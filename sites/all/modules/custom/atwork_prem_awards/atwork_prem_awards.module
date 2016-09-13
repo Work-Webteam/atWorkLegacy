@@ -1,0 +1,806 @@
+<?php
+// Premiers awards application pages
+define("PA_APP_NID", 5990);
+define("PA_LP_NID", 5991);
+
+// Premier's awards webcast registration pages
+//define("PA_REG_FORM_NID", 10241); // 2014 Webcast Reg
+//define("PA_REG_CONF_NID", 10242); // 2014 Confirmation page
+define("PA_REG_FORM_NID", 13361); // 2015 Webcast Reg, the webform we create
+define("PA_REG_CONF_NID", 13362); // 2015 Confirmation page, created as a background page dynamically updated with info below
+
+
+
+/**
+ * BEGINNING OF WEBCAST REGISTRATION SECTION
+ */
+function _atwork_prem_awards_registration_confirmation($sid = 0) {
+  module_load_include('inc', 'webform', 'includes/webform.submissions');
+
+  // this is the start of the page, displayed no matter what dates are selected
+  $output = <<<EOT
+<h2>Thank you for registering!</h2>
+<p>Go to the <strong><a href="http://video.web.gov.bc.ca/psa/pa/vod/" >Premier's Awards webcast stage,</a></strong> to test out the setup and watch the webcast on show day. The stage will highlight the next webcast in the queue.</p>
+<p>Test out: </p>
+<ul>
+  <li> Is the video playing? Allow 30 seconds for buffering. </li>
+  <li> Can you hear the video's audio? Are your speakers on? </li>
+  <li> Audio for the webcast will be directly through your computer speakers. Audio is not available through the phone. </li>
+</ul>
+<p> If you are having trouble viewing the video please <a href="mailto:77000@gov.bc.ca" >contact</a> the Service Desk at 250-387-7000 / 1-800-387-7000. </p>
+
+<hr />
+
+EOT;
+
+  // this is the event-specific details. We might want to add links, etc, key numbers corrospond with the $submission array
+  $dates = array(
+    7 => "Lower Mainland: September 15th. <br />
+  <a href=\" https://gww.gov.bc.ca/announcements/2015/premiers-innovation-and-excellence-awards-lower-mainland/event.ics \" > Add to your Outlook Calendar </a></p><hr />
+  ",
+    5 => "Vancouver Island: September 22nd. <br />
+  <a href=\"  https://gww.gov.bc.ca/announcements/2015/premiers-innovation-and-excellence-awards-vancouver-island/event.ics \" > Add to your Outlook Calendar </a></p><hr />
+  ",
+    15 => "Interior/North: October 6th. <br />
+  <a href=\" https://gww.gov.bc.ca/announcements/2015/premiers-innovation-and-excellence-awards-interiornorth/event.ics \" > Add to your Outlook Calendar </a></p><hr />
+  " ,
+  );
+
+
+  // get the sid from GET if possible
+  if (!$sid && isset($_GET['sid']) && $_GET['sid'] && is_numeric($_GET['sid'])) {
+    $sid = $_GET['sid'];
+  }
+
+  if ($sid) {
+    $submission = webform_get_submission(PA_REG_FORM_NID, $sid);
+    //dpm($submission);
+    // this output depends on a submission existing
+    /* $output .= <<<EOT
+<div class="field-label-above"><div class="field-label">Registrant Name:&nbsp;</div><div class="field-items"><div class="field-item odd">{$submission->data[12][0]}</div></div></div>
+<div class="field-label-above"><div class="field-label">Ministry:&nbsp;</div><div class="field-items"><div class="field-item odd">{$submission->data[14][0]}</div></div></div>
+<h2>You registered:</h2>
+EOT; */
+
+    $output .= "<h2>You registered:</h2>";
+    foreach ($dates as $key => $value) {
+      if (isset($submission->data[$key][0]) && $submission->data[$key][0]) {
+        $output .= "<p>";
+        $output .= $submission->data[$key][0];
+        $output .= " person(s) for ";
+        $output .= $value;
+      }
+    }
+
+  $output .= <<<EOT
+    <div class="field-label-above">
+      <div class="field-label">
+        You can also:
+      </div>
+    </div>
+    <ul>
+      <li> Add the webcast link to your Favourites on your browser for quick access on show day. </li>
+      <li> Subscribe to the tag for <a href="https://gww.gov.bc.ca/tags/premiers-awards"> Premier's Awards </a> and get email alerts of new related content and discussion. </li>
+      <li> Contact Katharine Benning (<a href="mailto:katharine.benning@gov.bc.ca?Subject=Premier's%20awards%202015" >katharine.benning@gov.bc.ca </a>) for other event information. </li>
+    </ul>
+EOT;
+
+  }
+  else {
+    // what if a user comes to this page directly. Send them back to the form?
+    drupal_goto('node/' . PA_REG_FORM_NID);
+  }
+
+
+  return $output;
+}
+
+// On submit send an email.
+function atwork_prem_awards_registration_submit($form, &$form_state) {
+  $to = $form_state['input']['submitted']['user']['confirmation_email'];
+
+  // applicant email
+  $params = array(
+    'subject' => 'Premier\'s Awards Webcast Confirmation',
+    'body' => _atwork_prem_awards_registration_confirmation($form_state['values']['details']['sid']),
+  );
+
+  $form_state['redirect'] = array(
+    'node/' . PA_REG_CONF_NID,
+    array(
+      'query' => array(
+        'sid' => $form_state['values']['details']['sid'],
+      ),
+    ),
+  );
+
+  drupal_mail('atwork_mail', 'atwork_mail_default', $to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
+}
+// End of Webcast application section
+/**************************************/
+
+
+
+
+/*****************************************************
+ * BEGINNING OF THE PREMIER AWARDS APPLICATION SECTION
+ */
+
+function _atwork_prem_awards_print() {
+  global $user;
+  if ($user->uid == '40360') {
+    return true;
+  }
+  if ($user->uid == '77') {
+    return true;
+  }
+  return false;
+}
+
+function readDocx($filePath) {
+  if (!extension_loaded('zip')) {
+    return '';
+  }
+    // Create new ZIP archive
+    $zip = new ZipArchive;
+    $dataFile = 'word/document.xml';
+    // Open received archive file
+    if (true === $zip->open($filePath)) {
+        // If done, search for the data file in the archive
+        if (($index = $zip->locateName($dataFile)) !== false) {
+            // If found, read it to the string
+            $data = $zip->getFromIndex($index);
+            $data = str_replace('<w:t>', '<w:t> ', $data);
+            $data = str_replace('</w:t>', ' </w:t>', $data);
+            // Close archive file
+            $zip->close();
+            $contents = explode('\n',strip_tags($data));
+            $text = '';
+            foreach($contents as $i=>$content) {
+
+                $text .= $contents[$i];
+            }
+            return $text;
+        }
+        $zip->close();
+    }
+    // In case of failure return empty string
+    return "";
+}
+
+function _atwork_prem_awards_count_words($files) {
+  $attached_words = 0;
+
+  foreach ($files as $file) {
+    if (strpos(' ' . strtolower($file), '.docx')) {
+      $text = readDocx($file);
+    }
+
+    elseif (strpos(' ' . strtolower($file), '.doc')) {
+      $fileHandle = fopen($file, "r");
+      $line = @fread($fileHandle, filesize($file));
+      $lines = explode(chr(0x0D),$line);
+      $outtext = '';
+      foreach($lines as $thisline) {
+        $pos = strpos($thisline, chr(0x00));
+        if (($pos !== FALSE)||(strlen($thisline)==0))
+          {
+          } else {
+            $outtext .= $thisline." ";
+          }
+      }
+
+      $outtext = preg_replace("/[^a-zA-Z0-9\s\,\.\-\n\r\t@\/\_\(\)]/","",$outtext);
+
+      list($text) = explode('Y, dXiJ', $outtext);
+    }
+
+    if (isset($text)) {
+      $text = preg_replace('/\s+/', ' ', $text);
+      $words = explode(' ', $text);
+      $attached_words = $attached_words + count($words);
+    }
+  }
+
+  if ($attached_words) {
+    $pages = number_format(($attached_words / 250), 1);
+    if ($pages > 5) {
+      drupal_set_message(t('Over 5 pages of text has been detected in your attachments. Please review them to ensure you aren\'t over the 5 page limit.'), 'warning');
+    }
+  }
+
+  return 0;
+}
+
+function _atwork_prem_awards_process_nominees($string) {
+  $header = array(
+    'No.',
+    'Name',
+    'Branch or program area',
+    'Email',
+    'Phone Number',
+  );
+
+  $data = explode(':', $string);
+  $rows = array();
+  $i = 1;
+  $output = '';
+  foreach ($data as $row) {
+    if ($row) {
+      $row_data = explode('|', $row);
+      $rows[] = array(
+        0 => $i,
+        1 => $row_data[0],
+        2 => $row_data[1],
+        3 => l($row_data[2], "mailto:". $row_data[2]),
+        4 => $row_data[3],
+      );
+      $i++;
+    }
+  }
+
+  $variables = array(
+    'header' => $header,
+    'rows' => $rows,
+    'attributes' => array(),
+    'caption' => '',
+    'colgroups' => array(),
+    'sticky' => FALSE,
+    'empty' => '',
+  );
+
+  return theme_table($variables);
+}
+
+function _atwork_prem_awards_get_contacts() {
+  $result = db_query("
+    SELECT mail FROM {users} u
+    LEFT JOIN {users_roles} r ON (u.uid = r.uid)
+    WHERE r.rid = 8
+    ORDER BY mail ASC");
+
+  $contacts = array();
+  foreach ($result as $row) {
+    $contacts[] = $row->mail;
+  }
+  return $contacts;
+}
+
+function atwork_prem_awards_menu(){
+    $items['node/%node/prem-award-roles'] = array(
+      'title' => 'Assign Roles',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('atwork_prem_awards_roles_form', 1),
+      'access callback' => 'atwork_prem_awards_roles_access',
+      'access arguments' => array(1),
+      'weight' => 1,
+      'type' => MENU_LOCAL_TASK,
+    );
+
+    return $items;
+}
+
+function atwork_prem_awards_block_info() {
+  // This example comes from node.module.
+  $blocks['nav'] = array(
+    'info' => t("Premiere's Awards Navigation"),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  return $blocks;
+}
+
+function atwork_prem_awards_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = array();
+
+  switch ($delta) {
+    case 'nav':
+      $block['subject'] = '';
+      $block['content'] = array(
+        '#markup' => _atwork_prem_awards_nav_block(),
+      );
+      break;
+  }
+  return $block;
+}
+
+function _atwork_prem_awards_nav_block() {
+  drupal_add_js(drupal_get_path('module', 'jquery_update') . '/replace/ui/ui/minified/jquery.ui.accordion.min.js');
+
+  $expanded_year = '0';
+
+  if (strpos(' ' . request_path(), 'career/premiers-awards/2011-12') || strpos(' ' . request_path(), 'career/premiers-awards/2011-2012')) {
+    $expanded_year = '1';
+  }
+  if (strpos(' ' . request_path(), 'career/premiers-awards/2010-11') || strpos(' ' . request_path(), 'career/premiers-awards/2010-2011')) {
+    $expanded_year = '2';
+  }
+  if (strpos(' ' . request_path(), 'career/premiers-awards/2009-10') || strpos(' ' . request_path(), 'career/premiers-awards/2009-2010')) {
+    $expanded_year = '3';
+  }
+
+  $js = <<<EOT
+jQuery(document).ready(function($) {
+  $( "#prem-nav-accordian" ).accordion({
+     active: $expanded_year,
+     collapsible: true,
+     heightStyle: "content"
+  });
+});
+EOT;
+  drupal_add_js($js, 'inline');
+
+  $menu = menu_tree('menu-premiers-awards');
+  $menu_2013 = render($menu);
+
+  $menu = menu_tree('menu-premiers-awards-2011-2012');
+  $menu_2012 = render($menu);
+
+  $menu = menu_tree('menu-premiers-awards-2010-2011');
+  $menu_2011 = render($menu);
+
+  $menu = menu_tree('menu-premiers-awards-2009-2010');
+  $menu_2010 = render($menu);
+
+  $output = <<<EOT
+<div>
+  <div id="prem-nav-accordian">
+    <h3>2012/2013</h3>
+    <div id="prem-award-current">
+      $menu_2013
+    </div>
+    <h3>2011/2012</h3>
+    <div>
+      $menu_2012
+    </div>
+    <h3>2010/2011</h3>
+    <div>
+      $menu_2011
+    </div>
+    <h3>2009/2010</h3>
+    <div>
+      $menu_2010
+    </div>
+  </div>
+</div>
+EOT;
+
+  return $output;
+}
+
+function atwork_prem_awards_permission() {
+  return array(
+    'premiers awards access' => array(
+      'title' => t('Access Premiere\'s Awards'),
+      'description' => t('Submit and edit applications.'),
+    ),
+    'premiers awards admin' => array(
+      'title' => t('Administer Premiere\'s Awards'),
+      'description' => t('Submit and edit all applications.'),
+    ),
+  );
+}
+
+function atwork_prem_awards_roles_access($node) {
+  if ($node->nid != PA_APP_NID) {
+    return FALSE;
+  }
+
+  if (!user_access('premiers awards admin') && !user_access('premiers awards access')) {
+    return FALSE;
+  }
+
+  return TRUE;
+}
+
+function atwork_prem_awards_roles_form($form, $node) {
+
+  // get existing contacts
+  $contacts = _atwork_prem_awards_get_contacts();
+
+  $form = array();
+
+  $form['users'] = array(
+    '#type' => 'textarea',
+    '#title' => t("Premier's Awards Contacts"),
+    '#default_value' => implode("\r\n", $contacts),
+    '#required' => TRUE,
+    '#wysiwyg' => FALSE,
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
+
+  return $form;
+}
+
+function atwork_prem_awards_roles_form_submit($form, &$form_state) {
+  // get existing contacts
+  $contacts = _atwork_prem_awards_get_contacts();
+
+  $users = explode("\r\n", $form_state['values']['users']);
+
+  foreach ($users as $key => $mail) {
+    if (!$mail) {
+      unset($users[$key]);
+    }
+  }
+
+  // unset all existing contacts
+  foreach ($contacts as $mail) {
+    $user = user_load_by_mail($mail);
+    if ($user->uid) {
+      unset($user->roles[8]);
+      $edit = array('roles' => $user->roles);
+      user_save($user, $edit);
+    }
+  }
+
+  // add the role to all submitted contacts
+  foreach ($users as $mail) {
+    $user = user_load_by_mail($mail);
+    if ($user->uid) {
+      $user->roles[8] = 'premiers awards contact';
+      $edit = array('roles' => $user->roles);
+      user_save($user, $edit);
+    }
+    else {
+      drupal_set_message("Couldn't find an account for $mail");
+    }
+  }
+}
+
+/*
+ * Implementation of hook_node_view
+ *
+ */
+function atwork_prem_awards_node_view($node, $view_mode, $langcode) {
+  if ($view_mode == 'full' && node_is_page($node)) {
+    if ($node->nid == PA_APP_NID || $node->nid == PA_LP_NID) {
+      if (!user_access('premiers awards access')) {
+        drupal_access_denied();
+      }
+    }
+    if ($node->nid == PA_APP_NID) {
+      if (!isset($_GET['type'])) {
+        drupal_goto('node/' . PA_LP_NID);
+      }
+      else {
+
+        require_once drupal_get_path('module', 'atwork_prem_awards') . '/atwork_prem_awards.replacements.inc';
+
+        $header_replace = _atwork_prem_awards_headers();
+
+        $node->content['body'][0]['#markup'] = str_replace('[prem-award-header]', $header_replace[$_GET['type']], $node->content['body'][0]['#markup']);
+      }
+    }
+    if ($node->nid == PA_REG_CONF_NID) {
+      $node->content['body'][0]['#markup'] = _atwork_prem_awards_registration_confirmation();
+    }
+  }
+}
+
+function atwork_prem_awards_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id == 'webform_client_form_' . PA_APP_NID) {
+    global $user;
+    require_once drupal_get_path('module', 'atwork_prem_awards') . '/atwork_prem_awards.replacements.inc';
+    drupal_add_js(drupal_get_path('module', 'atwork_prem_awards') . '/atwork_prem_awards.js');
+
+    $node = $form['#node'];
+
+    $cid_map = array();
+    foreach ($node->webform['components'] as $cid => $field) {
+      $cid_map[$field['form_key']] = $cid;
+    }
+
+    $form['#submit'][] = 'atwork_prem_awards_application_submit';
+    //$form['#validate'][] = 'atwork_prem_application_2012_validate';
+    array_unshift($form['#validate'], 'atwork_prem_awards_application_validate');
+
+    $form['submitted']['nominees']['#maxlength'] = '20000';
+
+    if (!isset($form['submitted']['nominees']['#default_value']) && (isset($form_state['post']['nominee_name'][0]) || isset($form_state['post']['nominee_name'][1]) || isset($form_state['post']['nominee_name'][2]))) {
+      $nominees = '';
+      foreach ($form_state['post']['nominee_name'] as $key => $nominee) {
+        if ($form_state['post']['nominee_name'][$key] || $form_state['post']['nominee_branch'][$key] || $form_state['post']['nominee_address'][$key] || $form_state['post']['nominee_email'][$key] || $form_state['post']['nominee_phone'][$key]) {
+          $nominees .= $form_state['post']['nominee_name'][$key] .'|'. $form_state['post']['nominee_branch'][$key] .'|'. $form_state['post']['nominee_email'][$key] .'|'. $form_state['post']['nominee_phone'][$key] .":";
+        }
+      }
+      if ($nominees) {
+        $form['submitted']['nominees']['#default_value'] = $nominees;
+      }
+    }
+
+    if (isset($form['submitted']['nominees']['#value'])) {
+      $nominees = '';
+      $nom_arr = explode(":", $form['submitted']['nominees']['#value']);
+
+      foreach($nom_arr as $nominee) {
+        if (trim($nominee)) {
+          $nominee_arr = explode('|', $nominee);
+          $nominees .= '<tr><td><input type="text" name="nominee_name[]" value="'. $nominee_arr[0] .'"/></td><td><input type="text" name="nominee_branch[]" value="'. $nominee_arr[1] .'"/></td><td><input type="text" name="nominee_email[]" value="'. $nominee_arr[2] .'"/></td><td><input type="text" name="nominee_phone[]" value="'. $nominee_arr[3] .'"/></td><tr>';
+        }
+      }
+
+      $form['submitted']['nominee_information']['nominees_header']['#markup'] = str_replace('</tbody></table>', $nominees .'</tbody></table>', $form['submitted']['nominee_information']['nominees_header']['#markup']);
+    }
+
+    // check if we are editing the submission
+    if (strpos(' '.$form['#action'], '/submission/') && !user_access('edit webform submissions')) {
+      if (arg(4) == 'edit') {
+        $form['submitted']['name_of_ministry_or_eligible_organization_sponsoring_this_application']['#disabled'] = 'true';
+        $form['submitted']['region']['#disabled'] = 'true';
+      }
+    }
+
+    $form['actions']['submit']['#prefix'] = '<p>' . t('Submitting the application will send an email copy to the Nominator Contact and Ministry Contact.') . '</p>';
+    $form['actions']['save'] = array(
+      '#type' => 'submit',
+      '#value' => t('Save'),
+      '#prefix' => '<p>' . t('Saving the application will not trigger any emails.') . '</p>',
+    );
+    //dpm($form);
+
+    // check for existence of application type (innovation, leadership, etc)
+    if (!isset($form['submitted']['application_type']['#default_value']) || !$form['submitted']['application_type']['#default_value']) {
+      return;
+    }
+    else {
+      $form_type = $form['submitted']['application_type']['#default_value'];
+      if (!in_array('lsa manager', $user->roles) && !in_array('administrator', $user->roles)) {
+        $form['submitted']['application_type']['#disabled'] = TRUE;
+      }
+    }
+
+    $translations = _atwork_prem_awards_questions();
+
+    $form['submitted']['summary_statement']['#title'] = '<h2>Evaluation Considerations</h2><h3>Summary (not to exceed 150 words):</h3>' . $translations[$form_type][0];
+    $form['submitted']['prem_award_q1']['#title'] = '<h3>Content (not to exceed 1500 words):</h3>Context (please keep to approximately 250 words):<br />' . $translations[$form_type][1];
+    for ($i=2;$i<10;$i++) {
+      if (isset($translations[$form_type][$i]) && $translations[$form_type][$i]) {
+        $form['submitted']['prem_award_q'. $i]['#title'] = str_replace('[prem-award-q'. $i .']', $translations[$form_type][$i], $form['submitted']['prem_award_q'. $i]['#title']);
+      } else {
+        unset($form['submitted']['prem_award_q'. $i]);
+      }
+    }
+  }
+
+  if ($form_id == 'webform_client_form_' . PA_REG_FORM_NID) {
+    $form['#submit'][] = 'atwork_prem_awards_registration_submit';
+  }
+}
+
+function atwork_prem_awards_application_validate($form, &$form_state) {
+  $nominees = '';
+
+  if (isset($_POST['nominee_name'])) {
+    foreach ($_POST['nominee_name'] as $key => $nominee) {
+      if ($_POST['nominee_name'][$key] || $_POST['nominee_branch'][$key] || $_POST['nominee_email'][$key] || $_POST['nominee_phone'][$key]) {
+        $nominees .= $_POST['nominee_name'][$key] .'|'. $_POST['nominee_branch'][$key] .'|'. $_POST['nominee_email'][$key] .'|'. $_POST['nominee_phone'][$key] .":";
+      }
+    }
+  }
+  if ($nominees) {
+    $form_state['values']['submitted']['nominees'] = $nominees;
+  }
+
+  if ($form_state['clicked_button']['#value'] == 'Save') {
+    // change the op so webform doesn't break
+    $form_state['values']['op'] = 'Submit';
+  }
+}
+
+function atwork_prem_awards_application_submit($form, &$form_state) {
+  global $user;
+  unset($form_state['redirect']);
+
+  require_once drupal_get_path('module', 'atwork_prem_awards') . '/atwork_prem_awards.replacements.inc';
+  $ministry_contacts = _atwork_prem_awards_ministry_contacts();
+
+  // clear existing messages
+  drupal_get_messages();
+
+  if ($form_state['clicked_button']['#value'] == 'Submit') {
+    $node = $form_state['build_info']['args'][0];
+
+    if ($form_state['build_info']['args'][1]) {
+      $submission = $form_state['build_info']['args'][1];
+    }
+    else {
+      $submission = webform_get_submission($node->nid, $form_state['values']['details']['sid']);
+    }
+
+    $ministry = $submission->data[1][0];
+
+    $node->atwork_form = $form;
+
+    $email = array(
+      'nid' => $node->nid,
+      'eid' => 1, // ??
+      'email' => $form_state['input']['submitted']['nominator']['nominator_email'],
+      'subject' => t('Premier\'s Award Nomination Confirmation'),
+      'from_name' => t('@Work'),
+      'from_address' => 'EmployeeNews@gov.bc.ca',
+      'template' => 'default',
+      'excluded_components' => array(),
+      'html' => TRUE,
+      'attachments' => FALSE,
+    );
+
+    $renderable_fields = webform_submission_render($node, $submission, $email, 'full_html');
+
+    $email['message'] = theme(array('webform_mail_prem_awards', 'webform_mail', 'webform_mail_message'), array('node' => $node, 'submission' => $submission, 'email' => $email, 'renderable_fields' => $renderable_fields));
+
+    // Replace tokens in the message.
+    $email['message'] = _webform_filter_values($email['message'], $node, $submission, $email, FALSE);
+
+    $email['message'] = drupal_get_css() . $email['message'];
+
+    // Build the e-mail headers.
+    $email['headers'] = theme(array('webform_mail_headers_' . $node->nid, 'webform_mail_headers'), array('node' => $node, 'submission' => $submission, 'email' => $email));
+
+    // Assemble the From string.
+    $email['from'] = webform_format_email_address($email['from_address'], $email['from_name'], $node, $submission);
+
+    $email['subject'] = webform_format_email_subject($email['subject'], $node, $submission);
+
+    $language = $user->uid ? user_preferred_language($user) : language_default();
+    $mail_params = array(
+      'message' => $email['message'],
+      'subject' => $email['subject'],
+      'headers' => $email['headers'],
+      'node' => $node,
+      'submission' => $submission,
+      'email' => $email,
+    );
+
+    // Set all other properties for HTML e-mail handling.
+    $mail_params['plain'] = !$email['html'];
+    $mail_params['plaintext'] = $email['html'] ? NULL : $email['message'];
+    $mail_params['headers'] = $email['headers'];
+    if ($email['html']) {
+      // MIME Mail requires this header or it will filter all text.
+      //$mail_params['headers']['Content-Type'] = 'text/html; charset=UTF-8';
+    }
+
+    // Mail the submission.
+    $message = drupal_mail('webform', 'submission', $email['email'], $language, $mail_params, $email['from']);
+
+    // now send to ministry contact
+    if ($ministry_contacts[$ministry]) {
+      $mail_params['email'] = $ministry_contacts[$ministry];
+      $message = drupal_mail('webform', 'submission', $ministry_contacts[$ministry], $language, $mail_params, $email['from']);
+    }
+
+    drupal_set_message('Thank you for your submission. An email has been sent to '. l($email['email'], 'mailto:'. $email['email']) . ' (Nomination Contact) and ' . l($ministry_contacts[$ministry], 'mailto:'. $ministry_contacts[$ministry]) . ' (Ministry Contact).');
+  }
+  elseif ($form_state['clicked_button']['#value'] == 'Save') {
+    drupal_set_message(t('Your submission has been saved. You may review and edit your submission !here.', array( '!here' => l('here', 'node/' . PA_APP_NID . '/submissions'))));
+  }
+
+  $files = array();
+
+  // play with files
+  foreach ($form_state['input']['submitted']['attachments'] as $key => $fid) {
+    if ($fid['fid']) {
+      $file = file_load($fid['fid']);
+      $files[] = drupal_realpath($file->uri);
+    }
+  }
+
+  if ($files) {
+    _atwork_prem_awards_count_words($files);
+  }
+}
+
+/**
+ * Preprocess function for webform-submission.tpl.php.
+ */
+function atwork_prem_awards_preprocess_webform_submission(&$vars) {
+  if (!isset($vars['node']->nid) || $vars['node']->nid != PA_APP_NID) {
+    return;
+  }
+
+  global $user;
+  require_once drupal_get_path('module', 'atwork_prem_awards') . '/atwork_prem_awards.replacements.inc';
+
+  //dpm($vars['submission']);
+  $application_type = $vars['submission']->data[41][0];
+  $translations = _atwork_prem_awards_questions();
+  $headers = _atwork_prem_awards_headers();
+
+  $atwork_header = array(
+    '#markup' => $headers[$application_type],
+    '#weight' => -99,
+  );
+
+  array_unshift($vars['renderable'], $atwork_header);
+
+  if (isset($vars['renderable']['application_type'])) {
+    unset($vars['renderable']['application_type']);
+  }
+
+  if ($vars['submission']->data[3][0]) {
+    $vars['renderable']['nominee_information']['nominees_header']['#value'] = _atwork_prem_awards_process_nominees($vars['submission']->data[3][0]);
+
+    $vars['renderable']['nominee_information']['nominees_header'] = array(
+      '#markup' => _atwork_prem_awards_process_nominees($vars['submission']->data[3][0]),
+    );
+  }
+  else {
+    unset($vars['renderable']['nominee_information']);
+  }
+
+  unset($vars['renderable']['nominees']);
+
+  $summary_markup = <<<EOT
+<h2>Evaluation Considerations</h2>
+<h3>{$vars['renderable']['summary_statement']['#title']}</h3>
+EOT;
+  $summary_markup .= '<strong>' . $translations[$application_type][0] . '</strong>';
+
+  $vars['renderable']['summary_statement'] = array(
+    '#weight' => $vars['renderable']['summary_statement']['#weight'],
+    '#markup' => $summary_markup . check_markup($vars['renderable']['summary_statement']['#value']),
+  );
+
+  $vars['renderable']['prem_award_q1'] = array(
+    '#weight' => $vars['renderable']['prem_award_q1']['#weight'],
+    '#markup' => '<h3>' . $vars['renderable']['prem_award_q1']['#title'] .
+      '</h3>' . '<strong>' . 'Context (please keep to approximately 250 words):<br />' .
+      $translations[$application_type][1] . '</strong>' .
+      check_markup($vars['renderable']['prem_award_q1']['#value']),
+  );
+
+  for ($i=2; $i<10; $i++) {
+    if (isset($vars['renderable']['prem_award_q' . $i])) {
+      if (isset($translations[$application_type][$i]) && $translations[$application_type][$i]) {
+        $vars['renderable']['prem_award_q' . $i]['#title'] = str_replace(
+          '[prem-award-q' . $i . ']',
+          $translations[$application_type][$i],
+          $vars['renderable']['prem_award_q' . $i]['#title']
+        );
+        $display = array(
+          '#weight' => $vars['renderable']['prem_award_q' . $i]['#weight'],
+          '#markup' => '<strong>' . $vars['renderable']['prem_award_q' . $i]['#title'] . '</strong>' . check_markup($vars['renderable']['prem_award_q' . $i]['#value']),
+        );
+        $vars['renderable']['prem_award_q' . $i] = $display;
+      }
+      else {
+        unset($vars['renderable']['prem_award_q' . $i]);
+      }
+    }
+  }
+
+  if (_atwork_prem_awards_print()) {
+
+    if (isset($vars['renderable'][0]['#markup'])) {
+      $arr = explode('</h3>', $vars['renderable'][0]['#markup']);
+      $vars['renderable'][0]['#markup'] = $arr[0] . '</h3>';
+    }
+
+    if (isset($vars['renderable']['name_of_ministry_or_eligible_organization_sponsoring_this_application'])) {
+      $vars['renderable']['name_of_ministry_or_eligible_organization_sponsoring_this_application']['#title'] = '';
+    }
+
+    if (isset($vars['renderable']['region'])) {
+      $vars['renderable']['region']['#title'] = '';
+    }
+
+    if (isset($vars['renderable']['title_of_nomination'])) {
+      $vars['renderable']['title_of_nomination']['#title'] = '';
+    }
+
+    $vars['renderable']['nominator']['#access'] = FALSE;
+    $vars['renderable']['nomination_contact']['#access'] = FALSE;
+    $vars['renderable']['video_contact']['#access'] = FALSE;
+    $vars['renderable']['nominee_information']['#access'] = FALSE;
+    $vars['renderable']['summary_word_count']['#access'] = FALSE;
+    $vars['renderable']['submission_word_count']['#access'] = FALSE;
+    //$vars['renderable']['attachments']['#access'] = FALSE;
+
+  }
+}

@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Rate widget theme
+ */
+
+$up_button = str_replace('title="up">up</a>', 'title="like">like</a>', $up_button);
+$info = str_replace('0 users have voted.', 'Like!', $info);
+$info = str_replace('user has voted', 'person likes this', $info);
+$info = str_replace('users have voted', 'people like this', $info);
+
+print $up_button;
+
+if ($info) {
+  print '<div class="rate-info">' . $info . '</div>';
+}
+
+if ($display_options['description']) {
+  print '<div class="rate-description">' . $display_options['description'] . '</div>';
+}

@@ -1,0 +1,4 @@
+name = Atwork Relationships
+description = Code dealing with user relationships
+package = Atwork
+core = 7.x

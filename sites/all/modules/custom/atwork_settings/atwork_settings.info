@@ -1,0 +1,4 @@
+name = Atwork Settings
+description = This module simply holds various settings
+package = Atwork
+core = 7.x

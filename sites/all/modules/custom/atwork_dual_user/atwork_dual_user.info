@@ -1,0 +1,4 @@
+name = Atwork Dual User
+description = Accounting for users like Trevor Barry who post as Climate Action
+package = Atwork
+core = 7.x

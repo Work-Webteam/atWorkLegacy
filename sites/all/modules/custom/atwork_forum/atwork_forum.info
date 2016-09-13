@@ -1,0 +1,4 @@
+name = Atwork Forum
+description = Custom changes relating to the discussion forum
+package = Atwork
+core = 7.x

@@ -1,0 +1,4 @@
+name = Atwork Registration
+description = Code dealing with event registrations
+package = Atwork
+core = 7.x

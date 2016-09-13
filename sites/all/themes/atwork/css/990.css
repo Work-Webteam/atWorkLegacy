@@ -1,0 +1,2032 @@
+/*  
+
+  --- TOC for this file ---
+
+    -Resets 
+
+    -Structure
+
+    -Global elements
+
+    -Typography
+
+    -Navigation
+
+    -Visual media and more global presentational stuff and landing pages
+
+    -Homepage (NID 96)
+
+    -Article, blog, poll, ETC structure, wiki, includes things like Polls 
+ 
+    -Forms
+
+    -Misc
+
+*/
+
+
+/* ---------------------------------------------- Reset Large Screen Browsers */
+html {
+  background-color: #062351;
+}
+
+body.front {
+  line-height: 15px;
+}
+#container-wrapper {
+  background: url(../images/background_rptr_int.jpg) repeat-x #062351;
+}
+#container {
+  background: url(../images/background.png) no-repeat center top;
+}
+
+#test-enviro-indicator {
+  display: block;
+}
+
+#admin-menu,
+#atwork-env {
+  display: block;
+}
+
+#admin-menu {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+/* ---------------------------------------------------------------- Structure */
+#main {
+  margin: 0;
+  padding-top: 33px;
+  margin-top: 0;
+  border-top: none;
+}
+
+.main-header {
+  background: none;
+  height: 145px;
+}
+
+.pager {
+  font-size: 0.75em;
+}
+
+.sidebar {
+  float: left;
+}
+
+.home-link {
+  width: 393px;
+  height: 100px;
+  display: block;
+  background: none;
+  position: absolute;
+  top: 70px;
+  z-index: 999;
+  cursor: pointer;
+}
+
+#top-content {
+  width: 100%;
+  float: left;
+  position: relative;
+}
+
+.sidebar-second #top-content {
+  width: 72.5%;
+}
+
+.main-title {
+  float: none;
+  width: 100%;
+  clear: none;
+  margin: 18px 0;
+}
+
+.page-node-add .main-title {
+  margin: 18px 0 0 0;
+}
+
+.page-node-add .node-type-list a {
+  font-weight: bold;
+}
+
+.no-breadcrumb .main-title {
+  margin-top: 0;
+}
+
+#footer {
+  padding: 1em;
+  padding-top: 0;
+}
+  .region-footer {
+    border: none;
+  }
+.front #footer {
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.front .region.region-content {
+  padding: 20px 20px 0 20px;
+  width: 100%;
+  float: left;
+  margin-bottom: 1.5em;
+}
+
+.region-pagetop #block-menu-menu-secondary-menu, 
+.region-pagetop #block-boxes-ministry_dropdown {
+  display: block;
+}
+.region-pagetop #block-boxes-ministry_dropdown {
+  padding-right: 0.343em;
+}
+
+.region-pagetop .block-menu ul {
+  display: block;
+  margin-top: 0;
+}
+
+.content.inner {
+  width: 100%;
+  position: relative;
+  float: left;
+  min-height: 481px;
+  padding-bottom: 96px;
+}
+
+.front .content.inner {
+  font-size: 12px;
+}
+
+.sidebar-second .content.inner {
+  background: #FFF url(/sites/all/themes/atwork/images/background_right_rptr.png) repeat-y right top;
+}
+
+.page-node .tabs {
+  margin: 1em 0 0 0;
+}
+
+.region-pagetop {
+  height: 144px;
+  position: relative;
+}
+  .region-pagetop #block-search-form .form-item  input {
+    border: 1px solid #11386c;
+    font-size: 0.750em;
+    width: 200px;
+    background: #FFFFA0;
+  }
+  .placeholder {
+    color: #aaa;
+  }
+  #block-search-form {
+    margin-top: 1em;
+    padding: 0;
+  }
+  #search-block-form {
+    padding: 7px;
+    border-radius: 10px;
+    background: #4375b7;
+    border: 1px solid #5b9df4;
+    padding-top: 5px;
+    margin-right: 0.333em;
+    float: right;
+  }
+  
+  #search-block-form i {
+    color: white;
+  }
+
+  #block-boxes-ministry_dropdown {
+    font-size: 0.750em;
+    margin-top: 0;
+  }
+  .region-pagetop #search-block-form label {
+    position: relative;
+    bottom: -1px;
+    color: white;
+    font-size: 0.750em;
+    margin-right: 5px;
+  }
+.footer-copyright {
+  float: left;
+  margin-top: -13px;
+  font-size: 12px;
+  color: rgb(0, 51, 102);
+}
+.region-footer .block-menu-block {
+  padding-left: 0;
+}
+.region-footer .boxes-box {
+  font-size: 12px;
+}
+
+/* boxes */
+.boxes-box {
+  position: relative;
+}
+.front .boxes-box-controls,
+.not-front .second.sidebar .boxes-box-controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.block-boxes .block-inner .boxes-box .boxes-box-controls li {
+  list-style-image: none;
+}
+.block-boxes .block-inner .boxes-box .boxes-box-controls li a {
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 11px;
+  color: orange;
+}
+/* too small */
+#boxes-box-ministry_dropdown .boxes-box-controls {
+  display: none;
+}
+
+.page-blogs .region-content .view-header {
+  margin-bottom: 1em;
+}
+
+/* ---------------------------------------------------------- Global Elements */
+fieldset {
+  padding: 0 18px;
+}
+  fieldset fieldset {
+    margin: 18px 0;
+  }
+html.js fieldset.collapsible .fieldset-legend {
+  background: url(../images/arrow_blue_down.png) no-repeat 5px 50%;
+}
+html.js fieldset.collapsible.collapsed .fieldset-legend {
+  background: url(../images/arrow_blue_right.png) no-repeat 5px 50%;
+}
+/* special fieldsets */
+
+
+/* fieldsets - what the? breaks chrome, works in ie */
+html.lt-ie9.js fieldset.form-wrapper legend,
+html.lt-ie9.js fieldset.collapsible legend,
+html.lt-ie9.js fieldset.collapsed legend {
+  padding-bottom: 5px;
+}
+html.not-ie.js fieldset.form-wrapper legend span,
+html.not-ie.js fieldset.collapsible legend span,
+html.not-ie.js fieldset.collapsed legend span {
+  display: inline;
+}
+legend .fieldset-legend {
+  padding: 0 5px;
+}
+html.js fieldset.collapsed {
+  padding: 0 18px;
+  height: 18px;
+}
+/*  html.js fieldset.collapsed .fieldset-legend {
+    background: url(../images/arrow_blue_right.png) no-repeat 5px 50%;
+  }
+html.js fieldset.collapsible .fieldset-legend {
+  background: url(../images/arrow_blue_down.png) no-repeat 5px 50%;
+}*/
+/* no-outline fieldset */
+html.js fieldset.no-outline {
+  border: none;
+  padding-left: 0;
+}
+  html.js fieldset.collapsible.no-outline .fieldset-legend {
+    background-position-x: 0px;
+    padding-left: 10px;
+  }
+html.js fieldset.collapsible.no-arrow .fieldset-legend {
+  background: none;
+  padding-left: 0;
+}
+.node-type-article fieldset.collapsible legend {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* --------------------------------------------------------------- Typography */
+body {
+  font-family: Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", sans-serif; /* WHHYyyyyy soooo mannnnyyyyy???! */
+  font-size: 14px;
+}
+
+.item-list ul,
+ul, 
+ol, 
+p, 
+dl, 
+dd, 
+dt, 
+blockquote {
+  font-size: 14px;
+  line-height: 18px;
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.node-teaser .item-list ul,
+.node-teaser ul, 
+.node-teaser ol, 
+.node-teaser p, 
+.node-teaser dl, 
+.node-teaser dd, 
+.node-teaser dt, 
+.node-teaser blockquote {
+  margin: 0;
+}
+
+.front .sidebar.second li {
+  line-height: 15px;
+}
+
+ul.menu li {
+  padding: 0;
+}
+
+.region-sidebar-second .views-row li {
+  line-height: 21px;
+}
+
+h1 {
+  font-size: 24px;
+  line-height: 27px;
+  margin-bottom: 9px;
+}
+h2 {
+  font-size: 21px;
+  line-height: 18px;
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+h3 {
+  font-size: 18px;
+  line-height: 18px;
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+h4,
+h5,
+h6 {
+  font-size: 16px;
+  line-height: 18px;
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+blockquote {
+  padding-left: 36px;
+  padding-right: 36px;
+}
+
+ul,
+.item-list ul,
+ol {
+  margin-left: 16px;
+  padding-left: 0;
+}
+
+.front ul,
+.front .item-list ul,
+.front ol {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+ul ul, 
+ol ol, 
+ul ol, 
+ol ul {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+ul.menu {
+  margin-left: 8px;
+}
+
+.region ul, 
+.region ol, 
+.region p, 
+.region dl,
+.region dt,
+.region dd, 
+.region blockquote {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+/* home page type in "lower columns" */
+.homepage-lower-column ul, 
+.homepage-lower-column ol, 
+.homepage-lower-column p, 
+.homepage-lower-column dl,
+.homepage-lower-column dt,
+.homepage-lower-column dd, 
+.homepage-lower-column blockquote {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+/* left sidebar */
+.region-sidebar-second ul,
+.region-sidebar-second ol, 
+.region-sidebar-second p, 
+.region-sidebar-second dl,
+.region-sidebar-second dt,
+.region-sidebar-second dd, 
+.region-sidebar-second blockquote {
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.region-sidebar-second ul:last-child,
+.region-sidebar-second ol:last-child, 
+.region-sidebar-second p:last-child, 
+.region-sidebar-second dl:last-child,
+.region-sidebar-second dt:last-child,
+.region-sidebar-second dd:last-child, 
+.region-sidebar-second blockquote:last-child {
+  margin-bottom: 0;
+}
+
+.region-sidebar-second ul:first-child,
+.region-sidebar-second ol:first-child, 
+.region-sidebar-second p:first-child, 
+.region-sidebar-second dl:first-child,
+.region-sidebar-second dt:first-child,
+.region-sidebar-second dd:first-child, 
+.region-sidebar-second blockquote:first-child {
+  margin-top: 0;
+}
+
+.region-sidebar-second .block {
+  margin-bottom: 18px
+}
+
+.front .region-sidebar-second .block {
+  margin-bottom: 0;
+}
+
+/* "submitted by" */
+.comment-inner .submitted,
+.node .posted-date {
+  font-size: 12px;
+  margin-bottom: 0;
+}
+
+/* front page blocks */
+.front .region-content .attachment ul {
+  font-size: 12px;
+  line-height: 14px;
+  margin-bottom: 0;
+  margin-top: 6px;
+}
+
+/* footer */
+#footer #block-menu_block-1,
+#boxes-box-homepage_logos {
+  display: block;
+}
+#footer .block-menu-block a {
+  font-size: 12px;
+}
+
+/* override rate module */
+.rate-info, .rate-description {
+  font-size: 12px;
+}
+
+.region blockquote p {
+  font-size: 12px;
+}
+
+.region dt + dd {
+  margin-top: -18px;
+}
+  #quiz-report-form dt + dd {
+    margin-top: 0;
+  }
+    #quiz-report-form dt + dd p strong:before {
+      content: 'Your ';
+    }
+
+.region-content .block-title,
+.region h2 {
+  font-size: 18px;
+  line-height: 18px;
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.region-content .block-title {
+  font-size: 21px;
+}
+
+h2.main-title {
+  font-size: 21px;
+  line-height: 21px;
+}
+
+.no-breadcrumb h2.main-title {
+  font-size: 24px;
+}
+
+article.node-teaser h2.main-title {
+  font-size: 22px;
+  margin-top: 13px;
+  line-height: 21px;
+}
+
+.sidebar.second .views-row-1 h2,
+.region h2.block-title {
+  margin-top: 0;
+}
+
+h2.breadcrumb {
+  margin: 0;
+  font-size: 24px;
+  padding-bottom: 0;
+  line-height: 21px;
+}
+
+.no-title h2.breadcrumb {
+  padding-bottom: 18px;
+}
+
+.region h3 {
+  font-size: 16px;
+  line-height: 18px;
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.region .field-name-body h3 {
+  font-size: 18px;
+}
+
+.region h4, 
+.region h5, 
+.region h6 {
+  font-size: 14px;
+  line-height: 18px;
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.field-name-body h4 {
+  font-size: 16px;
+}
+
+.region blockquote {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.region ul ul, 
+.region ol ol, 
+.region ul ol, 
+.region ol ul {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+/* --------------------------------------------------------------- Navigation */
+h2.breadcrumb a {
+  border: none;
+  padding: 0;
+}
+
+#breadcrumb nav {
+  float: inherit;
+  width: inherit;
+}
+
+.region-pagetop #block-menu-menu-secondary-menu .menu li {
+  display: inline;
+}
+.region-pagetop #block-menu-menu-moderator-menu {
+  position: absolute;
+  right: 0;
+  top: -11px;
+  z-index: 1;
+}
+.region-pagetop #block-menu-menu-moderator-menu .menu li {
+  font-weight: bold;
+  font-size: 12px;
+}
+  .region-pagetop #block-menu-menu-secondary-menu .menu li.last,
+  .region-pagetop #block-menu-menu-moderator-menu .menu li.last {
+    border: none;
+  }
+#block-menu-menu-secondary-menu .content {
+  padding-top: 7px;
+}
+
+/* "ministy dropdown" */
+select[name="ministrylink"] {
+  margin-top: 20px;
+}
+
+/* 
+  --- Superfish --- 
+  #block-superfish-1 = the whole superfish wrapper
+  #superfish-1 =  the <ul> that is the main menu
+*/
+#block-superfish-1 {
+  background: #fec12f url(/sites/all/themes/atwork/images/menu_grad.gif) repeat-x;
+  position: absolute;
+  bottom: -34px;
+  left: 0;
+  font-size: 14px;
+  width: 100%;
+  height: 32px;
+}
+/* 
+  for IE to ensure anti-aliasing during animate
+*/
+.lt-ie9 #block-superfish-1 ul {
+  filter: none !important;
+}
+  #block-superfish-1 li.sf-depth-1 {
+    display: table-cell;
+    width: 0;
+    text-align: center;
+    float: none;
+    white-space: nowrap;
+    height: 32px;
+  }
+  #block-superfish-1 li,
+  #block-superfish-1 ul {
+    margin-left: 0;
+  }
+  /* 
+    Here we need some hacks for FireFox.. 
+    Menu display table-cell does not play well with this FF bug. 
+    See: http://stackoverflow.com/questions/5148041/does-firefox-support-position-relative-on-table-elements
+  */
+  @-moz-document url-prefix() {
+    #block-superfish-1 li.sf-depth-1 {
+      display: inline-block;
+      width: 14.28571428571429%; /* sadly, will have to be changed with main nav updates.. */
+    }
+  }
+#superfish-1 a.ext {
+  background: none;
+}
+#superfish-1 ul {
+  width: auto;
+}
+  #superfish-1 ul:hover {
+    overflow: visible !important;
+  }
+  #superfish-1 ul ul {
+    left: 170px;
+  }
+#superfish-1 li a {
+  padding: 8px 0 8px 0;
+  border-top: none;
+  color: black;
+  font-weight: bold;
+}
+  #superfish-1 li a:hover {
+    background: white;
+  }
+  #superfish-1 li a .sf-sub-indicator {
+    background: none;
+  }
+  #superfish-1 li li {
+    display: list-item;
+    clear: both;
+    width: 171px;
+    text-align: left;
+    background-color: #6BA6F5;
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    white-space: normal;
+    list-style: none;
+  }
+    .lt-ie9 #block-superfish li li {
+      white-space: wrap !important; /* special IE rule 'cause IE is special */
+    }
+    #superfish-1 li li:hover, #superfish-1 li li a:hover {
+      background: #99ccff;
+    }
+    #superfish-1 li a.sf-depth-1 {
+      padding: 8px 10px;
+    }
+    #superfish-1 li li.last {
+      border-bottom: 1px solid white;
+    }
+    #superfish-1 li li a {
+      padding: 5px;
+    }
+      #superfish-1 li li a .sf-sub-indicator {
+        background: url('/sites/all/themes/atwork/images/arrow-right.png') no-repeat  -6px 3px;
+        top: 0 !important;
+        height: 24px;
+        width: 15px;
+      }
+      #superfish-1 li li a.menuparent {
+        padding-right: 8px;
+      }
+        #superfish-1 li li li {
+          background-color: #fac064;
+        }
+          #superfish-1 li li li:hover, #superfish-1 li li li a:hover {
+            background: #fcdc90;
+          }
+.sf-menu li:hover > ul, 
+.sf-menu li.sfHover > ul {
+  top: 32px;
+}
+.sf-menu.sf-style-default {
+  display: table;
+  width: 100%;
+}
+  .sf-menu.sf-style-default li, .sf-menu.sf-style-default li:hover {
+    background: url(/sites/all/themes/atwork/images/menu_grad.gif) repeat-x;
+  }
+  .sf-style-default.sf-menu {
+    margin-bottom: 0;
+  }
+
+/* ----------------------------- Visual media and global presentational stuff */
+.view-term-landing-page .views-row {
+  font-size: 0.875em;
+}
+
+/* taxonomy page */
+.menu-block-wrapper > ul.menu {
+  padding-left: 0;
+}
+  .menu-block-wrapper > ul.menu li ul.menu { /* dodgey... http://www.urbandictionary.com/define.php?term=dodgey */
+    margin-bottom: 0;
+  }
+.menu-name-menu-taxonomy .menu {
+  font-size: 16px;
+}
+  .menu-name-menu-taxonomy .menu > li {
+    padding: 1em;
+    padding-left: 1em;
+    border: 1px solid #adadad;
+    margin-bottom: 1em;
+    border-radius: 10px;
+  }
+  .menu-name-menu-taxonomy .menu > li:nth-child(even) {
+    background: #eeeeee url(/sites/all/themes/atwork/images/gray_grad2.gif) repeat-x;
+  }
+  .menu-name-menu-taxonomy .menu > li:nth-child(odd) {
+    background: url(/sites/all/themes/atwork/images/lightblue_grad.gif) repeat-x;
+  }
+  .menu-name-menu-taxonomy .menu li ul li {
+    padding: 0;
+    list-style-image: url(/sites/all/themes/atwork/images/arrow_blue_right.png);
+    margin-bottom: 0;
+    border: none !important;
+    background: none !important;
+  }
+.view-term-landing-page .item-list .views-row {
+  font-size: 14px;
+}
+
+/* -------------------------------------------------------- Homepage (NID 96) */
+#block-boxes-homepage_logos {
+  width: 100%;
+  float: left;
+  margin-top: -110px;
+}
+
+#boxes-box-homepage_logos {
+  background: white;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+
+.front .region-content .block ul li .field-content {
+  background: none;
+  font-size: 1em;
+  padding-left: 0;
+}
+
+.front .region-content .views-field-body {
+  margin-top: 0;
+}
+
+/* "top news story" */
+#block-views-home_page_blocks-block_1 {
+  float: left;
+  background: url(/sites/all/themes/atwork/images/background_top_news_stories.png) no-repeat top left;
+  border: solid 2px #71adea; 
+  width: 551px !important;
+  height: 255px;
+  margin: 10px 0 0 20px;
+  border-radius: 4px 0 0 4px;
+  clear: none;
+} 
+  #block-views-home_page_blocks-block_1 .views-field-title {
+    font-size: 18px;
+    /*margin: 20px 0 0 248px;*/
+    padding-right: 10px;
+  }
+  #block-views-home_page_blocks-block_1 .views-field-body {
+    margin: 10px 0 0 248px;
+  }
+  #block-views-home_page_blocks-block_1 .views-field-title-1 a {
+    padding-right: 1em;
+    padding-top: 0;
+    font-size: 14px;
+    color: #fff;
+    font-weight: normal;
+  } 
+    #block-views-home_page_blocks-block_1 .views-field-title-1 a:hover {
+      color: #eaab03;
+    }
+  #block-views-home_page_blocks-block_1 .block-title-link {
+    display: block;
+    margin: 0 0 0 248px;
+    padding: 5px 0 4px 7px;
+    font-size: 21px;
+    cursor: default;
+  }
+  #block-views-home_page_blocks-block_1 .content {
+    margin-top: 0;
+    background: transparent;
+    border: none;
+  }
+    #block-views-home_page_blocks-block_1 .views-field-field-image .field-content {
+      margin: 0 6px 6px 12px;
+      border: 2px solid #fff;
+      background: #fff;
+      width: 223px;
+      height: 176px;
+      border-radius: 10px;
+    }
+      #block-views-home_page_blocks-block_1 .views-field-field-image .field-content img {
+        margin: auto;
+        display: block;
+        padding-top: 4px;
+      }
+#content_top {
+  border-bottom: none;
+}
+
+/* "scrolling news" */
+#block-views-home_page_blocks-block_2 {
+  font-size: 14px;
+  float: right;
+  clear: none;
+  background: url(/sites/all/themes/atwork/images/background_top_news_stories-feed.png) no-repeat top right;
+  height: 255px;
+  margin: 10px 20px 0 0;
+  border: solid 2px #71adea;
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+  width: 369px !important;
+  overflow: hidden;
+}
+  #block-views-home_page_blocks-block_2 .jcarousel-prev-vertical {
+    top: 0px;
+  }
+#block-views-home_page_blocks-block_2 .view-footer {
+  position: absolute;
+  bottom: 7px;
+  right: 41px;
+}
+
+/* styles before js fires */
+#block-views-home_page_blocks-block_2 ul {
+  width: 340px;
+  height: 173px;
+  overflow: hidden;
+  margin: 0;
+}
+#block-views-home_page_blocks-block_2 ul li {
+  margin: 5px 0 7px 0;
+  height: 53px;
+  list-style-image: none;
+  list-style-type: none;
+}
+#block-views-home_page_blocks-block_2 .view-display-id-block_2 {
+  padding: 25px 0 0 20px;
+}
+
+/* carosel stuff */
+#block-views-home_page_blocks-block_2 ul {
+  width: 360px;
+}
+#block-views-home_page_blocks-block_2 .jcarousel-container-vertical li {
+  width: 327px;
+}
+
+.front .views-field .field-content img {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+}
+  
+/* first four blocks output in a row, ie. "blogs, forums, polls, videos" (oct. '13) */
+.front .region-content {
+  padding: 0;
+}
+.front .region-content .block {
+  width: 212px;
+  padding: 0;
+  font-size: 12px;
+  float: right;
+  clear: none;
+  margin: 0;
+  margin-left: 24px;
+  background: transparent;
+  border: none;
+}
+  #block-views-home_page_blocks-blogs {
+    margin: 0;
+  }
+  #block-views-home_page_blocks-blogs .views-field-nothing {
+    margin-top: 6px;
+  }
+  .front .region-content .block .block-title {
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+  .front .region-content .block .block-title a {
+    padding-left: 5px;
+  }
+  .front .region-content .block ul {
+    margin-left: 0;
+  }
+    .front .region-content .block ul li {
+      margin-top: 0;
+      font-size: 1em;
+      margin-left: 13px; /* should maybe be EM units */
+      line-height: 18px;
+      list-style-image: url(/sites/all/themes/atwork/images/arrow_blue_right.png);
+    }
+      .lt-ie9 .front .region-content .block ul li {
+        margin-left: 16px;
+      }
+    .front .region-content .block .field-content img {
+      border-radius: 10px;
+      float: none;
+      margin: 0;
+    }
+
+.front .region-content .view-footer {
+  float: none;
+}
+
+#block-views-home_page_blocks-forums .views-field-nothing-1,
+.front .region.region-content .views-field-field-image {
+  background-color: #fff;
+  border: 1px solid #999999;
+  padding: 4px;
+  text-align: center;
+  width: 212px;
+  height: 165px;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  margin-bottom: 5px;
+}
+.front .region-content .attachment .views-field-title {
+  font-weight: inherit;
+}
+.front .region-content .views-row {
+  margin-top: 5px;
+}
+/* target the "mores" under each view-content and image for each site "section" */
+.front .view-home-page-blocks .view-footer p {
+  text-align: left;
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+  .front .view-home-page-blocks .view-footer p:after {
+    content: ' \00bb';
+    color: #0066cc;
+  }
+/* key initiatives */
+#block-boxes-homepage_key_initiatives .boxes-box-content ul {
+  padding-left: 0 !important;
+  margin: 0;
+}
+  #block-boxes-homepage_key_initiatives .boxes-box-content li {
+    list-style: none;
+    min-height: 37px;
+    padding: 7px 0 4px 42px;
+    position: relative;
+  }
+    #block-boxes-homepage_key_initiatives .boxes-box-content li a {
+      font-weight: bold;
+    }
+/* maybe we should move this to inline... */
+#block-boxes-homepage_key_initiatives h2.block-title {
+  margin-bottom: 0;
+}
+#block-boxes-homepage_key_initiatives .ki-icon {
+  background: url(/sites/all/themes/atwork/images/key_initiatives2016_Jan.png);
+  position: absolute;
+  top: 8px;
+  left: -5px;
+  height: 42px;
+  width: 40px;
+}
+.ki-icon {
+  display: inline;
+}
+li .ki-icon {
+  background-position: -7px -808px;
+}
+#ki1 .ki-icon {
+  background-position: -7px -654px;
+}
+#ki2 .ki-icon {
+  background-position: -7px -109px;
+}
+#ki3 .ki-icon {
+  background-position: -7px -553px;
+}
+#ki4 .ki-icon {
+  background-position: -7px -185px;
+}
+#ki5 .ki-icon {
+  background-position: -7px -225px;
+}
+#ki6 .ki-icon {
+  background-position: -7px -106px;
+  height: 38px;
+}
+#ki7 .ki-icon {
+  background-position: -7px -808px;
+}
+#ki8 .ki-icon {
+  background-position: -7px -366px;
+}
+#ki9 .ki-icon {
+  background-position: -7px -466px;
+}
+#ki10 .ki-icon {
+  background-position: -7px -510px;
+}
+#ki11 .ki-icon {
+  background-position: -7px -420px;
+}
+#ki12 .ki-icon {
+  background-position: -7px -300px;
+}
+#ki13 .ki-icon {
+  background-position: -7px -479px;
+}
+#ki14 .ki-icon {
+  background-position: -7px -12px;
+}
+#ki15 .ki-icon {
+  background-position: -7px -700px;
+}
+#ki16 .ki-icon {
+  background-position: -7px -700px;
+}
+#ki17 .ki-icon {
+  background-position: -7px -10px;
+}
+#ki18 .ki-icon {
+  background-position: -7px -700px;
+}
+#ki19 .ki-icon {
+  background-position: -7px -700px;
+}
+#ki20 .ki-icon {
+  background-position: -7px -700px;
+}
+#ki21 .ki-icon {
+  background-position: -7px -700px;
+}
+#ki22 .ki-icon {
+  background-position: -7px -565px;
+}
+#ki23 .ki-icon {
+  background-position: -7px -322px;
+}
+#ki24 .ki-icon {
+  background-position: -7px -700px;
+}
+#ki25 .ki-icon {
+  background-position: -7px -700px;
+}
+#ki26 .ki-icon {
+  background-position: -7px -280px;
+}
+#ki31 .ki-icon {
+  background-position: -7px -290px;
+  height: 35px;
+}
+#ki32 .ki-icon {
+  background-position: -7px -898px;
+}
+#ki33 .ki-icon {
+  background-position: -7px -240px;
+}
+
+/* small reset */
+.front .sidebar.second .inner,
+.front .homepage-lower-column {
+  padding: 0 !important;
+}
+.homepage-lower-column li {
+  margin-bottom: 0;
+}
+
+.front .homepage-lower-column {
+  width: 33.333%;
+  float: left;
+  margin-top: 0;
+  margin-bottom: 1em;
+  font-size: 12px;
+}
+  .lt-ie10 .front .homepage-lower-column {
+    width: 320px;
+  }
+  .front .homepage-lower-column h2.block-title {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 14px;
+    width: auto;
+    display: inline-block;
+  }
+  
+.front .page-node .region-content-bottom {
+  padding-top: 0;
+}
+.front #sidebar-second {
+  width: 33.333%;
+}
+  .lt-ie10 .front #sidebar-second {
+    margin-top: 0;
+  }
+/* inner wrappers */
+.front .homepage-lower-column .block-inner {
+  padding: 0 1em 0.5em;
+  margin: 0 13px 13px;
+  border-radius: 10px;
+}
+  .front .region-content-bottom.homepage-lower-column .block-inner {
+    margin-left: 7px;
+    margin-right: 7px;
+  }
+  .front .sidebar.first .block-inner {
+    margin-right: 7px;
+  }
+  .front .sidebar.second .block-inner {
+    margin-left: 7px;
+  }
+.front .homepage-lower-column ul {
+  padding-left: 16px;
+  margin: 0;
+}
+  .front .homepage-lower-column li {
+    margin-left: 0 !important;
+  }
+.front .homepage-lower-column .view-footer {
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: bold;
+  background: #EEE;
+  padding: 3px;
+}
+
+.front #block-views-home_page_blocks-wikis .view-header {
+  display: block;
+}
+
+.front #block-views-home_page_blocks-wikis .view-header,
+.front #block-views-home_page_blocks-wikis .view-header p {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.front #block-views-home_page_blocks-comments .views-field .field-content a {
+  font-weight: bold;
+}
+
+/* some front uls use a different line-height. correct this. */
+#block-boxes-homepage_top_tools ul li,
+#block-views-home_page_blocks-wikis ul li,
+#block-boxes-homepage_community ul li {
+  line-height: 18px;
+}
+
+/* --------------------------------- Article, blog, poll, ETC structure, wiki */
+.sidebar.second {
+  width: 27.5%;
+  padding: 20px 5px 10px 10px;
+  float: right;
+  border-top: none;
+}
+  .lt-ie9 .sidebar.second {
+    width: 27.5%;
+  }
+  
+.region-content-bottom {
+  padding: 0 14px;
+}
+  
+.sidebar-second .region-content-bottom {
+  width: 72.5%;
+  float: left;
+}
+
+.region-sidebar-second .icon-angle-right {
+  padding-right: 0.5em;
+  font-weight: bold;
+}
+
+/* center all images in the sidebar for news and blogs, etc. */
+.sidebar.second img {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+}
+.sidebar.second #block-views-e_cards-block_2  img {
+  margin: 0 0 18px 0;
+}
+
+/* trying to target "Post an Event" */
+.page-news .sidebar.second .view-footer {
+  text-align: left;
+  font-weight: bold;
+}
+
+#primary .content img, 
+.not-front #secondary .content img {
+  background-color: #FFFFFF;
+  border: 1px solid #A9A9A9;
+  padding: 4px;
+}
+
+.node-teaser .taxonomy-terms {
+  /*clear: both;*/ /* yes, no? maybe so? */
+}
+
+/* recent comments page */
+.view-id-recent_comments.view-display-id-page ul {
+  margin-top: 0;
+}
+/* Ecards */
+.page-ecards {
+  /* placeholder */
+}
+  .page-ecards .region-content {
+    font-size: 14px;
+  }
+  /* ecard images align to right for some reason */
+  .page-ecards .region-sidebar-second img {
+    margin: 18px 0;
+  }
+  /* ecard block has no margin on bottom */
+  #block-views-e_cards-block_2 {
+    margin-bottom: 18px;
+  }
+  .page-ecards #ecardList {
+    display: block;
+    margin-left: 0;
+  }
+  /* clear table borders */
+  .view-id-e_cards table,
+  .view-id-e_cards table * {
+    border: 0;
+  }
+  /* ie max width quirk */
+  .not-front section #top-content .view-e-cards img,
+  .field-item table img {
+    max-width: none;
+    margin: 0;
+  }
+  .view-id-e_cards tr .views-field-field-image {
+    margin-top: 18px;
+  }
+  .view-id-e_cards tr.row-first .views-field-field-image {
+    margin-top: 0;
+  }
+  
+  .view-id-e_cards tr {
+    margin-bottom: 5px;
+  }
+  .page-ecards .listCol1, .page-ecards .listCol2, .page-ecards .listCol3 {
+    float: left;
+    width: 31%;
+    margin-left: 18px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  #block-boxes-ecards_home p {
+    margin-top: 0;
+  }
+  #block-block-1 {
+    margin-bottom: 18px;
+  }
+  #block-block-1 li {
+    background: url(/sites/all/themes/atwork/images/arrow_blue_right.png) no-repeat left 6px;
+    padding-left: 13px;
+    list-style: none;
+  }
+  
+/* target ecard images, themselves */
+.node-ecard .field-item img {
+  display: block;
+  margin: auto;
+}
+  .view-e-cards td {
+    padding: 0;
+  }
+
+/* premier's awards */
+#block-atwork_prem_awards-nav h3 {
+  cursor: pointer;
+  color: #0066cc;
+}
+#block-atwork_prem_awards-nav fieldset .summary  {
+  display: none;
+}
+.prem-award .sidebar.second {
+  min-height: 650px;
+}
+.prem-award form input[type=submit] {
+  margin-left: 1em;
+}
+
+/* events homepage - search */
+.page-search-node #top-content .region-content,
+.page-node-77 #top-content .region-content {
+  padding-top: 15px;
+}
+
+/* forums */
+.region td.forum-list-icon {
+  font-size: 30px;
+}
+
+.forum-list-text-legend-new-posts i,
+.forum-list-icon-new-posts i {
+  color: #eaab03;
+}
+.forum-table th img,
+.forum-table th a {
+  vertical-align: top;
+}
+.page-forum .tabs {
+  margin-top: 1em;
+}
+.page-forum .region-content-top {
+  padding-top: 0;
+}
+.forum-table-superheader .forum-table-name {
+  /* overrides module */
+  font-size: 24px;
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+#block-boxes-forum_header .boxes-box-controls ul {
+  margin: 0;
+}
+.forum-list-icon-wrapper span {
+  width: 15px !important;
+  height: auto !important;
+  text-align: left !important;
+}
+td.forum-list-icon {
+  vertical-align: top;
+  /*text-align: left;*/
+  width: 15px !important;
+}
+.forum-list-icon-legend {
+  font-weight: bold;
+}
+.forum-list-icon-legend .forum-list-icon-new-posts,
+.forum-list-icon-legend .forum-list-icon-default {
+  display: none;
+}
+td.forum-details .forum-description,
+.forum-number-new-topics {
+  margin-top: 0.5em;
+}
+#forum-statistics-header {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 0.5em 0;
+}
+#forum-statistics-header, 
+.forum-statistics-sub-header,
+.forum-statistics-sub-body {
+  padding: 0;
+}
+.forum-statistics-sub-header {
+  margin-top: 1em;
+}
+.forum-table-superheader {
+  padding: 0;
+  margin-bottom: 1em;
+}
+.forum-statistics-sub-body {
+  font-size: 14px;
+}
+#forum .pager {
+  font-size: 16px !important;
+}
+#forum-pager-top .pager {
+  padding-top: 0;
+}
+.page-forum #boxes-box-forum_header .boxes-box-content ul {
+  margin-bottom: 0;
+}
+.lt-ie10 #forum-sort div.container-inline {
+  min-width: 300px;
+}
+/* forum topic page */
+.forum-posted-on {
+  font-size: 12px; 
+  color: #666;
+  padding: 0;
+}
+.forum-post-panel-sub .author-pane {
+  margin-left: 0;
+  margin-top: 0;
+}
+.author-pane .username {
+  display: block;
+  min-width: 150px;
+}
+.forum-post-panel-main div {
+  font-size: 14px;
+}
+.forum-topic-header {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 0.5em;
+}
+.forum-topic-header .topic-reply-link, 
+.forum-topic-header .topic-new-post-link, 
+.forum-topic-header .last-post-link {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+.forum-topic-header .topic-post-count {
+  margin-bottom: 7px;
+  margin-top: 0;
+}
+.forum-post .forum-post-footer .forum-jump-links {
+  display: none;
+}
+.node-type-forum .view-filters {
+  margin-bottom: 1em;
+}
+.node-type-forum .main-title {
+  margin-top: 0;
+}
+.view-node-comments .forum-post-content {
+  padding-top: 1em;
+  padding-bottom: 0.5em;
+}
+.forum-post-panel-main {
+  min-height: 1px;
+}
+.forum-post-links {
+  margin-top: -67px;
+}
+.node-type-forum #comments {
+  margin-top: 10px;
+}
+.forum-post-number {
+  font-size: 12px;
+}
+.node-type-forum .rate-info, 
+.node-type-forum .rate-description {
+  font-size: 13px;
+}
+
+/* gallery */
+section.content.inner .view-gallery-reference img {
+  margin: 0;
+}
+
+.view-gallery-reference .views-row {
+  float: left;
+  margin-right: 8px;
+}
+.view-gallery-reference .views-row-last {
+  margin-right: 0;
+}
+
+/* 
+  Custom stuff for color box images
+*/
+#colorbox .colorbox-image {
+  float: left;
+  width: 65%;
+}
+#colorbox .colorbox-image img {
+  margin: auto;
+  display: block;
+}
+#colorbox .node-content,
+#colorbox .colorbox-content {
+  float: right;
+  clear: right;
+  width: 33%;
+}
+#colorbox .colorbox-content {
+  padding-right: 1em;
+}
+#colorbox article.node-image {
+  position: inherit;
+}
+.node-type-gallery #colorbox .colorbox-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.node-type-gallery #colorbox .colorbox-image img {
+  max-width: 100%;
+}
+.node-type-gallery #cboxLoadedContent .terms {
+  position: absolute;
+  bottom: 0;
+  left: 64px;
+}
+.node-type-gallery #cboxLoadedContent .node {
+  padding-top: 0;
+}
+
+/* wiki */
+#edit-section-message {
+  margin-top: 0;
+}
+.markItUpHeader ul {
+  margin-left: 0;
+}
+#toc {
+  width: auto;
+  min-width: 30%;
+}
+#toc td {
+  padding: 0 0 0 1em;
+}
+#toc h2 {
+  margin: 12px 0;
+}
+#toc .tocnumber {
+  padding-right: .5em;
+}
+#block-system-main #toc ul li {
+  list-style-image: none;
+  list-style: none;
+  margin-left: 0;
+}
+#toc ul {
+  margin: 12px 12px 12px 0;
+}
+#toc ul ul {
+  margin: 0 0 0 18px;
+}
+.editsection {
+  font-size: 12px;
+  font-weight: normal;
+  display: inline;
+  padding-left: .5em;
+}
+.mw-headline {
+  float: left;
+}
+#edit-submit-wiki {
+  padding: 1px;
+}
+
+#sidebar-second #block-block-2 {
+  margin-bottom: 15px;
+}
+
+.page-node-115 #block-views--exp-wiki-page {
+  margin: 0 auto;
+  margin-top: 1em;
+}
+
+#block-views--exp-wiki-page .form-submit {
+  margin: 0;
+}
+
+.node-type-wiki .tabs {
+  margin-bottom: 1em;
+}
+
+.node-type-wiki .field-name-body h2,
+.node-type-wiki .field-name-body h3,
+.node-type-wiki .field-name-body h4,
+.node-type-wiki .field-name-body h5 {
+  clear: both;
+}
+
+.node-type-wiki .view-wiki-categories .views-row,
+.page-wiki-topic .view-wiki-categories .views-row {
+  float: left;
+  margin-right: 1em;
+}
+
+#edit-terms[name="terms"] {
+  width: 300px;
+}
+  .sidebar.second #edit-terms[name="terms"] {
+    width: 240px;
+  }
+
+.views-submit-button #edit-submit-wiki {
+  margin-top: -2px;
+}
+
+/* -------------------------------------------------------------------- Forms */ 
+#edit-field-image-und-0-upload-button {
+  margin: 0 3px;
+}
+.field-type-list-boolean .form-type-checkbox .description {
+  display: inline;
+  margin-left: .5em;
+  font-weight: bold;
+  font-style: normal;
+  color: black;
+  font-size: inherit;
+}
+
+.field-type-image .form-wrapper .image-widget img.file-icon {
+  display: none;
+}
+
+div.vertical-tabs {
+  clear: both;
+}
+
+.markItUp {
+  width: auto;
+}
+
+#markItUpEdit-section-value li,
+#block-system-main .field-name-body .markItUpHeader li {
+  list-style-image: none;
+  list-style: none;
+  padding: 4px 0;
+  margin: 0 1px;
+  font-size: 19px;
+  cursor: pointer;
+}
+#markItUpEdit-section-value li:hover,
+#block-system-main .field-name-body .markItUpHeader li:hover {
+  background-color: #eee;
+}
+
+/* field collections */
+.field-collection-view {
+  border-bottom: none;
+}
+.field-collection-container {
+  border-bottom: none;
+  margin-bottom: 0;
+  margin-top: 18px;
+  width: 100%;
+  clear: both;
+  float: left;
+}
+.field-collection-container .field-label {
+  font-size: 21px;
+  margin-bottom: 18px;
+  margin-top: 0;
+}
+.field-collection-container .field-name-field-question .field-label {
+  font-size: inherit;
+  width: 100%;
+}
+.field-collection-container .field-items .field-item {
+  margin-bottom: 0;
+}
+.field-collection-view {
+  padding: 0;
+  margin: 0;
+}
+
+/* input format */
+html.js fieldset.filter-wrapper.collapsible .fieldset-legend {
+  background-position-x: 0px;
+}
+html.js fieldset.filter-wrapper.collapsible {
+  padding-left: 0;
+  padding-top: 7px;
+  border: 0;
+  margin-top: 3px;
+}
+html.js fieldset.filter-wrapper.collapsible .form-type-select {
+  padding: 0;
+  margin: 0;
+}
+
+select[multiple] {
+  margin-bottom: 9px;
+}
+
+option {
+  padding: 0 9px 4px;
+}
+
+button {
+  padding: 4px 9px;
+}
+
+.text-format-wrapper .description,
+.form-item .description {
+  font-size: 12px;
+}
+
+.views-exposed-widget input,
+.views-exposed-widget select {
+  padding: 0;
+  font-size: 13px;
+}
+
+.views-exposed-form .views-exposed-widget .form-submit {
+  margin-top: 16px;
+}
+
+/* exposed filter on employee public page */
+.page-employees .views-exposed-widget label {
+  float: left;
+  clear: left;
+  width: 90px;
+}
+
+.page-employees .views-exposed-widget .form-item {
+  float: left;
+  clear: left;
+  margin-top: 5px;
+}
+.page-employees .views-exposed-widget input {
+  float: left;
+}
+
+.page-employees .views-exposed-widget .form-submit {
+  margin-top: 5px;
+  margin-left: 1em;
+}
+
+.page-employees .views-exposed-widget .chzn-container {
+  width: 212px !important;
+  display: block !important;
+  float: left;
+}
+
+.page-employees .views-exposed-widget fieldset {
+  clear: left;
+  float: left;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  margin-top: 1em;
+}
+
+.page-employees .views-exposed-widget .fieldset-wrapper {
+  overflow: visible !important;
+}
+
+
+
+/* --------------------------------------------------------------------- Misc */
+.preview .media-item .media-thumbnail img {
+  width: 78px !important;
+}
+
+html.js input.form-autocomplete {
+  background-position: 100% 5px;
+}
+html.js .views-exposed-form input.form-autocomplete {
+  background-position: 100% 2px;
+}
+
+/* /node/add */
+.node-type-list dd {
+  margin-bottom: 1em;
+}
+
+span.trigger {
+  font-size: 14px;
+  background: none;
+  padding: 0;
+  font-weight: normal;
+}
+
+/* old fckeditor styles, needed (maybe) for old content? */
+.rteindent1 {
+  margin-left: 40px;
+}
+.rteindent2 {
+  margin-left: 80px;
+}
+.rteindent3 {
+  margin-left: 120px;
+}
+.rteindent4 {
+  margin-left: 160px;
+}
+.rteleft {
+  text-align: left;
+}
+.rteright {
+  text-align: right;
+}
+.rtecenter {
+  text-align: center;
+}
+.rtejustify {
+  text-align: justify;
+}
+.ibimage_left {
+  float: left;
+}
+.ibimage_right {
+  float: right;
+}
+
+/* search */
+.page-search-node #top-content .region-content h2 {
+  font-size: 21px;
+}
+.page-search-node .search-result h3.title {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.page-search-node ol.search-results {
+  margin-left: 0;
+}
+.search-results .search-snippet-info {
+  padding-left: 0;
+}
+.page-search-node .main-title {
+  margin-top: 0;
+}
+
+/* user profiles */
+.page-user- .no-tabs .main-title {
+  margin-bottom: 0;
+}
+
+#user-profile-form {
+  padding-top: 1em;
+}
+.page-user-edit .add-profile-section-desc {
+  font-style: italic;
+}
+.page-user-edit #block-system-main li {
+  list-style: disc;
+}
+.page-user-edit .field-name-field-image fieldset {
+  margin: 0;
+  padding-bottom: 1em;
+}
+.page-user-edit .field-type-field-collection {
+  padding: 1em;
+  border: 1px solid #ccc;
+}
+.page-user-edit .field-type-field-collection.field-name-field-personal,
+.page-user-edit .field-type-field-collection.field-name-field-career {
+  background-color: #eee;
+}
+.page-user-edit .field-type-field-collection.field-name-field-career {
+  border-bottom: none;
+}
+.page-user-edit .field-type-field-collection.field-name-field-personal {
+  border-top: none;
+}
+.page-user-edit input.select-or-other-other {
+  font-size: 18px;
+  padding: 0;
+  font-weight: bold;
+  margin-top: 5px;
+  width: 100%;
+}
+.page-user-edit .field-type-field-collection th.field-label {
+  font-size: 21px;
+}
+.page-user-edit .field-name-field-image {
+  margin: 18px 0 21px 0;
+  width: 100%;
+}
+.page-user-edit .field-name-field-image fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+html.js .page-user-edit .field-name-field-image .fieldset-legend {
+  background: none;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+html.js .page-user-edit .field-name-field-image fieldset legend {
+  margin-bottom: 18px;
+} 
+.page-user-edit .field-type-field-collection table th.field-label {
+  display: none;
+}
+.page-user-edit .tabledrag-toggle-weight-wrapper {
+  display: none;
+}
+.page-user .field-name-field-image {
+  float: left;
+}
+.page-user section.content.inner .field-name-field-image img {
+  margin: 0 1em 0 0;
+}
+.page-user .profile-photo-description {
+  font-style: italic;
+  text-align: center;
+  padding-right: 1em;
+}
+.page-user .profile-section {
+  font-size: 21px;
+  margin-top: 0;
+}
+.page-user-edit .profile-photo-title {
+  font-weight: bold;
+  padding-left: 3em;
+}
+.page-user .profile fieldset {
+  margin: 0;
+}
+.page-user .field-collection-container p {
+  padding-left: 18px;
+  background: url(/sites/all/themes/atwork/images/arrow_blue_right.png) no-repeat 0 5px;
+}
+.page-user .field-name-field-summary .field-label,
+.page-user .field-name-field-career .field-label,
+.page-user .field-name-field-philosophy-influences .field-label,
+.page-user .field-name-field-personal .field-label,
+.page-user .field-name-field-favourites .field-label {
+  display: none;
+}
+.page-user .field-name-field-question .field-label {
+  display: inherit;
+}
+.page-user-edit .field-name-field-summary .field-label,
+.page-user-edit .field-name-field-career .field-label,
+.page-user-edit .field-name-field-philosophy-influences .field-label,
+.page-user-edit .field-name-field-personal .field-label,
+.page-user-edit .field-name-field-favourites .field-label {
+  display: inherit;
+}
+.field-name-field-answer .fieldset-legend {
+  font-weight: bold;
+}
+#block-views-profiles-block .views-label {
+  font-weight: bold;
+  display: block;
+}
+#block-views-profiles-block .views-field {
+  margin-bottom: 9px;
+  clear: both;
+}
+
+#block-views-profiles-block .views-row li {
+  line-height: 18px;
+}
+
+#block-views-profiles-block .profile-image img {
+  float: left;
+  margin: 0 .5em 9px 0;
+}
+/* front status mesages */
+.front div.messages {
+  margin: 20px 20px 0 20px;
+}
+
+.page-node-6413 table tbody td {
+  padding: 0 !important; /* don't hate (pls) */
+}
+
+.ui-dialog.ui-widget.ui-widget-content {
+  background-color: white;
+  border: 1px solid #bbb;
+}
+
+/* comment in and out for devel purposes */
+.idir-jonbell #admin-menu,
+.idir-clachamb #admin-menu {
+  display: block;
+}
+html body.admin-menu.idir-jonbell,
+html body.admin-menu.idir-clachamb {
+  margin-top: 29px !important;
+}
+

@@ -1,0 +1,29 @@
+<?php
+
+function views_access_current_user_views_plugins() { 
+  $plugins = array( 
+    'access' => array( 
+      'views_access_current_user' => array( 
+        'title' => t('Current User'), 
+        'help' => t('Only display to current user.'), 
+        'handler' => 'views_access_current_user_access_plugin', 
+        'path' => drupal_get_path('module', 'views_access_current_user'), 
+      ), 
+    ), 
+  ); 
+  return $plugins; 
+}
+
+function views_access_current_user_access($account = NULL) {
+  global $user;
+  $access = FALSE;
+  
+  if (arg(0) == 'user' && is_numeric(arg(1))) {
+    $viewed_user = user_load(arg(1));
+    if ($viewed_user && $viewed_user->uid == $user->uid) {
+      $access = TRUE;
+    }
+  }
+  
+  return $access;
+}

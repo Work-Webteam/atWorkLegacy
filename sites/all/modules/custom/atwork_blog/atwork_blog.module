@@ -1,0 +1,236 @@
+<?php
+
+/*
+ * Implementation of hook_views_pre_view()
+ *
+ *
+ */
+function atwork_blog_views_pre_view(&$view, &$display_id, &$args) {
+  //Health-bent is causing issues as an argument so we need to deal with it
+  if ($view->name == 'blogs' && $view->current_display == 'page') {
+    if ($view->args) {
+      if ($view->args[0] == 'health-bent') {
+        $view->args[0] = 'Health-bent';
+      }
+      elseif ($view->args[0] == 'Health-bent') {
+        //$view->args[0] = 'Health-bent';
+      }
+      else {
+        $view->args[0] = str_replace('-', ' ', $view->args);
+      }
+
+      $author = user_load_by_name($view->args[0]);
+      if ($author) {
+        $view->args[0] = $author->uid;
+      }
+      else {
+        drupal_not_found();
+      }
+    }
+  }
+  if ($view->name == 'blogs' && $view->current_display == 'block_1') {
+
+  }
+
+  if ($view->name == 'blogs' && $view->current_display == 'group_blogs') {
+    //dpm($args);
+  }
+}
+/*
+ * Implementation of hook_views_pre_render
+ *
+ * Want to hide group content creation button for users who do not have proper permissions
+ *
+ */
+function atwork_blog_views_pre_render(&$view) {
+  if ($view->name == 'blogs' && $view->current_display == 'group_blogs') {
+    global $user;
+
+    global $user;
+    // This is the associated group id
+    $gid = $view -> args[0];
+    // Load the node and find user's roles
+    $group = node_load($gid);
+    $roles = og_get_user_roles('node', $gid, $user->uid);
+
+    // Hide the button link from anyone who does not have the requisite role to create this type of content
+    switch (TRUE) {
+      case (in_array("Blogger", $roles)):
+      case (in_array("administrator", $roles)):
+      case (user_access('administer users')):
+        break;
+      default:
+        drupal_add_css('.create-blog {visibility: hidden;}', $option['type'] = 'inline');
+        break;
+    }
+
+    // FOR ATWORK CLASSIC - REDIRECT BLOG PAGE TO OUR BACKGROUND PAGE
+      //dpm($view);
+    /*
+    global $theme;
+    if($theme == 'atwork'  && !_atwork_is_admin()){
+      //dpm($theme);
+      $path = current_path();
+      $path_array = explode('/', $path);
+      //dpm($path_array);
+      if(isset($path_array[1]) && is_numeric($path_array[1])){
+        switch($path_array[1]){
+          // Climate change
+          case 10096:
+            drupal_goto('/blogs/climate-action-blog');
+            break;
+          // Yearning for Learning
+          case 12388:
+            drupal_goto('/blogs/yearning-for-learning-blog');
+            break;
+          // Beyond the Soapbox
+          case 10097:
+            drupal_goto('blogs/beyond-the-soapbox-blog');
+            break;
+          // Health-bent
+          case 10095:
+            drupal_goto('/blogs/health-bent-blog');
+            break;
+          // Citizen Engagement and Social Media Corner
+          case 2186:
+            break;
+          // ARRC
+          case 2637:
+            drupal_goto('blogs/arrc-blog');
+            break;
+          // Anything else ignore for now
+          default:
+            //drupal_goto('blogs');
+            break;
+        }
+      }
+    }*/
+  }
+}
+
+/*
+ * Implementation of hook_form_FORMID_form_alter()
+ *
+ * User's shouldn't see the blog profile field unless they've been given
+ * the blogger role
+ *
+ */
+function atwork_blog_form_user_profile_form_alter(&$form, &$form_state, $form_id) {
+  // hide blogger profile from non-bloggers
+  $user = $form['#user'];
+  if (!in_array('blogger', $user->roles)) {
+    //field_group_hide_field_groups($form, array('group_blog_profile'));
+  }
+}
+
+/**
+ * Implements hook_form_alter();
+ */
+function atwork_blog_form_blog_node_form_alter(&$form, &$form_state) {
+  global $user;
+  //dpm($form);
+
+
+  if(!_atwork_is_admin()){
+    $form['menu']['#access'] = FALSE;
+    $form['og_group_ref']['#access'] = FALSE;
+    $form['actions']['delete']['#access'] = FALSE;
+    //Some tags are reserved for editors and admins only
+    //References helper function in atwork_misc.module
+    _atwork_hide_exec_tags($form);
+
+  }
+}
+
+
+
+/*
+ * Implementation of hook_node_view()
+ *
+ * Add next/previous blog links
+ *
+ * And add blogger profile to bottom of content
+ *
+ */
+function atwork_blog_node_view($node, $view_mode, $langcode) {
+  global $user;
+
+  if ($node->type != 'blog' || $view_mode != 'full') {
+    return;
+  }
+
+  $blogger_links = array();
+
+  $author = user_load($node->uid);
+
+  $prev_uid = db_select('node', 'n')
+    ->condition('status', 1)
+    ->condition('type', 'blog')
+    ->condition('created', $node->created, '<')
+    ->condition('uid', $node->uid)
+    ->fields('n', array('nid'))
+    ->orderBy('created', 'DESC')
+    ->execute()
+    ->fetchAssoc();
+
+  if ($prev_uid) {
+    $previous_link = '&lt; ' . l(t('Previous post'), 'node/' . $prev_uid['nid'] ) . t(' by this blogger');
+    $blogger_links[] = '<span class="previous">' . $previous_link . '</span>';
+  }
+
+  $next_uid = db_select('node', 'n')
+    ->condition('status', 1)
+    ->condition('type', 'blog')
+    ->condition('created', $node->created, '>')
+    ->condition('uid', $node->uid)
+    ->fields('n', array('nid'))
+    ->orderBy('created', 'ASC')
+    ->execute()
+    ->fetchAssoc();
+
+  if ($next_uid) {
+    $next_link = l(t('Next post'), 'node/' . $next_uid['nid'] ) . t(' by this blogger ') . '&gt;';
+    $blogger_links[] = '<span class="next">' . $next_link . '</span>';
+  }
+
+  if ($blogger_links) {
+    $node->content['blogger_links'] = array(
+      '#weight' => 110,
+      '#markup' => '<div class="blogger-links">' . implode(' | ', $blogger_links) . '</div>',
+    );
+  }
+
+  $blogger_profile = field_get_items('user', $author, 'field_blog_profile');
+  $blogger_photo = field_get_items('user', $author, 'field_image');
+
+  if ((isset($blogger_profile[0]['value']) && $blogger_profile[0]['value']) ||
+      (isset($blogger_photo[0]['fid']) && $blogger_photo[0]['fid'])) {
+
+    $output = '';
+    // add photo
+    if (isset($blogger_photo[0]['fid']) && $blogger_photo[0]['fid']) {
+      $variables = array(
+        'style_name' => 'blogger_photo',
+        'path' => $blogger_photo[0]['uri'],
+        'width' => $blogger_photo[0]['width'],
+        'height' => $blogger_photo[0]['height'],
+        'alt' => $blogger_photo[0]['alt'],
+        'title' => $blogger_photo[0]['title'],
+      );
+
+      $output .= '<span class="blogger-photo crop">' . theme('image_style', $variables) . '</span>';
+    }
+
+    // add text
+    if (isset($blogger_profile[0]['value']) && $blogger_profile[0]['value']) {
+      $output .= '<span class="blogger-profile"><p>' . $blogger_profile[0]['value'] . '</p></span>';
+    }
+
+
+    $node->content['blogger_profile'] = array(
+      '#weight' => 1,
+      '#markup' => '<div id="blogger-profile">' . $output . '</div>',
+    );
+  }
+}
+

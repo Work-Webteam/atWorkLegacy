@@ -1,0 +1,4 @@
+name = Atwork Sharepoint Integration
+description = Group - File integration
+package = Atwork
+core = 7.x

@@ -1,0 +1,69 @@
+(function ($) {
+
+Drupal.behaviors.initColorboxDefaultStyle = {
+  attach: function (context, settings) {
+    $(document).bind('cbox_complete', function () {
+      // Only run if there is a title.
+      if ($('#cboxTitle:empty', context).length == false) {
+        //$('#cboxToggle').remove();
+        var isIframe = false;
+        
+        if ($('#cboxLoadedContent iframe').length) {
+          $('#cboxLoadedContent').hide();
+          isIframe = true;
+          $('#cboxNext').remove();
+          $('#cboxPrevious').remove();
+          $('#cboxCurrent').remove();
+        }
+        var caption = $('#cboxTitle').html();
+        if ($('#atworkCaption').length) {
+          var caption = $('#atworkCaption').html();
+          $('#cboxTitle').html('');
+        }
+        
+        if (isIframe && caption) {
+          $('#cboxContent', context).prepend('<div id="cboxToggle">View Video</div>');
+        }
+        else if (caption) {
+          $('#cboxContent', context).prepend('<div id="cboxToggle">Caption On</div>');
+          $('#cboxTitle').html('<div id="atworkCaption" style="height:auto; width:100%;"></div>');
+          $('#atworkCaption').html(caption);
+        }
+        
+        $('#cboxToggle').on("click", function(){
+          if (isIframe) {
+            $('#cboxLoadedContent').toggle(0);
+            $('#cboxTitle', context).toggle(0, function () {
+              if ($('#cboxTitle', context).is(":visible")) {
+                $('#cboxToggle').text('View Video', context);
+              }
+              else {
+                $('#cboxToggle').text('View Caption', context);
+              }
+            });
+          }
+          else {
+            $('#cboxTitle', context).slideToggle(400, function () {
+              if ($('#cboxTitle', context).is(":visible")) {
+                $('#cboxToggle').text('Caption On', context);
+              }
+              else {
+                $('#cboxToggle').text('Caption Off', context);
+              }
+            });
+          }
+        });
+      }
+      else {
+        $('#cboxTitle', context).hide();
+      }
+    });
+    $(document).bind('cbox_cleanup', function () {
+      // Only run if there is a title.
+      $('#cboxToggle').remove();
+      $('#atworkCaption').remove();
+    });
+  }
+};
+
+})(jQuery);

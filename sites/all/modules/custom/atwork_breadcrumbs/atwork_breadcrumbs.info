@@ -1,0 +1,4 @@
+name = Atwork Breadcrumbs
+description = For the tricky ones
+package = Atwork
+core = 7.x

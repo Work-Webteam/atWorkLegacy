@@ -1,0 +1,4 @@
+name = Atwork Profiles
+description = Code to help manage profiles
+package = Atwork
+core = 7.x

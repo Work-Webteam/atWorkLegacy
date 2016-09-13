@@ -1,0 +1,4 @@
+name = Atwork Group Wizard
+description = Trying to make groups easier to create.
+package = Atwork
+core = 7.x

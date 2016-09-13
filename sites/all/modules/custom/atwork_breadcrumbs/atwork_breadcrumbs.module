@@ -1,0 +1,1014 @@
+<?php
+
+/**
+ * Implements hook_node_view()
+ * To alter breadcrumbs for enhanced/classic site (blogs)
+ */
+
+function atwork_breadcrumbs_node_view($node, $view_mode, $langcode) {
+  //global $user;
+  //if ($user->uid == 56664){
+  //  dpm($node);
+  //}
+
+  if ($node->type == 'blog' && $view_mode == 'full') {
+
+    global $theme;
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+      if(isset($node->og_group_ref) && $node->og_group_ref){
+        $nid = $node->og_group_ref[$node->language][0]['target_id'];
+        $group = node_load($nid);
+        $title = $group->title;
+        $path_alias = drupal_get_path_alias('node/' . $node->nid);
+        $breadcrumb[] = l(t('Groups'), 'groups');
+        $breadcrumb[] = l($title, 'node/' . $nid);
+        $breadcrumb[] = l(t('Blogs'), 'node/' . $nid . '/blogs');
+        $breadcrumb[] = l($node->title, $path_alias);
+      } else {
+        $breadcrumb[] = l(t('Blogs'), '/blogs');
+        $path_alias = drupal_get_path_alias('node/' . $node->nid);
+        $breadcrumb[] = l($node->title, $path_alias);
+      }
+    //dpm($breadcrumb );
+    drupal_set_breadcrumb($breadcrumb);
+
+  }
+
+  if ($node->type == 'article' && $view_mode == 'full') {
+    // Group articles handled elsewhere
+    if(isset($node->og_group_ref) && $node->og_group_ref){
+      return;
+    }
+
+    // Poll specific
+    if((isset($node->field_poll) && $node->field_poll)){
+      $breadcrumb = array();
+      $breadcrumb[] = l(t('Home'), '<front>');
+      $breadcrumb[] = l(t('Polls'), 'polls');
+      $path_alias = drupal_get_path_alias('node/' . $node->nid);
+      $breadcrumb[] = l($node->title, $path_alias);
+      drupal_set_breadcrumb($breadcrumb);
+      return;
+    }
+
+    // Regular articles but not news view
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('News'), 'news');
+    $title = $node->title;
+    if ($node->nid == '13832'){
+      drupal_set_breadcrumb($breadcrumb);
+    } else {
+        $path_alias = drupal_get_path_alias('node/' . $node->nid);
+        $breadcrumb[] = l($title, $path_alias);
+        drupal_set_breadcrumb($breadcrumb);
+    }
+  }
+
+  // Simplenews Newsletters
+  if($node->type == 'simplenews' && $view_mode == 'full'){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Newsletters'), 'newsletters');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  $og_context = og_context();
+  if($node->type=='event' && $og_context){
+    $group = node_load($og_context['gid']);
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Groups'), 'groups');
+    $breadcrumb[] = l($group->title, 'node/' . $og_context['gid']);
+    $breadcrumb[] = l(t('Group Calendar'), 'node/' . $og_context['gid'] . '/calendar');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  // For group background pages
+  if($node->type == 'section_page' && $og_context) {
+    $group = node_load($og_context['gid']);
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Groups'), 'groups');
+    $breadcrumb[] = l($group->title, 'node/' . $og_context['gid']);
+    $breadcrumb[] = l($node->title, 'node/' . $node->nid);
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  // Single node breadcrumb changes
+  if($node->nid === '219'){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Our Values'), 'org/bcps-values');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid === '13944'){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Where Ideas Work'), 'org/where-ideas-work-brand');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid === '170'){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Award-Winning Employer'), 'org/award-winning-employer');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '60') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Core Policies'), 'reference/core-government-policies');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '13974') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Being the Best'), 'org/hr-plan');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '13976') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Diversity'), 'org/diversity');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '2067') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Gov 2.0'), 'gov20');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '13960') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Leading Workplace Strategies'), 'lws');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '5595') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('LeanBC'), 'leanbc');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '7127') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Corporate Learning Strategy'), 'org/learning-strategy');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+
+  if($node->nid == '245') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Premier\'s Awards'), 'career/premiers-awards');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '7888') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Premier\'s Awards'), 'career/premiers-awards');
+    $breadcrumb[] = l(t('Premier\'s Awards Categories'), 'career/premiers-awards/categories');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '7891') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Premier\'s Awards'), 'career/premiers-awards');
+    $breadcrumb[] = l(t('Premier\'s Awards Nominations'), 'career/premiers-awards/nominations');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '7286') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Premier\'s Awards'), 'career/premiers-awards');
+    $breadcrumb[] = l(t('Premier\'s Awards Adjudicators and Judges'), 'career/premiers-awards/premiers-awards-adjudicators-and-judges');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '7887') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Premier\'s Awards'), 'career/premiers-awards');
+    $breadcrumb[] = l(t('Premier\'s Awards Finalists and Winners'), 'career/premiers-awards/finalists');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '3832') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Premier\'s Awards'), 'career/premiers-awards');
+    $breadcrumb[] = l(t('Premier\'s Awards Ministry Contacts'), 'wiki/items/premiers-awards-ministry-contacts');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+
+  if($node->nid == '244') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Long Service Awards'), 'career/long-service-awards');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '14043') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Long Service Awards'), 'career/long-service-awards');
+    $breadcrumb[] = l(t('FAQ'), 'career/long-service-awards/faq');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '374') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Long Service Awards'), 'career/long-service-awards');
+    $breadcrumb[] = l(t('Eligibility'), 'career/long-service-awards/eligibility');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '380') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Long Service Awards'), 'career/long-service-awards');
+    $breadcrumb[] = l(t('Eligibility'), 'career/long-service-awards/eligibility');
+    $breadcrumb[] = l(t('Eligible Entities'), 'career/long-service-awards/eligibility/entities');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '378') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Long Service Awards'), 'career/long-service-awards');
+    $breadcrumb[] = l(t('Eligibility'), 'career/long-service-awards/eligibility');
+    $breadcrumb[] = l(t('Policy'), 'career/long-service-awards/eligibility/policy');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '8726') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Long Service Awards'), 'career/long-service-awards');
+    $breadcrumb[] = l(t('Award Catalogue'), 'career/long-service-awards/award-catalogue');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '10816') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Long Service Awards'), 'career/long-service-awards');
+    $breadcrumb[] = l(t('Ceremonies'), 'career/long-service-awards/ceremonies');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '13506') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Long Service Awards'), 'career/long-service-awards');
+    $breadcrumb[] = l(t('Ceremonies'), 'career/long-service-awards/ceremonies');
+    $breadcrumb[] = l(t('2015 Ceremony Recipients'), 'career/long-service-awards/2015-recipients');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '6140') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Long Service Awards'), 'career/long-service-awards');
+    $breadcrumb[] = l(t('Ceremonies'), 'career/long-service-awards/ceremonies');
+    $breadcrumb[] = l(t('Government House'), 'career/long-service-awards/dates/government-house');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+
+  if($node->nid == '14044') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Long Service Awards'), 'career/long-service-awards');
+    $breadcrumb[] = l(t('Ceremonies'), 'career/long-service-awards/ceremonies');
+    $breadcrumb[] = l(t('Volunteering'), 'career/long-service-awards/volunteering');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '10759') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Long Service Awards'), 'career/long-service-awards');
+    $breadcrumb[] = l(t('LSA Contacts'), 'career/long-service-awards/long_service_awards_contacts');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+
+  if($node->nid == '13978') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Work Environment Survey'), 'wes');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '13979') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Work Environment Survey'), 'wes');
+    $breadcrumb[] = l(t('Results'), 'wes/results');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '13980') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Work Environment Survey'), 'wes');
+    $breadcrumb[] = l(t('Resources'), 'wes/resources');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '11418') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Gov 101'), 'reference/gov101');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '13957') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Our Organization'), 'our-organization');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '7690'){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Classifieds'), 'classifieds');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '10624'){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('10 Best Places to Work'), 'hr/10-best-places-work');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '13975'){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Public Service Week'), 'public-service-week');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+
+  if($node->nid == '13956'){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Learning from the Best'), 'learning-from-the-best');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '13958'){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Region to Region'), 'region-to-region');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '14046'){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Leadership Series'), 'leadership-series');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '13955'){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('ETC. Talks'), 'etc-talks');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '13949'){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Award-Winning Employees'), 'org/award-winning-employees');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '13977'){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Spotlight'), 'spotlight');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($node->nid == '243'){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Staff Appreciation'), 'staff-appreciation');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+  //global $user;
+  //if($user->uid == 56664) {
+  //  dpm($node);
+  //  dpm($view_mode);
+  //}
+
+}
+
+
+/**
+ * Implements hook_views_post_render
+ * Updating breadcrumbs for current classic/enhanced views blocks setup.
+ */
+function atwork_breadcrumbs_views_post_render(&$view, &$output, &$cache){
+  global $theme;
+  if($view->name == 'blogs' && ($view->current_display=='block_2' || $view->current_display=='block_3' )){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Blogs'), 'blogs');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($view->name == 'polls' && ($view->current_display=='block_2' || $view->current_display=='block_3')){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Polls'), 'polls');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if($view->name == 'newsletter_archive' && $view->current_display == 'page'){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Newsletters'), 'newsletters');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  // Executive messages
+  if($view->name == 'executive_updates' && $view->current_display == 'block_2' ){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Executive Messages'), 'executive-messages');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  // For blogs display in groups
+  if($view->name == 'blogs' && $view->current_display == 'group_blogs'){
+
+    if($theme == 'atwork') {
+      $breadcrumb = array();
+      if(isset($view->args[0])){
+        $nid = $view->args[0];
+        $group = node_load($nid);
+        $title = $group->title;
+        $breadcrumb[] = l($title, 'node/' . $nid);
+        $breadcrumb[] = l(t('Blogs'), 'node/' . $nid . '/blogs');
+        drupal_set_breadcrumb($breadcrumb);
+      }
+    }
+
+    if($theme == 'atwork_zen'){
+      $breadcrumb = array();
+      if(isset($view->args[0])){
+        $nid = $view->args[0];
+        $group = node_load($nid);
+        $title = $group->title;
+        $breadcrumb[] = l(t('Home'), '<front>');
+        $breadcrumb[] = l(t('Groups'), 'groups');
+        $breadcrumb[] = l($title, 'node/' . $nid);
+        $breadcrumb[] = l(t('Blogs'), 'node/' . $nid . '/blogs');
+        drupal_set_breadcrumb($breadcrumb);
+     }
+    }
+  }
+
+  if($view->name == 'news' && $view->current_display == 'block_1'){
+    $breadcrumb = array();
+    $breadcrumb[] = l('Home', '<front>');
+    $breadcrumb[] = l('News', 'news');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+
+  // Group Calendar view
+  if($view->name == 'group_calendar' && $view->current_display == 'page_1'){
+    if(isset($view->args[0])){
+      $gid = $view->args[0];
+      $group = node_load($gid);
+      $group_title = $group->title;
+      $breadcrumb = array();
+      $breadcrumb[] = l(t('Home'), '<front>');
+      $breadcrumb[] = l(t('Groups'), 'groups');
+      $breadcrumb[] = l($group_title, 'node/' . $gid);
+      $breadcrumb[] = l(t('Calendar'), 'node/' . $gid . '/calendar');
+      drupal_set_breadcrumb($breadcrumb);
+    }
+  }
+
+  // Galleries View
+  if($view->name == 'gallery_reference' && $view->current_display == 'page_2'){
+    if(isset($view->args[0])){
+      $gid = $view->args[0];
+      $group = node_load($gid);
+      $group_title = $group->title;
+      $breadcrumb = array();
+      $breadcrumb[] = l(t('Home'), '<front>');
+      $breadcrumb[] = l(t('Groups'), 'groups');
+      $breadcrumb[] = l($group_title, 'node/' . $gid);
+      $breadcrumb[] = l(t('Galleries'), 'node/' . $gid . '/galleries');
+      drupal_set_breadcrumb($breadcrumb);
+    }
+  }
+
+  if($view->name == 'gallery_reference' && $view->current_display == 'block_thumbs'){
+    if(isset($view->args[0]) && isset($view->result[0]->_field_data['node_field_data_field_gallery_nid']['entity']->og_group_ref['und'][0]['target_id'])){
+      $gid = $view->args[0];
+      $group = node_load($view->result[0]->_field_data['node_field_data_field_gallery_nid']['entity']->og_group_ref['und'][0]['target_id']);
+      $group_title = $group->title;
+      $breadcrumb = array();
+      $breadcrumb[] = l(t('Home'), '<front>');
+      $breadcrumb[] = l(t('Groups'), 'groups');
+      $breadcrumb[] = l($group_title, 'node/' .  $view->result[0]->_field_data['node_field_data_field_gallery_nid']['entity']->og_group_ref['und'][0]['target_id']);
+      $breadcrumb[] = l(t('Galleries'), 'node/' . $view->result[0]->_field_data['node_field_data_field_gallery_nid']['entity']->og_group_ref['und'][0]['target_id'] . '/galleries');
+      $breadcrumb[] = l($view->result[0]->_field_data['node_field_data_field_gallery_nid']['entity']->title, 'node/' . $gid);
+      drupal_set_breadcrumb($breadcrumb);
+    }
+  }
+
+  if($view->name == 'gallery_reference' && $view->current_display == 'page_3'){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Photo Galleries'), 'galleries');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  // Poll view in groups
+  if($view->name == 'polls' && $view->current_display == 'page_1'){
+    if(isset($view->args[0])){
+      $gid = $view->args[0];
+      $group = node_load($gid);
+      $group_title = $group->title;
+      $breadcrumb = array();
+      $breadcrumb[] = l(t('Home'), '<front>');
+      $breadcrumb[] = l(t('Groups'), 'groups');
+      $breadcrumb[] = l($group_title, 'node/' . $gid);
+      $breadcrumb[] = l(t('Polls'), 'node/' . $gid . '/polls');
+      drupal_set_breadcrumb($breadcrumb);
+    }
+  }
+
+  // Questions view in groups
+  if($view->name == 'questions' && $view->current_display == 'page'){
+    if(isset($view->args[0])){
+      $gid = $view->args[0];
+      $group = node_load($gid);
+      $group_title = $group->title;
+      $breadcrumb = array();
+      $breadcrumb[] = l(t('Home'), '<front>');
+      $breadcrumb[] = l(t('Groups'), 'groups');
+      $breadcrumb[] = l($group_title, 'node/' . $gid);
+      $breadcrumb[] = l(t('Questions'), 'node/' . $gid . '/qas');
+      drupal_set_breadcrumb($breadcrumb);
+    }
+  }
+
+  // Group Article Page
+  if($view->name == 'news' && $view->current_display == 'page_1'){
+    if(isset($view->args[0])){
+      $gid = $view->args[0];
+      $group = node_load($gid);
+      $group_title = $group->title;
+      $breadcrumb = array();
+      $breadcrumb[] = l(t('Home'), '<front>');
+      $breadcrumb[] = l(t('Groups'), 'groups');
+      $breadcrumb[] = l($group_title, 'node/' . $gid);
+      $breadcrumb[] = l(t('Articles'), 'node/' . $gid . 'news');
+      drupal_set_breadcrumb($breadcrumb);
+    }
+  }
+
+  // Main group page view
+  if($view->name == 'groups' && $view->current_display == 'details') {
+    if(isset($view->args[0])){
+      $gid =$view->args[0];
+      $group = node_load($gid);
+      $group_title = $group->title;
+      $breadcrumb = array();
+      $breadcrumb[] = l(t('Home'), '<front>');
+      $breadcrumb[] = l(t('Groups'), 'groups');
+      $breadcrumb[] = l($group_title, 'node/' . $gid);
+      drupal_set_breadcrumb($breadcrumb);
+    }
+  }
+
+  if($view->name == 'people_admin' && $view->current_display == 'public_page'){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Employee Profiles'), 'employees');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  if ($view->name == 'Executive_Profiles' && $view->current_display == 'page_1'){
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Executive Profiles'), 'executive-team');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+
+
+
+  //global $user;
+  //if ($user->uid == 56664){
+  //  dpm($view);
+  //}
+}
+
+
+/***********************************  GROUPS BREADCRUMBS ************************************/
+
+/**
+ * Implements hook_form_FORM_ID_alter();
+ * Setting up breadcrumbs the way we want them
+ */
+function atwork_breadcrumbs_form_og_menu_overview_form_alter(&$form, &$form_state, $form_id) {
+  $group = og_context();
+
+  if (isset($group)){
+    $group_type = $group['group_type'];
+    $gid = $group['gid'];
+    $group_object = node_load($gid);
+
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Groups'), 'groups');
+    $breadcrumb[] = l($group_object->title, 'node/' . $gid);
+    $breadcrumb[] = l(t('Menu'), 'group/node/' . $gid . '/admin/menus');
+    // Set the breadcrumb.
+    drupal_set_breadcrumb($breadcrumb);//$group_type, $gid); // hide overall admin page, array(l(t('Group'), "$group_type/$gid/group")));
+  }
+}
+
+
+/**
+ * Implements hook_form_FORM_ID_alter();
+ * Setting up breadcrumbs the way we want them
+ */
+
+function atwork_group_form_og_menu_edit_item_form_alter(&$form, &$form_state, $form_id){
+  $group = og_context();
+
+  if (isset($group)){
+    $group_type = $group['group_type'];
+    $gid = $group['gid'];
+    $group_object = node_load($gid);
+
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Groups'), 'groups');
+    $breadcrumb[] = l($group_object->title, 'node/' . $gid);
+    $breadcrumb[] = l(t('Menu'), 'group/node/' . $gid . '/admin/menus');
+    // Set the breadcrumb.
+    drupal_set_breadcrumb($breadcrumb);//$group_type, $gid); // hide overall admin page, array(l(t('Group'), "$group_type/$gid/group")));
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter();
+ *
+ * show the question when giving an answer
+ */
+function atwork_breadcrumbs_form_answer_node_form_alter(&$form, &$form_state, $form_id) {
+  if($form_id == 'answer_node_form'){
+    // See if answer is related to a question from a group
+    if (isset($_GET['field_answer_question'])) {
+    $question = node_load($_GET['field_answer_question']);
+    }
+    if ($question){
+      if(isset($question->og_group_ref[$question->language][0]['target_id']) && $question->og_group_ref[$question->language][0]['target_id']){
+        $gid = $question->og_group_ref[$question->language][0]['target_id'];
+        $group = node_load($gid);
+        $og_context = og_context('node', $group);
+      }
+    }
+    // If it is, set a title and set breadcrumbs
+    if($og_context){
+      // set breadcrumbs
+      $group = node_load($gid);
+      $breadcrumb = array();
+      $breadcrumb[] = l(t('Home'), '<front>');
+      $breadcrumb[] = l(t('Groups'), 'groups');
+      $breadcrumb[] = l($group->title, 'node/' . $group->nid);
+      $breadcrumb[] = l(t('Question and Answers'), 'node/' . $group->nid . '/qas');
+      $breadcrumb[] = l($question->title, 'node/' . $question->nid);
+      drupal_set_breadcrumb($breadcrumb);
+      drupal_set_title($group->title);
+    }
+    // A quick note about required fields
+    $form['title']['#prefix'] = '<div style="text-align:right;" id="instruction_for_required">(A <strong><span style="color:#c00">*</span></strong> denotes a required field.)</div><br />';
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter();
+ * To alter breadcrumbs on groups questions page
+ */
+function atwork_breadcrumbs_form_question_node_form_alter(&$form, &$form_state, $form_id) {
+  // A quick note about required fields
+  $form['title']['#suffix'] = '<div style="text-align:right;" id="instruction_for_required">(A <strong><span style="color:#c00">*</span></strong> denotes a required field.)</div><br />';
+
+  $og_context = og_context();
+  if($og_context){
+    // set breadcrumbs
+    $gid = $og_context['gid'];
+    $group = node_load($gid);
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Groups'), 'groups');
+    $breadcrumb[] = l($group->title, 'node/' . $group->nid);
+    $breadcrumb[] = l(t('Question and Answers'), 'node/' . $group->nid . '/qas');
+    drupal_set_breadcrumb($breadcrumb);
+    drupal_set_title($group->title);
+  }
+}
+
+
+
+/**
+ * Implements hook_form_alter();
+ * To alter breadcrumbs in group forms page
+ *
+ */
+function atwork_breadcrumbs_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+
+  // Group Forms
+  if($form_id == 'section_node_form') {
+    $og_context = og_context();
+    if ($og_context) {
+      $gid = $og_context['gid'];
+      $group = node_load($gid);
+      $breadcrumb = array();
+      $breadcrumb[] = l(t('Home'), '<front>');
+      $breadcrumb[] = l(t('Groups'), 'groups');
+      $breadcrumb[] = l($group->title, 'node/' . $group->nid);
+      drupal_set_breadcrumb($breadcrumb);
+      drupal_set_title($group->title);
+    }
+  }
+  // Groups landing page forms and My group form
+  if (in_array($form['#id'], array('views-exposed-form-groups-page-2', 'views-exposed-form-groups-page-3'))) {
+    //Set breadcrumb on groups home, get rid of strange menu crumb
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    drupal_set_breadcrumb($breadcrumb);
+  }
+  // Event forms
+  if ($form_id == 'event_node_form') {
+    $og_context = og_context();
+    if($og_context){
+      $gid = $form['og_group_ref'][$form['language']['#value']][0]['default']['#default_value'][0];
+      $group_title = $form['og_group_ref'][$form['language']['#value']][0]['default']['#options'][$gid];
+      drupal_set_title(t($group_title));
+      $breadcrumb = array();
+      $breadcrumb[] = l(t('Home'), '<front>');
+      $breadcrumb[] = l(t('Groups'), 'groups');
+      $breadcrumb[] = l($group_title, 'node/' . $gid);
+      $breadcrumb[] = l(t('Calendar'), 'node/' . $gid . '/calendar');
+    } else {
+      $breadcrumb = array();
+      $breadcrumb[] = l(t('Home'), '<front>');
+      $breadcrumb[] = l(t('Event'), 'announcements');
+      $breadcrumb[] = l(t('Create An Event'), 'node/add/event');
+    }
+    drupal_set_breadcrumb($breadcrumb);
+    $form['title']['#prefix'] = '<div style="text-align:right;" id="instruction_for_required">(A <strong><span style="color:#c00">*</span></strong> denotes a required field.)</div><br />';
+  }
+
+  // Gallery forms
+  if ($form_id == 'gallery_node_form'){
+    $og_context = og_context();
+    if($og_context){
+      //set title
+      $node_of_group = node_load($og_context['gid']);
+      drupal_set_title($node_of_group->title);
+      // set proper breadcrumbs
+      $breadcrumb = array();
+      $breadcrumb[] = l(t('Home'), '<front>');
+      $breadcrumb[] = l(t('Groups'), 'groups');
+      $breadcrumb[] = l($node_of_group->title, 'node/' .  $og_context['gid'] );
+      $breadcrumb[] = l(t('Galleries'), 'node/' . $og_context['gid'] . '/galleries');
+      drupal_set_breadcrumb($breadcrumb);
+     } else {
+      $breadcrumb = array();
+      $breadcrumb[] = l(t('Home'), '<front>');
+      $breadcrumb[] = l(t('Galleries'), 'galleries');
+      drupal_set_breadcrumb($breadcrumb);
+     }
+  }
+
+  // Image forms
+  if($form_id == 'image_node_form'){
+    if(isset($form['field_gallery'][$form['language']['#value']]['#default_value'][0])){
+      $node_of_gallery = node_load($form['field_gallery'][$form['language']['#value']]['#default_value'][0]);
+      if(isset($node_of_gallery->og_group_ref)){
+        $node_of_group = node_load($node_of_gallery->og_group_ref[$node_of_gallery->language][0]['target_id']);
+        drupal_set_title($node_of_group->title);
+        $breadcrumb = array();
+        $breadcrumb[] = l(t('Home'), '<front>');
+        $breadcrumb[] = l(t('Groups'), 'groups');
+        $breadcrumb[] = l($node_of_group->title, 'node/' . $node_of_group->nid);
+        $breadcrumb[] = l(t('Galleries'), 'node/' . $node_of_group->nid . '/galleries');
+        $breadcrumb[] = l($node_of_gallery->title, 'node/' . $node_of_gallery->nid);
+      } else {
+        $breadcrumb = array();
+        $breadcrumb[] = l(t('Home'), '<front');
+        $breadcrumb[] = l(t('Galleries'), 'galleries');
+      }
+      drupal_set_breadcrumb($breadcrumb);
+    }
+  }
+
+  // Poll Forms
+  if($form_id == 'poll_node_form'){
+    $og_context = og_context();
+    if($og_context){
+      // set breadcrumbs
+      $gid = $og_context['gid'];
+      $group = node_load($gid);
+      $breadcrumb = array();
+      $breadcrumb[] = l(t('Home'), '<front>');
+      $breadcrumb[] = l(t('Groups'), 'groups');
+      $breadcrumb[] = l($group->title, 'node/' . $group->nid);
+      $breadcrumb[] = l(t('Polls'), 'node/' . $group->nid . '/polls');
+      drupal_set_breadcrumb($breadcrumb);
+
+      // Set title
+      drupal_set_title($group->title);
+
+      // A quick note about required fields
+      $form['field_image']['#prefix'] = '<div style="text-align:right;" id="instruction_for_required">(A <strong><span style="color:#c00">*</span></strong> denotes a required field.)</div><br />';
+    }
+  }
+
+  // Group Articles form
+  if($form_id == 'article_node_form'){
+    $og_context = og_context();
+    if($og_context){
+      // set breadcrumbs
+      $gid = $og_context['gid'];
+      $group = node_load($gid);
+      $breadcrumb = array();
+      $breadcrumb[] = l(t('Home'), '<front>');
+      $breadcrumb[] = l(t('Groups'), 'groups');
+      $breadcrumb[] = l($group->title, 'node/' . $group->nid);
+      $breadcrumb[] = l(t('Articles'), 'node/' . $group->nid . '/news');
+      drupal_set_breadcrumb($breadcrumb);
+      drupal_set_title($group->title);
+
+      // A quick note about required fields
+      $form['title']['#prefix'] = '<div style="text-align:right;" id="instruction_for_required">(A <strong><span style="color:#c00">*</span></strong> denotes a required field.)</div><br />';
+    }
+  }
+
+  // Group background page form
+  if($form_id == 'section_page_node_form'){
+    if(isset($form['og_group_ref'][$form['language']['#value']][0]['default']['#default_value'][0])){
+      $gid = $form['og_group_ref'][$form['language']['#value']][0]['default']['#default_value'][0];
+      $group = node_load($gid);
+      $breadcrumb = array();
+      $breadcrumb[] = l(t('Home'), '<front>');
+      $breadcrumb[] = l(t('Groups'), 'groups');
+      $breadcrumb[] = l($group->title, 'node/' . $group->nid);
+      $breadcrumb[] = l(t('Articles'), 'node/' . $group->nid . '/news');
+      drupal_set_breadcrumb($breadcrumb);
+      drupal_set_title($group->title);
+    }
+
+    // A quick note about required fields
+    $form['title']['#prefix'] = '<div style="text-align:right;" id="instruction_for_required">(A <strong><span style="color:#c00">*</span></strong> denotes a required field.)</div><br />';
+  }
+
+ //if($user->uid == 56664){
+ //   dpm($form);
+ //   dpm($form_id);
+ // }
+}
+
+
+
+/**
+ * Implements hook_form_FORM_ID_alter();
+ */
+function atwork_breadcrumbs_form_blog_node_form_alter(&$form, &$form_state) {
+
+  // Alter title, add breadcrumbs, add note about * for group users
+  $og_context = og_context();
+  if($og_context){
+    // Fix for random issue with Jills profile (and perhaps others.) which was disassociating blogs from groups
+    if(isset($og_context['gid']) && $og_context['gid']) {
+      $gid = $og_context['gid'];
+    }
+    $group_object = node_load($gid);
+    $group_title = $group_object->title;
+    //dpm($group_title);
+    drupal_set_title(t($group_title));
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    $breadcrumb[] = l(t('Groups'), 'groups');
+    $breadcrumb[] = l($group_title, 'node/' . $gid);
+    $breadcrumb[] = l(t('Blogs'), 'node/' . $gid . '/blogs');
+    if(isset($form['#node']->title) && $form['#node']->title){
+      $blog_title = $form['#node']->title;
+      $breadcrumb[] = l($blog_title, 'node/' . $form['#node']->uid);
+    }
+    drupal_set_breadcrumb($breadcrumb);
+    $form['title']['#prefix'] = '<div style="text-align:right;" id="instruction_for_required">(A <strong><span style="color:#c00">*</span></strong> denotes a required field.)</div><br />';
+    //dpm($form);
+  }
+}
+
+/******************* BLOCK LEVEL **********************************************/
+
+
+/**
+ * Implements hook_block_view_alter();
+ */
+function atwork_breadcrumbs_block_view_alter(&$data, $block) {
+  global $user;
+  global $theme;
+
+  if (!isset($user->theme)) {
+    return;
+  }
+
+  //if($user->uid == 56664){
+  //  dpm($block);
+  //}
+
+  if ($theme == 'atwork'){
+    // THIS IS FOR THE PREVIOUS VERSION OF @WORK - ATWORK CLASSIC
+    switch ($block->delta){
+      case 'blogs-block_2':
+        //dpm($block);
+        drupal_set_title('');
+        $breadcrumb = array();
+        $breadcrumb[] = l('Home', '<front>');
+        $breadcrumb[] = l('Blogs', 'blogs');
+        drupal_set_breadcrumb($breadcrumb);
+        $block->title = '';
+        return $block;
+        break;
+      case 'videos-block_3':
+        drupal_set_title('');
+        $breadcrumb=array();
+        $breadcrumb[] = l('Home', '<front>');
+        $breadcrumb[] = l ('Videos', 'videos');
+        drupal_set_breadcrumb($breadcrumb);
+        $block->title = '';
+        return $block;
+        break;
+      case 'polls-block_3':
+        drupal_set_title('');
+        $breadcrumb[] = l('Home', '<front');
+        $breadcrumb[] = l('Polls', 'polls');
+        drupal_set_breadcrumb($breadcrumb);
+        $block->title = '';
+        return $block;
+        break;
+    }
+  }
+}
+
+/*
+ * Implementation of hook_user_view()
+ *
+ * Show or hide various profile fields
+ *
+ * Add email and IDIR fields for convienence
+ */
+function atwork_breadcrumbs_user_view($account, $view_mode, $langcode) {
+  if ($view_mode == 'full') {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), '<front>');
+    if(in_array('executive', $account->roles)){
+      $breadcrumb[] = l(t('Executive Profiles'), '/executive-team' );
+    } else {
+      $breadcrumb[] = l(t('Employee Profiles'), '/employees' );
+    }
+    $breadcrumb[] = l($account->name, '/employees' . '/' . $account->name);
+    drupal_set_breadcrumb($breadcrumb);
+    //global $user;
+    //if ($user->uid ==56664) {
+    //  dpm($account);
+    //}
+  }
+}

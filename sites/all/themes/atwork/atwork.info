@@ -1,0 +1,52 @@
+name = AtWork
+description = HTML5/CSS3 theme for Drupal 7 at gww.gov.bc.ca
+screenshot = images/screenshot.png
+core = "7.x"
+version = "1.0"
+project = "AtWork"
+engine = phptemplate
+; How to name your .tpl files: http://drupal.org/node/1089656
+
+; couldn't use "page_top" (with underscore) vs "pagetop" as it was a previously used name
+regions[pagetop] = Page Top
+regions[navbar] = Navigation Bar
+; Homepage only, featured News Item(s)
+regions[content_top] = Content Top
+regions[pre_content] = Pre Content
+regions[content] = Content
+; for things like comments section, homepage middle col
+regions[content_bottom] = Content Bottom
+; Homepage only, first of three main cols below sections
+regions[sidebar_first] = First sidebar (Only used on homepage)
+regions[sidebar_second] = Second sidebar
+regions[footer] = Footer
+
+features[] = name
+; features[] = slogan
+; leave uncommented: http://drupal.org/node/1149900
+features[] = logo
+; leave uncommented: http://drupal.org/node/1183708
+features[] = favicon
+features[] = node_user_picture
+features[] = comment_user_picture
+features[] = search
+features[] = main_menu
+features[] = secondary_menu
+
+; Stylesheets are hard coded in order to support Respond.js (cannot use '@import' with this script)
+;stylesheets[all][] = css/style.css
+;stylesheets[all][] = css/enhanced.css
+
+; colorbox custom themeing
+stylesheets[all][] = css/colorbox_style.css
+
+; Most scripts are hard coded.
+; colorbox custom themeing
+scripts[] = js/colorbox_style.js
+
+; Defaults
+settings[basic_breadcrumb_separator] = »
+settings[clear_registry] = 0
+
+; Custom theme for the @Work site: gww.gov.bc.ca 
+; Theme based off of the Drupal "Boilerplate" theme: https://drupal.org/project/boilerplate

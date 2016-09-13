@@ -1,0 +1,6 @@
+name = Views - Fix exposed filters
+description = Save the Items per Page, Sort by and Sort Order Options in the user Cookie.
+package = Atwork
+core = 7.x
+
+dependencies[] = views

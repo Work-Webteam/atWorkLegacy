@@ -1,0 +1,6 @@
+name = views_access_current_user
+description = Provide an access plugin for current user
+core = 7.x
+package = Atwork
+dependencies[] = views
+files[] = views_access_current_user_access_plugin.inc

@@ -1,0 +1,4 @@
+name = Atwork Search
+description = Changes to the default search module
+package = Atwork
+core = 7.x

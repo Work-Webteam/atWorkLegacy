@@ -1,0 +1,94 @@
+<?php
+
+/**
+* Implementation of hook_install()
+*/
+function atwork_auth_install() {
+  // Make sure this module gets processed second (eg. when hooks are invoked) to make we
+  // populate the user object before other modules get processed.
+  db_query("UPDATE {system} SET weight = -98 WHERE name = 'atwork_auth'");
+  
+  // Set up our variables
+  variable_set('atwork_auth_watchdog_new', 1);
+  variable_set('atwork_auth_watchdog_rename', 1);
+  variable_set('atwork_auth_watchdog_nosm', 0);
+  variable_set('atwork_auth_prefix', 'old');
+  variable_set('atwork_auth_rename_fields', 0);
+  variable_set('atwork_auth_display_name_field', '');
+  variable_set('atwork_auth_min_code_field', '');
+  variable_set('atwork_auth_excluded_idirs', '');
+  variable_set('atwork_auth_sync_enabled', 0);
+  variable_set('atwork_auth_gal_on_creation', 0);
+  variable_set('atwork_auth_cron_num_users', 10);
+  variable_set('atwork_auth_cron_num_days', 14);
+  variable_set('atwork_auth_gal_num_days', 0);
+  variable_set('atwork_auth_cron_watchdog', 1);
+  variable_set('atwork_auth_cron_watchdog_num', 10);
+}
+
+/**
+* Implementation of hook_uninstall()
+*/
+function atwork_auth_uninstall() {
+  // delete our variables
+  variable_del('atwork_auth_watchdog_new');
+  variable_del('atwork_auth_watchdog_rename');
+  variable_del('atwork_auth_watchdog_nosm');
+  variable_del('atwork_auth_prefix');
+  variable_del('atwork_auth_rename_fields');
+  variable_del('atwork_auth_display_name_field');
+  variable_del('atwork_auth_min_code_field');
+  variable_del('atwork_auth_excluded_idirs');
+  variable_del('atwork_auth_sync_enabled');
+  variable_del('atwork_auth_gal_on_creation');
+  variable_del('atwork_auth_cron_num_users');
+  variable_del('atwork_auth_cron_num_days');
+  variable_del('atwork_auth_gal_num_days');
+  variable_del('atwork_auth_cron_watchdog');
+  variable_del('atwork_auth_cron_watchdog_num');
+}
+
+/*
+ * Implements hook_schema()
+ * 
+ * Make our table that maps users (uid) to their GUID
+ */
+function atwork_auth_schema() {
+  $schema['atwork_auth'] = array(
+    'description' => 'Stores users GUID to capture IDIR changes.',
+    'fields' => array(
+      'uid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => NULL,
+        'description' => 'Unique user ID.',
+      ),
+      'guid' => array(
+        'type' => 'varchar',
+        'length' => 256,
+        'not null' => FALSE,
+        'default' => NULL,
+        'description' => 'Government user ID provided by reverse-poxy/GAL.',
+      ),
+      'timestamp' => array(
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => NULL,
+        'description' => 'Tracking the last time a user was updated from GAL.',
+      ),
+    ),
+    'indexes' => array(
+      'uid_guid' => array('uid', 'guid'),
+      'timestamp' => array('timestamp'),
+    ),
+    'foreign keys' => array(
+      'user' => array(
+        'table' => 'users',
+        'columns' => array('uid' => 'uid'),
+      ),
+    ),
+  );
+  
+  return $schema;
+}

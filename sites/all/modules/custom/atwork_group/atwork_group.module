@@ -1,0 +1,1038 @@
+<?php
+
+/*
+ * Helper function that returns all members of a group
+ */
+function _atwork_group_get_members($gid) {
+  $query = db_select('users', 'u');
+
+  $query
+    ->condition('u.uid', 0, '<>')
+    ->condition('u.status', 1, '=')
+    ->fields('u', array('uid', 'name'))
+    ->fields('dn', array('field_display_name_value'))
+    ->join('field_data_field_display_name', 'dn', "u.uid = dn.entity_id");
+    $query->join('og_membership', 'ogm', "ogm.gid = :gid AND u.uid = ogm.etid AND ogm.entity_type = 'user'", array(':gid' => $gid));
+
+  return $query->execute()->fetchAll();
+}
+
+/*
+ * Helper function that helps contruct the group menu
+ */
+function _atwork_group_content_type() {
+  return array(
+    'blog' => array(
+      'name' => t('Blogs'),
+      'path' => 'blogs',
+    ),
+    'event' => array(
+      'name' => t('Events'),
+      'path' => 'calendar',
+    ),
+    'gallery' => array(
+      'name' => t('Galleries'),
+      'path' => 'galleries',
+    ),
+    'news' => array(
+      'name' => t('Articles'),
+      'path' => 'news',
+    ),
+    'poll' => array(
+      'name' => t('Polls'),
+      'path' => 'polls',
+    ),
+    'qa' => array(
+      'name' => t('Question and Answers'),
+      'path' => 'qas',
+    ),
+   // 'issue' => array(
+   //   'name' => t('Task List'),
+   //   'path' => 'tasks',
+   // ),
+
+   // 'file' => array(
+   //   'name' => t('File Management'),
+   //   'path' => 'files',
+   // ),
+  );
+}
+
+/*
+ * Helper function that contructs links added to group menu
+ */
+function _atwork_group_content_links($group) {
+  if (!$group) return;
+
+  $path = drupal_get_path_alias('node/' . $group->nid);
+
+  $links = array();
+
+  foreach (_atwork_group_content_type() as $type => $content) {
+    $enabled = field_get_items('node', $group, 'field_grp_opt_' . $type);
+    if ($enabled[0]['value']) {
+
+      $links[$content['path']] = array(
+        'title' => $content['name'],
+        'href' => 'node/' . $group->nid . '/' . $content['path'],
+      );
+    }
+  }
+
+  if ($links) {
+    $variables['links'] = $links;
+    return theme('links', $variables);
+  }
+
+}
+
+/*
+ * Helper function that limits the add-content links to those selected in the group options
+ */
+function _atwork_group_add_content_links($group) {
+
+  $links = og_node_create_links('node', $group->nid, 'og_group_ref', FALSE);
+
+  $blog = field_get_items('node', $group, 'field_grp_opt_blog');
+  $event = field_get_items('node', $group, 'field_grp_opt_event');
+  $qa = field_get_items('node', $group, 'field_grp_opt_qa');
+  $issue = field_get_items('node', $group, 'field_grp_opt_issue');
+  $page = field_get_items('node', $group, 'field_grp_opt_page');
+  $gallery = field_get_items('node', $group, 'field_grp_opt_gallery');
+  $poll = field_get_items('node', $group, 'field_grp_opt_poll');
+  $news = field_get_items('node', $group, 'field_grp_opt_news');
+
+  if (isset($links['og_node_create_links']['#items'][0]['data'])) {
+    foreach ($links['og_node_create_links']['#items'] as $key => $value) {
+      if ((strpos(' ' . $value['data'], 'node/add/blog') && !$blog[0]['value']) ||
+          (strpos(' ' . $value['data'], 'node/add/event') && !$event[0]['value']) ||
+          (strpos(' ' . $value['data'], 'node/add/gallery') && !$gallery[0]['value']) ||
+          (strpos(' ' . $value['data'], 'node/add/section-page') && !$page[0]['value']) ||
+          (strpos(' ' . $value['data'], 'node/add/poll') && !$poll[0]['value']) ||
+          (strpos(' ' . $value['data'], 'node/add/question') && !$qa[0]['value']) ||
+          (strpos(' ' . $value['data'], 'node/add/article') && !$news[0]['value']) ||
+          (strpos(' ' . $value['data'], 'node/add/task-list') && !$issue[0]['value'])) {
+        unset($links['og_node_create_links']['#items'][$key]);
+      }
+      // News article should show as Article in the Add Content Menu, so lets swap it out.
+      if (strpos(' ' . $value['data'], 'node/add/article') && $news[0]['value']) {
+        $article = 'News article';
+        $value['data'] = str_replace($article, "Article", $value['data']);
+        $links['og_node_create_links']['#items'][$key]['data'] = $value['data'];
+      }
+    }
+  }
+  return drupal_render($links);
+
+}
+/*
+ * Un-developed feature where a group owner could specify what blocks they want to appear on group pages
+ */
+function _atwork_group_blocks($group) {
+  $output = '';
+
+  $block_map = array(
+    'Blogs' => 'blogs-block_og',
+    'Galleries' => 'gallery_reference-block_1',
+    'Polls' => 'polls-block_1',
+    'Question And Answers' => 'question_and_answers-block_sidebar',
+    'Task List' => 'task_list-block_1',
+  );
+
+  $event_sidebar = field_get_items('node', $group, 'field_grp_opt_event_sidebar');
+  $event_sidebar_cal = field_get_items('node', $group, 'field_grp_opt_event_sidebar_cal');
+  $block_order = field_get_items('node', $group, 'field_grp_opt_block_order');
+
+  if (isset($event_sidebar[0]['value']) && $event_sidebar[0]['value']) {
+    if (isset($event_sidebar_cal[0]['value']) && $event_sidebar_cal[0]['value'] == 2) {
+      $block_map['Events'] = 'group_calendar-block_1';
+    }
+    elseif (isset($event_sidebar_cal[0]['value']) && $event_sidebar_cal[0]['value'] == 1) {
+      $block_map['Events'] = 'group_calendar-block_2';
+    }
+  }
+
+  if (isset($block_order[0]['value']) && $block_order[0]['value']) {
+    if (strpos(' ' . $block_order[0]['value'], '|')) {
+      // multiple blocks
+      $blocks = explode('|', $block_order[0]['value']);
+      foreach ($blocks as $block_name) {
+        $block = block_load('views', $block_map[$block_name]);
+        $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+        $output .= render($render_array);
+      }
+    }
+    else {
+      // single block
+      $block = block_load('views', $block_map[$block_order[0]['value']]);
+      $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+
+      return render($render_array);
+    }
+  }
+
+  return $output;
+}
+
+/**
+ * Build the related-groups text for nodes.
+ *
+ * @param $related_groups
+ *   Array of groups referenced by the node.
+ *
+ * @return
+ *   String containing the related groups.
+ *
+ * Borrowed from commons for use with tokens
+ */
+function atwork_group_related_groups_text($related_groups) {
+  // don't display anything if this is a group activity feed
+  $og_context = og_context();
+
+  if (isset($og_context['group_type']) &&
+      $og_context['group_type'] == 'node' &&
+      isset($og_context['gid'])) {
+    return;
+  }
+
+  // In 1 group: "in the x group"
+  if (count($related_groups) == 1) {
+    return ' ' . t('in the !group group', array('!group' => l($related_groups[0]->title, 'node/' . $related_groups[0]->nid)));
+  }
+
+  // In 2 groups: "in the x and y groups"
+  if (count($related_groups) == 2) {
+    return ' ' . t('in the !group-0 and !group-1 groups', array(
+      '!group-0' => l($related_groups[0]->title, 'node/' . $related_groups[0]->nid),
+      '!group-1' => l($related_groups[1]->title, 'node/' . $related_groups[1]->nid),
+    ));
+  }
+
+  // In more than 2 groups: "in the x, y and z groups"
+  if (count($related_groups) > 2) {
+    // Separate the last group.
+    $last_group = array_pop($related_groups);
+    $text = ' in the ';
+    // Prepare tokens for t() for each of the other groups.
+    foreach ($related_groups as $key => $this_group) {
+      $text .= "!group-$key, ";
+      $t_args["!group-$key"] = l($this_group->title, 'node/' . $this_group->nid);
+    }
+    // Prepare the last group token.
+    $text .= " and !group-$last_group->nid groups.";
+    $t_args["!group-$last_group->nid"] = l($last_group->title, 'node/' . $last_group->nid);
+    // Prepare the full text with all of the groups and their tokens:
+    return t($text, $t_args);
+  }
+}
+
+/*
+ * Build a join/leave link
+ */
+function _atwork_group_link($gid) {
+  $membership_link = '<div class="atwork-membership-action gid-' . $gid . '">';
+
+  $is_member = og_is_member('node', $gid);
+  if ($is_member) {
+    //$membership_link .= '<a href="#" onclick="atwork_membership_ajax_load(\'remove\', \'' . $gid . '\'); return false;">Leave</a>';
+    $membership_link .= l(t('Joined'), 'group/node/' . $gid . '/unsubscribe');
+  }
+  else {
+    //$membership_link .= '<a href="#" onclick="atwork_membership_ajax_load(\'add\', \'' . $gid . '\'); return false;">Join</a>';
+    $membership_link .= l(_atwork_fa('plus') . ' ' . t('Join'), 'group/node/' . $gid . '/subscribe', array('html' => TRUE));
+  }
+
+  $membership_link .= '</div>';
+
+  return $membership_link;
+}
+
+/**
+ * Implements hook_init();
+ */
+function atwork_group_init() {
+  // js to support ajax-based group joining/leaving
+  // not using ajax anymore so not needed
+//  $js = <<<EOT
+//function atwork_membership_ajax_load(op, gid) {
+//  jQuery(".atwork-membership-action.gid-" + gid).load("/atwork-membership/" + op + "/" + gid);
+//  return false;
+//}
+//EOT;
+//
+//    drupal_add_js($js, 'inline');
+}
+
+/**
+ * Implements hook_menu();
+ */
+function atwork_group_menu() {
+  drupal_add_library('system', 'drupal.ajax');
+  $items = array();
+  $items['tutorials/ajax/groups/%'] = array(
+    'delivery callback' => 'ajax_deliver',
+    'title' => 'Tutorial Callback For Group',
+    'description' => 'To check if user has seen the group tutorial',
+    'page callback' => 'atwork_groups_tutorial_check',
+    'page arguments' => array(3),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * @param  $argument the query string that shows us the tutorial is completed.
+ *
+ */
+function atwork_groups_tutorial_check($argument) {
+  global $user;
+  //dpm($argument);
+  if(isset($argument) && $argument == 'tutorial=true'){
+    $account = user_load($user->uid);
+    // Mark them as though they have seen it
+    $edit = array(
+      'field_group_page_tutorial' => array(
+        'und' => array(
+          0 => array(
+            'value' => 0
+          ),
+        ),
+      ),
+    );
+    user_save($account, $edit);
+    // It is a stinker about taking new js
+    //drupal_clear_js_cache();
+  }
+  if(isset($argument) && $argument == 'tutorial=admin_true'){
+    $account = user_load($user->uid);
+     $edit = array(
+      'field_group_admin_tour' => array(
+        'und' => array(
+          0 => array(
+            'value' => 0
+          ),
+        ),
+      ),
+    );
+    user_save($account, $edit);
+  }
+  return;
+}
+
+/*
+ * was used for our ajax-based group joining
+ */
+function atwork_group_page_callback($op, $gid) {
+  switch ($op) {
+    case 'add':
+      $og_membership = og_group('node', $gid);
+
+      return '<a href="#" onclick="atwork_membership_ajax_load(\'remove\', \'' . $gid . '\'); return false;">Leave</a>';
+      break;
+
+    case 'remove':
+      $og_membership = og_ungroup('node', $gid);
+
+      return '<a href="#" onclick="atwork_membership_ajax_load(\'add\', \'' . $gid . '\'); return false;">Join</a>';
+      break;
+  }
+}
+
+/*
+ * was used for our ajax-based group joining
+ */
+function atwork_group_delivery_callback($page_callback_result) {
+  print $page_callback_result;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter();
+ */
+function atwork_group_form_og_ui_add_users_alter(&$form, &$form_state, $form_id) {
+  // we don't need a request field
+  hide($form['membership_fields']['og_membership_request']);
+  //dpm($form);
+}
+
+
+/**
+ * Implements hook_form_FORM_ID_alter();
+ */
+
+function atwork_group_form_og_ui_edit_membership_alter(&$form, &$form_state, $form_id){
+  // Dropping things we don't need
+  hide($form['og_user']['state']);
+  hide($form['membership_fields']['og_membership_request']);
+  $form['og_user']['#title'] = 'Choose the roles for:';
+}
+
+
+function atwork_group_views_pre_view(&$view, &$display_id, &$args) {
+  // set group context on ALL views pages where url = node/x and x is a group
+  if ($view->display[$view->current_display]->display_plugin == 'page') {
+    if (arg(0) == 'node' && is_numeric(arg(1))) {
+      $node = node_load(arg(1));
+      if ($node && og_is_group('node', $node)) {
+        og_context('node', $node);
+      }
+    }
+  }
+
+  // i think this is deprecated - no more teaser view on group homepage
+  if ($view->name == 'og_nodes' && $view->current_display == 'group_attach_content') {
+    if (!isset($view->current_entity->nid)) {
+      return;
+    }
+
+    $node = $view->current_entity;
+    $display = field_get_items('node', $node, 'field_group_home_content');
+
+    if (!isset($display[0]['value']) || !$display[0]['value']) {
+      $view->executed = TRUE;
+      $view->display_handler->set_option('empty', array());
+    }
+  }
+}
+
+function atwork_group_views_post_render(&$view, &$output, &$cache) {
+  /*
+   * there is a view that shows some details about the group on it's homepage
+   *
+   * if group or site admin add some handy links for group administration
+   *
+   * if group member add the add-content links
+   */
+
+  if ((($view->name == 'groups' && $view->current_display == 'details') || ($view->name == 'second_sidebar_blocks' && $view->current_display == 'og_links'))  && isset($view->args[0]) && $view->args[0]) {
+   global $user;
+
+    if($user->uid == 56664) {
+    	//dpm($view);
+    }
+
+    $group = node_load($view->args[0]);
+
+    if ($group) {
+      $og_roles = array_keys(og_get_user_roles('node', $group->nid, $user->uid));
+
+      if (!$og_roles && !_atwork_is_admin() && $view->current_display == 'og_links') {
+        $output = '';
+        return;
+      }
+
+      $variables['links'] = array();
+      $variables['links']['edit'] = array(
+        'title' => t('Edit Group Settings'),
+        'href' => 'node/' . $group->nid . '/edit',
+      );
+      $variables['links']['admin'] = array(
+        'title' => t('Manage Content'),
+        'href' => 'node/' . $group->nid . '/admin',
+      );
+      if(_atwork_is_admin()){
+        $variables['links']['group'] = array(
+          'title' => t('Group Admin'),
+          'href' => 'node/' . $group->nid . '/group',
+        );
+      }
+      $variables['links']['menu'] = array(
+          'title' => t('Menu Options'),
+          'href' => 'group/node/' . $group->nid . '/admin/menus',
+      );
+
+      $variables['links']['members'] = array(
+        'title' => t('Members'),
+        'href' => 'group/node/' . $group->nid . '/admin/people',
+      );
+
+      $group_url = $GLOBALS['base_url'] . '/' . drupal_get_path_alias();
+      $variables['links']['email'] = array(
+        'title' => t('Send Group Invite Email'),
+        'href' => 'mailto:?subject=' . _atwork_full_name($user) . '%20has%20invited%20you%20to%20join%20' . $group->title . '&body=' . _atwork_full_name($user) . '%20would%20like%20to%20invite%20you%20to%20join%20"' . $group->title . '". Join by clicking on the following url:' . $group_url . ' .',
+      );
+
+      $admin_links = theme('links', $variables);
+
+      // collapse or not these admin links?
+      if (strpos($admin_links, 'class="active"')) {
+        $collapsed = '';
+      }
+      else {
+        $collapsed = 'collapsed';
+      }
+
+      $add_content_links = _atwork_group_add_content_links($group);
+      //dpm($add_content_links);
+
+      $output .= '<ul style="margin: 0;">';
+
+      // add admin links if user is this group's admin
+      if (in_array(3, $og_roles) || _atwork_is_admin()) {
+
+      $output .= <<<EOT
+<fieldset style="margin-top: 8px; margin-bottom: 0;" class="no-outline collapsible $collapsed">
+  <legend><span class="fieldset-legend">Settings</span></legend>
+  <div class="fieldset-wrapper" style="padding-left: 10px;">
+    $admin_links
+  </div>
+</fieldset>
+EOT;
+      }
+
+      // add add content links if user is a member (of any role) of this group
+      if (in_array(2, $og_roles) || _atwork_is_admin()) {
+      $output .= <<<EOT
+<fieldset style="margin-top: 8px;" class="no-outline collapsible">
+  <legend><span class="fieldset-legend">Add Content</span></legend>
+  <div class="fieldset-wrapper" style="padding-left: 10px;">
+    $add_content_links
+  </div>
+</fieldset>
+EOT;
+      }
+
+      if ($view->current_display == 'details') {
+        $output .= _atwork_group_link($group->nid);
+
+        //$output .= _atwork_group_blocks($group);
+      }
+    }
+  }
+}
+
+/*
+ * Implements hook_views_pre_render()
+ */
+function atwork_group_views_pre_render(&$view) {
+  //add a group join/leave link to our group listing view
+  if ($view->name =='groups' && in_array($view->current_display, array('page_2', 'page_3', 'block_2'))) {
+    foreach ($view->result as &$result) {
+      $result->field_body[0]['rendered']['#markup'] = _atwork_group_link($result->nid);
+    }
+  }
+
+  // If the user is using atwork_zen theme, show them the tutorial
+  if ($view->name == 'groups' && $view->current_display == 'page_2') {
+    Global $user;
+    if ($user->theme == 'atwork_zen') {
+      $account = user_load($user->uid);
+      if(!isset($account->field_group_page_tutorial['und'][0]['value']) || (isset($account->field_group_page_tutorial['und'][0]['value']) && $account->field_group_page_tutorial['und'][0]['value'] == 1)){
+        //drupal_clear_js_cache();
+        jquery_impromptu_add();
+        drupal_add_js(drupal_get_path('module', 'atwork_group') . '/atwork_group_tutorial.js');
+      }
+    }
+  }
+
+
+  if ($view->name == 'groups' && $view->current_display == 'details') {
+    Global $user;
+    if ($user->theme == 'atwork_zen') {
+      $account = user_load($user->uid);
+      $gid = $view->args[0];
+      $current_group = node_load($gid);
+      $og_roles = array_keys(og_get_user_roles('node', $current_group->nid, $user->uid));
+      if(in_array(3, $og_roles)){
+        if(!isset($account->field_group_admin_tour['und'][0]['value']) || (isset($account->field_group_admin_tour['und'][0]['value']) && $account->field_group_admin_tour['und'][0]['value']==1)){
+          jquery_impromptu_add();
+          drupal_add_js(drupal_get_path('module', 'atwork_group') . '/atwork_group_admin_tutorial.js');
+        }
+      }
+    }
+  }
+
+
+  // Existing message is strange when a member is deleted, lets grab it and alter it
+  if($view->name == 'og_members_admin' && $view->current_display == 'page_1') {
+    if(isset($_SESSION['messages']['status']) && in_array('The membership was removed.', $_SESSION['messages']['status'])){
+     $i = array_search('The membership was removed.', $_SESSION['messages']['status']);
+     $_SESSION['messages']['status'][$i] = "The member was removed";
+     //dpm($_SESSION['messages']['status']);
+    }
+  }
+
+
+  // FOR ATWORK CLASSIC - REDIRECT GROUP PAGE TO OUR BACKGROUND PAGE
+  //dpm($view);
+  global $user;
+  /*if ($view->name == 'groups')  {
+    global $theme;
+    if($theme == 'atwork'  && !_atwork_is_admin()){
+      switch($view->args[0]){
+        // Climate change
+        case 10096:
+          drupal_goto('/blogs/climate-action-blog');
+          break;
+        // Yearning for Learning
+        case 12388:
+          drupal_goto('/blogs/yearning-for-learning-blog');
+          break;
+        // Beyond the Soapbox
+        case 10097:
+          drupal_goto('blogs/beyond-the-soapbox-blog');
+          break;
+        // Health-bent
+        case 10095:
+          drupal_goto('/blogs/health-bent-blog');
+          break;
+        // Citizen Engagement and Social Media Corner
+        case 2186:
+          break;
+        // ARRC
+        case 2637:
+          drupal_goto('blogs/arrc-blog');
+          break;
+        // Anything else
+        // ignore for now
+        default:
+          //drupal_goto('blogs');
+          break;
+      }
+    }
+  }*/
+}
+
+
+/**
+ * Implements hook_menu_alter();
+ */
+function atwork_group_menu_alter(&$items) {
+  // Decouple node for the group admin tab, but keep the path intact.
+  $items['node/%/group']['type'] = MENU_CALLBACK;
+
+  // og menu lets group admin add a custom menu. We don't want that
+  // we only want the group menu added through the group edit page
+  // this ensures all group menus share the same naming convention
+  $items['group/%/%/admin/menus']['page callback'] = 'atwork_group_og_menu_overview_page';
+  $items['group/%/%/admin/menus/add']['access callback'] = FALSE;
+
+}
+
+
+/**
+ * Menu callback which shows an overview page of all the custom menus in a
+ * user's group and along with their description.
+ *
+ * We are overriding this callback so it doesn't prompt the user to add a menu
+ */
+function atwork_group_og_menu_overview_page($group_type, $gid) {
+  // For some reason, the values above are not correct - so lets fix them
+  $group = og_context();
+
+  if (isset($group)){
+    $group_type = $group['group_type'];
+    $gid = $group['gid'];
+  }
+
+  // Set the title of the page.
+  $entity_wrapper = entity_metadata_wrapper($group_type, node_load($gid));
+  $entity_label = $entity_wrapper->label() ? $entity_wrapper->label() : $group_type . ' ' . $gid;
+
+  drupal_set_title(t('@title', array('@title' => $entity_label)), PASS_THROUGH);
+  // Set the breadcrumb.
+  og_set_breadcrumb($group_type, $gid); // hide overall admin page, array(l(t('Group'), "$group_type/$gid/group")));
+
+  // @todo Replace by D7 database independant functions
+  $result = db_query("
+    SELECT om.gid, om.menu_name as name, m.title as title, m.description as description FROM {og_menu} om
+    LEFT JOIN {menu_custom} m
+    ON om.menu_name = m.menu_name
+    WHERE om.gid = :gid
+    ORDER BY title", array(':gid' => $gid));
+  $header = array(t('Title'), array('data' => t('Operations'), 'colspan' => '3'));
+  $rows = array();
+
+  foreach ($result as $menu) {
+    // OG Menu makes no sense to users, lets strip it as a default.
+    if($menu->description == 'OG Menu for ' . $menu->title) {
+      $menu->description = $menu->title;
+    }
+    //$row = array(theme('menu_admin_overview', array('title' => $menu->title, 'name' => $menu->name, 'description' => $menu->description)));
+    $row = array(theme('menu_admin_overview', array('title' => $menu->title, 'name' => $menu->name)));
+    $row[] = array('data' => l(t('list links'), 'group/' . $group_type . '/' . $gid . '/admin/menus/' . $menu->name));
+   // $row[] = array('data' => l(t('edit menu'), 'group/' . $group_type . '/' . $gid . '/admin/menus/' . $menu->name . '/edit'));
+    $row[] = array('data' => l(t('add link'), 'group/' . $group_type . '/' . $gid . '/admin/menus/' . $menu->name . '/add'));
+    $rows[] = $row;
+  }
+
+  if ($result->rowCount() == 0) {
+    return t('There are currently no menus. ') . ' ' . l(t('Edit'), 'node/' . $gid . '/edit') . t(' the group and select "Enable Group Menu" to add one.');
+  }
+  else {
+    return theme('table', array('header' => $header, 'rows' => $rows));
+  }
+}
+
+/**
+ * Implements hook_node_access();
+ */
+function atwork_group_node_access($node, $op, $account) {
+
+  foreach (og_get_entity_groups('node', $node) as $entity_type => $og_memberships) {
+    foreach ($og_memberships as $membership_id => $entity_id) {
+      if ($entity_type == 'node') {
+        // Assuming we only want to deal with node groups, we can
+        // access the group node with...
+        $group_node = node_load($entity_id);
+      }
+    }
+  }
+
+  if (isset($group_node->nid) && $group_node->nid) {
+    $roles = og_get_user_roles('node', $group_node->nid);
+
+    if (isset($roles[3])) {
+      return NODE_ACCESS_ALLOW;
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter();
+ *
+ *
+ */
+function atwork_group_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+
+  //Group Page manipulations - TODO - should probably be in its own module - difficult to find here
+  if($form_id == 'section_page_node_form') {
+    // Want users to be able to unpub background pages if they wish
+    if(isset($form['options']) && $form['options']) {
+      $form['options']['#access'] = TRUE;
+    }
+
+
+    if(!_atwork_is_admin()){
+      // Hide exec tags, from helper function in atwork_misc.module
+      _atwork_hide_exec_tags($form);
+      //Hide other fields from non-priv'd users
+      $form['options']['promote']['#access'] = FALSE;
+      $form['options']['sticky']['#access'] = FALSE;
+      $form['og_group_ref']['#access'] = FALSE;
+      $form['actions']['delete']['#access'] = FALSE;
+      drupal_add_css('.form-item.form-type-select.form-item-menu-parent {display:none;}', $option['type'] = 'inline' );
+    }
+
+
+  }
+
+  //TODO: put this in atwork_group_wizrd.module
+  if ($form_id == 'section_node_form') {
+
+    $group_terms = variable_get('atwork_group_terms','');
+
+    if (isset($group_terms['value']) && $group_terms['value']) {
+      $form['field_terms'][$form['field_terms']['#language']]['#prefix'] = $group_terms['value'];
+      $form['field_terms'][$form['field_terms']['#language']]['#access'] = FALSE;
+    }
+
+    $form['#validate'][] = 'atwork_groups_form_validate';
+
+  }
+
+  // checkbox indicating whether or not to subscribe to group on join
+  if ($form_id == 'og_ui_confirm_subscribe') {
+
+    module_load_include('inc', 'subscriptions', 'subscriptions.admin');
+
+    $form['email_subscription'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Get email updates'),
+      '#default_value' => 1,
+    );
+
+    $options = array();
+    foreach (_subscriptions_send_intervals() as $interval => $text) {
+      $options[$interval] = $text;
+    }
+
+    $form['send_interval'] = array(
+      '#type' => 'select',
+      '#title' => t('Frequency'),
+      '#options' => $options,
+      '#default_value' => 604800,
+      '#states' => array(
+        'visible' => array(
+          ':input[name=email_subscription]' => array('checked' => TRUE),
+        ),
+      ),
+    );
+
+    $form['#submit'][] = '_atwork_group_subscribe_submit';
+
+    //dpm($form);
+  }
+  if ($form_id == 'og_ui_confirm_unsubscribe') {
+    $form['#submit'][] = '_atwork_group_unsubscribe_submit';
+  }
+
+  /*
+   * Add a list of letters to our exposed filters on the group listing page
+   */
+  if (in_array($form['#id'], array('views-exposed-form-groups-page-2', 'views-exposed-form-groups-page-3'))) {
+    if (isset($form['title'])) {
+      hide($form['title']);
+    }
+    //if (isset($form['#info']['filter-combine']['label'])) {
+    //  $form['#info']['filter-combine']['label'] = '';
+    //}
+    //if (isset($form['#info']['filter-title']['label'])) {
+    //  $form['#info']['filter-title']['label'] = '';
+    //}
+
+    $form['search']['#attributes']['placeholder'] = t('Search Groups');
+
+    if ($form['#id'] == 'views-exposed-form-groups-page-2') {
+      $form['search']['#suffix'] = _atwork_fa('search', 'style="cursor: pointer;" onclick="document.getElementById(\'views-exposed-form-groups-page-2\').submit()"');
+      $link_url = 'groups';
+    }
+    elseif ($form['#id'] == 'views-exposed-form-groups-page-3') {
+      $form['search']['#suffix'] = _atwork_fa('search', 'style="cursor: pointer;" onclick="document.getElementById(\'views-exposed-form-groups-page-3\').submit()"');
+      $link_url = 'my-groups';
+    }
+
+
+    $letters = range('A', 'Z');
+
+    if (isset($_GET['title']) && $_GET['title']) {
+      $all = l(t('All'), $link_url);
+    }
+    else {
+      $all = l(t('All'), $link_url, array('attributes' => array('class' => array('really-active'))));
+    }
+
+    $alpha_filter = '<ul><li class="first">' . $all . '</li>';
+
+    foreach($letters as $letter) {
+      $alpha_filter .= '<li>';
+      if (isset($_GET['title']) && strtoupper($_GET['title']) == $letter) {
+        $link = l($letter, $link_url, array('attributes' => array('class' => array('really-active')), 'query' => array('title' => $letter)));
+      }
+      else {
+        $link = l($letter, $link_url, array('query' => array('title' => $letter)));
+      }
+      $alpha_filter .= $link . '</li>';
+    }
+
+    $alpha_filter .= '</ul>';
+
+    $form['alpha_filter'] = array(
+      '#markup' => $alpha_filter,
+      '#weight' => 100,
+      '#prefix' => '<div class="alpha_filter_label">Browse Groups By Letter</div>',
+    );
+
+  }
+
+  if($form_id == 'og_menu_overview_form'){
+    //edit tab could get user in trouble, lets hide it.
+    if(!_atwork_is_admin()){
+      drupal_add_css(".tabs-primary.tabs.primary li:last-child {display:none;}", 'inline');
+    }
+  }
+
+  if($form_id == 'og_menu_edit_item_form'){
+    //edit tab could get user in trouble, lets hide it.
+    if(!_atwork_is_admin()){
+      drupal_add_css(".tabs-primary.tabs.primary li:last-child {display:none;}", 'inline');
+    }
+  }
+
+  if($form_id == 'og_menu_edit_menu_form'){
+    // Don't want users to delete the menu if they find this page - they don't have the ability to re-add
+    if(!_atwork_is_admin()){
+      $form['actions']['delete']['#access'] = FALSE;
+      //Change weird 'og'description for users if they get here.
+      if($form['description']['#default_value'] == 'OG Menu for ' . $form['title']['#default_value']) {
+        $form['description']['#default_value'] = $form['title']['#default_value'];
+      }
+      //dpm($form);
+    }
+  }
+  //dpm($form_id);
+}
+
+/*
+ * delete group subscription when a user leaves a group
+ */
+function _atwork_group_unsubscribe_submit(&$form, &$form_state) {
+  global $user;
+  subscriptions_delete($user->uid, 'node', 'group_audience', $form_state['build_info']['args'][1]->nid, -1);
+
+  //dpm($form_state);
+}
+
+/*
+ * submit callback. subscribe to group on join is checkbox checked
+ */
+function _atwork_group_subscribe_submit(&$form, &$form_state) {
+  global $user;
+  if (isset($form_state['values']['email_subscription']) && $form_state['values']['email_subscription']) {
+    subscriptions_write_subscription('node', 'group_audience', $form_state['build_info']['args'][1], -1, $user->uid, $form_state['values']['send_interval'], 1, 1);
+  }
+}
+
+/*
+ * validation callback
+ *
+ * TODO: move to atwork_group_callback.module
+ */
+function atwork_groups_form_validate(&$form, &$form_state) {
+  // Not using this for now
+  return;
+  // ensure terms are checked
+  if (!$form_state['values']['field_terms'][$form_state['values']['language']][0]['value']) {
+    form_set_error('field_terms', t('You must agree to the terms.'));
+  }
+}
+
+/**
+ * Implements hook_block_info();
+ */
+function atwork_group_block_info() {
+  $blocks['groups_tabs'] = array(
+    'info' => t('Groups Homepage: Tabs'),
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view();
+ *
+ * Provide a blocks that is simply a few links with number of groups added
+ */
+function atwork_group_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'groups_tabs':
+
+      $result = db_select('node', 'n')
+        ->fields('n', array('nid'))
+        ->condition('n.type', 'section')
+        ->condition('n.status', 1)
+        ->execute();
+
+      $num_all_groups = $result->rowCount();
+
+      $user_groups = og_get_groups_by_user();
+
+      if (isset($user_groups['node'])) {
+        $num_user_groups = count($user_groups['node']);
+      }
+      else {
+        $num_user_groups = 0;
+      }
+
+      $all_groups_link = l(t('All Groups') . ' (' . $num_all_groups . ')', 'groups');
+      $my_groups_link = l(t('My Groups') . ' (' . $num_user_groups . ')', 'my-groups');
+      $create_group_link = l(t('Create a Group'), 'node/add/section');
+
+      $block['content'] = array(
+        '#markup' => '<span class="all-groups">' . $all_groups_link . '</span><span class="my-groups">' . $my_groups_link . '</span><span class="create-group">' . $create_group_link . '</span>',
+      );
+
+      break;
+  }
+
+  return $block;
+}
+
+
+/**
+ * Implements hook_block_view_alter();
+ *
+ * Add content links to the og_menu block
+ */
+function atwork_group_block_view_alter(&$data, $block) {
+  if ($block->module == 'og_menu' && $block->delta == 'og_single_menu_block') {
+    //$data['subject'] = '';
+
+
+    $og_context = og_context();
+
+    if (isset($og_context['group_type']) &&
+        $og_context['group_type'] == 'node' &&
+        isset($og_context['gid'])) {
+
+      $group = node_load($og_context['gid']);
+      $group_links = _atwork_group_content_links($group);
+      $group_links = str_replace('<ul class="links">', '', $group_links);
+      $group_links = str_replace('</ul>', '', $group_links);
+
+      $data['content']['atwork_menu']['#markup'] = $group_links;
+
+      $data['subject'] = l($group->title, 'node/' . $group->nid);
+    }
+  }
+}
+
+/**
+ * Implements hook_node_view();
+ */
+function atwork_group_node_view($node, $view_mode, $langcode) {
+  if ($node->type == 'poll') {
+    $gid = field_get_items('node', $node, 'og_group_ref');
+
+    if ($gid) {
+      // is user not a member they can't vote
+      $group = node_load($gid[0]['target_id']);
+
+      if (!og_is_member('node', $gid[0]['target_id'])) {
+        if (isset($node->content['poll_view_voting'])) {
+          unset($node->content['poll_view_voting']);
+          $node->content['poll_view_results']['#markup'] = atwork_polls_view_results($node, $view_mode);
+          $message = t('You must be a member of the !group group to vote on this poll.', array('!group' => l($group->title, 'node/' . $group->nid)));
+          drupal_set_message($message);
+        }
+      }
+    }
+
+  }
+
+
+  //p\ programmatically add activity feed block to a group's node content
+  if ($node->type == 'section') {
+    $block = module_invoke('atwork_activity', 'block_view', 'group');
+
+    $node->content['body']['#weight'] = -1;
+
+    $node->content['activity'] = array(
+      '#weight' => 0,
+      '#markup' => '<h2 class="block__title block-title">' . $block['subject'] . '</h2>' . $block['content']['#markup'],
+    );
+  }
+
+
+  // While we are here, handle a message:
+  if($node->type == 'section' && isset($_SESSION['messages']['status'])){
+    $gid = $node->nid;
+    $group = node_load($gid);
+    $message_check = 'As the manager of <em class="placeholder">' . $group->title . "</em>, you can not leave the group.";
+    if (in_array($message_check, $_SESSION['messages']['status'])){
+      $i = array_search($message_check, $_SESSION['messages']['status']);
+      $_SESSION['messages']['status'][$i] = 'As the manager of <em class="placeholder">' . $group->title . '</em>, you cannot leave the group';
+    }
+  }
+}
+
+
+
+/**
+ *
+ * Implements hook_preprocess_views_view()
+ *
+ * We need to attach impromptu libraries to show tutorials on the groups page
+ */
+
+function atwork_group_preprocess_views_view(&$vars) {
+	$view = &$vars['view'];
+	// Make sure it's the correct view
+
+}
+

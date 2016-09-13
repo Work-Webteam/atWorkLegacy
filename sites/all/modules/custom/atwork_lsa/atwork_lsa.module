@@ -1,0 +1,558 @@
+<?php
+
+function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
+  global $user;
+  $user = user_load($user->uid);
+  //$form['#token'] = False;
+  drupal_set_title('Long Service Award Application');
+  drupal_set_breadcrumb(array());
+  drupal_add_js(drupal_get_path('module', 'atwork_lsa').'/atwork_lsa.js');
+  drupal_add_js(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_gift.js');
+  drupal_add_js(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_gift_list.js');
+  jquery_impromptu_add();
+  drupal_add_library('system', 'drupal.ajax');
+  if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)){
+    //dpm($user);
+    drupal_add_css('.group-lsa-administration {dsplay:block !important;}', 'inline');
+  } else {
+    // Hide the administration panel from all users until after signup is over.
+    drupal_add_js(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_admin_fields.js');
+    drupal_add_css('.group-lsa-administration {display:none}', 'inline');
+  }
+
+  $form['field_lsa_received_award']['#suffix'] = '<div style="display: none" id="lsa-no-gift">The Office of Protocol will contact you soon in this regard. Or you may contact them directly at (250) 387-1616.</div>';
+  $form['field_lsa_terms'][$form['field_lsa_terms']['#language']]['#title'] = '';
+
+  $form['#validate'][] = 'atwork_lsa_application_validate';
+  $form['#submit'][] = 'atwork_lsa_application_submit';
+
+
+  // skip defaults for admins who are entering for others
+  if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)  || in_array('lsa contact', $user->roles)) {
+    $form['field_lsa_terms'][$form['field_lsa_terms']['#language']]['#default_value'] = 1;
+
+    return;
+  }
+
+  // if new application check if users already submitted one
+  if (!isset($form['#node']->nid) || !$form['#node']->nid) {
+    $exists = db_select('node', 'n')
+      ->fields('n', array('nid'))
+      ->condition('n.uid', $user->uid)
+      ->condition('n.type', 'lsa_application')
+      ->execute()
+      ->fetchAssoc();
+
+    if (isset($exists['nid']) && $exists['nid']) {
+      drupal_goto('career/long-service-awards/applications/' . $exists['nid']);
+    }
+  }
+
+  $form['field_lsa_employee_number'][$form['field_lsa_employee_number']['#language']][0]['value']['#default_value'] = atwork_ldap_get_employee_number($user);
+
+  $field_gal_first_name = field_get_items('user', $user, 'field_gal_first_name');
+  $field_gal_last_name = field_get_items('user', $user, 'field_gal_last_name');
+  $field_gal_phone_number = field_get_items('user', $user, 'field_gal_phone_number');
+  $field_gal_branch = field_get_items('user',$user,'field_gal_branch');
+  $field_gal_work_group = field_get_items('user',$user, 'field_gal_work_group');
+  $field_gal_address = field_get_items('user',$user, 'field_gal_address');
+  $field_gal_postal_code = field_get_items('user',$user,'field_gal_postal_code');
+  $field_gal_city = field_get_items('user',$user,'field_gal_city');
+
+  if (isset($field_gal_first_name[0]['value']) && $field_gal_first_name[0]['value']) {
+    $form['field_lsa_first_name'][$form['field_lsa_first_name']['#language']][0]['value']['#default_value'] = $field_gal_first_name[0]['value'];
+  }
+
+  if (isset($field_gal_last_name[0]['value']) && $field_gal_last_name[0]['value']) {
+    $form['field_lsa_last_name'][$form['field_lsa_last_name']['#language']][0]['value']['#default_value'] = $field_gal_last_name[0]['value'];
+  }
+
+  if (isset($field_gal_phone_number[0]['value']) && $field_gal_phone_number[0]['value']) {
+    $form['field_lsa_work_phone'][$form['field_lsa_work_phone']['#language']][0]['value']['#default_value'] = $field_gal_phone_number[0]['value'];
+  }
+
+  if(isset($field_gal_branch[0]['value']) && $field_gal_branch[0]['value']){
+    $form['field_lsa_branch_department'][$form['field_lsa_branch_department']['#language']][0]['value']['#default_value'] = $field_gal_branch[0]['value'];
+  }
+
+  if(isset($field_gal_work_group[0]['value']) && $field_gal_work_group[0]['value']){
+    $form['field_lsa_office_work_group'][$form['field_lsa_office_work_group']['#language']][0]['value']['#default_value'] = $field_gal_work_group[0]['value'];
+  }
+
+  if(isset($field_gal_address[0]['value']) && $field_gal_address[0]['value']){
+    $form['field_lsa_office_address'][$form['field_lsa_office_address']['#language']][0]['value']['#default_value'] = $field_gal_address[0]['value'];
+  }
+
+  if(isset($field_gal_postal_code[0]['value']) && $field_gal_postal_code[0]['value']){
+    $form['field_lsa_office_postal_code'][$form['field_lsa_office_postal_code']['#language']][0]['value']['#default_value'] = $field_gal_postal_code[0]['value'];
+  }
+
+  if(isset($field_gal_city[0]['value']) && $field_gal_city[0]['value']) {
+    $form['field_lsa_office_city'][$form['field_lsa_office_city']['#language']][0]['value']['#default_value'] = $field_gal_city[0]['value'];
+  }
+
+  $form['field_lsa_email'][$form['field_lsa_email']['#language']][0]['email']['#default_value'] = $user->mail;
+
+  //dpm($form);
+  //dpm($form_state);
+}
+
+/*
+ * Validation function:
+ *
+ * Ensures the postal code is 6 characters with no spaces
+ * Ensures the phone numbers are 10 digits long
+ *
+ * If no errors are found it applies ucwords() to the city and street
+ * and strtoupper to the postal code
+ *
+ */
+function atwork_lsa_application_validate($form, &$form_state) {
+  global $user;
+  //$form['#token'] = false;
+  if($user->uid == 56664){
+   // dpm($form_state);
+    //dpm($form);
+    //dpm($form['#token']);
+    //dpm($form['form_token']['default_value']);
+    //dpm($form_state['values']['form_token'] );
+  }
+  $lang = $form_state['values']['language'];
+
+  // if new check for duplicate employee id
+//  $exists = db_select('field_data_field_lsa_employee_number', 'f')
+//    ->fields('f', array('entity_id'))
+//    ->condition('f.field_lsa_employee_number_value', $form_state['values']['field_lsa_employee_number'][$lang][0]['value'])
+//    ->execute()
+//    ->fetchAssoc();
+//
+//  if ($exists) {
+//    if ((!isset($form_state['node']->nid) || !$form_state['node']->nid)) {
+//      form_set_error('field_lsa_employee_number', t(
+//        'The Employee Number %employee_number has already been submitted on a different application.',
+//        array(
+//          '%employee_number' => $form_state['values']['field_lsa_employee_number'][$lang][0]['value'],
+//        )
+//      ));
+//    }
+//    else {
+//      drupal_set_message(t(
+//        'The Employee Number %employee_number has already been submitted on a different application.',
+//        array(
+//          '%employee_number' => $form_state['values']['field_lsa_employee_number'][$lang][0]['value'],
+//        )
+//      ), 'warning');
+//    }
+//  }
+
+  if (($form_state['values']['field_lsa_register_last_year'][$lang][0]['value'] == 2 &&
+      !$form_state['values']['field_lsa_award'][$lang][0]['value']) && $form_state['values']['field_lsa_years_of_service']['und'][0]['value'] <= '40'){
+    form_set_error('field_lsa_gift_option', t(
+      'Please choose an award.'
+    ));
+  }
+
+  // check supervisor's email
+  // WE went around the better GAL centered validation because not all addresses in LSA are in the GAL
+  //_atwork_validate_emails($form_state['values']['field_lsa_supervisor_email'][$lang][0]['email'] , 'field_lsa_supervisor_email', $form['form_token']['#default_value']);
+  $email = $form_state['values']['field_lsa_supervisor_email'][$lang][0]['email'];
+  $internal_addresses = variable_get('atwork_mail_internal_addresses',array());
+  if (in_array(substr_replace(strtolower($email), '', 0, strpos($email, '@')), $internal_addresses)) {
+    return TRUE;
+  }
+  form_set_error($email, t('Email is limited to organizations within the BC Public Service. %email was not found.', array('%email' => $email)));
+  return FALSE;
+
+}
+
+function atwork_lsa_node_presave($node) {
+
+  if($node->type === 'lsa_pin_application'){
+    $lang = $node->language;
+    // Upper case
+    $node->field_lsa_office_postal_code[$lang][0]['value'] = strtoupper($node->field_lsa_office_postal_code[$lang][0]['value']);
+    // remove spaces
+    $node->field_lsa_office_postal_code[$lang][0]['value'] = preg_replace('/\s+/', '', $node->field_lsa_office_postal_code[$lang][0]['value']);
+    // remove special characters
+    $node->field_lsa_office_postal_code[$lang][0]['value'] = preg_replace('/[^A-Za-z0-9\-]/', '', $node->field_lsa_office_postal_code[$lang][0]['value']);
+    // Put expected space back at 3rd spot
+    $node->field_lsa_office_postal_code[$lang][0]['value'] = wordwrap($node->field_lsa_office_postal_code[$lang][0]['value'], 3, ' ', true);
+    // Make sure this is no more than 7 characters long
+    if(strlen($node->field_lsa_office_postal_code[$lang][0]['value']) > 7){
+      $node->field_lsa_office_postal_code[$lang][0]['value'] = substr($node->field_lsa_office_postal_code[$lang][0]['value'], 0,7);
+    }
+  }
+
+
+
+
+  if ($node->type != 'lsa_application') {
+    return;
+  }
+
+  $lang = $node->language;
+
+  // standardize case
+  $node->field_lsa_street[$lang][0]['value'] = ucwords(strtolower($node->field_lsa_street[$lang][0]['value']));
+  $node->field_lsa_city[$lang][0]['value'] = ucwords(strtolower($node->field_lsa_city[$lang][0]['value']));
+  // Postal Code setup
+  // Upper case
+  $node->field_lsa_home_postal_code[$lang][0]['value'] = strtoupper($node->field_lsa_home_postal_code[$lang][0]['value']);
+  $node->field_lsa_office_postal_code[$lang][0]['value'] = strtoupper($node->field_lsa_office_postal_code[$lang][0]['value']);
+  // remove spaces
+  $node->field_lsa_home_postal_code[$lang][0]['value'] = preg_replace('/\s+/', '', $node->field_lsa_home_postal_code[$lang][0]['value']);
+  $node->field_lsa_office_postal_code[$lang][0]['value'] = preg_replace('/\s+/', '', $node->field_lsa_office_postal_code[$lang][0]['value']);
+  // remove special characters
+  $node->field_lsa_home_postal_code[$lang][0]['value'] = preg_replace('/[^A-Za-z0-9\-]/', '', $node->field_lsa_home_postal_code[$lang][0]['value']);
+  $node->field_lsa_office_postal_code[$lang][0]['value'] = preg_replace('/[^A-Za-z0-9\-]/', '', $node->field_lsa_office_postal_code[$lang][0]['value']);
+  // Put expected space back at 3rd spot
+  $node->field_lsa_home_postal_code[$lang][0]['value'] = wordwrap($node->field_lsa_home_postal_code[$lang][0]['value'], 3, ' ', true);
+  $node->field_lsa_office_postal_code[$lang][0]['value'] = wordwrap($node->field_lsa_office_postal_code[$lang][0]['value'], 3, ' ', true);
+  // Make sure this is no more than 7 characters long
+  if (strlen($node->field_lsa_home_postal_code[$lang][0]['value']) > 7){
+    $node->field_lsa_home_postal_code[$lang][0]['value'] = substr($node->field_lsa_home_postal_code[$lang][0]['value'],0,7);
+  }
+  if(strlen($node->field_lsa_office_postal_code[$lang][0]['value']) > 7){
+    $node->field_lsa_office_postal_code[$lang][0]['value'] = substr($node->field_lsa_office_postal_code[$lang][0]['value'], 0,7);
+  }
+
+
+  // trim by request - probably not needed
+  $node->field_lsa_first_name[$lang][0]['value'] = trim($node->field_lsa_first_name[$lang][0]['value']);
+
+  if(isset($node->field_lsa_middle_name[$lang][0]['value']) && $node->field_lsa_middle_name[$lang][0]['value']){
+    $node->field_lsa_middle_name[$lang][0]['value'] = trim($node->field_lsa_middle_name[$lang][0]['value']);
+  }
+
+  $node->field_lsa_last_name[$lang][0]['value'] = trim($node->field_lsa_last_name[$lang][0]['value']);
+
+  // uppercase po box
+  $node->field_lsa_street[$lang][0]['value'] = str_replace('Po Box', 'PO BOX', $node->field_lsa_street[$lang][0]['value']);
+
+  // if "registered last year" is false, "received gift" must be false too
+  if ($node->field_lsa_register_last_year[$lang][0]['value'] == 2) {
+    $node->field_lsa_received_award[$lang][0]['value'] = 0;
+  }
+
+  // if "registered last year" is true then no gift for you!
+  if ($node->field_lsa_register_last_year[$lang][0]['value'] == 1) {
+    //$node->field_lsa_award[$lang][0]['value'] = "";
+  }
+
+}
+
+/*
+ * What to do after the form is submitted.
+ * In addition to getting the email with confirmation details,
+ * users get this page with some of the values that they entered in the form
+ * output as a way of confirmation.
+ *
+ * Notice the dpm($form_state) -- useful for finding the correct values.
+ * Use those contained in $form_state['values']['submitted_tree']
+ *
+ */
+function atwork_lsa_application_submit(&$form, &$form_state) {
+  // Append the ministry ID to the form
+  // Append the ministry ID to the form
+  if(isset($form_state['values']['field_lsa_org']['und'][0]['value']) && $form_state['values']['field_lsa_org']['und'][0]['value']){
+    $form_state['values']['field_lsa_ministry_id']['und'][0]['value'] = $form_state['values']['field_lsa_org']['und'][0]['value'];
+  }
+
+}
+
+function atwork_lsa_node_view($node, $view_mode, $langcode) {
+  if($node->type === 'lsa_pin_application'){
+    $node->content['top_message'] = array(
+      '#weight' => -10,
+      '#markup' => '<h2>Thank you for your registration</h2>
+      <em style="color: red; font-weight: bold;">Print and retain this confirmation for your records.</em>',
+      );
+    $node->content['bottom_message'] = array(
+      '#weight' => 90,
+      '#markup' => '<p class="feature_box_yellow" style="margin-top: 1em;">If you have any questions, please contact your <a href="/career/employee-appreciation/recognition-contacts">Ministry Recognition Contact</a>, or the corporate  contact at the BC Public Service Agency, <a href="mailto:Gillian.Kish@gov.bc.ca">Gillian.Kish@gov.bc.ca</a></p>',
+      );
+  }
+
+
+  if ($node->type != 'lsa_application') {
+    return;
+  }
+
+  $award_year = date("Y");
+  $node->content['top_message'] = array(
+      '#weight' => -10,
+      /*'#markup' => '<h2>Thank you for your registration</h2>
+      <em style="color: red; font-weight: bold;">Print and retain this confirmation for your records.</em>',*/
+      '#markup' => '<strong style="color: red; font-weight: bold;">Please review your information below and make any necessary changes. If you have difficulty updating your details, please contact us at <a href="mailto:longserviceawards@gov.bc.ca">longserviceawards@gov.bc.ca</a> or call Jenny Pescod at (250) 356-7916.</strong><br /><br />',
+    );
+  $node->content['bottom_message'] = array(
+      '#weight' => 90,
+      '#markup' => '<p class="feature_box_yellow" style="margin-top: 1em;">If you have questions about your RSVP, please contact us at <a href="mailto:longserviceawards@gov.bc.ca">LongServiceAwards@gov.bc.ca</a></p><p class="feature_box_yellow" style="margin-top: 1em;">If you  have questions about travel arrangements, please contact your <a href="/career/long-service-awards/long_service_awards_contacts">Ministry Long Service Awards Contact</a></p><br />
+
+        <em style="text-align: center; display: block; margin-bottom: 1em; font-weight: bold;">Congratulations on your Long Service Award!</em>',
+    );
+}
+
+function atwork_lsa_views_pre_view(&$view, &$display_id, &$args) {
+  global $user;
+
+  if ($view->name == 'content' &&
+      $display_id == 'lsa' &&
+      (in_array('lsa admin', $user->roles) ||
+      in_array('administrator', $user->roles))) {
+
+    $view_filters = $view->display_handler->get_option('filters');
+    unset($view_filters['uid_current']);
+    $view->display_handler->override_option('filters', $view_filters);
+
+  }
+  if ($view->name == 'content' &&
+      $display_id == 'page_2' &&
+      (in_array('lsa admin', $user->roles) ||
+      in_array('administrator', $user->roles))) {
+
+    $view_filters = $view->display_handler->get_option('filters');
+    unset($view_filters['uid_current']);
+    $view->display_handler->override_option('filters', $view_filters);
+
+  }
+}
+
+/**
+ * Implements hook_insert();
+ *
+ * Send emails on successfult application creation
+ */
+function atwork_lsa_node_insert($node) {
+  //if ($node->type != 'lsa_application' || $node->type != 'lsa_pin_application') {
+    //return;
+  //}
+
+  if($node->type == 'lsa_application'){
+    $lang = $node->language;
+
+    require_once(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa.mail.inc');
+
+    // applicant email
+    $params = array(
+      'subject' => $applicant_subject,
+      'body' => $applicant_body,
+    );
+
+    drupal_mail('atwork_mail', 'atwork_mail_default', $applicant_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
+
+    // supervisor
+    $params = array(
+      'subject' => $supervisor_subject,
+      'body' => $supervisor_body,
+    );
+
+    drupal_mail('atwork_mail', 'atwork_mail_default', $supervisor_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
+  }
+
+  if($node->type == 'lsa_pin_application'){
+    $lang = $node->language;
+
+    require_once(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_pin.mail.inc');
+    // applicant email
+    $params = array(
+      'subject' => $applicant_subject,
+      'body' => $applicant_body,
+    );
+    drupal_mail('atwork_mail', 'atwork_mail_default', $applicant_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
+
+    // supervisor
+    $params = array(
+      'subject' => $supervisor_subject,
+      'body' => $supervisor_body,
+    );
+
+    drupal_mail('atwork_mail', 'atwork_mail_default', $supervisor_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
+  }
+
+}
+
+/**
+ * Implements hook_form_alter();
+ */
+function atwork_lsa_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+
+// For LSA admin, allows to sort on whether a user has entered input.
+  if($form['#id'] == 'views-exposed-form-lsa-admin-page-2'){
+    if(isset($form['field_lsa_notes_value_op']['#options'])){
+      // foreach here to remove all the fields we don't need
+      foreach($form['field_lsa_notes_value_op']['#options'] as $key => $value){
+        if($value == "Is empty (NULL)"){
+          $form['field_lsa_notes_value_op']['#options'][$key] = "Is empty";
+          continue;
+        }
+        if($value == "Is not empty (NOT NULL)"){
+          $form['field_lsa_notes_value_op']['#options'][$key] = "Is not empty";
+          continue;
+        }
+        unset($form['field_lsa_notes_value_op']['#options'][$key]);
+      }
+      // Also, unhide the drop down which seems to want to hide for some reason.
+      drupal_add_css("#edit-field-lsa-notes-value-wrapper {display:block !important; }", 'inline');
+      // But hide the weird textbox
+      drupal_add_css("#edit-field-lsa-notes-value {display:none; }", 'inline');
+    }
+    //dpm($form);
+  }
+
+  if ($form['#id'] == 'views-exposed-form-content-lsa') {
+    if (isset($form['#info']['filter-created']['label'])) {
+      $form['#info']['filter-created']['label'] = '';
+    }
+    if (isset($form['#info']['filter-timestamp']['label'])) {
+      $form['#info']['filter-timestamp']['label'] = '';
+    }
+
+    $form['created_op']['#default_value'] = '<';
+    foreach (array('<=', '=', '!=', '>=', 'empty', 'not empty', 'regular_expression') as $op) {
+      unset($form['created_op']['#options'][$op]);
+    }
+
+    $form['created']['value']['#title'] = '';
+    $form['created']['value']['#type'] = 'date_popup';
+    $form['created']['value']['#date_format'] = 'Y-m-d';
+
+    $form['created']['min']['#title'] = t('Start Date');
+    $form['created']['min']['#type'] = 'date_popup';
+    $form['created']['min']['#date_format'] = 'Y-m-d';
+
+
+    $form['created']['max']['#title'] = t('End Date');
+    $form['created']['max']['#type'] = 'date_popup';
+    $form['created']['max']['#date_format'] = 'Y-m-d';
+
+  }
+  if ($form['#id'] === 'lsa-pin-application-node-form'){
+    drupal_set_title('Service Pin Application');
+    drupal_set_breadcrumb(array());
+  }
+
+  if ($form_id === 'lsa_application_node_form' ) {
+   //dpm($form);
+
+  }
+
+}
+
+
+/**
+ * This section for LSA Button code only
+ */
+
+
+/**
+ * implements hook_form_FORM_ID_alter
+ * @param  [type] &$form      [description]
+ * @param  [type] $form_state [description]
+ * @return [type]             [description]
+ */
+function atwork_lsa_form_lsa_pin_application_node_form_alter(&$form, $form_state) {
+  global $user;
+  $user = user_load($user->uid);
+
+  if(isset($form['field_lsa_work_phone']['und'][0]['value']['#title']) && $form['field_lsa_work_phone']['und'][0]['value']['#title']){
+    $form['field_lsa_work_phone']['und'][0]['value']['#title'] = t('Supervisor Phone Number');
+  }
+  if(isset($form['field_lsa_work_phone_ext']['und'][0]['value']['#title']) && $form['field_lsa_work_phone_ext']['und'][0]['value']['#title']){
+    $form['field_lsa_work_phone_ext']['und'][0]['value']['#title'] = t('Supervisor Phone Ext');
+  }
+
+
+  // skip defaults for admins who are entering for others
+  if (in_array('lsa admin', $user->roles) || /*in_array('administrator', $user->roles)  || */ in_array('recognition contact', $user->roles)) {
+
+    return;
+  }
+
+
+
+    // if new application check if users already submitted one
+  if (!isset($form['#node']->nid) || !$form['#node']->nid) {
+    $exists = db_select('node', 'n')
+      ->fields('n', array('nid'))
+      ->condition('n.uid', $user->uid)
+      ->condition('n.type', 'lsa_pin_application')
+      ->execute()
+      ->fetchAssoc();
+    if (isset($exists['nid']) && $exists['nid']) {
+      drupal_goto('career/long-service-awards-pin/applications/' . $exists['nid']);
+    }
+  }
+
+
+
+  // We need to autofill some text boxes
+  $form['field_lsa_pin_employee_number'][$form['field_lsa_pin_employee_number']['#language']][0]['value']['#default_value'] = atwork_ldap_get_employee_number($user);
+  $field_gal_first_name = field_get_items('user', $user, 'field_gal_first_name');
+  $field_gal_last_name = field_get_items('user', $user, 'field_gal_last_name');
+  $field_gal_phone_number = field_get_items('user', $user, 'field_gal_phone_number');
+  $field_gal_branch = field_get_items('user',$user,'field_gal_branch');
+  $field_gal_work_group = field_get_items('user',$user, 'field_gal_work_group');
+  $field_gal_address = field_get_items('user',$user, 'field_gal_address');
+  $field_gal_postal_code = field_get_items('user',$user,'field_gal_postal_code');
+  $field_gal_city = field_get_items('user',$user,'field_gal_city');
+
+  if (isset($field_gal_first_name[0]['value']) && $field_gal_first_name[0]['value']) {
+    $form['field_lsa_pin_first_name'][$form['field_lsa_pin_first_name']['#language']][0]['value']['#default_value'] = $field_gal_first_name[0]['value'];
+  }
+
+  if (isset($field_gal_last_name[0]['value']) && $field_gal_last_name[0]['value']) {
+    $form['field_lsa_pin_last_name'][$form['field_lsa_pin_last_name']['#language']][0]['value']['#default_value'] = $field_gal_last_name[0]['value'];
+  }
+
+  if(isset($field_gal_branch[0]['value']) && $field_gal_branch[0]['value']){
+    $form['field_lsa_branch_department'][$form['field_lsa_branch_department']['#language']][0]['value']['#default_value'] = $field_gal_branch[0]['value'];
+  }
+
+  if(isset($field_gal_address[0]['value']) && $field_gal_address[0]['value']){
+    $form['field_lsa_office_address'][$form['field_lsa_office_address']['#language']][0]['value']['#default_value'] = $field_gal_address[0]['value'];
+  }
+
+  if(isset($field_gal_postal_code[0]['value']) && $field_gal_postal_code[0]['value']){
+    $form['field_lsa_office_postal_code'][$form['field_lsa_office_postal_code']['#language']][0]['value']['#default_value'] = $field_gal_postal_code[0]['value'];
+  }
+
+  if(isset($field_gal_city[0]['value']) && $field_gal_city[0]['value']) {
+    $form['field_lsa_office_city'][$form['field_lsa_office_city']['#language']][0]['value']['#default_value'] = $field_gal_city[0]['value'];
+  }
+
+  $form['field_lsa_email'][$form['field_lsa_email']['#language']][0]['email']['#default_value'] = $user->mail;
+
+}
+
+/**
+ * implements hook_mmenu_alter()
+ * this is used to redirect users after LSA alteration term has ended.
+ * TODO = turn off before next season of LSA applications
+ */
+function atwork_lsa_menu_alter(&$items){
+  $items['node/%node']['page callback'] = 'atwork_lsa_node_page_view';
+}
+
+function atwork_lsa_node_page_view($node) {
+  global $user;
+  // skip redirect for admins and lsa_admins
+  if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)) {
+    return node_page_view($node);
+  }
+  // Redirect any other user who tries to access an lsa application node
+  if($node->type == 'lsa_application'){
+    // Give contact details
+    drupal_set_message('The LSA application period has come to an end. If you have any questions or concerns, please contact the Jenny Pescod at (250-356-7916) or email the <a href="mailto:longserviceawards@gov.bc.ca"> Long Service Award inbox </a> ', 'status');
+    // Redirect to 403
+    drupal_goto('r4032login');
+
+    //return node_page_view($node);
+
+  }
+  else {
+    // Not an lsa_application node, continue
+    return node_page_view($node);
+  }
+}

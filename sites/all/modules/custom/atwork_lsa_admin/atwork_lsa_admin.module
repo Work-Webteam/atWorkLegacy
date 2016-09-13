@@ -1,0 +1,585 @@
+<?php
+
+/**
+ * This module is intended to seperate out LSA administration funcitonality from the LSA Form itself.
+ * Created on 2016-05-19 by T.Werdal
+ */
+
+/**
+ * Implements hook_form_alter();
+ */
+function atwork_lsa_admin_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+
+  // For LSA admin, allows to sort on whether a user has entered input into the notes field or not.
+  if($form['#id'] == 'views-exposed-form-lsa-admin-page-2'){
+    if(isset($form['field_lsa_notes_value_op']['#options'])){
+      // foreach here to remove all the fields we don't need to confuse LSA Admin staff with
+      foreach($form['field_lsa_notes_value_op']['#options'] as $key => $value){
+        if($value == "Is empty (NULL)"){
+          // Remove uneeded lingo
+          $form['field_lsa_notes_value_op']['#options'][$key] = "Is empty";
+          continue;
+        }
+        if($value == "Is not empty (NOT NULL)"){
+          $form['field_lsa_notes_value_op']['#options'][$key] = "Is not empty";
+          continue;
+        }
+        if($value != 'Is empty' && $value != "Is not empty"){
+          // Remove choices we don't need
+          unset($form['field_lsa_notes_value_op']['#options'][$key]);
+        }
+
+      }
+      // Also, unhide the drop down which seems to want to hide for some reason.
+      drupal_add_css("#edit-field-lsa-notes-value-wrapper {display:block !important; }", 'inline');
+      // But hide the weird textbox.
+      drupal_add_css("#edit-field-lsa-notes-value {display:none; }", 'inline');
+    }
+  }
+
+  // For the RSVP block located on content pages, need to fill in hidden fields
+  if($form['#id'] == 'editableviews-entity-form-lsa-admin' && $form['#view_display_name'] == 'block_lsa_rsvp'){
+    // Change submit button text
+    $form['actions']['submit']['#value'] = "Submit RSVP";
+    drupal_add_css("#edit-actions-submit {font-weight:bolder; font-size:125%;}", "inline");
+    // Add submit handler
+    $form['#submit'][] = 'update_lsa_node_submit';
+    // remove options that we don't want applicants to access
+    if(!_atwork_is_admin() && !in_array('lsa admin', $user->roles) && !in_array('lsa contact', $user->roles)){
+      if(isset($form['#entity_ids']['node'][0]) && $form['#entity_ids']['node'][0]){
+        $node = $form['#entity_ids']['node'][0];
+        if(isset($form['node'][$node]['field_lsa_ceremony_response']['und']['#options']) && $form['node'][$node]['field_lsa_ceremony_response']['und']['#options']){
+          unset($form['node'][$node]['field_lsa_ceremony_response']['und']['#options']['_none']);
+        }
+      }
+    }
+  }
+
+}
+
+
+function update_lsa_node_submit(&$form, &$form_state){
+  if (arg(0) == 'node' && is_numeric(arg(1))) {
+      // Get the nid
+      $nid = arg(1);
+      // Load the node if you need to
+      $node = node_load($nid);
+  }
+  if(isset($node) && $node){
+      if(isset($form_state['input']['node'][$nid]['field_lsa_ceremony_response']) && $form_state['input']['node'][$nid]['field_lsa_ceremony_response']){
+        switch ($form_state['input']['node'][$nid]['field_lsa_ceremony_response']['und']){
+          case "_none":
+            $node->field_lsa_attending_ceremony['und'][0]['value'] = "1";
+            $node->field_lsa_guest['und'][0]['value'] = "0";
+            $node->field_lsa_rsvp['und'][0]['value'] = "0";
+            $node->field_lsa_number_attending['und'][0]['value'] = "0";
+            break;
+          case "1":
+            $node->field_lsa_attending_ceremony['und'][0]['value'] = "2";
+            $node->field_lsa_guest['und'][0]['value'] = "0";
+            $node->field_lsa_rsvp['und'][0]['value'] = "1";
+            $node->field_lsa_number_attending['und'][0]['value'] = "1";
+            break;
+          case "2":
+            $node->field_lsa_attending_ceremony['und'][0]['value'] = "2";
+            $node->field_lsa_guest['und'][0]['value'] = "1";
+            $node->field_lsa_rsvp['und'][0]['value'] = "1";
+            $node->field_lsa_number_attending['und'][0]['value'] = "2";
+            break;
+          case "3":
+            $node->field_lsa_attending_ceremony['und'][0]['value'] = "3";
+            $node->field_lsa_guest['und'][0]['value'] = "0";
+            $node->field_lsa_rsvp['und'][0]['value'] = "1";
+            $node->field_lsa_number_attending['und'][0]['value'] = "0";
+            break;
+          default:
+            break;
+        }
+        node_save($node);
+      }
+      //dpm($node);
+      $messages = drupal_get_messages();
+      if(isset($messages['status'][0]) && $messages['status'][0]){
+        $message_check = substr($messages['status'][0], 0, 5);
+        if($message_check == 'Saved'){
+          $messages['status'][0] = 'Your RSVP has been submitted. Thank you!';
+          $_SESSION['messages'] = $messages;
+        }
+      }
+
+
+  }
+  return;
+}
+
+/**
+ * Implements hook_views_bulk_operations_form_alter
+ *
+ */
+
+function atwork_lsa_admin_views_bulk_operations_form_alter(&$form, &$form_state, $vbo){
+
+  if($form['#form_id'] == 'views_form_lsa_admin_page_8'){
+
+    // Remove the regular submit handler to generate and send emails ourselves
+    //$form['select']['action::mimemail_send_email_action']['#submit'] = '';
+    //Replace it with our own submit handler
+    $form['select']['action::mimemail_send_email_action']['#submit'][] = 'custom_vbo_submit_handler';
+
+
+  }
+}
+
+/**
+ *  Helper function for LSA email form
+ *  Seemed to be the best place to create and send all emails
+ *  Borrowed from atwork_lsa.module written by Saren Calvert
+ */
+function custom_vbo_submit_handler(&$form, &$form_state){
+  // Going to split this out to helper functions at this point depending on which type of send we are looking at (i.e. all, page or single)
+  $staus_message = array();
+
+  // All function, send to helper function that runs its own query depending on options chosen
+  if(isset($form_state['select_all_pages']) && $form_state['select_all_pages'] == true){
+    // kickstart all function, and recieve an array of information we can parse for user.
+    $status_message = send_to_all_applicants($form, $form_state);
+  } else {
+    // Page/single function, simply uses the data that has been forwarded to it
+    $status_message = send_to_selected_applicants($form, $form_state);
+  }
+
+
+  // Parse the status of sends and save to a .csv.
+  // Gather some vars
+  date_default_timezone_set('America/Los_Angeles');
+  $date = date('d-m-y');
+  $time = date('H:i:s');
+  $send_num = 0;
+  $error_num = 0;
+
+  //dpm($status_message);
+  // Build output and save as a txt file with the date as a #id - https://www.drupal.org/node/1875456
+  if(isset($status_message['success']) && $status_message['success']){
+    foreach($status_message['success'] as $key=>$value){
+      $success_output = array(
+        'Date' => $date,
+        'Time' => $time,
+        'Node' => $value['node'],
+        'Name' => $value['name'],
+        'Email' => $value['email'],
+        'Alt_Email' => $value['alt_email'],
+        'Employee ID' => $value['employee_id'],
+        );
+      $file = fopen('/var/www/html/sites/all/modules/custom/atwork_lsa_admin/send_logs/' . $date . '_lsa_mail_send.csv', "a");
+      // Append to .csv
+      fputcsv($file, $success_output);
+
+      // Close file so it can be used again
+      fclose($file);
+
+      // And record this for our message
+      $send_num ++;
+    }
+  }
+  // And the same for error logs
+  // Build output and save as a txt file with the date as a #id - https://www.drupal.org/node/1875456
+  if(isset($status_message['error']) && $status_message['error']){
+    foreach($status_message['error'] as $key=>$value){
+      $error_output = array(
+        'Date' => $date,
+        'Time' => $time,
+        'Node' => $value['node'],
+        'Name' => $value['name'],
+        'Employee ID' => $value['employee_id'],
+        'error' => $value['reason'],
+        );
+      $file = fopen('/var/www/html/sites/all/modules/custom/atwork_lsa_admin/send_logs/' . $date . '_lsa_mail_error.csv', "a");
+      // Append to .csv
+      fputcsv($file, $success_output);
+
+      // Close file so it can be used again
+      fclose($file);
+
+      // Again, reecord this for message
+      $error_num ++;
+    }
+  }
+
+  //dpm($form);
+
+  // Redirect back to email page, we do not need any more of VBO's functionality
+  //drupal_goto('lsa-admin/email');
+
+
+  //If errors, send a message
+  if(isset($error_num) && $error_num > 0){
+    drupal_set_message("There " . ($error_num > 1 ? "were " : "was ") . $error_num . ($error_num > 1 ? "errors.  " : "error.  ") . "Please see error log");
+  }
+
+  if(isset($send_num) && $send_num > 0){
+    drupal_set_message($send_num . ($send_num >  1 ? " applicants were" : " applicant was") . " emailed");
+  }
+
+  drupal_goto('lsa-admin/email');
+
+
+}
+
+/**
+ * Function that queries all applicants, and sends them an appropriate email
+ * @param   $results [data object returned from query]
+ * @param   $lsa_list [array of all lsa items returned via query from database]
+ * @param   $results [data object returned from query]
+ * @param   $lsa_node [The loaded physical node object.]
+ *
+ * These params are then sent to helper function that creates the mailing, numbers and send confirmation
+ * @return   $status_message [array returned to submit function in order to display a message confirming the sends]
+ */
+
+function send_to_all_applicants(&$form, &$form_state){
+  $status_message = array();
+  $return_message = array();
+      // Need to collect and save our filters here as well, lets add a field called "filters"
+  $form['lsa_send_filters'] = array(
+    '#type' => "array",
+    );
+  //dpm($form_state);
+  if(isset($form_state['build_info']['args'][0]->exposed_data['field_lsa_ceremonydate_value']) && $form_state['build_info']['args'][0]->exposed_data['field_lsa_ceremonydate_value']) {
+    $ceremony_id = $form_state['build_info']['args'][0]->exposed_data['field_lsa_ceremonydate_value'];
+    $ceremony_compare = " = " ;
+    if($ceremony_id == 'All'){
+      $ceremony_id = "";
+      $ceremony_compare = " <> ";
+    }
+
+  }
+  if(isset($form_state['build_info']['args'][0]->exposed_data['field_lsa_org_value']) && $form_state['build_info']['args'][0]->exposed_data['field_lsa_org_value']){
+    $ministry_compare = ' = ';
+    $ministry_id = $form_state['build_info']['args'][0]->exposed_data['field_lsa_org_value'];
+    if($ministry_id == 'All'){
+      $ministry_id = "0";
+      $ministry_compare = " >= ";
+    }
+  }
+  if(isset($form_state['build_info']['args'][0]->exposed_data['field_lsa_rsvp_value']) ){
+    $rsvp = $form_state['build_info']['args'][0]->exposed_data['field_lsa_rsvp_value'];
+    $rsvp_compare = ' = ';
+    if($rsvp == 'All'){
+      $rsvp = "0";
+      $rsvp_compare = " >= ";
+    }
+  }
+  //dpm($form_state);
+  if(isset($form_state['build_info']['args'][0]->exposed_data['field_lsa_retro_active_value'])){
+    $retro_active_compare = ' = ';
+    $retro_active = $form_state['build_info']['args'][0]->exposed_data['field_lsa_retro_active_value'];
+    if($retro_active == 'All'){
+      $retro_active = "0";
+      $retro_active_compare = " >= ";
+    }
+  }
+
+  // Gather all results *NOTE - These will have to be cleared every year prior to launch
+  // We need to account for other filters here as well now, so slightly different queries
+
+  $results = db_query("SELECT node.nid AS nid
+    FROM {node} node
+    LEFT JOIN {users} users_node ON node.uid = users_node.uid
+    LEFT JOIN {field_data_field_lsa_ceremonydate} ceremony_date ON node.nid = ceremony_date.entity_id
+    LEFT JOIN {field_data_field_lsa_org} org ON node.nid = org.entity_id
+    LEFT JOIN {field_data_field_lsa_rsvp} rsvp ON node.nid = rsvp.entity_id
+    LEFT JOIN {field_data_field_lsa_retro_active} retroactive ON node.nid = retroactive.entity_id
+    WHERE (( (node.status =  '1') AND (node.type IN ('lsa_application')) AND (ceremony_date.field_lsa_ceremonydate_value  $ceremony_compare '$ceremony_id') AND (rsvp.field_lsa_rsvp_value $rsvp_compare '$rsvp') AND (org.field_lsa_org_value $ministry_compare '$ministry_id') AND (retroactive.field_lsa_retro_active_value $retro_active_compare '$retro_active')))");
+
+  //dpm($results);
+  if($results){
+    foreach($results as $record){
+      $lsa_list[] = $record;
+    }
+  }
+  //dpm($lsa_list);
+
+  if(isset($lsa_list)){
+    // Record total number of elements
+    $status_message = array('total_records' => count($lsa_list));
+
+    // Extract NID
+    foreach($lsa_list as $key=>$value){
+      $node_id = $value->nid;
+      // Now load the node object
+      $lsa_node = node_load($node_id);
+      // Send entire node object over to send function, retrieve info on send details
+      $return_message = lsa_email_send($lsa_node);
+      //dpm($return_message);
+      foreach($return_message as $key=>$value){
+        $status_message[$key][] = $value;
+      }
+    }
+  } else {
+    $status_message['error'][] = "No records found";
+  }
+  //dpm($lsa_node);
+  //dpm($status_message);
+  return $status_message;
+}
+
+/**
+ * Function that takes the list of applicants from VBO, and sends them an appropriate email
+ * @param   $lsa_node [The loaded physical node object.]
+ *
+ * These params are then sent to helper function that creates the mailing, numbers and send confirmation
+ * @return   $status_message [array returned to submit function in order to display a message confirming the sends]
+ */
+function send_to_selected_applicants($form, $form_state){
+  //dpm($form);
+  $status_message = array();
+  $return_message = array();
+
+  foreach($form_state['values']['views_bulk_operations'] as $nid){
+    // Don't worry about the values that were not selected
+    if($nid === 0){
+      continue;
+    }
+    // Build an array of all nodes we must send to
+    $lsa_list[] = $nid;
+  }
+
+  // Record total number of elements
+  $status_message = array('total_record' => count($lsa_list));
+
+  // Extract NID
+  foreach($lsa_list as $key=>$value){
+    $node_id = $value;
+    // Load node object.
+    $lsa_node = node_load($node_id);
+    // Send entire node objecct over to send function, retrieve info on send details
+    $return_message = lsa_email_send($lsa_node);
+    // Keep track of status of send
+    foreach($return_message as $key=>$value){
+      $status_message[$key][] = $value;
+    }
+  }
+  //dpm($status_message);
+  //dpm($lsa_node);
+  return $status_message;
+}
+
+/**
+ * Helper function that attempts to build and send email to user, sending back information about the success/failure of the attempted send
+ * @param  $lsa_node [Node object of the LSA form, we want to gather $email, $name, $ceremony_date and check out $retirement_status]
+ * @return [array] $send_status [Collect the status of the send, note if there are errors and pinpoint the reason this record has errors, bundle in array and send back]
+ */
+function lsa_email_send($lsa_node){
+  require(drupal_get_path('module', 'atwork_lsa_admin') . '/atwork_lsa_admin.mail.inc');
+  $lang = $lsa_node->language;
+  $email = "no email address specified";
+
+  // Initialize return array
+  $send_status = array();
+
+  // Check if this user has more than one email address... if so, then send a mailing to both
+  // No addresses would be an error
+  if(isset($lsa_node->field_lsa_alt_email_address) && $lsa_node->field_lsa_alt_email_address){
+    $alt_email = $lsa_node->field_lsa_alt_email_address[$lang][0]['email'];
+    $email = $lsa_node->field_lsa_email[$lang][0]['email'];
+  } elseif(isset($lsa_node->field_lsa_email[$lang][0]['email'])) {
+    $email = $lsa_node->field_lsa_email[$lang][0]['email'];
+  }
+  else {
+    $error = 'No valid email address found';
+  }
+
+  // If errors have been recorded, jump out of this function
+  if(isset($error)){
+    //$reason = $error;
+    $send_status['error']['node'] = $lsa_node->nid;
+    $send_status['error']['employee_id'] = $lsa_node->field_lsa_employee_number[$lang][0]['safe_value'];
+    $send_status['error']['name'] = $lsa_node->title;
+    $send_status['error']['reason'] = $error;
+    // Don't bother building email
+    return($send_status);
+  }
+
+  // If no errors, then continue with mailing
+  // Set the custom message up
+  $params = array(
+    'subject' => $applicant_subject,
+    'body' => $applicant_body,
+  );
+
+  // Need to send to all emails we have, to make sure we have the best chance to reach all recipients.
+  if(isset($alt_email)){
+    // Then append the Success message
+    $send_status['success']['node'] = $lsa_node->nid;
+    $send_status['success']['name'] = $lsa_node->title;
+    $send_status['success']['email'] = $email;
+    $send_status['success']['alt_email'] = $alt_email;
+    $send_status['success']['employee_id'] = $lsa_node->field_lsa_employee_number[$lang][0]['safe_value'];
+    // Send our mailing
+    drupal_mail('atwork_mail', 'atwork_mail_default', $email, language_default(), $params, 'longserviceawards@gov.bc.ca');
+    drupal_mail('atwork_mail', 'atwork_mail_default', $alt_email, language_default(), $params, 'longserviceawards@gov.bc.ca');
+    // While we are here, lets save our date of send to the node, no use using another foreach for this
+
+  } else {
+    // Then append the Success message
+    $send_status['success']['node'] = $lsa_node->nid;
+    $send_status['success']['name'] = $lsa_node->title;
+    $send_status['success']['email'] = $email;
+    $send_status['success']['alt_email'] = '';
+    $send_status['success']['employee_id'] = $lsa_node->field_lsa_employee_number[$lang][0]['safe_value'];
+    // Send our mailing
+    drupal_mail('atwork_mail', 'atwork_mail_default', $email, language_default(), $params, 'longserviceawards@gov.bc.ca');
+  }
+  // While we are here, lets save our date of send to the node, no use using another foreach for this, must be in mysql datetime formate
+  $current_date = gmdate("Y-m-d H:i:s");
+  $update_send_time = array(
+    $lsa_node->language => array(
+      0 => array(
+        'value' => $current_date,
+        'timezone' => 'America/Vancouver',
+        'timezone_db' => 'UTC',
+        'date_type' => 'datetime',
+        ),
+      ),
+    );
+
+  $lsa_node->field_lsa_invitation_sent = $update_send_time;
+  node_save($lsa_node);
+
+  //dpm($lsa_node);
+  // Send back our message array
+  return($send_status);
+}
+
+
+/**
+ * Implements hook_node_view
+ * @param  [type] $node      [description]
+ * @param  [type] $view_mode [description]
+ * @param  [type] $langcode  [description]
+ * @return [type]            [description]
+ */
+function atwork_lsa_admin_node_view($node, $view_mode, $langcode) {
+
+  if($node->type !== 'lsa_application'){
+    return;
+  }
+
+  // Add in our LSA click handler that shows teh save button dynamically when a user clicks in a text box
+  drupal_add_js(drupal_get_path('module', 'atwork_lsa_admin').'/atwork_lsa_admin.js');
+
+  global $user;
+  $user_object = user_load($user->uid);
+  if($user->uid == 0){
+    return;
+  }
+  //dpm($user_object);
+  // Conditions that allow us to see the node, else we redirect and give a message.
+  if($node->uid == $user->uid){
+    return;
+  } elseif (isset($user_object->field_gal_employee_number['und'][0]['safe_value']) && isset($node->content['field_lsa_employee_number']['#items'][0]['value']) && ($user_object->field_gal_employee_number['und'][0]['safe_value'] == $node->content['field_lsa_employee_number']['#items'][0]['value'])){
+    return;
+  } elseif($node->uid == 41854){
+    return;
+  } elseif(_atwork_is_admin() || in_array('lsa admin', $user->roles) || in_array('lsa contact', $user->roles) ){
+    return;
+  } else {
+    drupal_set_message(t("Something has gone wrong. Please contact us at <a href='mailto:longserviceawards@gov.bc.ca'>LongServiceAwards@gov.bc.ca</a> for more information."), 'warning');
+    //drupal_goto('career/long-service-awards');
+    $node->content['#access'] = false;
+  }
+
+  //dpm($node); https://test2.gww.gov.bc.ca/career/long-service-awards/applications/19331
+
+}
+
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ * Don't want to give user full edit access, even though they do have it so they can update fields.
+ */
+function atwork_lsa_admin_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  // Lsa_admin should always be able to edit
+  global $user;
+  if(_atwork_is_admin() || in_array('lsa admin', $user->roles)){
+    return;
+  }
+  //  remove the 'edit' & 'view' tab when viewing the node.
+  if(isset($router_item['page_arguments'][0]->type) && $router_item['page_arguments'][0]->type == 'lsa_application'){
+    //dpm('Yes');
+    foreach ($router_item['page_arguments'] as $key => $argument) {
+      if (is_object($argument) && $router_item['page_arguments'][$key]->type == 'lsa_application') {
+        foreach ($data['tabs'][0]['output'] as $key => $value) {
+          if ($value['#link']['path'] == 'node/%/edit'||'node/%/view') {
+            unset($data['tabs'][0]['output'][$key]);
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+/**
+ * Implements hook_views_query_alter
+ * Used to limit block results to current node
+ */
+function atwork_lsa_admin_views_query_alter(&$view, &$query){
+  if($view->current_display == "block_lsa_rsvp"){
+    if (arg(0) == 'node' && is_numeric(arg(1))) {
+      // Get the nid
+      $nid = arg(1);
+      // Load the node if you need to
+      $node = node_load($nid);
+    }
+    if(isset($node)){
+      $query->where[1]['conditions'][] = array(
+        'field' => 'node.nid',
+        'value' => $node->nid,
+        'operator' => '=',
+        );
+    }
+  }
+}
+
+/**
+ * Implements hook_block_list_alter(&$blocks)
+ */
+function atwork_lsa_admin_block_list_alter(&$blocks){
+  if (arg(0) == 'node' && is_numeric(arg(1))) {
+      // Get the nid
+      $nid = arg(1);
+      // Load the node if you need to
+      $node = node_load($nid);
+  }
+
+  if(isset($node) && $node){
+    if($node->type != "lsa_application"){
+      return;
+    }
+
+    global $user;
+    $user_object = user_load($user->uid);
+
+    if($node->uid == $user->uid){
+      return;
+    } elseif (isset($user_object->field_gal_employee_number['und'][0]['safe_value']) && isset($node->content['field_lsa_employee_number']['#items'][0]['value']) && ($user_object->field_gal_employee_number['und'][0]['safe_value'] == $node->content['field_lsa_employee_number']['#items'][0]['value'])){
+      return;
+    } elseif($node->uid == 41854){
+      return;
+    } elseif(_atwork_is_admin() || in_array('lsa admin', $user->roles) || in_array('lsa contact', $user->roles) ){
+      return;
+    } else {
+      // Don't show this block if user should not have access to it.
+      if(isset($blocks['1973']) && $blocks['1973']){
+        unset($blocks['1973']);
+      }
+    }
+  }
+  //dpm($node);
+  //dpm($blocks);
+}
+

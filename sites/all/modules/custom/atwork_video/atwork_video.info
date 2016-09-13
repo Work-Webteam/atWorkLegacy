@@ -1,0 +1,4 @@
+name = Atwork Video
+description = Tying together WYSIWYG and media and other misc stuff
+package = Atwork
+core = 7.x

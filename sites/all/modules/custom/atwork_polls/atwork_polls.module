@@ -1,0 +1,489 @@
+<?php
+
+/**
+ * Implementation of hook_form_alter()
+ *
+ * Add the multiple choice option to poll node form
+ *
+ * If multiple enabled change the voting form to checkboxes
+ *
+ * Take over the voting submit routine from the poll module
+ *
+ * Take over the cancel voting submit routine from the poll module
+ * because more than one vote may need to be removed
+ */
+function atwork_polls_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'poll_node_form') {
+    //dpm($form);
+    // add the multichoice options on the node edit form
+    $form['settings']['multichoice'] = array(
+      '#type' => 'radios',
+      '#title' => t('Multiple choices'),
+      '#default_value' => (isset($form['#node']->multichoice)) ? $form['#node']->multichoice : 0,
+      '#options' => array(
+        0 => t('Single Choice'),
+        1 => t('Multiple Choices / Per Vote (divides the selected items into %, eg. 4 selected items will each be weighted as 25%)'),
+        2 => t('Multiple Choices / Per User (each selected item will be weighted as 100%, eg. 4 selected items will equal 400%)'),
+      ),
+      '#description' => t('Setup for Single choice(radio button) or Multiple choices (checkbox).')
+    );
+
+    $form['field_image']['und']['#description'] = 'Your image should reflect the theme of your poll. The image will appear on the <a href="/polls">polls landing page</a>.';
+    //hide fields users should see, or not use
+    if(!_atwork_is_admin()){
+      drupal_add_css('#edit-body-und-0-format {display:none;}', $option['type'] = 'inline');
+      drupal_add_css('.tabledrag-toggle-weight {display:none;', $option['type'] = 'inline');
+      $form['og_group_ref']['#access'] = FALSE;
+      $form['revision_information']['#access'] = FALSE;
+
+      // Do not show a second image
+     if(isset($form['field_image']['und'][1])){
+      $form['field_image']['und'][1]['#access'] = FALSE;
+     }
+
+      // Let users set poll open/closed, multi or single choice and hides duration (doesn't work)
+      $form['settings']['#access'] = TRUE;
+      $form['settings']['active']['#access'] = TRUE;
+      $form['settings']['runtime']['#access'] = FALSE;
+    }
+
+    // Change value in choice button
+    $form['choice_wrapper']['poll_more']['#value'] = 'Add another choice';
+     // attach needed js files
+    $form['#attached']['js'][drupal_get_path('module', 'atwork_polls') . '/atwork_polls.js'] = array(
+      'type' => 'file',
+    );
+    $form['actions']['submit']['#submit'][] = '_atwork_polls_custom_submit';
+  }
+
+    // Edit the redirect after delete - TODO: a module where all delete behavior is kept?
+  if($form_id == 'node_delete_confirm' && isset($form['#node']->og_group_ref) && $form['#node']->og_group_ref['und'][0]['target_id'] && $form['#node']->type == 'poll'){
+    $form['#submit'][] = 'atwork_polls_redirect_poll_delete';
+  }
+
+
+
+  // edit the voting form to show checkboxes
+  if ($form_id == 'poll_view_voting') {
+    $list = array();
+    foreach ($form['#node']->choice as $i => $choice) {
+      $list[$i+1] = $choice['chtext'];
+    }
+    if ($form['#node']->multichoice == 1 || $form['#node']->multichoice == 2) {
+      $form['choice']['#type'] = 'checkboxes';
+      unset($form['choice']['#default_value']);
+    }
+    $form['choice']['#options'] = $list;
+    $form['#validate'][] = '_atwork_polls_form_validate';
+    unset($form['vote']['#submit']);
+    $form['vote']['#submit'][] = 'atwork_polls_vote';
+  }
+
+  // take over the core vote cancelling routine
+  if ($form_id == 'poll_cancel_form') {
+    unset($form['actions']['submit']['#submit']);
+    $form['actions']['submit']['#submit'][] = 'atwork_polls_cancel';
+  }
+
+}
+
+function atwork_polls_redirect_poll_delete($form, &$form_state) {
+  $form_state['redirect'] = 'node/' . $form['#node']->og_group_ref['und'][0]['target_id'] . '/polls';
+  return;
+}
+
+function _atwork_polls_custom_submit($form, &$form_state){
+  $messages = drupal_get_messages('status');
+  if(isset($form_state['build_info']['args'][0]->og_group_ref) && $form_state['build_info']['args'][0]->og_group_ref){
+    if(isset($form['title']['#default_value'])){
+      drupal_set_message(t('Your poll <em class="placeholder">' . $form['title']['#default_value'] . '</em> has been updated and appears on your <a href = "/node/' . $form_state['build_info']['args'][0]->og_group_ref['und'][0]['target_id'] . '/polls">group poll page</a>. To make edits, click on your polle select Edit. '));
+    } else {
+    drupal_set_message(t('Your poll <em class="placeholder">' . $form_state['build_info']['args'][0]->title . '</em> has been created and appears on your <a href = "/node/' . $form_state['build_info']['args'][0]->og_group_ref['und'][0]['target_id'] . '/polls">group poll page</a>. To make edits, click on your poll and select Edit. '));
+    }
+  } else {
+    if(isset($form['title']['#default_value'])){
+      drupal_set_message(t('Your poll <em class="placeholder">' . $form['title']['#default_value'] . '</em> has been updated and appears on the <a href = "/polls">polls page</a>. To make edits, click on your poll and select Edit. '));
+    } else {
+      drupal_set_message(t('Your poll <em class="placeholder">' . $form_state['build_info']['args'][0]->title . '</em> has been created and appears on the <a href = "/polls">polls page</a>. To make edits, click on your poll and select Edit.'));
+    }
+  }
+  return;
+}
+
+/**
+ * Submit callback for poll_cancel_form
+ *
+ * Delete all votes for multiple choice polls
+ */
+function atwork_polls_cancel($form, &$form_state) {
+  global $user;
+  $node = node_load($form['#nid']);
+
+  // this is a copy of core
+  db_delete('poll_vote')
+    ->condition('nid', $node->nid)
+    ->condition($user->uid ? 'uid' : 'hostname', $user->uid ? $user->uid : ip_address())
+    ->execute();
+
+  // Subtract from the votes.
+  // $node->vote has been changed from core to always be an array
+  foreach ($node->vote as $chid) {
+    db_update('poll_choice')
+      ->expression('chvotes', 'chvotes - :chvotes', array(':chvotes' => 1))
+      ->condition('nid', $node->nid)
+      ->condition('chid', $chid)
+      ->execute();
+  }
+
+}
+
+
+
+
+/*
+ * Our own validate function for checkboxes.
+ */
+function _atwork_polls_form_validate($form, &$form_state) {
+  if ($form['choice']['#type'] == 'checkboxes'){
+    $voted = false;
+    foreach ($form_state['values']['choice'] as $option) {
+      if ($option) {
+        $voted = true;
+      }
+    }
+    if (!$voted) {
+      form_set_error( 'choice', t('Your vote could not be recorded because you did not select any of the choices.'));
+    }
+  }
+}
+
+/*
+ * Submit Callback for poll_view_voting
+ *
+ * Insert multiple votes for multiple choice polls
+ */
+function atwork_polls_vote($form, &$form_state) {
+  $node = $form['#node'];
+  global $user;
+
+  // this is ugly, it inserts the vote and updates totals
+  if ($form['choice']['#type'] == 'checkboxes'){
+    $choice = array_filter($form_state['values']['choice']);
+    foreach($choice as $key => $checked) {
+      // choices on page is 1-based array because of checkboxes. in db it's 0-based
+      $chid = $key - 1;
+
+      db_insert('poll_vote')
+        ->fields(array(
+          'nid' => $node->nid,
+          'chid' => $chid,
+          'uid' => $user->uid,
+          'hostname' => ip_address(),
+          'timestamp' => REQUEST_TIME,
+        ))
+        ->execute();
+
+
+      // Add one to the votes.
+      db_update('poll_choice')
+        ->expression('chvotes', 'chvotes + :chvotes', array(':chvotes' => 1))
+        ->condition('nid', $node->nid)
+        ->condition('chid', $chid)
+        ->execute();
+    }
+  } else {
+    $choice = $form_state['values']['choice'];
+    // choices on page is 1-based array because of checkboxes. in db it's 0-based
+    $choice = $choice - 1;
+
+    db_insert('poll_vote')
+      ->fields(array(
+        'nid' => $node->nid,
+        'chid' => $choice,
+        'uid' => $user->uid,
+        'hostname' => ip_address(),
+        'timestamp' => REQUEST_TIME,
+      ))
+      ->execute();
+
+    // Add one to the votes.
+    db_update('poll_choice')
+      ->expression('chvotes', 'chvotes + :chvotes', array(':chvotes' => 1))
+      ->condition('nid', $node->nid)
+      ->condition('chid', $choice)
+      ->execute();
+
+  }
+  cache_clear_all();
+
+  if (!$user->uid) {
+    // The vote is recorded so the user gets the result view instead of the
+    // voting form when viewing the poll. Saving a value in $_SESSION has the
+    // convenient side effect of preventing the user from hitting the page
+    // cache. When anonymous voting is allowed, the page cache should only
+    // contain the voting form, not the results.
+    $_SESSION['poll_vote'][$node->nid] = $choice;
+  }
+
+  drupal_set_message(t('Your vote was recorded.'));
+}
+
+/*
+ * Implementation of hook_node_view()
+ *
+ * Take over poll_view_results from core so we can render a multiple choice poll
+ */
+function atwork_polls_node_view($node, $view_mode, $langcode) {
+  if ($node->type == 'poll' && $view_mode == 'full') {
+    if (isset($node->content['poll_view_results']['#markup'])) {
+      $node->content['poll_view_results']['#markup'] = atwork_polls_view_results($node, $view_mode);
+    }
+    //dpm($node);
+  }
+  if ($view_mode == 'teaser') {
+    if(isset($node->body) && $node->body){
+      $body = $node->body[$node->language][0]['value'];
+      //dpm($node);
+    }
+    if (isset($body) && preg_match_all("/\[block:([^=\\]]+)=?([^\\]]*)?\]/i", $body, $match)) {
+      if (isset($match[0][0]) && strpos($body, '<p>' .  $match[0][0] . '</p>')) {
+        $body = str_replace('<p>' .  $match[0][0] . '</p>', '', $body);
+        $node->content['body'][0]['#markup'] = text_summary($body);
+      }
+    }
+    //dpm($node);
+    //<p>[block:poll=7433]</p>
+  }
+
+}
+
+/*
+ * Implementation of hook_node_load()
+ *
+ * Adding $node->multichoice for easy reference
+ */
+function atwork_polls_node_load($nodes, $types) {
+  global $user;
+
+  // set $node->multichoice
+  if (count(array_intersect(array('poll'), $types))) {
+    $result = db_query('SELECT nid, multichoice FROM {atwork_polls} WHERE nid IN(:nids)', array(':nids' => array_keys($nodes)));
+    foreach ($result as $record) {
+      $nodes[$record->nid]->multichoice = $record->multichoice;
+    }
+  }
+
+  // now do $node->vote
+  // always set it as an array
+  foreach($nodes as $poll) {
+    if ($poll->type == 'poll') {
+      if (!isset($poll->active)) {
+        $poll->active = 0;
+      }
+      if (user_access('vote on polls') && $poll->active) {
+        if ($user->uid) {
+          // If authenticated, find existing vote based on uid.
+          $poll->vote = array();
+          $result = db_query('SELECT chid FROM {poll_vote} WHERE nid = :nid AND uid = :uid', array(':nid' => $poll->nid, ':uid' => $user->uid));
+          foreach ($result as $record) {
+            $poll->vote[$record->chid] = $record->chid;
+          }
+          if (empty($poll->vote)) {
+            $poll->vote = -1;
+            $poll->allowvotes = TRUE;
+          }
+        }
+        elseif (!empty($_SESSION['poll_vote'][$node->nid])) {
+          // Otherwise the user is anonymous. Look for an existing vote in the
+          // user's session.
+          $poll->vote = $_SESSION['poll_vote'][$node->nid];
+        }
+      }
+    }
+  }
+}
+
+/*
+ * Implementation of hook_node_insert()
+ *
+ * Save whether or note multiple choice has been enabled
+ */
+function atwork_polls_node_insert($node) {
+  if ($node->type == 'poll') {
+    db_insert('atwork_polls')
+      ->fields(array(
+        'nid' => $node->nid,
+        'multichoice' => $node->multichoice,
+      ))
+      ->execute();
+  }
+}
+
+/*
+ * Implementation of hook_node_delete()
+ *
+ * Delete record from our custom table
+ */
+function atwork_polls_node_delete($node) {
+  if ($node->type == 'poll') {
+    db_delete('atwork_polls')
+      ->condition('nid', $node->nid)
+      ->execute();
+  }
+}
+
+
+
+/*
+ * Implementation of hook_node_update()
+ *
+ * Record any changes of poll type to our custom table
+ */
+function atwork_polls_node_update($node) {
+  if ($node->type == 'poll') {
+    // find if poll exists in {atwork_polls}
+    // it might not if this module was enabled after the poll was created
+    $exists = db_query_range("SELECT nid FROM {atwork_polls} WHERE nid = :nid", 0, 1, array(':nid' => $node->nid))->fetch();
+    if ($exists) {
+      db_update('atwork_polls')
+        ->fields(array(
+          'multichoice' => $node->multichoice,
+        ))
+        ->condition('nid', $node->nid)
+        ->execute();
+    } else {
+      db_insert('atwork_polls')
+        ->fields(array(
+          'nid' => $node->nid,
+          'multichoice' => $node->multichoice,
+        ))
+        ->execute();
+    }
+  }
+}
+
+/**
+ * Helper function to render a Poll
+ *
+ * Supports multiple choice polls
+ */
+function atwork_polls_view_results($node, $view_mode, $block = FALSE) {
+  // Make sure that choices are ordered by their weight.
+  uasort($node->choice, 'drupal_sort_weight');
+
+  // Count the votes and find the maximum
+  $total_votes = 0;
+  $max_votes = 0;
+  foreach ($node->choice as $choice) {
+    if (isset($choice['chvotes'])) {
+      $total_votes += $choice['chvotes'];
+      $max_votes = max($max_votes, $choice['chvotes']);
+    }
+  }
+
+  if($node->multichoice == 2){
+    $result = db_query_range("SELECT count(distinct uid) AS total_votes FROM {poll_vote} WHERE nid = :nid", 0, 1, array(':nid' => $node->nid))->fetch();
+    $total_votes = $result->total_votes;
+  }
+
+  $poll_results = '';
+  foreach ($node->choice as $i => $choice) {
+    if (!empty($choice['chtext'])) {
+      $chvotes = isset($choice['chvotes']) ? $choice['chvotes'] : NULL;
+      $poll_results .= theme('poll_bar', array('title' => $choice['chtext'], 'votes' => $chvotes, 'total_votes' => $total_votes, 'vote' => isset($node->vote) && $node->vote == $i, 'block' => $block, 'barnum' => $i));
+    }
+  }
+
+  return theme('poll_results', array('raw_title' => $node->title, 'results' => $poll_results, 'votes' => $total_votes, 'raw_links' => isset($node->links) ? $node->links : array(), 'block' => $block, 'nid' => $node->nid, 'vote' => isset($node->vote) ? $node->vote : NULL));
+}
+
+
+/**
+ * Implements hook_field_attach_presave()
+ *
+ * Look for [block:poll=1234] syntax in our node bodies and save to field_poll
+ * if we find it. This is what will make a node a poll
+ */
+function atwork_polls_field_attach_presave($entity_type, $entity) {
+  if (isset($entity->field_poll)) {
+    // File ids to be in the field
+    $polls = array();
+
+    // To get the bundle name for field_info_instances
+    $eids = entity_extract_ids($entity_type, $entity);
+
+    foreach (field_info_instances($entity_type, $eids[2]) as $field) {
+      if (isset($field['settings']['text_processing']) && $field['settings']['text_processing']) {
+        foreach ($entity->$field['field_name'] as $lang => $texts) {
+          if (! isset($fids[$lang])) {
+            $fids[$lang] = array();
+          }
+
+          if ($texts && is_array($texts)) {
+            foreach ($texts as $text) {
+              if (preg_match_all("/\[block:poll=?([^\\]]*)?\]/i", $text['value'], $match)) {
+                $polls[$lang][] = array($match[1][0]);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    foreach ($polls as $lang => $lang_poll) {
+      $entity->field_poll[$lang] = array();
+      foreach ($lang_poll as $poll) {
+        $entity->field_poll[$lang][] = array('target_id' => $poll);
+      }
+    }
+
+    if (empty($polls)) {
+      foreach ($entity->field_poll as $lang => $value) {
+        $entity->field_poll[$lang] = array();
+      }
+    }
+  }
+}
+
+/*
+ * Implementation of hook_view_alter()
+ *
+ * D7 poll block only shows latest poll, Allow the delta to represent the nid
+ * of the poll so we can display any poll instead of the latest
+ */
+function atwork_polls_block_view_alter(&$data, $block) {
+  if (isset($block->module) && isset($block->delta) && $block->module == 'poll') {
+    // Retrieve the latest poll.
+    $select = db_select('node', 'n');
+    $select->join('poll', 'p', 'p.nid = n.nid');
+    $select->fields('n', array('nid'))
+    //  ->condition('n.status', 1)
+      ->condition('n.nid', $block->delta)
+      ->orderBy('n.created', 'DESC')
+      ->range(0, 1);
+
+    $record = $select->execute()->fetchObject();
+    if ($record) {
+      $poll = node_load($record->nid);
+      if ($poll->nid) {
+        $poll->title = '';
+        $data['subject'] = '';
+
+        if ($poll->active && isset($poll->vote) && $poll->vote < 0) {
+          $data['content'] = drupal_render(drupal_get_form('poll_view_voting', $poll));
+        }
+        else {
+          $data['content'] = atwork_polls_view_results($poll, 'full', TRUE);
+        }
+      }
+    }
+  }
+}
+
+function atwork_polls_menu_alter(&$items) {
+  if (isset($items['poll'])) {
+    unset($items['poll']);
+  }
+}
+
+

@@ -1,0 +1,104 @@
+<?php
+
+/*
+ * Implementation of hook_form_alter()
+ *
+ * Allow the component name to be larger
+ *
+ * Control Emerging Leader voting form
+ *
+ * @TODO move to atwork_prem_awards module
+ */
+function atwork_webform_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id == 'webform_component_edit_form') {
+    $form['name']['#type'] = 'textarea';
+    unset($form['name']['#maxlength']);
+  }
+
+  /*
+   * Emerging leaders voting form for 2012
+   *
+   * Previously the submit button was disabled once a vote was cast but now permanently
+   *
+   */
+  if ($form_id == 'webform_client_form_5255') {
+    foreach ($form['submitted']['finalists']['#options'] as $key => $data) {
+      list($name, $video_id, $thumb_path, $caption) = explode('&&&', $data);
+      unset($form['submit']);
+      $form['submitted']['finalists']['#options'][$key] = '<div class="video-finalist video-'. $key .'"><h3>'. $name .'</h3><a href="//www.youtube.com/v/'. $video_id .'?wmode=transparent&amp;fs=1&amp;width=640&amp;height=480&amp;hl=en_US1&amp;iframe=true&amp;rel=0" class="colorbox-load" title="' . $caption . '"><img src="/sites/default/files/webform/premieres_awards/'. $thumb_path .'" alt = "Click me" /></a></div>';
+    }
+  }
+  if ($form_id == 'webform_client_form_7097') {
+    foreach ($form['submitted']['finalists']['#options'] as $key => $data) {
+      list($name, $video_id, $thumb_path, $caption) = explode('&&&', $data);
+      unset($form['submit']);
+      $form['submitted']['finalists']['#options'][$key] = '<div class="video-finalist video-'. $key .'"><h3>'. $name .'</h3><a href="//www.youtube.com/v/'. $video_id .'?wmode=transparent&amp;fs=1&amp;width=640&amp;height=480&amp;hl=en_US1&amp;iframe=true&amp;rel=0&amp;showinfo=0" class="colorbox-load" title="' . $caption . '"><img src="/sites/default/files/webform/premieres_awards/2013/'. $thumb_path .'" alt = "Click me"  /></a></div>';
+    }
+  }
+
+  /**
+   * Emerging Leaders 2015 voting form
+   * Code to handle legacy page by year - new forms are added below
+   * @var [type]
+   */
+  if ($form_id == 'webform_client_form_10102') {
+    foreach ($form['submitted']['finalists']['#options'] as $key => $data) {
+      list($name, $video_id, $thumb_path, $caption) = explode('&&&', $data);
+      unset($form['submit']);
+      $form['submitted']['finalists']['#options'][$key] = '<div class="video-finalist video-'. $key .'"><h3>'. $name .'</h3><a href="//www.youtube.com/v/'. $video_id .'?wmode=transparent&amp;fs=1&amp;width=640&amp;height=480&amp;hl=en_US1&amp;iframe=true&amp;rel=0&amp;showinfo=0" class="colorbox-load" title="' . $caption . '"><img src="/sites/default/files/webform/premieres_awards/2015/'. $thumb_path .'" alt = "Click me"  /></a></div>';
+    }
+  }
+
+  if ($form_id == 'webform_client_form_19843') {
+    // check if user voted
+    global $user;
+    $voted = db_select('webform_submissions', 'd')
+      ->fields('d', array('uid'))
+      ->condition('d.nid', 19843)
+      ->condition('d.uid', $user->uid)
+      ->execute()
+      ->fetchAll();
+
+    if ($voted) {
+      $form['actions']['submit']['#access'] = FALSE;
+      drupal_set_message('Thanks for voting!');
+    }
+
+    /*
+     * Uncomment this when voting closes
+     */
+    //$form['actions']['submit']['#access'] = FALSE;
+
+    $js = <<<EOT
+jQuery(document).ready(function($) {
+
+	var tempTitle = '';
+    // On mouseover, we save the original title values
+	$('a').mouseover(function() {
+		tempTitle = $(this).attr("title");
+		// We replace this with values stored in tags "rel", which populates tooltip
+        $(this).attr( "title",$(this).attr("rel"));
+    });
+
+    $('a').mouseout(function() {
+		// When we leave, we replace the original title
+        $(this).attr("title",tempTitle);
+
+    });
+	$('a').click(function() {
+		// When we click, we replace the original title
+        $(this).attr("title",tempTitle);
+	});
+
+});
+EOT;
+
+    drupal_add_js($js, 'inline');
+
+    // This is used for the current years emergent leaders - code above is for last years.
+    foreach ($form['submitted']['finalists']['#options'] as $key => $data) {
+      list($name, $video_id, $thumb_path, $caption) = explode('&&&', $data);
+      $form['submitted']['finalists']['#options'][$key] = '<div class="video-finalist video-'. $key .'"><h3>'. $name .'</h3><a href="//www.youtube.com/v/'. $video_id .'?wmode=transparent&amp;fs=1&amp;width=640&amp;height=385&amp;hl=en_US1&amp;iframe=true&amp;rel=0&amp;showinfo=0" class="colorbox-load" title="' . $caption . '" rel="Click to see ' . $name . '\'s video"><img src="/sites/default/files/webform/premieres_awards/2016/'. $thumb_path .'" alt = "Click me" /></a></div>';
+    }
+  }
+}

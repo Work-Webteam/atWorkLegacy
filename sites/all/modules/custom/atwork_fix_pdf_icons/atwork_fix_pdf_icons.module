@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Custom functionality for the @Work (gww.gov.bc.ca) site.
+ * Uses JavaScript to append a PDF or Word icon to the already inserted icons
+ * in content (via CCK editor) and appends icons where they have not been
+ * inserted by a human by evaluating the extension of a given hyperlink.
+ */
+
+/**
+ * Implements hook_init().
+ */
+function atwork_fix_pdf_icons_init() {
+  if (!drupal_is_front_page() && !path_is_admin(current_path())) {
+    drupal_add_js(drupal_get_path('module', 'atwork_fix_pdf_icons') . '/atwork_fix_pdf_icons.js');
+  }
+}

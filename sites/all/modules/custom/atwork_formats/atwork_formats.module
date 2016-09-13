@@ -1,0 +1,151 @@
+<?php
+
+/*
+ * Implementation of hook_init() 
+ * 
+ * Make the comment text area start with the text editor disabled.
+ */
+function atwork_formats_init() {
+  global $user;
+  
+  drupal_add_js('(function ($) { '
+      . '$( document ).ready(function() { '
+      . '$( "#wysiwyg-toggle-edit-comment-body-und-0-value" ).trigger( "click" );'
+      . '}); }(jQuery));', 
+      array('type' => 'inline', 'scope' => 'footer', 'weight' => 99));
+      // . '//$(".wysiwyg-toggle-wrapper").html(\'<a id="wysiwyg-toggle-edit-comment-body-und-0-value" href="javascript:void(0);">Enable text formatting</a>\'); '
+}
+
+/**
+ * Implements hook_element_info_alter()
+ * 
+ * Adds an #after_build function to all text_format elements.
+ */
+function atwork_formats_element_info_alter(&$types) {
+  $types['text_format']['#after_build'][] = 'atwork_formats_after_build';
+}
+
+/*
+ * after_build Callback
+ * 
+ * Set various defaults to input formats
+ * 
+ * Do some fixes related to hiding the input format form and wysiwyg module
+ * 
+ * This is stuff better_formats module would do without the over-head
+ */
+function atwork_formats_after_build($element, &$form_state) {
+  if (isset($element['format'])) {
+    
+    global $user;
+    
+    // always hide guidelines and help
+    $element['format']['guidelines']['#access'] = FALSE;
+    $element['format']['help']['#access'] = FALSE;
+    //dpm($element);
+    // override wiki (if wiki is set af format, enforce it)
+    if (isset($element['#format']) && $element['#format'] == 'wiki') {
+      $element['format']['format']['#options'] = array(
+        'wiki' => 'Wiki',
+      );
+    }
+    
+    if (isset($element['#field_name']) && $element['#field_name'] == 'field_summary') {
+      $element['format']['format']['#options'] = array(
+        'comment' => 'Comment',
+      );
+    }
+    
+    if (isset($element['#field_name']) && $element['#field_name'] == 'field_transcript') {
+      $element['format']['format']['#options'] = array(
+        'comment' => 'Comment',
+      );
+    }
+    
+    if (isset($element['#field_name']) && $element['#field_name'] == 'field_blog_profile') {
+      $element['format']['format']['#options'] = array(
+        'filtered_no_editor' => 'Filtered HTML without an Editor',
+      );
+    }
+    
+    // #entity_type not always set
+    if (!isset($element['#entity_type'])) {
+      $entity_type = FALSE;
+    }
+    else {
+      $entity_type = $element['#entity_type'];
+    }
+    // comments always get comment input format
+    // except statuses!!
+    if ($entity_type == 'comment') {
+      if (isset($form_state['complete form']['#node']->type) && $form_state['complete form']['#node']->type == 'status') {
+        $element['format']['format']['#options'] = array(
+          'filtered_no_editor' => 'Comment',
+        );
+      }
+      else {
+        $element['format']['format']['#options'] = array(
+          'comment' => 'Comment',
+        );
+      }
+    }
+    elseif ($entity_type == 'field_collection_item') {
+      $element['format']['format']['#options'] = array(
+        'filtered_no_editor' => 'Filtered No Editor',
+      );
+    }
+    elseif ($entity_type == 'node') {
+      
+      $exisiting_content = isset($element['#entity']->nid) ? TRUE : FALSE ;
+      
+      // all wikis must use wiki input format
+      if ($element['#bundle'] == 'wiki') {
+        $element['format']['format']['#options'] = array(
+          'wiki' => 'Wiki',
+        );
+      }
+      // user-submitted content should always be filtered_html
+      elseif (in_array($element['#bundle'], array('event', 'forum', 'classified', 'question', 'answer'))) {
+        $element['format']['format']['#options'] = array(
+          'filtered_html' => 'Filtered HTML',
+        );
+      }
+      
+      // content shared by admins/users - set to filtered as default but leave option
+      elseif (in_array($element['#bundle'], array('section_page', 'section', 'blog'))) {
+        if (!$exisiting_content) {
+          $element['format']['format']['#value'] = 'filtered_html';
+          $element['format']['format']['#default_value'] = 'filtered_html';
+        }
+        
+        // if regular user remove options
+        if (!_atwork_is_admin() && !in_array('blogger', $user->roles)) {
+          $element['format']['format']['#options'] = array(
+            'filtered_html' => 'Filtered HTML',
+          );
+        }
+      }
+    }
+    
+    if (count($element['format']['format']['#options']) == 1) {
+  //   $element['format']['format']['#access'] = FALSE;
+      $element['format']['#attributes']['class'][] = 'element-invisible';
+    }
+    else {
+      $element['format']['#title'] = t('Input format');
+      $element['format']['#collapsible'] = TRUE;
+      $element['format']['#collapsed'] = TRUE;
+      $element['format']['#attributes']['class'][] = 'collapsible';
+      $element['format']['#attributes']['class'][] = 'collapsed';
+    }
+  }
+  
+  return $element;
+}
+
+/**
+ * Implements hook_js_alter();
+ */
+function atwork_formats_js_alter(&$javascript) {
+  //dpm($javascript);
+}

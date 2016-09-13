@@ -1,0 +1,154 @@
+<?php
+
+function comment_revision_install() {
+  db_add_field('comment', 'vid',
+    array(
+      'description' => 'The current {comment_revision}.vid version identifier.',
+      'type' => 'int',
+      'unsigned' => TRUE,
+      'not null' => FALSE,
+      'default' => NULL,
+    ),
+    array(
+      'indexes' => array(
+        'vid' => array('vid')
+      ),
+      'unique keys' => array(
+        'cid_vid' => array('vid', 'cid'),
+      ),
+      'foreign keys' => array(
+        'comment_revision' => array(
+          'table' => 'comment_revision',
+          'columns' => array('vid' => 'vid'),
+        ),
+      ),
+    )
+  );
+  
+  db_update('comment')
+    ->expression('vid', 'cid')
+    ->execute();
+  
+  
+  $query = db_select('comment', 'c');
+  $query->addField('c','cid');
+  $query->addField('c','vid');
+  $query->addField('c','uid', 'revision_uid');
+  $query->addField('c','uid');
+  $query->addField('c','subject');
+  $query->addField('c','changed', 'timestamp');
+  $query->addField('c','created');
+  $query->addField('c','mail');
+  $query->addField('c','homepage');
+  $query->addField('c','status');
+  $query->addField('c','language');
+
+  // Perform the insert.
+  db_insert('comment_revision')
+    ->from($query)
+    ->execute();
+  
+  
+}
+
+function comment_revision_uninstall() {
+  db_drop_index('comment', 'vid');
+  db_drop_unique_key('comment', 'cid_vid');
+  db_drop_field('comment', 'vid');
+}
+
+function comment_revision_schema() {
+  $schema['comment_revision'] = array(
+    'description' => 'Stores comment revisions and associated data.',
+    'fields' => array(
+      'cid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => NULL,
+        'description' => 'Primary Key: Unique comment ID.',
+      ),
+      'vid' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'The current {comment_revision}.vid version identifier.',
+      ),
+      'revision_uid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'The {users}.uid who revised the comment.',
+      ),
+      'uid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'The {users}.uid who authored the comment. If set to 0, this comment was created by an anonymous user.',
+      ),
+      'subject' => array(
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'The comment title.',
+      ),
+      'timestamp' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'The time that the comment revision was created, as a Unix timestamp.',
+      ),
+      'created' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'The time that the comment was created, as a Unix timestamp.',
+      ),
+      'status' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 1,
+        'size' => 'tiny',
+        'description' => 'The published status of a comment. (0 = Not Published, 1 = Published)',
+      ),
+      'mail' => array(
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => FALSE,
+        'description' => "The comment author's e-mail address from the comment form, if user is anonymous, and the 'Anonymous users may/must leave their contact information' setting is turned on.",
+      ),
+      'homepage' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => "The comment author's home page address from the comment form, if user is anonymous, and the 'Anonymous users may/must leave their contact information' setting is turned on.",
+      ),
+      'language' => array(
+        'description' => 'The {languages}.language of this comment.',
+        'type' => 'varchar',
+        'length' => 12,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+    ),
+    'indexes' => array(
+      'comment_uid' => array('uid'),
+      'comment_cid' => array('cid'),
+    ),
+    'primary key' => array('vid'),
+    'foreign keys' => array(
+      'comment_version_author' => array(
+        'table' => 'users',
+        'columns' => array('uid' => 'uid'),
+      ),
+      'comment_version' => array(
+        'table' => 'comment',
+        'columns' => array('cid' => 'cid'),
+      ),
+    ),
+  );
+  
+  return $schema;
+}

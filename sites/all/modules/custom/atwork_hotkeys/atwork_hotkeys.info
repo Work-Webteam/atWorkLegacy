@@ -1,0 +1,4 @@
+name = Atwork Hotkeys
+description = Chages page location when user taps on an hotkey from the homepage.
+package = Atwork
+core = 7.x

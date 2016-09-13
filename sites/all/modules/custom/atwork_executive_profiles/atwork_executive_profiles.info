@@ -1,0 +1,5 @@
+name = Atwork Executive Profiles
+description = Code to help manage executive profiles
+package = Atwork
+dependencies[] = atwork_profiles
+core = 7.x

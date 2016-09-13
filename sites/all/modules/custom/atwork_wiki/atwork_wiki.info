@@ -1,0 +1,4 @@
+name = Atwork Wiki
+description = Code tieing wikilumbia together
+package = Atwork
+core = 7.x

@@ -1,0 +1,4 @@
+name = Atwork Question and Answers
+description = Trying to make like stackoverflow.
+package = Atwork
+core = 7.x

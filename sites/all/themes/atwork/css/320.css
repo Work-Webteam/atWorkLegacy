@@ -1,0 +1,319 @@
+/* 
+
+  --- TOC for this file ---
+
+    -Resets
+
+    -Structure
+
+    -Typography
+
+    -Navigation
+
+    -Visual media and more global presentational stuff and landing pages
+
+    -Homepage (NID 96)
+
+    -Article, blog, poll, ETC structure, wiki
+
+    -Forms
+
+    - Misc
+
+*/
+
+
+/* ------------------------------------------------- Reset High-Tech Browsers */
+html {
+  margin: 0;
+  width: 100%; 
+}
+
+/* ---------------------------------------------------------------- Structure */
+.sidebar.second {
+  padding: 0;
+  padding-top: 1em;
+  margin-top: 0;
+  border-top: 1px solid #ccc;
+  margin-bottom: 0;
+}
+
+.prem-award .sidebar.second {
+  background: url(/sites/all/themes/atwork/images/pa_sidebar_background.png) no-repeat;
+}
+
+.region-pagetop #block-menu-menu-secondary-menu, 
+.region-pagetop #block-boxes-ministry_dropdown {
+  display: block; 
+}
+
+.front #block-system-main {
+  display: none;
+}
+
+.region-sidebar-second .block-title {
+  border-bottom: none; 
+}
+.region-sidebar-second .views-field-name {
+  border-bottom: none;
+}
+
+.region-pagetop #block-boxes-ministry_dropdown {
+  display: none;
+}
+
+.teaser-footer {
+  font-size: 0.750em;
+}
+
+#block-nice_menus-1 {
+  margin-top: 0;
+}
+
+.region-pagetop input {
+  width: 93%;
+  float: left;
+}
+
+#footer {
+  padding-top: 0;
+}
+
+/* --------------------------------------------------------------- Typography */
+h1, h2, h3, h4, h5, h6 {
+  word-wrap: break-word;
+  -webkit-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+}
+
+ul.menu ul li,
+ul ul,
+ol ul {
+  list-style-image: none;
+  list-style-type: circle;
+  list-style: circle;
+}
+
+.node ol li {
+  margin-bottom: 1em;
+}
+
+.view-term-landing-page ul li,
+.view-node-comments .field-name-comment-body ul li,
+.view-wiki ul li,
+.view-wiki-categories ul li,
+.view-id-wiki.view-display-id-page ul li,
+.atwork-menu .menu li.leaf,
+.view-id-recent_comments.view-display-id-page ul li,
+#block-boxes-blog_sidebar ul,
+ul.menu,
+ul li.collapsed,
+ul li li.collapsed,
+ul li li li.collapsed,
+#block-views-second_sidebar_blocks-block_3 ul li,
+#boxes-box-add_forum_topic ul li,
+.not-front .sidebar.second ul li,
+.not-front #block-system-main .field-name-body ul li,
+.webform-submission ul li,
+.page-user .content ul li,
+.webform-client-form label ul li {
+  list-style-image: url(/sites/all/themes/atwork/images/arrow_blue_right.png);
+}
+  .not-front #block-system-main .field-name-body li {
+    margin-left: 1em;
+  }
+
+ul li.expanded,
+ul li li.expanded,
+ul li li li.expanded,
+ul li li li li.expanded {
+  list-style-image: url(/sites/all/themes/atwork/images/arrow_blue_down.png);
+  list-style-type: circle;  
+}
+
+ul ul ul,
+ol ul ul,
+ol ol ul,
+ul ol ul {
+  list-style-type: square;
+}
+
+ol ol,
+ul ol {list-style-type: lower-alpha;}
+
+ol ol ol,
+ul ol ol,
+ul ul ol,
+ol ul ol {
+  list-style-type: lower-roman;
+}
+
+table {
+  border-left: 1px solid #ccc; 
+  border-top: 1px solid #ccc;
+}
+  th,
+  td {
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    line-height: 18px;
+    vertical-align: top;
+  }
+    th label {
+      margin-left: 5px;
+    }
+
+thead th,
+thead td,
+tbody th,
+tbody td,
+tfoot th,
+tfoot td {
+  padding: 9px;
+}
+
+caption {
+  font-size: 10px;
+  line-height: 14px;
+  text-align: right;
+}
+
+.item-list ul,
+ul, 
+ol, 
+p, 
+dl, 
+dd, 
+dt, 
+blockquote {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.block ul, 
+.block ol {
+  margin-left: 16px;
+  padding-left: 0;
+}
+
+/* --------------------------------------------------------------- Navigation */
+.mnav {
+  width: auto;
+}
+
+.region-pagetop #block-menu-menu-secondary-menu, 
+.region-pagetop #block-boxes-ministry_dropdown,
+.region-pagetop .block-menu ul {
+  display: none;
+}
+
+#superfish-1-select {
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+#block-boxes-copyright_terms_user {
+  font-size: 0.777em;
+}
+
+/* ----------------------------- Visual media and global presentational stuff */
+h2.breadcrumb a {
+  border-bottom: none;
+}
+
+.comment {
+  padding-top: 1em;
+}
+
+/* -------------------------------------------------------- Homepage (NID 96) */
+.front #block-views-home_page_blocks-wikis .view-header {
+  display: none;
+}
+
+#content_top {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 1em;
+}
+
+.front .views-field .field-content img {
+  padding: 4px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+.front .region-content .block ul li .field-content {
+  background: url(/sites/all/themes/atwork/images/arrow_blue_right.png) 0 3px no-repeat;
+  font-size: 0.75em;
+  padding-left: 1em;
+}
+
+.front .region-content .block {
+  padding: 1em;
+  margin-bottom: 1em;
+  background: url("/sites/all/themes/atwork/images/poll_grad.gif") repeat-x scroll left top #cdddef;
+  border: 1px solid #a5c4e3;
+}
+
+#block-views-home_page_blocks-block_1 .content {
+  margin-top: 1em;
+  background: url("/sites/all/themes/atwork/images/poll_grad.gif") repeat-x scroll left top #cdddef;
+  padding: 5px;
+  min-height: 187px;
+  border: 1px solid #a5c4e3;
+}
+#block-views-home_page_blocks-block_1 .block-title-link {
+  background-color: #00AEEF;
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+}
+  #block-views-home_page_blocks-block_1 .block-title-link:hover {
+    color: white;
+  }
+
+#block-views-home_page_blocks-block_2 .view-display-id-block_2 {
+  margin-top: 1em;
+}
+
+.front .homepage-lower-column li {
+  list-style-image: url(/sites/all/themes/atwork/images/arrow_blue_right.png);
+  margin-left: 1em;
+}
+
+.front .homepage-lower-column .block-inner { 
+  padding: 1em;
+  background: #fdfaeb url(/sites/all/themes/atwork/images/yellow_grad_bottom.gif) repeat-x bottom left;
+  border: 1px solid #f9eaad;
+  margin-bottom: 1em;
+}
+.front .homepage-lower-column h2.block-title {
+  margin-bottom: 1em;
+  background: #fddf8c;
+  padding: 0.333em;
+}
+  .front .homepage-lower-column h2.block-title a {
+    color: black;
+  }
+  .front .homepage-lower-column h2.block-title a:hover {
+    color: #0066cc;
+  }
+
+/* --------------------------------- Article, blog, poll, ETC structure, wiki */
+.content #block-views-node_comments-block {
+  border: none;
+  border-top: 1px solid #fed67a;
+  padding: 14px;
+}
+  .node-type-forum .content #block-views-node_comments-block {
+    border: none;
+  }
+
+/* -------------------------------------------------------------------- Forms */
+input {
+  padding: 4px;
+}
+
+/* --------------------------------------------------------------------- Misc */
+.container-inline label {
+  display: none;
+}

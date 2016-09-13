@@ -1,0 +1,115 @@
+* {
+	/* A simple page reset */
+	margin:0px;
+	padding:0px;
+	font-family: Calibri, "Gill Sans"," Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", Helvetica,Arial, sans-serif;
+}
+.clear { /* The clearfix hack */ clear:both; }
+a img{ border:none; }
+
+body { color: #333; font-size: 0.9em; }
+
+#wrapper { width: 630px; }
+
+img.instructions_icon {  }
+.instructions { color: #3d5d98; text-align: left; width: 590px; float: right; position: relative; margin-top: -2px; }
+
+#navbg { z-index: -1; color: #989898; font-size: 17px; text-align: center;  }
+.navimages { z-index: 3; text-align: center; margin-top: -20px; }
+img.navimage { padding: 1px 63px; }
+
+.navdesc { margin-top: 10px; }
+.navdesc span { z-index: 3; text-align: center; padding: 1px 17px; font-size: 15px; color: #838383; font-family: "Myriad Pro", Myriad, "DejaVu Sans Condensed", Helvetica, Arial, sans-serif; } 
+
+#mainquestion { border: 1px solid #ebb730; margin: 25px 0px; padding: 15px 15px 85px 15px; }
+
+img.neaticon { float: right; }
+
+h2.question { font-weight: normal; font-family: Calibri, "Gill Sans"," Gill Sans MT"; font-size: 15px; }
+
+h2.description { color: black; font-size: 19px; margin: 5px 0px 10px 0px; font-family: "Muli"; }
+
+h3.concepthead { margin: 30px 0px 0px 40px; font-weight: normal; }
+
+/* This UL gets converted to a sortable by jQuery */
+ul.sort {  }
+
+/* indiviual voting items */
+ul.sort li { list-style: none; width: 537px; cursor: all-scroll; position: relative; font-weight: bold; padding: 5px 0px 5px 0px; font-size: 15px; }
+/* exists soley for drag and drop functionality, idenitfies drag item */
+.tut { padding: 3px; }
+
+.title { display: inline; padding-left: 20px; }
+
+.rnumber { border: 1px solid #ebb730; width: 1em; color: #ebb730; font-size: 17px; font-weight: bold; display: inline; padding: 0px 5px; }
+
+/* the additional comments link */
+.showhide { display: inline; float: right; font-size: 13px; }
+/* for the javascript */
+.show_hide { display: none; } 
+a, a:visited { color:#00BBFF; text-decoration: none; outline: none; }
+a:hover { text-decoration: underline; }
+
+.usercomments { border: 1px solid #959595; overflow: auto; width: 487px; height: 50px; font-size: 1em; float: right; margin-top: 5px; }
+/* the placeholder text in IE, needed for jquery */
+.placeheld {  }
+input#othertitleinput { font-weight: bold; color: #333; font-size: 15px; border: 1px solid #959595; width: 233px; margin: 0; }
+
+/* the letter counter!! :) */
+.letter_counter { font-family: "Muli", "Tahoma", sans-serif; font-size: 11px; color: #999; float: right; margin-right: 5px; }
+.lettercount, .expandcollapse { display: inline; }
+.expandcollapse { float: right; overflow: visible; }
+.slidingDiv { margin: 0; height: 70px; }
+
+/* not used if there's no image */
+.tut-img{
+	border: 3px solid white;
+	float: left;
+	margin:0 15px 0 0;
+	/* width:50px;
+	height:50px; */
+	position:relative;
+}
+
+
+
+.button-holder { float: right; padding: 25px 55px 0px 0px; }
+a.button:hover {  }
+/* on mouse click */
+a.button:active { border: 1px solid #d7d6d6; }
+
+
+
+
+.resultswrap { border: 1px solid orange; margin-top: 30px; padding-bottom: 40px; }
+h3.compare { background-color: orange; text-align: center; font-size: 19px; padding: 10px 0px; }
+h2.description_result { font-weight: normal; margin: 15px 0px 0px 10px; font-size: 19px; }
+h2.question_result { font-size: 17px; margin: 20px 0px 40px 10px; }
+.resultsdots2, .resultsdots3 { z-index: -1; color: orange; overflow: hidden; }
+.resultsdots1 { display: none; }
+
+.chart { width: 250px; float: left; }
+.chart h3 { font-weight: normal; font-size: 17px; }
+.userchoice /* userchoice chart class */ { margin-left: 40px; margin-top: -220px; }
+.systemchoice { margin-left: 340px; margin-top: -220px; }
+
+ul.thenumbers { list-style: none; margin-top: 30px; margin-left: 10px; }
+ul.thenumbers li { border: 1px solid #ebb730; width: 1em; color: #ebb730; font-size: 17px; font-weight: bold; padding: 0px 0px 0px 6px; margin-bottom: 10px; } /* copied from "rnumber" with edits */
+ul.numbers_left li {  }
+ul.thenumbers.numbers_right { margin-left: 310px; margin-top: -198px; }
+ul.thenumbers.numbers_right li { background: #eee; }
+
+.chart.systemchoice .bar { background: #eee; } 
+.bar{
+	/* Each bar in the chart is a div. Colors and width are assigned later */
+	height: 21px;
+	margin-bottom: 10px;
+	margin-top: 1px;
+	overflow: hidden;
+	padding-left: 3px;
+	white-space: nowrap;
+	font-weight: bold;
+	font-size: 13px;
+}
+
+.tot-votes { font-size:17px; font-weight:bold; }

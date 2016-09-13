@@ -1,0 +1,4 @@
+name = Comment Revision
+description = Let comments have revisions
+package = Atwork
+core = 7.x

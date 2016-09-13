@@ -1,0 +1,4 @@
+name = Atwork Group Functionality
+description = A few custom things for our groups
+package = Atwork
+core = 7.x

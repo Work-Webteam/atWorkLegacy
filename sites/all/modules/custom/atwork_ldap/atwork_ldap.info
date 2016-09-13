@@ -1,0 +1,4 @@
+name = Atwork LDAP
+description = Code integrating GAL lookups and maintenance tasks
+package = Atwork
+core = 7.x

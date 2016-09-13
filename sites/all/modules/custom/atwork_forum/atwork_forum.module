@@ -1,0 +1,110 @@
+<?php
+
+/*
+ * Implementation of hook_preprocess_node()
+ *
+ */
+function atwork_forum_preprocess_node(&$variables){
+  //dpm($variables);
+  if (isset($variables['post_edited'])) {
+    $variables['post_edited'] = '';
+  }
+}
+
+/**
+ * Implements hook_menu_alter();
+ */
+function atwork_forum_menu_alter(&$items) {
+  $items['forum/view']['title'] = t('View all forums');
+}
+
+
+function atwork_forum_init() {
+  if (current_path() == 'forum') {
+    $js = <<<EOT
+jQuery(document).ready(function($) {
+  jQuery('.region td.forum-list-icon-default i').attr('title', 'No New Posts');
+  jQuery('.region td.forum-list-icon-new-posts i').attr('title', 'New Posts');
+});
+EOT;
+    drupal_add_js($js, 'inline');
+  }
+}
+
+/**
+ * Implements hook_view_post_render()
+ *
+ * Add our random image to the homepage forum block
+ */
+function atwork_forum_views_post_render(&$view, &$output, &$cache) {
+  if ($view->name == 'advanced_forum_topic_list' && $view->current_display == 'default') {
+    $js = <<<EOT
+jQuery(document).ready(function($) {
+  jQuery('span.topic-icon-hot-new').attr('title', 'Hot topic with new posts');
+  jQuery('span.topic-icon-new').attr('title', 'New Posts');
+  jQuery('span.topic-icon-default').attr('title', 'No New Posts');
+  jQuery('span.topic-icon-hot').attr('title', 'Hot topic without new posts');
+  jQuery('span.topic-icon-sticky').attr('title', 'Sticky topic');
+  jQuery('span.topic-icon-closed').attr('title', 'Locked topic');
+});
+EOT;
+    drupal_add_js($js, 'inline');
+  }
+
+  if ($view->name == 'home_page_blocks' && $view->current_display == 'forums') {
+    if (strpos($output, 'put_image_here')) {
+      $random = mt_rand(1, 36);
+      $random_image = '<img height="155" width="206" src="/sites/default/files/images/forum/' . $random . '.jpg" alt="Discussion Forum" />';
+
+      $output = str_replace('put_image_here', $random_image, $output);
+    }
+  }
+}
+
+
+/*
+ * Implementation of hook_preprocess_forums()
+ *
+ * Change wording on add forum link
+ */
+function atwork_forum_preprocess_forums(&$variables) {
+  if (isset($variables['forum_links']) && $variables['forum_links'] && isset($variables['tid']) && $variables['tid']) {
+    $new_links = l(t('Create forum topic'), 'node/add/forum/' . $variables['tid']);
+    $variables['topics'] = str_replace($variables['forum_links'], $new_links, $variables['topics']);
+  }
+}
+
+/*
+ * Implementation of hook_preprocess_forum_list()
+ *
+ * Add add link to forums view
+ */
+function atwork_forum_preprocess_forum_list(&$variables) {
+  if (isset($variables['tables'][1]['table_info']->description)) {
+    $variables['tables'][1]['table_info']->description = l(t('Post new forum topic'), 'node/add/forum/0');
+  }
+}
+
+
+/*
+ * Implementation of hook_form_alter()
+ *
+ */
+function atwork_forum_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'forum_node_form') {
+    if (isset($form['taxonomy_forums'][$form['taxonomy_forums']['#language']]['#options']['_none'])) {
+      $form['taxonomy_forums'][$form['taxonomy_forums']['#language']]['#options']['_none'] = '- Please choose -';
+    }
+    drupal_set_title('Post New Forum Topic ');
+  }
+}
+
+/*
+ * Implementation of hook_node_view()
+ *
+ * Add OBO/Firm to price
+ * Add expiry date
+ *
+ */
+function atwork_forum_node_view($node, $view_mode, $langcode) {
+}

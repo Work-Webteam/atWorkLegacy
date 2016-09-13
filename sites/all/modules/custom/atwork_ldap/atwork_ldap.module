@@ -1,0 +1,140 @@
+<?php
+/**
+ * @file
+ * Provides the atwork_ldap object with a few other features/hooks
+ */
+
+/*
+ * Helper function that checks if LDAP can bind
+ */
+function _atwork_ldap_working() {
+  $atwork_ldap = new atwork_ldap;
+  
+  if ($atwork_ldap->connected) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/*
+ * Helper function that returns a user's employee ID
+ */
+function atwork_ldap_get_employee_number($user) {
+  $atwork_ldap = new atwork_ldap;
+  
+  $result = $atwork_ldap->query('person', 'sAMAccountName', $user->name, array('employeeid'));
+  
+  return isset($result[0]['employeeid'][0]) ? $result[0]['employeeid'][0] : '';
+}
+
+/**
+ * Implementation of hook_menu
+ * 
+ * Configuration page for LDAP settings
+ * 
+ */
+function atwork_ldap_menu() {  
+  $links['admin/config/atwork/ldap'] =  array(
+    'title' => t('LDAP Credentials') , 
+    'description' => t('Manage LDAP Settings') ,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('atwork_ldap_settings_form'),
+    'access arguments' => array('access administration pages'), 
+    'file' => 'atwork_ldap.admin.inc',
+    'file path' => drupal_get_path('module', 'atwork_ldap'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
+  return $links;
+}
+
+/*
+ * Our class definition
+ */
+class atwork_ldap {
+  protected $ldap_url;
+  protected $ldap_domain;
+  protected $ldap_dn;
+  protected $username;
+  protected $password;
+  public $connected = FALSE;
+  
+  protected $ldap_connection;
+  
+  function __construct() {
+    
+    $this->connected = FALSE;
+    
+    $this->ldap_url = variable_get('atwork_ldap_url', '');
+    $this->ldap_domain = variable_get('atwork_ldap_domain', '');
+    $this->ldap_dn = variable_get('atwork_ldap_dn', '');
+    $this->username = variable_get('atwork_ldap_user', '');
+    $this->password = variable_get('atwork_ldap_pass', '');
+    
+    $this->ldap_connection = ldap_connect($this->ldap_url);
+    
+    ldap_set_option($this->ldap_connection, LDAP_OPT_PROTOCOL_VERSION, 3);
+    ldap_set_option($this->ldap_connection, LDAP_OPT_REFERRALS, 0);
+    
+    $login = @ldap_bind($this->ldap_connection, "$this->username@$this->ldap_domain", $this->password);
+    
+    if ($login) {
+      $this->connected = TRUE;
+    }
+  }
+  
+  /*
+   * Conduct an LDAP query
+   * 
+   * @param string $type
+   *    The objectCategory, typically "person"
+   * @param string $field
+   *    The field we will query on such as "mail", "samaccountname" or "bcgovguid" (slow)
+   * @param string $value
+   *    The corresponding value to $field
+   * @param array $attributes
+   *    The field we want in our results. Leave empty to include all fields (alot!)
+   * @param string $additional_filters
+   *    Any additional filters we want such as (whenchanged>=20130101070000.0Z)
+   * 
+   * @return array The unchanged results from our query
+   */
+  public function query($type, $field, $value, $attributes = array(), $additional_filters = '') {
+    $filter = '(&(objectCategory=' . $type . ')(' . $field . '=' . $value . ')' . $additional_filters . ')';
+
+    $ldapresult = ldap_search($this->ldap_connection, $this->ldap_dn, $filter, $attributes);
+    return ldap_get_entries($this->ldap_connection, $ldapresult);
+  }
+}
+
+
+
+
+/*
+ * Implements hook_requiremnts()
+ * 
+ * Show results of ldap_bind on the Drupal status page
+ * 
+ */
+function atwork_ldap_requirements($phase) {
+  $requirements = array();
+
+  if ($phase == 'runtime') {
+    if (_atwork_ldap_working()) {
+      $requirements['atwork_ldap'] = array(
+        'value' => t('Configured correctly'),
+        'severity' => REQUIREMENT_OK,
+      );
+    }
+    else {
+      $requirements['atwork_ldap'] = array(
+        'value' => t('Cannot connect to server'),
+        'severity' => REQUIREMENT_ERROR,
+        'description' => t('LDAP credentials are not functioning. Please visit <a href="@url">LDAP Settings</a> to correct this.', array('@url' => $GLOBALS['base_url'] . '/admin/config/ldap')),
+      );
+    }
+    $requirements['atwork_ldap']['title'] = t('Atwork LDAP Status');
+  }
+
+  return $requirements;
+}

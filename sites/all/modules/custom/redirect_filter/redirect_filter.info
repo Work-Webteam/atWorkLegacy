@@ -1,0 +1,4 @@
+name = Redirect Filter
+description = An input format that allows a redirection
+package = Atwork
+core = 7.x

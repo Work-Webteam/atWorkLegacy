@@ -1,0 +1,4 @@
+name = Atwork Webform
+description = Some changes to the default webform module
+package = Atwork
+core = 7.x

@@ -1,0 +1,4 @@
+name = Atwork News
+description = Code for News stuff
+package = Atwork
+core = 7.x

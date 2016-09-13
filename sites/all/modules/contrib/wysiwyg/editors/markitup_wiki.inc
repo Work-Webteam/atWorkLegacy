@@ -1,0 +1,261 @@
+<?php
+
+/**
+ * @file
+ * Editor integration functions for markItUp.
+ */
+
+/**
+ * Plugin implementation of hook_editor().
+ */
+function wysiwyg_markitup_wiki_editor() {
+  $editor['markitup_wiki'] = array(
+    'title' => 'markItUp Wiki',
+    'vendor url' => 'http://markitup.jaysalvat.com',
+    'download url' => 'http://markitup.jaysalvat.com/downloads',
+    'library path' => wysiwyg_get_path('markitup'),
+    'libraries' => array(
+      '' => array(
+        'title' => 'Source',
+        'files' => array('markitup/jquery.markitup.js'),
+      ),
+      'pack' => array(
+        'title' => 'Packed',
+        'files' => array('markitup/jquery.markitup.pack.js'),
+      ),
+    ),
+    'install note callback' => 'wysiwyg_markitup_wiki_install_note',
+    'version callback' => 'wysiwyg_markitup_wiki_version',
+    'themes callback' => 'wysiwyg_markitup_wiki_themes',
+    'settings form callback' => 'wysiwyg_markitup_wiki_settings_form',
+    'settings callback' => 'wysiwyg_markitup_wiki_settings',
+    'plugin callback' => 'wysiwyg_markitup_plugins',
+    'versions' => array(
+      '1.1.5' => array(
+        'js files' => array('markitup.js'),
+      ),
+    ),
+  );
+  return $editor;
+}
+
+/**
+ * Return an install note.
+ */
+function wysiwyg_markitup_wiki_install_note() {
+  return '<p class="warning">' . t('Only rename the extracted folder from "latest" to "markitup", no other changes needed.') . '</p>';
+}
+
+/**
+ * Detect editor version.
+ *
+ * @param $editor
+ *   An array containing editor properties as returned from hook_editor().
+ *
+ * @return
+ *   The installed editor version.
+ */
+function wysiwyg_markitup_wiki_version($editor) {
+  // Changelog was in markitup/markitup/readme.txt <= 1.1.5.
+  $changelog = $editor['library path'] . '/markitup/readme.txt';
+  if (!file_exists($changelog)) {
+    // Changelog was moved up to markitup/CHANGELOG.md after 1.1.5.
+    $changelog = $editor['library path'] . '/CHANGELOG.md';
+    if (!file_exists($changelog)) {
+      return;
+    }
+  }
+  $changelog = fopen($changelog, 'r');
+  $line = fgets($changelog);
+  if (preg_match('@([0-9\.]+)@', $line, $version)) {
+    fclose($changelog);
+    return $version[1];
+  }
+  fclose($changelog);
+}
+
+/**
+ * Determine available editor themes or check/reset a given one.
+ *
+ * @param $editor
+ *   A processed hook_editor() array of editor properties.
+ * @param $profile
+ *   A wysiwyg editor profile.
+ *
+ * @return
+ *   An array of theme names. The first returned name should be the default
+ *   theme name.
+ */
+function wysiwyg_markitup_wiki_themes($editor, $profile) {
+  return array('simple', 'markitup');
+}
+
+/**
+ * Enhances the editor profile settings form for markItUp.
+ */
+function wysiwyg_markitup_wiki_settings_form(&$form, &$form_state) {
+  $form['basic']['language']['#access'] = FALSE;
+  $form['css']['#access'] = FALSE;
+}
+
+/**
+ * Return runtime editor settings for a given wysiwyg profile.
+ *
+ * @param $editor
+ *   A processed hook_editor() array of editor properties.
+ * @param $config
+ *   An array containing wysiwyg editor profile settings.
+ * @param $theme
+ *   The name of a theme/GUI/skin to use.
+ *
+ * @return
+ *   A settings array to be populated in
+ *   Drupal.settings.wysiwyg.configs.{editor}
+ */
+function wysiwyg_markitup_wiki_settings($editor, $config, $theme) {
+  drupal_add_css($editor['library path'] . '/markitup/skins/' . $theme . '/style.css', array(
+    // Specify an alternate basename; otherwise, style.css would override a
+    // commonly used style.css file of the theme.
+    'basename' => 'markitup.' . $theme . '.style.css',
+    'group' => CSS_THEME,
+  ));
+
+  $settings = array(
+    'root' => base_path() . $editor['library path'] . '/markitup/',
+    'nameSpace' => $theme,
+    'markupSet' => array(),
+  );
+
+  // Add configured buttons or all available.
+  $default_buttons = array(
+    'h1' => array (
+      'name' => 'Heading 1',
+      'key' => '1',
+      'openWith' => '== ',
+      'closeWith' => ' ==',
+      'placeHolder' => 'Your title here...',
+      'className' => 'markitup-h1',
+    ),
+    'h2' => array (
+      'name' => 'Heading 2',
+      'key' => '2',
+      'openWith' => '=== ',
+      'closeWith' => ' ===',
+      'placeHolder' => 'Your title here...',
+      'className' => 'markitup-h2',
+    ),
+    'h3' => array (
+      'name' => 'Heading 3',
+      'key' => '3',
+      'openWith' => '==== ',
+      'closeWith' => ' ====',
+      'placeHolder' => 'Your title here...',
+      'className' => 'markitup-h3',
+    ),
+    'h4' => array (
+      'name' => 'Heading 4',
+      'key' => '4',
+      'openWith' => '===== ',
+      'closeWith' => ' =====',
+      'placeHolder' => 'Your title here...',
+      'className' => 'markitup-h4',
+    ),
+    'h5' => array (
+      'name' => 'Heading 5',
+      'key' => '5',
+      'openWith' => '====== ',
+      'closeWith' => ' ======',
+      'placeHolder' => 'Your title here...',
+      'className' => 'markitup-h5',
+    ),
+    'bold' => array (
+      'name' => 'Bold',
+      'key' => 'B',
+      'openWith' => '\'\'\'',
+      'closeWith' => '\'\'\'',
+      'className' => 'markitup-bold',
+    ),
+    'italic' => array (
+      'name' => 'Italic',
+      'key' => 'I',
+      'openWith' => '\'\'',
+      'closeWith' => '\'\'',
+      'className' => 'markitup-italic',
+    ),
+    'strike' => array (
+      'name' => 'Strike through',
+      'key' => 'S',
+      'openWith' => '<s>',
+      'closeWith' => '</s>',
+      'className' => 'markitup-strike',
+    ),
+    'ul' => array (
+      'name' => 'Bulleted list',
+      'openWith' => '(!(* |!|*)!)',
+      'className' => 'markitup-ul',
+    ),
+    'ol' => array (
+      'name' => 'Numeric list',
+      'openWith' => '(!(# |!|#)!)',
+      'className' => 'markitup-ol',
+    ),
+    'image' => array (
+      'name' => 'Picture',
+      'key' => 'P',
+      'replaceWith' => '[[Image:[![Url:!:http://]!]|[![name]!]]]',
+      'className' => 'markitup-image',
+    ),
+    'link' => array (
+      'name' => 'Link',
+      'key' => 'L',
+      'openWith' => '[[[![Link]!] ',
+      'closeWith' => ']]',
+      'placeHolder' => 'Your text to link here...',
+      'className' => 'markitup-link',
+    ),
+    // @todo
+    // 'cleanup' => array('name' => t('Clean-up'), 'className' => 'markitup-cleanup', 'replaceWith' => 'function(markitup) { return markitup.selection.replace(/<(.*?)>/g, "") }'),
+    'preview' => array(
+      'name' => t('Preview'),
+      'className' => 'markitup-preview',
+      'call' => 'preview',
+    ),
+  );
+  $settings['markupSet'] = array();
+  if (!empty($config['buttons'])) {
+    foreach ($config['buttons'] as $plugin) {
+      foreach ($plugin as $button => $enabled) {
+        if (isset($default_buttons[$button])) {
+          $settings['markupSet'][$button] = $default_buttons[$button];
+        }
+      }
+    }
+  }
+dpm($settings);
+  return $settings;
+}
+
+/**
+ * Return internal plugins for this editor; semi-implementation of hook_wysiwyg_plugin().
+ */
+function wysiwyg_markitup_wiki_plugins($editor) {
+  return array(
+    'default' => array(
+      'buttons' => array(
+        'bold' => t('Bold'), 'italic' => t('Italic'),
+        'strike' => t('Strike-through'),
+        'image' => t('Image'),
+        'link' => t('Link'),
+        'h1' => t('heading 1'),
+        'h2' => t('heading 2'),
+        'h3' => t('heading 3'),
+        'h4' => t('heading 4'),
+        'h5' => t('heading 5'),
+        'ol' => t('ordered list'),
+        'ul' => t('unordered list'),
+        'preview' => t('Preview'),
+      ),
+      'internal' => TRUE,
+    ),
+  );
+}

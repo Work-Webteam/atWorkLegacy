@@ -1,0 +1,193 @@
+<?php
+
+/**
+ * Implements hook_block_info().
+ * A block that will hold a list that will replace the main menu - all controlled by jquery
+ */
+function atwork_mobile_block_info(){
+  //dpm($blocks);
+  $blocks = array();
+  $blocks['atwork_mobile_menu_block'] = array(
+    'info' => t("Atwork Mobile Menu Block"),
+    );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function atwork_mobile_block_view($delta = '') {
+  $block = array();
+
+  switch($delta) {
+    case ('atwork_mobile_menu_block'):
+      $block['subject'] = '';
+      $block['content'] = _atwork_menu_block_builder();
+      // Add in block js
+      drupal_add_js(drupal_get_path('module', 'atwork_mobile').'/atwork_mobile.js');
+      break;
+  }
+  return $block;
+}
+
+/**
+ * Helper function to seperate out the actual menue list
+ *
+ */
+
+function _atwork_menu_block_builder(){
+  // Lets build a well-id'd menu from unordered lists
+  $output = <<<EOT
+  <div id="full_menu"> <i class="fa fa-bars" aria-hidden="true"></i>
+  <ul id="atwork_menu">
+    <li id = "atwork_menu_item_home" class="atwork_menu_top_level"><a href="/"> <span class="menu-title">Home</span> </a></li>
+    <li id = "atwork_menu_item_tool" class="atwork_menu_top_level"><span class="menu-title"><i class="fa fa-plus" aria-hidden="true"></i> Top Tools</span>
+    	<ul id="atwork_menu_item_tool_menu">
+        	<li id = "atwork_menu_item_account_services" class="atwork_menu_nested"><a href="https://cassp.gov.bc.ca/SitePages/Home.aspx">Corporate Accounting Services</a></li>
+            <li id = "atwork_menu_item_store" class="atwork_menu_nested"><a href="https://gww.gov.bc.ca/tools/online-store">Employee Discount Store</a></li>
+            <li id = "atwork_menu_item_access_home" class="atwork_menu_nested"><a href="https://timepayhome.gov.bc.ca/" target="_blank">Employee Self Service: Access From Home</a></li>
+            <li id = "atwork_menu_item_access_work" class="atwork_menu_nested"><a href="https://timepay.gov.bc.ca/" target="_blank">Employee Self Service: Access From Work</a></li>
+            <li id = "atwork_menu_item_myhr" class="atwork_menu_nested"><a href="http://www2.gov.bc.ca/myhr/article.page?ContentID=620ede5d-b0cf-6c2e-fe75-4cd557824566" target="_blank">Job Opportunities</a></li>
+            <li id = "atwork_menu_item_learning" class="atwork_menu_nested"><a href="https://gww.gov.bc.ca/groups/learning-bc-public-service">Learning</a></li>
+            <li id = "atwork_menu_item_myperformance" class="atwork_menu_nested"><a href="https://employee.gov.bc.ca/epmnew/" target="_blank">MyPerformance Profile</a></li>
+            <li id = "atwork_menu_item_tech_support" class="atwork_menu_nested"><a href="https://77000.gov.bc.ca" target="_blank">Technology Support | Ph 250-387-7000 / 1-866-660-0811</a></li>
+        </ul>
+    </li>
+    <li id = "atwork_menu_item_news" class="atwork_menu_top_level"><span class="menu-title"><i class="fa fa-plus" aria-hidden="true"></i> News</span>
+      <ul id="atwork_menu_item_news_menu">
+        <li id = "atwork_menu_item_article" class="atwork_menu_nested"><a href="/news">Article</a></li>
+        <li id = "atwork_menu_item_executive_messages" class="atwork_menu_nested"><a href="/executive-messages"> Executive Messages </a></li>
+        <li id = "atwork_menu_item_newsletters" class="atwork_menu_nested"><a href="/newsletters"> Newsletters </a></li>
+        <li id = "atwork_menu_item_videos" class = "atwork_menu_nested"><a href = "/videos"> Videos </a></li>
+        <li id = "atwork_menu_item_series" class="atwork_menu_nested_header"> <span class="menu-sub-title"><i class="fa fa-plus" aria-hidden="true"></i> Series</span>
+          <ul id="atwork_menu_item_series_menu">
+            <li  id="atwork_menu_item_briefing_note" class="atwork_menu_nested"><a href="/series/briefing-note">Briefing Note</a></li>
+            <li  id="atwork_menu_item_etc" class="atwork_menu_nested"><a href="/series/etc-talks">ETC. Talks</a></li>
+            <li id="atwork_menu_item_leadership_series" class="atwork_menu_nested"><a href = "/series/leadership">Leadership Series </a></li>
+            <li id="atwork_menu_item_supervisor_series" class="atwork_menu_nested"><a href = "/series/supervisor">Supervisor Series </a></li>
+            <li id="atwork_menu_item_take_2" class="atwork_menu_nested"><a href="/series/take-2">Take 2</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li id="atwork_menu_item_about_the_bc_public_service" class="atwork_menu_top_level"><span class="menu-title"><i class="fa fa-plus" aria-hidden="true"></i> About the BC Public Service</span>
+      <ul id="atwork_menu_item_abps_menu">
+        <li id = "atwork_menu_item_who_we_are" class="atwork_menu_nested_header"><span class="menu-sub-title"> <i class="fa fa-plus" aria-hidden="true"></i> Who We Are</span>
+          <ul id="atwork_menu_item_who_we_are_menu">
+            <li id="atwork_menu_item_our_organization" class="atwork_menu_nested"><a href="/our-organization">Our Organization</a></li>
+            <li id="atwork_menu_item_our_values" class="atwork_menu_nested"><a href="/org/bcps-values">Our Values</a></li>
+            <li id="atwork_menu_item_standards_of_conduct" class="atwork_menu_nested"><a href="http://www2.gov.bc.ca/gov/content/careers-myhr/managers-supervisors/employee-labour-relations/conditions-agreements/policy#standards" target="_blank">Standards if Conduct</a></li>
+            <li id="atwork_menu_item_community_involvement" class="atwork_menu_nested"><a href="/community-involvement">Community Involvement</a></li>
+            <li id="atwork_menu_item_where_ideas_work" class="atwork_menu_nested"><a href="/org/where-ideas-work-brand">Where Ideas Work</a></li>
+            <li id="atwork_menu_item_award_winning_employer" class="atwork_menu_nested"><a href="/org/award-winning-employer">Award-Winning Employer</a></li>
+            <li id="atwork_menu_item_core_policies" class="atwork_menu_nested"><a href="/reference/core-government-policies">Core Policies</a></li>
+            <li id="atwork_menu_item_gov_101" class="atwork_menu_nested"><a href="/reference/gov101">Gov 101</a></li>
+          </ul>
+        </li>
+        <li id="atwork_menu_item_corporate_strategies" class="atwork_menu_nested_header"> <span class="menu-sub-title"><i class="fa fa-plus" aria-hidden="true"></i> Corporate Strategies</span>
+          <ul id="atwork_menu_item_corporate_strategies_menu">
+            <li id="atwork_menu_item_corporate_hr_plan" class="atwork_menu_nested"><a href="/org/hr-plan">Corporate HR Plan:Being the Best</a></li>
+            <li id="atwork_menu_item_diversity" class="atwork_menu_nested"><a href="/org/diversity">Diversity</a></li>
+            <li id="atwork_menu_item_gov_2_0" class="atwork_menu_nested"><a href ="/gov20">Gov 2.0</a></li>
+            <li id="atwork_menu_item_leading_workplace_strategies" class="atwork_menu_nested"><a href="/lws">Leading Workplace Strategies</a></li>
+            <li id="atwork_menu_item_leanbc" class="atwork_menu_nested"><a href="/leanbc">LeanBC</a></li>
+            <li id="atwork_menu_item_learning_strategy" class="atwork_nested"><a href="/org/learning-strategy">Learning</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li id="atwork_menu_item_our_community" class="atwork_menu_top_level"><span class="menu-title"><i class="fa fa-plus" aria-hidden="true"></i> Our Community</span>
+      <ul id="atwork_menu_item_our_community_menu">
+        <li id="atwork_menu_item_employee_profiles" class="atwork_menu_nested"><a href="/employees">Employee Profiles</a></li>
+        <li id="atwork_menu_item_executive_profiles" class="atwork_menu_nested"><a href="/executive-team">Executive Profiles</a></li>
+        <li id="atwork_menu_item_groups" class="atwork_menu_nested"><a href="/groups">Groups</a></li>
+        <li id="atwork_menu_item_blogs" class="atwork_menu_nested"><a href="/blogs">Blogs</a></li>
+        <li id="atwork_menu_item_polls" class="atwork_menu_nested"><a href="/polls">Polls</a></li>
+        <li id="atwork_menu_item_photo_galleries" class="atwork_menu_nested"><a href="/galleries">Photo Galleries</a></li>
+        <li id="atwork_menu_item_events" class="atwork_menu_nested"><a href="/announcements">Events</a></li>
+        <li id="atwork_menu_item_discussion_forum" class="atwork_menu_nested"><a href="/forum">Discussion Forum</a></li>
+        <!--<li id="atwork_menu_item_classifieds" class="atwork_menu_nested"><a href="/classifieds">Classifieds</a></li>--> 
+        <!--<li id="atwork_menu_item_wikilumbia" class="atwork_menu_nested"><a href="/wiki">Wikilumbia</a></li>-->
+      </ul>
+    </li>
+    <li id="atwork_menu_item_engagement_recognition" class="atwork_menu_top_level"><span class="menu-title"><i class="fa fa-plus" aria-hidden="true"></i> Engagement &amp; Recognition</span>
+      <ul id="atwork_menu_item_engagement_recognition_menu">
+        <li id="atwork_menu_item_corporate_programs" class="atwork_menu_nested_header"> <span class="menu-sub-title"><i class="fa fa-plus" aria-hidden="true"></i> Corporate Programs</span>
+          <ul id="atwork_menu_item_corporate_programs_menu">
+            <li id="atwork_menu_item_work_environment_survey" class="atwork_menu_nested"><a href="/wes">Work Environment Survey</a></li>
+            <li id="atwork_menu_item_premiers_awards" class="atwork_menu_nested"><a href="/career/premiers-awards">Premier's Awards</a></li>
+            <li id="atwork_menu_item_long_servie_awards" class="atwork_menu_nested"><a href="/career/long-service-awards">Long Service Awards</a></li>
+            <li id="atwork_menu_item_service_pins" class="atwork_menu_nested"><a href="/career/service-pins">Service Pins</a></li>
+            <li id="atwork_menu_item_top_work_units" class="atwork_menu_nested"><a href="/top-work-units">Top Work Units</a></li>
+            <li id="atwork_menu_item_10_best_places_to_work" class="atwork_menu_nested"><a href="/hr/10-best-places=work">10 Best Places to Work</a></li>
+            <li id="atwork_menu_item_public_service_week" class="atwork_menu_nested"><a href="/public-service-week">Public Service Week</a></li>
+          </ul>
+        </li>
+        <li id="atwork_menu_item_learning_from_the_best" class="atwork_menu_nested_header"> <span class="menu-sub-title"><i class="fa fa-plus" aria-hidden="true"></i> Learning from the Best</span>
+          <ul id="atwork_menu_item_learning_from_the_best_menu">
+            <li id="atwork_menu_item_about_learning_from_the_best" class="atwork_menu_nested"><a href="/learning-from-the-best"> About Learning from the Best</a></li>
+            <li id="atwork_menu_item_region_to_region" class="atwork_menu_nested"><a href="/region-to-region"> Region to Region </a></li>
+            <li id="atwork_menu_item_leadership_series_2" class="atwork_menu_nested"><a href="/series/leadership">Leadership Series</a></li>
+            <li id="atwork_menu_item_etc_talks" class="atwork_menu_nested"><a href="/series/etc-talks">ETC. Talks</a></li>
+            <li id="atwork_menu_item_award_winning_employees" class="atwork_menu_nested"><a href="/org/award-winning-employees">Award-Winning Employees</a></li>
+            <li id="atwork_menu_item_spotlight" class="atwork_menu_nested"><a href="/spotlight">Spotlight</a></li>
+          </ul>
+        </li>
+        <li id="atwork_menu_item_resources" class="atwork_menu_nested_header"><span class="menu-sub-title"><i class="fa fa-plus" aria-hidden="true"></i> Resources</span>
+          <ul id="atwork_menu_item_resources_menu">
+            <li id="atwork_menu_item_ecards" class="atwork_menu_nested"><a href="/ecards">Ecards</a></li>
+            <li id="atwork_menu_item_recognition_contacts" class="atwork_menu_nested"><a href="/career/employee-appreciation/recognition-contacts">Recognition Contacts</a></li>
+            <li id="atwork_menu_item_employee_appreciation" class="atwork_menu_nested"><a href="/career/employee-appreciation">Employee Appreciation</a></li>
+            <li id="atwork_menu_item_customizable_certificates" class="atwork_menu_nested"><a href="/career/employee-appreciation/forms">Customizable Certificates</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li id="atwork_menu_item_tools_resources" class="atwork_menu_top_level"> <span class="menu-title"><i class="fa fa-plus" aria-hidden="true"></i> Tools &amp; Resources</span>
+      <ul id="atwork_menu_item_tools_resources_menu">
+        <li id="atwork_menu_item_business" class="atwork_menu_nested_header"><span class="menu-sub-title"><i class="fa fa-plus" aria-hidden="true"></i> Business</span>
+          <ul id="atwork_menu_item_business_menu">
+            <li id="atwork_menu_item_corporate_accounting_services" class="atwork_menu_nested"><a href="https://cassp.gov.bc.ca/SitePages/Home.aspx" target="_blank">Corporate Accounting Services</a></li>
+            <li id="atwork_menu_item_financial_forms" class="atwork_menu_nested"><a href="http://gww.fin.gov.bc.ca/menu/forms_alpha.stm" target="_blank">Financial Forms</a></li>
+            <li id="atwork_menu_item_iexpenses" class="atwork_menu_nested"><a href="https://cassp.gov.bc.ca/solutions/Pages/iExpenses.aspx" target="_blank">iExpenses</a></li>
+            <li id="atwork_menu_item_bc_bid_resources" class="atwork_menu_nested"><a href="http://www.gov.bc.ca/BCBidResources" target="_blank">BC Bid Resources</a></li>
+          </ul>
+        </li>
+        <li id="atwork_menu_item_human_resources" class="atwork_menu_nested_header"><span class="menu-sub-title"><i class="fa fa-plus" aria-hidden="true"></i> Human Resources</span>
+          <ul id="atwork_menu_item_human_resources_menu">
+            <li id="atwork_menu_item_employee_self_service_home" class="atwork_menu_nested"><a href="https://timepayhome.gov.bc.ca/">Employee Self Service - Home</a></li>
+            <li id="atwork_menu_item_employee_self_service_work" class="atwork_menu_nested"><a href="https://timepay.gov.bc.ca/">Employee Self Service - Work</a></li>
+            <li id="atwork_menu_item_hr_forms" class="atwork_menu_nested"><a href="http://www2.gov.bc.ca/myhr/forms.page">Hr Forms</a></li>
+            <li id="atwork_menu_item_learning_system" class="atwork_menu_nested"><a href="https://learning.gov.bc.ca/psp/CHIPSPLM/EMPLOYEE/ELM/h/?tab=DEFAULT">Learning System</a></li>
+            <li id="atwork_menu_item_myperformance_profile" class="atwork_menu_nested"><a href="http://employee.gov.bc.ca/epm/">Learning System</a></li>
+            <li id="atwork_menu_item_pacific_blue_cross" class="atwork_menu_nested"><a href="https://service.pac.bluecross.ca/acesweb/pages/Authentication/Signin.aspx?userType=1">Pacific Blue Cross</a></li>
+          </ul>
+        </li>
+        <li id="atwork_menu_item_technology" class="atwork_menu_nested_header"><span class="menu-sub-title"><i class="fa fa-plus" aria-hidden="true"></i> Technology</span>
+          <ul id="atwork_menu_item_technology_menu">
+            <li id="atwork_menu_item_istore" class="atwork_menu_nested"><a href="https://ssbc-client.gov.bc.ca/order/istore.htm">iStore</a></li>
+            <li id="atwork_menu_item_summer" class="atwork_menu_nested"><a href="https://summer.gov.bc.ca/">Summer Webmail</a></li>
+            <li id="atwork_menu_item_technology_support" class="atwork_menu_nested"><a href="https://77000.gov.bc.ca/">Technology Support</a></li>
+            <li id="atwork_menu_item_blackberry_help" class="atwork_menu_nested"><a href="https://ssbc-client.gov.bc.ca/MES_BlackBerry/default.htm">Blackberry Help</a></li>
+            <li id="atwork_menu_item_iphone_help" class="atwork_menu_nested"><a href="https://ssbc-client.gov.bc.ca/MES_iOS/default.htm">iPhone Help</a></li>
+            <li id="atwork_menu_lync_help" class="atwork_menu_nested"><a href="https://connect.gov.bc.ca/SitePages/Home.aspx" target="blank">Lync Help</a></li>
+            <li id="atwork_menu_outlook_help" class="atwork_menu_nested"><a href="https://ssbc-client.gov.bc.ca/Exchange/Exchangedefault.htm" target="_blank">Outlook/Exchange Help</a></li>
+          </ul>
+        </li>
+        <li id="atwork_menu_item_other" class="atwork_menu_nested_header"><span class="menu-sub-title"><i class="fa fa-plus" aria-hidden="true"></i> Other</span>
+          <ul id="atwork_menu_item_other_menu">
+            <li id="atwork_menu_item_records_management" class="atwork_menu_nested"><a href="http://www2.gov.bc.ca/gov/content/governments/services-for-government/information-management-technology/records-management" target="_blank">Records Management</a></li>
+            <li id="atwork_menu_item_bc_administrative_portal" class="atwork_menu_nested"><a href="https://spc-csnr.gov.bc.ca/BCAP/SitePages/BCAP%20Home.aspx" target="_blank">BC Administrative Portal</a></li>
+            <li id="atwork_menu_item_bc_government_directory" class="atwork_menu_nested"><a href="dir.gov.bc.ca" target="_blank">BC Government Directory</a></li>
+            <li  id="atwork_menu_item_cabinet_operations_templates" class="atwork_menu_nested"><a href="http://gww.cabops.gov.bc.ca/templates/" target="_blank">Caninet Operations Templates</a></li>
+            <li id="atwork_menu_item_project_management_toolbox" class="atwork_menu_nested"><a href="https://fin.gov.bc.ca/PROCoP/Shared%20Documents/Forms/AllItems.aspx" target="_blank">Project Managesment Toolbox</a></li>
+            <li id="atwork_menu_item_employee_discount" class="atwork_menu_nested"><a href="/tools/online-store">Employee Discount Store</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+EOT;
+  return $output;
+}

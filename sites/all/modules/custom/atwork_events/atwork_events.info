@@ -1,0 +1,4 @@
+name = Atwork Events
+description = Code relating to events
+package = Atwork
+core = 7.x

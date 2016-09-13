@@ -1,0 +1,409 @@
+<?php
+
+/**
+ * Implements hook_views_api()
+ */
+
+function atwork_qa_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'atwork_qa'),
+  );
+}
+
+
+
+
+/*
+ * Helper function determines if this answer was marked correct
+ */
+function _atwork_qa_question_answered($node) {
+
+  static $return;
+
+  if (isset($return)) {
+    return $return;
+  }
+
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'answer')
+    ->propertyCondition('status', 1)
+    ->fieldCondition('field_answer_question', 'target_id', $node->nid)
+    ->fieldCondition('field_answer_best', 'value', 1);
+
+  $result = $query->execute();
+  if (isset($result['node'])) {
+    $return = key($result['node']);
+  }
+  else {
+    $return = 0;
+  }
+  return $return;
+}
+
+
+/**
+ * Implements hook_menu();
+ */
+function atwork_qa_menu() {
+  $items['node/%node/mark-as-best'] = array(
+    'title' => 'Mark as best answer',
+    'type' => MENU_CALLBACK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('atwork_qa_mark_confirm', 1),
+    'access callback' => 'atwork_qa_mark_access',
+    'access arguments' => array(1),
+  );
+  $items['node/%node/unmark-as-best'] = array(
+    'title' => 'Unmark as best answer',
+    'type' => MENU_CALLBACK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('atwork_qa_unmark_confirm', 1),
+    'access callback' => 'atwork_qa_mark_access',
+    'access arguments' => array(1),
+  );
+
+  return $items;
+}
+
+/*
+ * Access callback
+ *
+ * only allow the question poster to mark correct answer
+ */
+function atwork_qa_mark_access($node) {
+  if (!$node->status || $node->type != 'answer') {
+    return FALSE;
+  }
+
+  global $user;
+  $question_nid = field_get_items('node', $node, 'field_answer_question');
+
+  if ($question_nid) {
+    $question = node_load($question_nid[0]['target_id']);
+
+    if ($question && $question->uid == $user->uid) {
+      return TRUE;
+    }
+  }
+
+  return FALSE;
+}
+
+/**
+ * Menu callback -- ask for confirmation of marking best answer
+ */
+function atwork_qa_mark_confirm($form, &$form_state, $node) {
+  $form['#node'] = $node;
+  $form['nid'] = array('#type' => 'value', '#value' => $node->nid);
+
+  $body = field_get_items('node', $node, 'body');
+
+  return confirm_form($form,
+    t('Are you sure you want to mark this answer as best?', array('%title' => $node->title)),
+    'node/' . $node->nid,
+    check_markup($body[0]['value'], $body[0]['format']),
+    t('Mark'),
+    t('Cancel')
+  );
+}
+
+/**
+ * Menu callback -- ask for confirmation of unmarking best answer
+ */
+function atwork_qa_unmark_confirm($form, &$form_state, $node) {
+  $form['#node'] = $node;
+  $form['nid'] = array('#type' => 'value', '#value' => $node->nid);
+
+  $body = field_get_items('node', $node, 'body');
+
+  return confirm_form($form,
+    t('Are you sure you want to unmark this answer as best?', array('%title' => $node->title)),
+    'node/' . $node->nid,
+    check_markup($body[0]['value'], $body[0]['format']),
+    t('Unmark'),
+    t('Cancel')
+  );
+}
+
+/*
+ * Submit callback
+ *
+ * mark answer as correct
+ */
+function atwork_qa_mark_confirm_submit($form, &$form_state) {
+  if ($form_state['values']['confirm']) {
+    $node = node_load($form_state['values']['nid']);
+    $node->field_answer_best[$node->language][0]['value'] = 1;
+    node_save($node);
+
+    drupal_set_message(t('Answer has been marked as best.'));
+  }
+}
+
+/*
+ * Submit callback
+ *
+ * unmark answer as correct
+ */
+function atwork_qa_unmark_confirm_submit($form, &$form_state) {
+  if ($form_state['values']['confirm']) {
+    $node = node_load($form_state['values']['nid']);
+    $node->field_answer_best[$node->language][0]['value'] = 0;
+    node_save($node);
+
+    drupal_set_message(t('Answer has been unmarked as best.'));
+  }
+}
+
+/**
+ * Implements hook_node_view();
+ */
+function atwork_qa_node_view($node, $view_mode, $langcode) {
+  if ($node->type == 'question' && $view_mode == 'full') {
+    $node->content['atwork_add_answer'] = array(
+      '#theme' => 'links',
+      '#attributes' => array(
+        'class' => array('links', 'inline'),
+      ),
+      '#links' => array(
+        'add_answer' => array(
+          'title' => t('Provide an answer to this question.'),
+          'href' => 'node/add/answer',
+          'attributes' => array(
+            'title' => t('Provide an answer to this question.'),
+          ),
+          'query' => array(
+            'field_answer_question' => $node->nid,
+            'destination' => 'node/' . $node->nid,
+          ),
+        ),
+      ),
+    );
+  }
+
+  if ($node->type == 'answer' && $view_mode == 'full') {
+    global $user;
+
+    $question_nid = field_get_items('node', $node, 'field_answer_question');
+
+    if ($question_nid) {
+      $question = node_load($question_nid[0]['target_id']);
+
+      // redirect to question if this is a node-page
+      if (node_is_page($node)) {
+        drupal_goto('node/' . $question->nid);
+      }
+
+      // hide title field
+      $node->title = '';
+
+      // Question owner view with link to unmark
+      if ($question) {
+        // is this the best answer?
+        $best_answer = field_get_items('node', $node, 'field_answer_best');
+        if ($best_answer && $best_answer[0]['value'] ) {
+          // unmark as best answer link
+          $node->content['atwork_unmark_answer'] = array(
+            '#prefix' => '<span class="best-answer">Best Answer ' . _atwork_fa('star') . '</span>',
+            '#theme' => 'links',
+            '#attributes' => array(
+              'class' => array('links', 'inline'),
+            ),
+            '#links' => array(
+              'unmark_answer' => array(
+                'title' => t('Unmark this as the best answer.'),
+                'href' => 'node/' . $node->nid . '/unmark-as-best',
+                'attributes' => array(
+                  'title' => t('Unmark this as the best answer.'),
+                ),
+                'query' => array(
+                  'destination' => 'node/' . $question->nid,
+                ),
+              ),
+            ),
+          );
+        }
+        else {
+          // best answer marked on different answer?
+          if (!_atwork_qa_question_answered($question) && $user->uid == $question->uid) {
+            // mark as best answer link
+
+            $node->content['atwork_mark_answer'] = array(
+              '#theme' => 'links',
+              '#attributes' => array(
+                'class' => array('links', 'inline'),
+              ),
+              '#links' => array(
+                'mark_answer' => array(
+                  'title' => t('Mark this as the best answer.'),
+                  'href' => 'node/' . $node->nid . '/mark-as-best',
+                  'attributes' => array(
+                    'title' => t('Mark this as the best answer.'),
+                  ),
+                  'query' => array(
+                    'destination' => 'node/' . $question->nid,
+                  ),
+                ),
+              ),
+            );
+          }
+          else {
+            // nothing: no link until best answer is unmarked?
+          }
+        }
+        if( isset($node->content['atwork_unmark_answer']) && $node->content['atwork_unmark_answer'] && $question->uid != $user->uid ) {
+         drupal_add_css('.unmark_answer.first.last {display: none;}',  $option['type'] = 'inline');
+        }
+      }
+    }
+  }
+    // Fix to allow comments to show on full content blocks embedded in full content view page. This is a work around for core comment module lines 710 - 712
+  if ($node->type == 'answer') {
+    $node->content['comments'] = comment_node_page_additions($node);
+  }
+}
+
+
+
+/**
+ * Implements hook_form_FORM_ID_alter();
+ *
+ * show the question when giving an answer
+ */
+function atwork_qa_form_answer_node_form_alter(&$form, &$form_state, $form_id) {
+  $form['field_answer_best']['#access'] = FALSE;
+  $form['actions']['preview']['#access'] = FALSE;
+  if (isset($_GET['field_answer_question'])) {
+    $question = node_load($_GET['field_answer_question']);
+    if ($question) {
+
+      $body = field_get_items('node', $question, 'body');
+
+      $form['question'] = array(
+        '#markup' => '<h2>Question: ' . $question->title . '</h2>' . check_markup($body[0]['value'], $body[0]['format']),
+        '#weight' => -1,
+      );
+    }
+  }
+
+  if($form_id == 'answer_node_form'){
+    //$form['actions']['submit']['#submit'][0] = 'atwork_qa_node_form_submit';
+    // See if answer is related to a question from a group
+    if ($question){
+      if(isset($question->og_group_ref[$question->language][0]['target_id']) && $question->og_group_ref[$question->language][0]['target_id']){
+        $gid = $question->og_group_ref[$question->language][0]['target_id'];
+        $group = node_load($gid);
+        $og_context = og_context('node', $group);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter();
+ */
+function atwork_qa_form_question_node_form_alter(&$form, &$form_state, $form_id) {
+  $form['field_question_num_answers']['#access'] = FALSE;
+  $form['title']['#title'] = 'Heading';
+  $form['actions']['delete']['#access'] = FALSE;
+  $question_instructions = variable_get('atwork_instructions_question');
+  $form['title']['#prefix'] = $question_instructions['value'];
+  if(!_atwork_is_admin()) {
+    $form['og_group_ref']['#access'] = FALSE;
+  }
+}
+
+/*
+ * Helper function that updates the field_question_num_answers field on a question
+ *
+ * Helps with rendering as well as provides subscription updates to question
+ */
+function atwork_qa_reset_num($node, $op) {
+  $question_nid = field_get_items('node', $node, 'field_answer_question');
+
+  if ($question_nid) {
+    $question = node_load($question_nid[0]['target_id']);
+    if ($question) {
+      $result = db_select('field_data_field_answer_question', 'f')
+        ->fields('f', array('field_answer_question_target_id'))
+        ->condition('f.field_answer_question_target_id', $question->nid)
+        ->condition('f.entity_id', $node->nid, '!=')
+        ->execute();
+
+      if ($op == 'insert') {
+        $num_answers = $result->rowCount() + 1;
+      }
+      elseif ($op == 'delete') {
+        $num_answers = $result->rowCount() - 1;
+      }
+
+      $question->field_question_num_answers[$question->language][0]['value'] = $num_answers;
+      node_save($question);
+    }
+  }
+}
+
+/**
+ * Implements hook_node_insert();
+ */
+function atwork_qa_node_insert($node) {
+  if ($node->type != 'answer') {
+    return;
+  }
+
+  atwork_qa_reset_num($node, 'insert');
+}
+
+/**
+ * Implements hook_node_delete();
+ */
+function atwork_qa_node_delete($node) {
+  if ($node->type != 'answer') {
+    return;
+  }
+
+  atwork_qa_reset_num($node, 'delete');
+}
+
+/*
+ * Implementation of hook_views_pre_render()
+ *
+ * Remove exposed filter if no comments posted
+ */
+function atwork_qa_views_pre_render(&$view) {
+  // Remove the double printed Answer from message
+  if ($view->name == 'question_and_answers' && $view->current_display == 'block_answers') {
+    // Want to remove the double use of Answer in message on node creation.
+    if(isset($_SESSION['messages']['status']) && $_SESSION['messages']['status']) {
+      foreach($_SESSION['messages']['status'] as $key => $value) {
+        $prefix = 'Answer';
+        $updated_message = preg_replace('/^' . preg_quote($prefix, '/') . '/', '', $value);
+        $_SESSION['messages']['status'][$key] = $updated_message;
+        return;
+      }
+    }
+
+    //dpm($view->relationship['votingapi_cache']);
+
+    if (isset($view->args[0])) {
+      $question = node_load($view->args[0]);
+
+      if ($question) {
+        $num_answers = field_get_items('node', $question, 'field_question_num_answers');
+        if ($num_answers) {
+          $view->build_info['title'] = format_plural($num_answers[0]['value'], '1 Answer', '@count Answers');
+        }
+      }
+    }
+  }
+}
+
+function atwork_qa_rate_widget_alter(&$widget, $values) {
+  //dpm($widget);
+  //print_r($widget);
+  //print_r($values);
+  $widget->css = "sites/all/themes/atwork_zen/css/number_up_down.css";
+}
+

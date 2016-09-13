@@ -1,0 +1,150 @@
+<?php
+
+/*
+ * Helper function that checks an email domain
+ * against a list of internal domains
+ */
+function _atwork_valid_email($email) {
+  $internal_addresses = variable_get('atwork_mail_internal_addresses',array());
+  
+  if (in_array(substr_replace(strtolower($email), '', 0, strpos($email, '@')), $internal_addresses)) {
+    return TRUE;
+  }
+  
+  return FALSE;
+}
+
+/*
+ * Helper function
+ * 
+ * Return an array of email addresses from a textarea
+ */
+function _atwork_get_addresses($string) {
+  $string = str_replace(array("\r\n", "\n", "\r"), ',', trim($string));
+  $string = str_replace(' ', '', $string);
+  
+  $addresses = explode(',', $string);
+  return array_filter($addresses);
+}
+
+/*
+ * Helper function that validates a set of emails
+ */
+function _atwork_validate_emails($emails, $key, $atwork_LDAP_checked) {
+  if ($emails) {
+    $recipient_addresses = _atwork_get_addresses($emails);
+    $atwork_ldap = new atwork_ldap;
+    
+    foreach ($recipient_addresses as $recipient_address) {
+      if (!_atwork_valid_email($recipient_address)) {
+        form_set_error($key, t('Email is limited to organizations within the BC Public Service. %email was not found.', array('%email' => $recipient_address)));
+      }
+      
+      // check if we already checked GAL and that we checked the same
+      // list of emails. If emails changed check again
+      if (isset($_SESSION['atwork_LDAP_checked'])) {
+        
+        if ($_SESSION['atwork_LDAP_checked']['emails'] == $emails) {
+          // emails matched, check is done
+          unset($_SESSION['atwork_LDAP_checked']);
+          return;
+        }
+      }
+      
+      // ok now check if email exists in GAL
+      $result = $atwork_ldap->query('person', 'mail', $recipient_address, array('employeeid'));
+      
+      if (!$result['count']) {
+        $message = t('%mail was not found in the government address list. You may want to double check the name/email of the person you’re sending to. Submit this form again if you are sure this is the correct address.', array('%mail' => $recipient_address));
+        drupal_set_message($message, 'warning');
+        form_set_error($key);
+        $_SESSION['atwork_LDAP_checked'] = array(
+          'id' => $atwork_LDAP_checked,
+          'emails' => $emails,
+        );
+        $atwork_LDAP_checked = &drupal_static('atwork_LDAP_checked', $atwork_LDAP_checked);
+      }
+    }
+  }
+}
+
+/*
+ * Implementation of hook_exit()
+ * 
+ * We cached the emails so we don't need to check them twice in case
+ * there were other form errors.
+ * 
+ * As soon as they leave the form we remove the cached emails
+ */
+function atwork_mail_exit($destination = NULL) {
+  if (isset($_SESSION['atwork_LDAP_checked'])) {
+    // unset if they aren't on the page anymore
+    $atwork_LDAP_checked = &drupal_static('atwork_LDAP_checked');
+    
+    if (isset($atwork_LDAP_checked) ? $_SESSION['atwork_LDAP_checked']['id'] == $atwork_LDAP_checked ? TRUE : FALSE : FALSE) {
+      // we are still on the same page doing the checking, don't unset anything
+      return;
+    }
+    //unset($_SESSION['atwork_LDAP_checked']);
+  }
+}
+
+/*
+ * Implementation of hook_mail_alter()
+ * 
+ * Modify some email headers the way we like them for outlook/exchange
+ */
+function atwork_mail_mail_alter(&$message) {
+  if ($message['id'] == 'forward_forward_page') {
+    // we added quotes around the name in atwork_misc atwork_forward_form_validate()
+    // now remove them from the subject
+    $message['subject'] = str_replace('"', '', $message['subject']);
+  }
+  
+  if ($message['id'] == 'ecard_ecard_ecard') {
+    // if no name_to fix the emptyness
+    $message['body'][0] = str_replace('Hello ,', 'Hello,', $message['body'][0]);
+    
+    // problem: ecard removing commas and messing up email fields
+    // try to load recipient
+    if ($user = user_load_by_mail($message['params']['ecard']->mail_to)) {
+      $message['to'] = '"' . _atwork_display_name($user) . '" <' . $user->mail .'>';
+    }
+    
+    // now fix sender
+    $message['from'] = $message['headers']['Sender'];
+    $message['headers']['From'] = '"' . $message['params']['ecard']->name_from . '" <' . $message['headers']['Sender'] .'>';
+    $message['headers']['Reply-To'] = '"' . $message['params']['ecard']->name_from . '" <' . $message['params']['ecard']->mail_from .'>';
+  }
+  
+  if ($message['id'] == 'ecard_ecard_copy') {
+    // fix sender
+    $message['from'] = '"' . $message['params']['ecard']->site_name . '" <' . $message['headers']['Sender'] .'>';
+    $message['headers']['From'] = '"' . $message['params']['ecard']->site_name . '" <' . $message['headers']['Sender'] .'>';
+    // fix to
+    if ($user = user_load_by_mail($message['params']['ecard']->mail_from)) {
+      $message['to'] = '"' . _atwork_display_name($user) . '" <' . $user->mail .'>';
+    }
+  }
+
+}
+
+/**
+ * Implements hook_mail();
+ */
+function atwork_mail_mail($key, &$message, $params) {
+  //dpm($key);
+  if($key ==  'atwork_mail_default') {
+    if (isset($params['subject'])) {
+      $message['subject'] = $params['subject'];
+    } 
+    if (isset($params['body'])) {
+      $message['body'][] = $params['body']; 
+    }
+    if (isset($params['headers']) && is_array($params['headers'])) {   
+      $message['headers'] += $params['headers'];
+    }
+    
+    //dpm($message);
+  }
+}

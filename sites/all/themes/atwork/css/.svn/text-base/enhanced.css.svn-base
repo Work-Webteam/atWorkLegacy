@@ -1,0 +1,47 @@
+/*
+
+  This is the enhanced CSS more modern browsers will get.
+
+TODO: MAKE THIS TABLE;
+
+  --- TOC for this file  ---
+
+    -Resets
+
+    -Structure
+
+    -Global elements
+
+    -Navigation
+
+    -Visual media and more globally presentational stuff
+
+    -Article and blog and poll (etc) structure
+
+    -Forms
+
+    -Tables
+
+    -Reusable
+
+    -Media queries
+
+    -IE
+
+    -Print Styles
+
+    -Misc
+
+*/
+
+/* --------------------------------Media queries */
+@media screen and (min-width: 480px) {
+  body {
+    background: #eee !important;
+    font-family: Helvetica;
+  }
+  h1, h2, h3, h4, h5, h6 {
+      word-wrap: break-word;
+      -webkit-text-size-adjust: none;
+  }
+}

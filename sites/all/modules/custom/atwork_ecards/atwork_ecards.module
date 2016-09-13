@@ -1,0 +1,308 @@
+  <?php
+
+/*
+ * Implementation of hook_form_alter()
+ *
+ * Set and disable name and email
+ *
+ * Remove "Name to"
+ *
+ * Add our own validate and submit callbacks
+ *
+ */
+function atwork_ecards_form_alter(&$form, &$form_state, $form_id) {
+  //dpm($form_id);
+  if ($form_id == 'ecard_form_create_ecard') {
+    global $user;
+    $full_user = user_load($user->uid);
+    $form['name_from']['#default_value'] = $full_user->field_gal_first_name['und'][0]['safe_value'] . " " . $full_user->field_gal_last_name['und'][0]['safe_value'];
+    $form['name_from']['#disabled'] = TRUE;
+
+    if (isset($user->mail)) {
+      $form['mail_from']['#default_value'] = $user->mail;
+      $form['mail_from']['#title'] = t('Sender email');
+      $form['mail_from']['#disabled'] = TRUE;
+    }
+
+    $form['text']['#required'] = TRUE;
+    $form['text']['#description'] = t('Whatever you type here will be displayed with the ecard.');
+
+    $form['submit']['#value'] = t('Send ecard');
+
+    unset($form['name_to']);
+
+    $form['mail_to']['#title'] = t('Email(s) of recipient(s) (Limited to organizations within the BC Public Service.)');
+    $form['mail_to']['#type'] = 'textarea';
+    $form['mail_to']['#suffix'] = t('Enter your recipient\'s email address. Separate multiple email addresses with commas.');
+
+    $form['#validate'] = array('atwork_ecards_form_validate');
+    $form['#submit'] = array('atwork_ecards_form_submit');
+  }
+
+  if($form['#id'] == 'views-exposed-form-e-cards-page') {
+    if (isset($form['#info']['filter-field_ecard_category_tid']['label'])) {
+      $form['#info']['filter-field_ecard_category_tid']['label'] = '';
+    }
+    //dpm($form);
+  }
+
+}
+
+/*
+ * Validation Callback
+ *
+ * Check that the emails are valid
+ *
+ */
+function atwork_ecards_form_validate($form, &$form_state) {
+  _atwork_validate_emails($form_state['values']['mail_to'], 'mail_to', $form['form_token']['#default_value']);
+}
+
+/*
+ * Submit Callback
+ *
+ * Mostly copied from ecard module
+ *
+ * Try and retreive the "Name To"
+ *
+ * Custom message and redirect
+ *
+ */
+function atwork_ecards_form_submit($form, &$form_state) {
+
+  $recipient_addresses = _atwork_get_addresses($form_state['values']['mail_to']);
+
+  // the ecard module only accepts one email per submission
+  // we will "submit" the form once per email address
+  foreach ($recipient_addresses as $recipient_address) {
+    $form['mail_to']['#value'] = $recipient_address;
+
+    // lookup a name, if not found use the email address
+    if ($user = user_load_by_mail($recipient_address)) {
+      $form['name_to']['#value'] = $user->field_gal_first_name['und'][0]['safe_value'];
+    }
+    else {
+      $form['name_to']['#value'] = '';
+    }
+
+    // do this for multiple ecards
+    if (isset($ecard)) {
+      unset($ecard);
+    }
+
+    // copied from ecard_form_create_ecard_submit()
+    // but taking out the drupal_goto until all recipients are processed
+    $ecard['entity_type'] = $form_state['build_info']['args'][0]['entity_type'];
+    $ecard['bundle'] = $form_state['build_info']['args'][0]['bundle'];
+    $ecard['entity_id'] = $form_state['build_info']['args'][0]['entity_id'];
+    $ecard['uid'] = $GLOBALS['user']->uid;
+
+    // Remove any HTML and other unwanted chars that might destroy the senders name.
+    $ecard['name_from'] = check_plain($form['name_from']['#value']);
+    $ecard['mail_from'] = $form['mail_from']['#value'];
+
+    $ecard['name_to'] = check_plain($form['name_to']['#value']);
+    $ecard['mail_to'] = $form['mail_to']['#value'];
+
+    // Make sure nothing bad can happen.
+    // @todo Implement input filter system.
+    $ecard['text'] = filter_xss_admin($form['text']['#value']);
+
+    $ecard = ecard_create($ecard);
+
+    $ecard->entity_path = $form_state['build_info']['args'][0]['entity_path'];
+    $ecard->mail = $form_state['build_info']['args'][0]['mail'];
+    $ecard->ecard_url = url($ecard->entity_path, array('query' => array('ecard' => $ecard->hash), 'absolute' => TRUE));
+    $ecard->ecard_copy_url = url($ecard->entity_path, array('query' => array('ecard' => $ecard->hash), 'absolute' => TRUE));
+    $ecard->site_name = variable_get('site_name', 'Default site name');
+
+    // this is changed from ecard_mail_send() because that will trigger multiple copies to sender
+    ecard_mail_send_ecard($ecard);
+
+  }
+
+  // pulled from ecard_mail_send()
+  if ($ecard->mail['copy']['ecard_copy_enabled']) {
+    ecard_mail_send_ecard($ecard, 'ecard_copy');
+  }
+
+  $messages = drupal_get_messages();
+  foreach ($messages as $type => $id) {
+    foreach ($id as $message){
+      $message = str_replace('E-Card', 'ecard', $message);
+      drupal_set_message($message, $type);
+    }
+  }
+
+  $message = t('View your ecard !url', array(
+    '!url' => l(t('here'), $ecard->entity_path, array('query' => array('ecard' => $ecard->hash)))
+  ));
+
+  drupal_set_message($message);
+
+  drupal_goto('node/2330');
+
+  //drupal_goto($ecard->entity_path, array('query' => array('ecard' => $ecard->hash)));
+
+}
+
+/*
+ * Implementation of hook_block_BLOOCKID_alter()
+ *
+ * @todo Do this entirely in views
+ *
+ */
+function atwork_ecards_block_view_block_1_alter(&$data, $block) {
+  $tree = taxonomy_get_tree(5, 0, 1);
+  $output = '';
+
+  $output .= '<ul id="ecardList">';
+  $output .=  '<li>' . l(t('All'), 'ecards/all') . '</li>';
+
+  foreach ($tree as $term) {
+    $children = taxonomy_get_children($term->tid);
+    if ($children) {
+      $output .=  '<li>' . l($term->name, 'ecards/' . $term->tid) . '<ul>';
+      foreach ($children as $child) {
+        $output .=  '<li class="nested-list">' . l($child->name, 'ecards/' . $child->tid) ;
+      }
+      $output .=  '</ul>';
+    }
+    else {
+      $output .=  '<li>' . l($term->name, 'ecards/' . $term->tid) ;
+    }
+    $output .=  '</li>';
+  }
+  $output .=  '</ul>';
+  $data['content'] = $output;
+}
+
+/*
+ * Implementation of hook_views_pre_view()
+ *
+ * Add the ecards_home block to the view header if no argument
+ */
+function atwork_ecards_views_pre_view(&$view, &$display_id, &$args) {
+  if ($view->name == 'e_cards' && $view->current_display == 'page') {
+    if ($view->args) {
+      // add header from block
+      $block = boxes_block_view('ecards_home');
+
+      $block_variables = array(
+        'block' => $block,
+      );
+
+      $header = theme_boxes_box($block_variables);
+      $options = array(
+        'id' => 'area',
+        'table' => 'views',
+        'field' => 'area',
+        'empty' => FALSE,
+        'content' => $header,
+        'format' => 'full_html',
+        'tokenize' => 0,
+      );
+      $view->display_handler->set_option('header', array('text' => $options));
+    }
+  }
+}
+
+/*
+ * Implemntation of hook_views_pre_render()
+ *
+ * Add an "All" faux taxonomy terms
+ *
+ * @todo views may allow this one day
+ */
+function atwork_ecards_views_pre_render(&$view) {
+  if ($view->name == 'e_cards_categories' && $view->current_display == 'block') {
+    $row = new stdClass;
+    $row->taxonomy_term_data_name = 'All';
+    $row->taxonomy_term_data_vid = 5;
+    $row->tid = 'all';
+    $row->taxonomy_vocabulary_machine_name = 'ecards_category';
+
+    array_unshift($view->result, $row);
+  }
+  if ($view->name == 'e_cards' && $view->current_display == 'page') {
+    //dpm($view);
+  }
+}
+
+/*
+ * Implemntation of hook_views_post_render()
+ *
+ * Fix an issue where the pager isn't getting setting the "all"
+ *
+ * Set a custom breadcrumb based on arguments
+ *
+ * Add links to sub-categories if there are any
+ *
+ * @todo views will probably include some of these things eventually
+ */
+function atwork_ecards_views_post_render(&$view, &$output, &$cache) {
+  if ($view->name == 'e_cards' && $view->current_display == 'page') {
+    if ($view->args) {
+      if ($view->args[0] == 'all') {
+        drupal_set_title('Ecards - All');
+        // fix for the /all not showing up in the pager
+        $output = str_replace('ecards?page=', 'ecards/all?page=', $output);
+      }
+      elseif (is_numeric($view->args[0])) {
+        $term = taxonomy_term_load($view->args[0]);
+        $parents = taxonomy_get_parents($term->tid);
+
+        if ($parents) {
+          $term = reset($parents);
+        }
+
+        $breadcrumb = array();
+        $breadcrumb[] = l(t('Home'), '<front>');
+        $breadcrumb[] = l(t('Ecards'), 'ecards');
+        $breadcrumb[] = l($term->name, 'ecards/' . $term->tid);
+        drupal_set_breadcrumb($breadcrumb);
+
+        drupal_set_title('Ecards - ' . $term->name);
+
+        $children = taxonomy_get_children($term->tid);
+
+        if ($children) {
+          $links = array();
+          foreach ($children as $child) {
+            $links[] = array(
+              'title' => $child->name,
+              'href' => 'ecards/' . $child->tid,
+            );
+          }
+
+          $variables = array(
+            'links' => $links,
+            'attributes' => array('class' => 'ecards-sub-menu'),
+            'heading' => array(),
+          );
+
+          $output = theme_links($variables) . $output;
+        }
+      }
+    }
+  }
+}
+
+/*
+ * Hmmm, I think these two functions were simply to get the form js on the
+ * ecards page so that the fieldset is collapsible.
+ */
+
+// THis function was messing up the path to the theme template - removing it helped. March 2016
+//function atwork_ecards_theme_registry_alter(&$theme_registry) {
+  //dpm($theme_registry);
+ // if (isset($theme_registry['ecard_formatter_view'])) {
+  //  $theme_registry['ecard_formatter_view']['template'] = drupal_get_path('theme', 'atwork') .'/templates/ecard_field';
+ //   $theme_registry['ecard_formatter_view']['type'] = 'theme';
+  //  $theme_registry['ecard_formatter_view']['theme path'] = drupal_get_path('theme', 'atwork');
+//  }
+//}
+
+function atwork_ecards_preprocess_ecard_formatter_view(&$variables) {
+  drupal_add_js('misc/form.js');
+}

@@ -1,0 +1,4 @@
+name = Atwork Zen
+description = Code to help transition between themes
+package = Atwork
+core = 7.x

@@ -1,0 +1,4 @@
+name = Atwork Blog
+description = Custom changes relating to blogs
+package = Atwork
+core = 7.x

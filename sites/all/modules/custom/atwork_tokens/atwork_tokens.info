@@ -1,0 +1,4 @@
+name = Atwork Tokens
+description = Our own special tokens
+package = Atwork
+core = 7.x

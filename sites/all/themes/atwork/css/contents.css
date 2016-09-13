@@ -1,0 +1,119 @@
+/*
+Copyright (c) 2003-2012, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.html or http://ckeditor.com/license
+*/
+
+html {
+  height: 100%
+}
+
+body
+{
+	/* Font */
+	font-family: sans-serif, Arial, Verdana, "Trebuchet MS";
+	font-size: 12px;
+
+	/* Text color */
+	color: #333;
+
+	/* Remove the background color to make it transparent */
+	background-color: #fff;
+
+	margin: 20px;
+}
+
+.cke_editable
+{
+	font-size: 13px;
+  	height: 90%
+}
+
+blockquote
+{
+	font-style: italic;
+	font-family: Georgia, Times, "Times New Roman", serif;
+	padding: 2px 0;
+	border-style: solid;
+	border-color: #ccc;
+	border-width: 0;
+}
+
+.cke_contents_ltr blockquote
+{
+	padding-left: 20px;
+	padding-right: 8px;
+	border-left-width: 5px;
+}
+
+.cke_contents_rtl blockquote
+{
+	padding-left: 8px;
+	padding-right: 20px;
+	border-right-width: 5px;
+}
+.ckeditor-hide{visibility: visible;}
+a
+{
+	color: #0782C1;
+}
+
+ol,ul,dl
+{
+	/* IE7: reset rtl list margin. (#7334) */
+	*margin-right: 0px;
+	/* preserved spaces for list items with text direction other than the list. (#6249,#8049)*/
+	padding: 0 40px;
+}
+
+h1,h2,h3,h4,h5,h6
+{
+	font-weight: normal;
+	line-height: 1.2em;
+}
+
+hr
+{
+	border: 0px;
+	border-top: 1px solid #ccc;
+}
+
+img.right {
+    border: 1px solid #ccc;
+    float: right;
+    margin-left: 15px;
+    padding: 5px;
+}
+
+img.left {
+    border: 1px solid #ccc;
+    float: left;
+    margin-right: 15px;
+    padding: 5px;
+}
+
+img:hover {
+	opacity: .9;
+	filter: alpha(opacity = 90);
+}
+.feature_box_blue {
+  border-radius: 10px;
+  background: url("/sites/all/themes/atwork/images/poll_grad.gif") repeat-x scroll left top #cdddef;
+  border: 1px solid #a5c4e3;
+  margin: 5px;
+  padding: 7px 10px;
+}
+
+p.feature_box_yellow {
+  border-radius: 10px 10px 10px 10px;
+  background: url("/sites/all/themes/atwork/images/yellow_grad_bottom.gif") repeat-x scroll left bottom #FDFAEB;
+  border: 1px solid #F9EAAD;
+  margin: 5px;
+  padding: 7px 10px;
+}
+.feature_box_yellow-trans {
+  border-radius: 10px 10px 10px 10px;
+  background: url("/sites/all/themes/atwork/images/yellow_grad_bottom-trans.png") repeat-x scroll left bottom #FDFAEB;
+  border: 1px solid #F9EAAD;
+  margin: 0 5px;
+  padding: 7px 10px;
+}

@@ -1,0 +1,424 @@
+/* 
+
+  --- TOC for this file ---
+
+    -Resets, basically - remove stuff from the printed page that's in style.css
+
+    -Global Elements
+
+    -Homepage
+
+    -Webform Submissions
+
+    -Misc (consider the CSS/JS field and @media print {...} for per node print styling)
+
+    -IE
+
+*/
+
+
+/* ------------------------------------------------------------------- Resets */
+* {
+  color: black !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  -ms-filter: none !important;
+  font-family: 'Calibri', sans-serif;
+  background: transparent !important;
+}
+
+body {
+  width: 100%;
+  padding: 0;
+  padding-bottom: 1em;
+  font-size: 17px; /* just too big printed for some reason */
+}
+
+.region li,
+.region p {
+  font-size: 17px;
+  line-height: 19px;
+}
+
+html body.admin-menu {
+  margin-top: 0 !important;
+}
+
+.main-header .site-name {
+  display: block;
+  font-size: 2em;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+#container {
+  margin: 0 auto;
+  position: relative;
+}
+
+#page {
+  padding: 60px 40px;
+}
+
+@page {
+  margin: 2cm;
+  margin-left: 4cm;
+}
+
+ul {
+  list-style: initial outside;
+  list-style-type: disc;
+}
+
+.ir a:after,
+a[href^="javascript:"]:after,
+a[href^="#"]:after {
+  content: "";
+}
+
+/* a whole lotta background kill'n */
+#container,
+.main-header
+#container-wrapper,
+#footer {
+  background: transparent !important;
+}
+
+/* a whole lotta display:none; */
+.breadcrumb,
+.tabs,
+.feed-icon,
+.links,
+body.menu-item-webformsubmission div#header,
+body.menu-item-webformsubmission div#tabs-wrapper ul.tabs.primary,
+body.menu-item-webformsubmission div.webform-submission-navigation,
+div#themer-toggle,
+#print-ico,
+.icon-print,
+.presence_stay,
+#test-enviro-indicator,
+#navigation #block-superfish-1,
+ul.links .comment_delete, 
+ul.links .comment_edit,
+.forum-topic-navigation,
+.rate_thumbup_comments,
+.flag_content_add,
+.flag,
+.font-awesome,
+#footer,
+.pager,
+.node-readmore,
+.region-content .view-header,
+.view-home-page-blocks .view-footer,
+#search-block-form,
+#block-superfish-1,
+#block-views-home_page_blocks-block_2,
+.front .views-field-title-1,
+#boxes-box-ministry_dropdown,
+.comment-form,
+#views-exposed-form-node-comments-block,
+#node-tools,
+.blogger-links,
+.lt-ie9 .icon-thumbs-up,
+.lt-ie9 .icon-tag,
+#block-boxes-homepage_community,
+.block.region-count-2 .content,
+#block-menu-menu-moderator-menu,
+#block-views-home_page_blocks-wikis .view-header p,
+.front .region-content .view-home-page-blocks .item-list,
+#admin-menu,
+#block-views-second_sidebar_blocks-block_3,
+#block-menu-menu-secondary-menu,
+.node-type-lsa-application #sidebar-second {
+  display: none !important;
+}
+
+
+/* ------------------------------------------------------------------ Globals */
+a {
+  color: black;
+}
+
+p, h2, h3 {
+  orphans: 3;
+  widows: 3;
+}
+
+h2, h3 {
+  page-break-after: avoid;
+}
+
+.region h2 {
+  font-size: 19px;
+  line-height: 21px;
+}
+.region h3 {
+  font-size: 17px;
+  line-height: 19px;
+}
+.region h4 {
+  font-size: 20px;
+  line-height: 22px;
+}
+.region h5 {
+  font-size: 20px;
+  line-height: 22px;
+}
+.region h6 {
+  font-size: 20px;
+  line-height: 22px;
+}
+
+
+/*pre, 
+blockquote {
+  border: 1px solid #666;
+  page-break-inside: avoid;
+  padding: 10px;
+}*/
+
+thead {
+  display: table-header-group;
+}
+
+tr, 
+img {
+  page-break-inside: avoid;
+}
+
+.not-ie img {
+  /* https://bcps.basecamphq.com/projects/7717571-web-team-day-to-day/todo_items/171897711/comments */
+  max-width: 100% !important;
+}
+.content img {
+  display: block;
+}
+
+.item-list ul, ul, ol, p, dl, dd, dt, blockquote {
+  margin: 1em 0;
+}
+
+
+/* ----------------------------------------------------------------- Homepage */
+.front .homepage-lower-column {
+  margin-bottom: 0 !important;
+}
+  .front .homepage-lower-column .block-title {
+    margin-top: 1em;
+  }
+  .front .homepage-lower-column .block-inner {
+    border: none !important;
+  }
+.front .views-field-title,
+.front .block-title {
+  font-size: 1.111em;
+}
+.front .region.region-content {
+  padding: 0;
+}
+#home_key_initiatives li a {
+  font-weight: bold;
+}
+
+#block-boxes-homepage_top_tools {
+  height: 0; /* prevents a clearing issue */
+  overflow: hidden;
+}
+
+#block-views-home_page_blocks-events .item-list .views-row .field-content a,
+#block-views-home_page_blocks-wikis li.views-row {
+  font-size: 0.9em;
+}
+
+#block-views-home_page_blocks-events .item-list .views-row .field-content a {
+  font-weight: bold;
+}
+
+/* recent comments */
+#block-views-home_page_blocks-comments .views-row {
+  margin-bottom: 0.5em;
+}
+
+.front .region.region-content .views-field-field-image,
+#block-views-home_page_blocks-forums .views-field-nothing-1 {
+  border: none;
+}
+
+.front .region-content .block {
+  margin-left: 0 !important;
+}
+
+
+/* ------------------------------------------------------ Webform Submissions */
+body.menu-item-webformsubmission {
+  font-size: 1.5em;
+  line-height: 2em;
+}
+body.menu-item-webformsubmission h4 {
+  line-height: 1.6em;
+}
+body.menu-item-webformsubmission div.fieldset { 
+  width: 230mm; 
+  border-bottom:2px solid black;
+  margin-bottom:2em;
+  padding-bottom:1em;
+}
+  body.menu-item-webformsubmission div.fieldset h4 {
+    font-style: italic;
+    font-weight: normal;
+    padding-bottom: 0.5em;
+  }
+  body.menu-item-webformsubmission div.fieldset div.fieldset {
+    border-bottom: none;
+  }
+body.menu-item-webformsubmission span.legend {
+  font-size: 2.3em;
+  margin-top: 2em;
+}
+body.menu-item-webformsubmission h2, 
+body.menu-item-webformsubmission h3, 
+body.menu-item-webformsubmission h4, 
+body.menu-item-webformsubmission h5, 
+body.menu-item-webformsubmission h6 {
+  font-size: 1.2em;
+  margin-bottom: 0.1em;
+}
+body.menu-item-webformsubmission .field-content {
+  margin-bottom: 1em;
+}
+
+
+/* --------------------------------------------------------------------- Misc */
+.node-teaser.node-even, 
+.node-teaser.node-odd {
+  border: 1px solid #666;
+  border-radius: 0;
+  page-break-inside: avoid;
+}
+.node-teaser .taxonomy-terms {
+  clear: both !important;
+}
+
+.comment {
+  padding-bottom: 2em;
+  padding-top: 1em;
+  border-radius: 0 !important;
+  border: 1px solid #666;
+  page-break-inside: avoid;
+}
+.sidebar-second .region-content-bottom,
+.content #block-views-node_comments-block {
+  padding: 0;
+}
+.content #block-views-node_comments-block {
+  page-break-inside: avoid;
+}
+
+#sidebar-second-inner .block-title {
+  margin-top: 1em;
+  margin-bottom: 0;
+}
+
+.not-front section.content.inner img {
+  border: none;
+}
+
+/* show URLs on printed page of <a> tags */
+/*article .content a[href]:after {
+  content: " (" attr(href) ")";
+}*/
+
+.poll,
+#forum table {
+  width: 600px; 
+}
+
+#awards_logos img {
+  float: left;
+}
+
+/* compentencies page */
+.qtip-contentWrapper, /* "pop ups" */
+body.sub-section-5990 #submission_info {
+  border: none !important;
+  font-size: 16px !important;
+}
+.comp-print-iframe {
+  font-size: 7em !important;
+}
+
+.content.inner .sidebar.second,
+.not-front .region-content-bottom {
+  clear: both;
+  float: none;
+}
+
+.toggle_container .block {
+  visibility: visible;
+}
+
+#block-views-home_page_blocks-events h2.block-title {
+  margin-top: -1em; /* hmm... */
+}
+
+#main {
+  padding-top: 0 !important;
+}
+
+.main-header {
+  height: 2em;
+  min-height: 0;
+}
+
+#sidebar-second-inner .block-title,
+.region h3 {
+  margin-top: 2em;
+}
+
+
+/* -------------------------------------------------------- Internet Explorer */
+.lt-ie9 body {
+  width: 900px;
+}
+@page {
+  margin: 0.5cm; /* IE8 likes this */
+}
+
+.lt-ie9 .content .views-field img {
+  border: none !important;
+}
+ 
+/*.lt-ie9 .node-teaser.node-even, .lt-ie9 .node-teaser.node-odd {
+  border: none;
+  border-bottom: 1px solid #666;
+}*/
+.lt-ie9 .node-teaser .field-name-body {
+  padding-left: 0;
+  clear: both;
+}
+
+/* homepage */
+.lt-ie9 .front section.content.inner section.block { /* isn't this fun? */
+  clear: both;
+  float: none; 
+}
+.lt-ie9 .front .homepage-lower-column {
+  float: none !important;
+  clear: both;
+  width: 100%;
+}
+.lt-ie9 .front #block-boxes-homepage_key_initiatives {
+  margin-top: 2em;
+}
+.lt-ie9 #block-views-home_page_blocks-block_2,
+.lt-ie9 .jcarousel-container,
+.region-footer {
+  display: none !important;
+}
+.lt-ie9 .region.region-content .views-field-field-image {
+  padding: 0 !important;
+}
+.lt-ie9 .front .region-content .block .block-title a {
+  padding-left: 0;
+}

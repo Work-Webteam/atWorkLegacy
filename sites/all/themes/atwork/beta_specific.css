@@ -1,0 +1,242 @@
+/*
+Code related to beta testing website - hiding info that regular users should not see
+ */
+
+
+/* Theme switch block */
+#block-atwork_zen_specific-switch_theme
+{
+  display: none !important;
+}
+
+
+/* User Name Links to Profile */
+.username
+{
+  pointer-events: none;
+  cursor: text;
+  color: #727272;
+}
+
+
+/*** PROFILE SPECIFIC ***/
+.group_profile_card
+{
+  display: none;
+}
+
+.group_profile_extra
+{
+  display: none;
+}
+
+.page-user.page-user- #messages
+{
+  display:none;
+}
+
+
+.page-user.page-user- .tabs
+{
+  display:none;
+}
+
+/*** GROUP SPECIFIC ***/
+
+/* Group page [/groups] */
+.page-groups #top-content
+{
+  display: none;
+}
+
+
+.page-groups #sidebar-second
+{
+  display: none;
+}
+
+
+/*** FORUM SPECIFIC ***/
+
+/* Hide image in forums */
+.node-type-forum .field-name-field-image
+{
+  display: none !important;
+}
+
+#advanced-forum-forum-topic-list-sort-form
+{
+  display: none;
+}
+
+
+/*** HOMEPAGE SPECIFIC ***/
+
+#block-menu-menu-moderator-menu
+{
+  display: none;
+}
+
+
+/*** ECARDS ***/
+
+.page-ecards #block-system-main
+{
+  display: none;
+}
+
+.page-ecards.page-ecards- #block-system-main
+{
+  display: inline;
+}
+
+/*** DOUBLE TAG ICON ISSUE ***/
+.icon-tag.font-awesome
+{
+  display:none;
+}
+
+
+/*** CLASSIFIED - ADDING IN ICONS ***/
+.browsead a:before
+{
+  content: url("/sites/all/themes/atwork/images/browse_all_items.png");
+}
+
+.browsead a
+{
+  line-height:0;
+  font-size:0;
+  color:transparent;
+}
+
+.postad a:before
+{
+  content: url("/sites/all/themes/atwork/images/post_an_ad.png");
+}
+
+.postad a
+{
+  line-height:0;
+  font-size:0;
+  color:transparent;
+}
+
+/*** AARC Hiding info ***/
+.page-node-2637 div.view.view-groups.view-id-groups.view-display-id-details
+{
+  display:none !important;
+}
+
+.page-node-13502 div.field.field-name-body.field-type-text-with-summary.field-label-hidden
+{
+  display:none;
+}
+
+.page-node-13502 #node-tools
+{
+  display:none;
+}
+
+li.polls.last
+{
+  display:none !important;
+}
+
+#group-activity ul.pager
+{
+  display:none;
+}
+
+
+/*** GROUP RELATED CSS ***/
+
+.atwork-membership-action{
+  display:none;
+}
+
+.atwork-activity
+{
+  display:none;
+}
+
+h2.block__title.block-title
+{
+  display:none;
+}
+
+.node-type-section #breadcrumb
+{
+  display:none;
+}
+
+.page-node-13832 #breadcrumb
+{
+  display:none;
+}
+
+.node-type-section div.views-field.views-field-field-group-description
+{
+  display:none;
+}
+
+#block-og_menu-og_single_menu_block .blogs.first.last
+{
+  display:none;
+}
+
+#block-og_menu-og_single_menu_block .content
+{
+
+}
+
+.page-node-13476.page-node-blogs.og-context .create-blog{
+  display: none;
+}
+
+
+/***HIDE NEW TITLES ON BLOCK/BACKGROUND ***/
+#block-views-blogs-block_2 .block-title-link
+{
+  display:none;
+}
+
+.page-node-13494 h2.main-title:nth-child(3)
+{
+  display:none;
+}
+
+
+/*** For profile text size ***/
+.views-field.views-field-field-gal-title
+{
+  display: block;
+  margin:0;
+  padding:0;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.views-field.views-field-mail
+{
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.profile-image
+{
+  display:none;
+}
+
+/*** Blogger profiles ***/
+#blogger-profile
+{
+  height: 155px !important;
+}
+
+#block-og_menu-og_single_menu_block
+{
+  list-style-type: none;
+}
+
+

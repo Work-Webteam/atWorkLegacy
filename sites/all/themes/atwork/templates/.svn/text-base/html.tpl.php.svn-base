@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if IE 7]>
+  <html class="no-js lt-ie9 lt-ie8" lang="<?php print $language->language; ?>" xml:lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>">
+<![endif]-->
+<!--[if IE 8]>
+  <html class="no-js lt-ie9" lang="<?php print $language->language; ?>" xml:lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+  <html class="no-js" lang="<?php print $language->language; ?>" xml:lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>">
+<!--<![endif]-->
+
+  <head>
+
+    <!-- BEGIN Drupal $head -->
+      <?php print $head; ?>
+    <!-- /END Drupal $head -->
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <title><?php print $head_title; ?></title>
+
+    <!-- load the latest version of jQuery and always have it available in a specific var for @Work special requests -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script>
+      jQueryEdge = jQuery.noConflict(true);
+    </script>
+
+    <!-- Try to upgrade MSIE5.5-8 to be compatible with modern browsers. http://code.google.com/p/ie7-js/ -->
+    <!--[if lt IE 9]>
+      <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+    <![endif]-->
+
+    <!-- BEGIN Drupal styles -->
+    <?php print $styles;?>
+    <!-- /END Drupal styles -->
+
+    <!--
+      Responsive Stylesheets
+
+      IE gets the first "basic" stylesheet AND the "enhanced" CSS (enhanced.css), via the conditional IE comments.
+      Other browsers get this too, but with the quick acid test of the media attribute "only all".
+      This is a test for older browsers. In other words, a browser that doesn't support media queries.
+
+      Important to note:
+        - IE will ignore the third link because of this media attribute (gets sheets 1 and 2).
+        - High-tech modern browsers will get sheets 1 and 3.
+        - Low-tech browsers will get only the basic experience (stylesheet 1).
+
+    -->
+
+    <!-- 1. The basic stylesheet, all browers get this -->
+    <link rel="stylesheet" id="style-css" href="<?php print $GLOBALS['base_url']; ?>/sites/all/themes/atwork/css/style.css" />
+
+    <!-- 2. Special tweaks for Internet Explorer. Only IE gets this. -->
+    <!--[if gt IE 6]><link rel="stylesheet" id="style-css" href="<?php print $GLOBALS['base_url']; ?>/sites/all/themes/atwork/css/enhanced.css" /><![endif]-->
+
+    <!-- 3. Acid test for a modern browser with media query support. ( 'media=only all' ) -->
+    <!--[if !IE]><!--><link rel="stylesheet" id="style-css" media="only all" href="<?php print $GLOBALS['base_url']; ?>/sites/all/themes/atwork/css/enhanced.css" /><!--<![endif]-->
+
+    <!-- /Responsive Stylesheets -->
+
+    <!--[if IE 7]>
+      <style>
+        behavior: url(<?php print $GLOBALS['base_url']; ?>/sites/all/themes/atwork/js/boxsizing.htc);
+      </style>
+    <![endif]-->
+
+    <script>
+      /*
+        patch for Windows 8 phone and IE10. Needs to stay here! http://trentwalton.com/2013/01/16/windows-phone-8-viewport-fix/
+        It’s a shame to see that we’re still being forced to perform back bending maneuvers in order to properly render our websites in an IE browser version.
+        I had high hopes for IE 10.
+      */
+      if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+        var msViewportStyle = document.createElement("style");
+        msViewportStyle.appendChild(
+          document.createTextNode(
+            "@-ms-viewport{width:auto!important}"
+          )
+        );
+        document.getElementsByTagName("head")[0].
+          appendChild(msViewportStyle);
+      }
+    </script>
+
+    <!-- BEGIN Drupal $critps -->
+    <?php print $scripts; ?>
+    <!-- /END Drupal scripts -->
+
+    <script>
+      /*
+        reclaim the dollar sign ($) var for use in jQuery plugins. limits ability to use other JS libraries in this theme.
+        http://drupal.stackexchange.com/questions/2680/drupal-7-jquery-the-dollar-sign
+      */
+      $ = jQuery;
+    </script>
+
+  </head>
+
+  <body class="<?php print $classes; ?>" <?php print $attributes;?>>
+
+    <?php print $page_top; ?>
+    <?php print $page; ?>
+    <?php print $page_bottom; ?>
+
+    <script src="<?php print $GLOBALS['base_url']; ?>/sites/all/themes/atwork/js/plugins.js"></script>
+    <script src="<?php print $GLOBALS['base_url']; ?>/sites/all/themes/atwork/js/main.js"></script>
+
+    <script>
+      // presentational GLOBAL javascripts // do we need this?
+    </script>
+
+  </body>
+
+</html>

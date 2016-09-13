@@ -1,0 +1,200 @@
+/**
+ * @file
+ * Print styling
+ *
+ * We provide some sane print styling for Drupal using Zen's layout method.
+ */
+
+/**
+ * By importing this CSS file as media "all", we allow this print file to be
+ * aggregated with other stylesheets, for improved front-end performance.
+ */
+@media print {
+
+  /* Underline all links. */
+  a:link,
+  a:visited {
+    text-decoration: underline !important;
+  }
+
+  /* Don't underline header. */
+  a:link.header__site-link,
+  a:visited.header__site-link {
+    text-decoration: none !important;
+  }
+
+  /* Add visible URL after links. */
+  #content a[href]:after {
+    content: " (" attr(href) ")";
+    font-weight: normal;
+    font-size: 16px;
+  }
+
+  /* Only display useful links. */
+  #content a[href^="javascript:"]:after,
+  #content a[href^="#"]:after {
+    content: "";
+  }
+
+  /* Add visible title after abbreviations. */
+  #content abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  /* Un-float the content. */
+  #content {
+    float: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Turn off any background colors or images. */
+  body,
+  #page,
+  #main,
+  #content {
+    color: #000;
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+
+  /* Hide sidebars and nav elements. */
+  #skip-link,
+  #toolbar,
+  #navigation,
+  .region-sidebar-first,
+  .region-sidebar-second,
+  #footer,
+  .breadcrumb,
+  .tabs,
+  .action-links,
+  .links,
+  .book-navigation,
+  .forum-topic-navigation,
+  .pager,
+  .feed-icons {
+    visibility: hidden;
+    display: none;
+  }
+
+/* Print rules for Premiers Awards submissions */
+html {
+  background-image: none !important;
+  background-color: #FFF !important;
+  color: #000 !important;
+  font-family: arial, verdana, sans-serif !important;
+}
+.page-node-submission #page {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+.page-node-submission header,
+.page-node-submission nav,
+.page-node-submission nav.breadcrumb,
+.page-node-submission #navigation,
+.page-node-submission .webform-submission-navigation,
+.page-node-submission .mega-nav,
+.page-node-submission .tabs-primary.tabs.primary,
+.page-node-submission ul.webform-submission-actions,
+.page-node-submission .webform-component--summary-word-count,
+.page-node-submission h2 {
+  display: none;
+}
+.page-node-submission label.webform-label-processed {
+  display: none !important;
+}
+
+.page-node-submission h1#page-title.page__title.title:after {
+  content: "-16";
+}
+.page-node-submission .webform-component-display {
+  margin: 10px 0 0 50px;
+  font-size: 12pt;
+  font-style: oblique;
+}
+.page-node-submission h3 {
+  margin: 20px 0;
+  border-bottom: solid 5px grey; 
+}
+.page-node-submission p {
+  margin-top: 12pt;
+  margin-bottom: 12pt;
+}
+.page-node-submission fieldset {
+  display: none;
+}
+.page-node-submission fieldset.webform-component--attachments {
+  display: block !important;
+}
+.page-node-submission label.webform-label-processed {
+  display: inline-block;
+}
+.page-node-submission strong {
+  display: block !important;
+  padding: 10px;
+  border: solid 1px #D7D7D7;
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

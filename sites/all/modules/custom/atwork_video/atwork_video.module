@@ -1,0 +1,181 @@
+<?php
+
+// Auto filled field name. This field is filled with the medias included in entity body.
+define('MEDIA_FILLED_FIELD', 'field_video');
+
+/**
+ * Helper Function
+ * 
+ * Get the text formats where media_filter is activated.
+ */
+function _media_formats() {
+
+  $cache_media_formats = cache_get('media_formats', 'cache_filter');
+
+  if (empty($cache_media_formats)) {
+
+    $media_formats = array();
+
+    $formats = filter_formats();
+    foreach ($formats as $format) {
+      $filters = filter_list_format($format->format);
+      if (isset($filters['media_filter'])) {
+        $media_formats[$format->format] = $format->format;
+      }
+    }
+
+    cache_set('media_formats', $media_formats, 'cache_filter');
+
+    return $media_formats;
+  }
+
+  return $cache_media_formats->data;
+}
+
+/**
+ * Helper Function
+ * 
+ * Generates an array of fid from inline tags.
+ * @param
+ * The String containing text and html markup of textarea
+ * @return
+ * An array of fids.
+ *
+ * @see _media_generate_tagMap()
+ */
+function _media_fids_in_text($text) {
+  $fids = array();
+
+  preg_match_all("/\[\[(.*?)]]/s", $text, $matches, PREG_SET_ORDER);
+  foreach ($matches as $match) {
+    $tag = $match[1];
+
+    if (!is_string($tag)) {
+      return FALSE;
+    }
+
+    $tag_info = drupal_json_decode($tag);
+
+    if (isset($tag_info['fid'])) {
+      $fid = $tag_info['fid'];
+      $fids[$fid] = $fid;
+    }
+  }
+
+  // @todo call hooks for custom modules
+  
+  return $fids;
+}
+
+/*
+ * Implementation of hook_form_alter()
+ * 
+ * Only show existing items in field_video
+ */
+function atwork_video_form_alter(&$form, &$form_state, $form_id) {
+  if (isset($form['field_video'])) {
+    if (!isset($form['field_video'][$form['field_video']['#language']][0]['#default_value']['fid']) || !$form['field_video'][$form['field_video']['#language']][0]['#default_value']['fid']) {
+      $form['field_video']['#access'] = FALSE;
+    }
+    
+    $form['field_video'][$form['field_video']['#language']][$form['field_video'][$form['field_video']['#language']]['#file_upload_delta']]['#access'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter();
+ */
+function atwork_video_form_media_wysiwyg_format_form_alter(&$form, &$form_state, $form_id) {
+ drupal_add_js(drupal_get_path('module', 'atwork_video') . '/atwork_video.js');
+  //dpm($form);
+}
+
+
+/**
+ * Implements hook_field_attach_presave()
+ * 
+ * Add the medias inserted into long texts fields to the MEDIA_FILLED_FIELD
+ */
+function atwork_video_field_attach_presave($entity_type, $entity) {
+  if (isset($entity->atwork_migrating)) {
+    return;
+  }
+  if ( isset($entity->{MEDIA_FILLED_FIELD}) && ($media_formats = _media_formats()) ) {
+    // File ids to be in the field
+    $fids = array();
+    
+    // To get the bundle name for field_info_instances
+    $eids = entity_extract_ids($entity_type, $entity);
+
+    foreach (field_info_instances($entity_type, $eids[2]) as $field) {
+      if (isset($field['settings']['text_processing']) && $field['settings']['text_processing']) {
+        foreach ($entity->$field['field_name'] as $lang => $texts) {
+          if (! isset($fids[$lang])) {
+            $fids[$lang] = array();
+          }
+
+          if ($texts && is_array($texts)) {
+            foreach ($texts as $text) {
+              if (in_array($text['format'], $media_formats)) {
+                $fids[$lang] += _media_fids_in_text($text['value']);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    foreach ($fids as $lang => $lang_fids) {
+      $entity->{MEDIA_FILLED_FIELD}[$lang] = array();
+      foreach ($lang_fids as $fid) {
+        $entity->{MEDIA_FILLED_FIELD}[$lang][] = array('fid' => $fid, 'display' => 0);
+      }
+    }
+
+    if (empty($fids)) {
+      foreach ($entity->{MEDIA_FILLED_FIELD} as $lang => $value) {
+        $entity->{MEDIA_FILLED_FIELD}[$lang] = array();
+      }
+    }
+  }
+}
+
+/*
+ * Implementation of hook_media_token_to_markup_alter()
+ * 
+ * Alter the field_transcript to render inside an accordian
+ */
+function atwork_video_media_wysiwyg_token_to_markup_alter(&$element, $tag_info, $settings) {
+  if (isset($element['content']['file']) && isset($element['content']['field_transcript'])) {
+    $element['content']['file']['#weight'] = -10;
+    $element['content']['field_transcript']['#weight'] = 0;
+    
+    // new transcripts are plain text and need <transcript name> format escaped
+    if (!strpos(' ' . $element['content']['field_transcript']['#object']->field_transcript[$element['content']['field_transcript']['#language']][0]['value'], '<p>')) {
+      $element['content']['field_transcript'][0]['#markup'] = $element['content']['field_transcript']['#object']->field_transcript[$element['content']['field_transcript']['#language']][0]['value'];
+    }
+    
+    /* standardize line breaks */
+    $output = str_replace("\n", "\n\n", $element['content']['field_transcript'][0]['#markup']);
+    $output = str_replace("\n\n\n\n", "\n\n", $output);
+    $output = str_replace("\n\n\n", "\n\n", $output);
+    
+    $output = _filter_autop($output);
+
+    
+    if (trim($output)) {
+      $html = <<<EOT
+<fieldset class=" collapsible collapsed no-outline transcript">
+  <legend><span class="fieldset-legend">Transcript</span></legend>
+  <div class="fieldset-wrapper">
+    $output
+  </div>
+</fieldset>
+EOT;
+      $element['content']['field_transcript'][0]['#markup'] = $html;
+    }
+    else {
+      $element['content']['field_transcript'][0]['#markup'] = '';
+    }
+  }
+}

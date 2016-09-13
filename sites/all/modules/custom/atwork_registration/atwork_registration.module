@@ -1,0 +1,104 @@
+<?php
+
+
+function atwork_registration_form_registration_form_alter(&$form, &$form_state, $form_id) {
+  if (isset($form['who_message'])) {
+    hide($form['who_message']);
+  }
+  if (isset($form['#registration_settings']['entity_id']) && $form['#registration_settings']['entity_id']) {
+    $event = node_load($form['#registration_settings']['entity_id']);
+    $form['actions']['submit']['#attributes']['title'] = t('Register for !title', array('!title' => $event->title));
+    $form['actions']['submit']['#attributes']['alt'] = t('Register for !title', array('!title' => $event->title));
+  }
+  $form['#submit'][] = '_atwork_registration_submit';
+}
+
+function _atwork_registration_submit(&$form, &$form_state) {
+  $event = node_load($form['#registration_settings']['entity_id']);
+  //dpm($form_state);
+  $form_state['redirect'] = 'node/' . $event->nid;
+}
+
+
+/*
+ * Implementation of hook_node_view()
+ * 
+ * Add an link to our ics-based view
+ */
+function atwork_registration_node_view($node, $view_mode, $langcode) {
+  if ($node->type != 'event' || !(isset($node->field_register))) {
+    return;
+  }
+  
+  
+}
+
+function atwork_registration_entity_view($entity, $type, $view_mode, $langcode) {
+  if ($type != 'registration') {
+    return;
+  }
+  //dpm($entity);
+}
+
+function atwork_registration_preprocess_page(&$variables) {
+  if (isset($variables['page']['content']['system_main']['registration']) && count($variables['page']['content']['system_main']['registration']) == 1) {
+    foreach ($variables['page']['content']['system_main']['registration'] as $registration_id => $registration) {
+      hide($variables['page']['content']['system_main']['registration'][$registration_id]['created']);
+      hide($variables['page']['content']['system_main']['registration'][$registration_id]['updated']);
+      hide($variables['page']['content']['system_main']['registration'][$registration_id]['author']);
+      $variables['page']['content']['system_main']['registration'][$registration_id]['slots']['#prefix'] =
+          '<div class="field registration-slots"><div class="field-label">Seats Used</div>';
+    }
+    
+    
+  }
+  
+  if (isset($variables['node']->type) && $variables['node']->type == 'event') {
+    $node = $variables['node'];
+    if (isset($variables['page']['content']['system_main']['nodes'][$variables['node']->nid]['field_register'])) {
+      $register_element = $variables['page']['content']['system_main']['nodes'][$variables['node']->nid]['field_register'];
+      unset($variables['page']['content']['system_main']['nodes'][$variables['node']->nid]['field_register']);
+      $variables['page']['sidebar_second']['field_register'] = $register_element;
+      $variables['page']['sidebar_second']['field_register']['#weight'] = -999;
+      $variables['page']['sidebar_second']['#sorted'] = FALSE;
+      $variables['page']['sidebar_second']['field_register'][0]['header']['#weight'] = -9999;
+      $variables['page']['sidebar_second']['field_register'][0]['header']['#markup'] = '<h2>Registration</h2>';
+      hide($variables['page']['sidebar_second']['field_register'][0]['actions']['cancel']);
+    }
+    else {
+      global $user;
+  
+      $result = db_select('registration', 'r')
+        ->fields('r', array('registration_id'))
+        ->condition('r.user_uid', $user->uid)
+        ->condition('r.entity_id', $node->nid)
+        ->orderBy('r.created', 'ASC')
+        ->execute();
+
+      $message = '';
+
+      if ($result->rowCount()) {
+        $message .= '<h2>Registration</h2><p>You have registered for this event:';
+        
+        
+        
+        foreach ($result as $row) {
+          $registration = registration_load($row->registration_id);
+          $message .= '<br />' . l(t('View registration details', array('!num' => $registration->registration_id)), 'registration/' . $registration->registration_id) . '.';
+        }
+        
+        
+        $variables['page']['sidebar_second']['field_register']['#markup'] = $message . '</p>';
+        $variables['page']['sidebar_second']['field_register']['#weight'] = -999;
+        $variables['page']['sidebar_second']['#sorted'] = FALSE;
+        
+        //drupal_set_message($message);
+      }
+    }
+    
+    
+    //dpm($variables);
+  }
+  
+  
+}

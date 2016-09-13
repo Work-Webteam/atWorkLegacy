@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * Implementation of hook_schema().
+ *
+ * @return array
+ */
+function atwork_polls_schema() {
+  $schema = array(
+    'atwork_polls' => array(
+      'description' => "Add multi-choice options to polls.",
+      'fields' => array(
+        'nid' => array(
+          'description' => "The Node ID",
+          'type' => 'int',
+          'not null' => TRUE,
+          'default' => 0),
+        'multichoice' => array(
+          'description' => "Multichoice options",
+          'type' => 'int',
+          'not null' => TRUE,
+          'default' => 0),
+      ),
+      'indexes' => array(
+        'nid' => array('nid')
+      )
+    )
+  );
+  
+  return $schema;
+}
+
+/**
+* Implementation of hook_install()
+*/
+function atwork_polls_install() {
+  db_drop_primary_key('poll_vote');
+  db_add_index('poll_vote', 'nid', array('nid'));
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function atwork_polls_uninstall() {
+  // unfortunately we need to delete votes from multichoice polls when this module is uninstalled
+  // or we won't be able to add back the primary key
+  db_query("DELETE FROM {poll_vote} WHERE nid IN (SELECT nid FROM {atwork_polls} WHERE multichoice > 0)");
+  db_drop_index('poll_vote', 'nid');
+  db_add_primary_key('poll_vote', array('nid','uid','hostname'));
+}
+

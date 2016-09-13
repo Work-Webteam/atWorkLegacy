@@ -1,0 +1,4 @@
+name = Atwork Formats
+description = Modifying input format settings
+package = Atwork
+core = 7.x

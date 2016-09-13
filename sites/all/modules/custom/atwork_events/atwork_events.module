@@ -1,0 +1,142 @@
+ <?php
+
+/*
+ * Implementation of hook_form_alter()
+ *
+ * For user submitted events set custom field permissions
+ */
+function atwork_events_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'event_node_form') {
+    // TODO: why is this here?
+    if (isset($form['cpn'])) {
+      unset($form['cpn']);
+    }
+    /*
+     * remove these fields simply to make the add event page less cluttered.
+     */
+    if (!user_access('edit any event')) {
+      //unset($form['field_image']);
+      unset($form['field_related_links']);
+      $form['field_event_type'][$form['field_event_type']['#language']]['#type'] = 'hidden';
+    }
+
+    // Change some of the other labels
+    $form['title']['#title'] = t('Event Title');
+    $form['body']['und'][0]['#title'] = t('Event Description');
+    if (!user_access('administer users')) {
+     $form['og_group_ref']['#access'] = FALSE;
+     $form['menu']['#access'] = FALSE;
+    }
+
+    //Some tags are reserved for editors and admins only
+    if(!_atwork_is_admin()) {
+      //References helper function in atwork_misc.module
+      _atwork_hide_exec_tags($form);
+    }
+
+    $form['field_date']['und'][0]['show_repeat_settings']['#suffix'] = '<p><em>Check the "repeat" box to display your event info on the calendar at set intervals for your event.</em></p></div>';
+
+    $form['actions']['submit']['#submit'][] = 'atwork_events_custom_submit';
+
+   //dpm($form);
+  }
+    // Edit the redirect after delete - TODO: a module where all delete behavior is kept?
+  if($form_id == 'node_delete_confirm' && isset($form['#node']->og_group_ref) && $form['#node']->og_group_ref['und'][0]['target_id'] && $form['#node']->type == 'event'){
+    $form['#submit'][] = 'atwork_events_redirect_event_delete';
+  }
+}
+
+
+
+/**
+ * Helper function to change submission message
+ */
+
+function atwork_events_custom_submit(&$form, &$form_state){
+  $messages = drupal_get_messages('status');
+  if(isset($form_state['build_info']['args'][0]->og_group_ref) && $form_state['build_info']['args'][0]->og_group_ref){
+    if(isset($form['title']['#default_value'])){
+      drupal_set_message(t('Your event <em class="placeholder">' . $form['title']['#default_value'] . '</em> has been updated and appears on your <a href = "/node/' . $form_state['build_info']['args'][0]->og_group_ref['und'][0]['target_id'] . '/calendar">group calendar</a>. To make edits, click on your event in the calendar and select Edit. '));
+    } else {
+    drupal_set_message(t('Your event <em class="placeholder">' . $form_state['build_info']['args'][0]->title . '</em> has been created and appears on your <a href = "/node/' . $form_state['build_info']['args'][0]->og_group_ref['und'][0]['target_id'] . '/calendar">group calendar</a>. To make edits, click on your event in the calendar and select Edit. '));
+    }
+  } else {
+    if(isset($form['title']['#default_value'])){
+      drupal_set_message(t('Your event <em class="placeholder">' . $form['title']['#default_value'] . '</em> has been updated and appears on the <a href = "/announcements">corporate events calendar</a>. To make edits, click on your event in the calendar and select Edit. '));
+    } else {
+      drupal_set_message(t('Your event <em class="placeholder">' . $form_state['build_info']['args'][0]->title . '</em> has been created and appears on the <a href = "/announcements">corporate events calendar</a>. To make edits, click on your event in the calendar and select Edit. '));
+    }
+  }
+  return;
+}
+
+
+/**
+ * Helper function for delete redirect
+ * @param  $form        event form object
+ * @param  &$form_state event form state
+ *
+ */
+function atwork_events_redirect_event_delete($form, &$form_state) {
+  $form_state['redirect'] = 'node/' . $form['#node']->og_group_ref['und'][0]['target_id'] . '/calendar';
+  return;
+}
+
+
+/*
+ * Implementation of hook_node_view()
+ *
+ * Add an link to our ics-based view
+ */
+function atwork_events_node_view($node, $view_mode, $langcode) {
+
+  if ($node->type != 'event') {
+    return;
+  }
+
+  if ($view_mode == 'full' || $view_mode == 'teaser') {
+    // only display if only one date or ics file won't work
+    $field_date = field_get_items('node', $node, 'field_date');
+
+    if ($node->field_date && count($field_date) === 1) {
+      $node->content['links']['ical'] = array(
+        '#theme' => 'links',
+        '#links' => array(
+          'ical_link' => array(
+            'title' => t('Add to Calendar'),
+            'href' => 'node/' . $node->nid . '/event.ics',
+            'attributes' => array(
+              'title' => t('Download an .ics file and open with Outlook'),
+              'class' => array('ical-link'),
+            ),
+          ),
+        ),
+        '#attributes' => array(
+          'class' => array('links', 'inline'),
+        ),
+      );
+      $node->content['links']['#weight'] = 8;
+    }
+  }
+  if ($view_mode == 'teaser') {
+  }
+}
+
+
+/**
+ * Implements hook_views_pre_render
+ * @param  &$view
+ * To clear group events out of calendar
+ */
+function atwork_events_views_pre_render(&$view){
+  if($view->name == 'calendar'){
+    foreach($view->result as $key){
+      if(isset($key->_field_data['nid']['entity']->og_group_ref) && $key->_field_data['nid']['entity']->og_group_ref) {
+        continue;
+      } else{
+        $result_no_group[] = $key;
+      }
+    }
+    $view->result = $result_no_group;
+  }
+}

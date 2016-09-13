@@ -1,0 +1,4 @@
+name = Atwork Migration
+description = Converting from D6 to D7
+package = Atwork
+core = 7.x

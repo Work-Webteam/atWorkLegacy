@@ -1,0 +1,4 @@
+name = Atwork Fix PDF Icons
+description = Uses JavaScript to append the PDF and Word icons to links ending in .pdf and .doc(x) inserted via the content (GUI/ckeditor) editor in the past.
+core = 7.x
+version = 7.x-0.1.0-dev

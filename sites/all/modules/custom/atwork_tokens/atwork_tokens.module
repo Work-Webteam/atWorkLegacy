@@ -1,0 +1,290 @@
+<?php
+
+/**
+ * Implementation of hook_token_info().
+ * 
+ * Provide some tokens we can use
+ */
+function atwork_tokens_token_info() {
+  $info['tokens']['user']['author-themed'] = array(
+    'name' => t('A themed username'),
+    'description' => t('A username wrapped in theme_username().'),
+  );
+  $info['tokens']['node']['rendered'] = array(
+    'name' => t('Rendered node'),
+    'description' => t('A fully rendereb node with comments.'),
+  );
+  $info['tokens']['node']['author-themed'] = array(
+    'name' => t('A themed username'),
+    'description' => t('A username wrapped in theme_username().'),
+  );
+  $info['tokens']['node']['author-full'] = array(
+    'name' => t('Full name'),
+    'description' => t('A first and last name.'),
+  );
+  $info['tokens']['node']['author-display-name'] = array(
+    'name' => t("A user's display name"),
+    'description' => t("A user's display name if it exists, or account name if it doesn't."),
+  );
+  $info['tokens']['node']['revision-author-themed'] = array(
+    'name' => t('A themed username'),
+    'description' => t('A username wrapped in theme_username().'),
+  );
+  $info['tokens']['node']['revision-author-display-name'] = array(
+    'name' => t("A user's display name"),
+    'description' => t("A user's display name if it exists, or account name if it doesn't."),
+  );
+  $info['tokens']['comment']['author-themed'] = array(
+    'name' => t('A themed username'),
+    'description' => t('A username wrapped in theme_username().'),
+  );
+  $info['tokens']['comment']['author-full'] = array(
+    'name' => t('Full name'),
+    'description' => t('A first and last name.'),
+  );
+  $info['tokens']['comment']['teaser'] = array(
+    'name' => t('Comment teaser'),
+    'description' => t('Arbitrary number of characters then maybe an ellipse.'),
+  );
+  $info['tokens']['comment']['author-display-name'] = array(
+    'name' => t("A user's display name"),
+    'description' => t("A user's display name if it exists, or account name if it doesn't."),
+  );
+  $info['tokens']['file']['aw-filename-caplitalized'] = array(
+    'name' => t("Filename Capitalized"),
+    'description' => t("The capitalized filename."),
+  );
+  $info['tokens']['ecard']['sender-themed'] = array(
+    'name' => t("Sender"),
+    'description' => t("The themed username."),
+  );
+  $info['tokens']['ecard']['receiver-themed'] = array(
+    'name' => t("Receiver"),
+    'description' => t("The themed username."),
+  );
+  
+  $tokens['atwork-groups']['in-groups-text'] = array(
+    'name' => t('"In groups" text'),
+    'description' => t('The text (starting with "in the groups") indicating which groups a peice of content belongs to.'),
+  );
+  
+  $info['tokens']['user']['author-conditional'] = array(
+    'name' => t("Author Conditional"),
+    'description' => t('The themed username or "You".'),
+  );
+  
+  $info['tokens']['user']['author-their-your'] = array(
+    'name' => t("Author Their-Your"),
+    'description' => t('"Their" or "Your" depending on who is logged in.'),
+  );
+  
+  return $info;
+}
+
+/**
+ * Implementation of hook_tokens()
+ * 
+ * Provide some unique tokens
+ */
+function atwork_tokens_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+  $sanitize = !empty($options['sanitize']);
+  
+  if ($type == 'user' && !empty($data['user'])) {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'author-themed':
+          $user = user_load($data['user']->uid);
+          $replacements[$original] = theme('username', array('account' => $user));
+          break;
+        case 'author-conditional':
+          global $user;
+          $author = user_load($data['user']->uid);
+          if ($user->uid == $author->uid) {
+            $replacements[$original] = t('You');
+          }
+          else {
+            $replacements[$original] = theme('username', array('account' => $author));
+          }
+          break;
+        case 'author-their-your':
+          global $user;
+          $author = user_load($data['user']->uid);
+          if ($user->uid == $author->uid) {
+            $replacements[$original] = t('your');
+          }
+          else {
+            $replacements[$original] = t('their');
+          }
+          break;
+      }
+    }
+  }
+  
+  
+  
+  if ($type == 'node' && !empty($data['node'])) {
+    $node = $data['node'];
+
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'rendered':
+          $replacements[$original] = drupal_render(node_view($node));
+          break;
+        case 'author-themed':
+          $user = user_load($node->uid);
+          $replacements[$original] = theme('username', array('account' => $user));
+          break;
+        case 'revision-author-themed':
+          $user = user_load($node->revision_uid);
+          $replacements[$original] = theme('username', array('account' => $user));
+          break;
+        case 'author-display-name':
+          $user = user_load($node->uid);
+          $replacements[$original] = _atwork_display_name($user);
+          break;
+        case 'author-full':
+          $user = user_load($node->uid);
+          $replacements[$original] = _atwork_full_name($user);
+          break;
+        case 'revision-author-display-name':
+          $user = user_load($node->revision_uid);
+          $replacements[$original] = _atwork_display_name($user);
+          break;
+      }
+    }
+  }
+  
+  if ($type == 'comment' && !empty($data['comment'])) {
+    $comment = $data['comment'];
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'author-themed':
+          $user = user_load_by_name($comment->name);
+          $replacements[$original] = theme('username', array('account' => $user));
+          break;
+        case 'author-display-name':
+          $user = user_load_by_name($comment->name);
+          $replacements[$original] = _atwork_display_name($user);
+          break;
+        case 'author-full':
+          $user = user_load_by_name($comment->name);
+          $replacements[$original] = _atwork_full_name($user);
+          break;
+        case 'teaser':
+          $comment_body = field_get_items('comment', $comment, 'comment_body');
+          $comment_teaser = '';
+          if (isset($comment_body[0]['value']) && $comment_body[0]['value']) {
+            if (strlen($comment_body[0]['value']) <= 50) {
+              $comment_teaser = $comment_body[0]['value'];
+            }
+            else {
+              $comment_teaser = substr_replace($comment_body[0]['value'], '', 50);
+              $comment_teaser .= '...';
+            }
+          }
+          
+          $replacements[$original] = $comment_teaser;
+          break;
+      }
+    }
+  }
+  
+  if ($type == 'file' && !empty($data['file'])) {
+    $file = $data['file'];
+
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'aw-filename-caplitalized':
+          $info = pathinfo($file->filename);
+          $replacements[$original] = ucwords($info['filename']);
+          break;
+      }
+    }
+  }
+  
+  if ($type == 'ecard' && !empty($data['ecard'])) {
+    $ecard = $data['ecard'];
+
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'sender-themed':
+          $user = user_load($ecard->uid);
+          $replacements[$original] = theme('username', array('account' => $user));
+          break;
+        
+        case 'receiver-themed':
+          $user = user_load_by_mail($ecard->mail_to);
+          if ($user) {
+            $replacements[$original] = theme('username', array('account' => $user));
+          }
+          elseif (isset($ecard->name_to) && $ecard->name_to) {
+            $replacements[$original] = $ecard->name_to;
+          }
+          else {
+            $replacements[$original] = $ecard->mail_to;
+          }
+          break;
+      }
+    }
+  }
+  
+  if ($type == 'atwork-groups') {
+    if (!empty($tokens['in-groups-text'])) {
+      // Build a list of groups associated with this message.
+      $text = '';
+      $target_nids = array();
+      $related_groups = array();
+      $related_gids = array();
+
+      // First, build an array of target nodes associated with the message.
+      foreach ($data['message']->field_message_node[LANGUAGE_NONE] as $key => $value) {
+        $target_nids[] = $value['target_id'];
+      }
+      // If there are no target nodes, the in-groups-text token should be empty.
+      if (empty($target_nids)) {
+        $replacements['[atwork-groups:in-groups-text]'] = $text;
+        return $replacements;
+      }
+      // Build a list of groups associated with the target nodes.
+      // For now, we assume that the group type is node.
+      foreach ($target_nids as $key => $nid) {
+        $og_memberships_this_target = og_get_entity_groups('node', $nid);
+        if (!empty($og_memberships_this_target['node'])) {
+          $og_memberships_this_target = $og_memberships_this_target['node'];
+          foreach ($og_memberships_this_target as $membership_id => $gid) {
+            $related_gids[] = $gid;
+          }
+        }
+      }
+      // If no groups are associated with any of the targett nodes,
+      // then we have no "in the groups" text.
+      if (empty($related_gids)) {
+        $replacements['[atwork-groups:in-groups-text]'] = '';
+      }
+
+      $related_groups = entity_load('node', $related_gids);
+      // Key the array of groups in a predictable way.
+      $related_groups = array_values($related_groups);
+      // Generate the appropriate text depending on the number of groups
+      // associated with the message:
+      $replacements['[atwork-groups:in-groups-text]'] = atwork_group_related_groups_text($related_groups);
+    }
+  }
+  
+  // put this on bottom as it might have already been filled above
+  // [message:field-message-node:author-themed]
+  if ($type == 'message' && !empty($data['message'])) {
+    foreach ($tokens as $name => $original) {
+      //dpm($name);
+      switch ($name) {
+        case 'field-message-node:author-themed':
+          
+          break;
+      }
+    }
+  }
+  
+  
+  return $replacements;
+}

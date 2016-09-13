@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * Implements hook_form_FORM_ID_alter();
+ */
+function atwork_news_form_article_node_form_alter(&$form, &$form_state, $form_id) {
+
+  $og_context = og_context();
+
+  // hide un-needed form elements if this is a group news
+  if ($og_context) {
+    if(!_atwork_is_admin()) {
+      $form['field_additional_info']['#access'] = FALSE;
+      $form['field_related_links']['#access'] = FALSE;
+      $form['field_additional_info2']['#access'] = FALSE;
+      $form['field_poll']['#access'] = FALSE;
+      $form['field_snipet'][$form['language']['#value']][0]['value']['#default_value'] = 'Article';
+      $form['field_snipet']['#access'] = FALSE;
+      $form['og_group_ref']['#access'] = FALSE;
+      //$form['revision_information']['#access'] = FALSE;
+      $form['options']['status']['#default_value'] = 1;
+      $form['options']['#access'] = TRUE;
+     // $form['options']['promote']['#access'] = FALSE;
+     // $form['options']['sticky']['#access'] = FALSE;
+      $form['actions']['delete']['#access'] = FALSE;
+      drupal_add_css('#edit-body-und-0-format {display:none;}', $option['type'] = 'inline');
+      // Hide exec tags, from helper function in atwork_misc.module
+      _atwork_hide_exec_tags($form);
+    }
+  }
+  //dpm($form);
+}
+
+
+
+
+/*
+ * Implementation of hook_views_pre_render
+ *
+ * Want to hide group content creation button for users who do not have proper permissions
+ *
+ */
+function atwork_news_views_pre_render(&$view) {
+  //dpm($view);
+
+  if ($view->name == 'news' && $view->current_display == 'page_1') {
+    global $user;
+    // This is the associated group id
+    $gid = $view -> args[0];
+    // Load the node and find user's roles
+    $group = node_load($gid);
+    $roles = og_get_user_roles('node', $gid, $user->uid);
+    //dpm($roles);
+
+    // Hide the button link from anyone who does not have the requisite role to create this type of content
+    switch (TRUE) {
+      case (in_array("Roving Reporter", $roles)):
+      case (in_array("administrator", $roles)):
+      case (user_access('administer users')):
+				drupal_add_css('.button {visibility: hidden;}', $option['type'] = 'inline');
+        break;
+      default:
+        drupal_add_css('.button {visibility: hidden;}', $option['type'] = 'inline');
+        break;
+    }
+  }
+}
+
+
+
+
+/*
+function atwork_news_form_alter(&$form, &$form_state, $form_id){
+  if ($form_id == 'article_node_form'){
+    $form["#validate"][] = 'atwork_news_form_validate';
+  }
+
+}
+
+function atwork_news_form_validate($form, &$form_state){
+  dpm($form_state);
+  dpm($form);
+}
+
+*/

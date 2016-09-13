@@ -1,0 +1,4 @@
+name = Atwork LSA Admin
+description = Modifications to the LSA Administration Pages/Functions
+package = Atwork Special Programs
+core = 7.x

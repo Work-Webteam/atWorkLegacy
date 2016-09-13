@@ -1,0 +1,4 @@
+name = Atwork Status Update
+description = Custom changes relating to status updates for groups
+package = Atwork
+core = 7.x

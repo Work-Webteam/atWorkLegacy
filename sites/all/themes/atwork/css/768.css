@@ -1,0 +1,422 @@
+/* 
+
+  --- TOC for this file ---
+
+    -Resets
+
+    -Structure
+
+    -Global elements
+
+    -Navigation
+
+    -Visual media and more global presentational stuff and landing pages
+
+    -Homepage (NID 96)
+
+    -Article, blog, poll, ETC structure, wiki
+
+    -Forms
+
+    -Misc
+
+*/
+
+
+/* ------------------------------------------------------------------- Resets */
+
+body {
+  padding: 0;
+}
+
+/* ---------------------------------------------------------------- Structure */
+#main {
+  margin: 3px;
+  border-top: 1px solid #ccc;
+}
+select#superfish-1-select {
+  margin-left: 3px;
+}
+
+.site-name {
+  display: none; 
+}
+
+.main-header {
+  background: url(../images/logo.png) no-repeat 0 0;
+  min-height: 132px;
+}
+
+#footer {
+  background: #4790db url(/sites/all/themes/atwork/images/footer_grad.gif) repeat-x;
+  padding: 1em;
+  padding-top: 0;
+}
+.region-footer {
+  border: none;
+}
+#footer .block-menu-block, #footer .block-menu-block a {
+  color: white;
+}
+  #footer .block-menu-block a:hover {
+    color: white;
+    text-decoration: underline;
+  }
+.region-footer .expanded {
+  width: 14.275%;
+}
+
+.sidebar.second {
+  padding: 1em;
+}
+
+/* ---------------------------------------------------------- Global Elements */
+ul.inline li:first-child {
+  padding-left: 0;
+}
+/* reset small screen tables */
+.region td, .region th {
+  font-size: 12px;
+}
+
+/* draggable table rows */
+form .field-multiple-table td.field-multiple-drag {
+  width: 30px;
+  padding: 1em 0 0 0;
+}
+form .field-multiple-table td.field-multiple-drag a.tabledrag-handle {
+  width: 17px;
+  height: 20px;
+}
+a.tabledrag-handle .handle {
+  background: url(/misc/draggable.png) no-repeat 4px 5px;
+  height: 20px; 
+  margin: 0;
+  padding: 0;
+  width: 17px;
+}
+.draggable a.tabledrag-handle {
+  height: auto;
+  margin-left: 5px;
+  
+}
+
+/* atwork dev */
+#atwork-env {
+  font-size: large;
+  color: red;
+  width: 100%;
+  text-align: right;
+  padding-right: 5px;
+}
+.test-env #boxes-box-ministry_dropdown select,
+.dev-env #boxes-box-ministry_dropdown select {
+  margin-top: 10px;
+}
+
+/* --------------------------------------------------------------- Navigation */
+.tabs {
+  margin-top: 1em;
+}
+
+#block-boxes-copyright_terms_user {
+  font-size: 0.777em;
+}
+
+/* ----------------------------- Visual media and global presentational stuff */
+/* icons */
+#node-tools i {
+  font-size: 14px;
+}
+
+.node .content img.left,
+.sidebar .content .ckeditor-img.left {
+  float: left;
+}
+.node .content img.right,
+.sidebar .content .ckeditor-img.right {
+  float: right;
+}
+.not-front section.content.inner img.left,
+.node .content img.left,
+.region-content .node .content img[align="left"],
+.sidebar .content img.left {
+  margin-left: 0;
+  margin-top: 0;
+}
+.not-front section.content.inner img.right,
+.node .content img.right,
+.region-content .node .content img[align="right"],
+.sidebar .content img.right {
+  margin-right: 0;
+  margin-top: 0;
+}
+.sidebar .content img.right {
+  margin-left: 0.5em;
+}
+.sidebar .content img.left {
+  margin-right: 0.5em;
+}
+
+.comment-inner {
+  padding-top: 1em;
+}
+
+.not-front .imagecache-node_image {
+  background-color: #FFFFFF;
+  border: 1px solid #A9A9A9;
+  padding: 4px;
+  box-shadow: rgb(153, 153, 153) 1px 1px 5px 0;
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=7,Direction=200,Color='#999999');  
+}
+
+.node-readmore {
+  float: right;
+}
+
+/* comments */
+.flag-abuse_comments {
+  float: right;
+  color: #ccc;
+}
+#subscribe .fieldset-legend {
+  font-weight: bold;
+}
+
+.not-front #primary #comments .box,
+#block-views-node_comments-block {
+  background: url(/sites/all/themes/atwork/images/yellow_grad.gif) repeat-x;
+}
+.teaser-footer .icon-angle-right, .teaser-footer .icon-comment {
+  padding-right: 0.25em;
+  font-weight: bold;
+}
+.view-node-comments .views-exposed-form .views-widget-sort-by {
+  display: none;
+}
+
+.comment {
+  padding-top: 0;
+}
+
+/* -------------------------------------------------------- Homepage (NID 96) */
+#block-views-home_page_blocks-block_2 .jcarousel-container-vertical li {
+  width: 100%;
+  overflow: hidden;
+  min-height: 0; /* reset */
+}
+
+#block-views-home_page_blocks-block_1 .views-field-title-1 a {
+  float: right;
+  padding-top: 1em;
+  font-weight: bold;
+} 
+#block-views-home_page_blocks-block_1 .views-field-title {
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+#block-views-home_page_blocks-block_1 .views-field-field-image {
+  float: left;
+  padding-right: 0.5em;
+}
+
+.front .region-content .block .field-content img {
+  float: left;
+  margin-right: 1em;
+}
+
+.front .region-content .view-footer {
+  float: right;
+}
+
+/* block titles */
+.front .region-content .views-field-title {
+  font-weight: bold;
+}
+.front .region-content .views-field-body {
+  margin-top: 1em;
+}
+
+/* key inititatives */
+.ki-icon {
+  display: none;
+}
+
+.homepage-lower-column li {
+  margin-bottom: 1em;
+}
+
+#block-views-calendar-block_2 .view-header,
+.view-home-page-blocks .views-row {
+  margin-bottom: 0.5em;
+}
+  /* exceptions */
+#block-views-home_page_blocks-wikis .view-home-page-blocks .views-row {
+    margin-bottom: 0;
+  }
+
+/* --------------------------------- Article, blog, poll, ETC structure, wiki */
+/* clear padding on article when there are no tabs */
+.page-node .no-tabs article {
+  padding-top: 0;
+}
+
+/* events */
+.calendar-calendar tr td {
+  text-align: center;
+}
+  .calendar-calendar tr td .month {
+    min-height: 40px;
+    padding-top: 10px;
+  }
+    .lt-ie9 .calendar-calendar tr td .month {
+      padding-top: 15px;
+    }
+.calendar-calendar th.days {
+  padding-bottom: 7px;
+  padding-top: 5px;
+}
+.view-calendar .view-content {
+  margin-top: -17px;
+}
+
+article.node-event .field {
+  margin-bottom: 1em;
+}
+article.node-event .field-name-field-tags {
+  margin-bottom: 0;
+}
+.node-type-event #sidebar-second #registration-form .form-submit {
+  background: url(../images/register.jpg) no-repeat 0 0;
+  height: 44px;
+  border: 0;
+  width: 140px;
+  text-indent: -999px;
+}
+
+
+/* module override */
+table .mini-day-on a {
+  text-decoration: none;
+}
+  table .mini-day-on a:hover {
+    text-decoration: none;
+  }
+.calendar-calendar .has-events {
+  background: #e0eaf1;
+}
+.calendar-calendar .has-events:hover,
+.view-calendar .view-footer > p a:hover {
+  background: #FEF5CA;
+  cursor: pointer;
+}
+/* target "post an event" */
+.view-calendar .view-footer > p a,
+.field-add-to-calendar a {
+  display: block;
+  text-align: center;
+  font-size: 1.25em;
+  margin: 1.25em auto 0.5em auto;
+  width: 50%;
+  border: 1px solid #ccc;
+  padding: 3px;
+  background: #e0eaf1;
+  background: #eee;
+}
+
+/* ecards */
+.ecards-sub-menu {
+  margin-bottom: 1em;
+  margin-top: 0;
+}
+  .ecards-sub-menu li {
+    list-style-image: url(/sites/all/themes/atwork/images/arrow_blue_right.png);
+  }
+
+/* polls (embedded or otherwise) */
+.poll .text,
+.poll .percent {
+  font-size: 14px;
+}
+.poll .form-type-radios input[type="radio"] {
+  margin-bottom: 3px;
+}
+  .poll .form-type-radios .option {
+    padding-left: 0.5em;
+    font-size: 14px;
+  }
+.block-poll ul.links {
+  padding-left: 1.25em;
+}
+  .block-poll ul.links li {
+    list-style-image: url(/sites/all/themes/atwork/images/arrow_blue_right.png);
+    margin-top: 1em;
+    font-size: 14px;
+  }
+  .poll .poll-already-voted,
+  .poll .poll-closed {
+    background-color: #5b9df4;
+    border: 1px solid #4375b7;
+    color: #220000;
+    font-weight: bold;
+    margin: 0 auto;
+    padding: 7px;
+    text-align: center;
+  }
+  .poll .total {
+    color: #047df8;
+    font-size: .9em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+/* taxonomy */ 
+.view-term-landing-page .view-header {
+  font-weight: bold;
+}
+.page-taxonomy-term ul.tabs {
+  margin-bottom: 1em;
+}
+
+.region h2 {
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+.node .posted-date, 
+.comment-inner .submitted {
+  margin-bottom: 1em;
+}
+
+/* -------------------------------------------------------------------- Forms */
+.region-pagetop input {
+  width: 27%;
+  float: none;
+}
+
+#block-search-form {
+  padding-top: 77px;
+  color: white;
+  margin-bottom: 10px;
+  padding-right: 7px;
+}
+#js-submit-search {
+  margin-right: 9px;
+}
+
+.container-inline label {
+  display: inline;
+}
+
+/* --------------------------------------------------------------------- Misc */
+.comment-inner .rate-widget {
+  margin: 0;
+}
+
+.icon-print {
+  font-size: 24px;
+  height: 18px;
+  float: right;
+  cursor: pointer;
+  display: block;
+}

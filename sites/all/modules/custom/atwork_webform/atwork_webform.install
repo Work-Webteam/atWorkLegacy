@@ -1,0 +1,6 @@
+<?php
+
+function atwork_webform_install() {
+  db_change_field('webform_component', 'name', 'name',
+    array('type' => 'text', 'not null' => TRUE));
+}

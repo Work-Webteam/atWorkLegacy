@@ -1,0 +1,385 @@
+<?php
+
+/*
+ * Helper Function
+ * 
+ * Add a revision to comment_revision
+ */
+function _comment_revision_add($comment) {
+  global $user;
+  $vid = db_insert('comment_revision')
+          ->fields(array(
+            'cid' => $comment->cid,
+            'uid' => $comment->uid,
+            'revision_uid' => $user->uid,
+            'subject' => $comment->subject,
+            'timestamp' => REQUEST_TIME,
+            'created' => $comment->created,
+            'status' => $comment->status,
+            'mail' => $comment->mail,
+            'homepage' => $comment->homepage,
+            'language' => $comment->language,
+          ))
+          ->execute();
+  return $vid;
+}
+
+/*
+ * Helper Function
+ * 
+ * Update the vid in the comment table
+ */
+function _comment_revision_update($comment, $vid) {
+  db_update('comment')
+    ->fields(array('vid' => $vid))
+    ->condition('cid', $comment->cid)
+    ->execute();
+}
+
+/*
+ * Helper Function
+ * 
+ * Returns the current number of revisions
+ */
+function _comment_revision_get_num($comment) {
+  $num_revisions = db_query('SELECT COUNT(cid) as num FROM {comment_revision} WHERE cid = :cid',
+    array(
+      ':cid' => $comment->cid
+    ))->fetchCol();
+  
+  return $num_revisions[0] - 1;
+}
+
+/*
+ * Implementation of hook_preprocess_comment()
+ * 
+ * Add a revisions link to comments
+ */
+function comment_revision_preprocess_comment(&$variables){
+  //dpm($variables);
+  $comment = $variables['comment'];
+  
+  $num_revisions = _comment_revision_get_num($comment);
+  
+  if ($num_revisions) {
+    $revisions_link = array(
+      'title' => t('revisions'),
+      'href' => 'comment/' . $comment->cid . '/revisions',
+      'html' => TRUE,
+    );
+    
+    global $user;
+    
+    if ((user_access('view own comment revisions') && ($user->uid == $comment->uid)) || user_access('view own comment revisions')) {
+      $variables['content']['links']['comment']['#links']['comment-revisions'] = $revisions_link;
+    }
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function comment_revision_menu() {
+  $items['comment/%comment/revisions'] = array(
+    'title' => 'Revisions',
+    'page callback' => 'comment_revision_page',
+    'page arguments' => array(1),
+    'access callback' => 'comment_revision_access',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 0,
+  );
+  
+
+  return $items;
+}
+
+/*
+ * Access Callback for comment/%comment/revisions
+ */
+function comment_revision_access($comment) {
+  if (user_access('view comment revisions')) {
+    return TRUE;
+  }
+  
+  global $user;
+  
+  if (!$user->uid) {
+    return FALSE;
+  }
+  
+  if ($user->uid == $comment->uid && user_access('view own comment revisions')) {
+    return TRUE;
+  }
+  
+  return FALSE;
+}
+
+/*
+ * Page Callback of comment/%comment/revisions
+ * 
+ * Display a list of revisions
+ */
+function comment_revision_page($comment) {
+  
+  $header = array(
+    array('data' => 'Created', 'field' => 'created'),
+    array('data' => 'Edited', 'field' => 'timestamp', 'sort' => 'desc'),
+    array('data' => 'Subject', 'field' => 'subject'),
+    array('data' => 'Comment'),
+    array('data' => 'Revision Author'),
+    array('data' => 'Comment Author'),
+    array('data' => 'Status', 'field' => 'status'),
+  );
+  
+  $query = db_select('comment_revision', 'c')->fields('c')->extend('PagerDefault')->extend('TableSort')->orderByHeader($header);
+  
+  $query
+    ->join('field_revision_comment_body', 'b', 'c.vid = b.revision_id');
+  
+  $result = $query
+    ->fields('b')
+    ->condition('cid', $comment->cid)
+    ->orderBy('c.timestamp', 'DESC')
+    ->limit(10)
+    ->execute();
+  
+  $data = array();
+  foreach ($result as $record) {
+    //dpm($record);
+    $author = user_load($record->uid);
+    $revisor = user_load($record->revision_uid);
+    $data[] = array(
+      'created' => format_date($record->created),
+      'edited' => format_date($record->timestamp),
+      'subject' => $record->subject,
+      'comment' => check_markup($record->comment_body_value, $record->comment_body_format),
+      'revision_uid' => theme('username', array('account' => $revisor)),
+      'author' => theme('username', array('account' => $author)),
+      'status' => $record->status ? t('Published') : t('Not Published'),
+    );
+  }
+  
+  $table_variables = array(
+    'header' => $header,
+    'rows' => $data,
+    'attributes' => array(),
+    'caption' => NULL,
+    'colgroups' => array(),
+    'sticky' => FALSE,
+    'empty' => NULL,
+  );
+  
+  $build = theme('table', $table_variables);
+  $build .= theme('pager', array('tags' => array()));
+  
+  return $build;
+}
+
+/*
+ * Implementation of hook_schema_alter()
+ * 
+ * Add our vid field to the comment table
+ */
+function comment_revision_schema_alter(&$schema) {
+  // Add field to existing schema.
+  $schema['comment']['fields']['vid'] = array(
+    'description' => 'The current {comment_revision}.vid version identifier.',
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => FALSE,
+    'default' => NULL,
+  );
+  $schema['comment']['indexes']['vid'] = 'vid';
+  $schema['comment']['unique keys']['cid_vid'] = array('vid', 'cid');
+  $schema['comment']['foreign keys']['comment_revision'] = array(
+    'table' => 'comment_revision',
+    'columns' => array('vid' => 'vid'),
+  );
+}
+
+/*
+ * Implementation of hook_permission()
+ */
+function comment_revision_permission() {
+  return array(
+    'view comment revisions' => array(
+      'title' => t('View comment revisions'),
+      'description' => t('View all comment revisions.'),
+    ),
+    'view own comment revisions' => array(
+      'title' => t('View own comment revisions'),
+      'description' => t('Comment author can view their own comment revisions.'),
+    ),
+  );
+}
+
+/*
+ * Implementation of hook_comment_insert()
+ * 
+ * Add a revision and update revision number
+ */
+function comment_revision_comment_insert($comment) {
+  $vid = _comment_revision_add($comment);
+  
+  if ($vid) {
+    _comment_revision_update($comment, $vid);
+    global $comment_revision_original_body_values;
+    foreach ($comment->comment_body as $language => $fields) {
+      foreach ($fields as $delta => &$field) {
+        $comment_revision_original_body_values[$comment->cid][$language][$delta]['revision_id'] = $vid;
+      }
+    }
+  }
+}
+
+/*
+ * Implementation of hook_exit()
+ * 
+ * The comment module always updates the field_revision_comment_body that has
+ * the same revision_id as entity_id. IE the original comment body.
+ * 
+ * Account for this during exit and restore the original comment body if necessary
+ */
+function comment_revision_exit() {
+  global $comment_revision_original_body_values;
+  if (isset($comment_revision_original_body_values)) {
+    foreach ($comment_revision_original_body_values as $cid => $comment) {
+      foreach ($comment as $language => $fields) {
+        foreach ($fields as $delta => $field) {
+          
+          $fields = array();
+          if (isset($field['value']) && $field['value']) {
+            $fields['comment_body_value'] = $field['value'];
+          }
+          if (isset($field['revision_id']) && $field['revision_id']) {
+            $fields['revision_id'] = $field['revision_id'];
+          }
+          if (isset($field['format']) && $field['format']) {
+            $fields['comment_body_format'] = $field['format'];
+          }
+          
+          
+//          db_update('field_revision_comment_body')
+//            ->fields($fields)
+//            ->condition('entity_id', $cid)
+//            ->condition('revision_id', $cid)
+//            ->execute();
+        }
+      }
+    }
+  }
+}
+
+/*
+ * Implementation of hook_comment_update()
+ * 
+ * Add record to comment_revision table
+ * 
+ * Update vid in comment table
+ * 
+ * Update vid in field_revision_comment_body table
+ */
+function comment_revision_comment_update($comment) {
+
+  $vid = _comment_revision_add($comment);
+  
+  if ($vid) {
+    _comment_revision_update($comment, $vid);
+    
+    global $comment_revision_original_body_values;
+    
+    foreach ($comment->comment_body as $language => $fields) {
+      foreach ($fields as $delta => &$field) {
+        $comment_revision_original_body_values[$comment->cid][$language][$delta]['revision_id'] = $vid;
+      }
+    }
+    
+    db_update('field_revision_comment_body')
+      ->fields(array(
+        'revision_id' => $vid,
+      ))
+      ->condition('entity_id', $comment->cid)
+      ->condition('revision_id', $comment->cid)
+      ->execute();
+  }
+}
+
+/*
+ * Implementation of hook_comment_presave()
+ * 
+ * Get the original comment body and restore it durring hook_exit()
+ */
+function comment_revision_comment_presave($comment) {
+  // If this is a new comment, abort now
+  if (!$comment->cid) {
+    return;
+  }
+  
+  // load the original field_revision_comment_body field
+  // when the vid was the same as the cid as this will get over-written and we will
+  // revert it back in hook_comment_update()
+  
+  $comment_revision_original_body_values = array();
+  global $comment_revision_original_body_values;
+  
+  foreach ($comment->comment_body as $language => $fields) {
+    foreach ($fields as $delta => &$field) {
+      $body = db_query('
+        SELECT comment_body_value, comment_body_format 
+        FROM {field_revision_comment_body} 
+        WHERE language = :language
+          AND delta = :delta
+          AND entity_id = :cid
+        ORDER BY revision_id ASC
+        LIMIT 1
+        ',
+        array(
+          ':language' => $language,
+          ':delta' => $delta,
+          ':cid' => $comment->cid,
+      ))->fetchObject();
+      
+      $comment_revision_original_body_values[$comment->cid][$language][$delta]['value'] = $body->comment_body_value;
+      $comment_revision_original_body_values[$comment->cid][$language][$delta]['format'] = $body->comment_body_format;
+    }
+  }
+}
+
+/*
+ * Implementation of hook_comment_load()
+ * 
+ * Add the proper body value associated with the comment vid
+ */
+function comment_revision_comment_load($comments) {
+  foreach ($comments as $cid => &$comment) {
+    // get vid
+    $vid = db_query('SELECT vid FROM {comment} WHERE cid = :cid', array(':cid' => $cid))->fetchObject();
+    $comment->vid = $vid->vid;
+    
+    // now over-write the body field based on the revision
+    foreach ($comment->comment_body as $language => $fields) {
+      foreach ($fields as $delta => $field) {
+        $body = db_query('
+          SELECT comment_body_value, comment_body_format 
+          FROM {field_revision_comment_body} 
+          WHERE revision_id = :vid 
+            AND language = :language
+            AND delta = :delta
+          ',
+          array(
+            ':vid' => $comment->vid,
+            ':language' => $language,
+            ':delta' => $delta,
+        ))->fetchObject();
+        
+        if ($body) {
+          $comment->comment_body[$language][$delta]['value'] = $body->comment_body_value;
+          $comment->comment_body[$language][$delta]['format'] = $body->comment_body_format;
+          $comment->comment_body[$language][$delta]['safe_value'] = check_markup($body->comment_body_value, $body->comment_body_format, $language);
+        }
+      }
+    }
+  }
+}
+

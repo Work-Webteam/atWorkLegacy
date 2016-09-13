@@ -1,0 +1,45 @@
+<?php
+
+/*
+ * Implementation of hook_filter_info()
+ */
+function redirect_filter_filter_info() {
+  $filters['redirect_filter'] = array(
+    'title' => t('Redirect Filter'),
+    'description' => t('You may redirect to url using the code <code>[redirect:from=nodeID to=http://foo.bar.com/bla-bla]</code>.'),
+    'process callback' => '_redirect_filter',
+    'tips callback' => '_redirect_filter_tips',
+  );
+  return $filters;
+}
+
+/*
+ * Filter Callback of redirect_filter
+ */
+function _redirect_filter($text, $filter) {
+  if (preg_match("/\[redirect:from=([0-9]+) to=([^\s\]]+)\]/i", $text, $match)) {
+    if (arg(0)=='node' && is_numeric(arg(1)) && arg(1) == $match[1] && arg(2) <> 'edit'){
+      drupal_goto($match[2]);
+    }     
+  }
+  return $text;
+}
+
+/*
+ * Implementation of hook_filter_tips()
+ */
+function _redirect_filter_tips($filter, $format, $long = FALSE) {
+  if ($long) {
+    return t('
+      <p><strong>Redirect Filter</strong></p>
+      <p>You may redirect to url using the code <code>[redirect:from=nodeID to=http://foo.bar.com/bla-bla]</code>.</p>
+	  <p>Do NOT use it in teaser.</p>
+      <p>Examples:</p>
+      <ul>
+        <li><code>[redirect:from=999 to=htttps://gww.gov.bc.ca/news/2010/0315/foo-bar-bla-bla]</code></li>
+      </ul>');
+  }
+  else {
+    return t('You may insert redirect with <code>[redirect:from=nodeID to=http://foo.bar.com/bla-bla]</code>. Do NOT use it in teaser.');
+  }
+}
