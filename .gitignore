@@ -11,6 +11,7 @@
 sites/*/*settings*.php
 sites/*/*settings*.php*
 .htaccess
+sites/default/custom/
 
 # Ignore paths that contain generated content.
 files/
