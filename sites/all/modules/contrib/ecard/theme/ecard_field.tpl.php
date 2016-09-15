@@ -11,9 +11,9 @@ $salutation = "Hi" . $salutation;
 $name_to = $salutation;
 
 ?>
-
+<!-- Update made to remove the name from and regards text with ecards-->
 <div class="ecard">
-  <div class="name-to"><?php print $name_to; ?></div>
+  <!--<div class="name-to"><?php print $name_to; ?></div>-->
   <div class="content"><?php print $content; ?></div>
-  <div class="footer"><?php print $footer; ?></div>
+  <!--<div class="footer"><?php print $footer; ?></div>-->
 </div>
