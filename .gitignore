@@ -95,7 +95,7 @@ newsletter_stats/*
 nl_images
 rootSerial.php
 SpryEffects.js
-template.php
+/template.php
 templates/*
 theme-settings.php
 _tmpProfiles.php
