@@ -306,3 +306,22 @@ function atwork_ecards_views_post_render(&$view, &$output, &$cache) {
 function atwork_ecards_preprocess_ecard_formatter_view(&$variables) {
   drupal_add_js('misc/form.js');
 }
+
+/**
+ * Implements function hook_node_view
+ * The closing signature is hard-coded in a .inc file in the contrib module - we want to change the layout.
+ */
+
+function atwork_ecards_node_view($node, $view_mode, $langcode){
+  if($node->type !== ecard){
+    return;
+  }
+  if(isset($node->content['field_e_card'][0]['#markup']) && $node->content['field_e_card'][0]['#markup']){
+    $mark_up  = $node->content['field_e_card'][0]['#markup'];
+    $markup_fix = explode('class="footer">', $mark_up);
+    if(isset($markup_fix[1]) && $markup_fix[1]){
+      $markup_fix[1] = "<p></p><p>Regards,</p><p> " . substr($markup_fix[1], 7) . "</p><br />";
+    }
+    $node->content['field_e_card'][0]['#markup'] = $markup_fix[0] . 'class="footer">' . $markup_fix[1];
+  }
+}
