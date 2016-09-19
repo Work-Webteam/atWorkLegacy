@@ -313,7 +313,7 @@ function atwork_ecards_preprocess_ecard_formatter_view(&$variables) {
  */
 
 function atwork_ecards_node_view($node, $view_mode, $langcode){
-  if($node->type !== ecard){
+  if($node->type !== "ecard"){
     return;
   }
   if(isset($node->content['field_e_card'][0]['#markup']) && $node->content['field_e_card'][0]['#markup']){
