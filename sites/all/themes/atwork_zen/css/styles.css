@@ -4590,6 +4590,14 @@ article.node-question .tiled-node-links {
 .node-ecard img {
 	border: solid 1px #818283;
 }
+/* CSS changes specific to the ecard displayed to the end user. Changes made to text spacing below the ecard image */
+.node-ecard .field-name-field-e-card {
+	margin-top: 5px;
+}
+.node-ecard .field-name-field-e-card .content {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
 /*----------------- End of Section--------------------*/
 
 
