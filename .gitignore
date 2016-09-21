@@ -85,20 +85,20 @@ Temporary Items
 
 # Non Drupal PSA files and directories
 browscap/*
-clear_apc.php
-dump.txt
-IEStandards.xml
-index_xmtoc436pl.php
-mem_fs/*
-newsletter_stats/*
-nl_images
-rootSerial.php
-SpryEffects.js
+/clear_apc.php
+/dump.txt
+/IEStandards.xml
+/index_xmtoc436pl.php
+/mem_fs/*
+/newsletter_stats/*
+/nl_images
+/rootSerial.php
+/SpryEffects.js
 /template.php
-templates/*
-theme-settings.php
-_tmpProfiles.php
-web_bug/*
+/templates/*
+/theme-settings.php
+/_tmpProfiles.php
+/web_bug/*
 
 
 # Ignore Gulp files
