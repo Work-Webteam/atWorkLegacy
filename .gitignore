@@ -84,7 +84,6 @@ Temporary Items
 
 
 # Non Drupal PSA files and directories
-authcache.php
 browscap/*
 clear_apc.php
 dump.txt
