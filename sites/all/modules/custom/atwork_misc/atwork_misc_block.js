@@ -4,7 +4,7 @@
     $("#twitter-widget-0").css('min-height','');
     $(".twitter-timeline").contents().find("p").css("font-size","10pt");
     $(".twitter-timeline").contents().find("p").css("line-height","normal");
-    $("#twitter-widget-0").height(80);
+    $("#twitter-widget-0").height(170);
     $('#twitter-widget-0' ).attr( 'src', function ( i, val ) { return val; });
     $("#olympic_block_roll_up_down").text("+ View More");
     $("#olympic_placeholder_for_additional_content").hide();
@@ -13,7 +13,7 @@
 
   function resizeOlympicBlock(){
     $("#twitter-widget-0").css('min-height','');
-    if($("#twitter-widget-0").height() == 80){
+    if($("#twitter-widget-0").height() == 170){
       $("#twitter-widget-0").animate({height:'300px'}, {queue:false, duration:300});
       $("#twitter_feed_div").animate({height:'300px'}, {queue:false, duration:300});
       $("#olympic_medal_count_containers").animate({'marginTop' : "+=55px"});
@@ -26,8 +26,8 @@
       $("#olympic_placeholder_for_additional_content").slideDown(300);
       //$("#olympic_placeholder_for_additional_content2").slideDown(500);
     } else {
-      $("#twitter-widget-0").animate({height:'80px'}, {queue:false, duration:300});
-      $("#twitter_feed_div").animate({height:'80px'}, {queue:false, duration:300});
+      $("#twitter-widget-0").animate({height:'170px'}, {queue:false, duration:300});
+      $("#twitter_feed_div").animate({height:'170px'}, {queue:false, duration:300});
       $("#olympic_medal_count_containers").animate({'marginTop' : "-=55px"});
       $("#olympic_gold_medal_count_container").animate({'marginTop' : "-=40px"});
       $("#olympic_silver_medal_count_container").animate({'marginTop' : "-=40px"});
