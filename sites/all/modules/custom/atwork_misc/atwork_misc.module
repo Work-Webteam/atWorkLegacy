@@ -14,7 +14,7 @@ function _atwork_user_changed($original_account, $updated_account) {
     'field_favourites',
     'field_image',
  //   'field_skills',
-    );
+  );
 
   //normalize for und
   $original_values = array();
@@ -53,29 +53,29 @@ function _atwork_instructions($var_name) {
   $atwork_instructions = $atwork_instructions['value'];
 
   $js = <<<EOT
-  (function($) {
-    $(document).ready(function() {
-      $('.atwork-instuction').each(function() {
-        $(this).qtip({
-          content: {
+(function($) {
+  $(document).ready(function() {
+    $('.atwork-instuction').each(function() {
+      $(this).qtip({
+        content: {
             attr: 'data-tooltip'
-          },
-          position: {
-            target: $(this).find('i')
-          },
-          hide: {
-            fixed: true,
-            event: 'click mouseleave',
-            target: $(this).find('i')
-          },
-          show: {
-            target: $(this).find('i')
-          }
-        });
+        },
+        position: {
+          target: $(this).find('i')
+        },
+        hide: {
+          fixed: true,
+          event: 'click mouseleave',
+          target: $(this).find('i')
+        },
+        show: {
+          target: $(this).find('i')
+        }
       });
     });
-  })(jQuery);
-  EOT;
+  });
+})(jQuery);
+EOT;
 
   drupal_add_js($js, 'inline');
 
@@ -98,23 +98,23 @@ function _atwork_fa($icon, $extra = '') {
       // name changes to support both themes at same time
       switch ($icon) {
         case 'circle-blank':
-        $icon = 'circle-o';
-        break;
+          $icon = 'circle-o';
+          break;
         case 'envelope-alt':
-        $icon = 'envelope-o';
-        break;
+          $icon = 'envelope-o';
+          break;
         case 'comments-alt':
-        $icon = 'comments-o';
-        break;
+          $icon = 'comments-o';
+          break;
         case 'facetime-video':
-        $icon = 'video-camera';
-        break;
+          $icon = 'video-camera';
+          break;
         case 'star-empty':
-        $icon = 'star-o';
-        break;
+          $icon = 'star-o';
+          break;
       }
 
-      return '<i ' . $extra . 'class="fa fa-' . $icon . '"></i> ';
+    return '<i ' . $extra . 'class="fa fa-' . $icon . '"></i> ';
     }
   }
 }
@@ -198,7 +198,7 @@ function _atwork_add_link_icons(&$variables) {
   // flag
   if (isset($variables['content']['footer']['links']['flag']['#links']['flag-abuse_nodes']['title'])) {
     $variables['content']['footer']['links']['flag']['#links']['flag-abuse_nodes']['title'] =
-    str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $variables['content']['footer']['links']['flag']['#links']['flag-abuse_nodes']['title']);
+      str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $variables['content']['footer']['links']['flag']['#links']['flag-abuse_nodes']['title']);
     $variables['content']['footer']['links']['flag']['#links']['flag-abuse_nodes']['html'] = TRUE;
   }
 
@@ -319,12 +319,12 @@ function atwork_misc_node_view($node, $view_mode, $langcode) {
   // js for front page
   if ($node->nid == 96) {
     $js = <<<EOT
-    (function($) { $(document).ready(function() {
-      $('.jcarousel').jcarousel({
-        wrap: 'circular',
-      })
-    });})(jQuery);
-    EOT;
+(function($) { $(document).ready(function() {
+  $('.jcarousel').jcarousel({
+    wrap: 'circular',
+  })
+});})(jQuery);
+EOT;
     drupal_add_js('sites/all/libraries/jcarousel/lib/jquery.jcarousel.min.js');
     drupal_add_js('sites/all/libraries/jcarousel/lib/jquery.jcarousel-control.min.js');
     drupal_add_js($js, 'inline');
@@ -372,21 +372,21 @@ function atwork_misc_node_view($node, $view_mode, $langcode) {
       $parent = menu_link_get_preferred($path);
       //dpm($parent);
       $parameters = array(
-      'active_trail' => array($parent['plid']),
-      'only_active_trail' => FALSE,
-      'min_depth' => $parent['depth']+1,
-      'max_depth' => $parent['depth']+1,
-      'conditions' => array('plid' => $parent['mlid']),
-      );
+          'active_trail' => array($parent['plid']),
+          'only_active_trail' => FALSE,
+          'min_depth' => $parent['depth']+1,
+          'max_depth' => $parent['depth']+1,
+          'conditions' => array('plid' => $parent['mlid']),
+        );
 
       $children = menu_build_tree($parent['menu_name'], $parameters);
 
       if ($children) {
         $node->content['atwork_menu'] = array(
-        '#prefix' => '<div class="atwork-menu">',
-        '#suffix' => '</div>',
-        '#weight' => 0,//
-        'links' => menu_tree_output($children),
+          '#prefix' => '<div class="atwork-menu">',
+          '#suffix' => '</div>',
+          '#weight' => 0,//
+          'links' => menu_tree_output($children),
         );
         $node->content['body']['#weight'] = 1;
       }
@@ -412,21 +412,21 @@ function atwork_misc_node_view($node, $view_mode, $langcode) {
 
       //return;
       $parameters = array(
-      'active_trail' => array($parent['plid']),
-      'only_active_trail' => FALSE,
-      'min_depth' => $parent['depth']+1,
-      'max_depth' => $parent['depth']+1,
-      'conditions' => array('plid' => $parent['mlid']),
-      );
+          'active_trail' => array($parent['plid']),
+          'only_active_trail' => FALSE,
+          'min_depth' => $parent['depth']+1,
+          'max_depth' => $parent['depth']+1,
+          'conditions' => array('plid' => $parent['mlid']),
+        );
 
       $children = menu_build_tree($parent['menu_name'], $parameters);
 
       if ($children) {
         $node->content['atwork_menu'] = array(
-        '#prefix' => '<div class="atwork-menu">' . $header_text,
-        '#suffix' => '</div>',
-        '#weight' => 0,//
-        'links' => menu_tree_output($children),
+          '#prefix' => '<div class="atwork-menu">' . $header_text,
+          '#suffix' => '</div>',
+          '#weight' => 0,//
+          'links' => menu_tree_output($children),
         );
         $node->content['body']['#weight'] = 1;
       }
@@ -443,13 +443,13 @@ function atwork_misc_menu() {
   drupal_add_library('system', 'drupal.ajax');
   $items = array();
   $items['tutorials/ajax/%'] = array(
-  'delivery callback' => 'ajax_deliver',
-  'title' => 'Tutorial Callback',
-  'description' => 'To check if user has seen tutorial',
-  'page callback' => 'atwork_misc_tutorial_check',
-  'page arguments' => array(2),
-  'access arguments' => array('access content'),
-  'type' => MENU_CALLBACK,
+    'delivery callback' => 'ajax_deliver',
+    'title' => 'Tutorial Callback',
+    'description' => 'To check if user has seen tutorial',
+    'page callback' => 'atwork_misc_tutorial_check',
+    'page arguments' => array(2),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
   );
 
   return $items;
@@ -466,13 +466,13 @@ function atwork_misc_tutorial_check($argument) {
     $account = user_load($user->uid);
     // Mark them as though they have seen it
     $edit = array(
-    'field_home_page_tutorial' => array(
-    'und' => array(
-    0 => array(
-    'value' => 0
-    ),
-    ),
-    ),
+      'field_home_page_tutorial' => array(
+        'und' => array(
+          0 => array(
+            'value' => 0
+          ),
+        ),
+      ),
     );
     user_save($account, $edit);
   }
@@ -524,14 +524,14 @@ function atwork_misc_node_view_alter(&$build) {
  */
 function atwork_misc_menu_alter(&$items) {
   $items['admin/people/create'] = array(
-  'title' => 'Add user',
-  'description' => 'Manage user accounts, roles, and permissions.',
-  'page callback' => 'user_admin',
-  'page arguments' => array('create'),
-  'access arguments' => array('administer users'),
-  'position' => 'left',
-  'weight' => -4,
-  'file' => 'modules/user/user.admin.inc',
+    'title' => 'Add user',
+    'description' => 'Manage user accounts, roles, and permissions.',
+    'page callback' => 'user_admin',
+    'page arguments' => array('create'),
+    'access arguments' => array('administer users'),
+    'position' => 'left',
+    'weight' => -4,
+    'file' => 'modules/user/user.admin.inc',
   );
 
 
@@ -568,7 +568,7 @@ function atwork_misc_menu_alter(&$items) {
  */
 function atwork_misc_admin_paths_alter(&$paths) {
     // Treat all user pages as not administrative.
-  $paths['user/*'] = FALSE;
+    $paths['user/*'] = FALSE;
 }
 
 /*
@@ -632,22 +632,22 @@ function atwork_misc_form_alter(&$form, &$form_state, $form_id) {
     //dpm($form);
 
     $js = <<<EOT
-    jQuery(document).ready(function($) {
-      $('#subscriptions-ui-node-form').hide();
-      $('#node-tools .subscription-flyout-toggle').click(function() {
-        $('#subscriptions-ui-node-form').slideToggle();
-        return false;
-      });
-    });
+jQuery(document).ready(function($) {
+  $('#subscriptions-ui-node-form').hide();
+  $('#node-tools .subscription-flyout-toggle').click(function() {
+    $('#subscriptions-ui-node-form').slideToggle();
+    return false;
+  });
+});
 
-    EOT;
+EOT;
     drupal_add_js($js, array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
   }
   if ($form['#id'] == 'views-exposed-form-content-page') {
     if (isset($form['field_migration_flag_value'])) {
       $form['field_migration_flag_value']['#options'] = array(
-      'All' => 'All',
-      1 => 'Flagged',
+        'All' => 'All',
+        1 => 'Flagged',
       );
     }
     //dpm($form);
@@ -658,31 +658,31 @@ function atwork_misc_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'subscriptions_add_form') {
     // node type
     if (isset($form['stype']['#value']) && $form['stype']['#value'] == 'node' &&
-     isset($form['sid']['#value']) && is_numeric($form['sid']['#value'])) {
+         isset($form['sid']['#value']) && is_numeric($form['sid']['#value'])) {
       if ($node = node_load($form['sid']['#value'])) {
         $form['header'] = array(
-        '#markup' => t('Subscribe to') . ' ' . strtolower(node_type_get_name($node)) . ': <em>' . $node->title . '</em>',
-        '#weight' => -10,
+          '#markup' => t('Subscribe to') . ' ' . strtolower(node_type_get_name($node)) . ': <em>' . $node->title . '</em>',
+          '#weight' => -10,
         );
       }
     }
     // taxa type
     if (isset($form['stype']['#value']) && $form['stype']['#value'] == 'taxa' &&
-     isset($form['sid']['#value']) && is_numeric($form['sid']['#value'])) {
+         isset($form['sid']['#value']) && is_numeric($form['sid']['#value'])) {
       if ($term = taxonomy_term_load($form['sid']['#value'])) {
         $form['header'] = array(
-        '#markup' => t('Subscribe to tag:') . ' <em>' . $term->name . '</em>',
-        '#weight' => -10,
+          '#markup' => t('Subscribe to tag:') . ' <em>' . $term->name . '</em>',
+          '#weight' => -10,
         );
       }
     }
     // content type
     if (isset($form['stype']['#value']) && $form['stype']['#value'] == 'type' &&
-     isset($form['sid']['#value']) && $types = node_type_get_types()) {
+         isset($form['sid']['#value']) && $types = node_type_get_types()) {
       if (isset($types[$form['sid']['#value']]->name)) {
         $form['header'] = array(
-        '#markup' => t('Subscribe to all content of type:') . ' <em>' . $types[$form['sid']['#value']]->name . '</em>',
-        '#weight' => -10,
+          '#markup' => t('Subscribe to all content of type:') . ' <em>' . $types[$form['sid']['#value']]->name . '</em>',
+          '#weight' => -10,
         );
       }
     }
@@ -772,83 +772,83 @@ function atwork_misc_form_alter(&$form, &$form_state, $form_id) {
     // fix silly workbench_moderation issue https://drupal.org/node/1408858
     if (isset($form['workbench_moderation_state_current']['#value'])
       && isset($form['options']['workbench_moderation_state_new']['#options'][$form['workbench_moderation_state_current']['#value']]) ) {
-        $form['options']['workbench_moderation_state_new']['#default_value'] = $form['workbench_moderation_state_current']['#value'];
-        unset($form['options']['status']['#access']);
-        $form['options']['status']['#disabled'] = TRUE;
-        $form['options']['status']['#attributes'] = array(
+      $form['options']['workbench_moderation_state_new']['#default_value'] = $form['workbench_moderation_state_current']['#value'];
+      unset($form['options']['status']['#access']);
+      $form['options']['status']['#disabled'] = TRUE;
+      $form['options']['status']['#attributes'] = array(
         'class' => array(
-        'hidden',
+          'hidden',
         ),
-        );
-      }
-      $form['#validate'][] = 'atwork_node_form_validate';
+      );
+    }
+    $form['#validate'][] = 'atwork_node_form_validate';
     //dpm($form);
-    }
+  }
 
-    if ($form_id == 'contact_site_form') {
-      $form['name']['#default_value'] = _atwork_display_name($GLOBALS['user']);
-      $form['name']['#disabled'] = TRUE;
-      $form['mail']['#disabled'] = TRUE;
-      $form['#submit'][] = 'atwork_misc_contact_form_submit';
-    }
+  if ($form_id == 'contact_site_form') {
+    $form['name']['#default_value'] = _atwork_display_name($GLOBALS['user']);
+    $form['name']['#disabled'] = TRUE;
+    $form['mail']['#disabled'] = TRUE;
+    $form['#submit'][] = 'atwork_misc_contact_form_submit';
+  }
 
   // hide alt field
-    if (isset($form['field_image'])) {
-      $form['field_image']['#after_build'][] = 'atwork_image_field_after_build';
-    }
+  if (isset($form['field_image'])) {
+    $form['field_image']['#after_build'][] = 'atwork_image_field_after_build';
+  }
 
   // rename summary
-    if (isset($form['#node_edit_form']) && isset($form['body']) && isset($form['body'][$form['body']['#language']][0]['summary'])) {
-      $form['body'][$form['body']['#language']][0]['summary']['#title'] = t('Teaser');
-      $form['body'][$form['body']['#language']][0]['summary']['#description'] = t('Leave blank to use trimmed value of full text as the teaser');
-    }
-
-    if ($form_id == 'article_node_form') {
-      $form['options']['sticky']['#title'] = t('Top news story (sticky)');
-      $form['options']['promote']['#title'] = t('Scrolling news (promoted)');
-    }
-
-    if ($form_id == 'search_block_form') {
-      $form['actions']['submit']['#type'] = 'image_button';
-      $form['search_block_form']['#suffix'] = _atwork_fa('search', 'style="cursor: pointer;" onclick="document.getElementById(\'search-block-form\').submit()"');
-      $form['actions']['submit']['#value'] = '';
-    }
+  if (isset($form['#node_edit_form']) && isset($form['body']) && isset($form['body'][$form['body']['#language']][0]['summary'])) {
+    $form['body'][$form['body']['#language']][0]['summary']['#title'] = t('Teaser');
+    $form['body'][$form['body']['#language']][0]['summary']['#description'] = t('Leave blank to use trimmed value of full text as the teaser');
   }
 
-  function _atwork_misc_ct_plural($name) {
-    switch ($name) {
-      case 'blog':
+  if ($form_id == 'article_node_form') {
+    $form['options']['sticky']['#title'] = t('Top news story (sticky)');
+    $form['options']['promote']['#title'] = t('Scrolling news (promoted)');
+  }
+
+  if ($form_id == 'search_block_form') {
+    $form['actions']['submit']['#type'] = 'image_button';
+    $form['search_block_form']['#suffix'] = _atwork_fa('search', 'style="cursor: pointer;" onclick="document.getElementById(\'search-block-form\').submit()"');
+    $form['actions']['submit']['#value'] = '';
+  }
+}
+
+function _atwork_misc_ct_plural($name) {
+  switch ($name) {
+    case 'blog':
       return t('Blog entries');
-      case 'article':
+    case 'article':
       return t('News');
-      case 'announcement':
+    case 'announcement':
       return t('Announcements');
-      case 'event':
+    case 'event':
       return t('Events');
-      case 'wiki':
+    case 'wiki':
       return t('Wiki entries');
-    }
-    return $name;
   }
+  return $name;
+}
 
-  /*
+/*
  * submit callback
  *
  * Add the drupal messages subscriptions module should
  */
-  function _atwork_misc_subscriptions_submit(&$form, &$form_state) {
-    if (isset($form_state['values']['subscriptions'][1]) && isset($form_state['values']['updates'][1]) && isset($form_state['values']['params'][1])) {
-      global $user;
-      $params = array(
+function _atwork_misc_subscriptions_submit(&$form, &$form_state) {
+  if (isset($form_state['values']['subscriptions'][1]) && isset($form_state['values']['updates'][1]) && isset($form_state['values']['params'][1])) {
+    global $user;
+    $params = array(
       'recipient_uid' => $user->uid,
-      );
+    );
 
-      $subscriptions = subscriptions_get($params);
+    $subscriptions = subscriptions_get($params);
 
-      if (isset($form_state['values']['params'])) {
-        foreach ($form_state['values']['params'] as $key => $sub) {
-          switch ($sub['field']) {
-            case 'nid':
+    if (isset($form_state['values']['params'])) {
+      foreach ($form_state['values']['params'] as $key => $sub) {
+        switch ($sub['field']) {
+          case 'nid':
             // this subscription is subscribed to
             if ($form_state['values']['subscriptions'][$key]) {
               // is this subscription new?
@@ -864,7 +864,7 @@ function atwork_misc_form_alter(&$form, &$form_state, $form_id) {
               }
             }
             break;
-            case 'type':
+          case 'type':
             // this subscription is subscribed to
             if ($form_state['values']['subscriptions'][$key]) {
               // is this subscription new?
@@ -893,7 +893,7 @@ function atwork_misc_form_alter(&$form, &$form_state, $form_id) {
               }
             }
             break;
-            case 'tid':
+          case 'tid':
             if (isset($form_state['values']['params'][$key]['value']) && $form_state['values']['params'][$key]['value'] && $term = taxonomy_term_load($form_state['values']['params'][$key]['value'])) {
               // this subscription is subscribed to
               if ($form_state['values']['subscriptions'][$key]) {
@@ -924,21 +924,21 @@ function atwork_misc_form_alter(&$form, &$form_state, $form_id) {
               }
             }
             break;
-          }
         }
       }
     }
   }
+}
 
-  /*
+/*
  * Afterbuild Callback for field_image
  *
  * Hide the alt field as it is useless (we set alt to match title)
  */
-  function atwork_image_field_after_build(&$element) {
-    if ((isset($element['parents'][0]) && $element['parents'][0] = 'field_image') ||
-     (isset($element['#parents'][0]) && $element['#parents'][0] = 'field_image') &&
-   isset($element['#language']))     {
+function atwork_image_field_after_build(&$element) {
+  if ((isset($element['parents'][0]) && $element['parents'][0] = 'field_image') ||
+       (isset($element['#parents'][0]) && $element['#parents'][0] = 'field_image') &&
+       isset($element['#language']))     {
     // hide alt field
     for ($i = 0; $i <= $element[$element['#language']]['#file_upload_delta']; $i++) {
       $element[$element['#language']][$i]['alt']['#access'] = FALSE;
@@ -961,7 +961,7 @@ function atwork_misc_field_widget_form_alter(&$element, &$form_state, $context) 
     // override the text.js file so we can use "Teaser" instead of "Summary"
     if ($element['#field_name'] == 'body' && isset($element['summary'])) {
       $element['summary']['#attached']['js'] = array(
-      0 => drupal_get_path('module', 'atwork_misc') . '/text.js'
+        0 => drupal_get_path('module', 'atwork_misc') . '/text.js'
       );
     }
     if ($element['#field_name'] == 'field_image') {
@@ -1057,22 +1057,22 @@ function atwork_misc_init() {
   // ugly hack for scrolling news
   if (drupal_is_front_page()) {
     $js = <<<EOD
-    jQuery(document).ready(function($) {
-      if ($('#block-views-home_page_blocks-block_2 .view-display-id-block_2').length) {
-        $('#block-views-home_page_blocks-block_2 .view-display-id-block_2').css("padding", 0);
-      }
-    });
-    EOD;
+jQuery(document).ready(function($) {
+  if ($('#block-views-home_page_blocks-block_2 .view-display-id-block_2').length) {
+    $('#block-views-home_page_blocks-block_2 .view-display-id-block_2').css("padding", 0);
+  }
+});
+EOD;
     drupal_add_js($js, 'inline');
   }
 
   // admin css
   if (arg(0) == 'admin') {
     $css = <<<EOD
-    .views-ui-dialog #views-ajax-popup {
-      background-color: white;
-    }
-    EOD;
+.views-ui-dialog #views-ajax-popup {
+  background-color: white;
+}
+EOD;
     drupal_add_css($css, array('type' => 'inline'));
   }
   drupal_add_css('.ckeditor-hide{visibility: hidden;}', array('type' => 'inline'));
@@ -1126,9 +1126,9 @@ function atwork_misc_views_pre_view(&$view, &$display_id, &$args) {
     $sid = subscriptions_get_subscription($user->uid, 'node', 'tid', $view->args[0]);
 
     $attributes = array(
-    'query' => array(
-    'destination' => current_path(),
-    ),
+      'query' => array(
+        'destination' => current_path(),
+      ),
     );
 
     if (!$sid) {
@@ -1140,13 +1140,13 @@ function atwork_misc_views_pre_view(&$view, &$display_id, &$args) {
 
 
     $options = array(
-    'id' => 'area',
-    'table' => 'views',
-    'field' => 'area',
-    'empty' => FALSE,
-    'content' => $header,
-    'format' => 'full_html',
-    'tokenize' => 0,
+      'id' => 'area',
+      'table' => 'views',
+      'field' => 'area',
+      'empty' => FALSE,
+      'content' => $header,
+      'format' => 'full_html',
+      'tokenize' => 0,
     );
     $view->display_handler->set_option('header', array('text' => $options));
 
@@ -1170,156 +1170,156 @@ function atwork_misc_views_pre_render(&$view) {
         }
         if (!$row->field_field_display_name) {
           $row->field_field_display_name = array(
-          0 => array(
-          'rendered' => array(
-          '#markup' => $account->name,
-          '#access' => TRUE,
-          ),
-          'raw' => array(
-          'value' => $account->name,
-          'format' => NULL,
-          'safe_value' => $account->name,
-          ),
-          ),
+            0 => array(
+              'rendered' => array(
+                '#markup' => $account->name,
+                '#access' => TRUE,
+              ),
+              'raw' => array(
+                'value' => $account->name,
+                'format' => NULL,
+                'safe_value' => $account->name,
+              ),
+            ),
           );
         }
 
         if ((!isset($row->_field_data['users_node_uid']['entity']->uid) || !$row->_field_data['users_node_uid']['entity']->uid) &&
-          (!isset($row->_field_data['users_comment_uid']['entity']->uid) || !$row->_field_data['users_comment_uid']['entity']->uid)) {
-            $view->atwork_strip_anon_links = TRUE;
-            $row->field_field_display_name = array(
+            (!isset($row->_field_data['users_comment_uid']['entity']->uid) || !$row->_field_data['users_comment_uid']['entity']->uid)) {
+          $view->atwork_strip_anon_links = TRUE;
+          $row->field_field_display_name = array(
             0 => array(
-            'rendered' => array(
-            '#markup' => variable_get('anonymous', 'Guest'),
-            '#access' => TRUE,
+              'rendered' => array(
+                '#markup' => variable_get('anonymous', 'Guest'),
+                '#access' => TRUE,
+              ),
+              'raw' => array(
+                'value' => variable_get('anonymous', 'Guest'),
+                'format' => NULL,
+                'safe_value' => variable_get('anonymous', 'Guest'),
+              ),
             ),
-            'raw' => array(
-            'value' => variable_get('anonymous', 'Guest'),
-            'format' => NULL,
-            'safe_value' => variable_get('anonymous', 'Guest'),
-            ),
-            ),
-            );
-          }
+          );
         }
       }
     }
-
-
-
-
   }
 
-  /*
+
+
+
+}
+
+/*
  * Implementation of hook_views_post_render()
  *
  * For some reason we can get user links to the anon page so just strip them
  */
-  function atwork_misc_views_post_render(&$view, &$output, &$cache) {
-    if (isset($view->atwork_strip_anon_links)) {
-      if (!$view->atwork_strip_anon_links) {
-        return;
-      }
+function atwork_misc_views_post_render(&$view, &$output, &$cache) {
+  if (isset($view->atwork_strip_anon_links)) {
+    if (!$view->atwork_strip_anon_links) {
+      return;
+    }
 
 
-      $dom = filter_dom_load($output);
-      $xpath = new DOMXPath($dom);
+    $dom = filter_dom_load($output);
+    $xpath = new DOMXPath($dom);
 
-      foreach ($xpath->query("//a[contains(@href,'user/0')]") as $link) {
-        $newelement = $dom->createTextNode($link->nodeValue);
-        $link->parentNode->replaceChild($newelement, $link);
+    foreach ($xpath->query("//a[contains(@href,'user/0')]") as $link) {
+      $newelement = $dom->createTextNode($link->nodeValue);
+      $link->parentNode->replaceChild($newelement, $link);
       //dpm($link->nodeValue);
-      }
-
-      $output = filter_dom_serialize($dom);
     }
 
-    if ($view->name == 'home_page_blocks' && $view->current_display == 'block_2') {
-
-    }
-    if ($view->name == 'home_page_blocks_zen' && in_array($view->current_display, array('block_1', 'block_3', 'block_4'))) {
-      $output = str_replace('[icon-article]',       _atwork_fa('newspaper-o', 'title="News Article"'), $output);
-      $output = str_replace('[icon-poll]',          _atwork_fa('check-square-o', 'title="Poll"'), $output);
-      $output = str_replace('[icon-blog]',          _atwork_fa('pencil-square-o', 'title="Blog Entry"'), $output);
-      $output = str_replace('[icon-event]',         _atwork_fa('calendar', 'title="Event"'), $output);
-      $output = str_replace('[icon-forum]',         _atwork_fa('comments-o', 'title="Forum Topic"'), $output);
-      $output = str_replace('[icon-gallery]',       _atwork_fa('camera', 'title="Gallery"'), $output);
-      $output = str_replace('[icon-section]',       _atwork_fa('newspaper-o', 'title="Group"'), $output);
-      $output = str_replace('[icon-section_page]',  _atwork_fa('info', 'title="Group Page"'), $output);
-      $output = str_replace('[icon-page]',          _atwork_fa('info', 'title="Background Page"'), $output);
-      $output = str_replace('[icon-image]',         _atwork_fa('camera', 'title="Image"'), $output);
-      $output = str_replace('[icon-question]',      _atwork_fa('question-circle', 'title="Question"'), $output);
-      $output = str_replace('[icon-answer]',        _atwork_fa('question-circle', 'title="Answer"'), $output);
-    }
+    $output = filter_dom_serialize($dom);
   }
 
-  /*
+  if ($view->name == 'home_page_blocks' && $view->current_display == 'block_2') {
+
+  }
+  if ($view->name == 'home_page_blocks_zen' && in_array($view->current_display, array('block_1', 'block_3', 'block_4'))) {
+    $output = str_replace('[icon-article]',       _atwork_fa('newspaper-o', 'title="News Article"'), $output);
+    $output = str_replace('[icon-poll]',          _atwork_fa('check-square-o', 'title="Poll"'), $output);
+    $output = str_replace('[icon-blog]',          _atwork_fa('pencil-square-o', 'title="Blog Entry"'), $output);
+    $output = str_replace('[icon-event]',         _atwork_fa('calendar', 'title="Event"'), $output);
+    $output = str_replace('[icon-forum]',         _atwork_fa('comments-o', 'title="Forum Topic"'), $output);
+    $output = str_replace('[icon-gallery]',       _atwork_fa('camera', 'title="Gallery"'), $output);
+    $output = str_replace('[icon-section]',       _atwork_fa('newspaper-o', 'title="Group"'), $output);
+    $output = str_replace('[icon-section_page]',  _atwork_fa('info', 'title="Group Page"'), $output);
+    $output = str_replace('[icon-page]',          _atwork_fa('info', 'title="Background Page"'), $output);
+    $output = str_replace('[icon-image]',         _atwork_fa('camera', 'title="Image"'), $output);
+    $output = str_replace('[icon-question]',      _atwork_fa('question-circle', 'title="Question"'), $output);
+    $output = str_replace('[icon-answer]',        _atwork_fa('question-circle', 'title="Answer"'), $output);
+  }
+}
+
+/*
  * Implementation of hook_preprocess_node()
  *
  * Hide some normal node elements on home page
  *
  * Restrict field_image to one image when viewing teaser
  */
-  function atwork_misc_preprocess_node(&$variables) {
+function atwork_misc_preprocess_node(&$variables) {
   // custom node links
-    if (isset($variables['content']['links']) && $variables['content']['links']) {
-      $variables['classes_array'][] = 'node-tools';
+  if (isset($variables['content']['links']) && $variables['content']['links']) {
+    $variables['classes_array'][] = 'node-tools';
 
     // re-arrange the links
-      $variables['content']['footer'] = array(
+    $variables['content']['footer'] = array(
       '#weight' => 100,
       '#prefix' => '<div id="node-tools">',
       '#suffix' => '</div>',
       'links' => $variables['content']['links'],
-      );
+    );
 
-      $variables['content']['footer']['links'] = $variables['content']['links'];
-      $variables['content']['footer']['links']['#weight'] = 80;
-      unset($variables['content']['links']);
+    $variables['content']['footer']['links'] = $variables['content']['links'];
+    $variables['content']['footer']['links']['#weight'] = 80;
+    unset($variables['content']['links']);
 
-      if ($variables['type'] == 'wiki' && isset($variables['content']['footer']['links']['comment']['#links']['comment-add']['href'])) {
-        $variables['content']['footer']['links']['comment']['#links']['comment-add']['href'] .= '/discussion';
-      }
+    if ($variables['type'] == 'wiki' && isset($variables['content']['footer']['links']['comment']['#links']['comment-add']['href'])) {
+      $variables['content']['footer']['links']['comment']['#links']['comment-add']['href'] .= '/discussion';
+    }
 //    dpm($variables);
 //    dpm($variables['content']['footer']['links']);
 
-      if (isset($variables['content']['rate_thumbup_nodes']) && $variables['content']['rate_thumbup_nodes']) {
-        $variables['content']['footer']['rate_thumbup_nodes'] = $variables['content']['rate_thumbup_nodes'];
-        $variables['content']['footer']['rate_thumbup_nodes']['#weight'] = 60;
-        unset($variables['content']['rate_thumbup_nodes']);
-      }
-      if (isset($variables['content']['ical_link']) && $variables['content']['ical_link']) {
-        $variables['content']['footer']['ical_link'] = $variables['content']['ical_link'];
-        $variables['content']['footer']['ical_link']['#weight'] = 60;
-        unset($variables['content']['ical_link']);
-      }
-      if ((isset($variables['content']['subscriptions_ui']['wrapper']['subscriptions']) && $variables['content']['subscriptions_ui']['wrapper']['subscriptions'])
-       || (isset($variables['content']['subscriptions_ui']['subscriptions_ui_form']['wrapper']['subscriptions']) && $variables['content']['subscriptions_ui']['subscriptions_ui_form']['wrapper']['subscriptions'])) {
-        $variables['content']['footer']['subscriptions_ui'] = $variables['content']['subscriptions_ui'];
-        $variables['content']['footer']['subscriptions_ui']['#weight'] = 999;
-        $variables['content']['footer']['subscriptions_ui_toggle'] = array(
+    if (isset($variables['content']['rate_thumbup_nodes']) && $variables['content']['rate_thumbup_nodes']) {
+      $variables['content']['footer']['rate_thumbup_nodes'] = $variables['content']['rate_thumbup_nodes'];
+      $variables['content']['footer']['rate_thumbup_nodes']['#weight'] = 60;
+      unset($variables['content']['rate_thumbup_nodes']);
+    }
+    if (isset($variables['content']['ical_link']) && $variables['content']['ical_link']) {
+      $variables['content']['footer']['ical_link'] = $variables['content']['ical_link'];
+      $variables['content']['footer']['ical_link']['#weight'] = 60;
+      unset($variables['content']['ical_link']);
+    }
+    if ((isset($variables['content']['subscriptions_ui']['wrapper']['subscriptions']) && $variables['content']['subscriptions_ui']['wrapper']['subscriptions'])
+         || (isset($variables['content']['subscriptions_ui']['subscriptions_ui_form']['wrapper']['subscriptions']) && $variables['content']['subscriptions_ui']['subscriptions_ui_form']['wrapper']['subscriptions'])) {
+      $variables['content']['footer']['subscriptions_ui'] = $variables['content']['subscriptions_ui'];
+      $variables['content']['footer']['subscriptions_ui']['#weight'] = 999;
+      $variables['content']['footer']['subscriptions_ui_toggle'] = array(
         '#markup' => '<div class="node-links first"><a href="#" title="Subscribe" class="subscription-flyout-toggle">' . _atwork_fa('bullhorn') . 'Subscribe</a></div>',
         '#weight' => 0,
-        );
-        unset($variables['content']['subscriptions_ui']);
-      }
+      );
+      unset($variables['content']['subscriptions_ui']);
+    }
 
     // add font-awesome icons
-      _atwork_add_link_icons($variables);
+    _atwork_add_link_icons($variables);
 
     // if flag link exists, move it to the end
     //dpm($variables['content']);
 
-      $links = drupal_render($variables['content']['footer']['links']);
+    $links = drupal_render($variables['content']['footer']['links']);
     //dpm($links);
     // sooooooooooooo hacky :(
-      $links = str_replace('<ul class="links inline">', '', $links);
-      $links = str_replace('</ul>', '', $links);
-      $links = str_replace('<li', '<div class="node-links"><span', $links);
-      $links = str_replace('</li>', '</span></div>', $links);
+    $links = str_replace('<ul class="links inline">', '', $links);
+    $links = str_replace('</ul>', '', $links);
+    $links = str_replace('<li', '<div class="node-links"><span', $links);
+    $links = str_replace('</li>', '</span></div>', $links);
 
-      $links = str_replace('<div class="node-links"><span class="node-readmore', '<div class="node-links last"><span class="node-readmore', $links);
-      $links = str_replace('<div class="node-links"><span class="flag-abuse_nodes last">', '<div class="node-links last"><span class="flag-abuse_nodes last">', $links);
+    $links = str_replace('<div class="node-links"><span class="node-readmore', '<div class="node-links last"><span class="node-readmore', $links);
+    $links = str_replace('<div class="node-links"><span class="flag-abuse_nodes last">', '<div class="node-links last"><span class="flag-abuse_nodes last">', $links);
     //dpm($links);
 //    $first_div = substr($links, 0, 24);
 //
@@ -1327,31 +1327,31 @@ function atwork_misc_views_pre_render(&$view) {
 //      $links = substr_replace($links, '<div class="node-links first">', 0, 24);
 //    }
 
-      if ($links) {
-        $variables['content']['footer']['links'] = array(
+    if ($links) {
+      $variables['content']['footer']['links'] = array(
         '#markup' => $links,
         '#weight' => 10,
-        );
-      }
+      );
     }
+  }
 
-    if (drupal_is_front_page()) {
-      $variables['title'] = '';
-      unset($variables['content']['links']);
-      unset($variables['content']['subscriptions_ui']);
-      unset($variables['content']['footer']);
-    }
+  if (drupal_is_front_page()) {
+    $variables['title'] = '';
+    unset($variables['content']['links']);
+    unset($variables['content']['subscriptions_ui']);
+    unset($variables['content']['footer']);
+  }
 
   // when viewing teasers only show the first image
-    if ($variables['view_mode'] == 'teaser') {
-      if (isset($variables['content']['field_image']['#items'])) {
-        $num_images = count($variables['content']['field_image']['#items']);
-        for ($i=1; $i<$num_images; $i++) {
-          unset($variables['content']['field_image'][$i]);
-          unset($variables['content']['field_image']['#items'][$i]);
-        }
+  if ($variables['view_mode'] == 'teaser') {
+    if (isset($variables['content']['field_image']['#items'])) {
+      $num_images = count($variables['content']['field_image']['#items']);
+      for ($i=1; $i<$num_images; $i++) {
+        unset($variables['content']['field_image'][$i]);
+        unset($variables['content']['field_image']['#items'][$i]);
       }
     }
+  }
 
 //  if (isset($variables['uid'])) {
 //    if ($user = user_load($variables['uid'])) {
@@ -1368,44 +1368,44 @@ function atwork_misc_views_pre_render(&$view) {
 //    dpm($username_variables);
 //    dpm($variables['node']);
 //  }
-  }
+}
 
-  function atwork_misc_process_html(&$variables) {
-    if (arg(0) == 'ecards' && arg(1) == 'all') {
-      $variables['head_title'] = 'Ecards - All | @Work';
-    }
+function atwork_misc_process_html(&$variables) {
+  if (arg(0) == 'ecards' && arg(1) == 'all') {
+    $variables['head_title'] = 'Ecards - All | @Work';
   }
+}
 
-  function atwork_misc_process(&$variables, $hook) {
+function atwork_misc_process(&$variables, $hook) {
   //dpm($hook);
-  }
+}
 
 
-  function atwork_misc_preprocess(&$variables, $hook) {
-    if ($hook == 'page') {
+function atwork_misc_preprocess(&$variables, $hook) {
+  if ($hook == 'page') {
     //dpm($variables);
-    }
-
   }
 
-  function atwork_misc_preprocess_block(&$variables) {
-    if ($variables['block']->module == 'boxes') {
-      if (strpos($variables['content'], 'class="use-ajax active">Edit Box')) {
-        $variables['content'] = str_replace('class="use-ajax active">Edit Box', 'title="AtWork editors can edit this - refresh the page after to see your changes" class="use-ajax active">Edit Box', $variables['content']);
-      }
+}
+
+function atwork_misc_preprocess_block(&$variables) {
+  if ($variables['block']->module == 'boxes') {
+    if (strpos($variables['content'], 'class="use-ajax active">Edit Box')) {
+      $variables['content'] = str_replace('class="use-ajax active">Edit Box', 'title="AtWork editors can edit this - refresh the page after to see your changes" class="use-ajax active">Edit Box', $variables['content']);
     }
   }
+}
 
-  function atwork_misc_js_alter(&$javascript) {
-    if (isset($javascript['sites/all/libraries/superfish/sfsmallscreen.js'])) {
-      $file = drupal_get_path('module', 'atwork_misc') . '/sfsmallscreen.js';
-      $javascript['sites/all/libraries/superfish/sfsmallscreen.js']['data'] = $file;
-    }
+function atwork_misc_js_alter(&$javascript) {
+  if (isset($javascript['sites/all/libraries/superfish/sfsmallscreen.js'])) {
+    $file = drupal_get_path('module', 'atwork_misc') . '/sfsmallscreen.js';
+    $javascript['sites/all/libraries/superfish/sfsmallscreen.js']['data'] = $file;
+  }
 
   //dpm($javascript);
-  }
+}
 
-  /**
+/**
  *
  * Implementation of hook_flag_flag()
  *
@@ -1422,139 +1422,146 @@ function atwork_misc_views_pre_render(&$view) {
  * @param $flagging_id
  *  The flagging entity.
  */
-  function atwork_misc_flag_flag($flag, $entity_id, $account, $flagging) {
+function atwork_misc_flag_flag($flag, $entity_id, $account, $flagging) {
 
-    $message = t('The following user reported an inapproriate item for your review.') . '<br /><br />';
-    $message .= '<strong>' . t('User') . ':</strong> ' . l(_atwork_display_name($account), 'user/' . $account->uid) . '<br />';
+  $message = t('The following user reported an inapproriate item for your review.') . '<br /><br />';
+  $message .= '<strong>' . t('User') . ':</strong> ' . l(_atwork_display_name($account), 'user/' . $account->uid) . '<br />';
 
-    $reason = field_get_items('flagging', $flagging, 'field_reason');
+  $reason = field_get_items('flagging', $flagging, 'field_reason');
 
-    if ($flag->entity_type == 'comment') {
-      $comment = comment_load($entity_id);
-      $node = node_load($comment->nid);
-      $ct_name = node_type_get_name($node);
-      $subject = t('A comment has been flagged on the !ct-name: !title', array('!ct-name' => $ct_name, '!title' => $node->title));
-      $link = l($node->title, 'node/' . $node->nid, array(
+  if ($flag->entity_type == 'comment') {
+    $comment = comment_load($entity_id);
+    $node = node_load($comment->nid);
+    $ct_name = node_type_get_name($node);
+    $subject = t('A comment has been flagged on the !ct-name: !title', array('!ct-name' => $ct_name, '!title' => $node->title));
+    $link = l($node->title, 'node/' . $node->nid, array(
       'query' => array(
-      'c' => $comment->cid,
+        'c' => $comment->cid,
       ),
       'fragment' => 'comment-' . $comment->cid,
-      ));
+    ));
+  }
+  elseif ($flag->entity_type == 'node') {
+    $node = node_load($entity_id);
+    $ct_name = node_type_get_name($node);
+    if (in_array(substr($ct_name, 0, 1), array('A', 'E', 'I', 'O', 'U'))) {
+      $subject_header = ucfirst(t('an')) . ' ' . $ct_name;
     }
-    elseif ($flag->entity_type == 'node') {
-      $node = node_load($entity_id);
-      $ct_name = node_type_get_name($node);
-      if (in_array(substr($ct_name, 0, 1), array('A', 'E', 'I', 'O', 'U'))) {
-        $subject_header = ucfirst(t('an')) . ' ' . $ct_name;
-      }
-      else {
-        $subject_header = ucfirst(t('a')) . ' ' . $ct_name;
-      }
-      $subject = t('!node-type has been flagged', array('!node-type' => $subject_header));
-      $link = l($node->title, 'node/' . $node->nid);
+    else {
+      $subject_header = ucfirst(t('a')) . ' ' . $ct_name;
     }
+    $subject = t('!node-type has been flagged', array('!node-type' => $subject_header));
+    $link = l($node->title, 'node/' . $node->nid);
+  }
 
-    $message .= '<strong>' . t('Item') . ':</strong> ' . $link . '<br />';
-    $message .= '<strong>' . t('Reason') . ':</strong> ' . $reason[0]['value'] . '<br /><br />';
+  $message .= '<strong>' . t('Item') . ':</strong> ' . $link . '<br />';
+  $message .= '<strong>' . t('Reason') . ':</strong> ' . $reason[0]['value'] . '<br /><br />';
 
-    $message .= t('<br />---<br />Manage the reported items list at') . ':<br />';
-    $message .= l('https://gww.gov.bc.ca/admin/content/flag_content', 'admin/content/flag_content');
+  $message .= t('<br />---<br />Manage the reported items list at') . ':<br />';
+  $message .= l('https://gww.gov.bc.ca/admin/content/flag_content', 'admin/content/flag_content');
 
 
-    $params = array(
+  $params = array(
     'subject' => $subject,
     'body' => $message,
-    );
+  );
 
-    drupal_mail('atwork_mail', 'atwork_mail_default', variable_get('site_mail', 'EmployeeNews@gov.bc.ca'), language_default(), $params, $account->mail);
-  }
+  drupal_mail('atwork_mail', 'atwork_mail_default', variable_get('site_mail', 'EmployeeNews@gov.bc.ca'), language_default(), $params, $account->mail);
+}
 
-  /**
+/**
  * Implements hook_node_presave();
  */
-  function atwork_misc_node_presave($node) {
+function atwork_misc_node_presave($node) {
   // problem: reverting a node automatically sets $node->subscriptions_notify
   // so we need to detect if this is a revision
-    if (isset($node->log) && strpos($node->log, 'opy of the revision from <em class="placeholder">')) {
-      $node->subscriptions_notify = FALSE;
-    }
+  if (isset($node->log) && strpos($node->log, 'opy of the revision from <em class="placeholder">')) {
+    $node->subscriptions_notify = FALSE;
   }
+}
 
-  function atwork_misc_preprocess_field(&$variables) {
-    $field_name = $variables['element']['#field_name'];
-    if ($field_name == 'field_tags') {
-      $variables['label'] = _atwork_fa('tag') . $variables['label'];
-    }
+function atwork_misc_preprocess_field(&$variables) {
+  $field_name = $variables['element']['#field_name'];
+  if ($field_name == 'field_tags') {
+    $variables['label'] = _atwork_fa('tag') . $variables['label'];
   }
+}
 
-  function atwork_misc_views_query_alter(&$view, &$query) {
-    if ($view->name == 'home_page_blocks_zen' && ($view->current_display == 'block' || $view->current_display == 'attachment_1')) {
-      $query->table_queue['field_data_field_promoted']['join']->type = 'LEFT';
-      unset($query->table_queue['field_data_field_promoted']['join']->extra[1]);
-    }
+function atwork_misc_views_query_alter(&$view, &$query) {
+  if ($view->name == 'home_page_blocks_zen' && ($view->current_display == 'block' || $view->current_display == 'attachment_1')) {
+    $query->table_queue['field_data_field_promoted']['join']->type = 'LEFT';
+    unset($query->table_queue['field_data_field_promoted']['join']->extra[1]);
   }
+}
 
 
-  /**
+/**
  * Implements hook_block_info().
  * Short term solution to display twitter block on front page.
  */
-  function atwork_misc_block_info(){
+function atwork_misc_block_info(){
   //dpm($blocks);
-    $blocks = array();
-    $blocks['twitter_block'] = array(
+  $blocks = array();
+  $blocks['twitter_block'] = array(
     'info' => t("twitter_block"),
     );
-    return $blocks;
-  }
+  return $blocks;
+}
 
-  /**
+/**
  * Implements hook_block_view().
  */
-  function atwork_misc_block_view($delta = '') {
-    $block = array();
+function atwork_misc_block_view($delta = '') {
+  $block = array();
 
-    switch($delta) {
-      case ('twitter_block'):
+  switch($delta) {
+    case ('twitter_block'):
       $block['subject'] = '';
       $block['content'] = _atwork_misc_block_content();
       drupal_add_js(drupal_get_path('module', 'atwork_misc').'/atwork_misc_block.js');
       break;
-    }
-    return $block;
   }
+  return $block;
+}
 
-  function _atwork_misc_block_content(){
+function _atwork_misc_block_content(){
   // TODO - find an api or json that you can pull medal counts off of
-    $gold = 0;
-    $silver = 0;
-    $bronze = 0;
+  $gold = 0;
+  $silver = 0;
+  $bronze = 0;
   // Parse the medal count .csv
-    $fh = fopen(drupal_get_path('module', 'atwork_misc').'/olympic/olympic.csv', "r");
-    if(isset($fh)){
-      while(($row = fgetcsv($fh, ",")) !== FALSE){
-        $gold = $row[0];
-        $silver = $row[1];
-        $bronze = $row[2];
-      }
+  $fh = fopen(drupal_get_path('module', 'atwork_misc').'/olympic/olympic.csv', "r");
+  if(isset($fh)){
+    while(($row = fgetcsv($fh, ",")) !== FALSE){
+      $gold = $row[0];
+      $silver = $row[1];
+      $bronze = $row[2];
     }
-    fclose($fh);
+  }
+  fclose($fh);
   // Add the medal banner
-    $img = drupal_get_path('module', 'atwork_misc') . '/images/2medals_382x80.png';
-    $output = <<<EOL
-    <div id="olympic_block_container">
-      <div id="twitter_feed_div" align="left"><a class="twitter-timeline" data-width="600" data-height="300" data-dnt="true" data-chrome="noheader nofooter transparent noborder" href="https://twitter.com/TheCrownCa">Tweets by The Crown</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-    </div>
-
-    <div class="twitter-block-right-content"> 
-      <img src="/sites/all/themes/atwork_zen/images/royal-tour2016.jpg" />
-      <h1>Did You Know?</h1>
-      <p>When addressing the Duke and Duchess of Cambridge, one should use &quot;Your Royal Highness&quot; initially, and &quot;Sir/Ma'am&quot; as the conversation continues.</p>
-    </div>
-    <!--<div id="olympic_placeholder_for_additional_content2"> This box can also hold additional content</div>-->
-    <div id="olympic_block_roll_up_down"> + </div>
+  $img = drupal_get_path('module', 'atwork_misc') . '/images/2medals_382x80.png';
+  $output = <<<EOL
+<div id="olympic_block_container">
+  <div id="twitter_feed_div" align="left"><a class="twitter-timeline" data-width="600" data-height="300" data-dnt="true" data-chrome="noheader nofooter transparent noborder" href="https://twitter.com/TheCrownCa">Tweets by TheCrownCa</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+</div>
+<div id="olympic_medal_count_containers">
+  <!--<div id="olympic_background_image">
+    <div id="olympic_gold_medal_count_container">$gold</div>
+    <div id="olympic_silver_medal_count_container">$silver</div>
+    <div id="olympic_bronze_medal_count_container">$bronze</div>
+  </div>-->
+  <!--<div id="olympic_placeholder_for_additional_content"> <a href="http://olympic.ca/" _target="blank">Canadian Olympic Team Official Website</a></div>-->
+  <div class="royalDYK">
+    <img src="/sites/all/themes/atwork_zen/images/royal-tour2016.jpg" />
+    <h1>Did You Know?</h1>
+    <p>When addressing the Duke and Duchess of Cambridge, one should use &quot;Your Royal Highness&quot; initially, and &quot;Sir/Ma'am&quot; as the conversation continues.</p>
   </div>
-  EOL;
+</div>
+<!--<div id="olympic_placeholder_for_additional_content2"> This box can also hold additional content</div>-->
+<div id="olympic_block_roll_up_down"> + </div>
+</div>
+EOL;
 
   return $output;
 }
