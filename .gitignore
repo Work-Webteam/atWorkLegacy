@@ -99,6 +99,8 @@ browscap/*
 /theme-settings.php
 /_tmpProfiles.php
 /web_bug/*
+/sites/phpMyAdmin/
+
 
 
 # Ignore Gulp files
