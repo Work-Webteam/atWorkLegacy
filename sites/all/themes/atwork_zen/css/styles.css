@@ -265,10 +265,10 @@ html {
 	margin-top: -30px;
 }
 #header {
-/*	background: url(/sites/all/themes/atwork_zen/images/atwork-logo.png) no-repeat scroll center 10px;*/
+	background: url(/sites/all/themes/atwork_zen/images/atwork-logo.png) no-repeat scroll center 10px;
 	/* Below, for a new atwork-logo-theme image, update the date parameter to reflect the edit date. 
 	This prevents browser caching */
-	background: url(/sites/all/themes/atwork_zen/images/atwork-logo-theme.png?d=20160919) no-repeat scroll center 18px; 
+	/*background: url(/sites/all/themes/atwork_zen/images/atwork-logo-theme.png?d=20160919) no-repeat scroll center 18px;*/ 
 	height: 180px;
 	image-rendering: -moz-auto;         /* Firefox */
 	image-rendering:   -o-auto;         /* Opera */
