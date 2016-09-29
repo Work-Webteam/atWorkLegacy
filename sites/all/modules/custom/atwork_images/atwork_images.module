@@ -344,7 +344,7 @@ function atwork_images_form_alter(&$form, &$form_state, $form_id) {
     }
     if(!isset($form["menu"])){
       $form['actions']['submit']['#submit'][] = 'unpublished_group_submit';
-      dpm($form);
+      //dpm($form);
     }
   }
 
