@@ -1216,7 +1216,11 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
 
     //Combine full first and last name, hide original GAL field
     if (isset($account->content['field_gal_first_name'])) {
-      // Moved to atwork_relationships.module
+      if($user->uid === $account->uid){
+        // If the user views their own profile, then we don't want the follow button, but we do need the name concat
+        $account->content['field_gal_first_name'][0]['#markup'] = t(_atwork_full_name($account));
+      }
+      // Moved to atwork_relationships.module, so that it would not overwrite the follow button that we created there. May move it back here eventually.
       //$account->content['field_gal_first_name'][0]['#markup'] = t(_atwork_full_name($account));
     } else {
       $account->content['field_gal_first_name'] = array(

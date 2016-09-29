@@ -109,3 +109,13 @@ function atwork_relationships_user_view($account, $view_mode, $langcode) {
     }
   }
 }
+
+/**
+ *  helper function to add in follow button on blog node view
+ */
+function _atwork_relationships_button_add(&$output, $account){
+    // Build a link and then wrap it in a button.
+    $relationship_link = atwork_relationships_get_link($account);
+
+    return($output .= $relationship_link);
+}
