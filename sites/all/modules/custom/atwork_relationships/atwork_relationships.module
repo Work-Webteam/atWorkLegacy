@@ -7,7 +7,7 @@ function atwork_relationships_ajax_load(op, uid, rtid) {
   return false;
 }
 EOT;
-    
+
     drupal_add_js($js, 'inline');
 }
 
@@ -19,7 +19,7 @@ function atwork_relationships_get_link($account) {
     'requestee_id' => $account->uid,
     'rtid' => 1,
   ));
-  
+
   if ($relationships) {
     foreach ($relationships as $rid => $relationship) {
       $relationship_link = '<a href="#" title="Click to unfollow colleague" onclick="atwork_relationships_ajax_load(\'remove\', \'' . $account->uid . '\', \'' . $rid . '\'); return false;">Following</a>';
@@ -28,8 +28,8 @@ function atwork_relationships_get_link($account) {
   else {
     $relationship_link = '<a href="#" title="Click to follow colleague" onclick="atwork_relationships_ajax_load(\'add\', \'' . $account->uid . '\', \'1\'); return false;">Follow</a>';
   }
-  
-  return '<div class="atwork-relationship-action uid-' . $account->uid . '">' . $relationship_link . '</div>';
+
+  return '<button class="atwork-relationship-action uid-' . $account->uid . '">' . $relationship_link . '</button>';
 }
 
 function atwork_relationships_views_pre_render(&$view) {
@@ -37,7 +37,7 @@ function atwork_relationships_views_pre_render(&$view) {
     foreach ($view->result as &$result) {
       $account = user_load($result->uid);
       $relationship_link = atwork_relationships_get_link($account);
-      
+
       if (isset($result->field_field_gal_title[0]['rendered']['#markup'])) {
         $result->field_field_gal_title[0]['rendered']['#markup'] .= $relationship_link;
       }
@@ -70,7 +70,7 @@ function atwork_relationships_page_callback($op, $account, $id) {
       $relationship = user_relationships_request_relationship($user, $account, $id);
       return '<a href="#" onclick="atwork_relationships_ajax_load(\'remove\', \'' . $account->uid . '\', \'' . $relationship->rid . '\'); return false;">Following</a>';
       break;
-    
+
     case 'remove':
       $relationships = user_relationships_load(array('rid' => $id));
       user_relationships_delete_relationship($relationships[$id], $account, $op);
@@ -81,4 +81,31 @@ function atwork_relationships_page_callback($op, $account, $id) {
 
 function atwork_relationships_delivery_callback($page_callback_result) {
   print $page_callback_result;
+}
+
+
+/**
+ * Implements hook_user_view
+ * Code that adds a follow button and ajax callbacks on profile pages
+ */
+
+function atwork_relationships_user_view($account, $view_mode, $langcode) {
+  if($view_mode == 'full' && module_exists('user_relationships')){
+    global $user;
+    // User should not see their own follow button
+    if($account->uid === $user->uid){
+      return;
+    }
+
+    // Build a link and then wrap it in a button.
+    $relationship_link = atwork_relationships_get_link($account);
+    if (isset($account->content['field_gal_first_name'][0]['#markup'])) {
+      // Add button to the markup for first name (that is altered into full name)
+      // The full name part of this was moved from atwork_profiles - as noted there.
+      $account->content['field_gal_first_name'][0]['#markup'] = t(_atwork_full_name($account)) . $relationship_link ;
+    }
+    else {
+      $result->field_field_gal_title[0]['rendered']['#markup'] .= $relationship_link;
+    }
+  }
 }

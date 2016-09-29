@@ -1216,11 +1216,8 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
 
     //Combine full first and last name, hide original GAL field
     if (isset($account->content['field_gal_first_name'])) {
-      $account->content['field_gal_first_name'][0]['#markup'] = t(_atwork_full_name($account));
-      //$account->content['full_name'] = $account->content['field_gal_first_name'];
-      //$account->content['full_name'][0]['#markup'] = t(_atwork_full_name($account));
-      //$account->content['full_name']['#title'] = t('Full Name');
-      //hide($account->content['field_gal_first_name']);
+      // Moved to atwork_relationships.module
+      //$account->content['field_gal_first_name'][0]['#markup'] = t(_atwork_full_name($account));
     } else {
       $account->content['field_gal_first_name'] = array(
         '#theme' => 'field',
