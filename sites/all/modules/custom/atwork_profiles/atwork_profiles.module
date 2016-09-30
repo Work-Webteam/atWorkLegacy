@@ -1515,6 +1515,7 @@ function atwork_profiles_views_post_render(&$view, &$output, &$cache) {
     if (isset($view->args[0]) && $view->args[0] && is_numeric($view->args[0])) {
       $account = user_load($view->args[0]);
 
+      /* This was moved to the atwork_relationships.module in order to refactor code.
       if (strpos($output, ':relationship_link') && module_exists('atwork_relationships') && $account->uid != $user->uid) {
         $relationship_link = atwork_relationships_get_link($account);
         $output = str_replace(':relationship_link', $relationship_link, $output);
@@ -1522,8 +1523,8 @@ function atwork_profiles_views_post_render(&$view, &$output, &$cache) {
       elseif (strpos($output, ':relationship_link')) {
         $output = str_replace(':relationship_link', '', $output);
       }
-
-      // add required questions
+      */
+      // add required
       $required_questions = _atwork_profiles_required_questions();
 
       foreach ($required_questions as $required_question) {

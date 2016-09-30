@@ -4,11 +4,28 @@ function atwork_relationships_init() {
   $js = <<<EOT
 function atwork_relationships_ajax_load(op, uid, rtid) {
   jQuery(".atwork-relationship-action.uid-" + uid).load("/atwork-relationship/" + op + "/" + uid + "/" + rtid);
+  jQuery(".block-refresh-button").each(function(){
+    jQuery(this).click();
+  });
   return false;
 }
 EOT;
 
+// This allows us to ajax block content on the profiles page
+
+  $js2 = <<<EOT
+jQuery(document).ready(function(){
+  jQuery(".atwork-relationship-action").mousedown(function(){
+    jQuery(".block-refresh-button").each(function(){
+      jQuery(this).click();
+    });
+  });
+});
+EOT;
+
     drupal_add_js($js, 'inline');
+    //drupal_add_js($js2, 'inline');
+
 }
 
 function atwork_relationships_get_link($account) {
@@ -118,4 +135,31 @@ function _atwork_relationships_button_add(&$output, $account){
     $relationship_link = atwork_relationships_get_link($account);
 
     return($output .= $relationship_link);
+}
+
+
+/**
+ * Implementation of hook_block_view_MODULE_DELTA_alter
+ * Code to show following/followers blocks only on user and user/* pages.
+ */
+function atwork_relationships_block_view_alter(&$data, $block){
+  switch ($block->delta){
+    // Grab relationship blocks - same process on either, so we can fall through
+    case("relationships-block_following"):
+    case("relationships-block_followers"):
+      // Block is set, so lets check if we are on the right page
+      if(isset($block->visibility) && $block->visibility == 1){
+        $url_check = $_SERVER['REQUEST_URI'];
+        $url_parts_check = explode( '/', $url_check);
+        // Don't want to make the block disappear on ajax reload
+        if($url_parts_check[1] == "block_refresh"){
+          return;
+        }
+        // If we are down the path further than user/[idir], then hide these blocks
+        if(count($url_parts_check) > 3){
+          $data['content']['#access'] = false;
+        }
+      }
+    break;
+  }
 }
