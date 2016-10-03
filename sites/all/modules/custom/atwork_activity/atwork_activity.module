@@ -832,8 +832,14 @@ function atwork_activity_tokens_alter(&$replacements, $context) {
  * Implementation of hook_block_info()
  *
  * Make some message blocks
+ * Includes profile page activity block, and homepage activity block.
  */
 function atwork_activity_block_info() {
+   // For the profile page
+  $blocks['profile_page_activity_feed_block'] = array(
+    'info' => t("Profile page activity feed block"),
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+  );
   // This example comes from node.module.
   $blocks['profile'] = array(
     'info' => t('Profile: Activity'),
@@ -847,9 +853,13 @@ function atwork_activity_block_info() {
     'info' => t('Homepage: Activity'),
     'visibility' => BLOCK_VISIBILITY_LISTED,
   );
-
+  dpm($blocks);
   return $blocks;
 }
+
+
+
+
 
 /*
  * Implementation of hook_block_view()
@@ -861,6 +871,7 @@ function atwork_activity_block_view($delta = '') {
   $block = array();
 
   switch ($delta) {
+
     // currently not being used. required user_relationships
     case 'profile':
       if (arg(0) != 'user' || !is_numeric(arg(1))) {
@@ -1020,9 +1031,100 @@ EOT;
      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_click_handlers.js');
 
       break;
+    /** the profile page block view */
+    case 'profile_page_activity_feed_block':
+      $block['subject'] = 'User activity';
+      // This helps to keep this code a little cleaner - all content is located in it's own function below.
+      $block['content'] = array(
+        '#markup' => _atwork_activity_profile_page_block_content($block),
+        );
+      break;
   }
   return $block;
 }
+
+
+/**
+ * Helper function to create content for the profile page feed
+ */
+function _atwork_activity_profile_page_block_content(&$block){
+  // Grab user and account variables
+  global $user;
+  $this_user = user_load($user->uid);
+  $account = user_load(arg(1));
+  if (!$account) {
+    return;
+  }
+
+  // Decide if it is users block or others and set title
+  if($account->uid === $user->uid){
+    $block['title'] = t("My Feed");
+  } else {
+    $block['title'] = $this_user->field_gal_first_name['und'][0]['safe_value'] . t("\'s activity feed");
+  }
+  // Grab all messages related to user, User name, and picture of User.
+
+  $query = db_select('message', 'm')
+    ->fields('m', array('mid'));
+
+  $query->leftJoin('field_data_field_message_node', 'message_node', 'm.mid = message_node.entity_id');
+
+  // We only want certain types of messages
+  $or = db_or()
+    ->condition('m.type', 'group_subscribe')
+    ->condition('m.type', 'new_comment')
+    ->condition('m.type', 'updated_user')
+    ->condition('m.type', 'following_user')
+    ->condition('m.type', 'status')
+    ->condition('m.type', 'user_liked_node')
+    ->condition('m.type', 'new_answer')
+    ->condition('m.type', 'new_image')
+    ->condition('m.type', 'group_subscribe');
+    // This will have to be on its own with a join to check authorship.
+    // ->condition('m.type', 'new_node');
+    // ->condition('m.type', 'updated_node')
+
+  $query->condition($or)
+    ->condition('m.uid', $user->uid)
+    ->orderBy('m.timestamp', 'DESC')
+    ->range(0, 100);
+
+  $result = $query
+    ->extend('PagerDefault')
+    ->limit(20)
+    ->execute()
+    ->fetchAll();
+
+  $form = drupal_get_form('atwork_activity_form');
+
+  $output = render($form);
+
+  $i = 1;
+  foreach ($result as $record) {
+    $message = message_load($record->mid);
+
+    $classes = array();
+    $classes[] = 'message';
+    $classes[] = 'message-' . $message->mid;
+
+    if ($i % 2 == 0) {
+      $classes[] = 'even';
+    }
+    else {
+      $classes[] = 'odd';
+    }
+
+    $tmpMsg = str_replace("background","webpage", $message->getText());
+
+    $new_output .= '<div class="' . implode(' ', $classes) . '">' . $tmpMsg . '</div>';
+    $i++;
+  }
+
+    $output = '<div id="activity-feed">' . $new_output . '</div>' . theme('pager');
+
+  return $output;
+}
+
 /*
  * Create a message for ecards being sent. No other hooks so use this one.
  */
@@ -1048,3 +1150,5 @@ function atwork_activity_mail_alter(&$email_message) {
 
   }
 }
+
+
