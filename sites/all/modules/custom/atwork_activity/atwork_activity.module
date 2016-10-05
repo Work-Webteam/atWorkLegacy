@@ -1176,10 +1176,44 @@ function _atwork_activity_profile_page_block_content(&$block){
 
   //****************************************************************************************//
 
+  $output = '';
+  $classes = array();
 
+  $query1 = new EntityFieldQuery();
+  $query1->entityCondition('entity_type', 'message');
+  $query1->propertyCondition('uid', $user->uid);
+  $result1 = $query1->execute();
+  $mids1 = array_keys($result1['message']);
+  $messages1 = entity_load('message', $mids1);
+  $message_render_array = entity_view('message', $messages1);
 
-    //$output .= '<div id="activity-feed">' . $new_output . '</div>' . theme('pager');
-    dpm($message);
+  //print render($messages1);
+  //dpm($output);
+  $output .= '<div id="activity-feed">' ;//. render($message_render_array) . '</div>' . theme('pager');
+  //dpm($message);
+  //
+  //
+  $j = 1;
+  foreach($message_render_array['message'] as $key=>$result) {
+    $classes = array();
+
+    $classes[] = 'message';
+    $classes[] = 'message-' . $key;
+
+    if ($j % 2 == 0) {
+      $classes[] = 'even';
+    }
+    else {
+      $classes[] = 'odd';
+    }
+
+    $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . date('M j', $message->timestamp) . '</span> ' . render($result) . '</div>';
+
+   $j++;
+
+  }
+  $output .= '</div>' . theme('pager');
+
   return $output;
 }
 
