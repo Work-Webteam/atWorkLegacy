@@ -1035,8 +1035,8 @@ EOT;
       $block['subject'] = 'User activity';
       // This helps to keep this code a little cleaner - all content is located in it's own function below.
       $block['content'] = array(
-        '#markup' => _atwork_activity_profile_page_block_content($block),
-        );
+        '#markup' => _atwork_activity_profile_page_block_content($block)
+      );
       break;
   }
   return $block;
@@ -1067,20 +1067,46 @@ function _atwork_activity_profile_page_block_content(&$block){
   $classes = array();
 
   // Put together our query
-  $query1 = new EntityFieldQuery();
-  $query1->entityCondition('entity_type', 'message');
-  $query1->propertyCondition('uid', $user->uid);
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'message')
+    ->propertyCondition('uid', $account->uid)
+    ->pager(10);
   // Put together an array of messages
-  $result1 = $query1->execute();
+  $result1 = $query->execute();
+
   $mids1 = array_keys($result1['message']);
+  //dpm($mids1);
+
+  $query = db_select('message', 'm')
+    ->fields('m', array('mid'))
+    ->orderBy('m.timestamp', 'DESC')
+    ->condition('m.uid', $account->uid);
+
+  $result = $query
+    //->extend('PagerDefault')
+    //->limit(15)
+    ->execute()
+    ->fetchAll();
+
+  //dpm($result);
+  $result_mid = array();
+  foreach($result as $value){
+    $result_mid[] = $value->mid;
+  }
   // Load entities and all related content
-  $messages1 = entity_load('message', $mids1);
+  $messages1 = entity_load('message', $result_mid);
+  //dpm($messages1);
   // Now remove all unwanted messages
   foreach($messages1 as $key=>$value){
+    //dpm($value->type);
     switch(true){
+      //case(true):
+      //  break;
       case($value->type == "user_received_ecard"):
       case($value->type == "user_sent_ecard"):
       case($value->type == "user_liked_comment"):
+      case($value->type == "user_liked_node"):
+      case($value->type == "group_unsubscribed"):
         unset($messages1[$key]);
         break;
       // Need to remove instances of masquerading or posting as employee news
@@ -1088,15 +1114,47 @@ function _atwork_activity_profile_page_block_content(&$block){
         if(isset($value->field_message_node['und'][0]['target_id']) && $value->field_message_node['und'][0]['target_id']){
           $node = node_load($value->field_message_node['und'][0]['target_id']);
           if(!empty($node)){
-            if(isset($node->uid) && $user->uid){
-              if($node->uid !== $user->uid){
+            if(isset($node->uid) && $node->uid){
+              if(($account->uid !== $node->uid)){
+                unset($messages1[$key]);
+              }
+            // Node is authored by employee news
+            } else {
+              unset($messages1[$key]);
+            }
+          }
+        }
+        break;
+      case($value->type == "new_node"):
+        if(isset($value->field_message_node['und'][0]['target_id']) && $value->field_message_node['und'][0]['target_id']){
+          $node = node_load($value->field_message_node['und'][0]['target_id']);
+          if(!empty($node)){
+            if(isset($node->uid) && $node->uid){
+              if(($account->uid !== $node->uid)){
+                unset($messages1[$key]);
+              }
+            } else {
+              unset($messages1[$key]);
+            }
+          }
+        }
+        break;
+      // Gallery case
+      case($value->type == "new_image"):
+        if(isset($value->field_message_node['und'][0]['target_id']) && $value->field_message_node['und'][0]['target_id']){
+          $node = node_load($value->field_message_node['und'][0]['target_id']);
+          if(!empty($node)){
+            if(isset($node->uid) && $account->uid){
+              if(($node->uid !== $account->uid)){
                 unset($messages1[$key]);
               }
             }
           }
         }
         break;
-      // TODO: Forum case, gallery case, image case, ??Broken Case?? (starts with [])?
+      // TODO: Forum case, gallery case, image case, background page, ??Broken Case?? (starts with [])?
+      default:
+        break;
     }
   }
 
@@ -1104,10 +1162,21 @@ function _atwork_activity_profile_page_block_content(&$block){
   // Now create a render array to get the entity wrappers/markup in place
   $message_render_array = entity_view('message', $messages1);
   // The final markup - wrap it up in a div
+  $form = drupal_get_form('atwork_activity_form');
+
+  //pm($message_render_array);
+
+  $output .= render($form);
   $output .= '<div id="activity-feed">' ;
 
+
+  $pager_number = pager_array_splice($message_render_array['message'], 10);
+  dpm($pager_number);
+
+
+
   $j = 1;
-  foreach($message_render_array['message'] as $key=>$result) {
+  foreach($pager_number as $key=>$result) {
     $classes = array();
 
     $classes[] = 'message';
@@ -1119,15 +1188,36 @@ function _atwork_activity_profile_page_block_content(&$block){
     else {
       $classes[] = 'odd';
     }
-    $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . date('M j Y', $result['#entity']->timestamp) . '</span> ' . render($result) . '</div>';
+    $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . date('M j Y', $result['#entity']->timestamp) . '</span> ' . render($result) . '</div>' ;
 
    $j++;
 
   }
-  $output .= '</div>' . theme('pager');
+
+
+  $output .= '</div>' . theme('pager', array('quantity' => 10));
+ // $output .= theme('pager');
 
   return $output;
 }
+
+/**
+ * A generic array pager for Drupal
+ * Found here:
+ * https://www.drupal.org/docs/7/creating-custom-modules/howtos/paging-non-sql-data
+ */
+function pager_array_splice($data, $limit = 9, $element = 0) {
+  global $pager_page_array, $pager_total, $pager_total_items; $page = isset($_GET['page']) ? $_GET['page'] : '';
+  // Convert comma-separated $page to an array, used by other functions.
+  $pager_page_array = explode(',', $page);
+  // We calculate the total of pages as ceil(items / limit).
+  $pager_total_items[$element] = count($data);
+  $pager_total[$element] = ceil($pager_total_items[$element] / $limit);
+  $pager_page_array[$element] = max(0, min((int)$pager_page_array[$element], ((int)$pager_total[$element]) - 1));
+  return array_slice($data, $pager_page_array[$element] * $limit, $limit, TRUE);
+}
+
+
 
 /*
  * Create a message for ecards being sent. No other hooks so use this one.
