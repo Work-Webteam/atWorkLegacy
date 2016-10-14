@@ -266,9 +266,9 @@ html {
 }
 #header {
 	background: url(/sites/all/themes/atwork_zen/images/atwork-logo.png) no-repeat scroll center 10px;
-	/* Below, for a new atwork-logo-theme image, update the date parameter to reflect the edit date. 
+	/* Below, for a new atwork-logo-theme image, update the date parameter to reflect the edit date.
 	This prevents browser caching */
-	/*background: url(/sites/all/themes/atwork_zen/images/atwork-logo-theme.png?d=20160919) no-repeat scroll center 18px;*/ 
+	/*background: url(/sites/all/themes/atwork_zen/images/atwork-logo-theme.png?d=20160919) no-repeat scroll center 18px;*/
 	height: 180px;
 	image-rendering: -moz-auto;         /* Firefox */
 	image-rendering:   -o-auto;         /* Opera */
@@ -3049,6 +3049,28 @@ aside.sidebars h2 {
 	border-bottom: solid 30px #A7A7A7;
 	border-left: solid 30px #A7A7A7;
 	overflow: hidden;
+	background-color: #FFF;
+}
+
+/* For the profile feed - added by twerdal 10/14/2016 */
+ #activity-feed .field.field-name-field-image.field-type-image.field-label-above{
+ 	display: block;
+ }
+  #activity-feed .field.field-name-field-image.field-type-image img{
+	height: 50% !important;
+	width: 50% !important;
+	display: block !important;;
+	border: none !important;;
+	position: relative !important;;
+	left: 5px !important;;
+	top: 5px !important;;
+	padding: 0;
+	margin: 0;
+	border-top: none  !important;
+	border-right: none !important;;
+	border-bottom: none !important;;
+	border-left: none !important;;
+	overflow: hidden !important;;
 	background-color: #FFF;
 }
 
@@ -6302,9 +6324,9 @@ li.atwork_menu_top_level .menu-sub-title i.fa.fa-minus {
 /* Temporary code stuff - development area only */
 /* Temporarily hides the likes and comments on the first artilce of the slideshow overaly */
 /* This is to target the Spotlight article and is to be channged as the article moves through the overlay */
-/*.views-slideshow-xtra-overlay-row-0 .slideshow_num_likes, 
+/*.views-slideshow-xtra-overlay-row-0 .slideshow_num_likes,
 .views-slideshow-xtra-overlay-row-0 .slideshow-num-comments,*/
-.views-slideshow-xtra-overlay-row-4 .slideshow_num_likes, 
+.views-slideshow-xtra-overlay-row-4 .slideshow_num_likes,
 .views-slideshow-xtra-overlay-row-4 .slideshow-num-comments {
 	display: none !important;
 }

@@ -1164,21 +1164,17 @@ function _atwork_activity_profile_page_block_content(&$block){
   // The final markup - wrap it up in a div
   $form = drupal_get_form('atwork_activity_form');
 
-  //pm($message_render_array);
 
   $output .= render($form);
   $output .= '<div id="activity-feed">' ;
 
 
   $pager_number = pager_array_splice($message_render_array['message'], 10);
-  dpm($pager_number);
-
-
 
   $j = 1;
   foreach($pager_number as $key=>$result) {
+    // Set up odd/even classes
     $classes = array();
-
     $classes[] = 'message';
     $classes[] = 'message-' . $key;
 
@@ -1188,7 +1184,12 @@ function _atwork_activity_profile_page_block_content(&$block){
     else {
       $classes[] = 'odd';
     }
-    $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . date('M j Y', $result['#entity']->timestamp) . '</span> ' . render($result) . '</div>' ;
+
+    // We want to add images to the activity feed.
+    $author = user_load($result['#entity']->uid);
+
+
+    $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . date('M j Y', $result['#entity']->timestamp) . '</span> <span class="feed_image">' . render(field_view_field('user', $author, 'field_image', array('settings' => array('image_style' => 'user_thumb')))) . '</span>' . render($result) . '</div>' ;
 
    $j++;
 
