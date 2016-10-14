@@ -100,6 +100,7 @@ browscap/*
 /_tmpProfiles.php
 /web_bug/*
 /sites/phpMyAdmin/
+/sites/all/modules/contrib/module_missing_message_fixer
 
 
 

@@ -2765,7 +2765,8 @@ aside.sidebars h2 {
 }
 /*.section-employees .views-view-grid.cols-4 td,*/
 .section-employees .view-content .views-row.views-row-odd,
-.section-employees .view-content .views-row.views-row-even {
+.section-employees .view-content .views-row.views-row-even,
+.view-relationships .view-content .views-row {
 	display: inline-block;
 	background-color: #D7D7D7;
 	border: solid 1px #A7A7A7;
@@ -2775,9 +2776,11 @@ aside.sidebars h2 {
 	color: #000;
 	height: 415px;
 	width: 235px;
+	position: relative;
 }
 .section-employees .view-content .views-row-odd .image-employee-landing,
-.section-employees .view-content .views-row-even .image-employee-landing{
+.section-employees .view-content .views-row-even .image-employee-landing,
+.view-relationships .views-field-field-image {
 	display: block;
 	width: 180px;
 	/*! height: 240px; */
@@ -2788,13 +2791,15 @@ aside.sidebars h2 {
 	overflow: hidden;
 }
 .section-employees .view-content .views-row-odd .image-employee-landing img,
-.section-employees .view-content .views-row-even .image-employee-landing img{
+.section-employees .view-content .views-row-even .image-employee-landing img,
+.view-relationships .views-field-field-image img {
 	width: 100%;
 	height: 100%;
 	margin: 0;
 }
 .section-employees .view-content .views-row-odd .name-employee-landing,
-.section-employees .view-content .views-row-even .name-employee-landing {
+.section-employees .view-content .views-row-even .name-employee-landing,
+.view-relationships .views-field-field-display-name {
 	display: block;
 	width: 85%;
 	margin: 10px auto 0;
@@ -2802,7 +2807,8 @@ aside.sidebars h2 {
 	min-height: 40px;
 }
 .section-employees .view-content .views-row-odd .title-employee-landing,
-.section-employees .view-content .views-row-even .title-employee-landing {
+.section-employees .view-content .views-row-even .title-employee-landing,
+.view-relationships .views-field-field-gal-title {
 	font-family: open-sans, sans-serif;
 	display: block;
 	padding: 0;
@@ -2810,6 +2816,12 @@ aside.sidebars h2 {
 	font-weight: initial;
 	color: #666;
 	line-height: normal;
+}
+
+.section-employees .views-row button.atwork-relationship-action {
+    position: absolute;
+    bottom: 10px;
+    right: 14px;
 }
 
 .page-employees fieldset#edit-advanced-search .fieldset-legend {
@@ -3286,6 +3298,15 @@ aside.sidebars h2 {
 	display: block;
 	height: 30px;
 }
+
+/*----------------- Following/Follower Sections --------------------*/
+
+/* --- Following Page ---*/
+
+.view-relationships td {
+    background-color: green;
+}
+
 
 /*----------------- User Profile Admin Screens --------------------*/
 #user-profile-form {

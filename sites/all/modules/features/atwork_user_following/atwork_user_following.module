@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Atwork User Following feature.
+ */
+
+include_once 'atwork_user_following.features.inc';
