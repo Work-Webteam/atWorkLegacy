@@ -3056,22 +3056,15 @@ aside.sidebars h2 {
  #activity-feed .field.field-name-field-image.field-type-image.field-label-above{
  	display: block;
  }
-  #activity-feed .field.field-name-field-image.field-type-image img{
-	height: 50% !important;
-	width: 50% !important;
-	display: block !important;;
-	border: none !important;;
-	position: relative !important;;
-	left: 5px !important;;
-	top: 5px !important;;
+  #activity-feed .field.field-name-field-image.field-type-image.field-label-above{
+	height: auto !important;
+	width: auto !important;
+	display: block !important;
+	border-style: none;
+	position: relative !important;
 	padding: 0;
 	margin: 0;
-	border-top: none  !important;
-	border-right: none !important;;
-	border-bottom: none !important;;
-	border-left: none !important;;
-	overflow: hidden !important;;
-	background-color: #FFF;
+	transform: scale(0.5, 0.5);
 }
 
 .page-user.section-employees .field.field-name-field-image.field-type-image img,
