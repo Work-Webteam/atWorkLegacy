@@ -1187,14 +1187,17 @@ function _atwork_activity_profile_page_block_content(&$block){
 
     // We want to add images to the activity feed.
     $author = user_load($result['#entity']->uid);
+    // Check if an image exists:
+    if(isset($author->field_image) && $author->field_image){
+      // If it does, then grab a renderable view of it
+      $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
+    }
 
-
-    $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . date('M j Y', $result['#entity']->timestamp) . '</span> <span class="feed_image">' . render(field_view_field('user', $author, 'field_image', array('settings' => array('image_style' => 'icon_image')))) . '</span>' . render($result) . '</div>' ;
+    $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . date('M j Y', $result['#entity']->timestamp) . '</span> <span class="feed_image">' . render($user_image) . '</span>' . render($result) . '</div>' ;
 
    $j++;
 
   }
-
 
   $output .= '</div>' . theme('pager', array('quantity' => 10));
  // $output .= theme('pager');

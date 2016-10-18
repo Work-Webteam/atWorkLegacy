@@ -3053,26 +3053,25 @@ aside.sidebars h2 {
 }
 
 /* For the profile feed - added by twerdal 10/14/2016 */
- #activity-feed .field.field-name-field-image.field-type-image.field-label-above{
- 	display: block;
- }
+
   #activity-feed .field.field-name-field-image.field-type-image.field-label-above{
+	padding: 0px;
+	border: 0px;
 	height: auto !important;
 	width: auto !important;
 	display: block !important;
 	border-style: none;
 	position: relative !important;
-	padding: 0;
-	margin: 0;
-	transform: scale(0.5, 0.5);
 }
 
 .page-user.section-employees .field.field-name-field-image.field-type-image img,
 .page-user.section-user .field.field-name-field-image.field-type-image img {
-	padding: 0px;
-	border: 0px;
-	height: 240px;
+
+	/*height: 240px; */
 }
+
+/*  END TWERDAL EDIT**/
+
 .page-user.section-employees #content .group_profile_card p,
 .page-user.section-user #content .group_profile_card p {
 	padding: 0;
