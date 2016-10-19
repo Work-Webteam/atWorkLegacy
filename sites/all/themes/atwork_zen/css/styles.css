@@ -2764,9 +2764,8 @@ aside.sidebars h2 {
 	margin: 0 auto;
 }
 /*.section-employees .views-view-grid.cols-4 td,*/
-.section-employees .view-content .views-row.views-row-odd,
-.section-employees .view-content .views-row.views-row-even,
-.view-relationships .view-content .views-row {
+.section-employees .view-content .views-row,
+.view-people-admin .view-content .views-row {
 	display: inline-block;
 	background-color: #D7D7D7;
 	border: solid 1px #A7A7A7;
@@ -2778,9 +2777,9 @@ aside.sidebars h2 {
 	width: 235px;
 	position: relative;
 }
-.section-employees .view-content .views-row-odd .image-employee-landing,
-.section-employees .view-content .views-row-even .image-employee-landing,
-.view-relationships .views-field-field-image {
+
+.section-employees .view-content .views-row .image-employee-landing,
+.view-people-admin .view-content .views-row .image-employee-landing {
 	display: block;
 	width: 180px;
 	/*! height: 240px; */
@@ -2790,25 +2789,23 @@ aside.sidebars h2 {
 	background-color: #A7A7A7;
 	overflow: hidden;
 }
-.section-employees .view-content .views-row-odd .image-employee-landing img,
-.section-employees .view-content .views-row-even .image-employee-landing img,
-.view-relationships .views-field-field-image img {
+
+.section-employees .view-content .views-row .image-employee-landing img,
+.view-people-admin .view-content .views-row .image-employee-landing img  {
 	width: 100%;
 	height: 100%;
 	margin: 0;
 }
-.section-employees .view-content .views-row-odd .name-employee-landing,
-.section-employees .view-content .views-row-even .name-employee-landing,
-.view-relationships .views-field-field-display-name {
+.section-employees .view-content .views-row .name-employee-landing,
+.view-people-admin .view-content .views-row .name-employee-landing {
 	display: block;
 	width: 85%;
 	margin: 10px auto 0;
 	font-weight: 800;
 	min-height: 40px;
 }
-.section-employees .view-content .views-row-odd .title-employee-landing,
-.section-employees .view-content .views-row-even .title-employee-landing,
-.view-relationships .views-field-field-gal-title {
+.section-employees .view-content .views-row .title-employee-landing,
+.view-people-admin .view-content .views-row .title-employee-landing {
 	font-family: open-sans, sans-serif;
 	display: block;
 	padding: 0;
@@ -2829,14 +2826,18 @@ aside.sidebars h2 {
   margin-top: -15px;
   margin-right: 15px;
 }
-/*----------------- Employee Landing Page Search Area --------------------*/
-.section-employees .view-filters #views-exposed-form-people-admin-public-page {
+/*----------------- Employee Landing Page, Following/ers Search Area --------------------*/
+.section-employees .view-filters #views-exposed-form-people-admin-public-page,
+.section-employees .view-filters #views-exposed-form-people-admin-page-following2,
+.section-employees .view-filters #views-exposed-form-people-admin-page-followers2 {
 	display: inline-block;
 	border: solid 1px #ECECEC;
 	padding: 0 10px;
 }
 #views-exposed-form-people-admin-public-page .form-type-textfield,
-#views-exposed-form-people-admin-public-page .form-type-textfield input {
+#views-exposed-form-people-admin-public-page .form-type-textfield input,
+#views-exposed-form-people-admin-page-following2 .form-type-textfield,
+#views-exposed-form-people-admin-page-following2 .form-type-textfield input {
 	width: 100%;
 }
 #views-exposed-form-people-admin-public-page #edit-name-wrapper,
@@ -2845,22 +2846,44 @@ aside.sidebars h2 {
 #views-exposed-form-people-admin-public-page #edit-ministry-wrapper,
 #views-exposed-form-people-admin-public-page #edit-city-wrapper,
 #views-exposed-form-people-admin-public-page #edit-skills-wrapper,
-#views-exposed-form-people-admin-public-page #edit-interests-wrapper {
+#views-exposed-form-people-admin-public-page #edit-interests-wrapper,
+#views-exposed-form-people-admin-page-following2 #edit-name-wrapper,
+#views-exposed-form-people-admin-page-following2 #edit-branch-wrapper,
+#views-exposed-form-people-admin-page-following2 #edit-title-wrapper,
+#views-exposed-form-people-admin-page-following2 #edit-ministry-wrapper,
+#views-exposed-form-people-admin-page-following2 #edit-city-wrapper,
+#views-exposed-form-people-admin-page-following2 #edit-skills-wrapper,
+#views-exposed-form-people-admin-page-following2 #edit-interests-wrapper,
+#views-exposed-form-people-admin-page-followers2 #edit-name-wrapper,
+#views-exposed-form-people-admin-page-followers2 #edit-branch-wrapper,
+#views-exposed-form-people-admin-page-followers2 #edit-title-wrapper,
+#views-exposed-form-people-admin-page-followers2 #edit-ministry-wrapper,
+#views-exposed-form-people-admin-page-followers2 #edit-city-wrapper,
+#views-exposed-form-people-admin-page-followers2 #edit-skills-wrapper,
+#views-exposed-form-people-admin-page-followers2 #edit-interests-wrapper  {
 	width: 32.7%;
 }
-#views-exposed-form-people-admin-public-page .views-exposed-form .views-exposed-widget {
+#views-exposed-form-people-admin-public-page .views-exposed-form .views-exposed-widget,
+#views-exposed-form-people-admin-page-following2 .views-exposed-form .views-exposed-widget,
+#views-exposed-form-people-admin-page-followers .views-exposed-form .views-exposed-widget {
 	padding: 0 5px 0 0;
 	margin: 0;
 }
 .view-gallery-reference .views-exposed-widget.views-submit-button,
 .view-gallery-reference .views-exposed-widget.views-reset-button,
 #views-exposed-form-people-admin-public-page .views-exposed-form .views-exposed-widget.views-submit-button,
-#views-exposed-form-people-admin-public-page .views-exposed-form .views-exposed-widget.views-reset-button {
+#views-exposed-form-people-admin-public-page .views-exposed-form .views-exposed-widget.views-reset-button,
+#views-exposed-form-people-admin-page-following2 .views-exposed-form .views-exposed-widget.views-submit-button,
+#views-exposed-form-people-admin-page-following2 .views-exposed-form .views-exposed-widget.views-reset-button,
+#views-exposed-form-people-admin-page-followers2 .views-exposed-form .views-exposed-widget.views-submit-button,
+#views-exposed-form-people-admin-page-followers2 .views-exposed-form .views-exposed-widget.views-reset-button {
 	padding: 0;
 	margin: -2px 4px 0 0 ;
 }
 .view-gallery-reference #edit-sort-by.form-select,
-#views-exposed-form-people-admin-public-page .views-exposed-form #edit-sort-by.form-select {
+#views-exposed-form-people-admin-public-page .views-exposed-form #edit-sort-by.form-select,
+#views-exposed-form-people-admin-page-following2 .views-exposed-form #edit-sort-by.form-select,
+#views-exposed-form-people-admin-page-followers2 .views-exposed-form #edit-sort-by.form-select {
 	height: 23px;
 }
 .view-gallery-reference .views-widget-sort-by {
@@ -2868,7 +2891,9 @@ aside.sidebars h2 {
 	padding-right: 0;
 }
 @media all and (-ms-high-contrast:none) {
-	#views-exposed-form-people-admin-public-page .views-exposed-form #edit-sort-by.form-select {
+	#views-exposed-form-people-admin-public-page .views-exposed-form #edit-sort-by.form-select,
+	#views-exposed-form-people-admin-page-following2 .views-exposed-form #edit-sort-by.form-select,
+	#views-exposed-form-people-admin-page-followers2 .views-exposed-form #edit-sort-by.form-select {
 	height: 25px;
 	}
 }
@@ -3303,7 +3328,7 @@ aside.sidebars h2 {
 
 /* --- Following Page ---*/
 
-.view-relationships td {
+.people-following td {
     background-color: green;
 }
 

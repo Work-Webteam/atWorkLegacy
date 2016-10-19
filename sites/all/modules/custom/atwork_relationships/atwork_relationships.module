@@ -145,8 +145,8 @@ function _atwork_relationships_button_add(&$output, $account){
 function atwork_relationships_block_view_alter(&$data, $block){
   switch ($block->delta){
     // Grab relationship blocks - same process on either, so we can fall through
-    case("relationships-block_following"):
-    case("relationships-block_followers"):
+    case("people_admin-block_following"):
+    case("people_admin-block_followers"):
       // Block is set, so lets check if we are on the right page
       if(isset($block->visibility) && $block->visibility == 1){
         $url_check = $_SERVER['REQUEST_URI'];
