@@ -2620,6 +2620,20 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '9';
   $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'semanticviews_default';
+  $handler->display->display_options['style_options']['row']['element_type'] = '';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'semanticviews_fields';
+  $handler->display->display_options['row_options']['skip_blank'] = 0;
+  $handler->display->display_options['row_options']['semantic_html'] = array(
+    'field_image' => array(
+      'element_type' => '',
+      'class' => '',
+    ),
+  );
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Global: Unfiltered text */
   $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
@@ -2642,26 +2656,22 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['fields']['uid']['label'] = '';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['uid']['element_label_colon'] = FALSE;
-  /* Field: Field: Image */
-  $handler->display->display_options['fields']['field_image']['id'] = 'field_image';
-  $handler->display->display_options['fields']['field_image']['table'] = 'field_data_field_image';
-  $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
-  $handler->display->display_options['fields']['field_image']['relationship'] = 'requestee_id';
-  $handler->display->display_options['fields']['field_image']['label'] = '';
-  $handler->display->display_options['fields']['field_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_image']['settings'] = array(
-    'image_style' => 'icon_image',
-    'image_link' => 'content',
-  );
-  $handler->display->display_options['fields']['field_image']['delta_offset'] = '0';
+  /* Field: User: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'requestee_id';
+  $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
   /* Field: User: Display Name */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['relationship'] = 'requestee_id';
   $handler->display->display_options['fields']['field_display_name']['label'] = '';
-  $handler->display->display_options['fields']['field_display_name']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_display_name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_display_name']['alter']['path'] = 'user/[uid]';
   $handler->display->display_options['fields']['field_display_name']['element_label_colon'] = FALSE;
   /* Field: User: Title */
@@ -2670,7 +2680,25 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['fields']['field_gal_title']['field'] = 'field_gal_title';
   $handler->display->display_options['fields']['field_gal_title']['relationship'] = 'requestee_id';
   $handler->display->display_options['fields']['field_gal_title']['label'] = '';
+  $handler->display->display_options['fields']['field_gal_title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_gal_title']['element_label_colon'] = FALSE;
+  /* Field: Field: Image */
+  $handler->display->display_options['fields']['field_image']['id'] = 'field_image';
+  $handler->display->display_options['fields']['field_image']['table'] = 'field_data_field_image';
+  $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
+  $handler->display->display_options['fields']['field_image']['relationship'] = 'requestee_id';
+  $handler->display->display_options['fields']['field_image']['label'] = '';
+  $handler->display->display_options['fields']['field_image']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_image']['alter']['text'] = '<a href="/employees/[name]"><img src=[field_image] alt="[field_display_name]" title="[field_display_name]" /></a>';
+  $handler->display->display_options['fields']['field_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_image']['type'] = 'image_url';
+  $handler->display->display_options['fields']['field_image']['settings'] = array(
+    'url_type' => '1',
+    'image_style' => 'follow_thumbs',
+    'image_link' => '',
+  );
+  $handler->display->display_options['fields']['field_image']['delta_offset'] = '0';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Global: Random */
   $handler->display->display_options['sorts']['random']['id'] = 'random';
@@ -2732,13 +2760,23 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['fields']['uid']['label'] = '';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['uid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['uid']['link_to_user'] = FALSE;
+  /* Field: User: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'requester_id';
+  $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
   /* Field: User: Display Name */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['relationship'] = 'requester_id';
   $handler->display->display_options['fields']['field_display_name']['label'] = '';
-  $handler->display->display_options['fields']['field_display_name']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_display_name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_display_name']['alter']['path'] = 'user/[uid]';
   $handler->display->display_options['fields']['field_display_name']['element_label_colon'] = FALSE;
   /* Field: User: Title */
@@ -2747,6 +2785,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['fields']['field_gal_title']['field'] = 'field_gal_title';
   $handler->display->display_options['fields']['field_gal_title']['relationship'] = 'requester_id';
   $handler->display->display_options['fields']['field_gal_title']['label'] = '';
+  $handler->display->display_options['fields']['field_gal_title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_gal_title']['element_label_colon'] = FALSE;
   /* Field: Field: Image */
   $handler->display->display_options['fields']['field_image']['id'] = 'field_image';
@@ -2754,10 +2793,12 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
   $handler->display->display_options['fields']['field_image']['relationship'] = 'requester_id';
   $handler->display->display_options['fields']['field_image']['label'] = '';
+  $handler->display->display_options['fields']['field_image']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_image']['alter']['text'] = '<a href="/employees/[name]"><img src=[field_image] alt="[field_display_name]" title="[field_display_name]" /></a>';
   $handler->display->display_options['fields']['field_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_image']['settings'] = array(
-    'image_style' => 'icon_image',
+    'image_style' => 'follow_thumbs',
     'image_link' => 'content',
   );
   $handler->display->display_options['fields']['field_image']['delta_offset'] = '0';
