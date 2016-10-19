@@ -601,6 +601,34 @@ function atwork_activity_form_og_ui_confirm_unsubscribe_alter(&$form, &$form_sta
   $form['#submit'][] = '_atwork_activity_group_unsubscribe';
 }
 
+function atwork_activity_form_alter(&$form, &$form_state, $form_id){
+  if(isset($form['bundle']) && $form['bundle']['#value'] == "profile_feed_comments"){
+    dpm($form);
+    $form['field_display_name']['#access'] = FALSE;
+    $form['field_date']['#access'] = FALSE;
+    $author = user_load($form_state['reply']->uid);
+    // Add image render as a #prefix to name?
+    $form_state['field']['field_display_name']['und']['instance']['default_value'] = $author->field_display_name['und'][0]['safe_value'];
+    $form['field_display_name']['und'][0]['value']['#default_value'] =  $author->field_display_name['und'][0]['safe_value'];
+    dpm($form_state);
+    // TODO: Set prefix and suffix for display name in form (image render and <a> tags)
+    // Set up the render in proper order
+    // Add comments to all content types.
+    // Set up tools? Can I just add this as a field? Add to entity?
+  }
+}
+
+function atwork_activity_entity_view($entity, $type, $view_mode, $langcode){
+  if($type == "reply"){
+    if(!empty($entity->field_display_name)){
+     dpm($entity);
+    }
+  }
+}
+
+
+
+
 function _atwork_activity_group_subscribe(&$form, &$form_state) {
   global $user;
 
