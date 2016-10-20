@@ -2913,7 +2913,16 @@ aside.sidebars h2 {
 	max-width: 220px; 
 	float: right;
 	clear: right;
+	position: relative;
 }
+
+#block-views-people-admin-block-followers .view-header,
+#block-views-people-admin-block-following .view-header {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
 
 #block-views-people-admin-block-followers .view-empty,
 #block-views-people-admin-block-following .view-empty,
@@ -2922,30 +2931,40 @@ aside.sidebars h2 {
 	padding-top: 1em;
 }
 
-
-
-
 #block-views-people-admin-block-followers .view-content a,
 #block-views-people-admin-block-following .view-content a {
 	float: left;
-	margin: 4px 6px;
+	margin: 8px 0;
 }
+
+#block-views-people-admin-block-followers .view-content a:nth-child(3n+2),
+#block-views-people-admin-block-following .view-content a:nth-child(3n+2) {/* target the 2nd, 5th, and so on */
+	margin: 8px 20px;
+}
+
 
 #block-views-people-admin-block-followers .more-link,
 #block-views-people-admin-block-following .more-link {
 	clear: both;
 }
 
+#block-views-people-admin-block-followers .pager,
+#block-views-people-admin-block-following .pager {/* need paged results for counter but hide the actual pager */
+	display: none;
+}
+
 #block-views-people-admin-block-followers .more-link a,
 #block-views-people-admin-block-following .more-link a {
 	text-align: right;
+	font-size: smaller;
 }
 
 #block-views-people-admin-block-followers h2,
 #block-views-people-admin-block-following h2 {
-	padding: 1em 0 0 0;
+	padding: 0;
 	line-height: normal;
 	border-bottom: solid 1px;
+	margin-top: 0 !important;
 }
 
 
