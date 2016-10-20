@@ -601,28 +601,41 @@ function atwork_activity_form_og_ui_confirm_unsubscribe_alter(&$form, &$form_sta
   $form['#submit'][] = '_atwork_activity_group_unsubscribe';
 }
 
+/**
+ * Implements hook_form_alter
+ * Need to include displayname and date in comments to make them similar to other site comment strings
+ */
 function atwork_activity_form_alter(&$form, &$form_state, $form_id){
   if(isset($form['bundle']) && $form['bundle']['#value'] == "profile_feed_comments"){
-    dpm($form);
     $form['field_display_name']['#access'] = FALSE;
-    $form['field_date']['#access'] = FALSE;
+    $form['field_profile_comment_date']['#access'] = FALSE;
     $author = user_load($form_state['reply']->uid);
     // Add image render as a #prefix to name?
-    $form_state['field']['field_display_name']['und']['instance']['default_value'] = $author->field_display_name['und'][0]['safe_value'];
+    //$form_state['field']['field_display_name']['und']['instance']['default_value'] = $author->field_display_name['und'][0]['safe_value'];
     $form['field_display_name']['und'][0]['value']['#default_value'] =  $author->field_display_name['und'][0]['safe_value'];
-    dpm($form_state);
     // TODO: Set prefix and suffix for display name in form (image render and <a> tags)
-    // Set up the render in proper order
+    $form['field_profile_comment_date']['und']['#prefix'] = "Posted: " . $form['field_profile_comment_date']['und']['#prefix'];
+
     // Add comments to all content types.
     // Set up tools? Can I just add this as a field? Add to entity?
+
   }
 }
 
-function atwork_activity_entity_view($entity, $type, $view_mode, $langcode){
+/**
+ * Implements hook_entity_view_alter
+ * Used to add in links/images and prefix's to rendered comment entities
+ */
+
+function atwork_activity_entity_view_alter(&$build, $type){
   if($type == "reply"){
-    if(!empty($entity->field_display_name)){
-     dpm($entity);
-    }
+    // Grab user who posetd the comment
+    $author = user_load($build["field_display_name"]['#object']->uid);
+    // Add a link to their profile to encourage connections
+    $build["field_display_name"][0]['#markup'] = '<a href="/employees/' . $author->name . '"> ' . $build["field_display_name"][0]['#markup'] . '</a>';
+    // Add image to the comment
+    $image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
+    $build["field_profile_comment_date"][0]['#markup'] = render($image) . " Posted: " . $build["field_profile_comment_date"][0]['#markup'];
   }
 }
 

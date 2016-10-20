@@ -3134,6 +3134,9 @@ aside.sidebars h2 {
 .page-user.section-user .field.field-name-field-display-name .field-label {
 	display: none;
 }
+/*******
+* Removed for development of comments, will need to be reworked  - Twerdal 2016-10-20
+*
 .page-user.section-employees .field.field-name-field-display-name:before,
 .page-user.section-user .field.field-name-field-display-name:before {
 	content: "Email:";
@@ -3142,12 +3145,15 @@ aside.sidebars h2 {
 	padding-right: 5px;
 	color: #000;
 }
+
 .page-user.section-employees .field.field-name-field-display-name,
 .page-user.section-user .field.field-name-field-display-name {
 	position: absolute;
 	top: 90px;
-	top: 96px \0/ !important; /* For IE only */
+	top: 96px \0/ !important; /* For IE only */ /*
 }
+*/
+
 .page-user.section-employees .field.field-name-field-linkedin,
 .page-user.section-user .field.field-name-field-linkedin {
 	position: absolute;
