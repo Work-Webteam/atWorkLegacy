@@ -639,7 +639,8 @@ function atwork_activity_entity_view_alter(&$build, $type){
     $build["field_profile_comment_date"][0]['#markup'] = render($image) . " Posted: " . $build["field_profile_comment_date"][0]['#markup'];
     // Add flag icon:
     $build['links']['flag']['#links']['flag-profile_content_flag']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $build['links']['flag']['#links']['flag-profile_content_flag']['title']);
-    //dpm($build);
+    dpm($build['#entity']);
+    dpm(arg());
 
   }
 }
@@ -650,8 +651,14 @@ function atwork_activity_entity_view_alter(&$build, $type){
  */
 function atwork_activity_entity_load($entities, $type){
   if($type == 'message' || $type == 'reply'){
-    //s
   }
+}
+
+/**
+ * Implements hook_entity_view
+ */
+function atwork_activity_entity_view($entity, $type, $view_mode, $langcode){
+
 }
 
 
@@ -1252,10 +1259,13 @@ function _atwork_activity_profile_page_block_content(&$block){
       $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
     }
 
-     // Put everything together in the order we would like for this message
-    $output .= '<div class="' . implode(' ', $classes) . '"><span class="date"> ' . date('F j Y - g:ia', $result['#entity']->timestamp) . '</span> <span class="feed_image">' . render($user_image) . '</span>' . render($result) . '</div>' ;
+    $widget_id = '5';
 
+     // Put everything together in the order we would like for this message
+    $output .= '<div class="' . implode(' ', $classes) . '"><span class="date"> ' . date('F j Y - g:ia', $result['#entity']->timestamp) . '</span> <span class="feed_image">' . render($user_image) . '</span>' . render($result) .
+  /* print rate_generate_widget($widget_id, 'message', $entity->cid) . */ '</div>' ;
    $j++;
+   dpm($value);
 
   }
 
