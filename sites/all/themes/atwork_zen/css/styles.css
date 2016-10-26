@@ -2910,7 +2910,7 @@ aside.sidebars h2 {
 
 #block-views-people-admin-block-followers,
 #block-views-people-admin-block-following {
-	max-width: 220px; 
+	width: 220px; 
 	float: right;
 	clear: right;
 	position: relative;
@@ -3108,239 +3108,33 @@ aside.sidebars h2 {
 /*#####################################################################################################################################################*/
 /* User Profile Page -------------------------------------------------------*/
 /*#####################################################################################################################################################*/
-.page-user-edit h2.breadcrumb {
-	margin-top: 10px;
-}
 
-.page-user.section-employees .masquerade-switch,
-.page-user.section-user .masquerade-switch {
-	position: absolute;
-	bottom: 2px;
-	left: 30px;
-	left: 60px\0/ !important; /* For IE only */
-	width: auto;
-	padding: 2px 7px;
-	border: solid 1px beige;
-}
-/*----------------- Published Profiles --------------------*/
-.page-user.section-employees #content .profile,
-.page-user.section-user #content .profile {
-	position: relative;
-	background-color: #D7D7D7;
-	margin: 5px 0 0 0;
-	padding: 0;
-	clear: both;
-	height: 300px;
-	width: 100%;
-	font-family: open-sans,sans-serif !important;
-}
-.page-user.section-employees .field.field-name-field-image.field-type-image,
-.page-user.section-user .field.field-name-field-image.field-type-image {
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 240px;
-	width: auto;
-	max-width: 220px;
-	padding: 0;
-	margin: 0;
-	border-top: solid 30px #A7A7A7;
-	border-right: solid 30px #A7A7A7;
-	border-bottom: solid 30px #A7A7A7;
-	border-left: solid 30px #A7A7A7;
-	overflow: hidden;
-	background-color: #FFF;
-}
 
-.page-user.section-employees .field.field-name-field-image.field-type-image img,
-.page-user.section-user .field.field-name-field-image.field-type-image img {
-	padding: 0px;
-	border: 0px;
-	height: 240px;
-}
-.page-user.section-employees #content .group_profile_card p,
-.page-user.section-user #content .group_profile_card p {
-	padding: 0;
-	margin: 0;
-}
-.page-user.section-user .field.field-name-field-extended-biography p,
-.page-user.section-employees .field.field-name-field-extended-biography p {
-	padding: 0;
-	margin: 10px 0;
-}
-.page-user.section-employees .field.field-name-field-gal-first-name,
-.page-user.section-user .field.field-name-field-gal-first-name {
-	position: absolute;
-	top: 0;
-	padding-left: 270px;
-	padding-top: 20px;
-	font-family: atwork-font;
-	font-weight: 800;
-	font-weight: 400\0/ !important; /* For IE only */
-	font-style: normal;
-	color: #000 !important;
-}
-.page-user.section-employees .field.field-name-field-gal-title,
-.page-user.section-user .field.field-name-field-gal-title {
-	position: absolute;
-	top: 42px;
-	top: 48px\0/ !important; /* For IE only */
-	width: 65%;
-	color: #008D7B;
-	border-bottom: solid 1px #000;
-	margin-left: 270px;
-	padding-top: 0;
-	font-weight: normal \0/ !important; /* For IE only */
-	font-size: .9em;
-	padding-bottom: 3px;
-}
-.page-user.section-employees .field.field-name-field-gal-phone-number,
-.page-user.section-user .field.field-name-field-gal-phone-number {
-	position: absolute;
-	top: 68px;
-	top: 74px\0/ !important; /* For IE only */
-	padding-left: 270px;
-	clear: right;
-	color: #000;
-}
-.page-user.section-employees .field.field-name-field-display-name,
-.page-user.section-user .field.field-name-field-display-name,
-.page-user.section-employees .field.field-name-field-linkedin,
-.page-user.section-user .field.field-name-field-linkedin,
-.page-user.section-employees .field.field-name-field-joined-public-service,
-.page-user.section-user .field.field-name-field-joined-public-service {
-	left: 270px;
-	display: block;
-	height: auto;
-	line-height: 18px;
-	clear: right;
-	color: #000;
-}
-.page-user.section-employees .field.field-name-field-display-name .field-label,
-.page-user.section-user .field.field-name-field-display-name .field-label {
-	display: none;
-}
-.page-user.section-employees .field.field-name-field-display-name:before,
-.page-user.section-user .field.field-name-field-display-name:before {
-	content: "Email:";
-	font-weight: bold;
+/* --- Skills/Interests tabs --- */
+
+.group-skills-interests-htabs {
+	width: 242px;
 	float: left;
-	padding-right: 5px;
-	color: #000;
-}
-.page-user.section-employees .field.field-name-field-display-name,
-.page-user.section-user .field.field-name-field-display-name {
-	position: absolute;
-	top: 90px;
-	top: 96px \0/ !important; /* For IE only */
-}
-.page-user.section-employees .field.field-name-field-linkedin,
-.page-user.section-user .field.field-name-field-linkedin {
-	position: absolute;
-	top: 110px;
-	top: 116px \0/ !important; /* For IE only */
-}
-.page-user.section-employees .field.field-name-field-joined-public-service,
-.page-user.section-user .field.field-name-field-joined-public-service {
-	position: absolute;
-	top: 130px;
-	top: 136px \0/ !important; /* For IE only */
-}
-.page-user.section-employees #user-user-full-group-location-div-set,
-.page-user.section-user #user-user-full-group-location-div-set {
-	line-height: 17px;
-	position: absolute;
-	left: 630px;
-	left: 660px \0/ !important; /* For IE only */
-	top: 70px;
-	top: 74px \0/ !important; /* For IE only */
-	display: block;
-	color: #000;
-}
-.page-user.section-employees .field.field-name-field-summary {
-	position: absolute;
-	left: 270px;
-	top: 145px;
-	display: block;
-	width: 65%;
-	line-height: 18px;
-	clear: right;
-}
-.page-user.section-employees .field.field-name-field-summary h2,
-.page-user.section-user .field.field-name-field-summary h2 {
-	padding: 0;
-	margin: 10px 0 0 0;
-	line-height: normal;
 }
 
-/** Extended profile area - published profiles, all information **/
-.page-user.section-employees #user-user-full-group-profile-extra,
-.page-user.section-user #user-user-full-group-profile-extra {
-	display: inline-block;
-	float: right;
-	position: relative;
-	top: 320px;
-	width: 100%;
-	min-height: 150px;
-	padding: 0;
-	margin: 0;
-	clear: both;
-}
-.page-user.section-employees #user-user-full-group-skills-interests {
-	display: inline-block;
-	width: 26%;
-}
-.page-user.section-employees .field.field-name-field-extended-biography,
-.page-user.section-user .field.field-name-field-extended-biography {
-	display: inline-block;
-	width: 72%;
-	float: right;
-}
-.page-user.section-employees .field.field-name-field-extended-biography p,
-.page-user.section-user .field.field-name-field-extended-biography p {
-	padding-right: 40px;
-}
-.page-user.section-employees .field.field-name-field-extended-biography h2,
-.page-user.section-user .field.field-name-field-extended-biography h2 {
-	padding: 0;
-	margin: 0 0 5px 0;
-	line-height: normal;
-}
-.page-user.section-employees .field.field-name-field-skills,
-.page-user.section-employees .field.field-name-field-employee-interests {
-
-	text-transform: capitalize;
-}
-.page-user.section-employees h2.skills-profile-section,
-.page-user.section-employees h2.interests-profile-section {
-	padding: 0;
-	line-height: normal;
-	border-bottom: solid 1px;
-}
-.page-user.section-employees h2.interests-profile-section {
-	padding-top: 10px;
-}
-/*.page-user.section-employees .group_skills_interests {
-	position: absolute;
-	display: block;
-	width: 100%;
-	left: 0;
-	top: 5px;
-}*/
-.page-user.section-employees h2.skills-profile-section,
-.page-user.section-employees h2.interests-profile-section{
-	margin: 0 0 10px 0;
+.group-skills-interests-htabs .horizontal-tabs {
+	border: none;
 }
 
-.page-user.section-employees .field.field-name-field-skills .field-item.odd,
-.page-user.section-employees .field.field-name-field-skills .field-item.even,
-.page-user.section-employees .field.field-name-field-employee-interests .field-item.odd,
-.page-user.section-employees .field.field-name-field-employee-interests .field-item.even {
-	display: inline-block;
-	border: solid 1px rgba(0, 141, 123, .4);
-	padding: 3px 5px;
-	margin: 0 2px 5px 0;
-	color: #666;
+.horizontal-tabs .group-skills-tab.horizontal-tabs-pane,
+.horizontal-tabs .group-interests-tab.horizontal-tabs-pane {
+	padding-left: 0;
+}
+
+.group-skills-tab,
+.group-interests-tab {
+	min-height: 100px;
+	background: white;
+}
+
+.group-skills-tab h2,
+.group-interests-tab h2 {
+	display: none;
 }
 
 /** Extended profile area - published profiles, missing information **/
@@ -3386,6 +3180,11 @@ aside.sidebars h2 {
 	display: block;
 	height: 30px;
 }
+
+.field-name-field-extended-biography {
+	background: white;
+}
+
 
 /*----------------- Following/Follower Sections --------------------*/
 
