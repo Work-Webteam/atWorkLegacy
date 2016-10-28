@@ -606,7 +606,7 @@ function atwork_activity_form_og_ui_confirm_unsubscribe_alter(&$form, &$form_sta
  * Need to include displayname and date in comments to make them similar to other site comment strings
  */
 function atwork_activity_form_alter(&$form, &$form_state, $form_id){
-  if(isset($form['bundle']) && $form['bundle']['#value'] == "profile_feed_comments"){
+  if(isset($form['bundle']) && $form['bundle']['#value'] == "entity_comments"){
     $form['field_display_name']['#access'] = FALSE;
     $form['field_profile_comment_date']['#access'] = FALSE;
     $author = user_load($form_state['reply']->uid);
