@@ -71,7 +71,9 @@ class AtworkRateButton
     if ($this->class) {
       $classes[] = $this->class;
     }
-    return theme('link', array(
+
+
+   return theme('link', array(
       'text' => $this->label,
       'path' => $_GET['q'],
       'options' => array(

@@ -3,7 +3,6 @@
     attach: function(context) {
       $('.atwork-rate-widget:not(.atwork-rate-processed)', context).addClass('atwork-rate-processed').each(function () {
         var widget = $(this);
-        var ids = widget.attr('id').match(/^atwork_rate\-([a-z]+)\-([0-9]+)\-([0-9]+)\-([0-9])$/);
         var data = {
           entity_type: widget.attr('data-entity-type'),
           entity_id: widget.attr('data-entity-id'),
@@ -11,10 +10,12 @@
           widget_mode: widget.attr('data-mode')
         };
 
+
         $('a.atwork-rate-button', widget).click(function() {
           var token = $(this).attr('data-token');
           return Drupal.atworkRateVote(widget, data, token);
         });
+        $(".voted a.atwork-rate-button").hide();
 
         // Save description in attribute so we can reset this on mouseout.
         widget.attr('data-description', $('span.atwork-rate-description', widget).text());
@@ -73,13 +74,14 @@
   Drupal.atworkRateVote = function(widget, data, token) {
     // Invoke JavaScript hook.
     widget.trigger('eventBeforeAtworkRate', [data]);
-
+    //console.log( Drupal.settings.atwork_rate.destination);
+    var destinationForSave = Drupal.settings.atwork_rate.destination;
     $(".atwork-rate-description", widget).text(Drupal.t('Saving vote...'));
 
     // Random number to prevent caching, see http://drupal.org/node/1042216#comment-4046618
     var random = Math.floor(Math.random() * 99999);
 
-    var q = Drupal.settings.atwork_rate.basePath.match(/\?/) ? '&' : '?' + 'field_name=' + data.field_name + '&entity_type=' + data.entity_type + '&entity_id=' + data.entity_id + '&widget_mode=' + data.widget_mode + '&rate=' + token + '&destination=' + encodeURIComponent(Drupal.settings.rate.destination) + '&r=' + random;
+    var q = Drupal.settings.atwork_rate.basePath.match(/\?/) ? '&' : '?' + 'field_name=' + data.field_name + '&entity_type=' + data.entity_type + '&entity_id=' + data.entity_id + '&widget_mode=' + data.widget_mode + '&atwork_rate=' + token + '&destination=' + destinationForSave.destination + '&r=' + random;
     if (data.value) {
       q = q + '&value=' + data.value;
     }
@@ -92,20 +94,18 @@
       else {
         // Get parent object.
         var p = widget.parent();
-
         // Invoke JavaScript hook.
         widget.trigger('eventAfterAtworkRate', [data]);
-
+        //console.log(data);
         widget.before(response);
-
         // Remove widget.
         widget.remove();
+
         widget = undefined;
 
         Drupal.attachBehaviors(p.get(0));
       }
     });
-
     return false;
-  }
+  };
 })(jQuery);

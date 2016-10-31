@@ -31,6 +31,7 @@ class AtworkRateDefaultWidget extends AtworkRateWidget
       ->condition('w.type', $this->type)
       ->execute()
       ->fetchObject();
+      //dpm($widget);
     if ($widget) {
       $this->wid = $widget->wid;
       $this->value_type = $widget->mode;
@@ -46,7 +47,6 @@ class AtworkRateDefaultWidget extends AtworkRateWidget
       $this->sprites = (bool) $widget->sprites;
       $this->highlight_voted = $widget->highlight_voted;
       $this->highlight_mouseover = $widget->highlight_mouseover;
-
       $this->loadButtons();
     }
   }
@@ -66,6 +66,7 @@ class AtworkRateDefaultWidget extends AtworkRateWidget
 
     // Loop the result to find files to load.
     $fids = array();
+    //dpm($buttons);
     foreach ($buttons as $button) {
       if (!$this->sprites) {
         $img = $button->img_default;
@@ -109,7 +110,6 @@ class AtworkRateDefaultWidget extends AtworkRateWidget
       'format_closed' => 16,
     );
     $mode = isset($modes[$this->mode]) ? $modes[$this->mode] : 0;
-
     $elements = db_select('atwork_rate_widget_element', 'e')
       ->fields('e', array('type', 'prefix', 'suffix', 'mode'))
       ->condition('e.wid', $this->wid)
@@ -121,7 +121,6 @@ class AtworkRateDefaultWidget extends AtworkRateWidget
         $this->layout[] = $element;
       }
     }
-
     foreach ($this->elements as $element) {
       if ($element instanceof AtworkRateButton) {
         $highlight = FALSE;
@@ -179,6 +178,7 @@ class AtworkRateDefaultWidget extends AtworkRateWidget
     $classes = array('atwork-rate-widget', "atwork-rate-widget-{$this->type}");
     $classes[] = $this->displayed == ATWORK_RATE_AVERAGE ? 'average-rating' : 'user-rating';
     $classes[] = $this->voted ? 'voted' : 'not-voted';
+
     if ($this->mode == 'format_full_disabled' || $this->mode == 'format_compact_disabled' || $this->mode == 'format_closed') {
       $classes[] = 'disabled';
     }
@@ -201,7 +201,6 @@ class AtworkRateDefaultWidget extends AtworkRateWidget
       'data-desc-mouseover' => $this->desc_mouseover,
     );
     $output = "<div" . drupal_attributes($attributes) . ">$output</div>";
-
     return $output;
   }
 
@@ -212,23 +211,51 @@ class AtworkRateDefaultWidget extends AtworkRateWidget
    */
   protected function getDescription() {
     $user_vote = NULL;
+    $total_vote = $this->count;
+    $total_vote_without_user = $total_vote - 1;
+
+    //dpm($this);
     foreach ($this->results as $result) {
       if ($result['function'] == 'user') {
         $user_vote = $this->getButtonLabelByValue($result['value']);
       }
     }
-
+    // Hacked the messages to take more instances into account.
+    // TODO: In the future, this should be added to the front end rate_ui module, and standardized here.
+    // No one has voted
     if ($this->count == 0) {
       $description = $this->desc_norating;
     }
-    elseif (is_null($user_vote)) {
-      $description = $this->desc_notvoted;
+    // You have not voted, someone else has
+    elseif (is_null($user_vote) ) {
+      if($total_vote == 1 ){
+        $description = "(" . $total_vote . ")";
+      } else {
+        $description = "(" . $total_vote . ")";
+      }
     }
+    // You just voted
     elseif ($this->just_voted) {
-      $description = $this->desc_justvoted;
+      if($total_vote_without_user == 1 ){
+        $description = "You and " .  $total_vote_without_user . " other liked this";
+      } elseif($total_vote_without_user == 0) {
+        $description = "You liked this";
+      } else {
+        $description = "You and " .  $total_vote_without_user . " others liked this";
+      }
     }
+
+    // You are the only one who has voted
+    elseif ($user_vote && $this->count == 1){
+      $description = "You liked this";
+    }
+    // You have voted and so has someone else
     else {
-      $description = $this->desc_voted;
+      if($total_vote_without_user == 1 ){
+        $description = "You and " . $total_vote_without_user . "other liked this";
+      } else {
+        $description = "You and " . $total_vote_without_user . "others liked this";
+      }
     }
 
     $description = t($description, array(

@@ -417,7 +417,7 @@ function atwork_rate_vote_ajax() {
   $entity_id = (int) $_GET['entity_id'];
   $field_name = preg_replace('/[^\\w\\-]/', '', $_GET['field_name']);
   $widget_mode = preg_replace('/[^\\w\\-]/', '', $_GET['widget_mode']);
-
+  dpm($_GET);
   $entities = entity_load($entity_type, array($entity_id));
   if (!isset($entities[$entity_id])) {
     return MENU_NOT_FOUND;
