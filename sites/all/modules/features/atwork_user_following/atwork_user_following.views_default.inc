@@ -2650,7 +2650,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['label'] = 'haven\'t started following';
   $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div id="not-following"><p>You haven\'t started following anyone. Find colleagues to follow on the <a href="employees>employees page</a></p></div>';
+  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div id="not-following"><p>You haven\'t started following anyone. Find colleagues to follow on the <a href="/employees">employees page</a></p></div>';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: User relationships: Requestee user */
   $handler->display->display_options['relationships']['requestee_id']['id'] = 'requestee_id';
@@ -2754,6 +2754,20 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '9';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'semanticviews_default';
+  $handler->display->display_options['style_options']['row']['element_type'] = '';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'semanticviews_fields';
+  $handler->display->display_options['row_options']['skip_blank'] = 0;
+  $handler->display->display_options['row_options']['semantic_html'] = array(
+    'field_image' => array(
+      'element_type' => '',
+      'class' => '',
+    ),
+  );
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: Result summary */
   $handler->display->display_options['header']['result']['id'] = 'result';
@@ -2821,9 +2835,11 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['fields']['field_image']['alter']['text'] = '<a href="/employees/[name]"><img src=[field_image] alt="[field_display_name]" title="[field_display_name]" /></a>';
   $handler->display->display_options['fields']['field_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_image']['type'] = 'image_url';
   $handler->display->display_options['fields']['field_image']['settings'] = array(
+    'url_type' => '1',
     'image_style' => 'follow_thumbs',
-    'image_link' => 'content',
+    'image_link' => '',
   );
   $handler->display->display_options['fields']['field_image']['delta_offset'] = '0';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
