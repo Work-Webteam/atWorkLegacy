@@ -2760,63 +2760,59 @@ aside.sidebars h2 {
 /*#####################################################################################################################################################*/
 /*----------------- Employee Landing Page Specific Rules --------------------*/
 .section-employees .view-content {
-  width: auto;
-  margin: 0 auto;
+	width: auto;
+	margin: 0 auto;
 }
 /*.section-employees .views-view-grid.cols-4 td,*/
-.section-employees .view-content .views-row {
-  position: relative;
-  display: inline-block;
-  background-color: #D7D7D7;
-  border: solid 1px #A7A7A7;
-  vertical-align: top;
-  margin: 0 0 5px 0;
-  padding: 0;
-  color: #000;
-  height: 415px;
-  width: 235px;
-}
-.section-employees .view-content .views-row-odd .image-employee-landing,
-.section-employees .view-content .views-row-even .image-employee-landing{
-  display: block;
-  width: 180px;
-  /*! height: 240px; */
-  padding: 0;
-  overflow: hidden;
-  border: solid 28px #A7A7A7;
-  background-color: #A7A7A7;
-  overflow: hidden;
-}
-.section-employees .view-content .views-row-odd .image-employee-landing img,
-.section-employees .view-content .views-row-even .image-employee-landing img{
-  width: 100%;
-  height: 100%;
-  margin: 0;
-}
-.section-employees .view-content .views-row-odd .name-employee-landing,
-.section-employees .view-content .views-row-even .name-employee-landing {
-  display: block;
-  width: 85%;
-  margin: 10px auto 0;
-  font-weight: 800;
-  min-height: 40px;
-}
-.section-employees .view-content .views-row-odd .title-employee-landing,
-.section-employees .view-content .views-row-even .title-employee-landing {
-  font-family: open-sans, sans-serif;
-  display: block;
-  padding: 0;
-  margin: 0 15px;
-  font-weight: initial;
-  color: #666;
-  line-height: normal;
+.section-employees .view-content .views-row,
+.view-people-admin .view-content .views-row {
+	display: inline-block;
+	background-color: #D7D7D7;
+	border: solid 1px #A7A7A7;
+	vertical-align: top;
+	margin: 0 0 5px 0;
+	padding: 0;
+	color: #000;
+	height: 415px;
+	width: 235px;
+	position: relative;
 }
 
-.section-employees .view-content .views-row-odd .title-employee-landing .atwork-relationship-action,
-.section-employees .view-content .views-row-even .title-employee-landing .atwork-relationship-action {
-	position: absolute;
-	bottom: 20px;
-	right: 20px;
+.section-employees .view-content .views-row .image-employee-landing,
+.view-people-admin .view-content .views-row .image-employee-landing {
+	display: block;
+	width: 180px;
+	/*! height: 240px; */
+	padding: 0;
+	overflow: hidden;
+	border: solid 28px #A7A7A7;
+	background-color: #A7A7A7;
+	overflow: hidden;
+}
+
+.section-employees .view-content .views-row .image-employee-landing img,
+.view-people-admin .view-content .views-row .image-employee-landing img  {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+.section-employees .view-content .views-row .name-employee-landing,
+.view-people-admin .view-content .views-row .name-employee-landing {
+	display: block;
+	width: 85%;
+	margin: 10px auto 0;
+	font-weight: 800;
+	min-height: 40px;
+}
+.section-employees .view-content .views-row .title-employee-landing,
+.view-people-admin .view-content .views-row .title-employee-landing {
+	font-family: open-sans, sans-serif;
+	display: block;
+	padding: 0;
+	margin: 4px 18px;
+	font-weight: initial;
+	color: #666;
+	line-height: normal;
 }
 
 .page-employees fieldset#edit-advanced-search .fieldset-legend {
@@ -2824,6 +2820,13 @@ aside.sidebars h2 {
   margin-top: -15px;
   margin-right: 15px;
 }
+
+.section-employees .view-content button.atwork-relationship-action {
+	  position: absolute;
+    bottom: 10px;
+    right: 20px;
+}
+
 /*----------------- Employee Landing Page, Following/ers Search Area --------------------*/
 .section-employees .view-filters #views-exposed-form-people-admin-public-page,
 .section-employees .view-filters #views-exposed-form-people-admin-page-following2,
