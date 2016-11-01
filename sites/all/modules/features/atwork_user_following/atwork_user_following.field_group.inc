@@ -13,6 +13,68 @@ function atwork_user_following_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_interests_tab|user|user|default';
+  $field_group->group_name = 'group_interests_tab';
+  $field_group->entity_type = 'user';
+  $field_group->bundle = 'user';
+  $field_group->mode = 'default';
+  $field_group->parent_name = 'group_skills_interests';
+  $field_group->data = array(
+    'label' => 'Interests',
+    'weight' => '39',
+    'children' => array(
+      0 => 'field_employee_interests',
+    ),
+    'format_type' => 'htab',
+    'format_settings' => array(
+      'label' => 'Interests',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'group-interests-tab field-group-htab',
+        'description' => '',
+      ),
+      'formatter' => 'closed',
+    ),
+  );
+  $field_groups['group_interests_tab|user|user|default'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_location_div_set|user|user|default';
+  $field_group->group_name = 'group_location_div_set';
+  $field_group->entity_type = 'user';
+  $field_group->bundle = 'user';
+  $field_group->mode = 'default';
+  $field_group->parent_name = 'group_profile_identity_bundle';
+  $field_group->data = array(
+    'label' => 'Location_bundle',
+    'weight' => '51',
+    'children' => array(
+      0 => 'field_gal_address',
+      1 => 'field_gal_city',
+      2 => 'field_gal_postal_code',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Location_bundle',
+      'instance_settings' => array(
+        'id' => 'user_user_full_group_location_div_set',
+        'classes' => 'group-profile-location-bundle field-group-div',
+        'description' => '',
+        'show_label' => '0',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_location_div_set|user|user|default'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_profile_card|user|user|default';
   $field_group->group_name = 'group_profile_card';
   $field_group->entity_type = 'user';
@@ -207,6 +269,8 @@ function atwork_user_following_field_group_info() {
   // Included for use with string extractors like potx.
   t('Contact_bundle');
   t('Identity_bundle');
+  t('Interests');
+  t('Location_bundle');
   t('Profile Card');
   t('Profile Extra');
   t('Skills');
