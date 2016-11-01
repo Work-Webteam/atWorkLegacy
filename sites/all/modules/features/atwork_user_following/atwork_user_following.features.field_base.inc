@@ -10,56 +10,42 @@
 function atwork_user_following_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_employee_interests'.
-  $field_bases['field_employee_interests'] = array(
+  // Exported field_base: 'field_extended_biography'.
+  $field_bases['field_extended_biography'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_employee_interests',
+    'field_name' => 'field_extended_biography',
     'indexes' => array(
-      'tid' => array(
-        0 => 'tid',
+      'format' => array(
+        0 => 'format',
       ),
     ),
     'locked' => 0,
-    'module' => 'taxonomy',
-    'settings' => array(
-      'allowed_values' => array(
-        0 => array(
-          'vocabulary' => 'profile_interests',
-          'parent' => 0,
-        ),
-      ),
-    ),
+    'module' => 'text',
+    'settings' => array(),
     'translatable' => 0,
-    'type' => 'taxonomy_term_reference',
+    'type' => 'text_long',
   );
 
-  // Exported field_base: 'field_skills'.
-  $field_bases['field_skills'] = array(
+  // Exported field_base: 'field_summary'.
+  $field_bases['field_summary'] = array(
     'active' => 1,
-    'cardinality' => -1,
+    'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_skills',
+    'field_name' => 'field_summary',
     'indexes' => array(
-      'tid' => array(
-        0 => 'tid',
+      'format' => array(
+        0 => 'format',
       ),
     ),
     'locked' => 0,
-    'module' => 'taxonomy',
-    'settings' => array(
-      'allowed_values' => array(
-        0 => array(
-          'vocabulary' => 'profile_skills',
-          'parent' => 0,
-        ),
-      ),
-    ),
+    'module' => 'text',
+    'settings' => array(),
     'translatable' => 0,
-    'type' => 'taxonomy_term_reference',
+    'type' => 'text_long',
   );
 
   return $field_bases;
