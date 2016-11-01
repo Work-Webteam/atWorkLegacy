@@ -2764,8 +2764,8 @@ aside.sidebars h2 {
   margin: 0 auto;
 }
 /*.section-employees .views-view-grid.cols-4 td,*/
-.section-employees .view-content .views-row.views-row-odd,
-.section-employees .view-content .views-row.views-row-even {
+.section-employees .view-content .views-row {
+  position: relative;
   display: inline-block;
   background-color: #D7D7D7;
   border: solid 1px #A7A7A7;
@@ -2810,6 +2810,13 @@ aside.sidebars h2 {
   font-weight: initial;
   color: #666;
   line-height: normal;
+}
+
+.section-employees .view-content .views-row-odd .title-employee-landing .atwork-relationship-action,
+.section-employees .view-content .views-row-even .title-employee-landing .atwork-relationship-action {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
 }
 
 .page-employees fieldset#edit-advanced-search .fieldset-legend {
@@ -2892,10 +2899,7 @@ aside.sidebars h2 {
 .section-employees .region-pre-content p {
 	margin-bottom: 12px;
 }
-/*#views-exposed-form-people-admin-public-page #edit-skills-wrapper #edit-skills,
-#views-exposed-form-people-admin-public-page #edit-interests-wrapper #edit-interests {
-	width: 50%;
-}*/
+
 
 /*----------------- Following/ers Blocks --------------------*/
 
@@ -3116,176 +3120,6 @@ aside.sidebars h2 {
 	right: 20px;
 	top: 50px;
 }
-
-/*----------------- Published Profiles --------------------*/
-/*.page-user.section-employees #content .profile,
-.page-user.section-user #content .profile {
-  position: relative;
-  background-color: #D7D7D7;
-  margin: 5px 0 0 0;
-  padding: 0;
-  clear: both;
-  height: 300px;
-  width: 100%;
-  font-family: open-sans,sans-serif !important;
-}*/
-
-/* ---- start Full Group Profile Card ---- */
-/*
-.page-user.section-employees .field.field-name-field-image.field-type-image,
-.page-user.section-user .field.field-name-field-image.field-type-image {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 240px;
-  width: auto;
-  max-width: 220px;
-  padding: 0;
-  margin: 0;
-  border-top: solid 30px #A7A7A7;
-  border-right: solid 30px #A7A7A7;
-  border-bottom: solid 30px #A7A7A7;
-  border-left: solid 30px #A7A7A7;
-  overflow: hidden;
-  background-color: #FFF;
-}
-
-.page-user.section-employees .field.field-name-field-image.field-type-image img,
-.page-user.section-user .field.field-name-field-image.field-type-image img {
-  padding: 0px;
-  border: 0px;
-  height: 240px;
-}
-.page-user.section-employees #content .group_profile_card p,
-.page-user.section-user #content .group_profile_card p {
-  padding: 0;
-  margin: 0;
-}
-.page-user.section-user .field.field-name-field-extended-biography p,
-.page-user.section-employees .field.field-name-field-extended-biography p {
-  padding: 0;
-  margin: 10px 0;
-}
-.page-user.section-employees .field.field-name-field-gal-first-name,
-.page-user.section-user .field.field-name-field-gal-first-name {
-  position: absolute;
-  top: 0;
-  padding-left: 270px;
-  padding-top: 20px;
-  font-family: atwork-font;
-  font-weight: 800;
-  font-weight: 400\0/ !important; 
-  font-style: normal;
-  color: #000 !important;
-}
-.page-user.section-employees .field.field-name-field-gal-title,
-.page-user.section-user .field.field-name-field-gal-title {
-  position: absolute;
-  top: 42px;
-  top: 48px\0/ !important; 
-  width: 65%;
-  color: #008D7B;
-  border-bottom: solid 1px #000;
-  margin-left: 270px;
-  padding-top: 0;
-  font-weight: normal \0/ !important; 
-  font-size: .9em;
-  padding-bottom: 3px;
-}
-.page-user.section-employees .field.field-name-field-gal-phone-number,
-.page-user.section-user .field.field-name-field-gal-phone-number {
-  position: absolute;
-  top: 68px;
-  top: 74px\0/ !important; 
-  padding-left: 270px;
-  clear: right;
-  color: #000;
-}
-.page-user.section-employees .field.field-name-field-display-name,
-.page-user.section-user .field.field-name-field-display-name,
-.page-user.section-employees .field.field-name-field-linkedin,
-.page-user.section-user .field.field-name-field-linkedin,
-.page-user.section-employees .field.field-name-field-joined-public-service,
-.page-user.section-user .field.field-name-field-joined-public-service {
-  left: 270px;
-  display: block;
-  height: auto;
-  line-height: 18px;
-  clear: right;
-  color: #000;
-}
-.page-user.section-employees .field.field-name-field-display-name .field-label,
-.page-user.section-user .field.field-name-field-display-name .field-label {
-  display: none;
-}
-.page-user.section-employees .field.field-name-field-display-name:before,
-.page-user.section-user .field.field-name-field-display-name:before {
-  content: "Email:";
-  font-weight: bold;
-  float: left;
-  padding-right: 5px;
-  color: #000;
-}
-.page-user.section-employees .field.field-name-field-display-name,
-.page-user.section-user .field.field-name-field-display-name {
-  position: absolute;
-  top: 90px;
-  top: 96px \0/ !important; 
-}
-.page-user.section-employees .field.field-name-field-linkedin,
-.page-user.section-user .field.field-name-field-linkedin {
-  position: absolute;
-  top: 110px;
-  top: 116px \0/ !important; 
-}
-.page-user.section-employees .field.field-name-field-joined-public-service,
-.page-user.section-user .field.field-name-field-joined-public-service {
-  position: absolute;
-  top: 130px;
-  top: 136px \0/ !important; 
-}
-.page-user.section-employees #user-user-full-group-location-div-set,
-.page-user.section-user #user-user-full-group-location-div-set {
-  line-height: 17px;
-  position: absolute;
-  left: 630px;
-  left: 660px \0/ !important; 
-  top: 70px;
-  top: 74px \0/ !important; 
-  display: block;
-  color: #000;
-}
-.page-user.section-employees .field.field-name-field-summary {
-  position: absolute;
-  left: 270px;
-  top: 145px;
-  display: block;
-  width: 65%;
-  line-height: 18px;
-  clear: right;
-}
-.page-user.section-employees .field.field-name-field-summary h2,
-.page-user.section-user .field.field-name-field-summary h2 {
-  padding: 0;
-  margin: 10px 0 0 0;
-  line-height: normal;
-}*/
-
-/* ---- end Full Group Profile Card ---- */
-
-/* ---- start Profile Extra ---- */
-
-/*.page-user.section-employees #user-user-full-group-profile-extra,
-.page-user.section-user #user-user-full-group-profile-extra {
-  display: inline-block;
-  position: relative;
-  top: 300px;
-  width: 100%;
-  min-height: 150px;
-  padding: 0;
-  margin: 0;
-  clear: both;
-}*/
 
 
 /* Start New Profile styling */
