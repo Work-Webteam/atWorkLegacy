@@ -3101,7 +3101,6 @@ aside.sidebars h2 {
   margin-top: 10px;
 }
 
-.page-user.section-employees .masquerade-switch,
 .page-user.section-user .masquerade-switch {
   position: absolute;
   bottom: 2px;
@@ -3111,6 +3110,13 @@ aside.sidebars h2 {
   padding: 2px 7px;
   border: solid 1px beige;
 }
+
+.page-user.section-employees .masquerade-switch {
+	position: absolute;
+	right: 20px;
+	top: 50px;
+}
+
 /*----------------- Published Profiles --------------------*/
 /*.page-user.section-employees #content .profile,
 .page-user.section-user #content .profile {
@@ -3285,6 +3291,7 @@ aside.sidebars h2 {
 /* Start New Profile styling */
 
 #user-user-full-group-profile-card {
+	position: relative;
 	background-color: #D7D7D7;
 }
 
@@ -3296,14 +3303,14 @@ aside.sidebars h2 {
 }
 
 #user-user-full-group-profile-card .field-name-field-image { /* profile pic */
-	max-width: 25%;
+	width: 260px;
 	margin: 0 2em 0 0;
 	padding: 2em;
 	background-color: #a7a7a7;
 }
 
 #user-user-full-group-profile-card .group-profile-identity-bundle { /* main identity info */
-	margin-top: 2em;
+	margin-top: 1.8em;
 	max-width: 65%;
 }
 
@@ -3312,17 +3319,29 @@ aside.sidebars h2 {
 			float: left;
 		}
 
+		#user-user-full-group-profile-card .group-profile-contact-bundle {
+			margin-right: 4em;
+		}
+
 			.group-profile-identity-bundle .field-name-field-gal-title {
 				margin-bottom: 1em;
 			}
 
+			.group-profile-identity-bundle .atwork-relationship-action { /* follow button */
+				position: absolute;
+				top: 20px;
+				right: 20px;
+				font-size: 12px;
+				font-weight: bold;
+			}
+
 			#user-user-full-group-profile-card .group-profile-location-bundle {
 				margin-top: 4em;
-				margin-left: 3em;
+				max-width: 200px;
 			}
 		#user-user-full-group-profile-card  .field-name-field-summary {
 			clear: both;
-			padding-top: 0.5em;
+			padding-top: 2px;
 		}
 
 /* start group_profile_extra box - contains skills, interests, expandable bio */
@@ -3343,7 +3362,7 @@ aside.sidebars h2 {
 	}
 
 	#user-user-full-group-profile-extra .field-group-htabs-wrapper {
-    width: 220px;
+    width: 240px;
     display: inline-block;
     border: 10px solid #d7d7d7;
     border-bottom: none;
@@ -3367,7 +3386,7 @@ aside.sidebars h2 {
 	#user-user-full-group-profile-extra .field-name-field-extended-biography {
     display: inline-block;
     box-sizing: border-box;
-    max-width: 75%;
+    max-width: 70%;
     vertical-align: top;
     padding: 0.5em 2em;
 	} 

@@ -24,7 +24,8 @@ function atwork_user_following_field_group_info() {
     'weight' => '0',
     'children' => array(
       0 => 'field_image',
-      1 => 'group_profile_identity_bundle',
+      1 => 'masquerade',
+      2 => 'group_profile_identity_bundle',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -62,7 +63,6 @@ function atwork_user_following_field_group_info() {
       3 => 'field_gal_first_name',
       4 => 'field_linkedin',
       5 => 'field_joined_public_service',
-      6 => 'masquerade',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -125,7 +125,7 @@ function atwork_user_following_field_group_info() {
   $field_group->parent_name = 'group_profile_card';
   $field_group->data = array(
     'label' => 'Identity_bundle',
-    'weight' => '2',
+    'weight' => '3',
     'children' => array(
       0 => 'field_summary',
       1 => 'group_location_div_set',
