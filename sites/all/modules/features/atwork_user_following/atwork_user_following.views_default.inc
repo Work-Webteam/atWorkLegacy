@@ -1760,7 +1760,7 @@ function atwork_user_following_views_default_views() {
   /* Display: Page: Following */
   $handler = $view->new_display('page', 'Page: Following', 'page_following2');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Following2';
+  $handler->display->display_options['title'] = 'Following';
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'people-following';
   $handler->display->display_options['defaults']['use_ajax'] = FALSE;
@@ -2182,7 +2182,7 @@ function atwork_user_following_views_default_views() {
   /* Display: Page: Followers */
   $handler = $view->new_display('page', 'Page: Followers', 'page_followers2');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Following2';
+  $handler->display->display_options['title'] = 'Followers';
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'people-following';
   $handler->display->display_options['defaults']['use_ajax'] = FALSE;

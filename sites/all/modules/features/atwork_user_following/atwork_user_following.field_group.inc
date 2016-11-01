@@ -49,7 +49,7 @@ function atwork_user_following_field_group_info() {
   $field_group->parent_name = 'group_profile_identity_bundle';
   $field_group->data = array(
     'label' => 'Location_bundle',
-    'weight' => '51',
+    'weight' => '44',
     'children' => array(
       0 => 'field_gal_address',
       1 => 'field_gal_city',
