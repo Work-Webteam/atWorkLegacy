@@ -93,34 +93,8 @@ function atwork_activity_menu() {
  * page callback for atwork profile feeds (atwork-activity/profile_feed/[module]/[delta])
  * Copied partially from block_refresh module
  */
-function atwork_activity_profile_feed_callback($module = NULL, $delta = NULL){
-  // If there is a request directly to /employeees/user/profile_feed
-  if (!isset($module) || !isset($delta)){
-    drupal_not_found();
-  }
-  //Validate args and get referrering page args from end.  Set as path.
-  // @todo: extract to a method.
-  $args = arg();
-  dpm($args);
-  if(!empty($args[3]) && $args[0] == 'block_refresh' && $args[1] == $module && $args[2] == $delta) {
-    unset($args[0]);
-    unset($args[1]);
-    unset($args[2]);
-    $_GET['q'] = implode('/', $args);
-  } else {
-    $_GET['q'] = '';  $args = arg();
-  }
-
-  //Bypass page cache if set
-  if(isset($settings[$block_id]['bypass_external_cache']) && $settings[$block_id]['bypass_external_cache'] != ''){
-    drupal_add_http_header('Cache-Control', 'public, max-age=' . intval($settings[$block_id]['bypass_external_cache']));
-  }
-  $block  = block_load($module, $delta);
-  $renderable_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-  $output = drupal_render($renderable_array);
-
-   // Print out the content of the proceeding call
-   print $output;
+function atwork_activity_profile_feed_callback(&$form, $form_state){
+  $element = $form;
 }
 
 function atwork_activity_group_access($node) {
@@ -647,6 +621,7 @@ function atwork_activity_form_og_ui_confirm_unsubscribe_alter(&$form, &$form_sta
  * Need to include displayname and date in comments to make them similar to other site comment strings
  */
 function atwork_activity_form_alter(&$form, &$form_state, $form_id){
+
   if(isset($form['bundle']) && $form['bundle']['#value'] == "entity_comments"){
     $form['field_display_name']['#access'] = FALSE;
     $form['field_profile_comment_date']['#access'] = FALSE;
@@ -657,12 +632,32 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
     // TODO: Set prefix and suffix for display name in form (image render and <a> tags)
     $form['field_profile_comment_date']['und']['#prefix'] = "Posted: " . $form['field_profile_comment_date']['und']['#prefix'];
 
-
-    // Add comments to all content types.
-    // Set up tools? Can I just add this as a field? Add to entity?
-
+    // We want our own submit handler - so we can ajax this
+    $form['#submit'] = '';
+    //$form['#submit'][] = 'atwork_activity_reply_form_submit';
+    // Want ajax
+    //$form['#action'] = '';
+    $form['actions']['submit']['#ajax'] = array(
+      'callback' => 'atwork_activity_reply_form_submit',
+      );
   }
 }
+
+
+/**
+ * Submit handler for entity replies on the profile activity feed page
+ */
+
+function atwork_activity_reply_form_submit($form, &$form_state) {
+  $reply = (object) $form_state['reply'];
+  entity_form_submit_build_entity('reply', $reply, $form, $form_state);
+  entity_save('reply', $reply);
+  //$bundle = reply_bundle_load($reply->bundle);
+
+}
+
+
+
 
 /**
  * Implements hook_entity_view_alter
@@ -954,7 +949,6 @@ function atwork_activity_block_info() {
     'info' => t('Homepage: Activity'),
     'visibility' => BLOCK_VISIBILITY_LISTED,
   );
-  dpm($blocks);
   return $blocks;
 }
 
@@ -1134,12 +1128,14 @@ EOT;
       break;
     /** the profile page block view */
     case 'profile_page_activity_feed_block':
+      // TODO - Set variables with ID
       $block['subject'] = 'User activity';
       // This helps to keep this code a little cleaner - all content is located in it's own function below.
       $block['content'] = array(
         '#markup' => _atwork_activity_profile_page_block_content($block)
       );
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_profile_feed.js');
+
       break;
   }
   return $block;
@@ -1335,7 +1331,6 @@ function _atwork_activity_profile_page_block_content(&$block){
         $time_record = date('F j Y', $result['#entity']->timestamp);
         break;
     }
-    dpm($time_record);
 
      // Put everything together in the order we would like for this message
     $output .= '<div class="' . implode(' ', $classes) . '"><span class="date"> ' . $time_record . '</span> <span class="feed_image">' . render($user_image) . '</span>' . render($result) .
