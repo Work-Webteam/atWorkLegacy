@@ -3325,6 +3325,12 @@ aside.sidebars h2 {
   height: 30px;
 }
 
+.field-expander .read-more,
+.field-expander .read-less {
+  font-weight: bold;
+  font-style: italic;
+}
+
 /*----------------- User Profile Admin Screens --------------------*/
 #user-profile-form {
   padding-top: 10px;
