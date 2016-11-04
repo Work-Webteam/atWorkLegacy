@@ -213,6 +213,45 @@ function atwork_user_following_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_profile|user|user|form';
+  $field_group->group_name = 'group_profile';
+  $field_group->entity_type = 'user';
+  $field_group->bundle = 'user';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Profile',
+    'weight' => '4',
+    'children' => array(
+      0 => 'field_summary',
+      1 => 'field_career',
+      2 => 'field_philosophy_influences',
+      3 => 'field_personal',
+      4 => 'field_favourites',
+      5 => 'field_image',
+      6 => 'field_skills',
+      7 => 'field_linkedin',
+      8 => 'field_extended_biography',
+      9 => 'field_joined_public_service',
+      10 => 'field_employee_interests',
+      11 => 'group_blog_byline',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Profile',
+      'instance_settings' => array(
+        'required_fields' => 0,
+        'classes' => 'group-profile field-group-fieldset ',
+        'description' => '',
+      ),
+      'formatter' => 'collapsed',
+    ),
+  );
+  $field_groups['group_profile|user|user|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_skills_interests|user|user|default';
   $field_group->group_name = 'group_skills_interests';
   $field_group->entity_type = 'user';
@@ -271,6 +310,7 @@ function atwork_user_following_field_group_info() {
   t('Identity_bundle');
   t('Interests');
   t('Location_bundle');
+  t('Profile');
   t('Profile Card');
   t('Profile Extra');
   t('Skills');
