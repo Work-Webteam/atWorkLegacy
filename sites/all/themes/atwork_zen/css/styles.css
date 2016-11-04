@@ -3191,22 +3191,24 @@ aside.sidebars h2 {
 	background-color: white;
 	border: 10px solid #d7d7d7;
   border-top: none;
-	display: table; 
+	display: inline-flex; 
   box-sizing: border-box;
   width: 100%;
+  /*height: 140px;  change this to operate with the jquery accordion as needed */
+  overflow: hidden;
 }
 
 	#user-user-full-group-profile-extra .field-group-htabs-wrapper,
 	#user-user-full-group-profile-extra .field-name-field-extended-biography {
 		background-color: white;
+    vertical-align: top;
 	}
 
 	#user-user-full-group-profile-extra .field-group-htabs-wrapper {
     width: 240px;
-    display: table-cell;
+    min-width: 240px;
     border-right: 10px solid #d7d7d7;
     border-bottom: none;
-    height: 100%;
 	} 
 
 		#user-user-full-group-profile-extra .horizontal-tabs {
@@ -3224,8 +3226,6 @@ aside.sidebars h2 {
 		}
 
 	#user-user-full-group-profile-extra .field-name-field-extended-biography {
-    display: table-cell;
-    vertical-align: top;
     padding: 0.5em 2em;
 	} 
 
