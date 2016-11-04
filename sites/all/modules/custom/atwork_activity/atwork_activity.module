@@ -978,6 +978,7 @@ function atwork_activity_block_view($delta = '') {
         break;
       }
 
+      // We want our js script to act on this block, not the standard one
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity.js');
       $output = '';
       global $user;
