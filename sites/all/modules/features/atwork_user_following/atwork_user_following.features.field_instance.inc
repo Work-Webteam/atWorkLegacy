@@ -10,21 +10,27 @@
 function atwork_user_following_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'user-user-field_employee_interests'.
-  $field_instances['user-user-field_employee_interests'] = array(
+  // Exported field_instance: 'user-user-field_extended_biography'.
+  $field_instances['user-user-field_extended_biography'] = array(
     'bundle' => 'user',
     'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
-        'module' => 'taxonomy',
+        'label' => 'above',
+        'module' => 'jquery_expander',
         'settings' => array(
-          'semantic_field_format' => '',
+          'collapseTimer' => '',
+          'expandPrefix' => ' ...',
+          'expandText' => 'Expand »',
+          'semantic_field_format' => 0,
+          'slicePoint' => 350,
+          'userCollapsePrefix' => '',
+          'userCollapseText' => 'Collapse',
         ),
-        'type' => 'taxonomy_term_reference_plain',
-        'weight' => 39,
+        'type' => 'jquery_expander',
+        'weight' => 13,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -34,82 +40,45 @@ function atwork_user_following_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'user',
-    'field_name' => 'field_employee_interests',
-    'label' => 'Interests',
+    'field_name' => 'field_extended_biography',
+    'label' => 'Extended Biography',
     'required' => 0,
     'settings' => array(
-      'user_register_form' => 0,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'active_tags',
-      'settings' => array(
-        'apply_chosen' => 1,
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'mode' => 'single',
-        'size' => 60,
-      ),
-      'type' => 'active_tags_taxonomy_autocomplete',
-      'weight' => 42,
-    ),
-  );
-
-  // Exported field_instance: 'user-user-field_skills'.
-  $field_instances['user-user-field_skills'] = array(
-    'bundle' => 'user',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'taxonomy',
-        'settings' => array(
-          'semantic_field_format' => '',
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
         ),
-        'type' => 'taxonomy_term_reference_plain',
-        'weight' => 38,
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
       ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'full' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 14,
-      ),
-    ),
-    'entity_type' => 'user',
-    'field_name' => 'field_skills',
-    'label' => 'Skills',
-    'required' => 0,
-    'settings' => array(
+      'semantic_field_format' => '',
+      'text_processing' => 1,
       'user_register_form' => 0,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'active_tags',
+      'module' => 'text',
       'settings' => array(
-        'apply_chosen' => 1,
-        'autocomplete_path' => 'taxonomy/autocomplete',
+        'maxlength_js' => '',
+        'maxlength_js_enforce' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'mode' => 'single',
-        'size' => 60,
+        'maxlength_js_truncate_html' => 0,
+        'rows' => 10,
       ),
-      'type' => 'active_tags_taxonomy_autocomplete',
-      'weight' => 41,
+      'type' => 'text_textarea',
+      'weight' => 43,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Interests');
-  t('Skills');
+  t('Extended Biography');
 
   return $field_instances;
 }
