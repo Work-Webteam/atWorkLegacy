@@ -3189,8 +3189,11 @@ aside.sidebars h2 {
 
 #user-user-full-group-profile-extra {
 	background-color: white;
-	border-bottom: 10px solid #d7d7d7;
-	display: table;
+	border: 10px solid #d7d7d7;
+  border-top: none;
+	display: table; 
+  box-sizing: border-box;
+  width: 100%;
 }
 
 	#user-user-full-group-profile-extra .field-group-htabs-wrapper,
@@ -3200,8 +3203,8 @@ aside.sidebars h2 {
 
 	#user-user-full-group-profile-extra .field-group-htabs-wrapper {
     width: 240px;
-    display: inline-block;
-    border: 10px solid #d7d7d7;
+    display: table-cell;
+    border-right: 10px solid #d7d7d7;
     border-bottom: none;
     height: 100%;
 	} 
@@ -3221,9 +3224,7 @@ aside.sidebars h2 {
 		}
 
 	#user-user-full-group-profile-extra .field-name-field-extended-biography {
-    display: inline-block;
-    box-sizing: border-box;
-    max-width: 70%;
+    display: table-cell;
     vertical-align: top;
     padding: 0.5em 2em;
 	} 
