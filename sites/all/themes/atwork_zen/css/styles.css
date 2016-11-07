@@ -3194,7 +3194,7 @@ aside.sidebars h2 {
 	display: inline-flex; 
   box-sizing: border-box;
   width: 100%;
-  /*height: 140px;  change this to operate with the jquery accordion as needed */
+  height: 90px;  /*change this to operate with the jquery accordion as needed */
   overflow: hidden;
 }
 
@@ -3228,6 +3228,12 @@ aside.sidebars h2 {
 	#user-user-full-group-profile-extra .field-name-field-extended-biography {
     padding: 0.5em 2em;
 	} 
+
+#clickmeplease {
+  float: right;
+  margin-top: -13px;
+  margin-bottom: 2em;
+}
 
 /* end group_profile_extra box */
 
