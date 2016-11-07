@@ -19,17 +19,11 @@ function atwork_user_following_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'jquery_expander',
+        'module' => 'text',
         'settings' => array(
-          'collapseTimer' => '',
-          'expandPrefix' => ' ...',
-          'expandText' => 'Expand »',
-          'semantic_field_format' => 0,
-          'slicePoint' => 350,
-          'userCollapsePrefix' => '',
-          'userCollapseText' => 'Collapse',
+          'semantic_field_format' => '',
         ),
-        'type' => 'jquery_expander',
+        'type' => 'text_default',
         'weight' => 13,
       ),
       'ecard' => array(

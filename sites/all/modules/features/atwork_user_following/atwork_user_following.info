@@ -1,15 +1,14 @@
 name = Atwork People and Following
-description = All featurable components for the follow people functionality. Includes expandable bio capability.
+description = Components for the follow people functionality.
 core = 7.x
 package = Atwork Features
-version = 7.x-3.0
+version = 7.x-3.1
 dependencies[] = active_tags
 dependencies[] = entity
 dependencies[] = entityreference
 dependencies[] = features
 dependencies[] = field_group
 dependencies[] = image
-dependencies[] = jquery_expander
 dependencies[] = semanticviews
 dependencies[] = strongarm
 dependencies[] = text
