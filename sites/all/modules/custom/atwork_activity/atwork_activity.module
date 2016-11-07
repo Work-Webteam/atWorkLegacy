@@ -80,12 +80,32 @@ function atwork_activity_menu() {
   );
 
   // new custom ajax functionality for the profile page.
-  $items['atwork-activity/profile_feed'] = array(
-    'title' => 'My Activity',
+  $items['user/%user/ajax'] = array(
+    'title' => 'My Activity callback',
     'type' => MENU_CALLBACK,
-    'page callback' => 'atwork_activity_profile_feed_callback',
-    'access arguements' => array('access content'),
+    'page callback' => 'atwork_activity_ajax_callback',
+    'access arguments' => array('access content'),
+    'theme_callback' => 'ajax_base_page_theme',
   );
+
+  // Callback trigger
+  $items['user/%user/trigger-page'] = array(
+    'title' => 'AJAX trigger page',
+    'page callback' => 'atwork_activity_profile_feed_trigger_page',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'theme_callback' => 'ajax_base_page_theme',
+    );
+
+    // Returns a Non-JavaScript alternative.
+  $items['user/%user/nojs'] = array(
+    'title' => 'My custom non-javascript callback',
+    'page callback' => 'atwork_activity_nojs_callback',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'theme_callback' => 'ajax_base_page_theme',
+  );
+
 
   return $items;
 }
@@ -93,8 +113,38 @@ function atwork_activity_menu() {
  * page callback for atwork profile feeds (atwork-activity/profile_feed/[module]/[delta])
  * Copied partially from block_refresh module
  */
-function atwork_activity_profile_feed_callback(&$form, $form_state){
-  $element = $form;
+function atwork_activity_profile_feed_trigger_page(){
+  // Load in Drupal core AJAX library.
+  drupal_add_library('system', 'drupal.ajax');
+  drupal_add_js(drupal_get_path('module', 'atwork_activity'). '/atwork_activity_profile_feed.js');
+  $user = user_load(arg(1));
+  // Present the user with a link with the id 'my-special-link'.
+  return l('Run my AJAX commands', 'employees/' . $user->name . '/trigger-page', array(
+    'attributes' => array(
+      'id' => 'my-special-link'
+    ),
+  )
+  );
+}
+
+// JSon response to the page
+function atwork_activity_ajax_callback() {
+  $ajax_commands = array();
+  $output = _atwork_activity_profile_page_block_content();
+  dpm($output);
+  $ajax_commands[] = ajax_command_remove('#activity-feed');
+  $ajax_commands[] = ajax_command_remove('#atwork-activity-form');
+  $ajax_commands[] = ajax_command_remove('.item-list');
+
+  $ajax_commands[] = ajax_command_insert('#block-atwork-activity-profile-page-activity-feed-block', $output["#markup"]);
+  ajax_deliver(array('#type' => 'ajax', '#commands' => $ajax_commands));
+}
+
+/**
+ * Non-JavaScript callback that returns hello world.
+ */
+function atwork_activity_nojs_callback() {
+  return "Hello world";
 }
 
 function atwork_activity_group_access($node) {
@@ -103,6 +153,7 @@ function atwork_activity_group_access($node) {
   }
   return FALSE;
 }
+
 
 /*
  * A form added to the top of the user's activity feed.
@@ -1132,10 +1183,8 @@ EOT;
       // TODO - Set variables with ID
       $block['subject'] = 'User activity';
       // This helps to keep this code a little cleaner - all content is located in it's own function below.
-      $block['content'] = array(
-        '#markup' => _atwork_activity_profile_page_block_content($block)
-      );
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_profile_feed.js');
+      $block['content'] = _atwork_activity_profile_page_block_content();
+      //drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'atwork_activity_profile_feed.js');
 
       break;
   }
@@ -1146,11 +1195,17 @@ EOT;
 /**
  * Helper function to create content for the profile page feed
  */
-function _atwork_activity_profile_page_block_content(&$block){
+function _atwork_activity_profile_page_block_content(){
   // Grab user and account variables
   global $user;
   $this_user = user_load($user->uid);
+  $test = arg(1);
+  if($test!=56664){
+    $account= user_load(56664);
+  } else {
   $account = user_load(arg(1));
+}
+  dpm(arg());
   if (!$account) {
     return;
   }
@@ -1343,7 +1398,7 @@ function _atwork_activity_profile_page_block_content(&$block){
  // $output .= theme('pager');
 
 
-  return $output;
+  return array('#markup'=>$output);
 }
 
 /**
