@@ -79,17 +79,8 @@ function atwork_activity_menu() {
     'page arguements' =>array(1),
   );
 
-  // new custom ajax functionality for the profile page.
-  $items['user/%user/ajax'] = array(
-    'title' => 'My Activity callback',
-    'type' => MENU_CALLBACK,
-    'page callback' => 'atwork_activity_ajax_callback',
-    'access arguments' => array('access content'),
-    'theme_callback' => 'ajax_base_page_theme',
-  );
-
   // Callback trigger
-  $items['user/%user/trigger-page'] = array(
+  $items['atwork-activity/trigger-page'] = array(
     'title' => 'AJAX trigger page',
     'page callback' => 'atwork_activity_profile_feed_trigger_page',
     'access arguments' => array('access content'),
@@ -97,55 +88,40 @@ function atwork_activity_menu() {
     'theme_callback' => 'ajax_base_page_theme',
     );
 
-    // Returns a Non-JavaScript alternative.
-  $items['user/%user/nojs'] = array(
-    'title' => 'My custom non-javascript callback',
-    'page callback' => 'atwork_activity_nojs_callback',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-    'theme_callback' => 'ajax_base_page_theme',
-  );
+
+
 
 
   return $items;
 }
+
+
+
 /**
  * page callback for atwork profile feeds (atwork-activity/profile_feed/[module]/[delta])
  * Copied partially from block_refresh module
  */
 function atwork_activity_profile_feed_trigger_page(){
+  //drupal_add_library('system', 'drupal.ajax');
+  //drupal_add_library('system', 'jquery.form');
+  $user_id = (isset($_GET['userId']) ? $_GET['userId'] : 0);
   // Load in Drupal core AJAX library.
-  drupal_add_library('system', 'drupal.ajax');
-  drupal_add_js(drupal_get_path('module', 'atwork_activity'). '/atwork_activity_profile_feed.js');
-  $user = user_load(arg(1));
-  // Present the user with a link with the id 'my-special-link'.
-  return l('Run my AJAX commands', 'employees/' . $user->name . '/trigger-page', array(
-    'attributes' => array(
-      'id' => 'my-special-link'
-    ),
-  )
-  );
+  //$ajax_commands = array();
+  $output = _atwork_activity_profile_page_block_content($user_id);
+  //$ajax_commands[] = ajax_command_remove('#activity-feed');
+  //$ajax_commands[] = ajax_command_remove('#atwork-activity-form');
+  //$ajax_commands[] = ajax_command_remove('.item-list');
+
+  //$ajax_commands[] = ajax_command_replace('#block-atwork-activity-profile-page-activity-feed-block', print($output["#markup"]));
+  //$ajax_commands[] = ajax_command_changed('#block-atwork-activity-profile-page-activity-feed-block');
+  //$page = array('#type' => 'ajax', '#commands' => $ajax_commands);
+  // ajax_deliver($page);
+  print $output["#markup"];
+  exit;
 }
 
-// JSon response to the page
-function atwork_activity_ajax_callback() {
-  $ajax_commands = array();
-  $output = _atwork_activity_profile_page_block_content();
-  dpm($output);
-  $ajax_commands[] = ajax_command_remove('#activity-feed');
-  $ajax_commands[] = ajax_command_remove('#atwork-activity-form');
-  $ajax_commands[] = ajax_command_remove('.item-list');
 
-  $ajax_commands[] = ajax_command_insert('#block-atwork-activity-profile-page-activity-feed-block', $output["#markup"]);
-  ajax_deliver(array('#type' => 'ajax', '#commands' => $ajax_commands));
-}
 
-/**
- * Non-JavaScript callback that returns hello world.
- */
-function atwork_activity_nojs_callback() {
-  return "Hello world";
-}
 
 function atwork_activity_group_access($node) {
   if ($node->type == 'section' && user_access('access content')) {
@@ -683,14 +659,19 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
     // TODO: Set prefix and suffix for display name in form (image render and <a> tags)
     $form['field_profile_comment_date']['und']['#prefix'] = "Posted: " . $form['field_profile_comment_date']['und']['#prefix'];
 
+    // We need to scrub off any query string when these are built after an ajax refresh or they break.
+    $clean_url = explode('?', $form['#action']);
+    $form['#action'] = $clean_url[0];
     // We want our own submit handler - so we can ajax this
-    $form['#submit'] = '';
+    unset($form['#submit'][0]);
     //$form['#submit'][] = 'atwork_activity_reply_form_submit';
     // Want ajax
     //$form['#action'] = '';
     $form['actions']['submit']['#ajax'] = array(
       'callback' => 'atwork_activity_reply_form_submit',
       );
+
+
   }
 }
 
@@ -703,7 +684,14 @@ function atwork_activity_reply_form_submit($form, &$form_state) {
   $reply = (object) $form_state['reply'];
   entity_form_submit_build_entity('reply', $reply, $form, $form_state);
   entity_save('reply', $reply);
-  //$bundle = reply_bundle_load($reply->bundle);
+  $form_state['rebuild'] = TRUE;
+  //$options = array('query' => array(
+  //  'q' => '/atwork-activity/trigger-page',
+  //  ),
+  //);
+  //drupal_goto('employees/twerdal', $options);
+  $bundle = reply_bundle_load($reply->bundle);
+  dpm($form);
 
 }
 
@@ -1183,8 +1171,8 @@ EOT;
       // TODO - Set variables with ID
       $block['subject'] = 'User activity';
       // This helps to keep this code a little cleaner - all content is located in it's own function below.
-      $block['content'] = _atwork_activity_profile_page_block_content();
-      //drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'atwork_activity_profile_feed.js');
+      $block['content'] = _atwork_activity_profile_page_block_content(arg(1));
+      feed_block_init();
 
       break;
   }
@@ -1192,21 +1180,34 @@ EOT;
 }
 
 
+function feed_block_init(){
+      $account = user_load(arg(1));
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'atwork_activity_profile_feed.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/jquery.url.js');
+      drupal_add_js(array('feed_refresh' => array(
+        'refreshURL' => url("atwork-activity/trigger-page"),
+        'userId'=>$account->uid,
+        )), 'setting');
+}
+
+
 /**
  * Helper function to create content for the profile page feed
  */
-function _atwork_activity_profile_page_block_content(){
+function _atwork_activity_profile_page_block_content($user_id){
+
   // Grab user and account variables
   global $user;
   $this_user = user_load($user->uid);
-  $test = arg(1);
-  if($test!=56664){
-    $account= user_load(56664);
+
+  if(isset($user_id)){
+  $account = user_load($user_id);
   } else {
-  $account = user_load(arg(1));
-}
-  dpm(arg());
-  if (!$account) {
+   $account = user_load(arg(1));
+  }
+
+
+  if (!$account || $account == 0) {
     return;
   }
 
@@ -1219,6 +1220,9 @@ function _atwork_activity_profile_page_block_content(){
   // Grab all messages related to user, User name, and picture of User.
 
   $output = '';
+  //$output .= '<a href="javascript:;" id="my-special-link">Refresh</a>';
+  $output .= '<button class="btn btn-md btn-success" id="profile-refresh-button">Retrieve list items</button>
+  <div id="ajax-result"></div>';
   $classes = array();
 
   // Put together our query
@@ -1230,7 +1234,6 @@ function _atwork_activity_profile_page_block_content(){
   $result1 = $query->execute();
 
   $mids1 = array_keys($result1['message']);
-  //dpm($mids1);
 
   $query = db_select('message', 'm')
     ->fields('m', array('mid'))
@@ -1324,12 +1327,11 @@ function _atwork_activity_profile_page_block_content(){
   // The final markup - wrap it up in a div
   $form = drupal_get_form('atwork_activity_form');
 
-
   $output .= render($form);
   $output .= '<div id="activity-feed">' ;
 
 
-  $pager_number = pager_array_splice($message_render_array['message'], 10);
+  $pager_number = pager_array_splice($message_render_array['message'], 2);
 
   $j = 1;
   foreach($pager_number as $key=>$result) {
@@ -1394,9 +1396,9 @@ function _atwork_activity_profile_page_block_content(){
    $j++;
   }
 
-  $output .= '</div>' . theme('pager', array('quantity' => 10));
+  $output .= '</div>' . theme('pager', array('quantity' => 9));
  // $output .= theme('pager');
-
+  //dpm($output);
 
   return array('#markup'=>$output);
 }
