@@ -186,6 +186,9 @@ function _atwork_profiles_required_questions($form = FALSE, $required = FALSE) {
   return $form;
 }
 
+
+
+
 /*
  * Implementation of hook_menu_alter()
  *
@@ -1704,6 +1707,13 @@ function atwork_profiles_block_info() {
     'info' => t('Header Block'),
     'cache' => DRUPAL_NO_CACHE,
   );
+  $blocks['bio-toggle'] = array(
+    'info' => t('Extended Profile Toggle44'),
+    'status' => TRUE,
+    'region' => 'content',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => 'employees/*',
+  );
 
   return $blocks;
 }
@@ -1715,6 +1725,13 @@ function atwork_profiles_block_view($delta = '') {
   $block = array();
 
   switch ($delta) {
+    case 'bio-toggle':
+      $block['subject'] = t('');
+      $block['content'] = '<button id="clickmeplease">Toggle Bio</button>';
+      drupal_add_js(drupal_get_path('module', 'atwork_profiles') . '/atwork_profiles_2.js');
+    break;
+
+
     case 'header':
 
       global $user;
