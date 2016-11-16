@@ -3189,21 +3189,26 @@ aside.sidebars h2 {
 
 #user-user-full-group-profile-extra {
 	background-color: white;
-	border-bottom: 10px solid #d7d7d7;
-	display: table;
+	border: 10px solid #d7d7d7;
+  border-top: none;
+	display: inline-flex; 
+  box-sizing: border-box;
+  width: 100%;
+  height: 90px;  /*change this to operate with the jquery accordion as needed */
+  overflow: hidden;
 }
 
 	#user-user-full-group-profile-extra .field-group-htabs-wrapper,
 	#user-user-full-group-profile-extra .field-name-field-extended-biography {
 		background-color: white;
+    vertical-align: top;
 	}
 
 	#user-user-full-group-profile-extra .field-group-htabs-wrapper {
     width: 240px;
-    display: inline-block;
-    border: 10px solid #d7d7d7;
+    min-width: 240px;
+    border-right: 10px solid #d7d7d7;
     border-bottom: none;
-    height: 100%;
 	} 
 
 		#user-user-full-group-profile-extra .horizontal-tabs {
@@ -3221,12 +3226,14 @@ aside.sidebars h2 {
 		}
 
 	#user-user-full-group-profile-extra .field-name-field-extended-biography {
-    display: inline-block;
-    box-sizing: border-box;
-    max-width: 70%;
-    vertical-align: top;
     padding: 0.5em 2em;
 	} 
+
+#clickmeplease {
+  float: right;
+  margin-top: -13px;
+  margin-bottom: 2em;
+}
 
 /* end group_profile_extra box */
 
@@ -3322,6 +3329,12 @@ aside.sidebars h2 {
 .page-user.section-user .hidden_profile_skills_box {
   display: block;
   height: 30px;
+}
+
+.field-expander .read-more,
+.field-expander .read-less {
+  font-weight: bold;
+  font-style: italic;
 }
 
 /*----------------- User Profile Admin Screens --------------------*/

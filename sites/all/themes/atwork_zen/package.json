@@ -1,0 +1,11 @@
+{
+  "name": "atwork_zen",
+  "version": "1.0.0",
+  "description": "BUILD A THEME WITH ZEN ----------------------",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Raj Persram",
+  "license": "ISC"
+}

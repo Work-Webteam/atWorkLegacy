@@ -186,6 +186,9 @@ function _atwork_profiles_required_questions($form = FALSE, $required = FALSE) {
   return $form;
 }
 
+
+
+
 /*
  * Implementation of hook_menu_alter()
  *
@@ -1058,29 +1061,30 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
       }
     // About me not filled in, so lets create it so the CSS does not break (all relative) to other elements
     } 
-    // else {
-    //   $account->content['field_extended_biography'] = array(
-    //     '#theme' => 'field',
-    //     '#title' => t('Extended Biography'),
-    //     '#label_display' => 'hidden',
-    //     '#view_mode' => 'full',
-    //     '#language' => 'und',
-    //     '#field_name' => 'field_extended_biography',
-    //     '#field_type' => 'text_long',
-    //     '#entity_type' => 'user',
-    //     '#bundle' => 'user',
-    //     '#items' => array(
-    //       0 => array(
-    //         'value' => t(' '),
-    //         'format' => 'full_html',
-    //       ),
-    //     ),
-    //    '#formatter' => 'text_default',
-    //     0 => '',
-    //   );
+    else {
+      $account->content['field_extended_biography'] = array(
+        '#theme' => 'field',
+        '#weight' => 20,
+        '#title' => t('Extended Biography'),
+        '#label_display' => 'hidden',
+        '#view_mode' => 'full',
+        '#language' => 'und',
+        '#field_name' => 'field_extended_biography',
+        '#field_type' => 'text_long',
+        '#entity_type' => 'user',
+        '#bundle' => 'user',
+        '#items' => array(
+          0 => array(
+            'value' => t(' '),
+            'format' => 'full_html',
+          ),
+        ),
+       '#formatter' => 'text_default',
+        0 => '',
+      );
 
-    //   $account->content['field_extended_biography'][0]['#markup'] = t('<h2 class="profile-section-unfilled">' . $account->content['field_extended_biography']['#title'] . '</h2>' );
-    // }
+      $account->content['field_extended_biography'][0]['#markup'] = t('<h2 class="profile-section-unfilled">' . $account->content['field_extended_biography']['#title'] . '</h2>' );
+    }
 
     if (isset($account -> field_linkedin) && ($account-> field_linkedin)){
 
@@ -1703,6 +1707,13 @@ function atwork_profiles_block_info() {
     'info' => t('Header Block'),
     'cache' => DRUPAL_NO_CACHE,
   );
+  $blocks['bio-toggle'] = array(
+    'info' => t('Extended Profile Toggle44'),
+    'status' => TRUE,
+    'region' => 'content',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => 'employees/*',
+  );
 
   return $blocks;
 }
@@ -1714,6 +1725,13 @@ function atwork_profiles_block_view($delta = '') {
   $block = array();
 
   switch ($delta) {
+    case 'bio-toggle':
+      $block['subject'] = t('');
+      $block['content'] = '<button id="clickmeplease">Toggle Bio</button>';
+      drupal_add_js(drupal_get_path('module', 'atwork_profiles') . '/atwork_profiles_2.js');
+    break;
+
+
     case 'header':
 
       global $user;
