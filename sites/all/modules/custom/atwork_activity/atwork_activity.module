@@ -88,10 +88,6 @@ function atwork_activity_menu() {
     'theme_callback' => 'ajax_base_page_theme',
     );
 
-
-
-
-
   return $items;
 }
 
@@ -106,17 +102,20 @@ function atwork_activity_profile_feed_trigger_page(){
   //drupal_add_library('system', 'jquery.form');
   $user_id = (isset($_GET['userId']) ? $_GET['userId'] : 0);
   // Load in Drupal core AJAX library.
-  //$ajax_commands = array();
-  $output = _atwork_activity_profile_page_block_content($user_id);
-  //$ajax_commands[] = ajax_command_remove('#activity-feed');
-  //$ajax_commands[] = ajax_command_remove('#atwork-activity-form');
-  //$ajax_commands[] = ajax_command_remove('.item-list');
+  $ajax_commands = array();
 
-  //$ajax_commands[] = ajax_command_replace('#block-atwork-activity-profile-page-activity-feed-block', print($output["#markup"]));
-  //$ajax_commands[] = ajax_command_changed('#block-atwork-activity-profile-page-activity-feed-block');
-  //$page = array('#type' => 'ajax', '#commands' => $ajax_commands);
-  // ajax_deliver($page);
-  print $output["#markup"];
+
+  $output = _atwork_activity_profile_page_block_content($user_id);
+  $ajax_commands[] = ajax_command_remove('#activity-feed');
+  $ajax_commands[] = ajax_command_remove('#atwork-activity-form');
+  $ajax_commands[] = ajax_command_remove('.item-list');
+
+  $ajax_commands[] = ajax_command_replace('#block-atwork-activity-profile-page-activity-feed-block', $output["#markup"]);
+  $ajax_commands[] = ajax_command_changed('#block-atwork-activity-profile-page-activity-feed-block');
+  $page = array('#type' => 'ajax', '#commands' => $ajax_commands);
+  ajax_deliver($page);
+  //ctools_ajax_command_reload();
+    //return $output["#markup"];
   exit;
 }
 
@@ -662,36 +661,88 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
     // We need to scrub off any query string when these are built after an ajax refresh or they break.
     $clean_url = explode('?', $form['#action']);
     $form['#action'] = $clean_url[0];
+    $form['#after_build'][] = 'your_function';
     // We want our own submit handler - so we can ajax this
-    unset($form['#submit'][0]);
-    //$form['#submit'][] = 'atwork_activity_reply_form_submit';
+    //unset($form['#submit'][0]);
+    /*
+    $form['#submit'] = array(
+      '#type' => 'submit',
+      '#value' => 'Submit1',
+      '#ajax' => array(
+        'callback' => 'atwork_activity_reply_form_submit',
+        ),
+      );
+    */
+    //$form = drupal_rebuild_form($form_id, $form_state, $args);
+
+   //$form['#submit'][] = 'atwork_activity_reply_form_submit';
     // Want ajax
     //$form['#action'] = '';
     $form['actions']['submit']['#ajax'] = array(
-      'callback' => 'atwork_activity_reply_form_submit',
-      );
+      'callback' => 'atwork_activity_reply_form_submit_custom',
+      //'wrapper' => 'comment-submit-button',
+    );
+    //$form['#submit']['#prefix'] ='<div id="comment-submit-button">';
+    //$form["#submit"]['#suffix'] = '</div>';
+    $form['button'] = array(
+    '#type' => 'button',
+    '#value' => 'Click',
+    '#prefix' => '<div id="comment-submit-button">',
+    '#suffix' => '</div>',
+    '#ajax' => array(
+      'callback' => 'atwork_activity_reply_form_submit_custom',
+      'wrapper' => 'comment-submit-button',
+      'event' => 'click',
+    ),
+  );
 
 
+
+    dpm($form);
   }
 }
 
+
+
+function your_function($form, &$form_state){
+  if($form_state['reply']->instance_id == 426){
+    //dpm($form_state);
+  }
+
+
+  //include_once('./includes/bootstrap.inc');
+  //drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+  //$blocky = block_load('atwork_activity', 'profile-page-activity-feed-block');
+  //dpm($blocky);
+  //$form_state['cache'] = false;
+  // This helps to keep this code a little cleaner - all content is located in it's own function below.
+    //$form['actions']['submit']['#ajax'] = array(
+    //  'callback' => ' atwork_activity_reply_form_submit_custom',
+    //);
+  return $form;
+}
 
 /**
  * Submit handler for entity replies on the profile activity feed page
  */
 
-function atwork_activity_reply_form_submit($form, &$form_state) {
+function atwork_activity_reply_form_submit_custom($form, &$form_state) {
+  //dpm($form);
+  dpm($form_state);
   $reply = (object) $form_state['reply'];
   entity_form_submit_build_entity('reply', $reply, $form, $form_state);
   entity_save('reply', $reply);
-  $form_state['rebuild'] = TRUE;
+  //$form_state['rebuild'] = TRUE;
+  //$form = drupal_rebuild_form('reply', $form_state);
   //$options = array('query' => array(
   //  'q' => '/atwork-activity/trigger-page',
   //  ),
   //);
   //drupal_goto('employees/twerdal', $options);
   $bundle = reply_bundle_load($reply->bundle);
-  dpm($form);
+  //drupal_process_form($form_id, $form, $form_state);
+
+  return($form);
 
 }
 
@@ -1168,7 +1219,6 @@ EOT;
       break;
     /** the profile page block view */
     case 'profile_page_activity_feed_block':
-      // TODO - Set variables with ID
       $block['subject'] = 'User activity';
       // This helps to keep this code a little cleaner - all content is located in it's own function below.
       $block['content'] = _atwork_activity_profile_page_block_content(arg(1));
@@ -1189,6 +1239,29 @@ function feed_block_init(){
         'userId'=>$account->uid,
         )), 'setting');
 }
+
+
+/**
+ * Implements template_preprocess_HOOK().
+ */
+function template_preprocess_atwork_activity(&$vars) {
+  if($vars['elements']['#entity_type'] !== 'repy'){
+    //return;
+  }
+
+}
+
+
+/**
+ * Implements hook_block_view_MODULE_DELTA_alter
+ *
+ */
+function atwork_activity_block_view_atwork_activity_profile_page_activity_feed_block_alter(&$data, $block){
+  dpm($data);
+  dpm($block);
+}
+
+
 
 
 /**
@@ -1221,8 +1294,7 @@ function _atwork_activity_profile_page_block_content($user_id){
 
   $output = '';
   //$output .= '<a href="javascript:;" id="my-special-link">Refresh</a>';
-  $output .= '<button class="btn btn-md btn-success" id="profile-refresh-button">Retrieve list items</button>
-  <div id="ajax-result"></div>';
+  $output .= '<button class="btn btn-md btn-success" id="profile-refresh-button" style = "position: relative; right: 150px;">Retrieve list items</button>';
   $classes = array();
 
   // Put together our query

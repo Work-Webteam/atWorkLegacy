@@ -16,8 +16,7 @@ define('BLOCK_REFRESH_ACCESS_CONTENT_PERMISSION', 'access block refresh content'
  */
 function block_refresh_init() {
   if (user_access(BLOCK_REFRESH_ACCESS_CONTENT_PERMISSION)) {
-    //drupal_add_js(drupal_get_path('module', 'block_refresh') . '/js/block_refresh.js', array('scope' => 'footer'));
-    drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_profile_feed.js', array('scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'block_refresh') . '/js/block_refresh.js', array('scope' => 'footer'));
     drupal_add_css(drupal_get_path('module', 'block_refresh') . '/css/block_refresh.css');
     drupal_add_js(array(
       'block_refresh' => array(

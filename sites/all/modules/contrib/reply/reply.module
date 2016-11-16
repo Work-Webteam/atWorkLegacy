@@ -853,9 +853,11 @@ function reply_preprocess_reply(&$vars) {
   $settings = _reply_get_settings($reply);
 
   if (isset($vars['elements']['#access']) && $vars['elements']['#access'] == REPLY_ACCESS_FULL) {
+    if($vars['id'] == 51){
+  }
     if (reply_access('reply', $reply)) {
       if ($settings['form'] == REPLY_FORM_PAGE_SAME) {
-        $vars['links']['reply']['#markup'] = l(t('Reply'), 'reply/add/' . $reply->entity_id . '/' . $reply->instance_id . '/' . $reply->id, array('query' => array('destination' => $_GET['q'])));
+        $vars['links']['reply']['#markup'] = l(t('Reply'), 'reply/add/' . $reply->entity_id . '/' . $reply->instance_id . '/' . $reply->id, array('query' => array('destination' => isset($_GET['userId']) ? 'user/' . $_GET['userId'] : $_GET['q'])));
       }
       else {
         $vars['links']['reply']['#markup'] = l(t('Reply'), 'reply/add/' . $reply->entity_id . '/' . $reply->instance_id . '/' . $reply->id);
