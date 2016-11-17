@@ -265,6 +265,7 @@ html {
   margin-top: -30px;
 }
 #header {
+<<<<<<< HEAD
 /*  background: url(/sites/all/themes/atwork_zen/images/atwork-logo.png) no-repeat scroll center 10px;*/
   /* Below, for a new atwork-logo-theme image, update the date parameter to reflect the edit date. 
   This prevents browser caching */
@@ -275,6 +276,18 @@ html {
   image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
   image-rendering: auto;
   -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
+=======
+	background: url(/sites/all/themes/atwork_zen/images/atwork-logo.png) no-repeat scroll center 10px;
+	/* Below, for a new atwork-logo-theme image, update the date parameter to reflect the edit date.
+	This prevents browser caching */
+	/*background: url(/sites/all/themes/atwork_zen/images/atwork-logo-theme.png?d=20160919) no-repeat scroll center 18px;*/
+	height: 180px;
+	image-rendering: -moz-auto;         /* Firefox */
+	image-rendering:   -o-auto;         /* Opera */
+	image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
+	image-rendering: auto;
+	-ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
+>>>>>>> remotes/origin/WSEP-36-create-a-block-to-use-as-a-profi
 }
 
 #header-box {
@@ -3132,11 +3145,127 @@ aside.sidebars h2 {
 	background-color: #D7D7D7;
 }
 
+<<<<<<< HEAD
 #user-user-full-group-profile-card .field-name-field-image,
 #user-user-full-group-profile-card .group-profile-identity-bundle {
 	display: inline-block;
 	box-sizing: border-box;
 	vertical-align: top;
+=======
+/* For the profile feed - added by twerdal 10/14/2016 */
+
+  #activity-feed .field.field-name-field-image.field-type-image.field-label-above{
+	padding: 0px;
+	border: 0px;
+	height: auto !important;
+	width: auto !important;
+	display: block !important;
+	border-style: none;
+	position: relative !important;
+}
+
+.page-user.section-employees .field.field-name-field-image.field-type-image img,
+.page-user.section-user .field.field-name-field-image.field-type-image img {
+
+	/*height: 240px; */
+}
+
+/*  END TWERDAL EDIT**/
+
+.page-user.section-employees #content .group_profile_card p,
+.page-user.section-user #content .group_profile_card p {
+	padding: 0;
+	margin: 0;
+}
+.page-user.section-user .field.field-name-field-extended-biography p,
+.page-user.section-employees .field.field-name-field-extended-biography p {
+	padding: 0;
+	margin: 10px 0;
+}
+.page-user.section-employees .field.field-name-field-gal-first-name,
+.page-user.section-user .field.field-name-field-gal-first-name {
+	position: absolute;
+	top: 0;
+	padding-left: 270px;
+	padding-top: 20px;
+	font-family: atwork-font;
+	font-weight: 800;
+	font-weight: 400\0/ !important; /* For IE only */
+	font-style: normal;
+	color: #000 !important;
+}
+.page-user.section-employees .field.field-name-field-gal-title,
+.page-user.section-user .field.field-name-field-gal-title {
+	position: absolute;
+	top: 42px;
+	top: 48px\0/ !important; /* For IE only */
+	width: 65%;
+	color: #008D7B;
+	border-bottom: solid 1px #000;
+	margin-left: 270px;
+	padding-top: 0;
+	font-weight: normal \0/ !important; /* For IE only */
+	font-size: .9em;
+	padding-bottom: 3px;
+}
+.page-user.section-employees .field.field-name-field-gal-phone-number,
+.page-user.section-user .field.field-name-field-gal-phone-number {
+	position: absolute;
+	top: 68px;
+	top: 74px\0/ !important; /* For IE only */
+	padding-left: 270px;
+	clear: right;
+	color: #000;
+}
+.page-user.section-employees .field.field-name-field-display-name,
+.page-user.section-user .field.field-name-field-display-name,
+.page-user.section-employees .field.field-name-field-linkedin,
+.page-user.section-user .field.field-name-field-linkedin,
+.page-user.section-employees .field.field-name-field-joined-public-service,
+.page-user.section-user .field.field-name-field-joined-public-service {
+	left: 270px;
+	display: block;
+	height: auto;
+	line-height: 18px;
+	clear: right;
+	color: #000;
+}
+.page-user.section-employees .field.field-name-field-display-name .field-label,
+.page-user.section-user .field.field-name-field-display-name .field-label {
+	display: none;
+}
+/*******
+* Removed for development of comments, will need to be reworked  - Twerdal 2016-10-20
+*
+.page-user.section-employees .field.field-name-field-display-name:before,
+.page-user.section-user .field.field-name-field-display-name:before {
+	content: "Email:";
+	font-weight: bold;
+	float: left;
+	padding-right: 5px;
+	color: #000;
+}
+
+.page-user.section-employees .field.field-name-field-display-name,
+.page-user.section-user .field.field-name-field-display-name {
+	position: absolute;
+	top: 90px;
+	top: 96px \0/ !important; /* For IE only */ /*
+}
+*/
+
+.page-user.section-employees .field.field-name-field-linkedin,
+.page-user.section-user .field.field-name-field-linkedin {
+	position: absolute;
+	top: 110px;
+	top: 116px \0/ !important; /* For IE only */
+}
+.page-user.section-employees .field.field-name-field-joined-public-service,
+.page-user.section-user .field.field-name-field-joined-public-service {
+	position: absolute;
+	top: 130px;
+	top: 136px \0/ !important; /* For IE only */
+>>>>>>> remotes/origin/WSEP-36-create-a-block-to-use-as-a-profi
 }
 
 #user-user-full-group-profile-card .field-name-field-image { /* profile pic */
@@ -6357,9 +6486,9 @@ li.atwork_menu_top_level .menu-sub-title i.fa.fa-minus {
 /* Temporary code stuff - development area only */
 /* Temporarily hides the likes and comments on the first artilce of the slideshow overaly */
 /* This is to target the Spotlight article and is to be channged as the article moves through the overlay */
-/*.views-slideshow-xtra-overlay-row-0 .slideshow_num_likes, 
+/*.views-slideshow-xtra-overlay-row-0 .slideshow_num_likes,
 .views-slideshow-xtra-overlay-row-0 .slideshow-num-comments,*/
-.views-slideshow-xtra-overlay-row-4 .slideshow_num_likes, 
+.views-slideshow-xtra-overlay-row-4 .slideshow_num_likes,
 .views-slideshow-xtra-overlay-row-4 .slideshow-num-comments {
   display: none !important;
 }

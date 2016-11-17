@@ -1,0 +1,15 @@
+name = Atwork_Rate
+description = This is a copy of Rate2 from https://www.drupal.org/project/rate/releases, it is used for entities
+core = 7.x
+package = Voting
+dependencies[] = votingapi
+files[] = atwork_rate.install
+files[] = atwork_rate.module
+files[] = atwork_rate.admin.inc
+
+; Information added by drupal.org packaging script on 2013-10-01
+version = "7.x-2.x-dev"
+core = "7.x"
+project = "atwork_rate"
+datestamp = "1380624828"
+

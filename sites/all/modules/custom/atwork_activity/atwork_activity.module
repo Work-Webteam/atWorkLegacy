@@ -82,6 +82,7 @@ function atwork_activity_menu() {
   return $items;
 }
 
+
 function atwork_activity_group_access($node) {
   if ($node->type == 'section' && user_access('access content')) {
     return TRUE;
@@ -89,11 +90,11 @@ function atwork_activity_group_access($node) {
   return FALSE;
 }
 
+
 /*
  * A form added to the top of the user's activity feed.
  *
  * The menu item that calls this is commented out because we are waiting to release this (no profiles now)
- *
  */
 function atwork_activity_form() {
   $form = array();
@@ -103,7 +104,7 @@ function atwork_activity_form() {
     '#maxlength' => 1000,
     '#maxlength_js' => TRUE,
     '#attributes' => array(
-      'placeholder' => t('What\'s going on?'),
+      'placeholder' => t('What are you working on?'),
     ),
   );
   $form['post'] = array(
@@ -457,7 +458,7 @@ function atwork_activity_home_my_callback($all_args) {
  */
 function atwork_activity_page($user) {
   // js
-  drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity.js');
+  //drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity.js');
 
   // build query
   $following_subquery = db_select('user_relationships', 'ur')
@@ -600,6 +601,99 @@ function atwork_activity_form_og_ui_confirm_subscribe_alter(&$form, &$form_state
 function atwork_activity_form_og_ui_confirm_unsubscribe_alter(&$form, &$form_state, $form_id) {
   $form['#submit'][] = '_atwork_activity_group_unsubscribe';
 }
+
+/**
+ * Implements hook_form_alter
+ * Need to include displayname and date in comments to make them similar to other site comment strings
+ */
+function atwork_activity_form_alter(&$form, &$form_state, $form_id){
+
+  if(isset($form['bundle']) && $form['bundle']['#value'] == "entity_comments"){
+    // hide these fields on all forms
+    $form['field_display_name']['#access'] = FALSE;
+    $form['field_profile_comment_date']['#access'] = FALSE;
+    // These can be updated regardless if there are available
+    $author = user_load($form_state['reply']->uid);
+    // Add image render as a #prefix to name?
+    $form['field_display_name']['und'][0]['value']['#default_value'] =  $author->field_display_name['und'][0]['safe_value'];
+    // TODO: Set prefix and suffix for display name in form (image render and <a> tags)
+    $form['field_profile_comment_date']['und']['#prefix'] = "Posted: " . $form['field_profile_comment_date']['und']['#prefix'];
+    // Leave out Reply/Edit and Delete versions of the form -- so far this field seems to be the only one that differentiates them
+
+   if($form['#action'] !== '/employees/twerdal'){
+    return;
+   }
+   // hide this su8bmit button when we use our own.
+   $form['actions']['submit']['#access'] = FALSE;
+    // Create our own submit button for the profile page to send users to our handler
+    $form['button'] = array(
+    '#type' => 'button', // We lose ajax if we make this a true Submit - we will manually save the entity in our callback
+    '#value' => 'Post Comment', // To differentiate it from the normal submit button - this will be hidden by CSS.
+    '#prefix' => '<div id="comment-submit-button">',
+    '#suffix' => '</div>',
+    '#ajax' => array(
+      'callback' => 'atwork_activity_reply_form_submit_custom',
+      'wrapper' => 'comment-submit-button',
+      'event' => 'click',
+    ),
+  );
+
+  }
+}
+
+/**
+ * Submit handler for entity replies on the profile activity feed page
+ */
+
+function atwork_activity_reply_form_submit_custom($form, &$form_state) {
+  //dpm($form);
+  // Save this entity manually, and then we will refresh with Block Refresh (via JQuery)
+  $reply = (object) $form_state['reply'];
+  entity_form_submit_build_entity('reply', $reply, $form, $form_state);
+  entity_save('reply', $reply);
+  $bundle = reply_bundle_load($reply->bundle);
+
+  return($form);
+}
+
+
+/**
+ * Implements hook_entity_view_alter
+ * Used to add in links/images and prefix's to rendered comment entities
+ */
+
+function atwork_activity_entity_view_alter(&$build, $type){
+  if($type == "reply"){
+    // Grab user who posetd the comment
+    $author = user_load($build["field_display_name"]['#object']->uid);
+    // Add a link to their profile to encourage connections
+    $build["field_display_name"][0]['#markup'] = ' by <a href="/employees/' . $author->name . '"> ' . $build["field_display_name"][0]['#markup'] . '</a>';
+    // Add image to the comment
+    $image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
+    $build["field_profile_comment_date"][0]['#markup'] = render($image) . " Posted: " . $build["field_profile_comment_date"][0]['#markup'];
+    // Add flag icon:
+    $build['links']['flag']['#links']['flag-profile_content_flag']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $build['links']['flag']['#links']['flag-profile_content_flag']['title']);
+  }
+}
+
+
+/**
+ * Implements hook_entity_load
+ */
+function atwork_activity_entity_load($entities, $type){
+  if($type == 'message' || $type == 'reply'){
+  }
+}
+
+/**
+ * Implements hook_entity_view
+ */
+function atwork_activity_entity_view($entity, $type, $view_mode, $langcode){
+
+}
+
+
+
 
 function _atwork_activity_group_subscribe(&$form, &$form_state) {
   global $user;
@@ -832,8 +926,14 @@ function atwork_activity_tokens_alter(&$replacements, $context) {
  * Implementation of hook_block_info()
  *
  * Make some message blocks
+ * Includes profile page activity block, and homepage activity block.
  */
 function atwork_activity_block_info() {
+   // For the profile page
+  $blocks['profile_page_activity_feed_block'] = array(
+    'info' => t("Profile page activity feed block"),
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+  );
   // This example comes from node.module.
   $blocks['profile'] = array(
     'info' => t('Profile: Activity'),
@@ -847,9 +947,12 @@ function atwork_activity_block_info() {
     'info' => t('Homepage: Activity'),
     'visibility' => BLOCK_VISIBILITY_LISTED,
   );
-
   return $blocks;
 }
+
+
+
+
 
 /*
  * Implementation of hook_block_view()
@@ -861,6 +964,7 @@ function atwork_activity_block_view($delta = '') {
   $block = array();
 
   switch ($delta) {
+
     // currently not being used. required user_relationships
     case 'profile':
       if (arg(0) != 'user' || !is_numeric(arg(1))) {
@@ -872,6 +976,7 @@ function atwork_activity_block_view($delta = '') {
         break;
       }
 
+      // We want our js script to act on this block, not the standard one
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity.js');
       $output = '';
       global $user;
@@ -1020,9 +1125,259 @@ EOT;
      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_click_handlers.js');
 
       break;
+    /** the profile page block view */
+    case 'profile_page_activity_feed_block':
+      $block['subject'] = 'User activity';
+      // This helps to keep this code a little cleaner - all content is located in it's own function below.
+      $block['content'] = _atwork_activity_profile_page_block_content(arg(1));
+      // Don't think I need to pass these values anymore - will keep this for now to check.
+      //feed_block_init();
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '' . 'atwork_activity_profile_feed.js');
+      break;
   }
   return $block;
 }
+
+
+function feed_block_init(){
+      $account = user_load(arg(1));
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'atwork_activity_profile_feed.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/jquery.url.js');
+      drupal_add_js(array('feed_refresh' => array(
+        'refreshURL' => url("atwork-activity/trigger-page"),
+        'userId'=>$account->uid,
+        )), 'setting');
+}
+
+
+
+/**
+ * Helper function to create content for the profile page feed
+ */
+function _atwork_activity_profile_page_block_content($user_id){
+
+  // Grab user and account variables
+  global $user;
+  $this_user = user_load($user->uid);
+
+  if(isset($user_id)){
+  $account = user_load($user_id);
+  } else {
+   $account = user_load(arg(1));
+  }
+
+
+  if (!$account || $account == 0) {
+    return;
+  }
+
+  // Decide if it is users block or others and set title
+  if($account->uid === $user->uid){
+    $block['title'] = t("My Feed");
+  } else {
+    $block['title'] = $account->field_gal_first_name['und'][0]['safe_value'] . t("'s activity feed");
+  }
+  // Grab all messages related to user, User name, and picture of User.
+
+  $output = '';
+  $classes = array();
+
+  // Put together our query
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'message')
+    ->propertyCondition('uid', $account->uid)
+    ->pager(10);
+  // Put together an array of messages
+  $result1 = $query->execute();
+
+  $mids1 = array_keys($result1['message']);
+
+  $query = db_select('message', 'm')
+    ->fields('m', array('mid'))
+    ->orderBy('m.timestamp', 'DESC')
+    ->condition('m.uid', $account->uid);
+
+  $result = $query
+    //->extend('PagerDefault')
+    //->limit(15)
+    ->execute()
+    ->fetchAll();
+
+  //dpm($result);
+  $result_mid = array();
+  foreach($result as $value){
+    $result_mid[] = $value->mid;
+  }
+  // Load entities and all related content
+  $messages1 = entity_load('message', $result_mid);
+  //dpm($messages1);
+  // Now remove all unwanted messages
+  foreach($messages1 as $key=>$value){
+    //dpm($value->type);
+    switch(true){
+      //case(true):
+      case($value->type == "user_received_ecard"):
+      case($value->type == "user_sent_ecard"):
+      case($value->type == "user_liked_comment"):
+      case($value->type == "user_liked_node"):
+      case($value->type == "group_unsubscribed"):
+        unset($messages1[$key]);
+        break;
+      // Need to remove instances of masquerading or posting as employee news
+      case($value->type == "node_updated"):
+        if(isset($value->field_message_node['und'][0]['target_id']) && $value->field_message_node['und'][0]['target_id']){
+          $node = node_load($value->field_message_node['und'][0]['target_id']);
+          if(!empty($node)){
+            if(isset($node->uid) && $node->uid){
+              if(($account->uid !== $node->uid)){
+                unset($messages1[$key]);
+              }
+            // Node is authored by employee news, so uid = 0 (false to teh check above)
+            } else {
+              unset($messages1[$key]);
+            }
+          }
+        }
+        break;
+      case($value->type == "new_node"):
+        if(isset($value->field_message_node['und'][0]['target_id']) && $value->field_message_node['und'][0]['target_id']){
+          $node = node_load($value->field_message_node['und'][0]['target_id']);
+          if(!empty($node)){
+            if(isset($node->uid) && $node->uid){
+              if(($account->uid !== $node->uid)){
+                unset($messages1[$key]);
+              }
+            } else {
+              unset($messages1[$key]);
+            }
+          }
+        }
+        break;
+      // Gallery case
+      case($value->type == "new_image"):
+        if(isset($value->field_message_node['und'][0]['target_id']) && $value->field_message_node['und'][0]['target_id']){
+          $node = node_load($value->field_message_node['und'][0]['target_id']);
+          if(!empty($node)){
+            if(isset($node->uid) && $account->uid){
+              if(($node->uid !== $account->uid)){
+                unset($messages1[$key]);
+              }
+            }
+          }
+        }
+        break;
+      // Following case
+      case($value->type == "following_user"):
+        if(isset($value->uid) && $value->uid == $this_user->uid){
+          $user_on_own_feed = TRUE;
+        }
+        break;
+      // TODO: Forum case, image case, background page, ??Broken Case?? (starts with [])?
+      default:
+        break;
+    }
+  }
+
+  //dpm($messages1);
+  // Now create a render array to get the entity wrappers/markup in place
+  $message_render_array = entity_view('message', $messages1);
+  // The final markup - wrap it up in a div
+  $form = drupal_get_form('atwork_activity_form');
+
+  $output .= render($form);
+  $output .= '<div id="activity-feed">' ;
+
+
+  $pager_number = pager_array_splice($message_render_array['message'], 2);
+
+  $j = 1;
+  foreach($pager_number as $key=>$result) {
+    // Set up odd/even classes
+    $classes = array();
+    $classes[] = 'message';
+    $classes[] = 'message-' . $key;
+
+    if ($j % 2 == 0) {
+      $classes[] = 'even';
+    }
+    else {
+      $classes[] = 'odd';
+    }
+
+    // We want to add images to the activity feed.
+    $author = user_load($result['#entity']->uid);
+    // Add flag icon:
+    $result['links']['flag']['#links']['flag-message_flag']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $result['links']['flag']['#links']['flag-message_flag']['title']);
+
+    // Check if an image exists:
+    if(isset($author->field_image) && $author->field_image){
+      // If it does, then grab a renderable view of it
+      $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
+    }
+
+    // Handle following wording case
+    if($user_on_own_feed && $result['#bundle'] == 'following_user'){
+      // Remove "You is" and replace with You are
+      $str = substr($result['message__message_text__0']['#markup'], 10);
+      $result['message__message_text__0']['#markup'] = '<p>You are' . $str;
+    }
+    // Set date for mins/ago then hours, then days, week, then date
+    $current_time = time();
+    $post_time = $result['#entity']->timestamp;
+    $diff = $current_time - $post_time;
+    $time_record = "";
+    switch(TRUE){
+      case($diff<=60):
+        $time_record = "Now";
+        break;
+      // Less than an hour
+      case($diff<3600):
+        $time_record = floor($diff/60) . " Minutes ago";
+        break;
+      // Less than a day
+      case($diff<86400):
+        $time_record = floor($diff/3600) . " Hours ago";
+        break;
+      // Less than a week
+      case($diff<604800):
+        $time_record = floor($diff/86400) . " Days ago";
+        break;
+      default:
+        $time_record = date('F j Y', $result['#entity']->timestamp);
+        break;
+    }
+
+     // Put everything together in the order we would like for this message
+    $output .= '<div class="' . implode(' ', $classes) . '"><span class="date"> ' . $time_record . '</span> <span class="feed_image">' . render($user_image) . '</span>' . render($result) .
+  /* print rate_generate_widget($widget_id, 'message', $entity->cid) . */ '</div>' ;
+   $j++;
+  }
+
+  $output .= '</div>' . theme('pager', array('quantity' => 9));
+ // $output .= theme('pager');
+  //dpm($output);
+
+  return array('#markup'=>$output);
+}
+
+/**
+ * A generic array pager for Drupal
+ * Found here:
+ * https://www.drupal.org/docs/7/creating-custom-modules/howtos/paging-non-sql-data
+ */
+function pager_array_splice($data, $limit = 9, $element = 0) {
+  global $pager_page_array, $pager_total, $pager_total_items; $page = isset($_GET['page']) ? $_GET['page'] : '';
+  // Convert comma-separated $page to an array, used by other functions.
+  $pager_page_array = explode(',', $page);
+  // We calculate the total of pages as ceil(items / limit).
+  $pager_total_items[$element] = count($data);
+  $pager_total[$element] = ceil($pager_total_items[$element] / $limit);
+  $pager_page_array[$element] = max(0, min((int)$pager_page_array[$element], ((int)$pager_total[$element]) - 1));
+  return array_slice($data, $pager_page_array[$element] * $limit, $limit, TRUE);
+}
+
+
+
 /*
  * Create a message for ecards being sent. No other hooks so use this one.
  */
@@ -1031,7 +1386,6 @@ function atwork_activity_mail_alter(&$email_message) {
     $ecard = $email_message['params']['ecard'];
     $receiver = user_load_by_mail($ecard->mail_to);
     $node = node_load($ecard->entity_id);
-    //dpm($ecard);
     if ($receiver) {
       $message = message_create('user_received_ecard', array('uid' => $receiver->uid, 'timestamp' => time()));
       $wrapper = entity_metadata_wrapper('message', $message);
@@ -1045,6 +1399,5 @@ function atwork_activity_mail_alter(&$email_message) {
       $wrapper->field_message_node->set($node);
       $wrapper->save();
     }
-
   }
 }
