@@ -1375,7 +1375,6 @@ function _atwork_activity_profile_page_block_content($user_id){
 
     // Status update messages display improperly.
     if($user_on_own_feed && $result['#bundle'] == 'status'){
-      dpm($result);
       $str = substr($result['message__message_text__0']['#markup'], 20);
 
       $result['message__message_text__0']['#markup'] = '<p>You updated your' . $str;
