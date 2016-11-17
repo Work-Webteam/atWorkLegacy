@@ -105,6 +105,8 @@ browscap/*
 /php_check.php
 /sites/all/modules/custom/atwork_lsa_admin/send_logs/*
 
+# Ignore potentially large media files
+*.mov
 
 # Ignore Gulp files
 sites/all/themes/*/node_modules
