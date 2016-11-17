@@ -672,7 +672,11 @@ function atwork_activity_entity_view_alter(&$build, $type){
     $image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
     $build["field_profile_comment_date"][0]['#markup'] = render($image) . " Posted: " . $build["field_profile_comment_date"][0]['#markup'];
     // Add flag icon:
-    $build['links']['flag']['#links']['flag-profile_content_flag']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $build['links']['flag']['#links']['flag-profile_content_flag']['title']);
+    $build['links']['flag']['#links']['flag-flag_for_message_replies']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $build['links']['flag']['#links']['flag-flag_for_message_replies']['title']);
+  }
+
+  if($type == "message"){
+    $build['links']['flag']['#links']['flag-activity_feed_messages_flag']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'),$build['links']['flag']['#links']['flag-activity_feed_messages_flag']['title']);
   }
 }
 
@@ -1132,7 +1136,7 @@ EOT;
       $block['content'] = _atwork_activity_profile_page_block_content(arg(1));
       // Don't think I need to pass these values anymore - will keep this for now to check.
       //feed_block_init();
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '' . 'atwork_activity_profile_feed.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'atwork_activity_profile_feed.js');
       break;
   }
   return $block;
