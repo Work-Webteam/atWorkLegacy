@@ -625,7 +625,6 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
    }
    // hide this su8bmit button when we use our own.
    $form['actions']['submit']['#access'] = FALSE;
-   dpm($form);
     // Create our own submit button for the profile page to send users to our handler
     $form['button'] = array(
     '#type' => 'button', // We lose ajax if we make this a true Submit - we will manually save the entity in our callback
