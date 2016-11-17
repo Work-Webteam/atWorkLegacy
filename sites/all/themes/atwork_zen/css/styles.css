@@ -265,29 +265,16 @@ html {
   margin-top: -30px;
 }
 #header {
-<<<<<<< HEAD
 /*  background: url(/sites/all/themes/atwork_zen/images/atwork-logo.png) no-repeat scroll center 10px;*/
-  /* Below, for a new atwork-logo-theme image, update the date parameter to reflect the edit date. 
+  /* Below, for a new atwork-logo-theme image, update the date parameter to reflect the edit date.
   This prevents browser caching */
-  background: url(/sites/all/themes/atwork_zen/images/atwork-logo-theme.png?d=20160919) no-repeat scroll center 18px; 
+  background: url(/sites/all/themes/atwork_zen/images/atwork-logo-theme.png?d=20160919) no-repeat scroll center 18px;
   height: 180px;
   image-rendering: -moz-auto;         /* Firefox */
   image-rendering:   -o-auto;         /* Opera */
   image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
   image-rendering: auto;
   -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
-=======
-	background: url(/sites/all/themes/atwork_zen/images/atwork-logo.png) no-repeat scroll center 10px;
-	/* Below, for a new atwork-logo-theme image, update the date parameter to reflect the edit date.
-	This prevents browser caching */
-	/*background: url(/sites/all/themes/atwork_zen/images/atwork-logo-theme.png?d=20160919) no-repeat scroll center 18px;*/
-	height: 180px;
-	image-rendering: -moz-auto;         /* Firefox */
-	image-rendering:   -o-auto;         /* Opera */
-	image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
-	image-rendering: auto;
-	-ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
->>>>>>> remotes/origin/WSEP-36-create-a-block-to-use-as-a-profi
 }
 
 #header-box {
@@ -2921,7 +2908,7 @@ aside.sidebars h2 {
 
 #block-views-people-admin-block-followers,
 #block-views-people-admin-block-following {
-	width: 220px; 
+	width: 220px;
 	float: right;
 	clear: right;
 	position: relative;
@@ -3145,13 +3132,13 @@ aside.sidebars h2 {
 	background-color: #D7D7D7;
 }
 
-<<<<<<< HEAD
+
 #user-user-full-group-profile-card .field-name-field-image,
 #user-user-full-group-profile-card .group-profile-identity-bundle {
 	display: inline-block;
 	box-sizing: border-box;
 	vertical-align: top;
-=======
+
 /* For the profile feed - added by twerdal 10/14/2016 */
 
   #activity-feed .field.field-name-field-image.field-type-image.field-label-above{
@@ -3320,7 +3307,7 @@ aside.sidebars h2 {
 	background-color: white;
 	border: 10px solid #d7d7d7;
   border-top: none;
-	display: inline-flex; 
+	display: inline-flex;
   box-sizing: border-box;
   width: 100%;
   height: 90px;  /*change this to operate with the jquery accordion as needed */
@@ -3338,7 +3325,7 @@ aside.sidebars h2 {
     min-width: 240px;
     border-right: 10px solid #d7d7d7;
     border-bottom: none;
-	} 
+	}
 
 		#user-user-full-group-profile-extra .horizontal-tabs {
 			border: none;
@@ -3350,13 +3337,13 @@ aside.sidebars h2 {
 			display: none;
 		}
 		#user-user-full-group-profile-extra ul.horizontal-tabs-list {
-			background-color: #d7d7d7; 
+			background-color: #d7d7d7;
 			border-right: none;
 		}
 
 	#user-user-full-group-profile-extra .field-name-field-extended-biography {
     padding: 0.5em 2em;
-	} 
+	}
 
 #clickmeplease {
   float: right;
