@@ -3138,10 +3138,12 @@ aside.sidebars h2 {
 	display: inline-block;
 	box-sizing: border-box;
 	vertical-align: top;
+}
+
 
 /* For the profile feed - added by twerdal 10/14/2016 */
 
-  #activity-feed .field.field-name-field-image.field-type-image.field-label-above{
+#activity-feed .field.field-name-field-image.field-type-image.field-label-above{
 	padding: 0px;
 	border: 0px;
 	height: auto !important;
@@ -3169,41 +3171,7 @@ aside.sidebars h2 {
 	padding: 0;
 	margin: 10px 0;
 }
-.page-user.section-employees .field.field-name-field-gal-first-name,
-.page-user.section-user .field.field-name-field-gal-first-name {
-	position: absolute;
-	top: 0;
-	padding-left: 270px;
-	padding-top: 20px;
-	font-family: atwork-font;
-	font-weight: 800;
-	font-weight: 400\0/ !important; /* For IE only */
-	font-style: normal;
-	color: #000 !important;
-}
-.page-user.section-employees .field.field-name-field-gal-title,
-.page-user.section-user .field.field-name-field-gal-title {
-	position: absolute;
-	top: 42px;
-	top: 48px\0/ !important; /* For IE only */
-	width: 65%;
-	color: #008D7B;
-	border-bottom: solid 1px #000;
-	margin-left: 270px;
-	padding-top: 0;
-	font-weight: normal \0/ !important; /* For IE only */
-	font-size: .9em;
-	padding-bottom: 3px;
-}
-.page-user.section-employees .field.field-name-field-gal-phone-number,
-.page-user.section-user .field.field-name-field-gal-phone-number {
-	position: absolute;
-	top: 68px;
-	top: 74px\0/ !important; /* For IE only */
-	padding-left: 270px;
-	clear: right;
-	color: #000;
-}
+
 .page-user.section-employees .field.field-name-field-display-name,
 .page-user.section-user .field.field-name-field-display-name,
 .page-user.section-employees .field.field-name-field-linkedin,
@@ -3221,39 +3189,7 @@ aside.sidebars h2 {
 .page-user.section-user .field.field-name-field-display-name .field-label {
 	display: none;
 }
-/*******
-* Removed for development of comments, will need to be reworked  - Twerdal 2016-10-20
-*
-.page-user.section-employees .field.field-name-field-display-name:before,
-.page-user.section-user .field.field-name-field-display-name:before {
-	content: "Email:";
-	font-weight: bold;
-	float: left;
-	padding-right: 5px;
-	color: #000;
-}
 
-.page-user.section-employees .field.field-name-field-display-name,
-.page-user.section-user .field.field-name-field-display-name {
-	position: absolute;
-	top: 90px;
-	top: 96px \0/ !important; /* For IE only */ /*
-}
-*/
-
-.page-user.section-employees .field.field-name-field-linkedin,
-.page-user.section-user .field.field-name-field-linkedin {
-	position: absolute;
-	top: 110px;
-	top: 116px \0/ !important; /* For IE only */
-}
-.page-user.section-employees .field.field-name-field-joined-public-service,
-.page-user.section-user .field.field-name-field-joined-public-service {
-	position: absolute;
-	top: 130px;
-	top: 136px \0/ !important; /* For IE only */
->>>>>>> remotes/origin/WSEP-36-create-a-block-to-use-as-a-profi
-}
 
 #user-user-full-group-profile-card .field-name-field-image { /* profile pic */
 	width: 260px;
@@ -3274,6 +3210,7 @@ aside.sidebars h2 {
 
 		#user-user-full-group-profile-card .group-profile-contact-bundle {
 			margin-right: 4em;
+      max-width: 45%; /* account for long job titles */
 		}
 
 			.group-profile-identity-bundle .field-name-field-gal-title {
@@ -3346,7 +3283,7 @@ aside.sidebars h2 {
 	}
 
 #clickmeplease {
-  float: right;
+  float: left;
   margin-top: -13px;
   margin-bottom: 2em;
 }
