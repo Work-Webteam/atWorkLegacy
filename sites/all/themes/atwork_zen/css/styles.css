@@ -284,6 +284,9 @@ html {
   width: 100%;
   max-width: 960px;
 }
+.front #header-box {
+	max-width: 1280px;
+}
 #header-box #home-link a {
   display: block;
   width: 100%;
@@ -622,8 +625,12 @@ div.header-user {
   text-align: left;
   width: 100% !important;
 }
-#block-tb-megamenu-menu-main-menu-zen {
-  width: 960px;
+.not-front #block-tb-megamenu-menu-main-menu-zen {
+	width: 960px;
+}
+.front #block-tb-megamenu-menu-main-menu-zen {
+	max-width: 960px;
+	margin: 0 auto;
 }
 #block-tb-megamenu-menu-main-menu-zen .tb-megamenu-row.row-fluid {
   max-width: 100% !important;
@@ -648,6 +655,8 @@ div.header-user {
   border-top: 1px solid #CCCCCC;
 }
 .front #navigation .region-navigation {
+	width: 1150px;
+	margin: 0 auto;
 }
 #navigation .ext {
   display: none;
@@ -772,85 +781,7 @@ div.header-user {
 .ad-color {
  color: red;
 }
-/* Top Tools /  Weather Widget -------------------------------------------------------*/
 
-#header .view-top-tools.view-id-top_tools {
-  position: fixed;
-  margin-left: 975px;
-  top: 224px !important;
-  color: #999;
-  z-index: 100;
-}
-
-#top-tools-panel {
-  display: block;
-  width: 130px;
-  /*border:solid 1px #ccc;*/
-  background-color: #FFF;
-  border-top:solid 1px #CCC;
-  border-right:solid 1px #CCC;
-  border-bottom:solid 1px #CCC;
-  border-left:solid 1px #CCC;*/
-}
-#header .view-top-tools.view-id-top_tools h2 {
-  background-color: transparent;
-  background: url(/sites/all/themes/atwork_zen/images/green-ribbon.png) no-repeat 0px 8px;
-  color: #FFF;
-  text-align: left;
-  display: block;
-  width: 130px;
-  margin: 0;
-  padding: 6px 0px 5px 7px;
-  height: auto;
-}
-#header .view-top-tools.view-id-top_tools p {
-  display: block;
-  width: 120px;
-  line-height: normal;
-  padding: 0;
-  margin:0;
-}
-#header .view-top-tools.view-id-top_tools p a {
-  display: block;
-  width: 120px;
-  text-align: center;
-  color: #008D7B;
-  border-top: solid 1px #ECECEC;
-  margin: 0;
-  padding: 5px;
-}
-#header .view-top-tools.view-id-top_tools p a:hover {
-  background-color: #ECECEC;
-}
-#header .view-top-tools.view-id-top_tools span.ext {
-  display: none;
-}
-#header .view-top-tools.view-id-top_tools #quickfooter {
-  background-color: #008D7B;
-  display: block;
-  width: 130px;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-}
-#header .view-top-tools.view-id-top_tools i.fa.fa-caret-up,
-#header .view-top-tools.view-id-top_tools i.fa.fa-caret-down {
-  display: block;
-  width: 100%;
-  color: #FFF;
-  padding: 3px 0;
-  margin: 0;
-  line-height: .75em;
-  text-align: center;
-}
-#block-views-top-tools-block > div > div > div {
-  width: 0;
-  border: 0;
-}
-.view-id-top_tools .view-content .views-row-first.views-row-last .views-field-nothing {
-  background-color: #fff;
-  margin-top: 1px;
-}
 /* Front Page Users online -------------------------------------------------------*/
 #users_online {
   text-align: center;
@@ -865,9 +796,20 @@ div.header-user {
   display: none;
 }
 
+/* Front page width adjustments for new social sidebar */
+
+.front .region.region-pre-content,
+.front #block-block-5 {
+	max-width: 960px;
+	clear: both;
+}
+
+
 /* Front Page Slideshow -----------------------------------------------------------*/
 #block-views-home-page-blocks-zen-block-5 {
-  margin-bottom: 5px;
+  position: relative;
+	max-width: 960px;
+	margin-bottom: 5px;
 }
 .views_slideshow_cycle_main {
   display: block;
@@ -1026,18 +968,18 @@ div.header-user {
 /* Slideshow Previous / Next Controls -------------------------------------------------------*/
 
 #views_slideshow_controls_text_previous_home_page_blocks_zen-block_5 a {
-  display: inline-block;
-  width: 24px;
-  height: 30px;
-  position: absolute;
-  left: 1px;
-  top: 160px;
-  z-index: 50;
-  background: url(/sites/all/themes/atwork_zen/images/arrows.png);
-  background-position: -42px 0;
-  background-color: #26669E;
-  overflow: hidden;
-  text-indent: -1000px;
+display: inline-block;
+	width: 24px;
+	height: 30px;
+	position: absolute;
+	left: 1px;
+	top: 110px;
+	z-index: 50;
+	background: url(/sites/all/themes/atwork_zen/images/arrows.png);
+	background-position: -42px 0;
+	background-color: #26669E;
+	overflow: hidden;
+	text-indent: -1000px;
 }
 
 #views_slideshow_controls_text_previous_home_page_blocks_zen-block_5 a:hover {
@@ -1047,19 +989,19 @@ div.header-user {
   display: none;
 }
 #views_slideshow_controls_text_next_home_page_blocks_zen-block_5 a {
-  display: inline-block;
-  width: 24px;
-  height: 30px;
-  text-indent: -10000px;
-  position: absolute;
-  right: 1px;
-  z-index: 50;
-  top: 160px;
-  background: url(/sites/all/themes/atwork_zen/images/arrows.png);
-  background-position: -30px -33px;
-  background-color: #26669E;
-  overflow: hidden;
-  text-indent: -1000px;
+	display: inline-block;
+	width: 24px;
+	height: 30px;
+	text-indent: -10000px;
+	position: absolute;
+	right: 1px;
+	z-index: 50;
+	top: 110px;
+	background: url(/sites/all/themes/atwork_zen/images/arrows.png);
+	background-position: -30px -33px;
+	background-color: #26669E;
+	overflow: hidden;
+	text-indent: -1000px;
 }
 #views_slideshow_controls_text_next_home_page_blocks_zen-block_5 a:hover {
   background-position: 1px -33px;
@@ -1355,6 +1297,7 @@ h3.front-promoted-title a,
 
 
 /* Key Initiatives -------------------------------------------------------*/
+
 #block-block-5 .jcarousel-wrapper {
   background-color: #D7D7D7;
   padding-left: 20px;
@@ -1403,40 +1346,50 @@ h3.front-promoted-title a,
 }
 .front #block-block-5 h2.block__title,
 .front #block-atwork-activity-homepage h2.block__title,
+.front #block-views-gallery-reference-block-2 h2.block__title{
+	text-align: center;
+	/*background-color: #C7C7C7;*/
+	/*color: #004B8D;*/
+	background-color: #818283;
+	color: #FFF;
+	height: 36px;
+	padding: 5px 0 0;
+	margin: 0;
+}
+
 .front #block-views-home-page-blocks-zen-block-2 h2.block__title,
-.front #block-views-gallery-reference-block-2 h2.block__title {
-  text-align: center;
-  /*background-color: #C7C7C7;*/
-  /*color: #004B8D;*/
-  background-color: #818283;
-  color: #FFF;
-  height: 36px;
-  width: 100%;
-  padding: 5px 0 0;
-  margin: 0;
+.front #top-tools-panel h2 {
+	height: 36px;
+	padding: 0 0 0 15px;
+	margin: 0;
+	background: url(/sites/all/themes/atwork_zen/images/top-tools-ribbon.png) no-repeat 0;
+	background-color: #818283;
+	color: #FFF;
 }
 /* Front Page Activity Feed -------------------------------------------------------*/
 #block-atwork-activity-homepage {
-  background-color:  #D7D7D7;
-  padding-bottom: 15px;
-  width: 69%;
-  float:left;
-  height: 425px;
+	position: absolute;
+	top: 47px;
+	right: 0;
+	background-color:  #D7D7D7;
+	padding-bottom: 15px;
+	width: 280px;
+	height: 1378px;
 }
 #tabs {
-  margin: 5px 25px;
-  color: #666;
+	/*! margin: 5px 25px; */
+	color: #666;
 }
 #tabs #ui-id-1, #tabs #ui-id-2, #tabs #ui-id-3, #tabs #ui-id-4 {
   background-color: #C7C7C7;
 }
 #tabs #tabs-1, #tabs #tabs-2, #tabs #tabs-3, #tabs #tabs-4 {
-  margin-left: 3px;
-  margin-right: 3px;
-  background-color: #fff;
-  height: 320px;
-  overflow-y: auto;
-  /*line-height: 1.35em;*/
+	margin-left: 3px;
+	margin-right: 3px;
+	background-color: #fff;
+	height: 100%;
+	overflow-y: auto;
+	/*line-height: 1.35em;*/
 }
 #tabs .ui-tabs-nav a {
   color:#666;
@@ -1486,125 +1439,133 @@ h3.front-promoted-title a,
   padding-bottom: 3px;
   background-color: #FFF;
 }
-/* Front Page Events Feed -------------------------------------------------------*/
+
+/*------------------ New Front Page Events Block -----------------------------*/
+
 .front #block-views-home-page-blocks-zen-block-2 {
-  background-color: #D7D7D7;
-  width: 30%;
-  margin-left: 70%;
-  height: 425px;
-  padding-bottom: 15px;
-}
-.front #block-views-home-page-blocks-zen-block-2 .view-header {
-  display: block;
-  background-color: #C7C7C7;
-  width: 60%;
-  text-align: center;
-  padding: 3px 5px;
-  margin: 5px auto;
-  font-weight: bold;
-}
-.front #block-views-home-page-blocks-zen-block-2 ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
+	display: inline-block;
+	float: left;
+	background-color: #D7D7D7;
+	width: 49.3%;
+	height: 390px;
+	padding-bottom: 15px;
 }
 .front #block-views-home-page-blocks-zen-block-2 .view-content {
-  background-color: #fff;
-  display: block;
-  padding: 10px;
-  margin: 0 25px;
-  height: 320px;
+	background-color: #fff;
+	display: block;
+	height: 300px;
+	padding: 10px;
+	margin: 20px 25px 0;
 }
 .front #block-views-home-page-blocks-zen-block-2 .view-content .item-list {
   height: 300px;
   overflow: auto;
 }
-.front #block-views-home-page-blocks-zen-block-2 i.fa.fa-check {
+.front .event-calendar {
+	display: block;
+	width: 100%;
+	clear: both;
+	padding: 0;
+	margin: 0 0 12px 0;
+	border: solid 1px #ECECEC;
+}
+.front .event-calendar .calendar-icon {
   display: inline-block;
   float: left;
-  margin-top:3px;
+	clear: both;
+  width: 30px;
+  text-align: center;
+	line-height: 1.3em;
+  background-color: #D7D7D7;
+  padding: 5px;
+	margin-right: 10px;
+	/*background: url(/sites/all/themes/atwork_zen/images/calendar-icon-bknd.png) repeat-x center -3px;*/
 }
-.front #block-views-home-page-blocks-zen-block-2 h3 {
-  font-family: open-sans,sans-serif;
-  font-weight: normal;
-  font-size: inherit;
-  display: block;
-  padding: 0;
-  margin: 0 0 0 18px;
+.front .event-calendar .calendar-icon .event-date {
+	border: solid 1px #999;
 }
-.front #block-views-home-page-blocks-zen-block-2 .views-field.views-field-field-date {
-  display: block;
-  color: #666;
-  margin-left: 21px;
-  margin-bottom: 5px;
+.front .event-calendar .event-title h3 {
+	display: block;
+	font-family: inherit;
+	font-size: 1em;
+	font-weight: bold;
+	padding: 2px;
+	margin: 0;
+}
+.front .event-calendar .event-time:before {
+	content:"Time:";
+	float: left;
+	padding-right: 3px;
 }
 .front #block-views-home-page-blocks-zen-block-2 .pager {
-  display: block;
-  position: relative;
-  bottom: 68px;
-  margin: 0 auto 0 auto;
-  border-top: solid 1px #D7D7D7;
-  padding-top:1px;
-  padding-bottom: 1px;
+	display: block;
+	position: relative;
+	bottom: 35px;
+	margin: 0 auto 0 auto;
+	border-top: solid 1px #D7D7D7;
+	border-bottom: solid 1px #D7D7D7;
+	padding-top:1px;
+	padding-bottom: 1px;
+}
+.front #block-views-home-page-blocks-zen-block-2 #post-event a {
+	display: block;
+	position: relative;
+	bottom: 50px;
+	width: 150px;
+	text-align: center;
+	margin: 0 auto 0 auto;
+	padding-top:1px;
+	padding-bottom: 1px;	
+	border: solid 1px #C7C7C7;;
+}
+.front #block-views-home-page-blocks-zen-block-2 .view-header {
+	display: block;
+	width: 150px;
+	margin: -26px 0 26px 125px;
+	text-align: center;
 }
 .front #block-views-home-page-blocks-zen-block-2 .view-header a {
-  color: #666;
-  font-size: .9em;
+	color: #FFF;
 }
-.front #block-views-home-page-blocks-zen-block-2 .view-header a:hover {
-  color: #fff;
+
+.front .ajax-progress-throbber {
+	display: none;
 }
-/* Activity Feed / Events Links -------------------------------------------------------*/
-#block-views-home-page-blocks-zen-block-2 .front-events a,
-#block-atwork-activity-homepage .message a,
-#block-atwork-activity-homepage ul.pager a,
-#block-views-home-page-blocks-zen-block-2 .view-footer a {
-  text-decoration: none;
+/* Top Tools -------------------------------------------------------*/
+.front #block-views-top-tools-block {
+	display: inline-block;
+	background-color: #D7D7D7;
+	width: 27%;
+	height: 390px;
+	margin-left: 5px;
+	padding-bottom: 15px;
 }
-#block-atwork-activity-homepage .message a:hover,
-#block-atwork-activity-homepage ul.pager a:hover,
-#block-views-home-page-blocks-zen-block-2 .front-events h3:hover {
-  background-color: #C0C0C0;
-  color: #FFF;
+.front #block-views-top-tools-block h2 {
+	font-size: initial;
 }
-#block-views-home-page-blocks-zen-block-2 ul.pager .pager-current {
-  font-weight: normal;
+.front #top-tools-links {
+	background-color: #FFF;
+	margin: 20px;
+	padding: 15px;
+}
+.front #top-tools-links a {
+	display: block;
+	padding: 5px 8px;
+	margin-bottom: 5px;
+	border: solid 1px #C7C7C7;
+}
+.front #top-tools-links a:hover,
+.front #block-views-home-page-blocks-zen-block-2 #post-event a:hover {
+	color: #FFF;
+	background-color: #A7A7A7;
+	text-decoration: none;
 }
 /* Front Page Activity Feed Progress Indicator -------------------------------------------------------*/
 
-/*#block-atwork-activity-homepage .activity-feed-progress {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  top: -32px;
-}*/
-.activity-feed-progress {
-  position: absolute;
-  z-index: 9999;
-  display: block;
-  width: 68%;
-  height: 65%;
-  margin-top: 30px;
-  margin-left: 0px;
-  padding-top:15%;
-  padding-left: 30%;
-  background: url(/sites/all/themes/atwork_zen/images/main-nav-bknd.png) repeat;
+.front .activity-feed-progress {
+	display: none;
 }
 
-/* Events Calendar Link - Front Page */
-#front-event-link {
-  text-align: center;
-  margin-top: -62px;
-}
-#front-event-link a {
-  color: #666;
-  border: solid 1px #FFF;
-  padding: 1px 8px;
-}
-#front-event-link a:hover {
-  color: #FFF;
-  background-color: #26669E;
-}
 /* Front Page Employee Contributed Photos -------------------------------------------------------*/
 
 
