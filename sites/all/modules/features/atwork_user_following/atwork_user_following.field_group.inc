@@ -49,7 +49,7 @@ function atwork_user_following_field_group_info() {
   $field_group->parent_name = 'group_profile_identity_bundle';
   $field_group->data = array(
     'label' => 'Location_bundle',
-    'weight' => '44',
+    'weight' => '57',
     'children' => array(
       0 => 'field_gal_address',
       1 => 'field_gal_city',
@@ -117,14 +117,12 @@ function atwork_user_following_field_group_info() {
   $field_group->parent_name = 'group_profile_identity_bundle';
   $field_group->data = array(
     'label' => 'Contact_bundle',
-    'weight' => '43',
+    'weight' => '56',
     'children' => array(
       0 => 'field_display_name',
-      1 => 'field_gal_title',
-      2 => 'field_gal_phone_number',
-      3 => 'field_gal_first_name',
-      4 => 'field_linkedin',
-      5 => 'field_joined_public_service',
+      1 => 'field_gal_phone_number',
+      2 => 'field_linkedin',
+      3 => 'field_joined_public_service',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -192,6 +190,7 @@ function atwork_user_following_field_group_info() {
       0 => 'field_summary',
       1 => 'group_location_div_set',
       2 => 'group_profile_contact_bundle',
+      3 => 'group_profile_name_bundle',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -209,6 +208,39 @@ function atwork_user_following_field_group_info() {
     ),
   );
   $field_groups['group_profile_identity_bundle|user|user|default'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_profile_name_bundle|user|user|default';
+  $field_group->group_name = 'group_profile_name_bundle';
+  $field_group->entity_type = 'user';
+  $field_group->bundle = 'user';
+  $field_group->mode = 'default';
+  $field_group->parent_name = 'group_profile_identity_bundle';
+  $field_group->data = array(
+    'label' => 'Name Bundle',
+    'weight' => '55',
+    'children' => array(
+      0 => 'field_gal_title',
+      1 => 'field_gal_first_name',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Name Bundle',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'group-profile-name-bundle field-group-div',
+        'description' => '',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'none',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_profile_name_bundle|user|user|default'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -310,6 +342,7 @@ function atwork_user_following_field_group_info() {
   t('Identity_bundle');
   t('Interests');
   t('Location_bundle');
+  t('Name Bundle');
   t('Profile');
   t('Profile Card');
   t('Profile Extra');

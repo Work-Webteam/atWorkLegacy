@@ -619,25 +619,25 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
     // TODO: Set prefix and suffix for display name in form (image render and <a> tags)
     $form['field_profile_comment_date']['und']['#prefix'] = "Posted: " . $form['field_profile_comment_date']['und']['#prefix'];
     // Leave out Reply/Edit and Delete versions of the form -- so far this field seems to be the only one that differentiates them
-
-   if($form['#action'] !== '/employees/twerdal'){
-    return;
-   }
-   // hide this su8bmit button when we use our own.
+    $url_test = explode('/', $form['#action']);
+    if($url_test[1] == "reply"){
+      return;
+    }
+   // hide this submit button when we use our own.
    $form['actions']['submit']['#access'] = FALSE;
     // Create our own submit button for the profile page to send users to our handler
     $form['button'] = array(
-    '#type' => 'button', // We lose ajax if we make this a true Submit - we will manually save the entity in our callback
-    '#value' => 'Post Comment', // To differentiate it from the normal submit button - this will be hidden by CSS.
-    '#prefix' => '<div id="comment-submit-button">',
-    '#suffix' => '</div>',
-    '#ajax' => array(
-      'callback' => 'atwork_activity_reply_form_submit_custom',
-      'wrapper' => 'comment-submit-button',
-      'event' => 'click',
-    ),
-  );
-
+      '#type' => 'button', // We lose ajax if we make this a true Submit - we will manually save the entity in our callback
+      '#value' => 'Post Comment', // To differentiate it from the normal submit button - this will be hidden by CSS.
+      '#prefix' => '<div id="comment-submit-button">',
+      '#suffix' => '</div>',
+      '#ajax' => array(
+        'callback' => 'atwork_activity_reply_form_submit_custom',
+        'wrapper' => 'comment-submit-button',
+        'event' => 'click',
+      ),
+      '#weight' => 99, // Want this at the bottom, just ahead of the footer.
+    );
   }
 }
 
@@ -670,7 +670,54 @@ function atwork_activity_entity_view_alter(&$build, $type){
     $build["field_display_name"][0]['#markup'] = ' by <a href="/employees/' . $author->name . '"> ' . $build["field_display_name"][0]['#markup'] . '</a>';
     // Add image to the comment
     $image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
-    $build["field_profile_comment_date"][0]['#markup'] = render($image) . " Posted: " . $build["field_profile_comment_date"][0]['#markup'];
+    // Now lets set a more dynamic date
+    $current_time = time();
+    $post_time = $build['field_profile_comment_date']['#object']->field_profile_comment_date['und'][0]['value'];
+    $diff = $current_time - $post_time;
+    $time_record = "";
+    switch(TRUE){
+      case($diff<=60):
+        $time_record = "Now";
+        break;
+      // Less than an hour
+      case($diff<3600):
+        // One minute
+        if($diff < 120){
+          $time_record = floor($diff/60) . " Minute ago";
+        } else {
+          // Any number of minutes
+          $time_record = floor($diff/60) . " Minutes ago";
+        }
+        break;
+      // Less than a day
+      case($diff<86400):
+        // One hour
+        if($diff < 7200) {
+          $time_record = floor($diff/3600) . " Hour ago";
+        } else {
+          $time_record = floor($diff/3600) . " Hours ago";
+        }
+        break;
+      // Less than a week
+      case($diff<604800):
+        // On day
+        if($diff < 172800){
+          $time_record = floor($diff/86400) . " Day ago";
+        } else {
+          // More than one day
+          $time_record = floor($diff/86400) . " Days ago";
+        }
+        break;
+      default:
+        $time_record = date('F j Y', $result['#entity']->timestamp);
+        break;
+    }
+
+    // Set the time
+    $build['field_profile_comment_date'][0]['#markup'] = '<span class="date-display-single" property="dc:date" datatype="xsd:dateTime">' . $time_record . '</span>';
+
+    // Append the user image here
+    $build["field_profile_comment_date"][0]['#markup'] = '<div class="feed-user-image">' . render($image) . '</div>'. " Posted: " . $build["field_profile_comment_date"][0]['#markup'];
     // Add flag icon:
     $build['links']['flag']['#links']['flag-flag_for_message_replies']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $build['links']['flag']['#links']['flag-flag_for_message_replies']['title']);
   }
@@ -1136,7 +1183,7 @@ EOT;
       $block['content'] = _atwork_activity_profile_page_block_content(arg(1));
       // Don't think I need to pass these values anymore - will keep this for now to check.
       //feed_block_init();
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'atwork_activity_profile_feed.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_atwork_activity_profile_feed.js');
       break;
   }
   return $block;
@@ -1217,9 +1264,7 @@ function _atwork_activity_profile_page_block_content($user_id){
   //dpm($messages1);
   // Now remove all unwanted messages
   foreach($messages1 as $key=>$value){
-    //dpm($value->type);
     switch(true){
-      //case(true):
       case($value->type == "user_received_ecard"):
       case($value->type == "user_sent_ecard"):
       case($value->type == "user_liked_comment"):
@@ -1276,6 +1321,8 @@ function _atwork_activity_profile_page_block_content($user_id){
           $user_on_own_feed = TRUE;
         }
         break;
+      case($value->type == "status"):
+        break;
       // TODO: Forum case, image case, background page, ??Broken Case?? (starts with [])?
       default:
         break;
@@ -1324,6 +1371,13 @@ function _atwork_activity_profile_page_block_content($user_id){
       // Remove "You is" and replace with You are
       $str = substr($result['message__message_text__0']['#markup'], 10);
       $result['message__message_text__0']['#markup'] = '<p>You are' . $str;
+    }
+
+    // Status update messages display improperly.
+    if($user_on_own_feed && $result['#bundle'] == 'status'){
+      $str = substr($result['message__message_text__0']['#markup'], 20);
+
+      $result['message__message_text__0']['#markup'] = '<p>You updated your' . $str;
     }
     // Set date for mins/ago then hours, then days, week, then date
     $current_time = time();

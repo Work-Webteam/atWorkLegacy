@@ -98,6 +98,7 @@ regions[navigation]     = Navigation bar
 regions[highlighted]    = Highlighted
 regions[help]           = Help
 regions[pre_tabs]       = Pre-Tabs
+regions[social_side]    = Social sidebar
 regions[pre_content]    = Pre-Content
 regions[content]        = Content
 regions[post_content]   = Post-Content
