@@ -1183,7 +1183,7 @@ EOT;
       $block['content'] = _atwork_activity_profile_page_block_content(arg(1));
       // Don't think I need to pass these values anymore - will keep this for now to check.
       //feed_block_init();
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'atwork_activity_profile_feed.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_atwork_activity_profile_feed.js');
       break;
   }
   return $block;
@@ -1375,7 +1375,6 @@ function _atwork_activity_profile_page_block_content($user_id){
 
     // Status update messages display improperly.
     if($user_on_own_feed && $result['#bundle'] == 'status'){
-      dpm($result);
       $str = substr($result['message__message_text__0']['#markup'], 20);
 
       $result['message__message_text__0']['#markup'] = '<p>You updated your' . $str;
