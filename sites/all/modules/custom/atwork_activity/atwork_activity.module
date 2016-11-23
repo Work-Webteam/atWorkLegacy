@@ -1358,7 +1358,9 @@ function _atwork_activity_profile_page_block_content($user_id){
     // We want to add images to the activity feed.
     $author = user_load($result['#entity']->uid);
     // Add flag icon:
-    $result['links']['flag']['#links']['flag-message_flag']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $result['links']['flag']['#links']['flag-message_flag']['title']);
+    if(isset( $result['links']['flag']['#links']['flag-message_flag']) &&  $result['links']['flag']['#links']['flag-message_flag']){
+      $result['links']['flag']['#links']['flag-message_flag']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $result['links']['flag']['#links']['flag-message_flag']['title']);
+    }
 
     // Check if an image exists:
     if(isset($author->field_image) && $author->field_image){
