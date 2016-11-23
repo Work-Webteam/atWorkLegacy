@@ -709,7 +709,7 @@ function atwork_activity_entity_view_alter(&$build, $type){
         }
         break;
       default:
-        $time_record = date('F j Y', $result['#entity']->timestamp);
+        $time_record = date('F j Y', $post_time);
         break;
     }
 
