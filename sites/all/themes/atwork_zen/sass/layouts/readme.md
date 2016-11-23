@@ -1,0 +1,1 @@
+If you are using a custom layout, you should create a directory here of that name, plus at least a scss layout file.
