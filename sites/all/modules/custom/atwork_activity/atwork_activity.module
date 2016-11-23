@@ -1339,7 +1339,7 @@ function _atwork_activity_profile_page_block_content($user_id){
   $output .= '<div id="activity-feed">' ;
 
 
-  $pager_number = pager_array_splice($message_render_array['message'], 2);
+  $pager_number = pager_array_splice($message_render_array['message'], 10);
 
   $j = 1;
   foreach($pager_number as $key=>$result) {
