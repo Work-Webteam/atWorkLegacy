@@ -1217,8 +1217,8 @@ function _atwork_activity_profile_page_block_content($user_id){
    $account = user_load(arg(1));
   }
 
-
-  if (!isset($account) || $account == 0) {
+  // Bail out if we don't have a user, or if this is employee news
+  if (!isset($account) || $user_id == 0 || arg(1) == 0) {
     return;
   }
 
@@ -1232,16 +1232,6 @@ function _atwork_activity_profile_page_block_content($user_id){
 
   $output = '';
   $classes = array();
-
-  // Put together our query
-  $query = new EntityFieldQuery();
-  $query->entityCondition('entity_type', 'message')
-    ->propertyCondition('uid', $account->uid)
-    ->pager(10);
-  // Put together an array of messages
-  $result1 = $query->execute();
-
-  $mids1 = array_keys($result1['message']);
 
   $query = db_select('message', 'm')
     ->fields('m', array('mid'))
