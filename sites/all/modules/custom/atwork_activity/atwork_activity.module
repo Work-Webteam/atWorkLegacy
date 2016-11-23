@@ -709,7 +709,7 @@ function atwork_activity_entity_view_alter(&$build, $type){
         }
         break;
       default:
-        $time_record = date('F j Y', $result['#entity']->timestamp);
+        $time_record = date('F j Y', $post_time);
         break;
     }
 
@@ -1183,7 +1183,7 @@ EOT;
       $block['content'] = _atwork_activity_profile_page_block_content(arg(1));
       // Don't think I need to pass these values anymore - will keep this for now to check.
       //feed_block_init();
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'atwork_activity_profile_feed.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_atwork_activity_profile_feed.js');
       break;
   }
   return $block;
@@ -1218,7 +1218,7 @@ function _atwork_activity_profile_page_block_content($user_id){
   }
 
 
-  if (!$account || $account == 0) {
+  if (!isset($account) || $account == 0) {
     return;
   }
 
@@ -1338,78 +1338,82 @@ function _atwork_activity_profile_page_block_content($user_id){
   $output .= render($form);
   $output .= '<div id="activity-feed">' ;
 
-
-  $pager_number = pager_array_splice($message_render_array['message'], 2);
+  if(isset($message_render_array) && $message_render_array){
+    $pager_number = pager_array_splice($message_render_array['message'], 10);
+  }
 
   $j = 1;
-  foreach($pager_number as $key=>$result) {
-    // Set up odd/even classes
-    $classes = array();
-    $classes[] = 'message';
-    $classes[] = 'message-' . $key;
+  if(isset($pager_number) && !empty($pager_number)){
+    foreach($pager_number as $key=>$result) {
+      // Set up odd/even classes
+      $classes = array();
+      $classes[] = 'message';
+      $classes[] = 'message-' . $key;
 
-    if ($j % 2 == 0) {
-      $classes[] = 'even';
+      if ($j % 2 == 0) {
+        $classes[] = 'even';
+      }
+      else {
+        $classes[] = 'odd';
+      }
+
+      // We want to add images to the activity feed.
+      $author = user_load($result['#entity']->uid);
+      // Add flag icon:
+      if(isset( $result['links']['flag']['#links']['flag-message_flag']) &&  $result['links']['flag']['#links']['flag-message_flag']){
+        $result['links']['flag']['#links']['flag-message_flag']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $result['links']['flag']['#links']['flag-message_flag']['title']);
+      }
+
+      // Check if an image exists:
+      if(isset($author->field_image) && $author->field_image){
+        // If it does, then grab a renderable view of it
+        $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
+      }
+
+      // Handle following wording case
+      if(isset($user_on_own_feed) && $result['#bundle'] == 'following_user'){
+        // Remove "You is" and replace with You are
+        $str = substr($result['message__message_text__0']['#markup'], 10);
+        $result['message__message_text__0']['#markup'] = '<p>You are' . $str;
+      }
+
+      // Status update messages display improperly.
+      if(isset($user_on_own_feed) && $result['#bundle'] == 'status'){
+        $str = substr($result['message__message_text__0']['#markup'], 20);
+
+        $result['message__message_text__0']['#markup'] = '<p>You updated your' . $str;
+      }
+      // Set date for mins/ago then hours, then days, week, then date
+      $current_time = time();
+      $post_time = $result['#entity']->timestamp;
+      $diff = $current_time - $post_time;
+      $time_record = "";
+      switch(TRUE){
+        case($diff<=60):
+          $time_record = "Now";
+          break;
+        // Less than an hour
+        case($diff<3600):
+          $time_record = floor($diff/60) . " Minutes ago";
+          break;
+        // Less than a day
+        case($diff<86400):
+          $time_record = floor($diff/3600) . " Hours ago";
+          break;
+        // Less than a week
+        case($diff<604800):
+          $time_record = floor($diff/86400) . " Days ago";
+          break;
+        default:
+          $time_record = date('F j Y', $result['#entity']->timestamp);
+          break;
+      }
+
+       // Put everything together in the order we would like for this message
+      $output .= '<div class="' . implode(' ', $classes) . '"><span class="date"> ' . $time_record . '</span> <span class="feed_image">' . render($user_image) . '</span>' . render($result) .
+    /* print rate_generate_widget($widget_id, 'message', $entity->cid) . */ '</div>' ;
+     $j++;
     }
-    else {
-      $classes[] = 'odd';
-    }
-
-    // We want to add images to the activity feed.
-    $author = user_load($result['#entity']->uid);
-    // Add flag icon:
-    $result['links']['flag']['#links']['flag-message_flag']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $result['links']['flag']['#links']['flag-message_flag']['title']);
-
-    // Check if an image exists:
-    if(isset($author->field_image) && $author->field_image){
-      // If it does, then grab a renderable view of it
-      $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
-    }
-
-    // Handle following wording case
-    if($user_on_own_feed && $result['#bundle'] == 'following_user'){
-      // Remove "You is" and replace with You are
-      $str = substr($result['message__message_text__0']['#markup'], 10);
-      $result['message__message_text__0']['#markup'] = '<p>You are' . $str;
-    }
-
-    // Status update messages display improperly.
-    if($user_on_own_feed && $result['#bundle'] == 'status'){
-      dpm($result);
-      $str = substr($result['message__message_text__0']['#markup'], 20);
-
-      $result['message__message_text__0']['#markup'] = '<p>You updated your' . $str;
-    }
-    // Set date for mins/ago then hours, then days, week, then date
-    $current_time = time();
-    $post_time = $result['#entity']->timestamp;
-    $diff = $current_time - $post_time;
-    $time_record = "";
-    switch(TRUE){
-      case($diff<=60):
-        $time_record = "Now";
-        break;
-      // Less than an hour
-      case($diff<3600):
-        $time_record = floor($diff/60) . " Minutes ago";
-        break;
-      // Less than a day
-      case($diff<86400):
-        $time_record = floor($diff/3600) . " Hours ago";
-        break;
-      // Less than a week
-      case($diff<604800):
-        $time_record = floor($diff/86400) . " Days ago";
-        break;
-      default:
-        $time_record = date('F j Y', $result['#entity']->timestamp);
-        break;
-    }
-
-     // Put everything together in the order we would like for this message
-    $output .= '<div class="' . implode(' ', $classes) . '"><span class="date"> ' . $time_record . '</span> <span class="feed_image">' . render($user_image) . '</span>' . render($result) .
-  /* print rate_generate_widget($widget_id, 'message', $entity->cid) . */ '</div>' ;
-   $j++;
   }
 
   $output .= '</div>' . theme('pager', array('quantity' => 9));
@@ -1425,6 +1429,9 @@ function _atwork_activity_profile_page_block_content($user_id){
  * https://www.drupal.org/docs/7/creating-custom-modules/howtos/paging-non-sql-data
  */
 function pager_array_splice($data, $limit = 9, $element = 0) {
+  if(empty($data)){
+    return;
+  }
   global $pager_page_array, $pager_total, $pager_total_items; $page = isset($_GET['page']) ? $_GET['page'] : '';
   // Convert comma-separated $page to an array, used by other functions.
   $pager_page_array = explode(',', $page);
