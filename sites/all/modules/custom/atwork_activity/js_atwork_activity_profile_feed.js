@@ -68,14 +68,13 @@
           $(this).find(".reply").not(":last").hide();
           // Find out how many comments we have in this block
           var i = $(this).find($(".reply")).length;
-                  // If we don't have one yet, lets append it to this block.
-          $(this).append('<div class="comment-count-link"><a class="comment-count-link-text" href="#/">Comments(' + i + ')</a></div>');
-          //Grab the class of this message so we can remember its state
-          var y = ($(this).parentsUntil('[id^="activity-feed"').closest("div").prop("class"));
-          stateSave.push(y);
+          // If we don't have one yet, lets append it to this block.
+          if($(this).find(".comment-count-link").length === 0){
+            $(this).append('<div class="comment-count-link"><a class="comment-count-link-text" href="#/">Comments(' + i + ')</a></div>');
+          }
         });
       } else {
-        $.each($(".replies"), function(){
+        $.each(".replies", function(){
           // Don't want to double up on the comment links
           if($(this).find(".comment-count-link").length > 0){
             var j = $(this).find($(".reply")).length;
@@ -101,12 +100,12 @@
           $.each($(".replies"), function(){
             var x = ($(this).parentsUntil('[id^="activity-feed"').closest("div").prop("class"));
             // Not inArray is returned as a -1, 0 is a spot in the array, but will return as false in an if statement. Need to explicitly check for -1.
-            var test = ($.inArray(x, stateSave));
             if($.inArray(x, stateSave) !== -1){
-              // If it is here, it is hidden
-              $(this).find(".reply").not(":last").hide();
+              // If it is here, it should be shown
+              return;
             } else {
-              // leave it alone
+              // hide it
+             $(this).find(".reply").not(":last").hide();
               return;
             }
           });
@@ -122,38 +121,26 @@
     function toggleComments(classDiv){
       //Get rid of the spaces, so we can use this as a selector
       divClass = classDiv.split(' ').join('.');
-      // Nothing is hidden right now, so add this to the list and hide it
-      if(stateSave.length < 1){
-        // comment counter for link.
-        var $i = 0;
-        $.each($(".replies"), function(){
-          // Hide all but the last link
-          $(this).find(".reply").not(":last").slideUp("fast");
-          // Find out how many comments we have in this block
-          $i = $(this).find($(".reply")).length;
-          // Don't want to double up on the comment links
-          stateSave.push(classDiv);
-          if($(this).find($(".comment-count-link")).length > 0){
-            // TODO - check if count is accurate
-            return;
-          }
-          // If we don't have one yet, lets append it to this block.
-          $(this).append('<div class="comment-count-link"><a href="#/">Comments(' + $i + ')</a></div>');
-        });
-      } else {
+      // There is nothing in the array, so this needs to be opened and added to array.
+     if(stateSave.length > 0){
         // We have something in our array, so lets see if this is supposed to be closed or open.
         var arraySpot = $.inArray(classDiv, stateSave);
-        if(arraySpot !== -1){
-          // If it is in our array, it has been closed, and now should be opened - toggle open
+        if(arraySpot === -1){
+          // If it is not in our array, it has been closed, and now should be opened - toggle open
           $("." + divClass).find(".replies").find(".reply").not(":last").slideDown("fast");
-          //and remove it from the array
-          stateSave.splice(arraySpot, 1);
+          //and add it to the array
+          stateSave.push(classDiv);
         } else {
-         // If it is not in our array, it is opened and should be closed, toggle closed
-        $("." + divClass).find(".replies").find(".reply").not(":last").slideUp("fast");
-       // and add to array
-       stateSave.push(classDiv);
+           // If it is in our array, it is opened and should be closed
+          $("." + divClass).find(".replies").find(".reply").not(":last").slideUp("fast");
+          // and removed from the array
+          stateSave.splice(arraySpot, 1);
         }
+      } else {
+        // Everything is closed, and this is the first opened comment
+        $("." + divClass).find(".replies").find(".reply").not(":last").slideDown("fast");
+        // And add it to our array
+        stateSave.push(classDiv);
       }
       return;
     }
