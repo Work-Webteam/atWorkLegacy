@@ -204,7 +204,7 @@ function atwork_rate_field_prepare_view($entity_type, $entities, $field, $instan
     $widget_info = _atwork_rate_get_widgets($type);
     _atwork_rate_load_widget($widget_info);
 
-    if (class_exists($widget_info->class)) {
+    if (isset($widget_info->class) && class_exists($widget_info->class)) {
       $item = array(
         'class' => $widget_info->class,
         'attributes' => array(
