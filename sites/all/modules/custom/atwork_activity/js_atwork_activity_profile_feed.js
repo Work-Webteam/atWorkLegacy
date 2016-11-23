@@ -69,49 +69,30 @@
           // Find out how many comments we have in this block
           var i = $(this).find($(".reply")).length;
           // If we don't have one yet, lets append it to this block.
-          if($(this).find(".comment-count-link").length === 0){
+          if($(this).find(".comment-count-link").length === 0 && i > 1){
             $(this).append('<div class="comment-count-link"><a class="comment-count-link-text" href="#/">Comments(' + i + ')</a></div>');
           }
         });
-      } else {
-        $.each(".replies", function(){
-          // Don't want to double up on the comment links
-          if($(this).find(".comment-count-link").length > 0){
-            var j = $(this).find($(".reply")).length;
-            // Check if our j value is still relevant here
-            var comments = $(this).find("a.comment-count-link-text").text();
-            var commentNumber = comments.split("(");
-            var commentInt = commentNumber[1].split(")");
-            if(commentInt === j){
-              return;
-            } else {
-              // TODO - update comment number link
-            }
-            return;
+      } else if (stateSave.length > 0){
+        // If we have saved state, we need to deal with it here and either hide or leave comments open
+        $.each($(".replies"), function(){
+          var x = ($(this).parentsUntil('[id^="activity-feed"').closest("div").prop("class"));
+          // Not inArray is returned as a -1, 0 is a spot in the array, but will return as false in an if statement. Need to explicitly check for -1.
+          if($.inArray(x, stateSave) !== -1){
+            // If it is here, it should be shown
           } else {
-            // Rebuild the comments link if it does not exist
-            var k = $(this).find($(".reply")).length;
+            // hide it
+           $(this).find(".reply").not(":last").hide();
+          }
+          // If we don't have one yet, lets append it to this block.
+          var k = $(this).find($(".reply")).length;
+
+          if($(this).find(".comment-count-link").length === 0 && k > 1){
             $(this).append('<div class="comment-count-link"><a class="comment-count-link-text" href="#/">Comments(' + k + ')</a></div>');
           }
         });
-
-        // If we have saved state, we need to deal with it here and either hide or leave comments open
-        if(stateSave.length > 0){
-          $.each($(".replies"), function(){
-            var x = ($(this).parentsUntil('[id^="activity-feed"').closest("div").prop("class"));
-            // Not inArray is returned as a -1, 0 is a spot in the array, but will return as false in an if statement. Need to explicitly check for -1.
-            if($.inArray(x, stateSave) !== -1){
-              // If it is here, it should be shown
-              return;
-            } else {
-              // hide it
-             $(this).find(".reply").not(":last").hide();
-              return;
-            }
-          });
-
-        }
       }
+      return;
     }
 
     /**
