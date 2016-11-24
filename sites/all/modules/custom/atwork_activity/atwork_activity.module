@@ -1470,6 +1470,7 @@ function atwork_activity_block_view_alter(&$data, $block){
       if(isset($block->visibility) && $block->visibility == 1){
         $url_check = $_SERVER['REQUEST_URI'];
         $url_parts_check = explode( '/', $url_check);
+        dpm($url_parts_check);
         // Don't want to make the block disappear on ajax reload
         if($url_parts_check[1] == "block_refresh"){
           return;
