@@ -261,7 +261,7 @@ function atwork_classifieds_preprocess_node(&$variables) {
 
     if (!isset($variables['content']['field_image'])) {
       $variables['content']['field_image'] = array(
-        '#markup' => '<div class="field field-name-field-image"><img width="115" src="/sites/all/themes/atwork/images/no-image-found.jpg" /></div>',
+        '#markup' => '<div class="field field-name-field-image"><img width="115" src="/sites/all/themes/atwork-zen/images/no-image-found.jpg" /></div>',
         '#weight' => 0,
       );
     }
