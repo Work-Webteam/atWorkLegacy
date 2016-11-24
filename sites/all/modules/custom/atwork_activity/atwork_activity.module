@@ -1457,3 +1457,28 @@ function atwork_activity_mail_alter(&$email_message) {
     }
   }
 }
+
+
+/**
+ * Implementation of hook_block_view_alter
+ * Code to show following/followers blocks only on user and user/* pages.
+ */
+function atwork_activity_block_view_alter(&$data, $block){
+  switch ($block->delta){
+    case("profile_page_activity_feed_block"):
+      // Block is set, so lets check if we are on the right page
+      if(isset($block->visibility) && $block->visibility == 1){
+        $url_check = $_SERVER['REQUEST_URI'];
+        $url_parts_check = explode( '/', $url_check);
+        // Don't want to make the block disappear on ajax reload
+        if($url_parts_check[1] == "block_refresh"){
+          return;
+        }
+        // If we are down the path further than user/[idir], then hide these blocks
+        if(count($url_parts_check) > 3){
+          $data['content']['#access'] = false;
+        }
+      }
+    break;
+  }
+}
