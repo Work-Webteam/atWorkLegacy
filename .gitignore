@@ -4,7 +4,7 @@
 ### Sass ###
 .sass-cache/
 *.css.map
- sites/all/themes/atwork_zen/css/atwork_zen.styles*
+sites/all/themes/atwork_zen/css/atwork_zen.styles*
 
 
 ### Drupal ###
