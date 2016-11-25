@@ -22,6 +22,7 @@
 @import "components/misc/logo.scss";
 @import "components/misc/pagination.scss";
 @import "components/misc/search.scss";
+@import "components/misc/activity.scss";
 
 @import "components/node/article/default.scss";
 @import "components/node/article/teaser.scss";
@@ -3601,30 +3602,7 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 /*----------------- End of Section--------------------*/
 
 
-/*----------------- User Profile User Activity Feed --------------------*/
 
-.block-atwork-activity {
-  float: left;
-  clear: left;
-  min-width: 70%;
-}
-
-.block-atwork-activity .form-textarea {
-  border: 5px solid #004B8D;
-  border-left-width: 10px;
-  border-right-width: 10px;
-}
-
-.block-atwork-activity > div > .message {
-  position: relative; /* sets us up to position all internal elements */
-  margin: 2em 0;
-}
-
-
-
-
-
-/*----------------- End User Profile User Activity Feed --------------------*/
 
 
 
