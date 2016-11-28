@@ -27,20 +27,20 @@ function profile_feed_comments_flag_default_flags() {
     'title' => 'Activity Feed Messages Flag',
     'global' => 1,
     'types' => array(
-      0 => 'new_comment',
-      1 => 'new_node',
-      2 => 'updated_user',
-      3 => 'following_user',
-      4 => 'node_updated',
-      5 => 'status',
-      6 => 'user_liked_node',
-      7 => 'user_liked_comment',
-      8 => 'user_received_ecard',
-      9 => 'user_sent_ecard',
-      10 => 'new_answer',
-      11 => 'new_image',
-      12 => 'group_subscribe',
-      13 => 'group_unsubscribe',
+      0 => 'following_user',
+      1 => 'group_subscribe',
+      2 => 'group_unsubscribe',
+      3 => 'new_answer',
+      4 => 'new_comment',
+      5 => 'new_image',
+      6 => 'new_node',
+      7 => 'node_updated',
+      8 => 'status',
+      9 => 'updated_user',
+      10 => 'user_liked_comment',
+      11 => 'user_liked_node',
+      12 => 'user_received_ecard',
+      13 => 'user_sent_ecard',
     ),
     'flag_short' => 'Flag as inappropriate',
     'flag_long' => 'Flag as inappropriate',
@@ -63,11 +63,11 @@ function profile_feed_comments_flag_default_flags() {
     'show_contextual_link' => FALSE,
     'flag_confirmation' => 'Please provide a reason this content is inappropriate.',
     'unflag_confirmation' => 'Are you sure you want to unflag this content?',
-    'api_version' => 3,
     'module' => 'profile_feed_comments',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 3,
   );
   // Exported flag: "Flag for message replies".
   $flags['flag_for_message_replies'] = array(
@@ -98,11 +98,11 @@ function profile_feed_comments_flag_default_flags() {
     'show_contextual_link' => FALSE,
     'flag_confirmation' => 'Please provide a reason this content is inappropriate.',
     'unflag_confirmation' => 'Are you sure you want to unflag this content?',
-    'api_version' => 3,
     'module' => 'profile_feed_comments',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 3,
   );
   return $flags;
 
