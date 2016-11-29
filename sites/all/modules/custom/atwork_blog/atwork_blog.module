@@ -221,9 +221,6 @@ function atwork_blog_node_view($node, $view_mode, $langcode) {
       $output .= '<span class="blogger-photo crop">' . theme('image_style', $variables) . '</span>';
     }
 
-    // Add in a follow button here in atwork_relationships module
-    $output = _atwork_relationships_button_add($output, $author);
-
     // add text
     if (isset($blogger_profile[0]['value']) && $blogger_profile[0]['value']) {
       $output .= '<span class="blogger-profile"><p>' . $blogger_profile[0]['value'] . '</p></span>';
