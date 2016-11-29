@@ -344,7 +344,7 @@ function atwork_images_form_alter(&$form, &$form_state, $form_id) {
     }
     if(!isset($form["menu"])){
       $form['actions']['submit']['#submit'][] = 'unpublished_group_submit';
-      dpm($form);
+      //dpm($form);
     }
   }
 
@@ -637,6 +637,16 @@ function atwork_images_node_view($node, $view_mode) {
         }
       }
 
+      // In some cases, the gallery UID can be erased (i.e. = 0 ) In this case, admins should still have access so they can assign to a user.
+      if(isset($gallery) && $gallery->uid == 0 && _atwork_is_admin()) {
+        $node->content['atwork_add_image']['#links']['manage_gallery'] = array(
+          'title' => t('Manage gallery'),
+          'href' => 'node/' . $gallery->nid . '/manage-gallery',
+          'attributes' => array(
+            'title' => t('Manage this gallery'),
+          ),
+        );
+      }
 
       $account = user_load($node->uid);
 
