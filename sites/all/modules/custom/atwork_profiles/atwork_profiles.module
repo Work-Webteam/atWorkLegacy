@@ -1216,12 +1216,11 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
 
     //Combine full first and last name, hide original GAL field
     if (isset($account->content['field_gal_first_name'])) {
-      if($user->uid === $account->uid){
-        // If the user views their own profile, then we don't want the follow button, but we do need the name concat
-        $account->content['field_gal_first_name'][0]['#markup'] = t(_atwork_full_name($account));
-      }
-      // Moved to atwork_relationships.module, so that it would not overwrite the follow button that we created there. May move it back here eventually.
-      //$account->content['field_gal_first_name'][0]['#markup'] = t(_atwork_full_name($account));
+      $account->content['field_gal_first_name'][0]['#markup'] = t(_atwork_full_name($account));
+      //$account->content['full_name'] = $account->content['field_gal_first_name'];
+      //$account->content['full_name'][0]['#markup'] = t(_atwork_full_name($account));
+      //$account->content['full_name']['#title'] = t('Full Name');
+      //hide($account->content['field_gal_first_name']);
     } else {
       $account->content['field_gal_first_name'] = array(
         '#theme' => 'field',
@@ -1515,7 +1514,6 @@ function atwork_profiles_views_post_render(&$view, &$output, &$cache) {
     if (isset($view->args[0]) && $view->args[0] && is_numeric($view->args[0])) {
       $account = user_load($view->args[0]);
 
-      /* This was moved to the atwork_relationships.module in order to refactor code.
       if (strpos($output, ':relationship_link') && module_exists('atwork_relationships') && $account->uid != $user->uid) {
         $relationship_link = atwork_relationships_get_link($account);
         $output = str_replace(':relationship_link', $relationship_link, $output);
@@ -1523,8 +1521,8 @@ function atwork_profiles_views_post_render(&$view, &$output, &$cache) {
       elseif (strpos($output, ':relationship_link')) {
         $output = str_replace(':relationship_link', '', $output);
       }
-      */
-      // add required
+
+      // add required questions
       $required_questions = _atwork_profiles_required_questions();
 
       foreach ($required_questions as $required_question) {
