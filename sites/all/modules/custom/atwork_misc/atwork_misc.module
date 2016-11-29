@@ -1543,13 +1543,19 @@ function _atwork_misc_block_content(){
   $img = drupal_get_path('module', 'atwork_misc') . '/images/2medals_382x80.png';
   $output = <<<EOL
 <div id="olympic_block_container">
-  <div id="twitter_feed_div" align="left"><a class="twitter-timeline" data-width="600" data-height="300" data-dnt="true" data-chrome="noheader nofooter transparent noborder" href="https://twitter.com/TheCrownCa">Tweets by The Crown</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+  <div id="twitter_feed_div" align="left"><a class="twitter-timeline" data-width="600" data-height="300" data-dnt="true" data-chrome="noheader nofooter transparent noborder" href="https://twitter.com/TheCrownCa">Tweets by TheCrownCa</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>
 </div>
-
-<div class="twitter-block-right-content"> 
-  <img src="/sites/all/themes/atwork_zen/images/royal-tour2016.jpg" />
-  <h1>Did You Know?</h1>
-<p>When addressing the Duke and Duchess of Cambridge, one should use &quot;Your Royal Highness&quot; initially, and &quot;Sir/Ma'am&quot; as the conversation continues.</p>
+<div id="olympic_medal_count_containers">
+  <!--<div id="olympic_background_image">
+    <div id="olympic_gold_medal_count_container">$gold</div>
+    <div id="olympic_silver_medal_count_container">$silver</div>
+    <div id="olympic_bronze_medal_count_container">$bronze</div>
+  </div>-->
+  <!--<div id="olympic_placeholder_for_additional_content"> <a href="http://olympic.ca/" _target="blank">Canadian Olympic Team Official Website</a></div>-->
+  <div class="royalDYK">
+    <img src="/sites/all/themes/atwork_zen/images/royal-tour2016.jpg" />
+    <h1>Did You Know?</h1>
+    <p>When meeting Members of the Royal Family, there is no requirement to wear a hat, though it is entirely acceptable to do so. Hats are not normally worn at functions after 6:30 p.m.</p>
   </div>
 </div>
 <!--<div id="olympic_placeholder_for_additional_content2"> This box can also hold additional content</div>-->

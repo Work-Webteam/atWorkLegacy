@@ -94,14 +94,14 @@ a.avpw_cursor {
 } */
 
 h1, h2, h3, h4, h5,.pre-title-snipet {
-	font-family: atwork-font;
+	font-family: 'atwork-font';
 	padding: 0;
 	margin: 0;
 	letter-spacing: .05em;
 }
 
 h1, h2, h3, h4, h5 {
-	font-family: atwork-font;
+	font-family: 'atwork-font';
 	font-weight: normal;
 	padding: 0;
 	margin: 0;
@@ -264,19 +264,20 @@ html {
 .admin-menu #page {
 	margin-top: -30px;
 }
-#header {
-/*	background: url(/sites/all/themes/atwork_zen/images/atwork-logo.png) no-repeat scroll center 10px;*/
-	/* Below, for a new atwork-logo-theme image, update the date parameter to reflect the edit date. 
+#header {  
+	/* Below, for a new atwork-logo-theme image, update the date parameter to reflect the edit date.
 	This prevents browser caching */
-	background: url(/sites/all/themes/atwork_zen/images/atwork-logo-theme.png?d=20160919) no-repeat scroll center 18px; 
+	/*background: url(/sites/all/themes/atwork_zen/images/atwork-logo-theme.png?d=20160919) no-repeat scroll center 18px; */
 	height: 180px;
 	image-rendering: -moz-auto;         /* Firefox */
 	image-rendering:   -o-auto;         /* Opera */
 	image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
 	image-rendering: auto;
-	-ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
+	-ms-interpolation-mode: bicubic;  /* IE (non-standard property) */
 }
-
+.not-front #header {
+	background: url(/sites/all/themes/atwork_zen/images/atwork-logo.png) no-repeat scroll center 10px;
+}
 #header-box {
 	position: absolute;
   height: 110px;
@@ -318,6 +319,11 @@ img {
 	margin: 0;
 	/* width: 100%; */
 	height: auto;
+	image-rendering: -moz-auto;         /* Firefox */
+	image-rendering:   -o-auto;         /* Opera */
+	image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
+	image-rendering: auto;
+	 -ms-interpolation-mode: bicubic;  /* IE (non-standard property) */
 }
 
 
@@ -478,8 +484,12 @@ img {
 /*#####################################################################################################################################################*/
 #block-atwork-profiles-header {
 	display: inline-block;
-	padding-top: 5px;
+	padding-top: 8px;
 	width:  100%;
+}
+.front #block-atwork-profiles-header {
+	position: absolute;
+	top: 20px;
 }
 .header-links {
 	float:left;
@@ -513,7 +523,7 @@ div.header-user {
 	position: relative;
 	right: 0px;
 	width: 165px;
-	padding-top: 4px;
+	padding-top: 2px;
 	float:  right;
 }
 #header-user-name {
@@ -600,7 +610,7 @@ div.header-user {
 	margin: 0;
 }
 #navigation .region-navigation {
-	font-family: open-sans, sans-serif !important;
+	font-family: 'open-sans', sans-serif !important;
 }
 #navigation .region-navigation a.dropdown-toggle {
 	cursor: default;
@@ -923,13 +933,14 @@ div.header-user {
 	text-decoration: none;
 }
 .skin-default .slideshow-teaser-box h2 {
-	font-family: atwork-font;
+	font-family: 'atwork-font';
 	display: block;
 	height: 50px;
 	padding:0px;
 	margin: 0px;
 	line-height: normal;
 	font-size: 1.6em;
+	font-size: 1.5em\0/ !important; /* For IE only */
 }
 .skin-default .slideshow-teaser-box i {
 	color: #000;
@@ -1289,7 +1300,7 @@ ol.search-results h3.title {
 	margin-right: 0;
 }
 h3.front-promoted-title {
-	font-family: atwork-font;
+	font-family: 'atwork-font';
 	font-weight: normal;
 	font-size: 1.4em;
 	word-break: break-all;
@@ -1525,7 +1536,7 @@ h3.front-promoted-title a,
 	margin-top:3px;
 }
 .front #block-views-home-page-blocks-zen-block-2 h3 {
-	font-family: open-sans,sans-serif;
+	font-family: 'open-sans',sans-serif;
 	font-weight: normal;
 	font-size: inherit;
 	display: block;
@@ -2223,7 +2234,9 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-1 .views-row-odd, .section-series #block-views-article-series-block-1 .views-row-even,
 .section-series #block-views-article-series-block-2 .views-row-odd, .section-series #block-views-article-series-block-2 .views-row-even,
 .section-series #block-views-article-series-block-3 .views-row-odd, .section-series #block-views-article-series-block-3 .views-row-even,
-.section-series #block-views-article-series-block-4 .views-row-odd, .section-series #block-views-article-series-block-4 .views-row-even {
+.section-series #block-views-article-series-block-4 .views-row-odd, .section-series #block-views-article-series-block-4 .views-row-even,
+.section-series #block-views-article-series-block-5 .views-row-odd, .section-series #block-views-article-series-block-5 .views-row-even,
+.section-series #block-views-article-series-block-6 .views-row-odd, .section-series #block-views-article-series-block-6 .views-row-even {
 	display: inline-block;
 	width: 32%;
 	background-color: #ECECEC;
@@ -2240,7 +2253,9 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-1 .article-series-image img,
 .section-series #block-views-article-series-block-2 .article-series-image img,
 .section-series #block-views-article-series-block-3 .article-series-image img,
-.section-series #block-views-article-series-block-4 .article-series-image img {
+.section-series #block-views-article-series-block-4 .article-series-image img,
+.section-series #block-views-article-series-block-5 .article-series-image img,
+.section-series #block-views-article-series-block-6 .article-series-image img {
 	width: 100%;
 }
 .sidebar-first.og-context.og-context-node .posted-group-blog a.username,
@@ -2276,7 +2291,9 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-1 .article-series-title,
 .section-series #block-views-article-series-block-2 .article-series-title,
 .section-series #block-views-article-series-block-3 .article-series-title,
-.section-series #block-views-article-series-block-4 .article-series-title {
+.section-series #block-views-article-series-block-4 .article-series-title,
+.section-series #block-views-article-series-block-5 .article-series-title,
+.section-series #block-views-article-series-block-6 .article-series-title {
 	display: block;
 	height: 50px;
 	margin: 7px 0 0;
@@ -2322,7 +2339,9 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-1 .article-series-date,
 .section-series #block-views-article-series-block-2 .article-series-date,
 .section-series #block-views-article-series-block-3 .article-series-date,
-.section-series #block-views-article-series-block-4 .article-series-date {
+.section-series #block-views-article-series-block-4 .article-series-date,
+.section-series #block-views-article-series-block-5 .article-series-date,
+.section-series #block-views-article-series-block-6 .article-series-date {
 	display: block;
 	padding: 0 10px 0px;
 	font-style: oblique;
@@ -2360,7 +2379,9 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-1 .article-series-teaser,
 .section-series #block-views-article-series-block-2 .article-series-teaser,
 .section-series #block-views-article-series-block-3 .article-series-teaser,
-.section-series #block-views-article-series-block-4 .article-series-teaser {
+.section-series #block-views-article-series-block-4 .article-series-teaser,
+.section-series #block-views-article-series-block-5 .article-series-teaser,
+.section-series #block-views-article-series-block-6 .article-series-teaser {
 	display: block;
 	min-height: 95px;
 	padding: 10px 10px 5px;
@@ -2402,7 +2423,9 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-1 .article-series-comments,
 .section-series #block-views-article-series-block-2 .article-series-comments,
 .section-series #block-views-article-series-block-3 .article-series-comments,
-.section-series #block-views-article-series-block-4 .article-series-comments {
+.section-series #block-views-article-series-block-4 .article-series-comments,
+.section-series #block-views-article-series-block-5 .article-series-comments,
+.section-series #block-views-article-series-block-6 .article-series-comments {
 	padding: 0 10px 10px;
 	font-style: oblique;
 	display: block;
@@ -2433,7 +2456,9 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-1 .article-series-views,
 .section-series #block-views-article-series-block-2 .article-series-views,
 .section-series #block-views-article-series-block-3 .article-series-views,
-.section-series #block-views-article-series-block-4 .article-series-views {
+.section-series #block-views-article-series-block-4 .article-series-views,
+.section-series #block-views-article-series-block-5 .article-series-views,
+.section-series #block-views-article-series-block-6 .article-series-views {
 	float: right;
 	margin-right: 15px;
 	font-style: oblique;
@@ -2803,7 +2828,7 @@ aside.sidebars h2 {
 }
 .section-employees .view-content .views-row-odd .title-employee-landing,
 .section-employees .view-content .views-row-even .title-employee-landing {
-	font-family: open-sans, sans-serif;
+	font-family: 'open-sans', sans-serif;
 	display: block;
 	padding: 0;
 	margin: 0 15px;
@@ -3032,7 +3057,7 @@ aside.sidebars h2 {
 	clear: both;
 	height: 300px;
 	width: 100%;
-	font-family: open-sans,sans-serif !important;
+	font-family: 'open-sans',sans-serif !important;
 }
 .page-user.section-employees .field.field-name-field-image.field-type-image,
 .page-user.section-user .field.field-name-field-image.field-type-image {
@@ -3074,7 +3099,7 @@ aside.sidebars h2 {
 	top: 0;
 	padding-left: 270px;
 	padding-top: 20px;
-	font-family: atwork-font;
+	font-family: 'atwork-font';
 	font-weight: 800;
 	font-weight: 400\0/ !important; /* For IE only */
 	font-style: normal;
@@ -3686,6 +3711,8 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 .node-type-page #block-block-33,
 .node-type-page #block-block-34,
 .node-type-page #block-block-36,
+.node-type-page #block-block-48,
+.node-type-page #block-block-49,
 .node-type-page #block-boxes-staff-appreciation-navigation {
 	margin: 0;
 	border: solid 1px #E0E0E0;
@@ -3701,7 +3728,9 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 .node-type-page #block-block-33 h2.block__title.block-title,
 .node-type-page #block-block-34 h2.block__title.block-title,
 .node-type-page #block-boxes-staff-appreciation-navigation h2.block__title.block-title,
-.node-type-page #block-block-36 h2.block__title.block-title {
+.node-type-page #block-block-36 h2.block__title.block-title,
+.node-type-page #block-block-48 h2.block__title.block-title,
+.node-type-page #block-block-49 h2.block__title.block-title {
 	line-height: normal;
 	padding: 10px 10px;
 	margin: 0;
@@ -3732,7 +3761,9 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 .node-type-page #block-block-33 ul,
 .node-type-page #block-block-34 ul,
 .node-type-page #block-boxes-staff-appreciation-navigation ul,
-.node-type-page #block-block-36 ul {
+.node-type-page #block-block-36 ul,
+.node-type-page #block-block-48 ul,
+.node-type-page #block-block-49 ul {
 	padding-left: 0;
 }
 #block-og-menu-og-single-menu-block li,
@@ -3746,7 +3777,9 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 .node-type-page #block-block-33 ul li,
 .node-type-page #block-block-34 ul li,
 .node-type-page #block-boxes-staff-appreciation-navigation ul li,
-.node-type-page #block-block-36 ul li {
+.node-type-page #block-block-36 ul li,
+.node-type-page #block-block-48 ul li,
+.node-type-page #block-block-49 ul li {
 	border-top: solid 1px #E0E0E0;
 	background-color: #FFF;
 	list-style: none;
@@ -3769,7 +3802,9 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 .node-type-page #block-block-33 ul li a,
 .node-type-page #block-block-34 ul li a,
 .node-type-page #block-boxes-staff-appreciation-navigation ul li a,
-.node-type-page #block-block-36 ul li a {
+.node-type-page #block-block-36 ul li a,
+.node-type-page #block-block-48 ul li a,
+.node-type-page #block-block-49 ul li a {
 	background-image: url(/sites/all/themes/atwork_zen/images/right-chevrons.png);
 	background-repeat: no-repeat;
 	background-position: 1em .8em;
@@ -3801,7 +3836,9 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 .node-type-page #block-block-33 ul li a:hover,
 .node-type-page #block-block-34 ul li a:hover,
 .node-type-page #block-boxes-staff-appreciation-navigation ul li a:hover,
-.node-type-page #block-block-36 ul li a:hover {
+.node-type-page #block-block-36 ul li a:hover,
+.node-type-page #block-block-48 ul li a:hover,
+.node-type-page #block-block-49 ul li a:hover {
 	background-color: #004B8D;
 	color: #FFF;
 	background-image: url(/sites/all/themes/atwork_zen/images/right-chevrons-white.png);
@@ -4109,7 +4146,7 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 	/*background-repeat: repeat-x;*/
 	/*background-position: 0px 15px;*/
 	padding-top: 80px !important;
-	min-height: 700px\0/ !important; /* For IE only */
+	min-height: 750px\0/ !important; /* For IE only */
 }
 .sidebar-first.og-context.og-context-node .region-sidebar-first {
 
@@ -4368,6 +4405,7 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 }
 .rate-info,
 .rate-description {
+	display: inline;
 	font-style: oblique;
 	color: #666;
 	margin-top: 5px
@@ -4832,6 +4870,24 @@ article.node-question .tiled-node-links {
 .section-announcements #node-tools {
 	clear: both;
 }
+
+/* Event Specific Page. Shows details on the event, dates and times.
+This places the repeating times left to right in place of the very tall list on some pages */
+#node-event-full-group-date-time {
+	display: block;
+	width: 100%;
+	height: 460px;
+	overflow-y: auto;
+}
+#node-event-full-group-date-time .field-item.odd,
+#node-event-full-group-date-time .field-item.even {
+	display: block;
+	border: solid 1px #ECECEC;
+	margin: 10px 20px 0 0;
+	padding: 5px;
+}
+
+
 /* Add Event Admin Page */
 #event-node-form {
 	width: 85%;
@@ -5250,6 +5306,9 @@ article.node-tools #node-tools .rate-widget {
 	padding: 0;
 	font-size: .9em;
 }
+.section-groups .commentArticle .rate-widget-2 {
+	/*! top: -10px !important; */
+}
 .commentArticle .rate-widget {
 	position: relative;
 	left: 290px;
@@ -5276,6 +5335,12 @@ span.flag-throbber {
 .view-id-node_comments .views-exposed-widget.views-widget-sort-order label{
 	display: none;
 }
+
+.node-type-forum .forum-post-wrapper .node-links {
+	float: left;
+	margin-right: 10px;
+}
+
 /*----------------- End of Section--------------------*/
 
 
@@ -6127,7 +6192,7 @@ only screen and (min-device-pixel-ratio : 2) {
 }
 #block-atwork-mobile-atwork-mobile-menu-block i.fa.fa-bars:after {
 	content: " Menu";
-	font-family: atwork-font;
+	font-family: 'atwork-font';
 	font-size: 125%;
 }
 #block-atwork-mobile-atwork-mobile-menu-block #full_menu #atwork_menu {
@@ -6283,7 +6348,7 @@ li.atwork_menu_top_level .menu-sub-title i.fa.fa-minus {
 .page-node-195.node-type-wiki a#main-content:after {
 	content: "Public Service Blood Donor Drive";
 	text-decoration: none;
-	color: #000;font-family: atwork-font;
+	color: #000;font-family: 'atwork-font';
 	font-weight: normal;
   padding: 0;
   margin: 0;
@@ -6300,12 +6365,10 @@ li.atwork_menu_top_level .menu-sub-title i.fa.fa-minus {
 
 
 /* Temporary code stuff - development area only */
-/* Temporarily hides the likes and comments on the first artilce of the slideshow overaly */
-/* This is to target the Spotlight article and is to be channged as the article moves through the overlay */
-/*.views-slideshow-xtra-overlay-row-0 .slideshow_num_likes, 
-.views-slideshow-xtra-overlay-row-0 .slideshow-num-comments,*/
-.views-slideshow-xtra-overlay-row-4 .slideshow_num_likes, 
-.views-slideshow-xtra-overlay-row-4 .slideshow-num-comments {
+/* Temporarily hides the likes and comments on the slideshow overaly */
+/* Tracks the location by the URL */
+a[href="/news/2016/1121/playful-meets-practical"] ~ .slideshow_num_likes,
+a[href="/news/2016/1121/playful-meets-practical"] ~ .slideshow-num-comments {
 	display: none !important;
 }
 

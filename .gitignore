@@ -100,8 +100,13 @@ browscap/*
 /_tmpProfiles.php
 /web_bug/*
 /sites/phpMyAdmin/
+/sites/all/modules/contrib/module_missing_message_fixer
+/check_php.php
+/php_check.php
+/sites/all/modules/custom/atwork_lsa_admin/send_logs/*
 
-
+# Ignore potentially large media files
+*.mov
 
 # Ignore Gulp files
 sites/all/themes/*/node_modules
