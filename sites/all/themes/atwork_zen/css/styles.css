@@ -264,19 +264,11 @@ html {
 .admin-menu #page {
 	margin-top: -30px;
 }
-<<<<<<< HEAD
-
-#header {  
+#header {
 	/* Below, for a new atwork-logo-theme image, update the date parameter to reflect the edit date.
 	This prevents browser caching */
 	/*background: url(/sites/all/themes/atwork_zen/images/atwork-logo-theme.png?d=20160919) no-repeat scroll center 18px; */
-=======
-#header {
-	background: url(/sites/all/themes/atwork_zen/images/atwork-logo.png) no-repeat scroll center 10px;
-	/* Below, for a new atwork-logo-theme image, update the date parameter to reflect the edit date. 
-	This prevents browser caching */
-	/*background: url(/sites/all/themes/atwork_zen/images/atwork-logo-theme.png?d=20160919) no-repeat scroll center 18px;*/ 
->>>>>>> 57a560d549d550efc34a943d476c87030ea185ea
+
 	height: 180px;
 	image-rendering: -moz-auto;         /* Firefox */
 	image-rendering:   -o-auto;         /* Opera */
