@@ -261,7 +261,7 @@ function atwork_classifieds_preprocess_node(&$variables) {
 
     if (!isset($variables['content']['field_image'])) {
       $variables['content']['field_image'] = array(
-        '#markup' => '<div class="field field-name-field-image"><img width="115" src="/sites/all/themes/atwork/images/no-image-found.jpg" /></div>',
+        '#markup' => '<div class="field field-name-field-image"><img width="115" src="/sites/all/themes/atwork-zen/images/no-image-found.jpg" /></div>',
         '#weight' => 0,
       );
     }
@@ -442,7 +442,7 @@ function atwork_classifieds_views_pre_render(&$view) {
     foreach ($view->result as $key => $result) {
       if (!$result->field_field_image) {
         $view->result[$key]->field_field_image[0]['rendered'] = array(
-          '#markup' => '<div class="field field-name-field-image"><img width="115" src="/sites/all/themes/atwork/images/no-image-found.jpg" /></div>',
+          '#markup' => '<div class="field field-name-field-image"><img width="115" src="/sites/all/themes/atwork-zen/images/no-image-found.jpg" /></div>',
           '#access' => TRUE,
         );
       }
