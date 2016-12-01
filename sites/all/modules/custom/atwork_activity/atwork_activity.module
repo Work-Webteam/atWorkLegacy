@@ -360,7 +360,7 @@ function atwork_activity_home_all_callback($all_args) {
 
     $query->leftJoin('field_data_field_message_node', 'fmn', 'fmn.entity_id = m.mid');
     $query->leftJoin('field_data_field_gallery', 'i', 'i.entity_id = fmn.field_message_node_target_id');
-    $query->leftJoin('field_data_field_gallery_status', 's', 's.entity_id = i.field_gallery_target_id');
+    //$query->leftJoin('field_data_field_gallery_status', 's', 's.entity_id = i.field_gallery_target_id');
     $query->leftJoin('node', 'n', 'n.nid = fmn.field_message_node_target_id');
 
 
@@ -368,7 +368,7 @@ function atwork_activity_home_all_callback($all_args) {
       ->fields('m', array('mid'))
       ->condition('m.type', array('new_comment', 'new_node', /*'node_updated',*/ 'new_answer', 'new_image'), 'IN')
       ->condition('n.status', '1')
-      ->condition('s.field_gallery_status_value', '1')
+      //->condition('s.field_gallery_status_value', '1')
       ->condition('n.uid', array('0, 10'), 'NOT IN')
       ->orderBy('m.timestamp', 'DESC')
       ->range(0, 100);
