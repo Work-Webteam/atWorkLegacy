@@ -16,13 +16,13 @@
 @import "base/typography.scss";
 
 @import "layouts/grid.scss";
+@import "layouts/atworklayout.scss";
 
 @import "components/menus/navigation.scss";
 @import "components/menus/quicktabs.scss";
 @import "components/misc/logo.scss";
 @import "components/misc/pagination.scss";
 @import "components/misc/search.scss";
-@import "components/misc/activity.scss";
 
 @import "components/node/article/default.scss";
 @import "components/node/article/teaser.scss";
@@ -36,29 +36,12 @@
 @import "states/state.scss";
 
 
+
 // Below are the styles from the original style.css that should be divided up
 // into the sass partials above so nothing is left below
 
 
 /* @Work 2015 Theme CSS */
-/* Version Date of this syle sheet: November 30, 2015 */
-
-/*#####################################################################################################################################################*/
-
-/******* Site Colours ******/
-
-/*@Work 2015 Colours*/
-/* Blue:  #004B8D (solid with 80% opacity / #26669E (html version) */
-/* Blue Rollover: #003462 */
-/* Green: #008D7B */
-/* Pale Green: #F6F9F1 */
-/* Grey: #D7D7D7 */
-/* Dark Grey: rgb(129,130,131); */
-/* Icon / link yellow: RGB 254,212,99 / #fed463 */
-/* Title bar grey: RGB 199, 199, 199 / # C7C7C7 */
-/* Panel background light grey: RGB 224, 224, 224 / #E0E0E0 */
-
-/* Q Tip Tool Tip changes - see CSS jquery-qtip-min-js *//* Q Tip Tool Tip changes - see CSS jquery-qtip-min-js */
 
 /*#####################################################################################################################################################*/
 /* IE 10 + Specific CSS Hacks - Example code  */
@@ -86,59 +69,8 @@ a.avpw_cursor {
 /*  image-rendering: auto;
   -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
 
-
-/*#####################################################################################################################################################*/
-/* Site Wide Font Styles and Sizes */
-/*#####################################################################################################################################################*/
-
-/* Font families are now established in the normalize.css file */
-/*@font-face {
-  font-family: atwork-font;
-  src: url(../fonts/aleo-regular-webfont.eot); /* IE9 Compat Modes */
-/*  src: url(../fonts/aleo-regular-webfont.eot?#iefix) format('embedded-opentype'), /* IE6-IE8 */
-/*       url(../fonts/Archer-Medium-Pro.otf)  format('opentype'); /* Safari, Android, iOS */
-/*  font-weight: bold;
-} */
-
-/*@font-face {
-  font-family: open-sans;
-  src: url(../fonts/OpenSans-Regular.ttf),
-       url(../fonts/opensans-regular-webfont.woff),
-       url(../fonts/opensans-regular-webfont.eot);
-  font-weight: normal;
-} */
-
-h1, h2, h3, h4, h5,.pre-title-snipet {
-  font-family: atwork-font;
-  padding: 0;
-  margin: 0;
-  letter-spacing: .05em;
-}
-
-h1, h2, h3, h4, h5 {
-  font-family: atwork-font;
-  font-weight: normal;
-  padding: 0;
-  margin: 0;
-  letter-spacing: .05em;
-}
-h2, h3 {
-  font-size: 1.4em;
-}
-p {
-  padding: 0;
-  margin: 0;
-}
-
-/* Labels / Form titles & headers -------------------------------------------------------*/
-label {
-  font-weight: normal !important;
-}
 /*----------------- H1 - H6 Size adjustments --------------------*/
-/* Top Tools */
-#header .view-top-tools.view-id-top_tools h2 {
-  font-size: 1em;
-}
+
 /*----------------- Font Size: 1.75em --------------------*/
 /* User Profile Card */
 .profile .field-name-field-gal-first-name {
@@ -146,34 +78,7 @@ label {
 }
 
 /*----------------- Font Size: .85em --------------------*/
-/* Top Tools / Front Page Advanced Search / FP Key Initiatives */
-#header .view-top-tools.view-id-top_tools p,
-#edit-advanced-search,
-#edit-advanced.search-advanced,
-#block-block-5 .jcarousel span.ki-title,
-.front #tabs .ui-tabs-nav a,
-.user-link-desc,
-#block-boxes-front-ad-space,
-.field-name-field-tags,
-#block-atwork-activity-homepage,
-.front #block-views-home-page-blocks-zen-block-2,
-article.node-tools #node-tools,
-.comments header p.submitted,
-.node-type-article .comment header p.submitted,
-.node-type-forum .comment header p.submitted,
-.node-type-blog p.submitted,
-.poll .poll-already-voted,
-.commentLinks,
-.logged-in.two-sidebars.page-node.two-sidebars #group-activity-ajax {
-  font-size:.9em;
-}
 
-/* --------------------------------------------------------------- Typography */
-h1, h2, h3, h4, h5, h6 {
-  word-wrap: break-word;
-  -webkit-text-size-adjust: none;
-  -ms-text-size-adjust: none;
-}
 
 .sidebars ul li,
 #content article ul li {
@@ -210,7 +115,7 @@ html, body {
   height: 100%;
 }
 html {
-  background: url(/sites/all/themes/atwork_zen/images/top-bar.jpg) repeat-x scroll center -29px;
+  background: url(/sites/all/themes/atwork_zen/images/top-bar.png) repeat-x scroll center -30px;
 }
 #footer {
   background: url(/sites/all/themes/atwork_zen/images/mountain-footer.png) repeat-x scroll center bottom;
@@ -493,7 +398,7 @@ img {
 /*#####################################################################################################################################################*/
 #block-atwork-profiles-header {
   display: inline-block;
-  padding-top: 5px;
+  padding-top: 22px;
   width:  100%;
 }
 .header-links {
@@ -659,8 +564,8 @@ div.header-user {
   line-height: 1.5em;
   z-index: 100;
   /*background-color: #ECECEC;*/
-  background: url(/sites/all/themes/atwork_zen/images/menu-grey-panel.png) repeat center top;
-  border-top: 1px solid #CCCCCC;
+  /*background: url(/sites/all/themes/atwork_zen/images/menu-grey-panel.png) repeat center top;
+  border-top: 1px solid #CCCCCC;*/
 }
 .front #navigation .region-navigation {
 }
@@ -703,6 +608,7 @@ div.header-user {
 #navigation .mm-home {
   width: 9%;
   border-right: 1px solid #CCC;
+  margin-top: 1px;
 }
 #navigation .mm-news {
   width: 10%;
@@ -787,84 +693,42 @@ div.header-user {
 .ad-color {
  color: red;
 }
-/* Top Tools /  Weather Widget -------------------------------------------------------*/
-
-#header .view-top-tools.view-id-top_tools {
-  position: fixed;
-  margin-left: 975px;
-  top: 224px !important;
-  color: #999;
-  z-index: 100;
+/* Top Tools -------------------------------------------------------*/
+.front #block-views-top-tools-block {
+	display: inline-block;
+	background-color: #D7D7D7;
+	height: 390px;
+	margin-left: 5px;
+	padding-bottom: 15px;
 }
-
-#top-tools-panel {
-  display: block;
-  width: 130px;
-  /*border:solid 1px #ccc;*/
-  background-color: #FFF;
-  border-top:solid 1px #CCC;
-  border-right:solid 1px #CCC;
-  border-bottom:solid 1px #CCC;
-  border-left:solid 1px #CCC;
+.front #block-views-top-tools-block h2 {
+	font-size: initial;
 }
-#header .view-top-tools.view-id-top_tools h2 {
-  background-color: transparent;
-  background: url(/sites/all/themes/atwork_zen/images/green-ribbon.png) no-repeat 0px 8px;
-  color: #FFF;
-  text-align: left;
-  display: block;
-  width: 130px;
-  margin: 0;
-  padding: 6px 0px 5px 7px;
-  height: auto;
+.front #top-tools-links {
+	background-color: #FFF;
+	margin: 20px;
+	padding: 15px;
 }
-#header .view-top-tools.view-id-top_tools p {
-  display: block;
-  width: 120px;
-  line-height: normal;
-  padding: 0;
-  margin:0;
+.front #top-tools-links a {
+	display: block;
+	padding: 5px 8px;
+	margin-bottom: 5px;
+	border: solid 1px #C7C7C7;
 }
-#header .view-top-tools.view-id-top_tools p a {
-  display: block;
-  width: 120px;
-  text-align: center;
-  color: #008D7B;
-  border-top: solid 1px #ECECEC;
-  margin: 0;
-  padding: 5px;
+.front #top-tools-links a:hover,
+.front #block-views-home-page-blocks-zen-block-2 #post-event a:hover {
+	color: #FFF;
+	background-color: #A7A7A7;
+	text-decoration: none;
 }
-#header .view-top-tools.view-id-top_tools p a:hover {
-  background-color: #ECECEC;
-}
-#header .view-top-tools.view-id-top_tools span.ext {
-  display: none;
-}
-#header .view-top-tools.view-id-top_tools #quickfooter {
-  background-color: #008D7B;
-  display: block;
-  width: 130px;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-}
-#header .view-top-tools.view-id-top_tools i.fa.fa-caret-up,
-#header .view-top-tools.view-id-top_tools i.fa.fa-caret-down {
-  display: block;
-  width: 100%;
-  color: #FFF;
-  padding: 3px 0;
-  margin: 0;
-  line-height: .75em;
-  text-align: center;
-}
-#block-views-top-tools-block > div > div > div {
-  width: 0;
-  border: 0;
-}
-.view-id-top_tools .view-content .views-row-first.views-row-last .views-field-nothing {
-  background-color: #fff;
-  margin-top: 1px;
+.front #block-views-home-page-blocks-zen-block-2 h2.block__title,
+.front #top-tools-panel h2 {
+	height: 36px;
+	padding: 0 0 0 15px;
+	margin: 0;
+	background: url(/sites/all/themes/atwork_zen/images/top-tools-ribbon.png) no-repeat 0;
+	background-color: #818283;
+	color: #FFF;
 }
 /* Front Page Users online -------------------------------------------------------*/
 #users_online {
@@ -1010,8 +874,9 @@ div.header-user {
   border: none;
 }
 .front.logged-in.no-sidebars .skin-default .views-slideshow-controls-bottom {
-  width: 315px;
-  margin: 0 auto;
+    width: 315px;
+    position: relative;
+    top: -265px;
 }
 .front.logged-in.no-sidebars .skin-default .slide-box {
   display: block;
@@ -1039,37 +904,42 @@ div.header-user {
 }
 
 /* Slideshow Previous / Next Controls -------------------------------------------------------*/
-
+#views_slideshow_controls_text_home_page_blocks_zen-block_5 {
+    position: absolute;
+}
+#views_slideshow_controls_text_previous_home_page_blocks_zen-block_5 {
+  position: relative;
+  left: 2px;
+  z-index: 50;
+  top: 120px;
+}
 #views_slideshow_controls_text_previous_home_page_blocks_zen-block_5 a {
   display: inline-block;
   width: 24px;
   height: 30px;
-  position: absolute;
-  left: 1px;
-  top: 160px;
-  z-index: 50;
   background: url(/sites/all/themes/atwork_zen/images/arrows.png);
   background-position: -42px 0;
   background-color: #26669E;
   overflow: hidden;
   text-indent: -1000px;
 }
-
 #views_slideshow_controls_text_previous_home_page_blocks_zen-block_5 a:hover {
   background-position: -10px 0;
 }
 #views_slideshow_controls_text_pause_home_page_blocks_zen-block_5 a {
   display: none;
 }
+#views_slideshow_controls_text_next_home_page_blocks_zen-block_5 {
+  position: relative;
+  left: 908px;
+  z-index: 50;
+  top: 120px;
+}
 #views_slideshow_controls_text_next_home_page_blocks_zen-block_5 a {
   display: inline-block;
   width: 24px;
   height: 30px;
   text-indent: -10000px;
-  position: absolute;
-  right: 1px;
-  z-index: 50;
-  top: 160px;
   background: url(/sites/all/themes/atwork_zen/images/arrows.png);
   background-position: -30px -33px;
   background-color: #26669E;
@@ -1182,7 +1052,6 @@ fieldset#edit-advanced-search.collapsible.form-wrapper.collapse-processed.collap
 fieldset#edit-advanced-search.collapsible.form-wrapper.collapse-processed.collapsed {
 }
 fieldset#edit-advanced-search .fieldset-legend {
-  /*background: url(/sites/all/themes/atwork_zen/images/adv-help-arrow.png) no-repeat 35px;*/
   background: none;
   display: block;
   /*height: 45px;*/
@@ -1278,6 +1147,84 @@ ol.search-results h3.title {
 
 
 
+/* Front Page Social Sidebar -----------------------*/
+#social-side {
+    display: block;
+    position: relative;
+    z-index: 500;
+}
+#block-atwork-activity-homepage {
+	position: absolute;
+    top: 7px;
+	right: 0;
+	background-color:  #D7D7D7;
+	padding-bottom: 15px;
+	width: 280px;
+	height: 1357px;
+}
+#tabs {
+  margin: 5px;
+  color: #666;
+}
+#tabs #ui-id-1, #tabs #ui-id-2, #tabs #ui-id-3, #tabs #ui-id-4 {
+  background-color: #C7C7C7;
+}
+#tabs #tabs-1, #tabs #tabs-2, #tabs #tabs-3, #tabs #tabs-4 {
+  margin-left: 3px;
+  margin-right: 3px;
+  background-color: #fff;
+  height: 100%;
+  overflow-y: auto;
+  /*line-height: 1.35em;*/
+}
+#tabs .ui-tabs-nav a {
+  color:#666;
+  font-weight: bold;
+}
+#tabs .ui-tabs-nav a:hover {
+  color: #fff;
+}
+#tabs .ui-state-active>#ui-id-1, #tabs .ui-state-active>#ui-id-2, #tabs .ui-state-active>#ui-id-3, #tabs .ui-state-active>#ui-id-4 {
+  background-color: white;
+  border-bottom: solid 1px #ECECEC;
+}
+#tabs .ui-state-active>#ui-id-1:hover, #tabs .ui-state-active>#ui-id-2:hover, #tabs .ui-state-active>#ui-id-3:hover, #tabs .ui-state-active>#ui-id-4:hover {
+  color: #666;
+}
+#block-atwork-activity-homepage .date {
+  color: #818283;
+  float: left;
+  clear: both;
+}
+#block-atwork-activity-homepage .message  {
+  margin-bottom: 4px;
+}
+#block-atwork-activity-homepage .message p {
+  margin-left: 45px;
+  border-left: solid 1px #D7D7D7;
+  padding-left: 5px;
+}
+#block-atwork-activity-homepage .message:last-of-type {
+  margin-bottom: 40px;
+}
+#block-atwork-activity-homepage .item-list {
+  display: block;
+  width: 95.5%;
+  position: absolute;
+  bottom: 2px;
+  padding: 0 0 4px 0;
+  margin: 0 0 0 5px;
+  left:  0;
+  background-color: #FFF;
+}
+#block-atwork-activity-homepage ul.pager {
+
+  margin: 0 auto;
+  border-top: solid 1px #E0E0E0;
+  padding-top:3px;
+  padding-bottom: 3px;
+  background-color: #FFF;
+}
 
 /* Front Page 3 Box Grid -------------------------------------------------------*/
 #block-views-home-page-blocks-zen-block-1,
@@ -1418,7 +1365,6 @@ h3.front-promoted-title a,
 }
 .front #block-block-5 h2.block__title,
 .front #block-atwork-activity-homepage h2.block__title,
-.front #block-views-home-page-blocks-zen-block-2 h2.block__title,
 .front #block-views-gallery-reference-block-2 h2.block__title {
   text-align: center;
   /*background-color: #C7C7C7;*/
@@ -1430,181 +1376,99 @@ h3.front-promoted-title a,
   padding: 5px 0 0;
   margin: 0;
 }
-/* Front Page Activity Feed -------------------------------------------------------*/
-#block-atwork-activity-homepage {
-  background-color:  #D7D7D7;
-  padding-bottom: 15px;
-  width: 69%;
-  float:left;
-  height: 425px;
-}
-#tabs {
-  margin: 5px 25px;
-  color: #666;
-}
-#tabs #ui-id-1, #tabs #ui-id-2, #tabs #ui-id-3, #tabs #ui-id-4 {
-  background-color: #C7C7C7;
-}
-#tabs #tabs-1, #tabs #tabs-2, #tabs #tabs-3, #tabs #tabs-4 {
-  margin-left: 3px;
-  margin-right: 3px;
-  background-color: #fff;
-  height: 320px;
-  overflow-y: auto;
-  /*line-height: 1.35em;*/
-}
-#tabs .ui-tabs-nav a {
-  color:#666;
-  font-weight: bold;
-}
-#tabs .ui-tabs-nav a:hover {
-  color: #fff;
-}
-#tabs .ui-state-active>#ui-id-1, #tabs .ui-state-active>#ui-id-2, #tabs .ui-state-active>#ui-id-3, #tabs .ui-state-active>#ui-id-4 {
-  background-color: white;
-  border-bottom: solid 1px #ECECEC;
-}
-#tabs .ui-state-active>#ui-id-1:hover, #tabs .ui-state-active>#ui-id-2:hover, #tabs .ui-state-active>#ui-id-3:hover, #tabs .ui-state-active>#ui-id-4:hover {
-  color: #666;
-}
-#block-atwork-activity-homepage .date {
-  color: #818283;
-  float: left;
-  clear: both;
-}
-#block-atwork-activity-homepage .message  {
-  margin-bottom: 4px;
-}
-#block-atwork-activity-homepage .message p {
-  margin-left: 45px;
-  border-left: solid 1px #D7D7D7;
-  padding-left: 5px;
-}
-#block-atwork-activity-homepage .message:last-of-type {
-  margin-bottom: 40px;
-}
-#block-atwork-activity-homepage .item-list {
-  display: block;
-  width: 95.5%;
-  position: absolute;
-  bottom: 2px;
-  padding: 0 0 4px 0;
-  margin: 0 0 0 5px;
-  left:  0;
-  background-color: #FFF;
-}
-#block-atwork-activity-homepage ul.pager {
 
-  margin: 0 auto;
-  border-top: solid 1px #E0E0E0;
-  padding-top:3px;
-  padding-bottom: 3px;
-  background-color: #FFF;
-}
-/* Front Page Events Feed -------------------------------------------------------*/
+
+/*------------------ New Front Page Events Block -----------------------------*/
+
 .front #block-views-home-page-blocks-zen-block-2 {
-  background-color: #D7D7D7;
-  width: 30%;
-  margin-left: 70%;
-  height: 425px;
-  padding-bottom: 15px;
-}
-.front #block-views-home-page-blocks-zen-block-2 .view-header {
-  display: block;
-  background-color: #C7C7C7;
-  width: 60%;
-  text-align: center;
-  padding: 3px 5px;
-  margin: 5px auto;
-  font-weight: bold;
-}
-.front #block-views-home-page-blocks-zen-block-2 ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
+	display: inline-block;
+	float: left;
+	background-color: #D7D7D7;
+	min-width: 49%;
+	height: 390px;
+	padding-bottom: 15px;
 }
 .front #block-views-home-page-blocks-zen-block-2 .view-content {
-  background-color: #fff;
-  display: block;
-  padding: 10px;
-  margin: 0 25px;
-  height: 320px;
+	background-color: #fff;
+	display: block;
+	height: 300px;
+	padding: 10px;
+	margin: 20px 25px 0;
 }
 .front #block-views-home-page-blocks-zen-block-2 .view-content .item-list {
   height: 300px;
   overflow: auto;
 }
-.front #block-views-home-page-blocks-zen-block-2 i.fa.fa-check {
-  display: inline-block;
-  float: left;
-  margin-top:3px;
+.front .event-calendar {
+	display: block;
+	width: 100%;
+	clear: both;
+	padding: 0 0 4px 0;
+	margin: 0 0 12px 0;
+	border: solid 1px #ECECEC;
 }
-.front #block-views-home-page-blocks-zen-block-2 h3 {
-  font-family: open-sans,sans-serif;
-  font-weight: normal;
-  font-size: inherit;
-  display: block;
-  padding: 0;
-  margin: 0 0 0 18px;
+.front .event-calendar .calendar-icon {
+    display: inline-block;
+    float: left;
+	clear: both;
+    width: 30px;
+    text-align: center;
+	line-height: 1.3em;
+    background-color: #D7D7D7;
+    padding: 5px;
+    margin-right: 10px;
 }
-.front #block-views-home-page-blocks-zen-block-2 .views-field.views-field-field-date {
-  display: block;
-  color: #666;
-  margin-left: 21px;
-  margin-bottom: 5px;
+.front .event-calendar .calendar-icon .event-date {
+	border: solid 1px #999;
+}
+.front .event-calendar .event-title h3 {
+	display: block;
+	font-family: inherit;
+	font-size: 1em;
+	font-weight: bold;
+	padding: 2px;
+	margin: 0;
+}
+.front .event-calendar .event-time:before {
+	content:"Time:";
+	float: left;
+	padding-right: 3px;
 }
 .front #block-views-home-page-blocks-zen-block-2 .pager {
-  display: block;
-  position: relative;
-  bottom: 68px;
-  margin: 0 auto 0 auto;
-  border-top: solid 1px #D7D7D7;
-  padding-top:1px;
-  padding-bottom: 1px;
+	display: block;
+	position: relative;
+	bottom: 35px;
+	margin: 0 auto 0 auto;
+	border-top: solid 1px #D7D7D7;
+	border-bottom: solid 1px #D7D7D7;
+	padding-top:1px;
+	padding-bottom: 1px;
+}
+.front #block-views-home-page-blocks-zen-block-2 #post-event a {
+	display: block;
+	position: relative;
+	bottom: 50px;
+	width: 150px;
+	text-align: center;
+	margin: 0 auto 0 auto;
+	padding-top:1px;
+	padding-bottom: 1px;	
+	border: solid 1px #C7C7C7;;
+}
+.front #block-views-home-page-blocks-zen-block-2 .view-header {
+	display: block;
+	width: 150px;
+	margin: -26px 0 26px 125px;
+	text-align: center;
 }
 .front #block-views-home-page-blocks-zen-block-2 .view-header a {
-  color: #666;
-  font-size: .9em;
-}
-.front #block-views-home-page-blocks-zen-block-2 .view-header a:hover {
-  color: #fff;
-}
-/* Activity Feed / Events Links -------------------------------------------------------*/
-#block-views-home-page-blocks-zen-block-2 .front-events a,
-#block-atwork-activity-homepage .message a,
-#block-atwork-activity-homepage ul.pager a,
-#block-views-home-page-blocks-zen-block-2 .view-footer a {
-  text-decoration: none;
-}
-#block-atwork-activity-homepage .message a:hover,
-#block-atwork-activity-homepage ul.pager a:hover,
-#block-views-home-page-blocks-zen-block-2 .front-events h3:hover {
-  background-color: #C0C0C0;
-  color: #FFF;
-}
-#block-views-home-page-blocks-zen-block-2 ul.pager .pager-current {
-  font-weight: normal;
+	color: #FFF;
 }
 /* Front Page Activity Feed Progress Indicator -------------------------------------------------------*/
-
-/*#block-atwork-activity-homepage .activity-feed-progress {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  top: -32px;
-}*/
-.activity-feed-progress {
-  position: absolute;
-  z-index: 9999;
-  display: block;
-  width: 68%;
-  height: 65%;
-  margin-top: 30px;
-  margin-left: 0px;
-  padding-top:15%;
-  padding-left: 30%;
-  background: url(/sites/all/themes/atwork_zen/images/main-nav-bknd.png) repeat;
+.front .ajax-progress-throbber {
+	display: none;
 }
+
 
 /* Events Calendar Link - Front Page */
 #front-event-link {
@@ -1620,6 +1484,7 @@ h3.front-promoted-title a,
   color: #FFF;
   background-color: #26669E;
 }
+
 /* Front Page Employee Contributed Photos -------------------------------------------------------*/
 
 
@@ -3602,7 +3467,30 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 /*----------------- End of Section--------------------*/
 
 
+/*----------------- User Profile User Activity Feed --------------------*/
 
+.not-front .block-atwork-activity {
+  float: left;
+  clear: left;
+  min-width: 70%;
+}
+
+.block-atwork-activity .form-textarea {
+  border: 5px solid #004B8D;
+  border-left-width: 10px;
+  border-right-width: 10px;
+}
+
+.block-atwork-activity > div > .message {
+  position: relative; /* sets us up to position all internal elements */
+  margin: 2em 0;
+}
+
+
+
+
+
+/*----------------- End User Profile User Activity Feed --------------------*/
 
 
 
