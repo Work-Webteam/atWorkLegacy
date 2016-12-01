@@ -3,7 +3,10 @@
 
 ### Sass ###
 .sass-cache/
-*.css.map
+
+# Ignore compiled css files
+/sites/all/themes/atwork_zen/css/atwork_zen.styles.css
+*.map
 
 
 ### Drupal ###
@@ -104,9 +107,6 @@ browscap/*
 /check_php.php
 /php_check.php
 /sites/all/modules/custom/atwork_lsa_admin/send_logs/*
-
-# Ignore compiled css
-/sites/all/themes/atwork_zen/css/atwork_zen.styles.css
 
 # Ignore Gulp files
 sites/all/themes/*/node_modules
