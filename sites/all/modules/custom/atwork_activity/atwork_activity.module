@@ -1138,6 +1138,7 @@ function atwork_activity_block_view($delta = '') {
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity.js');
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_home.js');
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/jquery.url.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_undock.js');
       drupal_add_js('initializeAllActivity();', 'inline');
 
        /// this is now handled by click-handlers - too much strain on queries otherwise
@@ -1161,6 +1162,7 @@ EOT;
       $block['subject'] = t('Current Activity');
       $block['content'] = array(
         '#markup' => '
+<a href="node/21100" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="Click for pop-out Activity Feed window" /></a> 
 <div id="tabs">
 <div class="activity-feed-progress"><img src="/sites/all/themes/atwork_zen/images/progress.gif" title="Loading" /></div>
   <ul>
