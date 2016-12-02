@@ -1,36 +1,72 @@
-/*----------------- User Profile User Activity Feed --------------------*/
+/*----------------- Front Page Profile User Activity Feed Block --------------------*/
 
-.block-atwork-activity {
-  float: left;
-  clear: left;
-  min-width: 70%;
-  .form-textarea {
-    border: 5px solid #004B8D;
-    border-left-width: 10px;
-    border-right-width: 10px;
-  }
-  > div > .message {
-    position: relative; /* sets us up to position all internal elements */
-    margin: 2em 0;
-    border: 1px solid #ccc;
-    padding: 0.5em;
-    .field-label {
-      display: none;
-    }
-    .date {
+.front {
+  .block-atwork-activity {
+    .jsNewActivityWindow {
       position: absolute;
-      bottom: 0.1em;
-      right: 0.5em;
-      font-size: smaller;
-      color: lighten(#000, 60%);
-    }
-    .field-name-field-image {
-      float: left;
-      margin-right: 2em;
+      top: 5px;
+      right: 4px;
     }
   }
 }
 
 
+/*----------------- End Front Page Profile User Activity Feed Block --------------------*/
 
+/*----------------- User Profile User Activity Feed --------------------*/
+
+.page-user {
+  .block-atwork-activity {
+    float: left;
+    clear: left;
+    min-width: 70%;
+    .form-textarea {
+      border: 5px solid #004B8D;
+      border-left-width: 10px;
+      border-right-width: 10px;
+    }
+    > div > .message {
+      position: relative; /* sets us up to position all internal elements */
+      margin: 2em 0;
+      border: 1px solid #ccc;
+      padding: 0.5em;
+      .field-label {
+        display: none;
+      }
+      .date {
+        position: absolute;
+        bottom: 0.1em;
+        right: 0.5em;
+        font-size: smaller;
+        color: lighten(#000, 60%);
+      }
+      .field-name-field-image {
+        float: left;
+        margin-right: 2em;
+      }
+    }
+  }
+}
 /*----------------- End User Profile User Activity Feed --------------------*/
+
+
+/*----------------- Pop-out User Activity Window --------------------*/
+
+.new-activity-window {
+  background-color: #D7D7D7;
+  #block-atwork-activity-homepage {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    top: 20px;
+  }
+  #full_menu {// hide the hamburger menu
+    display: none;
+  }
+  .jsNewActivityWindow {// hide pop-out button
+    display: none;
+  }
+}
+
+/*----------------- End Pop-out User Activity Window --------------------*/
