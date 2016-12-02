@@ -69,15 +69,16 @@
 @media all and (min-width: 480px) {
   #main {
     /* Move all the children of #main down to make room. */
-    padding-top: 1em;
+    padding-top: .3em;
     position: relative;
   }
   #navigation {
     /* Move the navbar up inside #main's padding. */
-    position: absolute;
+    /*! position: absolute; */
     top: 0;
     /* height: 3em; - height now controlled through atwork2015.css */
-    width: 100%;
+    width: 960px;
+    margin: 0 auto;
   }
 }
 
