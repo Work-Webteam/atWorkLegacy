@@ -378,13 +378,11 @@ function atwork_activity_home_all_callback($all_args) {
       $query->condition($db_and);
       $query->orderBy('m.timestamp', 'DESC')
       ->range(0, 100);
-    dpm($query);
     $result = $query
       ->extend('PagerDefault')
       ->limit(8)
       ->execute()
       ->fetchAll();
-    dpm($result);
     $output = _atwork_activity_render_messages($result, $activityType);
 
     die($output);
