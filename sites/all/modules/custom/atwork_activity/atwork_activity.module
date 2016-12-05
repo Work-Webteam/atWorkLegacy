@@ -221,8 +221,20 @@ function _atwork_activity_render_messages($result, $activityType) {
         $tmpMsg = str_replace(array("<u>","</u>","<i>","</i>","<b>","</b>","<strong>","</strong>", "<em>", "</em>"),"", $tmpMsg);
       }
 
+      // We want to add images to the activity feed.
+      $author = user_load($message->uid);
+      // Check if an image exists:
+      if(isset($author->field_image) && $author->field_image){
+        // If it does, then grab a renderable view of it
+        $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
+      } else {
+        // Default image isn't always repopulated into $author->field_image after an ajax reload - so if it is missng and they have not saved a personal image, then lets reset the default image
+        $author->field_image[] = file_load('14627');
+        $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
+      }
+
       if($render)
-        $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . date('M j', $message->timestamp) . '</span> ' . $tmpMsg . '</div>';
+        $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . date('M j', $message->timestamp) . '</span> <span class="user-feed-image">' . render($user_image) . '</span>' . $tmpMsg . '</div>';
 
       $i++;
     }
@@ -1162,7 +1174,7 @@ EOT;
       $block['subject'] = t('Current Activity');
       $block['content'] = array(
         '#markup' => '
-<a href="node/21100" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="Click for pop-out Activity Feed window" /></a> 
+<a href="node/21100" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="Click for pop-out Activity Feed window" /></a>
 <div id="tabs">
 <div class="activity-feed-progress"><img src="/sites/all/themes/atwork_zen/images/progress.gif" title="Loading" /></div>
   <ul>
@@ -1356,7 +1368,7 @@ function _atwork_activity_profile_page_block_content($user_id){
       }
 
       // We want to add images to the activity feed.
-      $author = user_load($result['#entity']->uid);
+      $author = user_load($result['#entity']->uid, TRUE);
       // Add flag icon:
       if(isset( $result['links']['flag']['#links']['flag-message_flag']) &&  $result['links']['flag']['#links']['flag-message_flag']){
         $result['links']['flag']['#links']['flag-message_flag']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $result['links']['flag']['#links']['flag-message_flag']['title']);
@@ -1365,6 +1377,10 @@ function _atwork_activity_profile_page_block_content($user_id){
       // Check if an image exists:
       if(isset($author->field_image) && $author->field_image){
         // If it does, then grab a renderable view of it
+        $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
+      } else {
+        // Default image isn't always repopulated into $author->field_image after an ajax reload - so if it is missng and they have not saved a personal image, then lets reset the default image
+        $author->field_image[] = file_load('14627');
         $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
       }
 
