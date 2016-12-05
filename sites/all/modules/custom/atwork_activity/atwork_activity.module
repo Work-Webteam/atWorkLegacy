@@ -222,14 +222,15 @@ function _atwork_activity_render_messages($result, $activityType) {
       }
 
       // We want to add images to the activity feed.
-      $author = user_load($message->uid);
       // Check if an image exists:
       if(isset($author->field_image) && $author->field_image){
         // If it does, then grab a renderable view of it
         $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
       } else {
         // Default image isn't always repopulated into $author->field_image after an ajax reload - so if it is missng and they have not saved a personal image, then lets reset the default image
-        $author->field_image[] = file_load('14627');
+        $profile_image_field = field_info_instance('user', 'field_image', 'user');
+        $default_fid = $profile_image_field['settings']['default_image'];
+        $author->field_image[] = file_load($default_fid);
         $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
       }
 
@@ -1380,7 +1381,9 @@ function _atwork_activity_profile_page_block_content($user_id){
         $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
       } else {
         // Default image isn't always repopulated into $author->field_image after an ajax reload - so if it is missng and they have not saved a personal image, then lets reset the default image
-        $author->field_image[] = file_load('14627');
+        $profile_image_field = field_info_instance('user', 'field_image', 'user');
+        $default_fid = $profile_image_field['settings']['default_image'];
+        $author->field_image[] = file_load($default_fid);
         $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
       }
 
