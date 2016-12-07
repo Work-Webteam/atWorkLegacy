@@ -2,16 +2,43 @@
 
 .front {
   .block-atwork-activity {
-    .jsNewActivityWindow {
+    .jsNewActivityWindow {// the pop-out linked button
       position: absolute;
       top: 5px;
       right: 4px;
+      &:hover {
+        opacity: 0.7;
+      }
     }
   }
 }
 
 
 /*----------------- End Front Page Profile User Activity Feed Block --------------------*/
+
+
+/*----------------- Pop-out User Activity Window --------------------*/
+
+.new-activity-window {
+  background-color: #D7D7D7;
+  overflow: hidden;
+  #block-atwork-activity-homepage {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    top: 20px;
+  }
+  #full_menu {// hide the hamburger menu
+    display: none;
+  }
+  .jsNewActivityWindow {// hide pop-out button
+    display: none;
+  }
+}
+
+/*----------------- End Pop-out User Activity Window --------------------*/
+
 
 /*----------------- User Profile User Activity Feed --------------------*/
 
@@ -49,24 +76,3 @@
 }
 /*----------------- End User Profile User Activity Feed --------------------*/
 
-
-/*----------------- Pop-out User Activity Window --------------------*/
-
-.new-activity-window {
-  background-color: #D7D7D7;
-  #block-atwork-activity-homepage {
-    width: 100%;
-    height: auto;
-    margin: 0;
-    padding: 0;
-    top: 20px;
-  }
-  #full_menu {// hide the hamburger menu
-    display: none;
-  }
-  .jsNewActivityWindow {// hide pop-out button
-    display: none;
-  }
-}
-
-/*----------------- End Pop-out User Activity Window --------------------*/
