@@ -46,7 +46,7 @@ function atwork_relationships_get_link($account) {
     $relationship_link = '<a href="#" title="Click to follow colleague" onclick="atwork_relationships_ajax_load(\'add\', \'' . $account->uid . '\', \'1\'); return false;">Follow</a>';
   }
 
-  return '<button class="atwork-relationship-action uid-' . $account->uid . '">' . $relationship_link . '</button>';
+  return '<span class="atwork-relationship-action uid-' . $account->uid . '">' . $relationship_link . '</span>';
 }
 
 function atwork_relationships_views_pre_render(&$view) {
