@@ -1,52 +1,11 @@
-/*----------------- Front Page Profile User Activity Feed Block --------------------*/
-
-.front {
-  .block-atwork-activity {
-    .jsNewActivityWindow {// the pop-out linked button
-      position: absolute;
-      top: 5px;
-      right: 4px;
-      &:hover {
-        opacity: 0.7;
-      }
-    }
-  }
-}
-
-
-/*----------------- End Front Page Profile User Activity Feed Block --------------------*/
-
-
-/*----------------- Pop-out User Activity Window --------------------*/
-
-.new-activity-window {
-  background-color: #D7D7D7;
-  overflow: hidden;
-  #block-atwork-activity-homepage {
-    width: 100%;
-    height: auto;
-    margin: 0;
-    padding: 0;
-    top: 20px;
-  }
-  #full_menu {// hide the hamburger menu
-    display: none;
-  }
-  .jsNewActivityWindow {// hide pop-out button
-    display: none;
-  }
-}
-
-/*----------------- End Pop-out User Activity Window --------------------*/
-
-
-/*----------------- User Profile User Activity Feed --------------------*/
+/*-----------------  User Page User Activity Feed --------------------*/
 
 .page-user {
+  .region-post-content {
+    width: 70%;
+  }
   .block-atwork-activity {
-    float: left;
     clear: left;
-    min-width: 70%;
     .form-textarea {
       border: 5px solid #004B8D;
       border-left-width: 10px;
@@ -72,7 +31,54 @@
         margin-right: 2em;
       }
     }
+    .form-textarea {
+      border: 5px solid #004B8D;
+      border-left-width: 10px;
+      border-right-width: 10px;
+    }
+    > div > .message {
+      position: relative; /* sets us up to position all internal elements */
+      margin: 2em 0;
+    }
   }
 }
-/*----------------- End User Profile User Activity Feed --------------------*/
 
+/*----------------- End User Page User Activity Feed --------------------*/
+
+
+// Front page Activity Feed
+
+.front {
+  .block-atwork-activity {
+    .jsNewActivityWindow {// the pop-out linked button
+      position: absolute;
+      top: 5px;
+      right: 4px;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}
+
+/*----------------- Pop-out User Activity Window --------------------*/
+
+.new-activity-window {
+  background-color: #D7D7D7;
+  overflow: hidden;
+  #block-atwork-activity-homepage {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    top: 20px;
+  }
+  #full_menu {// hide the hamburger menu
+    display: none;
+  }
+  .jsNewActivityWindow {// hide pop-out button
+    display: none;
+  }
+}
+
+/*----------------- End Pop-out User Activity Window --------------------*/

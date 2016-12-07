@@ -100,8 +100,9 @@
   }
 
     .group-profile-identity-bundle .field-name-field-gal-title {
-      margin-bottom: 1em;
+      margin: 0.5em 0 0.8em 0;
       display: block;
+      color: $title-green;
     }
 
     .group-profile-identity-bundle .atwork-relationship-action { // follow button
@@ -267,3 +268,7 @@
   font-weight: bold;
   font-style: italic;
 }
+
+
+
+
