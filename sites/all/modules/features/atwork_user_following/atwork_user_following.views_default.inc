@@ -171,7 +171,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
   $handler->display->display_options['fields']['name']['format_username'] = FALSE;
-  /* Field: User: Display Name */
+  /* Field: Field: Display Name */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
@@ -243,7 +243,7 @@ function atwork_user_following_views_default_views() {
     7 => 0,
     8 => 0,
   );
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
@@ -399,7 +399,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
   $handler->display->display_options['fields']['name']['format_username'] = FALSE;
-  /* Field: User: Display Name */
+  /* Field: Field: Display Name */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
@@ -477,7 +477,7 @@ function atwork_user_following_views_default_views() {
     7 => 0,
     8 => 0,
   );
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
@@ -659,7 +659,7 @@ function atwork_user_following_views_default_views() {
   );
   $handler->display->display_options['fields']['field_image']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_image']['delta_offset'] = '0';
-  /* Field: User: Display Name */
+  /* Field: Field: Display Name */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
@@ -739,7 +739,7 @@ function atwork_user_following_views_default_views() {
     2 => 'OR',
   );
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
@@ -773,7 +773,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
   $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_dependent'] = 0;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_1']['id'] = 'field_display_name_value_1';
   $handler->display->display_options['filters']['field_display_name_value_1']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_1']['field'] = 'field_display_name_value';
@@ -957,42 +957,42 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['filters']['field_gal_phone_number_value']['operator'] = 'longerthan';
   $handler->display->display_options['filters']['field_gal_phone_number_value']['value'] = '1';
   $handler->display->display_options['filters']['field_gal_phone_number_value']['group'] = 1;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_2']['id'] = 'field_display_name_value_2';
   $handler->display->display_options['filters']['field_display_name_value_2']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_2']['field'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value_2']['operator'] = 'regular_expression';
   $handler->display->display_options['filters']['field_display_name_value_2']['value'] = '[a-zA-z]+([ \'-][a-zA-Z]+)*';
   $handler->display->display_options['filters']['field_display_name_value_2']['group'] = 1;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_3']['id'] = 'field_display_name_value_3';
   $handler->display->display_options['filters']['field_display_name_value_3']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_3']['field'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value_3']['operator'] = 'not_starts';
   $handler->display->display_options['filters']['field_display_name_value_3']['value'] = 'ADMIN';
   $handler->display->display_options['filters']['field_display_name_value_3']['group'] = 1;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_4']['id'] = 'field_display_name_value_4';
   $handler->display->display_options['filters']['field_display_name_value_4']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_4']['field'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value_4']['operator'] = 'contains';
   $handler->display->display_options['filters']['field_display_name_value_4']['value'] = ',';
   $handler->display->display_options['filters']['field_display_name_value_4']['group'] = 1;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_5']['id'] = 'field_display_name_value_5';
   $handler->display->display_options['filters']['field_display_name_value_5']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_5']['field'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value_5']['operator'] = 'not_starts';
   $handler->display->display_options['filters']['field_display_name_value_5']['value'] = 'zz';
   $handler->display->display_options['filters']['field_display_name_value_5']['group'] = 1;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_6']['id'] = 'field_display_name_value_6';
   $handler->display->display_options['filters']['field_display_name_value_6']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_6']['field'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value_6']['operator'] = 'not_starts';
   $handler->display->display_options['filters']['field_display_name_value_6']['value'] = 'XT:';
   $handler->display->display_options['filters']['field_display_name_value_6']['group'] = 1;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_7']['id'] = 'field_display_name_value_7';
   $handler->display->display_options['filters']['field_display_name_value_7']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_7']['field'] = 'field_display_name_value';
@@ -1076,7 +1076,7 @@ function atwork_user_following_views_default_views() {
   );
   $handler->display->display_options['fields']['field_image']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_image']['delta_offset'] = '0';
-  /* Field: User: Display Name */
+  /* Field: Field: Display Name */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
@@ -1127,14 +1127,14 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['sorts']['random']['id'] = 'random';
   $handler->display->display_options['sorts']['random']['table'] = 'views';
   $handler->display->display_options['sorts']['random']['field'] = 'random';
-  /* Sort criterion: User: Display Name (field_display_name) */
+  /* Sort criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['sorts']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['sorts']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['sorts']['field_display_name_value']['field'] = 'field_display_name_value';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
@@ -1165,7 +1165,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
   $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_dependent'] = 0;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_1']['id'] = 'field_display_name_value_1';
   $handler->display->display_options['filters']['field_display_name_value_1']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_1']['field'] = 'field_display_name_value';
@@ -1415,7 +1415,7 @@ function atwork_user_following_views_default_views() {
   );
   $handler->display->display_options['fields']['field_image']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_image']['delta_offset'] = '0';
-  /* Field: User: Display Name */
+  /* Field: Field: Display Name */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
@@ -1472,13 +1472,13 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['sorts']['random']['id'] = 'random';
   $handler->display->display_options['sorts']['random']['table'] = 'views';
   $handler->display->display_options['sorts']['random']['field'] = 'random';
-  /* Sort criterion: User: Display Name (field_display_name) */
+  /* Sort criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['sorts']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['sorts']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['sorts']['field_display_name_value']['field'] = 'field_display_name_value';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
@@ -1510,13 +1510,13 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
   $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_dependent'] = 0;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_1']['id'] = 'field_display_name_value_1';
   $handler->display->display_options['filters']['field_display_name_value_1']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_1']['field'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value_1']['operator'] = 'not empty';
   $handler->display->display_options['filters']['field_display_name_value_1']['group'] = 1;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_2']['id'] = 'field_display_name_value_2';
   $handler->display->display_options['filters']['field_display_name_value_2']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_2']['field'] = 'field_display_name_value';
@@ -1829,7 +1829,7 @@ function atwork_user_following_views_default_views() {
   );
   $handler->display->display_options['fields']['field_image']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_image']['delta_offset'] = '0';
-  /* Field: User: Display Name */
+  /* Field: Field: Display Name */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
@@ -1901,7 +1901,7 @@ function atwork_user_following_views_default_views() {
     2 => 'OR',
   );
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
@@ -1935,7 +1935,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
   $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_dependent'] = 0;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_1']['id'] = 'field_display_name_value_1';
   $handler->display->display_options['filters']['field_display_name_value_1']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_1']['field'] = 'field_display_name_value';
@@ -2122,42 +2122,42 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['filters']['field_gal_phone_number_value']['operator'] = 'longerthan';
   $handler->display->display_options['filters']['field_gal_phone_number_value']['value'] = '1';
   $handler->display->display_options['filters']['field_gal_phone_number_value']['group'] = 1;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_2']['id'] = 'field_display_name_value_2';
   $handler->display->display_options['filters']['field_display_name_value_2']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_2']['field'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value_2']['operator'] = 'regular_expression';
   $handler->display->display_options['filters']['field_display_name_value_2']['value'] = '[a-zA-z]+([ \'-][a-zA-Z]+)*';
   $handler->display->display_options['filters']['field_display_name_value_2']['group'] = 1;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_3']['id'] = 'field_display_name_value_3';
   $handler->display->display_options['filters']['field_display_name_value_3']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_3']['field'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value_3']['operator'] = 'not_starts';
   $handler->display->display_options['filters']['field_display_name_value_3']['value'] = 'ADMIN';
   $handler->display->display_options['filters']['field_display_name_value_3']['group'] = 1;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_4']['id'] = 'field_display_name_value_4';
   $handler->display->display_options['filters']['field_display_name_value_4']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_4']['field'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value_4']['operator'] = 'contains';
   $handler->display->display_options['filters']['field_display_name_value_4']['value'] = ',';
   $handler->display->display_options['filters']['field_display_name_value_4']['group'] = 1;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_5']['id'] = 'field_display_name_value_5';
   $handler->display->display_options['filters']['field_display_name_value_5']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_5']['field'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value_5']['operator'] = 'not_starts';
   $handler->display->display_options['filters']['field_display_name_value_5']['value'] = 'zz';
   $handler->display->display_options['filters']['field_display_name_value_5']['group'] = 1;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_6']['id'] = 'field_display_name_value_6';
   $handler->display->display_options['filters']['field_display_name_value_6']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_6']['field'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value_6']['operator'] = 'not_starts';
   $handler->display->display_options['filters']['field_display_name_value_6']['value'] = 'XT:';
   $handler->display->display_options['filters']['field_display_name_value_6']['group'] = 1;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_7']['id'] = 'field_display_name_value_7';
   $handler->display->display_options['filters']['field_display_name_value_7']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_7']['field'] = 'field_display_name_value';
@@ -2251,7 +2251,7 @@ function atwork_user_following_views_default_views() {
   );
   $handler->display->display_options['fields']['field_image']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_image']['delta_offset'] = '0';
-  /* Field: User: Display Name */
+  /* Field: Field: Display Name */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
@@ -2323,7 +2323,7 @@ function atwork_user_following_views_default_views() {
     2 => 'OR',
   );
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
@@ -2357,7 +2357,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
   $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_dependent'] = 0;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_1']['id'] = 'field_display_name_value_1';
   $handler->display->display_options['filters']['field_display_name_value_1']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_1']['field'] = 'field_display_name_value';
@@ -2544,42 +2544,42 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['filters']['field_gal_phone_number_value']['operator'] = 'longerthan';
   $handler->display->display_options['filters']['field_gal_phone_number_value']['value'] = '1';
   $handler->display->display_options['filters']['field_gal_phone_number_value']['group'] = 1;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_2']['id'] = 'field_display_name_value_2';
   $handler->display->display_options['filters']['field_display_name_value_2']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_2']['field'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value_2']['operator'] = 'regular_expression';
   $handler->display->display_options['filters']['field_display_name_value_2']['value'] = '[a-zA-z]+([ \'-][a-zA-Z]+)*';
   $handler->display->display_options['filters']['field_display_name_value_2']['group'] = 1;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_3']['id'] = 'field_display_name_value_3';
   $handler->display->display_options['filters']['field_display_name_value_3']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_3']['field'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value_3']['operator'] = 'not_starts';
   $handler->display->display_options['filters']['field_display_name_value_3']['value'] = 'ADMIN';
   $handler->display->display_options['filters']['field_display_name_value_3']['group'] = 1;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_4']['id'] = 'field_display_name_value_4';
   $handler->display->display_options['filters']['field_display_name_value_4']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_4']['field'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value_4']['operator'] = 'contains';
   $handler->display->display_options['filters']['field_display_name_value_4']['value'] = ',';
   $handler->display->display_options['filters']['field_display_name_value_4']['group'] = 1;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_5']['id'] = 'field_display_name_value_5';
   $handler->display->display_options['filters']['field_display_name_value_5']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_5']['field'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value_5']['operator'] = 'not_starts';
   $handler->display->display_options['filters']['field_display_name_value_5']['value'] = 'zz';
   $handler->display->display_options['filters']['field_display_name_value_5']['group'] = 1;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_6']['id'] = 'field_display_name_value_6';
   $handler->display->display_options['filters']['field_display_name_value_6']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_6']['field'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value_6']['operator'] = 'not_starts';
   $handler->display->display_options['filters']['field_display_name_value_6']['value'] = 'XT:';
   $handler->display->display_options['filters']['field_display_name_value_6']['group'] = 1;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_7']['id'] = 'field_display_name_value_7';
   $handler->display->display_options['filters']['field_display_name_value_7']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_7']['field'] = 'field_display_name_value';
@@ -2674,7 +2674,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
-  /* Field: User: Display Name */
+  /* Field: Field: Display Name */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
@@ -2726,7 +2726,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['arguments']['requester_id']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: User: Display Name (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
@@ -2808,7 +2808,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
-  /* Field: User: Display Name */
+  /* Field: Field: Display Name */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
