@@ -37,6 +37,7 @@ function atwork_activity_menu() {
 
   // these callbacks are all done through ajax
   // this one has an access callback which was handy when it was a menu tab
+  /*
   $items['atwork-activity/group/%node'] = array(
     'title' => 'Group Activity',
     'type' => MENU_CALLBACK,
@@ -45,6 +46,7 @@ function atwork_activity_menu() {
     'access callback' => 'atwork_activity_group_access',
     'access arguments' => array(2),
   );
+  */
 
   $items['atwork-activity/all-activity'] = array(
     'title' => 'All Activity',
@@ -55,6 +57,7 @@ function atwork_activity_menu() {
 
   );
 
+  /*
   $items['atwork-activity/comment-activity'] = array(
     'title' => 'Comment Activity',
     'type' => MENU_CALLBACK,
@@ -62,7 +65,8 @@ function atwork_activity_menu() {
     'access arguments' => array('access content'),
     'page arguements' =>array(1),
   );
-
+  */
+  /*
   $items['atwork-activity/group-activity'] = array(
     'title' => 'Group Activity',
     'type' => MENU_CALLBACK,
@@ -70,6 +74,7 @@ function atwork_activity_menu() {
     'access arguments' => array('access content'),
     'page arguements' =>array(1),
   );
+  */
 
   $items['atwork-activity/my-activity'] = array(
     'title' => 'My Activity',
@@ -108,10 +113,19 @@ function atwork_activity_form() {
     ),
   );
   $form['post'] = array(
-    '#type' => 'submit',
-    '#value' => t('Post'),
-  );
-
+        '#type' => 'button', // We lose ajax if we make this a true Submit - we will manually save the entity in our callback
+        '#value' => 'Posty', // To differentiate it from the normal submit button
+        '#prefix' => '<div id="status-submit-button">',
+        '#suffix' => '</div>',
+        '#ajax' => array(
+          'callback' => 'atwork_activity_form_submit',
+          'wrapper' => 'status-submit-button',
+          'event' => 'click',
+          "effect" => 'fade',
+        ),
+        '#weight' => 99, // Want this at the bottom, just ahead of the footer.
+        '#redirect' => FALSE,
+      );
   return $form;
 }
 
@@ -141,6 +155,8 @@ function atwork_activity_form_submit(&$form, &$form_state) {
 
   $node = node_submit($node);
   node_save($node);
+
+  return ($form);
 }
 
 /*
@@ -160,7 +176,15 @@ function _atwork_activity_ajax_header() {
  * render a query result of messages
  */
 function _atwork_activity_render_messages($result, $activityType) {
-  $output = '<div class="atwork-activity">';
+      // The final markup - wrap it up in a div
+  $form = drupal_get_form('atwork_activity_form');
+  $form['post'] = ajax_pre_render_element($form['post']);
+  $build = array(
+    'form' => $form,
+    "#attached" => $form['post']["#attached"],
+    );
+  $output = render($build);
+  $output .= '<div class="atwork-activity">';
   $i = 1;
   $msgCount = 0;
 
@@ -233,6 +257,7 @@ function _atwork_activity_render_messages($result, $activityType) {
         $author->field_image[] = file_load($default_fid);
         $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
       }
+
 
       if($render)
         $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . date('M j', $message->timestamp) . '</span> <span class="user-feed-image">' . render($user_image) . '</span>' . $tmpMsg . '</div>';
@@ -367,7 +392,6 @@ function atwork_activity_home_group_callback($all_args) {
  */
 function atwork_activity_home_all_callback($all_args) {
   if(isset($all_args) && $all_args === 'tab_1') {
-    _atwork_activity_ajax_header();
     $activityType = 0;
 
     $query = db_select('message', 'm');
@@ -381,7 +405,7 @@ function atwork_activity_home_all_callback($all_args) {
     $db_and = db_and();
     $query
       ->fields('m', array('mid'));
-      $db_and->condition('m.type', array('new_comment', 'new_node', /*'node_updated',*/ 'new_answer', 'new_image'), 'IN');
+      $db_and->condition('m.type', array('new_comment', 'new_node', /*'node_updated',*/ 'new_answer', 'new_image', 'following_user', 'status'), 'IN');
       $db_and->condition('n.status', '1');
       $db_and->condition('n.uid', array('0, 10'), 'NOT IN');
       // Only want published, non-private galleries to be selected
@@ -406,6 +430,7 @@ function atwork_activity_home_all_callback($all_args) {
 /*
  * Menu callback for an ajax-called activity feed on the homepage
  */
+/*
 function atwork_activity_home_comment_callback($all_args) {
   if(isset($all_args) && $all_args === 'tab_4') {
     _atwork_activity_ajax_header();
@@ -434,7 +459,7 @@ function atwork_activity_home_comment_callback($all_args) {
     die($output);
   }
 }
-
+*/
 /*
  * Menu callback for an ajax-called activity feed on the homepage
  */
@@ -475,6 +500,7 @@ function atwork_activity_home_my_callback($all_args) {
  * Currently the mnu item is disabled (no profiles!)
  *
  */
+/*
 function atwork_activity_page($user) {
   // js
   //drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity.js');
@@ -563,6 +589,7 @@ function atwork_activity_page($user) {
 
   return $build;
 }
+*/
 
 /*
  * Using an access callback to only show activity feeds of the logged in user
@@ -658,6 +685,11 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
       '#weight' => 99, // Want this at the bottom, just ahead of the footer.
     );
   }
+  if($form_id == "atwork_activity_form" ){
+    //unset($form['#submit']);
+   //unset($form['#action']);
+    $form_state['rebuild'] = TRUE;
+  }
 }
 
 /**
@@ -747,21 +779,24 @@ function atwork_activity_entity_view_alter(&$build, $type){
 }
 
 
+
 /**
  * Implements hook_entity_load
  */
+/*
 function atwork_activity_entity_load($entities, $type){
   if($type == 'message' || $type == 'reply'){
   }
 }
-
+*/
 /**
  * Implements hook_entity_view
  */
+/*
 function atwork_activity_entity_view($entity, $type, $view_mode, $langcode){
 
 }
-
+*/
 
 
 
@@ -911,6 +946,7 @@ function atwork_activity_votingapi_insert($votes) {
  * Implements hook_message_access_alter().
  *
  * Ensures you can't see a message of a node you don't have access to
+ * Does not work with galleries
  *
  */
 function atwork_activity_message_access_alter(&$access, $context) {
@@ -1005,10 +1041,12 @@ function atwork_activity_block_info() {
     'visibility' => BLOCK_VISIBILITY_LISTED,
   );
   // This example comes from node.module.
+  /*
   $blocks['profile'] = array(
     'info' => t('Profile: Activity'),
     'visibility' => BLOCK_VISIBILITY_LISTED,
   );
+  */
   $blocks['group'] = array(
     'info' => t('Group: Activity'),
     'visibility' => BLOCK_VISIBILITY_LISTED,
@@ -1036,6 +1074,7 @@ function atwork_activity_block_view($delta = '') {
   switch ($delta) {
 
     // currently not being used. required user_relationships
+    /*
     case 'profile':
       if (arg(0) != 'user' || !is_numeric(arg(1))) {
         break;
@@ -1130,7 +1169,7 @@ function atwork_activity_block_view($delta = '') {
 
       break;
 
-
+      */
 
     case 'group':
 
@@ -1180,15 +1219,9 @@ EOT;
 <div class="activity-feed-progress"><img src="/sites/all/themes/atwork_zen/images/progress.gif" title="Loading" /></div>
   <ul>
     <li><a href="#tabs-1">All Activity</a></li>
-    <li><a href="#tabs-4">Comment Activity</a></li>
     <li><a href="#tabs-3">My Activity</a></li>
-    <li><a href="#tabs-2">My Groups</a></li>
   </ul>
   <div id="tabs-1">
-  </div>
-  <div id="tabs-4">
-  </div>
-  <div id="tabs-2">
   </div>
   <div id="tabs-3">
   </div>
@@ -1209,18 +1242,6 @@ EOT;
   }
   return $block;
 }
-
-
-function feed_block_init(){
-      $account = user_load(arg(1));
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'atwork_activity_profile_feed.js');
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/jquery.url.js');
-      drupal_add_js(array('feed_refresh' => array(
-        'refreshURL' => url("atwork-activity/trigger-page"),
-        'userId'=>$account->uid,
-        )), 'setting');
-}
-
 
 
 /**
@@ -1345,8 +1366,12 @@ function _atwork_activity_profile_page_block_content($user_id){
   $message_render_array = entity_view('message', $messages1);
   // The final markup - wrap it up in a div
   $form = drupal_get_form('atwork_activity_form');
-
-  $output .= render($form);
+  $form['submit'] = ajax_pre_render_element($form['submit']);
+  $build = array(
+    'form' => $form,
+    "#attached" => $form['submit']["#attached"],
+    );
+  $output .= render($build);
   $output .= '<div id="activity-feed">' ;
 
   if(isset($message_render_array) && $message_render_array){
