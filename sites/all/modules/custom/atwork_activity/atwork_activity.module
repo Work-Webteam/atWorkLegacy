@@ -220,7 +220,7 @@ function _atwork_activity_render_messages($result, $activityType) {
          */
         $tmpMsg = str_replace(array("<u>","</u>","<i>","</i>","<b>","</b>","<strong>","</strong>", "<em>", "</em>"),"", $tmpMsg);
       }
-
+      $author = user_load($message->uid);
       // We want to add images to the activity feed.
       // Check if an image exists:
       if(isset($author->field_image) && $author->field_image){
