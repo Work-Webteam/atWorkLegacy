@@ -220,8 +220,7 @@ function _atwork_activity_render_messages($result, $activityType) {
          */
         $tmpMsg = str_replace(array("<u>","</u>","<i>","</i>","<b>","</b>","<strong>","</strong>", "<em>", "</em>"),"", $tmpMsg);
       }
-      dpm($message);
-      $author = node_load($message->uid);
+      $author = user_load($message->uid);
       // We want to add images to the activity feed.
       // Check if an image exists:
       if(isset($author->field_image) && $author->field_image){
@@ -231,7 +230,6 @@ function _atwork_activity_render_messages($result, $activityType) {
         // Default image isn't always repopulated into $author->field_image after an ajax reload - so if it is missng and they have not saved a personal image, then lets reset the default image
         $profile_image_field = field_info_instance('user', 'field_image', 'user');
         $default_fid = $profile_image_field['settings']['default_image'];
-        dpm($default_fid);
         $author->field_image[] = file_load($default_fid);
         $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
       }
