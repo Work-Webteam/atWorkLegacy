@@ -2,8 +2,7 @@
 
 .page-user {
   .region-post-content {
-    width: 65%;
-    margin-left: 4em;
+    width: 70%;
   }
   .block-atwork-activity {
     clear: left;
@@ -61,6 +60,9 @@
       border-right-width: 10px;
     }
     label[for^="edit-field-profile-comment-und-"] {// hide all labels that begin with edit-field...
+      display: none;
+    }
+    .block-refresh-button {// hide the refresh link
       display: none;
     }
   }
