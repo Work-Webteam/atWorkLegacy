@@ -576,7 +576,7 @@
       </table></td>
     <td valign="middle" height="140"><table width="100%" border="0" cellspacing="0" cellpadding="0" >
         <tr>
-          <td><p style="font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; margin-top: 10px; margin-right: 25px; margin-bottom: 10px; margin-left: 25px;">You’re one of 25,000+ employees receiving the <?php echo '<a color="#FFF" href="' . $atwork_base_url . '/newsletters' . $currentDate . '"'; ?> style="color:#FFF;">@Work&nbspnewsletter</a> – a selection of noteworthy news from your corporate intranet. Visit <?php echo '<a color="#FFF" href="' . $atwork_base_url . '/' . $currentDate . '"'; ?> style="color:#FFF;">@Work</a> to stay informed and connect with your colleagues across the BC Public Service.</a> </p><img alt="cube" title="cube" <?php echo 'src="' . $atwork_base_url; ?>/mem_fs/images/open/cube.png<?php echo $currentDate; ?>" style="width: 1px; height: 1px;"></td>
+          <td><p style="font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; margin-top: 10px; margin-right: 25px; margin-bottom: 10px; margin-left: 25px;">You’re one of 26,000+ employees receiving the <?php echo '<a color="#FFF" href="' . $atwork_base_url . '/newsletters' . $currentDate . '"'; ?> style="color:#FFF;">@Work&nbspnewsletter</a> – a selection of noteworthy news from your corporate intranet. Visit <?php echo '<a color="#FFF" href="' . $atwork_base_url . '/' . $currentDate . '"'; ?> style="color:#FFF;">@Work</a> to stay informed and connect with your colleagues across the BC Public Service.</a> </p><img alt="cube" title="cube" <?php echo 'src="' . $atwork_base_url; ?>/mem_fs/images/open/cube.png<?php echo $currentDate; ?>" style="width: 1px; height: 1px;"></td>
         </tr>
       </table></td>
   </tr>

@@ -186,9 +186,6 @@ function _atwork_profiles_required_questions($form = FALSE, $required = FALSE) {
   return $form;
 }
 
-
-
-
 /*
  * Implementation of hook_menu_alter()
  *
@@ -1011,31 +1008,30 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
         }
       }
     // About me not filled in, so lets create it so the CSS does not break (all relative) to other elements
-    } 
-    // else {
-    //   $account->content['field_summary'] = array(
-    //     '#theme' => 'field',
-    // //    '#weight' => 10,
-    //     '#title' => t('About me'),
-    //     '#label_display' => 'hidden',
-    //     '#view_mode' => 'full',
-    //     '#language' => 'und',
-    //     '#field_name' => 'field_summary',
-    //     '#field_type' => 'text_long',
-    //     '#entity_type' => 'user',
-    //     '#bundle' => 'user',
-    //     '#items' => array(
-    //       0 => array(
-    //         'value' => t(' Test '),
-    //         'format' => 'comment',
-    //         'safe_value' => t(' Test '),
-    //       ),
-    //     ),
-    //     0 => '',
-    //   );
+    } else {
+      $account->content['field_summary'] = array(
+        '#theme' => 'field',
+    //    '#weight' => 10,
+        '#title' => t('About me'),
+        '#label_display' => 'hidden',
+        '#view_mode' => 'full',
+        '#language' => 'und',
+        '#field_name' => 'field_summary',
+        '#field_type' => 'text_long',
+        '#entity_type' => 'user',
+        '#bundle' => 'user',
+        '#items' => array(
+          0 => array(
+            'value' => t(' Test '),
+            'format' => 'comment',
+            'safe_value' => t(' Test '),
+          ),
+        ),
+        0 => '',
+      );
 
-    //   $account->content['field_summary'][0]['#markup'] = t('<h2 class="profile-section-unfilled">' . $account->content['field_summary']['#title'] );
-    // }
+      $account->content['field_summary'][0]['#markup'] = t('<h2 class="profile-section-unfilled">' . $account->content['field_summary']['#title'] );
+    }
 
 // set up the rest of the custom labels, hide old labels
     if (isset($account->content['field_extended_biography']) && $account->content['field_extended_biography'] && $account->field_public_profile) {
@@ -1060,11 +1056,10 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
         }
       }
     // About me not filled in, so lets create it so the CSS does not break (all relative) to other elements
-    } 
-    else {
+    } else {
       $account->content['field_extended_biography'] = array(
         '#theme' => 'field',
-        '#weight' => 20,
+   //     '#weight' => 14,
         '#title' => t('Extended Biography'),
         '#label_display' => 'hidden',
         '#view_mode' => 'full',
@@ -1092,37 +1087,37 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
         $account->content['field_linkedin']['#access'] = TRUE;
         $account->content['field_linkedin'][0]['markup'] = '';
       }
-    } 
-    // else {
-    //   $account->content['field_linkedin'] = array(
-    //     '#theme' => 'field',
-    //     '#title' => 'My online resume',
-    //     '#access' => TRUE,
-    //     '#label_display' => 'inline',
-    //     '#view_mode' => TRUE,
-    //     '#language' => 'und',
-    //     '#field_name' => 'field_linkedin',
-    //     '#field_type' => 'link_field',
-    //     '#field_translatable' => 0,
-    //     '#entity_type' => 'user',
-    //     '#bundle' => 'user',
-    //     '#items' => array(
-    //       0 => array(
-    //         'url' => '',
-    //         'title' => '',
-    //         'attributes' => array(
-    //           'target' => '_blank',
-    //         ),
-    //         'display_url' => '',
-    //         'html' => TRUE,
-    //       ),
-    //     ),
-    //     '#formatter' => 'link_default',
-    //     0 => array(
-    //       '#markup' => '',
-    //     ),
-    //   );
-    // }
+    } else {
+      $account->content['field_linkedin'] = array(
+        '#theme' => 'field',
+  //      '#weight' => 8,
+        '#title' => 'My online resume',
+        '#access' => TRUE,
+        '#label_display' => 'inline',
+        '#view_mode' => TRUE,
+        '#language' => 'und',
+        '#field_name' => 'field_linkedin',
+        '#field_type' => 'link_field',
+        '#field_translatable' => 0,
+        '#entity_type' => 'user',
+        '#bundle' => 'user',
+        '#items' => array(
+          0 => array(
+            'url' => '',
+            'title' => '',
+            'attributes' => array(
+              'target' => '_blank',
+            ),
+            'display_url' => '',
+            'html' => TRUE,
+          ),
+        ),
+        '#formatter' => 'link_default',
+        0 => array(
+          '#markup' => '',
+        ),
+      );
+    }
 
     // Need our box to show up, but content should be hidden from others unless published.
     if (isset($account-> field_skills) && $account-> field_skills){
@@ -1221,12 +1216,11 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
 
     //Combine full first and last name, hide original GAL field
     if (isset($account->content['field_gal_first_name'])) {
-      if($user->uid === $account->uid){
-        // If the user views their own profile, then we don't want the follow button, but we do need the name concat
-        $account->content['field_gal_first_name'][0]['#markup'] = t(_atwork_full_name($account));
-      }
-      // Moved to atwork_relationships.module, so that it would not overwrite the follow button that we created there. May move it back here eventually.
-      //$account->content['field_gal_first_name'][0]['#markup'] = t(_atwork_full_name($account));
+      $account->content['field_gal_first_name'][0]['#markup'] = t(_atwork_full_name($account));
+      //$account->content['full_name'] = $account->content['field_gal_first_name'];
+      //$account->content['full_name'][0]['#markup'] = t(_atwork_full_name($account));
+      //$account->content['full_name']['#title'] = t('Full Name');
+      //hide($account->content['field_gal_first_name']);
     } else {
       $account->content['field_gal_first_name'] = array(
         '#theme' => 'field',
@@ -1520,7 +1514,6 @@ function atwork_profiles_views_post_render(&$view, &$output, &$cache) {
     if (isset($view->args[0]) && $view->args[0] && is_numeric($view->args[0])) {
       $account = user_load($view->args[0]);
 
-      /* This was moved to the atwork_relationships.module in order to refactor code.
       if (strpos($output, ':relationship_link') && module_exists('atwork_relationships') && $account->uid != $user->uid) {
         $relationship_link = atwork_relationships_get_link($account);
         $output = str_replace(':relationship_link', $relationship_link, $output);
@@ -1528,8 +1521,8 @@ function atwork_profiles_views_post_render(&$view, &$output, &$cache) {
       elseif (strpos($output, ':relationship_link')) {
         $output = str_replace(':relationship_link', '', $output);
       }
-      */
-      // add required
+
+      // add required questions
       $required_questions = _atwork_profiles_required_questions();
 
       foreach ($required_questions as $required_question) {
@@ -1707,13 +1700,6 @@ function atwork_profiles_block_info() {
     'info' => t('Header Block'),
     'cache' => DRUPAL_NO_CACHE,
   );
-  $blocks['bio-toggle'] = array(
-    'info' => t('Extended Profile Toggle'),
-    'status' => TRUE,
-    'region' => 'content',
-    'visibility' => BLOCK_VISIBILITY_LISTED,
-    'pages' => 'employees/*',
-  );
 
   return $blocks;
 }
@@ -1725,13 +1711,6 @@ function atwork_profiles_block_view($delta = '') {
   $block = array();
 
   switch ($delta) {
-    case 'bio-toggle':
-      $block['subject'] = t('');
-      $block['content'] = '<button id="clickmeplease">Toggle Bio</button>';
-      drupal_add_js(drupal_get_path('module', 'atwork_profiles') . '/atwork_profiles_2.js');
-    break;
-
-
     case 'header':
 
       global $user;

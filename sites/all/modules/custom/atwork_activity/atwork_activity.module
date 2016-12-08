@@ -178,20 +178,22 @@ function _atwork_activity_ajax_header() {
 function _atwork_activity_render_messages($result, $activityType) {
       // The final markup - wrap it up in a div
   $form = drupal_get_form('atwork_activity_form');
-  $form['post'] = ajax_pre_render_element($form['post']);
-  $build = array(
-    'form' => $form,
-    "#attached" => $form['post']["#attached"],
-    );
-  $output = render($build);
+  $output = render($form);
   $output .= '<div class="atwork-activity">';
   $i = 1;
   $msgCount = 0;
 
   if($result != 'error'){
-    foreach ($result as $record) {
-      $message = message_load($record->mid);
+    foreach($result as $value){
+      $result_mid[] = $value->mid;
+    }
+    // Load entities and all related content
+    $messages = entity_load('message', $result_mid);
+    $message_render_array = entity_view('message', $messages);
 
+
+    foreach ($message_render_array as $message) {
+      dpm($message);
       $classes = array();
       $classes[] = 'message';
       $classes[] = 'message-' . $message->mid;
@@ -229,21 +231,6 @@ function _atwork_activity_render_messages($result, $activityType) {
           $render = 0;
       }
 
-
-      $tmpMsg = str_replace("background","webpage", $message->getText());
-
-      if($msgCount > 0){
-
-        // Lets fix all badly formed html.
-        /*$stripHtml = new DOMDocument();
-        $stripHtml->loadHTML($tmpMsg);
-        $tmpMsg = $stripHtml->saveHTML();
-        // Get rid of that weird symbol that the XML is leaving
-         $tmpMsg = html_entity_decode($tmpMsg,ENT_QUOTES,"UTF-8");
-         $tmpMsg = str_replace("Â","", $tmpMsg);
-         */
-        $tmpMsg = str_replace(array("<u>","</u>","<i>","</i>","<b>","</b>","<strong>","</strong>", "<em>", "</em>"),"", $tmpMsg);
-      }
       $author = user_load($message->uid);
       // We want to add images to the activity feed.
       // Check if an image exists:
@@ -260,7 +247,7 @@ function _atwork_activity_render_messages($result, $activityType) {
 
 
       if($render)
-        $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . date('M j', $message->timestamp) . '</span> <span class="user-feed-image">' . render($user_image) . '</span>' . $tmpMsg . '</div>';
+        $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . date('M j', $message->timestamp) . '</span> <span class="user-feed-image">' . render($user_image) . '</span>' . render($message) . '</div>';
 
       $i++;
     }
@@ -1366,12 +1353,8 @@ function _atwork_activity_profile_page_block_content($user_id){
   $message_render_array = entity_view('message', $messages1);
   // The final markup - wrap it up in a div
   $form = drupal_get_form('atwork_activity_form');
-  $form['submit'] = ajax_pre_render_element($form['submit']);
-  $build = array(
-    'form' => $form,
-    "#attached" => $form['submit']["#attached"],
-    );
-  $output .= render($build);
+
+  $output = render($form);
   $output .= '<div id="activity-feed">' ;
 
   if(isset($message_render_array) && $message_render_array){
