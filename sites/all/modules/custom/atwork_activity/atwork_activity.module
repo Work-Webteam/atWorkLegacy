@@ -192,11 +192,11 @@ function _atwork_activity_render_messages($result, $activityType) {
     $message_render_array = entity_view('message', $messages);
 
 
-    foreach ($message_render_array as $message) {
-      dpm($message);
+    foreach ($message_render_array['message'] as $message) {
+      dpm($message['#entity']);
       $classes = array();
       $classes[] = 'message';
-      $classes[] = 'message-' . $message->mid;
+      $classes[] = 'message-' . $message['#entity']->mid;
 
       if ($i % 2 == 0) {
         $classes[] = 'even';
@@ -209,10 +209,10 @@ function _atwork_activity_render_messages($result, $activityType) {
 
       $render = 1;
 
-      if($message->type == 'new_image'){
+      if($message['#entity']->type == 'new_image'){
 
         $q = db_select('field_data_field_message_node', 'fmn')
-          ->where('fmn.entity_id = '. $message->mid);
+          ->where('fmn.entity_id = '. $message['#entity']->mid);
 
         $q->leftJoin('field_data_field_gallery', 'i', 'i.entity_id = fmn.field_message_node_target_id');
         $q->leftJoin('field_data_field_gallery_status', 's', 's.entity_id = i.field_gallery_target_id');
@@ -231,7 +231,7 @@ function _atwork_activity_render_messages($result, $activityType) {
           $render = 0;
       }
 
-      $author = user_load($message->uid);
+      $author = user_load($message['#entity']->uid);
       // We want to add images to the activity feed.
       // Check if an image exists:
       if(isset($author->field_image) && $author->field_image){
