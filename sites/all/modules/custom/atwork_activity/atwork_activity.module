@@ -377,8 +377,8 @@ function atwork_activity_home_group_callback($all_args) {
 /*
  * Menu callback for an ajax-called activity feed on the homepage
  */
-function atwork_activity_home_all_callback($all_args) {
-  if(isset($all_args) && $all_args === 'tab_1') {
+function atwork_activity_home_all_callback() {
+  //if(isset($all_args) && $all_args === 'tab_1') {
     $activityType = 0;
 
     $query = db_select('message', 'm');
@@ -410,8 +410,8 @@ function atwork_activity_home_all_callback($all_args) {
       ->fetchAll();
     $output = _atwork_activity_render_messages($result, $activityType);
 
-    die($output);
-  }
+    return($output);
+  //}
 }
 
 /*
@@ -1174,11 +1174,11 @@ function atwork_activity_block_view($delta = '') {
 
     case 'homepage':
 
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity.js');
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_home.js');
+      //drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity.js');
+      //drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_home.js');
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/jquery.url.js');
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_undock.js');
-      drupal_add_js('initializeAllActivity();', 'inline');
+      //drupal_add_js('initializeAllActivity();', 'inline');
 
        /// this is now handled by click-handlers - too much strain on queries otherwise
       //drupal_add_js('initializeGroupActivity();', 'inline');
@@ -1186,8 +1186,8 @@ function atwork_activity_block_view($delta = '') {
       //drupal_add_js('initializeCommentActivity();', 'inline');
 
 
-      drupal_add_library('system', 'ui.tabs');
-
+      //drupal_add_library('system', 'ui.tabs');
+/*
       $js = <<<EOT
 (function($) {
   $(document).ready(function() {
@@ -1215,11 +1215,13 @@ EOT;
 </div>',
       );
      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_click_handlers.js');
-
+*/
+      $block['subject'] = t('Current Activity');
+      $block['content'] = atwork_activity_home_all_callback();
       break;
     /** the profile page block view */
     case 'profile_page_activity_feed_block':
-      $block['subject'] = 'User activity';
+      $block['subject'] = t('User activity');
       // This helps to keep this code a little cleaner - all content is located in it's own function below.
       $block['content'] = _atwork_activity_profile_page_block_content(arg(1));
       // Don't think I need to pass these values anymore - will keep this for now to check.
