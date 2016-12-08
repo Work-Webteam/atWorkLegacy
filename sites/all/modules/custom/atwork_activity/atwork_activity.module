@@ -672,11 +672,7 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
     );
   }
   if($form_id == "atwork_activity_form" ){
-    dpm($form);
-    dpm($form_state);
-    //unset($form['#submit']);
-   //unset($form['#action']);
-    ///$form_state['rebuild'] = TRUE;
+
   }
 }
 
