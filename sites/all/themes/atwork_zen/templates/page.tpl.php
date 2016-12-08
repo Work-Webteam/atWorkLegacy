@@ -13,27 +13,27 @@
 	//MAIN MENU TARGETING
 	window.onload = function(){
 		var a = [
-			9181, 6897, 6524, 6534,
-			6537, 6540, 6533, 9514, 6525,
-			6895, 6536, 7916, 6535, 6532,
-			6539, 6680, 9513, 6681, 6682,
-			6530, 6531, 6522, 6538, 6526,
-			6896, 11065, 12331
-		];
+   9181, 6897, 6524, 6534,
+   6537, 6540, 6533, 9514, 6525,
+   6895, 6536, 7916, 6535, 6532,
+   6539, 6680, 9513, 6681, 6682,
+   6530, 6531, 6522, 6538, 6526,
+   6896, 11065, 12331
+   ];
 
-		var c = document.getElementById('block-tb-megamenu-menu-main-menu-zen').getElementsByTagName('li');
+   var c = document.getElementById('block-tb-megamenu-menu-main-menu-zen').getElementsByTagName('li');
 
-		for(var i = 0; i < a.length; i++){
-			for(var j = 0; j < c.length; j++){
-				if(c[j].getAttribute("data-id") == a[i]){
-					c[j].onclick = function(){
-						var d = this.getElementsByTagName('a');
-						return !window.open(d[0], '_blank');
-					}
-				}
-			}
-		}
-	}
+   for(var i = 0; i < a.length; i++){
+     for(var j = 0; j < c.length; j++){
+      if(c[j].getAttribute("data-id") == a[i]){
+       c[j].onclick = function(){
+        var d = this.getElementsByTagName('a');
+        return !window.open(d[0], '_blank');
+      }
+    }
+  }
+}
+}
 
 	//GALLERY THUMBS
 	jQuery(document).ready(function($){
@@ -47,9 +47,9 @@
 
 			$('.views-field-field-image a').each(function(){
 				var $this = $(this),
-					href = $this.attr('href');
-				$this.attr('href', href +'?page='+ galPg);
-			})
+       href = $this.attr('href');
+       $this.attr('href', href +'?page='+ galPg);
+     })
 		}
 	});
 
@@ -63,9 +63,9 @@
     <?php if ($logo): ?>
       <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
     <?php endif; ?>
-	<div id="header-box">
-	<div id="home-link" alt="" title=""><a href="/index.php">&nbsp;</a> </div>
-    <?php if ($site_name || $site_slogan): ?>
+    <div id="header-box">
+     <div id="home-link" alt="" title=""><a href="/index.php">&nbsp;</a> </div>
+     <?php if ($site_name || $site_slogan): ?>
       <div class="header__name-and-slogan" id="name-and-slogan">
         <?php if ($site_name): ?>
           <h1 class="header__site-name" id="site-name">
@@ -78,27 +78,55 @@
         <?php endif; ?>
       </div>
     <?php endif; ?>
-	</div>
-    <?php if ($secondary_menu): ?>
-      <nav class="header__secondary-menu" id="secondary-menu" role="navigation">
-        <?php print theme('links__system_secondary_menu', array(
-          'links' => $secondary_menu,
-          'attributes' => array(
-            'class' => array('links', 'inline', 'clearfix'),
+  </div>
+  <?php if ($secondary_menu): ?>
+    <nav class="header__secondary-menu" id="secondary-menu" role="navigation">
+      <?php print theme('links__system_secondary_menu', array(
+        'links' => $secondary_menu,
+        'attributes' => array(
+          'class' => array('links', 'inline', 'clearfix'),
           ),
-          'heading' => array(
-            'text' => $secondary_menu_heading,
-            'level' => 'h2',
-            'class' => array('element-invisible'),
+        'heading' => array(
+          'text' => $secondary_menu_heading,
+          'level' => 'h2',
+          'class' => array('element-invisible'),
           ),
-        )); ?>
-      </nav>
-    <?php endif; ?>
+          )); ?>
+    </nav>
+  <?php endif; ?>
 
-    <?php print render($page['header']); ?>
+  <?php print render($page['header']); ?>
 
   </header>
-<?php print $breadcrumb; ?>
+
+  <div id="navigation">
+
+      <?php if ($main_menu): ?>
+        <nav id="main-menu" role="navigation" tabindex="-1">
+          <?php
+          // This code snippet is hard to modify. We recommend turning off the
+          // "Main menu" on your sub-theme's settings form, deleting this PHP
+          // code block, and, instead, using the "Menu block" module.
+          // @see https://drupal.org/project/menu_block
+          print theme('links__system_main_menu', array(
+            'links' => $main_menu,
+            'attributes' => array(
+              'class' => array('links', 'inline', 'clearfix'),
+              ),
+            'heading' => array(
+              'text' => t('Main menu'),
+              'level' => 'h2',
+              'class' => array('element-invisible'),
+              ),
+              )); ?>
+        </nav>
+      <?php endif; ?>
+
+      <?php print render($page['navigation']); ?>
+
+  </div><!-- /#navigation -->
+
+  <?php print $breadcrumb; ?>
   <div id="main">
 
     <div id="content" class="column" role="main">
@@ -117,13 +145,13 @@
             case 'question':
             case 'section_page':
             case 'event':
-              $group = node_load($og_context['gid']);
-              $title_prefix = $title;
-              $title = $group->title;
-              break;
+            $group = node_load($og_context['gid']);
+            $title_prefix = $title;
+            $title = $group->title;
+            break;
             default:
-              break;
-            }
+            break;
+          }
           ?>
         <?php endif; ?>
       <?php endif ?>
@@ -143,43 +171,19 @@
       <?php if ($action_links): ?>
         <ul class="action-links"><?php print render($action_links); ?></ul>
       <?php endif; ?>
+      <div id="social-side"> 
+          <?php print render($page['social_side']); ?>
+       </div>
       <?php print render($page['pre_content']); ?>
       <?php print render($page['content']); ?>
       <?php print render($page['post_content']); ?>
       <?php print $feed_icons; ?>
-    </div>
-
-<div id="navigation">
-
-      <?php if ($main_menu): ?>
-        <nav id="main-menu" role="navigation" tabindex="-1">
-          <?php
-          // This code snippet is hard to modify. We recommend turning off the
-          // "Main menu" on your sub-theme's settings form, deleting this PHP
-          // code block, and, instead, using the "Menu block" module.
-          // @see https://drupal.org/project/menu_block
-          print theme('links__system_main_menu', array(
-            'links' => $main_menu,
-            'attributes' => array(
-              'class' => array('links', 'inline', 'clearfix'),
-            ),
-            'heading' => array(
-              'text' => t('Main menu'),
-              'level' => 'h2',
-              'class' => array('element-invisible'),
-            ),
-          )); ?>
-        </nav>
-      <?php endif; ?>
-
-      <?php print render($page['navigation']); ?>
-
-</div>
+    </div><!-- /#content -->
 
     <?php
-      // Render the sidebars to see if there's anything in them.
-      $sidebar_first  = render($page['sidebar_first']);
-      $sidebar_second = render($page['sidebar_second']);
+    // Render the sidebars to see if there's anything in them.
+        $sidebar_first  = render($page['sidebar_first']);
+        $sidebar_second = render($page['sidebar_second']);
     ?>
 
     <?php if ($sidebar_first || $sidebar_second): ?>
@@ -188,23 +192,23 @@
         <?php print $sidebar_second; ?>
       </aside>
     <?php endif; ?>
-  </div>
+  </div><!-- /#main -->
 
-</div>
+</div><!-- /#page -->
 
 <?php if ($is_front):
 
-  $interval   = REQUEST_TIME - variable_get('user_block_seconds_online', 900);
-  $count_auth = admin_menu_session_count($interval, FALSE);
-  if ($count_auth == 1) {
-    $users_online = '<div id="users_online"><p> <strong><strong>' . $count_auth . ' </strong></strong> person is currently on @Work. </p></div>';
-  }
-  else{
-    $users_online = '<div id="users_online"><p> <strong><strong>' . $count_auth . ' </strong></strong> people are currently on @Work.</p></div>';
-  }
-  if(isset($page['footer']['boxes_copyright_terms_user']['#markup']) && $page['footer']['boxes_copyright_terms_user']['#markup']){
-    $page['footer']['boxes_copyright_terms_user']['#markup'] .= $users_online;
-  }
+    $interval   = REQUEST_TIME - variable_get('user_block_seconds_online', 900);
+    $count_auth = admin_menu_session_count($interval, FALSE);
+    if ($count_auth == 1) {
+      $users_online = '<div id="users_online"><p> <strong><strong>' . $count_auth . ' </strong></strong> person is currently on @Work. </p></div>';
+    }
+    else{
+      $users_online = '<div id="users_online"><p> <strong><strong>' . $count_auth . ' </strong></strong> people are currently on @Work.</p></div>';
+    }
+    if(isset($page['footer']['boxes_copyright_terms_user']['#markup']) && $page['footer']['boxes_copyright_terms_user']['#markup']){
+      $page['footer']['boxes_copyright_terms_user']['#markup'] .= $users_online;
+    }
 endif; ?>
 
 <?php print render($page['bottom']); ?>

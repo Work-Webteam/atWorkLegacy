@@ -12,19 +12,42 @@
       border-right-width: 10px;
     }
     > div > .message {
-      position: relative; /* sets us up to position all internal elements */
+      position: relative; // sets us up to position all internal elements
       margin: 2em 0;
       border: 1px solid #ccc;
       padding: 0.5em;
+      &.even {
+        background-color: #f1f1f1;
+      }
       .field-label {
         display: none;
       }
-      .date {
+      // Position most of the inner elements absolutely
+      .comment-submit-button,
+      .date, 
+      .links,
+      .field-name-field-feed-like-button {
         position: absolute;
         bottom: 0.1em;
+        margin: 0;
+        padding: 0;
+      }
+      .field-name-field-feed-like-button { // show furthest left
+        right: 22em;
+      }
+      .comment-submit-button {
+        right: 2em;
+      }
+      .date {
         right: 0.5em;
         font-size: smaller;
         color: lighten(#000, 60%);
+      }
+      .links {// post as comment button.
+        right: 8em;
+        li {
+          padding: 0;
+        }
       }
       .field-name-field-image {
         float: left;
@@ -36,15 +59,17 @@
       border-left-width: 10px;
       border-right-width: 10px;
     }
-    > div > .message {
-      position: relative; /* sets us up to position all internal elements */
-      margin: 2em 0;
+    label[for^="edit-field-profile-comment-und-"] {// hide all labels that begin with edit-field...
+      display: none;
+    }
+    .block-refresh-button {// hide the refresh link
+      display: none;
     }
   }
 }
 
 /*----------------- End User Page User Activity Feed --------------------*/
-
+2
 
 // Front page Activity Feed
 
