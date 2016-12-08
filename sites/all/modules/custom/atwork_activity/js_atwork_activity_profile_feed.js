@@ -180,10 +180,11 @@
 
   // This section is for toggling visibility of the comments textarea and submit button
   $(function() {
-    $(".comment-submit-button").hide();
+    //$(".comment-submit-button").hide();
     $(".toggle-com-button").click(function(e) {
       e.preventDefault(); 
-      $(".comment-submit-button").toggle();
+      $(this).next(".comment-submit-button").toggle();
+      console.log($(this));
     });
 });
 
