@@ -79,6 +79,15 @@
     .block-refresh-button {// hide the refresh link
       display: none;
     }
+    // Initially hide the comment textarea and submit button and unhide with .js
+    .comment-submit-button,
+    .field-name-field-profile-comment {
+      display: none;
+    }
+    .comment-submit-button-show,
+    .field-name-field-profile-comment-show {
+      display: block;
+    }
   }
 }
 

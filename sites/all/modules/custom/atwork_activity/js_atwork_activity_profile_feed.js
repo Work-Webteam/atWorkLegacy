@@ -27,7 +27,7 @@
     attach: function (context, settings) {
     // Page refresh should occur every 5 seconds after initial load
     if(refreshFeed === false && timer=== false){ // Don't want to set this twice
-      //setFeedInterval();
+      setFeedInterval();
     }
 
     //Unless someone is typing in a text field
@@ -180,11 +180,13 @@
 
   // This section is for toggling visibility of the comments textarea and submit button
   $(function() {
-    //$(".comment-submit-button").hide();
+    // comment submit and textarea are initially hidden with css
+
+    // next, allow the toggle button to show/hide comment elements
     $(".toggle-com-button").click(function(e) {
       e.preventDefault(); 
-      $(this).next(".comment-submit-button").toggle();
-      console.log($(this));
+      $(this).nextAll(".comment-submit-button").toggleClass("comment-submit-button-show");
+      $(this).nextAll(".field-name-field-profile-comment").toggleClass("field-name-field-profile-comment-show");
     });
 });
 
