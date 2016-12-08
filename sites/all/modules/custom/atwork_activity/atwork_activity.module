@@ -247,7 +247,7 @@ function _atwork_activity_render_messages($result, $activityType) {
 
 
       if($render)
-        $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . date('M j', $message->timestamp) . '</span> <span class="user-feed-image">' . render($user_image) . '</span>' . render($message) . '</div>';
+        $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . date('M j', $message['#entity']->timestamp) . '</span> <span class="user-feed-image">' . render($user_image) . '</span>' . render($message) . '</div>';
 
       $i++;
     }
