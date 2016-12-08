@@ -114,14 +114,13 @@ function atwork_activity_form() {
   );
   $form['post'] = array(
         '#type' => 'button', // We lose ajax if we make this a true Submit - we will manually save the entity in our callback
-        '#value' => 'Posty', // To differentiate it from the normal submit button
+        '#value' => 'Post', // To differentiate it from the normal submit button
         '#prefix' => '<div id="status-submit-button">',
         '#suffix' => '</div>',
         '#ajax' => array(
           'callback' => 'atwork_activity_form_submit',
           'wrapper' => 'status-submit-button',
           'event' => 'click',
-          "effect" => 'fade',
         ),
         '#weight' => 99, // Want this at the bottom, just ahead of the footer.
         '#redirect' => FALSE,
@@ -135,6 +134,7 @@ function atwork_activity_form() {
 function atwork_activity_form_submit(&$form, &$form_state) {
 
   if (!isset($form_state['values']['status']) || !$form_state['values']['status']) {
+    dpm("No status found");
     return;
   }
 
@@ -193,7 +193,6 @@ function _atwork_activity_render_messages($result, $activityType) {
 
 
     foreach ($message_render_array['message'] as $message) {
-      dpm($message['#entity']);
       $classes = array();
       $classes[] = 'message';
       $classes[] = 'message-' . $message['#entity']->mid;
@@ -673,9 +672,11 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
     );
   }
   if($form_id == "atwork_activity_form" ){
+    dpm($form);
+    dpm($form_state);
     //unset($form['#submit']);
    //unset($form['#action']);
-    $form_state['rebuild'] = TRUE;
+    ///$form_state['rebuild'] = TRUE;
   }
 }
 
