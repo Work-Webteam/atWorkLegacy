@@ -26,7 +26,8 @@
       .comment-submit-button,
       .date, 
       .links,
-      .field-name-field-feed-like-button {
+      .field-name-field-feed-like-button,
+      .toggle-com-button {
         position: absolute;
         bottom: 0.1em;
         margin: 0;
@@ -36,7 +37,7 @@
         right: 22em;
       }
       .comment-submit-button {
-        right: 2em;
+        left: 0.5em;
       }
       .date {
         right: 0.5em;
@@ -47,6 +48,19 @@
         right: 8em;
         li {
           padding: 0;
+        }
+      }
+      .toggle-com-button {
+        right: 27em;
+        background:none!important;
+        border:none; 
+        padding:0!important;
+        font: inherit;
+        color: #135ab0;
+        cursor: pointer;
+        &:hover {
+        text-decoration: underline;
+        color: black;
         }
       }
       .field-name-field-image {
@@ -65,11 +79,21 @@
     .block-refresh-button {// hide the refresh link
       display: none;
     }
+    // Initially hide the comment textarea and submit button and unhide with .js
+    .comment-submit-button,
+    .field-name-field-profile-comment {
+      display: none;
+    }
+    .comment-submit-button-show,
+    .field-name-field-profile-comment-show {
+      display: block;
+    }
   }
 }
 
+
+
 /*----------------- End User Page User Activity Feed --------------------*/
-2
 
 // Front page Activity Feed
 

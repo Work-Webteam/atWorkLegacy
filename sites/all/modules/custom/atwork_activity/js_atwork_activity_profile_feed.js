@@ -178,6 +178,18 @@
    }
   };
 
+  // This section is for toggling visibility of the comments textarea and submit button
+  $(function() {
+    // comment submit and textarea are initially hidden with css
+
+    // next, allow the toggle button to show/hide comment elements
+    $(".toggle-com-button").click(function(e) {
+      e.preventDefault(); 
+      $(this).nextAll(".comment-submit-button").toggleClass("comment-submit-button-show");
+      $(this).nextAll(".field-name-field-profile-comment").toggleClass("field-name-field-profile-comment-show");
+    });
+});
+
 }(jQuery));
 
 

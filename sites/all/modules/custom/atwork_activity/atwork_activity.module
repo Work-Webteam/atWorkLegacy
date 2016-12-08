@@ -643,19 +643,27 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
       return;
     }
    // hide this submit button when we use our own.
-   $form['actions']['submit']['#access'] = FALSE;
+    $form['actions']['submit']['#access'] = FALSE;
     // Create our own submit button for the profile page to send users to our handler
     $form['button'] = array(
       '#type' => 'button', // We lose ajax if we make this a true Submit - we will manually save the entity in our callback
-      '#value' => 'Post Comment', // To differentiate it from the normal submit button - this will be hidden by CSS.
-      '#prefix' => '<div id="comment-submit-button">',
+      '#value' => 'Post Comment', // To differentiate it from the normal submit button - this will be hidden by CSS. 
+      '#prefix' => '<div class="comment-submit-button">',
       '#suffix' => '</div>',
       '#ajax' => array(
         'callback' => 'atwork_activity_reply_form_submit_custom',
         'wrapper' => 'comment-submit-button',
         'event' => 'click',
-      ),
+        ),
       '#weight' => 99, // Want this at the bottom, just ahead of the footer.
+    );
+    $form['toggle_com_button'] = array(// create a  button to toggle visibility of the comment elements
+      '#type' => 'button',
+      '#attributes' => array(
+        'onclick' => 'return (false);',
+        'class' => array('toggle-com-button')
+        ),
+      '#value' => t('Comment'),
     );
   }
 }
