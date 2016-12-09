@@ -23,30 +23,6 @@ function _atwork_activity_node_types() {
  * Implements hook_menu();
  */
 function atwork_activity_menu() {
-  // a user page that displays their activity
-  // built for the prototype but currently on hold
-//  $items['user/%user/activity'] = array(
-//    'title' => 'News Feed',
-//    'description' => 'View your activity.',
-//    'type' => MENU_LOCAL_TASK,
-//    'page callback' => 'atwork_activity_page',
-//    'page arguments' => array(1),
-//    'access callback' => 'atwork_activity_page_access',
-//    'access arguments' => array(1),
-//  );
-
-  // these callbacks are all done through ajax
-  // this one has an access callback which was handy when it was a menu tab
-  /*
-  $items['atwork-activity/group/%node'] = array(
-    'title' => 'Group Activity',
-    'type' => MENU_CALLBACK,
-    'page callback' => 'atwork_activity_group_callback',
-    'page arguments' => array(2),
-    'access callback' => 'atwork_activity_group_access',
-    'access arguments' => array(2),
-  );
-  */
 
   $items['atwork-activity/all-activity'] = array(
     'title' => 'All Activity',
@@ -56,25 +32,6 @@ function atwork_activity_menu() {
     'page arguements' =>array(1),
 
   );
-
-  /*
-  $items['atwork-activity/comment-activity'] = array(
-    'title' => 'Comment Activity',
-    'type' => MENU_CALLBACK,
-    'page callback' => 'atwork_activity_home_comment_callback',
-    'access arguments' => array('access content'),
-    'page arguements' =>array(1),
-  );
-  */
-  /*
-  $items['atwork-activity/group-activity'] = array(
-    'title' => 'Group Activity',
-    'type' => MENU_CALLBACK,
-    'page callback' => 'atwork_activity_home_group_callback',
-    'access arguments' => array('access content'),
-    'page arguements' =>array(1),
-  );
-  */
 
   $items['atwork-activity/my-activity'] = array(
     'title' => 'My Activity',
@@ -97,9 +54,8 @@ function atwork_activity_group_access($node) {
 
 
 /*
- * A form added to the top of the user's activity feed.
+ * A form added to the top of the user's activity feed that is saved as a status update.
  *
- * The menu item that calls this is commented out because we are waiting to release this (no profiles now)
  */
 function atwork_activity_form() {
   $form = array();
@@ -128,13 +84,98 @@ function atwork_activity_form() {
   return $form;
 }
 
+/**
+ * A form that interacts with the users customized messages for the homepage. Saves to the fields located in the users profile.
+ *
+ */
+function atwork_activity_customize_feed_form(){
+  global $user;
+  $current_user = user_load($user->uid);
+  // The collect the users options to display in our checkboxes
+  $choices = field_get_items('user', $current_user, 'field_feed_options');
+  if(isset($choices) && !empty($choices)){
+    // We have saved our preference before
+  } else {
+    $choices = array(
+    'my_actions' => t('My Actions'),
+    'actions_of_colleagues' => t('Actions of Colleages'),
+    'connections_between_colleagues' => t('Actions Between Colleagues'),
+    'joined_group' => t('Joined a Group'),
+    'answered_a_question' => t('Answered a Question'),
+    'comments' => t('Comments'),
+    'images' => t('Images'),
+    'content' => t('Content'),
+    'status_updates' => t('Status Updates'),
+    'profile_updates' => t('Profile Updates'),
+    );
+  }
+  // Now build the form
+  $form = array();
+  $form['feed_choices'] = array(
+    '#title' => t('Advanced Filter'),
+    '#type' => 'checkboxes',
+    '#description' => t('Select what type of content you would like to show up in your feed'),
+    '#options' => $choices,
+    );
+  $form['update'] = array(
+        '#type' => 'button', // We lose ajax if we make this a true Submit - we will manually save the entity in our callback
+        '#value' => t('Update'), // To differentiate it from the normal submit button
+        '#prefix' => '<div id="atus-submit-button">',
+        '#suffix' => '</div>',
+        '#ajax' => array(
+          'callback' => 'atwork_activity_advanced_feed_settings_submit_callback',
+          'wrapper' => 'feed-settings-submit-button',
+          'event' => 'click',
+        ),
+        '#weight' => 99, // Want this at the bottom, just ahead of the footer.
+        '#redirect' => FALSE,
+      );
+  return $form;
+}
+
+/**
+ * submit handler for the homepage feed settings - need to update and save these for the user
+ */
+function atwork_activity_advanced_feed_settings_submit_callback($form, &$form_state){
+  // Gather the users choices
+  global $user;
+  $current_user = user_load($user->uid);
+  // Update users fields
+  if(isset($form_state['values']['feed_choices']) && $form_state['values']['feed_choices']){
+    // what is the proper way for this to be set?
+    dpm($form_state);
+    pdm($current_user);
+    //$current_user['field_feed_options'] = $form_state['values']['feed_choices'];
+  }
+  // Save user to save the fields so we can save users preferences.
+  user_save($current_user);
+  return;
+}
+
+/**
+ * Vaidation handler for hompage feed advanced settings
+ */
+function atwork_activity_customize_feed_form_validate($form, &$form_state){
+  $form_set = false;
+  // Make sure we have at least something checked
+  foreach ($form_state['values']['feed_choices'] as $key => $value) {
+    if($value !== 0){
+      $form_set = true;
+      break;
+    } else {
+      // TODO: Because this is Ajax, we should probably handle this in an alert, or with JQuery making the button un-clickable if everything is unchecked.
+      form_set_error('feed_choices', t('You must select some content for your feed.'));
+    }
+  }
+  return;
+}
+
 /*
  * create a ststus content type for display in activity feeds
  */
 function atwork_activity_form_submit(&$form, &$form_state) {
 
   if (!isset($form_state['values']['status']) || !$form_state['values']['status']) {
-    dpm("No status found");
     return;
   }
 
@@ -176,10 +217,21 @@ function _atwork_activity_ajax_header() {
  * render a query result of messages
  */
 function _atwork_activity_render_messages($result, $activityType) {
-      // The final markup - wrap it up in a div
+  // Create two links that will change the choices below to give the illusion of two seperate tabs
+  // Use JQuery to refresh the block with the new choices.
+
+
+  // Get the advanced choices form
+  $adv_form = drupal_get_form('atwork_activity_customize_feed_form');
+  $output = '<div id="atwork-advanced-feed-settings">';
+  $output .= render($adv_form);
+  $output .= '</div>';
+
+  // The Status update form
   $form = drupal_get_form('atwork_activity_form');
-  $output = render($form);
+  $output .= render($form);
   $output .= '<div class="atwork-activity">';
+
   $i = 1;
   $msgCount = 0;
 
