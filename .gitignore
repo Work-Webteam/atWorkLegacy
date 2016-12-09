@@ -13,7 +13,7 @@
 # Ignore configuration files that may contain sensitive information.
 sites/*/*settings*.php
 sites/*/*settings*.php*
-.htaccess
+
 sites/default/custom/
 
 # Ignore paths that contain generated content.
@@ -22,7 +22,7 @@ sites/*/files
 sites/*/private
 
 # Ignore default text files
-robots.txt
+//robots.txt
 /CHANGELOG.txt
 /COPYRIGHT.txt
 /INSTALL*.txt
@@ -87,7 +87,7 @@ Temporary Items
 
 
 # Non Drupal PSA files and directories
-browscap/*
+//browscap/*
 /clear_apc.php
 /dump.txt
 /IEStandards.xml

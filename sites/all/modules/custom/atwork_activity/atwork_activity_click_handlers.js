@@ -1,6 +1,8 @@
 
 
 (function ($) {
+
+  /*
   function hideProgress() {
     jQuery('.activity-feed-progress').hide();
   }
@@ -10,18 +12,18 @@
 
   function refreshAllActivityClick(page) {
     if(!page) page = 0;
-
+    console.log("click");
     jQuery.ajax({
       cache: false,
       url: Drupal.settings.basePath + '?q=atwork-activity/all-activity/tab_1',
       data: {page: page},
       dataType: 'text',
       error: function(request, status, error) {
-        alert(status);
+        //alert(status);
       },
       success: function(data, status, request) {
         var html = data;
-
+        console.log("clicked");
                           hideProgress();
 
         jQuery('#tabs-1').html(html);
@@ -34,6 +36,7 @@
             .click(function(el, a, b, c) {
                                                   showProgress();
               var url = jQuery.url(el.currentTarget.getAttribute('href'));
+              console.log(url);
               refreshAllActivityClick(url.param('page'));
 
               return (false);
@@ -41,6 +44,8 @@
       }
     });
   }
+
+  /*
 
   function refreshGroupActivityClick(page) {
     if(!page) page = 0;
@@ -109,7 +114,8 @@
       }
     });
   }
-
+  */
+ /*
   function refreshMyActivityClick(page) {
     if(!page) page = 0;
 
@@ -148,22 +154,26 @@
  * Main function, various click handlers.
  *
  */
+/*
   $(document).ready(function(){
     // Set click handlers to update feeds on click
     // This way we don't query the db unless we actually want the info
     $("#ui-id-1").mousedown(function(){
       refreshAllActivityClick();
     });
+    /*
     $("#ui-id-4").mousedown(function(){
       refreshGroupActivityClick();
     });
     $("#ui-id-2").mousedown(function(){
       refreshCommentActivityClick();
     });
+
     $("#ui-id-3").mousedown(function(){
       refreshMyActivityClick();
     });
 
   });
+  */
 
 })(jQuery);

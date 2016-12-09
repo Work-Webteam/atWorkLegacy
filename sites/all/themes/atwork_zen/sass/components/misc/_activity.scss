@@ -24,7 +24,7 @@
       }
       // Position most of the inner elements absolutely
       .comment-submit-button,
-      .date, 
+      .date,
       .links,
       .field-name-field-feed-like-button,
       .toggle-com-button {
@@ -38,6 +38,7 @@
       }
       .comment-submit-button {
         left: 0.5em;
+
       }
       .date {
         right: 0.5em;
@@ -53,7 +54,7 @@
       .toggle-com-button {
         right: 27em;
         background:none!important;
-        border:none; 
+        border:none;
         padding:0!important;
         font: inherit;
         color: #135ab0;
@@ -87,11 +88,10 @@
     .comment-submit-button-show,
     .field-name-field-profile-comment-show {
       display: block;
+
     }
   }
 }
-
-
 
 /*----------------- End User Page User Activity Feed --------------------*/
 

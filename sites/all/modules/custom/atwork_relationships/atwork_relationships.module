@@ -4,28 +4,11 @@ function atwork_relationships_init() {
   $js = <<<EOT
 function atwork_relationships_ajax_load(op, uid, rtid) {
   jQuery(".atwork-relationship-action.uid-" + uid).load("/atwork-relationship/" + op + "/" + uid + "/" + rtid);
-  jQuery(".block-refresh-button").each(function(){
-    jQuery(this).click();
-  });
   return false;
 }
 EOT;
 
-// This allows us to ajax block content on the profiles page
-
-  $js2 = <<<EOT
-jQuery(document).ready(function(){
-  jQuery(".atwork-relationship-action").mousedown(function(){
-    jQuery(".block-refresh-button").each(function(){
-      jQuery(this).click();
-    });
-  });
-});
-EOT;
-
     drupal_add_js($js, 'inline');
-    //drupal_add_js($js2, 'inline');
-
 }
 
 function atwork_relationships_get_link($account) {
@@ -98,68 +81,4 @@ function atwork_relationships_page_callback($op, $account, $id) {
 
 function atwork_relationships_delivery_callback($page_callback_result) {
   print $page_callback_result;
-}
-
-
-/**
- * Implements hook_user_view
- * Code that adds a follow button and ajax callbacks on profile pages
- */
-
-function atwork_relationships_user_view($account, $view_mode, $langcode) {
-  if($view_mode == 'full' && module_exists('user_relationships')){
-    global $user;
-    // User should not see their own follow button
-    if($account->uid === $user->uid){
-      return;
-    }
-
-    // Build a link and then wrap it in a button.
-    $relationship_link = atwork_relationships_get_link($account);
-    if (isset($account->content['field_gal_first_name'][0]['#markup'])) {
-      // Add button to the markup for first name (that is altered into full name)
-      // The full name part of this was moved from atwork_profiles - as noted there.
-      $account->content['field_gal_first_name'][0]['#markup'] = t(_atwork_full_name($account)) . $relationship_link ;
-    }
-    else {
-      $result->field_field_gal_title[0]['rendered']['#markup'] .= $relationship_link;
-    }
-  }
-}
-
-/**
- *  helper function to add in follow button on blog node view
- */
-function _atwork_relationships_button_add(&$output, $account){
-    // Build a link and then wrap it in a button.
-    $relationship_link = atwork_relationships_get_link($account);
-
-    return($output .= $relationship_link);
-}
-
-
-/**
- * Implementation of hook_block_view_MODULE_DELTA_alter
- * Code to show following/followers blocks only on user and user/* pages.
- */
-function atwork_relationships_block_view_alter(&$data, $block){
-  switch ($block->delta){
-    // Grab relationship blocks - same process on either, so we can fall through
-    case("people_admin-block_following"):
-    case("people_admin-block_followers"):
-      // Block is set, so lets check if we are on the right page
-      if(isset($block->visibility) && $block->visibility == 1){
-        $url_check = $_SERVER['REQUEST_URI'];
-        $url_parts_check = explode( '/', $url_check);
-        // Don't want to make the block disappear on ajax reload
-        if($url_parts_check[1] == "block_refresh"){
-          return;
-        }
-        // If we are down the path further than user/[idir], then hide these blocks
-        if(count($url_parts_check) > 3){
-          $data['content']['#access'] = false;
-        }
-      }
-    break;
-  }
 }

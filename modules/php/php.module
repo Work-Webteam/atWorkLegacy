@@ -83,6 +83,7 @@ function php_eval($code) {
 
   // Recover original theme path.
   $theme_path = $old_theme_path;
+
   return $output;
 }
 
