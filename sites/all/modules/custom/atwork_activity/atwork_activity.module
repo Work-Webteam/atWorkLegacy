@@ -23,7 +23,7 @@ function _atwork_activity_node_types() {
  * Implements hook_menu();
  */
 function atwork_activity_menu() {
-
+// TODO: Is this needed now? Seeing as we ajax this ourselves?
   $items['atwork-activity/all-activity'] = array(
     'title' => 'All Activity',
     'type' => MENU_CALLBACK,
@@ -82,6 +82,36 @@ function atwork_activity_form() {
         '#redirect' => FALSE,
       );
   return $form;
+}
+
+/*
+ * create a ststus content type for display in activity feeds
+ */
+function atwork_activity_form_submit(&$form, &$form_state) {
+
+  if (!isset($form_state['values']['status']) || !$form_state['values']['status']) {
+    return;
+  }
+
+  global $user;
+  $node = new stdClass();
+
+  $node->type = 'status';
+
+  node_object_prepare($node);
+  $node->language = LANGUAGE_NONE;
+  $node->uid = $user->uid;
+  $node->status = 1;
+  $node->promote = 0;
+  $node->comment = 2;
+
+  $node->body[$node->language][0]['value']   = $form_state['values']['status'];
+  $node->body[$node->language][0]['format']  = 'filtered_no_editor';
+
+  $node = node_submit($node);
+  node_save($node);
+
+  return ($form);
 }
 
 /**
@@ -174,36 +204,6 @@ function atwork_activity_customize_feed_form_validate($form, &$form_state){
     }
   }
   return;
-}
-
-/*
- * create a ststus content type for display in activity feeds
- */
-function atwork_activity_form_submit(&$form, &$form_state) {
-
-  if (!isset($form_state['values']['status']) || !$form_state['values']['status']) {
-    return;
-  }
-
-  global $user;
-  $node = new stdClass();
-
-  $node->type = 'status';
-
-  node_object_prepare($node);
-  $node->language = LANGUAGE_NONE;
-  $node->uid = $user->uid;
-  $node->status = 1;
-  $node->promote = 0;
-  $node->comment = 2;
-
-  $node->body[$node->language][0]['value']   = $form_state['values']['status'];
-  $node->body[$node->language][0]['format']  = 'filtered_no_editor';
-
-  $node = node_submit($node);
-  node_save($node);
-
-  return ($form);
 }
 
 /*
@@ -435,40 +435,39 @@ function atwork_activity_home_group_callback($all_args) {
  * Menu callback for an ajax-called activity feed on the homepage
  */
 function atwork_activity_home_all_callback() {
-  //if(isset($all_args) && $all_args === 'tab_1') {
-    $activityType = 0;
+  // TODO: Change what is called in the query depending on which boxes are checked.... Should this be done in a different function?
+  $activityType = 0;
 
-    $query = db_select('message', 'm');
+  $query = db_select('message', 'm');
 
-    $query->leftJoin('field_data_field_message_node', 'fmn', 'fmn.entity_id = m.mid');
-    $query->leftJoin('field_data_field_gallery', 'i', 'i.entity_id = fmn.field_message_node_target_id');
-    $query->leftJoin('field_data_field_gallery_status', 's', 's.entity_id = i.field_gallery_target_id');
-    $query->leftJoin('node', 'n', 'n.nid = fmn.field_message_node_target_id');
+  $query->leftJoin('field_data_field_message_node', 'fmn', 'fmn.entity_id = m.mid');
+  $query->leftJoin('field_data_field_gallery', 'i', 'i.entity_id = fmn.field_message_node_target_id');
+  $query->leftJoin('field_data_field_gallery_status', 's', 's.entity_id = i.field_gallery_target_id');
+  $query->leftJoin('node', 'n', 'n.nid = fmn.field_message_node_target_id');
 
-    $db_or = db_or();
-    $db_and = db_and();
-    $query
-      ->fields('m', array('mid'));
-      $db_and->condition('m.type', array('new_comment', 'new_node', /*'node_updated',*/ 'new_answer', 'new_image', 'following_user', 'status'), 'IN');
-      $db_and->condition('n.status', '1');
-      $db_and->condition('n.uid', array('0, 10'), 'NOT IN');
-      // Only want published, non-private galleries to be selected
-      $db_or->condition('s.field_gallery_status_value', '1');
-      $db_or->condition('s.field_gallery_status_value', NULL);
-      //$db_or->condition('s.field_gallery_status_value', 'none', IFNULL) ;
-      $db_and->condition($db_or);
-      $query->condition($db_and);
-      $query->orderBy('m.timestamp', 'DESC')
-      ->range(0, 100);
-    $result = $query
-      ->extend('PagerDefault')
-      ->limit(8)
-      ->execute()
-      ->fetchAll();
-    $output = _atwork_activity_render_messages($result, $activityType);
+  $db_or = db_or();
+  $db_and = db_and();
+  $query
+    ->fields('m', array('mid'));
+    $db_and->condition('m.type', array('new_comment', 'new_node', /*'node_updated',*/ 'new_answer', 'new_image', 'following_user', 'status'), 'IN');
+    $db_and->condition('n.status', '1');
+    $db_and->condition('n.uid', array('0, 10'), 'NOT IN');
+    // Only want published, non-private galleries to be selected
+    $db_or->condition('s.field_gallery_status_value', '1');
+    $db_or->condition('s.field_gallery_status_value', NULL);
+    //$db_or->condition('s.field_gallery_status_value', 'none', IFNULL) ;
+    $db_and->condition($db_or);
+    $query->condition($db_and);
+    $query->orderBy('m.timestamp', 'DESC')
+    ->range(0, 100);
+  $result = $query
+    ->extend('PagerDefault')
+    ->limit(8)
+    ->execute()
+    ->fetchAll();
+  $output = _atwork_activity_render_messages($result, $activityType);
 
-    return($output);
-  //}
+  return($output);
 }
 
 /*
@@ -507,6 +506,7 @@ function atwork_activity_home_comment_callback($all_args) {
 /*
  * Menu callback for an ajax-called activity feed on the homepage
  */
+/*
 function atwork_activity_home_my_callback($all_args) {
   if(isset($all_args) && $all_args === 'tab_3') {
     _atwork_activity_ajax_header();
@@ -537,6 +537,7 @@ function atwork_activity_home_my_callback($all_args) {
     die($output);
   }
 }
+*/
 
 /*
  * A user page of an activity feed. Includes the "what's going on?" form
@@ -1353,6 +1354,7 @@ function _atwork_activity_profile_page_block_content($user_id){
   $messages1 = entity_load('message', $result_mid);
   //dpm($messages1);
   // Now remove all unwanted messages
+  // TODO: Instead of removing messages, we should move this into the query (as seen in front page feed query)
   foreach($messages1 as $key=>$value){
     switch(true){
       case($value->type == "user_received_ecard"):
@@ -1428,6 +1430,7 @@ function _atwork_activity_profile_page_block_content($user_id){
   $output = render($form);
   $output .= '<div id="activity-feed">' ;
 
+  // This is for the pager - but we don't need this if we clean up our query above
   if(isset($message_render_array) && $message_render_array){
     $pager_number = pager_array_splice($message_render_array['message'], 10);
   }
@@ -1523,6 +1526,7 @@ function _atwork_activity_profile_page_block_content($user_id){
  * A generic array pager for Drupal
  * Found here:
  * https://www.drupal.org/docs/7/creating-custom-modules/howtos/paging-non-sql-data
+ * TODO: We  may no longer need this if we fix our query in the profile page view.
  */
 function pager_array_splice($data, $limit = 9, $element = 0) {
   if(empty($data)){
@@ -1567,7 +1571,7 @@ function atwork_activity_mail_alter(&$email_message) {
 
 /**
  * Implementation of hook_block_view_alter
- * Code to show following/followers blocks only on user and user/* pages.
+ * Code to show activity feed block only on user and user/* pages.
  */
 function atwork_activity_block_view_alter(&$data, $block){
   switch ($block->delta){
