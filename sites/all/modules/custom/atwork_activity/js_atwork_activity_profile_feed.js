@@ -1,5 +1,4 @@
 (function ($) {
-
   /**
    * Global variables so that we don't lose them on refresh
    */
@@ -27,7 +26,7 @@
     attach: function (context, settings) {
     // Page refresh should occur every 5 seconds after initial load
     if(refreshFeed === false && timer=== false){ // Don't want to set this twice
-      setFeedInterval();
+      //setFeedInterval();
     }
 
     //Unless someone is typing in a text field
@@ -55,6 +54,11 @@
       resetTimer();
       return;
     });
+
+    $(".toggle-com-button").click(function(){ 
+      toggleCommentVis($(this));
+    });
+
 
     /**
      * Function that allows us to set links, show page the way we would like to at initial refresh
@@ -178,17 +182,15 @@
    }
   };
 
-  // This section is for toggling visibility of the comments textarea and submit button
-  $(function() {
-    // comment submit and textarea are initially hidden with css
+  /**
+   * Function to accept 'this' argument from click handler 
+   * to toggle visibility on comment for elements
+   */
+  function toggleCommentVis(thisObj){
+    thisObj.nextAll(".comment-submit-button").toggleClass("comment-submit-button-show");
+    thisObj.nextAll(".field-name-field-profile-comment").toggleClass("field-name-field-profile-comment-show");
+  };
 
-    // next, allow the toggle button to show/hide comment elements
-    $(".toggle-com-button").click(function(e) {
-      e.preventDefault(); 
-      $(this).nextAll(".comment-submit-button").toggleClass("comment-submit-button-show");
-      $(this).nextAll(".field-name-field-profile-comment").toggleClass("field-name-field-profile-comment-show");
-    });
-});
 
 }(jQuery));
 
