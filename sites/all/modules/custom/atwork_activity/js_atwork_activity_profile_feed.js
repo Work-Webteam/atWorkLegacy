@@ -26,7 +26,7 @@
     attach: function (context, settings) {
     // Page refresh should occur every 5 seconds after initial load
     if(refreshFeed === false && timer=== false){ // Don't want to set this twice
-      //setFeedInterval();
+      setFeedInterval();
     }
 
     //Unless someone is typing in a text field
@@ -58,7 +58,6 @@
     $(".toggle-com-button").click(function(){ 
       toggleCommentVis($(this));
     });
-
 
     /**
      * Function that allows us to set links, show page the way we would like to at initial refresh
