@@ -59,7 +59,6 @@
       toggleCommentVis($(this));
     });
 
-
     /**
      * Function that allows us to set links, show page the way we would like to at initial refresh
      */
