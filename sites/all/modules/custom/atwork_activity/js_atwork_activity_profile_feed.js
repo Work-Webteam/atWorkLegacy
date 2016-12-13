@@ -184,7 +184,7 @@
 
     // next, allow the toggle button to show/hide comment elements
     $(".toggle-com-button").click(function(e) {
-      e.preventDefault(); 
+      e.preventDefault();
       $(this).nextAll(".comment-submit-button").toggleClass("comment-submit-button-show");
       $(this).nextAll(".field-name-field-profile-comment").toggleClass("field-name-field-profile-comment-show");
     });

@@ -122,28 +122,36 @@ function atwork_activity_customize_feed_form(){
   global $user;
   $current_user = user_load($user->uid);
 
-  // We have saved our preference before
-  $choices = array(
-    'my_actions' => t('My Actions'),
-    'actions_of_colleagues' => t('Actions of My Colleages'),
-    'connections_between_colleagues' => t('Connections Between Colleagues'),
-    'joined_group' => t('Joined a Group'),
-    'answered_a_question' => t('Answered a Question'),
-    'comments' => t('Comments'),
-    'images' => t('Images'),
-    'content' => t('Content'),
-    'status_updates' => t('Status Updates'),
-    'profile_updates' => t('Profile Updates'),
-  );
-  // TODO: Require group activity here
-    $options = field_get_items('user', $current_user, 'field_feed_options');
+  // Need to grab all of the possible field choices
+  $field = field_info_field('field_field_feed_options');
+  // Get the instance package
+  $instance = field_info_instance('user', 'field_field_feed_options', 'user');
+  // Now we have the ability to get all default values
+  $defvalue = field_get_default_value('user', $current_user, $field, $instance);
+  $choices = array();
+  // Duplicate these choices for our custom form
+  foreach($defvalue as $key=>$value){
+    //Get proper name/markup, $value is the list number in the field we created for the profile/user object
+    $field_name = field_view_value('user', $current_user, 'field_field_feed_options', $value);
+    // Roll it all into our array
+    $choices[$value['value']] = $field_name['#markup'];
+  }
 
+  // TODO: Require group activity here
+  // Now gather the users previously saved preferences if they have any
+    $options = field_get_items('user', $current_user, 'field_field_feed_options');
+
+    // User has set options
     if(isset($options) && !empty($options)){
-      $i = 0;
       foreach($options as $key=>$value){
-        $checked_value = field_view_value('user', $current_user, 'field_feed_options', $options[$key]);
-        // TODO: We need to find a way to create an array from $user field that has expected values for this form. There needs to be crosover in naming systems.
-        $default_array = "joined_group";
+        $checked_value = field_view_value('user', $current_user, 'field_field_feed_options', $options[$key]);
+        // Create an array of settings that the user has previously set
+        $default_array[$value['value']] = $checked_value['#markup'];
+      }
+    } else {
+      // They have no saved preferences, so we turn everything on.
+      foreach($choices as $key=>$value){
+        $default_array[$key] = $value;
       }
     }
   // Now build the form
@@ -153,21 +161,29 @@ function atwork_activity_customize_feed_form(){
     '#type' => 'checkboxes',
     '#description' => t('Select what type of content you would like to show up in your feed'),
     '#options' => $choices,
-    '#default_value' => array($default_array),
+    '#default_value' => array(),
     );
   $form['update'] = array(
         '#type' => 'button', // We lose ajax if we make this a true Submit - we will manually save the entity in our callback
         '#value' => t('Update'), // To differentiate it from the normal submit button
-        '#prefix' => '<div id="atus-submit-button">',
+        '#prefix' => '<div id="home-status-preference-button">',
         '#suffix' => '</div>',
         '#ajax' => array(
           'callback' => 'atwork_activity_advanced_feed_settings_submit_callback',
           'wrapper' => 'feed-settings-submit-button',
           'event' => 'click',
         ),
-        '#weight' => 99, // Want this at the bottom, just ahead of the footer.
+        '#weight' => 99, // Want this at the bottom of this form section.
         '#redirect' => FALSE,
       );
+  // Now we auto-check the users preferences here, so it reflects what they are seeing in the feed.
+  // $default_array should always be set
+  if(isset($default_array) && !empty($default_array)){
+    foreach($default_array as $key=>$value){
+      $form['feed_choices']['#default_value'][] = $key;
+    }
+  }
+
   return $form;
 }
 
@@ -745,7 +761,6 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
   if($form_id === "atwork_activity_customize_feed_form"){
     global $user;
     $current_user = user_load($user->uid);
-    dpm($form);
   }
 }
 
