@@ -122,38 +122,24 @@ function atwork_activity_customize_feed_form(){
   global $user;
   $current_user = user_load($user->uid);
 
-  // Need to grab all of the possible field choices
-  $field = field_info_field('field_field_feed_options');
-  // Get the instance package
-  $instance = field_info_instance('user', 'field_field_feed_options', 'user');
-  // Now we have the ability to get all default values
-  $defvalue = field_get_default_value('user', $current_user, $field, $instance);
-  $choices = array();
-  // Duplicate these choices for our custom form
-  foreach($defvalue as $key=>$value){
-    //Get proper name/markup, $value is the list number in the field we created for the profile/user object
-    $field_name = field_view_value('user', $current_user, 'field_field_feed_options', $value);
-    // Roll it all into our array
-    $choices[$value['value']] = $field_name['#markup'];
-  }
-
+  $choices = get_all_default_choices('field_feed_options');
   // TODO: Require group activity here
   // Now gather the users previously saved preferences if they have any
-    $options = field_get_items('user', $current_user, 'field_field_feed_options');
+  $options = field_get_items('user', $current_user, 'field_feed_options');
 
-    // User has set options
-    if(isset($options) && !empty($options)){
-      foreach($options as $key=>$value){
-        $checked_value = field_view_value('user', $current_user, 'field_field_feed_options', $options[$key]);
-        // Create an array of settings that the user has previously set
-        $default_array[$value['value']] = $checked_value['#markup'];
-      }
-    } else {
-      // They have no saved preferences, so we turn everything on.
-      foreach($choices as $key=>$value){
-        $default_array[$key] = $value;
-      }
+  // User has set options
+  if(isset($options) && !empty($options)){
+    foreach($options as $key=>$value){
+      $checked_value = field_view_value('user', $current_user, 'field_feed_options', $options[$key]);
+      // Create an array of settings that the user has previously set
+      $default_array[$value['value']] = $checked_value['#markup'];
     }
+  } else {
+    // They have no saved preferences, so we turn everything on.
+    foreach($choices as $key=>$value){
+      $default_array[$key] = $value;
+    }
+  }
   // Now build the form
   $form = array();
   $form['feed_choices'] = array(
@@ -183,9 +169,32 @@ function atwork_activity_customize_feed_form(){
       $form['feed_choices']['#default_value'][] = $key;
     }
   }
-
   return $form;
 }
+
+/**
+ * Helper function that returns default values for one user field
+ */
+function get_all_default_choices($chosen_field){
+  global $user;
+  $current_user = user_load($user->uid);
+  // Need to grab all of the possible field choices
+  $field = field_info_field($chosen_field);
+  // Get the instance package
+  $instance = field_info_instance('user', $chosen_field, 'user');
+  // Now we have the ability to get all default values
+  $defvalue = field_get_default_value('user', $current_user, $field, $instance);
+  $choices = array();
+  // Duplicate these choices for our custom form
+  foreach($defvalue as $key=>$value){
+    //Get proper name/markup, $value is the list number in the field we created for the profile/user object
+    $field_name = field_view_value('user', $current_user, $chosen_field, $value);
+    // Roll it all into our array
+    $choices[$value['value']] = $field_name['#markup'];
+  }
+  return ($choices);
+}
+
 
 /**
  * submit handler for the homepage feed settings - need to update and save these for the user
@@ -196,11 +205,20 @@ function atwork_activity_advanced_feed_settings_submit_callback($form, &$form_st
   $current_user = user_load($user->uid);
   // Update users fields
   if(isset($form_state['values']['feed_choices']) && $form_state['values']['feed_choices']){
-    // what is the proper way for this to be set?
-    // TODO : Need to set this up properly in the user array, then save user.
+    // Remove old choices, Users must have at least one choice to reach this stage
+    unset($current_user->field_feed_options['und']);
+    $i = 0;
+    // Add in current choices from form
+    dpm($form_state);
+    foreach($form_state['values']['feed_choices'] as $key=>$value){
+      if($value > 0){
+        $current_user->field_feed_options['und'][$i]['value'] = $value;
+        $i++;
+      }
+    }
+      // Save user to save the fields so we can save users preferences.
+    user_save($current_user);
   }
-  // Save user to save the fields so we can save users preferences.
-  //user_save($current_user);
   return;
 }
 
@@ -343,6 +361,7 @@ function _atwork_activity_render_messages($result, $activityType) {
 /*
  * Menu callback for an ajax-called activity feed on a group homepage
  */
+/*
 function atwork_activity_group_callback($node) {
   $og_context = og_context('node', $node);
   $activityType = 2;
@@ -390,10 +409,11 @@ function atwork_activity_group_callback($node) {
 
   die($output);
 }
-
+ */
 /*
  * Menu callback for an ajax-called activity feed on the homepage
  */
+/*
 function atwork_activity_home_group_callback($all_args) {
   $activityType = 2;
 
@@ -446,6 +466,83 @@ function atwork_activity_home_group_callback($all_args) {
   }
 
 }
+*/
+
+
+/**
+ * Helper function that grabs all of the users choices, puts them in an array, and returns them.
+ */
+function feed_message_choices(){
+  global $user;
+  $current_user = user_load($user->uid);
+  $user_selection = array();
+  // Now gather the users previously saved preferences if they have any
+  $options = field_get_items('user', $current_user, 'field_feed_options');
+  // User has set options
+  if(isset($options) && !empty($options)){
+    foreach($options as $key=>$value){
+      $checked_value = field_view_value('user', $current_user, 'field_feed_options', $options[$key]);
+      // Create an array of settings that the user has previously set
+      $user_selection[] = $checked_value['#markup'];
+    }
+  } else {
+    // They have no saved preferences, so we turn everything on.
+    $choices = get_all_default_choices('field_feed_options');
+    foreach($choices as $key=>$value){
+      $user_selection[] = $value;
+    }
+  }
+  $return_array = homepage_choices_match($user_selection);
+  return($return_array);
+}
+
+/**
+ * Helper function that matches choices to mysql field names.
+ */
+function homepage_choices_match($user_selection){
+  $key_array = array(
+    'My Actions' => 'user_feed',
+    'Actions of My Colleagues' => 'all_activity',
+    'Connections Between Colleagues' => 'following_user',
+    'Comments' => 'new_comment',
+    'Content' => 'new_node',
+    'Images' => 'new_image',
+    'Status Update' => 'status',
+    'Answered a Question' => 'new_answer'
+    );
+  $query_array = array();
+  foreach($user_selection as $key=>$value){
+    if(array_key_exists($value, $key_array)){
+      array_push($query_array, $key_array[$value]);
+    }
+  }
+  return $query_array;
+}
+
+/**
+ * Query building function for individuals feed
+ */
+function user_feed_query($choices){
+  global $user;
+  $current_user = user_load($user->uid);
+  $uids = array();
+  // Need at least this users uid
+  array_push($uids, $current_user->uid);
+
+  //Check if we are collecting followers actions as well
+  if(in_array("following_user", $choices)){
+    //TODO create a query that collects the uid of all users this user is following
+    $query = db_select('user_relationships', 'u')
+      ->condition('u.requester_id', $current_user->uid, '=')
+      ->fields('u', array('requestee_id'));
+    $result = $query->execute();
+    foreach($result as $record){
+      array_push($uids, $record->requestee_id);
+    }
+  }
+  dpm($uids);
+  return $query;
+}
 
 /*
  * Menu callback for an ajax-called activity feed on the homepage
@@ -453,6 +550,17 @@ function atwork_activity_home_group_callback($all_args) {
 function atwork_activity_home_all_callback() {
   // TODO: Change what is called in the query depending on which boxes are checked.... Should this be done in a different function?
   $activityType = 0;
+  // Get the choices that the user has selected
+  $feed_message_choices = feed_message_choices();
+  // Check if this is "My Feed" or "All Activity"
+  if(in_array("user_feed", $feed_message_choices)){
+    // Remove this from array - it should not be part of query
+    $position = array_search("user_feed", $feed_message_choices);
+    unset($feed_message_choices[$position]);
+    $query = user_feed_query($feed_message_choices);
+  }
+  global $user;
+  $current_user = user_load($user->uid);
 
   $query = db_select('message', 'm');
 
@@ -465,7 +573,7 @@ function atwork_activity_home_all_callback() {
   $db_and = db_and();
   $query
     ->fields('m', array('mid'));
-    $db_and->condition('m.type', array('new_comment', 'new_node', /*'node_updated',*/ 'new_answer', 'new_image', 'following_user', 'status'), 'IN');
+    $db_and->condition('m.type', $feed_message_choices, 'IN');
     $db_and->condition('n.status', '1');
     $db_and->condition('n.uid', array('0, 10'), 'NOT IN');
     // Only want published, non-private galleries to be selected
@@ -759,8 +867,7 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
 
   }
   if($form_id === "atwork_activity_customize_feed_form"){
-    global $user;
-    $current_user = user_load($user->uid);
+    dpm($form_state);
   }
 }
 
