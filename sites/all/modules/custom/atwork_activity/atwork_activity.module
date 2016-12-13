@@ -531,7 +531,7 @@ function user_feed_query($choices){
 
   //Check if we are collecting followers actions as well
   if(in_array("following_user", $choices)){
-    //TODO create a query that collects the uid of all users this user is following
+    //create a query that collects the uid of all users this user is following
     $query = db_select('user_relationships', 'u')
       ->condition('u.requester_id', $current_user->uid, '=')
       ->fields('u', array('requestee_id'));
@@ -540,8 +540,9 @@ function user_feed_query($choices){
       array_push($uids, $record->requestee_id);
     }
   }
-  dpm($uids);
-  return $query;
+  // TODO: Now we need to create our larger query
+
+  return $user_feed_query;
 }
 
 /*
@@ -867,7 +868,7 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
 
   }
   if($form_id === "atwork_activity_customize_feed_form"){
-    dpm($form_state);
+
   }
 }
 
