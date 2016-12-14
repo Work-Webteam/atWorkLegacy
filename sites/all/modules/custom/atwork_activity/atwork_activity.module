@@ -661,6 +661,7 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
       '#type' => 'button',
       '#attributes' => array(
         'onclick' => 'return (false);',
+        'name' => 'toggle button',
         'class' => array('toggle-com-button')
         ),
       '#value' => t('Comment'),

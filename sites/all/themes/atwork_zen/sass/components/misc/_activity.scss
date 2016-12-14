@@ -96,11 +96,11 @@
     }
     // Initially hide the comment textarea and submit button and unhide with .js
     .comment-submit-button,
-    .field-name-field-profile-comment {
+    .field-name-field-profile-comment .form-textarea-wrapper {
       display: none;
     }
     .comment-submit-button-show,
-    .field-name-field-profile-comment-show {
+    .field-name-field-profile-comment-show .form-textarea-wrapper {
       display: block;
     }
   }

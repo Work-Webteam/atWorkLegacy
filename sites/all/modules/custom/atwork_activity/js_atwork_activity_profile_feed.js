@@ -186,8 +186,8 @@
    * to toggle visibility on comment for elements
    */
   function toggleCommentVis(thisObj){
-    thisObj.nextAll(".comment-submit-button").toggleClass("comment-submit-button-show", 'slow', "easeOutSine");
-    thisObj.nextAll(".field-name-field-profile-comment").toggleClass("field-name-field-profile-comment-show", 'slow', "easeOutSine");
+    thisObj.nextAll(".comment-submit-button").toggleClass("comment-submit-button-show");
+    thisObj.nextAll(".field-name-field-profile-comment").toggleClass("field-name-field-profile-comment-show");
     // change the value of the thisObj button
     if ($.trim($(thisObj).attr("value")) === 'Comment') {
       $(thisObj).val('Cancel');
