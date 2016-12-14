@@ -260,7 +260,6 @@ function _atwork_activity_render_messages($result, $activityType) {
   // Create two links that will change the choices below to give the illusion of two seperate tabs
   // Use JQuery to refresh the block with the new choices.
 
-
   // Get the advanced choices form
   $adv_form = drupal_get_form('atwork_activity_customize_feed_form');
   $output = '<div id="atwork-advanced-feed-settings">';
@@ -274,7 +273,6 @@ function _atwork_activity_render_messages($result, $activityType) {
 
   $i = 1;
   $msgCount = 0;
-
   if($result != 'error'){
     foreach($result as $value){
       $result_mid[] = $value->mid;
@@ -282,7 +280,6 @@ function _atwork_activity_render_messages($result, $activityType) {
     // Load entities and all related content
     $messages = entity_load('message', $result_mid);
     $message_render_array = entity_view('message', $messages);
-
 
     foreach ($message_render_array['message'] as $message) {
       $classes = array();
@@ -299,7 +296,6 @@ function _atwork_activity_render_messages($result, $activityType) {
       $msgCount++;
 
       $render = 1;
-
       if($message['#entity']->type == 'new_image'){
 
         $q = db_select('field_data_field_message_node', 'fmn')
@@ -502,13 +498,17 @@ function feed_message_choices(){
 function homepage_choices_match($user_selection){
   $key_array = array(
     'My Actions' => 'user_feed',
-    'Actions of My Colleagues' => 'all_activity',
+    'Actions by Colleagues I Follow' => 'following_actions',
+    'All Activity' => 'all_activity',
     'Connections Between Colleagues' => 'following_user',
     'Comments' => 'new_comment',
     'Content' => 'new_node',
     'Images' => 'new_image',
-    'Status Update' => 'status',
-    'Answered a Question' => 'new_answer'
+    'Status Updates' => 'status',
+    'Answered a Question' => 'new_answer',
+    'Profile Updates' => 'updated_user',
+    'Group Subscriptions' => 'group_subscribe',
+    'Activity In My Groups' => 'group_activity',
     );
   $query_array = array();
   foreach($user_selection as $key=>$value){
@@ -530,7 +530,9 @@ function user_feed_query($choices){
   array_push($uids, $current_user->uid);
 
   //Check if we are collecting followers actions as well
-  if(in_array("following_user", $choices)){
+  if(in_array("following_actions", $choices)){
+    // Add employee news
+    array_push($uids, 0);
     //create a query that collects the uid of all users this user is following
     $query = db_select('user_relationships', 'u')
       ->condition('u.requester_id', $current_user->uid, '=')
@@ -540,9 +542,61 @@ function user_feed_query($choices){
       array_push($uids, $record->requestee_id);
     }
   }
-  // TODO: Now we need to create our larger query
 
-  return $user_feed_query;
+  // If we are also looking for group info - grab that here
+  if(in_array("group_activity", $choices)){
+    $og_subquery = db_select('node', 'node')
+      ->fields('node', array('nid'));
+
+    $og_subquery->leftJoin('og_membership', 'og_nodes', "node.nid = og_nodes.etid AND og_nodes.entity_type = 'node' AND og_nodes.group_type = 'node' AND og_nodes.state = 1");
+    $og_subquery->leftJoin('og_membership', 'og_user', "og_nodes.gid = og_user.gid AND og_user.entity_type = 'user' AND og_user.group_type = 'node' AND og_user.state = 1 AND og_user.etid = :current_user", array(':current_user' => $current_user->uid));
+
+    $og_subquery->where('og_user.etid = :current_user', array(':current_user' => $user->uid))
+     ->where('node.status = 1');
+  }
+
+  // TODO: Now we need to create our larger query
+  $user_feed_query = db_select('message', 'm');
+
+  $user_feed_query->leftJoin('field_data_field_message_node', 'fmn', 'fmn.entity_id = m.mid');
+  $user_feed_query->leftJoin('field_data_field_gallery', 'i', 'i.entity_id = fmn.field_message_node_target_id');
+  $user_feed_query->leftJoin('field_data_field_gallery_status', 's', 's.entity_id = i.field_gallery_target_id');
+  $user_feed_query->leftJoin('node', 'n', 'n.nid = fmn.field_message_node_target_id');
+
+  $db_or = db_or();
+  $db_or2 = db_or();
+  $db_and = db_and();
+  $user_feed_query
+    ->fields('m', array('mid'));
+    $db_and->condition('m.type', $choices, 'IN');
+    // User and their followers
+    if(isset($og_subquery)){
+
+      $db_or2
+        ->condition('m.uid', $uids, 'IN')
+        ->condition('fmn.field_message_node_target_id', $og_subquery, 'IN');
+    } else {
+      $db_and->condition('m.uid', $uids, 'IN');
+    }
+    // Must be published, unless message is only a message and not a node
+    $db_or2->condition('n.status', '1');
+    $db_or2->condition('m.type', array('following_user','updated_user'), 'IN');
+
+    // Only want published, non-private galleries to be selected
+    $db_or->condition('s.field_gallery_status_value', '1');
+    $db_or->condition('s.field_gallery_status_value', NULL);
+    //$db_or->condition('s.field_gallery_status_value', 'none', IFNULL) ;
+    $db_and->condition($db_or2);
+    $db_and->condition($db_or);
+    $user_feed_query->condition($db_and);
+    $user_feed_query->orderBy('m.timestamp', 'DESC')
+    ->range(0, 100);
+  $result = $user_feed_query
+    ->extend('PagerDefault')
+    ->limit(8)
+    ->execute()
+    ->fetchAll();
+  return $result;
 }
 
 /*
@@ -558,38 +612,9 @@ function atwork_activity_home_all_callback() {
     // Remove this from array - it should not be part of query
     $position = array_search("user_feed", $feed_message_choices);
     unset($feed_message_choices[$position]);
-    $query = user_feed_query($feed_message_choices);
+    $result = user_feed_query($feed_message_choices);
   }
-  global $user;
-  $current_user = user_load($user->uid);
 
-  $query = db_select('message', 'm');
-
-  $query->leftJoin('field_data_field_message_node', 'fmn', 'fmn.entity_id = m.mid');
-  $query->leftJoin('field_data_field_gallery', 'i', 'i.entity_id = fmn.field_message_node_target_id');
-  $query->leftJoin('field_data_field_gallery_status', 's', 's.entity_id = i.field_gallery_target_id');
-  $query->leftJoin('node', 'n', 'n.nid = fmn.field_message_node_target_id');
-
-  $db_or = db_or();
-  $db_and = db_and();
-  $query
-    ->fields('m', array('mid'));
-    $db_and->condition('m.type', $feed_message_choices, 'IN');
-    $db_and->condition('n.status', '1');
-    $db_and->condition('n.uid', array('0, 10'), 'NOT IN');
-    // Only want published, non-private galleries to be selected
-    $db_or->condition('s.field_gallery_status_value', '1');
-    $db_or->condition('s.field_gallery_status_value', NULL);
-    //$db_or->condition('s.field_gallery_status_value', 'none', IFNULL) ;
-    $db_and->condition($db_or);
-    $query->condition($db_and);
-    $query->orderBy('m.timestamp', 'DESC')
-    ->range(0, 100);
-  $result = $query
-    ->extend('PagerDefault')
-    ->limit(8)
-    ->execute()
-    ->fetchAll();
   $output = _atwork_activity_render_messages($result, $activityType);
 
   return($output);
