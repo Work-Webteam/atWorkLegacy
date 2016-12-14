@@ -554,6 +554,8 @@ function user_feed_query($choices){
     $og_subquery->where('og_user.etid = :current_user', array(':current_user' => $user->uid))
      ->where('node.status = 1');
   }
+  // TODO: This needs to be extended to all content types - and also tested against other message types (i.e. does comments have to go here too?)
+  $node_type = array("article", "blog");
 
   // TODO: Now we need to create our larger query
   $user_feed_query = db_select('message', 'm');
@@ -566,6 +568,7 @@ function user_feed_query($choices){
   $db_or = db_or();
   $db_or2 = db_or();
   $db_and = db_and();
+  $db_and2 = db_and();
   $user_feed_query
     ->fields('m', array('mid'));
     $db_and->condition('m.type', $choices, 'IN');
@@ -579,7 +582,10 @@ function user_feed_query($choices){
       $db_and->condition('m.uid', $uids, 'IN');
     }
     // Must be published, unless message is only a message and not a node
-    $db_or2->condition('n.status', '1');
+    $db_and2->condition('n.status', '1');
+    $db_and2->condition('n.type', $node_type, 'IN');
+    $db_or2->condition($db_and2);
+
     $db_or2->condition('m.type', array('following_user','updated_user'), 'IN');
 
     // Only want published, non-private galleries to be selected
