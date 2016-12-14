@@ -121,7 +121,7 @@ function profile_feed_comments_image_default_styles() {
       98 => array(
         'name' => 'image_scale',
         'data' => array(
-          'width' => 40,
+          'width' => 45,
           'height' => '',
           'upscale' => 0,
         ),
