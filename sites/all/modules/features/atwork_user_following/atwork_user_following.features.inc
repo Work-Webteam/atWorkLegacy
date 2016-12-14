@@ -36,7 +36,7 @@ function atwork_user_following_image_default_styles() {
       96 => array(
         'name' => 'image_scale',
         'data' => array(
-          'width' => 60,
+          'width' => 70,
           'height' => '',
           'upscale' => 0,
         ),

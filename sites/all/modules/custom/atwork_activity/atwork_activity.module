@@ -225,13 +225,13 @@ function _atwork_activity_render_messages($result, $activityType) {
       // Check if an image exists:
       if(isset($author->field_image) && $author->field_image){
         // If it does, then grab a renderable view of it
-        $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
+        $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
       } else {
         // Default image isn't always repopulated into $author->field_image after an ajax reload - so if it is missng and they have not saved a personal image, then lets reset the default image
         $profile_image_field = field_info_instance('user', 'field_image', 'user');
         $default_fid = $profile_image_field['settings']['default_image'];
         $author->field_image[] = file_load($default_fid);
-        $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
+        $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
       }
 
       if($render)
@@ -696,7 +696,7 @@ function atwork_activity_entity_view_alter(&$build, $type){
     // Add a link to their profile to encourage connections
     $build["field_display_name"][0]['#markup'] = ' by <a href="/employees/' . $author->name . '"> ' . $build["field_display_name"][0]['#markup'] . '</a>';
     // Add image to the comment
-    $image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
+    $image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
     // Now lets set a more dynamic date
     $current_time = time();
     $post_time = $build['field_profile_comment_date']['#object']->field_profile_comment_date['und'][0]['value'];
@@ -1386,13 +1386,13 @@ function _atwork_activity_profile_page_block_content($user_id){
       // Check if an image exists:
       if(isset($author->field_image) && $author->field_image){
         // If it does, then grab a renderable view of it
-        $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
+        $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
       } else {
         // Default image isn't always repopulated into $author->field_image after an ajax reload - so if it is missng and they have not saved a personal image, then lets reset the default image
         $profile_image_field = field_info_instance('user', 'field_image', 'user');
         $default_fid = $profile_image_field['settings']['default_image'];
         $author->field_image[] = file_load($default_fid);
-        $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'icon_image')));
+        $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
       }
 
       // Handle following wording case
