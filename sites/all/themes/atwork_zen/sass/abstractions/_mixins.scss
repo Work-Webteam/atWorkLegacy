@@ -1,4 +1,7 @@
 
+
+// ---------- Buttons
+
 @mixin button-small {
   -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
   -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -22,7 +25,7 @@
   text-indent:0;
   border:1px solid #dcdcdc;
   display:inline-block;
-  color:#777777;
+  color:#666666;
   font-family:Arial;
   font-size:10px;
   font-weight:bold;
@@ -45,3 +48,13 @@
   }
 }
 
+
+// ---------- Quotes
+@mixin quotes-open {
+      content:"\201C";
+      font-size: 2em;
+      color: lighten(#000000, 70%);
+      font-family: Georgia, serif;
+      position: relative;
+      top: 6px;
+}

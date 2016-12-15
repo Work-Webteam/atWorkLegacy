@@ -149,6 +149,37 @@
 
 /*----------------- Comment Replies --------------------*/
 
+.field-name-field-profile-comment-date,
+.field-name-field-display-name {
+  font-size: smaller;
+  opacity: 0.7;
+}
+
+.field-name-field-display-name {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  left: inherit !important;
+}
+
+div.reply {
+  border: 1px solid #e0e0e0;
+  position: relative;
+  margin-bottom: 1em;
+  &:nth-child(even) {
+    background-color: #fcfcfc;
+  }
+  &:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  .field-name-field-profile-comment {
+    margin: 1em 0;
+    .field-item:before {
+      @include quotes-open;
+    }
+  }
+}
+
 .reply-body,
 .reply-links {
   padding: 0.3em;
