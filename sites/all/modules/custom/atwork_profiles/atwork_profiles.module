@@ -1703,10 +1703,6 @@ function atwork_profiles_form_views_exposed_form_alter(&$form, &$form_state, $fo
  */
 function atwork_profiles_block_info() {
   // This example comes from node.module.
-  $blocks['header'] = array(
-    'info' => t('Header Block'),
-    'cache' => DRUPAL_NO_CACHE,
-  );
   $blocks['bio-toggle'] = array(
     'info' => t('Extended Profile Toggle'),
     'status' => TRUE,
@@ -1714,7 +1710,10 @@ function atwork_profiles_block_info() {
     'visibility' => BLOCK_VISIBILITY_LISTED,
     'pages' => 'employees/*',
   );
-
+  $blocks['header'] = array(
+    'info' => t('Header Block'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
   return $blocks;
 }
 
@@ -1727,7 +1726,7 @@ function atwork_profiles_block_view($delta = '') {
   switch ($delta) {
     case 'bio-toggle':
       $block['subject'] = t('');
-      $block['content'] = '<button id="clickmeplease">Toggle Bio</button>';
+      $block['content'] = '<button id="bio-toggle-button">Read More</button>';
       drupal_add_js(drupal_get_path('module', 'atwork_profiles') . '/atwork_profiles_2.js');
     break;
 

@@ -1,8 +1,19 @@
-
-
 // ---------- Buttons
 
-@mixin button-small {
+@mixin button-normal {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  background: #f1f1f1;
+  padding: 2px 8px;
+  border: 1px solid #a9a9a9;
+  &:hover {
+    background: #c1c1c1;
+  }
+}
+
+
+@mixin button-small {// rounded small grey button
   -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
   -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
   box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -51,10 +62,10 @@
 
 // ---------- Quotes
 @mixin quotes-open {
-      content:"\201C";
-      font-size: 2em;
-      color: lighten(#000000, 70%);
-      font-family: Georgia, serif;
-      position: relative;
-      top: 6px;
+  content:"\201C";
+  font-size: 2em;
+  color: lighten(#000000, 70%);
+  font-family: Georgia, serif;
+  position: relative;
+  top: 6px;
 }
