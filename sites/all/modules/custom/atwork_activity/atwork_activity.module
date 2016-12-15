@@ -209,7 +209,6 @@ function atwork_activity_advanced_feed_settings_submit_callback($form, &$form_st
     unset($current_user->field_feed_options['und']);
     $i = 0;
     // Add in current choices from form
-    dpm($form_state);
     foreach($form_state['values']['feed_choices'] as $key=>$value){
       if($value > 0){
         $current_user->field_feed_options['und'][$i]['value'] = $value;
@@ -227,6 +226,7 @@ function atwork_activity_advanced_feed_settings_submit_callback($form, &$form_st
  */
 function atwork_activity_customize_feed_form_validate($form, &$form_state){
   $form_set = false;
+  dpm($form_state);
   // Make sure we have at least something checked
   foreach ($form_state['values']['feed_choices'] as $key => $value) {
     if($value !== 0){
@@ -273,7 +273,7 @@ function _atwork_activity_render_messages($result, $activityType) {
 
   $i = 1;
   $msgCount = 0;
-  if($result != 'error'){
+  if($result != 'error' && !empty($result)){
     foreach($result as $value){
       $result_mid[] = $value->mid;
     }
@@ -474,7 +474,6 @@ function feed_message_choices(){
   $user_selection = array();
   // Now gather the users previously saved preferences if they have any
   $options = field_get_items('user', $current_user, 'field_feed_options');
-  // User has set options
   if(isset($options) && !empty($options)){
     foreach($options as $key=>$value){
       $checked_value = field_view_value('user', $current_user, 'field_feed_options', $options[$key]);
@@ -496,27 +495,42 @@ function feed_message_choices(){
  * Helper function that matches choices to mysql field names.
  */
 function homepage_choices_match($user_selection){
+  // Change user choices into machine names for the messages
   $key_array = array(
-    'My Actions' => 'user_feed',
-    'Actions by Colleagues I Follow' => 'following_actions',
-    'All Activity' => 'all_activity',
+    'My Actions' => 'user_feed', // This means they are on the My Activity tab
+    'Actions of My Colleagues' => 'following_actions',
+    'All Activity' => 'all_activity', // This means they are on the All Activity tab
     'Connections Between Colleagues' => 'following_user',
+    'Joined a Group' => 'group_subscribe',
     'Comments' => 'new_comment',
     'Content' => 'new_node',
     'Images' => 'new_image',
     'Status Updates' => 'status',
-    'Answered a Question' => 'new_answer',
+    'Answered a Question' => 'new_answer', // This is a specific type of node, so will need to check this with JQuery when someone chooses the Content-> Answer choice.
     'Profile Updates' => 'updated_user',
     'Group Subscriptions' => 'group_subscribe',
     'Activity In My Groups' => 'group_activity',
+    'Blogs' => 'blog',
+    'Events' => 'event',
+    'Forums' => 'forum',
+    'News Articles' => 'article',
+    'Created a Group' => 'section',
+    'Group Pages' => 'section_page',
+    'Galleries' => 'gallery',
+    'Questions' => 'question',
+    'Answers' => 'answer',
+    'Polls' => 'poll',
     );
+
+  // Put it all into an array that can be used in a MySQL PDO query
   $query_array = array();
   foreach($user_selection as $key=>$value){
     if(array_key_exists($value, $key_array)){
       array_push($query_array, $key_array[$value]);
     }
   }
-  return $query_array;
+
+  return ($query_array);
 }
 
 /**
@@ -555,8 +569,37 @@ function user_feed_query($choices){
      ->where('node.status = 1');
   }
   // TODO: This needs to be extended to all content types - and also tested against other message types (i.e. does comments have to go here too?)
-  $node_type = array("article", "blog");
+  $node_type = array();
+  if(in_array("new_node", $choices)){
+    // This will screen for the type of content they would like to see, if they have chosen content above.
+    $content_type_array = array(
+      'blog',
+      'event',
+      'forum',
+      'article',
+      'section',
+      'section_page',
+      'gallery',
+      'question',
+      'poll',
+      'status',
+      'answer',
+      'page',
+      );
 
+
+    $node_type = array();
+    foreach($choices as $k => $choice){
+      if(($item = array_search($choice, $content_type_array))!==false){
+        $content_choice = $choice;
+        array_push($node_type, $content_choice);
+        //unset($choices[$k]);
+      }
+    }
+  }
+  if(empty($choices)){
+    return;
+  }
   // TODO: Now we need to create our larger query
   $user_feed_query = db_select('message', 'm');
 
@@ -583,7 +626,10 @@ function user_feed_query($choices){
     }
     // Must be published, unless message is only a message and not a node
     $db_and2->condition('n.status', '1');
-    $db_and2->condition('n.type', $node_type, 'IN');
+    if(isset($node_type) && !empty($node_type)){
+      $db_and2->condition('n.type', $node_type, 'IN');
+    }
+
     $db_or2->condition($db_and2);
 
     $db_or2->condition('m.type', array('following_user','updated_user'), 'IN');
