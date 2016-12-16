@@ -9,7 +9,7 @@
           var $this = $(this);
           if($this.data('expanded') == "yes"){
               $this.data('expanded',"no");
-              $('#user-user-full-group-profile-extra').animate({height:'154px'});
+              $('#user-user-full-group-profile-extra').animate({height:'87px'});
               $('#bio-toggle-button').text("Show More");
           } else {
               $this.data('expanded',"yes");

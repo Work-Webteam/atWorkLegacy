@@ -75,10 +75,7 @@
   clear: right;
   color: #000;
 }
-.page-user.section-employees .field.field-name-field-display-name .field-label,
-.page-user.section-user .field.field-name-field-display-name .field-label {
-  display: none;
-}
+
 
 
 #user-user-full-group-profile-card .field-name-field-image { // profile pic 
@@ -136,7 +133,7 @@
   display: inline-flex;
   box-sizing: border-box;
   width: 100%;
-  height: 154px;  //change this to operate with the jquery accordion as needed 
+  height: 87px;  //change this to operate with the jquery accordion as needed 
   overflow: hidden;
 }
 
