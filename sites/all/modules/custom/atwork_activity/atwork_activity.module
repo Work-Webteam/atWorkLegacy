@@ -559,14 +559,24 @@ function user_feed_query($choices){
   // If we are also looking for group info - grab that here
   // TODO: This must be overhauled, so that it grabs nodes that are referenced by user og_ref, and then searches the DB for all content associated with that group. grabbing their MID's
   if(in_array("group_activity", $choices)){
+    $og_sub1 = db_select('og_membership', 'og')
+      ->fields('og', array('gid'));
+    $db_and = db_and();
+
+    $db_and->condition('og.etid', $current_user->uid, '=');
+    $db_and->condition('og.entity_type', 'user', '=');
+    $og_sub1->condition($db_and);
+
     $og_subquery = db_select('node', 'node')
       ->fields('node', array('nid'));
+    $og_subquery->leftJoin('og_membership', 'og_mem', 'og_mem.etid=node.nid');
+    $db_and2 = db_and();
+    $db_and2->condition('og_mem.gid', $og_sub1, 'IN');
+    $og_subquery->condition($db_and2);
+    //$og_subquery->leftJoin('og_membership', 'og_user', "og_nodes.gid = og_user.gid AND og_user.entity_type = 'user' AND og_user.group_type = 'node' AND og_user.state = 1 AND og_user.etid = :current_user", array(':current_user' => $user->uid));
 
-    $og_subquery->leftJoin('og_membership', 'og_nodes', "node.nid = og_nodes.etid AND og_nodes.entity_type = 'node' AND og_nodes.group_type = 'node' AND og_nodes.state = 1");
-    $og_subquery->leftJoin('og_membership', 'og_user', "og_nodes.gid = og_user.gid AND og_user.entity_type = 'user' AND og_user.group_type = 'node' AND og_user.state = 1 AND og_user.etid = :current_user", array(':current_user' => $user->uid));
-
-    $og_subquery->where('og_user.etid = :current_user', array(':current_user' => $user->uid))
-     ->where('node.status = 1');
+    //$og_subquery->where('og_user.etid = :current_user', array(':current_user' => $user->uid))
+     //->where('node.status = 1');
   }
   // TODO: This needs to be extended to all content types - and also tested against other message types (i.e. does comments have to go here too?)
   $node_type = array();
@@ -587,19 +597,18 @@ function user_feed_query($choices){
       'page',
       );
 
-
-    $node_type = array();
     foreach($choices as $k => $choice){
       if(($item = array_search($choice, $content_type_array))!==false){
         $content_choice = $choice;
         array_push($node_type, $content_choice);
-        //unset($choices[$k]);
       }
     }
+
   }
   if(empty($choices)){
     return;
   }
+
   //Now we need to create our larger query
   // Want allmessages
   $user_feed_query = db_select('message', 'm');
@@ -615,22 +624,33 @@ function user_feed_query($choices){
   // Preparing different and/or variables for query
   $db_or = db_or();
   $db_or2 = db_or();
+  $db_or3 = db_or();
   $db_and = db_and();
   $db_and2 = db_and();
   $db_and3 = db_and();
+  $db_and4 = db_and();
+  $db_and5 = db_and();
 
+
+  /*
   // Want an array of MID's which we will send back
   $user_feed_query->fields('m', array('mid'));
   // Check what types of content user wanted to see
   $db_and->condition('m.type', $choices, 'IN');
   // If we have a subquery,, then it means they wanted to see info from groups they are part of.
   if(isset($og_subquery)){
-    $db_and
-      //->condition('m.uid', $current_user->uid, '=')
-      ->condition('fmn.field_message_node_target_id', $og_subquery, 'IN');
+    $db_and4
+      ->condition('fmn.field_message_node_target_id', $og_subquery, 'IN')
+      ->condition('n.type', $node_type, 'IN')
+      ->condition('n.status', 1, '=');
+    $db_or3
+      ->condition('m.uid', $uids, 'IN');
+    $db_and4->condition($db_or3);
+    $user_feed_query->condition($db_and4);
   } else {
     $db_and->condition('m.uid', $uids, 'IN');
   }
+
     // Must be published, unless message is only a message and not a node
     $db_and2->condition('n.status', '1');
     if(isset($node_type) && !empty($node_type)){
@@ -649,14 +669,82 @@ function user_feed_query($choices){
     $db_and->condition($db_or2);
     $db_and->condition($db_or);
     $user_feed_query->condition($db_and);
-    $user_feed_query->orderBy('m.timestamp', 'DESC')
-    ->range(0, 100);
+    */
+  $user_feed_query->fields('m', array('mid'))
+    ->condition(db_and()
+      ->condition('m.type', $choices, 'IN')
+    );
+
+  if(isset($og_subquery)){
+    $user_feed_query
+      ->condition(
+        db_and()
+        ->condition(
+          db_or()
+            ->condition('m.uid', $uids, 'IN')
+            ->condition(
+              db_and()
+                ->condition('fmn.field_message_node_target_id', $og_subquery, 'IN')
+            )
+        )
+      );
+  } else {
+    $user_feed_query
+      ->condition(db_and()
+        ->condition('m.uid', $uids, 'IN')
+      );
+  }
+
+  if(isset($node_type) && !empty($node_type)){
+    $db_and
+      ->condition(db_and()
+        ->condition('n.status', '1')
+        ->condition('n.type', $node_type, 'IN')
+    );
+
+  } else{
+    $db_and
+      ->condition(db_and()
+        ->condition('n.status', '1')
+    );
+  }
+  // These are not really nodes, so they don't show unless we tell them too
+  $additional = array();
+  if(in_array('following_user', $choices)){
+    array_push($additional, 'following_user');
+  }
+  if(in_array('updated_user', $choices)){
+    array_push($additional, 'updated_user');
+  }
+  // TODO - check for following user or profile update
+  if(isset($additional) && !empty($additional)){
+    $db_and3
+      ->condition('m.type', $additional, 'IN')
+      ->condition('m.uid', $uids, 'IN' );
+      $user_feed_query
+        ->condition(db_or()
+            ->condition($db_and)
+            ->condition($db_and3)
+        );
+  } else {
+    $user_feed_query ->condition($db_and);
+  }
+
+
+  // Only want published, non-private galleries to be selected
+  $db_or->condition('s.field_gallery_status_value', '1');
+  $db_or->condition('s.field_gallery_status_value', NULL);
+  //$db_and->condition($db_or);
+  //$user_feed_query->condition($db_and);
+  dpm($user_feed_query->__toString());
+
+  $user_feed_query->orderBy('m.timestamp', 'DESC')
+  ->range(0, 100);
   $result = $user_feed_query
     ->extend('PagerDefault')
     ->limit(8)
     ->execute()
     ->fetchAll();
-
   return $result;
 }
 
