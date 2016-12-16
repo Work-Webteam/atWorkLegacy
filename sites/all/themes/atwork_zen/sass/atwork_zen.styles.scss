@@ -2704,12 +2704,15 @@ aside.sidebars h2 {
   margin-right: 15px;
 }
 
-.section-employees .view-content {
-  .atwork-relationship-action {// the follow button
-    @include button-normal;
-    position: absolute;
-    bottom: 6px;
-    right: 6px;
+.section-employees,
+.section-user { 
+  .view-content {
+    .atwork-relationship-action {// the follow button
+      @include button-normal;
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+    }
   }
 }
 
