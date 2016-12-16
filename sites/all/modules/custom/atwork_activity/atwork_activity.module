@@ -226,16 +226,30 @@ function atwork_activity_advanced_feed_settings_submit_callback($form, &$form_st
  */
 function atwork_activity_customize_feed_form_validate($form, &$form_state){
   $form_set = false;
-  // Make sure we have at least something checked
-  foreach ($form_state['values']['feed_choices'] as $key => $value) {
-    if($value !== 0){
-      $form_set = true;
-      break;
-    } else {
-      // TODO: Because this is Ajax, we should probably handle this in an alert, or with JQuery making the button un-clickable if everything is unchecked.
-      form_set_error('feed_choices', t('You must select some content for your feed.'));
+  $set_array = array();
+  foreach($form_state['values']['feed_choices'] as $key=>$value){
+    if($value!='0'){
+      array_push($set_array, $value);
     }
   }
+  // All or My feed have been chose
+  if(in_array('1', $set_array) || in_array('2', $set_array)){
+    // Array to check for any non "Content" choice content
+    $non_content = array('3','4','5','7', '8', '9', '11', '12');
+    $content_filters = array('13', '14','15','16','17','18','19','20','22');
+    $check_array = array_intersect($non_content, $set_array);
+    $check_content_filters = array_intersect($content_filters, $set_array);
+    // If content and a content type are shown, then we can submit
+    if(in_array('10', $set_array) && !empty($check_content_filters)){
+      $form_set = true;
+      return;
+    }
+    if(!empty($check_array)){
+      $form_set = true;
+      return;
+    }
+  }
+  form_set_error('feed_choices', t('You must select some content for your feed.'));
   return;
 }
 
@@ -698,7 +712,7 @@ function user_feed_query($choices){
       )
     );
 
-  dpm($user_feed_query->__toString());
+  //dpm($user_feed_query->__toString());
 
   $user_feed_query->orderBy('m.timestamp', 'DESC')
   ->range(0, 100);
@@ -714,21 +728,24 @@ function user_feed_query($choices){
  * Function that builds a query for all activity on the site.
  */
 function all_activity_query($choices){
-    if(in_array("new_node", $choices)){
+  if(empty($choices)){
+    return;
+  }
+  if(in_array("new_node", $choices)){
     // This will screen for the type of content they would like to see, if they have chosen content above.
-  $content_type_array = array(
-    'blog',
-    'event',
-    'forum',
-    'article',
-    'section',
-    'section_page',
-    'gallery',
-    'question',
-    'poll',
-    'status',
-    'answer',
-    'page',
+    $content_type_array = array(
+      'blog',
+      'event',
+      'forum',
+      'article',
+      'section',
+      'section_page',
+      'gallery',
+      'question',
+      'poll',
+      'status',
+      'answer',
+      'page',
     );
 
 
