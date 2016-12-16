@@ -622,9 +622,6 @@ function user_feed_query($choices){
   $user_feed_query->leftJoin('node', 'n', 'n.nid = fmn.field_message_node_target_id');
 
   // Preparing different and/or variables for query
-  $db_or = db_or();
-  $db_or2 = db_or();
-  $db_or3 = db_or();
   $db_and = db_and();
   $db_and2 = db_and();
   $db_and3 = db_and();
@@ -632,45 +629,7 @@ function user_feed_query($choices){
   $db_and5 = db_and();
 
 
-  /*
-  // Want an array of MID's which we will send back
-  $user_feed_query->fields('m', array('mid'));
-  // Check what types of content user wanted to see
-  $db_and->condition('m.type', $choices, 'IN');
-  // If we have a subquery,, then it means they wanted to see info from groups they are part of.
-  if(isset($og_subquery)){
-    $db_and4
-      ->condition('fmn.field_message_node_target_id', $og_subquery, 'IN')
-      ->condition('n.type', $node_type, 'IN')
-      ->condition('n.status', 1, '=');
-    $db_or3
-      ->condition('m.uid', $uids, 'IN');
-    $db_and4->condition($db_or3);
-    $user_feed_query->condition($db_and4);
-  } else {
-    $db_and->condition('m.uid', $uids, 'IN');
-  }
-
-    // Must be published, unless message is only a message and not a node
-    $db_and2->condition('n.status', '1');
-    if(isset($node_type) && !empty($node_type)){
-      $db_and2->condition('n.type', $node_type, 'IN');
-    }
-    $db_or2->condition($db_and2);
-    $db_and3
-    ->condition('m.type', array('following_user','updated_user'), 'IN')
-    ->condition('m.uid', $uids, 'IN' );
-    $db_or2->condition($db_and3);
-
-    // Only want published, non-private galleries to be selected
-    $db_or->condition('s.field_gallery_status_value', '1');
-    $db_or->condition('s.field_gallery_status_value', NULL);
-    //$db_or->condition('s.field_gallery_status_value', 'none', IFNULL) ;
-    $db_and->condition($db_or2);
-    $db_and->condition($db_or);
-    $user_feed_query->condition($db_and);
-    */
-  $user_feed_query->fields('m', array('mid'))
+   $user_feed_query->fields('m', array('mid'))
     ->condition(db_and()
       ->condition('m.type', $choices, 'IN')
     );
@@ -721,21 +680,24 @@ function user_feed_query($choices){
     $db_and3
       ->condition('m.type', $additional, 'IN')
       ->condition('m.uid', $uids, 'IN' );
-      $user_feed_query
-        ->condition(db_or()
-            ->condition($db_and)
-            ->condition($db_and3)
-        );
+    $user_feed_query
+      ->condition(db_or()
+        ->condition($db_and)
+        ->condition($db_and3)
+      );
   } else {
     $user_feed_query ->condition($db_and);
   }
 
-
   // Only want published, non-private galleries to be selected
-  $db_or->condition('s.field_gallery_status_value', '1');
-  $db_or->condition('s.field_gallery_status_value', NULL);
-  //$db_and->condition($db_or);
-  //$user_feed_query->condition($db_and);
+  $user_feed_query
+    ->condition(db_and()
+      ->condition(db_or()
+        ->condition('s.field_gallery_status_value', '1')
+        ->condition('s.field_gallery_status_value', NULL)
+      )
+    );
+
   dpm($user_feed_query->__toString());
 
   $user_feed_query->orderBy('m.timestamp', 'DESC')
