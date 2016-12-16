@@ -114,5 +114,6 @@ browscap/*
 # Ignore Gulp files
 sites/all/themes/*/node_modules
 
-### SublimeText ###
+### Editors ###
 *.sublime*
+*.vscode*
