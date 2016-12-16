@@ -625,14 +625,6 @@ function user_feed_query($choices){
   $db_and->condition('m.type', $choices, 'IN');
   // If we have a subquery,, then it means they wanted to see info from groups they are part of.
   if(isset($og_subquery)){
-    $resultGroup = $og_subquery
-    ->extend('PagerDefault')
-    ->limit(8)
-    ->execute()
-    ->fetchAll();
-    foreach($resultGroup as $gresult){
-      dpm($gresult);
-    }
     $db_and
       //->condition('m.uid', $current_user->uid, '=')
       ->condition('fmn.field_message_node_target_id', $og_subquery, 'IN');
