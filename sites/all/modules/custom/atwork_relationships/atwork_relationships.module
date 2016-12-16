@@ -51,7 +51,7 @@ function atwork_relationships_get_link($account) {
 
 function atwork_relationships_views_pre_render(&$view) { 
   // show the follow/ing links if on these Views pages 
-  if ($view->name == 'people_admin' && $view->current_display == 'page_following2' && module_exists('user_relationships')) {
+  if ($view->name == 'people_admin' && ($view->current_display == 'public_page' || $view->current_display == 'page_followers2' || $view->current_display == 'page_following2') && module_exists('user_relationships')) {
     foreach ($view->result as &$result) {
       $account = user_load($result->uid);
       $relationship_link = atwork_relationships_get_link($account);
