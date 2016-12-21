@@ -1208,7 +1208,16 @@ EOT;
       break;
     /** the profile page block view */
     case 'profile_page_activity_feed_block':
-      $block['subject'] = 'User activity';
+      global $user;
+      $this_user = user_load($user->uid);
+
+      if(isset($user_id)){
+      $account = user_load($user_id);
+      } else {
+        $account = user_load(arg(1));
+      }
+      // Show the user's first name for the activity title
+      $block['subject'] = $account->field_gal_first_name['und'][0]['safe_value'] . t("'s Activity");
       // This helps to keep this code a little cleaner - all content is located in it's own function below.
       $block['content'] = _atwork_activity_profile_page_block_content(arg(1));
       // Don't think I need to pass these values anymore - will keep this for now to check.
