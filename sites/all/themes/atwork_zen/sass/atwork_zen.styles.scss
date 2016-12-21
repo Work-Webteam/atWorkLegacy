@@ -18,6 +18,8 @@
 @import "layouts/grid.scss";
 @import "layouts/atworklayout.scss";
 
+@import "components/buttons.scss";
+@import "components/comments.scss";
 @import "components/menus/navigation.scss";
 @import "components/menus/quicktabs.scss";
 @import "components/misc/logo.scss";
@@ -25,7 +27,6 @@
 @import "components/misc/search.scss";
 @import "components/misc/activity.scss";
 @import "components/misc/follow.scss";
-@import "components/buttons.scss";
 
 @import "components/node/article/default.scss";
 @import "components/node/article/teaser.scss";
@@ -4864,7 +4865,7 @@ section#comments {
   text-transform: capitalize;
 }
 .commentLinks li {
-  padding: 0 0 0 15px;
+  padding: 0 0 0 5px;
   margin: 0;
   float: left;
 }
@@ -4886,7 +4887,7 @@ article.node-tools #node-tools .rate-widget {
 }
 .commentArticle .rate-widget {
   position: relative;
-  left: 290px;
+  left: 310px;
   top: 18px;
   padding: 0;
   margin: 0;

@@ -1189,16 +1189,16 @@ EOT;
 <div class="activity-feed-progress"><img src="/sites/all/themes/atwork_zen/images/progress.gif" title="Loading" /></div>
   <ul>
     <li><a href="#tabs-1">All Activity</a></li>
-    <li><a href="#tabs-4">Comment Activity</a></li>
+    <!-- <li><a href="#tabs-4">Comment Activity</a></li> -->
     <li><a href="#tabs-3">My Activity</a></li>
-    <li><a href="#tabs-2">My Groups</a></li>
+    <!--  <li><a href="#tabs-2">My Groups</a></li> -->
   </ul>
   <div id="tabs-1">
   </div>
-  <div id="tabs-4">
-  </div>
-  <div id="tabs-2">
-  </div>
+  <!--<div id="tabs-4">
+  </div>->
+  <!--<div id="tabs-2">
+  </div>-->
   <div id="tabs-3">
   </div>
 </div>',
