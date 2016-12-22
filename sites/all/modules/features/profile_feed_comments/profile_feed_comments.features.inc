@@ -109,6 +109,40 @@ function profile_feed_comments_flag_default_flags() {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function profile_feed_comments_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: profile_thumbs_med.
+  $styles['profile_thumbs_med'] = array(
+    'label' => 'Profile Thumbs Med',
+    'effects' => array(
+      98 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 43,
+          'height' => '',
+          'upscale' => 0,
+        ),
+        'weight' => 1,
+      ),
+      99 => array(
+        'name' => 'image_crop',
+        'data' => array(
+          'width' => 40,
+          'height' => 40,
+          'anchor' => 'center-top',
+        ),
+        'weight' => 2,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
  * Implements hook_default_message_type().
  */
 function profile_feed_comments_default_message_type() {

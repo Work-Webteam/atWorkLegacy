@@ -32,8 +32,9 @@ function atwork_relationships_get_link($account) {
   return '<div class="atwork-relationship-action uid-' . $account->uid . '">' . $relationship_link . '</div>';
 }
 
-function atwork_relationships_views_pre_render(&$view) {
-  if ($view->name == 'people_admin' && $view->current_display == 'public_page' && module_exists('user_relationships')) {
+function atwork_relationships_views_pre_render(&$view) { 
+  // show the follow/ing links if on these Views pages 
+  if ($view->name == 'people_admin' && ($view->current_display == 'public_page' || $view->current_display == 'page_following2' || $view->current_display == 'page_followers2') && module_exists('user_relationships')) {
     foreach ($view->result as &$result) {
       $account = user_load($result->uid);
       $relationship_link = atwork_relationships_get_link($account);

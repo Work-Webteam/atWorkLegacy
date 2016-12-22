@@ -1711,6 +1711,13 @@ function atwork_profiles_block_view($delta = '') {
   $block = array();
 
   switch ($delta) {
+
+    case 'bio-toggle':
+      $block['subject'] = t('');
+      $block['content'] = '<button id="bio-toggle-button">Show More</button>';
+      drupal_add_js(drupal_get_path('module', 'atwork_profiles') . '/atwork_profiles_2.js');
+    break;
+
     case 'header':
 
       global $user;

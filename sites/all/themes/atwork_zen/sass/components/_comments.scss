@@ -1,0 +1,46 @@
+// Styling for comments, comment boxes, etc.
+
+/*----------------- Comment Replies --------------------*/
+
+.reply {
+  border: 1px solid #e0e0e0;
+  position: relative;
+  margin-bottom: 1em;
+  &:nth-child(even) {
+    background-color: #fcfcfc;
+  }
+  &:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  .field-name-field-profile-comment {
+    margin: 1em;
+    .field-item:before {
+      @include quotes-open;
+    }
+  }
+  .field-name-field-profile-comment-date,
+  .field-name-field-display-name {
+    font-size: smaller;
+    opacity: 0.8;
+  }
+
+  .field-name-field-display-name {
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    left: inherit !important;
+  }
+}
+
+.reply-body,
+.reply-links {
+  padding: 0.3em;
+}
+
+.commentLinks .comment-delete a,
+.commentLinks .comment-edit a,
+.commentLinks .comment-reply a,
+.reply-links a {
+  @include button-small;
+  margin-right: 0.5em;
+}

@@ -1,5 +1,4 @@
 (function ($) {
-
   /**
    * Global variables so that we don't lose them on refresh
    */
@@ -54,6 +53,10 @@
       //refresh interval and remove timer if present
       resetTimer();
       return;
+    });
+
+    $(".toggle-com-button").click(function(){ 
+      toggleCommentVis($(this));
     });
 
     /**
@@ -178,17 +181,20 @@
    }
   };
 
-  // This section is for toggling visibility of the comments textarea and submit button
-  $(function() {
-    // comment submit and textarea are initially hidden with css
-
-    // next, allow the toggle button to show/hide comment elements
-    $(".toggle-com-button").click(function(e) {
-      e.preventDefault();
-      $(this).nextAll(".comment-submit-button").toggleClass("comment-submit-button-show");
-      $(this).nextAll(".field-name-field-profile-comment").toggleClass("field-name-field-profile-comment-show");
-    });
-});
+  /**
+   * Function to accept 'this' argument from click handler 
+   * to toggle visibility on comment for elements
+   */
+  function toggleCommentVis(thisObj){
+    thisObj.nextAll(".comment-submit-button").toggleClass("comment-submit-button-show");
+    thisObj.nextAll(".field-name-field-profile-comment").toggleClass("field-name-field-profile-comment-show");
+    // change the value of the thisObj button
+    if ($.trim($(thisObj).attr("value")) === 'Comment') {
+      $(thisObj).val('Cancel');
+    } else {
+      $(thisObj).val('Comment');
+    }
+  }
 
 }(jQuery));
 
