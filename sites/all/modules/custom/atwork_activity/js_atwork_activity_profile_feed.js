@@ -55,7 +55,19 @@
       return;
     });
 
-    $(".toggle-com-button").click(function(){ 
+    // Updates status
+    $("[id^=edit-post").click(function(){
+      refreshPage();
+      resetTimer();
+    });
+
+    // Updates feed choices on the homepage
+    $("[id^=edit-update").click(function(){
+      refreshPage();
+      resetTimer();
+    });
+
+    $(".toggle-com-button").click(function(){
       toggleCommentVis($(this));
     });
 
@@ -182,7 +194,7 @@
   };
 
   /**
-   * Function to accept 'this' argument from click handler 
+   * Function to accept 'this' argument from click handler
    * to toggle visibility on comment for elements
    */
   function toggleCommentVis(thisObj){

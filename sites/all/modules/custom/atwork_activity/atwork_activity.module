@@ -1635,6 +1635,8 @@ function atwork_activity_block_view($delta = '') {
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/jquery.url.js');
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_undock.js');
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_filters.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_profile_feed.js');
+
       //drupal_add_js('initializeAllActivity();', 'inline');
 
        /// this is now handled by click-handlers - too much strain on queries otherwise
