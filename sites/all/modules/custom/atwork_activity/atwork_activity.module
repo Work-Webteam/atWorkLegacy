@@ -1664,13 +1664,15 @@ EOT;
       global $user;
       $this_user = user_load($user->uid);
 
-      if(isset($user_id)){
-      $account = user_load($user_id);
+      if(isset($this_user) && $this_user->uid == arg(1)){
+        $account = user_load($this_user->uid);
+        $block['subject'] = t("My Activity");
       } else {
         $account = user_load(arg(1));
+        // Show the user's first name for the activity title if this is not the current user's feed
+        $block['subject'] = $account->field_gal_first_name['und'][0]['safe_value'] . t("'s Activity");
       }
-      // Show the user's first name for the activity title
-      $block['subject'] = $account->field_gal_first_name['und'][0]['safe_value'] . t("'s Activity");
+
       // This helps to keep this code a little cleaner - all content is located in it's own function below.
       $block['content'] = _atwork_activity_profile_page_block_content(arg(1));
       // Don't think I need to pass these values anymore - will keep this for now to check.
