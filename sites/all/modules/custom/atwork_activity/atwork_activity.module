@@ -346,9 +346,33 @@ function _atwork_activity_render_messages($result, $activityType) {
         $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
       }
 
-
+      // Set date for mins/ago then hours, then days, week, then date
+      $current_time = time();
+      $post_time = $message['#entity']->timestamp;
+      $diff = $current_time - $post_time;
+      $time_record = "";
+      switch(TRUE){
+        case($diff<=60):
+          $time_record = "Now";
+          break;
+        // Less than an hour
+        case($diff<3600):
+          $time_record = floor($diff/60) . " Minutes ago";
+          break;
+        // Less than a day
+        case($diff<86400):
+          $time_record = floor($diff/3600) . " Hours ago";
+          break;
+        // Less than a week
+        case($diff<604800):
+          $time_record = floor($diff/86400) . " Days ago";
+          break;
+        default:
+          $time_record = date('F j Y', $message['#entity']->timestamp);
+          break;
+      }
       if($render)
-        $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . date('M j', $message['#entity']->timestamp) . '</span> <span class="user-feed-image">' . render($user_image) . '</span>' . render($message) . '</div>';
+        $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . $time_record . '</span> <span class="user-feed-image">' . render($user_image) . '</span>' . render($message) . '</div>';
 
       $i++;
     }
