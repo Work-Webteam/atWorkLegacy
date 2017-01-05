@@ -272,6 +272,9 @@ function _atwork_activity_ajax_header() {
 function _atwork_activity_render_messages($result, $activityType) {
   // Create two links that will change the choices below to give the illusion of two seperate tabs
   // Use JQuery to refresh the block with the new choices.
+  global $user;
+  $current_user = user_load($user->uid);
+
 
   // Get the advanced choices form
   $adv_form = drupal_get_form('atwork_activity_customize_feed_form');
@@ -331,8 +334,12 @@ function _atwork_activity_render_messages($result, $activityType) {
         if(!count($re))
           $render = 0;
       }
-
       $author = user_load($message['#entity']->uid);
+      if($message['#entity']->type == 'status' && $author->uid == $user->uid){
+        $str = substr($message['message__message_text__0']['#markup'], 20);
+        $message['message__message_text__0']['#markup'] = '<p>You updated your' . $str;
+      }
+
       // We want to add images to the activity feed.
       // Check if an image exists:
       if(isset($author->field_image) && $author->field_image){
