@@ -2226,7 +2226,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'users';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
-  $handler->display->display_options['fields']['uid']['relationship'] = 'requestee_id';
+  $handler->display->display_options['fields']['uid']['relationship'] = 'requester_id';
   $handler->display->display_options['fields']['uid']['label'] = '';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['uid']['element_label_colon'] = FALSE;
@@ -2235,7 +2235,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['fields']['field_image']['id'] = 'field_image';
   $handler->display->display_options['fields']['field_image']['table'] = 'field_data_field_image';
   $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
-  $handler->display->display_options['fields']['field_image']['relationship'] = 'requestee_id';
+  $handler->display->display_options['fields']['field_image']['relationship'] = 'requester_id';
   $handler->display->display_options['fields']['field_image']['label'] = '';
   $handler->display->display_options['fields']['field_image']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['field_image']['alter']['path'] = 'user/[uid]';
@@ -2255,7 +2255,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
-  $handler->display->display_options['fields']['field_display_name']['relationship'] = 'requestee_id';
+  $handler->display->display_options['fields']['field_display_name']['relationship'] = 'requester_id';
   $handler->display->display_options['fields']['field_display_name']['label'] = '';
   $handler->display->display_options['fields']['field_display_name']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['field_display_name']['alter']['path'] = 'user/[uid]';
@@ -2267,7 +2267,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['fields']['field_gal_title']['id'] = 'field_gal_title';
   $handler->display->display_options['fields']['field_gal_title']['table'] = 'field_data_field_gal_title';
   $handler->display->display_options['fields']['field_gal_title']['field'] = 'field_gal_title';
-  $handler->display->display_options['fields']['field_gal_title']['relationship'] = 'requestee_id';
+  $handler->display->display_options['fields']['field_gal_title']['relationship'] = 'requester_id';
   $handler->display->display_options['fields']['field_gal_title']['label'] = '';
   $handler->display->display_options['fields']['field_gal_title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_gal_title']['element_wrapper_type'] = 'h4';
@@ -2277,13 +2277,13 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['fields']['field_gal_ministry_name']['id'] = 'field_gal_ministry_name';
   $handler->display->display_options['fields']['field_gal_ministry_name']['table'] = 'field_data_field_gal_ministry_name';
   $handler->display->display_options['fields']['field_gal_ministry_name']['field'] = 'field_gal_ministry_name';
-  $handler->display->display_options['fields']['field_gal_ministry_name']['relationship'] = 'requestee_id';
+  $handler->display->display_options['fields']['field_gal_ministry_name']['relationship'] = 'requester_id';
   $handler->display->display_options['fields']['field_gal_ministry_name']['exclude'] = TRUE;
   /* Field: User: City */
   $handler->display->display_options['fields']['field_gal_city']['id'] = 'field_gal_city';
   $handler->display->display_options['fields']['field_gal_city']['table'] = 'field_data_field_gal_city';
   $handler->display->display_options['fields']['field_gal_city']['field'] = 'field_gal_city';
-  $handler->display->display_options['fields']['field_gal_city']['relationship'] = 'requestee_id';
+  $handler->display->display_options['fields']['field_gal_city']['relationship'] = 'requester_id';
   $handler->display->display_options['fields']['field_gal_city']['exclude'] = TRUE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Global: Random */
