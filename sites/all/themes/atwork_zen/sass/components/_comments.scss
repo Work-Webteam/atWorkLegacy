@@ -143,6 +143,9 @@
     font-size: smaller;
     opacity: 0.8;
   }
+  .field-name-field-feed-like-button {
+    left: 26em !important; // these have to be positioned from left, not right for rollover to work
+  }
 }
 
 .reply-body,
