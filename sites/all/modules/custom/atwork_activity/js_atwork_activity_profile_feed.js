@@ -10,8 +10,8 @@
   });
 
   $( document ).ajaxStop(function(){
-    $(".form-textarea").prop("disabled", false);
-    $(".form-textarea").prop("readonly", false);
+    //$(".form-textarea").prop("disabled", false);
+    //$(".form-textarea").prop("readonly", false);
   });
 
 
