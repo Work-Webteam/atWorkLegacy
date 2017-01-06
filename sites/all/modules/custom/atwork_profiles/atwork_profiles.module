@@ -1059,7 +1059,7 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
     } else {
       $account->content['field_extended_biography'] = array(
         '#theme' => 'field',
-   //     '#weight' => 14,
+        '#weight' => 14,
         '#title' => t('Extended Biography'),
         '#label_display' => 'hidden',
         '#view_mode' => 'full',
@@ -1715,7 +1715,16 @@ function atwork_profiles_block_view($delta = '') {
     case 'bio-toggle':
       $block['subject'] = t('');
       $block['content'] = '<button id="bio-toggle-button">Show More</button>';
-      drupal_add_js(drupal_get_path('module', 'atwork_profiles') . '/atwork_profiles_2.js');
+      // load jquery as early as possible. Before page render would be ideal however.
+      drupal_add_js(drupal_get_path('module', 'atwork_profiles') . '/atwork_profiles_2.js',
+        array(
+          'group' => JS_LIBRARY,
+          'weight' => -19,
+          'every_page' => FALSE,
+          'cache' => TRUE,
+          'scope' => 'header',
+        )
+      );
     break;
 
     case 'header':
