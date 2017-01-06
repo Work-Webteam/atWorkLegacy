@@ -309,6 +309,9 @@ function _atwork_activity_render_messages($result, $activityType) {
 
 
     foreach ($message_render_array['message'] as $message) {
+      dpm($message['#entity']);
+      // TODO - run a quick query / check function here on mid and return true/false
+      $stickied = '';
       $classes = array();
       $classes[] = 'message';
       $classes[] = 'message-' . $message['#entity']->mid;
@@ -888,7 +891,7 @@ function all_activity_query($choices){
       }
     }
   }
-  // TODO: Now we need to create our larger query
+  // Now we need to create our larger query
   $user_feed_query = db_select('message', 'm');
 
   $user_feed_query->leftJoin('field_data_field_message_node', 'fmn', 'fmn.entity_id = m.mid');
@@ -958,9 +961,56 @@ function atwork_activity_home_all_callback() {
     $result = all_activity_query($feed_message_choices);
   }
 
+  // Check if we have any 'stickied' messages
+  $result = stickied_activity_query($result);
+
   $output = _atwork_activity_render_messages($result, $activityType);
 
   return($output);
+}
+
+/**
+ * Helper function to check for any stickied messages
+ * @param  array $result current query object
+ * @return [type]         [description]
+ */
+function stickied_activity_query($result){
+  $messages = array();
+  // Now we need to create our larger query
+  $user_feed_query = db_select('message', 'm');
+  $user_feed_query->leftJoin('field_data_field_message_node', 'fmn', 'fmn.entity_id = m.mid');
+  $user_feed_query->leftJoin('node', 'n', 'n.nid = fmn.field_message_node_target_id');
+  $user_feed_query->leftJoin('field_data_field_sticky_to_activity_feeds', 'st', 'st.entity_id = n.nid');
+
+  $user_feed_query->fields('m', array('mid'));
+  $db_and = db_and();
+  $db_and->condition('n.status', '1');
+  $db_and->condition('st.field_sticky_to_activity_feeds_value', '1');
+  $db_and->condition('m.type', 'user_liked_node', '<>');
+
+  $user_feed_query->condition($db_and);
+
+  $result_sticky = $user_feed_query
+        ->execute()
+        ->fetchAll();
+  // Now grab any marked messages
+  foreach ($result_sticky as $record) {
+    $message = message_load($record->mid);
+    $current_node = node_load($message->field_message_node['und'][0]['target_id']);
+    $current_time = time();
+    $node_start = $current_node->field_sticky_start_date['und'][0]['value'];
+    $node_end = $current_node->field_sticky_start_date['und'][0]['value2'];
+    if(($current_time > $node_start)&&($current_time < $node_end)){
+      // This is currently within time limit - so lets put it on the front fo the array
+      array_unshift($result, $record);
+    } elseif($current_time > $node_end){
+      // This is an old case, so lets clean it up so we don't have to look it over again
+      $current_node->field_sticky_to_activity_feeds['und'][0]['value'] = 0;
+      node_save($current_node);
+      // Don't bother addint this to the result array
+    }
+    return $result;
+  }
 }
 
 /*
