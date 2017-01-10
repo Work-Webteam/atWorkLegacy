@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Homepage Activity Feed Feature feature.
+ */
+
+include_once 'homepage_activity_feed_feature.features.inc';
