@@ -30,6 +30,21 @@ function profile_feed_comments_strongarm() {
       'bypass_page_cache' => 1,
       'bypass_external_cache' => '',
     ),
+    'block-atwork-activity-homepage' => array(
+      'element' => 'block-atwork-activity-homepage',
+      'auto' => 0,
+      'manual' => 1,
+      'init' => 0,
+      'arguments' => 1,
+      'panels' => 0,
+      'timer' => '120',
+      'block' => array(
+        'block' => 'atwork_activity',
+        'delta' => 'homepage',
+      ),
+      'bypass_page_cache' => 1,
+      'bypass_external_cache' => '',
+    ),
   );
   $export['block_refresh_settings'] = $strongarm;
 

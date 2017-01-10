@@ -309,18 +309,25 @@ function _atwork_activity_render_messages($result, $activityType) {
 
 
     foreach ($message_render_array['message'] as $message) {
-      dpm($message['#entity']);
-      // TODO - run a quick query / check function here on mid and return true/false
-      $stickied = '';
-      $classes = array();
-      $classes[] = 'message';
-      $classes[] = 'message-' . $message['#entity']->mid;
+      // Use a function to check if message is stickied
+      $sticky_check = check_sticky_status($message['#entity']->mid);
 
-      if ($i % 2 == 0) {
-        $classes[] = 'even';
-      }
-      else {
-        $classes[] = 'odd';
+      if($sticky_check == true){
+        $classes = array();
+        $classes[] = 'message';
+        $classes[] = 'message-' . $message['#entity']->mid;
+        $classes[] = 'sticky';
+      } else {
+        $classes = array();
+        $classes[] = 'message';
+        $classes[] = 'message-' . $message['#entity']->mid;
+
+        if ($i % 2 == 0) {
+          $classes[] = 'even';
+        }
+        else {
+          $classes[] = 'odd';
+        }
       }
 
       $msgCount++;
@@ -412,6 +419,47 @@ function _atwork_activity_render_messages($result, $activityType) {
   return $output;
 }
 
+function check_sticky_status($mid){
+  if(empty($mid)){
+    return false;
+  }
+
+  // check if node mentioned in mid is stickied
+  $user_feed_query = db_select('message', 'm');
+  $user_feed_query->leftJoin('field_data_field_message_node', 'fmn', 'fmn.entity_id = m.mid');
+  $user_feed_query->leftJoin('node', 'n', 'n.nid = fmn.field_message_node_target_id');
+  $user_feed_query->leftJoin('field_data_field_sticky_to_activity_feeds', 'st', 'st.entity_id = n.nid');
+
+  $user_feed_query->fields('m', array('mid'));
+  $user_feed_query->fields('n', array('nid'));
+  $db_and = db_and();
+  $db_and->condition('n.status', '1');
+  $db_and->condition('st.field_sticky_to_activity_feeds_value', '1');
+  $db_and->condition('m.type', 'user_liked_node', '<>');
+  $db_and->condition('m.type', 'new_comment', '<>');
+  $db_and->condition('m.mid', $mid, '=');
+
+  $user_feed_query->condition($db_and);
+
+  $result_sticky = $user_feed_query
+        ->execute()
+        ->fetchAll();
+  // This is not a stickied node
+  if(empty($result_sticky)){
+    return false;
+  }
+  // This is a stickied node
+  if(!empty($result_sticky)){
+    $current_content = node_load($result_sticky[0]->nid);
+    $current_time = time();
+    // Check if we are within the timeframe
+    if(($current_time > $current_content->field_sticky_start_date['und'][0]['value']) && $current_time < $current_content->field_sticky_start_date['und'][0]['value2']){
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
 /*
  * Menu callback for an ajax-called activity feed on a group homepage
  */
@@ -987,6 +1035,7 @@ function stickied_activity_query($result){
   $db_and->condition('n.status', '1');
   $db_and->condition('st.field_sticky_to_activity_feeds_value', '1');
   $db_and->condition('m.type', 'user_liked_node', '<>');
+  $db_and->condition('m.type', 'new_comment', '<>');
 
   $user_feed_query->condition($db_and);
 
@@ -1001,6 +1050,9 @@ function stickied_activity_query($result){
     $node_start = $current_node->field_sticky_start_date['und'][0]['value'];
     $node_end = $current_node->field_sticky_start_date['und'][0]['value2'];
     if(($current_time > $node_start)&&($current_time < $node_end)){
+      // We need to remove this from teh wider feed if it is stickied
+      $key = array_search($record->mid, $result);
+      unset($result[$key]);
       // This is currently within time limit - so lets put it on the front fo the array
       array_unshift($result, $record);
     } elseif($current_time > $node_end){
@@ -1009,8 +1061,8 @@ function stickied_activity_query($result){
       node_save($current_node);
       // Don't bother addint this to the result array
     }
-    return $result;
   }
+  return $result;
 }
 
 /*
