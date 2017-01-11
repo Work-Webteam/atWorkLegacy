@@ -1013,7 +1013,7 @@ function atwork_activity_home_all_callback() {
   $result = stickied_activity_query($result);
 
   $output = _atwork_activity_render_messages($result, $activityType);
-
+  $output .= '<a href="node/21100" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="Click for pop-out Activity Feed window" /></a>';
   return($output);
 }
 
