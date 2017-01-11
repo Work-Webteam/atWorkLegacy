@@ -1363,13 +1363,20 @@ function atwork_activity_reply_form_submit_custom($form, &$form_state) {
 
 function atwork_activity_entity_view_alter(&$build, $type){
   if($type == "reply"){
-    if(isset($build['field_profile_comment']['#object']->parent)){
-      if($build['field_profile_comment']['#object']->parent === '0'){
-        // This is the top level, so can be given a class of 0
-        $depth = 0;
-      } elseif($build['field_profile_comment']['#object']->parent > 0){
-        // We have parents, so lets grab the depth
-        $depth = $build['#entity']->depth;
+    if(isset($build['#entity'])){
+      if($build['#entity']->depth == '0'){
+        // This is the top level, so we are refering to content - grab the content info?
+        //dpm($build);
+        $ids = array();
+        $ids[] = $build['#entity']->entity_id;
+        $parent_message = entity_load($build['#entity']->entity_type, $ids );
+        $message_author = user_load($parent_message[$build['#entity']->entity_id]->uid);
+        $message_name = $message_author->field_gal_first_name['und'][0]['safe_value'];
+        $author_line = " commented on $message_name" . "'s" . " status";
+      } elseif($build['#entity']->depth > 0){
+        // We have parents, so lets grab the parent's author for this reply
+        $mid = $build;
+        dpm($build['#entity']);
       }
     }
     // We need to get the nest number for this to add a to a class field
@@ -1411,7 +1418,7 @@ function atwork_activity_entity_view_alter(&$build, $type){
     // TODO - Tailor this from a username to a whole sentence based on reply subject
     $author = user_load($build["field_display_name"]['#object']->uid);
     // Add a link to their profile to encourage connections
-    $build["field_display_name"][0]['#markup'] = ' by <a href="/employees/' . $author->name . '"> ' . $build["field_display_name"][0]['#markup'] . '</a>';
+    $build["field_display_name"][0]['#markup'] = ' <a href="/employees/' . $author->name . '"> ' . $build["field_display_name"][0]['#markup'] . '</a> ' . $author_line;
     // Add image to the comment
     $image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
     // Now lets set a more dynamic date
