@@ -2,38 +2,46 @@
 
 /*********** Begin My Actions vs All Activity interaction ***********/ 
 
-function allActivityRules() {
-  $('#edit-feed-choices-2').attr('checked', true);
-  $("#edit-feed-choices-2").removeAttr("disabled"); // enable 'All Activity'
-  $("#edit-feed-choices-3").attr("disabled", true);
-  $("#edit-feed-choices-6").attr("disabled", true);
-}
-
-function myActionsRules() {
+function myActionsRules() {// when My Actions is button clicked
+  // these will change for prod but keeping checkboxes visible for testing
+  $("#edit-feed-choices-1").removeAttr("disabled"); // enable 'My Actions'
+  $('#edit-feed-choices-1').attr('checked', true);
   $('#edit-feed-choices-2').attr('checked', false);
-  $("#edit-feed-choices-2").attr({"disabled": true}); // enable and check 'All Activity'
+  // we will eventually hide this altogether but for now
+  $("#edit-feed-choices-2").attr("disabled", true);
+  
   $("#edit-feed-choices-3").removeAttr("disabled");
   $("#edit-feed-choices-6").removeAttr("disabled");
 }
 
-// First, enforce that only My Actions or All Activity can be checked
-if ($('#edit-feed-choices-1').is(':checked')) { // when My Actions is checked
-  myActionsRules();
-} else {
-  $('#edit-feed-choices-2').attr('checked', true); // else enable 'All Activity'
-  allActivityRules();
+function allActivityRules() {// when All Activity button is clicked
+  // these will change for prod but keeping checkboxes visible for testing
+  $("#edit-feed-choices-2").removeAttr("disabled"); // enable 'All Activity'
+  $('#edit-feed-choices-2').attr('checked', true);
+  $('#edit-feed-choices-1').attr('checked', false);
+  // we will eventually hide this altogether but for now disable customizations
+  $("#edit-feed-choices-1").attr("disabled", true);  
+  $("#edit-feed-choices-3").attr("disabled", true);
+  $("#edit-feed-choices-6").attr("disabled", true);
 }
 
-// Next, listen for My Actions checkbox changes
-$('#edit-feed-choices-1').change( 
-  function(){
-    if ($('#edit-feed-choices-1').is(':checked')) { // when checked
-      myActionsRules();
-    } else {
-      allActivityRules();
-    }
-  }
-);
+// Listen for My Actions vs All Activity button changes   
+$("#atwork-advanced-feed-settings").hide(); // initially hide the filter lists
+$(".activity-filters-my").click(function() {
+  if(!$("#atwork-advanced-feed-settings").is(":visible")) { // if filters aren't already showing
+    $("#atwork-advanced-feed-settings").show();
+  } 
+  myActionsRules();
+}); 
+$(".activity-filters-all").click(function() {
+  if(!$("#atwork-advanced-feed-settings").is(":visible")) { // if filters aren't already showing
+    $("#atwork-advanced-feed-settings").show();
+  } 
+  allActivityRules();
+}); 
+
+
+
 
 /*********** End My Actions vs All Activity interaction ***********/ 
 

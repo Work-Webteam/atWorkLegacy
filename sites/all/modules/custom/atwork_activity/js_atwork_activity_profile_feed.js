@@ -28,7 +28,7 @@
     attach: function (context, settings) {
     // Page refresh should occur every 5 seconds after initial load
     if(refreshFeed === false && timer=== false){ // Don't want to set this twice
-      setFeedInterval();
+      //setFeedInterval();
     }
 
     //Unless someone is typing in a text field
@@ -52,7 +52,9 @@
       setComments();
       //refresh interval and remove timer if present
       resetTimer();
-     // Refresh the page to make it dynamic
+      // close the filter options
+      $("#atwork-advanced-feed-settings").hide();
+      // Refresh the page to make it dynamic
       refreshPage();
 
       return;
