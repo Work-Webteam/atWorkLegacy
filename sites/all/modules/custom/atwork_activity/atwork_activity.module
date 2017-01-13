@@ -1373,6 +1373,9 @@ function atwork_activity_entity_view_alter(&$build, $type){
         $message_name = $message_author->field_gal_first_name['und'][0]['safe_value'];
         $author_line = " commented on $message_name" . "'s" . " status";
       } elseif($build['#entity']->depth > 0){
+        dpm($build['#entity']);
+         dpm($build["field_display_name"][0]['#markup']);
+
         // We have parents, so lets grab the immediate parent's author for this reply
         $mid = $build;
         // Grab the parent of the reply
@@ -1381,7 +1384,7 @@ function atwork_activity_entity_view_alter(&$build, $type){
           // Create a query that grabes the uid of the parent reply
           $user_feed_query = db_select('reply', 'r');
           $user_feed_query->fields('r', array('uid'))
-            ->condition('r.parent', $parent_reply, '=');
+            ->condition('r.id', $parent_reply, '=');
 
           $parent_reply_author = $user_feed_query
                 ->execute()
@@ -1394,11 +1397,6 @@ function atwork_activity_entity_view_alter(&$build, $type){
         }
       }
     }
-    // We need to get the nest number for this to add a to a class field
-    // Lets use recursion in a seperate function
-    //if($build['field_profile_comment'])
-
-
 
     /**** HASHTAG FUNCTIONALITY ****
 
