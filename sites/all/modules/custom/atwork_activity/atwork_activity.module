@@ -154,8 +154,8 @@ function atwork_activity_customize_feed_form(){
   $form = array();
   $form['feed_choices'] = array(
     '#title' => t('Advanced Filter'),
+    '#description' => t('Choose whether to show all site activity or just your own.'),
     '#type' => 'checkboxes',
-    '#description' => t('Select what type of content you would like to show up in your feed'),
     '#options' => $choices,
     '#default_value' => array(),
     );
@@ -1893,7 +1893,7 @@ EOT;
       );
      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_click_handlers.js');
 */
-      $block['subject'] = t('Current Activity');
+      $block['subject'] = t('My News Feed');
       $block['content'] = atwork_activity_home_all_callback();
       break;
     /** the profile page block view */

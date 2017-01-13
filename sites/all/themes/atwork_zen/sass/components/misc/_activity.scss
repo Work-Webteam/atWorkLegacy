@@ -5,8 +5,7 @@
 .front {
   .block-atwork-activity {
     h2 {
-      text-align: left !important;
-      margin-left: 1em;
+      text-indent: -4em;
     }
     .jsNewActivityWindow,
     .activity-filters-my,
@@ -26,18 +25,29 @@
     .activity-filters-my {// button to show filters for my-actions
       right: 70px;
       width: 16px;
-      background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-mine-off.png) no-repeat center center;
+      background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-my-off.png) no-repeat center center;
+      &.active,
       &:hover {
-        background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-mine-on.png) no-repeat center center;
+        background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-my-on.png) no-repeat center center;
+      }
+      &:hover {
+        opacity: 0.7;
       }
     }
     .activity-filters-all {// button to show filters for all-activity
       right: 28px;
       width: 36px;
-      background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-group-off.png) no-repeat center center;
+      background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-all-off.png) no-repeat center center;
+      &.active,
       &:hover {
-        background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-group-on.png) no-repeat center center;
+        background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-all-on.png) no-repeat center center;
       }
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+    #atwork-activity-customize-feed-form .description {
+      margin-bottom: 1em;
     }
   }
 }

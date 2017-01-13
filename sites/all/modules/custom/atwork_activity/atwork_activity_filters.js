@@ -1,9 +1,15 @@
 (function ($) {
 
+  // reorder the description div to display before the form
+  $('#atwork-activity-customize-feed-form .description').insertBefore('#atwork-activity-customize-feed-form #edit-feed-choices');
+
 /*********** Begin My Actions vs All Activity interaction ***********/ 
 
 function myActionsRules() {// when My Actions is button clicked
-  // these will change for prod but keeping checkboxes visible for testing
+  // set the filter buttons to show which is active
+  $(".activity-filters-all").removeClass("active"); // gray
+  $(".activity-filters-my").addClass("active"); // green 
+  // these will change for prod but for now, keeping checkboxes visible for testing
   $("#edit-feed-choices-1").removeAttr("disabled"); // enable 'My Actions'
   $('#edit-feed-choices-1').attr('checked', true);
   $('#edit-feed-choices-2').attr('checked', false);
@@ -15,7 +21,10 @@ function myActionsRules() {// when My Actions is button clicked
 }
 
 function allActivityRules() {// when All Activity button is clicked
-  // these will change for prod but keeping checkboxes visible for testing
+  // set the filter buttons to show which is active
+  $(".activity-filters-my").removeClass("active"); // gray
+  $(".activity-filters-all").addClass("active"); // green 
+  // these will change for prod but for now, keeping checkboxes visible for testing
   $("#edit-feed-choices-2").removeAttr("disabled"); // enable 'All Activity'
   $('#edit-feed-choices-2').attr('checked', true);
   $('#edit-feed-choices-1').attr('checked', false);
@@ -48,7 +57,7 @@ $(".activity-filters-all").click(function() {
 
 /*********** Start Content Filter rules ***********/
 
-function contentActive() {
+function contentActive() {// listed individually for ease of code interpretation
   $('#edit-feed-choices-13').attr('checked', false); // blogs
   $('#edit-feed-choices-14').attr('checked', false); // events
   $('#edit-feed-choices-15').attr('checked', false); // forums
@@ -57,6 +66,7 @@ function contentActive() {
   $('#edit-feed-choices-19').attr('checked', false); // galleries
   $('#edit-feed-choices-20').attr('checked', false); // questions
   $('#edit-feed-choices-21').attr('checked', false); // polls
+  $('#edit-feed-choices-13 label, #edit-feed-choices-14, #edit-feed-choices-15, #edit-feed-choices-16, #edit-feed-choices-17, #edit-feed-choices-19, #edit-feed-choices-20, #edit-feed-choices-21').wrap("<strike>");
 }
 
 // If content is checked, uncheck all sub-content types
