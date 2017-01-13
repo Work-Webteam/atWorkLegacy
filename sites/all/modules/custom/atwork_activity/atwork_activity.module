@@ -1366,7 +1366,6 @@ function atwork_activity_entity_view_alter(&$build, $type){
     if(isset($build['#entity'])){
       if($build['#entity']->depth == '0'){
         // This is the top level, so we are refering to content - grab the content info?
-        //dpm($build);
         $ids = array();
         $ids[] = $build['#entity']->entity_id;
         $parent_message = entity_load($build['#entity']->entity_type, $ids );
@@ -1374,9 +1373,25 @@ function atwork_activity_entity_view_alter(&$build, $type){
         $message_name = $message_author->field_gal_first_name['und'][0]['safe_value'];
         $author_line = " commented on $message_name" . "'s" . " status";
       } elseif($build['#entity']->depth > 0){
-        // We have parents, so lets grab the parent's author for this reply
+        // We have parents, so lets grab the immediate parent's author for this reply
         $mid = $build;
-        dpm($build['#entity']);
+        // Grab the parent of the reply
+        $parent_reply = $build['#entity']->parent;
+        if(isset($parent_reply) && !empty($parent_reply)){
+          // Create a query that grabes the uid of the parent reply
+          $user_feed_query = db_select('reply', 'r');
+          $user_feed_query->fields('r', array('uid'))
+            ->condition('r.parent', $parent_reply, '=');
+
+          $parent_reply_author = $user_feed_query
+                ->execute()
+                ->fetchAll();
+          // Will only ever be one of these
+          $author_uid = $parent_reply_author[0]->uid;
+          $reply_author = user_load($author_uid);
+          $author_first_name = $reply_author->field_gal_first_name['und'][0]['safe_value'];
+          $author_line = " replied to $author_first_name";
+        }
       }
     }
     // We need to get the nest number for this to add a to a class field
@@ -1414,8 +1429,7 @@ function atwork_activity_entity_view_alter(&$build, $type){
       }
     }
     /************ HASHTAG FUNCTIONALITY END ****/
-    // Grab user who posetd the comment
-    // TODO - Tailor this from a username to a whole sentence based on reply subject
+    // Grab user who posted the comment
     $author = user_load($build["field_display_name"]['#object']->uid);
     // Add a link to their profile to encourage connections
     $build["field_display_name"][0]['#markup'] = ' <a href="/employees/' . $author->name . '"> ' . $build["field_display_name"][0]['#markup'] . '</a> ' . $author_line;
