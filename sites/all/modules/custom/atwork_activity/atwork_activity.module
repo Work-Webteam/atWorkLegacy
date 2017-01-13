@@ -1373,9 +1373,6 @@ function atwork_activity_entity_view_alter(&$build, $type){
         $message_name = $message_author->field_gal_first_name['und'][0]['safe_value'];
         $author_line = " commented on $message_name" . "'s" . " status";
       } elseif($build['#entity']->depth > 0){
-        dpm($build['#entity']);
-         dpm($build["field_display_name"][0]['#markup']);
-
         // We have parents, so lets grab the immediate parent's author for this reply
         $mid = $build;
         // Grab the parent of the reply
@@ -1427,8 +1424,18 @@ function atwork_activity_entity_view_alter(&$build, $type){
       }
     }
     /************ HASHTAG FUNCTIONALITY END ****/
-    // Grab user who posted the comment
-    $author = user_load($build["field_display_name"]['#object']->uid);
+    // Grab user who posted the comment, For some reason this is not reflected in the object itself.
+    // Create a query that grabs the uid of the author
+    $rid_reply = $build['field_display_name']['#object']->id;
+    $user_feed_query = db_select('reply', 'r')
+      ->fields('r', array('uid'))
+      ->condition('r.id', $rid_reply, '=');
+
+    $author_uid = $user_feed_query
+          ->execute()
+          ->fetchAll();
+    // Will only ever be one of these
+    $author = user_load($author_uid[0]->uid);
     // Add a link to their profile to encourage connections
     $build["field_display_name"][0]['#markup'] = ' <a href="/employees/' . $author->name . '"> ' . $build["field_display_name"][0]['#markup'] . '</a> ' . $author_line;
     // Add image to the comment
