@@ -18,7 +18,6 @@
  */
 
 function atwork_zen_preprocess_page(&$variables, $hook) {
-
   // jquery.cookie plugin is not being loaded for all users
   // causing all jQuery and javascript to break in certain areas of the site
   drupal_add_library('system', 'jquery.cookie');

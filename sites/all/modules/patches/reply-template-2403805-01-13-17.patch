@@ -1,0 +1,26 @@
+From 8ef6f0b03522bf21c51684c3fbe297e1cdd47d3d Mon Sep 17 00:00:00 2001
+From: idebr <idebr@1879760.no-reply.drupal.org>
+Date: Wed, 14 Jan 2015 23:21:25 +0100
+Subject: [PATCH] Issue #2403805 by sebto: Template preprocess variables are
+ not available when reply.tpl.php is overridden in a theme
+
+---
+ reply.module | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/reply.module b/reply.module
+index 8203df0..470cb00 100644
+--- a/reply.module
++++ b/reply.module
+@@ -180,7 +180,8 @@ function reply_permission() {
+ /**
+  * Implements hook_theme().
+  */
+-function reply_theme() {
++function reply_theme(&$existing) {
++  $existing['entity']['preprocess functions'][] = 'reply_preprocess_reply';
+   return array(
+     'replies' => array(
+       'render element' => 'elements',
+--
+1.8.0.msysgit.0
