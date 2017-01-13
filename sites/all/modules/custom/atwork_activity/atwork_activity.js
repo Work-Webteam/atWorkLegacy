@@ -14,8 +14,6 @@ function toggleCommentForm(nid) {
   Drupal.behaviors.atworkActivity = {
     attach: function (context, settings) {
       $('.comment-form').hide();
-
-
     }
   };
 
