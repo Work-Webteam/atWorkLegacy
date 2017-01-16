@@ -2006,15 +2006,18 @@ function _atwork_activity_profile_page_block_content($user_id){
     return;
   }
 
+  $output = '';
   // Decide if it is users block or others and set title
   if($account->uid === $user->uid){
     $block['title'] = t("My Feed");
+    // The final markup - wrap it up in a div
+    $form = drupal_get_form('atwork_activity_form');
+    $output = render($form);
+    $output .= '<div id="activity-feed">' ;
   } else {
     $block['title'] = $account->field_gal_first_name['und'][0]['safe_value'] . t("'s activity feed");
   }
   // Grab all messages related to user, User name, and picture of User.
-
-  $output = '';
   $classes = array();
 
   $query = db_select('message', 'm')
@@ -2107,11 +2110,6 @@ function _atwork_activity_profile_page_block_content($user_id){
   //dpm($messages1);
   // Now create a render array to get the entity wrappers/markup in place
   $message_render_array = entity_view('message', $messages1);
-  // The final markup - wrap it up in a div
-  $form = drupal_get_form('atwork_activity_form');
-
-  $output = render($form);
-  $output .= '<div id="activity-feed">' ;
 
   // This is for the pager - but we don't need this if we clean up our query above
   if(isset($message_render_array) && $message_render_array){
