@@ -35,6 +35,9 @@ function profile_feed_comments_field_default_field_instances() {
     ),
     'entity_type' => 'comment',
     'field_name' => 'comment_body',
+    'hashtag_settings' => array(
+      'hashtag_field' => 1,
+    ),
     'label' => 'Comment',
     'required' => TRUE,
     'settings' => array(
@@ -1855,6 +1858,9 @@ function profile_feed_comments_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
+    'hashtag_settings' => array(
+      'hashtag_field' => 1,
+    ),
     'label' => 'Body',
     'required' => 0,
     'settings' => array(
@@ -1925,6 +1931,9 @@ function profile_feed_comments_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
+    'hashtag_settings' => array(
+      'hashtag_field' => 1,
+    ),
     'label' => 'Status',
     'required' => 0,
     'settings' => array(

@@ -195,7 +195,10 @@ function reply_permission() {
 /**
  * Implements hook_theme().
  */
-function reply_theme() {
+//function reply_theme() {}
+// ALtered as per patch https://www.drupal.org/files/issues/2403805-1.patch
+function reply_theme(&$existing) {
+  $existing['entity']['preprocess functions'][] = 'reply_preprocess_reply';
   return array(
     'replies' => array(
       'render element' => 'elements',
