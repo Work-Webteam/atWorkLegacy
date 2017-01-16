@@ -1294,8 +1294,13 @@ function atwork_activity_form_og_ui_confirm_unsubscribe_alter(&$form, &$form_sta
  */
 function atwork_activity_form_alter(&$form, &$form_state, $form_id){
 
-  if(isset($form['bundle']) && $form['bundle']['#value'] == "entity_comments"){
+  if(isset($form['bundle']) && $form['bundle']['#value'] == "entity_comments" && $form_state['build_info']['args'][0]->bundle == 'entity_comments' && $form['#type'] == 'form'){
     // hide these fields on all forms
+
+    if($form_id == 'field_ui_field_delete_form'){
+      return;
+    }
+    //dpm($form_id);
     $form['field_display_name']['#access'] = FALSE;
     $form['field_profile_comment_date']['#access'] = FALSE;
     // These can be updated regardless if there are available
@@ -1314,7 +1319,6 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
     // Create our own submit button for the profile page to send users to our handler
     $form['button'] = array(
       '#type' => 'button', // We lose ajax if we make this a true Submit - we will manually save the entity in our callback
-      '#value' => 'Post Comment', // To differentiate it from the normal submit button - this will be hidden by CSS.
       '#value' => 'Post Comment', // To differentiate it from the normal submit button - this will be hidden by CSS.
       '#prefix' => '<div class="comment-submit-button">',
       '#suffix' => '</div>',
@@ -1395,32 +1399,51 @@ function atwork_activity_entity_view_alter(&$build, $type){
       }
     }
 
-    /**** HASHTAG FUNCTIONALITY ****
+    /**** HASHTAG FUNCTIONALITY ****/
+
+    if(isset($build['field_profile_comment'][0]['#markup']) && $build['field_profile_comment'][0]['#markup']){
+      $markup = $build['field_profile_comment'][0]['#markup'];
+      $check_for_hash = strpos($markup, '#');
+      if(isset($check_for_hash) && is_numeric($check_for_hash)){
+        // Split this up so we can get to any hashes
+        $markup_array = explode(' ', $markup);
+        $vocabulary = taxonomy_vocabulary_machine_name_load('Hashtags');
+        $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
+
+        foreach($markup_array as $key=>$word){
+
+          $clean_word = (trim($word));
+          if($clean_word{0} == "#"){
+            // Get the term without the hash
+            $hash_term = ltrim($clean_word, '#');
+            $i = FALSE;
+            foreach($terms as $term){
+              if($term->name == $hash_term){
+                $markup_array[$key] = '<a href="/taxonomy/terms/reply/' . $term->tid . '" class="hashtag">' . $word . '</a>';
+                // Rebuild markup
+                $return_markup = implode(' ', $markup_array);
+                $build['field_profile_comment'][0]['#markup'] = $return_markup;
+              // Found it - no reason to continue looking through list.
+              break;
+              }
+            }
+            // save new term and then get path
+            // Term exists, but not associated with this instance
 
 
-    $markup = $build['field_profile_comment'][0]['#markup'];
-    $check_for_hash = strpos($markup, '#');
-    if(isset($check_for_hash) && is_numeric($check_for_hash)){
-      // Split this up so we can get to any hashes
-      $markup_array = explode(' ', $markup);
-      $vocabulary = taxonomy_vocabulary_machine_name_load('Hashtags');
-      $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
-      foreach($terms as $term){
-        dpm($term);
-      }
-      foreach($markup_array as $word){
-        dpm($word);
-        //if($term->name == $this_tag){
-          // Explode markup on space
-          // find any with #
-          // add in the new a href tags
-          // implode array
-       // } else {
-          // need to create a new term and save it here
-          // then grab that term, and tid
-          // and then explode this line and wrap the term in html
-          // implode it and save as markup
-        //}
+          }
+          //if($term->name == $this_tag){
+            // Explode markup on space
+            // find any with #
+            // add in the new a href tags
+            // implode array
+         // } else {
+            // need to create a new term and save it here
+            // then grab that term, and tid
+            // and then explode this line and wrap the term in html
+            // implode it and save as markup
+          //}
+        }
       }
     }
     /************ HASHTAG FUNCTIONALITY END ****/
@@ -1496,28 +1519,6 @@ function atwork_activity_entity_view_alter(&$build, $type){
     $build['links']['flag']['#links']['flag-activity_feed_messages_flag']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'),$build['links']['flag']['#links']['flag-activity_feed_messages_flag']['title']);
   }
 }
-
-
-
-/**
- * Implements hook_entity_load
- */
-/*
-function atwork_activity_entity_load($entities, $type){
-  if($type == 'message' || $type == 'reply'){
-  }
-}
-*/
-/**
- * Implements hook_entity_view
- */
-/*
-function atwork_activity_entity_view($entity, $type, $view_mode, $langcode){
-
-}
-*/
-
-
 
 function _atwork_activity_group_subscribe(&$form, &$form_state) {
   global $user;
