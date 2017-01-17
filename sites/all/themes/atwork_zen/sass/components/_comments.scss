@@ -41,9 +41,6 @@
       .field-name-field-feed-like-button {
         left: 29em;
         top: 6px;
-        a {
-          padding: 0 0.2em;
-        }
       }
       .date {
         right: 0.5em;
@@ -125,6 +122,12 @@
   margin: 1em;
 }
 
+.atwork-rate-widget-feed_like_button {
+  a {
+    padding: 0 0.3em;
+  }
+}
+
 .reply {
   border: 1px solid #e0e0e0;
   position: relative;
@@ -147,7 +150,10 @@
     opacity: 0.8;
   }
   .field-name-field-feed-like-button {
-    left: 26em !important; // these have to be positioned from left, not right for rollover to work
+    left: 51% !important; // these have to be positioned from left, not right for rollover to work
+    &.field-label-hidden {
+      position: relative;
+    }
   }
 }
 
@@ -167,9 +173,14 @@
 // Nesting Depth
 .replies-wrapper {
   .reply-depth-1 {
-    margin-left: 1em;
+    margin-left: 1.5em;
   }
   .reply-depth-2 {
-    margin-left: 2em;
+    margin-left: 3em;
+  }
+  .reply-depth-3,
+  .reply-depth-4,
+  .reply-depth-5 {
+    margin-left: 3em;
   }
 }
