@@ -160,3 +160,13 @@
   @include button-small;
   margin-right: 0.5em;
 }
+
+// Nesting Depth
+.replies-wrapper {
+  .reply-depth-1 {
+    margin-left: 1em;
+  }
+  .reply-depth-2 {
+    margin-left: 2em;
+  }
+}
