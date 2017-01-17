@@ -41,6 +41,9 @@
       .field-name-field-feed-like-button {
         left: 29em;
         top: 6px;
+        a {
+          padding: 0 0.2em;
+        }
       }
       .date {
         right: 0.5em;
@@ -159,4 +162,14 @@
 .reply-links a {
   @include button-small;
   margin-right: 0.5em;
+}
+
+// Nesting Depth
+.replies-wrapper {
+  .reply-depth-1 {
+    margin-left: 1em;
+  }
+  .reply-depth-2 {
+    margin-left: 2em;
+  }
 }
