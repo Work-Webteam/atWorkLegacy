@@ -2278,4 +2278,3 @@ function atwork_activity_block_view_alter(&$data, $block){
     break;
   }
 }
->>>>>>> WSEP-117-hash-tags
