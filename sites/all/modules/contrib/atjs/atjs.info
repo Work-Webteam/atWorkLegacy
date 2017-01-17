@@ -1,0 +1,21 @@
+name = At.js
+description = Provides an inline autocomplete within textareas.
+core = 7.x
+
+dependencies[] = ctools
+dependencies[] = jquery_update (>=7.x-2.3)
+dependencies[] = libraries
+
+package = Other
+
+files[] = plugins/export_ui/atjs_ctools_export_ui.class.php
+files[] = views/AtjsViewsHandlerRelationship.php
+
+configure = admin/structure/atjs
+
+; Information added by Drupal.org packaging script on 2016-06-16
+version = "7.x-1.0-alpha1+24-dev"
+core = "7.x"
+project = "atjs"
+datestamp = "1466091774"
+
