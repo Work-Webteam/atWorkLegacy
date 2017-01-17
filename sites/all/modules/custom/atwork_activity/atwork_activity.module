@@ -1017,6 +1017,7 @@ function atwork_activity_home_all_callback() {
   $output .= '<button class="activity-filters-all" title="show all content filters">A</button>';
   $output .= '<a href="node/21100" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="Click for pop-out Activity Feed window" /></a>';
   drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity.js');
+
   return($output);
 }
 
@@ -1297,8 +1298,13 @@ function atwork_activity_form_og_ui_confirm_unsubscribe_alter(&$form, &$form_sta
  */
 function atwork_activity_form_alter(&$form, &$form_state, $form_id){
 
-  if(isset($form['bundle']) && $form['bundle']['#value'] == "entity_comments"){
-    // hide these fields on all forms
+  if(isset($form['bundle']) && $form['bundle']['#value'] == "entity_comments" && $form_state['build_info']['args'][0]->bundle == 'entity_comments' && $form['#type'] == 'form'){
+    // hide these fields on all forms       // hide these fields on all forms
+    if($form_id == 'field_ui_field_delete_form'){
+      return;
+    }
+
+    //dpm($form_id);
     $form['field_display_name']['#access'] = FALSE;
     $form['field_profile_comment_date']['#access'] = FALSE;
     // These can be updated regardless if there are available
@@ -1317,7 +1323,6 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
     // Create our own submit button for the profile page to send users to our handler
     $form['button'] = array(
       '#type' => 'button', // We lose ajax if we make this a true Submit - we will manually save the entity in our callback
-      '#value' => 'Post Comment', // To differentiate it from the normal submit button - this will be hidden by CSS.
       '#value' => 'Post Comment', // To differentiate it from the normal submit button - this will be hidden by CSS.
       '#prefix' => '<div class="comment-submit-button">',
       '#suffix' => '</div>',
@@ -1339,7 +1344,7 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
     );
   }
 
-  }
+}
 
 /**
  * Submit handler for entity replies on the profile activity feed page
@@ -1398,32 +1403,51 @@ function atwork_activity_entity_view_alter(&$build, $type){
       }
     }
 
-    /**** HASHTAG FUNCTIONALITY ****
+    /**** HASHTAG FUNCTIONALITY ****/
+
+    if(isset($build['field_profile_comment'][0]['#markup']) && $build['field_profile_comment'][0]['#markup']){
+      $markup = $build['field_profile_comment'][0]['#markup'];
+      $check_for_hash = strpos($markup, '#');
+      if(isset($check_for_hash) && is_numeric($check_for_hash)){
+        // Split this up so we can get to any hashes
+        $markup_array = explode(' ', $markup);
+        $vocabulary = taxonomy_vocabulary_machine_name_load('Hashtags');
+        $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
+
+        foreach($markup_array as $key=>$word){
+
+          $clean_word = (trim($word));
+          if($clean_word{0} == "#"){
+            // Get the term without the hash
+            $hash_term = ltrim($clean_word, '#');
+            $i = FALSE;
+            foreach($terms as $term){
+              if($term->name == $hash_term){
+                $markup_array[$key] = '<a href="/taxonomy/terms/reply/' . $term->tid . '" class="hashtag">' . $word . '</a>';
+                // Rebuild markup
+                $return_markup = implode(' ', $markup_array);
+                $build['field_profile_comment'][0]['#markup'] = $return_markup;
+              // Found it - no reason to continue looking through list.
+              break;
+              }
+            }
+            // save new term and then get path
+            // Term exists, but not associated with this instance
 
 
-    $markup = $build['field_profile_comment'][0]['#markup'];
-    $check_for_hash = strpos($markup, '#');
-    if(isset($check_for_hash) && is_numeric($check_for_hash)){
-      // Split this up so we can get to any hashes
-      $markup_array = explode(' ', $markup);
-      $vocabulary = taxonomy_vocabulary_machine_name_load('Hashtags');
-      $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
-      foreach($terms as $term){
-        dpm($term);
-      }
-      foreach($markup_array as $word){
-        dpm($word);
-        //if($term->name == $this_tag){
-          // Explode markup on space
-          // find any with #
-          // add in the new a href tags
-          // implode array
-       // } else {
-          // need to create a new term and save it here
-          // then grab that term, and tid
-          // and then explode this line and wrap the term in html
-          // implode it and save as markup
-        //}
+          }
+          //if($term->name == $this_tag){
+            // Explode markup on space
+            // find any with #
+            // add in the new a href tags
+            // implode array
+         // } else {
+            // need to create a new term and save it here
+            // then grab that term, and tid
+            // and then explode this line and wrap the term in html
+            // implode it and save as markup
+          //}
+        }
       }
     }
     /************ HASHTAG FUNCTIONALITY END ****/
@@ -1499,28 +1523,6 @@ function atwork_activity_entity_view_alter(&$build, $type){
     $build['links']['flag']['#links']['flag-activity_feed_messages_flag']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'),$build['links']['flag']['#links']['flag-activity_feed_messages_flag']['title']);
   }
 }
-
-
-
-/**
- * Implements hook_entity_load
- */
-/*
-function atwork_activity_entity_load($entities, $type){
-  if($type == 'message' || $type == 'reply'){
-  }
-}
-*/
-/**
- * Implements hook_entity_view
- */
-/*
-function atwork_activity_entity_view($entity, $type, $view_mode, $langcode){
-
-}
-*/
-
-
 
 function _atwork_activity_group_subscribe(&$form, &$form_state) {
   global $user;
@@ -2009,15 +2011,18 @@ function _atwork_activity_profile_page_block_content($user_id){
     return;
   }
 
+  $output = '';
   // Decide if it is users block or others and set title
   if($account->uid === $user->uid){
     $block['title'] = t("My Feed");
+    // The final markup - wrap it up in a div
+    $form = drupal_get_form('atwork_activity_form');
+    $output = render($form);
+    $output .= '<div id="activity-feed">' ;
   } else {
     $block['title'] = $account->field_gal_first_name['und'][0]['safe_value'] . t("'s activity feed");
   }
   // Grab all messages related to user, User name, and picture of User.
-
-  $output = '';
   $classes = array();
 
   $query = db_select('message', 'm')
@@ -2110,11 +2115,6 @@ function _atwork_activity_profile_page_block_content($user_id){
   //dpm($messages1);
   // Now create a render array to get the entity wrappers/markup in place
   $message_render_array = entity_view('message', $messages1);
-  // The final markup - wrap it up in a div
-  $form = drupal_get_form('atwork_activity_form');
-
-  $output = render($form);
-  $output .= '<div id="activity-feed">' ;
 
   // This is for the pager - but we don't need this if we clean up our query above
   if(isset($message_render_array) && $message_render_array){
@@ -2278,3 +2278,4 @@ function atwork_activity_block_view_alter(&$data, $block){
     break;
   }
 }
+>>>>>>> WSEP-117-hash-tags
