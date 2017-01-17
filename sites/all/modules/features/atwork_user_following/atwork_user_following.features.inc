@@ -33,13 +33,23 @@ function atwork_user_following_image_default_styles() {
   $styles['follow_thumbs'] = array(
     'label' => 'Follow Thumbs',
     'effects' => array(
+      97 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => '',
+          'height' => 90,
+          'upscale' => 0,
+        ),
+        'weight' => -10,
+      ),
       98 => array(
-        'name' => 'image_scale_and_crop',
+        'name' => 'image_crop',
         'data' => array(
           'width' => 60,
           'height' => 60,
+          'anchor' => 'center-top',
         ),
-        'weight' => -9,
+        'weight' => 3,
       ),
     ),
   );
