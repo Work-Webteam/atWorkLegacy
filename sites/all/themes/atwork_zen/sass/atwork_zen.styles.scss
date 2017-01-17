@@ -701,11 +701,11 @@ div.header-user {
 }
 /* Top Tools -------------------------------------------------------*/
 .front #block-views-top-tools-block {
-	display: inline-block;
-	background-color: #D7D7D7;
-	height: 390px;
-	margin-left: 5px;
-	padding-bottom: 15px;
+    display: inline-block;
+    background-color: #D7D7D7;
+    height: 390px;
+    width: 336px;
+    padding-bottom: 15px;
 }
 .front #block-views-top-tools-block h2 {
 	font-size: initial;
@@ -873,16 +873,18 @@ div.header-user {
   margin-bottom:167px;
   font-weight: 600;
 }
-.front.logged-in.no-sidebars .skin-default.views-slideshow-controls-bottom {
-  display: inline-block;
-}
+
 .front .views-slideshow-controls-bottom .views-slideshow-pager-field-item {
   border: none;
 }
 .front.logged-in.no-sidebars .skin-default .views-slideshow-controls-bottom {
-    width: 315px;
+    display: inline-block;
+    height: 30px;
+    min-width:100%;
+    max-width:768px;
+    z-index: 100;
     position: relative;
-    top: -265px;
+    top: -140px;
 }
 .front.logged-in.no-sidebars .skin-default .slide-box {
   display: block;
@@ -910,14 +912,12 @@ div.header-user {
 }
 
 /* Slideshow Previous / Next Controls -------------------------------------------------------*/
-#views_slideshow_controls_text_home_page_blocks_zen-block_5 {
-    position: absolute;
-}
+
 #views_slideshow_controls_text_previous_home_page_blocks_zen-block_5 {
   position: relative;
-  left: 2px;
+  left: 0;
   z-index: 50;
-  top: 120px;
+  top: 0;
 }
 #views_slideshow_controls_text_previous_home_page_blocks_zen-block_5 a {
   display: inline-block;
@@ -937,9 +937,9 @@ div.header-user {
 }
 #views_slideshow_controls_text_next_home_page_blocks_zen-block_5 {
   position: relative;
-  left: 908px;
+  float:right;
   z-index: 50;
-  top: 120px;
+  top: 0;
 }
 #views_slideshow_controls_text_next_home_page_blocks_zen-block_5 a {
   display: inline-block;
@@ -1387,12 +1387,13 @@ h3.front-promoted-title a,
 /*------------------ New Front Page Events Block -----------------------------*/
 
 .front #block-views-home-page-blocks-zen-block-2 {
-	display: inline-block;
-	float: left;
-	background-color: #D7D7D7;
-	min-width: 49%;
-	height: 390px;
-	padding-bottom: 15px;
+    display: inline-block;
+    float: left;
+    background-color: #D7D7D7;
+    width:619px;
+    height: 390px;
+    padding-bottom: 15px;
+    margin-right: .5%;
 }
 .front #block-views-home-page-blocks-zen-block-2 .view-content {
 	background-color: #fff;
@@ -5584,334 +5585,6 @@ li.TabbedPanelsTab {
   text-align: center;
   margin-bottom: 30px;
 }
-
-
-
-/*#####################################################################################################################################################*/
-/** @media queries for mobile devices -------------------------------------------------------*/
-/*#####################################################################################################################################################**/
-
-/* Empty code for reference*/
-/*@media (max-width:753px) {
-
-}
-
-@media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px)
-and (orientation : portrait) {
-
-}*/
-/*****************************/
-
-@media all and (-ms-high-contrast:none) {
-  .views_slideshow_cycle_main {
-  margin-top/*\**/: 9px;
-  }
-}
-/*Mega Menu - Top Menu - Mobile Menu Cut off points*/
-@media screen and (max-width: 768px) {
-  #admin-menu,
-  #block-custom-search-blocks-1,
-  #block-views-home-page-blocks-zen-block-2,
-  #block-tb-megamenu-menu-main-menu-zen,
-  #footer #users_online {
-    display: none;
-  }
-  #block-atwork-activity-homepage {
-    width: inherit;
-  }
-}
-@media screen and (min-width: 970px) {
-  #block-atwork-mobile-atwork-mobile-menu-block {
-    display: none !important;
-  }
-}
-@media screen and (max-width: 969px) {
-  html {
-  background: url(/sites/all/themes/atwork_zen/images/top-bar-mobile.png) repeat-x scroll center -29px;
-  }
-  #header {
-    background: none;
-    height: inherit;
-  }
-  #navigation .region-navigation {
-    border-top-style: none;
-
-}
-}
-/* Front page mobile adjustments - @Media cutoff is 752 pixels */
-
-@media screen and (max-width:767px) {
-  .region-highlighted,
-  #block-block-5,
-  #block-views-home-page-blocks-zen-block-2,
-  #block-views-gallery-reference-block-2,
-  #block-boxes-homepage-logos,
-  a#ui-id-4 {
-    display: none;
-  }
-  #block-views-home-page-blocks-zen-block-1,
-  #block-views-home-page-blocks-zen-block-3,
-  #block-views-home-page-blocks-zen-block-4 {
-    display: block;
-    max-width: 90% !important;
-    margin: 10px auto;
-  }
-  .front-promoted-image img {
-    max-width: 100%;
-  }
-  .front #block-views-home-page-blocks-zen-block-2 {
-    display: none !important;
-  }
-  #block-atwork-activity-homepage {
-    width: 90%;
-    margin-left: 5%;
-  }
-  #footer table {
-    background-color: #26669E;
-  }
-}
-
-@media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px)
-and (orientation : portrait) {
-  #block-views-home-page-blocks-zen-block-1,
-  #block-views-home-page-blocks-zen-block-3,
-  #block-views-home-page-blocks-zen-block-4 {
-    max-width: 32.3%;
-  }
-  #block-views-home-page-blocks-zen-block-3 {
-    margin-left: .5%;
-    margin-right: .5%;
-  }
-  #awards_logos img {
-  width: auto;
-  margin: 10px 5px 0;
-  }
-  #footer-copyright table {
-    margin-top: 0 !important;
-  }
-}
-
-@media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px)
-and (orientation : landscape) {
-  #footer-copyright table {
-    margin-top: 0;
-    padding-bottom: 15px;
-  }
-}
-/* Tiled landing pages */
-
-@media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px)
-and (orientation : portrait) {
-  .section-classifieds .view-classifieds .views-row-odd, .section-classifieds .view-classifieds .views-row-even,
-  .page-galleries .view-gallery-reference .views-row-odd, .page-galleries .view-gallery-reference .views-row-even,
-  .section-blogs #block-views-blogs-block-3 .views-row-odd, .section-blogs #block-views-blogs-block-3 .views-row-even,
-  .section-news .view-id-news.view-display-id-page_2 .views-row-odd, .section-news .view-id-news.view-display-id-page_2 .views-row-even,
-  .section-corporate-news .view-id-news.view-display-id-page_3 .views-row-odd, .section-corporate-news .view-id-news.view-display-id-page_3 .views-row-even,
-  .section-videos .view-display-id-page_1 .views-row-odd, .section-videos .view-display-id-page_1 .views-row-even,
-  .section-videos .view-display-id-page_2 .views-row-odd, .section-videos .view-display-id-page_2 .views-row-even,
-  .section-corporate-polls .view-display-id-page_2 .views-row-odd, .section-corporate-polls .view-display-id-page_2 .views-row-even,
-  .section-polls .view-display-id-page_3 .views-row-odd, .section-polls .view-display-id-page_3 .views-row-even,
-  .section-etc-talks #block-views-videos-block-4 .views-row-odd, .section-etc-talks #block-views-videos-block-4 .views-row-even,
-  .section-executive-messages #block-views-executive-updates-block-2 .views-row-odd, .section-executive-messages #block-views-executive-updates-block-2 .views-row-even {
-    max-width: 240px;
-    margin: 0 4px 10px;
-    }
-}
-
-
-
-/* Mobile Menu Appearance */
-
-@media
-only screen and (-webkit-min-device-pixel-ratio : 1.5),
-only screen and (min-device-pixel-ratio : 1.5) {
-  #block-atwork-mobile-atwork-mobile-menu-block { font-size: 125%; }
-}
-
-@media
-only screen and (-webkit-min-device-pixel-ratio : 2),
-only screen and (min-device-pixel-ratio : 2) {
-  #block-atwork-mobile-atwork-mobile-menu-block {font-size: 100%;}
-}
-
-#block-atwork-mobile-atwork-mobile-menu-block #full_menu {
-  padding-bottom:10px;
-}
-#block-atwork-mobile-atwork-mobile-menu-block {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 100%;
-  min-height: 36px;
-  overflow-y: scroll;
-  padding: 20px 0 0 10px;
-  background-color: #ECECEC;
-  background-image: url(/sites/all/themes/atwork_zen/images/atwork-logo-menu.png);
-  background-repeat: no-repeat;
-  background-position: center 5px;
-  z-index: 10000;
-}
-#block-atwork-mobile-atwork-mobile-menu-block i.fa.fa-bars {
-  font-size: 125%;
-}
-#block-atwork-mobile-atwork-mobile-menu-block i.fa.fa-bars:after {
-  content: " Menu";
-  font-family: atwork-font;
-  font-size: 125%;
-}
-#block-atwork-mobile-atwork-mobile-menu-block #full_menu #atwork_menu {
-  padding: 0;
-  margin: 0;
-  line-height: normal;
-}
-#block-atwork-mobile-atwork-mobile-menu-block .menu-title {
-  display: block;
-  padding: 8px;
-  margin: 0 25px 0 0;
-  border-bottom: solid 1px #A7A7A7;
-}
-
-#block-atwork-mobile-atwork-mobile-menu-block .menu-sub-title {
-  display: block;
-  padding: 8px;
-  margin-left: 25px;
-}
-#block-atwork-mobile-atwork-mobile-menu-block ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-#block-atwork-mobile-atwork-mobile-menu-block li a {
-  color: #000;
-  display: block;
-}
-li.atwork_menu_nested a {
-  display: block;
-  margin: 5px 25px;
-  padding: 5px;
-  border: solid 1px #CCC;
-}
-li.atwork_menu_nested a:hover {
-  background-color: #CCC;
-  text-decoration:none;
-}
-
-li.atwork_menu_top_level .menu-title i.fa.fa-plus,
-li.atwork_menu_top_level .menu-sub-title i.fa.fa-plus {
-  padding: 2px;
-  border: solid 1px #999;
-  color: #999;
-  background-color: none;
-}
-li.atwork_menu_top_level .menu-title:hover,
-li.atwork_menu_top_level .menu-sub-title:hover {
-  background-color: #FFF;
-}
-
-li.atwork_menu_top_level .menu-title i.fa.fa-minus,
-li.atwork_menu_top_level .menu-sub-title i.fa.fa-minus {
-  padding: 2px;
-  border: solid 1px #000;
-  background-color: #26669E;
-  color: #FFF;
-}
-
-
-
-/* Mobile Front Page */
-.view-display-id-mobile_slideshow {
-  margin-top: 33px !important;
-}
-
-.view-display-id-mobile_slideshow .views-field-field-image img {
-  position: relative;
-  top: 0;
-  left: -18%;
-}
-
-.view-display-id-mobile_slideshow,
-.view-display-id-mobile_top5,
-.view-display-id-mobile_left,
-.view-display-id-mobile_middle,
-.view-display-id-mobile_right {
-  max-width: 600px;
-  margin: 0 auto;
-}
-.view-display-id-mobile_slideshow .slideshow-teaser-box {
-  display: block;
-  background-color: rgba(255,255,255,.85);
-  background: url(/sites/all/themes/atwork_zen/images/white-trans.png) repeat center center;
-  margin: 30px 40px;
-  max-width: 100%;
-  height: 149px;
-  padding: 20px;
-  border: solid 1px #ECECEC;
-}
-.view-display-id-mobile_slideshow .slideshow-teaser-box .slideshow-num-comments,
-.view-display-id-mobile_slideshow .slideshow-teaser-box .slideshow_num_likes {
-  display: inline-block;
-  margin-top: 10px;
-  margin-right: 10px;
-  font-size: 16px;
-}
-.view-display-id-mobile_slideshow .slideshow-teaser-box .more-content {
-  display: inline-block;
-  float: right;
-  margin-top: 10px
-}
-.view-id-home_page_blocks_zen.view-display-id-mobile_top5 .views-row-odd,
-.view-id-home_page_blocks_zen.view-display-id-mobile_top5 .views-row-even,
-.view-id-home_page_blocks_zen.view-display-id-mobile_left .views-row,
-.view-id-home_page_blocks_zen.view-display-id-mobile_middle .views-row,
-.view-display-id-mobile_right .views-row {
-  display: inline-block;
-  width: 100%;
-  clear: both;
-  background-color: #ECECEC;
-  margin-bottom: 10px;
-}
-.view-id-home_page_blocks_zen .mobile-promoted-image {
-  float: left;
-  width: 160px;
-}
-.view-id-home_page_blocks_zen .mobile-promoted-title,
-.view-id-home_page_blocks_zen .mobile-promoted-posted,
-.view-id-home_page_blocks_zen .mobile-promoted-teaser {
-  display: block;
-  margin-left: 170px;
-  margin-bottom: 5px;
-}
-.view-id-home_page_blocks_zen .mobile-promoted-title {
-  font-size: 125%;
-  margin-top: 10px;
-  color: #26669E;
-}
-.view-id-home_page_blocks_zen .mobile-promoted-teaser {
-  margin-right: 15px;
-  min-height: 70px;
-}
-.view-id-home_page_blocks_zen .mobile-promoted-type {
-  display: block;
-  width: 150px;
-  border: solid 1px #FFF;
-  background-color: #E0E0E0;
-  font-size: 12px;
-  text-align: center;
-  padding: 3px 6px;
-  margin-top: -25px;
-}
-
-
-
 
 
 /* Wiki page title change for one page only */
