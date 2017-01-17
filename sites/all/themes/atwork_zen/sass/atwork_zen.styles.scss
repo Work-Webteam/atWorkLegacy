@@ -736,6 +736,20 @@ div.header-user {
 	background-color: #818283;
 	color: #FFF;
 }
+
+.front .view-home-page-blocks-zen {
+  h3 a {
+    color: #fed463;
+    margin: 0 10px;
+  }
+  .front-promoted-title {
+    margin-top: 1em;
+  }
+  .front-promoted-posted {
+    margin-top: 2em;
+  }
+}
+
 /* Front Page Users online -------------------------------------------------------*/
 #users_online {
   text-align: center;
@@ -2962,7 +2976,7 @@ aside.sidebars h2 {
   border: solid 1px #B7B7B7;
   padding: 0 10px;
 }
-#user-profile-form p{
+#user-profile-form p {
   padding: 0;
   margin: 5px 15px 10px;
 }
