@@ -1299,12 +1299,12 @@ function atwork_activity_form_og_ui_confirm_unsubscribe_alter(&$form, &$form_sta
 function atwork_activity_form_alter(&$form, &$form_state, $form_id){
 
   if(isset($form['bundle']) && $form['bundle']['#value'] == "entity_comments" && $form_state['build_info']['args'][0]->bundle == 'entity_comments' && $form['#type'] == 'form'){
-    // hide these fields on all forms       // hide these fields on all forms
     if($form_id == 'field_ui_field_delete_form'){
       return;
     }
-
+    // hide these fields on all forms
     //dpm($form_id);
+    $form['field_hashtags']['#access'] = FALSE;
     $form['field_display_name']['#access'] = FALSE;
     $form['field_profile_comment_date']['#access'] = FALSE;
     // These can be updated regardless if there are available
