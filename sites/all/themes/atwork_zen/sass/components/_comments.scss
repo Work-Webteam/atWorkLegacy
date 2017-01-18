@@ -13,8 +13,8 @@
       border-left-width: 10px;
       border-right-width: 10px;
     }
-    > div > .message,
-    > .message { // need to account for two markup layouts here
+    > div#activity-feed > .message,
+    > .message { // target the first message div of own and other's profile page
       position: relative; // get ready to position all internal elements absolutely
       margin: 2em 0 2em 4em;
       border: 1px solid #ccc;
@@ -22,75 +22,90 @@
       &.even {
         background-color: #f5f5f5;
       }
-      .field-label {
+      .field-label { // hide all labels
         display: none;
       }
+    }
+    .entity-message {
+      margin-top: -3em; // hackey, but need to close up top space
+      &.clearfix:after {
+        content: "";
+        display: initial; // fix for odd bottom space on first posting
+      }
+      p + p + p { // this adds space between the status and where a comment starts
+        margin-top: 1em;
+      }
+    }
 
-      // Position most of the inner elements absolutely
-      .comment-submit-button,
-      .toggle-com-button,
-      .field-name-field-feed-like-button,
-      .date {
-        position: absolute;
-        margin: 0;
+    // Position most of the inner elements absolutely
+    .comment-submit-button,
+    .toggle-com-button,
+    .field-name-field-feed-like-button,
+    .date {
+      position: absolute;
+      margin: 0;
+      padding: 0;
+    }
+    .comment-submit-button {
+      left: 6px;
+      bottom: 0;
+    }
+    .field-name-field-feed-like-button {
+      left: 50.5%;
+      top: 6px;
+      min-width: 100px;
+      .field-name-field-feed-like-button { // new one made when clicked
+        left: inherit !important;
+        top: inherit;
+      }
+    }
+    .date {
+      right: 0.5em;
+      bottom: 2px;
+      font-size: smaller;
+      color: lighten(#000, 60%);
+    }
+    .links {// post as comment button.
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      top: 4px;
+      right: 4px;
+      li {
         padding: 0;
-      }
-      .comment-submit-button {
-        left: 6px;
-        bottom: 0;
-      }
-      .field-name-field-feed-like-button {
-        left: 29em;
-        top: 6px;
-      }
-      .date {
-        right: 0.5em;
-        bottom: 2px;
-        font-size: smaller;
-        color: lighten(#000, 60%);
-      }
-      .links {// post as comment button.
-        position: absolute;
         margin: 0;
-        padding: 0;
-        top: 4px;
-        right: 4px;
-        li {
-          padding: 0;
-          margin: 0;
-        }
       }
-     .field-name-field-comment-message-comments h3 {// not sure why this is here but hide it.
-        text-indent: -9999px; 
+    }
+    .field-name-field-comment-message-comments h3 {// not sure why this is here but hide it.
+      text-indent: -9999px; 
+    }
+    .toggle-com-button {
+      left: 6px;
+      bottom: 0;
+      background:none !important;
+      border:none;
+      padding:0 !important;
+      font: inherit;
+      color: #135ab0;
+      cursor: pointer;
+      font-size: smaller;
+      &:hover {
+        text-decoration: underline;
+        color: black;
       }
-      .toggle-com-button {
-        left: 6px;
-        bottom: 0;
-        background:none !important;
-        border:none;
-        padding:0 !important;
-        font: inherit;
-        color: #135ab0;
-        cursor: pointer;
-        font-size: smaller;
-        &:hover {
-          text-decoration: underline;
-          color: black;
-        }
+    }
+    .field-name-field-image {
+      float: left;
+      margin: -7px 0 0 -4.5em;
+      &:first-child { // first instance needs special treatment
+        float: none;
       }
-      .field-name-field-image {
-        float: left;
-        margin: -8px 0 0 -4.5em;
-        &:first-child { // first instance needs special treatment
-          float: none;
-        }
-      }
-      .reply-body .field-name-field-image {
-        float: left;
-        margin: 0 1em 0 0;
-        img {
-          width: 50%;
-        }
+    }
+    .reply-body .field-name-field-image {
+      float: left;
+      margin: 0 1em 0 0;
+      img {
+        width: 50%;
       }
     }
     .form-textarea {
@@ -154,7 +169,7 @@
     opacity: 0.8;
   }
   .field-name-field-feed-like-button {
-    left: 51% !important; // these have to be positioned from left, not right for rollover to work
+    left: 50.5% !important; // these have to be positioned from left, not right for rollover to work
     &.field-label-hidden {
       position: relative;
     }
