@@ -32,9 +32,6 @@
   background-color: #D7D7D7;
 }
 
-.profile-section-unfilled {
-  display: none; // hide unfilled sections
-}
 
 
 #user-user-full-group-profile-card .field-name-field-image,
@@ -173,7 +170,7 @@
     }
 
   #user-user-full-group-profile-extra .field-name-field-extended-biography {
-    padding: 0.5em 2em;
+    padding: 0em 2em;
   }
 
 #bio-toggle-button {
