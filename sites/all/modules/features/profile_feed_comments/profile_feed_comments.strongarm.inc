@@ -45,6 +45,36 @@ function profile_feed_comments_strongarm() {
       'bypass_page_cache' => 1,
       'bypass_external_cache' => '',
     ),
+    'block-views-people-admin-block-following' => array(
+      'element' => 'block-views-people-admin-block-following',
+      'auto' => 1,
+      'manual' => 0,
+      'init' => 0,
+      'arguments' => 1,
+      'panels' => 0,
+      'timer' => '5',
+      'block' => array(
+        'block' => 'views',
+        'delta' => 'people_admin-block_following',
+      ),
+      'bypass_page_cache' => 1,
+      'bypass_external_cache' => '',
+    ),
+    'block-views-people-admin-block-followers' => array(
+      'element' => 'block-views-people-admin-block-followers',
+      'auto' => 1,
+      'manual' => 0,
+      'init' => 0,
+      'arguments' => 1,
+      'panels' => 0,
+      'timer' => '5',
+      'block' => array(
+        'block' => 'views',
+        'delta' => 'people_admin-block_followers',
+      ),
+      'bypass_page_cache' => 1,
+      'bypass_external_cache' => '',
+    ),
   );
   $export['block_refresh_settings'] = $strongarm;
 
