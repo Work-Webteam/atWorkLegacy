@@ -51,12 +51,16 @@
       bottom: 0;
     }
     .field-name-field-feed-like-button {
-      left: 50.5%;
+      left: 51%;
       top: 6px;
       min-width: 100px;
       .field-name-field-feed-like-button { // new one made when clicked
         left: inherit !important;
         top: inherit;
+      }
+      .atwork-rate-description {
+        font-size: smaller; // need to make it smaller to fit everything together
+        padding: 0 0.3em;
       }
     }
     .date {
@@ -169,7 +173,7 @@
     opacity: 0.8;
   }
   .field-name-field-feed-like-button {
-    left: 50.5% !important; // these have to be positioned from left, not right for rollover to work
+    left: 51% !important; // these have to be positioned from left, not right for rollover to work
     &.field-label-hidden {
       position: relative;
     }
