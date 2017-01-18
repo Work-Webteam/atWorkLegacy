@@ -1,23 +1,20 @@
 (function ($) {
   function set_closed(){
     $("#atwork_menu").children().hide();
-	$("#atwork_menu_item_tool_menu").children().hide();
+    $("#atwork_menu_item_tool_menu").children().hide();
     $("#atwork_menu_item_news_menu").children().hide();
     $("#atwork_menu_item_abps_menu").children().hide();
-    $("#atwork_menu_item_who_we_are_menu").children().hide();
-    $("#atwork_menu_item_corporate_strategies_menu").children().hide();
-    $("#atwork_menu_item_series_menu").children().hide();
+    //$("#atwork_menu_item_who_we_are_menu").children().hide();
+    //$("#atwork_menu_item_corporate_strategies_menu").children().hide();
+    //$("#atwork_menu_item_series_menu").children().hide();
     $("#atwork_menu_item_our_community_menu").children().hide();
     $("#atwork_menu_item_engagement_recognition_menu").children().hide();
-    $("#atwork_menu_item_corporate_programs_menu").children().hide();
-    $("#atwork_menu_item_learning_from_the_best_menu").children().hide();
-    $("#atwork_menu_item_resources_menu").children().hide();
-    $("#atwork_menu_item_tools_resources_menu").children().hide();
-    $("#atwork_menu_item_business_menu").children().hide();
-    $("#atwork_menu_item_human_resources_menu").children().hide();
-    $("#atwork_menu_item_technology_menu").children().hide();
-    $("#atwork_menu_item_human_resources_menu").children().hide();
-    $("#atwork_menu_item_other_menu").children().hide();
+    //$("#atwork_menu_item_corporate_programs_menu").children().hide();
+    //$("#atwork_menu_item_learning_from_the_best_menu").children().hide();
+    //$("#atwork_menu_item_resources_menu").children().hide();
+    //$("#atwork_menu_item_tools_resources_menu").children().hide();
+    //$("#atwork_menu_item_business_menu").children().hide();
+    //$("#atwork_menu_item_human_resources_menu").children().hide();
   }
 
   //Helper function that changes + and - depending on whether a sub header is open or closed
@@ -48,7 +45,7 @@
     });
 
     // News menu click
-	$("#atwork_menu_item_tool").click(function(e){
+  $("#atwork_menu_item_tool").click(function(e){
       $("#atwork_menu_item_tool_menu").children().slideToggle();
       e.stopPropagation();
       var element = $("#atwork_menu_item_tool_menu").children();
@@ -67,26 +64,26 @@
       menuIcons(element);
     });
 
-    $("#atwork_menu_item_who_we_are").click(function(e){
+    /*$("#atwork_menu_item_who_we_are").click(function(e){
       $("#atwork_menu_item_who_we_are_menu").children().slideToggle();
       e.stopPropagation();
       var element = $("#atwork_menu_item_who_we_are_menu").children();
       menuIcons(element);
-    });
+    });*/
 
-    $("#atwork_menu_item_corporate_strategies").click(function(e){
+    /*$("#atwork_menu_item_corporate_strategies").click(function(e){
       $("#atwork_menu_item_corporate_strategies_menu").children().slideToggle();
       e.stopPropagation();
       var element = $("#atwork_menu_item_corporate_strategies_menu").children();
       menuIcons(element);
-    });
+    });*/
 
-    $("#atwork_menu_item_series").click(function(e){
+    /*$("#atwork_menu_item_series").click(function(e){
       $("#atwork_menu_item_series_menu").children().slideToggle();
       e.stopPropagation();
       var element = $("#atwork_menu_item_series_menu").children();
       menuIcons(element);
-    });
+    });*/
 
     $("#atwork_menu_item_our_community").click(function(e){
       $("#atwork_menu_item_our_community_menu").children().slideToggle();
@@ -101,54 +98,54 @@
       var element = $("#atwork_menu_item_engagement_recognition_menu").children();
       menuIcons(element);
     });
-    $("#atwork_menu_item_corporate_programs").click(function(e){
+    /*$("#atwork_menu_item_corporate_programs").click(function(e){
       $("#atwork_menu_item_corporate_programs_menu").children().slideToggle();
       e.stopPropagation();
       var element = $("#atwork_menu_item_corporate_programs_menu").children();
       menuIcons(element);
-    });
-    $("#atwork_menu_item_learning_from_the_best").click(function(e){
+    });*/
+    /*$("#atwork_menu_item_learning_from_the_best").click(function(e){
       $("#atwork_menu_item_learning_from_the_best_menu").children().slideToggle();
       e.stopPropagation();
       var element = $("#atwork_menu_item_learning_from_the_best_menu").children();
       menuIcons(element);
-    });
-    $("#atwork_menu_item_resources").click(function(e){
+    });*/
+    /*$("#atwork_menu_item_resources").click(function(e){
       $("#atwork_menu_item_resources_menu").children().slideToggle();
       e.stopPropagation();
       var element = $("#atwork_menu_item_resources_menu").children();
       menuIcons(element);
-    });
-    $("#atwork_menu_item_tools_resources").click(function(e){
+    });*/
+    /*$("#atwork_menu_item_tools_resources").click(function(e){
       $("#atwork_menu_item_tools_resources_menu").children().slideToggle();
       e.stopPropagation();
       var element = $("#atwork_menu_item_tools_resources_menu").children();
       menuIcons(element);
-    });
-    $("#atwork_menu_item_business").click(function(e){
+    });*/
+    /*$("#atwork_menu_item_business").click(function(e){
       $("#atwork_menu_item_business_menu").children().slideToggle();
       e.stopPropagation();
       var element = $("#atwork_menu_item_business_menu").children();
       menuIcons(element);
-    });
-    $("#atwork_menu_item_human_resources").click(function(e){
+    });*/
+    /*$("#atwork_menu_item_human_resources").click(function(e){
       $("#atwork_menu_item_human_resources_menu").children().slideToggle();
       e.stopPropagation();
       var element = $("#atwork_menu_item_human_resources_menu").children();
       menuIcons(element);
-    });
-    $("#atwork_menu_item_technology").click(function(e){
+    });*/
+    /*$("#atwork_menu_item_technology").click(function(e){
       $("#atwork_menu_item_technology_menu").children().slideToggle();
       e.stopPropagation();
       var element = $("#atwork_menu_item_technology_menu").children();
       menuIcons(element);
-    });
-    $("#atwork_menu_item_other").click(function(e){
+    });*/
+    /*$("#atwork_menu_item_other").click(function(e){
       $("#atwork_menu_item_other_menu").children().slideToggle();
       e.stopPropagation();
       var element = $("#atwork_menu_item_other_menu").children();
       menuIcons(element);
-    });
+    });*/
     $(".atwork_menu_nested").click(function(e){
       e.stopPropagation();
     });
