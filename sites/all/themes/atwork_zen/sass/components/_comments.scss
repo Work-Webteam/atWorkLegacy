@@ -35,8 +35,10 @@
       p:first-of-type { // the status message shouldn't crowd the like link
         max-width: 280px;
       }
-      p + p + p { // this adds space between the status and where a comment starts
+      p + p + p,
+      .activity-comment { // this adds space between the status and where a comment starts
         margin-top: 1em;
+        display: block;
       }
     }
 
