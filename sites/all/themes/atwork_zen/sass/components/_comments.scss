@@ -32,6 +32,9 @@
         content: "";
         display: initial; // fix for odd bottom space on first posting
       }
+      p:first-of-type { // the status message shouldn't crowd the like link
+        max-width: 280px;
+      }
       p + p + p { // this adds space between the status and where a comment starts
         margin-top: 1em;
       }
@@ -53,9 +56,9 @@
     .field-name-field-feed-like-button {
       left: 51%;
       top: 6px;
-      min-width: 100px;
+      min-width: 120px;
       .field-name-field-feed-like-button { // new one made when clicked
-        left: inherit !important;
+        left: -20% !important;
         top: inherit;
       }
       .atwork-rate-description {
@@ -173,7 +176,7 @@
     opacity: 0.8;
   }
   .field-name-field-feed-like-button {
-    left: 51% !important; // these have to be positioned from left, not right for rollover to work
+    left: 48% !important; // these have to be positioned from left, not right for rollover to work
     &.field-label-hidden {
       position: relative;
     }
