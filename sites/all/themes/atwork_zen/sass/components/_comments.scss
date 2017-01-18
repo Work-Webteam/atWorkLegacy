@@ -13,8 +13,9 @@
       border-left-width: 10px;
       border-right-width: 10px;
     }
-    > div > .message {
-      position: relative; // sets us up to position all internal elements
+    > div > .message,
+    > .message { // need to account for two markup layouts here
+      position: relative; // get ready to position all internal elements absolutely
       margin: 2em 0 2em 4em;
       border: 1px solid #ccc;
       padding: 0.5em;
@@ -80,6 +81,9 @@
       .field-name-field-image {
         float: left;
         margin: -8px 0 0 -4.5em;
+        &:first-child { // first instance needs special treatment
+          float: none;
+        }
       }
       .reply-body .field-name-field-image {
         float: left;
