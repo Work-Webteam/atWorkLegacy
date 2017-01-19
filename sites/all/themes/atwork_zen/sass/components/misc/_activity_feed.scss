@@ -1,0 +1,350 @@
+//----------------- Universal Activity Feed styles. Apply to both front and profile page 
+
+.block-atwork-activity {
+  #edit-status { // textarea status box
+    padding: 0.5em;
+  }
+  .field-label { // hide the field labels
+    display: none;
+  }
+}
+
+
+
+//--------- Front page Activity Feed
+
+.front {
+  .block-atwork-activity {
+    h2 {
+      text-indent: -4em;
+    }
+    .jsNewActivityWindow,
+    .activity-filters-my,
+    .activity-filters-all {// common buttons in header of home activity feed
+      position: absolute;
+      top: 14px;
+      border: none;
+      padding: 0;
+    }
+    .jsNewActivityWindow {// the pop-out linked button
+      right: 6px;
+      top: 12px;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+    .activity-filters-my {// button to show filters for my-actions
+      right: 70px;
+      width: 16px;
+      background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-my-off.png) no-repeat center center;
+      &.active,
+      &:hover {
+        background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-my-on.png) no-repeat center center;
+      }
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+    .activity-filters-all {// button to show filters for all-activity
+      right: 28px;
+      width: 36px;
+      background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-all-off.png) no-repeat center center;
+      &.active,
+      &:hover {
+        background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-all-on.png) no-repeat center center;
+      }
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+    #atwork-activity-customize-feed-form .description {
+      margin-bottom: 1em;
+    }
+    .date {
+      color: #818283;
+      float: left;
+      clear: both;
+    }
+
+    .message  {
+      margin-bottom: 4px;
+      p {
+        margin-left: 45px;
+        border-left: solid 1px #D7D7D7;
+        padding-left: 5px;
+      }
+      &:last-of-type {
+        margin-bottom: 40px;
+      }
+    }
+    
+    .item-list {
+      display: block;
+      width: 95.5%;
+      position: absolute;
+      bottom: 2px;
+      padding: 0 0 4px 0;
+      margin: 0 0 0 5px;
+      left:  0;
+      background-color: #FFF;
+    }
+
+    ul.pager {
+      margin: 0 auto;
+      border-top: solid 1px #E0E0E0;
+      padding-top:3px;
+      padding-bottom: 3px;
+      background-color: #FFF;
+    }
+  }
+}
+
+.block-refresh-button {
+  display: none;
+}
+
+
+
+
+//--------- User Page Profile Activity Feed
+
+
+
+.page-user {
+  .region-post-content {
+    width: 70%;
+  }
+  .block-atwork-activity {
+    clear: left;
+    .form-textarea {
+      border: 5px solid #004B8D;
+      border-left-width: 10px;
+      border-right-width: 10px;
+    }
+    > div#activity-feed > .message,
+    > .message { // target the first message div of own and other's profile page
+      position: relative; // get ready to position all internal elements absolutely
+      margin: 2em 0 2em 4em;
+      border: 1px solid #ccc;
+      padding: 0.5em;
+      &.even {
+        background-color: #f5f5f5;
+      }
+    }
+    .entity-message {
+      margin-top: -3em; // hackey, but need to close up top space
+      &.clearfix:after {
+        content: "";
+        display: initial; // fix for odd bottom space on first posting
+      }
+      p:first-of-type { // the status message shouldn't crowd the like link
+        max-width: 280px;
+      }
+      p + p + p,
+      .activity-comment { // this adds space between the status and where a comment starts
+        margin-top: 1em;
+        display: block;
+      }
+    }
+
+    // Position most of the inner elements absolutely
+    .comment-submit-button,
+    .toggle-com-button,
+    .field-name-field-feed-like-button,
+    .date {
+      position: absolute;
+      margin: 0;
+      padding: 0;
+    }
+    .comment-submit-button {
+      left: 6px;
+      bottom: 0;
+    }
+    .field-name-field-feed-like-button {
+      left: 51%;
+      top: 6px;
+      min-width: 120px;
+      .field-name-field-feed-like-button { // new one made when clicked
+        left: -20% !important;
+        top: inherit;
+      }
+      .atwork-rate-description {
+        font-size: smaller; // need to make it smaller to fit everything together
+        padding: 0 0.2em;
+      }
+    }
+    .date {
+      right: 0.5em;
+      bottom: 2px;
+      font-size: smaller;
+      color: lighten(#000, 60%);
+    }
+    .links {// post as comment button.
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      top: 4px;
+      right: 4px;
+      li {
+        padding: 0;
+        margin: 0;
+      }
+    }
+    .field-name-field-comment-message-comments h3 {// not sure why this is here but hide it.
+      text-indent: -9999px; 
+    }
+    .toggle-com-button {
+      left: 6px;
+      bottom: 0;
+      background:none !important;
+      border:none;
+      padding:0 !important;
+      font: inherit;
+      color: #135ab0;
+      cursor: pointer;
+      font-size: smaller;
+      &:hover {
+        text-decoration: underline;
+        color: black;
+      }
+    }
+    .field-name-field-image { // main image left of a post
+      margin: -7px 0 0 -4.5em;
+    }
+    .form-textarea {
+      border: 5px solid #004B8D;
+      border-left-width: 10px;
+      border-right-width: 10px;
+    }
+    label[for^="edit-field-profile-comment-und-"] {// hide all labels that begin with edit-field...
+      display: none;
+    }
+    .block-refresh-button {// hide the refresh link
+      display: none;
+    }
+    // Initially hide the comment textarea and submit button and unhide with .js
+    .comment-submit-button,
+    .field-name-field-profile-comment .form-textarea-wrapper {
+      display: none;
+    }
+    .comment-submit-button-show,
+    .field-name-field-profile-comment-show .form-textarea-wrapper {
+      display: block;
+
+    }
+  }
+}
+
+
+
+//---------- Comment Replies 
+
+.field-type-reply {
+  margin: 1em;
+}
+
+.atwork-rate-widget-feed_like_button {
+  a {
+    padding: 0 0.2em;
+  }
+}
+
+.reply {
+  border: 1px solid #e0e0e0;
+  position: relative;
+  margin-bottom: 1em;
+  &:nth-child(even) {
+    background-color: #fcfcfc;
+  }
+  &:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  .field-name-field-profile-comment {
+    margin: 1em;
+    .field-item:before {
+      @include quotes-open;
+    }
+  }
+  .field-name-field-profile-comment-date,
+  .field-name-field-display-name {
+    font-size: smaller;
+  }
+  .field-name-field-feed-like-button {
+    left: 48% !important; // these have to be positioned from left, not right for rollover to work
+    &.field-label-hidden {
+      position: relative;
+    }
+  }
+}
+
+.reply-body,
+.reply-links {
+  padding: 0.3em;
+}
+
+.page-user .block-atwork-activity { //override
+  .reply-body {
+    .field-name-field-image {
+      margin: 0;
+    }
+  } 
+}
+
+
+
+.commentLinks .comment-delete a,
+.commentLinks .comment-edit a,
+.commentLinks .comment-reply a,
+.reply-links a {
+  @include button-small;
+  margin-right: 0.5em;
+}
+
+// Nesting Depth
+.replies-wrapper {
+  .reply-depth-1 {
+    margin-left: 1.5em;
+  }
+  .reply-depth-2 {
+    margin-left: 3em;
+  }
+  .reply-depth-3,
+  .reply-depth-4,
+  .reply-depth-5 {
+    margin-left: 3em;
+  }
+}
+
+// Common Reply and Edit screens
+
+#reply-form {
+  textarea {
+    padding: 0.5em;
+  }
+  .form-submit { // submit button
+    margin-right: 1em;
+  }
+}
+
+
+//------------------ Start Pop-out User Activity Window 
+
+.new-activity-window {
+  background-color: #D7D7D7;
+  overflow: hidden;
+  #block-atwork-activity-homepage {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    top: 20px;
+  }
+  #full_menu {// hide the hamburger menu
+    display: none;
+  }
+  .jsNewActivityWindow {// hide pop-out button
+    display: none;
+  }
+}
+
+//----------------- End Pop-out User Activity Window 
