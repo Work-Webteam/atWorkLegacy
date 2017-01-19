@@ -100,19 +100,8 @@
         color: black;
       }
     }
-    .field-name-field-image {
-      float: left;
+    .field-name-field-image { // main image left of a post
       margin: -7px 0 0 -4.5em;
-      &:first-child { // first instance needs special treatment
-        float: none;
-      }
-    }
-    .reply-body .field-name-field-image {
-      float: left;
-      margin: 0 1em 0 0;
-      img {
-        width: 50%;
-      }
     }
     .form-textarea {
       border: 5px solid #004B8D;
@@ -172,7 +161,6 @@
   .field-name-field-profile-comment-date,
   .field-name-field-display-name {
     font-size: smaller;
-    opacity: 0.8;
   }
   .field-name-field-feed-like-button {
     left: 48% !important; // these have to be positioned from left, not right for rollover to work
@@ -186,6 +174,16 @@
 .reply-links {
   padding: 0.3em;
 }
+
+.page-user .block-atwork-activity { //override
+  .reply-body {
+    .field-name-field-image {
+      margin: 0;
+    }
+  } 
+}
+
+
 
 .commentLinks .comment-delete a,
 .commentLinks .comment-edit a,
