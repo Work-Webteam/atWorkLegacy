@@ -1,20 +1,4 @@
 (function ($) {
-  /**
-   * Global variables so that we don't lose them on refresh
-   */
-  /*
-  $( document ).ajaxStart(function(){
-    $(".form-textarea").prop("disabled", true);
-    $(".form-textarea").prop("readonly", true);
-    //$("#edit-status").prop("disabled", true);
-    $(".form-textarea").prop("value", "refreshing feed");
-  });
-
-  $( document ).ajaxStop(function(){
-    $(".form-textarea").prop("disabled", false);
-    $(".form-textarea").prop("readonly", false);
-  });
-  */
 
 
 
@@ -27,7 +11,10 @@
    * Drupal attach function - click handlers etc.
    */
   Drupal.behaviors.profileFeedJquery = {
-    attach: function (context, settings) {
+    attach: function(context, settings) {
+    console.log(settings);
+    console.log("attaching");
+   //$('#block-atwork-activity-profile-page-activity-feed-block').once('activityFeedJQuery', function(){
     // Page refresh should occur every 5 seconds after initial load
     if(refreshFeed !== false ){ // Don't want to set this twice
       clearTimeout(refreshFeed);
@@ -36,55 +23,72 @@
     setFeedInterval();
 
     //Unless someone is typing in a text field
-    $(".form-textarea").click(function(){
-      slow_var();
+    $("#block-atwork-activity-profile-page-activity-feed-block .form-textarea").once("stopRefresh", function(){
+      $(".form-textarea").click(function(){
+        slow_var();
+      });
     });
 
     // Initialize/take care of comments
     setComments();
 
+
     // click handler for the comment toggle function
-    $(".comment-count-link").click(function(){
-      toggleComments($(this).parentsUntil('[id^="activity-feed"').closest("div").prop("class"));
+    $("#block-atwork-activity-profile-page-activity-feed-block .comment-count-link").once("seeComment", function(){
+      $(".comment-count-link").click(function(){
+        toggleComments($(this).parentsUntil('[id^="activity-feed"').closest("div").prop("class"));
+      });
     });
 
-    $("[id^=edit-button").click(function(){
-      //TODO - figure out how to replace the div with a spinner.
-      //TODO - find out why we have a second box appearing when we submit
-      // Remove text blocks and show that it is saving
-      $('[id^="field-profile-comment-add-more-wrapper"').replaceWith('<div><p id="saving-notification"> SAVING </p></div>');
-      setComments();
-      //refresh interval and remove timer if present
-      resetTimer();
-      // close the filter options
-      $("#atwork-advanced-feed-settings").hide();
-      // Refresh the page to make it dynamic
+    // Comment update
 
-      return;
-    });
+      $("[id^=edit-button").click(function(){
+        //TODO - figure out how to replace the div with a spinner.
+        //TODO - find out why we have a second box appearing when we submit
+        // Remove text blocks and show that it is saving
+        $('[id^="field-profile-comment-add-more-wrapper]"', context).replaceWith('<div><p id="saving-notification"> SAVING </p></div>');
+        setComments();
+        //refresh interval and remove timer if present
+        ajaxRefresh();
+        resetTimer();
+        // close the filter options
+        $("#atwork-advanced-feed-settings").hide();
+        // Refresh the page to make it dynamic
+
+        return;
+      });
+
 
     // Updates status
-    $("[id^=edit-post").click(function(){
-      $('[id^="edit-status"').replaceWith('<div><p id="saving-notification"> SAVING </p></div>');
-      resetTimer();
+    $("[id^=edit-post").once("updateStatus", function(){
+      $("[id^=edit-post").click(function(){
+        $('[id^="edit-status"').replaceWith('<div><p id="saving-notification"> SAVING </p></div>');
+        $('[id^="edit-status').hide();
+        ajaxRefresh();
+        resetTimer();
+      });
     });
 
     // Updates feed choices on the homepage
-    $("[id^=edit-update").click(function(){
-      resetTimer();
+    $("[id^=edit-update").once("toggleChoices", function(){
+      $("[id^=edit-update").click(function(){
+        ajaxRefresh();
+        resetTimer();
+      });
     });
 
-    $(".toggle-com-button").click(function(){
-      toggleCommentVis($(this));
-    });
-
-    $(".block-refresh-button").click(function(){
-      console.log("clicked");
-      $(".form-textarea").prop("disabled", true);
-      $('[id^="edit-status"').replaceWith('<div><p id="saving-notification"> Refreshing </p></div>');
+      $('.toggle-com-button').click(function(){
+        toggleCommentVis($(this));
+        slow_var();
+      });
 
 
-    });
+      $(".block-refresh-button").click(function(){
+        console.log("clicked");
+        $(".form-textarea").prop("disabled", true);
+        $('[id^="edit-status"').replaceWith('<div><p id="saving-notification"> Refreshing </p></div>');
+      });
+
 
 
     /**
@@ -162,6 +166,8 @@
      * Function that stops all refreshes for 10 minutes if someone clicks in a text box, then restarts them
      */
     function slow_var(){
+      console.log("slow_var");
+      console.log(refreshFeed);
       if(refreshFeed !== false){
         clearTimeout(refreshFeed);
         refreshFeed = false;
@@ -178,17 +184,29 @@
      */
     function setFeedInterval(){
       if(refreshFeed === false){
-        refreshFeed = setTimeout(function(){
-          $('#block-atwork-activity-profile-page-activity-feed-block').find('.block-refresh-button').first().trigger("click");
-        }, 5000);
+        refreshFeed = setTimeout(ajaxRefresh, 10000);
       }
       // Make sure our timer is turned off
       if(timer !== false){
         clearTimeout(timer);
         timer = false;
       }
+      console.log("interval set");
       return;
     }
+
+    /**
+     * Function that clicks on relevant update links created by the block_refresh module
+     */
+    function ajaxRefresh(){
+      $('#block-atwork-activity-profile-page-activity-feed-block').find('.block-refresh-button').first().trigger("click");
+      $('#block-views-people-admin-block-following').find('.block-refresh-button').first().trigger("click");
+      $('#block-views-people-admin-block-followers').find('.block-refresh-button').first().trigger("click");
+      console.log("buttons clicked");
+      resetTimer();
+    }
+
+
 
     /**
      * Function to clear timer if any form is submitted on the profile feed
@@ -200,16 +218,16 @@
         refreshFeed = false;
       }
       setFeedInterval();
+      console.log("reset timer");
       return;
     }
-  }
- };
-
   /**
    * Function to accept 'this' argument from click handler
    * to toggle visibility on comment for elements
    */
+
   function toggleCommentVis(thisObj){
+    console.log("commentVis");
     thisObj.nextAll(".comment-submit-button").toggleClass("comment-submit-button-show");
     thisObj.nextAll(".field-name-field-profile-comment").toggleClass("field-name-field-profile-comment-show");
     // change the value of the thisObj button
@@ -219,6 +237,28 @@
       $(thisObj).val('Comment');
     }
   }
+
+
+   // });
+  },
+  /*
+detach: function(context, settings, trigger){
+    $(".form-textarea").unbind();
+    $(".comment-count-link").unbind();
+    $("[id^=edit-button]").unbind();
+    $("#atwork-advanced-feed-settings").unbind();
+    $("[id^=edit-post").unbind();
+    $("[id^=edit-update").unbind();
+    $(".toggle-com-button").unbind();
+    $(".block-refresh-button").unbind();
+    clearTimeout(timer);
+    clearTimeout(refreshFeed);
+    timer = false;
+    refreshFeed = false;
+    console.log("Detach");
+  }
+  */
+ };
 
 }(jQuery));
 
