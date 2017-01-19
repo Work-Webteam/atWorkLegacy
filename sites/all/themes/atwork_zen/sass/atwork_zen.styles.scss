@@ -1153,34 +1153,8 @@ ol.search-results h3.title {
   margin-bottom: 10px;
 }
 
+// Old Activity Feed tabs. Obsolete?
 
-
-
-
-
-
-
-
-
-
-
-
-
-/* Front Page Social Sidebar -----------------------*/
-#social-side {
-    display: block;
-    position: relative;
-    z-index: 500;
-}
-#block-atwork-activity-homepage {
-	position: absolute;
-  top: 37px;
-	right: 0;
-	background-color:  #D7D7D7;
-	padding-bottom: 15px;
-	width: 280px;
-	height: 1357px;
-}
 #tabs {
   margin: 5px;
   color: #666;
@@ -1209,40 +1183,6 @@ ol.search-results h3.title {
 }
 #tabs .ui-state-active>#ui-id-1:hover, #tabs .ui-state-active>#ui-id-2:hover, #tabs .ui-state-active>#ui-id-3:hover, #tabs .ui-state-active>#ui-id-4:hover {
   color: #666;
-}
-#block-atwork-activity-homepage .date {
-  color: #818283;
-  float: left;
-  clear: both;
-}
-#block-atwork-activity-homepage .message  {
-  margin-bottom: 4px;
-}
-#block-atwork-activity-homepage .message p {
-  margin-left: 45px;
-  border-left: solid 1px #D7D7D7;
-  padding-left: 5px;
-}
-#block-atwork-activity-homepage .message:last-of-type {
-  margin-bottom: 40px;
-}
-#block-atwork-activity-homepage .item-list {
-  display: block;
-  width: 95.5%;
-  position: absolute;
-  bottom: 2px;
-  padding: 0 0 4px 0;
-  margin: 0 0 0 5px;
-  left:  0;
-  background-color: #FFF;
-}
-#block-atwork-activity-homepage ul.pager {
-
-  margin: 0 auto;
-  border-top: solid 1px #E0E0E0;
-  padding-top:3px;
-  padding-bottom: 3px;
-  background-color: #FFF;
 }
 
 /* Front Page 3 Box Grid -------------------------------------------------------*/

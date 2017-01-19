@@ -13,8 +13,22 @@
 
 //--------- Front page Activity Feed
 
+#social-side {
+    display: block;
+    position: relative;
+    z-index: 500;
+}
+
+
 .front {
   .block-atwork-activity {
+    position: absolute;
+    top: 37px;
+    right: 0;
+    background-color:  #D7D7D7;
+    padding-bottom: 15px;
+    width: 280px;
+    height: 1357px;
     h2 {
       text-indent: -4em;
     }
@@ -230,7 +244,34 @@
     .comment-submit-button-show,
     .field-name-field-profile-comment-show .form-textarea-wrapper {
       display: block;
-
+    }
+    .date {
+      color: #818283;
+      float: left;
+      clear: both;
+    }
+    .message  {
+      margin-bottom: 4px;
+    }
+    .message:last-of-type {
+      margin-bottom: 40px;
+    }
+    .item-list {
+      display: block;
+      width: 95.5%;
+      position: absolute;
+      bottom: 2px;
+      padding: 0 0 4px 0;
+      margin: 0 0 0 5px;
+      left:  0;
+      background-color: #FFF;
+    }
+    ul.pager {
+      margin: 0 auto;
+      border-top: solid 1px #E0E0E0;
+      padding-top:3px;
+      padding-bottom: 3px;
+      background-color: #FFF;
     }
   }
 }
