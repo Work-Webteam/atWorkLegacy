@@ -1,3 +1,14 @@
+// Universal Activity Feed styles. Apply to both front and profile page
+
+.block-atwork-activity {
+  #edit-status { // textarea status box
+    padding: 0.5em;
+  }
+  .field-label { // hide the field labels
+    display: none;
+  }
+}
+
 
 
 // Front page Activity Feed

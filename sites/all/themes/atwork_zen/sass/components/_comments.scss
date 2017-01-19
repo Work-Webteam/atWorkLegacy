@@ -22,9 +22,6 @@
       &.even {
         background-color: #f5f5f5;
       }
-      .field-label { // hide all labels
-        display: none;
-      }
     }
     .entity-message {
       margin-top: -3em; // hackey, but need to close up top space
@@ -65,7 +62,7 @@
       }
       .atwork-rate-description {
         font-size: smaller; // need to make it smaller to fit everything together
-        padding: 0 0.3em;
+        padding: 0 0.2em;
       }
     }
     .date {
@@ -152,7 +149,7 @@
 
 .atwork-rate-widget-feed_like_button {
   a {
-    padding: 0 0.3em;
+    padding: 0 0.2em;
   }
 }
 
