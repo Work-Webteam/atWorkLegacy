@@ -209,3 +209,14 @@
     margin-left: 3em;
   }
 }
+
+// Common Reply and Edit screens
+
+#reply-form {
+  textarea {
+    padding: 0.5em;
+  }
+  .form-submit { // submit button
+    margin-right: 1em;
+  }
+}
