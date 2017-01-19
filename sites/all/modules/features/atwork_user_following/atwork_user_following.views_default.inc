@@ -1864,13 +1864,12 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['fields']['field_gal_city']['relationship'] = 'requestee_id';
   $handler->display->display_options['fields']['field_gal_city']['exclude'] = TRUE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Global: Random */
-  $handler->display->display_options['sorts']['random']['id'] = 'random';
-  $handler->display->display_options['sorts']['random']['table'] = 'views';
-  $handler->display->display_options['sorts']['random']['field'] = 'random';
-  $handler->display->display_options['sorts']['random']['group_type'] = 'count_distinct';
-  $handler->display->display_options['sorts']['random']['exposed'] = TRUE;
-  $handler->display->display_options['sorts']['random']['expose']['label'] = 'Random';
+  /* Sort criterion: Global: Random seed */
+  $handler->display->display_options['sorts']['random_seed']['id'] = 'random_seed';
+  $handler->display->display_options['sorts']['random_seed']['table'] = 'views';
+  $handler->display->display_options['sorts']['random_seed']['field'] = 'random_seed';
+  $handler->display->display_options['sorts']['random_seed']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['random_seed']['expose']['label'] = 'Random';
   /* Sort criterion: User: Last Name (field_gal_last_name) */
   $handler->display->display_options['sorts']['field_gal_last_name_value']['id'] = 'field_gal_last_name_value';
   $handler->display->display_options['sorts']['field_gal_last_name_value']['table'] = 'field_data_field_gal_last_name';
@@ -2286,13 +2285,12 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['fields']['field_gal_city']['relationship'] = 'requester_id';
   $handler->display->display_options['fields']['field_gal_city']['exclude'] = TRUE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Global: Random */
-  $handler->display->display_options['sorts']['random']['id'] = 'random';
-  $handler->display->display_options['sorts']['random']['table'] = 'views';
-  $handler->display->display_options['sorts']['random']['field'] = 'random';
-  $handler->display->display_options['sorts']['random']['group_type'] = 'count_distinct';
-  $handler->display->display_options['sorts']['random']['exposed'] = TRUE;
-  $handler->display->display_options['sorts']['random']['expose']['label'] = 'Random';
+  /* Sort criterion: Global: Random seed */
+  $handler->display->display_options['sorts']['random_seed']['id'] = 'random_seed';
+  $handler->display->display_options['sorts']['random_seed']['table'] = 'views';
+  $handler->display->display_options['sorts']['random_seed']['field'] = 'random_seed';
+  $handler->display->display_options['sorts']['random_seed']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['random_seed']['expose']['label'] = 'Random';
   /* Sort criterion: User: Last Name (field_gal_last_name) */
   $handler->display->display_options['sorts']['field_gal_last_name_value']['id'] = 'field_gal_last_name_value';
   $handler->display->display_options['sorts']['field_gal_last_name_value']['table'] = 'field_data_field_gal_last_name';
