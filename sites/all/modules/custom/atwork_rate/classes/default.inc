@@ -237,24 +237,24 @@ class AtworkRateDefaultWidget extends AtworkRateWidget
     // You just voted
     elseif ($this->just_voted) {
       if($total_vote_without_user == 1 ){
-        $description = "You and " .  $total_vote_without_user . " other liked this";
+        $description = "You and " .  $total_vote_without_user . " other like this";
       } elseif($total_vote_without_user == 0) {
-        $description = "You liked this";
+        $description = "You like this";
       } else {
-        $description = "You and " .  $total_vote_without_user . " others liked this";
+        $description = "You and " .  $total_vote_without_user . " others like this";
       }
     }
 
     // You are the only one who has voted
     elseif ($user_vote && $this->count == 1){
-      $description = "You liked this";
+      $description = "You like this";
     }
     // You have voted and so has someone else
     else {
       if($total_vote_without_user == 1 ){
-        $description = "You and " . $total_vote_without_user . "other liked this";
+        $description = "You and " . $total_vote_without_user . "other like this";
       } else {
-        $description = "You and " . $total_vote_without_user . "others liked this";
+        $description = "You and " . $total_vote_without_user . "others like this";
       }
     }
 

@@ -1011,7 +1011,7 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
     } else {
       $account->content['field_summary'] = array(
         '#theme' => 'field',
-    //    '#weight' => 10,
+        '#weight' => 100,
         '#title' => t('About me'),
         '#label_display' => 'hidden',
         '#view_mode' => 'full',
@@ -1133,31 +1133,7 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
           }
         }
       }
-    } else {
-      // If no skills yet, we build it.
-      $account->content['field_skills'] = array(
-        '#theme' => 'field',
-        '#title' => 'Skills',
-        '#access' => TRUE,
-        '#label_display' => 'hidden',
-        '#view_mode' => 'full',
-        '#language' => 'und',
-        '#field_name' => 'field_skills',
-        '#field_type' => 'taxonomy_term_reference',
-        '#field_translatable' => 0,
-        '#entity_type' => 'user',
-        '#bundle' => 'user',
-        '#items' => array(
-          0 => array(
-            'tid' => 539,
-          ),
-        ),
-        '#formatter' => 'taxonomy_term_reference_plain',
-        0 => array(
-          '#markup' => '<div class="hidden_profile_skills_box"> </div>',
-        ),
-      );
-    }
+    } 
 
     if (isset($account->content['field_skills'])) {
       if (isset($account->content['field_skills']['#title'])){
@@ -1181,31 +1157,7 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
           }
         }
       }
-    } else {
-      // If no interests yet, we build it.
-      $account->content['field_employee_interests'] = array(
-        '#theme' => 'field',
-        '#title' => 'Interests',
-        '#access' => TRUE,
-        '#label_display' => 'hidden',
-        '#view_mode' => 'full',
-        '#language' => 'und',
-        '#field_name' => 'field_employee_interests',
-        '#field_type' => 'taxonomy_term_reference',
-        '#field_translatable' => 0,
-        '#entity_type' => 'user',
-        '#bundle' => 'user',
-        '#items' => array(
-          0 => array(
-            'tid' => 541,
-          ),
-        ),
-        '#formatter' => 'taxonomy_term_reference_plain',
-        0 => array(
-          '#markup' => '<div class="hidden_profile_interests_box"> </div>',
-        ),
-      );
-    }
+    } 
 
     if (isset($account->content['field_employee_interests'])) {
       if(isset($account->content['field_employee_interests']['#title'])){
