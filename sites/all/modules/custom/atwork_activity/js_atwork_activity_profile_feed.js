@@ -12,8 +12,6 @@
    */
   Drupal.behaviors.profileFeedJquery = {
     attach: function(context, settings) {
-    console.log(settings);
-    console.log("attaching");
    //$('#block-atwork-activity-profile-page-activity-feed-block').once('activityFeedJQuery', function(){
     // Page refresh should occur every 5 seconds after initial load
     if(refreshFeed !== false ){ // Don't want to set this twice
@@ -34,11 +32,10 @@
 
 
     // click handler for the comment toggle function
-    $("#block-atwork-activity-profile-page-activity-feed-block .comment-count-link").once("seeComment", function(){
       $(".comment-count-link").click(function(){
         toggleComments($(this).parentsUntil('[id^="activity-feed"').closest("div").prop("class"));
       });
-    });
+
 
     // Comment update
 
@@ -49,10 +46,10 @@
         $('[id^="field-profile-comment-add-more-wrapper]"', context).replaceWith('<div><p id="saving-notification"> SAVING </p></div>');
         setComments();
         //refresh interval and remove timer if present
-        ajaxRefresh();
         resetTimer();
         // close the filter options
         $("#atwork-advanced-feed-settings").hide();
+        setTimeout(ajaxRefresh, 500);
         // Refresh the page to make it dynamic
 
         return;
@@ -62,10 +59,10 @@
     // Updates status
     $("[id^=edit-post").once("updateStatus", function(){
       $("[id^=edit-post").click(function(){
-        $('[id^="edit-status"').replaceWith('<div><p id="saving-notification"> SAVING </p></div>');
-        $('[id^="edit-status').hide();
-        ajaxRefresh();
+        $('[id^="atwork-activity-form"').replaceWith('<div><p id="saving-notification"> SAVING </p></div>');
         resetTimer();
+        // Delay this for .5 second so that we have time to commit to db
+        setTimeout(ajaxRefresh, 500);
       });
     });
 
@@ -84,7 +81,6 @@
 
 
       $(".block-refresh-button").click(function(){
-        console.log("clicked");
         $(".form-textarea").prop("disabled", true);
         $('[id^="edit-status"').replaceWith('<div><p id="saving-notification"> Refreshing </p></div>');
       });
@@ -104,7 +100,7 @@
           // Find out how many comments we have in this block
           var i = $(this).find($(".reply")).length;
           // If we don't have one yet, lets append it to this block.
-          if($(this).find(".comment-count-link").length === 0 && i > 1){
+          if($(this).find(".comment-count-link").length === 0 && i > 0){
             $(this).append('<div class="comment-count-link"><a class="comment-count-link-text" href="#/">Comments(' + i + ')</a></div>');
           }
         });
@@ -122,7 +118,7 @@
           // If we don't have one yet, lets append it to this block.
           var k = $(this).find($(".reply")).length;
 
-          if($(this).find(".comment-count-link").length === 0 && k > 1){
+          if($(this).find(".comment-count-link").length === 0 && k > 0){
             $(this).append('<div class="comment-count-link"><a class="comment-count-link-text" href="#/">Comments(' + k + ')</a></div>');
           }
         });
@@ -166,8 +162,6 @@
      * Function that stops all refreshes for 10 minutes if someone clicks in a text box, then restarts them
      */
     function slow_var(){
-      console.log("slow_var");
-      console.log(refreshFeed);
       if(refreshFeed !== false){
         clearTimeout(refreshFeed);
         refreshFeed = false;
@@ -191,7 +185,6 @@
         clearTimeout(timer);
         timer = false;
       }
-      console.log("interval set");
       return;
     }
 
@@ -202,7 +195,6 @@
       $('#block-atwork-activity-profile-page-activity-feed-block').find('.block-refresh-button').first().trigger("click");
       $('#block-views-people-admin-block-following').find('.block-refresh-button').first().trigger("click");
       $('#block-views-people-admin-block-followers').find('.block-refresh-button').first().trigger("click");
-      console.log("buttons clicked");
       resetTimer();
     }
 
@@ -218,7 +210,6 @@
         refreshFeed = false;
       }
       setFeedInterval();
-      console.log("reset timer");
       return;
     }
   /**
@@ -227,7 +218,6 @@
    */
 
   function toggleCommentVis(thisObj){
-    console.log("commentVis");
     thisObj.nextAll(".comment-submit-button").toggleClass("comment-submit-button-show");
     thisObj.nextAll(".field-name-field-profile-comment").toggleClass("field-name-field-profile-comment-show");
     // change the value of the thisObj button

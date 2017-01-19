@@ -47,8 +47,8 @@ function profile_feed_comments_strongarm() {
     ),
     'block-views-people-admin-block-following' => array(
       'element' => 'block-views-people-admin-block-following',
-      'auto' => 1,
-      'manual' => 0,
+      'auto' => 0,
+      'manual' => 1,
       'init' => 0,
       'arguments' => 1,
       'panels' => 0,
@@ -62,8 +62,8 @@ function profile_feed_comments_strongarm() {
     ),
     'block-views-people-admin-block-followers' => array(
       'element' => 'block-views-people-admin-block-followers',
-      'auto' => 1,
-      'manual' => 0,
+      'auto' => 0,
+      'manual' => 1,
       'init' => 0,
       'arguments' => 1,
       'panels' => 0,
