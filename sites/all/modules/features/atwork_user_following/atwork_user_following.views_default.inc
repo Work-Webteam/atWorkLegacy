@@ -712,13 +712,17 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['fields']['field_gal_work_group']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_gal_work_group']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Global: Random */
-  $handler->display->display_options['sorts']['random']['id'] = 'random';
-  $handler->display->display_options['sorts']['random']['table'] = 'views';
-  $handler->display->display_options['sorts']['random']['field'] = 'random';
-  $handler->display->display_options['sorts']['random']['group_type'] = 'count_distinct';
-  $handler->display->display_options['sorts']['random']['exposed'] = TRUE;
-  $handler->display->display_options['sorts']['random']['expose']['label'] = 'Random';
+  /* Sort criterion: Field: Image (field_image:fid) */
+  $handler->display->display_options['sorts']['field_image_fid']['id'] = 'field_image_fid';
+  $handler->display->display_options['sorts']['field_image_fid']['table'] = 'field_data_field_image';
+  $handler->display->display_options['sorts']['field_image_fid']['field'] = 'field_image_fid';
+  $handler->display->display_options['sorts']['field_image_fid']['order'] = 'DESC';
+  /* Sort criterion: Global: Random seed */
+  $handler->display->display_options['sorts']['random_seed']['id'] = 'random_seed';
+  $handler->display->display_options['sorts']['random_seed']['table'] = 'views';
+  $handler->display->display_options['sorts']['random_seed']['field'] = 'random_seed';
+  $handler->display->display_options['sorts']['random_seed']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['random_seed']['expose']['label'] = 'Random';
   /* Sort criterion: User: Last Name (field_gal_last_name) */
   $handler->display->display_options['sorts']['field_gal_last_name_value']['id'] = 'field_gal_last_name_value';
   $handler->display->display_options['sorts']['field_gal_last_name_value']['table'] = 'field_data_field_gal_last_name';
