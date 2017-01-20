@@ -62,7 +62,7 @@
         $('[id^="atwork-activity-form"').replaceWith('<div><p id="saving-notification"> SAVING </p></div>');
         resetTimer();
         // Delay this for .5 second so that we have time to commit to db
-        setTimeout(ajaxRefresh, 500);
+        setTimeout(ajaxRefresh, 800);
       });
     });
 

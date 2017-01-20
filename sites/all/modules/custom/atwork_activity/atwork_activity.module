@@ -1016,7 +1016,7 @@ function atwork_activity_home_all_callback() {
   $output .= '<button class="activity-filters-my" title="show my content filters">M</button>';
   $output .= '<button class="activity-filters-all" title="show all content filters">A</button>';
   $output .= '<a href="node/21100" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="Click for pop-out Activity Feed window" /></a>';
-  drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity.js');
+  drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity.js');
 
   return($output);
 }
@@ -1897,8 +1897,8 @@ function atwork_activity_block_view($delta = '') {
 
     case 'group':
 
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity.js');
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_group.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_group.js');
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/jquery.url.js');
       drupal_add_js('initializeActivity();', 'inline');
 
@@ -1914,8 +1914,8 @@ function atwork_activity_block_view($delta = '') {
       //drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity.js');
       //drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_home.js');
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/jquery.url.js');
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_undock.js');
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_filters.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_undock.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_filters.js');
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_profile_feed.js');
 
       //drupal_add_js('initializeAllActivity();', 'inline');
