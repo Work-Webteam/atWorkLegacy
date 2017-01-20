@@ -32,9 +32,11 @@
 
 
     // click handler for the comment toggle function
-      $(".comment-count-link").click(function(){
-        toggleComments($(this).parentsUntil('[id^="activity-feed"').closest("div").prop("class"));
-      });
+      //$("#block-atwork-activity-profile-page-activity-feed-block").once("commentCountLink", function(){
+        $("#block-atwork-activity-profile-page-activity-feed-block .comment-count-link").click(function(){
+          toggleComments($(this).parentsUntil('[id^="activity-feed"').closest("div").prop("class"));
+        });
+     // });
 
 
     // Comment update
@@ -74,7 +76,9 @@
       });
     });
 
-      $('.toggle-com-button').click(function(){
+
+    // Toggle comments
+      $('[id^=edit-toggle-com-button]').click(function(){
         toggleCommentVis($(this));
         slow_var();
       });
