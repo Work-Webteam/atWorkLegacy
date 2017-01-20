@@ -32,9 +32,11 @@
 
 
     // click handler for the comment toggle function
-      $(".comment-count-link").click(function(){
-        toggleComments($(this).parentsUntil('[id^="activity-feed"').closest("div").prop("class"));
-      });
+      //$("#block-atwork-activity-profile-page-activity-feed-block").once("commentCountLink", function(){
+        $("#block-atwork-activity-profile-page-activity-feed-block .comment-count-link").click(function(){
+          toggleComments($(this).parentsUntil('[id^="activity-feed"').closest("div").prop("class"));
+        });
+     // });
 
 
     // Comment update
@@ -62,7 +64,7 @@
         $('[id^="atwork-activity-form"').replaceWith('<div><p id="saving-notification"> SAVING </p></div>');
         resetTimer();
         // Delay this for .5 second so that we have time to commit to db
-        setTimeout(ajaxRefresh, 800);
+        setTimeout(ajaxRefresh, 1000);
       });
     });
 
@@ -74,7 +76,9 @@
       });
     });
 
-      $('.toggle-com-button').click(function(){
+
+    // Toggle comments
+      $('[id^=edit-toggle-com-button]').click(function(){
         toggleCommentVis($(this));
         slow_var();
       });
