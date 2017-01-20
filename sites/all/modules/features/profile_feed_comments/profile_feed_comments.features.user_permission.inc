@@ -60,6 +60,7 @@ function profile_feed_comments_user_default_permissions() {
     'name' => 'edit own entity_comments reply',
     'roles' => array(
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'reply',
   );
@@ -69,6 +70,7 @@ function profile_feed_comments_user_default_permissions() {
     'name' => 'post entity_comments reply',
     'roles' => array(
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'reply',
   );
@@ -78,6 +80,7 @@ function profile_feed_comments_user_default_permissions() {
     'name' => 'view entity_comments reply',
     'roles' => array(
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'reply',
   );
