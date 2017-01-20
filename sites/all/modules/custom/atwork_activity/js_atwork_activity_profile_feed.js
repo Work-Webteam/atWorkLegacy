@@ -32,11 +32,13 @@
 
 
     // click handler for the comment toggle function
-      //$("#block-atwork-activity-profile-page-activity-feed-block").once("commentCountLink", function(){
-        $("#block-atwork-activity-profile-page-activity-feed-block .comment-count-link").click(function(){
-          toggleComments($(this).parentsUntil('[id^="activity-feed"').closest("div").prop("class"));
-        });
-     // });
+    // Make sure we are not rebinding this improperly.
+    $("#block-atwork-activity-profile-page-activity-feed-block .comment-count-link").unbind();
+    $("#block-atwork-activity-profile-page-activity-feed-block .comment-count-link").click(function(){
+      toggleComments($(this).parentsUntil('[id^="activity-feed"').closest("div").prop("class"));
+      console.log("clicked");
+    });
+
 
 
     // Comment update
@@ -235,23 +237,23 @@
 
    // });
   },
-  /*
+
 detach: function(context, settings, trigger){
-    $(".form-textarea").unbind();
+   // $(".form-textarea").unbind();
     $(".comment-count-link").unbind();
-    $("[id^=edit-button]").unbind();
-    $("#atwork-advanced-feed-settings").unbind();
-    $("[id^=edit-post").unbind();
-    $("[id^=edit-update").unbind();
-    $(".toggle-com-button").unbind();
-    $(".block-refresh-button").unbind();
-    clearTimeout(timer);
-    clearTimeout(refreshFeed);
-    timer = false;
-    refreshFeed = false;
-    console.log("Detach");
+   // $("[id^=edit-button]").unbind();
+   // $("#atwork-advanced-feed-settings").unbind();
+   // $("[id^=edit-post").unbind();
+   // $("[id^=edit-update").unbind();
+   // $(".toggle-com-button").unbind();
+   // $(".block-refresh-button").unbind();
+   // clearTimeout(timer);
+   // clearTimeout(refreshFeed);
+   // timer = false;
+   // refreshFeed = false;
+  //  console.log("Detach");
   }
-  */
+
  };
 
 }(jQuery));
