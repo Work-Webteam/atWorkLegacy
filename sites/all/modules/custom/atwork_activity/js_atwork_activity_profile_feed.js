@@ -36,7 +36,6 @@
     $("#block-atwork-activity-profile-page-activity-feed-block .comment-count-link").unbind();
     $("#block-atwork-activity-profile-page-activity-feed-block .comment-count-link").click(function(){
       toggleComments($(this).parentsUntil('[id^="activity-feed"').closest("div").prop("class"));
-      console.log("clicked");
     });
 
 
@@ -47,14 +46,15 @@
         //TODO - figure out how to replace the div with a spinner.
         //TODO - find out why we have a second box appearing when we submit
         // Remove text blocks and show that it is saving
-        $('[id^="field-profile-comment-add-more-wrapper]"', context).replaceWith('<div><p id="saving-notification"> SAVING </p></div>');
-        setComments();
+        $('[id^="field-profile-comment-add-more-wrapper"').replaceWith('<div><p id="saving-notification-comment"> SAVING </p></div>');
         //refresh interval and remove timer if present
         resetTimer();
         // close the filter options
         $("#atwork-advanced-feed-settings").hide();
+        // Refresh the page after .5 seconds (to let db update)
         setTimeout(ajaxRefresh, 500);
-        // Refresh the page to make it dynamic
+        // Also open all comments so that user can see the comment they just made
+        setOpenOnReloadComments($(this).parentsUntil('[id^="activity-feed"').closest("div").prop("class"));
 
         return;
       });
@@ -63,7 +63,7 @@
     // Updates status
     $("[id^=edit-post").once("updateStatus", function(){
       $("[id^=edit-post").click(function(){
-        $('[id^="atwork-activity-form"').replaceWith('<div><p id="saving-notification"> SAVING </p></div>');
+        $('[id^="atwork-activity-form"').replaceWith('<div><p id="saving-notification-status"> SAVING </p></div>');
         resetTimer();
         // Delay this for .5 second so that we have time to commit to db
         setTimeout(ajaxRefresh, 1000);
@@ -107,7 +107,7 @@
           var i = $(this).find($(".reply")).length;
           // If we don't have one yet, lets append it to this block.
           if($(this).find(".comment-count-link").length === 0 && i > 0){
-            $(this).append('<div class="comment-count-link"><a class="comment-count-link-text" href="#/">Comments(' + i + ')</a></div>');
+            $(this).append('<div class="comment-count-link"><a class="comment-count-link-text" href="#/">Comments (' + i + ')</a></div>');
           }
         });
       } else if (stateSave.length > 0){
@@ -125,7 +125,7 @@
           var k = $(this).find($(".reply")).length;
 
           if($(this).find(".comment-count-link").length === 0 && k > 0){
-            $(this).append('<div class="comment-count-link"><a class="comment-count-link-text" href="#/">Comments(' + k + ')</a></div>');
+            $(this).append('<div class="comment-count-link"><a class="comment-count-link-text" href="#/">Comments (' + k + ')</a></div>');
           }
         });
       }
@@ -162,6 +162,20 @@
       }
       return;
     }
+
+
+    /**
+     * Function that sets comments to be opened when page refreshes, after adding a comment
+     */
+     function setOpenOnReloadComments(classDiv){
+       //Get rid of the spaces, so we can use this as a selector
+       divClass = classDiv.split(' ').join('.');
+       //If this is already open, we can ignore it
+        var arraySpot = $.inArray(classDiv, stateSave);
+        if(arraySpot === -1){
+          stateSave.push(classDiv);
+        }
+     }
 
 
     /**
