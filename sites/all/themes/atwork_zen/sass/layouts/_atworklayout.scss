@@ -58,6 +58,7 @@ only screen and (                min-resolution: 2dppx) {
     max-width: 90%;
     margin: 0 auto 10px!important;
   }
+  #admin-menu,
   #block-atwork-profiles-header,
   .front #block-block-5,
   #views_slideshow_controls_text_home_page_blocks_zen-block_5,
@@ -89,6 +90,7 @@ only screen and (                min-resolution: 2dppx) {
       width: 315px;
       margin: 0 auto;
     }
+    #admin-menu,
     #block-atwork-profiles-header,
     .front #block-block-5,
     #views_slideshow_controls_text_home_page_blocks_zen-block_5,
@@ -199,17 +201,17 @@ only screen and (                min-resolution: 2dppx) {
   .front .front-promoted-image {
     display: inline-block;
     clear:none;
-    height:165px;
-    max-width: 32%;
+    height:180px;
+    width: 275px;
     overflow: hidden;
     float:left;
+    margin-right:10px;
   }
   .front .front-promoted-image img {
     display: block;
   }
   .front .promoted-info {
-    margin-left:31%;
-    padding: 10px 20px;
+    padding: 10px;
   }
   .front .front-promoted-title h3 {
     clear:none;
@@ -219,7 +221,6 @@ only screen and (                min-resolution: 2dppx) {
     margin:0 0 10px 0;
   }
   .front .front-promoted-posted,
-  .front .front-promoted-teaser,
   .front .front-promoted-read,
   .front .front-promoted-comments,
   .front .front-promoted-likes,
@@ -229,6 +230,15 @@ only screen and (                min-resolution: 2dppx) {
     max-height:inherit;
     padding:0;
     margin:0;
+  }
+  .front .front-promoted-teaser {
+    clear:none;
+    min-height:40px;
+    padding:0;
+    margin:0;
+  }
+  .front .front-promoted-more {
+    margin-left: 280px;
   }
 }
 @media only screen and (max-width:979px) {

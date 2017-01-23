@@ -739,13 +739,9 @@ div.header-user {
 .front .view-home-page-blocks-zen {
   h3 a {
     color: #fed463;
-    margin: 0 10px;
-  }
-  .front-promoted-title {
-    margin-top: 1em;
   }
   .front-promoted-posted {
-    margin-top: 2em;
+    margin-bottom: 10px;
   }
 }
 
@@ -1415,6 +1411,9 @@ h3.front-promoted-title a,
 	font-weight: bold;
 	padding: 2px;
 	margin: 0;
+}
+.front .event-calendar .event-title h3 a {
+  color:#135ab0;
 }
 .front .event-calendar .event-time:before {
 	content:"Time:";
