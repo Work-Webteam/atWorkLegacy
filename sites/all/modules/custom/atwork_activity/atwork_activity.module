@@ -1297,7 +1297,16 @@ function atwork_activity_form_og_ui_confirm_unsubscribe_alter(&$form, &$form_sta
  */
 function atwork_activity_form_reply_form_alter(&$form, &$form_state, $form_id){
   if($form['form_id']['#id'] == "edit-reply-form"){
-    drupal_set_title('Edit');
+    // We are on the form, but the same form is used for add and edit, need to find which we are really on
+    // Get rid of query string
+    $check_url = explode('?', $_SERVER['REQUEST_URI']);
+    // Then parse the URI
+    $check_url = explode('/', $check_url[0]);
+    foreach($check_url as $key=>$value){
+      if($value === "edit"){
+        drupal_set_title('Edit');
+      }
+    }
   }
 }
 /**
