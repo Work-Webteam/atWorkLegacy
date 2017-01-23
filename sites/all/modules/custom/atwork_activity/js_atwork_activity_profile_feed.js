@@ -30,6 +30,8 @@
     // Initialize/take care of comments
     setComments();
 
+    // This is a check to fix a problem where IE changes the placeholder
+    internetExplorerCheck();
 
     // click handler for the comment toggle function
     // Make sure we are not rebinding this improperly.
@@ -91,6 +93,33 @@
         $('[id^="edit-status"').replaceWith('<div><p id="saving-notification"> Refreshing </p></div>');
       });
 
+
+
+/**
+ * Function to see if we are using internet explorer
+ */
+    function internetExplorerCheck(){
+
+      var ua = window.navigator.userAgent;
+      var msie = ua.indexOf('MSIE ');
+      var trident = ua.indexOf('Trident/');
+      var edge = ua.indexOf('Edge/');
+
+      // IE specific jQuery
+      if (trident > 0 || edge > 0 || msie > 0) {
+        // This is IE, so lets check what is in the textbox.
+        var checkText = $('#edit-status').attr('value');
+        if(checkText == "What are you working on?"){
+          $('#edit-status').on("focus", function(){
+            // Grab this again so that we don't erase user input after the handler is set.
+            var checkText = $('#edit-status').attr('value');
+            if(checkText == "What are you working on?"){
+              $('#edit-status').attr('value', '');
+            }
+          });
+        }
+      }
+    }
 
 
     /**
