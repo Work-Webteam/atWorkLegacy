@@ -2281,3 +2281,24 @@ function atwork_activity_block_view_alter(&$data, $block){
   }
 }
 
+
+/**
+ * Implements hook_user_view
+ */
+function atwork_activity_user_view_alter(&$build){
+  // Removing message that you receive when editing/posting a reply
+  $current_msgs = drupal_get_messages('status');
+  // Check if we have a status message, find it in array (if it is there) and remove it
+  if(isset($current_msgs['status']) && $current_msgs['status']){
+    // This is the message that we no longer want
+    $remove_msgs = array_search('<em class="placeholder">Comment</em> was successfully updated.', $current_msgs['status']);
+    // Turns to a boolean when empty for some reason - so doesn't reg as null
+    if(isset($remove_msgs) && $remove_msgs !== FALSE){
+      unset($current_msgs['status'][$remove_msgs]);
+      // Renumber this array or it won't show
+      $current_msgs['status'] =  array_values($current_msgs['status']);
+    }
+  }
+  // Replace message array in session with our new sanitized message
+  $_SESSION['messages'] = $current_msgs;
+}
