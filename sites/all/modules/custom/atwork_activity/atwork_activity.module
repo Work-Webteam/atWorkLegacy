@@ -1297,7 +1297,16 @@ function atwork_activity_form_og_ui_confirm_unsubscribe_alter(&$form, &$form_sta
  */
 function atwork_activity_form_reply_form_alter(&$form, &$form_state, $form_id){
   if($form['form_id']['#id'] == "edit-reply-form"){
-    drupal_set_title('Edit');
+    // We are on the form, but the same form is used for add and edit, need to find which we are really on
+    // Get rid of query string
+    $check_url = explode('?', $_SERVER['REQUEST_URI']);
+    // Then parse the URI
+    $check_url = explode('/', $check_url[0]);
+    foreach($check_url as $key=>$value){
+      if($value === "edit"){
+        drupal_set_title('Edit');
+      }
+    }
   }
 }
 /**
@@ -1307,9 +1316,10 @@ function atwork_activity_form_reply_form_alter(&$form, &$form_state, $form_id){
 function atwork_activity_form_alter(&$form, &$form_state, $form_id){
 
   if(isset($form['bundle']) && $form['bundle']['#value'] == "entity_comments" && $form_state['build_info']['args'][0]->bundle == 'entity_comments' && $form['#type'] == 'form'){
-    if($form_id == 'field_ui_field_delete_form'){
+    if($form_id == 'field_ui_field_delete_form' || $form_id == "reply_delete_form" ){
       return;
     }
+    dpm($form_id);
     // hide these fields on all forms
     $form['field_hashtags']['#access'] = FALSE;
     $form['field_display_name']['#access'] = FALSE;
@@ -2281,3 +2291,24 @@ function atwork_activity_block_view_alter(&$data, $block){
   }
 }
 
+
+/**
+ * Implements hook_user_view
+ */
+function atwork_activity_user_view_alter(&$build){
+  // Removing message that you receive when editing/posting a reply
+  $current_msgs = drupal_get_messages('status');
+  // Check if we have a status message, find it in array (if it is there) and remove it
+  if(isset($current_msgs['status']) && $current_msgs['status']){
+    // This is the message that we no longer want
+    $remove_msgs = array_search('<em class="placeholder">Comment</em> was successfully updated.', $current_msgs['status']);
+    // Turns to a boolean when empty for some reason - so doesn't reg as null
+    if(isset($remove_msgs) && $remove_msgs !== FALSE){
+      unset($current_msgs['status'][$remove_msgs]);
+      // Renumber this array or it won't show
+      $current_msgs['status'] =  array_values($current_msgs['status']);
+    }
+  }
+  // Replace message array in session with our new sanitized message
+  $_SESSION['messages'] = $current_msgs;
+}

@@ -862,7 +862,16 @@ function atwork_profiles_form_alter(&$form, &$form_state, $form_id) {
  * Add email and IDIR fields for convienence
  */
 function atwork_profiles_user_view($account, $view_mode, $langcode) {
+
   if ($view_mode == 'full') {
+        // Removing message that you receive when editing/posting a reply
+  $current_msgs = drupal_get_messages('status');
+  dpm($current_msgs);
+  foreach($current_msgs as $key => $value){
+    dpm($key);
+    dpm($current_msgs['status']);
+  }
+  $_SESSION['messages'] = $current_msgs;
     global $user;
     $is_assistant = FALSE;
     if (in_array('executive', $user->roles)) {
@@ -1133,7 +1142,7 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
           }
         }
       }
-    } 
+    }
 
     if (isset($account->content['field_skills'])) {
       if (isset($account->content['field_skills']['#title'])){
@@ -1157,7 +1166,7 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
           }
         }
       }
-    } 
+    }
 
     if (isset($account->content['field_employee_interests'])) {
       if(isset($account->content['field_employee_interests']['#title'])){
@@ -1407,6 +1416,14 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
         drupal_add_js(drupal_get_path('module', 'atwork_profiles') . '/atwork_profile_tutorial.js');
       }
     }
+
+    // Removing message that you receive when editing/posting a reply
+    $current_msgs = drupal_get_messages('status');
+    foreach($current_msgs as $key => $value){
+      dpm($key);
+      dpm($current_msgs['status']);
+    }
+    $_SESSION['messages'] = $current_msgs;
   }
 }
 
