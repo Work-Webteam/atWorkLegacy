@@ -1316,9 +1316,10 @@ function atwork_activity_form_reply_form_alter(&$form, &$form_state, $form_id){
 function atwork_activity_form_alter(&$form, &$form_state, $form_id){
 
   if(isset($form['bundle']) && $form['bundle']['#value'] == "entity_comments" && $form_state['build_info']['args'][0]->bundle == 'entity_comments' && $form['#type'] == 'form'){
-    if($form_id == 'field_ui_field_delete_form'){
+    if($form_id == 'field_ui_field_delete_form' || $form_id == "reply_delete_form" ){
       return;
     }
+    dpm($form_id);
     // hide these fields on all forms
     $form['field_hashtags']['#access'] = FALSE;
     $form['field_display_name']['#access'] = FALSE;
