@@ -506,7 +506,6 @@ function atwork_activity_group_callback($node) {
     ->execute()
     ->fetchAll();
 
-  //dpm($result);
   $output = _atwork_activity_group_render_messages($result, $activityType);
 
   die($output);
@@ -893,7 +892,6 @@ function user_feed_query($choices){
       )
     );
 
-  //dpm($user_feed_query->__toString());
 
   $user_feed_query->orderBy('m.timestamp', 'DESC')
   ->range(0, 100);
@@ -1170,7 +1168,6 @@ function atwork_activity_page($user) {
     ->condition('m.uid', $following_subquery, 'IN')
     ->condition('message_node.field_message_node_target_id', $og_subquery, 'IN');
 
-  //dpm($or->__toString);
 
   $query = db_select('message', 'm')
     ->fields('m', array('mid'));
@@ -1293,6 +1290,17 @@ function atwork_activity_form_og_ui_confirm_unsubscribe_alter(&$form, &$form_sta
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter();
+ *
+ * Change title on edit reply from View to Edit
+ *
+ */
+function atwork_activity_form_reply_form_alter(&$form, &$form_state, $form_id){
+  if($form['form_id']['#id'] == "edit-reply-form"){
+    drupal_set_title('Edit');
+  }
+}
+/**
  * Implements hook_form_alter
  * Need to include displayname and date in comments to make them similar to other site comment strings
  */
@@ -1303,7 +1311,6 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
       return;
     }
     // hide these fields on all forms
-    //dpm($form_id);
     $form['field_hashtags']['#access'] = FALSE;
     $form['field_display_name']['#access'] = FALSE;
     $form['field_profile_comment_date']['#access'] = FALSE;
@@ -1351,7 +1358,6 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
  */
 
 function atwork_activity_reply_form_submit_custom($form, &$form_state) {
-  //dpm($form);
   // Save this entity manually, and then we will refresh with Block Refresh (via JQuery)
   $reply = (object) $form_state['reply'];
   entity_form_submit_build_entity('reply', $reply, $form, $form_state);
@@ -2036,14 +2042,12 @@ function _atwork_activity_profile_page_block_content($user_id){
     ->execute()
     ->fetchAll();
 
-  //dpm($result);
   $result_mid = array();
   foreach($result as $value){
     $result_mid[] = $value->mid;
   }
   // Load entities and all related content
   $messages1 = entity_load('message', $result_mid);
-  //dpm($messages1);
   // Now remove all unwanted messages
   // TODO: Instead of removing messages, we should move this into the query (as seen in front page feed query)
   foreach($messages1 as $key=>$value){
@@ -2112,7 +2116,6 @@ function _atwork_activity_profile_page_block_content($user_id){
     }
   }
 
-  //dpm($messages1);
   // Now create a render array to get the entity wrappers/markup in place
   $message_render_array = entity_view('message', $messages1);
 
@@ -2203,7 +2206,6 @@ function _atwork_activity_profile_page_block_content($user_id){
 
   $output .= '</div>' . theme('pager', array('quantity' => 9));
  // $output .= theme('pager');
-  //dpm($output);
 
   return array('#markup'=>$output);
 }
@@ -2278,3 +2280,4 @@ function atwork_activity_block_view_alter(&$data, $block){
     break;
   }
 }
+
