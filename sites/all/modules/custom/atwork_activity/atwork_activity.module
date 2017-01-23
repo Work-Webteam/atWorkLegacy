@@ -1319,7 +1319,6 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
     if($form_id == 'field_ui_field_delete_form' || $form_id == "reply_delete_form" ){
       return;
     }
-    dpm($form_id);
     // hide these fields on all forms
     $form['field_hashtags']['#access'] = FALSE;
     $form['field_display_name']['#access'] = FALSE;
