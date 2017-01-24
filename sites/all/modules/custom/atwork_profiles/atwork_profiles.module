@@ -866,7 +866,7 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
   if ($view_mode == 'full') {
         // Removing message that you receive when editing/posting a reply
   $current_msgs = drupal_get_messages('status');
-  dpm($current_msgs);
+  //dpm($current_msgs);
   foreach($current_msgs as $key => $value){
     dpm($key);
     dpm($current_msgs['status']);
