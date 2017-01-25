@@ -632,9 +632,11 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Intro text';
   $handler->display->display_options['header']['area']['content'] = '<?php 
 global $user;
-echo(\'<p>To <a href="/user/\' . $user->uid . \' ">update your profile </a>, go to your personalization menu (The “Hello” menu in the blue ribbon, top right corner). Then select “My Profile” and go to the “Edit” tab above your profile photo.</p>\');
+echo(\'<p>Putting a face to a name is a great way to connect with your colleagues across the province. Search our employee profiles to find similar (or sought after) skills, interests, ministries or geographies.</p>\');
+echo(\'<p>To <a href="/user/\' . $user->uid . \' ">update your profile </a> go to your personalization menu (The “Hello” menu in the blue ribbon, top right corner). Then select “My Profile” and go to the “Edit” tab above your profile photo.</p><br /><br />\');
 ?>
 ';
   $handler->display->display_options['header']['area']['format'] = 'php_code';
