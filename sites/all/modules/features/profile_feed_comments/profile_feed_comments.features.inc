@@ -329,7 +329,7 @@ function profile_feed_comments_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cp\\u003E[message:field-message-node:author:author-conditional] updated their [message:field-message-node:content-type].\\u003C\\/p\\u003E\\r\\n\\r\\n\\u003Cp\\u003E[message:field-message-node:body]\\u003C\\/p\\u003E\\r\\n\\r\\n\\u003Cp\\u003E\\u0026nbsp;\\u003C\\/p\\u003E\\r\\n",
+          "value" : "\\u003Cp\\u003E[message:field-message-node:author:author-conditional] updated their [message:field-message-node:content-type].\\u003C\\/p\\u003E\\r\\n\\r\\n\\u003Cp\\u003E[message:field-message-node:body]\\u003C\\/p\\u003E\\u003Cbr \\/\\u003E\\r\\n",
           "format" : "full_html"
         }
       ]
