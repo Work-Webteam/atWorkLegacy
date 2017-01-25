@@ -262,7 +262,7 @@
   position: relative;
   margin-bottom: 1em;
   &:nth-child(even) {
-    background-color: #fcfcfc;
+    background-color: #e8e8e8;
   }
   &:nth-child(odd) {
     background-color: #f9f9f9;
@@ -325,7 +325,29 @@
 
 // Common Reply and Edit screens
 
-#reply-form {
+.entity-reply {
+  .field-label {
+    display: none;
+  }
+  .field-name-field-feed-like-button {
+    position: absolute;
+    left: 50%;
+    top: 8px;
+  }
+  ul.links {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 5px;
+    left: 70%;
+    li {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+#reply-form { // the reply box
   textarea {
     padding: 0.5em;
   }
