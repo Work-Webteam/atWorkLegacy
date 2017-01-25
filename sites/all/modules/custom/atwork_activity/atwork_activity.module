@@ -384,15 +384,15 @@ function _atwork_activity_render_messages($result, $activityType) {
           break;
         // Less than an hour
         case($diff<3600):
-          $time_record = floor($diff/60) . " Minutes ago";
+          $time_record = floor($diff/60) . " minutes ago";
           break;
         // Less than a day
         case($diff<86400):
-          $time_record = floor($diff/3600) . " Hours ago";
+          $time_record = floor($diff/3600) . " hours ago";
           break;
         // Less than a week
         case($diff<604800):
-          $time_record = floor($diff/86400) . " Days ago";
+          $time_record = floor($diff/86400) . " days ago";
           break;
         default:
           $time_record = date('F j Y', $message['#entity']->timestamp);
@@ -1495,29 +1495,29 @@ function atwork_activity_entity_view_alter(&$build, $type){
       case($diff<3600):
         // One minute
         if($diff < 120){
-          $time_record = floor($diff/60) . " Minute ago";
+          $time_record = floor($diff/60) . " minute ago";
         } else {
           // Any number of minutes
-          $time_record = floor($diff/60) . " Minutes ago";
+          $time_record = floor($diff/60) . " minutes ago";
         }
         break;
       // Less than a day
       case($diff<86400):
         // One hour
         if($diff < 7200) {
-          $time_record = floor($diff/3600) . " Hour ago";
+          $time_record = floor($diff/3600) . " hour ago";
         } else {
-          $time_record = floor($diff/3600) . " Hours ago";
+          $time_record = floor($diff/3600) . " hours ago";
         }
         break;
       // Less than a week
       case($diff<604800):
         // On day
         if($diff < 172800){
-          $time_record = floor($diff/86400) . " Day ago";
+          $time_record = floor($diff/86400) . " day ago";
         } else {
           // More than one day
-          $time_record = floor($diff/86400) . " Days ago";
+          $time_record = floor($diff/86400) . " days ago";
         }
         break;
       default:
@@ -2191,15 +2191,15 @@ function _atwork_activity_profile_page_block_content($user_id){
           break;
         // Less than an hour
         case($diff<3600):
-          $time_record = floor($diff/60) . " Minutes ago";
+          $time_record = floor($diff/60) . " minutes ago";
           break;
         // Less than a day
         case($diff<86400):
-          $time_record = floor($diff/3600) . " Hours ago";
+          $time_record = floor($diff/3600) . " hours ago";
           break;
         // Less than a week
         case($diff<604800):
-          $time_record = floor($diff/86400) . " Days ago";
+          $time_record = floor($diff/86400) . " days ago";
           break;
         default:
           $time_record = date('F j Y', $result['#entity']->timestamp);

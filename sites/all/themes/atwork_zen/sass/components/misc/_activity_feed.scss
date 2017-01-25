@@ -256,7 +256,7 @@
   }
 }
 
-.reply {
+.reply { 
   border: 1px solid #e0e0e0;
   position: relative;
   margin-bottom: 1em;
@@ -277,7 +277,7 @@
     font-size: smaller;
   }
   .field-name-field-feed-like-button {
-    left: 48% !important; // these have to be positioned from left, not right for rollover to work
+    left: 48%; // these have to be positioned from left, not right for rollover to work
     &.field-label-hidden {
       position: relative;
     }
@@ -325,9 +325,12 @@
   }
 }
 
-// Common Reply and Edit screens
+// Common Reply and Edit pages
 
-.entity-reply {
+.page-reply { 
+  #main {
+    width: 620px;
+  }
   .field-label {
     display: none;
   }
@@ -335,28 +338,32 @@
     position: absolute;
     left: 50%;
     top: 8px;
+    font-size: smaller;
   }
   ul.links {
     margin: 0;
     padding: 0;
     position: absolute;
     top: 5px;
-    left: 70%;
+    right: 5px;
     li {
       margin: 0;
       padding: 0;
+      font-size: smaller;
+    }
+  }
+  #reply-form { // the reply box
+    textarea {
+      padding: 0.5em;
+    }
+    .form-submit { // submit button
+      margin-right: 1em;
     }
   }
 }
 
-#reply-form { // the reply box
-  textarea {
-    padding: 0.5em;
-  }
-  .form-submit { // submit button
-    margin-right: 1em;
-  }
-}
+
+
 
 
 //------------------ Start Pop-out User Activity Window 
