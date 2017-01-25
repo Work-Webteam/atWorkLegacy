@@ -25,7 +25,7 @@ function homepage_activity_feed_feature_default_fe_block_settings() {
     'roles' => array(),
     'themes' => array(
       'atwork_zen' => array(
-        'region' => 'content',
+        'region' => 'social_side',
         'status' => 1,
         'theme' => 'atwork_zen',
         'weight' => 24,
