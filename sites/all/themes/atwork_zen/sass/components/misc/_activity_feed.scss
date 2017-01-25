@@ -134,8 +134,7 @@
     .entity-message {
       margin-top: -3em; // hackey, but need to close up top space
       &.clearfix:after {
-        content: "";
-        display: initial; // fix for odd bottom space on first posting
+        display: inline-block; // fix for odd bottom space on first posting
       }
       p:first-of-type { // the status message shouldn't crowd the like link
         max-width: 280px;
@@ -320,6 +319,9 @@
   .reply-depth-4,
   .reply-depth-5 {
     margin-left: 3em;
+  }
+  .comment-count-link {
+    margin-top: 1em;
   }
 }
 

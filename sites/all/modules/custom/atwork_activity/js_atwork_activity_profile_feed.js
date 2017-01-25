@@ -18,7 +18,7 @@
       clearTimeout(refreshFeed);
       refreshFeed = false;
     }
-    setFeedInterval();
+    //setFeedInterval();
 
     //Unless someone is typing in a text field
     $("#block-atwork-activity-profile-page-activity-feed-block .form-textarea").once("stopRefresh", function(){
