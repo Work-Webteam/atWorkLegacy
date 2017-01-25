@@ -7,101 +7,117 @@
   .field-label { // hide the field labels
     display: none;
   }
-}
-
-
-
-//--------- Front page Activity Feed
-
-.front {
-  .block-atwork-activity {
-    h2 {
-      text-indent: -4em;
-    }
-    .jsNewActivityWindow,
-    .activity-filters-my,
-    .activity-filters-all {// common buttons in header of home activity feed
-      position: absolute;
-      top: 14px;
-      border: none;
-      padding: 0;
-    }
-    .jsNewActivityWindow {// the pop-out linked button
-      right: 6px;
-      top: 12px;
-      &:hover {
-        opacity: 0.7;
-      }
-    }
-    .activity-filters-my {// button to show filters for my-actions
-      right: 70px;
-      width: 16px;
-      background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-my-off.png) no-repeat center center;
-      &.active,
-      &:hover {
-        background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-my-on.png) no-repeat center center;
-      }
-      &:hover {
-        opacity: 0.7;
-      }
-    }
-    .activity-filters-all {// button to show filters for all-activity
-      right: 28px;
-      width: 36px;
-      background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-all-off.png) no-repeat center center;
-      &.active,
-      &:hover {
-        background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-all-on.png) no-repeat center center;
-      }
-      &:hover {
-        opacity: 0.7;
-      }
-    }
-    #atwork-activity-customize-feed-form .description {
-      margin-bottom: 1em;
-    }
-    .date {
-      color: #818283;
-      float: left;
-      clear: both;
-    }
-
-    .message  {
-      margin-bottom: 4px;
-      p {
-        margin-left: 45px;
-        border-left: solid 1px #D7D7D7;
-        padding-left: 5px;
-      }
-      &:last-of-type {
-        margin-bottom: 40px;
-      }
-    }
-    
-    .item-list {
-      display: block;
-      width: 95.5%;
-      position: absolute;
-      bottom: 2px;
-      padding: 0 0 4px 0;
-      margin: 0 0 0 5px;
-      left:  0;
-      background-color: #FFF;
-    }
-
-    ul.pager {
-      margin: 0 auto;
-      border-top: solid 1px #E0E0E0;
-      padding-top:3px;
-      padding-bottom: 3px;
-      background-color: #FFF;
-    }
+  .block-refresh-button {
+    display: none;
   }
 }
 
-.block-refresh-button {
-  display: none;
+
+
+//--------- Social Side Activity Feed
+
+#social-side {
+  h2 {
+    text-indent: -4em;
+  }
+  .jsNewActivityWindow,
+  .activity-filters-my,
+  .activity-filters-all {// common buttons in header of home activity feed
+    position: absolute;
+    top: 14px;
+    border: none;
+    padding: 0;
+  }
+  .jsNewActivityWindow {// the pop-out linked button
+    right: 6px;
+    top: 12px;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  .activity-filters-my {// button to show filters for my-actions
+    right: 70px;
+    width: 16px;
+    background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-my-off.png) no-repeat center center;
+    &.active,
+    &:hover {
+      background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-my-on.png) no-repeat center center;
+    }
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  .activity-filters-all {// button to show filters for all-activity
+    right: 28px;
+    width: 36px;
+    background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-all-off.png) no-repeat center center;
+    &.active,
+    &:hover {
+      background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-all-on.png) no-repeat center center;
+    }
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  #atwork-activity-customize-feed-form .description {
+    margin-bottom: 1em;
+  }
+  .date {
+    color: #818283;
+    float: left;
+    clear: both;
+  }    
+  .item-list {
+    display: block;
+    width: 95.5%;
+    position: absolute;
+    bottom: 2px;
+    padding: 0 0 4px 0;
+    margin: 0 0 0 5px;
+    left:  0;
+    background-color: #FFF;
+  }
+
+  ul.pager {
+    margin: 0 auto;
+    border-top: solid 1px #E0E0E0;
+    padding-top:3px;
+    padding-bottom: 3px;
+    background-color: #FFF;
+  }
 }
+
+
+#social-side {// purely the message box styling here
+  .atwork-activity {
+    label {
+      display: none; //hide all labels. We don't need them
+    }
+    > .message  { //only the outer message div stuff
+      position: relative;
+      background-color: lighten(#777777, 30%);
+    }
+    .date {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+    ul.links {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+    .field-name-field-feed-like-button {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+    }
+  }
+  .entity-message {// only the inner nested message div stuff
+
+  }
+}
+
 
 
 
@@ -179,7 +195,6 @@
         top: inherit;
       }
       .atwork-rate-description {
-//font-size: smaller; // need to make it smaller to fit everything together
         padding: 0 0.2em;
       }
     }
@@ -366,7 +381,7 @@
 
 
 
-//------------------ Start Pop-out User Activity Window 
+//------------------ Pop-out User Activity Window specifics 
 
 .new-activity-window {
   background-color: #D7D7D7;
