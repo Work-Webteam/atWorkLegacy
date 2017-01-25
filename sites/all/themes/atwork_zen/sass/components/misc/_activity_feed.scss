@@ -128,7 +128,7 @@
       border: 1px solid #ccc;
       padding: 0.5em;
       &.even {
-        background-color: #f5f5f5;
+        background-color: lighten(#777, 49%);
       }
     }
     .entity-message {
@@ -140,10 +140,20 @@
       p:first-of-type { // the status message shouldn't crowd the like link
         max-width: 280px;
       }
-      p + p + p,
-      .activity-comment { // this adds space between the status and where a comment starts
+      p:first-of-type + p + p,
+      .activity-comment { // adds space between the status and only the 3rd comment
         margin-top: 1em;
         display: block;
+      }
+      p:first-of-type + p + p:before { // target exactly the only 3rd p
+        margin-left: 0.3em;
+        @include quotes-open;
+      }
+      .activity-comment {
+        margin-left: 0.3em;
+        &:before {
+          @include quotes-open;
+        }
       }
     }
 
@@ -164,12 +174,13 @@
       left: 51%;
       top: 6px;
       min-width: 120px;
+      font-size: smaller;
       .field-name-field-feed-like-button { // new one made when clicked
         left: -20% !important;
         top: inherit;
       }
       .atwork-rate-description {
-        font-size: smaller; // need to make it smaller to fit everything together
+//font-size: smaller; // need to make it smaller to fit everything together
         padding: 0 0.2em;
       }
     }
@@ -185,13 +196,14 @@
       padding: 0;
       top: 4px;
       right: 4px;
+      font-size: smaller;
       li {
         padding: 0;
         margin: 0;
       }
     }
     .field-name-field-comment-message-comments h3 {// not sure why this is here but hide it.
-      text-indent: -9999px; 
+      display: none; 
     }
     .toggle-com-button {
       left: 6px;
@@ -238,10 +250,6 @@
 
 
 //---------- Comment Replies 
-
-.field-type-reply {
-  margin: 1em;
-}
 
 .atwork-rate-widget-feed_like_button {
   a {
