@@ -171,7 +171,7 @@
       <?php if ($action_links): ?>
         <ul class="action-links"><?php print render($action_links); ?></ul>
       <?php endif; ?>
-      <div id="social-side"> 
+      <div id="social-side">
           <?php print render($page['social_side']); ?>
        </div>
       <?php print render($page['pre_content']); ?>
