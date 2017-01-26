@@ -16,6 +16,8 @@
 
 //--------- Social Side Activity Feed
 
+//----- General Layout
+
 #social-side {
   h2 {
     text-indent: -4em;
@@ -61,11 +63,6 @@
   }
   #atwork-activity-customize-feed-form .description {
     margin-bottom: 1em;
-  }
-  .date {
-    color: #818283;
-    float: left;
-    clear: both;
   }    
   .item-list {
     display: block;
@@ -88,33 +85,58 @@
 }
 
 
-#social-side {// purely the message box styling here
+//----- message box styling
+
+#social-side {
   .atwork-activity {
+      form  {
+        // hide for now.
+        display: none;
+      }
     label {
       display: none; //hide all labels. We don't need them
     }
-    > .message  { //only the outer message div stuff
+    > .message  { // start outer message div styling
       position: relative;
       background-color: lighten(#777777, 30%);
+      border-bottom: 2px solid red;
+      margin-bottom: 2em;
+    }
+    .date, 
+    ul.links,
+    .field-name-field-feed-like-button {
+      position: absolute; // unfortunately needed because markup layout is all over 
+      bottom: 2px;
     }
     .date {
-      position: absolute;
-      bottom: 0;
       left: 0;
     }
-    ul.links {
-      position: absolute;
-      bottom: 0;
+    ul.links { // hold the flag link
       right: 0;
+      // below, am forcing the styling to limit space. Remove later.
+      max-width: 42px;
+      max-height: 41px;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
     }
     .field-name-field-feed-like-button {
-      position: absolute;
-      bottom: 0;
       left: 50%;
     }
   }
-  .entity-message {// only the inner nested message div stuff
+  .entity-message {// start the inner nested message div styling
 
+  }
+  .replies { // start stying for replies
+    .field-name-field-image {
+      max-width: 24px;
+    }
+    .field-name-field-display-name {
+      position: absolute;
+      left: 50px;
+      top: 2px;
+      line-height: 1.4em;
+    }
   }
 }
 
@@ -123,8 +145,6 @@
 
 
 //--------- User Page Profile Activity Feed
-
-
 
 .page-user {
   .region-post-content {

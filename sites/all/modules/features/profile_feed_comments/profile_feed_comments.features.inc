@@ -161,7 +161,7 @@ function profile_feed_comments_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cp\\u003E[message:user:author-conditional]\\u0026nbsp;is following [message:field-message-user:author-themed].\\u003C\\/p\\u003E\\r\\n",
+          "value" : "\\u003Cp class=\\u0022msg-following-user\\u0022\\u003E[message:user:author-conditional]\\u0026nbsp;is following [message:field-message-user:author-themed].\\u003C\\/p\\u003E\\r\\n",
           "format" : "full_html"
         }
       ]
@@ -182,7 +182,7 @@ function profile_feed_comments_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cp\\u003E[message:user:author-conditional] joined the \\u003Ca href=\\u0022[message:field-message-node:url:relative]\\u0022 title=\\u0022[message:field-message-node:title]\\u0022\\u003E[message:field-message-node:title]\\u003C\\/a\\u003E group.\\u003C\\/p\\u003E\\r\\n",
+          "value" : "\\u003Cp class=\\u0022msg-group-subscribe\\u0022\\u003E[message:user:author-conditional] joined the \\u003Ca href=\\u0022[message:field-message-node:url:relative]\\u0022 title=\\u0022[message:field-message-node:title]\\u0022\\u003E[message:field-message-node:title]\\u003C\\/a\\u003E group.\\u003C\\/p\\u003E\\r\\n",
           "format" : "full_html"
         }
       ]
@@ -203,7 +203,7 @@ function profile_feed_comments_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cp\\u003E[message:user:author-conditional] left the \\u003Ca href=\\u0022[message:field-message-node:url:relative]\\u0022 title=\\u0022[message:field-message-node:title]\\u0022\\u003E[message:field-message-node:title]\\u003C\\/a\\u003E group.\\u003C\\/p\\u003E\\r\\n",
+          "value" : "\\u003Cp  class=\\u0022msg-group-unsubscribe\\u0022\\u003E[message:user:author-conditional] left the \\u003Ca href=\\u0022[message:field-message-node:url:relative]\\u0022 title=\\u0022[message:field-message-node:title]\\u0022\\u003E[message:field-message-node:title]\\u003C\\/a\\u003E group.\\u003C\\/p\\u003E\\r\\n",
           "format" : "full_html"
         }
       ]
@@ -224,7 +224,7 @@ function profile_feed_comments_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cp\\u003E[message:field-message-node:author:author-conditional] posted an answer to the question titled\\u0026nbsp;\\u003Ca href=\\u0022[message:field-message-node:field-answer-question:url:relative]\\u0022\\u003E[message:field-message-node:field-answer-question:title]\\u003C\\/a\\u003E.\\u003C\\/p\\u003E\\r\\n",
+          "value" : "\\u003Cp class=\\u0022msg-new-answer\\u0022\\u003E[message:field-message-node:author:author-conditional] posted an answer to the question titled\\u0026nbsp;\\u003Ca href=\\u0022[message:field-message-node:field-answer-question:url:relative]\\u0022\\u003E[message:field-message-node:field-answer-question:title]\\u003C\\/a\\u003E.\\u003C\\/p\\u003E\\r\\n",
           "format" : "full_html"
         }
       ]
@@ -245,7 +245,7 @@ function profile_feed_comments_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cp\\u003E[message:field-message-comment:author:author-conditional] posted a comment in \\u003Ca href=\\u0022[message:field-message-node:url:relative]?c=[message:field-message-comment:cid]#comment-[message:field-message-comment:cid]\\u0022 title=\\u0022[message:field-message-node:title]\\u0022\\u003E[message:field-message-node:title]\\u003C\\/a\\u003E[atwork-groups:in-groups-text].\\u003Cbr\\u003E\\r\\n\\t\\u003Cspan class=\\u0022activity-comment\\u0022\\u003E[message:field-message-comment:teaser]\\u003C\\/span\\u003E\\u003C\\/p\\u003E\\r\\n",
+          "value" : "\\u003Cp class=\\u0022msg-new-comment\\u0022\\u003E[message:field-message-comment:author:author-conditional] posted a comment in \\u003Ca href=\\u0022[message:field-message-node:url:relative]?c=[message:field-message-comment:cid]#comment-[message:field-message-comment:cid]\\u0022 title=\\u0022[message:field-message-node:title]\\u0022\\u003E[message:field-message-node:title]\\u003C\\/a\\u003E[atwork-groups:in-groups-text].\\u003Cbr\\u003E\\r\\n\\t\\u003Cspan class=\\u0022activity-comment\\u0022\\u003E[message:field-message-comment:teaser]\\u003C\\/span\\u003E\\u003C\\/p\\u003E\\r\\n",
           "format" : "full_html"
         }
       ]
@@ -266,7 +266,7 @@ function profile_feed_comments_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cp\\u003E[message:field-message-node:author:author-conditional] posted a new image to the gallery titled \\u003Ca href=\\u0022[message:field-message-node:field-gallery:url]\\u0022\\u003E[message:field-message-node:field-gallery:title]\\u003C\\/a\\u003E.\\u003C\\/p\\u003E\\r\\n",
+          "value" : "\\u003Cp class=\\u0022msg-new-image\\u0022\\u003E[message:field-message-node:author:author-conditional] posted a new image to the gallery titled \\u003Ca href=\\u0022[message:field-message-node:field-gallery:url]\\u0022\\u003E[message:field-message-node:field-gallery:title]\\u003C\\/a\\u003E.\\u003C\\/p\\u003E\\r\\n",
           "format" : "full_html"
         }
       ]
@@ -287,7 +287,7 @@ function profile_feed_comments_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cp\\u003E[message:field-message-node:author:author-conditional]\\u0026nbsp;posted the [message:field-message-node:content-type] titled \\u003Ca href=\\u0022[message:field-message-node:url:relative]\\u0022 title=\\u0022[message:field-message-node:title]\\u0022\\u003E[message:field-message-node:title]\\u003C\\/a\\u003E[atwork-groups:in-groups-text].\\u003C\\/p\\u003E\\r\\n",
+          "value" : "\\u003Cp class=\\u0022msg-new-node\\u0022\\u003E[message:field-message-node:author:author-conditional]\\u0026nbsp;posted the [message:field-message-node:content-type] titled \\u003Ca href=\\u0022[message:field-message-node:url:relative]\\u0022 title=\\u0022[message:field-message-node:title]\\u0022\\u003E[message:field-message-node:title]\\u003C\\/a\\u003E[atwork-groups:in-groups-text].\\u003C\\/p\\u003E\\r\\n",
           "format" : "full_html"
         }
       ]
@@ -308,7 +308,7 @@ function profile_feed_comments_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cp\\u003E[message:field-message-node:author:author-conditional] updated the [message:field-message-node:content-type]\\u0026nbsp;titled\\u0026nbsp;\\u003Ca href=\\u0022[message:field-message-node:url:relative]\\u0022 title=\\u0022[message:field-message-node:title]\\u0022\\u003E[message:field-message-node:title]\\u003C\\/a\\u003E.\\u003C\\/p\\u003E\\r\\n",
+          "value" : "\\u003Cp class=\\u0022msg-node-updated\\u0022\\u003E[message:field-message-node:author:author-conditional] updated the [message:field-message-node:content-type]\\u0026nbsp;titled\\u0026nbsp;\\u003Ca href=\\u0022[message:field-message-node:url:relative]\\u0022 title=\\u0022[message:field-message-node:title]\\u0022\\u003E[message:field-message-node:title]\\u003C\\/a\\u003E.\\u003C\\/p\\u003E\\r\\n",
           "format" : "full_html"
         }
       ]
@@ -329,7 +329,7 @@ function profile_feed_comments_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cp\\u003E[message:field-message-node:author:author-conditional] updated their [message:field-message-node:content-type].\\u003C\\/p\\u003E\\r\\n\\r\\n\\u003Cp\\u003E[message:field-message-node:body]\\u003C\\/p\\u003E\\u003Cbr \\/\\u003E\\r\\n",
+          "value" : "\\u003Cp  class=\\u0022msg-status-update\\u0022\\u003E[message:field-message-node:author:author-conditional] updated their [message:field-message-node:content-type].\\u003C\\/p\\u003E\\r\\n\\r\\n\\u003Cp\\u003E[message:field-message-node:body]\\u003C\\/p\\u003E\\r\\n\\r\\n\\u003Cp\\u003E\\u0026nbsp;\\u003C\\/p\\u003E\\r\\n",
           "format" : "full_html"
         }
       ]
@@ -350,7 +350,7 @@ function profile_feed_comments_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cp\\u003E[message:user:author-conditional] updated [message:user:author-their-your] profile.\\u003C\\/p\\u003E\\r\\n",
+          "value" : "\\u003Cp class=\\u0022msg-updated-user\\u0022\\u003E[message:user:author-conditional] updated [message:user:author-their-your] profile.\\u003C\\/p\\u003E\\r\\n",
           "format" : "full_html"
         }
       ]
@@ -371,7 +371,7 @@ function profile_feed_comments_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cp\\u003E[message:user:author-conditional] liked a comment in \\u003Ca href=\\u0022[message:field-message-node:url:relative]?c=[message:field-message-comment:cid]#comment-[message:field-message-comment:cid]\\u0022 title=\\u0022[message:field-message-node:title]\\u0022\\u003E[message:field-message-node:title]\\u003C\\/a\\u003E[atwork-groups:in-groups-text].\\u003C\\/p\\u003E\\r\\n",
+          "value" : "\\u003Cp class=\\u0022msg-user-liked-comment\\u0022\\u003E[message:user:author-conditional] liked a comment in \\u003Ca href=\\u0022[message:field-message-node:url:relative]?c=[message:field-message-comment:cid]#comment-[message:field-message-comment:cid]\\u0022 title=\\u0022[message:field-message-node:title]\\u0022\\u003E[message:field-message-node:title]\\u003C\\/a\\u003E[atwork-groups:in-groups-text].\\u003C\\/p\\u003E\\r\\n",
           "format" : "full_html"
         }
       ]
@@ -392,7 +392,7 @@ function profile_feed_comments_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cp\\u003E[message:user:author-conditional] liked the post\\u0026nbsp;\\u003Ca href=\\u0022[message:field-message-node:url:relative]\\u0022 title=\\u0022[message:field-message-node:title]\\u0022\\u003E[message:field-message-node:title]\\u003C\\/a\\u003E[atwork-groups:in-groups-text].\\u003C\\/p\\u003E\\r\\n",
+          "value" : "\\u003Cp class=\\u0022msg-user-liked-node\\u0022\\u003E[message:user:author-conditional] liked the post\\u0026nbsp;\\u003Ca href=\\u0022[message:field-message-node:url:relative]\\u0022 title=\\u0022[message:field-message-node:title]\\u0022\\u003E[message:field-message-node:title]\\u003C\\/a\\u003E[atwork-groups:in-groups-text].\\u003C\\/p\\u003E\\r\\n",
           "format" : "full_html"
         }
       ]
@@ -413,7 +413,7 @@ function profile_feed_comments_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cp\\u003E[message:user:author-conditional]\\u0026nbsp;received an \\u003Ca href=\\u0022[message:field-message-node:url]?ecard=[message:field-message-ecard:hash]\\u0022\\u003Eecard\\u003C\\/a\\u003E from\\u0026nbsp;[message:field-message-ecard:sender-themed].\\u003C\\/p\\u003E\\r\\n",
+          "value" : "\\u003Cp class=\\u0022msg-user-received-ecard\\u0022\\u003E[message:user:author-conditional]\\u0026nbsp;received an \\u003Ca href=\\u0022[message:field-message-node:url]?ecard=[message:field-message-ecard:hash]\\u0022\\u003Eecard\\u003C\\/a\\u003E from\\u0026nbsp;[message:field-message-ecard:sender-themed].\\u003C\\/p\\u003E\\r\\n",
           "format" : "full_html"
         }
       ]
@@ -434,7 +434,7 @@ function profile_feed_comments_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cp\\u003E[message:user:author-conditional]\\u0026nbsp;sent an \\u003Ca href=\\u0022[message:field-message-node:url]?ecard=[message:field-message-ecard:hash]\\u0022\\u003Eecard\\u003C\\/a\\u003E to [message:field-message-ecard:receiver-themed].\\u003C\\/p\\u003E\\r\\n",
+          "value" : "\\u003Cp class=\\u0022msg-user-sent-card\\u0022\\u003E[message:user:author-conditional]\\u0026nbsp;sent an \\u003Ca href=\\u0022[message:field-message-node:url]?ecard=[message:field-message-ecard:hash]\\u0022\\u003Eecard\\u003C\\/a\\u003E to [message:field-message-ecard:receiver-themed].\\u003C\\/p\\u003E\\r\\n",
           "format" : "full_html"
         }
       ]
