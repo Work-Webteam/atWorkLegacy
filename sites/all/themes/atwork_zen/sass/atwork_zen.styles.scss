@@ -1171,11 +1171,14 @@ ol.search-results h3.title {
 	position: absolute;
   top: 0;
 	right: 0;
-	background-color: white;
+	background-color: #fcfcfc;
+  border: 1px solid #f1f1f1;
 	padding-bottom: 15px;
 	width: 275px;
 	height: 1355px;
   overflow-x: scroll;
+  box-sizing: border-box;
+  padding: 4px;
 }
 #tabs {
   margin: 5px;
