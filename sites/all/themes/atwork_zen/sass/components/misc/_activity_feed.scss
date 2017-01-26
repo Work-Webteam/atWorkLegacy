@@ -98,6 +98,8 @@
     }
     > .message  { // start outer message div styling
       position: relative;
+      min-height: 70px;
+      padding: 4px;
       background-color: lighten(#777777, 30%);
       border-bottom: 2px solid red;
       margin-bottom: 2em;
@@ -106,13 +108,13 @@
     ul.links,
     .field-name-field-feed-like-button {
       position: absolute; // unfortunately needed because markup layout is all over 
-      bottom: 2px;
+      bottom: 0px;
     }
     .date {
-      left: 0;
+      left: 4px;
     }
-    ul.links { // hold the flag link
-      right: 0;
+    ul.links { // the flag link
+      right: 4px;
       // below, am forcing the styling to limit space. Remove later.
       max-width: 42px;
       max-height: 41px;
@@ -121,20 +123,48 @@
       padding: 0;
     }
     .field-name-field-feed-like-button {
-      left: 50%;
+      left: 60%;
+      bottom: 1px;
+    }
+
+    // position all first message paragraphs. Status updates, etc.
+    p[class^="msg-"] {
+      margin: -44px 10px 4px 50px;
     }
   }
-  .entity-message {// start the inner nested message div styling
+  
+  // inner nested message div styling
+  .entity-message {
   }
-  .replies { // start stying for replies
+  
+  // stying for replies
+  .replies-wrapper {
+    margin: 2em 0 3em 0;
+    .reply-depth-1 {
+    margin-left: 1.0em;
+  }
+  .reply-depth-2 {
+    margin-left: 2em;
+  }
+  .reply-depth-3,
+  .reply-depth-4,
+  .reply-depth-5 {
+    margin-left: 3em;
+  }
+  }
+  .replies { 
     .field-name-field-image {
       max-width: 24px;
     }
-    .field-name-field-display-name {
+  }
+  .reply-body {
+    .field-name-field-image {
       position: absolute;
-      left: 50px;
       top: 2px;
-      line-height: 1.4em;
+      left: 2px;
+    }
+    .field-name-field-profile-comment-date {
+      margin-left: 30px;
     }
   }
 }
