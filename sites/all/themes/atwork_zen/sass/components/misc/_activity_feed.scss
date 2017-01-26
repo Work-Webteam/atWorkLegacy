@@ -100,8 +100,8 @@
       position: relative;
       min-height: 70px;
       padding: 4px;
-      background-color: lighten(#777777, 30%);
-      border-bottom: 2px solid red;
+      border: 1px solid lighten(#777, 45%);
+      background-color: lighten(#777, 50%);
       margin-bottom: 2em;
     }
     .date, 
@@ -141,16 +141,23 @@
   .replies-wrapper {
     margin: 2em 0 3em 0;
     .reply-depth-1 {
-    margin-left: 1.0em;
+      margin-left: 1.0em;
+    }
+    .reply-depth-2 {
+      margin-left: 2em;
+    }
+    .reply-depth-3,
+    .reply-depth-4,
+    .reply-depth-5 {
+      margin-left: 3em;
+    }
   }
-  .reply-depth-2 {
-    margin-left: 2em;
-  }
-  .reply-depth-3,
-  .reply-depth-4,
-  .reply-depth-5 {
-    margin-left: 3em;
-  }
+  .reply {
+    border: 1px solid lighten(#777, 30%);
+    &:nth-child(odd),
+    &:nth-child(even) {
+      background-color: lighten(#777, 52%);
+    }
   }
   .replies { 
     .field-name-field-image {
