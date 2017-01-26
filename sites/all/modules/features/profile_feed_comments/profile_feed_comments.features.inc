@@ -42,7 +42,7 @@ function profile_feed_comments_flag_default_flags() {
       12 => 'user_received_ecard',
       13 => 'user_sent_ecard',
     ),
-    'flag_short' => 'Flag as inappropriate',
+    'flag_short' => 'Flag',
     'flag_long' => 'Flag as inappropriate',
     'flag_message' => '',
     'unflag_short' => 'Remove Flag',
@@ -77,7 +77,7 @@ function profile_feed_comments_flag_default_flags() {
     'types' => array(
       0 => 'entity_comments',
     ),
-    'flag_short' => 'Flag as inappropriate',
+    'flag_short' => 'Flag',
     'flag_long' => 'Flag as inappropriate',
     'flag_message' => '',
     'unflag_short' => 'Remove Flag',
