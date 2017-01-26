@@ -199,7 +199,6 @@
         }
       } else {
         // Everything is closed, and this is the first opened comment
-        console.log(divClass);
         $("." + divClass).find(".replies").find(".reply").slideDown("fast");
         // And add it to our array
         stateSave.push(classDiv);
