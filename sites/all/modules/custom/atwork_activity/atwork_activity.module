@@ -295,7 +295,7 @@ function _atwork_activity_render_messages($result, $activityType) {
   // The Status update form
   $form = drupal_get_form('atwork_activity_form');
   $output .= render($form);
-  $output .= '<div class="atwork-activity">';
+  $output .= '<div id="activity-feed" class="atwork-activity">';
 
   $i = 1;
   $msgCount = 0;

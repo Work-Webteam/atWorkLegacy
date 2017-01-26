@@ -20,8 +20,16 @@
     }
     setFeedInterval();
 
-    //Unless someone is typing in a text field
+    //Unless someone is typing in a text field on Profile page
     $("#block-atwork-activity-profile-page-activity-feed-block .form-textarea").once("stopRefresh", function(){
+      $(".form-textarea").click(function(){
+        slow_var();
+      });
+    });
+
+    //Unless someone is typing in a text field on homepage
+
+    $("#block-atwork-activity-homepage .form-textarea").once("stopRefresh", function(){
       $(".form-textarea").click(function(){
         slow_var();
       });
@@ -34,10 +42,16 @@
     internetExplorerCheck();
 
     // click handler for the comment toggle function
-    // Make sure we are not rebinding this improperly.
+    // Make sure we are not rebinding this improperly on profile page
     $("#block-atwork-activity-profile-page-activity-feed-block .comment-count-link").unbind();
     $("#block-atwork-activity-profile-page-activity-feed-block .comment-count-link").click(function(){
       toggleComments($(this).parentsUntil('[id^="activity-feed"').closest("div").prop("class"));
+    });
+
+    // Make sure we are not rebinding this improperly on homepage
+    $("#block-atwork-activity-homepage .comment-count-link").unbind();
+    $("#block-atwork-activity-homepage .comment-count-link").click(function(){
+      toggleComments($(this).parentsUntil('#activity-feed').closest("div").prop("class"));
     });
 
 
@@ -241,9 +255,13 @@
      * Function that clicks on relevant update links created by the block_refresh module
      */
     function ajaxRefresh(){
+      // Profile page
       $('#block-atwork-activity-profile-page-activity-feed-block').find('.block-refresh-button').first().trigger("click");
       $('#block-views-people-admin-block-following').find('.block-refresh-button').first().trigger("click");
       $('#block-views-people-admin-block-followers').find('.block-refresh-button').first().trigger("click");
+      // home page
+      $('#block-atwork-activity-homepage').find('.block-refresh-button').first().trigger("click");
+
       resetTimer();
     }
 
