@@ -139,25 +139,29 @@
       overflow: hidden;
       margin: 0;
       padding: 0;
-      li {
+      li, a {
         padding: 0;
       }
     }
-    .field-name-field-feed-like-button {
-      left: 55%;
-      bottom: 1px;
+    .field-name-field-comment-message-comments + .field-name-field-feed-like-button,
+    .field-name-field-follow-feed-comments + .field-name-field-feed-like-button {// outer message like
+      left: 44%;
     }
 
     // position all first message paragraphs. Status updates, etc.
     p[class^="msg-"] {
       margin: -44px 10px 4px 50px;
+      min-height: 36px;
     }
   }
   
   // inner nested message div styling
   .entity-message {
   }
-  
+
+  .field-name-field-profile-comment + .field-name-field-feed-like-button {// inner reply like
+    left: 44%;
+  }
   // stying for replies
   .replies-wrapper {
     margin: 2em 0 3em 0;
@@ -180,6 +184,9 @@
       background-color: lighten(#777, 52%);
     }
   }
+  .reply-links a[href*="delete"] {// temp hide the delete button to help styling
+    display: none;
+  }
   .replies { 
     .field-name-field-image {
       max-width: 24px;
@@ -187,12 +194,16 @@
   }
   .reply-body {
     .field-name-field-image {
-      position: absolute;
+      position: absolute !important;
       top: 2px;
       left: 2px;
     }
     .field-name-field-profile-comment-date {
       margin-left: 30px;
+      min-height: 26px;
+    }
+    .field-name-field-display-name {
+      line-height: 1.4em;
     }
   }
 }

@@ -990,10 +990,13 @@ div.header-user {
   margin: 0;
   padding: 0;
 }
-.front.logged-in #edit-actions--9,
-.front.logged-in #edit-actions #edit-submit {
-  display: none;
+
+.front.logged-in {
+  #edit-advanced-search + .form-actions {// only the one adjacent
+    display: none;
+  }
 }
+
 .not-front.logged-in #edit-submit--3 {
   display: none;
 }
