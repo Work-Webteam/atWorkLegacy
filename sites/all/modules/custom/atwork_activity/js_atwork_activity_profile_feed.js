@@ -62,7 +62,7 @@
         //TODO - figure out how to replace the div with a spinner.
         //TODO - find out why we have a second box appearing when we submit
         // Remove text blocks and show that it is saving
-        $('[id^="field-profile-comment-add-more-wrapper"').replaceWith('<div><p id="saving-notification-comment"> SAVING </p></div>');
+        $('[id^="field-profile-comment-add-more-wrapper"').replaceWith('<div><p id="saving-notification-comment" class="saving-activity"> SAVING </p></div>');
         //refresh interval and remove timer if present
         resetTimer();
         // close the filter options
@@ -79,7 +79,7 @@
     // Updates status
     $("[id^=edit-post").once("updateStatus", function(){
       $("[id^=edit-post").click(function(){
-        $('[id^="atwork-activity-form"').replaceWith('<div><p id="saving-notification-status"> SAVING </p></div>');
+        $('[id^="atwork-activity-form"').replaceWith('<div><p id="saving-notification-status" class="saving-activity"> SAVING </p></div>');
         resetTimer();
         // Delay this for .5 second so that we have time to commit to db
         setTimeout(ajaxRefresh, 1000);
@@ -104,7 +104,7 @@
 
       $(".block-refresh-button").click(function(){
         $(".form-textarea").prop("disabled", true);
-        $('[id^="edit-status"').replaceWith('<div><p id="saving-notification"> Refreshing </p></div>');
+        $('[id^="edit-status"').replaceWith('<div><p id="saving-notification" class="saving-activity"> Refreshing </p></div>');
       });
 
 
