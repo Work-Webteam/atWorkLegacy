@@ -355,9 +355,34 @@ function _atwork_activity_render_messages($result, $activityType) {
           $render = 0;
       }
       $author = user_load($message['#entity']->uid);
-      if($message['#entity']->type == 'status' && $author->uid == $user->uid){
-        $str = substr($message['message__message_text__0']['#markup'], 20);
-        $message['message__message_text__0']['#markup'] = '<p>You updated your' . $str;
+      // Change the message text for status updates if user on own feed
+      if($message['#entity']->type == 'status' && $author->uid === $user->uid){
+        // The author is looking at their own page, so lets update the wording
+        $message_split = explode( " ", $message['message__message_text__0']['#markup']);
+        foreach($message_split as $key=>$word){
+          if($word == "their"){
+            $message_split[$key] = "your";
+            // Must break out of loop here, so we don't change a status by accident
+            break;
+          }
+        }
+        // Put it back together and replace existing markup
+        $clean_message = implode(" ", $message_split);
+        $message['message__message_text__0']['#markup'] = $clean_message;
+      }
+
+      // Handle following wording case
+      if($author->uid === $user->uid && $message['#bundle'] == 'following_user'){
+        // Remove "You is" and replace with You are
+        $message_split = explode(" ", $message['message__message_text__0']['#markup']);
+        foreach($message_split as $key=>$value){
+          if($value == "is"){
+            $message_split[$key] = "are";
+            break;
+          }
+        }
+        $clean_message = implode(" ", $message_split);
+        $message['message__message_text__0']['#markup'] = $clean_message;
       }
 
       // We want to add images to the activity feed.
@@ -1946,16 +1971,31 @@ function _atwork_activity_profile_page_block_content($user_id){
       // Handle following wording case
       if(isset($user_on_own_feed) && $result['#bundle'] == 'following_user'){
         // Remove "You is" and replace with You are
-        $str = substr($result['message__message_text__0']['#markup'], 10);
-        $result['message__message_text__0']['#markup'] = '<p>You are' . $str;
+        $message_split = explode(" ", $result['message__message_text__0']['#markup']);
+        foreach($message_split as $key=>$value){
+          if($value == "is"){
+            $message_split[$key] = "are";
+            break;
+          }
+        }
+        $clean_message = implode(" ", $message_split);
+        $result['message__message_text__0']['#markup'] = $clean_message;
       }
 
       // Status update messages display improperly.
       if(isset($user_on_own_feed) && $result['#bundle'] == 'status'){
-        $str = substr($result['message__message_text__0']['#markup'], 20);
-
-        $result['message__message_text__0']['#markup'] = '<p>You updated your' . $str;
+        // Remove "their" and replace with Your
+        $message_split = explode(" ", $result['message__message_text__0']['#markup'] );
+        foreach($message_split as $key=>$value){
+          if($value == "their"){
+            $message_split[$key] = "your";
+            break;
+          }
+        }
+        $clean_message = implode(" ", $message_split);
+        $result['message__message_text__0']['#markup'] = $clean_message;
       }
+
       // Set date for mins/ago then hours, then days, week, then date
       $current_time = time();
       $post_time = $result['#entity']->timestamp;
