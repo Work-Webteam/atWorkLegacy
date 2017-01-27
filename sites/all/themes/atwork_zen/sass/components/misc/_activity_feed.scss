@@ -36,7 +36,26 @@
     }
   }
   #status-submit-button {
-    margin: -1em 0 1em 0;
+    clear: both;
+    text-align: right;
+  }
+  #status-update {
+    .field-name-field-image {
+      float: left;
+      max-width: 50px;
+    }
+    .form-textarea-wrapper {
+      float: right;
+      max-width: 200px;
+    }
+  }
+  #saving-notification-status {
+    margin-left: 50px;
+  }
+  #activity-feed {
+    clear: both;
+    display: block;
+    margin-top: 1em;
   }
   .jsNewActivityWindow,
   .activity-filters-my,
@@ -98,6 +117,7 @@
     padding-bottom: 3px;
     background-color: #FFF;
   }
+
 }
 
 
