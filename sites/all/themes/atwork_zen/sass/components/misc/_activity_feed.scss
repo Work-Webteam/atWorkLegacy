@@ -13,6 +13,9 @@
   .form-textarea {
     border: 5px solid #004B8D;
   }
+  #saving-notification-status {
+    @include atwork-messages(green, ok);
+  }
 }
 
 
@@ -103,8 +106,8 @@
 #social-side {
   .atwork-activity {
     form  {
-      // hide for now.
-      display: none;
+      // temp hide for now to help declutter.
+      //display: none;
     }
     #status-submit-button {
       text-align: right;

@@ -59,3 +59,17 @@
   position: relative;
   top: 6px;
 }
+
+// Boxed Messages. Images are borrowed from Drupal core, stored in /misc
+// Colours: green, yellow or red. 
+// Types: ok, warning, error 
+@mixin atwork-messages($colour,$type) {
+  margin: 1.5em 0;
+  padding: 6px 6px 6px 30px;
+  background-image: url('/misc/message-16-#{$type}.png');
+  background-position: 8px 8px;
+  background-repeat: no-repeat;
+  border: 1px solid lighten($colour, 50%);;
+  background-color: lighten($colour, 72%);
+  font-weight: bold;
+}
