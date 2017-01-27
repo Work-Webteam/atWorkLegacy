@@ -161,7 +161,7 @@ function profile_feed_comments_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cp class=\\u0022msg-following-user\\u0022\\u003E[message:user:author-conditional]\\u0026nbsp;is following [message:field-message-user:author-themed].\\u003C\\/p\\u003E\\r\\n",
+          "value" : "\\u003Cp class=\\u0022msg-following-user\\u0022\\u003E[message:user:author-conditional] is following [message:field-message-user:author-themed].\\u003C\\/p\\u003E\\r\\n",
           "format" : "full_html"
         }
       ]
