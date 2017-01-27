@@ -287,6 +287,7 @@
    */
 
   function toggleCommentVis(thisObj){
+    dpm(thisObj);
     thisObj.nextAll(".comment-submit-button").toggleClass("comment-submit-button-show");
     thisObj.nextAll(".field-name-field-profile-comment").toggleClass("field-name-field-profile-comment-show");
     // change the value of the thisObj button

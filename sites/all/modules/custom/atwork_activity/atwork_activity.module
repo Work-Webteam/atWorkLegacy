@@ -2139,7 +2139,6 @@ function atwork_activity_user_view_alter(&$build){
     // Turns to a boolean when empty for some reason - so doesn't reg as null
     if(isset($remove_msgs) && $remove_msgs !== FALSE){
       unset($current_msgs['status'][$remove_msgs]);
-      // Renumber this array or it won't show
     }
   }
 
@@ -2149,13 +2148,5 @@ function atwork_activity_user_view_alter(&$build){
   }
 }
 
-/**
- * Implements hoock_views_pre_render
- */
-/*
-function atwork_activity_views_post_execute(&$view){
-  if($view->name == "people_admin" && $view->current_display == "block_following"){
-    dpm($view->sort);
-  }
-}
-*/
+
+
