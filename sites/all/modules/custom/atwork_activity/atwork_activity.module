@@ -417,7 +417,13 @@ function _atwork_activity_render_messages($result, $activityType) {
           break;
         // Less than a week
         case($diff<604800):
-          $time_record = floor($diff/86400) . " days ago";
+          // On day
+          if($diff < 172800){
+            $time_record = floor($diff/86400) . " day ago";
+          } else {
+            // More than one day
+            $time_record = floor($diff/86400) . " days ago";
+          }
           break;
         default:
           $time_record = date('F j Y', $message['#entity']->timestamp);
@@ -2015,7 +2021,13 @@ function _atwork_activity_profile_page_block_content($user_id){
           break;
         // Less than a week
         case($diff<604800):
-          $time_record = floor($diff/86400) . " days ago";
+          // On day
+          if($diff < 172800){
+            $time_record = floor($diff/86400) . " day ago";
+          } else {
+            // More than one day
+            $time_record = floor($diff/86400) . " days ago";
+          }
           break;
         default:
           $time_record = date('F j Y', $result['#entity']->timestamp);
@@ -2114,9 +2126,6 @@ function atwork_activity_block_view_alter(&$data, $block){
 function atwork_activity_user_view_alter(&$build){
   // Removing message that you receive when editing/posting a reply
   $current_msgs = drupal_get_messages('status');
-  //$current_msgs = $_SESSION['messages']['status'];
-
-  //print_r($current_msgs);
 
   // Check if we have a status message, find it in array (if it is there) and remove it
   if(isset($current_msgs) && $current_msgs){
@@ -2126,15 +2135,22 @@ function atwork_activity_user_view_alter(&$build){
     if(isset($remove_msgs) && $remove_msgs !== FALSE){
       unset($current_msgs['status'][$remove_msgs]);
       // Renumber this array or it won't show
-      //$_SESSION['messages']['status'] =  array_values($_SESSION['messages']['status']);
     }
   }
 
   // Replace message array in session with our new sanitized message
   foreach($current_msgs['status'] as $key=>$value){
-
     drupal_set_message($value, 'status');
   }
-  // $_SESSION['messages'] = $current_msgs;
-
 }
+
+/**
+ * Implements hoock_views_pre_render
+ */
+/*
+function atwork_activity_views_post_execute(&$view){
+  if($view->name == "people_admin" && $view->current_display == "block_following"){
+    dpm($view->sort);
+  }
+}
+*/
