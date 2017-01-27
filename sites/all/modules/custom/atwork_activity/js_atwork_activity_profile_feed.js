@@ -233,7 +233,6 @@
       if(timer === false){
         timer = setTimeout(setFeedInterval, 300000);
       }
-      console.log("stopped refresh");
       return;
     }
 
@@ -256,7 +255,6 @@
      * Function that clicks on relevant update links created by the block_refresh module
      */
     function ajaxRefresh(){
-      console.log("refreshing");
       // Profile page
       $('#block-views-people-admin-block-following').find('.block-refresh-button').first().trigger("click");
       $('#block-views-people-admin-block-followers').find('.block-refresh-button').first().trigger("click");
