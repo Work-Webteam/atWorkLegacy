@@ -21,19 +21,21 @@
     setFeedInterval();
 
     //Unless someone is typing in a text field on Profile page
-    $("#block-atwork-activity-profile-page-activity-feed-block .form-textarea").once("stopRefresh", function(){
-      $(".form-textarea").click(function(){
+    $("#block-atwork-activity-profile-page-activity-feed-block .form-textarea").filter(function(){
+        return !$(this).data('stopRefresh');
+      }).on('click.form-textarea', function() {
         slow_var();
-      });
-    });
+      }).data('stopRefresh', true);
+
 
     //Unless someone is typing in a text field on homepage
-
-    $("#block-atwork-activity-homepage .form-textarea").once("stopRefresh", function(){
-      $(".form-textarea").click(function(){
+    $("#block-atwork-activity-homepage .form-textarea").filter(function(){
+        return !$(this).data('stopRefresh');
+      }).on('click.form-textarea', function() {
         slow_var();
-      });
-    });
+      }).data('stopRefresh', true);
+
+
 
     // Initialize/take care of comments
     setComments();
@@ -101,13 +103,11 @@
         slow_var();
       });
 
-
+/*
       $(".block-refresh-button").click(function(){
-        $(".form-textarea").prop("disabled", true);
-        $('[id^="edit-status"').replaceWith('<div><p id="saving-notification" class="saving-activity"> Refreshing </p></div>');
-      });
+       });
 
-
+*/
 
 /**
  * Function to see if we are using internet explorer
@@ -233,6 +233,7 @@
       if(timer === false){
         timer = setTimeout(setFeedInterval, 300000);
       }
+      console.log("stopped refresh");
       return;
     }
 
@@ -255,10 +256,13 @@
      * Function that clicks on relevant update links created by the block_refresh module
      */
     function ajaxRefresh(){
+      console.log("refreshing");
       // Profile page
-      $('#block-atwork-activity-profile-page-activity-feed-block').find('.block-refresh-button').first().trigger("click");
       $('#block-views-people-admin-block-following').find('.block-refresh-button').first().trigger("click");
       $('#block-views-people-admin-block-followers').find('.block-refresh-button').first().trigger("click");
+      $('#block-atwork-activity-profile-page-activity-feed-block').find('.block-refresh-button').first().trigger("click");
+      $(".form-textarea").prop("disabled", true);
+      $('[id^="edit-status"').replaceWith('<div><p id="saving-notification" class="saving-activity"> Refreshing </p></div>');
       // home page
       $('#block-atwork-activity-homepage').find('.block-refresh-button').first().trigger("click");
 
