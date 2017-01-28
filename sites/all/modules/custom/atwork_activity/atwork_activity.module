@@ -312,8 +312,89 @@ function _atwork_activity_render_messages($result, $activityType) {
     $messages = entity_load('message', $result_mid);
     $message_render_array = entity_view('message', $messages);
 
-
     foreach ($message_render_array['message'] as $message) {
+      // We need to make sure that this message is not too long. Current character count we want is 100
+     // If field is longer than 100 characters (without tags);
+      $string_is_too_long = false;
+      $message_string = $message['message__message_text__0']['#markup'];
+      $message_string_length = strlen(strip_tags($message_string));
+      if($message_string_length > 100){
+        $string_is_too_long = true;
+      }
+
+      // Make a copy, explode on closing tags
+      if($string_is_too_long === true){
+        // We know all messages start with <p and  class> - lets remove and save this.
+        preg_match('~^<p[^>]*>~', $message_string, $get_beginning_tag, PREG_OFFSET_CAPTURE);
+        $beginning_tag = $get_beginning_tag[0][0];
+        // Now add a placeholder in <p> tags sted
+        $replace_tags = preg_replace('~<p[^>]*>~', '^', $message_string);
+        // Now a different placeholder in </p> sted
+        $replace_tags = preg_replace('~</p[^>]*>~', '~', $replace_tags);
+        $string_array = str_split($replace_tags);
+        // Our counter for the iterator
+        $i = 0;
+        // Our opening tag counter
+        $j = 0;
+        // Our closing tag counter
+        $k = 0;
+        // Number of legittmate characters
+        $l = 0;
+        // Run through string, count the # of chars at each location that is not one of our placeholders
+        foreach($string_array as $key=>$character){
+          // We're done here, lets split
+          if($l >= 100 && $character == " " ){
+            break;
+          }
+          // this is an opening tag
+          if($character == "^"){
+            //lets look/strip duplicates first
+            if($string_array[$key-1] == '<p>'){
+              unset($string_array[$key]);
+              continue;
+            }
+            $j ++;
+            // Account for 3 characters in <p>
+            $i + 3;
+            // May as well replace this tag now
+            $string_array[$key] = "<p>";
+            continue;
+          // Same treatment for end tags
+          } elseif($character == "~"){
+            if($string_array[$key-1] == '</p>'){
+              unset($string_array[$key]);
+              continue;
+            }
+            $k ++;
+            // Account for 4 characters in </p>
+            $i + 4;
+            $string_array[$key] = "</p>";
+            continue;
+            // Else this is a legitmate character
+          } else {
+            $i ++;
+            $l ++;
+          }
+        }
+        // Now we can implode the array, rebuild the string
+        $rebuilt_array = implode($string_array);
+        $rebuilt_string = substr($rebuilt_array, 0, $i);
+        // Add ellipses and tagged more href on end
+        $rebuilt_string = $rebuilt_string . '... <a href="node/' . $message['#entity']->field_message_node['und'][0]['target_id'] . '">more</a>';
+        // Make sure all of our <p> tags are closed
+        while($k < $j){
+          $rebuilt_string = $rebuilt_string . '</p>';
+          $k++;
+        }
+
+        // Finally, re-ad our <p> with class to the beginning of array
+        $rebuilt_string = preg_replace('~^<p[^>]*>~', $beginning_tag, $rebuilt_string);
+
+        // Now put it back in markup
+        $message['message__message_text__0']['#markup'] = $rebuilt_string;
+      }
+
+
       // Use a function to check if message is stickied
       $sticky_check = check_sticky_status($message['#entity']->mid);
 
