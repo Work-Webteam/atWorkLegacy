@@ -153,8 +153,8 @@ function atwork_activity_customize_feed_form(){
   // Now build the form
   $form = array();
   $form['feed_choices'] = array(
-    '#title' => t('Advanced Filter'),
-    '#description' => t('Choose whether to show all site activity or just your own.'),
+    '#title' => ('<a href="#" id="activity-feed-advanced-filters">Advanced Filter</a>'),
+    '#description' => t(''),
     '#type' => 'checkboxes',
     '#options' => $choices,
     '#default_value' => array(),
