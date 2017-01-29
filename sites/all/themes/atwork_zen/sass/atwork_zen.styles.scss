@@ -1170,11 +1170,13 @@ ol.search-results h3.title {
     position: relative;
     z-index: 500;
 }
-#block-atwork-activity-homepage {
+.region-social-side {
 	position: absolute;
   top: 0;
 	right: 0;
-	background-color: #fcfcfc;
+}
+#block-atwork-activity-homepage {
+  background-color: #fcfcfc;
   border: 1px solid #f1f1f1;
 	padding-bottom: 15px;
 	width: 275px;

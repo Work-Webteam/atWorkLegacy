@@ -1812,7 +1812,7 @@ function atwork_activity_block_view($delta = '') {
 
       $block['subject'] = _atwork_fa('circle-blank') . t('Activity');
       $block['content'] = array(
-        '#markup' => '<div id="group-activity"><div class="activity-feed-progress"><img src="/sites/all/themes/atwork_zen/images/progress.gif" title="Loading" /></div><!-- /.activity-feed-progress --><div id="group-activity-ajax"></div><!-- /#666 --></div><!-- /#777 -->',
+        '#markup' => '<div id="group-activity"><div class="activity-feed-progress"><img src="/sites/all/themes/atwork_zen/images/progress.gif" title="Loading" /></div><!-- /.activity-feed-progress --><div id="group-activity-ajax"></div><!-- /#group-activity-ajax --></div><!-- /#group-activity" -->',
       );
 
       break;
