@@ -18,7 +18,7 @@
       clearTimeout(refreshFeed);
       refreshFeed = false;
     }
-    setFeedInterval();
+    //setFeedInterval();
 
     //Unless someone is typing in a text field on Profile page
     $("#block-atwork-activity-profile-page-activity-feed-block .form-textarea").filter(function(){
