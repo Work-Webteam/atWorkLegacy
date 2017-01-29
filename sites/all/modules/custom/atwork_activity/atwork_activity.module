@@ -82,7 +82,7 @@ function atwork_activity_form() {
         '#type' => 'button', // We lose ajax if we make this a true Submit - we will manually save the entity in our callback
         '#value' => 'Post', // To differentiate it from the normal submit button
         '#prefix' => '<div id="status-submit-button">',
-        '#suffix' => '</div>',
+        '#suffix' => '</div><!-- /#status-submit-button -->',
         '#ajax' => array(
           'callback' => 'atwork_activity_form_submit',
           'wrapper' => 'status-submit-button',
@@ -163,7 +163,7 @@ function atwork_activity_customize_feed_form(){
         '#type' => 'button', // We lose ajax if we make this a true Submit - we will manually save the entity in our callback
         '#value' => t('Update'), // To differentiate it from the normal submit button
         '#prefix' => '<div id="home-status-preference-button">',
-        '#suffix' => '</div>',
+        '#suffix' => '</div><!-- /#home-status-preference-button -->',
         '#ajax' => array(
           'callback' => 'atwork_activity_advanced_feed_settings_submit_callback',
           'wrapper' => 'feed-settings-submit-button',
@@ -290,7 +290,7 @@ function _atwork_activity_render_messages($result, $activityType) {
   $adv_form = drupal_get_form('atwork_activity_customize_feed_form');
   $output = '<div id="atwork-advanced-feed-settings">';
   $output .= render($adv_form);
-  $output .= '</div>';
+  $output .= '</div><!-- /#atwork-advanced-feed-settings -->';
 
   // The Status update form
   $user_image  = field_view_field('user', $current_user, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
@@ -298,7 +298,7 @@ function _atwork_activity_render_messages($result, $activityType) {
   $output .= '<div id="status-update">';
   $output .= render($user_image);
   $output .= render($form);
-  $output .= '</div>';
+  $output .= '</div><!-- /#status-update" -->';
   $output .= '<div id="activity-feed" class="atwork-activity">';
 
 
@@ -516,7 +516,7 @@ function _atwork_activity_render_messages($result, $activityType) {
           break;
       }
       if($render)
-        $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . $time_record . '</span> <span class="user-feed-image">' . render($user_image) . '</span>' . render($message) . '</div>';
+        $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . $time_record . '</span> <span class="user-feed-image">' . render($user_image) . '</span>' . render($message) . '</div><!-- /.message -->';
 
       $i++;
     }
@@ -531,7 +531,7 @@ function _atwork_activity_render_messages($result, $activityType) {
       $output .= 'No results found.';
   }
 
-  $output .= '</div>' . theme('pager');
+  $output .= '</div><!-- /#activity-feed" -->' . theme('pager');
 
   return $output;
 }
@@ -697,7 +697,7 @@ function _atwork_activity_group_render_messages($result, $activityType) {
       }
 
       if($render)
-        $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . date('M j', $message->timestamp) . '</span> ' . $tmpMsg . '</div>';
+        $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . date('M j', $message->timestamp) . '</span> ' . $tmpMsg . '</div><!-- /#444 -->';
 
       $i++;
     }
@@ -712,7 +712,7 @@ function _atwork_activity_group_render_messages($result, $activityType) {
       $output .= 'No results found.';
   }
 
-  $output .= '</div>' . theme('pager');
+  $output .= '</div><!-- /#555 -->' . theme('pager');
 
   return $output;
 }
@@ -1070,9 +1070,6 @@ function atwork_activity_home_all_callback() {
   $result = stickied_activity_query($result);
 
   $output = _atwork_activity_render_messages($result, $activityType);
-  $output .= '<button class="activity-filters-my" title="show my content filters">M</button>';
-  $output .= '<button class="activity-filters-all" title="show all content filters">A</button>';
-  $output .= '<a href="node/21100" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="Click for pop-out Activity Feed window" /></a>';
   drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity.js');
 
   return($output);
@@ -1236,7 +1233,7 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
       '#type' => 'button', // We lose ajax if we make this a true Submit - we will manually save the entity in our callback
       '#value' => 'Post Comment', // To differentiate it from the normal submit button - this will be hidden by CSS.
       '#prefix' => '<div class="comment-submit-button">',
-      '#suffix' => '</div>',
+      '#suffix' => '</div><!-- /.comment-submit-button -->',
       '#ajax' => array(
         'callback' => 'atwork_activity_reply_form_submit_custom',
         'wrapper' => 'comment-submit-button',
@@ -1422,7 +1419,7 @@ function atwork_activity_entity_view_alter(&$build, $type){
     $build['field_profile_comment_date'][0]['#markup'] = '<span class="date-display-single" property="dc:date" datatype="xsd:dateTime">' . $time_record . '</span>';
 
     // Append the user image here
-    $build["field_profile_comment_date"][0]['#markup'] = '<div class="feed-user-image">' . render($image) . '</div>'. " Posted: " . $build["field_profile_comment_date"][0]['#markup'];
+    $build["field_profile_comment_date"][0]['#markup'] = '<div class="feed-user-image">' . render($image) . '</div><!-- /.feed-user-image -->'. " Posted: " . $build["field_profile_comment_date"][0]['#markup'];
     // Add flag icon:
     $build['links']['flag']['#links']['flag-flag_for_message_replies']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $build['links']['flag']['#links']['flag-flag_for_message_replies']['title']);
   }
@@ -1812,7 +1809,7 @@ function atwork_activity_block_view($delta = '') {
 
       $block['subject'] = _atwork_fa('circle-blank') . t('Activity');
       $block['content'] = array(
-        '#markup' => '<div id="group-activity"><div class="activity-feed-progress"><img src="/sites/all/themes/atwork_zen/images/progress.gif" title="Loading" /></div><div id="group-activity-ajax"></div></div>',
+        '#markup' => '<div id="group-activity"><div class="activity-feed-progress"><img src="/sites/all/themes/atwork_zen/images/progress.gif" title="Loading" /></div><!-- /.activity-feed-progress --><div id="group-activity-ajax"></div><!-- /#group-activity-ajax --></div><!-- /#group-activity" -->',
       );
 
       break;
@@ -2122,12 +2119,12 @@ function _atwork_activity_profile_page_block_content($user_id){
 
        // Put everything together in the order we would like for this message
       $output .= '<div class="' . implode(' ', $classes) . '"><span class="date"> ' . $time_record . '</span> <span class="feed_image">' . render($user_image) . '</span>' . render($result) .
-    /* print rate_generate_widget($widget_id, 'message', $entity->cid) . */ '</div>' ;
+    /* print rate_generate_widget($widget_id, 'message', $entity->cid) . */ '</div><!-- /.message -->' ;
      $j++;
     }
   }
 
-  $output .= '</div>' . theme('pager', array('quantity' => 9));
+  $output .= '</div><!-- /#activity-feed -->' . theme('pager', array('quantity' => 9));
  // $output .= theme('pager');
 
   return array('#markup'=>$output);
