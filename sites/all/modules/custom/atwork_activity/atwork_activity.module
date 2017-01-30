@@ -323,7 +323,7 @@ function _atwork_activity_render_messages($result, $activityType) {
       }
 
       // Make a copy, explode on closing tags
-      if($string_is_too_long === true){
+      if($string_is_too_long === true && $message['#bundle'] == 'status'){
         // We know all messages start with <p and  class> - lets remove and save this.
         preg_match('~^<p[^>]*>~', $message_string, $get_beginning_tag, PREG_OFFSET_CAPTURE);
         $beginning_tag = $get_beginning_tag[0][0];
