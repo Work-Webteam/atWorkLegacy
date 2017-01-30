@@ -18,7 +18,7 @@
       clearTimeout(refreshFeed);
       refreshFeed = false;
     }
-    setFeedInterval();
+    //setFeedInterval();
 
     //Unless someone is typing in a text field on Profile page
     $("#block-atwork-activity-profile-page-activity-feed-block .form-textarea").filter(function(){
@@ -293,7 +293,9 @@
       $(thisObj).val('Comment');
     }
   }
-
+    function atwork_activity_ajax_load(){
+      jQuery("#ajax-target").load("get/ajax/11");
+    }
 
    // });
   },

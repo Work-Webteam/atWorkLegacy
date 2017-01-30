@@ -51,8 +51,54 @@ function atwork_activity_menu() {
     'page arguements' =>array(1),
   );
 
+  $items['noodle/%/%/%'] = array(
+    'page callback' => 'atwork_activity_ajax_get_ajax', // Render HTML.
+    'page arguments' => array(2,3,4),
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+    //'delivery callback' => 'atwork_activity_ajax_callback',  // Magic goes here.
+  );
+
   return $items;
 }
+
+function atwork_activity_ajax_get_ajax($latest_rendered_time_stamp) {
+echo($latest_rendered_time_stamp);
+  die();
+  /*
+  // TODO - Check DB for last timestamps > $latest and count them
+  $new_message_count = check_message_count($latest_rendered_time_stamp, $account_uid);
+  // TODO - Send back image and # of timestamps, specify #id if 0
+  if(isset($new_message) && $new_message > 0){
+    $new_message = '<div id="new-count">' . $new_message_count . '</div>';
+  } else {
+    $new_message = '<div id="count-remain">Nothing New</div>';
+  }
+  drupal_json_output($new_message);
+  drupal_exit();
+  */
+  return;
+}
+
+function check_message_count($latest_rendered_time_stamp, $account_uid){
+  $query = db_select('message', 'm')
+    ->fields('m', array('mid'))
+    ->orderBy('m.timestamp', 'DESC')
+    ->condition('m.uid', $account->uid);
+    //->condition('m.timestamp', $latest_rendered_time_stamp, '>');
+
+  $count_query = $query->countQuery($query);
+
+  $result = $query
+    //->extend('PagerDefault')
+    //->limit(15)
+    ->execute()
+    ->fetchAll();
+
+    return $result;
+}
+
+
 
 
 function atwork_activity_group_access($node) {
@@ -349,9 +395,11 @@ function _atwork_activity_render_messages($result, $activityType) {
           // this is an opening tag
           if($character == "^"){
             //lets look/strip duplicates first
-            if($string_array[$key-1] == '<p>'){
-              unset($string_array[$key]);
-              continue;
+            if($key > 0){
+              if($string_array[$key-1] == '<p>'){
+                unset($string_array[$key]);
+                continue;
+              }
             }
             $j ++;
             // Account for 3 characters in <p>
@@ -1890,6 +1938,7 @@ EOT;
       // Don't think I need to pass these values anymore - will keep this for now to check.
       //feed_block_init();
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_atwork_activity_profile_feed.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'MY_CUSTOM_MODULE.js');
       break;
   }
   return $block;
@@ -1917,12 +1966,22 @@ function _atwork_activity_profile_page_block_content($user_id){
   }
 
   $output = '';
+  $output .= '<a class="btn" href="#" id="my-special-link">Ajax Test</a>';
+  $output .= '<div id="ajax-target">Ajax goes here!!!</div>';
+ /* $output .= '<script>
+function atwork_activity_ajax_load() {
+  (function($) {
+    $("#ajax-target").load("/node/get/ajax/ajax/20457");
+  })(jQuery);
+}
+</script>';
+*/
   // Decide if it is users block or others and set title
   if($account->uid === $user->uid){
     $block['title'] = t("My Feed");
     // The final markup - wrap it up in a div
     $form = drupal_get_form('atwork_activity_form');
-    $output = render($form);
+    $output .= render($form);
     $output .= '<div id="activity-feed">' ;
   } else {
     $block['title'] = $account->field_gal_first_name['und'][0]['safe_value'] . t("'s activity feed");
@@ -2023,9 +2082,14 @@ function _atwork_activity_profile_page_block_content($user_id){
     $pager_number = pager_array_splice($message_render_array['message'], 5);
   }
 
+  $time_stamp = '0';
   $j = 1;
   if(isset($pager_number) && !empty($pager_number)){
     foreach($pager_number as $key=>$result) {
+      // This variable will get passed to jQuery so we can check it against DB
+      if($result['#entity']->timestamp > $time_stamp){
+        $time_stamp = $result['#entity']->timestamp;
+      }
       // Set up odd/even classes
       $classes = array();
       $classes[] = 'message';
@@ -2123,7 +2187,8 @@ function _atwork_activity_profile_page_block_content($user_id){
      $j++;
     }
   }
-
+  // Pass timestamp to js settings
+  drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $account->name, 'uid' => $account->uid)), 'setting');
   $output .= '</div><!-- /#activity-feed -->' . theme('pager', array('quantity' => 9));
  // $output .= theme('pager');
 
