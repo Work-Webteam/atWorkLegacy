@@ -165,7 +165,7 @@
     }
     > .message  { // start outer message div styling
       position: relative;
-      min-height: 70px;
+      min-height: 90px;
       padding: 4px;
       border: 1px solid lighten(#777, 45%);
       background-color: lighten(#777, 49%);
@@ -179,7 +179,8 @@
       font-size: smaller;
     }
     .date {
-      left: 4px;
+      left: 54px;
+      top: 4px;
     }
     ul.links { // the flag link
       right: 4px;
@@ -198,10 +199,10 @@
       left: 44%;
     }
 
-    // position all first message paragraphs. Status updates, etc.
+    // position all first message paragraphs. Status updates, etc. under the date.
     p[class^="msg-"] {
-      margin: -44px 10px 4px 50px;
-      min-height: 36px;
+      margin: -25px 10px 4px 0;
+      text-indent: 50px;
     }
   }
   
@@ -215,6 +216,13 @@
   // stying for replies
   .replies-wrapper {
     margin: 1em 0;
+    input.toggle-com-button { // the comment/cancel toggle button
+      position: absolute;
+      bottom: 0;
+    }
+    .comment-submit-button  {
+      margin-bottom: 2em;
+    }
     .reply-depth-1 {
       margin-left: 1.0em;
     }
