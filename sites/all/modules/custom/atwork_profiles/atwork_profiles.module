@@ -354,7 +354,7 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
   $account = $form['#user'];
 
   // if not an admin hide important user fields
-  if (!user_access('administer users')) {
+  if (user_access(!'administer users')) {
     $form['signature_settings']['#access'] = FALSE;
     $form['og_user_node']['#access'] = FALSE;
     $form['contact']['#access'] = FALSE;
@@ -366,9 +366,10 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
     $form['field_gal_hide_from_list']['#access'] = FALSE;
     $form['field_gal_enabled']['#access'] = FALSE;
     $form['field_gal_employee_number']['#access'] = FALSE;
-
+    $form['user_relationships_ui_settings']['#access'] = FALSE;
+    $form['field_feed_options']['#access'] = FALSE;
+    $form['field_employee_number']['#access'] = FALSE;
   }
-
 
   // Group permissions are being weird on profiles, deal with it here
   // From suggestion at https://www.drupal.org/node/2179367
