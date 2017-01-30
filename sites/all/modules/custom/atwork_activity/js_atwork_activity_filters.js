@@ -12,21 +12,22 @@
       // We will manipulate these choices with the image buttons at the top of the feed, hide them.
       $('.form-item.form-type-checkbox.form-item-feed-choices-1').hide();
       $('.form-item.form-type-checkbox.form-item-feed-choices-2').hide();
-
+      console.log("load");
       // hide advanced content filters and add link
       if(showAdvancedContent === false){
         $('.form-item.form-type-checkbox.form-item-feed-choices-11, .form-item.form-type-checkbox.form-item-feed-choices-12, .form-item.form-type-checkbox.form-item-feed-choices-13, .form-item.form-type-checkbox.form-item-feed-choices-14, .form-item.form-type-checkbox.form-item-feed-choices-15, .form-item.form-type-checkbox.form-item-feed-choices-16, .form-item.form-type-checkbox.form-item-feed-choices-17, .form-item.form-type-checkbox.form-item-feed-choices-18,.form-item.form-type-checkbox.form-item-feed-choices-19, .form-item.form-type-checkbox.form-item-feed-choices-20, .form-item.form-type-checkbox.form-item-feed-choices-21, .form-item.form-type-checkbox.form-item-feed-choices-22').hide();
       }
      // reorder the description div to display before the form
-      $('#atwork-activity-customize-feed-form .description').insertBefore('#atwork-activity-customize-feed-form #edit-feed-choices');
+      $('#activity-feed-advanced-filters').insertBefore('#atwork-activity-customize-feed-form #edit-feed-choices');
       setChoices();
       // Hide this block if we haven't opened the advanced menu
       if(advancedFilters === false){
         $("#edit-feed-choices").hide();
         $("#edit-update").hide();
       }
-      $('<div id="show-advanced-content-div"><p><a href="#" id="show-advanced-content">Choose by content type</a></p></div>').insertAfter("div.form-item.form-type-checkbox.form-item-feed-choices-22");
-
+      if($("#show-advanced-content-div").length === 0){
+        $('<div id="show-advanced-content-div"><p><a href="#" id="show-advanced-content">Choose by content type</a></p></div>').insertAfter("div.form-item.form-type-checkbox.form-item-feed-choices-22");
+      }
 
       /*********** Begin My Actions vs All Activity interaction ***********/
 
@@ -39,7 +40,9 @@
         $("#edit-feed-choices-2").attr("disabled", true);
 
         $("#edit-feed-choices-3").removeAttr("disabled");
+        $(".form-item.form-type-checkbox.form-item-feed-choices-3").slideUp();
         $("#edit-feed-choices-6").removeAttr("disabled");
+        $(".form-item.form-type-checkbox.form-item-feed-choices-6").slideUp();
       }
 
       function allActivityRules() {// when All Activity button is clicked
@@ -48,9 +51,8 @@
         $('#edit-feed-choices-2').attr('checked', true);
         $('#edit-feed-choices-1').attr('checked', false);
         // we will eventually hide this altogether but for now disable customizations
-        $("#edit-feed-choices-1").attr("disabled", true);
-        $("#edit-feed-choices-3").attr("disabled", true);
-        $("#edit-feed-choices-6").attr("disabled", true);
+        $("#edit-feed-choices-3").attr("checked", false);
+        $("#edit-feed-choices-6").attr("checked", false);
       }
 
       function setChoices(){
@@ -69,6 +71,7 @@
         }
       }
 
+
       function submitChanges(){
         $('#edit-update').trigger("click");
       }
@@ -80,14 +83,14 @@
         setChoices();
         myActionsRules();
         // Also need to lock these in - so click the update button
-        setTimeout(submitChanges, 1500);
+        setTimeout(submitChanges, 500);
       });
       $('.activity-filters-all').unbind();
       $(".activity-filters-all").click(function() {
         setChoices();
         allActivityRules();
         // Also need to lock these in - so click the update button
-        setTimeout(submitChanges, 1500);
+        setTimeout(submitChanges, 500);
       });
 
 
@@ -129,7 +132,6 @@
       // Link handles whether we see advanced filters or not.
       $("#activity-feed-advanced-filters").unbind();
       $("#activity-feed-advanced-filters").click(function() {
-        console.log("clicky");
         if(advancedFilters === false){
           advancedFilters = true;
           $('#edit-feed-choices').slideDown("slow");
@@ -159,19 +161,27 @@
       $('#edit-feed-choices-10').click(
         function(){
           if($("#edit-feed-choices-10").is(':checked')){
-            $('#edit-feed-choices-11,#edit-feed-choices-12,#edit-feed-choices-13,#edit-feed-choices-14,#edit-feed-choices-15,#edit-feed-choices-16,#edit-feed-choices-17,#edit-feed-choices-18,#edit-feed-choices-19,#edit-feed-choices-20,#edit-feed-choices-21, #edit-feed-choices-21').attr('checked',true);
+            $('#edit-feed-choices-11,#edit-feed-choices-12,#edit-feed-choices-13,#edit-feed-choices-14,#edit-feed-choices-15,#edit-feed-choices-16,#edit-feed-choices-17,#edit-feed-choices-18,#edit-feed-choices-19,#edit-feed-choices-20,#edit-feed-choices-21, #edit-feed-choices-22').attr('checked',true);
           }
         });
 
       // If any sub-content filters are applied, check content
-      $('#edit-feed-choices-11,#edit-feed-choices-12,#edit-feed-choices-13,#edit-feed-choices-14,#edit-feed-choices-15,#edit-feed-choices-16,#edit-feed-choices-17,#edit-feed-choices-19,#edit-feed-choices-20,#edit-feed-choices-21').change(
+      $('#edit-feed-choices-11,#edit-feed-choices-12,#edit-feed-choices-13,#edit-feed-choices-14,#edit-feed-choices-15,#edit-feed-choices-16,#edit-feed-choices-17,#edit-feed-choices-19,#edit-feed-choices-20,#edit-feed-choices-21,#edit-feed-choices-22').change(
         function(){
-          if ($('#edit-feed-choices-11,#edit-feed-choices-13,#edit-feed-choices-14,#edit-feed-choices-15,#edit-feed-choices-16,#edit-feed-choices-17,#edit-feed-choices-19,#edit-feed-choices-20,#edit-feed-choices-21,#edit-feed-choices-22').is(':checked')) { // when checked
-            $('#edit-feed-choices-10').attr('checked', true); // blogs
+          if ($('#edit-feed-choices-13,#edit-feed-choices-14,#edit-feed-choices-15,#edit-feed-choices-16,#edit-feed-choices-17,#edit-feed-choices-19,#edit-feed-choices-20,#edit-feed-choices-21,#edit-feed-choices-22').is(':checked')) { // when checked
+            $('#edit-feed-choices-10').attr('checked', true);
           } else {
             $('#edit-feed-choices-10').attr('checked', false);
           }
+          // Activity in my groups must have a content type associated with it
+          if($('#edit-feed-choices-10, #edit-feed-choices-11, #edit-feed-choices-12, #edit-feed-choices-13,#edit-feed-choices-14,#edit-feed-choices-15,#edit-feed-choices-16,#edit-feed-choices-17,#edit-feed-choices-19,#edit-feed-choices-20,#edit-feed-choices-21,#edit-feed-choices-22').is(':checked') && $('#edit-feed-choices-6').is(":checked")){
+            $('#edit-update').prop("disabled", false);
+          } else {
+            console.log("shold be disabled");
+            $('#edit-update').attr("disabled", true);
+          }
       });
+
 
       /*********** End Content Filter rules ***********/
     }

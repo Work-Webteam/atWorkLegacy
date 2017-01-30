@@ -89,9 +89,10 @@
     });
 
     // Updates feed choices on the homepage
-    $("[id^=edit-update").once("toggleChoices", function(){
-      $("[id^=edit-update").click(function(){
-        ajaxRefresh();
+    //$("#edit-update").unbind();
+    $("#edit-update").once("toggleChoices", function(){
+      $("#edit-update").click(function(){
+        setTimeout(ajaxRefresh, 300);
         resetTimer();
       });
     });
@@ -103,11 +104,6 @@
         slow_var();
       });
 
-/*
-      $(".block-refresh-button").click(function(){
-       });
-
-*/
 
 /**
  * Function to see if we are using internet explorer
@@ -262,7 +258,7 @@
       $(".form-textarea").prop("disabled", true);
       $('[id^="edit-status"').replaceWith('<div><p id="saving-notification" class="saving-activity"> Refreshing </p></div>');
       // home page
-      $('#block-atwork-activity-homepage').find('.block-refresh-button').first().trigger("click");
+      $('#block-atwork-activity-homepage').find('.block-refresh-button').trigger("click");
 
       resetTimer();
     }
