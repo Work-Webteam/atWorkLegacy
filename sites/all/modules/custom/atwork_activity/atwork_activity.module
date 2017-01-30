@@ -530,8 +530,8 @@ function _atwork_activity_render_messages($result, $activityType) {
     else
       $output .= 'No results found.';
   }
-
-  $output .= '</div><!-- /#activity-feed" -->' . theme('pager');
+  // number of items to show on the front page activity pager
+  $output .= '</div><!-- /#activity-feed" -->' . theme('pager', array('quantity' => 5));
 
   return $output;
 }
@@ -2123,8 +2123,8 @@ function _atwork_activity_profile_page_block_content($user_id){
      $j++;
     }
   }
-
-  $output .= '</div><!-- /#activity-feed -->' . theme('pager', array('quantity' => 9));
+  // number of items to show on the profile page pager
+  $output .= '</div><!-- /#activity-feed -->' . theme('pager', array('quantity' => 5));
  // $output .= theme('pager');
 
   return array('#markup'=>$output);
