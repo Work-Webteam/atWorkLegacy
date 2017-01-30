@@ -2020,7 +2020,7 @@ function _atwork_activity_profile_page_block_content($user_id){
 
   // This is for the pager - but we don't need this if we clean up our query above
   if(isset($message_render_array) && $message_render_array){
-    $pager_number = pager_array_splice($message_render_array['message'], 10);
+    $pager_number = pager_array_splice($message_render_array['message'], 5);
   }
 
   $j = 1;
