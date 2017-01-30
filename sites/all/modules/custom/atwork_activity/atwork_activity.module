@@ -53,7 +53,7 @@ function atwork_activity_menu() {
 
   $items['noodle/%/%/%'] = array(
     'page callback' => 'atwork_activity_ajax_get_ajax', // Render HTML.
-    'page arguments' => array(2,3,4),
+    'page arguments' => array(1,2,3),
     'type' => MENU_CALLBACK,
     'access arguments' => array('access content'),
     //'delivery callback' => 'atwork_activity_ajax_callback',  // Magic goes here.
@@ -62,8 +62,10 @@ function atwork_activity_menu() {
   return $items;
 }
 
-function atwork_activity_ajax_get_ajax($latest_rendered_time_stamp) {
+function atwork_activity_ajax_get_ajax($latest_rendered_time_stamp, $also, $also3) {
 echo($latest_rendered_time_stamp);
+echo($also);
+echo($also3);
   die();
   /*
   // TODO - Check DB for last timestamps > $latest and count them
