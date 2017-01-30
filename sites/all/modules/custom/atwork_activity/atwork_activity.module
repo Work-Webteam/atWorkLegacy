@@ -712,7 +712,7 @@ function _atwork_activity_group_render_messages($result, $activityType) {
       $output .= 'No results found.';
   }
 
-  $output .= '</div><!-- /#555 -->' . theme('pager');
+  $output .= '</div>' . theme('pager');
 
   return $output;
 }

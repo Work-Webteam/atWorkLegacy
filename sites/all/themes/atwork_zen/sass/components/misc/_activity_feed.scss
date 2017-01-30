@@ -148,21 +148,21 @@
       text-align: right;
       margin-top: -3em;
     }
+    .message { // common to both outer and inner message box
+      
+    }
     label {
       display: none; //hide all labels. We don't need them
     }
-    // sticky adspace styling
-    .sticky {
-
-    }
-
+    
     > .message  { // start outer message div styling
       position: relative;
       min-height: 90px;
       padding: 4px;
       border: 1px solid lighten(#777, 45%);
-      background-color: lighten(#777, 49%);
       margin-bottom: 1.5em;
+      background: lighten(#777, 49%) url(/sites/all/themes/atwork_zen/images/grey-trans.png) bottom center repeat-x;
+      background-size: 18px;
     }
     .date, 
     ul.links,
@@ -176,18 +176,13 @@
       top: 4px;
     }
     ul.links { // the flag link
-      right: 0;
-      text-align: right;
-      width: 100%;
+      right: 4px;
+      // below, am forcing the styling to limit space. Remove later.
+      max-width: 42px;
       max-height: 41px;
       overflow: hidden;
       margin: 0;
       padding: 0;
-      background-color: lighten(gray, 40%);
-      li {
-        margin-right: 4px;
-        display: inherit;
-      }
       li, a {
         padding: 0;
       }
@@ -202,10 +197,29 @@
       margin: -25px 10px 4px 0;
       text-indent: 50px;
     }
+    .sticky { // adspace styling. Overrides most layout settings above 
+      background: lighten(#26669e, 40%);
+      background-image: none;
+      text-align: center;
+      .date {
+        position: initial;
+      } 
+      ul.links,
+      .field-name-field-feed-like-button,
+      .user-feed-image,
+      form {
+        display: none;
+      }
+      p[class^="msg-"] {
+        margin: 0;
+        text-indent: 0;
+      }
+    }
   }
   
   // inner nested message div styling
   .entity-message {
+
   }
 
   .field-name-field-profile-comment + .field-name-field-feed-like-button {// inner reply like
@@ -260,6 +274,13 @@
     }
     .field-name-field-display-name {
       line-height: 1.4em;
+    }
+  }
+  .entity-reply {
+    background: url(/sites/all/themes/atwork_zen/images/grey-trans.png) bottom center repeat-x;
+    background-size: 18px;
+    &:last-child {
+      margin-bottom: 2em;
     }
   }
 }
@@ -419,7 +440,7 @@
 
 .reply-body,
 .reply-links {
-  padding: 0.3em;
+  padding: 0.2em;
 }
 
 .page-user .block-atwork-activity { //override
