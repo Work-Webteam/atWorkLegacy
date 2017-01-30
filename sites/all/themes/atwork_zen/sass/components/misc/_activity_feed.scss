@@ -1,4 +1,4 @@
-//----------------- Universal Activity Feed styles. Apply to both front and profile page 
+//----------------- Common Activity Feed styles - Applies to both front and profile page 
 
 .block-atwork-activity {
   #edit-status { // textarea status box
@@ -15,6 +15,28 @@
   }
   #saving-notification-status {
     @include atwork-messages(green, ok);
+  }
+  // Initially hide the comment textarea and submit button and unhide with .js
+  .comment-submit-button,
+  .field-name-field-profile-comment .form-textarea-wrapper {
+    display: none;
+  }
+  .comment-submit-button-show,
+  .field-name-field-profile-comment-show .form-textarea-wrapper {
+    display: block;
+  }
+  .toggle-com-button {
+    background:none !important;
+    border:none;
+    padding:0 !important;
+    font: inherit;
+    color: #135ab0;
+    cursor: pointer;
+    font-size: smaller;
+    &:hover {
+      text-decoration: underline;
+      color: black;
+    }
   }
 }
 
@@ -192,7 +214,7 @@
   }
   // stying for replies
   .replies-wrapper {
-    margin: 2em 0 3em 0;
+    margin: 1em 0;
     .reply-depth-1 {
       margin-left: 1.0em;
     }
@@ -333,17 +355,6 @@
     .toggle-com-button {
       left: 6px;
       bottom: 0;
-      background:none !important;
-      border:none;
-      padding:0 !important;
-      font: inherit;
-      color: #135ab0;
-      cursor: pointer;
-      font-size: smaller;
-      &:hover {
-        text-decoration: underline;
-        color: black;
-      }
     }
     .field-name-field-image { // main image left of a post
       margin: -7px 0 0 -4.5em;
@@ -358,16 +369,6 @@
     }
     .block-refresh-button {// hide the refresh link
       display: none;
-    }
-    // Initially hide the comment textarea and submit button and unhide with .js
-    .comment-submit-button,
-    .field-name-field-profile-comment .form-textarea-wrapper {
-      display: none;
-    }
-    .comment-submit-button-show,
-    .field-name-field-profile-comment-show .form-textarea-wrapper {
-      display: block;
-
     }
   }
 }

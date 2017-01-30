@@ -629,9 +629,9 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['label'] = 'intro text';
-  $handler->display->display_options['header']['area']['content'] = '<p>Putting a face to a name is a great way to connect with your colleagues across the province. Search our employee profiles to find similar (or sought after) skills, interests, ministries or geographies.</p>
+  $handler->display->display_options['header']['area']['content'] = '<p style="margin-bottom:10px;">Putting a face to a name is a great way to connect with your colleagues across the province. Search our employee profiles to find similar (or sought after) skills, interests, ministries or geographies.</p>
 
-<p>To update <a href="/employees/">your profile</a>, go to your personalization menu (The “Hello” menu in the blue ribbon, top right corner). Then select “My Profile” and go to the “Edit” tab above your profile photo.</p>
+<p style="margin-top:10px;">To update and publish <a href="/employees/">your profile</a>, go to your personalization menu (The “Hello” menu in the blue ribbon, top right corner). Then select “My Profile” and go to the “Edit” tab above your profile photo.</p>
 
 <p>&nbsp;</p>
 ';
@@ -642,7 +642,11 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'No results found.';
+  $handler->display->display_options['empty']['area']['content'] = '<p align="center" style="margin-bottom:12px;"><bold>No results found.</bold></p>
+<p style="margin-bottom:12px;">It’s possible the name you entered was misspelled or the employee you searched for has not published their profile.</p>
+ 
+<p style="margin-bottom:12px;">To publish and update your profile, go to your personalization menu (The “Hello” menu in the blue ribbon, top right corner). Then select “My Profile” and go to the “Edit” tab above your profile photo.</p>
+<p style="margin-bottom:12px;">To publish your profile, check the box that shows: “Share your profile.”</p>';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
@@ -685,6 +689,20 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['fields']['field_display_name']['element_wrapper_type'] = 'h3';
   $handler->display->display_options['fields']['field_display_name']['element_wrapper_class'] = 'name-employee-landing';
   $handler->display->display_options['fields']['field_display_name']['element_default_classes'] = FALSE;
+  /* Field: User: Last Name */
+  $handler->display->display_options['fields']['field_gal_last_name']['id'] = 'field_gal_last_name';
+  $handler->display->display_options['fields']['field_gal_last_name']['table'] = 'field_data_field_gal_last_name';
+  $handler->display->display_options['fields']['field_gal_last_name']['field'] = 'field_gal_last_name';
+  $handler->display->display_options['fields']['field_gal_last_name']['label'] = '';
+  $handler->display->display_options['fields']['field_gal_last_name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_gal_last_name']['element_label_colon'] = FALSE;
+  /* Field: User: First Name */
+  $handler->display->display_options['fields']['field_gal_first_name']['id'] = 'field_gal_first_name';
+  $handler->display->display_options['fields']['field_gal_first_name']['table'] = 'field_data_field_gal_first_name';
+  $handler->display->display_options['fields']['field_gal_first_name']['field'] = 'field_gal_first_name';
+  $handler->display->display_options['fields']['field_gal_first_name']['label'] = '';
+  $handler->display->display_options['fields']['field_gal_first_name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_gal_first_name']['element_label_colon'] = FALSE;
   /* Field: User: Title */
   $handler->display->display_options['fields']['field_gal_title']['id'] = 'field_gal_title';
   $handler->display->display_options['fields']['field_gal_title']['table'] = 'field_data_field_gal_title';
@@ -772,18 +790,18 @@ function atwork_user_following_views_default_views() {
     2 => 'OR',
   );
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Field: Display Name (field_display_name) */
-  $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
-  $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
-  $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
-  $handler->display->display_options['filters']['field_display_name_value']['operator'] = 'contains';
-  $handler->display->display_options['filters']['field_display_name_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_display_name_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['operator_id'] = 'field_display_name_value_op';
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['label'] = 'Name';
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['operator'] = 'field_display_name_value_op';
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['identifier'] = 'field_display_name_value';
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['remember_roles'] = array(
+  /* Filter criterion: User: Last Name (field_gal_last_name) */
+  $handler->display->display_options['filters']['field_gal_last_name_value']['id'] = 'field_gal_last_name_value';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['table'] = 'field_data_field_gal_last_name';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['field'] = 'field_gal_last_name_value';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_gal_last_name_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['operator_id'] = 'field_gal_last_name_value_op';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['label'] = 'Last Name';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['operator'] = 'field_gal_last_name_value_op';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['identifier'] = 'last_name';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -800,12 +818,46 @@ function atwork_user_following_views_default_views() {
     16 => 0,
     17 => 0,
   );
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_filter'] = 1;
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_items'] = '15';
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_field'] = 'field_display_name';
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_dependent'] = 0;
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_filter'] = 1;
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_items'] = '25';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_field'] = 'field_gal_last_name';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_dependent'] = 0;
+  /* Filter criterion: User: First Name (field_gal_first_name) */
+  $handler->display->display_options['filters']['field_gal_first_name_value']['id'] = 'field_gal_first_name_value';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['table'] = 'field_data_field_gal_first_name';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['field'] = 'field_gal_first_name_value';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_gal_first_name_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['operator_id'] = 'field_gal_first_name_value_op';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['label'] = 'First Name';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['operator'] = 'field_gal_first_name_value_op';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['identifier'] = 'first_name';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    15 => 0,
+    16 => 0,
+    17 => 0,
+  );
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_filter'] = 1;
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_items'] = '20';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_field'] = 'field_gal_first_name';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_dependent'] = 0;
   /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_1']['id'] = 'field_display_name_value_1';
   $handler->display->display_options['filters']['field_display_name_value_1']['table'] = 'field_data_field_display_name';
@@ -2814,7 +2866,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['label'] = 'have no followers';
   $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div id="no-followers"><p> Currently you have no followers, when your colleagues follow you, they will appear here.</p></div>';
+  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div id="no-followers"><p> Currently, you have no followers. When your colleagues follow you, they will appear here.</p></div>';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: User relationships: Requester user */
   $handler->display->display_options['relationships']['requester_id']['id'] = 'requester_id';
