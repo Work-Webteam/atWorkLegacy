@@ -47,28 +47,21 @@
 //----- General Layout
 
 #social-side {
-  .atwork-header-wrapper {
-    position: relative;
-  }
-  // start header button styles, positioned absolutely in atwork-header-wrapper
-  .jsNewActivityWindow,
-  .activity-filters-my,
-  .activity-filters-all {// common buttons in header of home activity feed
+  h2 {
     position: absolute;
-    top: 14px;
-    border: none;
-    padding: 0;
+    left: 0;
+    top: 0;
+    width: 256px !important;
+    z-index: 99;
   }
-  .jsNewActivityWindow {// the pop-out linked button
-    right: 6px;
-    top: 12px;
-    &:hover {
-      opacity: 0.7;
-    }
+  .block-header-inner { 
+    float: right;
+  }
+  .activity-filters-my,
+  .activity-filters-all {
+    border: none;
   }
   .activity-filters-my {// button to show filters for my-actions
-    right: 70px;
-    width: 16px;
     background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-my-off.png) no-repeat center center;
     &.active,
     &:hover {
@@ -79,8 +72,7 @@
     }
   }
   .activity-filters-all {// button to show filters for all-activity
-    right: 28px;
-    width: 36px;
+    width: 46px;
     background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-all-off.png) no-repeat center center;
     &.active,
     &:hover {
@@ -90,11 +82,11 @@
       opacity: 0.7;
     }
   }
-  // end header button styles
-  h2 { // this weirdness is expanding the title to overcome the internal padding
-    text-indent: -6em;
-    margin: -4px !important;
-    width: 104% !important;
+  .jsNewActivityWindow {// the pop-out linked button
+    margin-right: 6px;
+    &:hover {
+      opacity: 0.7;
+    }
   }
   #atwork-activity-form {
     .form-item {
@@ -152,10 +144,6 @@
 
 #social-side {
   .atwork-activity {
-    form  {
-      // temp hide for now to help declutter.
-      //display: none;
-    }
     #status-submit-button {
       text-align: right;
       margin-top: -3em;
@@ -163,13 +151,18 @@
     label {
       display: none; //hide all labels. We don't need them
     }
+    // sticky adspace styling
+    .sticky {
+
+    }
+
     > .message  { // start outer message div styling
       position: relative;
       min-height: 90px;
       padding: 4px;
       border: 1px solid lighten(#777, 45%);
       background-color: lighten(#777, 49%);
-      margin-bottom: 2em;
+      margin-bottom: 1.5em;
     }
     .date, 
     ul.links,
