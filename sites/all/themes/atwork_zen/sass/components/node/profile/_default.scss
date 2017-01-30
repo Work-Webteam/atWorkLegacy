@@ -125,6 +125,10 @@
     padding-top: 2px;
   }
 
+  .field-name-field-summary h2.profile-section {
+    margin-top: 0 !important; //just do it. Too many ids to overcome.
+  }
+
 // start group_profile_extra box - contains skills, interests, expandable bio 
 
 #user-user-full-group-profile-extra {

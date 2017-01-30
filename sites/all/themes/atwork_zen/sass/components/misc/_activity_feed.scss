@@ -1,4 +1,4 @@
-//----------------- Universal Activity Feed styles. Apply to both front and profile page 
+//----------------- Common Activity Feed styles - Applies to both front and profile page 
 
 .block-atwork-activity {
   #edit-status { // textarea status box
@@ -16,6 +16,28 @@
   #saving-notification-status {
     @include atwork-messages(green, ok);
   }
+  // Initially hide the comment textarea and submit button and unhide with .js
+  .comment-submit-button,
+  .field-name-field-profile-comment .form-textarea-wrapper {
+    display: none;
+  }
+  .comment-submit-button-show,
+  .field-name-field-profile-comment-show .form-textarea-wrapper {
+    display: block;
+  }
+  .toggle-com-button {
+    background:none !important;
+    border:none;
+    padding:0 !important;
+    font: inherit;
+    color: #135ab0;
+    cursor: pointer;
+    font-size: smaller;
+    &:hover {
+      text-decoration: underline;
+      color: black;
+    }
+  }
 }
 
 
@@ -25,38 +47,10 @@
 //----- General Layout
 
 #social-side {
-  h2 { // this weirdness is expanding the title to overcome the internal padding
-    text-indent: -6em;
-    margin: -4px !important;
-    width: 104% !important;
+  .atwork-header-wrapper {
+    position: relative;
   }
-  #atwork-activity-form {
-    .form-item {
-      margin-top: 0.5em;
-    }
-  }
-  #status-submit-button {
-    clear: both;
-    text-align: right;
-  }
-  #status-update {
-    .field-name-field-image {
-      float: left;
-      max-width: 50px;
-    }
-    .form-textarea-wrapper {
-      float: right;
-      max-width: 200px;
-    }
-  }
-  #saving-notification-status {
-    margin-left: 50px;
-  }
-  #activity-feed {
-    clear: both;
-    display: block;
-    margin-top: 1em;
-  }
+  // start header button styles, positioned absolutely in atwork-header-wrapper
   .jsNewActivityWindow,
   .activity-filters-my,
   .activity-filters-all {// common buttons in header of home activity feed
@@ -96,14 +90,47 @@
       opacity: 0.7;
     }
   }
+  // end header button styles
+  h2 { // this weirdness is expanding the title to overcome the internal padding
+    text-indent: -6em;
+    margin: -4px !important;
+    width: 104% !important;
+  }
+  #atwork-activity-form {
+    .form-item {
+      margin-top: 0.5em;
+    }
+  }
+  #status-submit-button {
+    clear: both;
+    text-align: right;
+  }
+  #status-update {
+    .field-name-field-image {
+      float: left;
+      max-width: 50px;
+    }
+    .form-textarea-wrapper {
+      float: right;
+      max-width: 200px;
+    }
+  }
+  #saving-notification-status {
+    margin-left: 50px;
+  }
+  #activity-feed {
+    clear: both;
+    display: block;
+    margin-top: 1em;
+  }
   #atwork-activity-customize-feed-form .description {
     margin-bottom: 1em;
   }    
-  .item-list {
+  .item-list { // the pager
     display: block;
-    width: 95.5%;
+    width: 253px;
     position: absolute;
-    bottom: 2px;
+    bottom: 33px;
     padding: 0 0 4px 0;
     margin: 0 0 0 5px;
     left:  0;
@@ -187,7 +214,7 @@
   }
   // stying for replies
   .replies-wrapper {
-    margin: 2em 0 3em 0;
+    margin: 1em 0;
     .reply-depth-1 {
       margin-left: 1.0em;
     }
@@ -328,17 +355,6 @@
     .toggle-com-button {
       left: 6px;
       bottom: 0;
-      background:none !important;
-      border:none;
-      padding:0 !important;
-      font: inherit;
-      color: #135ab0;
-      cursor: pointer;
-      font-size: smaller;
-      &:hover {
-        text-decoration: underline;
-        color: black;
-      }
     }
     .field-name-field-image { // main image left of a post
       margin: -7px 0 0 -4.5em;
@@ -353,16 +369,6 @@
     }
     .block-refresh-button {// hide the refresh link
       display: none;
-    }
-    // Initially hide the comment textarea and submit button and unhide with .js
-    .comment-submit-button,
-    .field-name-field-profile-comment .form-textarea-wrapper {
-      display: none;
-    }
-    .comment-submit-button-show,
-    .field-name-field-profile-comment-show .form-textarea-wrapper {
-      display: block;
-
     }
   }
 }
