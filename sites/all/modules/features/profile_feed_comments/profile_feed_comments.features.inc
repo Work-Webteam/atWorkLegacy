@@ -287,7 +287,7 @@ function profile_feed_comments_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cp class=\\u0022msg-new-node\\u0022\\u003E[message:field-message-node:author:author-conditional]\\u0026nbsp;posted the [message:field-message-node:content-type] titled \\u003Ca href=\\u0022[message:field-message-node:url:relative]\\u0022 title=\\u0022[message:field-message-node:title]\\u0022\\u003E[message:field-message-node:title]\\u003C\\/a\\u003E[atwork-groups:in-groups-text].\\u003C\\/p\\u003E\\r\\n",
+          "value" : "\\u003Cp class=\\u0022msg-new-node\\u0022\\u003E\\u003Cspan\\u003E[message:field-message-node:author:author-conditional]\\u0026nbsp;posted the [message:field-message-node:content-type] titled \\u003C\\/span\\u003E\\u003Ca href=\\u0022[message:field-message-node:url:relative]\\u0022 title=\\u0022[message:field-message-node:title]\\u0022\\u003E[message:field-message-node:title]\\u003C\\/a\\u003E[atwork-groups:in-groups-text].\\u003C\\/p\\u003E\\r\\n",
           "format" : "full_html"
         }
       ]

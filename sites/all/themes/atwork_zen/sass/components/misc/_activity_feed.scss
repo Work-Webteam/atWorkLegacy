@@ -226,8 +226,15 @@
         margin: 0;
         text-indent: 0;
       }
-      .msg-new-node a {
-        font-size: 20px;
+      .msg-new-node {
+        span {// hide the intro text if we are still using Sticky events
+          display: none;
+        }
+        a {// the link to the original node
+          margin-top: 0.5em;
+          display: block;
+          font-size: 20px;
+        }
       }
     }
   }
