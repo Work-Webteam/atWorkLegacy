@@ -1937,7 +1937,7 @@ EOT;
       // Don't think I need to pass these values anymore - will keep this for now to check.
       //feed_block_init();
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_atwork_activity_profile_feed.js');
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'MY_CUSTOM_MODULE.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_profile_page_ajax.js');
       break;
   }
   return $block;
