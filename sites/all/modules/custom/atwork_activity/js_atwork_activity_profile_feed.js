@@ -220,8 +220,11 @@
 
 
     function checkMessageCount(){
-      $('#profile-comment-link').trigger('click');
-      console.log("checking_message");
+      checkLink = $('#profile-comment-link');
+      if(checkLink > 0){
+        $('#profile-comment-link').trigger('click');
+        console.log("checking_message");
+      }
     }
 
 

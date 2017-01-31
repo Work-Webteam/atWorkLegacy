@@ -4,7 +4,6 @@
       currentTimeStamp = settings.atwork_activity.time;
       uid = settings.atwork_activity.uid;
       name = settings.atwork_activity.user;
-      console.log(settings.atwork_activity);
       // Settings does not seem to update the timestamp on reload - so we need to update that here through the most recent php span
       phpTimeStamp = $('#timestamp-latest').text();
       if(currentTimeStamp < phpTimeStamp){
@@ -16,9 +15,7 @@
         .bind('click', function(){
           $.get('/noodle/' + name + '/' + uid + '/' + currentTimeStamp, null, feedDetails);
           return false;
-        });
-
-      console.log(phpTimeStamp);
+       });
     }
   };
   var currentTimeStamp = '';
