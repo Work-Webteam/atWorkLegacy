@@ -336,6 +336,42 @@ function _atwork_activity_render_messages($result, $activityType) {
   $output .= render($adv_form);
   $output .= '</div><!-- /#atwork-advanced-feed-settings -->';
 
+  // Load adnode in here, not using superior sticky functionality baked into queries
+  $ad_node = node_load(20524);
+  if(isset($ad_node->field_content['und'][0]['value']) &&  $ad_node->field_content['und'][0]['value']){
+    $content = $ad_node->field_content['und'][0]['value'];
+    $date = $ad_node->created;
+    $current_time = time();
+    $diff = $current_time - $date;
+    $time_record = "";
+        switch(TRUE){
+          case($diff<=60):
+            $time_record = "Now";
+            break;
+          // Less than an hour
+          case($diff<3600):
+            $time_record = floor($diff/60) . " minutes ago";
+            break;
+          // Less than a day
+          case($diff<86400):
+            $time_record = floor($diff/3600) . " hours ago";
+            break;
+          // Less than a week
+          case($diff<604800):
+            // On day
+            if($diff < 172800){
+              $time_record = floor($diff/86400) . " day ago";
+            } else {
+              // More than one day
+              $time_record = floor($diff/86400) . " days ago";
+            }
+            break;
+          default:
+            $time_record = date('F j Y', $message['#entity']->timestamp);
+            break;
+        }
+    $output = '<div id="feed-ad-space-outer"><div id="feed-ad-space-content">' . $content . '</div><div id="feed-ad-space-author">Posted By: Employee News</div><div id="feed-ad-space-date">' . $time_record . '</div></div>';
+  }
   // The Status update form
   $user_image  = field_view_field('user', $current_user, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
   $form = drupal_get_form('atwork_activity_form');
@@ -583,6 +619,8 @@ function _atwork_activity_render_messages($result, $activityType) {
 }
 
 function check_sticky_status($mid){
+  // Not using for launch
+  return false;
   if(empty($mid)){
     return false;
   }
