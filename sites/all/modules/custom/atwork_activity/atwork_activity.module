@@ -1916,7 +1916,15 @@ EOT;
      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_click_handlers.js');
 */
       $block['subject'] = t('My News Feed');
-      $block['content'] = atwork_activity_home_all_callback();
+      $block['subject'] .= '<div class="block-header-inner">';
+      //$block['subject'] .= '<button class="activity-filters-my" title="show my content filters">&nbsp;</button>';
+      //$block['subject'] .= '<button class="activity-filters-all" title="show all content filters">&nbsp;</button>';
+      $block['subject'] .= '<a href="node/21100" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="Click for pop-out Activity Feed window" /></a>';
+      $block['subject'] .= '</div><!-- /.block-header-inner -->';
+
+      $block['content'] = '<div class="atwork-activity-block-container">';
+      $block['content'] .= atwork_activity_home_all_callback();
+      $block['content'] .= '</div><!-- /.atwork-activity-block-container -->';
       break;
     /** the profile page block view */
     case 'profile_page_activity_feed_block':
@@ -1925,7 +1933,7 @@ EOT;
 
       if(isset($this_user) && $this_user->uid == arg(1)){
         $account = user_load($this_user->uid);
-        $block['subject'] = t("My Activity");
+        $block['subject'] = t("My Status");
       } else {
         $account = user_load(arg(1));
         // Show the user's first name for the activity title if this is not the current user's feed
@@ -1981,6 +1989,7 @@ function atwork_activity_ajax_load() {
     // The final markup - wrap it up in a div
     $form = drupal_get_form('atwork_activity_form');
     $output .= render($form);
+    $output .= '<h2 class="block__title block-title">My Activity</h2>';
     $output .= '<div id="activity-feed">' ;
   } else {
     $block['title'] = $account->field_gal_first_name['und'][0]['safe_value'] . t("'s activity feed");
