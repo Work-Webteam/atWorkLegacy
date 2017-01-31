@@ -203,12 +203,18 @@
       margin: -25px 10px 4px 0;
       text-indent: 50px;
     }
-    .sticky { // adspace styling. Overrides most layout settings above 
-      background: lighten(#26669e, 40%);
-      background-image: none;
-      text-align: center;
+    .message.sticky { // ad space styling. Overrides most layout settings above 
+      padding: 1.5em 1em 1em 1em;
+      border: 1px solid grey;
+      background: lighten(grey, 40%) url(/sites/all/themes/atwork_zen/images/icons/atwork-ampersand.png) 15px center no-repeat;
+      padding-left: 80px;
       .date {
         position: initial;
+        line-height: 1em;
+        &:before {
+          content: "Posted by Employee News ";
+          display: block;
+        }
       } 
       ul.links,
       .field-name-field-feed-like-button,
@@ -219,6 +225,9 @@
       p[class^="msg-"] {
         margin: 0;
         text-indent: 0;
+      }
+      .msg-new-node a {
+        font-size: 20px;
       }
     }
   }
