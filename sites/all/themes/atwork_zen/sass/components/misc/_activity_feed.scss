@@ -47,6 +47,7 @@
 //----- General Layout
 
 #social-side {
+  // start all Header items 
   h2 {
     position: absolute;
     left: 0;
@@ -87,6 +88,10 @@
     &:hover {
       opacity: 0.7;
     }
+  }
+  // end all Header items 
+  .atwork-activity-block-container {
+    margin-top: 46px; // push down the container because the header is positioned absolutely
   }
   #atwork-activity-form {
     .form-item {
@@ -174,6 +179,7 @@
     .date {
       left: 54px;
       top: 4px;
+      bottom: inherit;
     }
     ul.links { // the flag link
       right: 4px;
@@ -306,6 +312,16 @@
       &.even {
         background-color: lighten(#777, 49%);
       }
+    }
+    .form-item-status {
+      margin-bottom: 5px;
+    }
+    #edit-status-counter {
+      text-indent: 60px;
+      margin-top: 6px;
+    }
+    #status-submit-button {
+      margin-top: -26px;
     }
     .entity-message {
       margin-top: -3em; // hackey, but need to close up top space

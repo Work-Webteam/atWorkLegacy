@@ -1887,7 +1887,7 @@ EOT;
 
       if(isset($this_user) && $this_user->uid == arg(1)){
         $account = user_load($this_user->uid);
-        $block['subject'] = t("My Activity");
+        $block['subject'] = t("My Status");
       } else {
         $account = user_load(arg(1));
         // Show the user's first name for the activity title if this is not the current user's feed
@@ -1932,6 +1932,7 @@ function _atwork_activity_profile_page_block_content($user_id){
     // The final markup - wrap it up in a div
     $form = drupal_get_form('atwork_activity_form');
     $output = render($form);
+    $output .= '<h2 class="block__title block-title">My Activity</h2>' ;
     $output .= '<div id="activity-feed">' ;
   } else {
     $block['title'] = $account->field_gal_first_name['und'][0]['safe_value'] . t("'s activity feed");
