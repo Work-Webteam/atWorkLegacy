@@ -62,23 +62,20 @@ function atwork_activity_menu() {
   return $items;
 }
 
-function atwork_activity_ajax_get_ajax($latest_rendered_time_stamp, $also, $also3) {
-echo($latest_rendered_time_stamp);
-echo($also);
-echo($also3);
-  die();
-  /*
-  // TODO - Check DB for last timestamps > $latest and count them
-  $new_message_count = check_message_count($latest_rendered_time_stamp, $account_uid);
-  // TODO - Send back image and # of timestamps, specify #id if 0
-  if(isset($new_message) && $new_message > 0){
-    $new_message = '<div id="new-count">' . $new_message_count . '</div>';
-  } else {
-    $new_message = '<div id="count-remain">Nothing New</div>';
+function atwork_activity_ajax_get_ajax($idir, $uid, $latest_rendered_time_stamp) {
+
+  //Check DB for last timestamps > $latest and count them
+  $new_message_count = check_message_count($latest_rendered_time_stamp, $uid);
+  dpm($new_message_count);
+  if($new_message_count[0]->expression > 0){
+    $return_message = '<div id="message-counter" class="new-message-count"><img src=" /sites/all/modules/custom/atwork_activity/img/nmii.png" alt="messages" id="new-message-image-icon"><span id="message-count-number">'. $new_message_count[0]->expression . '</span></div>';
+  }else {
+     $return_message = '<div id="message-counter" class="no-new-messages"></div>';
   }
-  drupal_json_output($new_message);
-  drupal_exit();
-  */
+  // Return to js
+  print($return_message);
+  // Stops themeing layer from interacting with this
+  die();
   return;
 }
 
@@ -86,12 +83,12 @@ function check_message_count($latest_rendered_time_stamp, $account_uid){
   $query = db_select('message', 'm')
     ->fields('m', array('mid'))
     ->orderBy('m.timestamp', 'DESC')
-    ->condition('m.uid', $account->uid);
-    //->condition('m.timestamp', $latest_rendered_time_stamp, '>');
+    ->condition('m.uid', $account_uid)
+    ->condition('m.timestamp', $latest_rendered_time_stamp, '>');
 
   $count_query = $query->countQuery($query);
 
-  $result = $query
+  $result = $count_query
     //->extend('PagerDefault')
     //->limit(15)
     ->execute()

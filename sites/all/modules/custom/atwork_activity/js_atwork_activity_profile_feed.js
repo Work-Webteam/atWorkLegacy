@@ -1,10 +1,5 @@
 (function ($) {
 
-
-
-  // Start with false so that we can tell if it is set or not.
-  var refreshFeed = false;
-  var timer = false;
   var stateSave = Array();
 
   /**
@@ -12,29 +7,6 @@
    */
   Drupal.behaviors.profileFeedJquery = {
     attach: function(context, settings) {
-   //$('#block-atwork-activity-profile-page-activity-feed-block').once('activityFeedJQuery', function(){
-    // Page refresh should occur every 5 seconds after initial load
-    if(refreshFeed !== false ){ // Don't want to set this twice
-      clearTimeout(refreshFeed);
-      refreshFeed = false;
-    }
-    setFeedInterval();
-
-    //Unless someone is typing in a text field on Profile page
-    $("#block-atwork-activity-profile-page-activity-feed-block .form-textarea").filter(function(){
-        return !$(this).data('stopRefresh');
-      }).on('click.form-textarea', function() {
-        slow_var();
-      }).data('stopRefresh', true);
-
-
-    //Unless someone is typing in a text field on homepage
-    $("#block-atwork-activity-homepage .form-textarea").filter(function(){
-        return !$(this).data('stopRefresh');
-      }).on('click.form-textarea', function() {
-        slow_var();
-      }).data('stopRefresh', true);
-
 
 
     // Initialize/take care of comments
@@ -56,17 +28,13 @@
       toggleComments($(this).parentsUntil('#activity-feed').closest("div").prop("class"));
     });
 
-
-
     // Comment update
-
       $("[id^=edit-button").click(function(){
         //TODO - figure out how to replace the div with a spinner.
         //TODO - find out why we have a second box appearing when we submit
         // Remove text blocks and show that it is saving
         $('[id^="field-profile-comment-add-more-wrapper"').replaceWith('<div><p id="saving-notification-comment" class="saving-activity"> SAVING </p></div>');
-        //refresh interval and remove timer if present
-        resetTimer();
+
         // close the filter options
         $("#atwork-advanced-feed-settings").hide();
         // Refresh the page after .5 seconds (to let db update)
@@ -77,32 +45,29 @@
         return;
       });
 
-
     // Updates status
     $("[id^=edit-post").once("updateStatus", function(){
       $("[id^=edit-post").click(function(){
         $('[id^="atwork-activity-form"').replaceWith('<div><p id="saving-notification-status" class="saving-activity"> SAVING </p></div>');
-        resetTimer();
         // Delay this for .5 second so that we have time to commit to db
-        setTimeout(ajaxRefresh, 1000);
+        setTimeout(ajaxRefresh, 500);
       });
     });
 
     // Updates feed choices on the homepage
-    //$("#edit-update").unbind();
     $("#edit-update").once("toggleChoices", function(){
       $("#edit-update").click(function(){
-        setTimeout(ajaxRefresh, 300);
+        setTimeout(ajaxRefresh, 500);
         resetTimer();
       });
     });
 
-
     // Toggle comments
       $('[id^=edit-toggle-com-button]').click(function(){
         toggleCommentVis($(this));
-        slow_var();
       });
+  }
+ };
 
 
 /**
@@ -218,36 +183,6 @@
 
 
     /**
-     * Function that stops all refreshes for 10 minutes if someone clicks in a text box, then restarts them
-     */
-    function slow_var(){
-      if(refreshFeed !== false){
-        clearTimeout(refreshFeed);
-        refreshFeed = false;
-      }
-      // If nothing happens in 5 minutes, we will start our refresh again
-      if(timer === false){
-        timer = setTimeout(setFeedInterval, 300000);
-      }
-      return;
-    }
-
-    /**
-     * Function in charge of setting the interval to the value we would like
-     */
-    function setFeedInterval(){
-      if(refreshFeed === false){
-        refreshFeed = setTimeout(ajaxRefresh, 10000);
-      }
-      // Make sure our timer is turned off
-      if(timer !== false){
-        clearTimeout(timer);
-        timer = false;
-      }
-      return;
-    }
-
-    /**
      * Function that clicks on relevant update links created by the block_refresh module
      */
     function ajaxRefresh(){
@@ -259,24 +194,9 @@
       $('[id^="edit-status"').replaceWith('<div><p id="saving-notification" class="saving-activity"> Refreshing </p></div>');
       // home page
       $('#block-atwork-activity-homepage').find('.block-refresh-button').trigger("click");
-
-      resetTimer();
     }
 
 
-
-    /**
-     * Function to clear timer if any form is submitted on the profile feed
-     */
-    function resetTimer(){
-      // Lets clear the interval here, as we are reseting the timer anyways
-      if(refreshFeed !== false){
-        clearTimeout(refreshFeed);
-        refreshFeed = false;
-      }
-      setFeedInterval();
-      return;
-    }
   /**
    * Function to accept 'this' argument from click handler
    * to toggle visibility on comment for elements
@@ -293,28 +213,6 @@
       $(thisObj).val('Comment');
     }
   }
-
-
-   // });
-  },
-
-detach: function(context, settings, trigger){
-   // $(".form-textarea").unbind();
-    $(".comment-count-link").unbind();
-   // $("[id^=edit-button]").unbind();
-   // $("#atwork-advanced-feed-settings").unbind();
-   // $("[id^=edit-post").unbind();
-   // $("[id^=edit-update").unbind();
-   // $(".toggle-com-button").unbind();
-   // $(".block-refresh-button").unbind();
-   // clearTimeout(timer);
-   // clearTimeout(refreshFeed);
-   // timer = false;
-   // refreshFeed = false;
-  //  console.log("Detach");
-  }
-
- };
 
 }(jQuery));
 
