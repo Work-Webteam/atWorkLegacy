@@ -214,16 +214,16 @@
      */
     function setFeedInterval(){
       if(refreshFeed === false){
-        refreshFeed = setInterval(checkMessageCount, 3000);
+        refreshFeed = setInterval(checkMessageCount, 30000);
       }
     }
 
 
     function checkMessageCount(){
-      checkLink = $('#profile-comment-link');
+      checkLink = $('#profile-comment-link').length;
+      console.log(checkLink);
       if(checkLink > 0){
         $('#profile-comment-link').trigger('click');
-        console.log("checking_message");
       }
     }
 

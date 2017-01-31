@@ -2189,7 +2189,6 @@ function _atwork_activity_profile_page_block_content($user_id){
   }
   // Pass timestamp to js settings
   drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $account->name, 'uid' => $account->uid)), 'setting');
-  dpm($time_stamp);
   $output .= '<span style="display:none" id="timestamp-latest">' . $time_stamp . '</span>';
   $output .= '</div><!-- /#activity-feed -->' . theme('pager', array('quantity' => 9));
  // $output .= theme('pager');
