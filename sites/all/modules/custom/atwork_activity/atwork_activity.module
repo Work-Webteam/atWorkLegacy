@@ -66,9 +66,8 @@ function atwork_activity_ajax_get_ajax($idir, $uid, $latest_rendered_time_stamp)
 
   //Check DB for last timestamps > $latest and count them
   $new_message_count = check_message_count($latest_rendered_time_stamp, $uid);
-  dpm($new_message_count);
   if($new_message_count[0]->expression > 0){
-    $return_message = '<div id="message-counter" class="new-message-count"><img src=" /sites/all/modules/custom/atwork_activity/img/nmii.png" alt="messages" id="new-message-image-icon"><span id="message-count-number">'. $new_message_count[0]->expression . '</span></div>';
+    $return_message = '<div id="message-counter" class="new-message-count"><img src=" /sites/all/modules/custom/atwork_activity/img/newmessages.png" alt="messages" id="new-message-image-icon"><span id="message-count-number">'. $new_message_count[0]->expression . '</span></div>';
   }else {
      $return_message = '<div id="message-counter" class="no-new-messages"></div>';
   }
@@ -1965,16 +1964,9 @@ function _atwork_activity_profile_page_block_content($user_id){
   }
 
   $output = '';
-  $output .= '<a class="btn" href="#" id="my-special-link">Ajax Test</a>';
-  $output .= '<div id="ajax-target">Ajax goes here!!!</div>';
- /* $output .= '<script>
-function atwork_activity_ajax_load() {
-  (function($) {
-    $("#ajax-target").load("/node/get/ajax/ajax/20457");
-  })(jQuery);
-}
-</script>';
-*/
+  $output .= '<a class="btn" href="#" id="profile-comment-link">Message Check</a>';
+  $output .= '<div id="ajax-target"></div>';
+
   // Decide if it is users block or others and set title
   if($account->uid === $user->uid){
     $block['title'] = t("My Feed");
@@ -2188,6 +2180,8 @@ function atwork_activity_ajax_load() {
   }
   // Pass timestamp to js settings
   drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $account->name, 'uid' => $account->uid)), 'setting');
+  dpm($time_stamp);
+  $output .= '<span style="display:none" id="timestamp-latest">' . $time_stamp . '</span>';
   $output .= '</div><!-- /#activity-feed -->' . theme('pager', array('quantity' => 9));
  // $output .= theme('pager');
 

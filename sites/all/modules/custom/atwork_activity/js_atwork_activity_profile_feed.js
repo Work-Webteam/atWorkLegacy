@@ -1,7 +1,7 @@
 (function ($) {
 
   var stateSave = Array();
-
+  var refreshFeed = false;
   /**
    * Drupal attach function - click handlers etc.
    */
@@ -14,6 +14,18 @@
 
     // This is a check to fix a problem where IE changes the placeholder
     internetExplorerCheck();
+
+    // Only run if the link exists in the current page load or fragment refresh.
+    $('#ajax-target:not(.atwork-activity-processed)', context)
+      .addClass('atwork-activity-processed')
+      .bind('click', function(){
+        ajaxRefresh();
+        return false;
+    });
+
+    if(refreshFeed === false){
+      setFeedInterval();
+    }
 
     // click handler for the comment toggle function
     // Make sure we are not rebinding this improperly on profile page
@@ -195,6 +207,23 @@
       // home page
       $('#block-atwork-activity-homepage').find('.block-refresh-button').trigger("click");
     }
+
+
+    /**
+     * Function in charge of setting the interval to the value we would like
+     */
+    function setFeedInterval(){
+      if(refreshFeed === false){
+        refreshFeed = setInterval(checkMessageCount, 3000);
+      }
+    }
+
+
+    function checkMessageCount(){
+      $('#profile-comment-link').trigger('click');
+      console.log("checking_message");
+    }
+
 
 
   /**
