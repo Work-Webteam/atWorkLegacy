@@ -90,6 +90,32 @@
     }
   }
   // end all Header items 
+
+  // start feed-ad-space
+    .feed-ad-space-outer {
+      border: 1px solid grey;
+      padding: 1em;
+      background: #d1e4f8;
+      position: relative;
+    }
+    .feed-ad-space-image {
+      position: absolute;
+      top: 20px;
+      left: 10px;
+      max-height: 40px;
+      width: auto;
+    }
+    .feed-ad-space-content {
+      font-size: 16px;
+      margin-bottom: 1em;
+    }
+    .feed-ad-space-content,
+    .feed-ad-space-author,
+    .feed-ad-space-date {
+      margin-left: 64px;
+    } 
+    // stop feed-ad-space
+
   .atwork-activity-block-container {
     margin-top: 46px; // push down the container because the header is positioned absolutely
   }
@@ -145,43 +171,10 @@
 }
 
 
-//----- message box styling
-
-#feed-ad-space-outer {
-  border: 1px solid grey;
-  padding: 1em;
-  background: #d1e4f8;
-  position: relative;
-}
-
-#feed-ad-space-content {
-  img {
-    position: absolute;
-    top: 20px;
-    left: 0px;
-    max-height: 40px;
-    width: auto;
-    padding: 0.5em;
-  }
-  p {
-    margin-left: 60px;
-    font-size: 18px;
-  }
-
-}
-  #feed-ad-space-author,
-  #feed-ad-space-date {
-    margin-left: 60px;
-  }
-  #feed-ad-space-author {
-    margin-top: 1em;
-  }
+//----- message box styling only
 
 #social-side {
   .atwork-activity {
-    #edit-status-counter {
-      display: none;
-    }
     #status-submit-button {
       text-align: right;
       margin-top: -3em;
@@ -251,8 +244,7 @@
       } 
       ul.links,
       .field-name-field-feed-like-button,
-      .user-feed-image,
-      form {
+      .user-feed-image{
         display: none;
       }
       p[class^="msg-"] {
