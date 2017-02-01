@@ -1087,7 +1087,6 @@ function user_feed_query($choices, $latest_rendered_time_stamp = NULL){
     //->limit(15)
     ->execute()
     ->fetchAll();
-    dpm($result);
     return $result;
    } else {
   $user_feed_query->orderBy('m.timestamp', 'DESC')
