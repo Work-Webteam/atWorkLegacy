@@ -7,32 +7,7 @@
    */
   Drupal.behaviors.profileFeedJquery = {
     attach: function(context, settings) {
-<<<<<<< HEAD
-   //$('#block-atwork-activity-profile-page-activity-feed-block').once('activityFeedJQuery', function(){
-    // Page refresh should occur every 5 seconds after initial load
-    if(refreshFeed !== false ){ // Don't want to set this twice
-      clearTimeout(refreshFeed);
-      refreshFeed = false;
-    }
-    //setFeedInterval();
 
-    //Unless someone is typing in a text field on Profile page
-    $("#block-atwork-activity-profile-page-activity-feed-block .form-textarea").filter(function(){
-        return !$(this).data('stopRefresh');
-      }).on('click.form-textarea', function() {
-        slow_var();
-      }).data('stopRefresh', true);
-
-
-    //Unless someone is typing in a text field on homepage
-    $("#block-atwork-activity-homepage .form-textarea").filter(function(){
-        return !$(this).data('stopRefresh');
-      }).on('click.form-textarea', function() {
-        slow_var();
-      }).data('stopRefresh', true);
-
-=======
->>>>>>> b22939be7ede1f64e7c6889dc73d4a511164efdd
 
 
     // Initialize/take care of comments
@@ -271,33 +246,7 @@
       $(thisObj).val('Comment');
     }
   }
-<<<<<<< HEAD
-    function atwork_activity_ajax_load(){
-      jQuery("#ajax-target").load("get/ajax/11");
-    }
 
-   // });
-  },
-
-detach: function(context, settings, trigger){
-   // $(".form-textarea").unbind();
-    $(".comment-count-link").unbind();
-   // $("[id^=edit-button]").unbind();
-   // $("#atwork-advanced-feed-settings").unbind();
-   // $("[id^=edit-post").unbind();
-   // $("[id^=edit-update").unbind();
-   // $(".toggle-com-button").unbind();
-   // $(".block-refresh-button").unbind();
-   // clearTimeout(timer);
-   // clearTimeout(refreshFeed);
-   // timer = false;
-   // refreshFeed = false;
-  //  console.log("Detach");
-  }
-
- };
-=======
->>>>>>> b22939be7ede1f64e7c6889dc73d4a511164efdd
 
 }(jQuery));
 
