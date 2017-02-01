@@ -1170,8 +1170,9 @@ ol.search-results h3.title {
   border: 1px solid #f1f1f1;
 	padding-bottom: 15px;
 	width: 275px;
-	height: 1355px;
-  overflow-x: scroll;
+	height: 1368px;
+  overflow-x: hidden; // don't show horizontal scrollbar
+  overflow-y: scroll;
   box-sizing: border-box;
   padding: 4px;
 }
