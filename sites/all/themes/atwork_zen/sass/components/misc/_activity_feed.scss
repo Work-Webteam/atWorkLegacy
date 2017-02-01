@@ -147,8 +147,38 @@
 
 //----- message box styling
 
+#feed-ad-space-outer {
+  border: 1px solid grey;
+  padding: 1em;
+  background: #d1e4f8;
+  position: relative;
+}
+
+#feed-ad-space-content {
+  img {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    max-height: 40px;
+    width: auto;
+    padding: 0.5em;
+  }
+  p {
+    margin-left: 60px;
+    font-size: 20px;
+  }
+
+}
+  #feed-ad-space-author,
+  #feed-ad-space-date {
+    margin-left: 60px;
+  }
+
 #social-side {
   .atwork-activity {
+    #edit-status-counter {
+      display: none;
+    }
     #status-submit-button {
       text-align: right;
       margin-top: -3em;
