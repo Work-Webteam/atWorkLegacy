@@ -62,25 +62,7 @@ function atwork_activity_menu() {
   return $items;
 }
 
-<<<<<<< HEAD
-function atwork_activity_ajax_get_ajax($latest_rendered_time_stamp, $also, $also3) {
-echo($latest_rendered_time_stamp);
-echo($also);
-echo($also3);
-  die();
-  /*
-  // TODO - Check DB for last timestamps > $latest and count them
-  $new_message_count = check_message_count($latest_rendered_time_stamp, $account_uid);
-  // TODO - Send back image and # of timestamps, specify #id if 0
-  if(isset($new_message) && $new_message > 0){
-    $new_message = '<div id="new-count">' . $new_message_count . '</div>';
-  } else {
-    $new_message = '<div id="count-remain">Nothing New</div>';
-  }
-  drupal_json_output($new_message);
-  drupal_exit();
-  */
-=======
+
 function atwork_activity_ajax_get_ajax($idir, $uid, $latest_rendered_time_stamp) {
 
   //Check DB for last timestamps > $latest and count them
@@ -94,7 +76,6 @@ function atwork_activity_ajax_get_ajax($idir, $uid, $latest_rendered_time_stamp)
   print($return_message);
   // Stops themeing layer from interacting with this
   die();
->>>>>>> b22939be7ede1f64e7c6889dc73d4a511164efdd
   return;
 }
 
@@ -102,21 +83,13 @@ function check_message_count($latest_rendered_time_stamp, $account_uid){
   $query = db_select('message', 'm')
     ->fields('m', array('mid'))
     ->orderBy('m.timestamp', 'DESC')
-<<<<<<< HEAD
-    ->condition('m.uid', $account->uid);
-    //->condition('m.timestamp', $latest_rendered_time_stamp, '>');
 
-  $count_query = $query->countQuery($query);
-
-  $result = $query
-=======
     ->condition('m.uid', $account_uid)
     ->condition('m.timestamp', $latest_rendered_time_stamp, '>');
 
   $count_query = $query->countQuery($query);
 
   $result = $count_query
->>>>>>> b22939be7ede1f64e7c6889dc73d4a511164efdd
     //->extend('PagerDefault')
     //->limit(15)
     ->execute()
@@ -1983,8 +1956,8 @@ EOT;
 */
       $block['subject'] = t('My News Feed');
       $block['subject'] .= '<div class="block-header-inner">';
-      //$block['subject'] .= '<button class="activity-filters-my" title="show my content filters">&nbsp;</button>';
-      //$block['subject'] .= '<button class="activity-filters-all" title="show all content filters">&nbsp;</button>';
+      $block['subject'] .= '<button class="activity-filters-my" title="show my content filters">&nbsp;</button>';
+      $block['subject'] .= '<button class="activity-filters-all" title="show all content filters">&nbsp;</button>';
       $block['subject'] .= '<a href="node/21100" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="Click for pop-out Activity Feed window" /></a>';
       $block['subject'] .= '</div><!-- /.block-header-inner -->';
 
@@ -2011,11 +1984,8 @@ EOT;
       // Don't think I need to pass these values anymore - will keep this for now to check.
       //feed_block_init();
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_atwork_activity_profile_feed.js');
-<<<<<<< HEAD
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'MY_CUSTOM_MODULE.js');
-=======
+
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_profile_page_ajax.js');
->>>>>>> b22939be7ede1f64e7c6889dc73d4a511164efdd
       break;
   }
   return $block;
@@ -2043,32 +2013,18 @@ function _atwork_activity_profile_page_block_content($user_id){
   }
 
   $output = '';
-<<<<<<< HEAD
-  $output .= '<a class="btn" href="#" id="my-special-link">Ajax Test</a>';
-  $output .= '<div id="ajax-target">Ajax goes here!!!</div>';
- /* $output .= '<script>
-function atwork_activity_ajax_load() {
-  (function($) {
-    $("#ajax-target").load("/node/get/ajax/ajax/20457");
-  })(jQuery);
-}
-</script>';
-*/
-=======
+
   $output .= '<a class="btn" href="#" id="profile-comment-link">Message Check</a>';
   $output .= '<div id="ajax-target"></div>';
 
->>>>>>> b22939be7ede1f64e7c6889dc73d4a511164efdd
   // Decide if it is users block or others and set title
   if($account->uid === $user->uid){
     $block['title'] = t("My Feed");
     // The final markup - wrap it up in a div
     $form = drupal_get_form('atwork_activity_form');
     $output .= render($form);
-<<<<<<< HEAD
-=======
+
     $output .= '<h2 class="block__title block-title">My Activity</h2>';
->>>>>>> b22939be7ede1f64e7c6889dc73d4a511164efdd
     $output .= '<div id="activity-feed">' ;
   } else {
     $block['title'] = $account->field_gal_first_name['und'][0]['safe_value'] . t("'s activity feed");
@@ -2276,10 +2232,8 @@ function atwork_activity_ajax_load() {
   }
   // Pass timestamp to js settings
   drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $account->name, 'uid' => $account->uid)), 'setting');
-<<<<<<< HEAD
-=======
+
   $output .= '<span style="display:none" id="timestamp-latest">' . $time_stamp . '</span>';
->>>>>>> b22939be7ede1f64e7c6889dc73d4a511164efdd
   $output .= '</div><!-- /#activity-feed -->' . theme('pager', array('quantity' => 9));
  // $output .= theme('pager');
 
