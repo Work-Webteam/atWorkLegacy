@@ -9,6 +9,7 @@
     attach: function(context, settings) {
 
 
+
     // Initialize/take care of comments
     setComments();
 
@@ -245,6 +246,7 @@
       $(thisObj).val('Comment');
     }
   }
+
 
 }(jQuery));
 

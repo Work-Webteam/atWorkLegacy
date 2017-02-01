@@ -62,6 +62,7 @@ function atwork_activity_menu() {
   return $items;
 }
 
+
 function atwork_activity_ajax_get_ajax($idir, $uid, $latest_rendered_time_stamp) {
 
   //Check DB for last timestamps > $latest and count them
@@ -82,6 +83,7 @@ function check_message_count($latest_rendered_time_stamp, $account_uid){
   $query = db_select('message', 'm')
     ->fields('m', array('mid'))
     ->orderBy('m.timestamp', 'DESC')
+
     ->condition('m.uid', $account_uid)
     ->condition('m.timestamp', $latest_rendered_time_stamp, '>');
 
@@ -1985,6 +1987,7 @@ EOT;
       // Don't think I need to pass these values anymore - will keep this for now to check.
       //feed_block_init();
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_atwork_activity_profile_feed.js');
+
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_profile_page_ajax.js');
       break;
   }
@@ -2013,6 +2016,7 @@ function _atwork_activity_profile_page_block_content($user_id){
   }
 
   $output = '';
+
   $output .= '<a class="btn" href="#" id="profile-comment-link">Message Check</a>';
   $output .= '<div id="ajax-target"></div>';
 
@@ -2022,6 +2026,7 @@ function _atwork_activity_profile_page_block_content($user_id){
     // The final markup - wrap it up in a div
     $form = drupal_get_form('atwork_activity_form');
     $output .= render($form);
+
     $output .= '<h2 class="block__title block-title">My Activity</h2>';
     $output .= '<div id="activity-feed">' ;
   } else {
@@ -2230,6 +2235,7 @@ function _atwork_activity_profile_page_block_content($user_id){
   }
   // Pass timestamp to js settings
   drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $account->name, 'uid' => $account->uid)), 'setting');
+
   $output .= '<span style="display:none" id="timestamp-latest">' . $time_stamp . '</span>';
   $output .= '</div><!-- /#activity-feed -->' . theme('pager', array('quantity' => 9));
  // $output .= theme('pager');

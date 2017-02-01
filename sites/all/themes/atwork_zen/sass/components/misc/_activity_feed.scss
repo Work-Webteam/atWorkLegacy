@@ -158,20 +158,23 @@
   img {
     position: absolute;
     top: 20px;
-    left: 20px;
+    left: 0px;
     max-height: 40px;
     width: auto;
     padding: 0.5em;
   }
   p {
     margin-left: 60px;
-    font-size: 20px;
+    font-size: 18px;
   }
 
 }
   #feed-ad-space-author,
   #feed-ad-space-date {
     margin-left: 60px;
+  }
+  #feed-ad-space-author {
+    margin-top: 1em;
   }
 
 #social-side {
