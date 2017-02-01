@@ -59,8 +59,36 @@ function atwork_activity_menu() {
     //'delivery callback' => 'atwork_activity_ajax_callback',  // Magic goes here.
   );
 
+
+  $items['atwork-activity/%/%/%'] = array(
+    'page callback' => 'atwork_activity_homepage_ajax_get_ajax', // Render HTML.
+    'page arguments' => array(1,2,3),
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+    //'delivery callback' => 'atwork_activity_ajax_callback',  // Magic goes here.
+  );
+
   return $items;
 }
+
+
+
+function atwork_activity_homepage_ajax_get_ajax($idir, $uid, $latest_rendered_time_stamp) {
+
+  //Check DB for last timestamps > $latest and count them
+  $new_message_count = atwork_activity_home_all_callback($latest_rendered_time_stamp, $uid);
+  if($new_message_count[0]->expression > 0){
+    $return_message = '<div id="message-counter" class="new-message-count"><img src=" /sites/all/modules/custom/atwork_activity/img/newmessages.png" alt="messages" id="new-message-image-icon"><span id="message-count-number">'. $new_message_count[0]->expression . '</span></div>';
+  }else {
+     $return_message = '<div id="message-counter" class="no-new-messages"></div>';
+  }
+  // Return to js
+  print($return_message);
+  // Stops themeing layer from interacting with this
+  die();
+  return;
+}
+
 
 
 function atwork_activity_ajax_get_ajax($idir, $uid, $latest_rendered_time_stamp) {
@@ -331,10 +359,12 @@ function _atwork_activity_render_messages($result, $activityType) {
   global $user;
   $current_user = user_load($user->uid);
 
-
+  $output = '';
   // Get the advanced choices form
   $adv_form = drupal_get_form('atwork_activity_customize_feed_form');
-  $output = '<div id="atwork-advanced-feed-settings">';
+  $output .= '<a class="btn" href="#" id="profile-comment-link">Message Check</a>';
+  $output .= '<div id="ajax-target"></div>';
+  $output .= '<div id="atwork-advanced-feed-settings">';
   $output .= render($adv_form);
   $output .= '</div><!-- /#atwork-advanced-feed-settings -->';
 
@@ -384,6 +414,7 @@ function _atwork_activity_render_messages($result, $activityType) {
   $output .= '<div id="activity-feed" class="atwork-activity">';
 
 
+  $time_stamp = 0;
   $i = 1;
   $msgCount = 0;
   if($result != 'error' && !empty($result)){
@@ -393,8 +424,10 @@ function _atwork_activity_render_messages($result, $activityType) {
     // Load entities and all related content
     $messages = entity_load('message', $result_mid);
     $message_render_array = entity_view('message', $messages);
-
     foreach ($message_render_array['message'] as $message) {
+      if( $message['#entity']->timestamp > $time_stamp){
+        $time_stamp = $message['#entity']->timestamp;
+      }
       // We need to make sure that this message is not too long. Current character count we want is 100
      // If field is longer than 100 characters (without tags);
       $string_is_too_long = false;
@@ -614,6 +647,10 @@ function _atwork_activity_render_messages($result, $activityType) {
     else
       $output .= 'No results found.';
   }
+  // Pass timestamp to js settings
+  drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $author->name, 'uid' => $author->uid)), 'setting');
+
+  $output .= '<span style="display:none" id="timestamp-latest">' . $time_stamp . '</span>';
 
   $output .= '</div><!-- /#activity-feed" -->' . theme('pager');
 
@@ -874,7 +911,7 @@ function homepage_choices_match($user_selection){
 /**
  * Query building function for individuals feed
  */
-function user_feed_query($choices){
+function user_feed_query($choices, $latest_rendered_time_stamp = NULL){
   global $user;
   $current_user = user_load($user->uid);
   $uids = array();
@@ -1037,7 +1074,22 @@ function user_feed_query($choices){
       )
     );
 
+   if(isset($latest_rendered_time_stamp) && $latest_rendered_time_stamp != null){
+    $user_feed_query
+        ->condition(db_and()
+           ->condition('m.timestamp', $latest_rendered_time_stamp, '>')
+        );
 
+  $count_query = $user_feed_query->countQuery($user_feed_query);
+
+  $result = $count_query
+    //->extend('PagerDefault')
+    //->limit(15)
+    ->execute()
+    ->fetchAll();
+    dpm($result);
+    return $result;
+   } else {
   $user_feed_query->orderBy('m.timestamp', 'DESC')
   ->range(0, 100);
   $result = $user_feed_query
@@ -1046,15 +1098,16 @@ function user_feed_query($choices){
     ->execute()
     ->fetchAll();
   return $result;
+  }
+  return;
 }
 
 /**
  * Function that builds a query for all activity on the site.
  */
-function all_activity_query($choices){
-  if(empty($choices)){
-    return;
-  }
+function all_activity_query($choices, $latest_rendered_time_stamp =null){
+
+
   if(in_array("new_node", $choices)){
     // This will screen for the type of content they would like to see, if they have chosen content above.
     $content_type_array = array(
@@ -1116,6 +1169,22 @@ function all_activity_query($choices){
     $db_and->condition($db_or2);
     $db_and->condition($db_or);
     $user_feed_query->condition($db_and);
+  if(isset($latest_rendered_time_stamp) && $latest_rendered_time_stamp != null){
+    $user_feed_query
+      ->condition(db_and()
+        ->condition('m.timestamp', $latest_rendered_time_stamp, '>')
+        );
+
+    $count_query = $user_feed_query->countQuery($user_feed_query);
+
+    $result = $count_query
+    //->extend('PagerDefault')
+    //->limit(15)
+    ->execute()
+    ->fetchAll();
+
+    return $result;
+  } else {
     $user_feed_query->orderBy('m.timestamp', 'DESC')
       ->range(0, 100);
     $result = $user_feed_query
@@ -1126,13 +1195,14 @@ function all_activity_query($choices){
 
   return $result;
 }
+}
 
 
 
 /*
  * Menu callback for an ajax-called activity feed on the homepage
  */
-function atwork_activity_home_all_callback() {
+function atwork_activity_home_all_callback($latest_rendered_time_stamp=null, $uid=null) {
   // TODO: Change what is called in the query depending on which boxes are checked.... Should this be done in a different function?
   $activityType = 0;
   // Get the choices that the user has selected
@@ -1142,16 +1212,25 @@ function atwork_activity_home_all_callback() {
     // Remove this from array - it should not be part of query
     $position = array_search("user_feed", $feed_message_choices);
     unset($feed_message_choices[$position]);
-    $result = user_feed_query($feed_message_choices);
+    $result = user_feed_query($feed_message_choices, $latest_rendered_time_stamp);
+    if(isset($latest_rendered_time_stamp) && $latest_rendered_time_stamp != null){
+      return $result;
+    }
   }
 
   if(in_array("all_activity", $feed_message_choices)){
     // Remove this from array - it should not be part of query
     $position = array_search("all_activity", $feed_message_choices);
     unset($feed_message_choices[$position]);
-    $result = all_activity_query($feed_message_choices);
+    $result = all_activity_query($feed_message_choices, $latest_rendered_time_stamp);
+    if(isset($latest_rendered_time_stamp) && $latest_rendered_time_stamp != null){
+      return $result;
+    }
   }
 
+  if(isset($latest_render_time_stamp) && $latest_rendered_time_stamp != null){
+    return $result;
+  }
   // Check if we have any 'stickied' messages
   $result = stickied_activity_query($result);
 
@@ -1954,6 +2033,8 @@ EOT;
       );
      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_click_handlers.js');
 */
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_homepage_ajax.js');
+
       $block['subject'] = t('My News Feed');
       $block['subject'] .= '<div class="block-header-inner">';
       $block['subject'] .= '<button class="activity-filters-my" title="show my content filters">&nbsp;</button>';
