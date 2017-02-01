@@ -8,8 +8,6 @@
   Drupal.behaviors.profileFeedJquery = {
     attach: function(context, settings) {
 
-
-
     // Initialize/take care of comments
     setComments();
 
@@ -73,7 +71,6 @@
       .addClass('atwork-activity-processed')
       .bind('click', function(){
         setTimeout(ajaxRefresh, 800);
-        resetTimer();
       });
 
     // Toggle comments
