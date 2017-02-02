@@ -145,7 +145,7 @@ function atwork_activity_form() {
   $form = array();
   $form['status'] = array(
     '#type' => 'textarea',
-    '#rows' => 3,
+    '#rows' => 2,
     '#maxlength' => 1000,
     '#maxlength_js' => TRUE,
     '#attributes' => array(
@@ -408,7 +408,7 @@ function _atwork_activity_render_messages($result, $activityType) {
     $output = '<div class="feed-ad-space-outer">
       <div class="feed-ad-space-image"><img src="sites/default/files/announcement/image/2017/0201/atwork-ampersand.png" /></div>
       <div class="feed-ad-space-content">' . $content . '</div>
-      <div class="feed-ad-space-author">Posted By: Employee News</div>
+      <div class="feed-ad-space-author">Posted by: Employee News</div>
       <div class="feed-ad-space-date">' . $time_record . '</div>
     </div>';
   }

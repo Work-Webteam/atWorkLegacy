@@ -99,21 +99,19 @@
       position: relative;
     }
     .feed-ad-space-image {
-      position: absolute;
-      top: 20px;
-      left: 10px;
-      max-height: 40px;
-      width: auto;
+      float: left;
+      margin: 0 10px 10px 0;
     }
     .feed-ad-space-content {
-      font-size: 16px;
+      font-size: 13px;
       margin-bottom: 1em;
+      p {
+        margin: 1em 0;
+        &:first-child {
+          margin-top: 0;
+        }
+      }
     }
-    .feed-ad-space-content,
-    .feed-ad-space-author,
-    .feed-ad-space-date {
-      margin-left: 64px;
-    } 
     // stop feed-ad-space
 
   .atwork-activity-block-container {
@@ -123,6 +121,9 @@
     .form-item {
       margin-top: 0.5em;
     }
+  }
+  #edit-status-counter { // hide the text counter
+    display: none;
   }
   #status-submit-button {
     clear: both;
@@ -191,7 +192,7 @@
       min-height: 90px;
       padding: 4px;
       border: 1px solid lighten(#777, 45%);
-      margin-bottom: 1.5em;
+      margin-bottom: 1em;
       background: lighten(#777, 49%) url(/sites/all/themes/atwork_zen/images/grey-trans.png) bottom center repeat-x;
       background-size: 18px;
     }
@@ -210,7 +211,7 @@
     ul.links { // the flag link
       right: 4px;
       // below, am forcing the styling to limit space. Remove later.
-      max-width: 42px;
+      max-width: 75px;
       max-height: 41px;
       overflow: hidden;
       margin: 0;
