@@ -21,7 +21,8 @@ function homepage_activity_feed_feature_default_fe_block_settings() {
     'module' => 'atwork_activity',
     'node_types' => array(),
     'noscript' => '',
-    'pages' => '<front>',
+    'pages' => '<front>
+node/20049',
     'roles' => array(),
     'themes' => array(
       'atwork_zen' => array(

@@ -1,16 +1,16 @@
 /* Hides Drupal warning boxes at the top of the page */
 
-.messages--error.messages.error {
-  display: none!important;
-}
 
+#block-views-home-page-blocks-zen-ad-space,
 #widget_pager_bottom_home_page_blocks_zen-block_5 {
     display: none; // hides the slideshow selector boxes until needed.
 }
 .front.logged-in.no-sidebars .skin-default {
 	height: 260px; // removes the space used by the selector boxes.
 }
-
+.messages--error.messages.error {
+  display: none;//hide the admin menu and error box. Remove before commit.
+}
 #main {
   margin-top: 2em;
 }
@@ -33,10 +33,9 @@ only screen and (                min-resolution: 2dppx) {
 @media only screen
   and (max-width:679px) and (min-width:350px)
   and (orientation: portrait)  {
-  #page, #main {
-      min-width:340px!important;
-      max-width:669px!important;
-      margin:0 auto;
+  #page {
+      min-width:352px!important;
+      max-width:677px!important;
   }
   #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row.views-slideshow-xtra-overlay-row {
     width:inherit!important;
@@ -105,6 +104,27 @@ only screen and (                min-resolution: 2dppx) {
   .section-etc-talks #block-views-videos-block-4 img,
   .view-executive-updates .image-exec-updates img {
     height:100%!important;
+  }
+  .front div#social-side {
+    display:block!important;
+    position: inherit;
+    height: 175px;
+    overflow: hidden;
+  }
+  .front .region.region-social-side {
+    position: relative;
+    top: 0px;
+    width: 100%;
+  }
+  .front div#block-atwork-activity-homepage,
+  .front #social-side h2.block__title.block-title {
+  width: 100%!important;
+  }
+  .front #social-side .atwork-activity-block-container {
+    margin-top: 0px!important;
+  }
+  .front #social-side #status-update .form-textarea-wrapper {
+    max-width:85%!important;
   }
 }
 @media only screen
@@ -229,9 +249,50 @@ only screen and (                min-resolution: 2dppx) {
     .view-executive-updates .image-exec-updates img {
       height:137px!important;
     }
+    .front div#social-side {
+      display:block!important;
+      position: inherit;
+      height: 175px;
+      overflow: hidden;
+    }
+    .front .region.region-social-side {
+      position: relative;
+      top: 0px;
+      width: 100%;
+    }
+    div#block-atwork-activity-homepage,
+    .front #social-side h2 {
+    width: 100%!important;
+    }
+    .front div#social-side {
+      display:block!important;
+      position: inherit;
+      height: 175px;
+      overflow: hidden;
+    }
+    .front .region.region-social-side {
+      position: relative;
+      top: 0px;
+      width: 100%;
+    }
+    .front div#block-atwork-activity-homepage,
+    .front #social-side h2.block__title.block-title {
+    width: 100%!important;
+    }
+    .front #social-side .atwork-activity-block-container {
+      margin-top: 0px!important;
+    }
+    .front #social-side #status-update {
+      width:75%;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    .front #social-side #status-update .form-textarea-wrapper {
+      max-width:none!important;
+    }
   }
 }
-@media only screen and (max-width:820px) and (min-width:600px){
+@media only screen and (max-width:820px) and (min-width:400px){
   html {
     background: none !important;
   }
@@ -325,10 +386,37 @@ only screen and (                min-resolution: 2dppx) {
   .front .front-promoted-more {
     margin-left: 280px;
   }
+  .front div#social-side {
+    display:block!important;
+    position: inherit;
+    height: 175px;
+    overflow: hidden;
+  }
+  .front .region.region-social-side {
+    position: relative;
+    top: 0px;
+    width: 100%;
+  }
+  div#block-atwork-activity-homepage,
+  .front #social-side h2.block__title.block-title {
+  width: 100%!important;
+  }
+  .front #social-side .atwork-activity-block-container {
+    margin-top: 0px!important;
+  }
+  .front #social-side #status-update {
+    width:75%;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .front #social-side #status-update .form-textarea-wrapper {
+    max-width:none!important;
+  }
 }
 @media only screen and (max-width:979px) {
   html,
-  #header.header {
+  #header.header,
+  .not-front.page-node-20049 #header.header {
     background: none !important;
   }
   .front #content.column {
@@ -341,7 +429,8 @@ only screen and (                min-resolution: 2dppx) {
   #block-block-45 {// hides the top tools panel
    		display: none !important;
     }
-	#header.header { //make new space for mobile menu in nav space
+	#header.header,
+  .not-front.page-node-20049 #header.header { //make new space for mobile menu in nav space
     height: 60px!important;
     margin: 0;
   	}
@@ -354,6 +443,9 @@ only screen and (                min-resolution: 2dppx) {
 	}
 }
 @media only screen and (min-width:980px) {
+  .not-front.page-node-20049 #header.header {
+    background: none !important;
+  }
   #block-atwork-mobile-atwork-mobile-menu-block,
   #block-block-45 {
     display: none !important;
@@ -372,20 +464,52 @@ only screen and (                min-resolution: 2dppx) {
 }
 
 @media only screen and (max-width: 1240px) {
-  .front #page {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 1240px!important;
-  }
+    .front #social-side,
     #block-block-45 { // show social sidebar only on wide screen view - 1240 or greater
         display: none !important;
     }
-    /*.front #content.column {
+    .front #content.column {
         max-width: 960px;
-    }*/
+    }
 }
 
-
+/* Pop Window on front page for the Social Sidebar */
+.not-front.page-node-20049 #headebox,
+.not-front.page-node-20049 #admin-menu,
+.not-front.page-node-20049 #block-atwork-profiles-header,
+.not-front.page-node-20049 #block-block-7 {
+  display: none;
+}
+.not-front.page-node-20049 #block-atwork-mobile-atwork-mobile-menu-block {
+  display:block!important;
+}
+.not-front.page-node-20049 #page {
+  width: 275px!important;
+}
+.not-front.page-node-20049 #page.new-activity-window {
+  background-color: #FFF;
+}
+.not-front.page-node-20049 #page.new-activity-window #header.header {
+  background: none;
+  height:60px!important;
+}
+.not-front.page-node-20049 #page.new-activity-window .atwork-activity-block-container {
+  margin-top:6px;
+}
+.not-front.page-node-20049 #page #social-side .region-social-side{
+  position: initial;
+  width: 275px;
+  margin: 0px auto;
+}
+.not-front.page-node-20049 #page #social-side h2 {
+  position: initial;
+  background-color:grey;
+  color:#FFF;
+  padding: 0 10px;
+}
+.not-front.page-node-20049 #social-side .item-list {
+  position: inherit;
+}
 
 /* Mobile Menu Appearance */
 #block-atwork-mobile-atwork-mobile-menu-block #full_menu {

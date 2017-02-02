@@ -59,8 +59,37 @@ function atwork_activity_menu() {
     //'delivery callback' => 'atwork_activity_ajax_callback',  // Magic goes here.
   );
 
+
+  $items['atwork-activity/%/%/%'] = array(
+    'page callback' => 'atwork_activity_homepage_ajax_get_ajax', // Render HTML.
+    'page arguments' => array(1,2,3),
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+    //'delivery callback' => 'atwork_activity_ajax_callback',  // Magic goes here.
+  );
+
   return $items;
 }
+
+
+
+function atwork_activity_homepage_ajax_get_ajax($idir, $uid, $latest_rendered_time_stamp) {
+
+  //Check DB for last timestamps > $latest and count them
+  $new_message_count = atwork_activity_home_all_callback($latest_rendered_time_stamp, $uid);
+  if($new_message_count[0]->expression > 0){
+    $return_message = '<div id="message-counter" class="new-message-count"><img src=" /sites/all/modules/custom/atwork_activity/img/newmessages.png" alt="messages" id="new-message-image-icon"><span id="message-count-number">'. $new_message_count[0]->expression . '</span></div>';
+  }else {
+     $return_message = '<div id="message-counter" class="no-new-messages"></div>';
+  }
+  // Return to js
+  print($return_message);
+  // Stops themeing layer from interacting with this
+  die();
+  return;
+}
+
+
 
 function atwork_activity_ajax_get_ajax($idir, $uid, $latest_rendered_time_stamp) {
 
@@ -82,6 +111,7 @@ function check_message_count($latest_rendered_time_stamp, $account_uid){
   $query = db_select('message', 'm')
     ->fields('m', array('mid'))
     ->orderBy('m.timestamp', 'DESC')
+
     ->condition('m.uid', $account_uid)
     ->condition('m.timestamp', $latest_rendered_time_stamp, '>');
 
@@ -115,7 +145,7 @@ function atwork_activity_form() {
   $form = array();
   $form['status'] = array(
     '#type' => 'textarea',
-    '#rows' => 3,
+    '#rows' => 2,
     '#maxlength' => 1000,
     '#maxlength_js' => TRUE,
     '#attributes' => array(
@@ -329,17 +359,22 @@ function _atwork_activity_render_messages($result, $activityType) {
   global $user;
   $current_user = user_load($user->uid);
 
-
+  $output = '';
   // Get the advanced choices form
   $adv_form = drupal_get_form('atwork_activity_customize_feed_form');
-  $output = '<div id="atwork-advanced-feed-settings">';
+  $output .= '<a class="btn" href="#" id="profile-comment-link">Message Check</a>';
+  $output .= '<div id="ajax-target"></div>';
+  $output .= '<div id="atwork-advanced-feed-settings">';
   $output .= render($adv_form);
   $output .= '</div><!-- /#atwork-advanced-feed-settings -->';
 
   // Load adnode in here, not using superior sticky functionality baked into queries
   $ad_node = node_load(20524);
+  //dpm(get_defined_vars());
   if(isset($ad_node->field_content['und'][0]['value']) &&  $ad_node->field_content['und'][0]['value']){
     $content = $ad_node->field_content['und'][0]['value'];
+    // need help with this line below.
+    $image = $ad_node->field_image_adspace['und'][0]['uri'];
     $date = $ad_node->created;
     $current_time = time();
     $diff = $current_time - $date;
@@ -370,7 +405,11 @@ function _atwork_activity_render_messages($result, $activityType) {
             $time_record = date('F j Y', $message['#entity']->timestamp);
             break;
         }
-    $output = '<div id="feed-ad-space-outer"><div id="feed-ad-space-content">' . $content . '</div><div id="feed-ad-space-author">Posted By: Employee News</div><div id="feed-ad-space-date">' . $time_record . '</div></div>';
+    $output = '<div class="feed-ad-space-outer">
+      <div class="feed-ad-space-image"><img src="sites/default/files/announcement/image/2017/0201/atwork-ampersand.png" /></div>
+      <div class="feed-ad-space-content">' . $content . '</div>
+      <div class="feed-ad-space-author-date">Posted by: Employee News '  . $time_record . '</div>
+    </div>';
   }
   // The Status update form
   $user_image  = field_view_field('user', $current_user, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
@@ -382,6 +421,7 @@ function _atwork_activity_render_messages($result, $activityType) {
   $output .= '<div id="activity-feed" class="atwork-activity">';
 
 
+  $time_stamp = 0;
   $i = 1;
   $msgCount = 0;
   if($result != 'error' && !empty($result)){
@@ -391,8 +431,10 @@ function _atwork_activity_render_messages($result, $activityType) {
     // Load entities and all related content
     $messages = entity_load('message', $result_mid);
     $message_render_array = entity_view('message', $messages);
-
     foreach ($message_render_array['message'] as $message) {
+      if( $message['#entity']->timestamp > $time_stamp){
+        $time_stamp = $message['#entity']->timestamp;
+      }
       // We need to make sure that this message is not too long. Current character count we want is 100
      // If field is longer than 100 characters (without tags);
       $string_is_too_long = false;
@@ -613,7 +655,13 @@ function _atwork_activity_render_messages($result, $activityType) {
       $output .= 'No results found.';
   }
 
-  $output .= '</div><!-- /#activity-feed" -->' . theme('pager');
+  // Pass timestamp to js settings
+  drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $author->name, 'uid' => $author->uid)), 'setting');
+
+  $output .= '<span style="display:none" id="timestamp-latest">' . $time_stamp . '</span>';
+  // The front page feed pager
+  $output .= '</div><!-- /#activity-feed" -->' . theme('pager', array('quantity' => 3));
+
 
   return $output;
 }
@@ -872,7 +920,7 @@ function homepage_choices_match($user_selection){
 /**
  * Query building function for individuals feed
  */
-function user_feed_query($choices){
+function user_feed_query($choices, $latest_rendered_time_stamp = NULL){
   global $user;
   $current_user = user_load($user->uid);
   $uids = array();
@@ -1035,7 +1083,21 @@ function user_feed_query($choices){
       )
     );
 
+   if(isset($latest_rendered_time_stamp) && $latest_rendered_time_stamp != null){
+    $user_feed_query
+        ->condition(db_and()
+           ->condition('m.timestamp', $latest_rendered_time_stamp, '>')
+        );
 
+  $count_query = $user_feed_query->countQuery($user_feed_query);
+
+  $result = $count_query
+    //->extend('PagerDefault')
+    //->limit(15)
+    ->execute()
+    ->fetchAll();
+    return $result;
+   } else {
   $user_feed_query->orderBy('m.timestamp', 'DESC')
   ->range(0, 100);
   $result = $user_feed_query
@@ -1044,15 +1106,16 @@ function user_feed_query($choices){
     ->execute()
     ->fetchAll();
   return $result;
+  }
+  return;
 }
 
 /**
  * Function that builds a query for all activity on the site.
  */
-function all_activity_query($choices){
-  if(empty($choices)){
-    return;
-  }
+function all_activity_query($choices, $latest_rendered_time_stamp =null){
+
+
   if(in_array("new_node", $choices)){
     // This will screen for the type of content they would like to see, if they have chosen content above.
     $content_type_array = array(
@@ -1114,6 +1177,22 @@ function all_activity_query($choices){
     $db_and->condition($db_or2);
     $db_and->condition($db_or);
     $user_feed_query->condition($db_and);
+  if(isset($latest_rendered_time_stamp) && $latest_rendered_time_stamp != null){
+    $user_feed_query
+      ->condition(db_and()
+        ->condition('m.timestamp', $latest_rendered_time_stamp, '>')
+        );
+
+    $count_query = $user_feed_query->countQuery($user_feed_query);
+
+    $result = $count_query
+    //->extend('PagerDefault')
+    //->limit(15)
+    ->execute()
+    ->fetchAll();
+
+    return $result;
+  } else {
     $user_feed_query->orderBy('m.timestamp', 'DESC')
       ->range(0, 100);
     $result = $user_feed_query
@@ -1124,13 +1203,14 @@ function all_activity_query($choices){
 
   return $result;
 }
+}
 
 
 
 /*
  * Menu callback for an ajax-called activity feed on the homepage
  */
-function atwork_activity_home_all_callback() {
+function atwork_activity_home_all_callback($latest_rendered_time_stamp=null, $uid=null) {
   // TODO: Change what is called in the query depending on which boxes are checked.... Should this be done in a different function?
   $activityType = 0;
   // Get the choices that the user has selected
@@ -1140,16 +1220,25 @@ function atwork_activity_home_all_callback() {
     // Remove this from array - it should not be part of query
     $position = array_search("user_feed", $feed_message_choices);
     unset($feed_message_choices[$position]);
-    $result = user_feed_query($feed_message_choices);
+    $result = user_feed_query($feed_message_choices, $latest_rendered_time_stamp);
+    if(isset($latest_rendered_time_stamp) && $latest_rendered_time_stamp != null){
+      return $result;
+    }
   }
 
   if(in_array("all_activity", $feed_message_choices)){
     // Remove this from array - it should not be part of query
     $position = array_search("all_activity", $feed_message_choices);
     unset($feed_message_choices[$position]);
-    $result = all_activity_query($feed_message_choices);
+    $result = all_activity_query($feed_message_choices, $latest_rendered_time_stamp);
+    if(isset($latest_rendered_time_stamp) && $latest_rendered_time_stamp != null){
+      return $result;
+    }
   }
 
+  if(isset($latest_render_time_stamp) && $latest_rendered_time_stamp != null){
+    return $result;
+  }
   // Check if we have any 'stickied' messages
   $result = stickied_activity_query($result);
 
@@ -1329,6 +1418,7 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
       '#type' => 'button',
       '#attributes' => array(
         'onclick' => 'return (false);',
+
         'name' => 'toggle button',
         'class' => array('toggle-com-button')
         ),
@@ -1952,11 +2042,16 @@ EOT;
       );
      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_click_handlers.js');
 */
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_homepage_ajax.js');
+
       $block['subject'] = t('My News Feed');
       $block['subject'] .= '<div class="block-header-inner">';
-      //$block['subject'] .= '<button class="activity-filters-my" title="show my content filters">&nbsp;</button>';
-      //$block['subject'] .= '<button class="activity-filters-all" title="show all content filters">&nbsp;</button>';
-      $block['subject'] .= '<a href="node/21100" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="Click for pop-out Activity Feed window" /></a>';
+      $block['subject'] .= '<button class="activity-filters-my" title="show my content filters">&nbsp;</button>';
+      $block['subject'] .= '<button class="activity-filters-all" title="show all content filters">&nbsp;</button>';
+      // for prod/test
+      //$block['subject'] .= '<a href="node/21100" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="Click for pop-out Activity Feed window" /></a>';
+      // for beta2
+      $block['subject'] .= '<a href="node/20049" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="Click for pop-out Activity Feed window" /></a>';
       $block['subject'] .= '</div><!-- /.block-header-inner -->';
 
       $block['content'] = '<div class="atwork-activity-block-container">';
@@ -1982,6 +2077,7 @@ EOT;
       // Don't think I need to pass these values anymore - will keep this for now to check.
       //feed_block_init();
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_atwork_activity_profile_feed.js');
+
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_profile_page_ajax.js');
       break;
   }
@@ -2010,6 +2106,7 @@ function _atwork_activity_profile_page_block_content($user_id){
   }
 
   $output = '';
+
   $output .= '<a class="btn" href="#" id="profile-comment-link">Message Check</a>';
   $output .= '<div id="ajax-target"></div>';
 
@@ -2019,6 +2116,7 @@ function _atwork_activity_profile_page_block_content($user_id){
     // The final markup - wrap it up in a div
     $form = drupal_get_form('atwork_activity_form');
     $output .= render($form);
+
     $output .= '<h2 class="block__title block-title">My Activity</h2>';
     $output .= '<div id="activity-feed">' ;
   } else {
@@ -2227,8 +2325,10 @@ function _atwork_activity_profile_page_block_content($user_id){
   }
   // Pass timestamp to js settings
   drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $account->name, 'uid' => $account->uid)), 'setting');
+
   $output .= '<span style="display:none" id="timestamp-latest">' . $time_stamp . '</span>';
-  $output .= '</div><!-- /#activity-feed -->' . theme('pager', array('quantity' => 9));
+  // The profile page pager
+  $output .= '</div><!-- /#activity-feed -->' . theme('pager', array('quantity' => 5));
  // $output .= theme('pager');
 
   return array('#markup'=>$output);
