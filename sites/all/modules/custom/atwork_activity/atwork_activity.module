@@ -409,7 +409,8 @@ function _atwork_activity_render_messages($result, $activityType) {
             $time_record = date('F j Y', $message['#entity']->timestamp);
             break;
         }
-    $output = '<div class="feed-ad-space-outer">
+
+    $output .= '<div class="feed-ad-space-outer">
       <div class="feed-ad-space-image"><img src="sites/default/files/announcement/image/2017/0201/atwork-ampersand.png" /></div>
       <div class="feed-ad-space-content">' . $content . '</div>
       <div class="feed-ad-space-author-date">Posted by: Employee News '  . $time_record . '</div>
@@ -2438,12 +2439,13 @@ function atwork_activity_user_view_alter(&$build){
     if(isset($remove_msgs) && $remove_msgs !== FALSE){
       unset($current_msgs['status'][$remove_msgs]);
     }
+    // Replace message array in session with our new sanitized message
+    foreach($current_msgs['status'] as $key=>$value){
+      drupal_set_message($value, 'status');
+    }
   }
 
-  // Replace message array in session with our new sanitized message
-  foreach($current_msgs['status'] as $key=>$value){
-    drupal_set_message($value, 'status');
-  }
+
 }
 
 
