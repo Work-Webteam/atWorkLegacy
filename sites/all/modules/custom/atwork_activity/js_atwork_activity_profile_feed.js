@@ -8,8 +8,6 @@
   Drupal.behaviors.profileFeedJquery = {
     attach: function(context, settings) {
 
-
-
     // Initialize/take care of comments
     setComments();
 
@@ -30,14 +28,16 @@
 
     // click handler for the comment toggle function
     // Make sure we are not rebinding this improperly on profile page
-    $("#block-atwork-activity-profile-page-activity-feed-block .comment-count-link").unbind();
-    $("#block-atwork-activity-profile-page-activity-feed-block .comment-count-link").click(function(){
+    $('#block-atwork-activity-profile-page-activity-feed-block .comment-count-link:not(.atwork-activity-processed)', context)
+      .addClass('atwork-activity-processed')
+      .bind('click', function(){
       toggleComments($(this).parentsUntil('[id^="activity-feed"').closest("div").prop("class"));
     });
 
     // Make sure we are not rebinding this improperly on homepage
-    $("#block-atwork-activity-homepage .comment-count-link").unbind();
-    $("#block-atwork-activity-homepage .comment-count-link").click(function(){
+    $('#block-atwork-activity-homepage .comment-count-link:not(.atwork-activity-processed)', context)
+      .addClass('atwork-activity-processed')
+      .bind('click', function(){
       toggleComments($(this).parentsUntil('#activity-feed').closest("div").prop("class"));
     });
 
@@ -59,24 +59,24 @@
       });
 
     // Updates status
-    $("[id^=edit-post").once("updateStatus", function(){
-      $("[id^=edit-post").click(function(){
-        $('[id^="atwork-activity-form"').replaceWith('<div><p id="saving-notification-status" class="saving-activity"> SAVING </p></div>');
+    $('#edit-post:not(.atwork-activity-processed)', context)
+      .addClass('atwork-activity-processed')
+      .bind('click', function(){
+        $('#atwork-activity-form').replaceWith('<div><p id="saving-notification-status" class="saving-activity"> SAVING </p></div>');
         // Delay this for .5 second so that we have time to commit to db
-        setTimeout(ajaxRefresh, 500);
+        setTimeout(ajaxRefresh, 800);
       });
-    });
-
     // Updates feed choices on the homepage
-    $("#edit-update").once("toggleChoices", function(){
-      $("#edit-update").click(function(){
-        setTimeout(ajaxRefresh, 500);
-        resetTimer();
+    $('#edit-update:not(.atwork-activity-processed)', context)
+      .addClass('atwork-activity-processed')
+      .bind('click', function(){
+        setTimeout(ajaxRefresh, 800);
       });
-    });
 
     // Toggle comments
-      $('[id^=edit-toggle-com-button]').click(function(){
+    $('.toggle-com-button.form-submit:not(.atwork-activity-processed)', context)
+      .addClass('atwork-activity-processed')
+      .bind('click', function(){
         toggleCommentVis($(this));
       });
   }
@@ -200,11 +200,9 @@
      */
     function ajaxRefresh(){
       // Profile page
-      $('#block-views-people-admin-block-following').find('.block-refresh-button').first().trigger("click");
-      $('#block-views-people-admin-block-followers').find('.block-refresh-button').first().trigger("click");
       $('#block-atwork-activity-profile-page-activity-feed-block').find('.block-refresh-button').first().trigger("click");
       $(".form-textarea").prop("disabled", true);
-      $('[id^="edit-status"').replaceWith('<div><p id="saving-notification" class="saving-activity"> Refreshing </p></div>');
+      $('#edit-status').replaceWith('<div><p id="saving-notification" class="saving-activity"> Refreshing </p></div>');
       // home page
       $('#block-atwork-activity-homepage').find('.block-refresh-button').trigger("click");
     }
@@ -222,7 +220,6 @@
 
     function checkMessageCount(){
       checkLink = $('#profile-comment-link').length;
-      console.log(checkLink);
       if(checkLink > 0){
         $('#profile-comment-link').trigger('click');
       }
@@ -246,7 +243,6 @@
       $(thisObj).val('Comment');
     }
   }
-
 
 }(jQuery));
 
