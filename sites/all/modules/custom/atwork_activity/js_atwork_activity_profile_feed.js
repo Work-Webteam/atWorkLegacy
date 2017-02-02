@@ -31,7 +31,7 @@
     $('#block-atwork-activity-profile-page-activity-feed-block .comment-count-link:not(.atwork-activity-processed)', context)
       .addClass('atwork-activity-processed')
       .bind('click', function(){
-      toggleComments($(this).parentsUntil('[id^="activity-feed"').closest("div").prop("class"));
+      toggleComments($(this).parentsUntil($('#block-atwork-activity-profile-page-activity-feed-block')).closest("div").prop("class"));
     });
 
     // Make sure we are not rebinding this improperly on homepage
@@ -233,7 +233,6 @@
    */
 
   function toggleCommentVis(thisObj){
-    //dpm(thisObj);
     thisObj.nextAll(".comment-submit-button").toggleClass("comment-submit-button-show");
     thisObj.nextAll(".field-name-field-profile-comment").toggleClass("field-name-field-profile-comment-show");
     // change the value of the thisObj button
