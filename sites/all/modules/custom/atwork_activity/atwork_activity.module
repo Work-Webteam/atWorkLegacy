@@ -145,7 +145,7 @@ function atwork_activity_form() {
   $form = array();
   $form['status'] = array(
     '#type' => 'textarea',
-    '#rows' => 3,
+    '#rows' => 2,
     '#maxlength' => 1000,
     '#maxlength_js' => TRUE,
     '#attributes' => array(
@@ -370,8 +370,11 @@ function _atwork_activity_render_messages($result, $activityType) {
 
   // Load adnode in here, not using superior sticky functionality baked into queries
   $ad_node = node_load(20524);
+  //dpm(get_defined_vars());
   if(isset($ad_node->field_content['und'][0]['value']) &&  $ad_node->field_content['und'][0]['value']){
     $content = $ad_node->field_content['und'][0]['value'];
+    // need help with this line below.
+    $image = $ad_node->field_image_adspace['und'][0]['uri'];
     $date = $ad_node->created;
     $current_time = time();
     $diff = $current_time - $date;
@@ -402,7 +405,12 @@ function _atwork_activity_render_messages($result, $activityType) {
             $time_record = date('F j Y', $message['#entity']->timestamp);
             break;
         }
-    $output .= '<div id="feed-ad-space-outer"><div id="feed-ad-space-content">' . $content . '</div><div id="feed-ad-space-author">Posted By: Employee News</div><div id="feed-ad-space-date">' . $time_record . '</div></div>';
+
+    $output .= '<div class="feed-ad-space-outer">
+      <div class="feed-ad-space-image"><img src="sites/default/files/announcement/image/2017/0201/atwork-ampersand.png" /></div>
+      <div class="feed-ad-space-content">' . $content . '</div>
+      <div class="feed-ad-space-author-date">Posted by: Employee News '  . $time_record . '</div>
+    </div>';
   }
   // The Status update form
   $user_image  = field_view_field('user', $current_user, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
@@ -647,12 +655,14 @@ function _atwork_activity_render_messages($result, $activityType) {
     else
       $output .= 'No results found.';
   }
+
   // Pass timestamp to js settings
   drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $author->name, 'uid' => $author->uid)), 'setting');
 
   $output .= '<span style="display:none" id="timestamp-latest">' . $time_stamp . '</span>';
+  // The front page feed pager
+  $output .= '</div><!-- /#activity-feed" -->' . theme('pager', array('quantity' => 3));
 
-  $output .= '</div><!-- /#activity-feed" -->' . theme('pager');
 
   return $output;
 }
@@ -1409,6 +1419,7 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
       '#type' => 'button',
       '#attributes' => array(
         'onclick' => 'return (false);',
+
         'name' => 'toggle button',
         'class' => array('toggle-com-button')
         ),
@@ -2317,7 +2328,8 @@ function _atwork_activity_profile_page_block_content($user_id){
   drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $account->name, 'uid' => $account->uid)), 'setting');
 
   $output .= '<span style="display:none" id="timestamp-latest">' . $time_stamp . '</span>';
-  $output .= '</div><!-- /#activity-feed -->' . theme('pager', array('quantity' => 9));
+  // The profile page pager
+  $output .= '</div><!-- /#activity-feed -->' . theme('pager', array('quantity' => 5));
  // $output .= theme('pager');
 
   return array('#markup'=>$output);

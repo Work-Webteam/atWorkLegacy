@@ -90,6 +90,33 @@
     }
   }
   // end all Header items 
+
+  // start feed-ad-space
+    .feed-ad-space-outer {
+      border: 1px solid grey;
+      padding: 1em;
+      background: #d1e4f8;
+      position: relative;
+    }
+    .feed-ad-space-image {
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+    .feed-ad-space-content {
+      font-size: 13px;
+      margin-bottom: 1em;
+      p {
+        margin: 1em 0;
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+    .feed-ad-space-author-date {
+      font-size: smaller;
+    }
+    // stop feed-ad-space
+
   .atwork-activity-block-container {
     margin-top: 46px; // push down the container because the header is positioned absolutely
   }
@@ -97,6 +124,9 @@
     .form-item {
       margin-top: 0.5em;
     }
+  }
+  #edit-status-counter { // hide the text counter
+    display: none;
   }
   #status-submit-button {
     clear: both;
@@ -145,43 +175,10 @@
 }
 
 
-//----- message box styling
-
-#feed-ad-space-outer {
-  border: 1px solid grey;
-  padding: 1em;
-  background: #d1e4f8;
-  position: relative;
-}
-
-#feed-ad-space-content {
-  img {
-    position: absolute;
-    top: 20px;
-    left: 0px;
-    max-height: 40px;
-    width: auto;
-    padding: 0.5em;
-  }
-  p {
-    margin-left: 60px;
-    font-size: 18px;
-  }
-
-}
-  #feed-ad-space-author,
-  #feed-ad-space-date {
-    margin-left: 60px;
-  }
-  #feed-ad-space-author {
-    margin-top: 1em;
-  }
+//----- message box styling only
 
 #social-side {
   .atwork-activity {
-    #edit-status-counter {
-      display: none;
-    }
     #status-submit-button {
       text-align: right;
       margin-top: -3em;
@@ -198,7 +195,7 @@
       min-height: 90px;
       padding: 4px;
       border: 1px solid lighten(#777, 45%);
-      margin-bottom: 1.5em;
+      margin-bottom: 1em;
       background: lighten(#777, 49%) url(/sites/all/themes/atwork_zen/images/grey-trans.png) bottom center repeat-x;
       background-size: 18px;
     }
@@ -217,7 +214,7 @@
     ul.links { // the flag link
       right: 4px;
       // below, am forcing the styling to limit space. Remove later.
-      max-width: 42px;
+      max-width: 75px;
       max-height: 41px;
       overflow: hidden;
       margin: 0;
@@ -251,8 +248,7 @@
       } 
       ul.links,
       .field-name-field-feed-like-button,
-      .user-feed-image,
-      form {
+      .user-feed-image{
         display: none;
       }
       p[class^="msg-"] {
