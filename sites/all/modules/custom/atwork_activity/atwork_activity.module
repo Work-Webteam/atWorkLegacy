@@ -364,7 +364,11 @@ function _atwork_activity_render_messages($result, $activityType) {
   $adv_form = drupal_get_form('atwork_activity_customize_feed_form');
   $output .= '<a class="btn" href="#" id="profile-comment-link">Message Check</a>';
   $output .= '<div id="ajax-target"></div>';
-  $output .= '<div id="atwork-advanced-feed-settings">';
+  if(_atwork_is_admin()){
+    $output .= '<div id="atwork-advanced-feed-settings" class="admin-advanced-feed-settings-view">';
+  } else {
+    $output .= '<div id="atwork-advanced-feed-settings" class="user-advanced-feed-settings-view">';
+  }
   $output .= render($adv_form);
   $output .= '</div><!-- /#atwork-advanced-feed-settings -->';
 
@@ -372,7 +376,7 @@ function _atwork_activity_render_messages($result, $activityType) {
   $ad_node = node_load(20524);
   //dpm(get_defined_vars());
   if(isset($ad_node->field_content['und'][0]['value']) &&  $ad_node->field_content['und'][0]['value']){
-    $content = $ad_node->field_content['und'][0]['value'];
+    $content .= $ad_node->field_content['und'][0]['value'];
     // need help with this line below.
     $image = $ad_node->field_image_adspace['und'][0]['uri'];
     $date = $ad_node->created;
@@ -1178,6 +1182,8 @@ function all_activity_query($choices, $latest_rendered_time_stamp =null){
     $db_and->condition($db_or);
     $user_feed_query->condition($db_and);
   if(isset($latest_rendered_time_stamp) && $latest_rendered_time_stamp != null){
+    // There was an issue where at times relationships would be entered twice in rapid succession. This fixes that.
+    $latest_rendered_time_stamp += 20;
     $user_feed_query
       ->condition(db_and()
         ->condition('m.timestamp', $latest_rendered_time_stamp, '>')
@@ -1798,10 +1804,20 @@ function atwork_activity_user_update(&$edit, $account, $category) {
  */
 function atwork_activity_user_relationships_save($relationship, $action) {
   if ($action == 'request') {
-    $requestee = user_load($relationship->requestee_id);
+    // Cannot follow yourself
+    if($relationship->requestee_id == $relationship->requester_id){
+      return;
+    }
 
+    // Shouldn't be able to follow if you already are - don't want to doublesave follow messages (in messages anyway);
+    $check = atwork_activity_existing_messages($relationship->requester_id, array($relationship->requestee_id), 'field_message_user', 'following_user');
+  if(isset($check) && !empty($check) ){
+    return;
+  }
+
+    $requestee = user_load($relationship->requestee_id);
     $message = message_create('following_user', array('uid' => $relationship->requester_id, 'timestamp' => $relationship->created));
-    $wrapper = entity_metadata_wrapper('message', $message);
+        $wrapper = entity_metadata_wrapper('message', $message);
     $wrapper->field_message_user->set($requestee);
     $wrapper->save();
   }

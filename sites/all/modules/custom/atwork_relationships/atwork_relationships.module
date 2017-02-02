@@ -85,7 +85,7 @@ function atwork_relationships_page_callback($op, $account, $id) {
     case 'add':
       global $user;
       $relationship = user_relationships_request_relationship($user, $account, $id);
-      return '<a href="#" onclick="atwork_relationships_ajax_load(\'remove\', \'' . $account->uid . '\', \'' . $relationship->rid . '\'); return false;">Unfollow</a>';
+      return '<a href="#" onclick="atwork_relationships_ajax_load(\'remove\', \'' . $account->uid . '\', \'' . $relationship->rid . '\'); return false;">Following</a>';
       break;
 
     case 'remove':
