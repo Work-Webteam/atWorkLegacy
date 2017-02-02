@@ -402,7 +402,7 @@ function _atwork_activity_render_messages($result, $activityType) {
             $time_record = date('F j Y', $message['#entity']->timestamp);
             break;
         }
-    $output = '<div id="feed-ad-space-outer"><div id="feed-ad-space-content">' . $content . '</div><div id="feed-ad-space-author">Posted By: Employee News</div><div id="feed-ad-space-date">' . $time_record . '</div></div>';
+    $output .= '<div id="feed-ad-space-outer"><div id="feed-ad-space-content">' . $content . '</div><div id="feed-ad-space-author">Posted By: Employee News</div><div id="feed-ad-space-date">' . $time_record . '</div></div>';
   }
   // The Status update form
   $user_image  = field_view_field('user', $current_user, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
@@ -2411,12 +2411,13 @@ function atwork_activity_user_view_alter(&$build){
     if(isset($remove_msgs) && $remove_msgs !== FALSE){
       unset($current_msgs['status'][$remove_msgs]);
     }
+    // Replace message array in session with our new sanitized message
+    foreach($current_msgs['status'] as $key=>$value){
+      drupal_set_message($value, 'status');
+    }
   }
 
-  // Replace message array in session with our new sanitized message
-  foreach($current_msgs['status'] as $key=>$value){
-    drupal_set_message($value, 'status');
-  }
+
 }
 
 
