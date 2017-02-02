@@ -51,18 +51,18 @@ function atwork_activity_menu() {
     'page arguements' =>array(1),
   );
 
-  $items['noodle/%/%/%'] = array(
+  $items['noodle/%/%/%/%'] = array(
     'page callback' => 'atwork_activity_ajax_get_ajax', // Render HTML.
-    'page arguments' => array(1,2,3),
+    'page arguments' => array(1,2,3,4),
     'type' => MENU_CALLBACK,
     'access arguments' => array('access content'),
     //'delivery callback' => 'atwork_activity_ajax_callback',  // Magic goes here.
   );
 
 
-  $items['atwork-activity/%/%/%'] = array(
+  $items['atwork-activity/%/%/%/%'] = array(
     'page callback' => 'atwork_activity_homepage_ajax_get_ajax', // Render HTML.
-    'page arguments' => array(1,2,3),
+    'page arguments' => array(1,2,3,4),
     'type' => MENU_CALLBACK,
     'access arguments' => array('access content'),
     //'delivery callback' => 'atwork_activity_ajax_callback',  // Magic goes here.
@@ -73,10 +73,17 @@ function atwork_activity_menu() {
 
 
 
-function atwork_activity_homepage_ajax_get_ajax($idir, $uid, $latest_rendered_time_stamp) {
-
+function atwork_activity_homepage_ajax_get_ajax($idir, $uid, $latest_rendered_time_stamp, $query = null) {
+  if(isset($query) && $query != null && $query != 'undefined'){
+    $return_modifier = $query;
+  } else {
+    $return_modifier = 0;
+  }
   //Check DB for last timestamps > $latest and count them
   $new_message_count = atwork_activity_home_all_callback($latest_rendered_time_stamp, $uid);
+  if(isset($return_modifier) && $return_modifier != 0 ){
+    $new_message_count[0]->expression = ($new_message_count[0]->expression - (8 * $return_modifier));
+  }
   if($new_message_count[0]->expression > 0){
     $return_message = '<div id="message-counter" class="new-message-count"><img src=" /sites/all/modules/custom/atwork_activity/img/newmessages.png" alt="messages" id="new-message-image-icon"><span id="message-count-number">'. $new_message_count[0]->expression . '</span></div>';
   }else {
@@ -91,10 +98,17 @@ function atwork_activity_homepage_ajax_get_ajax($idir, $uid, $latest_rendered_ti
 
 
 
-function atwork_activity_ajax_get_ajax($idir, $uid, $latest_rendered_time_stamp) {
-
+function atwork_activity_ajax_get_ajax($idir, $uid, $latest_rendered_time_stamp, $query=null) {
+  if(isset($query) && $query != null){
+    $return_modifier = $query;
+  } else {
+    $return_modifier = 0;
+  }
   //Check DB for last timestamps > $latest and count them
   $new_message_count = check_message_count($latest_rendered_time_stamp, $uid);
+  if(isset($return_modifier) && $return_modifier != 0 ){
+    $new_message_count[0]->expression = ($new_message_count[0]->expression - (5 * $return_modifier));
+  }
   if($new_message_count[0]->expression > 0){
     $return_message = '<div id="message-counter" class="new-message-count"><img src=" /sites/all/modules/custom/atwork_activity/img/newmessages.png" alt="messages" id="new-message-image-icon"><span id="message-count-number">'. $new_message_count[0]->expression . '</span></div>';
   }else {
@@ -1193,8 +1207,8 @@ function all_activity_query($choices, $latest_rendered_time_stamp =null){
     $count_query = $user_feed_query->countQuery($user_feed_query);
 
     $result = $count_query
-    //->extend('PagerDefault')
-    //->limit(15)
+      ->extend('PagerDefault')
+      ->limit(8)
     ->execute()
     ->fetchAll();
 
@@ -1261,6 +1275,8 @@ function atwork_activity_home_all_callback($latest_rendered_time_stamp=null, $ui
  * @return [type]         [description]
  */
 function stickied_activity_query($result){
+  // Not using sticky content currently
+  return $result;
   $messages = array();
   // Now we need to create our larger query
   $user_feed_query = db_select('message', 'm');

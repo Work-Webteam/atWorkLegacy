@@ -22,6 +22,22 @@
         $("#edit-feed-choices-8").attr("checked", true);
         $("#edit-feed-choices-9").attr("checked", true);
         $("#edit-feed-choices-10").attr("checked", true);
+        $("#edit-feed-choices-11").attr("checked", true);
+        $("#edit-feed-choices-12").attr("checked", true);
+        $("#edit-feed-choices-13").attr("checked", true);
+        $("#edit-feed-choices-14").attr("checked", true);
+        $("#edit-feed-choices-15").attr("checked", true);
+        $("#edit-feed-choices-16").attr("checked", true);
+        $("#edit-feed-choices-17").attr("checked", true);
+        $("#edit-feed-choices-18").attr("checked", true);
+        $("#edit-feed-choices-19").attr("checked", true);
+        $("#edit-feed-choices-20").attr("checked", true);
+        $("#edit-feed-choices-21").attr("checked", true);
+        $("#edit-feed-choices-22").attr("checked", true);
+
+
+
+
         // The above must be marked prior to submit
         submitChanges();
       }
@@ -45,6 +61,18 @@
         $("#edit-feed-choices-8").attr("checked", true);
         $("#edit-feed-choices-9").attr("checked", true);
         $("#edit-feed-choices-10").attr("checked", true);
+        $("#edit-feed-choices-11").attr("checked", true);
+        $("#edit-feed-choices-12").attr("checked", true);
+        $("#edit-feed-choices-13").attr("checked", true);
+        $("#edit-feed-choices-14").attr("checked", true);
+        $("#edit-feed-choices-15").attr("checked", true);
+        $("#edit-feed-choices-16").attr("checked", true);
+        $("#edit-feed-choices-17").attr("checked", true);
+        $("#edit-feed-choices-18").attr("checked", true);
+        $("#edit-feed-choices-19").attr("checked", true);
+        $("#edit-feed-choices-20").attr("checked", true);
+        $("#edit-feed-choices-21").attr("checked", true);
+        $("#edit-feed-choices-22").attr("checked", true);
         submitChanges();
       }
 
