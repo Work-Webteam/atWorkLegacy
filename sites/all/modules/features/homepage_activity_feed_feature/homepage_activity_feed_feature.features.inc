@@ -11,4 +11,25 @@ function homepage_activity_feed_feature_ctools_plugin_api($module = NULL, $api =
   if ($module == "field_group" && $api == "field_group") {
     return array("version" => "1");
   }
+  if ($module == "strongarm" && $api == "strongarm") {
+    return array("version" => "1");
+  }
+}
+
+/**
+ * Implements hook_node_info().
+ */
+function homepage_activity_feed_feature_node_info() {
+  $items = array(
+    'ad_space' => array(
+      'name' => t('Ad Space'),
+      'base' => 'node_content',
+      'description' => t('One line content. Can contain links, no images. Maximum characters 165 (including spaces)'),
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
+  );
+  drupal_alter('node_info', $items);
+  return $items;
 }
