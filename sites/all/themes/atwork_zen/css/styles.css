@@ -318,7 +318,7 @@ img {
 	border: none;
 	padding: 0;
 	margin: 0;
-	/* width: 100%; */
+	/*! width: 100%; */
 	height: auto;
 	image-rendering: -moz-auto;         /* Firefox */
 	image-rendering:   -o-auto;         /* Opera */
@@ -1312,6 +1312,7 @@ h3.front-promoted-title {
 	margin: 10px 15px;
 	color: #FFF;
 	line-height: 20px;
+	width:90%;
 }
 
 .front-promoted-posted {
@@ -2237,7 +2238,8 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-3 .views-row-odd, .section-series #block-views-article-series-block-3 .views-row-even,
 .section-series #block-views-article-series-block-4 .views-row-odd, .section-series #block-views-article-series-block-4 .views-row-even,
 .section-series #block-views-article-series-block-5 .views-row-odd, .section-series #block-views-article-series-block-5 .views-row-even,
-.section-series #block-views-article-series-block-6 .views-row-odd, .section-series #block-views-article-series-block-6 .views-row-even {
+.section-series #block-views-article-series-block-6 .views-row-odd, .section-series #block-views-article-series-block-6 .views-row-even,
+.section-series #block-views-article-series-block-7 .views-row-odd, .section-series #block-views-article-series-block-7 .views-row-even {
 	display: inline-block;
 	width: 32%;
 	background-color: #ECECEC;
@@ -2246,7 +2248,11 @@ aside.sidebars h2 {
 	margin-top: 10px;
 	color: #000;
 }
-
+span.article-series-image {
+	display: block;
+	height: 144px;
+	overflow: hidden;
+}
 .sidebar-first.og-context.og-context-node .view-display-id-page_1 .image-group-poll img,
 .sidebar-first.og-context.og-context-node .view-display-id-group_blogs .image-group-blog img,
 .sidebar-first.og-context.og-context-node .view-display-id-page_2 .image-group-gallery img,
@@ -2256,7 +2262,8 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-3 .article-series-image img,
 .section-series #block-views-article-series-block-4 .article-series-image img,
 .section-series #block-views-article-series-block-5 .article-series-image img,
-.section-series #block-views-article-series-block-6 .article-series-image img {
+.section-series #block-views-article-series-block-6 .article-series-image img,
+.section-series #block-views-article-series-block-7 .article-series-image img {
 	width: 100%;
 }
 .sidebar-first.og-context.og-context-node .posted-group-blog a.username,
@@ -2294,7 +2301,8 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-3 .article-series-title,
 .section-series #block-views-article-series-block-4 .article-series-title,
 .section-series #block-views-article-series-block-5 .article-series-title,
-.section-series #block-views-article-series-block-6 .article-series-title {
+.section-series #block-views-article-series-block-6 .article-series-title,
+.section-series #block-views-article-series-block-7 .article-series-title {
 	display: block;
 	height: 50px;
 	margin: 7px 0 0;
@@ -2342,7 +2350,8 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-3 .article-series-date,
 .section-series #block-views-article-series-block-4 .article-series-date,
 .section-series #block-views-article-series-block-5 .article-series-date,
-.section-series #block-views-article-series-block-6 .article-series-date {
+.section-series #block-views-article-series-block-6 .article-series-date,
+.section-series #block-views-article-series-block-7 .article-series-date {
 	display: block;
 	padding: 0 10px 0px;
 	font-style: oblique;
@@ -2382,7 +2391,8 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-3 .article-series-teaser,
 .section-series #block-views-article-series-block-4 .article-series-teaser,
 .section-series #block-views-article-series-block-5 .article-series-teaser,
-.section-series #block-views-article-series-block-6 .article-series-teaser {
+.section-series #block-views-article-series-block-6 .article-series-teaser,
+.section-series #block-views-article-series-block-7 .article-series-teaser {
 	display: block;
 	min-height: 95px;
 	padding: 10px 10px 5px;
@@ -2426,7 +2436,8 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-3 .article-series-comments,
 .section-series #block-views-article-series-block-4 .article-series-comments,
 .section-series #block-views-article-series-block-5 .article-series-comments,
-.section-series #block-views-article-series-block-6 .article-series-comments {
+.section-series #block-views-article-series-block-6 .article-series-comments,
+.section-series #block-views-article-series-block-7 .article-series-comments {
 	padding: 0 10px 10px;
 	font-style: oblique;
 	display: block;
@@ -2459,7 +2470,8 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-3 .article-series-views,
 .section-series #block-views-article-series-block-4 .article-series-views,
 .section-series #block-views-article-series-block-5 .article-series-views,
-.section-series #block-views-article-series-block-6 .article-series-views {
+.section-series #block-views-article-series-block-6 .article-series-views,
+.section-series #block-views-article-series-block-7 .article-series-views {
 	float: right;
 	margin-right: 15px;
 	font-style: oblique;
@@ -3551,7 +3563,7 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 }
 .sidebar-first aside.sidebars {
 	position: relative;
-	position: absolute\0/ !important; /* For IE only */
+	/*position: absolute\0/ !important; /* For IE only */
   /*top: 65px\0/ !important; /* For IE only */
 	left: 0;
 	width: 25%;
@@ -4177,7 +4189,7 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
   float: left\0/ !important; /* For IE only */
   /*width: 81%\0/ !important; /* For IE only */
   /*margin-left: 19%\0/ !important; /* For IE only */
-  margin-right: -80%\0/ !important; /* For IE only */
+  /*margin-right: -80%\0/ !important; /* For IE only */
 }
 /** Group Title ***********/
 .og-context.og-context-node #main h1 {

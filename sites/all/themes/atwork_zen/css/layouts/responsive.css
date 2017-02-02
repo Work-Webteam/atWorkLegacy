@@ -249,8 +249,8 @@
   /* Span 3 columns, starting in 2nd column from left. */
   .two-sidebars #content {
     float: left;
-    width: 59%;
-    margin-left: 20%;
+    width: 60%;
+    margin-left: 20.5%;
     margin-right: -80%;
   }
 
