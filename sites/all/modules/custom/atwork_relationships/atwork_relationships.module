@@ -4,17 +4,16 @@ function atwork_relationships_init() {
   $js = <<<EOT
 function atwork_relationships_ajax_load(op, uid, rtid) {
   jQuery(".atwork-relationship-action.uid-" + uid).load("/atwork-relationship/" + op + "/" + uid + "/" + rtid);
-  jQuery(
-    if(op == 'add'){
+  if(op == 'add'){
     var addMessage = '<div class="add-follower-message"> </div>';
-    $(".atwork-relationship-action.uid-" + uid).append('<div class="add-follower-message" style="display:none"> You are now following (name) ministry. The person you are following will not be notified. To stop following someone, go to their profile page and click "the following" button</div>').slideDown('slow');
+   jQuery(".atwork-relationship-action.uid-" + uid).parent().append('<div class="add-follower-message" > You are now following (name) ministry. The person you are following will not be notified. To stop following someone, go to their profile page and click "the following" button</div>').hide().slideDown('slow');
     setTimeout((function(){
-      $('.add-follower-message').slideUp("slow");
+      jQuery('.add-follower-message').slideUp("slow");
     }), 5000);
   } else {
 
   }
-  );
+
   return false;
 }
 EOT;
