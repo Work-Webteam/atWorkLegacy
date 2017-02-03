@@ -110,6 +110,7 @@ Temporary Items
 
 # Ignore potentially large media files
 *.mov
+*.mp4
 
 # Ignore Gulp files
 sites/all/themes/*/node_modules
