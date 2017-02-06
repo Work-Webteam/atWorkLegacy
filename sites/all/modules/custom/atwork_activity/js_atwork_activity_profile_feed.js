@@ -42,7 +42,7 @@
     });
 
     // Comment update
-      $('[id^=edit-button:not(.atwork-activity-processed)', context)
+      $('[id^=edit-button]:not(.atwork-activity-processed)', context)
         .addClass('atwork-activity-processed')
         .bind('click', function(){
           // Remove text blocks and show that it is saving
