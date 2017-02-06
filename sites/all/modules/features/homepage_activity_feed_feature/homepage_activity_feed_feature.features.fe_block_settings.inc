@@ -42,5 +42,208 @@ node/20049',
     'visibility' => 1,
   );
 
+  $export['views-home_page_blocks_zen-ad_space'] = array(
+    'cache' => -1,
+    'css' => '',
+    'custom' => 0,
+    'delta' => 'home_page_blocks_zen-ad_space',
+    'js' => '',
+    'module' => 'views',
+    'node_types' => array(),
+    'noscript' => '',
+    'pages' => '<front>',
+    'roles' => array(),
+    'themes' => array(
+      'atwork_zen' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'atwork_zen',
+        'weight' => 0,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '<none>',
+    'visibility' => 1,
+  );
+
+  $export['views-home_page_blocks_zen-block'] = array(
+    'cache' => -1,
+    'css' => '',
+    'custom' => 0,
+    'delta' => 'home_page_blocks_zen-block',
+    'js' => '',
+    'module' => 'views',
+    'node_types' => array(),
+    'noscript' => NULL,
+    'pages' => '<front>',
+    'roles' => array(),
+    'themes' => array(
+      'atwork_zen' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'atwork_zen',
+        'weight' => 67,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '<none>',
+    'visibility' => 1,
+  );
+
+  $export['views-home_page_blocks_zen-block_1'] = array(
+    'cache' => -1,
+    'css' => '',
+    'custom' => 0,
+    'delta' => 'home_page_blocks_zen-block_1',
+    'js' => '',
+    'module' => 'views',
+    'node_types' => array(),
+    'noscript' => '',
+    'pages' => '<front>',
+    'roles' => array(),
+    'themes' => array(
+      'atwork_zen' => array(
+        'region' => 'pre_content',
+        'status' => 1,
+        'theme' => 'atwork_zen',
+        'weight' => 28,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 1,
+  );
+
+  $export['views-home_page_blocks_zen-block_2'] = array(
+    'cache' => -1,
+    'css' => '',
+    'custom' => 0,
+    'delta' => 'home_page_blocks_zen-block_2',
+    'js' => '',
+    'module' => 'views',
+    'node_types' => array(),
+    'noscript' => NULL,
+    'pages' => '<front>',
+    'roles' => array(),
+    'themes' => array(
+      'atwork_zen' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'atwork_zen',
+        'weight' => 24,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 1,
+  );
+
+  $export['views-home_page_blocks_zen-block_3'] = array(
+    'cache' => -1,
+    'css' => '',
+    'custom' => 0,
+    'delta' => 'home_page_blocks_zen-block_3',
+    'js' => '',
+    'module' => 'views',
+    'node_types' => array(),
+    'noscript' => '',
+    'pages' => '<front>',
+    'roles' => array(),
+    'themes' => array(
+      'atwork_zen' => array(
+        'region' => 'pre_content',
+        'status' => 1,
+        'theme' => 'atwork_zen',
+        'weight' => 29,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 1,
+  );
+
+  $export['views-home_page_blocks_zen-block_4'] = array(
+    'cache' => -1,
+    'css' => '',
+    'custom' => 0,
+    'delta' => 'home_page_blocks_zen-block_4',
+    'js' => '',
+    'module' => 'views',
+    'node_types' => array(),
+    'noscript' => '',
+    'pages' => '<front>',
+    'roles' => array(),
+    'themes' => array(
+      'atwork_zen' => array(
+        'region' => 'pre_content',
+        'status' => 1,
+        'theme' => 'atwork_zen',
+        'weight' => 30,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 1,
+  );
+
+  $export['views-home_page_blocks_zen-block_5'] = array(
+    'cache' => -1,
+    'css' => '',
+    'custom' => 0,
+    'delta' => 'home_page_blocks_zen-block_5',
+    'js' => '',
+    'module' => 'views',
+    'node_types' => array(),
+    'noscript' => '',
+    'pages' => '<front>',
+    'roles' => array(),
+    'themes' => array(
+      'atwork_zen' => array(
+        'region' => 'pre_content',
+        'status' => 1,
+        'theme' => 'atwork_zen',
+        'weight' => 17,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 1,
+  );
+
   return $export;
 }
