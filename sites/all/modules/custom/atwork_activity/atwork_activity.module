@@ -390,7 +390,7 @@ function _atwork_activity_render_messages($result, $activityType) {
   $ad_node = node_load(20524);
   //dpm(get_defined_vars());
   if(isset($ad_node->field_content['und'][0]['value']) &&  $ad_node->field_content['und'][0]['value']){
-    $content .= $ad_node->field_content['und'][0]['value'];
+    $content = $ad_node->field_content['und'][0]['value'];
     // need help with this line below.
     $image = $ad_node->field_image_adspace['und'][0]['uri'];
     $date = $ad_node->created;
@@ -1519,7 +1519,7 @@ function atwork_activity_entity_view_alter(&$build, $type){
         foreach($markup_array as $key=>$word){
 
           $clean_word = (trim($word));
-          if($clean_word{0} == "#"){
+          if(!empty($clean_word) && $clean_word{0} == "#"){
             // Get the term without the hash
             $hash_term = ltrim($clean_word, '#');
             $i = FALSE;
