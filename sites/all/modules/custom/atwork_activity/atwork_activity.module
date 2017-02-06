@@ -458,7 +458,8 @@ function _atwork_activity_render_messages($result, $activityType) {
      // If field is longer than 100 characters (without tags);
       $string_is_too_long = false;
       $message_string = $message['message__message_text__0']['#markup'];
-      $message_string_length = strlen(strip_tags($message_string));
+      $no_tags_message = strip_tags($message_string);
+      $message_string_length = strlen($no_tags_message);
       if($message_string_length > 100){
         $string_is_too_long = true;
       }
@@ -532,9 +533,9 @@ function _atwork_activity_render_messages($result, $activityType) {
 
         // Finally, re-ad our <p> with class to the beginning of array
         $rebuilt_string = preg_replace('~^<p[^>]*>~', $beginning_tag, $rebuilt_string);
-
         // Now put it back in markup
         $message['message__message_text__0']['#markup'] = $rebuilt_string;
+
       }
 
 
