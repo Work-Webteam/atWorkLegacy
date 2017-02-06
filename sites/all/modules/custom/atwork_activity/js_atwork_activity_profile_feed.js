@@ -31,7 +31,7 @@
     $('#block-atwork-activity-profile-page-activity-feed-block .comment-count-link:not(.atwork-activity-processed)', context)
       .addClass('atwork-activity-processed')
       .bind('click', function(){
-      toggleComments($(this).parentsUntil($('#block-atwork-activity-profile-page-activity-feed-block')).closest("div").prop("class"));
+      toggleComments($(this).parentsUntil($('#activity-feed')).closest("div").prop("class"));
     });
 
     // Make sure we are not rebinding this improperly on homepage
@@ -42,18 +42,18 @@
     });
 
     // Comment update
-      $("[id^=edit-button").click(function(){
-        //TODO - figure out how to replace the div with a spinner.
-        //TODO - find out why we have a second box appearing when we submit
-        // Remove text blocks and show that it is saving
-        $('[id^="field-profile-comment-add-more-wrapper"').replaceWith('<div><p id="saving-notification-comment" class="saving-activity"> SAVING </p></div>');
+      $('[id^=edit-button:not(.atwork-activity-processed)', context)
+        .addClass('atwork-activity-processed')
+        .bind('click', function(){
+          // Remove text blocks and show that it is saving
+          $('[id^="field-profile-comment-add-more-wrapper"').replaceWith('<div><p id="saving-notification-comment" class="saving-activity"> SAVING </p></div>');
 
-        // close the filter options
-        $("#atwork-advanced-feed-settings").hide();
-        // Refresh the page after .5 seconds (to let db update)
-        setTimeout(ajaxRefresh, 500);
-        // Also open all comments so that user can see the comment they just made
-        setOpenOnReloadComments($(this).parentsUntil('[id^="activity-feed"').closest("div").prop("class"));
+          // close the filter options
+          $("#atwork-advanced-feed-settings").hide();
+          // Refresh the page after .5 seconds (to let db update)
+          setTimeout(ajaxRefresh, 500);
+          // Also open all comments so that user can see the comment they just made
+          setOpenOnReloadComments($(this).parentsUntil('#activity-feed').closest("div").prop("class"));
 
         return;
       });
