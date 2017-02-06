@@ -659,7 +659,7 @@ function _atwork_activity_render_messages($result, $activityType) {
           break;
       }
       if($render)
-        $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . $time_record . '</span> <span class="user-feed-image"><a href="employees/' . $author->name . '">' . render($user_image) . '</span>' . render($message) . '</div><!-- /.message -->';
+        $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . $time_record . '</span> <span class="user-feed-image"><a href="employees/' . $author->name . '">' . render($user_image) . '</span></a>' . render($message) . '</div><!-- /.message -->';
 
       $i++;
     }
