@@ -6,7 +6,7 @@ function atwork_relationship_ajax_load(op, uid, rtid, name) {
   if(op == 'add'){
     jQuery(".add-follower-message").remove();
     jQuery(".remove-follower-message").remove();
-    jQuery(".atwork-relationship-action.uid-" + uid).parent().append('<div class="add-follower-message" > You are now following name. The person you are following will not be notified. To stop following someone, go to their profile page and click the "following" button</div>').hide().slideDown('slow');
+    jQuery(".atwork-relationship-action.uid-" + uid).parent().append('<div class="add-follower-message" > "You are now following" + name + ". The person you are following will not be notified. To stop following someone, go to their profile page and click the \'following\' button"</div>').hide().slideDown('slow');
     setTimeout((function(){
       jQuery('.add-follower-message').slideUp("slow");
     }), 5000);
