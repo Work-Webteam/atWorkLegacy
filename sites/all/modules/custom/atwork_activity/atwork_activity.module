@@ -468,11 +468,25 @@ function _atwork_activity_render_messages($result, $activityType) {
       if($string_is_too_long === true && $message['#bundle'] == 'status'){
         // We know all messages start with <p and  class> - lets remove and save this.
         preg_match('~^<p[^>]*>~', $message_string, $get_beginning_tag, PREG_OFFSET_CAPTURE);
+        preg_match('/<a.*?>(.*?)<\/a>/', $message_string, $get_name_tag, PREG_OFFSET_CAPTURE);
         $beginning_tag = $get_beginning_tag[0][0];
+        // If we have an href that is near the beginning of a string, we capture it here
+        if(isset($get_name_tag) && !empty($get_name_tag) && $get_name_tag[0][1] < 30){
+          $name_href = $get_name_tag[0][0];
+        } else {
+          $name_href = false;
+        }
+
+        // If user has used our markers, we need to strip them out here.
+
         // Now add a placeholder in <p> tags sted
-        $replace_tags = preg_replace('~<p[^>]*>~', '^', $message_string);
+        $replace_tags = preg_replace('~<p[^>]*>~', '[^]', $message_string);
         // Now a different placeholder in </p> sted
-        $replace_tags = preg_replace('~</p[^>]*>~', '~', $replace_tags);
+        $replace_tags = preg_replace('~</p[^>]*>~', '[~]', $replace_tags);
+        if(isset($name_href) && $name_href != false){
+          // Now the first occurence of <a if it is wrapping a name.
+          $replace_tags = preg_replace('/<a.*?>(.*?)<\/a>/', '[`]', $replace_tags, 1);
+        }
         $string_array = str_split($replace_tags);
         // Our counter for the iterator
         $i = 0;
@@ -480,49 +494,55 @@ function _atwork_activity_render_messages($result, $activityType) {
         $j = 0;
         // Our closing tag counter
         $k = 0;
-        // Number of legittmate characters
-        $l = 0;
         // Run through string, count the # of chars at each location that is not one of our placeholders
         foreach($string_array as $key=>$character){
           // We're done here, lets split
-          if($l >= 100 && $character == " " ){
+          if($i >= 100 && $character == " "){
             break;
           }
+
           // this is an opening tag
           if($character == "^"){
-            //lets look/strip duplicates first
-            if($key > 0){
-              if($string_array[$key-1] == '<p>'){
-                unset($string_array[$key]);
-                continue;
-              }
-            }
-            $j ++;
-            // Account for 3 characters in <p>
-            $i + 3;
-            // May as well replace this tag now
-            $string_array[$key] = "<p>";
-            continue;
+           // Make sure this is our marker
+           if($key > 0){
+             // check if this is our marker
+             if($string_array[$key-1] == "[" && $string_array[$key+1] == "]"){
+              $j ++;
+              // Account for 3 characters in <p>
+              $i += 3;
+              // May as well replace this tag now
+              $string_array[$key] = "<p>";
+              // Remove the brackets - we don't need them
+              unset($string_array[$key-1]);
+              unset($string_array[$key+1]);
+              continue;
+             }
+           }
           // Same treatment for end tags
           } elseif($character == "~"){
-            if($string_array[$key-1] == '</p>'){
-              unset($string_array[$key]);
+            // check if this is our marker
+            if($string_array[$key-1] == "[" && $string_array[$key+1] == "]"){
+              // Addding new endtag
+              $k ++;
+              // Account for 4 characters in </p>
+              $i += 4;
+              $string_array[$key] = "</p>";
+              // Remove the brackets - we don't need them
+              unset($string_array[$key-1]);
+              unset($string_array[$key+1]);
               continue;
+              // Else this is a legitmate character
             }
-            $k ++;
-            // Account for 4 characters in </p>
-            $i + 4;
-            $string_array[$key] = "</p>";
-            continue;
-            // Else this is a legitmate character
           } else {
-            $i ++;
-            $l ++;
+                $i ++;
           }
         }
+
         // Now we can implode the array, rebuild the string
         $rebuilt_array = implode($string_array);
-        $rebuilt_string = substr($rebuilt_array, 0, $i);
+
+        // This is a zero based function adn we counted the first character above as '1' - so now need to take taht into account.
+        $rebuilt_string = substr($rebuilt_array, 0, $i-1);
         // Add ellipses and tagged more href on end
         $rebuilt_string = $rebuilt_string . '... <a href="node/' . $message['#entity']->field_message_node['und'][0]['target_id'] . '">more</a>';
         // Make sure all of our <p> tags are closed
@@ -531,8 +551,12 @@ function _atwork_activity_render_messages($result, $activityType) {
           $k++;
         }
 
+
         // Finally, re-ad our <p> with class to the beginning of array
         $rebuilt_string = preg_replace('~^<p[^>]*>~', $beginning_tag, $rebuilt_string);
+        if(isset($name_href) && $name_href != false){
+          $rebuilt_string = preg_replace('/\[`[^\]]*\]/', $name_href, $rebuilt_string);
+        }
         // Now put it back in markup
         $message['message__message_text__0']['#markup'] = $rebuilt_string;
 
