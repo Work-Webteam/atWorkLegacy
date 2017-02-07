@@ -1822,9 +1822,111 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'user-user-field_feed_options'.
+  $field_instances['user-user-field_feed_options'] = array(
+    'bundle' => 'user',
+    'default_value' => array(
+      0 => array(
+        'value' => 1,
+      ),
+      1 => array(
+        'value' => 2,
+      ),
+      2 => array(
+        'value' => 3,
+      ),
+      3 => array(
+        'value' => 4,
+      ),
+      4 => array(
+        'value' => 5,
+      ),
+      5 => array(
+        'value' => 6,
+      ),
+      6 => array(
+        'value' => 7,
+      ),
+      7 => array(
+        'value' => 8,
+      ),
+      8 => array(
+        'value' => 9,
+      ),
+      9 => array(
+        'value' => 10,
+      ),
+      10 => array(
+        'value' => 11,
+      ),
+      11 => array(
+        'value' => 12,
+      ),
+      12 => array(
+        'value' => 13,
+      ),
+      13 => array(
+        'value' => 14,
+      ),
+      14 => array(
+        'value' => 15,
+      ),
+      15 => array(
+        'value' => 16,
+      ),
+      16 => array(
+        'value' => 17,
+      ),
+      17 => array(
+        'value' => 18,
+      ),
+      18 => array(
+        'value' => 19,
+      ),
+      19 => array(
+        'value' => 20,
+      ),
+      20 => array(
+        'value' => 21,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 59,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'user',
+    'field_name' => 'field_feed_options',
+    'label' => 'Feed Options',
+    'required' => 0,
+    'settings' => array(
+      'semantic_field_format' => '',
+      'user_register_form' => 0,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 46,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Body');
+  t('Feed Options');
   t('Hashtags');
   t('Image');
   t('Sticky date');

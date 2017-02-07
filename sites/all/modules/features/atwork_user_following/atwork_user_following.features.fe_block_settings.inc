@@ -22,11 +22,11 @@ function atwork_user_following_default_fe_block_settings() {
     'node_types' => array(),
     'noscript' => '',
     'pages' => '<?php
-if (arg(0) == \'user\' && is_numeric(arg(1)) && (arg(2) == NULL)) {
-  return TRUE;
-} else {
-  return FALSE;
-}
+  if (arg(0) == \'user\' && is_numeric(arg(1)) && (arg(2) == NULL)) {
+   return TRUE;
+  } else {
+   return FALSE;
+  }
 ?>',
     'roles' => array(),
     'themes' => array(
@@ -34,7 +34,7 @@ if (arg(0) == \'user\' && is_numeric(arg(1)) && (arg(2) == NULL)) {
         'region' => 'content',
         'status' => 1,
         'theme' => 'atwork_zen',
-        'weight' => 27,
+        'weight' => 30,
       ),
       'seven' => array(
         'region' => '',
@@ -57,11 +57,11 @@ if (arg(0) == \'user\' && is_numeric(arg(1)) && (arg(2) == NULL)) {
     'node_types' => array(),
     'noscript' => '',
     'pages' => '<?php
-if (arg(0) == \'user\' && is_numeric(arg(1)) && (arg(2) == NULL)) {
-  return TRUE;
-} else {
-  return FALSE;
-}
+  if (arg(0) == \'user\' && is_numeric(arg(1)) && (arg(2) == NULL)) {
+   return TRUE;
+  } else {
+   return FALSE;
+  }
 ?>',
     'roles' => array(),
     'themes' => array(
@@ -69,7 +69,7 @@ if (arg(0) == \'user\' && is_numeric(arg(1)) && (arg(2) == NULL)) {
         'region' => 'content',
         'status' => 1,
         'theme' => 'atwork_zen',
-        'weight' => 26,
+        'weight' => 29,
       ),
       'seven' => array(
         'region' => '',
