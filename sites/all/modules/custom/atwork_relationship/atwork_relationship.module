@@ -1,0 +1,136 @@
+<?php
+function atwork_relationship_init() {
+  $js = <<<EOT
+function atwork_relationship_ajax_load(op, uid, rtid, name) {
+  jQuery(".atwork-relationship-action.uid-" + uid).load("/atwork-relationship/" + op + "/" + uid + "/" + rtid);
+  if(op == 'add'){
+    jQuery(".add-follower-message").remove();
+    jQuery(".remove-follower-message").remove();
+    jQuery(".atwork-relationship-action.uid-" + uid).parent().append('<div class="add-follower-message" > You are now following name. The person you are following will not be notified. To stop following someone, go to their profile page and click the "following" button</div>').hide().slideDown('slow');
+    setTimeout((function(){
+      jQuery('.add-follower-message').slideUp("slow");
+    }), 5000);
+  } else {
+    jQuery(".remove-follower-message").remove();
+    jQuery(".add-follower-message").remove();
+    jQuery(".atwork-relationship-action.uid-" + uid).parent().append('<div class="remove-follower-message" > You are now unfollowing name. They will not be notified. To start following them again, go to their profile page and click "Follow" </div>').hide().slideDown('slow');
+    setTimeout((function(){
+      jQuery('.remove-follower-message').slideUp("slow");
+    }), 5000);
+  }
+
+  return false;
+}
+EOT;
+
+    drupal_add_js($js, 'inline');
+}
+
+function atwork_relationship_get_link($account) {
+  global $user;
+  // Shouldn't be able to follow oneself
+  if($user->uid == $account->uid){
+    return;
+  }
+  $relationships = user_relationships_load(array(
+    'requester_id' => $user->uid,
+    'requestee_id' => $account->uid,
+    'rtid' => 1,
+  ));
+
+  if ($relationships) {
+    foreach ($relationships as $rid => $relationship) {
+      $relationship_link = '<a href="#" title="Click to unfollow colleague" onclick="atwork_relationship_ajax_load(\'remove\', \'' . $account->uid . '\', \'' . $rid . '\', \'' . $account->name . '\'); return false;">Following</a>';
+    }
+  }
+  else {
+    $relationship_link = '<a href="#" title="Click to follow colleague" onclick="atwork_relationship_ajax_load(\'add\', \'' . $account->uid . '\', \'1\', \'' . $account->name . '\'); return false;">Follow</a>';
+  }
+
+  return '<div class="atwork-relationship-action uid-' . $account->uid . '">' . $relationship_link . '</div>';
+}
+
+function atwork_relationship_views_pre_render(&$view) {
+  // show the follow/ing links if on these Views pages
+  if ($view->name == 'people_admin' && ($view->current_display == 'public_page' || $view->current_display == 'page_following2' || $view->current_display == 'page_followers2') && module_exists('user_relationships')) {
+    foreach ($view->result as &$result) {
+      if(isset($result->uid)){
+        $account = user_load($result->uid);
+        $relationship_link = atwork_relationship_get_link($account);
+
+        if (isset($result->field_field_gal_title[0]['rendered']['#markup'])) {
+          $result->field_field_gal_title[0]['rendered']['#markup'] .= $relationship_link;
+        }
+        else {
+          $result->field_field_gal_title[0]['rendered']['#markup'] = $relationship_link;
+        }
+      }
+      if(isset($result->users_user_relationships_uid)){
+        $account = user_load($result->users_user_relationships_uid);
+        $relationship_link = atwork_relationship_get_link($account);
+
+        if (isset($result->field_field_gal_title[0]['rendered']['#markup'])) {
+          $result->field_field_gal_title[0]['rendered']['#markup'] .= $relationship_link;
+        }
+        else {
+          $result->field_field_gal_title[0]['rendered']['#markup'] = $relationship_link;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_menu();
+ */
+
+function atwork_relationship_menu() {
+  $items['atwork-relationship/%/%user/%'] = array(
+    'title' => 'Make Relationships',
+    'type' => MENU_CALLBACK,
+    'page callback' => 'atwork_relationship_page_callback',
+    'page arguments' => array(1,2,3),
+    'access arguments' => array('access content'),
+    'delivery callback' => 'atwork_relationship_delivery_callback',
+  );
+  return $items;
+}
+
+function atwork_relationship_page_callback($op, $account, $id) {
+  switch ($op) {
+    case 'add':
+      global $user;
+      $relationship = user_relationships_request_relationship($user, $account, $id);
+      return '<a href="#" onclick="atwork_relationship_ajax_load(\'remove\', \'' . $account->uid . '\', \'' . $relationship->rid . '\'); return false;">Following</a>';
+      break;
+
+    case 'remove':
+      $relationships = user_relationships_load(array('rid' => $id));
+      user_relationships_delete_relationship($relationships[$id], $account, $op);
+      return '<a href="#" onclick="atwork_relationship_ajax_load(\'add\', \'' . $account->uid . '\', \'1\'); return false;">Follow</a>';;
+      break;
+  }
+}
+
+function atwork_relationship_delivery_callback($page_callback_result) {
+  print $page_callback_result;
+}
+
+
+/**
+ * Implements hook_node_view_alter()
+ * Used to add relationships button to profile pages.
+ */
+
+function atwork_relationship_user_view_alter(&$build){
+  $account = $build['#account'];
+  $relationship_link = atwork_relationship_get_link($account);
+  if (isset($build['field_gal_title'][0]['#markup'])) {
+    $build['field_gal_title'][0]['#markup'] .= $relationship_link;
+  }
+  else {
+    $build['field_gal_title'][0]['#markup'] = $relationship_link;
+  }
+}
+
+

@@ -1,0 +1,4 @@
+name = Atwork Relationships
+description = Alterations to user_relationships module.
+package = Atwork
+core = 7.x
