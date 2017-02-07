@@ -42,6 +42,35 @@ node/20049',
     'visibility' => 1,
   );
 
+  $export['atwork_activity-profile_page_activity_feed_block'] = array(
+    'cache' => 1,
+    'css' => '',
+    'custom' => 0,
+    'delta' => 'profile_page_activity_feed_block',
+    'js' => '',
+    'module' => 'atwork_activity',
+    'node_types' => array(),
+    'noscript' => '',
+    'pages' => 'user/*',
+    'roles' => array(),
+    'themes' => array(
+      'atwork_zen' => array(
+        'region' => 'post_content',
+        'status' => 1,
+        'theme' => 'atwork_zen',
+        'weight' => 0,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 1,
+  );
+
   $export['views-home_page_blocks_zen-ad_space'] = array(
     'cache' => -1,
     'css' => '',
