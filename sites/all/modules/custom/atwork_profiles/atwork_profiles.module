@@ -905,10 +905,10 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
               case(isset($account->content['field_skills']) && $account->content['field_skills']):
               case(isset($account->content['field_employee_interests']) && $account->content['field_employee_interests']):
               case(isset($account->content['field_linkedin']) && $account->content['field_linkedin']):
-                drupal_set_message(t('Your profile is not published. Click the Edit tab to fill out your draft profile and, when you’re ready, make it visible to your colleagues. <strong>Note:</strong> GAL information is always displayed in your profile.'));
+                drupal_set_message(t('Your profile is not published (visible to your colleagues on @Work). To publish your profile, select the "Edit" tab and click the "Share your profile" box at the bottom of the form. This action will allow colleagues to follow you. You can unpublish your profile at anytime by unchecking the "Share your profile" box in your profile. <p><span style="font-size:smaller"><strong >Note:</strong><em> Global Address List (GAL) information is always displayed in your profile.</em></span></p>'));
                 break;
               default:
-                drupal_set_message(t('Your profile is not published. Click the Edit tab to fill out your draft profile and, when you’re ready, make it visible to your colleagues. <strong>Note:</strong> GAL information is always displayed in your profile.'));
+                drupal_set_message(t('Your profile is not published (visible to your colleagues on @Work). To publish your profile, select the "Edit" tab and click the "Share your profile" box at the bottom of the form. This action will allow colleagues to follow you. You can unpublish your profile at anytime by unchecking the "Share your profile" box in your profile. <p><span style="font-size:smaller"><strong >Note:</strong><em> Global Address List (GAL) information is always displayed in your profile.</em></span></p>'));
             }
           }
           elseif (isset($account->field_public_profile) && !$account->field_public_profile && (in_array('executive', $user->roles))){
