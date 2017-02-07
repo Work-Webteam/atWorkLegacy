@@ -390,7 +390,7 @@ function _atwork_activity_render_messages($result, $activityType) {
   $ad_node = node_load(20524);
   //dpm(get_defined_vars());
   if(isset($ad_node->field_content['und'][0]['value']) &&  $ad_node->field_content['und'][0]['value']){
-    $content .= $ad_node->field_content['und'][0]['value'];
+    $content = $ad_node->field_content['und'][0]['value'];
     // need help with this line below.
     $image = $ad_node->field_image_adspace['und'][0]['uri'];
     $date = $ad_node->created;
@@ -458,7 +458,8 @@ function _atwork_activity_render_messages($result, $activityType) {
      // If field is longer than 100 characters (without tags);
       $string_is_too_long = false;
       $message_string = $message['message__message_text__0']['#markup'];
-      $message_string_length = strlen(strip_tags($message_string));
+      $no_tags_message = strip_tags($message_string);
+      $message_string_length = strlen($no_tags_message);
       if($message_string_length > 100){
         $string_is_too_long = true;
       }
@@ -532,9 +533,9 @@ function _atwork_activity_render_messages($result, $activityType) {
 
         // Finally, re-ad our <p> with class to the beginning of array
         $rebuilt_string = preg_replace('~^<p[^>]*>~', $beginning_tag, $rebuilt_string);
-
         // Now put it back in markup
         $message['message__message_text__0']['#markup'] = $rebuilt_string;
+
       }
 
 
@@ -659,7 +660,7 @@ function _atwork_activity_render_messages($result, $activityType) {
           break;
       }
       if($render)
-        $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . $time_record . '</span> <span class="user-feed-image"><a href="employees/' . $author->name . '">' . render($user_image) . '</span>' . render($message) . '</div><!-- /.message -->';
+        $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . $time_record . '</span> <span class="user-feed-image"><a href="employees/' . $author->name . '">' . render($user_image) . '</span></a>' . render($message) . '</div><!-- /.message -->';
 
       $i++;
     }
@@ -1519,7 +1520,7 @@ function atwork_activity_entity_view_alter(&$build, $type){
         foreach($markup_array as $key=>$word){
 
           $clean_word = (trim($word));
-          if($clean_word{0} == "#"){
+          if(!empty($clean_word) && $clean_word{0} == "#"){
             // Get the term without the hash
             $hash_term = ltrim($clean_word, '#');
             $i = FALSE;

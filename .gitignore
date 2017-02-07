@@ -87,7 +87,7 @@ Temporary Items
 
 
 # Non Drupal PSA files and directories
-//browscap/*
+browscap/
 /clear_apc.php
 /dump.txt
 /IEStandards.xml
