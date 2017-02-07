@@ -145,7 +145,7 @@ node/20049',
         'region' => 'content',
         'status' => 1,
         'theme' => 'atwork_zen',
-        'weight' => 24,
+        'weight' => 27,
       ),
       'seven' => array(
         'region' => '',

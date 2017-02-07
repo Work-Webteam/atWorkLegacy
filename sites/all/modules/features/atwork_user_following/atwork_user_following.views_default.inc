@@ -1880,7 +1880,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'No results found.';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: User relationships: Requestee user */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['requestee_id']['id'] = 'requestee_id';
   $handler->display->display_options['relationships']['requestee_id']['table'] = 'user_relationships';
   $handler->display->display_options['relationships']['requestee_id']['field'] = 'requestee_id';
@@ -1969,7 +1969,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['sorts']['field_gal_last_name_value_1']['exposed'] = TRUE;
   $handler->display->display_options['sorts']['field_gal_last_name_value_1']['expose']['label'] = 'Last Name | Z to A';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: User relationships: Requester user */
+  /* Contextual filter: Broken/missing handler */
   $handler->display->display_options['arguments']['requester_id']['id'] = 'requester_id';
   $handler->display->display_options['arguments']['requester_id']['table'] = 'user_relationships';
   $handler->display->display_options['arguments']['requester_id']['field'] = 'requester_id';
@@ -2301,7 +2301,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'No results found.';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: User relationships: Requester user */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['requester_id']['id'] = 'requester_id';
   $handler->display->display_options['relationships']['requester_id']['table'] = 'user_relationships';
   $handler->display->display_options['relationships']['requester_id']['field'] = 'requester_id';
@@ -2390,7 +2390,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['sorts']['field_gal_last_name_value_1']['exposed'] = TRUE;
   $handler->display->display_options['sorts']['field_gal_last_name_value_1']['expose']['label'] = 'Last Name | Z to A';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: User relationships: Requestee user */
+  /* Contextual filter: Broken/missing handler */
   $handler->display->display_options['arguments']['requestee_id']['id'] = 'requestee_id';
   $handler->display->display_options['arguments']['requestee_id']['table'] = 'user_relationships';
   $handler->display->display_options['arguments']['requestee_id']['field'] = 'requestee_id';
@@ -2735,7 +2735,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
   $handler->display->display_options['empty']['area_text_custom']['content'] = '<div id="not-following"><p>Not following anyone. Find colleagues to follow on the <a href="/employees">employees page</a>.</p></div>';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: User relationships: Requestee user */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['requestee_id']['id'] = 'requestee_id';
   $handler->display->display_options['relationships']['requestee_id']['table'] = 'user_relationships';
   $handler->display->display_options['relationships']['requestee_id']['field'] = 'requestee_id';
@@ -2797,7 +2797,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['sorts']['random']['table'] = 'views';
   $handler->display->display_options['sorts']['random']['field'] = 'random';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: User relationships: Requester user */
+  /* Contextual filter: Broken/missing handler */
   $handler->display->display_options['arguments']['requester_id']['id'] = 'requester_id';
   $handler->display->display_options['arguments']['requester_id']['table'] = 'user_relationships';
   $handler->display->display_options['arguments']['requester_id']['field'] = 'requester_id';
@@ -2868,7 +2868,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
   $handler->display->display_options['empty']['area_text_custom']['content'] = '<div id="no-followers"><p> Currently, you have no followers. When your colleagues follow you, they will appear here.</p></div>';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: User relationships: Requester user */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['requester_id']['id'] = 'requester_id';
   $handler->display->display_options['relationships']['requester_id']['table'] = 'user_relationships';
   $handler->display->display_options['relationships']['requester_id']['field'] = 'requester_id';
@@ -2931,7 +2931,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['sorts']['random']['table'] = 'views';
   $handler->display->display_options['sorts']['random']['field'] = 'random';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: User relationships: Requestee user */
+  /* Contextual filter: Broken/missing handler */
   $handler->display->display_options['arguments']['requestee_id']['id'] = 'requestee_id';
   $handler->display->display_options['arguments']['requestee_id']['table'] = 'user_relationships';
   $handler->display->display_options['arguments']['requestee_id']['field'] = 'requestee_id';

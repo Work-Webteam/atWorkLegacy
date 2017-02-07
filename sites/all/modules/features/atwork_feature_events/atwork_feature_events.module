@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Atwork Events feature.
+ */
+
+include_once 'atwork_feature_events.features.inc';
