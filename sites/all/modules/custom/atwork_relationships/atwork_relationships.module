@@ -2,16 +2,22 @@
 
 function atwork_relationships_init() {
   $js = <<<EOT
-function atwork_relationships_ajax_load(op, uid, rtid) {
+function atwork_relationships_ajax_load(op, uid, rtid, name) {
   jQuery(".atwork-relationship-action.uid-" + uid).load("/atwork-relationship/" + op + "/" + uid + "/" + rtid);
   if(op == 'add'){
-    var addMessage = '<div class="add-follower-message"> </div>';
-   jQuery(".atwork-relationship-action.uid-" + uid).parent().append('<div class="add-follower-message" > You are now following (name) ministry. The person you are following will not be notified. To stop following someone, go to their profile page and click "the following" button</div>').hide().slideDown('slow');
+    jQuery(".add-follower-message").remove();
+    jQuery(".remove-follower-message").remove();
+    jQuery(".atwork-relationship-action.uid-" + uid).parent().append('<div class="add-follower-message" > You are now following name. The person you are following will not be notified. To stop following someone, go to their profile page and click the "following" button</div>').hide().slideDown('slow');
     setTimeout((function(){
       jQuery('.add-follower-message').slideUp("slow");
     }), 5000);
   } else {
-
+    jQuery(".remove-follower-message").remove();
+    jQuery(".add-follower-message").remove();
+    jQuery(".atwork-relationship-action.uid-" + uid).parent().append('<div class="remove-follower-message" > You are now unfollowing name. They will not be notified. To start following them again, go to their profile page and click "Follow" </div>').hide().slideDown('slow');
+    setTimeout((function(){
+      jQuery('.remove-follower-message').slideUp("slow");
+    }), 5000);
   }
 
   return false;
@@ -35,11 +41,11 @@ function atwork_relationships_get_link($account) {
 
   if ($relationships) {
     foreach ($relationships as $rid => $relationship) {
-      $relationship_link = '<a href="#" title="Click to unfollow colleague" onclick="atwork_relationships_ajax_load(\'remove\', \'' . $account->uid . '\', \'' . $rid . '\'); return false;">Following</a>';
+      $relationship_link = '<a href="#" title="Click to unfollow colleague" onclick="atwork_relationships_ajax_load(\'remove\', \'' . $account->uid . '\', \'' . $rid . '\', \'' . $account->name . '\'); return false;">Following</a>';
     }
   }
   else {
-    $relationship_link = '<a href="#" title="Click to follow colleague" onclick="atwork_relationships_ajax_load(\'add\', \'' . $account->uid . '\', \'1\'); return false;">Follow</a>';
+    $relationship_link = '<a href="#" title="Click to follow colleague" onclick="atwork_relationships_ajax_load(\'add\', \'' . $account->uid . '\', \'1\', \'' . $account->name . '\'); return false;">Follow</a>';
   }
 
   return '<div class="atwork-relationship-action uid-' . $account->uid . '">' . $relationship_link . '</div>';
