@@ -388,11 +388,11 @@ function _atwork_activity_render_messages($result, $activityType) {
 
   // Load adnode in here, not using superior sticky functionality baked into queries
   $ad_node = node_load(20524);
-  //dpm(get_defined_vars());
+  //dpm($ad_node);
   if(isset($ad_node->field_content['und'][0]['value']) &&  $ad_node->field_content['und'][0]['value']){
     $content = $ad_node->field_content['und'][0]['value'];
-    // need help with this line below.
-    $image = $ad_node->field_image_adspace['und'][0]['uri'];
+    // TODO: Need to determine the proper way to render the image below. Using absolute image path for now.
+    //$image = 
     $date = $ad_node->created;
     $current_time = time();
     $diff = $current_time - $date;
@@ -424,10 +424,10 @@ function _atwork_activity_render_messages($result, $activityType) {
             break;
         }
 
-    $output .= '<div class="feed-ad-space-outer">
-      <div class="feed-ad-space-image"><img src="sites/default/files/announcement/image/2017/0201/atwork-ampersand.png" /></div>
+    $output = '<div class="feed-ad-space-image"><img src="/sites/all/themes/atwork_zen/images/default_images/ad-space-banner-default.jpg" /></div>
+    <div class="feed-ad-space-outer"> 
       <div class="feed-ad-space-content">' . $content . '</div>
-      <div class="feed-ad-space-author-date">Posted by: Employee News '  . $time_record . '</div>
+      <div class="feed-ad-space-author-date">Posted By: Employee News ' . $time_record . '</div>
     </div>';
   }
   // The Status update form
