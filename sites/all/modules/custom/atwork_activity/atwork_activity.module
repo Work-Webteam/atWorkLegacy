@@ -420,7 +420,7 @@ function _atwork_activity_render_messages($result, $activityType) {
             }
             break;
           default:
-            $time_record = date('F j Y', $message['#entity']->timestamp);
+            $time_record = date('F j Y', $date);
             break;
         }
 
