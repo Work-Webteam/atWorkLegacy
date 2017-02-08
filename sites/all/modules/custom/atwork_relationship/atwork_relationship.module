@@ -2,11 +2,12 @@
 function atwork_relationship_init() {
   $js = <<<EOT
 function atwork_relationship_ajax_load(op, uid, rtid, name) {
-  jQuery(".atwork-relationship-action.uid-" + uid).load("/atwork-relationship/" + op + "/" + uid + "/" + rtid);
+  console.log(name);
+  var message = '<div class="add-follower-message" > "You are now following"' + name + '". The person you are following will not be notified. To stop following someone, go to their profile page and click the \'following\' button"</div>';
   if(op == 'add'){
-    jQuery(".add-follower-message").remove();
-    jQuery(".remove-follower-message").remove();
-    jQuery(".atwork-relationship-action.uid-" + uid).parent().append('<div class="add-follower-message" > "You are now following" + name + ". The person you are following will not be notified. To stop following someone, go to their profile page and click the \'following\' button"</div>').hide().slideDown('slow');
+    //jQuery(".add-follower-message").remove();
+    //jQuery(".remove-follower-message").remove();
+    jQuery(".atwork-relationship-action.uid-" + uid).parent().append(message).hide().slideDown('slow');
     setTimeout((function(){
       jQuery('.add-follower-message').slideUp("slow");
     }), 5000);
@@ -18,7 +19,7 @@ function atwork_relationship_ajax_load(op, uid, rtid, name) {
       jQuery('.remove-follower-message').slideUp("slow");
     }), 5000);
   }
-
+  jQuery(".atwork-relationship-action.uid-" + uid).load("/atwork-relationship/" + op + "/" + uid + "/" + rtid + "/" + name);
   return false;
 }
 EOT;
@@ -37,16 +38,14 @@ function atwork_relationship_get_link($account) {
     'requestee_id' => $account->uid,
     'rtid' => 1,
   ));
-
   if ($relationships) {
     foreach ($relationships as $rid => $relationship) {
-      $relationship_link = '<a href="#" title="Click to unfollow colleague" onclick="atwork_relationship_ajax_load(\'remove\', \'' . $account->uid . '\', \'' . $rid . '\', \'' . $account->name . '\'); return false;">Following</a>';
+      $relationship_link = '<a href="#" title="Click to unfollow colleague" onclick="atwork_relationship_ajax_load(\'remove\', \'' . $account->uid . '\', \'' . $rid . '\', \'' . $account->field_display_name['und'][0]['safe_value'] . '\'); return false;">Following</a>';
     }
   }
   else {
-    $relationship_link = '<a href="#" title="Click to follow colleague" onclick="atwork_relationship_ajax_load(\'add\', \'' . $account->uid . '\', \'1\', \'' . $account->name . '\'); return false;">Follow</a>';
+    $relationship_link = '<a href="#" title="Click to follow colleague" onclick="atwork_relationship_ajax_load(\'add\', \'' . $account->uid . '\', \'1\', \'' . $account->field_display_name['und'][0]['safe_value'] . '\'); return false;">Follow</a>';
   }
-
   return '<div class="atwork-relationship-action uid-' . $account->uid . '">' . $relationship_link . '</div>';
 }
 
@@ -85,11 +84,11 @@ function atwork_relationship_views_pre_render(&$view) {
  */
 
 function atwork_relationship_menu() {
-  $items['atwork-relationship/%/%user/%'] = array(
+  $items['atwork-relationship/%/%user/%/%'] = array(
     'title' => 'Make Relationships',
     'type' => MENU_CALLBACK,
     'page callback' => 'atwork_relationship_page_callback',
-    'page arguments' => array(1,2,3),
+    'page arguments' => array(1,2,3,4),
     'access arguments' => array('access content'),
     'delivery callback' => 'atwork_relationship_delivery_callback',
   );
@@ -101,18 +100,19 @@ function atwork_relationship_page_callback($op, $account, $id) {
     case 'add':
       global $user;
       $relationship = user_relationships_request_relationship($user, $account, $id);
-      return '<a href="#" onclick="atwork_relationship_ajax_load(\'remove\', \'' . $account->uid . '\', \'' . $relationship->rid . '\'); return false;">Following</a>';
+      return '<a href="#" onclick="atwork_relationship_ajax_load(\'remove\', \'' . $account->uid . '\', \'' . $relationship->rid . '\', \'' . $account->field_display_name['und'][0]['safe_value'] . '\'); return false;">Following</a>';
       break;
 
     case 'remove':
       $relationships = user_relationships_load(array('rid' => $id));
       user_relationships_delete_relationship($relationships[$id], $account, $op);
-      return '<a href="#" onclick="atwork_relationship_ajax_load(\'add\', \'' . $account->uid . '\', \'1\'); return false;">Follow</a>';;
+      return '<a href="#" onclick="atwork_relationship_ajax_load(\'add\', \'' . $account->uid . '\', \'1\' , \'' . $account->field_display_name['und'][0]['safe_value'] . '\'); return false;">Follow</a>';;
       break;
   }
 }
 
 function atwork_relationship_delivery_callback($page_callback_result) {
+  dpm($page_callback_result);
   print $page_callback_result;
 }
 
