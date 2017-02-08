@@ -105,6 +105,14 @@
     .feed-ad-space-content {
       font-size: 13px;
       margin-bottom: 1em;
+      h2 {
+        position: inherit;
+        line-height: 1.2em;
+        font-family: Arial, Helvetica, sans-serif;
+        letter-spacing: 0px;
+        width: inherit !important;
+        text-transform: uppercase;
+      }
       p {
         margin: 1em 0;
         &:first-child {
