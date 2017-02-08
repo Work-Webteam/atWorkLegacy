@@ -92,16 +92,16 @@
   // end all Header items 
 
   // start feed-ad-space
-    .feed-ad-space-outer {
+    .feed-ad-space-image { // Lives outside of the ad-space container
+      margin-bottom: -6px; // bring the adspace box up to the image
+    }
+    .feed-ad-space-outer { 
       border: 1px solid grey;
       padding: 1em;
       background: #d1e4f8;
       position: relative;
     }
-    .feed-ad-space-image {
-      float: left;
-      margin: 0 10px 10px 0;
-    }
+
     .feed-ad-space-content {
       font-size: 13px;
       margin-bottom: 1em;
