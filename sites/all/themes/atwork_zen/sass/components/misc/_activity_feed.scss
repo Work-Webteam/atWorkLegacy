@@ -416,7 +416,7 @@
     }
     .field-name-field-feed-like-button {
       left: 51%;
-      top: 6px;
+      bottom: 0px;
       min-width: 120px;
       font-size: smaller;
       .field-name-field-feed-like-button { // new one made when clicked
@@ -429,7 +429,7 @@
     }
     .date {
       right: 0.5em;
-      bottom: 2px;
+      top: 6px;
       font-size: smaller;
       color: lighten(#000, 60%);
     }
@@ -437,10 +437,10 @@
       position: absolute;
       margin: 0;
       padding: 0;
-      top: 4px;
+      bottom: 0px;
       right: 4px;
       font-size: smaller;
-      li {
+      li, a {
         padding: 0;
         margin: 0;
       }
