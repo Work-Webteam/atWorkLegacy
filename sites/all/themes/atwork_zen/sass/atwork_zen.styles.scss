@@ -1158,7 +1158,7 @@ ol.search-results h3.title {
 .front #social-side {
     display: block;
     position: relative;
-    z-index: 500;
+    z-index: 50;
 }
 .region-social-side {
 	position: absolute;
@@ -1170,7 +1170,7 @@ ol.search-results h3.title {
   border: 1px solid #f1f1f1;
 	padding-bottom: 15px;
 	width: 275px;
-	height: 1368px;
+	height: 1356px;
   overflow-x: hidden; // don't show horizontal scrollbar
   overflow-y: scroll;
   box-sizing: border-box;
@@ -1288,7 +1288,9 @@ h3.front-promoted-title a,
   color: #FED463;
 }
 
-
+h3.front-promoted-title {
+  margin: 10px;
+}
 
 
 

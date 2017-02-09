@@ -387,7 +387,8 @@ function _atwork_activity_render_messages($result, $activityType) {
   $output .= '</div><!-- /#atwork-advanced-feed-settings -->';
 
   // Load adnode in here, not using superior sticky functionality baked into queries
-  $ad_node = node_load(20524);
+  //$ad_node = node_load(20524); // dev and local 
+  $ad_node = node_load(17352); // test and prod
   //dpm($ad_node);
   if(isset($ad_node->field_content['und'][0]['value']) &&  $ad_node->field_content['und'][0]['value']){
     $content = $ad_node->field_content['und'][0]['value'];
@@ -424,7 +425,7 @@ function _atwork_activity_render_messages($result, $activityType) {
             break;
         }
 
-    $output = '<div class="feed-ad-space-image"><img src="'. $ad_image .'" /></div>
+    $output .= '<div class="feed-ad-space-image"><img src="'. $ad_image .'" /></div>
     <div class="feed-ad-space-outer"> 
       <div class="feed-ad-space-content">' . $content . '</div>
       <div class="feed-ad-space-author-date">Posted By: Employee News ' . $time_record . '</div>

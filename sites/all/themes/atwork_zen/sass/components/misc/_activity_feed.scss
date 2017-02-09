@@ -13,6 +13,9 @@
   .form-textarea {
     border: 5px solid #004B8D;
   }
+  #profile-comment-link {
+    display: none; 
+  }
   #saving-notification-status {
     @include atwork-messages(green, ok);
   }
@@ -37,6 +40,20 @@
       text-decoration: underline;
       color: black;
     }
+  }
+  .new-message-count {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 40px;
+    height: auto;
+  }
+  #message-count-number { // TODO: Need a better icon and placement
+    position: absolute;
+    top: 20px;
+    left: 24px;
   }
 }
 
@@ -73,7 +90,7 @@
     }
   }
   .activity-filters-all {// button to show filters for all-activity
-    width: 46px;
+    width: 56px;
     background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-all-off.png) no-repeat center center;
     &.active,
     &:hover {
@@ -88,6 +105,9 @@
     &:hover {
       opacity: 0.7;
     }
+  }
+  .admin-advanced-feed-settings-view {
+    display: none;
   }
   // end all Header items 
 

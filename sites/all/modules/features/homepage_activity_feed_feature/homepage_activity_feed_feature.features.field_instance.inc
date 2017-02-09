@@ -53,6 +53,9 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_content',
+    'hashtag_settings' => array(
+      'hashtag_field' => 0,
+    ),
     'label' => 'Body',
     'required' => 0,
     'settings' => array(
@@ -82,7 +85,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
         'maxlength_js_enforce' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
         'maxlength_js_label_summary' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'maxlength_js_summary' => 165,
+        'maxlength_js_summary' => 350,
         'maxlength_js_truncate_html' => 1,
         'rows' => 5,
         'summary_rows' => 5,

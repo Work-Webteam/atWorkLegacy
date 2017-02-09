@@ -758,10 +758,10 @@ function profile_feed_comments_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'reply',
         'settings' => array(
-          'semantic_field_format' => 0,
+          'semantic_field_format' => '',
         ),
         'type' => 'reply_default',
         'weight' => 3,
@@ -807,7 +807,7 @@ function profile_feed_comments_field_default_field_instances() {
         'settings' => array(
           'displayed' => 3,
           'displayed_just_voted' => 2,
-          'semantic_field_format' => 0,
+          'semantic_field_format' => '',
         ),
         'type' => 'atwork_rate_format_full',
         'weight' => 4,
@@ -1500,7 +1500,7 @@ function profile_feed_comments_field_default_field_instances() {
       'module' => 'reply',
       'settings' => array(),
       'type' => 'reply',
-      'weight' => 2,
+      'weight' => 0,
     ),
   );
 
@@ -1517,7 +1517,7 @@ function profile_feed_comments_field_default_field_instances() {
         'settings' => array(
           'displayed' => 3,
           'displayed_just_voted' => 2,
-          'semantic_field_format' => 0,
+          'semantic_field_format' => '',
         ),
         'type' => 'atwork_rate_format_full',
         'weight' => 1,
@@ -1540,7 +1540,63 @@ function profile_feed_comments_field_default_field_instances() {
       'module' => NULL,
       'settings' => array(),
       'type' => 'atwork_rate_widget_thumbs_up_down',
-      'weight' => 4,
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'message-updated_user-field_follow_feed_comments'.
+  $field_instances['message-updated_user-field_follow_feed_comments'] = array(
+    'bundle' => 'updated_user',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'reply',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'reply_default',
+        'weight' => 2,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'message',
+    'field_name' => 'field_follow_feed_comments',
+    'label' => 'follow feed comments',
+    'required' => 0,
+    'settings' => array(
+      'access' => -1,
+      'allow_reply' => -1,
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'display' => -1,
+      'form' => -1,
+      'semantic_field_format' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'reply',
+      'settings' => array(),
+      'type' => 'reply',
+      'weight' => 1,
     ),
   );
 

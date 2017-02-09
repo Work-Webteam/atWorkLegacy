@@ -109,7 +109,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['style_options']['widgets']['top']['views_slideshow_xtra_overlay']['enable'] = 1;
   $handler->display->display_options['style_options']['widgets']['top']['views_slideshow_xtra_overlay']['weight'] = '1';
   $handler->display->display_options['style_options']['widgets']['top']['views_slideshow_xtra_overlay']['pause_after_mouse_move'] = '2000';
-  $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_pager']['enable'] = 1;
   $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_pager']['weight'] = '1';
   $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_pager']['type'] = 'views_slideshow_pager_fields';
   $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_pager']['views_slideshow_pager_fields_fields'] = array(
@@ -442,7 +441,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['field_image']['table'] = 'field_data_field_image';
   $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
   $handler->display->display_options['fields']['field_image']['label'] = '';
-  $handler->display->display_options['fields']['field_image']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_image']['element_wrapper_type'] = 'span';
   $handler->display->display_options['fields']['field_image']['element_wrapper_class'] = 'front-promoted-image';
@@ -459,7 +457,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['text'] = '<h3>[icon-[type]][title]</h3>';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '55';
   $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
@@ -477,7 +474,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = '';
-  $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['name']['alter']['text'] = '<div class="poster"><em>Posted by: [name]</em></div>';
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
@@ -489,7 +485,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = '';
-  $handler->display->display_options['fields']['body']['exclude'] = TRUE;
   $handler->display->display_options['fields']['body']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['body']['alter']['max_length'] = '135';
   $handler->display->display_options['fields']['body']['alter']['more_link_text'] = 'Read more';
@@ -508,7 +503,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = '';
-  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['nid']['alter']['text'] = 'Read more &raquo;';
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
@@ -524,7 +518,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['comment_count']['table'] = 'node_comment_statistics';
   $handler->display->display_options['fields']['comment_count']['field'] = 'comment_count';
   $handler->display->display_options['fields']['comment_count']['label'] = '';
-  $handler->display->display_options['fields']['comment_count']['exclude'] = TRUE;
   $handler->display->display_options['fields']['comment_count']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['comment_count']['alter']['text'] = '<i class="fa fa-comment"></i> Comments: [comment_count]';
   $handler->display->display_options['fields']['comment_count']['element_label_colon'] = FALSE;
@@ -537,7 +530,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['value']['field'] = 'value';
   $handler->display->display_options['fields']['value']['relationship'] = 'votingapi_cache';
   $handler->display->display_options['fields']['value']['label'] = '';
-  $handler->display->display_options['fields']['value']['exclude'] = TRUE;
   $handler->display->display_options['fields']['value']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['value']['alter']['text'] = '<i class="fa fa-thumbs-o-up"></i> Likes: [value]';
   $handler->display->display_options['fields']['value']['element_label_colon'] = FALSE;
@@ -550,20 +542,10 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = '';
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<div class="front-promoted">
- <div class="front-promoted-image">[field_image]</div>
-    <div class="promoted-info">
-         <div class="front-promoted-title"><h3>[title]</h3></div>
-         <div class="front-promoted-posted">[name]</div>
-         <div class="front-promoted-teaser">[body]</div>
-         <div class="front-promoted-read">[nid]</div>
-         <div class="front-promoted-comments">[comment_count]</div>
-         <div class="front-promoted-likes">[value]</div>
-         <div class="front-promoted-more">More [type]</div>
-    </div>
-</div>
-';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<div class="more-content">More [type]</div>';
   $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nothing_1']['element_wrapper_type'] = 'span';
+  $handler->display->display_options['fields']['nothing_1']['element_wrapper_class'] = 'front-promoted-more';
   $handler->display->display_options['fields']['nothing_1']['element_default_classes'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Promoted (field_promoted) */
@@ -653,7 +635,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['field_image']['table'] = 'field_data_field_image';
   $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
   $handler->display->display_options['fields']['field_image']['label'] = '';
-  $handler->display->display_options['fields']['field_image']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_image']['element_wrapper_type'] = 'span';
   $handler->display->display_options['fields']['field_image']['element_wrapper_class'] = 'front-promoted-image';
@@ -670,7 +651,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['text'] = '<h3>[icon-[type]][title]</h3>';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '55';
   $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
@@ -688,7 +668,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = '';
-  $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['name']['alter']['text'] = '<div class="poster"><em>Posted by: [name]</em></div>';
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
@@ -700,7 +679,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = '';
-  $handler->display->display_options['fields']['body']['exclude'] = TRUE;
   $handler->display->display_options['fields']['body']['alter']['max_length'] = '135';
   $handler->display->display_options['fields']['body']['alter']['more_link_text'] = 'Read more';
   $handler->display->display_options['fields']['body']['alter']['strip_tags'] = TRUE;
@@ -718,7 +696,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = '';
-  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['nid']['alter']['text'] = 'Read more &raquo;';
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
@@ -734,7 +711,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['comment_count']['table'] = 'node_comment_statistics';
   $handler->display->display_options['fields']['comment_count']['field'] = 'comment_count';
   $handler->display->display_options['fields']['comment_count']['label'] = '';
-  $handler->display->display_options['fields']['comment_count']['exclude'] = TRUE;
   $handler->display->display_options['fields']['comment_count']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['comment_count']['alter']['text'] = '<i class="fa fa-comment"></i> Comments: [comment_count]';
   $handler->display->display_options['fields']['comment_count']['element_label_colon'] = FALSE;
@@ -747,7 +723,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['value']['field'] = 'value';
   $handler->display->display_options['fields']['value']['relationship'] = 'votingapi_cache';
   $handler->display->display_options['fields']['value']['label'] = '';
-  $handler->display->display_options['fields']['value']['exclude'] = TRUE;
   $handler->display->display_options['fields']['value']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['value']['alter']['text'] = '<i class="fa fa-thumbs-o-up"></i> Likes: [value]';
   $handler->display->display_options['fields']['value']['element_label_colon'] = FALSE;
@@ -760,20 +735,10 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = '';
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<div class="front-promoted">
- <div class="front-promoted-image">[field_image]</div>
-    <div class="promoted-info">
-         <div class="front-promoted-title"><h3>[title]</h3></div>
-         <div class="front-promoted-posted">[name]</div>
-         <div class="front-promoted-teaser">[body]</div>
-         <div class="front-promoted-read">[nid]</div>
-         <div class="front-promoted-comments">[comment_count]</div>
-         <div class="front-promoted-likes">[value]</div>
-         <div class="front-promoted-more">More [type]</div>
-    </div>
-</div>
-';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<div class="more-content">More [type]</div>';
   $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nothing_1']['element_wrapper_type'] = 'span';
+  $handler->display->display_options['fields']['nothing_1']['element_wrapper_class'] = 'front-promoted-more';
   $handler->display->display_options['fields']['nothing_1']['element_default_classes'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Promoted (field_promoted) */
@@ -863,7 +828,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['field_image']['table'] = 'field_data_field_image';
   $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
   $handler->display->display_options['fields']['field_image']['label'] = '';
-  $handler->display->display_options['fields']['field_image']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_image']['element_wrapper_type'] = 'span';
   $handler->display->display_options['fields']['field_image']['element_wrapper_class'] = 'front-promoted-image';
@@ -880,7 +844,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['text'] = '<h3>[icon-[type]][title]</h3>';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '55';
   $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
@@ -898,7 +861,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['name']['field'] = 'name';
   $handler->display->display_options['fields']['name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['name']['label'] = '';
-  $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['name']['alter']['text'] = '<div class="poster"><em>Posted by: [name]</em></div>';
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
@@ -910,7 +872,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = '';
-  $handler->display->display_options['fields']['body']['exclude'] = TRUE;
   $handler->display->display_options['fields']['body']['alter']['max_length'] = '135';
   $handler->display->display_options['fields']['body']['alter']['more_link_text'] = 'Read more';
   $handler->display->display_options['fields']['body']['alter']['strip_tags'] = TRUE;
@@ -930,7 +891,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = '';
-  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['nid']['alter']['text'] = 'Read more &raquo;';
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
@@ -946,7 +906,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['comment_count']['table'] = 'node_comment_statistics';
   $handler->display->display_options['fields']['comment_count']['field'] = 'comment_count';
   $handler->display->display_options['fields']['comment_count']['label'] = '';
-  $handler->display->display_options['fields']['comment_count']['exclude'] = TRUE;
   $handler->display->display_options['fields']['comment_count']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['comment_count']['alter']['text'] = '<i class="fa fa-comment"></i> Comments: [comment_count]';
   $handler->display->display_options['fields']['comment_count']['element_label_colon'] = FALSE;
@@ -959,7 +918,6 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['value']['field'] = 'value';
   $handler->display->display_options['fields']['value']['relationship'] = 'votingapi_cache';
   $handler->display->display_options['fields']['value']['label'] = '';
-  $handler->display->display_options['fields']['value']['exclude'] = TRUE;
   $handler->display->display_options['fields']['value']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['value']['alter']['text'] = '<i class="fa fa-thumbs-o-up"></i> Likes: [value]';
   $handler->display->display_options['fields']['value']['element_label_colon'] = FALSE;
@@ -972,20 +930,10 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_1']['label'] = '';
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<div class="front-promoted">
- <div class="front-promoted-image">[field_image]</div>
-    <div class="promoted-info">
-         <div class="front-promoted-title"><h3>[title]</h3></div>
-         <div class="front-promoted-posted">[name]</div>
-         <div class="front-promoted-teaser">[body]</div>
-         <div class="front-promoted-read">[nid]</div>
-         <div class="front-promoted-comments">[comment_count]</div>
-         <div class="front-promoted-likes">[value]</div>
-         <div class="front-promoted-more">More [type]</div>
-    </div>
-</div>
-';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<div class="more-content">More [type]</div>';
   $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nothing_1']['element_wrapper_type'] = 'span';
+  $handler->display->display_options['fields']['nothing_1']['element_wrapper_class'] = 'front-promoted-more';
   $handler->display->display_options['fields']['nothing_1']['element_default_classes'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Promoted (field_promoted) */
