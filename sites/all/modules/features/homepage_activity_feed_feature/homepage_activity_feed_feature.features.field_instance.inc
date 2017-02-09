@@ -24,7 +24,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -106,7 +106,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 2,
+        'weight' => 1,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -162,9 +162,14 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => 'ad_space_250w',
+          'semantic_field_format' => 0,
+        ),
+        'type' => 'image',
+        'weight' => 4,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -201,7 +206,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
       'alt_field_hide' => 0,
       'alt_field_sync_title' => 1,
       'alt_field_update_on_edit' => 1,
-      'default_image' => 21941,
+      'default_image' => 0,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'filefield_paths' => array(
@@ -399,7 +404,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
         'pixlr_express_position' => 0,
         'pixlr_upload_enabled' => 0,
         'pixlr_upload_position' => 0,
-        'preview_image_style' => 'thumbnail',
+        'preview_image_style' => 'node_small',
         'progress_indicator' => 'throbber',
         'snipshot_enabled' => 0,
         'snipshot_position' => 0,
@@ -433,7 +438,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
           'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -509,7 +514,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'list_default',
-        'weight' => 3,
+        'weight' => 2,
       ),
       'ecard' => array(
         'label' => 'above',

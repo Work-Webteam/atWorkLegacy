@@ -391,8 +391,12 @@ function _atwork_activity_render_messages($result, $activityType) {
   //dpm($ad_node);
   if(isset($ad_node->field_content['und'][0]['value']) &&  $ad_node->field_content['und'][0]['value']){
     $content = $ad_node->field_content['und'][0]['value'];
-    // TODO: Need to determine the proper way to render the image below. Using absolute image path for now.
-    //$image = 
+    $image = field_view_value('node', $ad_node, 'field_image_adspace', $file, array(
+      'type' => 'image',
+      'settings' => array(
+        'image_style' => 'ad_space_250w',
+      ),
+    ));
     $date = $ad_node->created;
     $current_time = time();
     $diff = $current_time - $date;
@@ -424,7 +428,7 @@ function _atwork_activity_render_messages($result, $activityType) {
             break;
         }
 
-    $output = '<div class="feed-ad-space-image"><img src="/sites/all/themes/atwork_zen/images/default_images/ad-space-banner-default.jpg" /></div>
+    $output = '<div class="feed-ad-space-image">'. render($image) .'</div>
     <div class="feed-ad-space-outer"> 
       <div class="feed-ad-space-content">' . $content . '</div>
       <div class="feed-ad-space-author-date">Posted By: Employee News ' . $time_record . '</div>
