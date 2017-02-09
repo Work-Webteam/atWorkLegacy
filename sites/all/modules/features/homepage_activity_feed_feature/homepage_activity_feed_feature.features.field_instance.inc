@@ -88,7 +88,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 2,
+      'weight' => 4,
     ),
   );
 
@@ -150,7 +150,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 1,
+      'weight' => 3,
     ),
   );
 
@@ -158,7 +158,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
   $field_instances['node-ad_space-field_image_adspace'] = array(
     'bundle' => 'ad_space',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Use the crosshair icon to drag and drop an image to the top.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -199,7 +199,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_image_adspace',
     'label' => 'Image',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'alt_field' => 1,
       'alt_field_default' => '',
@@ -232,7 +232,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
       ),
       'filefield_paths_enabled' => 1,
       'max_filesize' => '1 MB',
-      'max_resolution' => '',
+      'max_resolution' => '250x250',
       'min_resolution' => '',
       'semantic_field_format' => '',
       'title_field' => 1,
@@ -303,6 +303,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
         'insert_default' => 'auto',
         'insert_styles' => array(
           'auto' => 'auto',
+          'colorbox__ad_space_250w' => 0,
           'colorbox__article_-_right_sidebar__240_wide_' => 0,
           'colorbox__atwork_newsletter_feature_image' => 0,
           'colorbox__atwork_newsletter_other_image' => 0,
@@ -347,6 +348,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
           'colorbox__user_thumb' => 0,
           'icon_link' => 0,
           'image' => 0,
+          'image_ad_space_250w' => 0,
           'image_article_-_right_sidebar__240_wide_' => 0,
           'image_atwork_newsletter_feature_image' => 0,
           'image_atwork_newsletter_other_image' => 0,
@@ -414,7 +416,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
         'svgedit_position' => 0,
       ),
       'type' => 'image_image',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -492,7 +494,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -1936,6 +1938,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
   t('Image');
   t('Sticky date');
   t('Sticky to activity feeds');
+  t('Use the crosshair icon to drag and drop an image to the top.');
 
   return $field_instances;
 }

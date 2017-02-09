@@ -32,7 +32,7 @@ function homepage_activity_feed_feature_field_default_field_bases() {
   // Exported field_base: 'field_image_adspace'.
   $field_bases['field_image_adspace'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => 5,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_image_adspace',

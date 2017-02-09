@@ -13,6 +13,35 @@ function homepage_activity_feed_feature_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_adspace_image_group|node|ad_space|form';
+  $field_group->group_name = 'group_adspace_image_group';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'ad_space';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Image Collection',
+    'weight' => '1',
+    'children' => array(
+      0 => 'field_image_adspace',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Image Collection',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => '',
+        'classes' => '',
+        'description' => 'There are 5 available slots for images but only the topmost will be used.',
+      ),
+      'formatter' => 'collapsed',
+    ),
+  );
+  $field_groups['group_adspace_image_group|node|ad_space|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_js_files|node|article|form';
   $field_group->group_name = 'group_js_files';
   $field_group->entity_type = 'node';
@@ -319,6 +348,7 @@ function homepage_activity_feed_feature_field_group_info() {
   t('Custom Code');
   t('Group Page Settings');
   t('Group Page Tags');
+  t('Image Collection');
   t('News Settings');
   t('News Tags');
   t('Poll Settings');
