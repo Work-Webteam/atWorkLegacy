@@ -399,7 +399,7 @@ function _atwork_activity_render_messages($result, $activityType) {
   // Load adnode in here, not using superior sticky functionality baked into queries
   $ad_node = node_load(20524); // dev and local
   //$ad_node = node_load(17352); // test and prod
-  if(isset($ad_node->field_content['und'][0]['value']) &&  $ad_node->field_content['und'][0]['value']){
+  if(isset($ad_node->field_content['und'][0]['value']) &&  $ad_node->field_content['und'][0]['value'] && $ad_node->status == '1'){
     $content = $ad_node->field_content['und'][0]['value'];
     $image = $ad_node->field_image_adspace['und'][0]['uri'];
     $ad_image = image_style_url("ad_space_250w", $image);
