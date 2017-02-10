@@ -58,7 +58,7 @@ node/20049',
         'region' => 'post_content',
         'status' => 1,
         'theme' => 'atwork_zen',
-        'weight' => 0,
+        'weight' => 3,
       ),
       'seven' => array(
         'region' => '',
