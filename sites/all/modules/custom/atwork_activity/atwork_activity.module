@@ -122,11 +122,24 @@ function atwork_activity_ajax_get_ajax($idir, $uid, $latest_rendered_time_stamp,
 }
 
 function check_message_count($latest_rendered_time_stamp, $account_uid){
+  $content_types = array(
+    'group_subscribe',
+    'new_answer',
+    'new_comment',
+    'new_image',
+    'new_node',
+    'status',
+    'updated_user',
+    'following_user'
+  );
+
+
   $query = db_select('message', 'm')
     ->fields('m', array('mid'))
     ->orderBy('m.timestamp', 'DESC')
 
     ->condition('m.uid', $account_uid)
+    ->condition('m.type', $content_types , "IN")
     ->condition('m.timestamp', $latest_rendered_time_stamp, '>');
 
   $count_query = $query->countQuery($query);
@@ -139,9 +152,6 @@ function check_message_count($latest_rendered_time_stamp, $account_uid){
 
     return $result;
 }
-
-
-
 
 function atwork_activity_group_access($node) {
   if ($node->type == 'section' && user_access('access content')) {
@@ -387,9 +397,8 @@ function _atwork_activity_render_messages($result, $activityType) {
   $output .= '</div><!-- /#atwork-advanced-feed-settings -->';
 
   // Load adnode in here, not using superior sticky functionality baked into queries
-  //$ad_node = node_load(20524); // dev and local 
+  //$ad_node = node_load(20524); // dev and local
   $ad_node = node_load(17352); // test and prod
-  //dpm($ad_node);
   if(isset($ad_node->field_content['und'][0]['value']) &&  $ad_node->field_content['und'][0]['value']){
     $content = $ad_node->field_content['und'][0]['value'];
     $image = $ad_node->field_image_adspace['und'][0]['uri'];
@@ -426,7 +435,7 @@ function _atwork_activity_render_messages($result, $activityType) {
         }
 
     $output .= '<div class="feed-ad-space-image"><img src="'. $ad_image .'" /></div>
-    <div class="feed-ad-space-outer"> 
+    <div class="feed-ad-space-outer">
       <div class="feed-ad-space-content">' . $content . '</div>
       <div class="feed-ad-space-author-date">Posted By: Employee News ' . $time_record . '</div>
     </div>';
@@ -2145,6 +2154,76 @@ EOT;
 
 
 /**
+ * Function to work out a proper query for profile page
+ */
+
+function profile_query($uid, $latest_rendered_time_stamp = NULL){
+  $current_user = user_load($uid);
+
+  $message_types = array(
+    'group_subscribe',
+    'new_answer',
+    'new_comment',
+    'new_image',
+    'new_node',
+    'status',
+    'updated_user',
+    'following_user',
+    );
+
+  //Now we need to create our larger query
+  // Want allmessages
+  $user_feed_query = db_select('message', 'm');
+  // More message data
+  //$user_feed_query->leftJoin('field_data_field_message_node', 'fmn', 'fmn.entity_id = m.mid');
+  // Galleris, if we want them
+  //$user_feed_query->leftJoin('field_data_field_gallery', 'i', 'i.entity_id = fmn.field_message_node_target_id');
+  // More gallery info if needed
+  //$user_feed_query->leftJoin('field_data_field_gallery_status', 's', 's.entity_id = i.field_gallery_target_id');
+  // For messages that are associated with nodes
+  //$user_feed_query->leftJoin('node', 'n', 'n.nid = fmn.field_message_node_target_id');
+
+
+  $user_feed_query->fields('m', array('mid'))
+    ->condition('m.uid', $uid, '=')
+ //   ->condition('n.status', '1')
+    ->condition('m.type', $message_types, 'IN');
+/*    ->condition(db_and()
+      ->condition(db_or()
+        ->condition('s.field_gallery_status_value', '1')
+        ->condition('s.field_gallery_status_value', NULL)
+        )
+      );
+*/
+   if(isset($latest_rendered_time_stamp) && $latest_rendered_time_stamp != null){
+    $user_feed_query
+        ->condition(db_and()
+           ->condition('m.timestamp', $latest_rendered_time_stamp, '>')
+        );
+
+      $count_query = $user_feed_query->countQuery($user_feed_query);
+
+      $result = $count_query
+     //->extend('PagerDefault')
+      //->limit(15)
+      ->execute()
+      ->fetchAll();
+    return $result;
+   } else {
+    $user_feed_query->orderBy('m.timestamp', 'DESC')
+    ->range(0, 100);
+    $result = $user_feed_query
+      ->extend('PagerDefault')
+      ->limit(8)
+      ->execute()
+      ->fetchAll();
+    return $result;
+  }
+  return;
+}
+
+
+/**
  * Helper function to create content for the profile page feed
  */
 function _atwork_activity_profile_page_block_content($user_id){
@@ -2184,10 +2263,22 @@ function _atwork_activity_profile_page_block_content($user_id){
   // Grab all messages related to user, User name, and picture of User.
   $classes = array();
 
+  $hidden_types = array(
+    'group_subscribe',
+    'new_answer',
+    'new_comment',
+    'new_image',
+    'new_node',
+    'status',
+    'updated_user',
+    'following_user'
+    );
+
   $query = db_select('message', 'm')
     ->fields('m', array('mid'))
     ->orderBy('m.timestamp', 'DESC')
-    ->condition('m.uid', $account->uid);
+    ->condition('m.uid', $account->uid)
+    ->condition('m.type', $hidden_types , "IN");
 
   $result = $query
     //->extend('PagerDefault')
@@ -2195,53 +2286,19 @@ function _atwork_activity_profile_page_block_content($user_id){
     ->execute()
     ->fetchAll();
 
+ // $result = profile_query($account->uid);
+
   $result_mid = array();
   foreach($result as $value){
     $result_mid[] = $value->mid;
   }
+
   // Load entities and all related content
   $messages1 = entity_load('message', $result_mid);
   // Now remove all unwanted messages
   // TODO: Instead of removing messages, we should move this into the query (as seen in front page feed query)
   foreach($messages1 as $key=>$value){
     switch(true){
-      case($value->type == "user_received_ecard"):
-      case($value->type == "user_sent_ecard"):
-      case($value->type == "user_liked_comment"):
-      case($value->type == "user_liked_node"):
-      case($value->type == "group_unsubscribed"):
-        unset($messages1[$key]);
-        break;
-      // Need to remove instances of masquerading or posting as employee news
-      case($value->type == "node_updated"):
-        if(isset($value->field_message_node['und'][0]['target_id']) && $value->field_message_node['und'][0]['target_id']){
-          $node = node_load($value->field_message_node['und'][0]['target_id']);
-          if(!empty($node)){
-            if(isset($node->uid) && $node->uid){
-              if(($account->uid !== $node->uid)){
-                unset($messages1[$key]);
-              }
-            // Node is authored by employee news, so uid = 0 (false to teh check above)
-            } else {
-              unset($messages1[$key]);
-            }
-          }
-        }
-        break;
-      case($value->type == "new_node"):
-        if(isset($value->field_message_node['und'][0]['target_id']) && $value->field_message_node['und'][0]['target_id']){
-          $node = node_load($value->field_message_node['und'][0]['target_id']);
-          if(!empty($node)){
-            if(isset($node->uid) && $node->uid){
-              if(($account->uid !== $node->uid)){
-                unset($messages1[$key]);
-              }
-            } else {
-              unset($messages1[$key]);
-            }
-          }
-        }
-        break;
       // Gallery case
       case($value->type == "new_image"):
         if(isset($value->field_message_node['und'][0]['target_id']) && $value->field_message_node['und'][0]['target_id']){
@@ -2260,8 +2317,6 @@ function _atwork_activity_profile_page_block_content($user_id){
         if(isset($value->uid) && $value->uid == $this_user->uid){
           $user_on_own_feed = TRUE;
         }
-        break;
-      case($value->type == "status"):
         break;
       // TODO: Forum case, image case, background page, ??Broken Case?? (starts with [])?
       default:
@@ -2438,7 +2493,6 @@ function atwork_activity_mail_alter(&$email_message) {
     }
   }
 }
-
 
 /**
  * Implementation of hook_block_view_alter
