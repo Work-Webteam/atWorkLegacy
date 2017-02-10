@@ -1656,7 +1656,7 @@ function atwork_profiles_block_info() {
     'info' => t('Header Block'),
     'cache' => DRUPAL_NO_CACHE,
   );
-  $blocks['bio_toggle'] = array(
+  $blocks['bio-toggle'] = array(
     'info' =>t("Profile page bio toggle block"),
     'visibility' => BLOCK_VISIBILITY_LISTED,
     );
