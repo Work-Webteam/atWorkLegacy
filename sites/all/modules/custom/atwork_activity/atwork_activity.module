@@ -568,6 +568,9 @@ function _atwork_activity_render_messages($result, $activityType) {
         if(isset($name_href) && $name_href != false){
           $rebuilt_string = preg_replace('/\[`[^\]]*\]/', $name_href, $rebuilt_string);
         }
+
+        // Strip out anything that is not a <p> or <a>
+        $rebuilt_string = strip_tags($rebuilt_string, '<p><a>');
         // Now put it back in markup
         $message['message__message_text__0']['#markup'] = $rebuilt_string;
 
@@ -2361,7 +2364,8 @@ function _atwork_activity_profile_page_block_content($user_id){
           $time_record = date('F j Y', $result['#entity']->timestamp);
           break;
       }
-
+      // strip out any tags that could cause problems later
+      $result['message__message_text__0']['#markup'] = strip_tags($result['message__message_text__0']['#markup'], '<p><a>');
        // Put everything together in the order we would like for this message
       $output .= '<div class="' . implode(' ', $classes) . '"><span class="date"> ' . $time_record . '</span> <span class="feed_image">' . render($user_image) . '</span>' . render($result) .
     /* print rate_generate_widget($widget_id, 'message', $entity->cid) . */ '</div><!-- /.message -->' ;
