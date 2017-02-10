@@ -31,18 +31,32 @@
     $('#block-atwork-activity-profile-page-activity-feed-block .comment-count-link:not(.atwork-activity-processed)', context)
       .addClass('atwork-activity-processed')
       .bind('click', function(){
-      toggleComments($(this).parentsUntil($('#activity-feed')).closest("div").prop("class"));
+      //  ID changes on your page vs. others page.
+      var location = $(this).parentsUntil('#activity-feed').closest("div").prop("class");
+      // Others feed
+      if(location.length < 1 ){
+        toggleComments($(this).parentsUntil('#block-atwork-activity-profile-page-activity-feed-block').closest("div").prop("class"));
+      } else {
+        toggleComments(location);
+      }
     });
 
     // Make sure we are not rebinding this improperly on homepage
     $('#block-atwork-activity-homepage .comment-count-link:not(.atwork-activity-processed)', context)
       .addClass('atwork-activity-processed')
       .bind('click', function(){
-      toggleComments($(this).parentsUntil('#activity-feed').closest("div").prop("class"));
+      //  ID changes on your page vs. others page.
+      var location = $(this).parentsUntil('#activity-feed').closest("div").prop("class");
+      // Others feed
+      if(location.length < 1 ){
+        toggleComments($(this).parentsUntil('#block-atwork-activity-profile-page-activity-feed-block').closest("div").prop("class"));
+      } else {
+        toggleComments(location);
+      }
     });
 
     // Comment update
-      $('[id^=edit-button]:not(.atwork-activity-processed)', context)
+    $('[id^=edit-button]:not(.atwork-activity-processed)', context)
         .addClass('atwork-activity-processed')
         .bind('click', function(){
           // Remove text blocks and show that it is saving
@@ -53,7 +67,14 @@
           // Refresh the page after .5 seconds (to let db update)
           setTimeout(ajaxRefresh, 500);
           // Also open all comments so that user can see the comment they just made
-          setOpenOnReloadComments($(this).parentsUntil('#activity-feed').closest("div").prop("class"));
+          // if you are on your feed
+          var location = $(this).parentsUntil('#activity-feed').closest("div").prop("class");
+          // Others feed
+          if(location.length < 1 ){
+            setOpenOnReloadComments($(this).parentsUntil('#block-atwork-activity-profile-page-activity-feed-block').closest("div").prop("class"));
+          } else {
+            setOpenOnReloadComments(location);
+          }
 
         return;
       });
