@@ -461,7 +461,7 @@ function _atwork_activity_render_messages($result, $activityType) {
     $messages = entity_load('message', $result_mid);
     $message_render_array = entity_view('message', $messages);
     foreach ($message_render_array['message'] as $message) {
-      dpm($message['#entity']);
+      //dpm($message['#entity']);
       if( $message['#entity']->timestamp > $time_stamp){
         $time_stamp = $message['#entity']->timestamp;
       }
