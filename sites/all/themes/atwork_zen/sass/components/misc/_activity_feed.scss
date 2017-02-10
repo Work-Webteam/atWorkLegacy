@@ -74,6 +74,7 @@
   }
   .block-header-inner { 
     float: right;
+    margin-top: -3px;
   }
   .activity-filters-my,
   .activity-filters-all {
@@ -90,7 +91,7 @@
     }
   }
   .activity-filters-all {// button to show filters for all-activity
-    width: 56px;
+    width: 68px;
     background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-all-off.png) no-repeat center center;
     &.active,
     &:hover {
@@ -104,6 +105,9 @@
     margin-right: 6px;
     &:hover {
       opacity: 0.7;
+    }
+    img {
+      margin-bottom: -6px;
     }
   }
   .admin-advanced-feed-settings-view {
@@ -621,11 +625,18 @@
     padding: 0;
     top: 20px;
   }
+  .atwork-activity-block-container {
+    padding: 4px;
+  }
   #full_menu {// hide the hamburger menu
     display: none;
   }
   .jsNewActivityWindow {// hide pop-out button
     display: none;
+  }
+  .feed-ad-space-outer h2 {
+    background-color: transparent;
+    color: #333;
   }
 }
 

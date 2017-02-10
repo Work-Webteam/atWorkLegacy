@@ -2114,12 +2114,12 @@ EOT;
 
       $block['subject'] = t('My News Feed');
       $block['subject'] .= '<div class="block-header-inner">';
-      $block['subject'] .= '<button class="activity-filters-my" title="show my content filters">&nbsp;</button>';
-      $block['subject'] .= '<button class="activity-filters-all" title="show all content filters">&nbsp;</button>';
+      $block['subject'] .= '<button class="activity-filters-my" title="See my activity + activity of my groups + people I follow">&nbsp;</button>';
+      $block['subject'] .= '<button class="activity-filters-all" title="See all site activity">&nbsp;</button>';
       // for prod/test
-      //$block['subject'] .= '<a href="node/21100" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="Click for pop-out Activity Feed window" /></a>';
+      //$block['subject'] .= '<a href="node/21100" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="See activity in a new window" /></a>';
       // for beta2
-      $block['subject'] .= '<a href="node/20049" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="Click for pop-out Activity Feed window" /></a>';
+      $block['subject'] .= '<a href="node/20049" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="See activity in a new window" /></a>';
       $block['subject'] .= '</div><!-- /.block-header-inner -->';
 
       $block['content'] = '<div class="atwork-activity-block-container">';
