@@ -1613,13 +1613,13 @@ function atwork_profiles_form_views_exposed_form_alter(&$form, &$form_state, $fo
     //$form['advanced_search']['followers']['#title'] = t('People following me');
     $form['advanced_search']['title'] = $form['title'];
     $form['advanced_search']['title']['#title'] = t('Title');
-	$form['advanced_search']['branch'] = $form['branch'];
+    $form['advanced_search']['branch'] = $form['branch'];
     $form['advanced_search']['branch']['#title'] = t('Branch');
-	$form['advanced_search']['ministry'] = $form['ministry'];
+    $form['advanced_search']['ministry'] = $form['ministry'];
     $form['advanced_search']['ministry']['#title'] = t('Ministry');
     $form['advanced_search']['skills'] = $form['skills'];
     $form['advanced_search']['skills']['#title'] = t('Skills');
-	$form['advanced_search']['interests'] = $form['interests'];
+    $form['advanced_search']['interests'] = $form['interests'];
     $form['advanced_search']['interests']['#title'] = t('Interests');
     $form['advanced_search']['city'] = $form['city'];
     $form['advanced_search']['city']['#title'] = t('City');
@@ -1633,7 +1633,7 @@ function atwork_profiles_form_views_exposed_form_alter(&$form, &$form_state, $fo
 
     unset($form['title']);
     unset($form['skills']);
-	unset($form['interests']);
+    unset($form['interests']);
     unset($form['work_group']);
     unset($form['branch']);
     unset($form['ministry']);
@@ -1656,6 +1656,10 @@ function atwork_profiles_block_info() {
     'info' => t('Header Block'),
     'cache' => DRUPAL_NO_CACHE,
   );
+  $blocks['bio_toggle'] = array(
+    'info' =>t("Profile page bio toggle block"),
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    );
 
   return $blocks;
 }
