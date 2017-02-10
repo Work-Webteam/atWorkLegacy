@@ -403,7 +403,7 @@ function _atwork_activity_render_messages($result, $activityType) {
     $content = $ad_node->field_content['und'][0]['value'];
     $image = $ad_node->field_image_adspace['und'][0]['uri'];
     $ad_image = image_style_url("ad_space_250w", $image);
-    $date = $ad_node->created;
+    $date = $ad_node->revision_timestamp;
     $current_time = time();
     $diff = $current_time - $date;
     $time_record = "";
@@ -461,6 +461,7 @@ function _atwork_activity_render_messages($result, $activityType) {
     $messages = entity_load('message', $result_mid);
     $message_render_array = entity_view('message', $messages);
     foreach ($message_render_array['message'] as $message) {
+      dpm($message['#entity']);
       if( $message['#entity']->timestamp > $time_stamp){
         $time_stamp = $message['#entity']->timestamp;
       }
