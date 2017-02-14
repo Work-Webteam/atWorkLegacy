@@ -70,7 +70,7 @@ function atwork_feature_events_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'date_format_time_only';
-  $strongarm->value = 'H:i a';
+  $strongarm->value = 'h:i a';
   $export['date_format_time_only'] = $strongarm;
 
   $strongarm = new stdClass();
