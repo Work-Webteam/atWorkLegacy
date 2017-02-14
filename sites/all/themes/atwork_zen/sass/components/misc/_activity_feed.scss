@@ -266,7 +266,8 @@
     p[class^="msg-"] {
       margin: -25px 10px 4px 0;
     }
-    .message.entity-message.message-status.clearfix {
+    .message.entity-message.message-status.clearfix p,
+    .message.entity-message.message-following-user.clearfix p {
       margin-left: 50px;
     }
     .message.sticky { // ad space styling. Overrides most layout settings above 
@@ -651,7 +652,7 @@
 .not-front .new-activity-window #admin-menu,
 .not-front .new-activity-window #block-atwork-profiles-header,
 .not-front .new-activity-window #block-block-7 {
-  display: none;
+  display: none!important;
 }
 .not-front .new-activity-window #block-atwork-mobile-atwork-mobile-menu-block {
   display:block!important;
