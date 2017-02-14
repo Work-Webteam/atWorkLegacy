@@ -117,6 +117,8 @@
   // start feed-ad-space
     .feed-ad-space-image { // Lives outside of the ad-space container
       margin-bottom: -6px; // bring the adspace box up to the image
+      text-align: center;
+      background-color: #26669E;
     }
     .feed-ad-space-outer { 
       border: 1px solid grey;
@@ -162,6 +164,9 @@
   #status-submit-button {
     clear: both;
     text-align: right;
+  }
+  #status-update {
+    margin-top: -1em;
   }
   #status-update {
     .field-name-field-image {
