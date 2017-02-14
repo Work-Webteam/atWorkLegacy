@@ -626,7 +626,7 @@
     top: 20px;
   }
   .atwork-activity-block-container {
-    padding: 4px;
+    padding: 5px;
   }
   #full_menu {// hide the hamburger menu
     display: none;
@@ -639,5 +639,45 @@
     color: #333;
   }
 }
+
+
+/* Pop Window on front page for the Social Sidebar */
+// Don't use a node id. There is a custom class called 'new-activity-window'
+.not-front .new-activity-window #headebox,
+.not-front .new-activity-window #admin-menu,
+.not-front .new-activity-window #block-atwork-profiles-header,
+.not-front .new-activity-window #block-block-7 {
+  display: none;
+}
+.not-front .new-activity-window #block-atwork-mobile-atwork-mobile-menu-block {
+  display:block!important;
+}
+.not-front .new-activity-window {
+  width: 275px!important;
+}
+.not-front .new-activity-window {
+  background-color: #FFF;
+}
+.not-front .new-activity-window #header.header {
+  background: none;
+  height:60px!important;
+}
+.not-front .new-activity-window .atwork-activity-block-container {
+  margin-top:6px;
+}
+.not-front .new-activity-window #social-side .region-social-side{
+  position: initial;
+  width: 275px;
+  margin: 0px auto;
+}
+.not-front .new-activity-window #social-side h2 {
+  position: initial;
+  padding: 0 10px;
+}
+.not-front .new-activity-window #social-side .item-list {
+  position: inherit;
+}
+
+
 
 //----------------- End Pop-out User Activity Window 
