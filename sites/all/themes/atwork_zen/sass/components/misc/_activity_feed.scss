@@ -69,7 +69,6 @@
     position: absolute;
     left: 0;
     top: 0;
-    width: 256px !important;
     z-index: 99;
   }
   .block-header-inner { 
@@ -227,7 +226,7 @@
       min-height: 90px;
       padding: 4px;
       border: 1px solid lighten(#777, 45%);
-      margin-bottom: 1em;
+      margin-bottom: .5em;
       background: lighten(#777, 49%) url(/sites/all/themes/atwork_zen/images/grey-trans.png) bottom center repeat-x;
       background-size: 18px;
     }
@@ -255,15 +254,21 @@
         padding: 0;
       }
     }
+    .field-name-field-feed-like-button {
+      width: 130px; //needed because ajax changes mean the reload applies the styling twice
+    }
     .field-name-field-comment-message-comments + .field-name-field-feed-like-button,
     .field-name-field-follow-feed-comments + .field-name-field-feed-like-button {// outer message like
-      left: 44%;
+      left: 35%;
     }
 
     // position all first message paragraphs. Status updates, etc. under the date.
     p[class^="msg-"] {
       margin: -25px 10px 4px 0;
-      text-indent: 50px;
+    }
+    .message.entity-message.message-status.clearfix p,
+    .message.entity-message.message-following-user.clearfix p {
+      margin-left: 50px;
     }
     .message.sticky { // ad space styling. Overrides most layout settings above 
       padding: 1.5em 1em 1em 1em;
@@ -626,7 +631,7 @@
     top: 20px;
   }
   .atwork-activity-block-container {
-    padding: 4px;
+    padding: 5px;
   }
   #full_menu {// hide the hamburger menu
     display: none;
@@ -639,5 +644,45 @@
     color: #333;
   }
 }
+
+// Moved Chris files from atworklayout to here for the feed. Needs to be Sassily cleaned
+/* Pop Window on front page for the Social Sidebar */
+// Don't use a node id. There is a custom class called 'new-activity-window'
+.not-front .new-activity-window #headebox,
+.not-front .new-activity-window #admin-menu,
+.not-front .new-activity-window #block-atwork-profiles-header,
+.not-front .new-activity-window #block-block-7 {
+  display: none!important;
+}
+.not-front .new-activity-window #block-atwork-mobile-atwork-mobile-menu-block {
+  display:block!important;
+}
+.not-front .new-activity-window {
+  width: 275px!important;
+}
+.not-front .new-activity-window {
+  background-color: #FFF;
+}
+.not-front .new-activity-window #header.header {
+  background: none;
+  height:60px!important;
+}
+.not-front .new-activity-window .atwork-activity-block-container {
+  margin-top:6px;
+}
+.not-front .new-activity-window #social-side .region-social-side{
+  position: initial;
+  width: 275px;
+  margin: 0px auto;
+}
+.not-front .new-activity-window #social-side h2 {
+  position: initial;
+  padding: 0 10px;
+}
+.not-front .new-activity-window #social-side .item-list {
+  position: inherit;
+}
+
+
 
 //----------------- End Pop-out User Activity Window 
