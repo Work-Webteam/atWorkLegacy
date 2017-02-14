@@ -416,7 +416,7 @@ only screen and (                min-resolution: 2dppx) {
 @media only screen and (max-width:979px) {
   html,
   #header.header,
-  .not-front.page-node-20049 #header.header {
+  .not-front .new-activity-window #header.header {
     background: none !important;
   }
   .front #content.column {
@@ -430,7 +430,7 @@ only screen and (                min-resolution: 2dppx) {
    		display: none !important;
     }
 	#header.header,
-  .not-front.page-node-20049 #header.header { //make new space for mobile menu in nav space
+  .not-front .new-activity-window #header.header { //make new space for mobile menu in nav space
     height: 60px!important;
     margin: 0;
   	}
@@ -443,7 +443,7 @@ only screen and (                min-resolution: 2dppx) {
 	}
 }
 @media only screen and (min-width:980px) {
-  .not-front.page-node-20049 #header.header {
+  .not-front .new-activity-window #header.header {
     background: none !important;
   }
   #block-atwork-mobile-atwork-mobile-menu-block,
@@ -474,40 +474,40 @@ only screen and (                min-resolution: 2dppx) {
 }
 
 /* Pop Window on front page for the Social Sidebar */
-.not-front.page-node-20049 #headebox,
-.not-front.page-node-20049 #admin-menu,
-.not-front.page-node-20049 #block-atwork-profiles-header,
-.not-front.page-node-20049 #block-block-7 {
+// Don't use a node id. There is a custom class called 'new-activity-window'
+.not-front .new-activity-window #headebox,
+.not-front .new-activity-window #admin-menu,
+.not-front .new-activity-window #block-atwork-profiles-header,
+.not-front .new-activity-window #block-block-7 {
   display: none;
 }
-.not-front.page-node-20049 #block-atwork-mobile-atwork-mobile-menu-block {
+.not-front .new-activity-window #block-atwork-mobile-atwork-mobile-menu-block {
   display:block!important;
 }
-.not-front.page-node-20049 #page {
+.not-front .new-activity-window {
   width: 275px!important;
 }
-.not-front.page-node-20049 #page.new-activity-window {
+.not-front .new-activity-window {
   background-color: #FFF;
 }
-.not-front.page-node-20049 #page.new-activity-window #header.header {
+.not-front .new-activity-window #header.header {
   background: none;
   height:60px!important;
 }
-.not-front.page-node-20049 #page.new-activity-window .atwork-activity-block-container {
+.not-front .new-activity-window .atwork-activity-block-container {
   margin-top:6px;
+  padding: 5px;
 }
-.not-front.page-node-20049 #page #social-side .region-social-side{
+.not-front .new-activity-window #social-side .region-social-side{
   position: initial;
   width: 275px;
   margin: 0px auto;
 }
-.not-front.page-node-20049 #page #social-side h2 {
+.not-front .new-activity-window #social-side h2 {
   position: initial;
-  background-color:grey;
-  color:#FFF;
   padding: 0 10px;
 }
-.not-front.page-node-20049 #social-side .item-list {
+.not-front .new-activity-window #social-side .item-list {
   position: inherit;
 }
 
