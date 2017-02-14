@@ -254,9 +254,12 @@
         padding: 0;
       }
     }
+    .field-name-field-feed-like-button {
+      width: 130px; //needed because ajax changes mean the reload applies the styling twice
+    }
     .field-name-field-comment-message-comments + .field-name-field-feed-like-button,
     .field-name-field-follow-feed-comments + .field-name-field-feed-like-button {// outer message like
-      left: 44%;
+      left: 35%;
     }
 
     // position all first message paragraphs. Status updates, etc. under the date.
