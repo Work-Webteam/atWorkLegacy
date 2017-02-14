@@ -629,19 +629,13 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['label'] = 'intro text';
-  $handler->display->display_options['header']['area']['content'] = '<?php
-global $user;
-$message = (\'
-<p style="margin-bottom:10px;">Putting a face to a name is a great way to connect with your colleagues across the province. Search our employee profiles to find similar (or sought after) skills, interests, ministries or geographies.</p>
+  $handler->display->display_options['header']['area']['content'] = '<p style="margin-bottom:10px;">Putting a face to a name is a great way to connect with your colleagues across the province. Search our employee profiles to find similar (or sought after) skills, interests, ministries or geographies.</p>
 
-<p style="margin-top:10px;">To update and publish <a href="/employees/\' . $user->name . \'">your profile</a>, go to your personalization menu (The “Hello” menu in the blue ribbon, top right corner). Then select “My Profile” and go to the “Edit” tab above your profile photo.</p>
+<p style="margin-top:10px;">To update and publish <a href="/employees/">your profile</a>, go to your personalization menu (The “Hello” menu in the blue ribbon, top right corner). Then select “My Profile” and go to the “Edit” tab above your profile photo.</p>
 
 <p>&nbsp;</p>
-\');
-
-echo($message);
-?>';
-  $handler->display->display_options['header']['area']['format'] = 'php_code';
+';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';

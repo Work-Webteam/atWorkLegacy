@@ -22,7 +22,7 @@ function homepage_activity_feed_feature_default_fe_block_settings() {
     'node_types' => array(),
     'noscript' => '',
     'pages' => '<front>
-node/20049',
+node/21100',
     'roles' => array(),
     'themes' => array(
       'atwork_zen' => array(
@@ -58,7 +58,7 @@ node/20049',
         'region' => 'post_content',
         'status' => 1,
         'theme' => 'atwork_zen',
-        'weight' => 3,
+        'weight' => 0,
       ),
       'seven' => array(
         'region' => '',

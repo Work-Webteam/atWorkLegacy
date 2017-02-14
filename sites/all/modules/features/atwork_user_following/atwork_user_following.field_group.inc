@@ -152,7 +152,7 @@ function atwork_user_following_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Profile Extra',
-    'weight' => '1',
+    'weight' => '2',
     'children' => array(
       0 => 'field_extended_biography',
       1 => 'group_skills_interests',
