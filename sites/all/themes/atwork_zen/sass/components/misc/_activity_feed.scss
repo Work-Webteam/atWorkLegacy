@@ -428,6 +428,11 @@
           @include quotes-open;
         }
       }
+      p:nth-last-of-type(2) {
+        &:after {
+          @include quotes-closed;
+        } 
+      }
     }
 
     // Position most of the inner elements absolutely

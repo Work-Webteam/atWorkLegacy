@@ -60,6 +60,15 @@
   top: 6px;
 }
 
+@mixin quotes-closed {
+  content:"\201D";
+  font-size: 2em;
+  color: lighten(#000000, 70%);
+  font-family: Georgia, serif;
+  position: relative;
+  top: 6px;
+}
+
 // Boxed Messages. Images are borrowed from Drupal core, stored in /misc
 // Colours: green, yellow or red. 
 // Types: ok, warning, error 
