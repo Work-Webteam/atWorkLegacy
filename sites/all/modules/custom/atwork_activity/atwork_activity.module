@@ -437,7 +437,7 @@ function _atwork_activity_render_messages($result, $activityType) {
     $output .= '<div class="feed-ad-space-image"><img src="'. $ad_image .'" /></div>
     <div class="feed-ad-space-outer">
       <div class="feed-ad-space-content">' . $content . '</div>
-      <div class="feed-ad-space-author-date">Posted By: Employee News ' . $time_record . '</div>
+      <div class="feed-ad-space-author-date">Posted by: Employee News ' . $time_record . '</div>
     </div>';
   }
   // The Status update form
