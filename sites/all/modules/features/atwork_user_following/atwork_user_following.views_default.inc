@@ -2733,7 +2733,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['label'] = 'haven\'t started following';
   $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div id="not-following"><p>Not following anyone. Find colleagues to follow on the <a href="/employees">employees page</a>.</p></div>';
+  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div id="not-following"><p>Not following anyone. Find colleagues to follow on the <a href="/employees">Employee Profile Page</a>.</p></div>';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: User relationships: Requestee user */
   $handler->display->display_options['relationships']['requestee_id']['id'] = 'requestee_id';
