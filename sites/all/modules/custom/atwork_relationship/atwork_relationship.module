@@ -2,23 +2,28 @@
 function atwork_relationship_init() {
   $js = <<<EOT
 function atwork_relationship_ajax_load(op, uid, rtid, name) {
-  //console.log(name);
-  //var message = '<div class="add-follower-message" > "You are now following"' + name + '". The person you are following will not be notified. To stop following someone, go to their profile page and click the \'following\' button"</div>';
-  //if(op == 'add'){
-    //jQuery(".add-follower-message").remove();
-    //jQuery(".remove-follower-message").remove();
-    //jQuery(".atwork-relationship-action.uid-" + uid).parent().append(message).hide().slideDown('slow');
-    //setTimeout((function(){
-     // jQuery('.add-follower-message').slideUp("slow");
-   // }), 5000);
-  //} else {
-    //jQuery(".remove-follower-message").remove();
-    //jQuery(".add-follower-message").remove();
-    //jQuery(".atwork-relationship-action.uid-" + uid).parent().append('<div class="remove-follower-message" > You are now unfollowing name. They will not be notified. To start following them again, go to their profile page and click "Follow" </div>').hide().slideDown('slow');
-    //setTimeout((function(){
-      //jQuery('.remove-follower-message').slideUp("slow");
-    //}), 5000);
- // }
+  name = name.replace(/\+/g, '%20');
+  name = decodeURIComponent(name);
+  console.log(name);
+  var message = '';
+  if(op == 'add'){
+    message = '<div class="add-follower-message" > You are now following ' + name + '. The person you are following will not be notified. To stop following someone, go to their profile page and click the \'following\' button</div>';
+    jQuery(".add-follower-message").remove();
+    jQuery(".remove-follower-message").remove();
+    jQuery(".atwork-relationship-action.uid-" + uid).parent().append(message).hide().slideDown('slow');
+    setTimeout((function(){
+      jQuery('.add-follower-message').slideUp("slow");
+    }), 5000);
+  } else {
+    message = '<div class="remove-follower-message" >You are now unfollowing ' + name + '. They will not be notified. To start following them again, go to their profile page and click "Follow" </div>';
+    jQuery(".remove-follower-message").remove();
+    jQuery(".add-follower-message").remove();
+    jQuery(".atwork-relationship-action.uid-" + uid).parent().append(message).hide().slideDown('slow');
+    setTimeout((function(){
+    jQuery('.remove-follower-message').slideUp("slow");
+    }), 5000);
+  }
+  name = encodeURIComponent(name);
   jQuery(".atwork-relationship-action.uid-" + uid).load("/atwork-relationship/" + op + "/" + uid + "/" + rtid + "/" + name);
   return false;
 
