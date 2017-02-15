@@ -319,6 +319,10 @@
       &:after {
         @include quotes-closed;
       }  
+      a[href^=node] { // if exists, push more link out of quotes
+        float: right;
+        margin-bottom: 2em;
+      }
     }
   }
 
