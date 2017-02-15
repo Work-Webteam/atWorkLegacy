@@ -186,6 +186,9 @@ function atwork_zen_process_page(&$variables, $hooks){
   }
 
   if (arg(0) == 'user' && is_numeric(arg(1)) && arg(2)) {
+    if(arg(2) == "following" || arg(2) == "followers"){
+      return;
+    }
     $account = user_load(arg(1));
     $variables['breadcrumb'] = '<h2 class="breadcrumb">' . l(_atwork_display_name($account), 'user/' . $account->uid) . '</h2>';
     switch (arg(2)) {

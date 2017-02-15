@@ -623,16 +623,15 @@ function atwork_breadcrumbs_views_post_render(&$view, &$output, &$cache){
     drupal_set_breadcrumb($breadcrumb);
   }
 
-  if($view->name == 'people_admin' && $view->current_display == 'page_followers2'){
+  if($view->name == 'people_admin' && ($view->current_display == 'page_followers2' || $view->current_display == 'page_following2')){
     $breadcrumb = array();
     $breadcrumb[] = l(t('Home'), '<front>');
     $breadcrumb[] = l(t('Employee Profiles'), 'employees');
     if(isset($view->args[0]) && $view->args[0]){
       $current_user = user_load($view->args[0]);
-      $breadcrumb[] = l(t($current_user->field_display_name['und'][0]['safe_value']), '/user' . '/' . $current_user->uid);
+      $breadcrumb[] = l(t($current_user->field_display_name['und'][0]['safe_value']), 'employees' . '/' . $current_user->name);
     }
     drupal_set_breadcrumb($breadcrumb);
-    dpm($breadcrumb);
   }
 
 
@@ -1016,6 +1015,5 @@ function atwork_breadcrumbs_user_view($account, $view_mode, $langcode) {
     }
     $breadcrumb[] = l($account->name, '/employees' . '/' . $account->name);
     drupal_set_breadcrumb($breadcrumb);
-
   }
 }
