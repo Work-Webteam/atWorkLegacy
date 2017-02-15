@@ -312,7 +312,14 @@
   
   // inner nested message div styling
   .entity-message {
-
+    p[class^="msg-"] + p + p { // start with this class and then only the 3rd p
+      &:before {
+        @include quotes-open;
+      }
+      &:after {
+        @include quotes-closed;
+      }  
+    }
   }
 
   .field-name-field-profile-comment + .field-name-field-feed-like-button {// inner reply like
@@ -533,6 +540,9 @@
     .field-item:before {
       @include quotes-open;
     }
+    .field-item:after {
+      @include quotes-closed;
+    }  
   }
   .field-name-field-profile-comment-date,
   .field-name-field-display-name {
