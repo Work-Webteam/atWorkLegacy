@@ -21,7 +21,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Delivery Details',
-    'weight' => '5',
+    'weight' => '6',
     'children' => array(
       0 => 'field_lsa_office_address',
       1 => 'field_lsa_office_city',
@@ -449,6 +449,39 @@ function atwork_lsa_features_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_pin_options|node|lsa_pin_application|form';
+  $field_group->group_name = 'group_pin_options';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'lsa_pin_application';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Pin Options',
+    'weight' => '3',
+    'children' => array(
+      0 => 'field_lsa_pin_service_milestone',
+      1 => 'field_lsa_registerer',
+      2 => 'field_lsa_milestone_year',
+      3 => 'field_lsa_other_milestone_years',
+      4 => 'field_lsa_previous_service_miles',
+      5 => 'field_lsa_pin_ministry_org',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-pin-options field-group-fieldset',
+        'required_fields' => 1,
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_pin_options|node|lsa_pin_application|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_recipient_details|node|lsa_pin_application|form';
   $field_group->group_name = 'group_recipient_details';
   $field_group->entity_type = 'node';
@@ -457,17 +490,14 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Recipient Details',
-    'weight' => '3',
+    'weight' => '4',
     'children' => array(
       0 => 'field_lsa_pin_employee_number',
       1 => 'field_lsa_pin_prefix',
       2 => 'field_lsa_pin_first_name',
       3 => 'field_lsa_pin_last_name',
-      4 => 'field_lsa_org',
-      5 => 'field_lsa_branch_department',
-      6 => 'field_lsa_email',
-      7 => 'field_lsa_pin_service_milestone',
-      8 => 'field_lsa_registerer',
+      4 => 'field_lsa_branch_department',
+      5 => 'field_lsa_email',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -532,7 +562,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Supervisor Details',
-    'weight' => '4',
+    'weight' => '5',
     'children' => array(
       0 => 'field_lsa_supervisor_first_name',
       1 => 'field_lsa_supervisor_last_name',
@@ -561,6 +591,7 @@ function atwork_lsa_features_field_group_info() {
   t('Home Contact Information');
   t('Name');
   t('Office Information');
+  t('Pin Options');
   t('RSVP Information');
   t('Recipient Details');
   t('Service Information');

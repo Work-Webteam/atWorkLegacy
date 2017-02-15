@@ -4077,7 +4077,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 20,
       ),
       'type' => 'text_textfield',
-      'weight' => 21,
+      'weight' => 22,
     ),
   );
 
@@ -4150,7 +4150,70 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 20,
       ),
       'type' => 'email_textfield',
-      'weight' => 19,
+      'weight' => 21,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-lsa_pin_application-field_lsa_milestone_year'.
+  $field_instances['node-lsa_pin_application-field_lsa_milestone_year'] = array(
+    'bundle' => 'lsa_pin_application',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(
+          'semantic_field_format' => 0,
+        ),
+        'type' => 'list_default',
+        'weight' => 18,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_milestone_year',
+    'label' => 'Are you celebrating a current service milestone in 2017?',
+    'required' => 1,
+    'settings' => array(
+      'semantic_field_format' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 14,
     ),
   );
 
@@ -4381,21 +4444,26 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-lsa_pin_application-field_lsa_org'.
-  $field_instances['node-lsa_pin_application-field_lsa_org'] = array(
+  // Exported field_instance:
+  // 'node-lsa_pin_application-field_lsa_other_milestone_years'.
+  $field_instances['node-lsa_pin_application-field_lsa_other_milestone_years'] = array(
     'bundle' => 'lsa_pin_application',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
+        'label' => 'above',
         'module' => 'list',
         'settings' => array(
-          'semantic_field_format' => '',
+          'semantic_field_format' => 0,
         ),
         'type' => 'list_default',
-        'weight' => 6,
+        'weight' => 19,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4423,34 +4491,19 @@ function atwork_lsa_features_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_lsa_org',
-    'label' => 'Ministry/Organization',
+    'field_name' => 'field_lsa_other_milestone_years',
+    'label' => 'Do you wish to request any service pin(s) retroactively?',
     'required' => 1,
     'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
+      'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(
-        'apply_chosen' => '',
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-      ),
-      'type' => 'options_select',
-      'weight' => 20,
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 17,
     ),
   );
 
@@ -4526,7 +4579,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 8,
       ),
       'type' => 'text_textfield',
-      'weight' => 14,
+      'weight' => 17,
     ),
   );
 
@@ -4602,7 +4655,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 20,
       ),
       'type' => 'text_textfield',
-      'weight' => 17,
+      'weight' => 19,
     ),
   );
 
@@ -4678,7 +4731,68 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 20,
       ),
       'type' => 'text_textfield',
-      'weight' => 18,
+      'weight' => 20,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-lsa_pin_application-field_lsa_pin_ministry_org'.
+  $field_instances['node-lsa_pin_application-field_lsa_pin_ministry_org'] = array(
+    'bundle' => 'lsa_pin_application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(
+          'semantic_field_format' => 0,
+        ),
+        'type' => 'list_default',
+        'weight' => 21,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_pin_ministry_org',
+    'label' => 'Ministry_Organization',
+    'required' => 1,
+    'settings' => array(
+      'semantic_field_format' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 16,
     ),
   );
 
@@ -4749,7 +4863,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 16,
+      'weight' => 18,
     ),
   );
 
@@ -4800,19 +4914,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'label' => 'Service Milestone',
     'required' => 1,
     'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
+      'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -4820,7 +4922,6 @@ function atwork_lsa_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(
         'apply_chosen' => '',
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_select',
       'weight' => 15,
@@ -4897,7 +4998,126 @@ function atwork_lsa_features_field_default_field_instances() {
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_onoff',
-      'weight' => 12,
+      'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-lsa_pin_application-field_lsa_previous_service_miles'.
+  $field_instances['node-lsa_pin_application-field_lsa_previous_service_miles'] = array(
+    'bundle' => 'lsa_pin_application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(
+          'semantic_field_format' => 0,
+        ),
+        'type' => 'list_default',
+        'weight' => 20,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_previous_service_miles',
+    'label' => 'Please select the retroactive milestone pin(s) you would like to order',
+    'required' => 0,
+    'settings' => array(
+      'semantic_field_format' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 18,
+    ),
+  );
+
+  // Exported field_instance: 'node-lsa_pin_application-field_lsa_registerer'.
+  $field_instances['node-lsa_pin_application-field_lsa_registerer'] = array(
+    'bundle' => 'lsa_pin_application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(
+          'semantic_field_format' => 0,
+        ),
+        'type' => 'list_default',
+        'weight' => 17,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_registerer',
+    'label' => 'Who is registering for this service pin?',
+    'required' => 1,
+    'settings' => array(
+      'semantic_field_format' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 13,
     ),
   );
 
@@ -5285,6 +5505,7 @@ function atwork_lsa_features_field_default_field_instances() {
   t('25 Year Certificate');
   t('Actual_Min/Org');
   t('Alternate Email Address');
+  t('Are you celebrating a current service milestone in 2017?');
   t('Attending Ceremony');
   t('Attending with alternate Min/Org');
   t('Award');
@@ -5300,6 +5521,7 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Date of Retirement');
   t('Did you receive your award?');
   t('Did you register last year but were unable to attend the ceremony?');
+  t('Do you wish to request any service pin(s) retroactively?');
   t('Email address');
   t('Employee Number');
   t('Engravement');
@@ -5314,12 +5536,14 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Middle Name');
   t('Ministry ID');
   t('Ministry/Organization');
+  t('Ministry_Organization');
   t('Notes');
   t('Notes (Ceremony)');
   t('Number Attending');
   t('Office');
   t('Office Street Address');
   t('Please Specify Your Requirements');
+  t('Please select the retroactive milestone pin(s) you would like to order');
   t('Please use the format:A1A1A1');
   t('Postal Code');
   t('Prefix');
@@ -5336,6 +5560,7 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Terms');
   t('This is how your name will appear on your 25 year certificate. Make any changes you would like.');
   t('Watch Engraving Sent');
+  t('Who is registering for this service pin?');
   t('Work Phone');
   t('Work Phone Ext');
   t('Years of Service');

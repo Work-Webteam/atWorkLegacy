@@ -90,6 +90,27 @@ function atwork_lsa_features_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'menu-lsa-admin_lsa-admin:<nolink>',
   );
+  // Exported menu link: menu-lsa-admin_lsa-registrations:administration/long-service-awards .
+  $menu_links['menu-lsa-admin_lsa-registrations:administration/long-service-awards '] = array(
+    'menu_name' => 'menu-lsa-admin',
+    'link_path' => 'administration/long-service-awards ',
+    'router_path' => 'administration/long-service-awards',
+    'link_title' => 'LSA Registrations',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-lsa-admin_lsa-registrations:administration/long-service-awards ',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -48,
+    'customized' => 1,
+    'parent_identifier' => 'menu-lsa-admin_lsa-admin:<nolink>',
+  );
   // Exported menu link: menu-lsa-admin_service-pin-application:node/add/lsa-pin-application.
   $menu_links['menu-lsa-admin_service-pin-application:node/add/lsa-pin-application'] = array(
     'menu_name' => 'menu-lsa-admin',
@@ -138,6 +159,7 @@ function atwork_lsa_features_menu_default_menu_links() {
   t('LSA Admin');
   t('LSA Application');
   t('LSA Dashboard');
+  t('LSA Registrations');
   t('Service Pin Application');
   t('Service Pin Registrations');
 
