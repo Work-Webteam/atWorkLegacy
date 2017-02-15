@@ -467,6 +467,7 @@ function atwork_lsa_features_field_group_info() {
       5 => 'field_lsa_branch_department',
       6 => 'field_lsa_email',
       7 => 'field_lsa_pin_service_milestone',
+      8 => 'field_lsa_registerer',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

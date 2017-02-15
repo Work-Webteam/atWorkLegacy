@@ -556,8 +556,7 @@ function atwork_lsa_node_page_view($node) {
  */
 
 function atwork_lsa_menu() {
-  $items['atwork-lsa/%/'] = array(
-    'title' => 'For submitter',
+  $items['atwork_lsa_pin_form/%'] = array(
     'type' => MENU_CALLBACK,
     'page callback' => 'atwork_lsa_pin_page_callback',
     'page arguments' => array(1),
@@ -568,19 +567,22 @@ function atwork_lsa_menu() {
 }
 
 /**
- * Callback to determing who is filling out the pin form
+ * Callback to determing who is filling out the pin form, and sending an array back to use to hide/show/auto-pop specific fields.
  * @param  string $choice   passes the choice that the user selects, which alters the way the form appears/populates.
  */
 function atwork_lsa_pin_page_callback($choice) {
   $return_array = array();
   global $user;
   $current_user = user_load($user->uid);
-  // skip defaults for admins who are entering for others
-  if (in_array('lsa admin', $current_user->roles) || in_array('recognition contact', $current_user->roles)) {
-    return $return_array;
-  }
 
+  // skip defaults for admins who are entering for others
+ // if (in_array('lsa admin', $current_user->roles) || in_array('recognition contact', $current_user->roles)) {
+ //   die();
+ // }
+
+  if($choice == 1){
     //If this is a user, check to see if they have already submitted an application
+    // TODO = THIS REQUIRES TESTING
     $exists = db_select('node', 'n')
       ->fields('n', array('nid'))
       ->condition('n.uid', $user->uid)
@@ -591,35 +593,69 @@ function atwork_lsa_pin_page_callback($choice) {
       drupal_goto('career/long-service-awards-pin/applications/' . $exists['nid']);
     }
 
+    // We need to autofill some text boxes
+    $field_gal_employee_number = field_get_items('user', $current_user, 'field_gal_employee_number');
+    $field_gal_first_name = field_get_items('user', $current_user, 'field_gal_first_name');
+    $field_gal_last_name = field_get_items('user', $current_user, 'field_gal_last_name');
+    $field_gal_branch = field_get_items('user',$current_user,'field_gal_branch');
+    $field_gal_work_group = field_get_items('user',$current_user, 'field_gal_work_group');
+    $field_gal_city = field_get_items('user',$current_user,'field_gal_city');
+    $field_email = field_get_items('user', $current_user, 'mail');
+    $return_array = array(
+      'choice' => 1,
+      'employee_number' => $field_gal_employee_number,
+      'first_name' => $field_gal_first_name,
+      'last_name' => $field_gal_last_name,
+      'branch' => $field_gal_branch,
+      'work_group' => $field_gal_work_group,
+      'email' => $field_email,
+    );
 
+    drupal_json_output($return_array);
+    die();
+  } elseif($choice == 2) {
+    // This is a supervisor, so we can fill in some info for them
+    $field_gal_first_name = field_get_items('user', $current_user, 'field_gal_first_name');
+    $field_gal_last_name = field_get_items('user', $current_user, 'field_gal_last_name');
+    $field_gal_phone_number = field_get_items('user', $current_user, 'field_gal_phone_number');
+    $field_gal_address = field_get_items('user',$current_user, 'field_gal_address');
+    $field_gal_postal_code = field_get_items('user',$current_user,'field_gal_postal_code');
+    $field_gal_city = field_get_items('user',$current_user,'field_gal_city');
+    $return_array = array(
+      'choice' => 2,
+      'first_name' => $field_gal_first_name,
+      'last_name' => $field_gal_last_name,
+      'phone_number' => $field_gal_phone_number,
+      'address' => $field_gal_address,
+      'postal_code' => $field_gal_postal_code,
+      'city' => $field_gal_city,
+    );
 
+    $return_array = array(
+      'choice' => 2,
+    );
+    drupal_json_output($return_array);
+    die();
+  } elseif($choice == 3) {
+    $return_array = array(
+      'choice' => 3,
+    );
+    drupal_json_output($return_array);
+    die();
+  }
 
-  // We need to autofill some text boxes
-  //$form['field_lsa_pin_employee_number'][$form['field_lsa_pin_employee_number']['#language']][0]['value']['#default_value'] = atwork_ldap_get_employee_number($user);
-  $field_gal_first_name = field_get_items('user', $user, 'field_gal_first_name');
-  $field_gal_last_name = field_get_items('user', $user, 'field_gal_last_name');
-  $field_gal_phone_number = field_get_items('user', $user, 'field_gal_phone_number');
-  $field_gal_branch = field_get_items('user',$user,'field_gal_branch');
-  $field_gal_work_group = field_get_items('user',$user, 'field_gal_work_group');
-  $field_gal_address = field_get_items('user',$user, 'field_gal_address');
-  $field_gal_postal_code = field_get_items('user',$user,'field_gal_postal_code');
-  $field_gal_city = field_get_items('user',$user,'field_gal_city');
+  // Choice is 0 or does not have a value - so hide everything adn set select to 0
   $return_array = array(
-    'first_name' => $field_gal_first_name,
-    'last_name' => $field_gal_last_name,
-    'phone_number' => $field_gal_phone_number,
-    'branch' => $field_gal_branch,
-    'work_group' => $field_gal_work_group,
-    'address' => $field_gal_address,
-    'postal_code' => $field_gal_postal_code,
-    'city' => $field_gal_city,
+    'choice' => 0,
   );
-  drupal_add_js(array('atwork_lsa' => $return_array), 'setting');
-  return;
+  drupal_json_output($return_array);
+  die();
+
 }
 
-
+/*
 function atwork_lsa_in_delivery_callback($page_callback_result) {
   print $page_callback_result;
 
 }
+*/
