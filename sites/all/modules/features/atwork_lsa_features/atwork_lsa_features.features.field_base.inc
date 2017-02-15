@@ -630,6 +630,31 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_lsa_milestone_year'.
+  $field_bases['field_lsa_milestone_year'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_milestone_year',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 'No',
+        1 => 'Yes',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
+  );
+
   // Exported field_base: 'field_lsa_ministry_id'.
   $field_bases['field_lsa_ministry_id'] = array(
     'active' => 1,
@@ -901,6 +926,31 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'list_integer',
   );
 
+  // Exported field_base: 'field_lsa_other_milestone_years'.
+  $field_bases['field_lsa_other_milestone_years'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_other_milestone_years',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 'No',
+        1 => 'Yes',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
+  );
+
   // Exported field_base: 'field_lsa_pin_employee_number'.
   $field_bases['field_lsa_pin_employee_number'] = array(
     'active' => 1,
@@ -964,6 +1014,50 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_lsa_pin_ministry_org'.
+  $field_bases['field_lsa_pin_ministry_org'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_pin_ministry_org',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        1 => 'BC Public Service Agency',
+        2 => 'Ministry of Aboriginal Relations and Reconciliation',
+        3 => 'Ministry of Advanced Education',
+        4 => 'Ministry of Agriculture',
+        5 => 'Ministry of Children and Family Development',
+        6 => 'Ministry of Community, Sport and Cultural Development',
+        7 => 'Ministry of Education',
+        8 => 'Ministry of Energy and Mines',
+        9 => 'Ministry of Environment',
+        10 => 'Ministry of Finance',
+        11 => 'Ministry of Forests, Lands and Natural Resource Operations',
+        12 => 'Ministry of Health',
+        13 => 'Ministry of International Trade',
+        14 => 'Ministry of Jobs, Tourism and Skills Training',
+        15 => 'Ministry of Justice',
+        16 => 'Ministry of Natural Gas Development',
+        17 => 'Ministry of Public Safety and Solicitor General',
+        18 => 'Ministry of Small Business and Red Tape Reduction',
+        19 => 'Ministry of Social Development and Social Innovation',
+        20 => 'Ministry of Technology, Innovation and Citizens\' Services',
+        21 => 'Ministry of Transportation and Infrastructure',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_lsa_pin_prefix'.
   $field_bases['field_lsa_pin_prefix'] = array(
     'active' => 1,
@@ -1011,6 +1105,12 @@ function atwork_lsa_features_field_default_field_bases() {
         10 => '10 Years',
         15 => '15 Years',
         20 => '20 Years',
+        25 => '25 Years',
+        30 => '30 Years',
+        35 => '35 Years',
+        40 => '40 Years',
+        45 => '45 Years',
+        50 => '50 Years',
       ),
       'allowed_values_function' => '',
     ),
@@ -1071,6 +1171,39 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'list_integer',
   );
 
+  // Exported field_base: 'field_lsa_previous_service_miles'.
+  $field_bases['field_lsa_previous_service_miles'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_previous_service_miles',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        5 => 5,
+        10 => 10,
+        15 => 15,
+        20 => 20,
+        25 => 25,
+        30 => 30,
+        35 => 35,
+        40 => 40,
+        45 => 45,
+        50 => 50,
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_lsa_received_award'.
   $field_bases['field_lsa_received_award'] = array(
     'active' => 1,
@@ -1119,6 +1252,32 @@ function atwork_lsa_features_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_integer',
+  );
+
+  // Exported field_base: 'field_lsa_registerer'.
+  $field_bases['field_lsa_registerer'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_registerer',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        1 => 'I am registering for myself',
+        2 => 'I am a supervisor, registering on behalf my employee',
+        3 => 'I am a ministry rep, registering on behalf of an employee in our ministry/organization',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_lsa_retiring_thisyear'.
