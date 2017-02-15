@@ -1,0 +1,16 @@
+// For custom styling of Drupal message boxes
+
+// Front page messages relate to Activity Feed, so place inside
+.front {
+  .messages--status {
+    position: absolute;
+    right: 0px;
+    top: 42px;
+    z-index: 60;
+    max-width: 193px;
+  }
+  .messages--error.messages.error { //hide the admin menu and error box. Remove before commit.
+    display: none;
+  }
+}
+
