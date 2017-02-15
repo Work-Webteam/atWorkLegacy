@@ -646,7 +646,7 @@ echo(\'<p style="margin-top:10px;">To update and publish <a href="/employees/\' 
   $handler->display->display_options['empty']['area']['content'] = '<p align="center" style="margin-bottom:12px;"><bold>No results found.</bold></p>
 <p style="margin-bottom:12px;">It’s possible the name you entered was misspelled or the employee you searched for has not published their profile.</p>
  
-<p style="margin-bottom:12px;">To publish and update your profile, go to your personalization menu (The “Hello” menu in the blue ribbon, top right corner). Then select “My Profile” and go to the “Edit” tab above your profile photo.</p>
+<p style="margin-bottom:12px;">To publish your profile, go to your personalization menu (The “Hello” menu in the blue ribbon, top right corner). Then select “My Profile” and go to the “Edit” tab above your profile photo.</p>
 <p style="margin-bottom:12px;">To publish your profile, check the box that shows: “Share your profile.”</p>';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
