@@ -600,7 +600,7 @@ function atwork_lsa_pin_page_callback($choice) {
     $field_gal_branch = field_get_items('user',$current_user,'field_gal_branch');
     $field_gal_work_group = field_get_items('user',$current_user, 'field_gal_work_group');
     $field_gal_city = field_get_items('user',$current_user,'field_gal_city');
-    $field_email = field_get_items('user', $current_user, 'mail');
+    $field_email = $current_user->mail;
     $return_array = array(
       'choice' => 1,
       'employee_number' => $field_gal_employee_number,
