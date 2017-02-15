@@ -117,11 +117,13 @@
   // start feed-ad-space
     .feed-ad-space-image { // Lives outside of the ad-space container
       margin-bottom: -6px; // bring the adspace box up to the image
+      text-align: center;
+      background-color: #26669E;
     }
     .feed-ad-space-outer { 
       border: 1px solid grey;
       padding: 1em;
-      background: #d1e4f8;
+      background: #D7D7D7;
       position: relative;
     }
 
@@ -164,6 +166,9 @@
     text-align: right;
   }
   #status-update {
+    margin-top: -.5em;
+  }
+  #status-update {
     .field-name-field-image {
       float: left;
       max-width: 50px;
@@ -179,7 +184,7 @@
   #activity-feed {
     clear: both;
     display: block;
-    margin-top: 1em;
+    margin-top: .8em;
   }
   #atwork-activity-customize-feed-form .description {
     margin-bottom: 1em;
@@ -657,7 +662,7 @@
 .not-front .new-activity-window #admin-menu,
 .not-front .new-activity-window #block-atwork-profiles-header,
 .not-front .new-activity-window #block-block-7 {
-  display: none!important;
+  display: none;
 }
 .not-front .new-activity-window #block-atwork-mobile-atwork-mobile-menu-block {
   display:block!important;
