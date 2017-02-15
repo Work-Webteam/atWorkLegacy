@@ -8,9 +8,6 @@
 .front.logged-in.no-sidebars .skin-default {
 	height: 260px; // removes the space used by the selector boxes.
 }
-.messages--error.messages.error {
-  display: none;//hide the admin menu and error box. Remove before commit.
-}
 #main {
   margin-top: 2em;
 }
