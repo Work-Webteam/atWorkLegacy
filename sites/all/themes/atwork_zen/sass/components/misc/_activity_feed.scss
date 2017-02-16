@@ -11,7 +11,7 @@
     display: none;
   }
   .form-textarea {
-    border: 5px solid #004B8D;
+    border: 5px solid #26669E;
   }
   #profile-comment-link {
     display: none; 
@@ -62,7 +62,6 @@
 //--------- Social Side Activity Feed
 
 //----- General Layout
-
 #social-side {
   // start all Header items 
   h2 {
@@ -172,6 +171,14 @@
     .field-name-field-image {
       float: left;
       max-width: 50px;
+    }
+    div#speech-pointer {//adds pointer arrow to status update bubble on activity feed
+    display: block;
+    width: 12px;
+    height: 18px;
+    background: url(/sites/all/modules/custom/atwork_activity/img/speech-arrow.png) no-repeat;
+    padding: 0;
+    margin: -63px 0 50px 53px;
     }
     .form-textarea-wrapper {
       float: right;
