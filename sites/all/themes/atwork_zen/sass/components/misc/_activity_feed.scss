@@ -35,7 +35,7 @@
     font: inherit;
     color: #135ab0;
     cursor: pointer;
-    font-size: smaller;
+    font-size: 10px;
     &:hover {
       text-decoration: underline;
       color: black;
@@ -108,7 +108,7 @@
       margin-bottom: -6px;
     }
   }
-  .admin-advanced-feed-settings-view {
+  #activity-feed-advanced-filters {
     display: none;
   }
   // end all Header items 
@@ -145,7 +145,7 @@
       }
     }
     .feed-ad-space-author-date {
-      font-size: smaller;
+      font-size: 10px;
     }
     // stop feed-ad-space
 
@@ -178,7 +178,7 @@
     height: 18px;
     background: url(/sites/all/modules/custom/atwork_activity/img/speech-arrow.png) no-repeat;
     padding: 0;
-    margin: -63px 0 50px 53px;
+    margin: -65px 0 50px 41px;
     }
     .form-textarea-wrapper {
       float: right;
@@ -235,7 +235,7 @@
     
     > .message  { // start outer message div styling
       position: relative;
-      min-height: 90px;
+      min-height: 100px;
       padding: 4px;
       border: 1px solid lighten(#777, 45%);
       margin-bottom: .5em;
@@ -247,7 +247,7 @@
     .field-name-field-feed-like-button {
       position: absolute; // unfortunately needed  
       bottom: 0px;
-      font-size: smaller;
+      font-size: 10px;
     }
     .date {
       left: 54px;
@@ -268,6 +268,10 @@
     }
     .field-name-field-feed-like-button {
       width: 130px; //needed because ajax changes mean the reload applies the styling twice
+      font-family: Arial, sans-serif;
+      i:before {
+        padding-right: 0.2em;
+      }
     }
     .field-name-field-comment-message-comments + .field-name-field-feed-like-button,
     .field-name-field-follow-feed-comments + .field-name-field-feed-like-button {// outer message like
@@ -276,11 +280,10 @@
 
     // position all first message paragraphs. Status updates, etc. under the date.
     p[class^="msg-"] {
-      margin: -25px 10px 4px 0;
+      margin: -25px 10px 4px 48px;
     }
-    .message.entity-message.message-status.clearfix p,
-    .message.entity-message.message-following-user.clearfix p {
-      margin-left: 50px;
+    p {
+      margin-left: 48px;
     }
     .message.sticky { // ad space styling. Overrides most layout settings above 
       padding: 1.5em 1em 1em 1em;
@@ -297,7 +300,7 @@
       } 
       ul.links,
       .field-name-field-feed-like-button,
-      .user-feed-image{
+      .user-feed-image {
         display: none;
       }
       p[class^="msg-"] {
@@ -328,7 +331,7 @@
       }  
       a[href^=node] { // if exists, push more link out of quotes
         float: right;
-        margin: 2em 0 3em 0;
+        margin: 0.5em 0 3em 0;
       }
     }
   }
@@ -475,7 +478,7 @@
       left: 51%;
       bottom: 0px;
       min-width: 120px;
-      font-size: smaller;
+      font-size: 10px;
       .field-name-field-feed-like-button { // new one made when clicked
         left: -20% !important;
         top: inherit;
@@ -487,7 +490,7 @@
     .date {
       right: 0.5em;
       top: 6px;
-      font-size: smaller;
+      font-size: 10px;
       color: lighten(#000, 60%);
     }
     .links {// post as comment button.
@@ -496,7 +499,7 @@
       padding: 0;
       bottom: 0px;
       right: 4px;
-      font-size: smaller;
+      font-size: 10px;
       li, a {
         padding: 0;
         margin: 0;
@@ -557,7 +560,7 @@
   }
   .field-name-field-profile-comment-date,
   .field-name-field-display-name {
-    font-size: smaller;
+    font-size: 10px;
   }
   .field-name-field-feed-like-button {
     left: 48%; // these have to be positioned from left, not right for rollover to work
@@ -621,7 +624,7 @@
     position: absolute;
     left: 50%;
     top: 8px;
-    font-size: smaller;
+    font-size: 10px;
   }
   ul.links {
     margin: 0;
@@ -632,7 +635,7 @@
     li {
       margin: 0;
       padding: 0;
-      font-size: smaller;
+      font-size: 10px;
     }
   }
   #reply-form { // the reply box
