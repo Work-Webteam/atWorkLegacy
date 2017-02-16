@@ -10,6 +10,7 @@ $(document).ready(function(){
         setTimeout(function() {
           $(customWindow.document).scrollLeft(2000);
         }, 10);
+        customWindow.focus(); // focus, damn you
       }); 
       return false;
     });
