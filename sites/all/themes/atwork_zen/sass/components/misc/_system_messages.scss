@@ -2,12 +2,14 @@
 
 // Front page messages relate to Activity Feed, so place inside
 .front {
-  .messages--status {
-    position: absolute;
-    right: 0px;
-    top: 42px;
-    z-index: 60;
-    max-width: 193px;
+  #content {
+    .messages--status {
+      position: absolute;
+      right: 0px;
+      top: 42px;
+      z-index: 60;
+      width: 193px !important; //override the auto setting
+    }
   }
   .messages--error.messages.error { //hide the admin menu and error box. Remove before commit.
     display: none;
