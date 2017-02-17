@@ -3,14 +3,17 @@
 
 ### Sass ###
 .sass-cache/
-*.css.map
+
+# Ignore compiled css files
+/sites/all/themes/atwork_zen/css/atwork_zen.styles.css
+*.map
 
 
 ### Drupal ###
 # Ignore configuration files that may contain sensitive information.
 sites/*/*settings*.php
 sites/*/*settings*.php*
-.htaccess
+
 sites/default/custom/
 
 # Ignore paths that contain generated content.
@@ -19,7 +22,7 @@ sites/*/files
 sites/*/private
 
 # Ignore default text files
-robots.txt
+//robots.txt
 /CHANGELOG.txt
 /COPYRIGHT.txt
 /INSTALL*.txt
@@ -84,7 +87,7 @@ Temporary Items
 
 
 # Non Drupal PSA files and directories
-browscap/*
+browscap/
 /clear_apc.php
 /dump.txt
 /IEStandards.xml
@@ -107,9 +110,46 @@ browscap/*
 
 # Ignore potentially large media files
 *.mov
+*.mp4
 
 # Ignore Gulp files
 sites/all/themes/*/node_modules
 
+###### Editors #####
+
 ### SublimeText ###
-*.sublime*
+# cache files for sublime text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+# workspace files are user-specific
+*.sublime-workspace
+
+# project files should be checked into the repository, unless a significant
+# proportion of contributors will probably not be using SublimeText
+*.sublime-project
+
+# sftp configuration file
+sftp-config.json
+
+# Package control specific files
+Package Control.last-run
+Package Control.ca-list
+Package Control.ca-bundle
+Package Control.system-ca-bundle
+Package Control.cache/
+Package Control.ca-certs/
+bh_unicode_properties.cache
+
+# Sublime-github package stores a github token in this file
+# https://packagecontrol.io/packages/sublime-github
+GitHub.sublime-settings
+
+### VisualStudioCode ###
+*.vscode*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.htaccess
