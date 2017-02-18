@@ -9,12 +9,16 @@
           var customWindow = window.open(this.href, "customWindow", "scrollbars=1, width=300, height=850, top=0, left=9000");
           setTimeout(function(){window.blur();},1000);
           setTimeout(function(){customWindow.focus();},1200);
+          setTimeout(function(){window.blur();},1250);
+          setTimeout(function(){customWindow.focus();},1350);
+
+
           if(window.focus){
-            setTimeout(customWindow.focus(), 1500);
+            setTimeout(customWindow.focus(), 2500);
           }
         // waits for dom to load and then scrolls all the way to the right.
         setTimeout(function() {
-          $(customWindow.document).scrollLeft(800);
+          $(customWindow.document).scrollLeft(500);
         }, 10);
           return false;
         });
