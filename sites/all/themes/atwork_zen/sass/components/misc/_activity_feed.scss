@@ -437,7 +437,7 @@
         display: inline-block; // fix for odd bottom space on first posting
       }
       p:first-of-type { // the status message shouldn't crowd the like link
-        max-width: 280px;
+        max-width: 500px;
       }
       p:first-of-type + p + p,
       .activity-comment { // adds space between the status and only the 3rd comment
