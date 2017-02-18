@@ -108,9 +108,15 @@
       margin-bottom: -6px;
     }
   }
-  #atwork-advanced-feed-setting {
+  // start Advanced Filters
+  .user-advanced-feed-settings-view { // hide for regular users
     display: none;
   }
+  .admin-advanced-feed-settings-view { // show for admins and editors
+    display: block;
+  }
+  // end Advanced Filters
+
   // end all Header items 
 
   // start feed-ad-space
