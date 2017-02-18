@@ -14,19 +14,6 @@ $(document).ready(function(){
         }, 10);
 
         customWindow.focus(); // focus, damn you
-        // Hide admin wrapper here it is annoying
-        setTimeout(function() {
-          customWindow.$("#admin-menu-wrapper").hide();
-        }, 1000);
-        // Only allow N/S resizing
-       setTimeout(function() {
-         customWindow.resizable({
-           handles: 'n,s',
-           resize: function(event, ui) {
-             ui.size.width = ui.originalSize.width;
-           }
-         });
-       }, 1000);
       });
       return false;
     });
