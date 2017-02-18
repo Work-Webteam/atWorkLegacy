@@ -342,7 +342,6 @@ EOT;
     }
   }
   if($node->nid == 21348){
-    dpm($node);
     $js_1 = <<<EOT
 
     (function($) {
