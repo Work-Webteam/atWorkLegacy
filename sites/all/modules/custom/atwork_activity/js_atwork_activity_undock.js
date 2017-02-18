@@ -18,7 +18,7 @@
           }
         // waits for dom to load and then scrolls all the way to the right.
         setTimeout(function() {
-          $(customWindow.document).scrollLeft(500);
+          $(customWindow.document).scrollLeft(2000);
         }, 10);
           return false;
         });
