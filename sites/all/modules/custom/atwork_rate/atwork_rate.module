@@ -1,0 +1,431 @@
+<?php
+/**
+ * @file
+ * Main module file for the Rate module.
+ */
+
+// Define display modes for the rate widget.
+define('ATWORK_RATE_FULL', 'full');
+define('ATWORK_RATE_COMPACT', 'compact');
+define('ATWORK_RATE_DISABLED', 'full_disabled');
+define('ATWORK_RATE_COMPACT_DISABLED', 'compact_disabled');
+define('ATWORK_RATE_CLOSED', 'closed');
+
+// Define modes for which rating to display
+define('ATWORK_RATE_AVERAGE', 1);
+define('ATWORK_RATE_USER', 2);
+define('ATWORK_RATE_USER_OR_AVERAGE', 3);
+
+// Define modes for behavior with users without permission to vote.
+define('ATWORK_RATE_NOPERM_REDIRECT_WITH_MESSAGE', 1);
+define('ATWORK_RATE_NOPERM_REDIRECT_WITHOUT_MESSAGE', 2);
+define('ATWORK_RATE_NOPERM_SHOW_DISABLED_WIDGET', 3);
+define('ATWORK_RATE_NOPERM_HIDE_WIDGET', 4);
+
+/**
+ * Implements hook_menu().
+ */
+function atwork_rate_menu() {
+  $menu = array();
+
+  $menu['atwork_rate/vote/js'] = array(
+    'page callback' => 'atwork_rate_vote_ajax',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
+
+  return $menu;
+}
+
+/**
+ * Implements hook_field_info().
+ */
+function atwork_rate_field_info() {
+  $settings = array(
+    'tag' => 'vote',
+    'roles' => array(),
+    'allow_voting_by_author' => TRUE,
+    'noperm_behavior' => ATWORK_RATE_NOPERM_SHOW_DISABLED_WIDGET,
+  );
+
+  return array(
+    'atwork_rate' => array(
+      'label' => t('Atwork Rate widget'),
+      'description' => t('Atwork Rate widget'),
+      'settings' => $settings,
+      'default_widget' => 'atwork_rate_widget_thumbs_up_down',
+      'default_formatter' => 'atwork_rate_format_full',
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function atwork_rate_field_formatter_info() {
+  return array(
+    'atwork_rate_format_full' => array(
+      'label' => t('Full widget'),
+      'field types' => array('atwork_rate'),
+      'settings' => array(
+        'displayed' => ATWORK_RATE_USER_OR_AVERAGE,
+        'displayed_just_voted' => ATWORK_RATE_USER,
+      ),
+    ),
+    'atwork_rate_format_compact' => array(
+      'label' => t('Compact'),
+      'field types' => array('atwork_rate'),
+      'settings' => array(
+        'displayed' => ATWORK_RATE_USER_OR_AVERAGE,
+        'displayed_just_voted' => ATWORK_RATE_USER,
+      ),
+    ),
+    'atwork_rate_format_full_disabled' => array(
+      'label' => t('Full widget, disabled'),
+      'field types' => array('atwork_rate'),
+      'settings' => array(
+        'displayed' => ATWORK_RATE_USER_OR_AVERAGE,
+        'displayed_just_voted' => ATWORK_RATE_USER,
+      ),
+    ),
+    'atwork_rate_format_compact_disabled' => array(
+      'label' => t('Compact, disabled'),
+      'field types' => array('atwork_rate'),
+      'settings' => array(
+        'displayed' => ATWORK_RATE_USER_OR_AVERAGE,
+        'displayed_just_voted' => ATWORK_RATE_USER,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_info().
+ */
+function atwork_rate_field_widget_info() {
+  $info = array();
+  $widgets = _atwork_rate_get_widgets();
+  foreach ($widgets as $type => $widget) {
+    $info["atwork_rate_widget_$type"] = array(
+      'label' => t($widget->name),
+      'field types' => array('atwork_rate'),
+      'settings' => array(),
+      'behaviors' => array(
+        'multiple values' => FIELD_BEHAVIOR_CUSTOM,
+        'default value' => FIELD_BEHAVIOR_NONE,
+      ),
+    );
+  }
+  return $info;
+}
+
+/**
+ * Implements hook_field_validate().
+ */
+function atwork_rate_field_validate($obj_type, $object, $field, $instance, $langcode, &$items, &$errors) {
+  foreach ($items as $delta => $item) {
+    // @todo Add validation.
+  }
+}
+
+/**
+ * Implements hook_field_settings_form().
+ */
+function atwork_rate_field_settings_form($field, $instance, $has_data) {
+  $settings = $field['settings'];
+
+  $form['tag'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Tag'),
+    '#default_value' => $settings['tag'],
+    '#description' => t('Tag used for VotingAPI. Widgets with the same tag share their voting results. Use "vote" for global use.'),
+    '#required' => TRUE,
+  );
+
+  $form['permissions'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Permissions'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+
+  // Select roles.
+  $res = db_select('role', 'r')
+    ->fields('r', array('rid', 'name'))
+    ->orderBy('name', 'asc')
+    ->execute();
+
+  $options = array();
+  foreach ($res as $rec) {
+    $options[$rec->rid] = $rec->name;
+  }
+
+  $form['permissions']['roles'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Roles'),
+    '#options' => $options,
+    '#default_value' => $settings['roles'],
+    '#description' => t('Allow voting only for the selected role(s). If you select no roles, all users are allowed to vote.'),
+  );
+
+  $form['permissions']['allow_voting_by_author'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Allow author to rate his / her own content'),
+    '#default_value' => $settings['allow_voting_by_author'],
+    '#description' => t('Will change the state to disabled. Always true for anonymous users.'),
+  );
+
+  $options = array(
+    ATWORK_RATE_NOPERM_REDIRECT_WITH_MESSAGE => t('Redirect to login and show message'),
+    ATWORK_RATE_NOPERM_REDIRECT_WITHOUT_MESSAGE => t('Redirect to login but do not show a message'),
+    ATWORK_RATE_NOPERM_SHOW_DISABLED_WIDGET => t('Show a disabled widget (with non clickable buttons)'),
+    ATWORK_RATE_NOPERM_HIDE_WIDGET => t('Hide widget'),
+  );
+
+  $form['permissions']['noperm_behavior'] = array(
+    '#type' => 'radios',
+    '#title' => t('Behavior when user has no permission to vote'),
+    '#options' => $options,
+    '#default_value' => $settings['noperm_behavior'],
+    '#description' => t('Choose an action what will happen if a user clicks on the widget but doesn\'t have the permission to vote.'),
+  );
+
+  return $form;
+}
+
+/**
+ * Implements hook_field_prepare_view().
+ */
+function atwork_rate_field_prepare_view($entity_type, $entities, $field, $instances, $langcode, &$items) {
+  $entity_info = entity_get_info($entity_type);
+  foreach ($entities as $id => $entity) {
+    // Strip off "rate_widget_" from field type to get the widget type.
+    $type = substr($instances[$id]['widget']['type'], 19);
+    $widget_info = _atwork_rate_get_widgets($type);
+    _atwork_rate_load_widget($widget_info);
+
+    if (isset($widget_info->class) && class_exists($widget_info->class)) {
+      $item = array(
+        'class' => $widget_info->class,
+        'attributes' => array(
+          'type' => $type,
+          'entity_type' => $entity_type,
+          'entity_id' => $id,
+        ),
+      );
+      $items[$id] = array($item);
+    }
+  }
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function atwork_rate_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $output = array();
+
+  // Strip off "rate_" from display type to get widget mode.
+  $mode = substr($display['type'], 12);
+  foreach ($items as $item) {
+    $item['attributes'] += array(
+      'tag' => $field['settings']['tag'],
+      'mode' => $mode,
+      'displayed' => $display['settings']['displayed'],
+      'displayed_just_voted' => $display['settings']['displayed_just_voted'],
+      'field_name' => $field['field_name'],
+    );
+    $widget = new $item['class']($item['attributes']);
+    $output[] = array(
+      '#theme' => 'atwork_rate_widget',
+      'widget' => $widget,
+    );
+  }
+
+  return $output;
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ */
+function atwork_rate_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+
+  $form = array();
+
+  $options = array(
+    ATWORK_RATE_AVERAGE => t('Average rating'),
+    ATWORK_RATE_USER => t('Users vote if available, empty otherwise'),
+    ATWORK_RATE_USER_OR_AVERAGE => t('Users vote if available, average otherwise'),
+  );
+
+  $form['displayed'] = array(
+    '#type' => 'radios',
+    '#title' => t('Which rating should be displayed?'),
+    '#options' => $options,
+    '#default_value' => $settings['displayed'],
+  );
+
+  $options = array(
+    ATWORK_RATE_AVERAGE => t('Average rating'),
+    ATWORK_RATE_USER => t('Users vote'),
+  );
+
+  $form['displayed_just_voted'] = array(
+    '#type' => 'radios',
+    '#title' => t('Which rating should be displayed when the user just voted?'),
+    '#options' => $options,
+    '#default_value' => $settings['displayed_just_voted'],
+  );
+
+  return $form;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function atwork_rate_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+
+  switch ($settings['displayed']) {
+    case ATWORK_RATE_AVERAGE:
+      return t('Average rating');
+      break;
+    case ATWORK_RATE_USER:
+      return t('Users vote if available, empty otherwise');
+      break;
+    case ATWORK_RATE_USER_OR_AVERAGE:
+      return t('Users vote if available, average otherwise');
+      break;
+  }
+
+  return '';
+}
+
+/**
+ * Get all available widgets or a single widget by name.
+ *
+ * @param string $widget_type
+ *
+ * @return array $widgets
+ */
+function _atwork_rate_get_widgets($widget_type = NULL) {
+  $widgets = array();
+  foreach (module_implements('atwork_rate_widgets') as $module) {
+    if ($module_widgets = module_invoke($module, 'atwork_rate_widgets')) {
+      foreach ($module_widgets as $type => $info) {
+        $info->module = $module;
+        $widgets[$type] = $info;
+      }
+    }
+  }
+  if (empty($widget_type)) {
+    return $widgets;
+  }
+  else {
+    return isset($widgets[$widget_type]) ? $widgets[$widget_type] : FALSE;
+  }
+}
+
+/**
+ * Load the widget include file.
+ *
+ * @param object $widget_info
+ *   Widget info from _rate_get_widgets().
+ */
+function _atwork_rate_load_widget($widget_info) {
+  // Load the dependencies first.
+  module_load_include('inc', 'atwork_rate', 'classes/widget');
+  module_load_include('inc', 'atwork_rate', 'classes/button');
+
+  // Load the widget class file.
+  if (!empty($widget_info->file)) {
+    $file = drupal_get_path('module', $widget_info->module) . '/' . $widget_info->file;
+    include_once($file);
+  }
+}
+
+/**
+ * Implements hook_rate_widgets().
+ */
+function atwork_rate_atwork_rate_widgets() {
+  $output = array();
+
+  $widgets = db_select('atwork_rate_widget', 'w')
+    ->fields('w', array('type', 'name'))
+    ->execute()
+    ->fetchAll();
+
+  foreach ($widgets as $widget) {
+    $output[$widget->type] = new stdClass();
+    $output[$widget->type]->name = $widget->name;
+    $output[$widget->type]->class = 'AtworkRateDefaultWidget';
+    $output[$widget->type]->file = 'classes/default.inc';
+  }
+
+  return $output;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function atwork_rate_theme() {
+  return array(
+    'atwork_rate_widget' => array(
+      'pattern' => 'atwork_rate_widget__',
+      'render element' => 'element',
+      'template' => 'atwork-rate-widget',
+    ),
+  );
+}
+
+/**
+ * Implements hook_votingapi_metadata_alter().
+ *
+ * Make tags and option value type visible to VotingAPI.
+ *
+ * @see votingapi_metadata()
+ */
+function atwork_rate_votingapi_metadata_alter(&$data) {
+  $widgets = _atwork_rate_get_widgets();
+
+  foreach ($widgets as $widget) {
+    $tag = 'vote'; // @todo
+    if (isset($data['tags'][$tag])) {
+      continue;
+    }
+    $data['tags'][$tag] = array(
+      'name' => $tag,
+      'description' => t('Tag used for %name Rate widget', array('%name' => $widget->title)),
+    );
+  }
+
+  if (!isset($data['value_types']['option'])) {
+    $data['value_types']['option'] = array(
+      'name' => t('Options'),
+      'description' => t('Votes that are counted per option without meaningful average.'),
+    );
+  }
+}
+
+/**
+ * AJAX callback for Rate widgets.
+ */
+function atwork_rate_vote_ajax() {
+  $entity_type = preg_replace('/[^\\w\\-]/', '', $_GET['entity_type']);
+  $entity_id = (int) $_GET['entity_id'];
+  $field_name = preg_replace('/[^\\w\\-]/', '', $_GET['field_name']);
+  $widget_mode = preg_replace('/[^\\w\\-]/', '', $_GET['widget_mode']);
+  $entities = entity_load($entity_type, array($entity_id));
+  if (!isset($entities[$entity_id])) {
+    return MENU_NOT_FOUND;
+  }
+
+  $display = array(
+    'label' => 'hidden',
+    'type' => "atwork_rate_$widget_mode",
+  );
+  $widget = field_view_field($entity_type, $entities[$entity_id], $field_name, $display);
+  print drupal_render($widget);
+}

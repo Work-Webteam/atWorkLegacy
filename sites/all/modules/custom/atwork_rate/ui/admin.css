@@ -1,0 +1,12 @@
+div.atwork-rate-form-button div.form-item {
+  float: left;
+}
+
+div.atwork-rate-form-button {
+  width: 100%;
+  overflow: hidden;
+}
+
+.atwork-rate-elements-inline * {
+  display: inline;
+}

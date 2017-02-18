@@ -354,7 +354,7 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
   $account = $form['#user'];
 
   // if not an admin hide important user fields
-  if (!user_access('administer users')) {
+  if (user_access(!'administer users')) {
     $form['signature_settings']['#access'] = FALSE;
     $form['og_user_node']['#access'] = FALSE;
     $form['contact']['#access'] = FALSE;
@@ -366,9 +366,10 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
     $form['field_gal_hide_from_list']['#access'] = FALSE;
     $form['field_gal_enabled']['#access'] = FALSE;
     $form['field_gal_employee_number']['#access'] = FALSE;
-
+    $form['user_relationships_ui_settings']['#access'] = FALSE;
+    $form['field_feed_options']['#access'] = FALSE;
+    $form['field_employee_number']['#access'] = FALSE;
   }
-
 
   // Group permissions are being weird on profiles, deal with it here
   // From suggestion at https://www.drupal.org/node/2179367
@@ -862,7 +863,9 @@ function atwork_profiles_form_alter(&$form, &$form_state, $form_id) {
  * Add email and IDIR fields for convienence
  */
 function atwork_profiles_user_view($account, $view_mode, $langcode) {
+
   if ($view_mode == 'full') {
+
     global $user;
     $is_assistant = FALSE;
     if (in_array('executive', $user->roles)) {
@@ -902,10 +905,10 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
               case(isset($account->content['field_skills']) && $account->content['field_skills']):
               case(isset($account->content['field_employee_interests']) && $account->content['field_employee_interests']):
               case(isset($account->content['field_linkedin']) && $account->content['field_linkedin']):
-                drupal_set_message(t('Your profile is not published. Click the Edit tab to fill out your draft profile and, when you’re ready, make it visible to your colleagues. <strong>Note:</strong> GAL information is always displayed in your profile.'));
+                drupal_set_message(t('Your profile is not published (visible to your colleagues on @Work). To publish your profile, select the "Edit" tab and click the "Share your profile" box at the bottom of the form. This action will allow colleagues to follow you. You can unpublish your profile at anytime by unchecking the "Share your profile" box in your profile. <p><span style="font-size:smaller"><strong >Note:</strong><em> Global Address List (GAL) information is always displayed in your profile.</em></span></p>'));
                 break;
               default:
-                drupal_set_message(t('Your profile is not published. Click the Edit tab to fill out your draft profile and, when you’re ready, make it visible to your colleagues. <strong>Note:</strong> GAL information is always displayed in your profile.'));
+                drupal_set_message(t('Your profile is not published (visible to your colleagues on @Work). To publish your profile, select the "Edit" tab and click the "Share your profile" box at the bottom of the form. This action will allow colleagues to follow you. You can unpublish your profile at anytime by unchecking the "Share your profile" box in your profile. <p><span style="font-size:smaller"><strong >Note:</strong><em> Global Address List (GAL) information is always displayed in your profile.</em></span></p>'));
             }
           }
           elseif (isset($account->field_public_profile) && !$account->field_public_profile && (in_array('executive', $user->roles))){
@@ -1011,7 +1014,7 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
     } else {
       $account->content['field_summary'] = array(
         '#theme' => 'field',
-    //    '#weight' => 10,
+        '#weight' => 100,
         '#title' => t('About me'),
         '#label_display' => 'hidden',
         '#view_mode' => 'full',
@@ -1059,7 +1062,7 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
     } else {
       $account->content['field_extended_biography'] = array(
         '#theme' => 'field',
-   //     '#weight' => 14,
+        '#weight' => 14,
         '#title' => t('Extended Biography'),
         '#label_display' => 'hidden',
         '#view_mode' => 'full',
@@ -1133,30 +1136,6 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
           }
         }
       }
-    } else {
-      // If no skills yet, we build it.
-      $account->content['field_skills'] = array(
-        '#theme' => 'field',
-        '#title' => 'Skills',
-        '#access' => TRUE,
-        '#label_display' => 'hidden',
-        '#view_mode' => 'full',
-        '#language' => 'und',
-        '#field_name' => 'field_skills',
-        '#field_type' => 'taxonomy_term_reference',
-        '#field_translatable' => 0,
-        '#entity_type' => 'user',
-        '#bundle' => 'user',
-        '#items' => array(
-          0 => array(
-            'tid' => 539,
-          ),
-        ),
-        '#formatter' => 'taxonomy_term_reference_plain',
-        0 => array(
-          '#markup' => '<div class="hidden_profile_skills_box"> </div>',
-        ),
-      );
     }
 
     if (isset($account->content['field_skills'])) {
@@ -1181,30 +1160,6 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
           }
         }
       }
-    } else {
-      // If no interests yet, we build it.
-      $account->content['field_employee_interests'] = array(
-        '#theme' => 'field',
-        '#title' => 'Interests',
-        '#access' => TRUE,
-        '#label_display' => 'hidden',
-        '#view_mode' => 'full',
-        '#language' => 'und',
-        '#field_name' => 'field_employee_interests',
-        '#field_type' => 'taxonomy_term_reference',
-        '#field_translatable' => 0,
-        '#entity_type' => 'user',
-        '#bundle' => 'user',
-        '#items' => array(
-          0 => array(
-            'tid' => 541,
-          ),
-        ),
-        '#formatter' => 'taxonomy_term_reference_plain',
-        0 => array(
-          '#markup' => '<div class="hidden_profile_interests_box"> </div>',
-        ),
-      );
     }
 
     if (isset($account->content['field_employee_interests'])) {
@@ -1455,6 +1410,7 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
         drupal_add_js(drupal_get_path('module', 'atwork_profiles') . '/atwork_profile_tutorial.js');
       }
     }
+
   }
 }
 
@@ -1514,8 +1470,8 @@ function atwork_profiles_views_post_render(&$view, &$output, &$cache) {
     if (isset($view->args[0]) && $view->args[0] && is_numeric($view->args[0])) {
       $account = user_load($view->args[0]);
 
-      if (strpos($output, ':relationship_link') && module_exists('atwork_relationships') && $account->uid != $user->uid) {
-        $relationship_link = atwork_relationships_get_link($account);
+      if (strpos($output, ':relationship_link') && module_exists('atwork_relationship') && $account->uid != $user->uid) {
+        $relationship_link = atwork_relationship_get_link($account);
         $output = str_replace(':relationship_link', $relationship_link, $output);
       }
       elseif (strpos($output, ':relationship_link')) {
@@ -1657,13 +1613,13 @@ function atwork_profiles_form_views_exposed_form_alter(&$form, &$form_state, $fo
     //$form['advanced_search']['followers']['#title'] = t('People following me');
     $form['advanced_search']['title'] = $form['title'];
     $form['advanced_search']['title']['#title'] = t('Title');
-	$form['advanced_search']['branch'] = $form['branch'];
+    $form['advanced_search']['branch'] = $form['branch'];
     $form['advanced_search']['branch']['#title'] = t('Branch');
-	$form['advanced_search']['ministry'] = $form['ministry'];
+    $form['advanced_search']['ministry'] = $form['ministry'];
     $form['advanced_search']['ministry']['#title'] = t('Ministry');
     $form['advanced_search']['skills'] = $form['skills'];
     $form['advanced_search']['skills']['#title'] = t('Skills');
-	$form['advanced_search']['interests'] = $form['interests'];
+    $form['advanced_search']['interests'] = $form['interests'];
     $form['advanced_search']['interests']['#title'] = t('Interests');
     $form['advanced_search']['city'] = $form['city'];
     $form['advanced_search']['city']['#title'] = t('City');
@@ -1677,7 +1633,7 @@ function atwork_profiles_form_views_exposed_form_alter(&$form, &$form_state, $fo
 
     unset($form['title']);
     unset($form['skills']);
-	unset($form['interests']);
+    unset($form['interests']);
     unset($form['work_group']);
     unset($form['branch']);
     unset($form['ministry']);
@@ -1700,6 +1656,10 @@ function atwork_profiles_block_info() {
     'info' => t('Header Block'),
     'cache' => DRUPAL_NO_CACHE,
   );
+  $blocks['bio-toggle'] = array(
+    'info' =>t("Profile page bio toggle block"),
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    );
 
   return $blocks;
 }
@@ -1711,6 +1671,22 @@ function atwork_profiles_block_view($delta = '') {
   $block = array();
 
   switch ($delta) {
+
+    case 'bio-toggle':
+      $block['subject'] = t('');
+      $block['content'] = '<button id="bio-toggle-button">Show More</button>';
+      // load jquery as early as possible. Before page render would be ideal however.
+      drupal_add_js(drupal_get_path('module', 'atwork_profiles') . '/atwork_profiles_2.js',
+        array(
+          'group' => JS_LIBRARY,
+          'weight' => -19,
+          'every_page' => FALSE,
+          'cache' => TRUE,
+          'scope' => 'header',
+        )
+      );
+    break;
+
     case 'header':
 
       global $user;

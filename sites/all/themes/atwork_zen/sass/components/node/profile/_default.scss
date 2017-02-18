@@ -1,0 +1,292 @@
+
+/* -------------- User Profile Page -------------------------*/
+
+.page-user-edit h2.breadcrumb {
+  margin-top: 10px;
+}
+
+.page-user {
+  &.section-user .masquerade-switch {
+    position: absolute;
+    bottom: 2px;
+    left: 30px;
+    left: 60px\0/ !important; /* For IE only */
+    width: auto;
+    padding: 2px 7px;
+    border: solid 1px beige;
+  }
+  .profile {
+    margin-bottom: 0;
+  }
+}
+
+.page-user.section-employees .masquerade-switch {
+  position: absolute;
+  right: 20px;
+  top: 50px;
+}
+
+
+#user-user-full-group-profile-card {
+  position: relative;
+  background-color: #D7D7D7;
+}
+
+
+
+#user-user-full-group-profile-card .field-name-field-image,
+#user-user-full-group-profile-card .group-profile-identity-bundle {
+  display: inline-block;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+
+#activity-feed .field.field-name-field-image.field-type-image.field-label-above{
+  padding: 0px;
+  border: 0px;
+  height: auto !important;
+  width: 50px; // otherwise, it blocks some links
+  display: block;
+  border-style: none;
+  position: relative;
+}
+
+
+.page-user.section-employees #content .group_profile_card p,
+.page-user.section-user #content .group_profile_card p {
+  padding: 0;
+  margin: 0;
+}
+.page-user.section-user .field.field-name-field-extended-biography p,
+.page-user.section-employees .field.field-name-field-extended-biography p {
+  padding: 0;
+  margin: 10px 0;
+}
+
+.page-user.section-employees .field.field-name-field-display-name,
+.page-user.section-user .field.field-name-field-display-name,
+.page-user.section-employees .field.field-name-field-linkedin,
+.page-user.section-user .field.field-name-field-linkedin,
+.page-user.section-employees .field.field-name-field-joined-public-service,
+.page-user.section-user .field.field-name-field-joined-public-service {
+  left: 270px;
+  display: block;
+  height: auto;
+  line-height: 18px;
+  // clear: right;
+  color: #000;
+}
+
+
+
+#user-user-full-group-profile-card .field-name-field-image { // profile pic 
+  width: 260px;
+  margin: 0 2em 0 0;
+  padding: 2em;
+  background-color: #a7a7a7;
+  min-height: 230px;
+}
+
+#user-user-full-group-profile-card .group-profile-identity-bundle { // main identity info 
+  margin-top: 1.8em;
+  max-width: 65%;
+}
+
+
+  #user-user-full-group-profile-card .group-profile-contact-bundle,
+  #user-user-full-group-profile-card .group-profile-location-bundle {
+    float: left;
+    margin-top: 0em;
+  }
+
+  #user-user-full-group-profile-card .group-profile-contact-bundle {
+    margin-right: 6em;
+  }
+
+    .group-profile-identity-bundle .field-name-field-gal-title {
+      margin: 0.5em 0 0.8em 0;
+      display: block;
+      color: $title-green;
+      max-width: 470px;
+    }
+
+    .group-profile-identity-bundle .atwork-relationship-action { // follow button
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      @include button-normal;
+    }
+
+    #user-user-full-group-profile-card .group-profile-location-bundle {
+      max-width: 200px;
+    }
+  #user-user-full-group-profile-card  .field-name-field-summary {
+    clear: both;
+    padding-top: 2px;
+  }
+
+  .field-name-field-summary h2.profile-section {
+    margin-top: 0 !important; //just do it. Too many ids to overcome.
+  }
+
+// start group_profile_extra box - contains skills, interests, expandable bio 
+
+#user-user-full-group-profile-extra {
+  border: 10px solid #d7d7d7;
+  border-top: none;
+  display: inline-flex;
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+#block-atwork-profiles-bio-toggle {
+  margin-top: -3px;
+}
+
+  #user-user-full-group-profile-extra .field-group-htabs-wrapper,
+  #user-user-full-group-profile-extra .field-name-field-extended-biography {
+    background-color: white;
+    vertical-align: top;
+  }
+
+  #user-user-full-group-profile-extra .field-group-htabs-wrapper {
+    width: 240px;
+    min-width: 240px;
+    border-right: 10px solid #d7d7d7;
+    border-bottom: none;
+  }
+
+    #user-user-full-group-profile-extra .horizontal-tabs {
+      border: none;
+      background-color: white;
+      border-right: none;
+    }
+
+    #user-user-full-group-profile-extra .horizontal-tabs h2 {
+      display: none;
+    }
+    #user-user-full-group-profile-extra ul.horizontal-tabs-list {
+      background-color: #d7d7d7;
+      border-right: none;
+    }
+
+  #user-user-full-group-profile-extra .field-name-field-extended-biography {
+    padding: 0em 2em;
+  }
+
+#bio-toggle-button {
+  width: 100%;
+  height: 16px;
+  font-size: 10px;
+  line-height: 1em;
+  overflow: hidden;
+}
+
+
+
+// end group_profile_extra box
+
+
+.page-user.section-employees #user-user-full-group-skills-interests {
+  display: inline-block;
+  width: 26%;
+}
+
+.page-user.section-employees .field.field-name-field-extended-biography p,
+.page-user.section-user .field.field-name-field-extended-biography p {
+  padding-right: 40px;
+}
+.page-user.section-employees .field.field-name-field-extended-biography h2,
+.page-user.section-user .field.field-name-field-extended-biography h2 {
+  padding: 0;
+  margin: 0 0 5px 0;
+  line-height: normal;
+}
+.page-user.section-employees .field.field-name-field-skills,
+.page-user.section-employees .field.field-name-field-employee-interests {
+
+  text-transform: capitalize;
+}
+.page-user.section-employees h2.skills-profile-section,
+.page-user.section-employees h2.interests-profile-section {
+  padding: 0;
+  line-height: normal;
+  border-bottom: solid 1px;
+}
+.page-user.section-employees h2.interests-profile-section {
+  padding-top: 10px;
+}
+
+.page-user.section-employees h2.skills-profile-section,
+.page-user.section-employees h2.interests-profile-section{
+  margin: 0 0 10px 0;
+}
+
+.page-user.section-employees .field.field-name-field-skills .field-item.odd,
+.page-user.section-employees .field.field-name-field-skills .field-item.even,
+.page-user.section-employees .field.field-name-field-employee-interests .field-item.odd,
+.page-user.section-employees .field.field-name-field-employee-interests .field-item.even {
+  display: inline-block;
+  border: solid 1px rgba(0, 141, 123, .4);
+  padding: 3px 5px;
+  margin: 0 2px 5px 0;
+  color: #666;
+}
+
+// Extended profile area - published profiles, missing information
+.page-user.section-user .field.field-name-field-summary h2.profile-section-unfilled {
+  position: absolute;
+  top: 150px;
+  left: 330px;
+  color: #D7D7D7;
+  border: solid 1px #ECECEC;
+  margin-top: 10px;
+}
+.page-user.section-employees .field.field-name-field-extended-biography h2.profile-section-unfilled,
+.page-user.section-user .field.field-name-field-extended-biography h2.profile-section-unfilled {
+  width: auto;
+  width: 100%\0/ !important; // For IE only
+  color: #A7A7A7;
+  padding: 0;
+  margin-top: 10px;
+}
+.page-user.section-employees h2.profile-section-unfilled,
+.page-user.section-user h2.profile-section-unfilled {
+  width: 30%;
+  padding: 0;
+  line-height: normal;
+  color: #A7A7A7;
+}
+.page-user.section-employees .group_skills_interests h2.skills-profile-section-unfilled,
+.page-user.section-user h2.skills-profile-section,
+.page-user.section-user h2.interests-profile-section {
+  display: inline-block;
+  width: 26.8%;
+  color: #D7D7D7;
+  background-color: #FBFBFB;
+  border: solid 1px #ECECEC;
+  margin-top: 5px;
+  padding: 5px 0 5px 20px;
+  line-height: normal;
+}
+.page-user.section-user h2.skills-profile-section {
+  margin-top: 10px;
+}
+.page-user.section-user .hidden_profile_skills_box {
+  display: block;
+  height: 30px;
+}
+
+.field-expander .read-more,
+.field-expander .read-less {
+  font-weight: bold;
+  font-style: italic;
+}
+
+
+
+

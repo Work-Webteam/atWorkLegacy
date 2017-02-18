@@ -1,0 +1,722 @@
+//----------------- Common Activity Feed styles - Applies to both front and profile page 
+
+.block-atwork-activity {
+  #edit-status { // textarea status box
+    padding: 0.5em;
+  }
+  .field-label { // hide the field labels
+    display: none;
+  }
+  .block-refresh-button {
+    display: none;
+  }
+  .form-textarea {
+    border: 5px solid #26669E;
+  }
+  #profile-comment-link {
+    display: none; 
+  }
+  #saving-notification-status {
+    @include atwork-messages(green, ok);
+  }
+  // Initially hide the comment textarea and submit button and unhide with .js
+  .comment-submit-button,
+  .field-name-field-profile-comment .form-textarea-wrapper {
+    display: none;
+  }
+  .comment-submit-button-show,
+  .field-name-field-profile-comment-show .form-textarea-wrapper {
+    display: block;
+  }
+  .toggle-com-button {
+    background:none !important;
+    border:none;
+    padding:0 !important;
+    font: inherit;
+    color: #135ab0;
+    cursor: pointer;
+    font-size: 10px;
+    &:hover {
+      text-decoration: underline;
+      color: black;
+    }
+  }
+  .new-message-count {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 40px;
+    height: auto;
+  }
+  #message-count-number { // TODO: Need a better icon and placement
+    position: absolute;
+    top: 20px;
+    left: 24px;
+  }
+}
+
+
+
+//--------- Social Side Activity Feed
+
+//----- General Layout
+#social-side {
+  // start all Header items 
+  h2 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 99;
+  }
+  .block-header-inner { 
+    float: right;
+    margin-top: -3px;
+  }
+  .activity-filters-my,
+  .activity-filters-all {
+    border: none;
+  }
+  .activity-filters-my {// button to show filters for my-actions
+    background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-my-off.png) no-repeat center center;
+    &.active,
+    &:hover {
+      background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-my-on.png) no-repeat center center;
+    }
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  .activity-filters-all {// button to show filters for all-activity
+    width: 68px;
+    background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-all-off.png) no-repeat center center;
+    &.active,
+    &:hover {
+      background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-all-on.png) no-repeat center center;
+    }
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  .jsNewActivityWindow {// the pop-out linked button
+    margin-right: 6px;
+    &:hover {
+      opacity: 0.7;
+    }
+    img {
+      margin-bottom: -6px;
+    }
+  }
+  #activity-feed-advanced-filters {
+    display: none;
+  }
+  // end all Header items 
+
+  // start feed-ad-space
+    .feed-ad-space-image { // Lives outside of the ad-space container
+      margin-bottom: -6px; // bring the adspace box up to the image
+      text-align: center;
+      background-color: #26669E;
+    }
+    .feed-ad-space-outer { 
+      border: 1px solid grey;
+      padding: 1em;
+      background: #D7D7D7;
+      position: relative;
+    }
+
+    .feed-ad-space-content {
+      font-size: 13px;
+      margin-bottom: 1em;
+      h2 {
+        position: inherit;
+        line-height: 1.2em;
+        font-family: Arial, Helvetica, sans-serif;
+        letter-spacing: 0px;
+        width: inherit !important;
+        text-transform: uppercase;
+      }
+      p {
+        margin: 1em 0;
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+    .feed-ad-space-author-date {
+      font-size: 10px;
+    }
+    // stop feed-ad-space
+
+  .atwork-activity-block-container {
+    margin-top: 46px; // push down the container because the header is positioned absolutely
+  }
+  #atwork-activity-form {
+    .form-item {
+      margin-top: 0.5em;
+    }
+  }
+  #edit-status-counter { // hide the text counter
+    display: none;
+  }
+  #status-submit-button {
+    clear: both;
+    text-align: right;
+  }
+  #status-update {
+    margin-top: -.5em;
+  }
+  #status-update {
+    .field-name-field-image {
+      float: left;
+      max-width: 50px;
+    }
+    div#speech-pointer {//adds pointer arrow to status update bubble on activity feed
+    display: block;
+    width: 12px;
+    height: 18px;
+    background: url(/sites/all/modules/custom/atwork_activity/img/speech-arrow.png) no-repeat;
+    padding: 0;
+    margin: -65px 0 50px 41px;
+    }
+    .form-textarea-wrapper {
+      float: right;
+      max-width: 200px;
+    }
+  }
+  #saving-notification-status {
+    margin-left: 50px;
+  }
+  #activity-feed {
+    clear: both;
+    display: block;
+    margin-top: .8em;
+  }
+  #atwork-activity-customize-feed-form .description {
+    margin-bottom: 1em;
+  }    
+  .item-list { // the pager
+    display: block;
+    width: 252px;
+    position: absolute;
+    bottom: 19px;
+    padding: 0 0 4px 0;
+    margin: 0 0 0 5px;
+    left:  0;
+    background-color: #FFF;
+  }
+
+  ul.pager {
+    margin: 0 auto;
+    border-top: solid 1px #E0E0E0;
+    padding-top:3px;
+    padding-bottom: 3px;
+    background-color: #FFF;
+  }
+
+}
+
+
+//----- message box styling only
+
+#social-side {
+  .atwork-activity {
+    #status-submit-button {
+      text-align: right;
+      margin-top: -3em;
+    }
+    .message { // common to both outer and inner message box
+      
+    }
+    label {
+      display: none; //hide all labels. We don't need them
+    }
+    
+    > .message  { // start outer message div styling
+      position: relative;
+      min-height: 100px;
+      padding: 4px;
+      border: 1px solid lighten(#777, 45%);
+      margin-bottom: .5em;
+      background: lighten(#777, 49%) url(/sites/all/themes/atwork_zen/images/grey-trans.png) bottom center repeat-x;
+      background-size: 18px;
+    }
+    .date, 
+    ul.links,
+    .field-name-field-feed-like-button {
+      position: absolute; // unfortunately needed  
+      bottom: 0px;
+      font-size: 10px;
+    }
+    .date {
+      left: 54px;
+      top: 4px;
+      bottom: inherit;
+    }
+    ul.links { // the flag link
+      right: 4px;
+      // below, am forcing the styling to limit space. Remove later.
+      max-width: 75px;
+      max-height: 41px;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      li, a {
+        padding: 0;
+      }
+    }
+    .field-name-field-feed-like-button {
+      width: 130px; //needed because ajax changes mean the reload applies the styling twice
+      font-family: Arial, sans-serif;
+      i:before {
+        padding-right: 0.2em;
+      }
+    }
+    .field-name-field-comment-message-comments + .field-name-field-feed-like-button,
+    .field-name-field-follow-feed-comments + .field-name-field-feed-like-button {// outer message like
+      left: 35%;
+    }
+
+    // position all first message paragraphs. Status updates, etc. under the date.
+    p[class^="msg-"] {
+      margin: -25px 10px 4px 48px;
+    }
+    p {
+      margin-left: 48px;
+    }
+    .message.sticky { // ad space styling. Overrides most layout settings above 
+      padding: 1.5em 1em 1em 1em;
+      border: 1px solid grey;
+      background: lighten(grey, 40%) url(/sites/all/themes/atwork_zen/images/icons/atwork-ampersand.png) 15px center no-repeat;
+      padding-left: 80px;
+      .date {
+        position: initial;
+        line-height: 1em;
+        &:before {
+          content: "Posted by Employee News ";
+          display: block;
+        }
+      } 
+      ul.links,
+      .field-name-field-feed-like-button,
+      .user-feed-image {
+        display: none;
+      }
+      p[class^="msg-"] {
+        margin: 0;
+        text-indent: 0;
+      }
+      .msg-new-node {
+        span {// hide the intro text if we are still using Sticky events
+          display: none;
+        }
+        a {// the link to the original node
+          margin-top: 0.5em;
+          display: block;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+  
+  // inner nested message div styling
+  .entity-message {
+    p[class^="msg-"] + p + p { // start with this class and then only the 3rd p
+      &:before {
+        @include quotes-open;
+      }
+      &:after {
+        @include quotes-closed;
+      }  
+      a[href^=node] { // if exists, push more link out of quotes
+        float: right;
+        margin: 0.5em 0 3em 0;
+      }
+    }
+  }
+
+  .field-name-field-profile-comment + .field-name-field-feed-like-button {// inner reply like
+    left: 44%;
+  }
+  // stying for replies
+  .replies-wrapper {
+    margin: 1em 0;
+    input.toggle-com-button { // the comment/cancel toggle button
+      position: absolute;
+      bottom: 0;
+    }
+    .comment-submit-button  {
+      margin-bottom: 2em;
+    }
+    .reply-depth-1 {
+      margin-left: 1.0em;
+    }
+    .reply-depth-2 {
+      margin-left: 2em;
+    }
+    .reply-depth-3,
+    .reply-depth-4,
+    .reply-depth-5 {
+      margin-left: 3em;
+    }
+  }
+  .reply {
+    border: 1px solid lighten(#777, 30%);
+    &:nth-child(odd),
+    &:nth-child(even) {
+      background-color: lighten(#777, 52%);
+    }
+  }
+  .reply-links a[href*="delete"] {// temp hide the delete button to help styling
+    display: none;
+  }
+  .replies { 
+    .field-name-field-image {
+      max-width: 24px;
+    }
+  }
+  .reply-body {
+    .field-name-field-image {
+      position: absolute !important;
+      top: 2px;
+      left: 2px;
+    }
+    .field-name-field-profile-comment-date {
+      margin-left: 30px;
+      min-height: 26px;
+    }
+    .field-name-field-display-name {
+      line-height: 1.4em;
+    }
+  }
+  .entity-reply {
+    background: url(/sites/all/themes/atwork_zen/images/grey-trans.png) bottom center repeat-x;
+    background-size: 18px;
+    &:last-child {
+      margin-bottom: 2em;
+    }
+  }
+}
+
+
+
+
+
+//--------- User Page Profile Activity Feed
+
+.page-user {
+  .region-post-content {
+    width: 70%;
+  }
+  .block-atwork-activity {
+    clear: left;
+    > div#activity-feed > .message,
+    > .message { // target the first message div of own and other's profile page
+      position: relative; // get ready to position all internal elements absolutely
+      margin: 2em 0 2em 4em;
+      border: 1px solid #ccc;
+      padding: 0.5em;
+      &.even {
+        background-color: lighten(#777, 49%);
+      }
+    }
+    .form-item-status {
+      margin-bottom: 5px;
+    }
+    #edit-status-counter {
+      text-indent: 60px;
+      margin-top: 6px;
+    }
+    #status-submit-button {
+      margin-top: -26px;
+    }
+    .entity-message {
+      margin-top: -3em; // hackey, but need to close up top space
+      &.clearfix:after {
+        display: inline-block; // fix for odd bottom space on first posting
+      }
+      p:first-of-type { // the status message shouldn't crowd the like link
+        max-width: 280px;
+      }
+      p:first-of-type + p + p,
+      .activity-comment { // adds space between the status and only the 3rd comment
+        margin-top: 1em;
+        display: block;
+      }
+      p:first-of-type + p + p:before { // target exactly the only 3rd p
+        margin-left: 0.3em;
+        @include quotes-open;
+      }
+      .activity-comment {
+        margin-left: 0.3em;
+        &:before {
+          @include quotes-open;
+        }
+      }
+      p:nth-last-of-type(2) {
+        &:after {
+          @include quotes-closed;
+        } 
+      }
+    }
+
+    // Position most of the inner elements absolutely
+    .comment-submit-button,
+    .toggle-com-button,
+    .field-name-field-feed-like-button,
+    .date {
+      position: absolute;
+      margin: 0;
+      padding: 0;
+    }
+    .comment-submit-button {
+      left: 6px;
+      bottom: 0;
+    }
+    .field-name-field-feed-like-button {
+      left: 51%;
+      bottom: 0px;
+      min-width: 120px;
+      font-size: 10px;
+      .field-name-field-feed-like-button { // new one made when clicked
+        left: -20% !important;
+        top: inherit;
+      }
+      .atwork-rate-description {
+        padding: 0 0.2em;
+      }
+    }
+    .date {
+      right: 0.5em;
+      top: 6px;
+      font-size: 10px;
+      color: lighten(#000, 60%);
+    }
+    .links {// post as comment button.
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      bottom: 0px;
+      right: 4px;
+      font-size: 10px;
+      li, a {
+        padding: 0;
+        margin: 0;
+      }
+    }
+    .field-name-field-comment-message-comments h3 {// not sure why this is here but hide it.
+      display: none; 
+    }
+    .toggle-com-button {
+      left: 6px;
+      bottom: 0;
+    }
+    .field-name-field-image { // main image left of a post
+      margin: -7px 0 0 -4.5em;
+    }
+    .form-textarea {
+      border: 5px solid #004B8D;
+      border-left-width: 10px;
+      border-right-width: 10px;
+    }
+    label[for^="edit-field-profile-comment-und-"] {// hide all labels that begin with edit-field...
+      display: none;
+    }
+    .block-refresh-button {// hide the refresh link
+      display: none;
+    }
+  }
+}
+
+
+
+//---------- Comment Replies 
+
+.atwork-rate-widget-feed_like_button {
+  a {
+    padding: 0 0.2em;
+  }
+}
+
+.reply { 
+  border: 1px solid #e0e0e0;
+  position: relative;
+  margin-bottom: 1em;
+  &:nth-child(even) {
+    background-color: #e8e8e8;
+  }
+  &:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  .field-name-field-profile-comment {
+    margin: 1em;
+    .field-item:before {
+      @include quotes-open;
+    }
+    .field-item:after {
+      @include quotes-closed;
+    }  
+  }
+  .field-name-field-profile-comment-date,
+  .field-name-field-display-name {
+    font-size: 10px;
+  }
+  .field-name-field-feed-like-button {
+    left: 48%; // these have to be positioned from left, not right for rollover to work
+    &.field-label-hidden {
+      position: relative;
+    }
+  }
+}
+
+.reply-body,
+.reply-links {
+  padding: 0.2em;
+}
+
+.page-user .block-atwork-activity { //override
+  .reply-body {
+    .field-name-field-image {
+      margin: 0;
+    }
+  } 
+}
+
+
+
+.commentLinks .comment-delete a,
+.commentLinks .comment-edit a,
+.commentLinks .comment-reply a,
+.reply-links a {
+  @include button-small;
+  margin-right: 0.5em;
+}
+
+// Nesting Depth
+.replies-wrapper {
+  .reply-depth-1 {
+    margin-left: 1.5em;
+  }
+  .reply-depth-2 {
+    margin-left: 3em;
+  }
+  .reply-depth-3,
+  .reply-depth-4,
+  .reply-depth-5 {
+    margin-left: 3em;
+  }
+  .comment-count-link {
+    margin-top: 1em;
+  }
+}
+
+// Common Reply and Edit pages
+
+.page-reply { 
+  #main {
+    width: 620px;
+  }
+  .field-label {
+    display: none;
+  }
+  .field-name-field-feed-like-button {
+    position: absolute;
+    left: 50%;
+    top: 8px;
+    font-size: 10px;
+  }
+  ul.links {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    li {
+      margin: 0;
+      padding: 0;
+      font-size: 10px;
+    }
+  }
+  #reply-form { // the reply box
+    textarea {
+      padding: 0.5em;
+    }
+    .form-submit { // submit button
+      margin-right: 1em;
+    }
+  }
+}
+
+
+
+
+
+//------------------ Pop-out User Activity Window specifics 
+
+.new-activity-window {
+  background-color: #D7D7D7;
+  overflow: hidden;
+  #block-atwork-activity-homepage {
+    width: 275px;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    top: 20px;
+  }
+  .atwork-activity-block-container {
+    padding: 5px;
+  }
+  #full_menu {// hide the hamburger menu
+    display: none;
+  }
+  .jsNewActivityWindow {// hide pop-out button
+    display: none;
+  }
+  .feed-ad-space-outer h2 {
+    background-color: transparent;
+    color: #333;
+  }
+}
+
+// Moved Chris files from atworklayout to here for the feed. Needs to be Sassily cleaned
+/* Pop Window on front page for the Social Sidebar */
+// Don't use a node id. There is a custom class called 'new-activity-window'
+.not-front .new-activity-window #headebox,
+.not-front .new-activity-window #admin-menu,
+.not-front .new-activity-window #block-atwork-profiles-header,
+.not-front .new-activity-window #block-block-7 {
+  display: none;
+}
+.not-front .new-activity-window #block-atwork-mobile-atwork-mobile-menu-block {
+  display:block!important;
+}
+.not-front .new-activity-window {
+  width: 275px!important;
+}
+.not-front .new-activity-window {
+  background-color: #FFF;
+}
+.not-front .new-activity-window #header.header {
+  background: none;
+  height:60px!important;
+}
+.not-front .new-activity-window .atwork-activity-block-container {
+  margin-top:6px;
+}
+.not-front .new-activity-window #social-side .region-social-side{
+  position: initial;
+  width: 275px;
+  margin: 0px auto;
+}
+.not-front .new-activity-window #social-side h2 {
+  position: initial;
+  padding: 0 10px;
+}
+.not-front .new-activity-window #social-side .item-list {
+  position: inherit;
+}
+
+
+
+//----------------- End Pop-out User Activity Window 

@@ -1,0 +1,280 @@
+<?php
+/**
+ * @file
+ * Main install tasks and update tasks for the Rate module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function atwork_rate_schema() {
+  $schema = array();
+
+  $schema['atwork_rate_widget'] = array(
+    'fields' => array(
+      'wid' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'type' => array(
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'mode' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+      ),
+      'sprites' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+      ),
+      'highlight_voted' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+      ),
+      'highlight_mouseover' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+      ),
+      'desc_norating' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'desc_notvoted' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'desc_voted' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'desc_justvoted' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'desc_mouseover' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ),
+      'css_file' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ),
+      'js_file' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ),
+    ),
+    'primary key' => array('wid'),
+  );
+
+  $schema['atwork_rate_widget_button'] = array(
+    'fields' => array(
+      'wid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'num' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'label' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'value' => array(
+        'type' => 'int',
+        'unsigned' => FALSE,
+        'not null' => TRUE,
+      ),
+      'description' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'width' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+      ),
+      'height' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+      ),
+      'img_default' => array(
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+      'img_highlighted' => array(
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+      'img_default_voted' => array(
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+      'img_highlighted_voted' => array(
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+      'img_disabled' => array(
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+      'img_disabled_voted' => array(
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+    ),
+    'primary key' => array('wid', 'num'),
+  );
+
+  $schema['atwork_rate_widget_element'] = array(
+    'fields' => array(
+      'wid' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'type' => array(
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+      ),
+      'prefix' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'suffix' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'weight' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      // 1 = full, 2 = compact, 4 = full disabled, 8 = compact disabled, 16 = closed
+      'mode' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 31,
+      ),
+    ),
+    'primary key' => array('wid', 'type'),
+  );
+
+  $schema['atwork_rate_bot_agent'] = array(
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'pattern' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['atwork_rate_bot_ip'] = array(
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'ip' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Update css and js attributes in the widget objects.
+ *
+ * This function has to be called when the information from hook_rate_templates() is changed.
+ */
+function _atwork_rate_update_templates_data() {
+  $templates = array();
+  foreach (module_implements('atwork_rate_templates') as $module) {
+    foreach (module_invoke($module, 'atwork_rate_templates') as $name => $template) {
+      $templates[$name] = $template;
+    }
+  }
+
+  $widgets = variable_get('atwork_rate_widgets', array());
+  foreach ($widgets as $widget_id => $widget) {
+    $template = isset($widget->template) ? $widget->template : NULL;
+    if (isset($templates[$template])) {
+      if (isset($widget->css)) {
+        unset($widget->css);
+      }
+      if (isset($templates[$template]->css)) {
+        $widget->css = $templates[$template]->css;
+      }
+      if (isset($widget->js)) {
+        unset($widget->js);
+      }
+      if (isset($templates[$template]->js)) {
+        $widget->js = $templates[$template]->js;
+      }
+    }
+    $widgets[$widget_id] = $widget;
+  }
+  variable_set('atwork_rate_widgets', $widgets);
+}
+
+/**
+ * Create tables for blacklisting bots.
+ */
+function atwork_rate_update_7100() {
+  $schema = drupal_get_schema_unprocessed('atwork_rate');
+  db_create_table('atwork_rate_bot_agent', $schema['atwork_rate_bot_agent']);
+  db_create_table('atwork_rate_bot_ip', $schema['atwork_rate_bot_ip']);
+}
+
+/**
+ * Add rate_widget_element.mode field.
+ */
+function atwork_rate_update_7201() {
+  if (!db_field_exists('atwork_rate_widget_element', 'mode')) {
+    $schema = drupal_get_schema_unprocessed('atwork_rate');
+    db_add_field('atwork_rate_widget_element', 'mode', $schema['atwork_rate_widget_element']['fields']['mode']);
+  }
+}

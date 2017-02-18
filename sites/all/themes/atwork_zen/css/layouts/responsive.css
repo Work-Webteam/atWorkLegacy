@@ -20,7 +20,11 @@
   margin-right: auto;
   max-width: 960px;
 }
-
+.front #page {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1240px;
+}
 /* Apply the shared properties of grid items in a single, efficient ruleset. */
 #header,
 #content,
@@ -65,15 +69,16 @@
 @media all and (min-width: 480px) {
   #main {
     /* Move all the children of #main down to make room. */
-    padding-top: 1em;
+    padding-top: .3em;
     position: relative;
   }
   #navigation {
     /* Move the navbar up inside #main's padding. */
-    position: absolute;
+    /*! position: absolute; */
     top: 0;
     /* height: 3em; - height now controlled through atwork2015.css */
-    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
   }
 }
 
@@ -249,8 +254,8 @@
   /* Span 3 columns, starting in 2nd column from left. */
   .two-sidebars #content {
     float: left;
-    width: 60%;
-    margin-left: 20.5%;
+    width: 59%;
+    margin-left: 20%;
     margin-right: -80%;
   }
 

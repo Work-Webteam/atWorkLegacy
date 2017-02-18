@@ -845,7 +845,17 @@ EOT;
     $form['search_block_form']['#suffix'] = _atwork_fa('search', 'style="cursor: pointer;" onclick="document.getElementById(\'search-block-form\').submit()"');
     $form['actions']['submit']['#value'] = '';
   }
+  // Changing submit text and setting a message for flag
+  if($form_id == 'flag_confirm'){
+    $form['actions']['submit']['#value'] = t('Submit');
+    $form['#submit'][] = 'flag_form_set_message';
 }
+}
+// Helper function to set message once flag report is submitted
+function flag_form_set_message(){
+  drupal_set_message(t('Employee News has been notified.'), 'status', FALSE);
+}
+
 
 function _atwork_misc_ct_plural($name) {
   switch ($name) {
@@ -1596,4 +1606,27 @@ function _atwork_misc_block_content(){
 EOL;
 
   return $output;
+}
+
+
+/**
+ * implements hook_field_access, hiding certain forms from user
+ */
+function atwork_misc_field_access($op, $field, $entity_type, $entity, $account){
+  if($op == "edit" && ($field['field_name'] ==  'field_sticky_start_date' || $field['field_name'] == 'field_sticky_to_activity_feeds')){
+    return false;
+     // if not an admin hide important user fields
+    if (!user_access('administer users')) {
+      return false;
+    }
+    return true;
+
+  }
+  if($op == "edit" && $field['field_name'] ==  'field_feed_options' ){
+    return false;
+  }
+  if($op == "edit" && $field['field_name'] ==  'field_gal_employee_number' ){
+    return false;
+  }
+
 }

@@ -1,0 +1,559 @@
+/* Hides Drupal warning boxes at the top of the page */
+
+
+#block-views-home-page-blocks-zen-ad-space,
+#widget_pager_bottom_home_page_blocks_zen-block_5 {
+    display: none; // hides the slideshow selector boxes until needed.
+}
+.front.logged-in.no-sidebars .skin-default {
+	height: 260px; // removes the space used by the selector boxes.
+}
+#main {
+  margin-top: 2em;
+}
+
+
+/** @media queries for mobile devices **/
+/** Mobile - 768px to 820px **/
+/** Narrow Screen - 821px to 979px **/
+/** Desktop - 980px to max 1260px **/
+/** Social sidebar cuts out at 1240px and reappears at mobile resolutions lower than 980px **/
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   min--moz-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx) {
+
+@media only screen
+  and (max-width:679px) and (min-width:350px)
+  and (orientation: portrait)  {
+  #page {
+      min-width:352px!important;
+      max-width:677px!important;
+  }
+  #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row.views-slideshow-xtra-overlay-row {
+    width:inherit!important;
+    height:inherit!important;
+    margin:10px!important;
+  }
+  #block-views-home-page-blocks-zen-block-5 {
+    margin-bottom: 25px!important;
+  }
+  #widget_pager_bottom_home_page_blocks_zen-block_5 {
+    position:relative;
+    top: 263px;
+    display: block;
+    width: 315px;
+    margin: 0 auto;
+  }
+  #block-views-home-page-blocks-zen-block-1,
+	#block-views-home-page-blocks-zen-block-3,
+	#block-views-home-page-blocks-zen-block-4 {
+    display: block!important;
+    min-width:325px;
+    max-width: 90%;
+    margin: 0 auto 10px!important;
+  }
+  #admin-menu,
+  #block-atwork-profiles-header,
+  .front #block-block-5,
+  #views_slideshow_controls_text_home_page_blocks_zen-block_5,
+  #block-views-gallery-reference-block-2,
+  #block-boxes-homepage-logos,
+  #footer #footer-copyright table td.sideBrdr {
+    display: none!important;
+  }
+  .front #block-views-home-page-blocks-zen-block-2 {
+    width:inherit!important;
+    margin: 0 auto;
+  }
+  .section-classifieds .view-classifieds .views-row-odd, .section-classifieds .view-classifieds .views-row-even,
+  .page-galleries .view-gallery-reference .views-row-odd, .page-galleries .view-gallery-reference .views-row-even,
+  .section-blogs #block-views-blogs-block-3 .views-row-odd, .section-blogs #block-views-blogs-block-3 .views-row-even,
+  .section-news .view-id-news.view-display-id-page_2 .views-row-odd, .section-news .view-id-news.view-display-id-page_2 .views-row-even,
+  .section-corporate-news .view-id-news.view-display-id-page_3 .views-row-odd, .section-corporate-news .view-id-news.view-display-id-page_3 .views-row-even,
+  .section-videos .view-display-id-page_1 .views-row-odd, .section-videos .view-display-id-page_1 .views-row-even,
+  .section-videos .view-display-id-page_2 .views-row-odd, .section-videos .view-display-id-page_2 .views-row-even,
+  .section-corporate-polls .view-display-id-page_2 .views-row-odd, .section-corporate-polls .view-display-id-page_2 .views-row-even,
+  .section-polls .view-display-id-page_3 .views-row-odd, .section-polls .view-display-id-page_3 .views-row-even,
+  .section-etc-talks #block-views-videos-block-4 .views-row-odd, .section-etc-talks #block-views-videos-block-4 .views-row-even,
+  .section-executive-messages #block-views-executive-updates-block-2 .views-row-odd, .section-executive-messages #block-views-executive-updates-block-2 .views-row-even {
+    display: block!important;
+    clear:both;
+    min-width:325px;
+    max-width: 90%;
+    margin: 0 auto 20px!important;
+    padding-bottom: 25px;
+  }
+  .section-blogs #block-views-blogs-block-3 .image-blog-landing img,
+  .section-news .view-id-news.view-display-id-page_2 .image-news-landing img,
+  .section-corporate-news .view-id-news.view-display-id-page_3 .image-news-landing img,
+  .section-videos .view-display-id-page_1 .image-video-landing img,
+  .section-videos .view-display-id-page_2 .image-video-landing img,
+  .section-corporate-polls .view-display-id-page_2 .image-poll-landing img,
+  .section-polls .view-display-id-page_3 .image-poll-landing img,
+  .section-classifieds .view-classifieds .views-row .image-classifieds-section img,
+  .node-type-classified.section-classifieds .region-post-content .views-row .image-addtional-classifieds img,
+  .page-taxonomy .view-id-term_landing_page .views-row img,
+  .section-etc-talks #block-views-videos-block-4 img,
+  .view-executive-updates .image-exec-updates img {
+    height:100%!important;
+  }
+  .front div#social-side {
+    display:block!important;
+    position: inherit;
+    height: 175px;
+    overflow: hidden;
+  }
+  .front .region.region-social-side {
+    position: relative;
+    top: 0px;
+    width: 100%;
+  }
+  .front div#block-atwork-activity-homepage,
+  .front #social-side h2.block__title.block-title {
+  width: 100%!important;
+  }
+  .front #social-side .atwork-activity-block-container {
+    margin-top: 0px!important;
+  }
+  .front #social-side #status-update .form-textarea-wrapper {
+    max-width:85%!important;
+  }
+}
+@media only screen
+  and (max-width:767px) and (min-width:350px)
+  and (orientation: landscape) {
+    #page {
+        min-width:352px!important;
+        max-width:765px!important;
+    }
+    #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row.views-slideshow-xtra-overlay-row {
+      width:inherit!important;
+      height:inherit!important;
+      margin:10px 20px!important;
+    }
+    #block-views-home-page-blocks-zen-block-5 {
+      margin-bottom: 25px!important;
+    }
+    #widget_pager_bottom_home_page_blocks_zen-block_5 {
+      position:relative;
+      display: block;
+      width: 315px;
+      margin: 0 auto;
+    }
+    #admin-menu,
+    #block-atwork-profiles-header,
+    .front #block-block-5,
+    #views_slideshow_controls_text_home_page_blocks_zen-block_5,
+    #block-views-gallery-reference-block-2,
+    #block-boxes-homepage-logos {
+      display: none!important;
+    }
+    #block-views-home-page-blocks-zen-block-1,
+    #block-views-home-page-blocks-zen-block-3,
+    #block-views-home-page-blocks-zen-block-4,
+    #block-views-home-page-blocks-zen-block-2 {
+        min-width: 100% !important;
+        max-width:786px;
+        clear: both;
+        height: inherit;
+    }
+    .section-employees .view-content .views-row, .view-people-admin .view-content .views-row {
+      height:140px;
+      min-width: 100% !important;
+      max-width:786px;
+      clear: both;
+    }
+    .front .front-promoted-image {
+      display: inline-block;
+      clear:none;
+      height:165px;
+      max-width: 32%;
+      overflow: hidden;
+      float:left;
+    }
+    .employee-profile .image-employee-landing {
+      display: inline-block;
+      clear:none;
+      height:120px;
+      width: 90px;
+      overflow: hidden;
+      float:left;
+    }
+    .front .front-promoted-image img,
+    .employee-profile .image-employee-landing img {
+      display: block;
+    }
+    .front .promoted-info {
+      margin-left:31%;
+      padding: 10px 20px;
+    }
+    .front .front-promoted-title h3 {
+      clear:none;
+      min-height:inherit;
+      max-height:inherit;
+      padding:0;
+      margin:0 0 10px 10px;
+    }
+    .front .front-promoted-posted,
+    .front .front-promoted-teaser,
+    .front .front-promoted-read,
+    .front .front-promoted-comments,
+    .front .front-promoted-likes,
+    .front .front-promoted-more {
+      clear:none;
+      min-height:inherit;
+      max-height:inherit;
+      padding:0;
+      margin:0;
+    }
+    .front .front-promoted-teaser {
+      max-height: 36px;
+      overflow:hidden;
+    }
+    .section-classifieds .view-classifieds .views-row-odd, .section-classifieds .view-classifieds .views-row-even,
+    .page-galleries .view-gallery-reference .views-row-odd, .page-galleries .view-gallery-reference .views-row-even,
+    .section-blogs #block-views-blogs-block-3 .views-row-odd, .section-blogs #block-views-blogs-block-3 .views-row-even,
+    .section-news .view-id-news.view-display-id-page_2 .views-row-odd, .section-news .view-id-news.view-display-id-page_2 .views-row-even,
+    .section-corporate-news .view-id-news.view-display-id-page_3 .views-row-odd, .section-corporate-news .view-id-news.view-display-id-page_3 .views-row-even,
+    .section-videos .view-display-id-page_1 .views-row-odd, .section-videos .view-display-id-page_1 .views-row-even,
+    .section-videos .view-display-id-page_2 .views-row-odd, .section-videos .view-display-id-page_2 .views-row-even,
+    .section-corporate-polls .view-display-id-page_2 .views-row-odd, .section-corporate-polls .view-display-id-page_2 .views-row-even,
+    .section-polls .view-display-id-page_3 .views-row-odd, .section-polls .view-display-id-page_3 .views-row-even,
+    .section-etc-talks #block-views-videos-block-4 .views-row-odd, .section-etc-talks #block-views-videos-block-4 .views-row-even,
+    .section-executive-messages #block-views-executive-updates-block-2 .views-row-odd, .section-executive-messages #block-views-executive-updates-block-2 .views-row-even {
+      display: inline-block!important;
+      width:210px;
+      margin: 0 auto 20px!important;
+      padding-bottom: 25px;
+      font-size:.9em;
+    }
+    .section-blogs #block-views-blogs-block-3 .image-blog-landing img,
+    .section-news .view-id-news.view-display-id-page_2 .image-news-landing img,
+    .section-corporate-news .view-id-news.view-display-id-page_3 .image-news-landing img,
+    .section-videos .view-display-id-page_1 .image-video-landing img,
+    .section-videos .view-display-id-page_2 .image-video-landing img,
+    .section-corporate-polls .view-display-id-page_2 .image-poll-landing img,
+    .section-polls .view-display-id-page_3 .image-poll-landing img,
+    .section-classifieds .view-classifieds .views-row .image-classifieds-section img,
+    .node-type-classified.section-classifieds .region-post-content .views-row .image-addtional-classifieds img,
+    .page-taxonomy .view-id-term_landing_page .views-row img,
+    .section-etc-talks #block-views-videos-block-4 img,
+    .view-executive-updates .image-exec-updates img {
+      height:137px!important;
+    }
+    .front div#social-side {
+      display:block!important;
+      position: inherit;
+      height: 175px;
+      overflow: hidden;
+    }
+    .front .region.region-social-side {
+      position: relative;
+      top: 0px;
+      width: 100%;
+    }
+    div#block-atwork-activity-homepage,
+    .front #social-side h2 {
+    width: 100%!important;
+    }
+    .front div#social-side {
+      display:block!important;
+      position: inherit;
+      height: 175px;
+      overflow: hidden;
+    }
+    .front .region.region-social-side {
+      position: relative;
+      top: 0px;
+      width: 100%;
+    }
+    .front div#block-atwork-activity-homepage,
+    .front #social-side h2.block__title.block-title {
+    width: 100%!important;
+    }
+    .front #social-side .atwork-activity-block-container {
+      margin-top: 0px!important;
+    }
+    .front #social-side #status-update {
+      width:75%;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    .front #social-side #status-update .form-textarea-wrapper {
+      max-width:none!important;
+    }
+  }
+}
+@media only screen and (max-width:820px) and (min-width:400px){
+  html {
+    background: none !important;
+  }
+  #page {
+    min-width:590px!important;
+    max-width:810px!important;
+  }
+  .front #block-views-gallery-reference-block-2,
+  #block-block-5,
+  #block-custom-search-blocks-1,
+  #block-boxes-homepage-logos,
+  #views_slideshow_controls_text_home_page_blocks_zen-block_5 {
+    display: none!important;
+  }
+  #block-views-home-page-blocks-zen-block-5 {
+    margin-bottom: 25px!important;
+  }
+  .front.logged-in.no-sidebars .views-slideshow-controls-bottom.clearfix {
+    top:0!important;
+    display: block;
+  }
+  #widget_pager_bottom_home_page_blocks_zen-block_5 {
+    display: block;
+    width: 315px;
+    margin: 0 auto;
+  }
+  .front #content.column {
+      max-width: 98% !important;
+      margin: 0 auto;
+  }
+  #page {
+    max-width:820px !important;
+  }
+  .front .views-slideshow-xtra-overlay-row {
+    margin-top: 20px;
+    margin-left: 5px;
+  }
+  .front .views_slideshow_cycle_main .field-content img {
+    margin-left: -90px;
+  }
+	.front #block-views-home-page-blocks-zen-block-2.block.block-views {
+		min-width: 98%;
+	}
+	#block-views-home-page-blocks-zen-block-1,
+	#block-views-home-page-blocks-zen-block-3,
+	#block-views-home-page-blocks-zen-block-4,
+	#block-views-home-page-blocks-zen-block-2 {
+      min-width: 100% !important;
+      max-width:819px;
+      clear: both;
+	}
+  .front .front-promoted-image {
+    display: inline-block;
+    clear:none;
+    height:180px;
+    width: 275px;
+    overflow: hidden;
+    float:left;
+    margin-right:10px;
+  }
+  .front .front-promoted-image img {
+    display: block;
+  }
+  .front .promoted-info {
+    padding: 10px;
+  }
+  .front .front-promoted-title h3 {
+    clear:none;
+    min-height:inherit;
+    max-height:inherit;
+    padding:0;
+    margin:0 0 10px 0;
+  }
+  .front .front-promoted-posted,
+  .front .front-promoted-read,
+  .front .front-promoted-comments,
+  .front .front-promoted-likes,
+  .front .front-promoted-more {
+    clear:none;
+    min-height:inherit;
+    max-height:inherit;
+    padding:0;
+    margin:0;
+  }
+  .front .front-promoted-teaser {
+    clear:none;
+    min-height:40px;
+    padding:0;
+    margin:0;
+  }
+  .front .front-promoted-more {
+    margin-left: 280px;
+  }
+  .front div#social-side {
+    display:block!important;
+    position: inherit;
+    height: 175px;
+    overflow: hidden;
+  }
+  .front .region.region-social-side {
+    position: relative;
+    top: 0px;
+    width: 100%;
+  }
+  div#block-atwork-activity-homepage,
+  .front #social-side h2.block__title.block-title {
+  width: 100%!important;
+  }
+  .front #social-side .atwork-activity-block-container {
+    margin-top: 0px!important;
+  }
+  .front #social-side #status-update {
+    width:75%;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .front #social-side #status-update .form-textarea-wrapper {
+    max-width:none!important;
+  }
+}
+@media only screen and (max-width:979px) {
+  html,
+  #header.header,
+  .not-front .new-activity-window #header.header {
+    background: none !important;
+  }
+  .front #content.column {
+      max-width: 98% !important;
+      margin: 0 auto;
+  }
+	#navigation,
+	#block-views-top-tools-block,
+  #block-custom-search-blocks-1,
+  #block-block-45 {// hides the top tools panel
+   		display: none !important;
+    }
+	#header.header,
+  .not-front .new-activity-window #header.header { //make new space for mobile menu in nav space
+    height: 60px!important;
+    margin: 0;
+  	}
+ 	#navigation .region-navigation { // move .region-nav to very top
+    top: 0 !important;
+    width: 100%;
+  	}
+	.front #block-views-home-page-blocks-zen-block-2.block.block-views {
+		min-width: 100%;
+	}
+}
+@media only screen and (min-width:980px) {
+  .not-front .new-activity-window #header.header {
+    background: none !important;
+  }
+  #block-atwork-mobile-atwork-mobile-menu-block,
+  #block-block-45 {
+    display: none !important;
+  	}
+	.front .region.region-pre-content,
+	.front #block-block-5 {
+		max-width: 960px;
+		clear: both;
+	}
+	.front #header-box {
+		min-width: 820px;
+		max-width: 1280px; //container in top banner
+	}
+  .front #block-views-home-page-blocks-zen-block-2 {
+    }
+}
+
+@media only screen and (max-width: 1240px) {
+    .front #social-side,
+    #block-block-45 { // show social sidebar only on wide screen view - 1240 or greater
+        display: none !important;
+    }
+    .front #content.column {
+        max-width: 960px;
+    }
+}
+
+
+
+/* Mobile Menu Appearance */
+#block-atwork-mobile-atwork-mobile-menu-block #full_menu {
+  padding-bottom:10px;
+}
+
+#block-atwork-mobile-atwork-mobile-menu-block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  min-height: 36px;
+  overflow-y: scroll;
+  padding: 20px 0 0 10px;
+  background-color: #ECECEC;
+  background-image: url(/sites/all/themes/atwork_zen/images/atwork-logo-menu.png);
+  background-repeat: no-repeat;
+  background-position: center 5px;
+  z-index: 10000;
+  border-bottom: solid 8px #004B8D !important;
+}
+#block-atwork-mobile-atwork-mobile-menu-block i.fa.fa-bars {
+  font-size: 125%;
+}
+#block-atwork-mobile-atwork-mobile-menu-block i.fa.fa-bars:after {
+  content: " Menu";
+  font-family: atwork-font;
+  font-size: 125%;
+}
+#block-atwork-mobile-atwork-mobile-menu-block #full_menu #atwork_menu {
+  padding: 0;
+  margin: 0;
+  line-height: normal;
+}
+#block-atwork-mobile-atwork-mobile-menu-block .menu-title {
+  display: block;
+  padding: 8px;
+  margin: 0 25px 0 0;
+  border-bottom: solid 1px #A7A7A7;
+}
+
+#block-atwork-mobile-atwork-mobile-menu-block .menu-sub-title {
+  display: block;
+  padding: 8px;
+  margin-left: 25px;
+}
+#block-atwork-mobile-atwork-mobile-menu-block ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#block-atwork-mobile-atwork-mobile-menu-block li a {
+  color: #000;
+  display: block;
+}
+li.atwork_menu_nested a {
+  display: block;
+  margin: 5px 25px;
+  padding: 5px;
+  border: solid 1px #CCC;
+}
+li.atwork_menu_nested a:hover {
+  background-color: #CCC;
+  text-decoration:none;
+}
+
+li.atwork_menu_top_level .menu-title i.fa.fa-plus,
+li.atwork_menu_top_level .menu-sub-title i.fa.fa-plus {
+  padding: 2px;
+  border: solid 1px #999;
+  color: #999;
+  background-color: none;
+}
+li.atwork_menu_top_level .menu-title:hover,
+li.atwork_menu_top_level .menu-sub-title:hover {
+  background-color: #FFF;
+}
+
+li.atwork_menu_top_level .menu-title i.fa.fa-minus,
+li.atwork_menu_top_level .menu-sub-title i.fa.fa-minus {
+  padding: 2px;
+  border: solid 1px #000;
+  background-color: #26669E;
+  color: #FFF;
+}
