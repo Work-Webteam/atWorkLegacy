@@ -11,6 +11,7 @@
 
           setTimeout(function(){
             if(!customWindow.focus){
+              console.log("was not focus");
               setTimeout(customWindow.focus(), 1000);
               //setTimeout(function(){window.blur();},900);
             }
