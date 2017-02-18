@@ -686,11 +686,19 @@ function _atwork_activity_render_messages($result, $activityType) {
           break;
         // Less than an hour
         case($diff<3600):
-          $time_record = floor($diff/60) . " minutes ago";
+          if($diff <120){
+             $time_record = floor($diff/60) . " minute ago";
+          } else {
+            $time_record = floor($diff/60) . " minutes ago";
+          }
           break;
         // Less than a day
         case($diff<86400):
-          $time_record = floor($diff/3600) . " hours ago";
+          if($diff < 7200){
+            $time_record = floor($diff/3600) . " hour ago";
+          } else {
+            $time_record = floor($diff/3600) . " hours ago";
+          }
           break;
         // Less than a week
         case($diff<604800):
@@ -2477,16 +2485,4 @@ function atwork_activity_user_view_alter(&$build){
     $remove_msgs = array_search('<em class="placeholder">Entity Comments</em> was successfully updated.', $current_msgs['status']);
     // Turns to a boolean when empty for some reason - so doesn't reg as null
     if(isset($remove_msgs) && $remove_msgs !== FALSE){
-      unset($current_msgs['status'][$remove_msgs]);
-    }
-    // Replace message array in session with our new sanitized message
-    foreach($current_msgs['status'] as $key=>$value){
-      drupal_set_message($value, 'status');
-    }
-  }
-
-
-}
-
-
-
+   
