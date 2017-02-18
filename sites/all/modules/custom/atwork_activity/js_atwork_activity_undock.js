@@ -7,18 +7,18 @@
         .bind('click', function(){
           // opens in new window to the far right of screen, on top and accounting for multiple monitors
           var customWindow = window.open(this.href, "customWindow", "scrollbars=1, width=300, height=850, top=0, left=9000");
-          setTimeout(function(){window.blur();},600);
           setTimeout(function(){customWindow.focus();},1000);
-          //setTimeout(function(){window.blur();},4000);
-          //setTimeout(function(){customWindow.focus();},4001);
 
-
-          if(window.focus){
-            setTimeout(customWindow.focus(), 1500);
-          }
+          setTimeout(function(){
+            if(!customWindow.focus){
+              setTimeout(customWindow.focus(), 1000);
+              setTimeout(function(){window.blur();},900);
+            }
+          }, 1002);
         // waits for dom to load and then scrolls all the way to the right.
         setTimeout(function() {
           $(customWindow.document).scrollLeft(2000);
+          $(customWindow.document).focus();
         }, 10);
           return false;
         });
