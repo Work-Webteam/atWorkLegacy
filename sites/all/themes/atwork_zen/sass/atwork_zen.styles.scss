@@ -2719,7 +2719,9 @@ aside.sidebars h2 {
 #views-exposed-form-people-admin-public-page .form-type-textfield,
 #views-exposed-form-people-admin-public-page .form-type-textfield input,
 #views-exposed-form-people-admin-page-following2 .form-type-textfield,
-#views-exposed-form-people-admin-page-following2 .form-type-textfield input {
+#views-exposed-form-people-admin-page-following2 .form-type-textfield input,
+#views-exposed-form-people-admin-page-followers2 .form-type-textfield,
+#views-exposed-form-people-admin-page-followers2 .form-type-textfield input  {
   width: 100%;
 }
 #views-exposed-form-people-admin-public-page #edit-name-wrapper,
@@ -2747,7 +2749,7 @@ aside.sidebars h2 {
 }
 #views-exposed-form-people-admin-public-page .views-exposed-form .views-exposed-widget,
 #views-exposed-form-people-admin-page-following2 .views-exposed-form .views-exposed-widget,
-#views-exposed-form-people-admin-page-followers .views-exposed-form .views-exposed-widget {
+#views-exposed-form-people-admin-page-followers2 .views-exposed-form .views-exposed-widget {
   padding: 0 5px 0 0;
   margin: 0;
 }
