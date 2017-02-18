@@ -415,8 +415,9 @@ function _atwork_activity_render_messages($result, $activityType) {
           case($diff<3600):
             if($diff < 120){
               $time_record = floor($diff/60) . " minute ago";
-            }
+            } else {
             $time_record = floor($diff/60) . " minutes ago";
+            }
             break;
           // Less than a day
           case($diff<86400):
