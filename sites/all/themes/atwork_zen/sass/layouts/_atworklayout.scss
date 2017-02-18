@@ -63,7 +63,8 @@ only screen and (                min-resolution: 2dppx) {
   #views_slideshow_controls_text_home_page_blocks_zen-block_5,
   #block-views-gallery-reference-block-2,
   #block-boxes-homepage-logos,
-  #footer #footer-copyright table td.sideBrdr {
+  #footer #footer-copyright table td.sideBrdr,
+  .jsNewActivityWindow.atwork-activity-processed {
     display: none!important;
   }
   .front #block-views-home-page-blocks-zen-block-2 {
@@ -105,7 +106,8 @@ only screen and (                min-resolution: 2dppx) {
   .front div#social-side {
     display:block!important;
     position: inherit;
-    height: 175px;
+    min-height: 250px;
+    max-height: 300px;
     overflow: hidden;
   }
   .front .region.region-social-side {
@@ -276,9 +278,6 @@ only screen and (                min-resolution: 2dppx) {
     .front #social-side h2.block__title.block-title {
     width: 100%!important;
     }
-    .front #social-side .atwork-activity-block-container {
-      margin-top: 0px!important;
-    }
     .front #social-side #status-update {
       width:75%;
       margin-left:auto;
@@ -287,9 +286,17 @@ only screen and (                min-resolution: 2dppx) {
     .front #social-side #status-update .form-textarea-wrapper {
       max-width:none!important;
     }
+    .front div#social-side {
+    display: block !important;
+    position: inherit;
+    min-height: 300px;
+    max-height: 330px;
+    overflow: hidden;
+    }
   }
 }
-@media only screen and (max-width:820px) and (min-width:400px){
+@media only screen and (max-width:820px) and (min-width:400px)
+and (orientation: portrait) {
   html {
     background: none !important;
   }
@@ -389,7 +396,7 @@ only screen and (                min-resolution: 2dppx) {
     display:block!important;
     position: inherit;
     min-height: 250px;
-    max-height: 275px;
+    max-height: 330px;
     overflow: hidden;
   }
   .front .region.region-social-side {
@@ -478,6 +485,7 @@ only screen and (                min-resolution: 2dppx) {
 }
 
 #block-atwork-mobile-atwork-mobile-menu-block {
+  display: block;
   position: absolute;
   top: 0;
   left: 0;
