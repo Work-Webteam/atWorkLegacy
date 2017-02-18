@@ -12,7 +12,7 @@
           setTimeout(function(){
             if(!customWindow.focus){
               setTimeout(customWindow.focus(), 1000);
-              setTimeout(function(){window.blur();},900);
+              //setTimeout(function(){window.blur();},900);
             }
           }, 1002);
         // waits for dom to load and then scrolls all the way to the right.
