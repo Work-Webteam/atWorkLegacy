@@ -6,7 +6,7 @@
         .addClass('atwork-activity-processed')
         .bind('click', function(){
           // opens in new window to the far right of screen, on top and accounting for multiple monitors
-          var customWindow = window.open(this.href, "customWindow", "scrollbars=1, width=300, height=850, left=9000");
+          var customWindow = window.open(this.href, "customWindow", "scrollbars=1, width=305, height=850");
           setTimeout(function(){customWindow.focus();},1000);
 
           setTimeout(function(){
