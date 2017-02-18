@@ -7,6 +7,8 @@
    */
   Drupal.behaviors.profileFeedJquery = {
     attach: function(context, settings) {
+    // On initial load, lets make sure this window is focused.
+    window.focus();
 
     // Initialize/take care of comments
     setComments();
