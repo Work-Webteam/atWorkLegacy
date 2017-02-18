@@ -301,7 +301,9 @@ only screen and (                min-resolution: 2dppx) {
   #block-block-5,
   #block-custom-search-blocks-1,
   #block-boxes-homepage-logos,
-  #views_slideshow_controls_text_home_page_blocks_zen-block_5 {
+  #views_slideshow_controls_text_home_page_blocks_zen-block_5,
+  #social-side .admin-advanced-feed-settings-view,
+  .jsNewActivityWindow.atwork-activity-processed  {
     display: none!important;
   }
   #block-views-home-page-blocks-zen-block-5 {
@@ -386,7 +388,8 @@ only screen and (                min-resolution: 2dppx) {
   .front div#social-side {
     display:block!important;
     position: inherit;
-    height: 175px;
+    min-height: 250px;
+    max-height: 275px;
     overflow: hidden;
   }
   .front .region.region-social-side {
@@ -398,11 +401,8 @@ only screen and (                min-resolution: 2dppx) {
   .front #social-side h2.block__title.block-title {
   width: 100%!important;
   }
-  .front #social-side .atwork-activity-block-container {
-    margin-top: 0px!important;
-  }
   .front #social-side #status-update {
-    width:75%;
+    width:450px;
     margin-left:auto;
     margin-right:auto;
   }
