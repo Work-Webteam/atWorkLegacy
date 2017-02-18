@@ -2485,4 +2485,16 @@ function atwork_activity_user_view_alter(&$build){
     $remove_msgs = array_search('<em class="placeholder">Entity Comments</em> was successfully updated.', $current_msgs['status']);
     // Turns to a boolean when empty for some reason - so doesn't reg as null
     if(isset($remove_msgs) && $remove_msgs !== FALSE){
-   
+      unset($current_msgs['status'][$remove_msgs]);
+    }
+    // Replace message array in session with our new sanitized message
+    foreach($current_msgs['status'] as $key=>$value){
+      drupal_set_message($value, 'status');
+    }
+  }
+
+
+}
+
+
+
