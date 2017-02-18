@@ -152,7 +152,8 @@ only screen and (                min-resolution: 2dppx) {
     .front #block-block-5,
     #views_slideshow_controls_text_home_page_blocks_zen-block_5,
     #block-views-gallery-reference-block-2,
-    #block-boxes-homepage-logos {
+    #block-boxes-homepage-logos,
+    .front #social-side #status-update  {
       display: none!important;
     }
     #block-views-home-page-blocks-zen-block-1,
@@ -248,12 +249,6 @@ only screen and (                min-resolution: 2dppx) {
     .view-executive-updates .image-exec-updates img {
       height:137px!important;
     }
-    .front div#social-side {
-      display:block!important;
-      position: inherit;
-      height: 175px;
-      overflow: hidden;
-    }
     .front .region.region-social-side {
       position: relative;
       top: 0px;
@@ -263,12 +258,6 @@ only screen and (                min-resolution: 2dppx) {
     .front #social-side h2 {
     width: 100%!important;
     }
-    .front div#social-side {
-      display:block!important;
-      position: inherit;
-      height: 175px;
-      overflow: hidden;
-    }
     .front .region.region-social-side {
       position: relative;
       top: 0px;
@@ -277,14 +266,6 @@ only screen and (                min-resolution: 2dppx) {
     .front div#block-atwork-activity-homepage,
     .front #social-side h2.block__title.block-title {
     width: 100%!important;
-    }
-    .front #social-side #status-update {
-      width:75%;
-      margin-left:auto;
-      margin-right:auto;
-    }
-    .front #social-side #status-update .form-textarea-wrapper {
-      max-width:none!important;
     }
     .front div#social-side {
     display: block !important;
