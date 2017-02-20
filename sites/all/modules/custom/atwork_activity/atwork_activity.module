@@ -480,6 +480,8 @@ function _atwork_activity_render_messages($result, $activityType) {
       $message_string = $message['message__message_text__0']['#markup'];
       $no_tags_message = strip_tags($message_string);
       $message_string_length = strlen($no_tags_message);
+      global $user;
+
       if($message_string_length > 100){
         $string_is_too_long = true;
       }
@@ -731,7 +733,7 @@ function _atwork_activity_render_messages($result, $activityType) {
   }
 
   // Pass timestamp to js settings
-  drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $author->name, 'uid' => $author->uid)), 'setting');
+  //drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $author->name, 'uid' => $author->uid)), 'setting');
 
   $output .= '<span style="display:none" id="timestamp-latest">' . $time_stamp . '</span>';
   // The front page feed pager
@@ -2096,20 +2098,14 @@ function atwork_activity_block_view($delta = '') {
 
       //drupal_add_library('system', 'ui.tabs');
 /*
-      $js = <<<EOT
-(function($) {
-  $(document).ready(function() {
-    $( "#tabs" ).tabs();
-  });
-})(jQuery);
-EOT;
+
 
       drupal_add_js($js, 'inline');
 
       $block['subject'] = t('Current Activity');
       $block['content'] = array(
         '#markup' => '
-<a href="node/21100" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="Click for pop-out Activity Feed window" /></a>
+<a href="node/21603" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="Click for pop-out Activity Feed window" /></a>
 <div id="tabs">
 <div class="activity-feed-progress"><img src="/sites/all/themes/atwork_zen/images/progress.gif" title="Loading" /></div>
   <ul>
@@ -2131,16 +2127,13 @@ EOT;
       );
      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_click_handlers.js');
 */
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_homepage_ajax.js');
+      //drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_homepage_ajax.js');
 
       $block['subject'] = t('My News Feed');
       $block['subject'] .= '<div class="block-header-inner">';
       $block['subject'] .= '<button class="activity-filters-my" title="My activity">&nbsp;</button>';
       $block['subject'] .= '<button class="activity-filters-all" title="All activity">&nbsp;</button>';
-      // for prod/test
-      $block['subject'] .= '<a href="node/21100" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="See activity in a new window" /></a>';
-      // for beta2
-      //$block['subject'] .= '<a href="node/20049" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="See activity in a new window" /></a>';
+      $block['subject'] .= '<a href="node/21603" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="See activity in a new window" /></a>';
       $block['subject'] .= '</div><!-- /.block-header-inner -->';
 
       $block['content'] = '<div class="atwork-activity-block-container">';
@@ -2167,7 +2160,7 @@ EOT;
       //feed_block_init();
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_atwork_activity_profile_feed.js');
 
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_profile_page_ajax.js');
+      //drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_profile_page_ajax.js');
       break;
   }
   return $block;
@@ -2390,7 +2383,7 @@ function _atwork_activity_profile_page_block_content($user_id){
     }
   }
   // Pass timestamp to js settings
-  drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $account->name, 'uid' => $account->uid)), 'setting');
+  //drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $account->name, 'uid' => $account->uid)), 'setting');
 
   $output .= '<span style="display:none" id="timestamp-latest">' . $time_stamp . '</span>';
   // The profile page pager

@@ -14,7 +14,7 @@
       $('#profile-comment-link:not(.atwork-activity-processed)', context)
         .addClass('atwork-activity-processed')
         .bind('click', function(){
-          $.get('/atwork-activity/' + name + '/' + uid + '/' + currentTimeStamp + '/' + query.page, null, feedDetails);
+          //$.get('/atwork-activity/' + name + '/' + uid + '/' + currentTimeStamp + '/' + query.page, null, feedDetails);
           return false;
        });
     }
@@ -26,9 +26,9 @@
   var query = '';
   var feedDetails = function(response){
     //var result = $.parseJSON(response);
-    console.log(response);
-    $('#ajax-target').html(response);
-
+    //console.log(response);
+    //$('#ajax-target').html(response);
+    return false;
   };
 
   // Read a page's GET URL variables and return them as an associative array.
