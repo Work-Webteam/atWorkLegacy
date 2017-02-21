@@ -510,9 +510,9 @@ function profile_feed_comments_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'module' => NULL,
+      'module' => 'atwork_rate',
       'settings' => array(),
-      'type' => 'atwork_rate_widget_thumbs_up_down',
+      'type' => 'atwork_rate_widget_feed_like_button',
       'weight' => 6,
     ),
   );
@@ -1104,9 +1104,9 @@ function profile_feed_comments_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 0,
-      'module' => NULL,
+      'module' => 'atwork_rate',
       'settings' => array(),
-      'type' => 'atwork_rate_widget_thumbs_up_down',
+      'type' => 'atwork_rate_widget_feed_like_button',
       'weight' => 5,
     ),
   );
@@ -1381,7 +1381,7 @@ function profile_feed_comments_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'above',
         'module' => 'atwork_rate',
         'settings' => array(
           'displayed' => 3,
@@ -1537,9 +1537,9 @@ function profile_feed_comments_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'module' => NULL,
+      'module' => 'atwork_rate',
       'settings' => array(),
-      'type' => 'atwork_rate_widget_thumbs_up_down',
+      'type' => 'atwork_rate_widget_feed_like_button',
       'weight' => 2,
     ),
   );
@@ -2072,7 +2072,21 @@ function profile_feed_comments_field_default_field_instances() {
     'label' => 'Body',
     'required' => 0,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
       'display_summary' => 0,
+      'semantic_field_format' => '',
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
@@ -2082,7 +2096,9 @@ function profile_feed_comments_field_default_field_instances() {
       'settings' => array(
         'maxlength_js' => '',
         'maxlength_js_enforce' => 0,
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        'maxlength_js_label' => 'Remaining: <strong>@remaining</strong>',
+        'maxlength_js_label_summary' => 'Remaining: <strong>@remaining</strong>',
+        'maxlength_js_summary' => '',
         'maxlength_js_truncate_html' => 0,
         'rows' => 20,
         'summary_rows' => 5,

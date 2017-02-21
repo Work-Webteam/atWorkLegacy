@@ -34,7 +34,7 @@ function atwork_user_following_default_fe_block_settings() {
         'region' => 'content',
         'status' => 1,
         'theme' => 'atwork_zen',
-        'weight' => 29,
+        'weight' => 31,
       ),
       'seven' => array(
         'region' => '',

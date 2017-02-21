@@ -27,20 +27,20 @@ function profile_feed_comments_flag_default_flags() {
     'title' => 'Activity Feed Messages Flag',
     'global' => 1,
     'types' => array(
-      0 => 'group_unsubscribe',
-      1 => 'new_answer',
-      2 => 'new_comment',
-      3 => 'new_image',
-      4 => 'new_node',
-      5 => 'node_updated',
-      6 => 'status',
-      7 => 'updated_user',
-      8 => 'user_liked_comment',
-      9 => 'user_liked_node',
-      10 => 'user_received_ecard',
-      11 => 'user_sent_ecard',
-      12 => 'following_user',
-      13 => 'group_subscribe',
+      0 => 'following_user',
+      1 => 'group_subscribe',
+      2 => 'group_unsubscribe',
+      3 => 'new_answer',
+      4 => 'new_comment',
+      5 => 'new_image',
+      6 => 'new_node',
+      7 => 'node_updated',
+      8 => 'status',
+      9 => 'updated_user',
+      10 => 'user_liked_comment',
+      11 => 'user_liked_node',
+      12 => 'user_received_ecard',
+      13 => 'user_sent_ecard',
     ),
     'flag_short' => 'Flag',
     'flag_long' => 'Flag as inappropriate',
@@ -245,7 +245,7 @@ function profile_feed_comments_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cp class=\\u0022msg-new-comment\\u0022\\u003E[message:field-message-comment:author:author-conditional] posted a comment in \\u003Ca href=\\u0022[message:field-message-node:url:relative]?c=[message:field-message-comment:cid]#comment-[message:field-message-comment:cid]\\u0022 title=\\u0022[message:field-message-node:title]\\u0022\\u003E[message:field-message-node:title]\\u003C\\/a\\u003E[atwork-groups:in-groups-text].\\u003Cbr\\u003E\\r\\n\\t\\u003Cspan class=\\u0022activity-comment\\u0022\\u003E[message:field-message-comment:teaser]\\u003C\\/span\\u003E\\u003C\\/p\\u003E\\r\\n",
+          "value" : "\\u003Cp class=\\u0022msg-new-comment\\u0022\\u003E[message:field-message-comment:author:author-conditional] posted a comment in \\u003Ca href=\\u0022[message:field-message-node:url:relative]?c=[message:field-message-comment:cid]#comment-[message:field-message-comment:cid]\\u0022 title=\\u0022[message:field-message-node:title]\\u0022\\u003E[message:field-message-node:title]\\u003C\\/a\\u003E[atwork-groups:in-groups-text].\\u003Cbr\\u003E\\r\\n\\t\\u003Cspan class=\\u0022activity-comment\\u0022\\u003E[message:field-message-comment:teaser] \\u003C\\/span\\u003E\\u0026nbsp;\\u003Ca href=\\u0022[message:field-message-comment:url]\\u0022\\u003Emore\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\r\\n",
           "format" : "full_html"
         }
       ]

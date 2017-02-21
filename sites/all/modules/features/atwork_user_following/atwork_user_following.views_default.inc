@@ -1927,6 +1927,22 @@ echo(\'<p style="margin-top:10px;">To update and publish <a href="/employees/\' 
   $handler->display->display_options['fields']['field_display_name']['element_wrapper_type'] = 'h3';
   $handler->display->display_options['fields']['field_display_name']['element_wrapper_class'] = 'name-employee-landing';
   $handler->display->display_options['fields']['field_display_name']['element_default_classes'] = FALSE;
+  /* Field: User: Last Name */
+  $handler->display->display_options['fields']['field_gal_last_name']['id'] = 'field_gal_last_name';
+  $handler->display->display_options['fields']['field_gal_last_name']['table'] = 'field_data_field_gal_last_name';
+  $handler->display->display_options['fields']['field_gal_last_name']['field'] = 'field_gal_last_name';
+  $handler->display->display_options['fields']['field_gal_last_name']['relationship'] = 'requestee_id';
+  $handler->display->display_options['fields']['field_gal_last_name']['label'] = '';
+  $handler->display->display_options['fields']['field_gal_last_name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_gal_last_name']['element_label_colon'] = FALSE;
+  /* Field: User: First Name */
+  $handler->display->display_options['fields']['field_gal_first_name']['id'] = 'field_gal_first_name';
+  $handler->display->display_options['fields']['field_gal_first_name']['table'] = 'field_data_field_gal_first_name';
+  $handler->display->display_options['fields']['field_gal_first_name']['field'] = 'field_gal_first_name';
+  $handler->display->display_options['fields']['field_gal_first_name']['relationship'] = 'requestee_id';
+  $handler->display->display_options['fields']['field_gal_first_name']['label'] = '';
+  $handler->display->display_options['fields']['field_gal_first_name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_gal_first_name']['element_label_colon'] = FALSE;
   /* Field: User: Title */
   $handler->display->display_options['fields']['field_gal_title']['id'] = 'field_gal_title';
   $handler->display->display_options['fields']['field_gal_title']['table'] = 'field_data_field_gal_title';
@@ -1986,18 +2002,18 @@ echo(\'<p style="margin-top:10px;">To update and publish <a href="/employees/\' 
     2 => 'OR',
   );
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Field: Display Name (field_display_name) */
-  $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
-  $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
-  $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
-  $handler->display->display_options['filters']['field_display_name_value']['operator'] = 'contains';
-  $handler->display->display_options['filters']['field_display_name_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_display_name_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['operator_id'] = 'field_display_name_value_op';
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['label'] = 'Name';
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['operator'] = 'field_display_name_value_op';
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['identifier'] = 'field_display_name_value';
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['remember_roles'] = array(
+  /* Filter criterion: User: Last Name (field_gal_last_name) */
+  $handler->display->display_options['filters']['field_gal_last_name_value']['id'] = 'field_gal_last_name_value';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['table'] = 'field_data_field_gal_last_name';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['field'] = 'field_gal_last_name_value';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_gal_last_name_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['operator_id'] = 'field_gal_last_name_value_op';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['label'] = 'Last Name';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['operator'] = 'field_gal_last_name_value_op';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['identifier'] = 'field_gal_last_name_value';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -2014,12 +2030,46 @@ echo(\'<p style="margin-top:10px;">To update and publish <a href="/employees/\' 
     16 => 0,
     17 => 0,
   );
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_filter'] = 1;
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_items'] = '15';
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_field'] = 'field_display_name';
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_dependent'] = 0;
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_filter'] = 1;
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_items'] = '25';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_field'] = 'field_gal_last_name';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_dependent'] = 0;
+  /* Filter criterion: User: First Name (field_gal_first_name) */
+  $handler->display->display_options['filters']['field_gal_first_name_value']['id'] = 'field_gal_first_name_value';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['table'] = 'field_data_field_gal_first_name';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['field'] = 'field_gal_first_name_value';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_gal_first_name_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['operator_id'] = 'field_gal_first_name_value_op';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['label'] = 'First Name';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['operator'] = 'field_gal_first_name_value_op';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['identifier'] = 'field_gal_first_name_value';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    15 => 0,
+    16 => 0,
+    17 => 0,
+  );
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_filter'] = 1;
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_items'] = '20';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_field'] = 'field_gal_first_name';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_dependent'] = 0;
   /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_1']['id'] = 'field_display_name_value_1';
   $handler->display->display_options['filters']['field_display_name_value_1']['table'] = 'field_data_field_display_name';
@@ -2236,6 +2286,14 @@ echo(\'<p style="margin-top:10px;">To update and publish <a href="/employees/\' 
   $handler->display->display_options['filters']['field_display_name_value_5']['value'] = 'zz';
   $handler->display->display_options['filters']['field_display_name_value_5']['group'] = 1;
   /* Filter criterion: Field: Display Name (field_display_name) */
+  $handler->display->display_options['filters']['field_display_name_value_8']['id'] = 'field_display_name_value_8';
+  $handler->display->display_options['filters']['field_display_name_value_8']['table'] = 'field_data_field_display_name';
+  $handler->display->display_options['filters']['field_display_name_value_8']['field'] = 'field_display_name_value';
+  $handler->display->display_options['filters']['field_display_name_value_8']['relationship'] = 'requestee_id';
+  $handler->display->display_options['filters']['field_display_name_value_8']['operator'] = '!=';
+  $handler->display->display_options['filters']['field_display_name_value_8']['value'] = 'Employee News';
+  $handler->display->display_options['filters']['field_display_name_value_8']['group'] = 1;
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_6']['id'] = 'field_display_name_value_6';
   $handler->display->display_options['filters']['field_display_name_value_6']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value_6']['field'] = 'field_display_name_value';
@@ -2348,6 +2406,22 @@ echo(\'<p style="margin-top:10px;">To update and publish <a href="/employees/\' 
   $handler->display->display_options['fields']['field_display_name']['element_wrapper_type'] = 'h3';
   $handler->display->display_options['fields']['field_display_name']['element_wrapper_class'] = 'name-employee-landing';
   $handler->display->display_options['fields']['field_display_name']['element_default_classes'] = FALSE;
+  /* Field: User: Last Name */
+  $handler->display->display_options['fields']['field_gal_last_name']['id'] = 'field_gal_last_name';
+  $handler->display->display_options['fields']['field_gal_last_name']['table'] = 'field_data_field_gal_last_name';
+  $handler->display->display_options['fields']['field_gal_last_name']['field'] = 'field_gal_last_name';
+  $handler->display->display_options['fields']['field_gal_last_name']['relationship'] = 'requester_id';
+  $handler->display->display_options['fields']['field_gal_last_name']['label'] = '';
+  $handler->display->display_options['fields']['field_gal_last_name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_gal_last_name']['element_label_colon'] = FALSE;
+  /* Field: User: First Name */
+  $handler->display->display_options['fields']['field_gal_first_name']['id'] = 'field_gal_first_name';
+  $handler->display->display_options['fields']['field_gal_first_name']['table'] = 'field_data_field_gal_first_name';
+  $handler->display->display_options['fields']['field_gal_first_name']['field'] = 'field_gal_first_name';
+  $handler->display->display_options['fields']['field_gal_first_name']['relationship'] = 'requester_id';
+  $handler->display->display_options['fields']['field_gal_first_name']['label'] = '';
+  $handler->display->display_options['fields']['field_gal_first_name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_gal_first_name']['element_label_colon'] = FALSE;
   /* Field: User: Title */
   $handler->display->display_options['fields']['field_gal_title']['id'] = 'field_gal_title';
   $handler->display->display_options['fields']['field_gal_title']['table'] = 'field_data_field_gal_title';
@@ -2407,18 +2481,18 @@ echo(\'<p style="margin-top:10px;">To update and publish <a href="/employees/\' 
     2 => 'OR',
   );
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Field: Display Name (field_display_name) */
-  $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
-  $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
-  $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
-  $handler->display->display_options['filters']['field_display_name_value']['operator'] = 'contains';
-  $handler->display->display_options['filters']['field_display_name_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_display_name_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['operator_id'] = 'field_display_name_value_op';
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['label'] = 'Name';
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['operator'] = 'field_display_name_value_op';
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['identifier'] = 'field_display_name_value';
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['remember_roles'] = array(
+  /* Filter criterion: User: Last Name (field_gal_last_name) */
+  $handler->display->display_options['filters']['field_gal_last_name_value']['id'] = 'field_gal_last_name_value';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['table'] = 'field_data_field_gal_last_name';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['field'] = 'field_gal_last_name_value';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_gal_last_name_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['operator_id'] = 'field_gal_last_name_value_op';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['label'] = 'Last Name';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['operator'] = 'field_gal_last_name_value_op';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['identifier'] = 'field_gal_last_name_value';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -2435,12 +2509,46 @@ echo(\'<p style="margin-top:10px;">To update and publish <a href="/employees/\' 
     16 => 0,
     17 => 0,
   );
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_filter'] = 1;
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_items'] = '15';
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_field'] = 'field_display_name';
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
-  $handler->display->display_options['filters']['field_display_name_value']['expose']['autocomplete_dependent'] = 0;
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_filter'] = 1;
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_items'] = '25';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_field'] = 'field_gal_last_name';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_dependent'] = 0;
+  /* Filter criterion: User: First Name (field_gal_first_name) */
+  $handler->display->display_options['filters']['field_gal_first_name_value']['id'] = 'field_gal_first_name_value';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['table'] = 'field_data_field_gal_first_name';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['field'] = 'field_gal_first_name_value';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_gal_first_name_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['operator_id'] = 'field_gal_first_name_value_op';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['label'] = 'First Name';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['operator'] = 'field_gal_first_name_value_op';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['identifier'] = 'field_gal_first_name_value';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    15 => 0,
+    16 => 0,
+    17 => 0,
+  );
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_filter'] = 1;
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_items'] = '20';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_field'] = 'field_gal_first_name';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_dependent'] = 0;
   /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_1']['id'] = 'field_display_name_value_1';
   $handler->display->display_options['filters']['field_display_name_value_1']['table'] = 'field_data_field_display_name';
@@ -2734,7 +2842,7 @@ echo(\'<p style="margin-top:10px;">To update and publish <a href="/employees/\' 
   $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['label'] = 'haven\'t started following';
   $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div id="not-following"><p>Not following anyone. Find colleagues to follow on the <a href="/employees">Employees Profile Page</a>.</p></div>';
+  $handler->display->display_options['empty']['area_text_custom']['content'] = '<div id="not-following"><p>Not following anyone. Find colleagues to follow on the <a href="/employees">Employee Profile page</a>.</p></div>';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: User relationships: Requestee user */
   $handler->display->display_options['relationships']['requestee_id']['id'] = 'requestee_id';
@@ -2758,15 +2866,6 @@ echo(\'<p style="margin-top:10px;">To update and publish <a href="/employees/\' 
   $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
-  /* Field: Field: Display Name */
-  $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
-  $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
-  $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
-  $handler->display->display_options['fields']['field_display_name']['relationship'] = 'requestee_id';
-  $handler->display->display_options['fields']['field_display_name']['label'] = '';
-  $handler->display->display_options['fields']['field_display_name']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_display_name']['alter']['path'] = 'user/[uid]';
-  $handler->display->display_options['fields']['field_display_name']['element_label_colon'] = FALSE;
   /* Field: User: Title */
   $handler->display->display_options['fields']['field_gal_title']['id'] = 'field_gal_title';
   $handler->display->display_options['fields']['field_gal_title']['table'] = 'field_data_field_gal_title';
@@ -2792,6 +2891,14 @@ echo(\'<p style="margin-top:10px;">To update and publish <a href="/employees/\' 
     'image_link' => '',
   );
   $handler->display->display_options['fields']['field_image']['delta_offset'] = '0';
+  /* Field: Field: Display Name */
+  $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
+  $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
+  $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
+  $handler->display->display_options['fields']['field_display_name']['relationship'] = 'requestee_id';
+  $handler->display->display_options['fields']['field_display_name']['label'] = '';
+  $handler->display->display_options['fields']['field_display_name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_display_name']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Global: Random */
   $handler->display->display_options['sorts']['random']['id'] = 'random';
@@ -2816,6 +2923,7 @@ echo(\'<p style="margin-top:10px;">To update and publish <a href="/employees/\' 
   $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value']['operator'] = '!=';
   $handler->display->display_options['filters']['field_display_name_value']['value'] = 'Employee News';
+  $handler->display->display_options['filters']['field_display_name_value']['group'] = 1;
   $handler->display->display_options['block_description'] = 'views - following';
 
   /* Display: Block: Followers */
