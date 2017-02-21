@@ -64,7 +64,8 @@ only screen and (                min-resolution: 2dppx) {
   #block-views-gallery-reference-block-2,
   #block-boxes-homepage-logos,
   #footer #footer-copyright table td.sideBrdr,
-  .jsNewActivityWindow.atwork-activity-processed {
+  .jsNewActivityWindow.atwork-activity-processed,
+  #block-block-52 {
     display: none!important;
   }
   .front #block-views-home-page-blocks-zen-block-2 {
@@ -107,7 +108,7 @@ only screen and (                min-resolution: 2dppx) {
     display:block!important;
     position: inherit;
     min-height: 250px;
-    max-height: 300px;
+    max-height: 770px;
     overflow: hidden;
   }
   .front .region.region-social-side {
@@ -119,8 +120,9 @@ only screen and (                min-resolution: 2dppx) {
   .front #social-side h2.block__title.block-title {
   width: 100%!important;
   }
-  .front #social-side .atwork-activity-block-container {
-    margin-top: 0px!important;
+  .front #social-side h2.block__title.block-title {
+     text-align: left;
+     padding-left: 12px;
   }
   .front #social-side #status-update .form-textarea-wrapper {
     max-width:85%!important;
@@ -153,7 +155,9 @@ only screen and (                min-resolution: 2dppx) {
     #views_slideshow_controls_text_home_page_blocks_zen-block_5,
     #block-views-gallery-reference-block-2,
     #block-boxes-homepage-logos,
-    .front #social-side #status-update  {
+    .front #social-side #status-update,
+    #block-block-52,
+    .jsNewActivityWindow.atwork-activity-processed {
       display: none!important;
     }
     #block-views-home-page-blocks-zen-block-1,
@@ -266,6 +270,10 @@ only screen and (                min-resolution: 2dppx) {
     .front div#block-atwork-activity-homepage,
     .front #social-side h2.block__title.block-title {
     width: 100%!important;
+    }
+    .front #social-side h2.block__title.block-title {
+      text-align: left;
+      padding-left: 12px;
     }
     .front div#social-side {
     display: block !important;
