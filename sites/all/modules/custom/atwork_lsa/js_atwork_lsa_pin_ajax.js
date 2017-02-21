@@ -1,7 +1,6 @@
 (function ($) {
   Drupal.behaviors.atwork_lsa_pin = {
     attach: function(context, settings) {
-      console.log(settings);
       var type = "";
       setUpPage();
       // Only run if the link exists in the current page load or fragment refresh.
@@ -44,7 +43,6 @@
         .bind('change', function(){
           //Checked "No" so lets clear the field and hide i`t again.
           $('#edit-field-lsa-previous-service-miles').show();
-
         });
     }
   };
