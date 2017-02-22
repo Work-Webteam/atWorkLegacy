@@ -4806,10 +4806,15 @@ table.forum-table-forums td.forum-last-reply {
 .region.region-post-content #block-views-node-comments-block #comments {
   padding: 10px 10px 20px 10px;
 }
-article.node-tools #node-tools .node-links {
+article.node-tools #node-tools .node-links,
+.section-forum .node-tools #node-tools .node-links{
   float: left;
   clear: right;
   margin-right: 15px;
+}
+.section-forum .node-tools #node-tools .node-links .post-edit,
+.section-forum .node-tools #node-tools .node-links .post-delete {
+  display:none;
 }
 #comments {
   background-color: #D7D7D7;
