@@ -4816,6 +4816,10 @@ article.node-tools #node-tools .node-links,
 .section-forum .node-tools #node-tools .node-links .post-delete {
   display:none;
 }
+.forum-post-panel-main {
+    margin-left: 150px;
+    height: auto !important;
+}
 #comments {
   background-color: #D7D7D7;
   padding: 0 0 20px 0;
