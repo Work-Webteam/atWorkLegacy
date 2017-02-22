@@ -5606,11 +5606,9 @@ li.TabbedPanelsTab {
 /* Temporarily hides the likes and comments on the first artilce of the slideshow overaly */
 /* This is to target the Spotlight article and is to be channged as the article moves through the overlay */
 /*.views-slideshow-xtra-overlay-row-0 .slideshow_num_likes,
-.views-slideshow-xtra-overlay-row-0 .slideshow-num-comments,*/
-.views-slideshow-xtra-overlay-row-4 .slideshow_num_likes,
-.views-slideshow-xtra-overlay-row-4 .slideshow-num-comments {
+.views-slideshow-xtra-overlay-row-0 .slideshow-num-comments{
   display: none !important;
-}
+}*/
 
 .webform-analysis-component.webform-analysis-component-select.webform-analysis-component--finalists {
   width: inherit;
