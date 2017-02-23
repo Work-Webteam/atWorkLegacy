@@ -64,7 +64,7 @@ only screen and (                min-resolution: 2dppx) {
   #block-views-gallery-reference-block-2,
   #block-boxes-homepage-logos,
   #footer #footer-copyright table td.sideBrdr,
-  .jsNewActivityWindow.atwork-activity-processed,
+  /*.jsNewActivityWindow.atwork-activity-processed,*/
   #block-block-52 {
     display: none!important;
   }
@@ -108,7 +108,7 @@ only screen and (                min-resolution: 2dppx) {
     display:block!important;
     position: inherit;
     min-height: 250px;
-    max-height: 770px;
+    max-height: 450px;
     overflow: hidden;
   }
   .front .region.region-social-side {
@@ -157,7 +157,7 @@ only screen and (                min-resolution: 2dppx) {
     #block-boxes-homepage-logos,
     .front #social-side #status-update,
     #block-block-52,
-    .jsNewActivityWindow.atwork-activity-processed {
+    /*.jsNewActivityWindow.atwork-activity-processed*/ {
       display: none!important;
     }
     #block-views-home-page-blocks-zen-block-1,
@@ -299,8 +299,11 @@ and (orientation: portrait) {
   #block-boxes-homepage-logos,
   #views_slideshow_controls_text_home_page_blocks_zen-block_5,
   #social-side .admin-advanced-feed-settings-view,
-  .jsNewActivityWindow.atwork-activity-processed  {
+  /*.jsNewActivityWindow.atwork-activity-processed*/  {
     display: none!important;
+  }
+  #social-side .block-header-inner {
+    padding-right: 10px;
   }
   #block-views-home-page-blocks-zen-block-5 {
     margin-bottom: 25px!important;
@@ -385,7 +388,7 @@ and (orientation: portrait) {
     display:block!important;
     position: inherit;
     min-height: 250px;
-    max-height: 330px;
+    max-height: 380px;
     overflow: hidden;
   }
   .front .region.region-social-side {
