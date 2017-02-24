@@ -15,7 +15,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'bundle' => 'ad_space',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'You can insert an image from slot 2-5. For best results, eiter leave the image size at the default (250px) or scale to 120px in width, leaving the height empty. Text will flow around.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -59,19 +59,6 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'label' => 'Body',
     'required' => 0,
     'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
       'display_summary' => 0,
       'semantic_field_format' => '',
       'text_processing' => 1,
@@ -1942,6 +1929,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
   t('Sticky date');
   t('Sticky to activity feeds');
   t('Use the crosshair icon to drag and drop an image to the top.');
+  t('You can insert an image from slot 2-5. For best results, eiter leave the image size at the default (250px) or scale to 120px in width, leaving the height empty. Text will flow around.');
 
   return $field_instances;
 }

@@ -125,7 +125,7 @@
       text-align: center;
       background-color: #26669E;
     }
-    .feed-ad-space-outer { 
+    .feed-ad-space-outer { // Everything within the ad-space container
       border: 1px solid grey;
       padding: 1em;
       background: #D7D7D7;
@@ -142,18 +142,24 @@
         letter-spacing: 0px;
         width: inherit !important;
         text-transform: uppercase;
+        font-size: 12px;
       }
       p {
         margin: 1em 0;
         &:first-child {
           margin-top: 0;
         }
+        img { // any inline image
+          margin-right: 7px;
+          margin-bottom: 4px;
+        }
       }
     }
     .feed-ad-space-author-date {
       font-size: 10px;
     }
-    // stop feed-ad-space
+
+    // end feed-ad-space
 
   .atwork-activity-block-container {
     margin-top: 46px; // push down the container because the header is positioned absolutely
@@ -294,39 +300,6 @@
     }
     p {
       margin-left: 48px;
-    }
-    .message.sticky { // ad space styling. Overrides most layout settings above 
-      padding: 1.5em 1em 1em 1em;
-      border: 1px solid grey;
-      background: lighten(grey, 40%) url(/sites/all/themes/atwork_zen/images/icons/atwork-ampersand.png) 15px center no-repeat;
-      padding-left: 80px;
-      .date {
-        position: initial;
-        line-height: 1em;
-        &:before {
-          content: "Posted by Employee News ";
-          display: block;
-        }
-      } 
-      ul.links,
-      .field-name-field-feed-like-button,
-      .user-feed-image {
-        display: none;
-      }
-      p[class^="msg-"] {
-        margin: 0;
-        text-indent: 0;
-      }
-      .msg-new-node {
-        span {// hide the intro text if we are still using Sticky events
-          display: none;
-        }
-        a {// the link to the original node
-          margin-top: 0.5em;
-          display: block;
-          font-size: 20px;
-        }
-      }
     }
   }
   
