@@ -19,6 +19,8 @@
           setMinistryOptions($('#edit-field-lsa-pin-ministry-org-und').val());
           return;
         });
+
+      // TODO - Should we always see this? Maybe highlight them here if they are not filled out yet.
       $('#edit-field-lsa-milestone-year-und-1:not(.atwork-activity-processed)', context)
         .addClass('atwork-activity-processed')
         .bind('click', function(){
@@ -28,6 +30,7 @@
           }
         });
 
+      // Click handler to clear fields if this option changes.
       $('#edit-field-lsa-milestone-year-und-0:not(.atwork-activity-processed)', context)
         .addClass('atwork-activity-processed')
         .bind('click', function(){
@@ -41,8 +44,9 @@
       $('#edit-field-lsa-other-milestone-years:not(.atwork-activity-processed)', context)
         .addClass('atwork-activity-processed')
         .bind('change', function(){
-          //Checked "No" so lets clear the field and hide i`t again.
           $('#edit-field-lsa-previous-service-miles').show();
+          // Hide annoying "required" flag on each option.
+          $('.option').find('span').removeClass('form-required').hide();
         });
     }
   };
@@ -51,25 +55,63 @@
    * @param  {array} response [Holds an array of user, supervisor fields for auto-pop, the response.choice key holds the type of submission this will be]
    */
   var feedDetails = function(response){
-    //var result = $.parseJSON(response);
-    console.log(response);
+    // User is filling out their own application
     if(response.choice == 1){
-      // Show fields
+      // Show fields or user
       $('.group-recipient-details').slideDown('slow');
+      // Show field for current year status
       $('#edit-field-lsa-milestone-year').slideDown('slow');
+      $('#edit-field-lsa-pin-service-milestone').slideDown('slow');
 
-      // populate fields
+      // Show fields for supervisors
+      $('.collapsible.required-fields.group-supervisor-details.field-group-fieldset.form-wrapper.collapse-processed').slideDown('slow');
+
+      // populate fields for user - we know they are filling this out for themselves.
       $('#edit-field-lsa-branch-department-und-0-value').val(response.branch[0].safe_value);
       $('#edit-field-lsa-pin-first-name-und-0-value').val(response.first_name[0].safe_value);
       $('#edit-field-lsa-pin-last-name-und-0-value').val(response.last_name[0].safe_value);
       $('#edit-field-lsa-pin-employee-number-und-0-value').val(response.employee_number[0].safe_value);
       $('#edit-field-lsa-email-und-0-email').val(response.email);
+      $('.collapsible.required-fields.group-delivery-details.field-group-fieldset.form-wrapper.collapse-processed').slideDown('slow');
+      $('#edit-field-lsa-pin-terms').slideDown('slow');
+      $('#edit-field-lsa-pin-sup-location').slideDown('slow');
+      $('#lsa-pin-terms').slideDown('slow');
+    // Supervisor filling out form
     } else if(response.choice == 2){
+      // Show fields or user
+      $('.group-recipient-details').slideDown('slow');
+      // Show field for current year status
+      $('#edit-field-lsa-milestone-year').slideDown('slow');
+      $('#edit-field-lsa-pin-service-milestone').slideDown('slow');
+      // Show fields for supervisors
+      $('.collapsible.required-fields.group-supervisor-details.field-group-fieldset.form-wrapper.collapse-processed').slideDown('slow');
+      $('.collapsible.required-fields.group-delivery-details.field-group-fieldset.form-wrapper.collapse-processed').slideDown('slow');
+      $('#edit-field-lsa-pin-terms').slideDown('slow');
+      $('#edit-field-lsa-pin-sup-location').slideDown('slow');
+      $('#lsa-pin-terms').slideDown('slow');
 
+
+      // Populated fields for supervisors
+      $('#edit-field-lsa-supervisor-first-name-und-0-value').val(response.first_name[0].safe_value);
+      $('#edit-field-lsa-supervisor-last-name-und-0-value').val(response.last_name[0].safe_value);
+      $('#edit-field-lsa-supervisor-email-und-0-email').val(response.email);
+      $('#edit-field-lsa-work-phone-und-0-value').val(response.phone_number[0].safe_value);
+
+    // Ministry Rep if filling out form.
     } else if(response.choice == 3){
-
+      // Show whole form, and don't fill anything.
+            // Show fields or user
+      $('.group-recipient-details').slideDown('slow');
+      // Show field for current year status
+      $('#edit-field-lsa-milestone-year').slideDown('slow');
+      $('#edit-field-lsa-pin-service-milestone').slideDown('slow');
+      $('#edit-field-lsa-pin-terms').slideDown('slow');
+      $('#edit-field-lsa-pin-sup-location').slideDown('slow');
+      $('#lsa-pin-terms').slideDown('slow');
+      // Show fields for supervisors
+      $('.collapsible.required-fields.group-supervisor-details.field-group-fieldset.form-wrapper.collapse-processed').slideDown('slow');
     } else {
-
+      // todo - Reset to default?
     }
     return;
   };
@@ -87,6 +129,8 @@
     $('.collapsible.required-fields.group-supervisor-details.field-group-fieldset.form-wrapper.collapse-processed').hide();
     $('.collapsible.required-fields.group-delivery-details.field-group-fieldset.form-wrapper.collapse-processed').hide();
     $('#edit-field-lsa-pin-terms').hide();
+    $('#edit-field-lsa-pin-sup-location').hide();
+    $('#lsa-pin-terms').hide();
   }
 
   /**
@@ -101,7 +145,7 @@
         // Also change labels
         $('.form-item-field-lsa-other-milestone-years-und label:first-child').text("Do you wish to request a service pin retroactively?");
         $('.form-item-field-lsa-previous-service-miles-und label:first-child').text("Please select the retroactive milestone pin you would like to order");
-        $('#edit-field-lsa-other-milestone-years').show();
+        $('#edit-field-lsa-other-milestone-years').slideDown('slow');
         if($('#edit-field-lsa-previous-service-miles').not('atwork-activity-processed')){
           $('#edit-field-lsa-previous-service-miles').addClass('atwork-activity-processed');
           // Allow them to choose one pin:
@@ -123,7 +167,7 @@
           $('.form-item-field-lsa-previous-service-miles-und label:first-child').text("Please select the retroactive milestone pin(s) you would like to order");
         }
         // Show choices so users can choose
-        $('#edit-field-lsa-other-milestone-years').show();
+        $('#edit-field-lsa-other-milestone-years').slideDown('slow');
       break;
 
       //If this is on of their award years then they can choose multiple extras: 20
@@ -138,7 +182,7 @@
         }
         // Check if they are celebrating this year
         if($('#edit-field-lsa-milestone-year-und-1').val == 1){
-          $('#edit-field-lsa-other-milestone-years').show();
+          $('#edit-field-lsa-other-milestone-years').slideDown('slow');
         } else {
           $('#edit-field-lsa-other-milestone-years').hide();
           $('#edit-field-lsa-other-milestone-years-und-1').prop('checked', false);

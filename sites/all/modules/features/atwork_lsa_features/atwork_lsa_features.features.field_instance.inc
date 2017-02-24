@@ -4020,7 +4020,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 7,
+        'weight' => 5,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4095,7 +4095,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'email_default',
-        'weight' => 5,
+        'weight' => 4,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4170,10 +4170,10 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'above',
         'module' => 'list',
         'settings' => array(
-          'semantic_field_format' => 0,
+          'semantic_field_format' => '',
         ),
         'type' => 'list_default',
-        'weight' => 18,
+        'weight' => 16,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4232,7 +4232,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 13,
+        'weight' => 12,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4261,7 +4261,10 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_office_address',
-    'label' => 'Office Street Address',
+    'hashtag_settings' => array(
+      'hashtag_field' => 0,
+    ),
+    'label' => 'Supervisors’ Address',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -4277,6 +4280,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -4289,7 +4293,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 10,
     ),
   );
 
@@ -4307,7 +4311,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 14,
+        'weight' => 13,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4364,7 +4368,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 20,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 11,
     ),
   );
 
@@ -4383,7 +4387,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 15,
+        'weight' => 14,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4412,7 +4416,10 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_office_postal_code',
-    'label' => 'Postal Code',
+    'hashtag_settings' => array(
+      'hashtag_field' => 0,
+    ),
+    'label' => 'Postal Code (For Victoria locations, please use the P.O. Box address)',
     'required' => 0,
     'settings' => array(
       'authcache' => array(
@@ -4428,6 +4435,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -4440,7 +4448,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 7,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 12,
     ),
   );
 
@@ -4460,10 +4468,10 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'above',
         'module' => 'list',
         'settings' => array(
-          'semantic_field_format' => 0,
+          'semantic_field_format' => '',
         ),
         'type' => 'list_default',
-        'weight' => 19,
+        'weight' => 17,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4522,7 +4530,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4598,7 +4606,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 2,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4674,7 +4682,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4747,10 +4755,10 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'above',
         'module' => 'list',
         'settings' => array(
-          'semantic_field_format' => 0,
+          'semantic_field_format' => '',
         ),
         'type' => 'list_default',
-        'weight' => 21,
+        'weight' => 19,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4804,13 +4812,10 @@ function atwork_lsa_features_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
-        'module' => 'list',
-        'settings' => array(
-          'semantic_field_format' => '',
-        ),
-        'type' => 'list_default',
-        'weight' => 2,
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 20,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4882,7 +4887,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'list_default',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4928,6 +4933,84 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'node-lsa_pin_application-field_lsa_pin_sup_location'.
+  $field_instances['node-lsa_pin_application-field_lsa_pin_sup_location'] = array(
+    'bundle' => 'lsa_pin_application',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(
+          'semantic_field_format' => 0,
+        ),
+        'type' => 'list_default',
+        'weight' => 22,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_pin_sup_location',
+    'label' => 'Does your supervisor work in a different office location than you? ',
+    'required' => 1,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'semantic_field_format' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 19,
+    ),
+  );
+
   // Exported field_instance: 'node-lsa_pin_application-field_lsa_pin_terms'.
   $field_instances['node-lsa_pin_application-field_lsa_pin_terms'] = array(
     'bundle' => 'lsa_pin_application',
@@ -4937,13 +5020,13 @@ function atwork_lsa_features_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => 'I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target ="_blank">Service Pin Recognition Eligibility Guidelines</a> (which I have reviewed) that as of December 31, 2016, I will have worked for the BC Public Service for 5, 10, 15, or 20 years and I am therefore eligible for a Service Pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for purposes of the pin program. ',
+    'description' => 'I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target ="_blank">Service Pin Recognition Eligibility Guidelines</a> (which I have reviewed) that as of December 31, 2017, I will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and am therefore eligible to receive a service pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 21,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4988,6 +5071,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
+      'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -4995,7 +5079,6 @@ function atwork_lsa_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(
         'display_label' => 1,
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_onoff',
       'weight' => 7,
@@ -5014,10 +5097,10 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'above',
         'module' => 'list',
         'settings' => array(
-          'semantic_field_format' => 0,
+          'semantic_field_format' => '',
         ),
         'type' => 'list_default',
-        'weight' => 20,
+        'weight' => 18,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -5072,10 +5155,10 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'above',
         'module' => 'list',
         'settings' => array(
-          'semantic_field_format' => 0,
+          'semantic_field_format' => '',
         ),
         'type' => 'list_default',
-        'weight' => 17,
+        'weight' => 15,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -5136,7 +5219,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'email_default',
-        'weight' => 10,
+        'weight' => 8,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -5210,7 +5293,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 8,
+        'weight' => 6,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -5286,7 +5369,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 9,
+        'weight' => 7,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -5361,7 +5444,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'phone',
-        'weight' => 11,
+        'weight' => 10,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -5439,7 +5522,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 12,
+        'weight' => 11,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -5522,13 +5605,14 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Did you receive your award?');
   t('Did you register last year but were unable to attend the ceremony?');
   t('Do you wish to request any service pin(s) retroactively?');
+  t('Does your supervisor work in a different office location than you? ');
   t('Email address');
   t('Employee Number');
   t('Engravement');
   t('First Name');
   t('Guest Attending');
   t('Home Phone');
-  t('I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target ="_blank">Service Pin Recognition Eligibility Guidelines</a> (which I have reviewed) that as of December 31, 2016, I will have worked for the BC Public Service for 5, 10, 15, or 20 years and I am therefore eligible for a Service Pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for purposes of the pin program. ');
+  t('I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target ="_blank">Service Pin Recognition Eligibility Guidelines</a> (which I have reviewed) that as of December 31, 2017, I will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and am therefore eligible to receive a service pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.');
   t('I declare, to the best of my knowledge and consistent with the Long Service Awards Eligibility Guidelines (which I have reviewed) that as of December 31, 2016, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of this event.');
   t('If retired, please use last organization worked.');
   t('Invitation Send Date');
@@ -5546,6 +5630,7 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Please select the retroactive milestone pin(s) you would like to order');
   t('Please use the format:A1A1A1');
   t('Postal Code');
+  t('Postal Code (For Victoria locations, please use the P.O. Box address)');
   t('Prefix');
   t('Province');
   t('RSVP');
@@ -5557,6 +5642,7 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Supervisor Email');
   t('Supervisor First Name');
   t('Supervisor Last Name');
+  t('Supervisors’ Address');
   t('Terms');
   t('This is how your name will appear on your 25 year certificate. Make any changes you would like.');
   t('Watch Engraving Sent');

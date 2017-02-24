@@ -21,7 +21,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Delivery Details',
-    'weight' => '6',
+    'weight' => '5',
     'children' => array(
       0 => 'field_lsa_office_address',
       1 => 'field_lsa_office_city',
@@ -248,6 +248,41 @@ function atwork_lsa_features_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_lsa_pin_terms|node|lsa_pin_application|form';
+  $field_group->group_name = 'group_lsa_pin_terms';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'lsa_pin_application';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => '',
+    'weight' => '7',
+    'children' => array(
+      0 => 'field_lsa_pin_terms',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => '',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => 'lsa-pin-terms',
+        'classes' => 'group-lsa-pin-terms field-group-fieldset',
+        'description' => 'If the above information is complete, and you have agreed to the terms below, click the “SUBMIT” button at the bottom of the screen. You will then receive:
+<ul>
+<li> a confirmation page displaying all of the information you’ve entered. Please check this page to ensure the information is accurate. If something is incorrect, contact Gillian Kish <a href="mailto:gillian.kish@gov.bc.ca?Subject=LSA%20pin%20application%20question">(Gillian.kish@gov.bc.ca)</a></li>
+<li>an automated email thanking you for your registration.</li>
+</ul>
+<p class="style-red"> <strong>IMPORTANT:</strong> If you do not receive a confirmation email, you will need to re-submit the request again.</p>
+',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_lsa_pin_terms|node|lsa_pin_application|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_lsa_rsvp|node|lsa_application|form';
   $field_group->group_name = 'group_lsa_rsvp';
   $field_group->entity_type = 'node';
@@ -457,14 +492,15 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Pin Options',
-    'weight' => '3',
+    'weight' => '4',
     'children' => array(
       0 => 'field_lsa_pin_service_milestone',
-      1 => 'field_lsa_registerer',
-      2 => 'field_lsa_milestone_year',
-      3 => 'field_lsa_other_milestone_years',
+      1 => 'field_lsa_milestone_year',
+      2 => 'field_lsa_other_milestone_years',
+      3 => 'field_lsa_pin_ministry_org',
       4 => 'field_lsa_previous_service_miles',
-      5 => 'field_lsa_pin_ministry_org',
+      5 => 'field_lsa_registerer',
+      6 => 'field_lsa_pin_sup_location',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -490,7 +526,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Recipient Details',
-    'weight' => '4',
+    'weight' => '5',
     'children' => array(
       0 => 'field_lsa_pin_employee_number',
       1 => 'field_lsa_pin_prefix',
@@ -562,13 +598,16 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Supervisor Details',
-    'weight' => '5',
+    'weight' => '6',
     'children' => array(
       0 => 'field_lsa_supervisor_first_name',
       1 => 'field_lsa_supervisor_last_name',
       2 => 'field_lsa_supervisor_email',
-      3 => 'field_lsa_work_phone',
-      4 => 'field_lsa_work_phone_ext',
+      3 => 'field_lsa_office_address',
+      4 => 'field_lsa_office_city',
+      5 => 'field_lsa_work_phone',
+      6 => 'field_lsa_work_phone_ext',
+      7 => 'field_lsa_office_postal_code',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
