@@ -7,6 +7,7 @@
       $('#edit-field-lsa-registerer-und:not(.atwork-activity-processed)', context)
         .addClass('atwork-activity-processed')
         .bind('change', function(){
+          rebuiltForm = true;
           type = $('#edit-field-lsa-registerer-und').val();
           $.get('/atwork_lsa_pin_form/' + type, null, feedDetails);
           return false;
@@ -55,6 +56,8 @@
    * @param  {array} response [Holds an array of user, supervisor fields for auto-pop, the response.choice key holds the type of submission this will be]
    */
   var feedDetails = function(response){
+     console.log(response);
+
     // User is filling out their own application
     if(response.choice == 1){
       // Show fields or user
@@ -117,20 +120,23 @@
   };
 
   function setUpPage() {
-    // Hide top fields that user should not have access to
-    $('#edit-field-lsa-pin-service-milestone').hide();
-    $('#edit-field-lsa-pin-ministry-org').hide();
-    $('#edit-field-lsa-milestone-year').hide();
-    $('#edit-field-lsa-pin-service-milestone').hide();
-    $('#edit-field-lsa-other-milestone-years').hide();
-    $('#edit-field-lsa-previous-service-miles').hide();
-    // Hide other fields for now.
-    $('.collapsible.required-fields.group-recipient-details.field-group-fieldset.form-wrapper.collapse-processed').hide();
-    $('.collapsible.required-fields.group-supervisor-details.field-group-fieldset.form-wrapper.collapse-processed').hide();
-    $('.collapsible.required-fields.group-delivery-details.field-group-fieldset.form-wrapper.collapse-processed').hide();
-    $('#edit-field-lsa-pin-terms').hide();
-    $('#edit-field-lsa-pin-sup-location').hide();
-    $('#lsa-pin-terms').hide();
+    console.log($('#edit-field-lsa-registerer-und').val());
+    if($('#edit-field-lsa-registerer-und').val() == '_none'){
+      // Hide top fields that user should not have access to
+      $('#edit-field-lsa-pin-service-milestone').hide();
+      $('#edit-field-lsa-pin-ministry-org').hide();
+      $('#edit-field-lsa-milestone-year').hide();
+      $('#edit-field-lsa-pin-service-milestone').hide();
+      $('#edit-field-lsa-other-milestone-years').hide();
+      $('#edit-field-lsa-previous-service-miles').hide();
+      // Hide other fields for now.
+      $('.collapsible.required-fields.group-recipient-details.field-group-fieldset.form-wrapper.collapse-processed').hide();
+      $('.collapsible.required-fields.group-supervisor-details.field-group-fieldset.form-wrapper.collapse-processed').hide();
+      $('.collapsible.required-fields.group-delivery-details.field-group-fieldset.form-wrapper.collapse-processed').hide();
+      $('#edit-field-lsa-pin-terms').hide();
+      $('#edit-field-lsa-pin-sup-location').hide();
+      $('#lsa-pin-terms').hide();
+    }
   }
 
   /**

@@ -158,22 +158,29 @@ function atwork_lsa_application_validate($form, &$form_state) {
 
 }
 
+function atwork_lsa_pin_application_validate($form, &$form_state){
+  $lang = $form_state['values']['language'];
+  // Check if an application has already been submitted for this user
+  $exists = db_select('field_data_field_lsa_pin_employee_number', 'e')
+      ->fields('e', array('entity_id'))
+      ->condition('e.field_lsa_pin_employee_number_value', $form_state['input']['field_lsa_pin_employee_number'][$lang][0]['value'])
+      //->condition('e.bundle', 'lsa_pin_application')
+      ->execute()
+      ->fetchAll();
+  if(isset($exists) && !empty($exists)){
+    // They already have an application, so we set an error.
+    form_set_error('field_lsa_pin_employee_number', t('The employee id you have entered is already associated with a pin application'));
+    return false;
+  }
+
+  return true;
+}
+
 function atwork_lsa_node_presave($node) {
 
   if($node->type === 'lsa_pin_application'){
     $lang = $node->language;
-    // Upper case
-    $node->field_lsa_office_postal_code[$lang][0]['value'] = strtoupper($node->field_lsa_office_postal_code[$lang][0]['value']);
-    // remove spaces
-    $node->field_lsa_office_postal_code[$lang][0]['value'] = preg_replace('/\s+/', '', $node->field_lsa_office_postal_code[$lang][0]['value']);
-    // remove special characters
-    $node->field_lsa_office_postal_code[$lang][0]['value'] = preg_replace('/[^A-Za-z0-9\-]/', '', $node->field_lsa_office_postal_code[$lang][0]['value']);
-    // Put expected space back at 3rd spot
-    $node->field_lsa_office_postal_code[$lang][0]['value'] = wordwrap($node->field_lsa_office_postal_code[$lang][0]['value'], 3, ' ', true);
-    // Make sure this is no more than 7 characters long
-    if(strlen($node->field_lsa_office_postal_code[$lang][0]['value']) > 7){
-      $node->field_lsa_office_postal_code[$lang][0]['value'] = substr($node->field_lsa_office_postal_code[$lang][0]['value'], 0,7);
-    }
+
   }
 
 
@@ -245,7 +252,6 @@ function atwork_lsa_node_presave($node) {
  *
  */
 function atwork_lsa_application_submit(&$form, &$form_state) {
-  // Append the ministry ID to the form
   // Append the ministry ID to the form
   if(isset($form_state['values']['field_lsa_org']['und'][0]['value']) && $form_state['values']['field_lsa_org']['und'][0]['value']){
     $form_state['values']['field_lsa_ministry_id']['und'][0]['value'] = $form_state['values']['field_lsa_org']['und'][0]['value'];
@@ -454,7 +460,7 @@ function atwork_lsa_form_lsa_pin_application_node_form_alter(&$form, $form_state
   if(isset($form['field_lsa_work_phone_ext']['und'][0]['value']['#title']) && $form['field_lsa_work_phone_ext']['und'][0]['value']['#title']){
     $form['field_lsa_work_phone_ext']['und'][0]['value']['#title'] = t('Supervisor Phone Ext');
   }
-
+  $form['#validate'][] = 'atwork_lsa_pin_application_validate';
 /*
   // skip defaults for admins who are entering for others
   if (in_array('lsa admin', $user->roles) || in_array('recognition contact', $user->roles)) {
@@ -579,19 +585,8 @@ function atwork_lsa_pin_page_callback($choice) {
  // if (in_array('lsa admin', $current_user->roles) || in_array('recognition contact', $current_user->roles)) {
  //   die();
  // }
-
   if($choice == 1){
     //If this is a user, check to see if they have already submitted an application
-    // TODO = THIS REQUIRES TESTING
-    $exists = db_select('node', 'n')
-      ->fields('n', array('nid'))
-      ->condition('n.uid', $user->uid)
-      ->condition('n.type', 'lsa_pin_application')
-      ->execute()
-      ->fetchAssoc();
-    if (isset($exists['nid']) && $exists['nid']) {
-      drupal_goto('career/long-service-awards-pin/applications/' . $exists['nid']);
-    }
 
     // We need to autofill some text boxes
     $field_gal_employee_number = field_get_items('user', $current_user, 'field_gal_employee_number');
@@ -610,7 +605,6 @@ function atwork_lsa_pin_page_callback($choice) {
       'work_group' => $field_gal_work_group,
       'email' => $field_email,
     );
-
     drupal_json_output($return_array);
     die();
   } elseif($choice == 2) {
