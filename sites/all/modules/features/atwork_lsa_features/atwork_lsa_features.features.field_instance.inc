@@ -4005,6 +4005,85 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-lsa_pin_application-field_lsa_branch'.
+  $field_instances['node-lsa_pin_application-field_lsa_branch'] = array(
+    'bundle' => 'lsa_pin_application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 9,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_branch',
+    'hashtag_settings' => array(
+      'hashtag_field' => 0,
+    ),
+    'label' => 'Branch',
+    'required' => 0,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'semantic_field_format' => '',
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'maxlength_js' => 0,
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        'size' => 20,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 24,
+    ),
+  );
+
   // Exported field_instance:
   // 'node-lsa_pin_application-field_lsa_branch_department'.
   $field_instances['node-lsa_pin_application-field_lsa_branch_department'] = array(
@@ -4020,7 +4099,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 5,
+        'weight' => 8,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4099,7 +4178,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'email_default',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4158,6 +4237,82 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-lsa_pin_application-field_lsa_home_phone'.
+  $field_instances['node-lsa_pin_application-field_lsa_home_phone'] = array(
+    'bundle' => 'lsa_pin_application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'phone',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'phone',
+        'weight' => 6,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_home_phone',
+    'label' => 'Phone',
+    'required' => 1,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'ca_phone_parentheses' => 1,
+      'ca_phone_separator' => '-',
+      'phone_country_code' => 0,
+      'phone_default_country_code' => 1,
+      'phone_int_max_length' => 15,
+      'semantic_field_format' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'phone',
+      'settings' => array(),
+      'type' => 'phone_textfield',
+      'weight' => 22,
+    ),
+  );
+
   // Exported field_instance:
   // 'node-lsa_pin_application-field_lsa_milestone_year'.
   $field_instances['node-lsa_pin_application-field_lsa_milestone_year'] = array(
@@ -4177,7 +4332,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'list_default',
-        'weight' => 16,
+        'weight' => 1,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4236,7 +4391,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 12,
+        'weight' => 15,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4315,7 +4470,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 13,
+        'weight' => 16,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4391,7 +4546,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 14,
+        'weight' => 17,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4470,12 +4625,9 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
-        'settings' => array(
-          'semantic_field_format' => '',
-        ),
-        'type' => 'list_default',
-        'weight' => 17,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 19,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4534,7 +4686,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4610,7 +4762,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4686,7 +4838,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4762,7 +4914,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'list_default',
-        'weight' => 19,
+        'weight' => 7,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4832,7 +4984,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 20,
+        'weight' => 23,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4904,7 +5056,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'list_default',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4964,12 +5116,9 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'list_default',
-        'weight' => 22,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 18,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -5043,7 +5192,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 21,
+        'weight' => 24,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -5112,12 +5261,9 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
-        'settings' => array(
-          'semantic_field_format' => '',
-        ),
-        'type' => 'list_default',
-        'weight' => 18,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 20,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -5169,13 +5315,10 @@ function atwork_lsa_features_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(
-          'semantic_field_format' => '',
-        ),
-        'type' => 'list_default',
-        'weight' => 15,
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 22,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -5236,7 +5379,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'email_default',
-        'weight' => 8,
+        'weight' => 12,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -5310,7 +5453,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 6,
+        'weight' => 10,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -5386,7 +5529,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 7,
+        'weight' => 11,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -5461,7 +5604,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'phone',
-        'weight' => 10,
+        'weight' => 13,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -5539,7 +5682,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 11,
+        'weight' => 14,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -5613,6 +5756,7 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Award ID');
   t('Award Special Instructions');
   t('Award Year');
+  t('Branch');
   t('Branch/Department');
   t('Ceremony Date');
   t('Ceremony Night');
@@ -5644,6 +5788,7 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Number Attending');
   t('Office');
   t('Office Street Address');
+  t('Phone');
   t('Please Specify Your Requirements');
   t('Please select the retroactive milestone pin(s) you would like to order');
   t('Please use the format:A1A1A1');
