@@ -4049,7 +4049,10 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_branch_department',
-    'label' => 'Branch/Department',
+    'hashtag_settings' => array(
+      'hashtag_field' => 0,
+    ),
+    'label' => 'Department',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -4065,6 +4068,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -4077,7 +4081,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 20,
       ),
       'type' => 'text_textfield',
-      'weight' => 22,
+      'weight' => 23,
     ),
   );
 
@@ -4213,7 +4217,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -4223,7 +4227,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'bundle' => 'lsa_pin_application',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => '<p class="style-red">For Victoria locations, please use the P.O. Box address</p>',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -4419,7 +4423,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'hashtag_settings' => array(
       'hashtag_field' => 0,
     ),
-    'label' => 'Postal Code (For Victoria locations, please use the P.O. Box address)',
+    'label' => 'Postal Code',
     'required' => 0,
     'settings' => array(
       'authcache' => array(
@@ -4787,9 +4791,22 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_pin_ministry_org',
-    'label' => 'Ministry_Organization',
+    'label' => 'What ministry/organization are you with?',
     'required' => 1,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -4800,7 +4817,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 16,
+      'weight' => 14,
     ),
   );
 
@@ -4929,7 +4946,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
@@ -5586,6 +5603,7 @@ function atwork_lsa_features_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('25 Year Certificate');
+  t('<p class="style-red">For Victoria locations, please use the P.O. Box address</p>');
   t('Actual_Min/Org');
   t('Alternate Email Address');
   t('Are you celebrating a current service milestone in 2017?');
@@ -5602,6 +5620,7 @@ function atwork_lsa_features_field_default_field_instances() {
   t('City');
   t('Date Stamp');
   t('Date of Retirement');
+  t('Department');
   t('Did you receive your award?');
   t('Did you register last year but were unable to attend the ceremony?');
   t('Do you wish to request any service pin(s) retroactively?');
@@ -5620,7 +5639,6 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Middle Name');
   t('Ministry ID');
   t('Ministry/Organization');
-  t('Ministry_Organization');
   t('Notes');
   t('Notes (Ceremony)');
   t('Number Attending');
@@ -5630,7 +5648,6 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Please select the retroactive milestone pin(s) you would like to order');
   t('Please use the format:A1A1A1');
   t('Postal Code');
-  t('Postal Code (For Victoria locations, please use the P.O. Box address)');
   t('Prefix');
   t('Province');
   t('RSVP');
@@ -5646,6 +5663,7 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Terms');
   t('This is how your name will appear on your 25 year certificate. Make any changes you would like.');
   t('Watch Engraving Sent');
+  t('What ministry/organization are you with?');
   t('Who is registering for this service pin?');
   t('Work Phone');
   t('Work Phone Ext');

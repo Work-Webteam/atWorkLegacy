@@ -595,6 +595,7 @@ function atwork_lsa_pin_page_callback($choice) {
     $field_gal_branch = field_get_items('user',$current_user,'field_gal_branch');
     $field_gal_work_group = field_get_items('user',$current_user, 'field_gal_work_group');
     $field_gal_city = field_get_items('user',$current_user,'field_gal_city');
+    $field_gal_phone_number = field_get_items('user', $current_user, 'field_gal_phone_number');
     $field_email = $current_user->mail;
     $return_array = array(
       'choice' => 1,
@@ -604,6 +605,7 @@ function atwork_lsa_pin_page_callback($choice) {
       'branch' => $field_gal_branch,
       'work_group' => $field_gal_work_group,
       'email' => $field_email,
+      'phone' => $field_gal_phone_number,
     );
     drupal_json_output($return_array);
     die();
@@ -625,15 +627,9 @@ function atwork_lsa_pin_page_callback($choice) {
       'address' => $field_gal_address,
       'postal_code' => $field_gal_postal_code,
       'city' => $field_gal_city,
+      'email' => $field_email,
     );
 
-    $return_array = array(
-      'choice' => 2,
-      'first_name' => $field_gal_first_name,
-      'last_name' => $field_gal_last_name,
-      'email' => $field_email,
-      'phone_number' => $field_gal_phone_number
-    );
     drupal_json_output($return_array);
     die();
   } elseif($choice == 3) {

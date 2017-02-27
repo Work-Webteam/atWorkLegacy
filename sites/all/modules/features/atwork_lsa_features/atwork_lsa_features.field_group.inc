@@ -504,13 +504,14 @@ function atwork_lsa_features_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Pin Options',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-pin-options field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'group-pin-options field-group-fieldset',
+        'description' => '<em>Service pins will be sent to your supervisor for presentation to you during Public Service Week - June 12-16, 2017. </em>',
       ),
+      'formatter' => 'collapsible',
     ),
   );
   $field_groups['group_pin_options|node|lsa_pin_application|form'] = $field_group;
@@ -534,6 +535,8 @@ function atwork_lsa_features_field_group_info() {
       3 => 'field_lsa_pin_last_name',
       4 => 'field_lsa_branch_department',
       5 => 'field_lsa_email',
+      6 => 'field_lsa_home_phone',
+      7 => 'field_lsa_branch',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

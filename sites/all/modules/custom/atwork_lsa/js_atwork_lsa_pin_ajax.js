@@ -60,6 +60,9 @@
 
     // User is filling out their own application
     if(response.choice == 1){
+      // Show field for ministry
+      $('#edit-field-lsa-pin-ministry-org').slideDown('slow');
+
       // Show fields or user
       $('.group-recipient-details').slideDown('slow');
       // Show field for current year status
@@ -75,6 +78,8 @@
       $('#edit-field-lsa-pin-last-name-und-0-value').val(response.last_name[0].safe_value);
       $('#edit-field-lsa-pin-employee-number-und-0-value').val(response.employee_number[0].safe_value);
       $('#edit-field-lsa-email-und-0-email').val(response.email);
+      $('#edit-field-lsa-home-phone-und-0-value').val(response.phone[0].safe_value);
+      $('#edit-field-lsa-branch-und-0-value').val(response.work_group[0].safe_value);
       $('.collapsible.required-fields.group-delivery-details.field-group-fieldset.form-wrapper.collapse-processed').slideDown('slow');
       $('#edit-field-lsa-pin-terms').slideDown('slow');
       $('#edit-field-lsa-pin-sup-location').slideDown('slow');
