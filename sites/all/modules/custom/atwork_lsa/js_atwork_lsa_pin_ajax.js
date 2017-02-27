@@ -10,6 +10,7 @@
           rebuiltForm = true;
           type = $('#edit-field-lsa-registerer-und').val();
           $.get('/atwork_lsa_pin_form/' + type, null, feedDetails);
+          checkLabels(type);
           return false;
         });
 
@@ -56,7 +57,6 @@
    * @param  {array} response [Holds an array of user, supervisor fields for auto-pop, the response.choice key holds the type of submission this will be]
    */
   var feedDetails = function(response){
-     console.log(response);
 
     // User is filling out their own application
     if(response.choice == 1){
@@ -125,7 +125,6 @@
   };
 
   function setUpPage() {
-    console.log($('#edit-field-lsa-registerer-und').val());
     if($('#edit-field-lsa-registerer-und').val() == '_none'){
       // Hide top fields that user should not have access to
       $('#edit-field-lsa-pin-service-milestone').hide();
@@ -149,30 +148,47 @@
    */
 
   function setMinistryOptions(ministry){
+          console.log(ministry);
+
     switch(true){
       //Only One: 9, 19
-      case ministry == (9 || 19):
+      case ministry ==  9:
+      case ministry == 19:
+      console.log("9 adn 19");
         // We can only allow one box to be checked if they have chosen 9 or 19
         // Also change labels
         $('.form-item-field-lsa-other-milestone-years-und label:first-child').text("Do you wish to request a service pin retroactively?");
         $('.form-item-field-lsa-previous-service-miles-und label:first-child').text("Please select the retroactive milestone pin you would like to order");
         $('#edit-field-lsa-other-milestone-years').slideDown('slow');
-        if($('#edit-field-lsa-previous-service-miles').not('atwork-activity-processed')){
-          $('#edit-field-lsa-previous-service-miles').addClass('atwork-activity-processed');
+        if($('#edit-field-lsa-previous-service-miles-und').not('atwork-activity-processed')){
+          $('#edit-field-lsa-previous-service-miles-und').addClass('atwork-activity-processed');
+          $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false);
           // Allow them to choose one pin:
-          $('#edit-field-lsa-previous-service-miles input.form-checkbox').on('change', function() {
-            $('#edit-field-lsa-previous-service-miles input.form-checkbox').not(this).prop('checked', false);
+          $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').on('change', function() {
+            $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').not(this).prop('checked', false);
           });
         }
       break;
       //multiple: 1,2,3,5,7,8,11,12,15,16,17
-      case ministry == (1 || 2 || 3 || 5 || 7 || 8 || 11 || 12 || 15 || 16 || 17):
+      case ministry == 1:
+      case ministry == 2 :
+      case ministry == 3 :
+      case ministry == 5 :
+      case ministry == 7:
+      case ministry == 8:
+      case ministry == 11:
+      case ministry == 12:
+      case ministry == 15:
+      case ministry ==  16:
+      case ministry == 17:
+        console.log("fired");
         // If we have previous set handlers on this - lets remove them.
-        if($('#edit-field-lsa-previous-service-miles').hasClass('atwork-activity-processed')){
+        if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
+
           // Remove class
-          $('#edit-field-lsa-previous-service-miles').removeClass('atwork-activity-processed');
+          $('#edit-field-lsa-previous-service-miles-und').removeClass('atwork-activity-processed');
           // unbind any restrictions we previously had set.
-          $('#edit-field-lsa-previous-service-miles').unbind();
+          $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').unbind();
           // Reset labels
           $('.form-item-field-lsa-other-milestone-years-und label:first-child').text("Do you wish to request any service pin(s) retroactively?");
           $('.form-item-field-lsa-previous-service-miles-und label:first-child').text("Please select the retroactive milestone pin(s) you would like to order");
@@ -184,12 +200,13 @@
       //If this is on of their award years then they can choose multiple extras: 20
       case ministry = 20:
         // Check if this had other restrictions previously
-        if($('#edit-field-lsa-previous-service-miles').hasClass('atwork-activity-processed')){
-          $('#edit-field-lsa-previous-service-miles').removeClass('atwork-activity-processed');
+        if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
+          console.log("has class");
+          $('#edit-field-lsa-previous-service-miles-und').removeClass('atwork-activity-processed');
           // Reset labels
           $('.form-item-field-lsa-other-milestone-years-und label:first-child').text("Do you wish to request any service pin(s) retroactively?");
           $('.form-item-field-lsa-previous-service-miles-und label:first-child').text("Please select the retroactive milestone pin(s) you would like to order");
-          $('#edit-field-lsa-previous-service-miles').unbind();
+          $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').unbind();
         }
         // Check if they are celebrating this year
         if($('#edit-field-lsa-milestone-year-und-1').val == 1){
@@ -221,6 +238,13 @@
       } else {
         valid = false;
       }
+    }
+  }
+
+  function checkLabels($choice){
+    if($choice == 1){
+      // This is a user, so check if we need to change anything back. If not leave it.
+      console.log($('#edit-field-lsa-pin-ministry-org-und.form-item.form-type-select.form-item-field-lsa-registerer-und'));
     }
   }
 })(jQuery);
