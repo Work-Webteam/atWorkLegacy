@@ -1099,6 +1099,7 @@ function atwork_lsa_features_field_default_field_bases() {
         21 => 'Ministry of Transportation and Infrastructure',
         22 => 'Public Guardian and Trustee',
         23 => 'Community Living BC',
+        24 => 'Environmental Assessment',
       ),
       'allowed_values_function' => '',
     ),

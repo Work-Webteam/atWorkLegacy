@@ -4382,11 +4382,7 @@ function atwork_lsa_features_field_default_field_instances() {
   // 'node-lsa_pin_application-field_lsa_milestone_year'.
   $field_instances['node-lsa_pin_application-field_lsa_milestone_year'] = array(
     'bundle' => 'lsa_pin_application',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -4667,11 +4663,7 @@ function atwork_lsa_features_field_default_field_instances() {
   // 'node-lsa_pin_application-field_lsa_other_milestone_years'.
   $field_instances['node-lsa_pin_application-field_lsa_other_milestone_years'] = array(
     'bundle' => 'lsa_pin_application',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
