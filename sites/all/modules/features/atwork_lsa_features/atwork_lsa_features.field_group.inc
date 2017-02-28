@@ -20,18 +20,21 @@ function atwork_lsa_features_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Delivery Details',
-    'weight' => '5',
-    'children' => array(),
+    'label' => '',
+    'weight' => '6',
+    'children' => array(
+      0 => 'field_lsa_pin_sup_location',
+    ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => 'Delivery Details',
+      'label' => '',
       'instance_settings' => array(
         'required_fields' => 1,
-        'classes' => 'group-delivery-details field-group-fieldset ',
-        'description' => '*NOTE: Service pins will be mailed directly to the recipient\'s supervisor between June 1-10. Please enter the address and contact details for your supervisor, below.',
+        'id' => 'sup-div',
+        'classes' => '',
+        'description' => '',
       ),
-      'formatter' => 'collapsible',
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_delivery_details|node|lsa_pin_application|form'] = $field_group;
@@ -47,13 +50,13 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Administration',
-    'weight' => '21',
+    'weight' => '23',
     'children' => array(
       0 => 'field_lsa_notes',
       1 => 'field_lsa_form_date_stamp',
       2 => 'field_lsa_retro_active',
-      3 => 'group_lsa_rsvp',
-      4 => 'group_lsa_ceremony_details',
+      3 => 'group_lsa_ceremony_details',
+      4 => 'group_lsa_rsvp',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -80,7 +83,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = 'group_lsa_administration';
   $field_group->data = array(
     'label' => 'Ceremony Details',
-    'weight' => '38',
+    'weight' => '39',
     'children' => array(
       0 => 'field_lsa_alternate_min_org',
       1 => 'field_lsa_actual_min_org',
@@ -149,7 +152,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Work Information',
-    'weight' => '17',
+    'weight' => '19',
     'children' => array(
       0 => 'field_lsa_org',
       1 => 'field_lsa_branch_department',
@@ -219,7 +222,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Name',
-    'weight' => '16',
+    'weight' => '18',
     'children' => array(
       0 => 'field_lsa_prefix',
       1 => 'field_lsa_first_name',
@@ -252,7 +255,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => '',
-    'weight' => '7',
+    'weight' => '8',
     'children' => array(
       0 => 'field_lsa_pin_terms',
     ),
@@ -287,7 +290,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = 'group_lsa_administration';
   $field_group->data = array(
     'label' => 'RSVP Information',
-    'weight' => '37',
+    'weight' => '38',
     'children' => array(
       0 => 'field_lsa_rsvp',
       1 => 'field_lsa_attending_ceremony',
@@ -496,7 +499,6 @@ function atwork_lsa_features_field_group_info() {
       3 => 'field_lsa_pin_ministry_org',
       4 => 'field_lsa_previous_service_miles',
       5 => 'field_lsa_registerer',
-      6 => 'field_lsa_pin_sup_location',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -505,7 +507,7 @@ function atwork_lsa_features_field_group_info() {
         'required_fields' => 1,
         'id' => '',
         'classes' => 'group-pin-options field-group-fieldset',
-        'description' => '<em>Service pins will be sent to your supervisor for presentation to you during Public Service Week - June 12-16, 2017. </em>',
+        'description' => '<em>Service pins will be sent to the employee\'s supervisor for presentation during Public Service Week - June 12-16, 2017. </em>',
       ),
       'formatter' => 'collapsible',
     ),
@@ -596,7 +598,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Supervisor Details',
-    'weight' => '6',
+    'weight' => '7',
     'children' => array(
       0 => 'field_lsa_supervisor_first_name',
       1 => 'field_lsa_supervisor_last_name',
@@ -604,8 +606,7 @@ function atwork_lsa_features_field_group_info() {
       3 => 'field_lsa_office_address',
       4 => 'field_lsa_office_city',
       5 => 'field_lsa_work_phone',
-      6 => 'field_lsa_work_phone_ext',
-      7 => 'field_lsa_office_postal_code',
+      6 => 'field_lsa_office_postal_code',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -624,7 +625,6 @@ function atwork_lsa_features_field_group_info() {
   t('Administration');
   t('Ceremony Details');
   t('Contact Information');
-  t('Delivery Details');
   t('Home Contact Information');
   t('Name');
   t('Office Information');

@@ -460,6 +460,7 @@ function atwork_lsa_form_lsa_pin_application_node_form_alter(&$form, $form_state
     $form['field_lsa_work_phone_ext']['und'][0]['value']['#title'] = t('Supervisor Phone Ext');
   }
   $form['#validate'][] = 'atwork_lsa_pin_application_validate';
+  $form['actions']['submit']['#value'] = t('Submit this Service Pin request');
 /*
   // skip defaults for admins who are entering for others
   if (in_array('lsa admin', $user->roles) || in_array('recognition contact', $user->roles)) {

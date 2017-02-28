@@ -336,6 +336,31 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'list_integer',
   );
 
+  // Exported field_base: 'field_lsa_certificate_ordered'.
+  $field_bases['field_lsa_certificate_ordered'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_certificate_ordered',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 'No',
+        1 => 'Yes',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
+  );
+
   // Exported field_base: 'field_lsa_city'.
   $field_bases['field_lsa_city'] = array(
     'active' => 1,
@@ -1072,6 +1097,8 @@ function atwork_lsa_features_field_default_field_bases() {
         19 => 'Ministry of Social Development and Social Innovation',
         20 => 'Ministry of Technology, Innovation and Citizens\' Services',
         21 => 'Ministry of Transportation and Infrastructure',
+        22 => 'Public Guardian and Trustee',
+        23 => 'Community Living BC',
       ),
       'allowed_values_function' => '',
     ),

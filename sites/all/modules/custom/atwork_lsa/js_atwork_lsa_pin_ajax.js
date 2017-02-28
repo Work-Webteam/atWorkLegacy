@@ -27,7 +27,8 @@
         .bind('click', function(){
           if($('#edit-field-lsa-milestone-year-und-1').is(':checked')){
             $('#edit-field-lsa-pin-service-milestone').slideDown('slow');
-            $('#edit-field-lsa-pin-ministry-org').slideDown('slow');
+            // Double Check our options here (Mainly for MTICS)
+            setMinistryOptions($('#edit-field-lsa-pin-ministry-org-und').val());
           }
         });
 
@@ -38,7 +39,7 @@
           //Checked "No" so lets clear the field and hide it again.
           if($('#edit-field-lsa-milestone-year-und-0').is(':checked')){
             $('#edit-field-lsa-pin-service-milestone-und').val("_none");
-            $('#edit-field-lsa-pin-service-milestone').slideUp('slow');
+            setMinistryOptions($('#edit-field-lsa-pin-ministry-org-und').val());
           }
         });
 
@@ -49,6 +50,29 @@
           // Hide annoying "required" flag on each option.
           $('.option').find('span').removeClass('form-required').hide();
         });
+
+      $('#edit-field-lsa-other-milestone-years-und:not(.atwork-activity-processed)', context)
+        .addClass('atwork-activity-processed')
+        .bind('click', function(){
+          if($('#edit-field-lsa-other-milestone-years-und-0').is('checked')){
+            $('#edit-field-lsa-other-milestone-years').hide();
+            $('#edit-field-lsa-other-milestone-years-und-1').prop('checked', false);
+            $('#edit-field-lsa-other-milestone-years-und-0').prop('checked', true);
+            $('#edit-field-lsa-other-milestone-years').hide();
+            $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false);
+            $('#edit-field-lsa-previous-service-miles').slideUp('fast');
+          }
+        });
+
+
+
+      $('#edit-field-lsa-other-milestone-years-und-0:not(.atwork-activity-processed)', context)
+        .addClass('atwork-activity-processed')
+        .bind('click', function(){
+            $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false);
+            $('#edit-field-lsa-previous-service-miles').slideUp('fast');
+          });
+
     }
   };
   /**
@@ -100,7 +124,6 @@
       $('#edit-field-lsa-pin-service-milestone').hide();
       $('#edit-field-lsa-pin-ministry-org').hide();
       $('#edit-field-lsa-milestone-year').hide();
-      $('#edit-field-lsa-pin-service-milestone').hide();
       $('#edit-field-lsa-other-milestone-years').hide();
       $('#edit-field-lsa-previous-service-miles').hide();
       // Hide other fields for now.
@@ -110,6 +133,7 @@
       $('#edit-field-lsa-pin-terms').hide();
       $('#edit-field-lsa-pin-sup-location').hide();
       $('#lsa-pin-terms').hide();
+      $('#sup-div').hide();
     }
   }
 
@@ -134,7 +158,7 @@
           });
         }
       break;
-      //multiple: 1,2,3,5,7,8,11,12,15,16,17
+      //multiple: 1,2,3,5,7,8,11,12,15,16,17, 21
       case ministry == 1:
       case ministry == 2 :
       case ministry == 3 :
@@ -146,6 +170,7 @@
       case ministry == 15:
       case ministry ==  16:
       case ministry == 17:
+      case ministry == 21:
         // If we have previous set handlers on this - lets remove them.
         if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
 
@@ -159,19 +184,23 @@
       break;
 
       //If this is one of their award years then they can choose multiple extras: 20
-      case ministry = 20:
+      case ministry == 20:
         // Check if this had other restrictions previously
         if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
           $('#edit-field-lsa-previous-service-miles-und').removeClass('atwork-activity-processed');
           $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').unbind();
         }
         // Check if they are celebrating this year
-        if($('#edit-field-lsa-milestone-year-und-1').val == 1){
+        if($('#edit-field-lsa-milestone-year-und-1').is(':checked')){
+          // If so, then they can choose prev years.
           $('#edit-field-lsa-other-milestone-years').slideDown('slow');
         } else {
           $('#edit-field-lsa-other-milestone-years').hide();
           $('#edit-field-lsa-other-milestone-years-und-1').prop('checked', false);
           $('#edit-field-lsa-other-milestone-years-und-0').prop('checked', true);
+          $('#edit-field-lsa-other-milestone-years').hide();
+          $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false);
+          $('#edit-field-lsa-previous-service-miles').slideUp('fast');
         }
         break;
       // Any other number is not allowed to have retroactive
@@ -194,6 +223,7 @@
     $('#edit-field-lsa-pin-terms').slideDown('slow');
     $('#edit-field-lsa-pin-sup-location').slideDown('slow');
     $('#lsa-pin-terms').slideDown('slow');
+    $('#sup-div').slideDown('slow');
     return false;
   }
 
