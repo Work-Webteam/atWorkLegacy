@@ -77,13 +77,6 @@
     } else if(response.choice == 2){
       // Show field for ministry
       $('#edit-field-lsa-pin-ministry-org').slideDown('slow');
-      // Show fields for supervisors
-      $('.collapsible.required-fields.group-supervisor-details.field-group-fieldset.form-wrapper.collapse-processed').slideDown('slow');
-      $('.collapsible.required-fields.group-delivery-details.field-group-fieldset.form-wrapper.collapse-processed').slideDown('slow');
-      $('#edit-field-lsa-pin-terms').slideDown('slow');
-      $('#edit-field-lsa-pin-sup-location').slideDown('slow');
-      $('#lsa-pin-terms').slideDown('slow');
-
 
       // Populated fields for supervisors
       $('#edit-field-lsa-supervisor-first-name-und-0-value').val(response.first_name[0].safe_value);
@@ -93,17 +86,8 @@
 
     // Ministry Rep if filling out form.
     } else if(response.choice == 3){
-      // Show whole form, and don't fill anything.
-            // Show fields or user
-      $('.group-recipient-details').slideDown('slow');
-      // Show field for current year status
-      $('#edit-field-lsa-milestone-year').slideDown('slow');
-      $('#edit-field-lsa-pin-service-milestone').slideDown('slow');
-      $('#edit-field-lsa-pin-terms').slideDown('slow');
-      $('#edit-field-lsa-pin-sup-location').slideDown('slow');
-      $('#lsa-pin-terms').slideDown('slow');
-      // Show fields for supervisors
-      $('.collapsible.required-fields.group-supervisor-details.field-group-fieldset.form-wrapper.collapse-processed').slideDown('slow');
+      // Show field for ministry
+      $('#edit-field-lsa-pin-ministry-org').slideDown('slow');
     } else {
       // todo - Reset to default?
     }
