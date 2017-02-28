@@ -93,8 +93,6 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
 
   $form['field_lsa_email'][$form['field_lsa_email']['#language']][0]['email']['#default_value'] = $user->mail;
 
-  //dpm($form);
-  //dpm($form_state);
 }
 
 /*
@@ -333,12 +331,11 @@ function atwork_lsa_node_insert($node) {
     require_once(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa.mail.inc');
 
     // applicant email
-    $params = array(
-      'subject' => $applicant_subject,
-      'body' => $applicant_body,
-    );
-
-    drupal_mail('atwork_mail', 'atwork_mail_default', $applicant_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
+      $params = array(
+        'subject' => $applicant_subject,
+        'body' => $applicant_body,
+      );
+      drupal_mail('atwork_mail', 'atwork_mail_default', $applicant_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
 
     // supervisor
     $params = array(
@@ -351,15 +348,17 @@ function atwork_lsa_node_insert($node) {
 
   if($node->type == 'lsa_pin_application'){
     $lang = $node->language;
+    dpm($node);
 
     require_once(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_pin.mail.inc');
-    // applicant email
-    $params = array(
-      'subject' => $applicant_subject,
-      'body' => $applicant_body,
-    );
-    drupal_mail('atwork_mail', 'atwork_mail_default', $applicant_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
-
+    // applicant email, only sent if applicant has applied for themselves
+    if($node->field_lsa_registerer['und'][0]['value'] == 1){
+      $params = array(
+        'subject' => $applicant_subject,
+        'body' => $applicant_body,
+      );
+      drupal_mail('atwork_mail', 'atwork_mail_default', $applicant_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
+    }
     // supervisor
     $params = array(
       'subject' => $supervisor_subject,
