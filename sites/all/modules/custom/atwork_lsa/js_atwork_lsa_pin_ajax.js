@@ -38,39 +38,27 @@
         .bind('click', function(){
           //Checked "No" so lets clear the field and hide it again.
           if($('#edit-field-lsa-milestone-year-und-0').is(':checked')){
+            $('#edit-field-lsa-pin-service-milestone').slideUp('slow');
             $('#edit-field-lsa-pin-service-milestone-und').val("_none");
             setMinistryOptions($('#edit-field-lsa-pin-ministry-org-und').val());
           }
         });
 
-      $('#edit-field-lsa-other-milestone-years:not(.atwork-activity-processed)', context)
+
+      $('#edit-field-lsa-other-milestone-years-und-1:not(.atwork-activity-processed)', context)
         .addClass('atwork-activity-processed')
-        .bind('change', function(){
-          $('#edit-field-lsa-previous-service-miles').show();
+        .bind('click', function(){
+          $('#edit-field-lsa-previous-service-miles').slideDown('slow');
           // Hide annoying "required" flag on each option.
           $('.option').find('span').removeClass('form-required').hide();
         });
-
-      $('#edit-field-lsa-other-milestone-years-und:not(.atwork-activity-processed)', context)
-        .addClass('atwork-activity-processed')
-        .bind('click', function(){
-          if($('#edit-field-lsa-other-milestone-years-und-0').is('checked')){
-            $('#edit-field-lsa-other-milestone-years').hide();
-            $('#edit-field-lsa-other-milestone-years-und-1').prop('checked', false);
-            $('#edit-field-lsa-other-milestone-years-und-0').prop('checked', true);
-            $('#edit-field-lsa-other-milestone-years').hide();
-            $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false);
-            $('#edit-field-lsa-previous-service-miles').slideUp('fast');
-          }
-        });
-
 
 
       $('#edit-field-lsa-other-milestone-years-und-0:not(.atwork-activity-processed)', context)
         .addClass('atwork-activity-processed')
         .bind('click', function(){
             $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false);
-            $('#edit-field-lsa-previous-service-miles').slideUp('fast');
+            $('#edit-field-lsa-previous-service-miles').slideUp('slow');
           });
 
     }
@@ -197,10 +185,9 @@
         } else {
           $('#edit-field-lsa-other-milestone-years').hide();
           $('#edit-field-lsa-other-milestone-years-und-1').prop('checked', false);
-          $('#edit-field-lsa-other-milestone-years-und-0').prop('checked', true);
           $('#edit-field-lsa-other-milestone-years').hide();
           $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false);
-          $('#edit-field-lsa-previous-service-miles').slideUp('fast');
+          $('#edit-field-lsa-previous-service-miles').slideUp('slow');
         }
         break;
       // Any other number is not allowed to have retroactive
@@ -216,7 +203,6 @@
     $('.group-recipient-details').slideDown('slow');
     // Show field for current year status
     $('#edit-field-lsa-milestone-year').slideDown('slow');
-    $('#edit-field-lsa-pin-service-milestone').slideDown('slow');
 
     // Show fields for supervisors
     $('.collapsible.required-fields.group-supervisor-details.field-group-fieldset.form-wrapper.collapse-processed').slideDown('slow');
