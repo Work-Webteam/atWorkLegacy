@@ -158,7 +158,7 @@
         $('#edit-field-lsa-other-milestone-years').slideDown('slow');
       break;
 
-      //If this is on of their award years then they can choose multiple extras: 20
+      //If this is one of their award years then they can choose multiple extras: 20
       case ministry = 20:
         // Check if this had other restrictions previously
         if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
@@ -176,6 +176,7 @@
         break;
       // Any other number is not allowed to have retroactive
       default:
+        $('#edit-field-lsa-other-milestone-years').hide();
         $('#edit-field-lsa-previous-service-miles').hide();
         // Don't want to pass old values
         $('#edit-field-lsa-previous-service-miles input.form-checkbox').prop('checked', false);
@@ -214,18 +215,18 @@
 
     if(choice == 1){
       // This is a user, so check if we need to change anything back. If not leave it.
-      $('.form-item-field-lsa-milestone-year-und label:first-child').text("Are you celebrating a current service milestone in 2017?");
-      $('.form-item.form-type-select.form-item-field-lsa-pin-ministry-org-und label:first-child').text("What ministry/organization are you with?");
-      $('.form-item.form-type-select.form-item-field-lsa-pin-sup-location-und label:first-child').text("Does your supervisor work in a different office location than you?");
-      $('.form-item-field-lsa-other-milestone-years-und label:first-child').text("Do you wish to request any service pin(s) retroactively?");
-      $('.form-item.form-type-checkboxes.form-item-field-lsa-previous-service-miles-und label:first-child').text("Please select the retroactive milestone pin(s) you would like to order");
+      $('.form-item-field-lsa-milestone-year-und label:first-child').text('Are you celebrating a current service milestone in 2017? <span class="form-required" title="This field is required.">*</span>');
+      $('.form-item.form-type-select.form-item-field-lsa-pin-ministry-org-und label:first-child').text('What ministry/organization are you with? <span class="form-required" title="This field is required.">*</span>');
+      $('.form-item.form-type-select.form-item-field-lsa-pin-sup-location-und label:first-child').text('Does your supervisor work in a different office location than you? <span class="form-required" title="This field is required.">*</span>');
+      $('.form-item-field-lsa-other-milestone-years-und label:first-child').text('Do you wish to request any service pin(s) retroactively? <span class="form-required" title="This field is required.">*</span>');
+      $('.form-item.form-type-checkboxes.form-item-field-lsa-previous-service-miles-und label:first-child').text('Please select the retroactive milestone pin(s) you would like to order <span class="form-required" title="This field is required.">*</span>');
     } else {
       // Change this if user is applying on behalf of an employee
-      $('.form-item-field-lsa-milestone-year-und label:first-child').text("Is the employee celebrating a current service milestone in 2017?");
-      $('.form-item.form-type-select.form-item-field-lsa-pin-ministry-org-und label:first-child').text("What ministry/organization is the employee with?");
-      $('.form-item.form-type-select.form-item-field-lsa-pin-sup-location-und label:first-child').text("Does the employee’s supervisor work in a different office location than the employee?");
-      $('.form-item-field-lsa-other-milestone-years-und label:first-child').text("Do you wish to request any service pin(s) for the employee retroactively?");
-      $('.form-item.form-type-checkboxes.form-item-field-lsa-previous-service-miles-und label:first-child').text("Please select the retroactive milestone pin(s) you would like to order for the employee");
+      $('.form-item-field-lsa-milestone-year-und label:first-child').text('Is the employee celebrating a current service milestone in 2017? <span class="form-required" title="This field is required.">*</span>');
+      $('.form-item.form-type-select.form-item-field-lsa-pin-ministry-org-und label:first-child').text('What ministry/organization is the employee with? <span class="form-required" title="This field is required.">*</span>');
+      $('.form-item.form-type-select.form-item-field-lsa-pin-sup-location-und label:first-child').text('Does the employee’s supervisor work in a different office location than the employee? <span class="form-required" title="This field is required.">*</span>');
+      $('.form-item-field-lsa-other-milestone-years-und label:first-child').text('Do you wish to request any service pin(s) for the employee retroactively? <span class="form-required" title="This field is required.">*</span>');
+      $('.form-item.form-type-checkboxes.form-item-field-lsa-previous-service-miles-und label:first-child').text('Please select the retroactive milestone pin(s) you would like to order for the employee <span class="form-required" title="This field is required.">*</span>');
     }
   }
 })(jQuery);
