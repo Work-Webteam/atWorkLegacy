@@ -55,6 +55,14 @@
     top: 20px;
     left: 24px;
   }
+  .comment-icon:before { // this was placed with jQuery since can't use :before on input tag
+    position: absolute;
+    left: 4px;
+    bottom: 4px;
+    content: "\f075"; // the comment icon
+    font: normal normal normal 10px/1 FontAwesome;
+    color: #4072a0;
+  }
 }
 
 
@@ -289,17 +297,12 @@
         padding-right: 0.2em;
       }
     }
-    .comment-icon:before { // this was placed with jQuery since can't use :before on input tag
-      position: absolute;
-      left: 4px;
-      bottom: 4px;
-      content: "\f075"; // the comment icon
-      font: normal normal normal 10px/1 FontAwesome;
-      color: #4072a0;
-    }
-    .field-name-field-comment-message-comments + .field-name-field-feed-like-button,
-    .field-name-field-follow-feed-comments + .field-name-field-feed-like-button {// outer message like
-      left: 35%;
+    .field-name-field-comment-message-comments,
+    .field-name-field-follow-feed-comments,
+    .field-name-field-node-feed-reply {
+      + .field-name-field-feed-like-button {// outer message 'like'
+        left: 35%;
+      }
     }
 
     // position all first message paragraphs. Status updates, etc. under the date.
@@ -463,8 +466,8 @@
       padding: 0;
     }
     .comment-submit-button {
-      left: 6px;
-      bottom: 0;
+      left: 4px;
+      bottom: 2px;
     }
     .field-name-field-feed-like-button {
       left: 51%;
@@ -501,7 +504,7 @@
       display: none; 
     }
     .toggle-com-button {
-      left: 6px;
+      left: 17px;
       bottom: 0;
     }
     .field-name-field-image { // main image left of a post
