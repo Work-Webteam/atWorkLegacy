@@ -63,6 +63,9 @@
     font: normal normal normal 10px/1 FontAwesome;
     color: #4072a0;
   }
+  #edit-status-counter { // hide the text counter
+    display: none;
+  }
 }
 
 
@@ -176,9 +179,6 @@
     .form-item {
       margin-top: 0.5em;
     }
-  }
-  #edit-status-counter { // hide the text counter
-    display: none;
   }
   #status-submit-button {
     clear: both;
@@ -423,9 +423,6 @@
     #edit-status-counter {
       text-indent: 60px;
       margin-top: 6px;
-    }
-    #status-submit-button {
-      margin-top: -26px;
     }
     .entity-message {
       margin-top: -3em; // hackey, but need to close up top space
