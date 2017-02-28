@@ -19,9 +19,9 @@ $supervisor_body = <<<EOT
 
 <p>FYI – an employee you supervise has registered for a BC Public Service Pin, in celebration of {$email_milestone} years of service.</p>
 
-<p>Thank you for registering {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} for a $email_milestone year BC Public ServicPine</p>
+<p>Thank you for registering {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} for a $email_milestone year BC Public ServicePin</p>
 
-<p>This pin(s) will be sent directly to {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} supervisor, for presentation during <strong>Public Service Week (June 12-16)</strong>.</p>
+<p>This pin(s) will be sent directly to {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']}'s supervisor, for presentation during <strong>Public Service Week (June 12-16)</strong>.</p>
 
 <p>If you have questions about the corporate pin program, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
 
