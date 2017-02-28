@@ -289,6 +289,14 @@
         padding-right: 0.2em;
       }
     }
+    .comment-icon:before { // this was placed with jQuery since can't use :before on input tag
+      position: absolute;
+      left: 4px;
+      bottom: 4px;
+      content: "\f075"; // the comment icon
+      font: normal normal normal 10px/1 FontAwesome;
+      color: #4072a0;
+    }
     .field-name-field-comment-message-comments + .field-name-field-feed-like-button,
     .field-name-field-follow-feed-comments + .field-name-field-feed-like-button {// outer message like
       left: 35%;
@@ -328,6 +336,7 @@
     input.toggle-com-button { // the comment/cancel toggle button
       position: absolute;
       bottom: 0;
+      left: 17px;
     }
     .comment-submit-button  {
       margin-bottom: 2em;
