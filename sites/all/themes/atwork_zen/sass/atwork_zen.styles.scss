@@ -2702,14 +2702,19 @@ aside.sidebars h2 {
       bottom: 6px;
       right: 6px;
     }
-  .add-follower-message,
-  .remove-follower-message {
-    position: relative;
-    z-index: 15;
-    border: solid 1px #000;
-    padding: 5px;
-    bottom: 115px;
-    background-color: rgba(255,255,255,.75);
+    .add-follower-message,
+    .remove-follower-message {
+      position: relative;
+      z-index: 15;
+      bottom: 160px;
+    }
+    .add-follower-message {
+      @include atwork-messages(green, ok);
+    }
+
+    .remove-follower-message {
+      @include atwork-messages(yellow, warning);
+      background-color: #ffffe2;
     }
   }
 }
