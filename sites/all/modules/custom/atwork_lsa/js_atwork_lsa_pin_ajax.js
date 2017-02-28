@@ -10,7 +10,6 @@
           rebuiltForm = true;
           type = $('#edit-field-lsa-registerer-und').val();
           $.get('/atwork_lsa_pin_form/' + type, null, feedDetails);
-          checkLabels(type);
           return false;
         });
 
@@ -57,6 +56,7 @@
    * @param  {array} response [Holds an array of user, supervisor fields for auto-pop, the response.choice key holds the type of submission this will be]
    */
   var feedDetails = function(response){
+    checkLabels(response.choice);
 
     // User is filling out their own application
     if(response.choice == 1){
@@ -148,18 +148,13 @@
    */
 
   function setMinistryOptions(ministry){
-          console.log(ministry);
-
     switch(true){
       //Only One: 9, 19
       case ministry ==  9:
       case ministry == 19:
-      console.log("9 adn 19");
         // We can only allow one box to be checked if they have chosen 9 or 19
-        // Also change labels
-        $('.form-item-field-lsa-other-milestone-years-und label:first-child').text("Do you wish to request a service pin retroactively?");
-        $('.form-item-field-lsa-previous-service-miles-und label:first-child').text("Please select the retroactive milestone pin you would like to order");
         $('#edit-field-lsa-other-milestone-years').slideDown('slow');
+        // Make sure our labels are set correctly
         if($('#edit-field-lsa-previous-service-miles-und').not('atwork-activity-processed')){
           $('#edit-field-lsa-previous-service-miles-und').addClass('atwork-activity-processed');
           $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false);
@@ -181,7 +176,6 @@
       case ministry == 15:
       case ministry ==  16:
       case ministry == 17:
-        console.log("fired");
         // If we have previous set handlers on this - lets remove them.
         if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
 
@@ -189,9 +183,6 @@
           $('#edit-field-lsa-previous-service-miles-und').removeClass('atwork-activity-processed');
           // unbind any restrictions we previously had set.
           $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').unbind();
-          // Reset labels
-          $('.form-item-field-lsa-other-milestone-years-und label:first-child').text("Do you wish to request any service pin(s) retroactively?");
-          $('.form-item-field-lsa-previous-service-miles-und label:first-child').text("Please select the retroactive milestone pin(s) you would like to order");
         }
         // Show choices so users can choose
         $('#edit-field-lsa-other-milestone-years').slideDown('slow');
@@ -201,11 +192,7 @@
       case ministry = 20:
         // Check if this had other restrictions previously
         if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
-          console.log("has class");
           $('#edit-field-lsa-previous-service-miles-und').removeClass('atwork-activity-processed');
-          // Reset labels
-          $('.form-item-field-lsa-other-milestone-years-und label:first-child').text("Do you wish to request any service pin(s) retroactively?");
-          $('.form-item-field-lsa-previous-service-miles-und label:first-child').text("Please select the retroactive milestone pin(s) you would like to order");
           $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').unbind();
         }
         // Check if they are celebrating this year
@@ -241,10 +228,23 @@
     }
   }
 
-  function checkLabels($choice){
-    if($choice == 1){
+  function checkLabels(choice){
+    console.log(choice);
+
+    if(choice == 1){
       // This is a user, so check if we need to change anything back. If not leave it.
-      console.log($('#edit-field-lsa-pin-ministry-org-und.form-item.form-type-select.form-item-field-lsa-registerer-und'));
+      $('.form-item-field-lsa-milestone-year-und label:first-child').text("Are you celebrating a current service milestone in 2017?");
+      $('.form-item.form-type-select.form-item-field-lsa-pin-ministry-org-und label:first-child').text("What ministry/organization are you with?");
+      $('.form-item.form-type-select.form-item-field-lsa-pin-sup-location-und label:first-child').text("Does your supervisor work in a different office location than you?");
+      $('.form-item-field-lsa-other-milestone-years-und label:first-child').text("Do you wish to request any service pin(s) retroactively?");
+      $('.form-item.form-type-checkboxes.form-item-field-lsa-previous-service-miles-und label:first-child').text("Please select the retroactive milestone pin(s) you would like to order");
+    } else {
+      // Change this if user is applying on behalf of an employee
+      $('.form-item-field-lsa-milestone-year-und label:first-child').text("Is the employee celebrating a current service milestone in 2017?");
+      $('.form-item.form-type-select.form-item-field-lsa-pin-ministry-org-und label:first-child').text("What ministry/organization is the employee with?");
+      $('.form-item.form-type-select.form-item-field-lsa-pin-sup-location-und label:first-child').text("Does the employee’s supervisor work in a different office location than the employee?");
+      $('.form-item-field-lsa-other-milestone-years-und label:first-child').text("Do you wish to request any service pin(s) for the employee retroactively?");
+      $('.form-item.form-type-checkboxes.form-item-field-lsa-previous-service-miles-und label:first-child').text("Please select the retroactive milestone pin(s) you would like to order for the employee");
     }
   }
 })(jQuery);
