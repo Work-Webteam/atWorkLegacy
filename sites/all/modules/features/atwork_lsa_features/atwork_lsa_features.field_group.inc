@@ -22,11 +22,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->data = array(
     'label' => 'Delivery Details',
     'weight' => '5',
-    'children' => array(
-      0 => 'field_lsa_office_address',
-      1 => 'field_lsa_office_city',
-      2 => 'field_lsa_office_postal_code',
-    ),
+    'children' => array(),
     'format_type' => 'fieldset',
     'format_settings' => array(
       'label' => 'Delivery Details',
@@ -534,8 +530,8 @@ function atwork_lsa_features_field_group_info() {
       2 => 'field_lsa_pin_last_name',
       3 => 'field_lsa_branch_department',
       4 => 'field_lsa_email',
-      5 => 'field_lsa_home_phone',
-      6 => 'field_lsa_branch',
+      5 => 'field_lsa_branch',
+      6 => 'field_lsa_home_phone',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
