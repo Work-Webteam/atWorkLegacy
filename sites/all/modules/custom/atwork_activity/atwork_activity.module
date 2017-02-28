@@ -2131,9 +2131,9 @@ function atwork_activity_block_view($delta = '') {
 
       $block['subject'] = t('My News Feed');
       $block['subject'] .= '<div class="block-header-inner">';
-      $block['subject'] .= '<button class="activity-filters-my" title="My activity">&nbsp;</button>';
-      $block['subject'] .= '<button class="activity-filters-all" title="All activity">&nbsp;</button>';
-      $block['subject'] .= '<a href="node/21603" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="See activity in a new window" /></a>';
+      $block['subject'] .= '<button class="activity-filters-my" title="My Activity">&nbsp;</button>';
+      $block['subject'] .= '<button class="activity-filters-all" title="All Activity">&nbsp;</button>';
+      $block['subject'] .= '<a href="node/21603" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="See Activity in New Window" /></a>';
       $block['subject'] .= '</div><!-- /.block-header-inner -->';
 
       $block['content'] = '<div class="atwork-activity-block-container">';
