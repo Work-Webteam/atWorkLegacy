@@ -63,14 +63,6 @@
       // Show field for ministry
       $('#edit-field-lsa-pin-ministry-org').slideDown('slow');
 
-      // Show fields or user
-      $('.group-recipient-details').slideDown('slow');
-      // Show field for current year status
-      $('#edit-field-lsa-milestone-year').slideDown('slow');
-      $('#edit-field-lsa-pin-service-milestone').slideDown('slow');
-
-      // Show fields for supervisors
-      $('.collapsible.required-fields.group-supervisor-details.field-group-fieldset.form-wrapper.collapse-processed').slideDown('slow');
 
       // populate fields for user - we know they are filling this out for themselves.
       $('#edit-field-lsa-branch-department-und-0-value').val(response.branch[0].safe_value);
@@ -80,17 +72,11 @@
       $('#edit-field-lsa-email-und-0-email').val(response.email);
       $('#edit-field-lsa-home-phone-und-0-value').val(response.phone[0].safe_value);
       $('#edit-field-lsa-branch-und-0-value').val(response.work_group[0].safe_value);
-      $('.collapsible.required-fields.group-delivery-details.field-group-fieldset.form-wrapper.collapse-processed').slideDown('slow');
-      $('#edit-field-lsa-pin-terms').slideDown('slow');
-      $('#edit-field-lsa-pin-sup-location').slideDown('slow');
-      $('#lsa-pin-terms').slideDown('slow');
+
     // Supervisor filling out form
     } else if(response.choice == 2){
-      // Show fields or user
-      $('.group-recipient-details').slideDown('slow');
-      // Show field for current year status
-      $('#edit-field-lsa-milestone-year').slideDown('slow');
-      $('#edit-field-lsa-pin-service-milestone').slideDown('slow');
+      // Show field for ministry
+      $('#edit-field-lsa-pin-ministry-org').slideDown('slow');
       // Show fields for supervisors
       $('.collapsible.required-fields.group-supervisor-details.field-group-fieldset.form-wrapper.collapse-processed').slideDown('slow');
       $('.collapsible.required-fields.group-delivery-details.field-group-fieldset.form-wrapper.collapse-processed').slideDown('slow');
@@ -212,6 +198,17 @@
       break;
     }
 
+    // Show fields or user
+    $('.group-recipient-details').slideDown('slow');
+    // Show field for current year status
+    $('#edit-field-lsa-milestone-year').slideDown('slow');
+    $('#edit-field-lsa-pin-service-milestone').slideDown('slow');
+
+    // Show fields for supervisors
+    $('.collapsible.required-fields.group-supervisor-details.field-group-fieldset.form-wrapper.collapse-processed').slideDown('slow');
+    $('#edit-field-lsa-pin-terms').slideDown('slow');
+    $('#edit-field-lsa-pin-sup-location').slideDown('slow');
+    $('#lsa-pin-terms').slideDown('slow');
     return false;
   }
 
