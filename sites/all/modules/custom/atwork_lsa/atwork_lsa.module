@@ -167,7 +167,7 @@ function atwork_lsa_pin_application_validate($form, &$form_state){
       ->fetchAll();
   if(isset($exists) && !empty($exists)){
     // They already have an application, so we set an error.
-    form_set_error('field_lsa_pin_employee_number', t('The employee id you have entered is already associated with a pin application'));
+    form_set_error('field_lsa_pin_employee_number', t('This employee has already been registered for a service pin. Contact Gillian Kish (<a href="mailto:gillian.kish@gov.bc.ca?subject=Question%20about%20existing%20pin%20application">Gillian.kish@gov.bc.ca</a>) if addition pins are required.'));
     return false;
   }
 
