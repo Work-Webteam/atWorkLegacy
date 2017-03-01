@@ -143,13 +143,13 @@
           // Collande Clock
           '<option value="Collande Clock" name="collande_clock" id="30_gift_collande_clock">Collande Clock</option>' +
           // Sherpa blanket
-          '<option value="Appalachian Sherpa blanket" name="sherpa_blanket" id="30_gift_sherpa_blanket">Appalachian Sherpa Blanket</option>' +
+          '<option value="Appalacian Sherpa Blanket" name="sherpa_blanket" id="30_gift_sherpa_blanket">Appalacian Sherpa Blanket</option>' +
           // RHV Orca Sunset painting
           '<option value="Roy Vickers Print - Tofino Sunrise" name="rhv_print_sunrise" id="30_gift_rhv_print_sunrise">"Tofino Sunrise" framed art print</option>' +
           // Sterling earrings
           '<option value="Solid Sterling Drop Earrings" name="sterling_earrings" id="30_gift_sterling_earrings">Sterling silver drop earrings</option>' +
           // PECSF donation
-          '<option value= "PECSF Fund" name="provincial_employees_community_services_fund" id="25_pecsf">The Provincial Employees Community Services Fund (PECSF)</option>' +
+          '<option value= "$150.00 PECSF Charitible Donation" name="provincial_employees_community_services_fund" id="25_pecsf">The Provincial Employees Community Services Fund (PECSF)</option>' +
         '</select></label>' +
         /**
          * Image List
@@ -229,13 +229,13 @@
         // Choices
         '<label>Award Options: <select name="_35_year_option" id="gift_selection_box"><br />' +
           // Binoculars
-          '<option value="Bushnell Excursion compact binoculars HD" name="bushnell_binoculars" id="35_bushnell_binoculars"> Bushnell Excursion compact binoculars HD</option>' +
+          '<option value="Bushnell Compact Binoculars" name="bushnell_binoculars" id="35_bushnell_binoculars"> Bushnell Excursion compact binoculars HD</option>' +
           // Watch
           '<option value="Bulova Watch" name="bulova_watch" id="35_bulova_watch">Bulova Watch</option>' +
           // Bracelet
           '<option value="Solid Sterling Silver Aboriginal Bracelet" name="aboriginal_bracelet" id="35_aboriginal_bracelet"> Sterling silver Aboriginal bracelet </option>' +
           // Glass Vase
-          '<option value="Hand-Blown Glass Vase by Robert Held" name="glass_vase" id="35_glass_vase"> : “Blue Flower Bouquet”  glass vase</option>' +
+          '<option value="Hand-Blown Glass Vase by Robert Held" name="glass_vase" id="35_glass_vase">“Blue Flower Bouquet” glass vase</option>' +
           // PECSF donation
           '<option value= "PECSF Fund" name="provincial_employees_community_services_fund" id="25_pecsf">The Provincial Employees Community Services Fund (PECSF)</option>' +
         '</select></label>' +
@@ -310,7 +310,7 @@
           // Aboriginal Bracelet
           '<span id="info_aboriginal_bracelet"><br /><p> Each bracelet is hand made by Nancy Dawson, Silver Eagles Design Studio, Alert Bay, Vancouver Island.</p><br /><p>Solid sterling silver cuff bracelet, ¾ inch wide.</p><br /><p>Size A: fits: 6 ½" - 7 ½" wrist</p><p>Size B: fits 7 ½" -  8 ½" wrist</p><p>Engraved plate on box: 35 years of service.</p></span>' +
           // Glass Vase
-          '<span id="info_glass_vase"><br /><p>Hand-blown glass vase made in Parksville, B.C. by Robert Held.</p><p>Website <a href="http://robertheld.com/" target = "_blank">http://robertheld.com/</a> </p><p>Size:11.5" H</p><p><strong>Note:</strong> Due to the nature of this gift, engraving is not possible.</p>' +
+          '<span id="info_glass_vase"><br /><p>Hand-blown glass vase made in Parksville, B.C. by Robert Held.</p><p>Website <a href="http://robertheld.com/" target = "_blank">http://robertheld.com/</a> </p><p>Size:11.5" H</p><p><strong>Note:</strong> Due to the nature of this gift, engraving is not possible.</p></span>' +
           // PECSF
           '<span id="info_provincial_employees_community_services_fund"><p>In lieu of receiving a Long Service Award, you may opt to make a charitable donation via <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf">PECSF</a>. You may choose to donate to any registered charitable organization (maximum of two) OR to the PECSF Fund Supported Pool of charities in your region. To see which charities are in the PECSF Fund Supported Pool, <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions">click on your region</a>.</p><p><em>Before registering for your Long Service Award, you will first need to view the list of <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions">PECSF charities by Region</a>.</em></p><p><em>Once you have chosen a charity in your region, note the <strong>PECSF ID# and charity name</strong> as you will need to provide this information when you register. </em></p><p><strong>A commemorative certificate noting your charitable contribution will be presented to you at the Long Service Awards ceremony in the fall.</strong></p><p><em><small>Note: Charitable tax receipts are <strong>not</strong> issued for Long Service Award donations</small></em></p></span>' +
         '</div>',
@@ -389,13 +389,13 @@
           // Diamond earrings
           '<option value="14kt Diamond Earrings" name="diamond_earrings" id="40_diamond_earrings">Genuine Diamond Stud Earrings: 14 kt white gold</option>' +
           // Diamond pendant
-          '<option value="Diamond pendant and chain" name="diamond_pendant_and_chain" id="40_diamond_pendant_and_chain">Genuine Round  Diamond pendant and chain  - 10 kt  white gold </option>' +
+          '<option value="14kt White Gold Diamond Stud Earrings" name="diamond_pendant_and_chain" id="40_diamond_pendant_and_chain">Genuine Round  Diamond pendant and chain  - 10 kt  white gold </option>' +
           // Glass bowl
           '<option value="Hand-Blown Glass Bowl by Robert Held" name="glass_bowl" id="40_glass_bowl">Hand-blown glass bowl</option>' +
           // MD Print
           '<option value="Michaela Davidson Print - Sunbreakers" name="md_print" id="40_md_print">“Sun Breakers” - framed art print </option>' +
           // PECSF donation
-          '<option value= "PECSF Fund" name="provincial_employees_community_services_fund" id="25_pecsf">The Provincial Employees Community Services Fund (PECSF)</option>' +
+          '<option value= "$400.00 PECSF Charitible Donation" name="provincial_employees_community_services_fund" id="25_pecsf">The Provincial Employees Community Services Fund (PECSF)</option>' +
         '</select></label>' +
         /**
          * Image List
@@ -484,26 +484,30 @@ function gift_choice_populate_form(gifts){
     // Get proper wording
     switch(gift_name) {
       case "Cross Starry Blue ballpoint pen":
-        g_choice = "Ballpoint Pen";
+        g_choice = "Cross 'Starry Blue' Ballpoint Pen";
         break;
       case "Cross Tablet holder":
-        g_choice = "Tablet holder";
+        g_choice = "Leather Tablet Holder with Notepad";
         break;
       case "Sterling Silver and White Pearl Earrings":
-        g_choice = "Pearl Earrings";
+        g_choice = "Sterling Silver White Pearl Earrings";
         break;
       case "Passport and Luggage tag set":
-        g_choice = "Passport and luggage tag";
+        g_choice = "Leather Passport and Luggage Tag Set";
         break;
       case "PECSF Fund":
-        g_choice = "PECSF Fund";
+        g_choice = "$75.00 PECSF Charitible Donation";
         break;
       default :
         g_choice = "Please try again.";
         break;
     }
 
-    full_gift_name = "25 - " + cert_choice + ' ' + g_choice;
+    if(cert_choice.length > 0){
+      full_gift_name = "25 - " + cert_choice + g_choice;
+    } else {
+      full_gift_name = "25 - " + g_choice + " - No Certificate";
+    }
     // Put the certificate info into the main form
     $('#edit-field-lsa-25year-certificatename-und-0-value').val($('#_25_year_certificate_text_box').val());
   }
@@ -520,7 +524,7 @@ function gift_choice_populate_form(gifts){
     if(gift_name == 'Solid Sterling Silver Aboriginal Bracelet'){
       full_gift_name = "35 - Sterling Silver Bracelet - " + gifts.size_bracelet;
     }
-    if(gift_name == 'Bushnell Compact Binoculars Elite e2 Series'){
+    if(gift_name == 'Bushnell Compact Binoculars'){
       full_gift_name = "35 - Bushnell Compact Binoculars";
     }
     if(gift_name == "Bulova Watch"){
@@ -534,6 +538,9 @@ function gift_choice_populate_form(gifts){
     }
     if(gift_name == "Hand-Blown Glass Vase by Robert Held"){
       full_gift_name = "35 - " + gifts._35_year_option;
+    }
+    if(gift_name == "PECSF Fund"){
+      full_gift_name = "35 - $300.00 PECSF Charitible Donation";
     }
     // Fill in Engravement if it was an option
     if($("#engravement_pop_text").prop("value")!== ""){
