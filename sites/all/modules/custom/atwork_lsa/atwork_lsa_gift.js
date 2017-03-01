@@ -94,7 +94,6 @@
          * @param  {Object} f - Holds form data that user has chosen
          */
         submit:function(e,v,m,f){
-          console.log(f);
           // List of arguements that can be used in order to save gift value to our LSA form
           gift_choice_populate_form(f);
           e.preventDefault();
@@ -230,13 +229,13 @@
         // Choices
         '<label>Award Options: <select name="_35_year_option" id="gift_selection_box"><br />' +
           // Binoculars
-          '<option value="Bushnell Compact Binoculars Elite e2 Series" name="bushnell_binoculars" id="35_bushnell_binoculars"> Bushnell Compact Binoculars Elite e2 Series</option>' +
+          '<option value="Bushnell Excursion compact binoculars HD" name="bushnell_binoculars" id="35_bushnell_binoculars"> Bushnell Excursion compact binoculars HD</option>' +
           // Watch
           '<option value="Bulova Watch" name="bulova_watch" id="35_bulova_watch">Bulova Watch</option>' +
           // Bracelet
-          '<option value="Solid Sterling Silver Aboriginal Bracelet" name="aboriginal_bracelet" id="35_aboriginal_bracelet"> Solid Sterling Silver Aboriginal Bracelet </option>' +
+          '<option value="Solid Sterling Silver Aboriginal Bracelet" name="aboriginal_bracelet" id="35_aboriginal_bracelet"> Sterling silver Aboriginal bracelet </option>' +
           // Glass Vase
-          '<option value="Hand-Blown Glass Vase by Robert Held" name="glass_vase" id="35_glass_vase"> Hand-Blown Glass Vase by Robert Held</option>' +
+          '<option value="Hand-Blown Glass Vase by Robert Held" name="glass_vase" id="35_glass_vase"> : “Blue Flower Bouquet”  glass vase</option>' +
           // PECSF donation
           '<option value= "PECSF Fund" name="provincial_employees_community_services_fund" id="25_pecsf">The Provincial Employees Community Services Fund (PECSF)</option>' +
         '</select></label>' +
@@ -305,13 +304,13 @@
          */
         '<div id = "lsa_more_info_div">' +
           // Bulova watch
-          '<span id="info_bulova_watch"><br /><p>With BC Coat of Arms printed on dial.</p><br /><p>This finely-made watch comes in a variety of choices, gold, silver, black or brown leather, and a two-toned watch face.</p><br /><p><strong>Detail:</strong> Engraved with name of recipient and “35 years of Service” on back of watch</p></span>' +
+          '<span id="info_bulova_watch"><br /><p>Watch features BC Coat of Arms printed on dial.</p><br /><p>This finely-made watch comes in a variety of choices, gold, silver, black or brown leather, and a two-toned watch face.</p><br /><p><strong>Detail:</strong> Engraved with name of recipient and “35 years of Service” on back of watch</p></span>' +
           // Bushnell binoculars
-          '<span id="info_bushnell_binoculars"><br /><p>Super premium clarity and brightness, center focus, Porro prism, BaK-4 prism glass, fully multicoated.</p><br /><p> Size: 7 x 26 mm </p><p>Bushnell Roof Prism Binocular: Featuring BaK-4 Roof Prisms with PC-3 Prism Coatings, 8x42mm, Field of View 435 yards, Fully Multicoated Optics, 65% Wide-Angle Field of View.</p><br /><p><strong>Note:</strong> due to the nature of this award, a years of service plaque is not possible</p></span>' +
+          '<span id="info_bushnell_binoculars"><br /><p>Super premium clarity and brightness, center focus, Porro prism, BaK-4 prism glass, fully multicoated.</p><br /><p>Bushnell Roof Prism Binocular: Featuring BaK-4 Roof Prisms with PC-3 Prism Coatings, 8x42mm, Field of View 435 yards, Fully Multicoated Optics, 65% Wide-Angle Field of View.</p><br /><p>Size: 8 x 42 mm</p><p><strong>Note:</strong> due to the nature of this award, engraving is not possible</p></span>' +
           // Aboriginal Bracelet
-          '<span id="info_aboriginal_bracelet"><br /><p> With 14kt Yellow Gold Insert. By Nancy Dawson, Alert Bay, Northern Vancouver Island Each pair is hand-made by the artist. Cuff bracelet, 3/4 inch wide. Comes in two sizes.</p><br /><p><strong>Detail:</strong> Years of service plaque on lid of box.</p></span>' +
+          '<span id="info_aboriginal_bracelet"><br /><p> Each bracelet is hand made by Nancy Dawson, Silver Eagles Design Studio, Alert Bay, Vancouver Island.</p><br /><p>Solid sterling silver cuff bracelet, ¾ inch wide.</p><br /><p>Size A: fits: 6 ½" - 7 ½" wrist</p><p>Size B: fits 7 ½" -  8 ½" wrist</p><p>Engraved plate on box: 35 years of service.</p></span>' +
           // Glass Vase
-          '<span id="info_glass_vase"><br /><p><em>“Blue Flower Bouquet”</em></p><p>Delightful and elegant piece of art, hand made in BC.</p><p><strong>Detail:</strong> due to the nature of this gift, engraving is not possible.</p><p><a href="http://www.robertheld.com/" target="_blank"> Website </a></p></span>' +
+          '<span id="info_glass_vase"><br /><p>Hand-blown glass vase made in Parksville, B.C. by Robert Held.</p><p>Website <a href="http://robertheld.com/" target = "_blank">http://robertheld.com/</a> </p><p>Size:11.5" H</p><p><strong>Note:</strong> Due to the nature of this gift, engraving is not possible.</p>' +
           // PECSF
           '<span id="info_provincial_employees_community_services_fund"><p>In lieu of receiving a Long Service Award, you may opt to make a charitable donation via <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf">PECSF</a>. You may choose to donate to any registered charitable organization (maximum of two) OR to the PECSF Fund Supported Pool of charities in your region. To see which charities are in the PECSF Fund Supported Pool, <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions">click on your region</a>.</p><p><em>Before registering for your Long Service Award, you will first need to view the list of <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions">PECSF charities by Region</a>.</em></p><p><em>Once you have chosen a charity in your region, note the <strong>PECSF ID# and charity name</strong> as you will need to provide this information when you register. </em></p><p><strong>A commemorative certificate noting your charitable contribution will be presented to you at the Long Service Awards ceremony in the fall.</strong></p><p><em><small>Note: Charitable tax receipts are <strong>not</strong> issued for Long Service Award donations</small></em></p></span>' +
         '</div>',
@@ -386,13 +385,15 @@
         // Create the select list, remember name and id, both are used.
         '<label>Award Options: <select name="_40_year_option" id="gift_selection_box"><br />' +
           // Mantle Clock
-          '<option value="Napolean Beauty Mantle Clock" name="mantle_clock" id="40_gift_mantle_clock">Ergo Mantle Clock "Napolean Beauty"</option>' +
+          '<option value="Napolean Beauty Ergo Mantle Clock" name="mantle_clock" id="40_gift_mantle_clock">“Napolean Beauty” Ergo Mantle Clock</option>' +
           // Diamond earrings
           '<option value="14kt Diamond Earrings" name="diamond_earrings" id="40_diamond_earrings">Genuine Diamond Stud Earrings: 14 kt white gold</option>' +
+          // Diamond pendant
+          '<option value="Diamond pendant and chain" name="diamond_pendant_and_chain" id="40_diamond_pendant_and_chain">Genuine Round  Diamond pendant and chain  - 10 kt  white gold </option>' +
           // Glass bowl
-          '<option value="Hand-Blown Glass Bowl by Robert Held" name="glass_bowl" id="40_glass_bowl">Robert Held Blown glass bowl</option>' +
+          '<option value="Hand-Blown Glass Bowl by Robert Held" name="glass_bowl" id="40_glass_bowl">Hand-blown glass bowl</option>' +
           // MD Print
-          '<option value="Michaela Davidson Print - Sunbreakers" name="md_print" id="40_md_print">Framed art print “Sun Breakers”</option>' +
+          '<option value="Michaela Davidson Print - Sunbreakers" name="md_print" id="40_md_print">“Sun Breakers” - framed art print </option>' +
           // PECSF donation
           '<option value= "PECSF Fund" name="provincial_employees_community_services_fund" id="25_pecsf">The Provincial Employees Community Services Fund (PECSF)</option>' +
         '</select></label>' +
@@ -411,6 +412,8 @@
           '<img src="/sites/default/files/lsa_2015/40_MD_print.jpg" alt="Framed Art print" id="image_md_print"><br />' +
           // PECSF donation
           '<img src="/sites/default/files/lsa_2015/25_pecsf.jpg" alt="PECSF donation image" id="image_provincial_employees_community_services_fund"><br />' +
+          // Diamond pendant
+          '<img src="/sites/default/files/lsa_2015/40_diamond_pendant.png" alt="Image of diamond pendant" id="image_diamond_pendant_and_chain"><br />' +
         '</div>' +
         /**
          * More info list
@@ -418,15 +421,16 @@
          */
         '<div id = "lsa_more_info_div">' +
           // Mantle Clock
-          '<span id="info_mantle_clock"><p>This beautiful clock features a wood frame in solids and veneers in a warm oak finish with burl accents. A brass finish bezel surrounds the dial. It has very rich sounding chimes - choose from 4 chimes with a simple switch on the movement: <ul><li>Quarterly Westminster</li> <li>Quarterly Ava Maria</li> <li>Hourly Westminster</li> <li>Hourly/half hour strike</li></ul></p><p><a href="http://www.howardmiller.com/" target="_blank">Website</a></p></span>' +
+          '<span id="info_mantle_clock"><p>This beautiful clock features a wood frame in solids and veneers in a warm oak finish with burl accents. A brass finish bezel surrounds the dial. It has very rich sounding chimes - choose from 4 chimes with a simple switch on the movement: <ul><li>Quarterly Westminster</li> <li>Quarterly Ava Maria</li> <li>Hourly Westminster</li> <li>Hourly/half hour strike</li></ul></p><br /><p>Size: 20" x 10"</p><p><a href="http://www.howardmiller.com/" target="_blank">Website</a></p></span>' +
           // Diamond Earrings
           '<span id="info_diamond_earrings"><p>White gold stud earrings Round Brilliant cut diamonds .25 ct. tw.</p><p><strong>Detail:</strong> 40 Years of Service plaque on lid of box</p></span>' +
           // Glass Bowl
-          '<span id="info_glass_bowl"><p>Simply exquisite bowl.</p><p><strong>Size:</strong> 7 inches tall</p><p><strong>Note:</strong> due to the nature of this award, a years of service plaque is not possible</p><p><a href="http://www.robertheld.com/" target="_blank">Website</a></p></span>'+
+          '<span id="info_glass_bowl"><p>Hand-blown glass vase made in Parksville, B.C. by Robert Held. Website <a href="http://robertheld.com/" target = "_blank">http://robertheld.com/ </a></p><p><strong>Size:</strong> 7" H</p><p><strong>Note:</strong> due to the nature of this award, engraving is not possible.</p><p><a href="http://www.robertheld.com/" target="_blank">Website</a></p></span>'+
           // MD print
-          '<span id="info_md_print"><p>Michaela Davidson - framed art print “Sun Breakers” </p><p>Michaela Davidson is the resident artist of her Duncan and Lake Cowichan.</p><p>You can almost hear the waves in her beautiful breath-taking piece.</p><br /><p><strong>Approximate Framed size:</strong> 14 x 16 inches</p><br /><p><strong>Detail:</strong> Years of service engraved plate in matting of print</p><p><a href="http://michaeladavidsonart.com/" target="_blank">Website</a></p></span>' +
+          '<span id="info_md_print"><p>By artist Michaela Davidson, Duncan and Lake Cowichan, B.C.</p><p>Website <a href="http://michaeladavidsonart.com/" target = "_blank">http://michaeladavidsonart.com/</a> </p><br /><p>Size: 16"W x 14"H (approx.)</p><p>Engraved plate in matting : 30 years of service</p></span>' +
           // PECSF
           '<span id="info_provincial_employees_community_services_fund"><p>In lieu of receiving a Long Service Award, you may opt to make a charitable donation via <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf">PECSF</a>. You may choose to donate to any registered charitable organization (maximum of two) OR to the PECSF Fund Supported Pool of charities in your region. To see which charities are in the PECSF Fund Supported Pool, <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions">click on your region</a>.</p><p><em>Before registering for your Long Service Award, you will first need to view the list of <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions">PECSF charities by Region</a>.</em></p><p><em>Once you have chosen a charity in your region, note the <strong>PECSF ID# and charity name</strong> as you will need to provide this information when you register. </em></p><p><strong>A commemorative certificate noting your charitable contribution will be presented to you at the Long Service Awards ceremony in the fall.</strong></p><p><em><small>Note: Charitable tax receipts are <strong>not</strong> issued for Long Service Award donations</small></em></p></span>' +
+          '<span id="info_diamond_pendant_and_chain"><p>White gold, four claw pendant and 18 inch Singapore chain.</p><p>Round Brilliant cut diamonds  .20 ct. tw.</p><br /><p>Engraved plate on box: 40 years of service</p></span>' +
         '</div>',
         // buttons options, if not than Next or Back then we need to put quotes around it
         buttons: { 'Accept': 1 },
