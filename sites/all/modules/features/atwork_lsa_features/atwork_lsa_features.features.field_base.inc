@@ -361,6 +361,27 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
+  // Exported field_base: 'field_lsa_charity_name_2'.
+  $field_bases['field_lsa_charity_name_2'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_charity_name_2',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_lsa_city'.
   $field_bases['field_lsa_city'] = array(
     'active' => 1,
@@ -410,6 +431,73 @@ function atwork_lsa_features_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'datetime',
+  );
+
+  // Exported field_base: 'field_lsa_donation_amount'.
+  $field_bases['field_lsa_donation_amount'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_donation_amount',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_lsa_donation_amount_2'.
+  $field_bases['field_lsa_donation_amount_2'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_donation_amount_2',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_lsa_donation_options'.
+  $field_bases['field_lsa_donation_options'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_donation_options',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 'Option B: Please make a donation on my behalf, to the PECSF Fund Supported Pool of regional programs in my area.',
+        1 => 'Option A:  Please make a donation on my behalf, to the following charity',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
   );
 
   // Exported field_base: 'field_lsa_email'.
@@ -997,6 +1085,119 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
+  // Exported field_base: 'field_lsa_pecsf_charity_name'.
+  $field_bases['field_lsa_pecsf_charity_name'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_pecsf_charity_name',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_lsa_pecsf_id'.
+  $field_bases['field_lsa_pecsf_id'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_pecsf_id',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_lsa_pecsf_id_2'.
+  $field_bases['field_lsa_pecsf_id_2'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_pecsf_id_2',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_lsa_pecsf_region'.
+  $field_bases['field_lsa_pecsf_region'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_pecsf_region',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'Alberni Clayoquot' => 'Alberni Clayoquot',
+        'Bulkley-Nechako' => 'Bulkley-Nechako',
+        'Cariboo' => 'Cariboo',
+        'Central Coast' => 'Central Coast',
+        'Fraser Valley' => 'Fraser Valley',
+        'Central Kootenay' => 'Central Kootenay',
+        'Central Okanagan' => 'Central Okanagan',
+        'Columbia-Shuswap' => 'Columbia-Shuswap',
+        'Comox-Strathcona' => 'Comox-Strathcona',
+        'Cowichan Valley East Kootenay' => 'Cowichan Valley East Kootenay',
+        'Fraser-Fort George' => 'Fraser-Fort George',
+        'Haida Gwaii' => 'Haida Gwaii',
+        'Kitimat-Stikine' => 'Kitimat-Stikine',
+        'Kootenay Boundary' => 'Kootenay Boundary',
+        'Mount Waddington' => 'Mount Waddington',
+        'Nanaimo' => 'Nanaimo',
+        'North Okanagan' => 'North Okanagan',
+        'Northern Rockies' => 'Northern Rockies',
+        'Okanagan-Similkameen' => 'Okanagan-Similkameen',
+        'Peace River' => 'Peace River',
+        'Powell River' => 'Powell River',
+        'Squamish-Lillooet' => 'Squamish-Lillooet',
+        'Stikine' => 'Stikine',
+        'Sunshine Coast' => 'Sunshine Coast',
+        'Thompson-Nicola' => 'Thompson-Nicola',
+        'Vancouver (Greater)' => 'Vancouver (Greater)',
+        'Victoria (Greater)' => 'Victoria (Greater)',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_lsa_pin_employee_number'.
   $field_bases['field_lsa_pin_employee_number'] = array(
     'active' => 1,
@@ -1402,6 +1603,31 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
+  // Exported field_base: 'field_lsa_second_donation'.
+  $field_bases['field_lsa_second_donation'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_second_donation',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 'No',
+        1 => 'Yes',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
+  );
+
   // Exported field_base: 'field_lsa_specialrequirements'.
   $field_bases['field_lsa_specialrequirements'] = array(
     'active' => 1,
@@ -1507,6 +1733,31 @@ function atwork_lsa_features_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
+  );
+
+  // Exported field_base: 'field_lsa_survey'.
+  $field_bases['field_lsa_survey'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_survey',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => '',
+        1 => '',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
   );
 
   // Exported field_base: 'field_lsa_terms'.
