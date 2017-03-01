@@ -75,7 +75,7 @@
           '<span id="info_provincial_employees_community_services_fund"><p>In lieu of receiving a Long Service Award, you may opt to make a charitable donation via <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf">PECSF</a>. You may choose to donate to any registered charitable organization (maximum of two) OR to the PECSF Fund Supported Pool of charities in your region. To see which charities are in the PECSF Fund Supported Pool, <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions">click on your region</a>.</p><p><em>Before registering for your Long Service Award, you will first need to view the list of <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions">PECSF charities by Region</a>.</em></p><p><em>Once you have chosen a charity in your region, note the <strong>PECSF ID# and charity name</strong> as you will need to provide this information when you register. </em></p><p><strong>A commemorative certificate noting your charitable contribution will be presented to you at the Long Service Awards ceremony in the fall.</strong></p><p><em><small>Note: Charitable tax receipts are <strong>not</strong> issued for Long Service Award donations</small></em></p></span>' +
         '</div>' +
         // Certificate and certificate text box
-        '<div id = "lsa_certificate and textbox div">' +
+        '<div id = "lsa_certificate_and_textbox_div">' +
           // Certificate - comes with all 25 year gifts
           '<span id="info_25_year_certificate"><img src="/sites/default/files/bg/image/2015/0224/lsacertificategeneric-thumb.jpg" alt="25 year certificate" id="image_25_year_certificate"><p>The 25 year milestone award comes with an <em><strong>optional</strong></em> certificate of service: </p><br /></span>' +
           // Create a radial button to let the user select if they would, or would not like a certificate.
@@ -110,16 +110,23 @@
     image_choices();
     more_info_choices();
     certificate_name();
-    // Every 25 year gift comes with a certificate this should always be shown
-    $('#info_25_year_certificate').show();
-    $('#image_25_year_certificate').show();
+
         // Helper function to only show the image for the current selection
     $("select#gift_selection_box").change(function() {
       image_choices();
       more_info_choices();
-      // Every 25 year gift comes with a certificate this should always be shown
-      $('#info_25_year_certificate').show();
-      $('#image_25_year_certificate').show();
+      if($('select#gift_selection_box').val() == "PECSF Fund"){
+        // Every 25 year gift comes with a certificate this should always be shown
+        $('#info_25_year_certificate').hide();
+        $('#image_25_year_certificate').hide();
+        $('#lsa_certificate_and_textbox_div').hide();
+        $('#edit-field-lsa-certificate-ordered-und').prop("checked", false);
+        $('#_25_certificate_no').prop('checked', true);
+      } else {
+        // Every 25 year gift comes with a certificate this should always be shown
+        $('#info_25_year_certificate').show();
+        $('#image_25_year_certificate').show();
+      }
     });
   }
 
@@ -497,15 +504,17 @@ function gift_choice_populate_form(gifts){
         break;
       case "PECSF Fund":
         g_choice = "$75.00 PECSF Charitible Donation";
+        // No certificate, so lets send this back now
+        full_gift_name  = "25 - $75.00 PECSF Charitible Donation";
         break;
       default :
         g_choice = "Please try again.";
         break;
     }
 
-    if(cert_choice.length > 0){
+    if(cert_choice.length > 0 && full_gift_name.length <= 0){
       full_gift_name = "25 - " + cert_choice + g_choice;
-    } else {
+    } else if(full_gift_name.length <= 0) {
       full_gift_name = "25 - " + g_choice + " - No Certificate";
     }
     // Put the certificate info into the main form
