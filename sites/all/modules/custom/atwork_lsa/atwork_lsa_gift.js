@@ -478,12 +478,12 @@ function gift_choice_populate_form(gifts){
   if($('input[name="field_lsa_years_of_service[und]"]:checked').val() == 25){
     gift_name = gifts._25_year_option;
     certificate_choice = gifts.certificate;
-    var cert_choice = '';
+    var cert_choice='';
     if(certificate_choice == "yes"){
       cert_choice = "Framed Certificate and ";
       $('#edit-field-lsa-certificate-ordered-und').prop("checked", true);
     } else {
-      cert_choice = '';
+      cert_choice='';
       $('#edit-field-lsa-certificate-ordered-und').prop("checked", false);
     }
     // This gift must have a certificate name for recipient
@@ -512,8 +512,7 @@ function gift_choice_populate_form(gifts){
         g_choice = "Please try again.";
         break;
     }
-    console.log(cert_choice);
-    if(cert_choice.length > 0 && full_gift_name.length <= 0){
+    if(cert_choice){
       full_gift_name = "25 - " + cert_choice + g_choice;
     } else if(full_gift_name.length <= 0) {
       full_gift_name = "25 - " + g_choice + " - No Certificate";
