@@ -143,6 +143,9 @@
     // Hide alternate fields until they are required
     $('.collapsible.required-fields.group-lsa-first-donation.field-group-fieldset.form-wrapper.collapse-processed').hide();
     $('.collapsible.required-fields.group-lsa-second-donation.field-group-fieldset.form-wrapper.collapse-processed').hide();
+    // Only we can change this:
+    $('#edit-field-lsa-donation-amount-und-0-value').prop("disabled", true);
+    $('#edit-field-lsa-donation-amount-2-und-0-value').prop("disabled", true);
   }
 
 /**
