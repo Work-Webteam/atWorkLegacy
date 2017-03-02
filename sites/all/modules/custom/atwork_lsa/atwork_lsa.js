@@ -350,6 +350,9 @@
       // For IE we have to explicitly tell it to open the field under here for some stupid reason
       $('#edit-field-lsa-pecsf-region').show();
       $('#edit-field-lsa-pecsf-id').show();
+      $('#edit-field-lsa-pecsf-charity-name').show();
+      $('#edit-field-lsa-donation-amount').show();
+      $('#edit-field-lsa-second-donation').show();
 
     });
     $('#edit-field-lsa-donation-options-und-0').on('click', function(){
@@ -357,12 +360,18 @@
       // For IE we have to explicitly tell it to open the field under here for some stupid reason
       $('#edit-field-lsa-pecsf-region').show();
       $('#edit-field-lsa-pecsf-id').hide();
+      $('#edit-field-lsa-pecsf-charity-name').hide();
+      $('#edit-field-lsa-donation-amount').hide();
+      $('#edit-field-lsa-second-donation').hide();
 
     });
     $('#edit-field-lsa-donation-options-und-none').on('click', function(){
       $('.collapsible.required-fields.group-lsa-first-donation.field-group-fieldset.form-wrapper.collapse-processed').slideUp('fast');
       $('#edit-field-lsa-pecsf-region').hide();
       $('#edit-field-lsa-pecsf-id').hide();
+      $('#edit-field-lsa-pecsf-charity-name').hide();
+      $('#edit-field-lsa-donation-amount').hide();
+      $('#edit-field-lsa-second-donation').hide();
 
 
     });
