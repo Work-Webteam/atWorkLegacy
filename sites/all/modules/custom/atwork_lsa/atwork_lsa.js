@@ -328,6 +328,9 @@
         $('#edit-field-lsa-donation-amount-und-0-value').val(amount);
         $('#edit-field-lsa-donation-amount-2-und-0-value').val(amount);
         $('.collapsible.required-fields.group-lsa-second-donation.field-group-fieldset.form-wrapper.collapse-processed').slideDown('fast');
+        $('#edit-field-lsa-pecsf-id-2').slideDown('fast');
+        $('#edit-field-lsa-charity-name-2').slideDown('fast');
+        $('#edit-field-lsa-donation-amount-2').slideDown('fast');
       }
     });
     // If user selects no, we can  reassign all $ to first choice.
@@ -335,6 +338,9 @@
       set_pecsef($("input[name='field_lsa_years_of_service[und]']").val());
       $('#edit-field-lsa-donation-amount-2-und-0-value').val('');
       $('.collapsible.required-fields.group-lsa-second-donation.field-group-fieldset.form-wrapper.collapse-processed').slideUp('fast');
+      $('#edit-field-lsa-pecsf-id-2').slideUp('fast');
+      $('#edit-field-lsa-charity-name-2').slideUp('fast');
+      $('#edit-field-lsa-donation-amount-2').slideUp('fast');
 
     });
         // If user selects na, we can  reassign all $ to first choice.
