@@ -167,8 +167,16 @@ function atwork_lsa_pin_application_validate($form, &$form_state){
       ->fetchAll();
   if(isset($exists) && !empty($exists)){
     // They already have an application, so we set an error.
-    form_set_error('field_lsa_pin_employee_number', t('This employee has already been registered for a service pin. Contact Gillian Kish (<a href="mailto:gillian.kish@gov.bc.ca?subject=Question%20about%20existing%20pin%20application">Gillian.kish@gov.bc.ca</a>) if addition pins are required.'));
-    return false;
+    form_set_error('field_lsa_pin_employee_number', t('This employee has already been registered for a service pin. Contact Gillian Kish (<a href="mailto:gillian.kish@gov.bc.ca?subject=Question%20about%20existing%20pin%20application">Gillian.kish@gov.bc.ca</a>) if additional pins are required.'));
+  }
+
+  dpm($form_state);
+  // Make sure we have selected one or the other - don't want an empty application.
+  if((isset($form_state['input']['field_lsa_other_milestone_years']['und']) && $form_state['input']['field_lsa_other_milestone_years']['und'] == 1) || (isset($form_state['input']['field_lsa_milestone_year']['und']) && $form_state['input']['field_lsa_milestone_year']['und'] == 1)){
+    return true;
+  } else {
+    // Form is empty
+    form_set_error('field_lsa_', t('You have not selected any milestone'));
   }
 
   return true;
@@ -178,11 +186,19 @@ function atwork_lsa_node_presave($node) {
 
   if($node->type === 'lsa_pin_application'){
     $lang = $node->language;
-
+    // Upper case
+    $node->field_lsa_office_postal_code[$lang][0]['value'] = strtoupper($node->field_lsa_office_postal_code[$lang][0]['value']);
+    // remove spaces
+    $node->field_lsa_office_postal_code[$lang][0]['value'] = preg_replace('/\s+/', '', $node->field_lsa_office_postal_code[$lang][0]['value']);
+    // remove special characters
+    $node->field_lsa_office_postal_code[$lang][0]['value'] = preg_replace('/[^A-Za-z0-9\-]/', '', $node->field_lsa_office_postal_code[$lang][0]['value']);
+    // Put expected space back at 3rd spot
+    $node->field_lsa_office_postal_code[$lang][0]['value'] = wordwrap($node->field_lsa_office_postal_code[$lang][0]['value'], 3, ' ', true);
+    // Make sure this is no more than 7 characters long
+    if(strlen($node->field_lsa_office_postal_code[$lang][0]['value']) > 7){
+      $node->field_lsa_office_postal_code[$lang][0]['value'] = substr($node->field_lsa_office_postal_code[$lang][0]['value'], 0,7);
+    }
   }
-
-
-
 
   if ($node->type != 'lsa_application') {
     return;
@@ -348,7 +364,6 @@ function atwork_lsa_node_insert($node) {
 
   if($node->type == 'lsa_pin_application'){
     $lang = $node->language;
-    dpm($node);
 
     require_once(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_pin.mail.inc');
     // applicant email, only sent if applicant has applied for themselves
@@ -451,7 +466,7 @@ function atwork_lsa_form_lsa_pin_application_node_form_alter(&$form, $form_state
   global $user;
   $user = user_load($user->uid);
   drupal_add_js(drupal_get_path('module', 'atwork_lsa').'/js_atwork_lsa_pin_ajax.js');
-  drupal_add_js(drupal_get_path('module', 'atwork_lsa').'/js_atwork_lsa_pin.js');
+  //drupal_add_js(drupal_get_path('module', 'atwork_lsa').'/js_atwork_lsa_pin.js');
 
   if(isset($form['field_lsa_work_phone']['und'][0]['value']['#title']) && $form['field_lsa_work_phone']['und'][0]['value']['#title']){
     $form['field_lsa_work_phone']['und'][0]['value']['#title'] = t('Supervisor Phone Number');

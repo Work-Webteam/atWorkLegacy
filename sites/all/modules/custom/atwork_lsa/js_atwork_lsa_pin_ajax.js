@@ -21,7 +21,7 @@
           return;
         });
 
-      // TODO - Should we always see this? Maybe highlight them here if they are not filled out yet.
+      // Should we always see this? Maybe highlight them here if they are not filled out yet.
       $('#edit-field-lsa-milestone-year-und-1:not(.atwork-activity-processed)', context)
         .addClass('atwork-activity-processed')
         .bind('click', function(){
@@ -132,8 +132,8 @@
   function setMinistryOptions(ministry){
     switch(true){
       //Only One: 9, 19
-      case ministry ==  9:
-      case ministry == 19:
+      case ministry ==  8:
+      case ministry == 18:
         // We can only allow one box to be checked if they have chosen 9 or 19
         $('#edit-field-lsa-other-milestone-years').slideDown('slow');
         // Make sure our labels are set correctly
@@ -148,17 +148,18 @@
       break;
       //multiple: 1,2,3,5,7,8,11,12,15,16,17, 21
       case ministry == 1:
-      case ministry == 2 :
-      case ministry == 3 :
-      case ministry == 5 :
+      case ministry == 2:
+      case ministry == 4:
+      case ministry == 6:
       case ministry == 7:
-      case ministry == 8:
+      case ministry == 10:
       case ministry == 11:
-      case ministry == 12:
+      case ministry == 14:
       case ministry == 15:
-      case ministry ==  16:
-      case ministry == 17:
-      case ministry == 21:
+      case ministry == 16:
+      case ministry == 20:
+      case ministry == 29:
+      case ministry == 64:
         // If we have previous set handlers on this - lets remove them.
         if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
 
@@ -172,7 +173,7 @@
       break;
 
       //If this is one of their award years then they can choose multiple extras: 20
-      case ministry == 20:
+      case ministry == 19:
         // Check if this had other restrictions previously
         if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
           $('#edit-field-lsa-previous-service-miles-und').removeClass('atwork-activity-processed');
@@ -192,6 +193,7 @@
         break;
       // Any other number is not allowed to have retroactive
       default:
+        $('#edit-field-lsa-milestone-year-und').before('<div id="select-message"><p>In order to be eligible for a service pin, employees must be celebrating a current milestone in 2017. If you have questions about your eligibility, please contact your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>. </p></div>');
         $('#edit-field-lsa-other-milestone-years').hide();
         $('#edit-field-lsa-previous-service-miles').hide();
         // Don't want to pass old values
