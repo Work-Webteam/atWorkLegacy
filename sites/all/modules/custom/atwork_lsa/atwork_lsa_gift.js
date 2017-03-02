@@ -595,7 +595,63 @@ function gift_choice_populate_form(gifts){
   $('#edit-field-lsa-award-und-0-value').show();
   $('#edit-field-lsa-award-und-0-value').val(full_gift_name);
   $('#edit-field-lsa-award-id-und-0-value').val(gift_id_number);
+  // Check if this is a pecsef donation, if it is, run a function to figure out values etc.
+  switch(true){
+    case gift_id_number == 11:
+      set_pecsef(25);
+      break;
+    case gift_id_number == 17:
+      set_pecsef(30);
+      break;
+    case gift_id_number == 33:
+      set_pecsef(35);
+      break;
+    case gift_id_number == 40:
+      set_pecsef(40);
+      break;
+    case gift_id_number == 42:
+      set_pecsef(45);
+    break;
+    case gift_id_number == 44:
+      set_pecsef(50);
+    break;
+    default:
+      // Not pecsf, so make sure this is hidden and turned off.
+      $('#pecsf-fields').hide();
+    break;
+  }
 }
+
+/** Helper function to set PECSEF options anv values
+ *
+ */
+  function set_pecsef(year){
+    // Show and open pecsf block
+    $('#pecsf-fields').slideDown('slow');
+    switch(true){
+      case year == 25:
+        $('#edit-field-lsa-donation-amount-und-0-value').val('$75.00');
+        break;
+      case year == 30:
+        $('#edit-field-lsa-donation-amount-und-0-value').val('$150.00');
+        break;
+      case year == 35:
+        $('#edit-field-lsa-donation-amount-und-0-value').val('$300.00');
+        break;
+      case year == 40:
+        $('#edit-field-lsa-donation-amount-und-0-value').val('$400.00');
+        break;
+      case year == 45:
+        $('#edit-field-lsa-donation-amount-und-0-value').val('$450.00');
+        break;
+      case year == 50:
+        $('#edit-field-lsa-donation-amount-und-0-value').val('$500.00');
+        break;
+    }
+  }
+
+
+
 
 /**
  * Helper function to populate 25_year certificate with users name
