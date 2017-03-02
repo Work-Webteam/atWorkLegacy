@@ -326,7 +326,9 @@
         amount = '$' + amount;
         // Add it into the two donation text boxes
         $('#edit-field-lsa-donation-amount-und-0-value').val(amount);
+        $('#edit-field-lsa-donation-amount-und-0-value').prop("disabled", true);
         $('#edit-field-lsa-donation-amount-2-und-0-value').val(amount);
+        $('#edit-field-lsa-donation-amount-2-und-0-value').prop("disabled", true);
         $('.collapsible.required-fields.group-lsa-second-donation.field-group-fieldset.form-wrapper.collapse-processed').slideDown('fast');
         $('#edit-field-lsa-pecsf-id-2').slideDown('fast');
         $('#edit-field-lsa-charity-name-2').slideDown('fast');
