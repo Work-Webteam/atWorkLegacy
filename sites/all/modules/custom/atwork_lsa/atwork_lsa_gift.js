@@ -478,6 +478,7 @@ function gift_choice_populate_form(gifts){
   if($('input[name="field_lsa_years_of_service[und]"]:checked').val() == 25){
     gift_name = gifts._25_year_option;
     certificate_choice = gifts.certificate;
+    cert_choice = '';
     if(certificate_choice == "yes"){
       cert_choice = "Framed Certificate and ";
       $('#edit-field-lsa-certificate-ordered-und').prop("checked", true);
