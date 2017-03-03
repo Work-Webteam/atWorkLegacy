@@ -518,10 +518,9 @@ function atwork_lsa_features_field_group_info() {
     'label' => 'Name',
     'weight' => '1',
     'children' => array(
-      0 => 'field_lsa_prefix',
-      1 => 'field_lsa_first_name',
-      2 => 'field_lsa_middle_name',
-      3 => 'field_lsa_last_name',
+      0 => 'field_lsa_first_name',
+      1 => 'field_lsa_middle_name',
+      2 => 'field_lsa_last_name',
     ),
     'format_type' => 'div',
     'format_settings' => array(

@@ -14,7 +14,7 @@ function atwork_lsa_features_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_lsa_application';
-  $strongarm->value = 'edit-submission';
+  $strongarm->value = 'edit-auto-nodetitle';
   $export['additional_settings__active_tab_lsa_application'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -42,7 +42,7 @@ function atwork_lsa_features_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'ant_pattern_lsa_application';
-  $strongarm->value = '[node:field-lsa-prefix] [node:field-lsa-first-name] <?php
+  $strongarm->value = '[node:field-lsa-first-name] <?php
 if (isset($node->field_lsa_middle_name[$node->language][0][\'value\']) && $node->field_lsa_middle_name[$node->language][0][\'value\']) {
   print $node->field_lsa_middle_name[$node->language][0][\'value\'] . \' \';
 }
