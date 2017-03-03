@@ -122,6 +122,9 @@
       $('#edit-field-lsa-pin-sup-location').hide();
       $('#lsa-pin-terms').hide();
       $('#sup-div').hide();
+      // don't want to show the title for terms field.
+      $('#edit-field-lsa-pin-terms').find('.option').html('<span class="form-required" title="This field is required.">*</span>');
+      //$('#edit-field-lsa-pin-terms label:first-child').hide();
     }
   }
 
