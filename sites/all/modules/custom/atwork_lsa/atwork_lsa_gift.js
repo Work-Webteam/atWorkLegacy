@@ -513,7 +513,7 @@ function gift_choice_populate_form(gifts){
     }
     if(cert_choice){
       full_gift_name = "25 - " + cert_choice + g_choice;
-    } else if(full_gift_name.length <= 0) {
+    } else {
       full_gift_name = "25 - " + g_choice + " - No Certificate";
     }
     // Put the certificate info into the main form
