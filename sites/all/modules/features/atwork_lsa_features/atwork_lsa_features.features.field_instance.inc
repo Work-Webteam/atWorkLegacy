@@ -665,19 +665,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'label' => 'Award Year',
     'required' => 0,
     'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
+      'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -685,7 +673,6 @@ function atwork_lsa_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(
         'apply_chosen' => '',
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_select',
       'weight' => 8,
@@ -990,7 +977,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'bundle' => 'lsa_application',
     'default_value' => array(
       0 => array(
-        'value' => 1,
+        'value' => 0,
       ),
     ),
     'deleted' => 0,
@@ -3741,30 +3728,16 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_retiring_thisyear',
-    'label' => 'Retiring in 2016?',
+    'label' => 'Retiring in 2017?',
     'required' => 1,
     'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
+      'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-      ),
+      'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 5,
     ),
@@ -4978,7 +4951,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 20,
       ),
       'type' => 'text_textfield',
-      'weight' => 24,
+      'weight' => 32,
     ),
   );
 
@@ -5058,7 +5031,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 20,
       ),
       'type' => 'text_textfield',
-      'weight' => 23,
+      'weight' => 31,
     ),
   );
 
@@ -5131,7 +5104,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 20,
       ),
       'type' => 'email_textfield',
-      'weight' => 21,
+      'weight' => 29,
     ),
   );
 
@@ -5207,7 +5180,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'module' => 'phone',
       'settings' => array(),
       'type' => 'phone_textfield',
-      'weight' => 22,
+      'weight' => 30,
     ),
   );
 
@@ -5266,7 +5239,74 @@ function atwork_lsa_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 15,
+      'weight' => 16,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-lsa_pin_application-field_lsa_ministry_rep_email'.
+  $field_instances['node-lsa_pin_application-field_lsa_ministry_rep_email'] = array(
+    'bundle' => 'lsa_pin_application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => 0,
+        ),
+        'type' => 'text_default',
+        'weight' => 25,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_ministry_rep_email',
+    'hashtag_settings' => array(
+      'hashtag_field' => 0,
+    ),
+    'label' => 'Ministry Representative Email',
+    'required' => 0,
+    'settings' => array(
+      'semantic_field_format' => '',
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'maxlength_js' => 0,
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        'size' => 20,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 14,
     ),
   );
 
@@ -5346,7 +5386,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 30,
     ),
   );
 
@@ -5421,7 +5461,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 20,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 31,
     ),
   );
 
@@ -5488,7 +5528,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 7,
       ),
       'type' => 'text_textfield',
-      'weight' => 12,
+      'weight' => 32,
     ),
   );
 
@@ -5496,7 +5536,11 @@ function atwork_lsa_features_field_default_field_instances() {
   // 'node-lsa_pin_application-field_lsa_other_milestone_years'.
   $field_instances['node-lsa_pin_application-field_lsa_other_milestone_years'] = array(
     'bundle' => 'lsa_pin_application',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -5544,7 +5588,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 17,
+      'weight' => 18,
     ),
   );
 
@@ -5620,7 +5664,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 8,
       ),
       'type' => 'text_textfield',
-      'weight' => 17,
+      'weight' => 26,
     ),
   );
 
@@ -5696,7 +5740,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 20,
       ),
       'type' => 'text_textfield',
-      'weight' => 19,
+      'weight' => 27,
     ),
   );
 
@@ -5772,7 +5816,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 20,
       ),
       'type' => 'text_textfield',
-      'weight' => 20,
+      'weight' => 28,
     ),
   );
 
@@ -5833,7 +5877,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -5882,7 +5926,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_lsa_pin_service_milestone',
     'label' => 'Service Milestone',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
@@ -5894,7 +5938,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 16,
+      'weight' => 17,
     ),
   );
 
@@ -6086,7 +6130,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 18,
+      'weight' => 19,
     ),
   );
 
@@ -6217,7 +6261,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 20,
       ),
       'type' => 'email_textfield',
-      'weight' => 8,
+      'weight' => 28,
     ),
   );
 
@@ -6293,7 +6337,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 20,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 26,
     ),
   );
 
@@ -6369,7 +6413,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 20,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 27,
     ),
   );
 
@@ -6446,83 +6490,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'phone_textfield',
-      'weight' => 9,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-lsa_pin_application-field_lsa_work_phone_ext'.
-  $field_instances['node-lsa_pin_application-field_lsa_work_phone_ext'] = array(
-    'bundle' => 'lsa_pin_application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'inline',
-        'module' => 'text',
-        'settings' => array(
-          'semantic_field_format' => '',
-        ),
-        'type' => 'text_default',
-        'weight' => 14,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'question' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_lsa_work_phone_ext',
-    'label' => 'Work Phone Ext',
-    'required' => 0,
-    'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'maxlength_js' => 0,
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 6,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 29,
     ),
   );
 
@@ -6575,6 +6543,7 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Last Name');
   t('Middle Name');
   t('Ministry ID');
+  t('Ministry Representative Email');
   t('Ministry/Organization');
   t('Notes');
   t('Notes (Ceremony)');
@@ -6592,7 +6561,7 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Prefix');
   t('Province');
   t('RSVP');
-  t('Retiring in 2016?');
+  t('Retiring in 2017?');
   t('Retro-Active');
   t('Second Donation');
   t('Service Milestone');

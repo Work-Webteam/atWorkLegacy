@@ -46,7 +46,7 @@ function atwork_lsa_features_node_info() {
 "><strong>**IMPORTANT TO NOTE: If you do not receive these two items, you are not registered**</strong></p>'),
     ),
     'lsa_pin_application' => array(
-      'name' => t('Long Service Awards Pin Application'),
+      'name' => t('Service Pin Application'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',

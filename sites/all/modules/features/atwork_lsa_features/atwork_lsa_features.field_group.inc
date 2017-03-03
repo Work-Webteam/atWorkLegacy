@@ -592,6 +592,7 @@ function atwork_lsa_features_field_group_info() {
       3 => 'field_lsa_pin_ministry_org',
       4 => 'field_lsa_previous_service_miles',
       5 => 'field_lsa_registerer',
+      6 => 'field_lsa_ministry_rep_email',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

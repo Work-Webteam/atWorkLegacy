@@ -2559,7 +2559,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_employee_number']['id'] = 'field_lsa_employee_number';
   $handler->display->display_options['fields']['field_lsa_employee_number']['table'] = 'field_data_field_lsa_employee_number';
   $handler->display->display_options['fields']['field_lsa_employee_number']['field'] = 'field_lsa_employee_number';
-  /* Field: Content: Retiring in 2016? */
+  /* Field: Content: Retiring in 2017? */
   $handler->display->display_options['fields']['field_lsa_retiring_thisyear']['id'] = 'field_lsa_retiring_thisyear';
   $handler->display->display_options['fields']['field_lsa_retiring_thisyear']['table'] = 'field_data_field_lsa_retiring_thisyear';
   $handler->display->display_options['fields']['field_lsa_retiring_thisyear']['field'] = 'field_lsa_retiring_thisyear';
