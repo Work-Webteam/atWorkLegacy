@@ -4056,7 +4056,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'deleted' => 0,
     'description' => '<p>I declare, to the best of my knowledge and consistent with the Long Service Awards Eligibility Guidelines (which I have reviewed) that as of December 31, 2017, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of this event.</p>
 
-<p>At the conclusion of the Long Service Award ceremonies, a follow up survey will be sent to collect feedback about your Long Service Awards experience. Your feedback is invaluable for the ongoing improvement and quality of the program. Please indicate below if you would prefer not to participate – we hope you that you will!</p>',
+<p>At the conclusion of the Long Service Award ceremonies, a follow up survey will be sent to collect feedback about your Long Service Awards experience. Your feedback is invaluable for the ongoing improvement and quality of the program. Please indicate below if you would prefer not to participate.</p>',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -4094,19 +4094,6 @@ function atwork_lsa_features_field_default_field_instances() {
     'label' => 'Terms',
     'required' => 1,
     'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -6163,7 +6150,7 @@ function atwork_lsa_features_field_default_field_instances() {
   t('<p class="style-red">For Victoria locations, please use the P.O. Box address</p>');
   t('<p>I declare, to the best of my knowledge and consistent with the Long Service Awards Eligibility Guidelines (which I have reviewed) that as of December 31, 2017, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of this event.</p>
 
-<p>At the conclusion of the Long Service Award ceremonies, a follow up survey will be sent to collect feedback about your Long Service Awards experience. Your feedback is invaluable for the ongoing improvement and quality of the program. Please indicate below if you would prefer not to participate – we hope you that you will!</p>');
+<p>At the conclusion of the Long Service Award ceremonies, a follow up survey will be sent to collect feedback about your Long Service Awards experience. Your feedback is invaluable for the ongoing improvement and quality of the program. Please indicate below if you would prefer not to participate.</p>');
   t('Actual_Min/Org');
   t('Alternate Email Address');
   t('Are you celebrating a current service milestone in 2017?');
