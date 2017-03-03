@@ -150,7 +150,6 @@
     $('#edit-field-lsa-certificate-ordered').hide();
     // We want option A before option b for the PECSF
     divB = $('#edit-field-lsa-donation-options-und-0').parent().detach();
-    console.log(divB);
     divB.insertAfter($('#edit-field-lsa-donation-options-und-1').parent());
     // And no NA option here:
     $('#edit-field-lsa-donation-options-und-none').parent().hide();
@@ -349,7 +348,7 @@
     });
     // If user selects no, we can  reassign all $ to first choice.
     $('#edit-field-lsa-second-donation-und-0').on('click', function(){
-      set_pecsef($("input[name='field_lsa_years_of_service[und]']").val());
+      set_pecsef($("input[name='field_lsa_years_of_service[und]']:checked").val());
       $('#edit-field-lsa-donation-amount-2-und-0-value').val('');
       $('.collapsible.required-fields.group-lsa-second-donation.field-group-fieldset.form-wrapper.collapse-processed').slideUp('fast');
       $('#edit-field-lsa-pecsf-id-2').slideUp('fast');
@@ -359,7 +358,7 @@
     });
         // If user selects na, we can  reassign all $ to first choice.
     $('#edit-field-lsa-second-donation-und-none').on('click', function(){
-      set_pecsef($("input[name='field_lsa_years_of_service[und]']").val());
+      set_pecsef($("input[name='field_lsa_years_of_service[und]']:checked").val());
       $('#edit-field-lsa-donation-amount-2-und-0-value').val('');
       $('.collapsible.required-fields.group-lsa-second-donation.field-group-fieldset.form-wrapper.collapse-processed').slideUp('fast');
     });

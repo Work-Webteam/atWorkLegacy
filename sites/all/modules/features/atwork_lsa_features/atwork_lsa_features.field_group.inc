@@ -133,8 +133,9 @@ function atwork_lsa_features_field_group_info() {
       'label' => 'Home Contact Information',
       'instance_settings' => array(
         'required_fields' => 1,
+        'id' => '',
         'classes' => 'group-lsa-contact-info field-group-fieldset ',
-        'description' => 'Your home mailing address.',
+        'description' => 'Your Home Mailing Address',
       ),
       'formatter' => 'open',
     ),
@@ -287,11 +288,10 @@ function atwork_lsa_features_field_group_info() {
     'label' => 'Name',
     'weight' => '22',
     'children' => array(
-      0 => 'field_lsa_prefix',
-      1 => 'field_lsa_first_name',
-      2 => 'field_lsa_middle_name',
-      3 => 'field_lsa_last_name',
-      4 => 'group_lsa_contact_info',
+      0 => 'field_lsa_first_name',
+      1 => 'field_lsa_middle_name',
+      2 => 'field_lsa_last_name',
+      3 => 'group_lsa_contact_info',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
