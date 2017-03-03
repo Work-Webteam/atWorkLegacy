@@ -162,6 +162,7 @@
       case ministry == 16:
       case ministry == 20:
       case ministry == 29:
+      case ministry == 40:
       case ministry == 64:
         // If we have previous set handlers on this - lets remove them.
         if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
