@@ -171,6 +171,11 @@
           // unbind any restrictions we previously had set.
           $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').unbind();
         }
+        if($('#edit-field-lsa-milestone-year-und').hasClass('atwork-activity-processed')){
+          // If we have a notice we don't need, detach it, and be ready to re-apply as necessary
+          $('#select-message').detach();
+          $('#edit-field-lsa-milestone-year-und').removeClass('atwork-activity-processed');
+        }
         // Show choices so users can choose
         $('#edit-field-lsa-other-milestone-years').slideDown('slow');
       break;
@@ -181,6 +186,11 @@
         if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
           $('#edit-field-lsa-previous-service-miles-und').removeClass('atwork-activity-processed');
           $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').unbind();
+        }
+        if($('#edit-field-lsa-milestone-year-und').hasClass('atwork-activity-processed')){
+          // If we have a notice we don't need, detach it, and be ready to re-apply as necessary
+          $('#select-message').detach();
+          $('#edit-field-lsa-milestone-year-und').removeClass('atwork-activity-processed');
         }
         // Check if they are celebrating this year
         if($('#edit-field-lsa-milestone-year-und-1').is(':checked')){
@@ -196,7 +206,12 @@
         break;
       // Any other number is not allowed to have retroactive
       default:
-        $('#edit-field-lsa-milestone-year-und').before('<div id="select-message"><p>In order to be eligible for a service pin, employees must be celebrating a current milestone in 2017. If you have questions about your eligibility, please contact your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>. </p></div>');
+        if($('#edit-field-lsa-milestone-year-und').hasClass('atwork-activity-processed')){
+          // We are fine, nothing to do
+        } else {
+          $('#edit-field-lsa-milestone-year-und').addClass('atwork-activity-processed');
+          $('#edit-field-lsa-milestone-year-und').before('<div id="select-message"><p>In order to be eligible for a service pin, employees must be celebrating a current milestone in 2017. If you have questions about your eligibility, please contact your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>. </p></div>');
+        }
         $('#edit-field-lsa-other-milestone-years').hide();
         $('#edit-field-lsa-previous-service-miles').hide();
         // Don't want to pass old values
