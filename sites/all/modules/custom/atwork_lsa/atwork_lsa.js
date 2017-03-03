@@ -106,7 +106,7 @@
     $('#gift_select').hide();
 
     // Message for retired applicants
-    var retirement = $('<div id="retirement_message"><p><span style="color:red"><strong>*</strong>Please enter your last scheduled day of work</span></div>');
+    var retirement = $('<div id="retirement_message"><p><span style="color:red">Please enter your last scheduled day of work</span></div>');
     $('#edit-field-lsa-retiring-thisyear').append(retirement);
     $('#retirement_message').hide();
     $('#field-lsa-date-of-retirement-add-more-wrapper').hide();

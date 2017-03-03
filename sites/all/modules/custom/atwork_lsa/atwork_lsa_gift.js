@@ -16,7 +16,7 @@
     // Using the impromptu library for this: http://trentrichardson.com/Impromptu/
     var gift_chooser = {
       state0: {
-        title: 'Congratulations on 25 years! Please select your choice of award below: ',
+        title: 'Congratulations on 25 years!',
         // All HTML in one long string - pretty much any html tags can go here, and will be replicated in the popup.
         html: '<p>Please use the drop-down menu to view and choose your award from the list below. Once you have chosen your award, click on "Accept" to return to the LSA form.<p>'+
         /**
@@ -140,7 +140,7 @@
     // Using the impromptu library for this: http://trentrichardson.com/Impromptu/
     var gift_chooser = {
       state0: {
-        title: 'Congratulations on 30 years! Please select your choice of award below: ',
+        title: 'Congratulations on 30 years!',
         // All HTML in one long string - pretty much any html tags can go here, and will be replicated in the popup.
         html: '<p>Please use the drop-down menu to view and choose your award from the list below. Once you have chosen your award, click on "Accept" to return to the LSA form.<p>'+
        /**
@@ -225,7 +225,7 @@
     // Using the impromptu library for this: http://trentrichardson.com/Impromptu/
     var gift_chooser = {
       state0: {
-        title: 'Congratulations on 35 years! Please select your choice of award below: ',
+        title: 'Congratulations on 35 years!',
 
         // All HTML in one long string - pretty much any html tags can go here, and will be replicated in the popup.
         html: '<p>Please use the drop-down menu to view and choose your award from the list below. Once you have chosen your award, click on "Accept" to return to the LSA form.<p>'+
@@ -386,7 +386,7 @@
     // Using the impromptu library for this: http://trentrichardson.com/Impromptu/
     var gift_chooser = {
       state0: {
-        title: 'Congratulations on 40 years! Please select your choice of award below: ',
+        title: 'Congratulations on 40 years!',
         // All HTML in one long string - pretty much any html tags can go here, and will be replicated in the popup.
         html: '<p>Please use the drop-down menu to view and choose your award from the list below. Once you have chosen your award, click on "Accept" to return to the LSA form.<p>'+
         // Create the select list, remember name and id, both are used.
