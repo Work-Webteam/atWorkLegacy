@@ -170,7 +170,6 @@ function atwork_lsa_pin_application_validate($form, &$form_state){
     form_set_error('field_lsa_pin_employee_number', t('This employee has already been registered for a service pin. Contact Gillian Kish (<a href="mailto:gillian.kish@gov.bc.ca?subject=Question%20about%20existing%20pin%20application">Gillian.kish@gov.bc.ca</a>) if additional pins are required.'));
   }
 
-  dpm($form_state);
   // Make sure we have selected one or the other - don't want an empty application.
   if((isset($form_state['input']['field_lsa_other_milestone_years']['und']) && $form_state['input']['field_lsa_other_milestone_years']['und'] == 1) || (isset($form_state['input']['field_lsa_milestone_year']['und']) && $form_state['input']['field_lsa_milestone_year']['und'] == 1)){
     return true;
@@ -379,8 +378,15 @@ function atwork_lsa_node_insert($node) {
       'subject' => $supervisor_subject,
       'body' => $supervisor_body,
     );
-
     drupal_mail('atwork_mail', 'atwork_mail_default', $supervisor_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
+
+    if(isset($node->field_lsa_ministry_rep_email['und'][0]['value']) && $node->field_lsa_ministry_rep_email['und'][0]['value']){
+      $params = array(
+        'subject' => $ministry_rep_subject,
+        'body' => $ministry_rep_body,
+        );
+      drupal_mail('atwork_mail', 'atwork_mail_default', $ministry_rep_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
+    }
   }
 
 }
