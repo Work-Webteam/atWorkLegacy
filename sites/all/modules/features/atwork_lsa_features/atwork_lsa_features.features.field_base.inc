@@ -907,25 +907,6 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'text_long',
   );
 
-  // Exported field_base: 'field_lsa_notes_ceremony'.
-  $field_bases['field_lsa_notes_ceremony'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_lsa_notes_ceremony',
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(),
-    'translatable' => 0,
-    'type' => 'text_long',
-  );
-
   // Exported field_base: 'field_lsa_number_attending'.
   $field_bases['field_lsa_number_attending'] = array(
     'active' => 1,
@@ -1259,6 +1240,8 @@ function atwork_lsa_features_field_default_field_bases() {
         'Comox-Strathcona' => 'Comox-Strathcona',
         'Cowichan Valley East Kootenay' => 'Cowichan Valley East Kootenay',
         'Fraser-Fort George' => 'Fraser-Fort George',
+        'Greater Vancouver' => 'Greater Vancouver',
+        'Greater Victoria' => 'Greater Victoria',
         'Haida Gwaii' => 'Haida Gwaii',
         'Kitimat-Stikine' => 'Kitimat-Stikine',
         'Kootenay Boundary' => 'Kootenay Boundary',
@@ -1273,8 +1256,6 @@ function atwork_lsa_features_field_default_field_bases() {
         'Stikine' => 'Stikine',
         'Sunshine Coast' => 'Sunshine Coast',
         'Thompson-Nicola' => 'Thompson-Nicola',
-        'Vancouver (Greater)' => 'Vancouver (Greater)',
-        'Victoria (Greater)' => 'Victoria (Greater)',
       ),
       'allowed_values_function' => '',
     ),

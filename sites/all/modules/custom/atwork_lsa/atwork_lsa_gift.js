@@ -311,7 +311,7 @@
          */
         '<div id = "lsa_more_info_div">' +
           // Bulova watch
-          '<span id="info_bulova_watch"><br /><p>Watch features BC Coat of Arms printed on dial.</p><br /><p>This finely-made watch comes in a variety of choices, gold, silver, black or brown leather, and a two-toned watch face.</p><br /><p><strong>Detail:</strong> Engraved with name of recipient and “35 years of Service” on back of watch</p></span>' +
+          '<span id="info_bulova_watch"><br /><p>Watch features BC Coat of Arms printed on dial.</p><br /><p>This finely-made watch comes in a variety of choices, gold, silver, black or brown leather, and a two-toned watch face.</p><br /><p><strong>Detail:</strong> Engraved with name of recipient and “35 years of service” on back of watch</p></span>' +
           // Bushnell binoculars
           '<span id="info_bushnell_binoculars"><br /><p>Bushnell Roof Prism Binocular: Featuring BaK-4  Roof Prisms with PC-3  Phase Coating, 8 x 42 mm, Field of View 426 yards, Fully Multicoated Optics, 100 % Waterproof/Fogproof , Light-Weight Open Bridge Design, Soft Grip Thumb Notch.</p><br /><p>Size: 8 x 42 mm</p><p><strong>Note:</strong> due to the nature of this award, engraving is not possible</p></span>' +
           // Aboriginal Bracelet
@@ -432,9 +432,9 @@
           // Diamond Earrings
           '<span id="info_diamond_earrings"><p>White gold stud earrings Round Brilliant cut diamonds .25 ct. tw.</p><br /><p><strong>Detail:</strong> 40 Years of Service plaque on lid of box</p></span>' +
           // Glass Bowl
-          '<span id="info_glass_bowl"><p>Hand-blown glass vase made in Parksville, B.C. by Robert Held. Website <a href="http://robertheld.com/" target = "_blank">http://robertheld.com/ </a></p><p><strong>Size:</strong> 7" H</p><br /><p><strong>Note:</strong> due to the nature of this award, engraving is not possible.</p><br /><p><a href="http://www.robertheld.com/" target="_blank">Website</a></p></span>'+
+          '<span id="info_glass_bowl"><p>Hand-blown glass vase made in Parksville, B.C. by Robert Held. Website <a href="http://robertheld.com/" target = "_blank">http://robertheld.com/ </a></p><br /><p><strong>Size:</strong> 7" H</p><br /><p><strong>Note:</strong> due to the nature of this award, engraving is not possible.</p></span>'+
           // MD print
-          '<span id="info_md_print"><p>By artist Michaela Davidson, Duncan and Lake Cowichan, B.C.</p><br /><p>Website <a href="http://michaeladavidsonart.com/" target = "_blank">http://michaeladavidsonart.com/</a> </p><br /><p>Size: 16"W x 14"H (approx.)</p><p>Engraved plate in matting : 30 years of service</p></span>' +
+          '<span id="info_md_print"><p>By artist Michaela Davidson, Duncan and Lake Cowichan, B.C.</p><br /><p>Website <a href="http://michaeladavidsonart.com/" target = "_blank">http://michaeladavidsonart.com/</a> </p><br /><p>Size: 16"W x 14"H (approx.)</p><p>Engraved plate in matting: 40 years of service</p></span>' +
           // PECSF
           '<span id="info_provincial_employees_community_services_fund"><p>In lieu of receiving a Long Service Award, you may opt to make a charitable donation via <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf" target="_blank">PECSF</a>. You may choose to donate to any registered charitable organization (maximum of two) OR to the PECSF Fund Supported Pool of charities in your region. To see which charities are in the PECSF Fund Supported Pool, <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions" target="_blank">click on your region</a>.</p><br /><p><em>Before registering for your Long Service Award, you will first need to view the list of <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions" target="_blank">PECSF charities by Region</a>.</em></p><br /><p><em>Once you have chosen a charity in your region, note the <strong>PECSF ID# and charity name</strong> as you will need to provide this information when you register. </em></p><br /><p><strong>A commemorative certificate noting your charitable contribution will be presented to you at the Long Service Awards ceremony in the fall.</strong></p><p><em><small>Note: Charitable tax receipts are <strong>not</strong> issued for Long Service Award donations</small></em></p></span>' +
         '</div>',
@@ -780,10 +780,10 @@ function gift_choice_populate_form(gifts){
       if($('input[name="Mens_Womens"]').is(':checked')){
         // Women are not allowed as many chracters for their engravement - so we nead to change max and message.
         if($('input[name="Mens_Womens"]:checked').prop("value") == "Men\'s"){
-          $("#engravement_text").replaceWith('<p id="engravement_text">Please enter your name how you would like it engraved on your watch. <strong>*NOTE:</strong> can be no more than 33 characters.</p>');
+          $("#engravement_text").replaceWith('<p id="engravement_text">Please enter your name how you would like it engraved on your watch. <strong>*NOTE:</strong> 33 character limit</p>');
           $('#engravement_pop_text').prop("maxlength", 33);
         } else {
-          $("#engravement_text").replaceWith('<p id="engravement_text">Please enter your name how you would like it engraved on your watch. <strong>*NOTE:</strong> can be no more than 27 characters.</p>');
+          $("#engravement_text").replaceWith('<p id="engravement_text">Please enter your name how you would like it engraved on your watch. <strong>*NOTE:</strong> 27 character limit</p>');
           $('#engravement_pop_text').prop("maxlength", 27);
           if($("#engravement_pop_text").val().length>27){
             // Need to reduce length of entered values if we switch to ladies watch after mens watch.
