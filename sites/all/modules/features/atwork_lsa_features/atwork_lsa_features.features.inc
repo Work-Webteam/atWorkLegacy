@@ -55,9 +55,7 @@ function atwork_lsa_features_node_info() {
 		<ol>
 			<li>A confirmation page displaying all of the information you’ve entered. Please check this page to ensure the information is accurate and then print a copy for your records. If something is incorrect, please contact <a href="mailto:Gillian.Kish@gov.bc.ca">Gillian Kish</a>.</li>
 			<li>An automated email thanking you for your registration.</li>
-		</ol>
-<p><strong>IMPORTANT: If you do not receive these two items, you are not registered.</strong></p>
-<p> Pins will be made available to your supervisor for presentation during Public Service Week (June 12-16, 2017). </p>'),
+		</ol>'),
     ),
   );
   drupal_alter('node_info', $items);
