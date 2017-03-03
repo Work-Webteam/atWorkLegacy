@@ -143,6 +143,25 @@ function atwork_lsa_application_validate($form, &$form_state) {
     ));
   }
 
+  // Quick validation to make sure we have the right number of chars for the Postal Codes
+  dpm($form_state);
+  if(isset($form_state['input']['field_lsa_home_postal_code']['und'][0]['value']) && $form_state['input']['field_lsa_home_postal_code']['und'][0]['value']){
+    $postal_check = str_replace(" ", "", $form_state['input']['field_lsa_home_postal_code']['und'][0]['value']);
+    dpm($postal_check);
+    if(strlen($postal_check) < 6 || strlen($postal_check) > 6){
+      form_set_error('field_lsa_home_postal_code', t("The recipient postal code must have 6 characters."));
+      return FALSE;
+    }
+  }
+
+  if(isset($form_state['input']['field_lsa_office_postal_code']['und'][0]['value']) && $form_state['input']['field_lsa_office_postal_code']['und'][0]['value']){
+    $postal_check = str_replace(" ", "", $form_state['input']['field_lsa_office_postal_code']['und'][0]['value']);
+    dpm($postal_check);
+    if(strlen($postal_check) < 6 || strlen($postal_check) > 6){
+      form_set_error('field_lsa_office_postal_code', t("The office postal code must have 6 characters."));
+      return FALSE;
+    }
+  }
   // check supervisor's email
   // WE went around the better GAL centered validation because not all addresses in LSA are in the GAL
   //_atwork_validate_emails($form_state['values']['field_lsa_supervisor_email'][$lang][0]['email'] , 'field_lsa_supervisor_email', $form['form_token']['#default_value']);
@@ -152,6 +171,7 @@ function atwork_lsa_application_validate($form, &$form_state) {
     return TRUE;
   }
   form_set_error($email, t('Email is limited to organizations within the BC Public Service. %email was not found.', array('%email' => $email)));
+
   return FALSE;
 
 }
@@ -295,14 +315,16 @@ function atwork_lsa_node_view($node, $view_mode, $langcode) {
       '#weight' => -10,
       /*'#markup' => '<h2>Thank you for your registration</h2>
       <em style="color: red; font-weight: bold;">Print and retain this confirmation for your records.</em>',*/
-      '#markup' => '<strong style="color: red; font-weight: bold;">Please review your information below and make any necessary changes. If you have difficulty updating your details, please contact us at <a href="mailto:longserviceawards@gov.bc.ca">longserviceawards@gov.bc.ca</a> or call Jenny Pescod at (250) 356-7916.</strong><br /><br />',
+      //'#markup' => '<strong style="color: red; font-weight: bold;">Please review your information below and make any necessary changes. If you have difficulty updating your details, please contact us at <a href="mailto:longserviceawards@gov.bc.ca">longserviceawards@gov.bc.ca</a> or call Jenny Pescod at (250) 356-7916.</strong><br /><br />',
     );
+  /*
   $node->content['bottom_message'] = array(
       '#weight' => 90,
       '#markup' => '<p class="feature_box_yellow" style="margin-top: 1em;">If you have questions about your RSVP, please contact us at <a href="mailto:longserviceawards@gov.bc.ca">LongServiceAwards@gov.bc.ca</a></p><p class="feature_box_yellow" style="margin-top: 1em;">If you  have questions about travel arrangements, please contact your <a href="/career/long-service-awards/long_service_awards_contacts">Ministry Long Service Awards Contact</a></p><br />
 
         <em style="text-align: center; display: block; margin-bottom: 1em; font-weight: bold;">Congratulations on your Long Service Award!</em>',
     );
+    */
 }
 
 function atwork_lsa_views_pre_view(&$view, &$display_id, &$args) {
@@ -563,9 +585,9 @@ function atwork_lsa_node_page_view($node) {
   // Redirect any other user who tries to access an lsa application node
   if($node->type == 'lsa_application'){
     // Give contact details
-    drupal_set_message('The LSA application period has come to an end. If you have any questions or concerns, please contact the Jenny Pescod at (250-356-7916) or email the <a href="mailto:longserviceawards@gov.bc.ca"> Long Service Award inbox </a> ', 'status');
+   //drupal_set_message('The LSA application period has come to an end. If you have any questions or concerns, please contact the Jenny Pescod at (250-356-7916) or email the <a href="mailto:longserviceawards@gov.bc.ca"> Long Service Award inbox </a> ', 'status');
     // Redirect to 403
-    drupal_goto('r4032login');
+    //drupal_goto('r4032login');
 
     //return node_page_view($node);
 

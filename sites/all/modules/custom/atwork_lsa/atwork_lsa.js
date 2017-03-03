@@ -146,6 +146,8 @@
     // Only we can change this:
     $('#edit-field-lsa-donation-amount-und-0-value').prop("disabled", true);
     $('#edit-field-lsa-donation-amount-2-und-0-value').prop("disabled", true);
+    // We will manipulate this behind the scenes
+    $('#edit-field-lsa-certificate-ordered').hide();
   }
 
 /**
