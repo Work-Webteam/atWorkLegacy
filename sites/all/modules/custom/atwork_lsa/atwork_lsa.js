@@ -15,7 +15,7 @@
     // Always reset textbox when this value changes, so that we don't have a mis-match between award and years of service
     if ($("input[name='field_lsa_register_last_year[und]']:checked").val() == 2 && $('input[name="field_lsa_years_of_service[und]"]:checked').val() <= 40) {
       $("#edit-field-lsa-award-id-und-0-value").val('');
-      $('#edit-field-lsa-award-und-0-value').val('');
+      //$('#edit-field-lsa-award-und-0-value').val('');
       $('#edit-field-lsa-award-und-0-value').hide();
       $('.form-item.form-type-textfield.form-item-field-lsa-award-und-0-value').hide();
 
@@ -148,6 +148,13 @@
     $('#edit-field-lsa-donation-amount-2-und-0-value').prop("disabled", true);
     // We will manipulate this behind the scenes
     $('#edit-field-lsa-certificate-ordered').hide();
+    // We want option A before option b for the PECSF
+    divB = $('#edit-field-lsa-donation-options-und-0').parent().detach();
+    console.log(divB);
+    divB.insertAfter($('#edit-field-lsa-donation-options-und-1').parent());
+    // And no NA option here:
+    $('#edit-field-lsa-donation-options-und-none').parent().hide();
+    $('#edit-field-lsa-second-donation-und-none').parent().hide();
   }
 
 /**
