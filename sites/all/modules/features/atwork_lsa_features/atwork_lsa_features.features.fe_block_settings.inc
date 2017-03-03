@@ -12,6 +12,38 @@ function atwork_lsa_features_default_fe_block_settings() {
 
   $export['version'] = '2.0';
 
+  $export['boxes-long_service_awards_navigation'] = array(
+    'cache' => -2,
+    'css' => '',
+    'custom' => 0,
+    'delta' => 'long_service_awards_navigation',
+    'js' => '',
+    'module' => 'boxes',
+    'node_types' => array(),
+    'noscript' => '',
+    'pages' => 'career/long-service-awards
+career/long-service-awards/*
+career/long-service-awards/form
+career/long-service-awards/applications/*',
+    'roles' => array(),
+    'themes' => array(
+      'atwork_zen' => array(
+        'region' => 'sidebar_first',
+        'status' => 1,
+        'theme' => 'atwork_zen',
+        'weight' => 2,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => 'Long Service Awards',
+    'visibility' => 1,
+  );
+
   $export['boxes-lsa_admin_links'] = array(
     'cache' => -2,
     'css' => '',
@@ -124,8 +156,8 @@ node/add/*',
     'roles' => array(),
     'themes' => array(
       'atwork_zen' => array(
-        'region' => 'pre_content',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'atwork_zen',
         'weight' => 8,
       ),
