@@ -513,6 +513,8 @@ function gift_choice_populate_form(gifts){
     }
     if(cert_choice){
       full_gift_name = "25 - " + cert_choice + g_choice;
+    } else if(full_gift_name == '25 - $75.00 PECSF Charitible Donation'){
+      //do nothing, already filled this in above.
     } else {
       full_gift_name = "25 - " + g_choice + " - No Certificate";
     }

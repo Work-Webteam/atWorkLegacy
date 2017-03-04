@@ -144,10 +144,8 @@ function atwork_lsa_application_validate($form, &$form_state) {
   }
 
   // Quick validation to make sure we have the right number of chars for the Postal Codes
-  dpm($form_state);
   if(isset($form_state['input']['field_lsa_home_postal_code']['und'][0]['value']) && $form_state['input']['field_lsa_home_postal_code']['und'][0]['value']){
     $postal_check = str_replace(" ", "", $form_state['input']['field_lsa_home_postal_code']['und'][0]['value']);
-    dpm($postal_check);
     if(strlen($postal_check) < 6 || strlen($postal_check) > 6){
       form_set_error('field_lsa_home_postal_code', t("The recipient postal code must have 6 characters."));
       return FALSE;
@@ -156,7 +154,6 @@ function atwork_lsa_application_validate($form, &$form_state) {
 
   if(isset($form_state['input']['field_lsa_office_postal_code']['und'][0]['value']) && $form_state['input']['field_lsa_office_postal_code']['und'][0]['value']){
     $postal_check = str_replace(" ", "", $form_state['input']['field_lsa_office_postal_code']['und'][0]['value']);
-    dpm($postal_check);
     if(strlen($postal_check) < 6 || strlen($postal_check) > 6){
       form_set_error('field_lsa_office_postal_code', t("The office postal code must have 6 characters."));
       return FALSE;
