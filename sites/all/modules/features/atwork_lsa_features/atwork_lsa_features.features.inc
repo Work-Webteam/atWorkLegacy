@@ -37,9 +37,8 @@ function atwork_lsa_features_node_info() {
       'description' => '',
       'has_title' => '1',
       'title_label' => t('Title'),
-      'help' => t('<p align="center" class="feature_box_yellow
-"><strong>**IMPORTANT TO NOTE: If you do not receive these two items, you are not registered**</strong></p>
-<p>Once you have entered all the required information and hit the &ldquo;save&rdquo; button at the bottom of the screen, you will receive:</p>
+      'help' => t('<p>Once you have entered all the required information and hit the &ldquo;save&rdquo; button at the bottom of the screen, you will receive:</p>
+<p ><strong>**IMPORTANT TO NOTE: If you do not receive these two items, you are not registered**</strong></p>
 		<ol>
 			<li>A confirmation page displaying all of the information you&rsquo;ve entered. Please check this page to ensure the information is accurate and then print a copy for your records. If something is incorrect, please contact the <a href="mailto:longserviceawards@gov.bc.ca?Long%20Service%20Awards">Long Service Awards program</a>.</li>
 			<li>An automated confirmation email. </li>

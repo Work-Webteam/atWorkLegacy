@@ -180,13 +180,13 @@
          */
         '<div id = "lsa_more_info_div">' +
           // Blue ball point pen
-          '<span id="info_collande_clock"><p>Bold optical crystal, carriage-style clock with black glass center panel.</p><p>White dial with black Roman numerals and hour markers surrounded by a polished silver-tone bezel.</p><br /><p><strong>Dimensions:</strong>6.75"H (17 cm) by 6.25"W (16 cm)</p><p><strong>Detail:</strong> Engraved plate on front of clock: 30 years of service</p></span>' +
+          '<span id="info_collande_clock"><p>Bold optical crystal, carriage-style clock with black glass center panel.</p><p>White dial with black Roman numerals and hour markers surrounded by a polished silver-tone bezel.</p><br /><p><strong>Dimensions: </strong>6.75"H (17 cm) by 6.25"W (16 cm)</p><p><strong>Detail:</strong> Engraved plate on front of clock: 30 years of service</p></span>' +
           //Maglight and Flashlight
           '<span id="info_sherpa_blanket"><p>Ultimate high-end plush blanket: faux suede on one side and soft 270g Sherpa fleece on the other.</p><br /><p>Size:  50" H X 60" L</p><p>Embroidered on corner: 30 years</p></span>' +
           // RHV Orca Sunset painting
           '<span id="info_rhv_print_sunrise"><p>By artist Roy Henry Vickers.</p><br /><p> <a href="http://www.royhenryvickers.com/reproductions/product/820" target="_blank">Website</a></p><br /><p>Size: 14  inches x 11 inches (approx.)</p><p>Engraved plate in matting : 30 years of service</p></span>' +
           // Sterling Earrings
-          '<span id="info_sterling_earrings"><p><strong>By</strong> Nancy Dawson and Vincent Henson, Silver Eagles Design Studio, Alert Bay, Vancouver Island.</p><br /><p>Each pair is hand-made by the artists.</p><br /><p><strong>Note:</strong> these earrings are designed to coordinate with the 35 year sterling silver Aboriginal bracelet</p></span>' +
+          '<span id="info_sterling_earrings"><p>By Nancy Dawson and Vincent Henson, Silver Eagles Design Studio, Alert Bay, Vancouver Island.</p><br /><p>Each pair is hand-made by the artists.</p><br /><p><strong>Note:</strong> these earrings are designed to coordinate with the 35 year sterling silver Aboriginal bracelet</p></span>' +
           // PECSF
           '<span id="info_provincial_employees_community_services_fund"><p>In lieu of receiving a Long Service Award, you may opt to make a charitable donation via <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf" target="_blank">PECSF</a>. You may choose to donate to any registered charitable organization (maximum of two) OR to the PECSF Fund Supported Pool of charities in your region. To see which charities are in the PECSF Fund Supported Pool, <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions" target="_blank">click on your region</a>.</p><br /><p><em>Before registering for your Long Service Award, you will first need to view the list of <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions" target="_blank">PECSF charities by Region</a>.</em></p><br /><p><em>Once you have chosen a charity in your region, note the <strong>PECSF ID# and charity name</strong> as you will need to provide this information when you register. </em></p><br /><p><strong>A commemorative certificate noting your charitable contribution will be presented to you at the Long Service Awards ceremony in the fall.</strong></p><p><em><small>Note: Charitable tax receipts are <strong>not</strong> issued for Long Service Award donations</small></em></p></span>' +
         '</div>',
@@ -248,7 +248,7 @@
         '</select></label>' +
         // Mens or womens watch
         '<div id="mens_womens">' +
-          '<p>Please choose if you would prefer a mens watch or womens watch</p><br />' +
+          '<p>Please choose:</p>' +
           '<label><input type="radio" name="Mens_Womens" value="Ladies\'" id="35_bulova_womens" > Ladies\' </label>' +
           '<label><input type="radio" name="Mens_Womens" value="Men\'s" id="35_bulova_mens"> Men\'s </label>' +
         '</div>' +
@@ -276,7 +276,7 @@
         '</div>' +
         '<div id="watch_engravement_text_box">' +
           '<p id="engravement_text"></p>' +
-          '<label>Engravement: <input type="text" name="engravement_pop" value="" id="engravement_pop_text" maxlength="27"></label><br />' +
+          '<label><span style="color:red;"><strong>*</strong></span>Engravement: <input type="text" name="engravement_pop" value="" id="engravement_pop_text" maxlength="27"></label><br />' +
         '</div>' +
          //Aboriginal bracelet size choices
         '<div id="bracelet_size">' +
@@ -435,6 +435,8 @@
           '<span id="info_glass_bowl"><p>Hand-blown glass vase made in Parksville, B.C. by Robert Held. Website <a href="http://robertheld.com/" target = "_blank">http://robertheld.com/ </a></p><br /><p><strong>Size:</strong> 7" H</p><br /><p><strong>Note:</strong> due to the nature of this award, engraving is not possible.</p></span>'+
           // MD print
           '<span id="info_md_print"><p>By artist Michaela Davidson, Duncan and Lake Cowichan, B.C.</p><br /><p>Website <a href="http://michaeladavidsonart.com/" target = "_blank">http://michaeladavidsonart.com/</a> </p><br /><p>Size: 16"W x 14"H (approx.)</p><p>Engraved plate in matting: 40 years of service</p></span>' +
+          // Diamond Pendant
+          '<span id="info_diamond_pendant_and_chain"><p>White gold, four claw pendant and 18 inch Singapore chain.</p><p>Round Brilliant cut diamonds .20 ct. tw.</p><br /><p>Engraved plate on box: 40 years of service</p></span>'+
           // PECSF
           '<span id="info_provincial_employees_community_services_fund"><p>In lieu of receiving a Long Service Award, you may opt to make a charitable donation via <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf" target="_blank">PECSF</a>. You may choose to donate to any registered charitable organization (maximum of two) OR to the PECSF Fund Supported Pool of charities in your region. To see which charities are in the PECSF Fund Supported Pool, <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions" target="_blank">click on your region</a>.</p><br /><p><em>Before registering for your Long Service Award, you will first need to view the list of <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions" target="_blank">PECSF charities by Region</a>.</em></p><br /><p><em>Once you have chosen a charity in your region, note the <strong>PECSF ID# and charity name</strong> as you will need to provide this information when you register. </em></p><br /><p><strong>A commemorative certificate noting your charitable contribution will be presented to you at the Long Service Awards ceremony in the fall.</strong></p><p><em><small>Note: Charitable tax receipts are <strong>not</strong> issued for Long Service Award donations</small></em></p></span>' +
         '</div>',
