@@ -55,6 +55,17 @@
     top: 20px;
     left: 24px;
   }
+  .comment-icon:before { // this was placed with jQuery since can't use :before on input tag
+    position: absolute;
+    left: 4px;
+    bottom: 4px;
+    content: "\f075"; // the comment icon
+    font: normal normal normal 10px/1 FontAwesome;
+    color: #4072a0;
+  }
+  #edit-status-counter { // hide the text counter
+    display: none;
+  }
 }
 
 
@@ -125,7 +136,7 @@
       text-align: center;
       background-color: #26669E;
     }
-    .feed-ad-space-outer { 
+    .feed-ad-space-outer { // Everything within the ad-space container
       border: 1px solid grey;
       padding: 1em;
       background: #D7D7D7;
@@ -142,18 +153,24 @@
         letter-spacing: 0px;
         width: inherit !important;
         text-transform: uppercase;
+        font-size: 12px;
       }
       p {
         margin: 1em 0;
         &:first-child {
           margin-top: 0;
         }
+        img { // any inline image
+          margin-right: 7px;
+          margin-bottom: 4px;
+        }
       }
     }
     .feed-ad-space-author-date {
       font-size: 10px;
     }
-    // stop feed-ad-space
+
+    // end feed-ad-space
 
   .atwork-activity-block-container {
     margin-top: 46px; // push down the container because the header is positioned absolutely
@@ -162,9 +179,6 @@
     .form-item {
       margin-top: 0.5em;
     }
-  }
-  #edit-status-counter { // hide the text counter
-    display: none;
   }
   #status-submit-button {
     clear: both;
@@ -202,6 +216,7 @@
     clear: both;
     display: block;
     margin-top: .8em;
+    padding-bottom: 2em;
   }
   #atwork-activity-customize-feed-form .description {
     margin-bottom: 1em;
@@ -283,9 +298,12 @@
         padding-right: 0.2em;
       }
     }
-    .field-name-field-comment-message-comments + .field-name-field-feed-like-button,
-    .field-name-field-follow-feed-comments + .field-name-field-feed-like-button {// outer message like
-      left: 35%;
+    .field-name-field-comment-message-comments,
+    .field-name-field-follow-feed-comments,
+    .field-name-field-node-feed-reply {
+      + .field-name-field-feed-like-button {// outer message 'like'
+        left: 35%;
+      }
     }
 
     // position all first message paragraphs. Status updates, etc. under the date.
@@ -294,39 +312,6 @@
     }
     p {
       margin-left: 48px;
-    }
-    .message.sticky { // ad space styling. Overrides most layout settings above 
-      padding: 1.5em 1em 1em 1em;
-      border: 1px solid grey;
-      background: lighten(grey, 40%) url(/sites/all/themes/atwork_zen/images/icons/atwork-ampersand.png) 15px center no-repeat;
-      padding-left: 80px;
-      .date {
-        position: initial;
-        line-height: 1em;
-        &:before {
-          content: "Posted by Employee News ";
-          display: block;
-        }
-      } 
-      ul.links,
-      .field-name-field-feed-like-button,
-      .user-feed-image {
-        display: none;
-      }
-      p[class^="msg-"] {
-        margin: 0;
-        text-indent: 0;
-      }
-      .msg-new-node {
-        span {// hide the intro text if we are still using Sticky events
-          display: none;
-        }
-        a {// the link to the original node
-          margin-top: 0.5em;
-          display: block;
-          font-size: 20px;
-        }
-      }
     }
   }
   
@@ -355,6 +340,7 @@
     input.toggle-com-button { // the comment/cancel toggle button
       position: absolute;
       bottom: 0;
+      left: 17px;
     }
     .comment-submit-button  {
       margin-bottom: 2em;
@@ -438,9 +424,6 @@
       text-indent: 60px;
       margin-top: 6px;
     }
-    #status-submit-button {
-      margin-top: -26px;
-    }
     .entity-message {
       margin-top: -3em; // hackey, but need to close up top space
       &.clearfix:after {
@@ -481,8 +464,8 @@
       padding: 0;
     }
     .comment-submit-button {
-      left: 6px;
-      bottom: 0;
+      left: 4px;
+      bottom: 2px;
     }
     .field-name-field-feed-like-button {
       left: 51%;
@@ -519,7 +502,7 @@
       display: none; 
     }
     .toggle-com-button {
-      left: 6px;
+      left: 17px;
       bottom: 0;
     }
     .field-name-field-image { // main image left of a post

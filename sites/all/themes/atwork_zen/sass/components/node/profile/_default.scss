@@ -32,7 +32,14 @@
   background-color: #D7D7D7;
 }
 
+.add-follower-message {
+  @include atwork-messages(green, ok);
+}
 
+.remove-follower-message {
+  @include atwork-messages(yellow, warning);
+  background-color: #ffffe2;
+}
 
 #user-user-full-group-profile-card .field-name-field-image,
 #user-user-full-group-profile-card .group-profile-identity-bundle {
@@ -41,7 +48,7 @@
   vertical-align: top;
 }
 
-#activity-feed .field.field-name-field-image.field-type-image.field-label-above{
+#activity-feed .field.field-name-field-image.field-type-image.field-label-above {
   padding: 0px;
   border: 0px;
   height: auto !important;

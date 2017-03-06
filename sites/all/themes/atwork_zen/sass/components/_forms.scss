@@ -1,145 +1,4 @@
-/*#####################################################################################################################################################*/
-/** Long Service Awards Registration Form and LSA Pins Form -------------------------------------------------------*/
-/*#####################################################################################################################################################*/
-/*#lsa-application-node-form {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-#lsa-pin-application-node-form fieldset,
-#node_lsa_application_form_group_lsa_office_contact_info,
-#lsa-application-node-form fieldset {
-  border: solid 1px #D7D7D7;
-  padding: 12px;
-  margin: 10px auto;
-}
-
-#lsa-application-node-form fieldset legend {
-  background-color: #D7D7D7;
-  padding: 0px 8px;
-}
-
-#lsa-pin-application-node-form #node_lsa_pin_application_form_group_recipient_details,
-#lsa-pin-application-node-form #node_lsa_pin_application_form_group_supervisor_details,
-#lsa-pin-application-node-form #node_lsa_pin_application_form_group_delivery_details {
-  width: 70% !important;
-  margin-bottom: 15px;
-}
-
-#lsa-application-node-form #edit-field-lsa-email,
-#lsa-application-node-form #edit-field-lsa-alt-email-address,
-#lsa-application-node-form #edit-field-lsa-branch-department,
-#lsa-application-node-form #edit-field-lsa-office-work-group,
-#lsa-application-node-form #edit-field-lsa-office-address,
-#lsa-application-node-form #edit-field-lsa-office-city {
-  margin-top: 10px;
-}
-#lsa-application-node-form .form-item-field-lsa-prefix-und,
-#lsa-application-node-form .form-item-field-lsa-rsvp-und,
-#lsa-application-node-form .form-item-field-lsa-guest-und,
-#lsa-application-node-form .form-item-field-lsa-alternate-min-org-und {
-  display: inline-block;
-  margin-right: 5px;
-}
-
-#lsa-application-node-form #node_lsa_application_form_group_lsa_contact_info,
-#lsa-application-node-form #node_lsa_application_form_group_lsa_supervisor_info,
-#lsa-application-node-form .date-combo.form-wrapper {
-  margin-top: 20px;
-}
-#lsa-application-node-form .form-item-field-lsa-first-name-und-0-value,
-#lsa-application-node-form .form-item-field-lsa-middle-name-und-0-value,
-#lsa-application-node-form #edit-field-lsa-home-phone,
-#lsa-application-node-form #edit-field-lsa-work-phone {
-  float: left;
-  margin-right: 10px;
-}
-#lsa-application-node-form #edit-field-lsa-specialrequirements-und {
-  margin-left: 30px;
-  margin-top: 10px;
-}
-#lsa-application-node-form #edit-field-lsa-terms,
-#edit-field-lsa-pin-terms {
-  background-color: beige;
-  border: solid 1px #D7D7D7;
-  padding: 0px 10px;
-}
-#node_lsa_pin_application_form_group_delivery_details .fieldset-description {
-  margin-bottom: 10px;
-  font-size: .9em;
-  border: solid 1px #CCCCCC;
-  padding: 5px;
-}
-
-#lsa-application-node-form #edit-field-lsa-terms .description {
-  margin: -21px 30px 0px 30px;
-}
-#lsa-application-node-form .form-item-field-lsa-org-und,
-#lsa-application-node-form .form-item-field-lsa-ministry-id-und-0-value,
-#lsa-application-node-form .form-item-field-lsa-branch-department-und-0-value,
-#lsa-application-node-form .form-item-field-lsa-office-work-group-und-0-value,
-#lsa-application-node-form .orm-item-field-lsa-office-address-und-0-value,
-#lsa-application-node-form .form-item-field-lsa-office-address-und-0-value,
-#lsa-application-node-form .form-item-field-lsa-office-city-und-0-value,
-#lsa-application-node-form .form-item-field-lsa-office-province-und-0-value,
-#lsa-application-node-form .form-item-field-lsa-office-postal-code-und-0-value,
-#lsa-application-node-form .form-item-field-lsa-rsvp-und,
-#lsa-application-node-form .form-item-field-lsa-attending-ceremony-und,
-#lsa-application-node-form .form-item-field-lsa-guest-und,
-#lsa-application-node-form .form-item-field-lsa-number-attending-und,
-#lsa-application-node-form .form-item-field-lsa-alternate-min-org-und,
-#lsa-application-node-form .form-item-field-lsa-actual-min-org-und-0-value,
-#lsa-application-node-form .form-item-field-lsa-ceremonydate-und,
-#lsa-application-node-form .form-item-field-lsa-ceremony-night-und {
-  margin: 7px 0 10px 0;
-  padding-left: 10px;
-}
-
-#lsa-application-node-form .form-item-field-lsa-ceremony-night-und,
-#lsa-application-node-form #edit-field-lsa-branch-department,
-#lsa-application-node-form #edit-field-lsa-office-address {
-  padding-bottom: 10px;
-}
-#lsa-application-node-form #edit-field-lsa-office-city {
-  margin-bottom: 10px;
-}
-.node-type-lsa-application table.views-table.cols-0 {
-  width: 75%;
-}
-.node-type-lsa-application table.views-table.cols-0 tr {
-  background-color: #FFF;
-  border: none;
-}
-.node-type-lsa-application h2 {
-  border: solid 1px #CCC;
-  padding-left: 5px;
-  margin-bottom: 10px;
-  background-color: #ECECEC;
-}
-.node-type-lsa-application article >h2 {
-  background: none;
-  border: none;
-}
-.node-type-lsa-application fieldset {
-  padding: 10px !important;
-  margin-top: 10px !important;
-  margin-bottom: 10px !important;
-  background-color: #FFF !important;
-  border: solid 1px #CCC !important;
-}
-.node-type-lsa-application .field-group-fieldset .fieldset-legend {
-  border: solid 1px #CCC;
-  background-color: #FFF;
-}
-.node-type-lsa-application input {
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: solid 1px #CCC;
-}
-.node-type-lsa-application div.field {
-  margin-bottom: 3px;
-}
-*/
+// Long Service Awards Registration Form 
 
 .page-node-add-lsa-application {
   fieldset {
@@ -147,16 +6,20 @@
     margin: 1em 0;
     fieldset {
       background-color: darken(#f1f1f1, 4%);
-      margin: 20px;
+      margin: 10px;
     }
   }
   .fieldset-legend {
     font-weight: bold;
     font-size: 13px;
   }
-  .form-item.form-type-radio {
+  .form-type-radio {
     display: inline;
     margin-right: 1em;
+    // Exceptions
+    .form-item-field-lsa-donation-options-und {
+      display: block;
+    }
   }
   li {
     padding-bottom: 1em;
@@ -167,18 +30,28 @@
   input {
     background: #fafafa;
     border: 1px solid #ccc;
-    padding: 3px;
+    padding: 2px;
     + div[id$="value-counter"] {
       margin-top: 0.8em;
     }
   }
-  .form-item.form-type-textfield {
-    margin-bottom: 0.5em;
-    label {
-      float: left;
-      text-align: right !important;
-      margin-right: 15px;
-      width: 124px;
+  .form-item {
+    &.form-type-textfield {
+      margin-bottom: 0.5em;
+      label {
+        float: left;
+        text-align: right !important;
+        margin-right: 15px;
+        width: 124px;
+      }
+    }
+    label:first-child {
+      font-weight: bold !important;
+      font-size: 12px;
+    }
+    // Exceptions:
+    label[for="edit-field-lsa-award-und-0-value"] {
+      width: auto;
     }
   }
   .form-item-field-lsa-terms-und {
@@ -188,11 +61,24 @@
     .description {
       margin-left: 4em;
       margin-top: -2em;
+      font-weight: normal;
+      font-size: 0.9em;
+      padding: 3px;
     }
   }
   .ui-datepicker {
     background-color: #e6e6e6;
     border: 2px solid #a2a2a2;
+  }
+  #edit-submit {
+    @include button-large;
+  }
+  #gift_select   {
+    @include button-normal;
+  }
+  #lsa_gift_images_div {
+    text-align: center;
+    margin-top: 1em;
   }
 }
 

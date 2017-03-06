@@ -48,15 +48,15 @@
          */
         '<div id="lsa_gift_images_div">' +
           // Blue ball point pen
-          '<img src="/sites/default/files/lsa_2015/25_ballpoint-pen-final.jpg" alt="Blue ballpoint pen" id="image_blue_xp_ball_point_pen"><br />'+
+          '<img src="/sites/default/files/lsa_2015/25_ballpoint-pen-final.jpg" alt="Blue ballpoint pen" id="image_blue_xp_ball_point_pen">'+
           //silver lapel pin
-          '<img src="/sites/default/files/lsa_2015/25_padfolio_with_embossed_image_2017.jpg" alt="Cross Tablet holder" id="image_cross_tablet_holder"><br />' +
+          '<img src="/sites/default/files/lsa_2015/25_padfolio_with_embossed_image_2017.jpg" alt="Cross Tablet holder" id="image_cross_tablet_holder">' +
           // Pearl Earrings
-          '<img src="/sites/default/files/lsa_2015/25_pearle_earrings.jpg" alt="Sterling Silver Pearl earrings" id="image_pearl_earrings"><br />' +
+          '<img src="/sites/default/files/lsa_2015/25_pearle_earrings.jpg" alt="Sterling Silver Pearl earrings" id="image_pearl_earrings">' +
           //Padfolio
-          '<img src="/sites/default/files/lsa_2015/25_passport_luggage_tag_set.png" alt="Passport and Luggage tag picture" id="image_passport_luggage_tag"><br />' +
+          '<img src="/sites/default/files/lsa_2015/25_passport_luggage_tag_set.png" alt="Passport and Luggage tag picture" id="image_passport_luggage_tag">' +
           // PECSF donation
-          '<img src="/sites/default/files/lsa_2015/25_pecsf.jpg" alt="PECSF donation image" id="image_provincial_employees_community_services_fund"><br />' +
+          '<img src="/sites/default/files/lsa_2015/25_pecsf.jpg" alt="PECSF donation image" id="image_provincial_employees_community_services_fund">' +
         '</div>' +
         /**
          * More info list
@@ -164,15 +164,15 @@
          */
         '<div id="lsa_gift_images_div">' +
           // Collande Clock
-          '<img src="/sites/default/files/lsa_2015/30_collande_clock.jpg" alt="Collande Clock" id="image_collande_clock"><br />'+
+          '<img src="/sites/default/files/lsa_2015/30_collande_clock.jpg" alt="Collande Clock" id="image_collande_clock">'+
           // Maglight and Flashlight
-          '<img src="/sites/default/files/lsa_2015/30_sherpa_blanket.png" alt="Image of appalachian sherpa blanket" id="image_sherpa_blanket"><br />' +
+          '<img src="/sites/default/files/lsa_2015/30_sherpa_blanket.png" alt="Image of appalachian sherpa blanket" id="image_sherpa_blanket">' +
           // RHV Orca Sunset painting
-          '<img src="/sites/default/files/lsa_2015/30_tofino_sunrise.jpg" alt="Roy Henry Vickers Tofino Sunrise print" id="image_rhv_print_sunrise"><br />' +
+          '<img src="/sites/default/files/lsa_2015/30_tofino_sunrise.jpg" alt="Roy Henry Vickers Tofino Sunrise print" id="image_rhv_print_sunrise">' +
           // Sterling Earrings
-          '<img src="/sites/default/files/bg/image/2015/0224/30YearEarrings.jpg" alt="Solid Sterling Drop Earrings" id="image_sterling_earrings"><br />' +
+          '<img src="/sites/default/files/bg/image/2015/0224/30YearEarrings.jpg" alt="Solid Sterling Drop Earrings" id="image_sterling_earrings">' +
           // PECSF donation
-          '<img src="/sites/default/files/lsa_2015/25_pecsf.jpg" alt="PECSF donation image" id="image_provincial_employees_community_services_fund"><br />' +
+          '<img src="/sites/default/files/lsa_2015/25_pecsf.jpg" alt="PECSF donation image" id="image_provincial_employees_community_services_fund">' +
         '</div>' +
         /**
          * More info list

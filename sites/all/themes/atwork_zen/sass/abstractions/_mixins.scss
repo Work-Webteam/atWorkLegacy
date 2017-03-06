@@ -17,7 +17,7 @@
   font-weight:bold;
   font-style:normal;
   padding: 4px 12px;
-  line-height:1em;
+  line-height:1.2em;
   text-decoration:none;
   text-align:center;
   text-shadow:1px 1px 0px #ffffff;
@@ -49,6 +49,12 @@
   border-bottom-left-radius:4px;
 }
 
+@mixin button-large {
+  @include button-normal;
+  font-size: 1.2em;
+  padding: 6px 14px;
+}
+
 
 // ---------- Quotes
 @mixin quotes-open {
@@ -73,12 +79,13 @@
 // Colours: green, yellow or red. 
 // Types: ok, warning, error 
 @mixin atwork-messages($colour,$type) {
-  margin: 1.5em 0;
-  padding: 8px 8px 8px 30px;
+  margin: 1em 0;
+  padding: 6px 6px 6px 30px;
   background-image: url('/misc/message-16-#{$type}.png');
   background-position: 8px 8px;
   background-repeat: no-repeat;
   border: 1px solid lighten($colour, 50%);
   background-color: lighten($colour, 72%);
   font-weight: bold;
+  color: #777;
 }
