@@ -25,7 +25,6 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
 
   $form['#validate'][] = 'atwork_lsa_application_validate';
   $form['#submit'][] = 'atwork_lsa_application_submit';
-  dpm($form);
   $form['actions']['submit']['#value'] = "SUBMIT your LSA registration";
 
   // skip defaults for admins who are entering for others
