@@ -382,7 +382,7 @@
       $('#edit-field-lsa-pecsf-charity-name').hide();
       $('#edit-field-lsa-donation-amount').hide();
       $('#edit-field-lsa-second-donation').hide();
-      $('#edit-field-lsa-donation-amount-2-und-0-value').val('');
+      $('#edit-field-lsa-donation-amount-und-0-value').val('');
       $('#edit-field-lsa-donation-amount-2-und-0-value').val('');
       $('.collapsible.required-fields.group-lsa-second-donation.field-group-fieldset.form-wrapper.collapse-processed').slideUp('fast');
       $('#edit-field-lsa-pecsf-id-2').slideUp('fast');
