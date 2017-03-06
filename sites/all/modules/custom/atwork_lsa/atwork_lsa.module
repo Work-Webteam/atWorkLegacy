@@ -29,7 +29,7 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
 
   // skip defaults for admins who are entering for others
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)  || in_array('lsa contact', $user->roles)) {
-    $form['field_lsa_terms'][$form['field_lsa_terms']['#language']]['#default_value'] = 1;
+    //$form['field_lsa_terms'][$form['field_lsa_terms']['#language']]['#default_value'] = 1;
 
     return;
   }
