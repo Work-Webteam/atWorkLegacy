@@ -382,6 +382,8 @@
       $('#edit-field-lsa-pecsf-charity-name').hide();
       $('#edit-field-lsa-donation-amount').hide();
       $('#edit-field-lsa-second-donation').hide();
+      $('#edit-field-lsa-donation-amount-2-und-0-value').val('');
+
 
     });
     $('#edit-field-lsa-donation-options-und-none').on('click', function(){
@@ -391,9 +393,9 @@
       $('#edit-field-lsa-pecsf-charity-name').hide();
       $('#edit-field-lsa-donation-amount').hide();
       $('#edit-field-lsa-second-donation').hide();
-
-
+      set_pecsef($("input[name='field_lsa_years_of_service[und]']:checked").val());
     });
+
   });
 
   /** Helper function to set PECSEF options anv values
