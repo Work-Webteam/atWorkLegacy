@@ -44,12 +44,10 @@ $applicant_body = <<<EOT
 
 EOT;
 
-$ministry_rep_to = $node->field_lsa_ministry_rep_email['und'][0]['value'];
+$ministry_rep_to = $node->field_lsa_ministry_rep_email[$lang][0]['value'];
 $ministry_rep_subject = t('You have registered someone for a Service Pin.');
 $ministry_rep_body = <<<EOT
 <span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
-
-<p>You have registered an employee BC Public Service Pin, in celebration of { $email_milestone } years of service.</p>
 
 <p>Thank you for registering <strong>{$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']}</strong> for a $email_milestone year Service Pin(s)</p>
 

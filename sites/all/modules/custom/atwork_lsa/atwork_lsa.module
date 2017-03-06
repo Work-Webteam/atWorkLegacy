@@ -399,11 +399,14 @@ function atwork_lsa_node_insert($node) {
     );
     drupal_mail('atwork_mail', 'atwork_mail_default', $supervisor_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
 
+    dpm($node);
     if(isset($node->field_lsa_ministry_rep_email['und'][0]['value']) && $node->field_lsa_ministry_rep_email['und'][0]['value']){
       $params = array(
         'subject' => $ministry_rep_subject,
         'body' => $ministry_rep_body,
         );
+      dpm($ministry_rep_to);
+      dpm($params);
       drupal_mail('atwork_mail', 'atwork_mail_default', $ministry_rep_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
     }
   }
