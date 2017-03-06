@@ -15,7 +15,7 @@
     // Always reset textbox when this value changes, so that we don't have a mis-match between award and years of service
     if ($("input[name='field_lsa_register_last_year[und]']:checked").val() == 2 && $('input[name="field_lsa_years_of_service[und]"]:checked').val() <= 40) {
       $("#edit-field-lsa-award-id-und-0-value").val('');
-      $('#edit-field-lsa-award-und-0-value').val('');
+      //$('#edit-field-lsa-award-und-0-value').val('');
       $('#edit-field-lsa-award-und-0-value').hide();
       $('.form-item.form-type-textfield.form-item-field-lsa-award-und-0-value').hide();
 
@@ -106,7 +106,7 @@
     $('#gift_select').hide();
 
     // Message for retired applicants
-    var retirement = $('<div id="retirement_message"><p><span style="color:red"><strong>*</strong>Please enter your last scheduled day of work</span></div>');
+    var retirement = $('<div id="retirement_message"><p><span style="color:red">Please enter your last scheduled day of work</span></div>');
     $('#edit-field-lsa-retiring-thisyear').append(retirement);
     $('#retirement_message').hide();
     $('#field-lsa-date-of-retirement-add-more-wrapper').hide();
@@ -138,7 +138,22 @@
     $('#edit-field-lsa-award-sp-instructions').hide();
     // Hide the special requirements box unless we require it
     $('#edit-field-specialrequirement-descrip').hide();
-
+    // Hide PECSF unless user selects this choice
+    $('#pecsf-fields').hide();
+    // Hide alternate fields until they are required
+    $('.collapsible.required-fields.group-lsa-first-donation.field-group-fieldset.form-wrapper.collapse-processed').hide();
+    $('.collapsible.required-fields.group-lsa-second-donation.field-group-fieldset.form-wrapper.collapse-processed').hide();
+    // Only we can change this:
+    $('#edit-field-lsa-donation-amount-und-0-value').prop("disabled", true);
+    $('#edit-field-lsa-donation-amount-2-und-0-value').prop("disabled", true);
+    // We will manipulate this behind the scenes
+    $('#edit-field-lsa-certificate-ordered').hide();
+    // We want option A before option b for the PECSF
+    divB = $('#edit-field-lsa-donation-options-und-0').parent().detach();
+    divB.insertAfter($('#edit-field-lsa-donation-options-und-1').parent());
+    // And no NA option here:
+    $('#edit-field-lsa-donation-options-und-none').parent().hide();
+    $('#edit-field-lsa-second-donation-und-none').parent().hide();
   }
 
 /**
@@ -289,7 +304,7 @@
       retirement();
     });
 
-    // Cllick handler for special requirements
+    // Click handler for special requirements
     $('.form-checkbox').change(function(){
       special_requirements();
     });
@@ -306,5 +321,106 @@
       certificate_populate();
     });
 
+    // PECSF donation settings
+    $('#edit-field-lsa-second-donation-und-1').on('click', function(){
+      // User has decided to split their donation, we need to alter amounts
+      if($('#edit-field-lsa-second-donation-und-1').prop("checked", true)){
+        // Grab existing value
+        amount = $('#edit-field-lsa-donation-amount-und-0-value').val();
+        // Remove $ sign
+        amount = amount.substring(1, amount.length);
+        // Split in half
+        amount = amount/2;
+        // Round to dolar amount
+        amount = amount.toFixed(2);
+        // Readd the dolar sign
+        amount = '$' + amount;
+        // Add it into the two donation text boxes
+        $('#edit-field-lsa-donation-amount-und-0-value').val(amount);
+        $('#edit-field-lsa-donation-amount-und-0-value').prop("disabled", true);
+        $('#edit-field-lsa-donation-amount-2-und-0-value').val(amount);
+        $('#edit-field-lsa-donation-amount-2-und-0-value').prop("disabled", true);
+        $('.collapsible.required-fields.group-lsa-second-donation.field-group-fieldset.form-wrapper.collapse-processed').slideDown('fast');
+        $('#edit-field-lsa-pecsf-id-2').slideDown('fast');
+        $('#edit-field-lsa-charity-name-2').slideDown('fast');
+        $('#edit-field-lsa-donation-amount-2').slideDown('fast');
+      }
+    });
+    // If user selects no, we can  reassign all $ to first choice.
+    $('#edit-field-lsa-second-donation-und-0').on('click', function(){
+      set_pecsef($("input[name='field_lsa_years_of_service[und]']:checked").val());
+      $('#edit-field-lsa-donation-amount-2-und-0-value').val('');
+      $('.collapsible.required-fields.group-lsa-second-donation.field-group-fieldset.form-wrapper.collapse-processed').slideUp('fast');
+      $('#edit-field-lsa-pecsf-id-2').slideUp('fast');
+      $('#edit-field-lsa-charity-name-2').slideUp('fast');
+      $('#edit-field-lsa-donation-amount-2').slideUp('fast');
+
+    });
+        // If user selects na, we can  reassign all $ to first choice.
+    $('#edit-field-lsa-second-donation-und-none').on('click', function(){
+      set_pecsef($("input[name='field_lsa_years_of_service[und]']:checked").val());
+      $('#edit-field-lsa-donation-amount-2-und-0-value').val('');
+      $('.collapsible.required-fields.group-lsa-second-donation.field-group-fieldset.form-wrapper.collapse-processed').slideUp('fast');
+    });
+
+    // Handle choice A in PECSF form
+    $('#edit-field-lsa-donation-options-und-1').on('click', function(){
+      $('.collapsible.required-fields.group-lsa-first-donation.field-group-fieldset.form-wrapper.collapse-processed').slideDown('fast');
+      // For IE we have to explicitly tell it to open the field under here for some stupid reason
+      $('#edit-field-lsa-pecsf-region').show();
+      $('#edit-field-lsa-pecsf-id').show();
+      $('#edit-field-lsa-pecsf-charity-name').show();
+      $('#edit-field-lsa-donation-amount').show();
+      $('#edit-field-lsa-second-donation').show();
+
+    });
+    $('#edit-field-lsa-donation-options-und-0').on('click', function(){
+      $('.collapsible.required-fields.group-lsa-first-donation.field-group-fieldset.form-wrapper.collapse-processed').slideUp('fast');
+      // For IE we have to explicitly tell it to open the field under here for some stupid reason
+      $('#edit-field-lsa-pecsf-region').show();
+      $('#edit-field-lsa-pecsf-id').hide();
+      $('#edit-field-lsa-pecsf-charity-name').hide();
+      $('#edit-field-lsa-donation-amount').hide();
+      $('#edit-field-lsa-second-donation').hide();
+
+    });
+    $('#edit-field-lsa-donation-options-und-none').on('click', function(){
+      $('.collapsible.required-fields.group-lsa-first-donation.field-group-fieldset.form-wrapper.collapse-processed').slideUp('fast');
+      $('#edit-field-lsa-pecsf-region').hide();
+      $('#edit-field-lsa-pecsf-id').hide();
+      $('#edit-field-lsa-pecsf-charity-name').hide();
+      $('#edit-field-lsa-donation-amount').hide();
+      $('#edit-field-lsa-second-donation').hide();
+
+
+    });
   });
+
+  /** Helper function to set PECSEF options anv values
+ *
+ */
+  function set_pecsef(year){
+    // Show and open pecsf block
+    $('#pecsf-fields').slideDown('slow');
+    switch(true){
+      case year == 25:
+        $('#edit-field-lsa-donation-amount-und-0-value').val('$75.00');
+        break;
+      case year == 30:
+        $('#edit-field-lsa-donation-amount-und-0-value').val('$150.00');
+        break;
+      case year == 35:
+        $('#edit-field-lsa-donation-amount-und-0-value').val('$300.00');
+        break;
+      case year == 40:
+        $('#edit-field-lsa-donation-amount-und-0-value').val('$400.00');
+        break;
+      case year == 45:
+        $('#edit-field-lsa-donation-amount-und-0-value').val('$450.00');
+        break;
+      case year == 50:
+        $('#edit-field-lsa-donation-amount-und-0-value').val('$500.00');
+        break;
+    }
+  }
 })(jQuery);
