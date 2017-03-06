@@ -25,7 +25,8 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
 
   $form['#validate'][] = 'atwork_lsa_application_validate';
   $form['#submit'][] = 'atwork_lsa_application_submit';
-
+  dpm($form);
+  $form['actions']['submit']['#value'] = "SUBMIT your LSA registration";
 
   // skip defaults for admins who are entering for others
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)  || in_array('lsa contact', $user->roles)) {
@@ -286,6 +287,8 @@ function atwork_lsa_application_submit(&$form, &$form_state) {
   if(isset($form_state['values']['field_lsa_org']['und'][0]['value']) && $form_state['values']['field_lsa_org']['und'][0]['value']){
     $form_state['values']['field_lsa_ministry_id']['und'][0]['value'] = $form_state['values']['field_lsa_org']['und'][0]['value'];
   }
+
+  $form_state['values']['field_lsa_25year_certificatename']['und'][0]['value'] = $form_state['values']['field_lsa_first_name']['und'][0]['value'] . " " . $form_state['values']['field_lsa_last_name']['und'][0]['value'];
 
 }
 

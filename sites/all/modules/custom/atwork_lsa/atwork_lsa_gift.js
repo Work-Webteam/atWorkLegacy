@@ -280,7 +280,7 @@
         '</div>' +
          //Aboriginal bracelet size choices
         '<div id="bracelet_size">' +
-          '<p> Select the size of bracelet you would like. </p>' +
+          '<p><span style="color:red;"><strong>*</strong></span> Select the size of bracelet you would like. </p>' +
           '<label><input type="radio" value="size A" id="35_bracelet_size_a" name="size_bracelet">Size A: fits 6 1/2 to 7 1/2 inch wrists.</label>' +
           '<label><input type="radio" value="size B" id="35_bracelet_size_b" name="size_bracelet">Size B: fits 7 1/2 to 8 1/2 inch wrists.</label>' +
         '</div>' +
