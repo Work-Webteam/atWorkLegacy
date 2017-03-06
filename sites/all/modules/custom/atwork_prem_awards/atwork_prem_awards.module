@@ -203,7 +203,7 @@ function _atwork_prem_awards_count_words($files) {
   }
 
   if ($attached_words) {
-    $pages = number_format(($attached_words / 250), 1);
+    $pages = number_format(($attached_words / 300), 1);
     if ($pages > 5) {
       drupal_set_message(t('Over 5 pages of text has been detected in your attachments. Please review them to ensure you aren\'t over the 5 page limit.'), 'warning');
     }

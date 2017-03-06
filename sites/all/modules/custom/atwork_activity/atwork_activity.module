@@ -1266,7 +1266,7 @@ function all_activity_query($choices, $latest_rendered_time_stamp =null){
 
     $result = $count_query
       ->extend('PagerDefault')
-      ->limit(8)
+      ->limit(9)
     ->execute()
     ->fetchAll();
 
@@ -1276,7 +1276,7 @@ function all_activity_query($choices, $latest_rendered_time_stamp =null){
       ->range(0, 100);
     $result = $user_feed_query
       ->extend('PagerDefault')
-      ->limit(8)
+      ->limit(9)
       ->execute()
       ->fetchAll();
 

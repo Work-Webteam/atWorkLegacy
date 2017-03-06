@@ -33,7 +33,7 @@ CKEDITOR.stylesSet.add( 'default', [
 
 	{ name: 'Italic Title',		element: 'h2', styles: { 'font-style': 'italic' } },
 	{ name: 'Subtitle',			element: 'h3', styles: { 'color': '#aaa', 'font-style': 'italic' } },
-	{
+	/*{
 		name: 'Special Container',
 		element: 'div',
 		styles: {
@@ -41,7 +41,7 @@ CKEDITOR.stylesSet.add( 'default', [
 			background: '#eee',
 			border: '1px solid #ccc'
 		}
-	},
+	},*/
 
 	/* Inline Styles */
 

@@ -36,6 +36,7 @@ function _atwork_prem_awards_ministry_contacts() {
     31 => 'Barbara.Wilson@gov.bc.ca', //Public Sector Employers Council
     32 => 'Christina.Dawkins@gov.bc.ca', //Finance
     33 => 'Yvonne.ChadwickWhittome@gov.bc.ca', //Finance
+    34 => 'Sabrina.Loiacono@gov.bc.ca', //EAO
   );
 }
 
