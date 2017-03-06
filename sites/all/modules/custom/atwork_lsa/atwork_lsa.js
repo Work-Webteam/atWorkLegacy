@@ -372,6 +372,8 @@
       $('#edit-field-lsa-pecsf-charity-name').show();
       $('#edit-field-lsa-donation-amount').show();
       $('#edit-field-lsa-second-donation').show();
+      set_pecsef($("input[name='field_lsa_years_of_service[und]']:checked").val());
+
 
     });
     $('#edit-field-lsa-donation-options-und-0').on('click', function(){
