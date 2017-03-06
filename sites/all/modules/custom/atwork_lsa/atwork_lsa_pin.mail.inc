@@ -15,9 +15,9 @@ $email_milestone = '';
 
 $years = count($milestones);
 if($years == 1){
-  $mail_milestone = $milestones;
+  $email_milestone = $milestones[0];
 } elseif($years == 2){
-  $mail_milestone = $milestones[0] . " and " . $milestones[1];
+  $email_milestone = $milestones[0] . " and " . $milestones[1];
 } else {
   // Put it in a string all nice like
   $email_milestone = implode(", ", $milestones);
