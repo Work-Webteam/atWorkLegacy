@@ -249,8 +249,8 @@
         // Mens or womens watch
         '<div id="mens_womens">' +
           '<p>Please choose:</p>' +
-          '<label><input type="radio" name="Mens_Womens" value="Ladies\'" id="35_bulova_womens" > Ladies\' </label>' +
-          '<label><input type="radio" name="Mens_Womens" value="Men\'s" id="35_bulova_mens"> Men\'s </label>' +
+          '<label><input type="radio" name="Mens_Womens" value="Ladies\'" id="35_bulova_womens" > Ladies </label>' +
+          '<label><input type="radio" name="Mens_Womens" value="Men\'s" id="35_bulova_mens"> Mens </label>' +
         '</div>' +
         // Watch Type
         '<div id="watch_type">' +
@@ -311,7 +311,7 @@
          */
         '<div id = "lsa_more_info_div">' +
           // Bulova watch
-          '<span id="info_bulova_watch"><br /><p>Watch features BC Coat of Arms printed on dial.</p><br /><p>This finely-made watch comes in a variety of choices, gold, silver, black or brown leather, and a two-toned watch face.</p><br /><p><strong>Detail:</strong> Engraved with name of recipient and “35 years of service” on back of watch</p></span>' +
+          '<span id="info_bulova_watch"><br /><p>Watch features BC Coat of Arms printed on dial.</p><br /><p>Comes in a variety of choices including gold or silver, black or brown leather, and a two-toned watch face.</p><br /><p>Larger size (mens): watch face = 38 mm W</p><p>Strap width: approx. 20 mm</p><br /><p>Smaller size: (ladies): watch face = 29 mm W</p><p>Strap width: approx. 14 mm</p><br /><p>Engraved on back: Recipient’s Name, 35 years of service</p></span>' +
           // Bushnell binoculars
           '<span id="info_bushnell_binoculars"><br /><p>Bushnell Roof Prism Binocular: Featuring BaK-4  Roof Prisms with PC-3  Phase Coating, 8 x 42 mm, Field of View 426 yards, Fully Multicoated Optics, 100 % Waterproof/Fogproof , Light-Weight Open Bridge Design, Soft Grip Thumb Notch.</p><br /><p>Size: 8 x 42 mm</p><p><strong>Note:</strong> due to the nature of this award, engraving is not possible</p></span>' +
           // Aboriginal Bracelet
