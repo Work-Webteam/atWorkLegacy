@@ -3311,82 +3311,6 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-lsa_application-field_lsa_prefix'.
-  $field_instances['node-lsa_application-field_lsa_prefix'] = array(
-    'bundle' => 'lsa_application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'inline',
-        'module' => 'editablefields',
-        'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
-          'semantic_field_format' => '',
-        ),
-        'type' => 'editable',
-        'weight' => 7,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'question' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_lsa_prefix',
-    'label' => 'Prefix',
-    'required' => 1,
-    'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'semantic_field_format' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 9,
-    ),
-  );
-
   // Exported field_instance: 'node-lsa_application-field_lsa_received_award'.
   $field_instances['node-lsa_application-field_lsa_received_award'] = array(
     'bundle' => 'lsa_application',
@@ -6273,7 +6197,6 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Please select the retroactive milestone pin(s) you would like to order');
   t('Please use the format:A1A1A1');
   t('Postal Code');
-  t('Prefix');
   t('Province');
   t('RSVP');
   t('Retiring in 2017?');

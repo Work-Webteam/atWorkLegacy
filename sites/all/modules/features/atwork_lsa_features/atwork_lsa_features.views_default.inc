@@ -2630,7 +2630,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_award_sp_instructions']['id'] = 'field_lsa_award_sp_instructions';
   $handler->display->display_options['fields']['field_lsa_award_sp_instructions']['table'] = 'field_data_field_lsa_award_sp_instructions';
   $handler->display->display_options['fields']['field_lsa_award_sp_instructions']['field'] = 'field_lsa_award_sp_instructions';
-  /* Field: Content: Prefix */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_lsa_prefix']['id'] = 'field_lsa_prefix';
   $handler->display->display_options['fields']['field_lsa_prefix']['table'] = 'field_data_field_lsa_prefix';
   $handler->display->display_options['fields']['field_lsa_prefix']['field'] = 'field_lsa_prefix';

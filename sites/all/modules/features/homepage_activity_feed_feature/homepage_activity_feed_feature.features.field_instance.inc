@@ -95,68 +95,6 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-ad_space-field_hashtags'.
-  $field_instances['node-ad_space-field_hashtags'] = array(
-    'bundle' => 'ad_space',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(
-          'semantic_field_format' => '',
-        ),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 1,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'question' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 10,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_hashtags',
-    'label' => 'Hashtags',
-    'required' => FALSE,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'module' => 'taxonomy',
-      'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
-      ),
-      'type' => 'taxonomy_autocomplete',
-      'weight' => 3,
-    ),
-  );
-
   // Exported field_instance: 'node-ad_space-field_image_adspace'.
   $field_instances['node-ad_space-field_image_adspace'] = array(
     'bundle' => 'ad_space',
@@ -1937,7 +1875,6 @@ function homepage_activity_feed_feature_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Body');
   t('Feed Options');
-  t('Hashtags');
   t('Image');
   t('Sticky date');
   t('Sticky to activity feeds');
