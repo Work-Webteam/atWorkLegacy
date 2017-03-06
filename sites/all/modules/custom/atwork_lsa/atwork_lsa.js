@@ -388,6 +388,7 @@
       $('#edit-field-lsa-pecsf-id-2').slideUp('fast');
       $('#edit-field-lsa-charity-name-2').slideUp('fast');
       $('#edit-field-lsa-donation-amount-2').slideUp('fast');
+      $('#edit-field-lsa-second-donation-und-0').prop("checked", true);
 
 
     });
