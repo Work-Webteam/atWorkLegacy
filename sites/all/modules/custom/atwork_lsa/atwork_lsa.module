@@ -316,7 +316,27 @@ function atwork_lsa_node_view($node, $view_mode, $langcode) {
       <em style="color: red; font-weight: bold;">Print and retain this confirmation for your records.</em>',*/
       //'#markup' => '<strong style="color: red; font-weight: bold;">Please review your information below and make any necessary changes. If you have difficulty updating your details, please contact us at <a href="mailto:longserviceawards@gov.bc.ca">longserviceawards@gov.bc.ca</a> or call Jenny Pescod at (250) 356-7916.</strong><br /><br />',
     );
-  /*
+  $all_years = array();
+  if(isset($node->field_lsa_previous_service_miles['und'][0]['value']) && $node->field_lsa_previous_service_miles['und'][0]['value']){
+    foreach($node->field_lsa_previous_service_miles['und'][0]['value'] as $year){
+      $all_years[] = $year;
+    }
+  }
+  if(isset($node->field_lsa_milestone_year['und'][0]['value']) && $node->field_lsa_milestone_year['und'][0]['value'] != 0){
+    $all_years[] =  $node->field_lsa_milestone_year['und'][0]['value'];
+  }
+
+  sort($all_years);
+  $all_years = array_unique($all_years);
+
+  // Now make a string
+  $return_string_year = '';
+  foreach($all_years as $year=>$value){
+    $return_string_year .= $year . " ";
+  }
+  dpm($node);
+  $field_lsa_milestone_year['und'][0]['value'] = $return_string_year;
+   /*
   $node->content['bottom_message'] = array(
       '#weight' => 90,
       '#markup' => '<p class="feature_box_yellow" style="margin-top: 1em;">If you have questions about your RSVP, please contact us at <a href="mailto:longserviceawards@gov.bc.ca">LongServiceAwards@gov.bc.ca</a></p><p class="feature_box_yellow" style="margin-top: 1em;">If you  have questions about travel arrangements, please contact your <a href="/career/long-service-awards/long_service_awards_contacts">Ministry Long Service Awards Contact</a></p><br />
