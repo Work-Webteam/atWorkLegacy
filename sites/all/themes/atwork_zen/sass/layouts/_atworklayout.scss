@@ -64,7 +64,8 @@ only screen and (                min-resolution: 2dppx) {
   #block-views-gallery-reference-block-2,
   #block-boxes-homepage-logos,
   #footer #footer-copyright table td.sideBrdr,
-  .jsNewActivityWindow.atwork-activity-processed {
+  /*.jsNewActivityWindow.atwork-activity-processed,*/
+  #block-block-52 {
     display: none!important;
   }
   .front #block-views-home-page-blocks-zen-block-2 {
@@ -107,7 +108,7 @@ only screen and (                min-resolution: 2dppx) {
     display:block!important;
     position: inherit;
     min-height: 250px;
-    max-height: 300px;
+    max-height: 450px;
     overflow: hidden;
   }
   .front .region.region-social-side {
@@ -119,8 +120,9 @@ only screen and (                min-resolution: 2dppx) {
   .front #social-side h2.block__title.block-title {
   width: 100%!important;
   }
-  .front #social-side .atwork-activity-block-container {
-    margin-top: 0px!important;
+  .front #social-side h2.block__title.block-title {
+     text-align: left;
+     padding-left: 12px;
   }
   .front #social-side #status-update .form-textarea-wrapper {
     max-width:85%!important;
@@ -153,7 +155,9 @@ only screen and (                min-resolution: 2dppx) {
     #views_slideshow_controls_text_home_page_blocks_zen-block_5,
     #block-views-gallery-reference-block-2,
     #block-boxes-homepage-logos,
-    .front #social-side #status-update  {
+    .front #social-side #status-update,
+    #block-block-52,
+    /*.jsNewActivityWindow.atwork-activity-processed*/ {
       display: none!important;
     }
     #block-views-home-page-blocks-zen-block-1,
@@ -267,6 +271,10 @@ only screen and (                min-resolution: 2dppx) {
     .front #social-side h2.block__title.block-title {
     width: 100%!important;
     }
+    .front #social-side h2.block__title.block-title {
+      text-align: left;
+      padding-left: 12px;
+    }
     .front div#social-side {
     display: block !important;
     position: inherit;
@@ -291,8 +299,11 @@ and (orientation: portrait) {
   #block-boxes-homepage-logos,
   #views_slideshow_controls_text_home_page_blocks_zen-block_5,
   #social-side .admin-advanced-feed-settings-view,
-  .jsNewActivityWindow.atwork-activity-processed  {
+  /*.jsNewActivityWindow.atwork-activity-processed*/  {
     display: none!important;
+  }
+  #social-side .block-header-inner {
+    padding-right: 10px;
   }
   #block-views-home-page-blocks-zen-block-5 {
     margin-bottom: 25px!important;
@@ -377,7 +388,7 @@ and (orientation: portrait) {
     display:block!important;
     position: inherit;
     min-height: 250px;
-    max-height: 330px;
+    max-height: 380px;
     overflow: hidden;
   }
   .front .region.region-social-side {
@@ -462,7 +473,7 @@ and (orientation: portrait) {
 
 /* Mobile Menu Appearance */
 #block-atwork-mobile-atwork-mobile-menu-block #full_menu {
-  padding-bottom:10px;
+  padding:20px 0 0 10px;
 }
 
 #block-atwork-mobile-atwork-mobile-menu-block {
@@ -470,11 +481,10 @@ and (orientation: portrait) {
   position: absolute;
   top: 0;
   left: 0;
-  display: block;
   width: 100%;
-  min-height: 36px;
+  min-height: 56px;
   overflow-y: scroll;
-  padding: 20px 0 0 10px;
+  padding: 0;
   background-color: #ECECEC;
   background-image: url(/sites/all/themes/atwork_zen/images/atwork-logo-menu.png);
   background-repeat: no-repeat;
