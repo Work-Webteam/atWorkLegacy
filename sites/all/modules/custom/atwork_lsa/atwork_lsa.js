@@ -149,8 +149,8 @@
     // We will manipulate this behind the scenes
     $('#edit-field-lsa-certificate-ordered').hide();
     // We want option A before option b for the PECSF
-    divB = $('#edit-field-lsa-donation-options-und-0').parent().detach();
-    divB.insertAfter($('#edit-field-lsa-donation-options-und-1').parent());
+    ///divB = $('#edit-field-lsa-donation-options-und-0').parent().detach();
+    ///divB.insertAfter($('#edit-field-lsa-donation-options-und-1').parent());
     // And no NA option here:
     $('#edit-field-lsa-donation-options-und-none').parent().hide();
     $('#edit-field-lsa-second-donation-und-none').parent().hide();
