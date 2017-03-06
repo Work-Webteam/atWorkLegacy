@@ -907,6 +907,25 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'text_long',
   );
 
+  // Exported field_base: 'field_lsa_notes_ceremony'.
+  $field_bases['field_lsa_notes_ceremony'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_notes_ceremony',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
   // Exported field_base: 'field_lsa_number_attending'.
   $field_bases['field_lsa_number_attending'] = array(
     'active' => 1,
@@ -1504,6 +1523,34 @@ function atwork_lsa_features_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_boolean',
+  );
+
+  // Exported field_base: 'field_lsa_prefix'.
+  $field_bases['field_lsa_prefix'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_prefix',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        1 => 'Mr.',
+        2 => 'Ms.',
+        3 => 'Mrs.',
+        4 => 'Miss',
+        5 => 'Dr.',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_integer',
   );
 
   // Exported field_base: 'field_lsa_previous_service_miles'.

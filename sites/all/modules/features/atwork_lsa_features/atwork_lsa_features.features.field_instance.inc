@@ -2437,6 +2437,80 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-lsa_application-field_lsa_notes_ceremony'.
+  $field_instances['node-lsa_application-field_lsa_notes_ceremony'] = array(
+    'bundle' => 'lsa_application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 20,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_notes_ceremony',
+    'label' => 'Notes (Ceremony)',
+    'required' => 0,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'maxlength_js' => '',
+        'maxlength_js_enforce' => 0,
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        'maxlength_js_truncate_html' => 0,
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 31,
+    ),
+  );
+
   // Exported field_instance: 'node-lsa_application-field_lsa_number_attending'.
   $field_instances['node-lsa_application-field_lsa_number_attending'] = array(
     'bundle' => 'lsa_application',
@@ -3234,6 +3308,82 @@ function atwork_lsa_features_field_default_field_instances() {
       ),
       'type' => 'options_select',
       'weight' => 15,
+    ),
+  );
+
+  // Exported field_instance: 'node-lsa_application-field_lsa_prefix'.
+  $field_instances['node-lsa_application-field_lsa_prefix'] = array(
+    'bundle' => 'lsa_application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'editablefields',
+        'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
+          'semantic_field_format' => '',
+        ),
+        'type' => 'editable',
+        'weight' => 7,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_prefix',
+    'label' => 'Prefix',
+    'required' => 1,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'semantic_field_format' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 9,
     ),
   );
 
@@ -4437,65 +4587,6 @@ function atwork_lsa_features_field_default_field_instances() {
       ),
       'type' => 'text_textarea',
       'weight' => 25,
-    ),
-  );
-
-  // Exported field_instance: 'node-lsa_pin_application-field_hashtags'.
-  $field_instances['node-lsa_pin_application-field_hashtags'] = array(
-    'bundle' => 'lsa_pin_application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 21,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'question' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 10,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_hashtags',
-    'label' => 'Hashtags',
-    'required' => FALSE,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'module' => 'taxonomy',
-      'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
-      ),
-      'type' => 'taxonomy_autocomplete',
-      'weight' => 0,
     ),
   );
 
@@ -6158,7 +6249,6 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Engravement');
   t('First Name');
   t('Guest Attending');
-  t('Hashtags');
   t('Home Phone');
   t('I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target ="_blank">Service Pin Recognition Eligibility Guidelines</a> (which I have reviewed) that as of December 31, 2017, I will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and am therefore eligible to receive a service pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.');
   t('I do not wish to take part in the Long Service Awards survey.');
@@ -6171,6 +6261,7 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Ministry Representative Email');
   t('Ministry/Organization');
   t('Notes');
+  t('Notes (Ceremony)');
   t('Number Attending');
   t('Office');
   t('Office Street Address');
@@ -6182,6 +6273,7 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Please select the retroactive milestone pin(s) you would like to order');
   t('Please use the format:A1A1A1');
   t('Postal Code');
+  t('Prefix');
   t('Province');
   t('RSVP');
   t('Retiring in 2017?');

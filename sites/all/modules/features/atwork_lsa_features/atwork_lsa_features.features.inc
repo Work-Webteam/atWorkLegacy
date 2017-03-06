@@ -50,11 +50,7 @@ function atwork_lsa_features_node_info() {
       'description' => '',
       'has_title' => '1',
       'title_label' => t('Title'),
-      'help' => t('<p>Once you have entered all of the required information and clicked the &ldquo;save&rdquo; button at the bottom of the screen, you will receive:</p>
-		<ol>
-			<li>A confirmation page displaying all of the information you’ve entered. Please check this page to ensure the information is accurate and then print a copy for your records. If something is incorrect, please contact <a href="mailto:Gillian.Kish@gov.bc.ca">Gillian Kish</a>.</li>
-			<li>An automated email thanking you for your registration.</li>
-		</ol>'),
+      'help' => '',
     ),
   );
   drupal_alter('node_info', $items);
