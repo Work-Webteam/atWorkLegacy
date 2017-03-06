@@ -10,6 +10,69 @@
 function atwork_lsa_features_field_default_field_bases() {
   $field_bases = array();
 
+  // Exported field_base: 'field_gal_employee_number'.
+  $field_bases['field_gal_employee_number'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_gal_employee_number',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_gal_first_name'.
+  $field_bases['field_gal_first_name'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_gal_first_name',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_gal_last_name'.
+  $field_bases['field_gal_last_name'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_gal_last_name',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_lsa_25year_certificatename'.
   $field_bases['field_lsa_25year_certificatename'] = array(
     'active' => 1,
@@ -189,13 +252,34 @@ function atwork_lsa_features_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        1 => 2016,
-        2 => 2015,
+        1 => 2017,
+        2 => 2016,
       ),
       'allowed_values_function' => '',
     ),
     'translatable' => 0,
     'type' => 'list_integer',
+  );
+
+  // Exported field_base: 'field_lsa_branch'.
+  $field_bases['field_lsa_branch'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_branch',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
   );
 
   // Exported field_base: 'field_lsa_branch_department'.
@@ -315,6 +399,52 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'list_integer',
   );
 
+  // Exported field_base: 'field_lsa_certificate_ordered'.
+  $field_bases['field_lsa_certificate_ordered'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_certificate_ordered',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 'No',
+        1 => 'Yes',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
+  );
+
+  // Exported field_base: 'field_lsa_charity_name_2'.
+  $field_bases['field_lsa_charity_name_2'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_charity_name_2',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_lsa_city'.
   $field_bases['field_lsa_city'] = array(
     'active' => 1,
@@ -364,6 +494,73 @@ function atwork_lsa_features_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'datetime',
+  );
+
+  // Exported field_base: 'field_lsa_donation_amount'.
+  $field_bases['field_lsa_donation_amount'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_donation_amount',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_lsa_donation_amount_2'.
+  $field_bases['field_lsa_donation_amount_2'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_donation_amount_2',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_lsa_donation_options'.
+  $field_bases['field_lsa_donation_options'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_donation_options',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 'Option B: Please make a donation on my behalf, to the PECSF Fund Supported Pool of regional programs in my area.',
+        1 => 'Option A:  Please make a donation on my behalf, to the following charity',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
   );
 
   // Exported field_base: 'field_lsa_email'.
@@ -670,6 +867,27 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'number_integer',
   );
 
+  // Exported field_base: 'field_lsa_ministry_rep_email'.
+  $field_bases['field_lsa_ministry_rep_email'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_ministry_rep_email',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_lsa_notes'.
   $field_bases['field_lsa_notes'] = array(
     'active' => 1,
@@ -854,70 +1072,71 @@ function atwork_lsa_features_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        15 => 'Aboriginal Relations and Reconciliation',
-        16 => 'Advanced Education',
+        15 => 'Ministry of Aboriginal Relations and Reconciliation',
+        16 => 'Ministry of Advanced Education',
+        18 => 'Ministry of Agriculture',
+        26 => 'Ministry of Children and Family Development',
+        29 => 'Ministry of Community Sport and Cultural Development',
+        33 => 'Ministry of Education',
+        35 => 'Ministry of Energy and Mines',
+        36 => 'Ministry of Environment',
+        39 => 'Ministry of Finance',
+        44 => 'Ministry of Forests Lands and Natural Resource Operations',
+        48 => 'Ministry of Health',
+        51 => 'Ministry of International Trade',
+        53 => 'Ministry of Jobs Tourism and Skills Training',
+        54 => 'Ministry of Justice',
+        60 => 'Ministry of Natural Gas Development',
+        74 => 'Ministry of Public Safety and Solicitor General',
+        79 => 'Ministry of Small Business and Red Tape Reduction',
+        80 => 'Ministry of Social Development and Social Innovation',
+        81 => 'Ministry of Technology Innovation and Citizens\' Services',
+        82 => 'Ministry of Transportation and Infrastructure',
         17 => 'Agricultural Land Commission',
-        18 => 'Agriculture',
         19 => 'BC Arts Council',
         20 => 'BC Farm Industry Review Board',
         21 => 'BC Human Rights Tribunal',
         22 => 'BC Pension Corporation',
         23 => 'BC Public Service Agency',
         24 => 'BC Review Board',
+        89 => 'BC Transportation Financing Authority',
         25 => 'Board Resourcing and Development Office',
-        26 => 'Children and Family Development',
+        85 => 'Community Care and Assisted Living Appeal Board',
         28 => 'Community Living BC',
-        29 => 'Community, Sport and Cultural Development',
-        30 => 'Coroners Service of BC',
         31 => 'Crown Agencies Resource Office',
         32 => 'Destination BC',
-        33 => 'Education',
         34 => 'Elections BC',
-        35 => 'Energy and Mines',
-        36 => 'Environment',
+        86 => 'Employment and Assistance Appeal Tribunal',
         37 => 'Environmental Appeal Board',
         38 => 'Environmental Assessment Office',
-        39 => 'Finance',
         40 => 'Financial Institutions Commission',
         41 => 'Financial Services Tribunal',
         42 => 'Forest Appeals Commission',
         43 => 'Forest Practices Board',
-        44 => 'Forests, Lands and Natural Resource Operations',
         47 => 'Government Communications and Public Engagement',
-        48 => 'Health',
+        87 => 'Hospital Appeal Board',
         49 => 'Independent Investigations Office',
         50 => 'Intergovernmental Relations Secretariat',
-        51 => 'International Trade',
         52 => 'Islands Trust',
-        53 => 'Jobs, Tourism and Skills Training (Responsible for Labour)',
-        54 => 'Justice',
-        57 => 'Legislative Assembly',
+        57 => 'Legislative Assembly of BC',
         58 => 'Liquor Distribution Branch',
-        59 => 'Mediation and Arbitration Board',
-        60 => 'Natural Gas Development',
         61 => 'Office of the Auditor General',
         62 => 'Office of the Auditor General for Local Government',
-        63 => 'Office of the Fire Commisioner',
+        63 => 'Office of the Fire Commissioner',
         64 => 'Office of the Information and Privacy Commissioner',
         65 => 'Office of the Merit Commissioner',
         66 => 'Office of the Ombudsperson',
         67 => 'Office of the Police Complaint Commissioner',
         68 => 'Office of the Premier',
-        69 => 'Office of the Registar of Lobbyists',
-        70 => 'Oil and Gas Appeal Trubunal',
+        70 => 'Oil and Gas Appeal Tribunal',
         71 => 'Passenger Transportation Board',
         72 => 'Property Assessment Appeal Board',
         73 => 'Public Guardian and Trustee',
-        74 => 'Public Safety and Solicitor General',
         75 => 'Public Sector Employers\' Council Secretariat',
-        76 => 'Representative for Children and Youth',
+        76 => 'Office of the Representative for Children and Youth',
         77 => 'Royal BC Museum',
         78 => 'Safety Standards Appeal Board',
-        79 => 'Small Business and Red Tape Reduction',
-        80 => 'Social Development and Social Innovation',
-        81 => 'Technology, Innovation and Citizens\' Services',
-        82 => 'Transportation and Infrastructure',
-        83 => 'Vital Statistics Agency',
+        88 => 'Surface Rights Board of BC',
         84 => 'Workers\' Compensation Appeal Tribunal',
       ),
       'allowed_values_function' => '',
@@ -949,6 +1168,120 @@ function atwork_lsa_features_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_boolean',
+  );
+
+  // Exported field_base: 'field_lsa_pecsf_charity_name'.
+  $field_bases['field_lsa_pecsf_charity_name'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_pecsf_charity_name',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_lsa_pecsf_id'.
+  $field_bases['field_lsa_pecsf_id'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_pecsf_id',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_lsa_pecsf_id_2'.
+  $field_bases['field_lsa_pecsf_id_2'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_pecsf_id_2',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_lsa_pecsf_region'.
+  $field_bases['field_lsa_pecsf_region'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_pecsf_region',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'Alberni Clayoquot' => 'Alberni Clayoquot',
+        'Bulkley-Nechako' => 'Bulkley-Nechako',
+        'Cariboo' => 'Cariboo',
+        'Central Coast' => 'Central Coast',
+        'Fraser Valley' => 'Fraser Valley',
+        'Central Kootenay' => 'Central Kootenay',
+        'Central Okanagan' => 'Central Okanagan',
+        'Columbia-Shuswap' => 'Columbia-Shuswap',
+        'Comox-Strathcona' => 'Comox-Strathcona',
+        'Cowichan Valley' => 'Cowichan Valley',
+        'East Kootenay' => 'East Kootenay',
+        'Fraser-Fort George' => 'Fraser-Fort George',
+        'Greater Vancouver' => 'Greater Vancouver',
+        'Greater Victoria' => 'Greater Victoria',
+        'Haida Gwaii' => 'Haida Gwaii',
+        'Kitimat-Stikine' => 'Kitimat-Stikine',
+        'Kootenay Boundary' => 'Kootenay Boundary',
+        'Mount Waddington' => 'Mount Waddington',
+        'Nanaimo' => 'Nanaimo',
+        'North Okanagan' => 'North Okanagan',
+        'Northern Rockies' => 'Northern Rockies',
+        'Okanagan-Similkameen' => 'Okanagan-Similkameen',
+        'Peace River' => 'Peace River',
+        'Powell River' => 'Powell River',
+        'Squamish-Lillooet' => 'Squamish-Lillooet',
+        'Stikine' => 'Stikine',
+        'Sunshine Coast' => 'Sunshine Coast',
+        'Thompson-Nicola' => 'Thompson-Nicola',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_lsa_pin_employee_number'.
@@ -1030,59 +1363,83 @@ function atwork_lsa_features_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        1 => 'BC Public Service Agency',
-        2 => 'Ministry of Aboriginal Relations and Reconciliation',
-        3 => 'Ministry of Advanced Education',
-        4 => 'Ministry of Agriculture',
-        5 => 'Ministry of Children and Family Development',
-        6 => 'Ministry of Community, Sport and Cultural Development',
-        7 => 'Ministry of Education',
-        8 => 'Ministry of Energy and Mines',
-        9 => 'Ministry of Environment',
-        10 => 'Ministry of Finance',
-        11 => 'Ministry of Forests, Lands and Natural Resource Operations',
-        12 => 'Ministry of Health',
-        13 => 'Ministry of International Trade',
-        14 => 'Ministry of Jobs, Tourism and Skills Training',
-        15 => 'Ministry of Justice',
-        16 => 'Ministry of Natural Gas Development',
-        17 => 'Ministry of Public Safety and Solicitor General',
-        18 => 'Ministry of Small Business and Red Tape Reduction',
-        19 => 'Ministry of Social Development and Social Innovation',
-        20 => 'Ministry of Technology, Innovation and Citizens\' Services',
-        21 => 'Ministry of Transportation and Infrastructure',
+        1 => 'Ministry of Aboriginal Relations and Reconciliation',
+        2 => 'Ministry of Advanced Education',
+        3 => 'Ministry of Agriculture',
+        4 => 'Ministry of Children and Family Development',
+        5 => 'Ministry of Community, Sport and Cultural Development',
+        6 => 'Ministry of Education',
+        7 => 'Ministry of Energy and Mines',
+        8 => 'Ministry of Environment',
+        9 => 'Ministry of Finance',
+        10 => 'Ministry of Forests, Lands and Natural Resource Operations',
+        11 => 'Ministry of Health',
+        12 => 'Ministry of International Trade',
+        13 => 'Ministry of Jobs, Tourism and Skills Training',
+        14 => 'Ministry of Justice',
+        15 => 'Ministry of Natural Gas Development',
+        16 => 'Ministry of Public Safety and Solicitor General',
+        17 => 'Ministry of Small Business and Red Tape Reduction',
+        18 => 'Ministry of Social Development and Social Innovation',
+        19 => 'Ministry of Technology, Innovation and Citizens\' Services',
+        20 => 'Ministry of Transportation and Infrastructure',
+        21 => 'Accommodation and Real Estate Services (ARES)',
+        22 => 'Agricultural Land Commission',
+        23 => 'Auditor General for Local Government',
+        24 => 'BC Arts Council',
+        25 => 'BC Coroners Service',
+        26 => 'BC Farm Industry Review Board',
+        27 => 'BC Human Rights Tribunal',
+        28 => 'BC Pension Corporation',
+        29 => 'BC Public Service Agency',
+        30 => 'BC Review Board',
+        31 => 'BC Transportation Financing Authority',
+        32 => 'Board Resourcing and Development Office',
+        33 => 'Community Care & Assisted Living Appeal Board',
+        34 => 'Community Living BC',
+        35 => 'Crown Agencies Resource Office',
+        36 => 'Destination BC',
+        37 => 'Elections BC',
+        38 => 'Employment and Assistance Appeal Tribunal',
+        39 => 'Environmental Appeal Board',
+        40 => 'Environmental Assessment Office',
+        41 => 'Family Maintenance Enforcement Program',
+        42 => 'Financial Institutions Commission',
+        43 => 'Financial Services Tribunal',
+        44 => 'Forest Appeals Commission',
+        45 => 'Forest Practices Board',
+        46 => 'Government Communications and Public Engagement',
+        47 => 'Government House',
+        48 => 'Hospital Appeal Board',
+        49 => 'Independent Investigations Office',
+        50 => 'Intergovernmental Relations Secretariat',
+        51 => 'Islands Trust',
+        52 => 'Land and Water BC',
+        53 => 'Office of the Auditor General',
+        54 => 'Office of the Fire Commissioner',
+        55 => 'Office of the Information and Privacy Commissioner',
+        56 => 'Office of the Merit Commissioner',
+        57 => 'Office of the Ombudsperson',
+        58 => 'Office of the Police Complaints Commissioner',
+        59 => 'Office of the Representative for Children and Youth',
+        60 => 'Oil and Gas Appeal Tribunal',
+        61 => 'Passenger Transportation Board',
+        62 => 'Property Assessment Appeal Board',
+        63 => 'Provincial Court',
+        64 => 'Public Guardian and Trustee',
+        65 => 'Public Sector Employers\' Council Secretariat',
+        66 => 'Queens’ Printer',
+        67 => 'Royal BC Museum',
+        68 => 'Safety Standards Appeal Board',
+        69 => 'Supreme Court of British Columbia',
+        70 => 'Surface Rights Board of BC',
+        71 => 'Tourism BC',
+        72 => 'Workers’ Compensation Appeal Tribunal',
       ),
       'allowed_values_function' => '',
     ),
     'translatable' => 0,
     'type' => 'list_text',
-  );
-
-  // Exported field_base: 'field_lsa_pin_prefix'.
-  $field_bases['field_lsa_pin_prefix'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_lsa_pin_prefix',
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        1 => 'Mr.',
-        2 => 'Ms.',
-        3 => 'Mrs.',
-        4 => 'Miss',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_integer',
   );
 
   // Exported field_base: 'field_lsa_pin_service_milestone'.
@@ -1118,6 +1475,31 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'list_text',
   );
 
+  // Exported field_base: 'field_lsa_pin_sup_location'.
+  $field_bases['field_lsa_pin_sup_location'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_pin_sup_location',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 'No',
+        1 => 'Yes',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_lsa_pin_terms'.
   $field_bases['field_lsa_pin_terms'] = array(
     'active' => 1,
@@ -1141,34 +1523,6 @@ function atwork_lsa_features_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_boolean',
-  );
-
-  // Exported field_base: 'field_lsa_prefix'.
-  $field_bases['field_lsa_prefix'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_lsa_prefix',
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        1 => 'Mr.',
-        2 => 'Ms.',
-        3 => 'Mrs.',
-        4 => 'Miss',
-        5 => 'Dr.',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_integer',
   );
 
   // Exported field_base: 'field_lsa_previous_service_miles'.
@@ -1271,7 +1625,7 @@ function atwork_lsa_features_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         1 => 'I am registering for myself',
-        2 => 'I am a supervisor, registering on behalf my employee',
+        2 => 'I am a supervisor, registering on behalf of my employee',
         3 => 'I am a ministry rep, registering on behalf of an employee in our ministry/organization',
       ),
       'allowed_values_function' => '',
@@ -1337,6 +1691,31 @@ function atwork_lsa_features_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_lsa_rsvp',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 'No',
+        1 => 'Yes',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
+  );
+
+  // Exported field_base: 'field_lsa_second_donation'.
+  $field_bases['field_lsa_second_donation'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_second_donation',
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -1460,6 +1839,31 @@ function atwork_lsa_features_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
+  );
+
+  // Exported field_base: 'field_lsa_survey'.
+  $field_bases['field_lsa_survey'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_survey',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => '',
+        1 => '',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
   );
 
   // Exported field_base: 'field_lsa_terms'.

@@ -38,8 +38,8 @@ CKEDITOR.stylesSet.add( 'default', [
 		element: 'div',
 		styles: {
 			padding: '5px 10px',
-			background: '#eee',
-			border: '1px solid #ccc'
+			background: 'rgb(238,238,238)',
+			border: '1px solid none'
 		}
 	},*/
 

@@ -42,7 +42,7 @@ function atwork_lsa_features_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'ant_pattern_lsa_application';
-  $strongarm->value = '[node:field-lsa-prefix] [node:field-lsa-first-name] <?php
+  $strongarm->value = '[node:field-lsa-first-name] <?php
 if (isset($node->field_lsa_middle_name[$node->language][0][\'value\']) && $node->field_lsa_middle_name[$node->language][0][\'value\']) {
   print $node->field_lsa_middle_name[$node->language][0][\'value\'] . \' \';
 }
@@ -395,13 +395,13 @@ if (isset($node->field_lsa_middle_name[$node->language][0][\'value\']) && $node-
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '0',
-        ),
-        'path' => array(
           'weight' => '1',
         ),
-        'redirect' => array(
+        'path' => array(
           'weight' => '2',
+        ),
+        'redirect' => array(
+          'weight' => '3',
         ),
       ),
       'display' => array(),
@@ -457,17 +457,20 @@ if (isset($node->field_lsa_middle_name[$node->language][0][\'value\']) && $node-
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'ecard' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '0',
-        ),
-        'path' => array(
           'weight' => '1',
         ),
-        'redirect' => array(
+        'path' => array(
           'weight' => '2',
+        ),
+        'redirect' => array(
+          'weight' => '3',
         ),
       ),
       'display' => array(),
