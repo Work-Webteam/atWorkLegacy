@@ -405,8 +405,6 @@ function atwork_lsa_node_insert($node) {
         'subject' => $ministry_rep_subject,
         'body' => $ministry_rep_body,
         );
-      dpm($ministry_rep_to);
-      dpm($params);
       drupal_mail('atwork_mail', 'atwork_mail_default', $ministry_rep_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
     }
   }
