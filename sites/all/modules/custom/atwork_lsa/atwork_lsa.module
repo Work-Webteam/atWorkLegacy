@@ -45,7 +45,6 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
 
     if (isset($exists['nid']) && $exists['nid']) {
       drupal_goto('career/long-service-awards/application/' . $exists['nid']);
-
     }
   }
 
@@ -628,7 +627,7 @@ function atwork_lsa_node_page_view($node) {
     // Redirect to 403
     //drupal_goto('r4032login');
 
-    //return node_page_view($node);
+    return node_page_view($node);
 
 
   }
