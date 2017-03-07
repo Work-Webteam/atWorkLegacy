@@ -4454,13 +4454,22 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 9,
+        'weight' => 10,
       ),
       'ecard' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 10,
       ),
       'question' => array(
         'label' => 'above',
@@ -4534,13 +4543,22 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 8,
+        'weight' => 9,
       ),
       'ecard' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 9,
       ),
       'question' => array(
         'label' => 'above',
@@ -4613,13 +4631,22 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'email_default',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'ecard' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'inline',
+        'module' => 'email',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'email_default',
+        'weight' => 6,
       ),
       'question' => array(
         'label' => 'above',
@@ -4686,13 +4713,22 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'phone',
-        'weight' => 6,
+        'weight' => 7,
       ),
       'ecard' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'phone',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'phone',
+        'weight' => 7,
       ),
       'question' => array(
         'label' => 'above',
@@ -4771,6 +4807,15 @@ function atwork_lsa_features_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'list_default',
+        'weight' => 1,
+      ),
       'question' => array(
         'label' => 'above',
         'settings' => array(),
@@ -4819,16 +4864,25 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'above',
         'module' => 'text',
         'settings' => array(
-          'semantic_field_format' => 0,
+          'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 25,
+        'weight' => 18,
       ),
       'ecard' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 18,
       ),
       'question' => array(
         'label' => 'above',
@@ -4896,6 +4950,15 @@ function atwork_lsa_features_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 15,
       ),
       'question' => array(
         'label' => 'above',
@@ -4976,6 +5039,15 @@ function atwork_lsa_features_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'full' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 16,
+      ),
       'question' => array(
         'label' => 'above',
         'settings' => array(),
@@ -5052,6 +5124,15 @@ function atwork_lsa_features_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'full' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 17,
+      ),
       'question' => array(
         'label' => 'above',
         'settings' => array(),
@@ -5112,13 +5193,19 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 20,
       ),
       'ecard' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 20,
       ),
       'question' => array(
         'label' => 'above',
@@ -5177,6 +5264,15 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
         'weight' => 0,
       ),
       'question' => array(
@@ -5247,13 +5343,22 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'ecard' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 4,
       ),
       'question' => array(
         'label' => 'above',
@@ -5323,13 +5428,22 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'ecard' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 5,
       ),
       'question' => array(
         'label' => 'above',
@@ -5399,13 +5513,22 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'list_default',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'ecard' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'list_default',
+        'weight' => 8,
       ),
       'question' => array(
         'label' => 'above',
@@ -5468,6 +5591,15 @@ function atwork_lsa_features_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'full' => array(
+        'label' => 'inline',
+        'module' => 'list',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'list_default',
+        'weight' => 2,
+      ),
       'question' => array(
         'label' => 'above',
         'settings' => array(),
@@ -5522,13 +5654,19 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 19,
       ),
       'ecard' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 19,
       ),
       'question' => array(
         'label' => 'above',
@@ -5583,13 +5721,19 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 24,
+        'weight' => 22,
       ),
       'ecard' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 22,
       ),
       'question' => array(
         'label' => 'above',
@@ -5651,16 +5795,28 @@ function atwork_lsa_features_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 20,
+        'label' => 'inline',
+        'module' => 'list',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'list_default',
+        'weight' => 3,
       ),
       'ecard' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'inline',
+        'module' => 'list',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'list_default',
+        'weight' => 3,
       ),
       'question' => array(
         'label' => 'above',
@@ -5709,13 +5865,19 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 22,
+        'weight' => 21,
       ),
       'ecard' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 21,
       ),
       'question' => array(
         'label' => 'above',
@@ -5770,13 +5932,22 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'email_default',
-        'weight' => 12,
+        'weight' => 13,
       ),
       'ecard' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'inline',
+        'module' => 'email',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'email_default',
+        'weight' => 13,
       ),
       'question' => array(
         'label' => 'above',
@@ -5844,13 +6015,22 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 10,
+        'weight' => 11,
       ),
       'ecard' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 11,
       ),
       'question' => array(
         'label' => 'above',
@@ -5920,13 +6100,22 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 11,
+        'weight' => 12,
       ),
       'ecard' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 12,
       ),
       'question' => array(
         'label' => 'above',
@@ -5995,13 +6184,22 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'phone',
-        'weight' => 13,
+        'weight' => 14,
       ),
       'ecard' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'inline',
+        'module' => 'phone',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'phone',
+        'weight' => 14,
       ),
       'question' => array(
         'label' => 'above',

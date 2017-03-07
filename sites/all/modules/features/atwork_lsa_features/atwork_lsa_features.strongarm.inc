@@ -419,13 +419,13 @@ if (isset($node->field_lsa_middle_name[$node->language][0][\'value\']) && $node-
         'custom_settings' => TRUE,
       ),
       'scs' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'question' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'full' => array(
-        'custom_settings' => FALSE,
+        'custom_settings' => TRUE,
       ),
       'rss' => array(
         'custom_settings' => FALSE,
@@ -458,7 +458,7 @@ if (isset($node->field_lsa_middle_name[$node->language][0][\'value\']) && $node-
         'custom_settings' => FALSE,
       ),
       'ecard' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
     ),
     'extra_fields' => array(

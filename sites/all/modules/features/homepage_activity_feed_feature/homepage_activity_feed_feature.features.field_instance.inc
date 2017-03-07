@@ -15,7 +15,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'bundle' => 'ad_space',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'You can insert an image from slot 2-5. For best results, eiter leave the image size at the default (250px) or scale to 120px in width, leaving the height empty. Text will flow around.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -59,6 +59,19 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'label' => 'Body',
     'required' => 0,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
       'display_summary' => 0,
       'semantic_field_format' => '',
       'text_processing' => 1,
@@ -94,7 +107,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
         'settings' => array(
           'image_link' => '',
           'image_style' => 'ad_space_250w',
-          'semantic_field_format' => 0,
+          'semantic_field_format' => '',
         ),
         'type' => 'image',
         'weight' => 4,
@@ -356,18 +369,8 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'semantic_field_format' => '',
-          'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
-        ),
-        'type' => 'date_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 3,
       ),
       'ecard' => array(
@@ -439,11 +442,8 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
-        'settings' => array(
-          'semantic_field_format' => '',
-        ),
-        'type' => 'list_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 2,
       ),
       'ecard' => array(
@@ -498,18 +498,8 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'semantic_field_format' => 0,
-          'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
-        ),
-        'type' => 'date_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 18,
       ),
       'ecard' => array(
@@ -581,11 +571,8 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'list_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 17,
       ),
       'ecard' => array(
@@ -640,18 +627,8 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'semantic_field_format' => 0,
-          'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
-        ),
-        'type' => 'date_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 10,
       ),
       'ecard' => array(
@@ -717,11 +694,8 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'list_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 9,
       ),
       'ecard' => array(
@@ -912,18 +886,8 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'semantic_field_format' => 0,
-          'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
-        ),
-        'type' => 'date_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 6,
       ),
       'ecard' => array(
@@ -995,11 +959,8 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'list_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 5,
       ),
       'ecard' => array(
@@ -1060,18 +1021,8 @@ function homepage_activity_feed_feature_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'semantic_field_format' => 0,
-          'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
-        ),
-        'type' => 'date_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 8,
       ),
       'ecard' => array(
@@ -1149,11 +1100,8 @@ function homepage_activity_feed_feature_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'list_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 7,
       ),
       'ecard' => array(
@@ -1337,18 +1285,8 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'semantic_field_format' => 0,
-          'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
-        ),
-        'type' => 'date_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 7,
       ),
       'ecard' => array(
@@ -1420,11 +1358,8 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'list_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 6,
       ),
       'ecard' => array(
@@ -1622,18 +1557,8 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'semantic_field_format' => 0,
-          'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
-        ),
-        'type' => 'date_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 3,
       ),
       'ecard' => array(
@@ -1706,11 +1631,8 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'list_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 2,
       ),
       'ecard' => array(
@@ -1866,7 +1788,6 @@ function homepage_activity_feed_feature_field_default_field_instances() {
   t('Sticky date');
   t('Sticky to activity feeds');
   t('Use the crosshair icon to drag and drop an image to the top.');
-  t('You can insert an image from slot 2-5. For best results, eiter leave the image size at the default (250px) or scale to 120px in width, leaving the height empty. Text will flow around.');
 
   return $field_instances;
 }

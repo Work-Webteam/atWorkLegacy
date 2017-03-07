@@ -19,7 +19,7 @@ function atwork_lsa_features_default_box() {
   $box->description = 'Long Service Awards';
   $box->options = array(
     'body' => array(
-      'value' => '<p style="text-align: center;"><img alt="" class="image-node_image" src="/sites/default/files/styles/node_image/public/bg/image/2016/0308/longservice-awards2016.jpg" style="width: 200px; height: 176px;" title="Long Service Awards"></p>
+      'value' => '<p style="text-align: center;"><img alt="" class="image-node_image" src="/sites/default/files/styles/node_image/public/bg/image/2016/0308/LongServiceAwards_2017_Feb21.png" style="width: 200px; height: 197px;" title="Long Service Awards"></p>
 
 <ul>
 	<li><a href="/career/long-service-awards" title="Home">Home</a></li>
