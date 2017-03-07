@@ -271,8 +271,8 @@
         '<div id="strap_type">' +
           '<p> Select the strap you would like for your watch </p>' +
           '<label><input type="radio" name="gold_strap_type" value="Gold" id="35_bulova_gold_strap">Gold</label>'+
-          '<label><input type="radio" name="gold_strap_type" value="Brown Leather" id="35_bulova_brown_strap">Brown Leather</label>'+
-          '<label><input type="radio" name="gold_strap_type" value="Black Leather" id="35_bulova_black_strap">Black Leather</label>'+
+          '<label><input type="radio" name="gold_strap_type" value="Brown" id="35_bulova_brown_strap">Brown</label>'+
+          '<label><input type="radio" name="gold_strap_type" value="Black" id="35_bulova_black_strap">Black</label>'+
         '</div>' +
         '<div id="watch_engravement_text_box">' +
           '<p id="engravement_text"></p>' +
@@ -394,9 +394,9 @@
           // Mantle Clock
           '<option value="Napolean Beauty Ergo Mantle Clock" name="mantle_clock" id="40_gift_mantle_clock">“Napolean Beauty” Ergo Mantle Clock</option>' +
           // Diamond earrings
-          '<option value="14kt Diamond Earrings" name="diamond_earrings" id="40_diamond_earrings">Genuine Diamond Stud Earrings: 14 kt white gold</option>' +
+          '<option value="14kt White Gold Diamond Stud Earrings" name="diamond_earrings" id="40_diamond_earrings">Genuine Diamond Stud Earrings: 14 kt white gold</option>' +
           // Diamond pendant
-          '<option value="14kt White Gold Diamond Stud Earrings" name="diamond_pendant_and_chain" id="40_diamond_pendant_and_chain">Genuine Round  Diamond pendant and chain  - 10 kt  white gold </option>' +
+          '<option value="10kt White Gold Diamond Pendant and Chain" name="diamond_pendant_and_chain" id="40_diamond_pendant_and_chain">Genuine Round  Diamond pendant and chain  - 10 kt  white gold </option>' +
           // Glass bowl
           '<option value="Hand-Blown Glass Bowl by Robert Held" name="glass_bowl" id="40_glass_bowl">Hand-blown glass bowl</option>' +
           // MD Print
