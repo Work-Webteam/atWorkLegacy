@@ -76,3 +76,36 @@ $ministry_rep_body = <<<EOT
 <p>If you have questions about the corporate pin program, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
 
 EOT;
+
+
+
+/**
+ * Some ministries require specific email changes: These updates are only for the ministries of: Abor Relations, Adv Education, Education, Health, Env Assess Office, Public Guardian Trustee:
+ */
+
+
+$supervisor_to_special_condition = $node->field_lsa_supervisor_email[$lang][0]['email'];
+$supervisor_subject_special_condition = t('You have registered someone for a Service Pin');
+$supervisor_body_special_condition = <<<EOT
+<span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
+
+<p>Thank you for registering <strong> {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']}</strong> for a $email_milestone year Service Pin(s)</p>
+
+<p>The pin(s) will be mailed directly to your ministry/organization, for presentation during Public Service Week  - June 12-16, 2017.</strong></p>
+
+<p>If you have questions about the corporate pin program, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
+
+EOT;
+
+
+$applicant_to_special_condition = $node->field_lsa_email[$lang][0]['email'];
+$applicant_subject_special_condition = t('Your Service Milestone Pin application has been received');
+$applicant_body_special_condition = <<<EOT
+<span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
+<p>Thank you for registering for your {$email_milestone} year BC Public Service Pin(s), and congratulations on this important career milestone!</p>
+
+<p>Your pin(s) will be sent directly to your ministry/organization, for presentation to you during <strong>Public Service Week (June 12-16)</strong></p>
+
+<p>If you have questions about the corporate pin program, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.
+
+EOT;

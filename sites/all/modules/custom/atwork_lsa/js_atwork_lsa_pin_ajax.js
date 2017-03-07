@@ -68,6 +68,8 @@
    * @param  {array} response [Holds an array of user, supervisor fields for auto-pop, the response.choice key holds the type of submission this will be]
    */
   var feedDetails = function(response){
+    var special_cases = ["1","2","6","11","40","64"]; //Abor Relations, Adv Education, Education, Health, Env Assess Office, Public Guardian Trustee:
+
     checkLabels(response.choice);
 
     // User is filling out their own application
@@ -85,6 +87,16 @@
       $('#edit-field-lsa-home-phone-und-0-value').val(response.phone[0].safe_value);
       $('#edit-field-lsa-branch-und-0-value').val(response.work_group[0].safe_value);
 
+      if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1 ){
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>Your pin(s) will be sent directly to your ministry/organization, for presentation to you during Public Service Week (June 12-16).</em>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').show();
+      } else if ($('#edit-field-lsa-pin-ministry-org-und option:selected').val() != '_none'){
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 12-16, 2017.</em>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').show();
+      } else {
+        $('#edit-field-lsa-pin-ministry-org').find('.description').hide();
+      }
+
     // Supervisor filling out form
     } else if(response.choice == 2){
       // Show field for ministry
@@ -96,10 +108,33 @@
       $('#edit-field-lsa-supervisor-email-und-0-email').val(response.email);
       $('#edit-field-lsa-work-phone-und-0-value').val(response.phone_number[0].safe_value);
 
+      // depending on the situation, show or change the description field
+      if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>The pin(s) will be sent directly to your ministry/organization, for presentation to the employee during Public Service Week (June 12-16).</em>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').show();
+      } else if ($('#edit-field-lsa-pin-ministry-org-und option:selected').val() != '_none'){
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 12-16, 2017.</em>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').show();
+      } else {
+        $('#edit-field-lsa-pin-ministry-org').find('.description').hide();
+      }
+
+
     // Ministry Rep if filling out form.
     } else if(response.choice == 3){
       // Show field for ministry
       $('#edit-field-lsa-pin-ministry-org').slideDown('slow');
+          // depending on the situation, show or change the description field
+      if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>The pin(s) will be sent directly to your ministry/organization, for presentation to the employee during Public Service Week (June 12-16).</em>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').show();
+      } else if ($('#edit-field-lsa-pin-ministry-org-und option:selected').val() != '_none'){
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 12-16, 2017.</em>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').show();
+      } else {
+        $('#edit-field-lsa-pin-ministry-org').find('.description').hide();
+      }
+
     } else {
       // todo - Reset to default?
     }
@@ -125,6 +160,7 @@
       // don't want to show the title for terms field.
       $('#edit-field-lsa-pin-terms').find('.option').html('<span class="form-required" title="This field is required.">*</span>');
       //$('#edit-field-lsa-pin-terms label:first-child').hide();
+      $('#edit-field-lsa-pin-ministry-org').find('.description').hide();
     }
   }
 
@@ -225,6 +261,35 @@
     // Show field for current year status
     $('#edit-field-lsa-milestone-year').slideDown('slow');
 
+    var applicationSubmitter = $('#edit-field-lsa-registerer-und option:selected').val();
+    var special_cases = ["1","2","6","11","40","64"]; //Abor Relations, Adv Education, Education, Health, Env Assess Office, Public Guardian Trustee:
+
+    if(applicationSubmitter == 1){
+      if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>Your pin(s) will be sent directly to your ministry/organization, for presentation to you during Public Service Week (June 12-16).</em>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').show();
+      } else {
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 12-16, 2017.</em>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').show();
+      }
+    } else if(applicationSubmitter == 2){
+      // depending on the situation, show or change the description field
+      if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>The pin(s) will be sent directly to your ministry/organization, for presentation to the employee during Public Service Week (June 12-16).</em>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').show();
+      } else {
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 12-16, 2017.</em>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').show();
+      }
+    }  else if(applicationSubmitter == 3){
+      if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>The pin(s) will be sent directly to your ministry/organization, for presentation to the employee during Public Service Week (June 12-16).</em>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').show();
+      } else {
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 12-16, 2017.</em>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').show();
+      }
+    }
     // Show fields for supervisors
     $('.collapsible.required-fields.group-supervisor-details.field-group-fieldset.form-wrapper.collapse-processed').slideDown('slow');
     $('#edit-field-lsa-pin-terms').slideDown('slow');
