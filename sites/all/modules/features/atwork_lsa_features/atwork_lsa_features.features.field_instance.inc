@@ -4862,11 +4862,8 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
-        'settings' => array(
-          'semantic_field_format' => '',
-        ),
-        'type' => 'text_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 18,
       ),
       'ecard' => array(
@@ -5504,7 +5501,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'bundle' => 'lsa_pin_application',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Service pins will be sent to the employee\'s supervisor for presentation during Public Service Week - June 12-16, 2017.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -5690,7 +5687,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_lsa_pin_sup_location',
     'label' => 'Does your supervisor work in a different office location than you? ',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
@@ -6326,6 +6323,7 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Retro-Active');
   t('Second Charity');
   t('Service Milestone');
+  t('Service pins will be sent to the employee\'s supervisor for presentation during Public Service Week - June 12-16, 2017.');
   t('Special Requirements');
   t('Street');
   t('Supervisor Email');
