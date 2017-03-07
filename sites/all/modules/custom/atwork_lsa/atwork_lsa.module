@@ -44,7 +44,8 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
       ->fetchAssoc();
 
     if (isset($exists['nid']) && $exists['nid']) {
-      drupal_goto('career/long-service-awards/applications/' . $exists['nid']);
+      drupal_goto('career/long-service-awards/application/' . $exists['nid']);
+
     }
   }
 
@@ -311,21 +312,7 @@ function atwork_lsa_node_view($node, $view_mode, $langcode) {
   }
 
   $award_year = date("Y");
-  $node->content['top_message'] = array(
-      '#weight' => -10,
-      /*'#markup' => '<h2>Thank you for your registration</h2>
-      <em style="color: red; font-weight: bold;">Print and retain this confirmation for your records.</em>',*/
-      //'#markup' => '<strong style="color: red; font-weight: bold;">Please review your information below and make any necessary changes. If you have difficulty updating your details, please contact us at <a href="mailto:longserviceawards@gov.bc.ca">longserviceawards@gov.bc.ca</a> or call Jenny Pescod at (250) 356-7916.</strong><br /><br />',
-    );
 
-   /*
-  $node->content['bottom_message'] = array(
-      '#weight' => 90,
-      '#markup' => '<p class="feature_box_yellow" style="margin-top: 1em;">If you have questions about your RSVP, please contact us at <a href="mailto:longserviceawards@gov.bc.ca">LongServiceAwards@gov.bc.ca</a></p><p class="feature_box_yellow" style="margin-top: 1em;">If you  have questions about travel arrangements, please contact your <a href="/career/long-service-awards/long_service_awards_contacts">Ministry Long Service Awards Contact</a></p><br />
-
-        <em style="text-align: center; display: block; margin-bottom: 1em; font-weight: bold;">Congratulations on your Long Service Award!</em>',
-    );
-    */
 }
 
 function atwork_lsa_views_pre_view(&$view, &$display_id, &$args) {
