@@ -44,7 +44,7 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
       ->fetchAssoc();
 
     if (isset($exists['nid']) && $exists['nid']) {
-      drupal_goto('career/long-service-awards/application/' . $exists['nid']);
+      drupal_goto('node/' . $exists['nid']);
     }
   }
 
