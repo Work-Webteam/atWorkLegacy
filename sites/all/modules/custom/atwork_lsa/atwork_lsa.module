@@ -383,11 +383,22 @@ function atwork_lsa_node_insert($node) {
       drupal_mail('atwork_mail', 'atwork_mail_default', $applicant_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
     }
     // supervisor
-    $params = array(
-      'subject' => $supervisor_subject,
-      'body' => $supervisor_body,
-    );
-    drupal_mail('atwork_mail', 'atwork_mail_default', $supervisor_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
+    // Only to specific ministries
+    $check_min = array(
+      15,
+      16,
+      33,
+      48,
+      38,
+      73,
+      );
+    if(isset($node->field_lsa_pin_ministry_org['und'][0]['value']) && $node->field_lsa_pin_ministry_org['und'][0]['value'] && !in_array($node->field_lsa_pin_ministry_org['und'][0]['value'], $check_min)){
+      $params = array(
+        'subject' => $supervisor_subject,
+        'body' => $supervisor_body,
+      );
+      drupal_mail('atwork_mail', 'atwork_mail_default', $supervisor_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
+    }
 
     if(isset($node->field_lsa_ministry_rep_email['und'][0]['value']) && $node->field_lsa_ministry_rep_email['und'][0]['value']){
       $params = array(
@@ -607,9 +618,10 @@ function atwork_lsa_node_page_view($node) {
       $return_string_year = implode(", ", $all_years);
       // Need to put an "and" in at the end of this string, removing the last comma
       $return_string_year = strrev(implode(strrev(' and'), explode(strrev(','), strrev($return_string_year), 2)));
+      $return_string_year = $return_string_year . " years";
     }
     // Change what shows on page
-    $node->field_lsa_pin_service_milestone['und'][0]['value'] = $return_string_year . " years";
+    $node->field_lsa_pin_service_milestone['und'][0]['value'] = $return_string_year ;
     //This is not sent by reference so we must return it.
     return node_page_view($node);
   }
