@@ -385,12 +385,12 @@ function atwork_lsa_node_insert($node) {
     // supervisor
     // Only to specific ministries
     $check_min = array(
-      15,
-      16,
-      33,
-      48,
-      38,
-      73,
+      1, //ABR
+      6, // ED
+      2, // Aved
+      11, // health
+      40, // Environmental assessment office
+      64, // Pub guardian and trustee
       );
     if(isset($node->field_lsa_pin_ministry_org['und'][0]['value']) && $node->field_lsa_pin_ministry_org['und'][0]['value'] && !in_array($node->field_lsa_pin_ministry_org['und'][0]['value'], $check_min)){
       $params = array(
