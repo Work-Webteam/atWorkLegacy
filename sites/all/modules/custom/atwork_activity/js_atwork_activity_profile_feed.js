@@ -9,6 +9,7 @@
     attach: function(context, settings) {
     // On initial load, lets make sure this window is focused.
     window.focus();
+    $(".toggle-com-button").before('<span class="comment-icon"></span>');
 
     // Initialize/take care of comments
     setComments();
