@@ -90,8 +90,10 @@
   function change_award_year() {
     if ($("input[name='field_lsa_register_last_year[und]']:checked").val() == 1) {
       $('select#edit-field-lsa-award-year-und option[value="2"]').prop('selected', true);
+      $('#edit-field-lsa-received-award').show();
     } else {
       $('select#edit-field-lsa-award-year-und option[value="1"]').prop('selected', true);
+      $('#edit-field-lsa-received-award').hide();
     }
   }
 
@@ -303,6 +305,7 @@
     $('#edit-field-lsa-retiring-thisyear-und').change(function () {
       retirement();
     });
+
 
     // Click handler for special requirements
     $('.form-checkbox').change(function(){

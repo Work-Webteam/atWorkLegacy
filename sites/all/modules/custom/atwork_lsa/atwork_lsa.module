@@ -303,26 +303,6 @@ function atwork_lsa_node_view($node, $view_mode, $langcode) {
       '#markup' => '<p class="feature_box_yellow" style="margin-top: 1em;">If you have any questions, please contact your <a href="/career/employee-appreciation/recognition-contacts">Ministry Recognition Contact</a>, or the corporate  contact at the BC Public Service Agency, <a href="mailto:Gillian.Kish@gov.bc.ca">Gillian.Kish@gov.bc.ca</a></p>',
       );
 
-  $all_years = array();
-  if(isset($node->field_lsa_previous_service_miles['und'][0]['value']) && $node->field_lsa_previous_service_miles['und'][0]['value']){
-    foreach($node->field_lsa_previous_service_miles['und'] as $key=>$year){
-      $all_years[] = $year['value'];
-    }
-  }
-  if(isset($node->field_lsa_pin_service_milestone['und'][0]['value']) && $node->field_lsa_pin_service_milestone['und'][0]['value']){
-    $string_year = substr($node->field_lsa_pin_service_milestone['und'][0]['value'], 0,2);
-    $all_years[] =  $string_year;
-  }
-
-  sort($all_years);
-  $all_years = array_unique($all_years);
-
-  // Now make a string
-  $return_string_year = '';
-  foreach($all_years as $year=>$value){
-    $return_string_year .= $value . " ";
-  }
-  $node->field_lsa_pin_service_milestone['und'][0]['value'] = $return_string_year;
   }
 
 
@@ -597,20 +577,72 @@ function atwork_lsa_menu_alter(&$items){
   $items['node/%node']['page callback'] = 'atwork_lsa_node_page_view';
 }
 
+
+/**
+ * Implements hook_node_page_view
+ */
+
 function atwork_lsa_node_page_view($node) {
   global $user;
-  // skip redirect for admins and lsa_admins
-  if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)) {
+
+  /**
+   * For some strange reason, pin form does not show retro milestones
+   * @var [type]
+   */
+  if($node->type == 'lsa_pin_application'){
+
+    $all_years = array();
+    // If we have past years
+    if(isset($node->field_lsa_previous_service_miles['und']) && $node->field_lsa_previous_service_miles['und']){
+      foreach($node->field_lsa_previous_service_miles['und'] as $key=>$year){
+        $all_years[] = $year['value'];
+      }
+    }
+
+    // If we have a current year #
+    if(isset($node->field_lsa_pin_service_milestone['und'][0]) && $node->field_lsa_pin_service_milestone['und'][0]){
+      $string_year = $node->field_lsa_pin_service_milestone['und'][0]['value'];
+      $all_years[] =  $string_year;
+    }
+    // Sort them
+    sort($all_years);
+    // Make sure they did not use the same year more than once
+    $all_years = array_unique($all_years);
+
+    // Now make a string
+    $return_string_year = '';
+    $years = count($all_years);
+    if($years == 1){
+      $return_string_year = $all_years[0] . " year";
+    } elseif($years == 2){
+      $return_string_year = $all_years[0] . " and " . $all_years[1] . " years";
+    } else {
+      // Put it in a string all nice like
+      $return_string_year = implode(", ", $all_years);
+      // Need to put an "and" in at the end of this string, removing the last comma
+      $return_string_year = strrev(implode(strrev(' and'), explode(strrev(','), strrev($return_string_year), 2)));
+    }
+    // Change what shows on page
+    $node->field_lsa_pin_service_milestone['und'][0]['value'] = $return_string_year . " years";
+    //This is not sent by reference so we must return it.
     return node_page_view($node);
   }
+
+
+
   // Redirect any other user who tries to access an lsa application node
   if($node->type == 'lsa_application'){
+    // skip redirect for admins and lsa_admins
+    if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)) {
+      return node_page_view($node);
+    }
     // Give contact details
    //drupal_set_message('The LSA application period has come to an end. If you have any questions or concerns, please contact the Jenny Pescod at (250-356-7916) or email the <a href="mailto:longserviceawards@gov.bc.ca"> Long Service Award inbox </a> ', 'status');
     // Redirect to 403
     //drupal_goto('r4032login');
 
     //return node_page_view($node);
+
 
   }
   else {
