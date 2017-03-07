@@ -3,7 +3,7 @@
 // Collect all milestones applied for
 $milestones = array();
 if(isset($node->field_lsa_pin_service_milestone[$lang][0]['value']) && $node->field_lsa_pin_service_milestone[$lang][0]['value']){
-  $milestones[] = array($node->field_lsa_pin_service_milestone[$lang][0]['value']);
+  $milestones[] = $node->field_lsa_pin_service_milestone[$lang][0]['value'];
 }
 if(isset($node->field_lsa_previous_service_miles[$lang]) && $node->field_lsa_previous_service_miles[$lang]){
   foreach ($node->field_lsa_previous_service_miles[$lang] as $value){
