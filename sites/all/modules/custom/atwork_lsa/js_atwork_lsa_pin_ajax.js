@@ -158,6 +158,7 @@
   };
 
   function setUpPage() {
+    console.log($('#edit-field-lsa-registerer-und').val());
     if($('#edit-field-lsa-registerer-und').val() == '_none'){
       // Hide top fields that user should not have access to
       $('#edit-field-lsa-pin-service-milestone').hide();
@@ -179,10 +180,10 @@
       $('#edit-field-lsa-pin-ministry-org').find('.description').hide();
       $('#field-lsa-ministry-rep-email-add-more-wrapper').hide();
     } else {
-      if($('#edit-field-lsa-milestone-year-und-0').prop("checked", true)){
+      if($('#edit-field-lsa-milestone-year-und-0').is(":checked")){
         $('#edit-field-lsa-pin-service-milestone').hide();
       }
-      if($('#edit-field-lsa-other-milestone-years-und-0').prop("checked", true)){
+      if($('#edit-field-lsa-other-milestone-years-und-0').is(':checked')){
         $('#edit-field-lsa-previous-service-miles').hide();
       }
       setMinistryOptions($("#edit-field-lsa-pin-ministry-org-und option:selected").val());
@@ -197,7 +198,6 @@
    */
 
   function setMinistryOptions(ministry){
-    console.log(ministry);
     switch(true){
       //Only One: 9, 19
       case ministry ==  8:
