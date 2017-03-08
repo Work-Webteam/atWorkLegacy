@@ -515,18 +515,6 @@ function atwork_lsa_form_alter(&$form, &$form_state, $form_id) {
 }
 
 
-/**
- * This section for LSA pin submit handler
- */
-function atwork_lsa_pin_application_submit(&$form, $form_state){
-  dpm($form);
-  dpm($form_state);
-  if($form_state['input']['field_lsa_pin_service_milestone'] == "_none"){
-    $form['field_lsa_pin_service_milestone']['und']['#default_value'] = 0;
-    $form['field_lsa_pin_service_milestone']['und']['#value'] = 0;
-
-  }
-}
 
 
 /**
@@ -546,7 +534,6 @@ function atwork_lsa_form_lsa_pin_application_node_form_alter(&$form, $form_state
   }
   $form['#validate'][] = 'atwork_lsa_pin_application_validate';
   $form['actions']['submit']['#value'] = t('Submit this Service Pin request');
-  $form['#submit'][] = 'atwork_lsa_pin_application_submit';
 
 /*
   // skip defaults for admins who are entering for others

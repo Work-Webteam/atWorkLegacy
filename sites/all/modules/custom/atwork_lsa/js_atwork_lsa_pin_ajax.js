@@ -68,7 +68,7 @@
    * @param  {array} response [Holds an array of user, supervisor fields for auto-pop, the response.choice key holds the type of submission this will be]
    */
   var feedDetails = function(response){
-    var special_cases = ["1","2","6","11","40","64"]; //Abor Relations, Adv Education, Education, Health, Env Assess Office, Public Guardian Trustee:
+    var special_cases = ["1","2","6","11","40","64", "65"]; //Abor Relations, Adv Education, Education, Health, Env Assess Office, Public Guardian Trustee:
 
     checkLabels(response.choice);
     $('#sup-div.required-fields.form-wrapper').hide();
@@ -217,6 +217,7 @@
       case ministry == 29:
       case ministry == 40:
       case ministry == 64:
+      case ministry == 65:
         // If we have previous set handlers on this - lets remove them.
         if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
 
@@ -279,7 +280,7 @@
     $('#edit-field-lsa-milestone-year').slideDown('slow');
 
     var applicationSubmitter = $('#edit-field-lsa-registerer-und option:selected').val();
-    var special_cases = ["1","2","6","11","40","64"]; //Abor Relations, Adv Education, Education, Health, Env Assess Office, Public Guardian Trustee:
+    var special_cases = ["1","2","6","11","40","64", "65"]; //Abor Relations, Adv Education, Education, Health, Env Assess Office, Public Guardian Trustee:
 
     if(applicationSubmitter == 1){
       if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
