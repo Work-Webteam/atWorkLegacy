@@ -199,10 +199,10 @@
 
   function setMinistryOptions(ministry){
     switch(true){
-      //Only One: 9, 19
+      //Only One
       case ministry ==  8:
       case ministry == 18:
-        // We can only allow one box to be checked if they have chosen 9 or 19
+        // We can only allow one box to be checked if they have chosen
         $('#edit-field-lsa-other-milestone-years').slideDown('slow');
         // Make sure our labels are set correctly
         if($('#edit-field-lsa-previous-service-miles-und').not('atwork-activity-processed')){
@@ -230,6 +230,7 @@
       case ministry == 40:
       case ministry == 64:
       case ministry == 65:
+      case ministry == 19:
         // If we have previous set handlers on this - lets remove them.
         if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
 
@@ -248,6 +249,8 @@
       break;
 
       //If this is one of their award years then they can choose multiple extras: 20
+      //MTICS changed their mind on this
+      /*
       case ministry == 19:
         // Check if this had other restrictions previously
         if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
@@ -271,6 +274,7 @@
           $('#edit-field-lsa-previous-service-miles').slideUp('slow');
         }
         break;
+      */
       // Any other number is not allowed to have retroactive
       default:
         if($('#edit-field-lsa-milestone-year-und').hasClass('atwork-activity-processed')){
