@@ -4793,7 +4793,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'list',
         'settings' => array(
           'semantic_field_format' => '',
@@ -5793,11 +5793,8 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'list',
-        'settings' => array(
-          'semantic_field_format' => '',
-        ),
-        'type' => 'list_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 3,
       ),
       'ecard' => array(
