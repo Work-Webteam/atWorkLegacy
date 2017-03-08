@@ -77,6 +77,8 @@
     if(response.choice == 1){
       // Show field for ministry
       $('#edit-field-lsa-pin-ministry-org').slideDown('slow');
+      $('#edit-field-lsa-ministry-rep-email-und-0-value').val('');
+      $('#field-lsa-ministry-rep-email-add-more-wrapper').hide();
 
 
       // populate fields for user - we know they are filling this out for themselves.
@@ -105,7 +107,8 @@
     } else if(response.choice == 2){
       // Show field for ministry
       $('#edit-field-lsa-pin-ministry-org').slideDown('slow');
-
+      $('#edit-field-lsa-ministry-rep-email-und-0-value').val('');
+      $('#field-lsa-ministry-rep-email-add-more-wrapper').hide();
       // Populated fields for supervisors
       $('#edit-field-lsa-supervisor-first-name-und-0-value').val(response.first_name[0].safe_value);
       $('#edit-field-lsa-supervisor-last-name-und-0-value').val(response.last_name[0].safe_value);
@@ -132,6 +135,8 @@
     } else if(response.choice == 3){
       // Show field for ministry
       $('#edit-field-lsa-pin-ministry-org').slideDown('slow');
+      $('#field-lsa-ministry-rep-email-add-more-wrapper').show();
+
           // depending on the situation, show or change the description field
       if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
         $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>The pin(s) will be sent directly to your ministry/organization, for presentation to the employee during Public Service Week (June 12-16).</em>");
@@ -172,6 +177,7 @@
       $('#edit-field-lsa-pin-terms').find('.option').html('<span class="form-required" title="This field is required.">*</span>');
       //$('#edit-field-lsa-pin-terms label:first-child').hide();
       $('#edit-field-lsa-pin-ministry-org').find('.description').hide();
+      $('#field-lsa-ministry-rep-email-add-more-wrapper').hide();
     }
   }
 
