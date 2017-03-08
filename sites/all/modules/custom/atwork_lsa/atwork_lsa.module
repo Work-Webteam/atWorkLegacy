@@ -175,6 +175,12 @@ function atwork_lsa_application_validate($form, &$form_state) {
 
 function atwork_lsa_pin_application_validate($form, &$form_state){
   $lang = $form_state['values']['language'];
+
+  global $user;
+
+  if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)) {
+    return true;
+  }
   // Check if an application has already been submitted for this user
   $exists = db_select('field_data_field_lsa_pin_employee_number', 'e')
       ->fields('e', array('entity_id'))
@@ -625,7 +631,6 @@ function atwork_lsa_node_page_view($node) {
         $all_years[] = $year['value'];
       }
     }
-
     // If we have a current year #
     if(isset($node->field_lsa_pin_service_milestone['und'][0]) && $node->field_lsa_pin_service_milestone['und'][0]){
       $string_year = $node->field_lsa_pin_service_milestone['und'][0]['value'];
@@ -635,7 +640,6 @@ function atwork_lsa_node_page_view($node) {
     sort($all_years);
     // Make sure they did not use the same year more than once
     $all_years = array_unique($all_years);
-
     // Now make a string
     $return_string_year = '';
     $years = count($all_years);
@@ -648,10 +652,23 @@ function atwork_lsa_node_page_view($node) {
       $return_string_year = implode(", ", $all_years);
       // Need to put an "and" in at the end of this string, removing the last comma
       $return_string_year = strrev(implode(strrev(' and'), explode(strrev(','), strrev($return_string_year), 2)));
-      $return_string_year = $return_string_year . " years";
+      $return_string_year .= " years";
     }
     // Change what shows on page
-    $node->field_lsa_pin_service_milestone['und'][0]['value'] = $return_string_year ;
+    if(isset($node->field_lsa_pin_service_milestone['und'][0]['value']) && $node->field_lsa_pin_service_milestone['und'][0]['value']){
+      $node->field_lsa_pin_service_milestone['und'][0]['value'] = $return_string_year ;
+    } else {
+      // build array ourselves
+      $node->field_lsa_pin_service_milestone = array(
+        'und' => array(
+          0 => array(
+            'value' => $return_string_year,
+            'format' => NULL,
+            'safe_value' => $return_string_year,
+            ),
+          ),
+        );
+    }
     //This is not sent by reference so we must return it.
     return node_page_view($node);
   }
