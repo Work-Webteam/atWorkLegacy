@@ -9,7 +9,7 @@
   function lsaGift() {
 
     if ($("input[name='field_lsa_register_last_year[und]']:checked").val() == 1){
-      $('#edit-field-lsa-award-und-0-value').val("2015 Recipient - award received");
+      $('#edit-field-lsa-award-und-0-value').val("2016 Recipient - award received");
       $('#edit-field-lsa-award-id-und-0-value').val(1);
     }
     // Always reset textbox when this value changes, so that we don't have a mis-match between award and years of service
