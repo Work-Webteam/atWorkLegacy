@@ -454,6 +454,8 @@ function atwork_lsa_node_insert($node) {
 
 
     // applicant email, only sent if applicant has applied for themselves
+    dpm($node);
+    dpm(in_array($node->field_lsa_pin_ministry_org['und'][0]['value'], $check_min));
     if($node->field_lsa_registerer['und'][0]['value'] == 1 && !in_array($node->field_lsa_pin_ministry_org['und'][0]['value'], $check_min)){
       $params = array(
         'subject' => $applicant_subject,
@@ -462,6 +464,7 @@ function atwork_lsa_node_insert($node) {
       drupal_mail('atwork_mail', 'atwork_mail_default', $applicant_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
     }
     if($node->field_lsa_registerer['und'][0]['value'] == 1 && in_array($node->field_lsa_pin_ministry_org['und'][0]['value'], $check_min)){
+      dpm("Correct email");
       $params = array(
         'subject' => $applicant_subject_special_condition,
         'body' => $applicant_body_special_condition,
@@ -481,7 +484,7 @@ function atwork_lsa_node_insert($node) {
       drupal_mail('atwork_mail', 'atwork_mail_default', $supervisor_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
     }
 
-    if(isset($node->field_lsa_registerer['und'][0]['value']) && $node->field_lsa_registerer['und'][0]['value'] == 1 && in_array($node->field_lsa_pin_ministry_org['und'][0]['value'], $check_min)){
+    if(isset($node->field_lsa_registerer['und'][0]['value']) && $node->field_lsa_registerer['und'][0]['value'] == 1 && in_array($node->field_lsa_pin_ministry_org['und'][0]['value'], $check_min) && $node->field_lsa_registerer['und'][0]['value'] == 2){
       $params = array(
         'subject' => $supervisor_subject_special_condition,
         'body' => $supervisor_body_special_condition,
@@ -498,7 +501,7 @@ function atwork_lsa_node_insert($node) {
       drupal_mail('atwork_mail', 'atwork_mail_default', $ministry_rep_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
     }
 
-    if(isset($node->field_lsa_ministry_rep_email['und'][0]['value']) && $node->field_lsa_ministry_rep_email['und'][0]['value'] && in_array($node->field_lsa_pin_ministry_org['und'][0]['value'], $check_min)){
+    if(isset($node->field_lsa_ministry_rep_email['und'][0]['value']) && $node->field_lsa_ministry_rep_email['und'][0]['value'] && in_array($node->field_lsa_pin_ministry_org['und'][0]['value'], $check_min) && $node->field_lsa_registerer['und'][0]['value'] == 3){
       $params = array(
         'subject' =>  $supervisor_subject_special_condition,
         'body'=> $supervisor_body_special_condition,
