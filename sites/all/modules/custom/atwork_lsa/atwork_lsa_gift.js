@@ -296,7 +296,7 @@
           '<img src="/sites/default/files/bg/image/2015/0224/35watchsilverwtb.jpg" alt="Bulova Silver Watch, Silver Face" id="image_bulova_watch_3">' +
           '<img src="/sites/default/files/lsa_2015/35_watch_silver_gold.png" alt="Bulova Silver Watch, two-toned face" id="image_bulova_watch_4">' +
           // Bushnell Compact Binoculars
-          '<img src="https://gww.gov.bc.ca/sites/default/files/bg/image/2015/0224/picofBino2016.jpg" alt="bushnell compact binoculars" id="image_bushnell_binoculars">' +
+          '<img src="/sites/default/files/bg/image/2015/0224/picofBino2016.jpg" alt="bushnell compact binoculars" id="image_bushnell_binoculars">' +
           // Bracelet Picture
           '<img src="/sites/default/files/lsa_2015/35_bracelet.jpg" alt="Sterling Silver Aboriginal Bracelet" id="image_aboriginal_bracelet">' +
           // Vase Picture
