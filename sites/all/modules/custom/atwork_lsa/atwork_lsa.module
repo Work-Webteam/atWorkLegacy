@@ -26,7 +26,6 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
   $form['#validate'][] = 'atwork_lsa_application_validate';
   $form['#submit'][] = 'atwork_lsa_application_submit';
   $form['actions']['submit']['#value'] = "SUBMIT your LSA registration";
-
   // skip defaults for admins who are entering for others
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)  || in_array('lsa contact', $user->roles)) {
     //$form['field_lsa_terms'][$form['field_lsa_terms']['#language']]['#default_value'] = 1;
@@ -44,7 +43,7 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
       ->fetchAssoc();
 
     if (isset($exists['nid']) && $exists['nid']) {
-      drupal_goto('career/long-service-awards/applications/' . $exists['nid']);
+      drupal_goto('node/' . $exists['nid']);
     }
   }
 
@@ -175,6 +174,12 @@ function atwork_lsa_application_validate($form, &$form_state) {
 
 function atwork_lsa_pin_application_validate($form, &$form_state){
   $lang = $form_state['values']['language'];
+
+  global $user;
+
+  if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)) {
+    return true;
+  }
   // Check if an application has already been submitted for this user
   $exists = db_select('field_data_field_lsa_pin_employee_number', 'e')
       ->fields('e', array('entity_id'))
@@ -286,9 +291,72 @@ function atwork_lsa_application_submit(&$form, &$form_state) {
   if(isset($form_state['values']['field_lsa_org']['und'][0]['value']) && $form_state['values']['field_lsa_org']['und'][0]['value']){
     $form_state['values']['field_lsa_ministry_id']['und'][0]['value'] = $form_state['values']['field_lsa_org']['und'][0]['value'];
   }
+  $id = get_award_id_number($form_state);
+  // Send to helper function that will sort out the award id number if it is not populated yet.
+  if($form_state['values']['field_lsa_award_id']['und'][0]['value'] == 0 || $form_state['values']['field_lsa_award_id']['und'][0]['value'] == NULL){
+    if(isset($id) && $id > 0){
+      $form_state['values']['field_lsa_award_id']['und'][0]['value'] = $id;
+    }
+  } elseif ($form_state['values']['field_lsa_award_id']['und'][0]['value'] != $id){
+    $form_state['values']['field_lsa_award_id']['und'][0]['value'] = $id;
+  } elseif(!isset($form_state['values']['field_lsa_award_id']['und'][0]['value'])){
+    $form_state['values']['field_lsa_award_id']['und'][0]['value'] = $id;
+  }
 
   $form_state['values']['field_lsa_25year_certificatename']['und'][0]['value'] = $form_state['values']['field_lsa_first_name']['und'][0]['value'] . " " . $form_state['values']['field_lsa_last_name']['und'][0]['value'];
+}
 
+function get_award_id_number($form_state){
+  $award = $form_state['values']['field_lsa_award']['und'][0]['value'];
+  $awards = array(
+      1 => "2016 Recipient - award received",
+      2 => "25 - Choice TBC",
+      3 => "25 - Framed Certificate and Cross 'Starry Blue' Ballpoint Pen",
+      4 => "25 - Cross 'Starry Blue' Ballpoint Pen - No Certificate",
+      5 => "25 - Framed Certificate and Leather Tablet Holder with Notepad",
+      6 => "25 - Leather Tablet Holder with Notepad - No Certificate",
+      7 => "25 - Framed Certificate and Sterling Silver White Pearl Earrings",
+      8 => "25 - Sterling Silver White Pearl Earrings - No Certificate",
+      9 => "25 - Framed Certificate and Leather Passport and Luggage Tag Set",
+      10 => "25 - Leather Passport and Luggage Tag Set - No Certificate",
+      11 => "25 - $75.00 PECSF Charitible Donation",
+      12 => "30 - Choice TBC",
+      13 => "30 - Collande Clock",
+      14 => "30 - Appalacian Sherpa Blanket",
+      15 => "30 - Roy Vickers Print - Tofino Sunrise",
+      16 => "30 - Solid Sterling Drop Earrings",
+      17 => "30 - $150.00 PECSF Charitible Donation",
+      18 => "35 - Choice TBC",
+      19 => "35 - Bushnell Compact Binoculars",
+      20 => "35 - Hand-Blown Glass Vase by Robert Held",
+      21 => "35 - Ladies' Gold Watch with Black Strap",
+      22 => "35 - Ladies' Gold Watch with Brown Strap",
+      23 => "35 - Ladies' Gold Watch with Gold Strap",
+      24 => "35 - Ladies' Silver Watch with Silver Face",
+      25 => "35 - Ladies' Silver Watch with Two-toned Face",
+      26 => "35 - Men's Gold Watch with Black Strap",
+      27 => "35 - Men's Gold Watch with Brown Strap",
+      28 => "35 - Men's Gold Watch with Gold Strap",
+      29 => "35 - Men's Silver Watch with Silver Face",
+      30 => "35 - Men's Silver Watch with Two-toned Face",
+      31 => "35 - Sterling Silver Bracelet - size A",
+      32 => "35 - Sterling Silver Bracelet - size B",
+      33 => "35 - $300.00 PECSF Charitible Donation",
+      34 => "40 - Choice TBC",
+      35 => "40 - Napolean Beauty Ergo Mantle Clock",
+      36 => "40 - 14kt White Gold Diamond Stud Earrings",
+      37 => "40 - Hand-Blown Glass Bowl by Robert Held",
+      38 => "40 - Michaela Davidson Print - Sunbreakers",
+      39 => "40 - 10kt White Gold Diamond Pendant and Chain",
+      40 => "40 - $400.00 PECSF Charitible Donation",
+      41 => "45 - Choice TBC",
+      42 => "45 - $450.00 PECSF Charitible Donation",
+      43 => "50 - Choice TBC",
+      44 => "50 - $500.00 PECSF Charitible Donation",
+      45 => "Award already Sent",
+    );
+  $award_id = array_search($award, $awards);
+  return $award_id;
 }
 
 function atwork_lsa_node_view($node, $view_mode, $langcode) {
@@ -303,26 +371,6 @@ function atwork_lsa_node_view($node, $view_mode, $langcode) {
       '#markup' => '<p class="feature_box_yellow" style="margin-top: 1em;">If you have any questions, please contact your <a href="/career/employee-appreciation/recognition-contacts">Ministry Recognition Contact</a>, or the corporate  contact at the BC Public Service Agency, <a href="mailto:Gillian.Kish@gov.bc.ca">Gillian.Kish@gov.bc.ca</a></p>',
       );
 
-  $all_years = array();
-  if(isset($node->field_lsa_previous_service_miles['und'][0]['value']) && $node->field_lsa_previous_service_miles['und'][0]['value']){
-    foreach($node->field_lsa_previous_service_miles['und'] as $key=>$year){
-      $all_years[] = $year['value'];
-    }
-  }
-  if(isset($node->field_lsa_pin_service_milestone['und'][0]['value']) && $node->field_lsa_pin_service_milestone['und'][0]['value']){
-    $string_year = substr($node->field_lsa_pin_service_milestone['und'][0]['value'], 0,2);
-    $all_years[] =  $string_year;
-  }
-
-  sort($all_years);
-  $all_years = array_unique($all_years);
-
-  // Now make a string
-  $return_string_year = '';
-  foreach($all_years as $year=>$value){
-    $return_string_year .= $value . " ";
-  }
-  $node->field_lsa_pin_service_milestone['und'][0]['value'] = $return_string_year;
   }
 
 
@@ -331,26 +379,11 @@ function atwork_lsa_node_view($node, $view_mode, $langcode) {
   }
 
   $award_year = date("Y");
-  $node->content['top_message'] = array(
-      '#weight' => -10,
-      /*'#markup' => '<h2>Thank you for your registration</h2>
-      <em style="color: red; font-weight: bold;">Print and retain this confirmation for your records.</em>',*/
-      //'#markup' => '<strong style="color: red; font-weight: bold;">Please review your information below and make any necessary changes. If you have difficulty updating your details, please contact us at <a href="mailto:longserviceawards@gov.bc.ca">longserviceawards@gov.bc.ca</a> or call Jenny Pescod at (250) 356-7916.</strong><br /><br />',
-    );
 
-   /*
-  $node->content['bottom_message'] = array(
-      '#weight' => 90,
-      '#markup' => '<p class="feature_box_yellow" style="margin-top: 1em;">If you have questions about your RSVP, please contact us at <a href="mailto:longserviceawards@gov.bc.ca">LongServiceAwards@gov.bc.ca</a></p><p class="feature_box_yellow" style="margin-top: 1em;">If you  have questions about travel arrangements, please contact your <a href="/career/long-service-awards/long_service_awards_contacts">Ministry Long Service Awards Contact</a></p><br />
-
-        <em style="text-align: center; display: block; margin-bottom: 1em; font-weight: bold;">Congratulations on your Long Service Award!</em>',
-    );
-    */
 }
 
 function atwork_lsa_views_pre_view(&$view, &$display_id, &$args) {
   global $user;
-
   if ($view->name == 'content' &&
       $display_id == 'lsa' &&
       (in_array('lsa admin', $user->roles) ||
@@ -408,30 +441,71 @@ function atwork_lsa_node_insert($node) {
     $lang = $node->language;
 
     require_once(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_pin.mail.inc');
+
+    // Only to specific ministries
+    $check_min = array(
+      1, //ABR
+      6, // ED
+      2, // Aved
+      11, // health
+      40, // Environmental assessment office
+      64, // Pub guardian and trustee
+      );
+
+
     // applicant email, only sent if applicant has applied for themselves
-    if($node->field_lsa_registerer['und'][0]['value'] == 1){
+    if($node->field_lsa_registerer['und'][0]['value'] == 1 && !in_array($node->field_lsa_pin_ministry_org['und'][0]['value'], $check_min)){
       $params = array(
         'subject' => $applicant_subject,
         'body' => $applicant_body,
       );
       drupal_mail('atwork_mail', 'atwork_mail_default', $applicant_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
     }
-    // supervisor
-    $params = array(
-      'subject' => $supervisor_subject,
-      'body' => $supervisor_body,
-    );
-    drupal_mail('atwork_mail', 'atwork_mail_default', $supervisor_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
+    if($node->field_lsa_registerer['und'][0]['value'] == 1 && in_array($node->field_lsa_pin_ministry_org['und'][0]['value'], $check_min)){
+      $params = array(
+        'subject' => $applicant_subject_special_condition,
+        'body' => $applicant_body_special_condition,
+      );
 
-    if(isset($node->field_lsa_ministry_rep_email['und'][0]['value']) && $node->field_lsa_ministry_rep_email['und'][0]['value']){
+      drupal_mail('atwork_mail', 'atwork_mail_default', $applicant_to_special_condition, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
+
+    }
+
+
+    // supervisor
+    if(isset($node->field_lsa_pin_ministry_org['und'][0]['value']) && $node->field_lsa_pin_ministry_org['und'][0]['value'] && !in_array($node->field_lsa_pin_ministry_org['und'][0]['value'], $check_min)){
+      $params = array(
+        'subject' => $supervisor_subject,
+        'body' => $supervisor_body,
+      );
+      drupal_mail('atwork_mail', 'atwork_mail_default', $supervisor_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
+    }
+
+    if(isset($node->field_lsa_registerer['und'][0]['value']) && $node->field_lsa_registerer['und'][0]['value'] == 1 && in_array($node->field_lsa_pin_ministry_org['und'][0]['value'], $check_min)){
+      $params = array(
+        'subject' => $supervisor_subject_special_condition,
+        'body' => $supervisor_body_special_condition,
+      );
+      drupal_mail('atwork_mail', 'atwork_mail_default', $supervisor_to_special_condition, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
+    }
+
+    // Ministry Rep
+    if(isset($node->field_lsa_ministry_rep_email['und'][0]['value']) && $node->field_lsa_ministry_rep_email['und'][0]['value'] && !in_array($node->field_lsa_pin_ministry_org['und'][0]['value'], $check_min)){
       $params = array(
         'subject' => $ministry_rep_subject,
         'body' => $ministry_rep_body,
         );
       drupal_mail('atwork_mail', 'atwork_mail_default', $ministry_rep_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
     }
-  }
 
+    if(isset($node->field_lsa_ministry_rep_email['und'][0]['value']) && $node->field_lsa_ministry_rep_email['und'][0]['value'] && in_array($node->field_lsa_pin_ministry_org['und'][0]['value'], $check_min)){
+      $params = array(
+        'subject' =>  $supervisor_subject_special_condition,
+        'body'=> $supervisor_body_special_condition,
+        );
+       drupal_mail('atwork_mail', 'atwork_mail_default', $ministry_rep_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
+    }
+  }
 }
 
 /**
@@ -503,9 +577,6 @@ function atwork_lsa_form_alter(&$form, &$form_state, $form_id) {
 }
 
 
-/**
- * This section for LSA Button code only
- */
 
 
 /**
@@ -525,6 +596,7 @@ function atwork_lsa_form_lsa_pin_application_node_form_alter(&$form, $form_state
   }
   $form['#validate'][] = 'atwork_lsa_pin_application_validate';
   $form['actions']['submit']['#value'] = t('Submit this Service Pin request');
+
 /*
   // skip defaults for admins who are entering for others
   if (in_array('lsa admin', $user->roles) || in_array('recognition contact', $user->roles)) {
@@ -597,20 +669,85 @@ function atwork_lsa_menu_alter(&$items){
   $items['node/%node']['page callback'] = 'atwork_lsa_node_page_view';
 }
 
+
+/**
+ * Implements hook_node_page_view
+ */
+
 function atwork_lsa_node_page_view($node) {
   global $user;
-  // skip redirect for admins and lsa_admins
-  if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)) {
+
+  /**
+   * For some strange reason, pin form does not show retro milestones
+   * @var [type]
+   */
+
+  if($node->type == 'lsa_pin_application'){
+
+    $all_years = array();
+    // If we have past years
+    if(isset($node->field_lsa_previous_service_miles['und']) && $node->field_lsa_previous_service_miles['und']){
+      foreach($node->field_lsa_previous_service_miles['und'] as $key=>$year){
+        $all_years[] = $year['value'];
+      }
+    }
+    // If we have a current year #
+    if(isset($node->field_lsa_pin_service_milestone['und'][0]) && $node->field_lsa_pin_service_milestone['und'][0]){
+      $string_year = $node->field_lsa_pin_service_milestone['und'][0]['value'];
+      $all_years[] =  $string_year;
+    }
+    // Sort them
+    sort($all_years);
+    // Make sure they did not use the same year more than once
+    $all_years = array_unique($all_years);
+    // Now make a string
+    $return_string_year = '';
+    $years = count($all_years);
+    if($years == 1){
+      $return_string_year = $all_years[0] . " year";
+    } elseif($years == 2){
+      $return_string_year = $all_years[0] . " and " . $all_years[1] . " years";
+    } else {
+      // Put it in a string all nice like
+      $return_string_year = implode(", ", $all_years);
+      // Need to put an "and" in at the end of this string, removing the last comma
+      $return_string_year = strrev(implode(strrev(' and'), explode(strrev(','), strrev($return_string_year), 2)));
+      $return_string_year .= " years";
+    }
+    // Change what shows on page
+    if(isset($node->field_lsa_pin_service_milestone['und'][0]['value']) && $node->field_lsa_pin_service_milestone['und'][0]['value']){
+      $node->field_lsa_pin_service_milestone['und'][0]['value'] = $return_string_year ;
+    } else {
+      // build array ourselves
+      $node->field_lsa_pin_service_milestone = array(
+        'und' => array(
+          0 => array(
+            'value' => $return_string_year,
+            'format' => NULL,
+            'safe_value' => $return_string_year,
+            ),
+          ),
+        );
+    }
+    //This is not sent by reference so we must return it.
     return node_page_view($node);
   }
+
+
+
   // Redirect any other user who tries to access an lsa application node
   if($node->type == 'lsa_application'){
+    // skip redirect for admins and lsa_admins
+    if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)) {
+      return node_page_view($node);
+    }
     // Give contact details
    //drupal_set_message('The LSA application period has come to an end. If you have any questions or concerns, please contact the Jenny Pescod at (250-356-7916) or email the <a href="mailto:longserviceawards@gov.bc.ca"> Long Service Award inbox </a> ', 'status');
     // Redirect to 403
     //drupal_goto('r4032login');
 
-    //return node_page_view($node);
+    return node_page_view($node);
+
 
   }
   else {

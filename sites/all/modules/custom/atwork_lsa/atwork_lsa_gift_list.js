@@ -35,7 +35,7 @@
 		  27: "35 - Men's Gold Watch with Brown Strap",
 		  28: "35 - Men's Gold Watch with Gold Strap",
 		  29: "35 - Men's Silver Watch with Silver Face",
-		  30: "35 - Men's Silver Watch with Two-toned Face	",
+		  30: "35 - Men's Silver Watch with Two-toned Face",
 		  31: "35 - Sterling Silver Bracelet - size A",
 		  32: "35 - Sterling Silver Bracelet - size B",
 		  33: "35 - $300.00 PECSF Charitible Donation",

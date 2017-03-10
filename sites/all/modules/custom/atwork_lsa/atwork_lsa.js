@@ -9,7 +9,7 @@
   function lsaGift() {
 
     if ($("input[name='field_lsa_register_last_year[und]']:checked").val() == 1){
-      $('#edit-field-lsa-award-und-0-value').val("2015 Recipient - award received");
+      $('#edit-field-lsa-award-und-0-value').val("2016 Recipient - award received");
       $('#edit-field-lsa-award-id-und-0-value').val(1);
     }
     // Always reset textbox when this value changes, so that we don't have a mis-match between award and years of service
@@ -90,8 +90,10 @@
   function change_award_year() {
     if ($("input[name='field_lsa_register_last_year[und]']:checked").val() == 1) {
       $('select#edit-field-lsa-award-year-und option[value="2"]').prop('selected', true);
+      $('#edit-field-lsa-received-award').show();
     } else {
       $('select#edit-field-lsa-award-year-und option[value="1"]').prop('selected', true);
+      $('#edit-field-lsa-received-award').hide();
     }
   }
 
@@ -303,6 +305,7 @@
     $('#edit-field-lsa-retiring-thisyear-und').change(function () {
       retirement();
     });
+
 
     // Click handler for special requirements
     $('.form-checkbox').change(function(){

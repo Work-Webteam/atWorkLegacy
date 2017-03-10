@@ -599,7 +599,7 @@ function atwork_lsa_features_field_group_info() {
         'required_fields' => 1,
         'id' => '',
         'classes' => 'group-pin-options field-group-fieldset',
-        'description' => '<em>Service pins will be sent to the employee\'s supervisor for presentation during Public Service Week - June 12-16, 2017. </em>',
+        'description' => '',
       ),
       'formatter' => 'collapsible',
     ),

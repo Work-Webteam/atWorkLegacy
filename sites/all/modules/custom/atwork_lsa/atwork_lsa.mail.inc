@@ -17,7 +17,7 @@ $applicant_body = <<<EOT
 
 <p>An automated email has been sent to your supervisor so that he or she is aware of your eligibility for a Long Service Award and can provide you with the necessary supports, such as time off and travel coverage (if applicable).</p>
 
-<p>For general inquiries, please contact your workplace <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts" target="_blank">Long Service Award Contact</a>.</p>
+<p>For reimbursement and travel-related enquiries, please contact your workplace <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts" target="_blank">Long Service Award Contact</a>.</p>
 
 <p>For more information about the Long Service Awards Program, please visit <a href="https://gww.gov.bc.ca/career/long-service-awards" target="_blank">@Work.</a></p>
 

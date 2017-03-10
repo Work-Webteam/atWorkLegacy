@@ -425,7 +425,7 @@ if (isset($node->field_lsa_middle_name[$node->language][0][\'value\']) && $node-
         'custom_settings' => FALSE,
       ),
       'full' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'rss' => array(
         'custom_settings' => FALSE,

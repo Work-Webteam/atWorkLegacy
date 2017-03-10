@@ -1472,7 +1472,9 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
     // These can be updated regardless if there are available
     $author = user_load($form_state['reply']->uid);
     // Add image render as a #prefix to name?
-    $form['field_display_name']['und'][0]['value']['#default_value'] =  $author->field_display_name['und'][0]['safe_value'];
+    if(isset($author->field_display_name['und'][0]['safe_value']) && $author->field_display_name['und'][0]['safe_value']){
+      $form['field_display_name']['und'][0]['value']['#default_value'] =  $author->field_display_name['und'][0]['safe_value'];
+    }
     // TODO: Set prefix and suffix for display name in form (image render and <a> tags)
     $form['field_profile_comment_date']['und']['#prefix'] = "Posted: " . $form['field_profile_comment_date']['und']['#prefix'];
     // Leave out Reply/Edit and Delete versions of the form -- so far this field seems to be the only one that differentiates them
