@@ -606,7 +606,7 @@ div.header-user {
 
 
 #navigation .mm-home, #navigation .mm-news, #navigation .mm-social, #navigation .mm-bcps, #navigation .mm-recog, #navigation .mm-tools {
-  line-height: 1.5em;
+  line-height: 1.4em;
   text-align: center;
   /*background-color: rgba(237,237,237,.5) !important;*/
   /*background-color: #EEE\0/ !important; /* For IE only */
@@ -891,7 +891,6 @@ div.header-user {
 }
 .front.logged-in.no-sidebars .skin-default .views-slideshow-controls-bottom {
     position: relative;
-    top: -265px;
 }
 .front.logged-in.no-sidebars .skin-default .slide-box {
   display: block;

@@ -44,7 +44,6 @@ only screen and (                min-resolution: 2dppx) {
   }
   #widget_pager_bottom_home_page_blocks_zen-block_5 {
     position:relative;
-    top: 263px;
     display: block;
     width: 315px;
     margin: 0 auto;
@@ -68,6 +67,12 @@ only screen and (                min-resolution: 2dppx) {
   #block-block-52 {
     display: none!important;
   }
+  .front #social-side #status-update .form-textarea-wrapper textarea {
+    width: inherit;
+}
+#social-side .jsNewActivityWindow {
+    margin-right: 15px!important;
+}
   .front #block-views-home-page-blocks-zen-block-2 {
     width:inherit!important;
     margin: 0 auto;
@@ -108,8 +113,8 @@ only screen and (                min-resolution: 2dppx) {
     display:block!important;
     position: inherit;
     min-height: 250px;
-    max-height: 450px;
-    overflow: hidden;
+    max-height: 355px;
+    overflow: auto;
   }
   .front .region.region-social-side {
     position: relative;
@@ -125,7 +130,10 @@ only screen and (                min-resolution: 2dppx) {
      padding-left: 12px;
   }
   .front #social-side #status-update .form-textarea-wrapper {
-    max-width:85%!important;
+    max-width:84%!important;
+  }
+  #social-side #status-update div#speech-pointer {
+    margin-left: 45px!important;
   }
 }
 @media only screen
@@ -155,10 +163,11 @@ only screen and (                min-resolution: 2dppx) {
     #views_slideshow_controls_text_home_page_blocks_zen-block_5,
     #block-views-gallery-reference-block-2,
     #block-boxes-homepage-logos,
-    .front #social-side #status-update,
-    #block-block-52,
-    /*.jsNewActivityWindow.atwork-activity-processed*/ {
+    #block-block-52 {
       display: none!important;
+    }
+    #social-side .jsNewActivityWindow {
+    margin-right: 15px!important;
     }
     #block-views-home-page-blocks-zen-block-1,
     #block-views-home-page-blocks-zen-block-3,
@@ -179,9 +188,10 @@ only screen and (                min-resolution: 2dppx) {
       display: inline-block;
       clear:none;
       height:165px;
-      max-width: 32%;
+      width: 40%;
       overflow: hidden;
       float:left;
+      margin-right: 10px;
     }
     .employee-profile .image-employee-landing {
       display: inline-block;
@@ -199,11 +209,11 @@ only screen and (                min-resolution: 2dppx) {
       margin-left:31%;
       padding: 10px 20px;
     }
-    .front .front-promoted-title h3 {
+    .front h3.front-promoted-title {
       clear:none;
       min-height:inherit;
       max-height:inherit;
-      padding:0;
+      padding:10px 0 0 0;
       margin:0 0 10px 10px;
     }
     .front .front-promoted-posted,
@@ -215,12 +225,22 @@ only screen and (                min-resolution: 2dppx) {
       clear:none;
       min-height:inherit;
       max-height:inherit;
-      padding:0;
+      padding:0 10px 0 0;
       margin:0;
     }
     .front .front-promoted-teaser {
       max-height: 36px;
       overflow:hidden;
+    }
+    .front .front-promoted-more {
+      border-top: none;
+    }
+    .front .front-promoted-comments,
+    .front .front-promoted-likes,
+    .front .front-promoted-more {
+      display: inline-block;
+      margin-top: 10px;
+      float: none;
     }
     .section-classifieds .view-classifieds .views-row-odd, .section-classifieds .view-classifieds .views-row-even,
     .page-galleries .view-gallery-reference .views-row-odd, .page-galleries .view-gallery-reference .views-row-even,
@@ -253,6 +273,13 @@ only screen and (                min-resolution: 2dppx) {
     .view-executive-updates .image-exec-updates img {
       height:137px!important;
     }
+    .front div#social-side {
+    display:block!important;
+    position: inherit;
+    min-height: 250px;
+    max-height: 355px;
+    overflow: auto;
+  }
     .front .region.region-social-side {
       position: relative;
       top: 0px;
@@ -261,11 +288,6 @@ only screen and (                min-resolution: 2dppx) {
     div#block-atwork-activity-homepage,
     .front #social-side h2 {
     width: 100%!important;
-    }
-    .front .region.region-social-side {
-      position: relative;
-      top: 0px;
-      width: 100%;
     }
     .front div#block-atwork-activity-homepage,
     .front #social-side h2.block__title.block-title {
@@ -278,9 +300,19 @@ only screen and (                min-resolution: 2dppx) {
     .front div#social-side {
     display: block !important;
     position: inherit;
-    min-height: 300px;
+    min-height: 320px;
     max-height: 330px;
-    overflow: hidden;
+    overflow: auto;
+    }
+    div#status-update {
+    width: 410px;
+    margin: 0 auto;
+   }
+   .front #social-side #status-update .form-textarea-wrapper textarea {
+    width: inherit;
+    }
+    .front #social-side #status-update .form-textarea-wrapper {
+    max-width:84%!important;
     }
   }
 }
