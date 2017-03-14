@@ -1,6 +1,5 @@
 /* Hides Drupal warning boxes at the top of the page */
 
-
 #block-views-home-page-blocks-zen-ad-space,
 #widget_pager_bottom_home_page_blocks_zen-block_5 {
     display: none; // hides the slideshow selector boxes until needed.
@@ -316,6 +315,7 @@ only screen and (                min-resolution: 2dppx) {
     }
   }
 }
+
 @media only screen and (max-width:820px) and (min-width:400px)
 and (orientation: portrait) {
   html {
@@ -329,9 +329,7 @@ and (orientation: portrait) {
   #block-block-5,
   #block-custom-search-blocks-1,
   #block-boxes-homepage-logos,
-  #views_slideshow_controls_text_home_page_blocks_zen-block_5,
-  #social-side .admin-advanced-feed-settings-view,
-  /*.jsNewActivityWindow.atwork-activity-processed*/  {
+  #views_slideshow_controls_text_home_page_blocks_zen-block_5 {
     display: none!important;
   }
   #social-side .block-header-inner {

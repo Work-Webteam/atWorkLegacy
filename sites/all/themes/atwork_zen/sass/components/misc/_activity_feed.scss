@@ -709,6 +709,13 @@
 .not-front .new-activity-window #social-side .item-list {
   position: inherit;
 }
+/* Minor adjustment for the pop out window on mobile devices */
+@media only screen
+  and (max-width:679px) and (min-width:350px) {
+    .not-front .new-activity-window #social-side .region.region-social-side {
+      zoom: 1.15;
+      }
+}
 
 
 
