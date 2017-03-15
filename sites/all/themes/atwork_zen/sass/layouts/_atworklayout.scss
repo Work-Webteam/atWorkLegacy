@@ -30,8 +30,13 @@ only screen and (                min-resolution: 2dppx) {
   and (max-width:679px) and (min-width:350px)
   and (orientation: portrait)  {
   #page {
-      min-width:352px!important;
+      min-width:348px!important;
       max-width:677px!important;
+  }
+  #page .breadcrumb,
+  #page #content {
+    padding-left: 10px;
+    padding-right: 10px;
   }
   #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row.views-slideshow-xtra-overlay-row {
     width:inherit!important;
@@ -47,6 +52,9 @@ only screen and (                min-resolution: 2dppx) {
     width: 315px;
     margin: 0 auto;
   }
+.front.logged-in.no-sidebars .skin-default .views-slideshow-controls-bottom {
+    top: 0px!important;
+}
   #block-views-home-page-blocks-zen-block-1,
 	#block-views-home-page-blocks-zen-block-3,
 	#block-views-home-page-blocks-zen-block-4 {
@@ -134,6 +142,14 @@ only screen and (                min-resolution: 2dppx) {
   #social-side #status-update div#speech-pointer {
     margin-left: 45px!important;
   }
+  /* Executive Profile Landing Page */
+  
+
+  /* Group Landing Page */
+  #block-views-groups-block-2,
+  .create-group {
+    display:none;
+  }
 }
 @media only screen
   and (max-width:767px) and (min-width:350px)
@@ -141,6 +157,11 @@ only screen and (                min-resolution: 2dppx) {
     #page {
         min-width:352px!important;
         max-width:765px!important;
+    }
+    #page .breadcrumb,
+    #page #content {
+      padding-left: 10px;
+      padding-right: 10px;
     }
     #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row.views-slideshow-xtra-overlay-row {
       width:inherit!important;
@@ -155,6 +176,9 @@ only screen and (                min-resolution: 2dppx) {
       display: block;
       width: 315px;
       margin: 0 auto;
+    }
+    .front.logged-in.no-sidebars .skin-default .views-slideshow-controls-bottom {
+    top: 0px!important;
     }
     #admin-menu,
     #block-atwork-profiles-header,
