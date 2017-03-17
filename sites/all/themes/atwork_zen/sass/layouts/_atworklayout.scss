@@ -1,5 +1,6 @@
 /* Hides Drupal warning boxes at the top of the page */
 
+
 #block-views-home-page-blocks-zen-ad-space,
 #widget_pager_bottom_home_page_blocks_zen-block_5 {
     display: none; // hides the slideshow selector boxes until needed.
@@ -30,13 +31,8 @@ only screen and (                min-resolution: 2dppx) {
   and (max-width:679px) and (min-width:350px)
   and (orientation: portrait)  {
   #page {
-      min-width:348px!important;
+      min-width:352px!important;
       max-width:677px!important;
-  }
-  #page .breadcrumb,
-  #page #content {
-    padding-left: 10px;
-    padding-right: 10px;
   }
   #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row.views-slideshow-xtra-overlay-row {
     width:inherit!important;
@@ -48,13 +44,11 @@ only screen and (                min-resolution: 2dppx) {
   }
   #widget_pager_bottom_home_page_blocks_zen-block_5 {
     position:relative;
+    top: 263px;
     display: block;
     width: 315px;
     margin: 0 auto;
   }
-.front.logged-in.no-sidebars .skin-default .views-slideshow-controls-bottom {
-    top: 0px!important;
-}
   #block-views-home-page-blocks-zen-block-1,
 	#block-views-home-page-blocks-zen-block-3,
 	#block-views-home-page-blocks-zen-block-4 {
@@ -70,15 +64,10 @@ only screen and (                min-resolution: 2dppx) {
   #block-views-gallery-reference-block-2,
   #block-boxes-homepage-logos,
   #footer #footer-copyright table td.sideBrdr,
+  /*.jsNewActivityWindow.atwork-activity-processed,*/
   #block-block-52 {
     display: none!important;
   }
-  .front #social-side #status-update .form-textarea-wrapper textarea {
-    width: inherit;
-}
-#social-side .jsNewActivityWindow {
-    margin-right: 15px!important;
-}
   .front #block-views-home-page-blocks-zen-block-2 {
     width:inherit!important;
     margin: 0 auto;
@@ -119,8 +108,8 @@ only screen and (                min-resolution: 2dppx) {
     display:block!important;
     position: inherit;
     min-height: 250px;
-    max-height: 355px;
-    overflow: auto;
+    max-height: 450px;
+    overflow: hidden;
   }
   .front .region.region-social-side {
     position: relative;
@@ -136,40 +125,7 @@ only screen and (                min-resolution: 2dppx) {
      padding-left: 12px;
   }
   .front #social-side #status-update .form-textarea-wrapper {
-    max-width:84%!important;
-  }
-  #social-side #status-update div#speech-pointer {
-    margin-left: 45px!important;
-  }
-  /* Executive Profile Landing Page */
-  /* PSA Head */
-  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first.views-row-last {
-    width:350px!important;
-  }
-  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first {
-    height:226px!important;
-  }
-  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first .profile-image {
-    margin:5px 15px 0 0!important;
-  }
-  /* Executive Profiles */
-
-.page-executive-team #content .view-content .views-row-odd,
-.page-executive-team #content .view-content .views-row-even {
-    width: 230px!important;
-    height: inherit!important;
-}
-#content > div.view.view-Executive-Profiles.view-id-Executive_Profiles.view-display-id-page_1 > div.view-content {
-  width:240px;
-  margin:0 auto;
-}
-  /* Group Landing Page */
-  #block-views-groups-block-2,
-  .create-group {
-    display:none;
-  }
-  #content > div.view.view-Executive-Profiles.view-id-Executive_Profiles .pager-item {
-    padding:0;
+    max-width:85%!important;
   }
 }
 @media only screen
@@ -178,11 +134,6 @@ only screen and (                min-resolution: 2dppx) {
     #page {
         min-width:352px!important;
         max-width:765px!important;
-    }
-    #page .breadcrumb,
-    #page #content {
-      padding-left: 10px;
-      padding-right: 10px;
     }
     #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row.views-slideshow-xtra-overlay-row {
       width:inherit!important;
@@ -198,20 +149,16 @@ only screen and (                min-resolution: 2dppx) {
       width: 315px;
       margin: 0 auto;
     }
-    .front.logged-in.no-sidebars .skin-default .views-slideshow-controls-bottom {
-    top: 0px!important;
-    }
     #admin-menu,
     #block-atwork-profiles-header,
     .front #block-block-5,
     #views_slideshow_controls_text_home_page_blocks_zen-block_5,
     #block-views-gallery-reference-block-2,
     #block-boxes-homepage-logos,
-    #block-block-52 {
+    .front #social-side #status-update,
+    #block-block-52,
+    /*.jsNewActivityWindow.atwork-activity-processed*/ {
       display: none!important;
-    }
-    #social-side .jsNewActivityWindow {
-    margin-right: 15px!important;
     }
     #block-views-home-page-blocks-zen-block-1,
     #block-views-home-page-blocks-zen-block-3,
@@ -232,10 +179,9 @@ only screen and (                min-resolution: 2dppx) {
       display: inline-block;
       clear:none;
       height:165px;
-      width: 40%;
+      max-width: 32%;
       overflow: hidden;
       float:left;
-      margin-right: 10px;
     }
     .employee-profile .image-employee-landing {
       display: inline-block;
@@ -253,11 +199,11 @@ only screen and (                min-resolution: 2dppx) {
       margin-left:31%;
       padding: 10px 20px;
     }
-    .front h3.front-promoted-title {
+    .front .front-promoted-title h3 {
       clear:none;
       min-height:inherit;
       max-height:inherit;
-      padding:10px 0 0 0;
+      padding:0;
       margin:0 0 10px 10px;
     }
     .front .front-promoted-posted,
@@ -269,22 +215,12 @@ only screen and (                min-resolution: 2dppx) {
       clear:none;
       min-height:inherit;
       max-height:inherit;
-      padding:0 10px 0 0;
+      padding:0;
       margin:0;
     }
     .front .front-promoted-teaser {
       max-height: 36px;
       overflow:hidden;
-    }
-    .front .front-promoted-more {
-      border-top: none;
-    }
-    .front .front-promoted-comments,
-    .front .front-promoted-likes,
-    .front .front-promoted-more {
-      display: inline-block;
-      margin-top: 10px;
-      float: none;
     }
     .section-classifieds .view-classifieds .views-row-odd, .section-classifieds .view-classifieds .views-row-even,
     .page-galleries .view-gallery-reference .views-row-odd, .page-galleries .view-gallery-reference .views-row-even,
@@ -317,13 +253,6 @@ only screen and (                min-resolution: 2dppx) {
     .view-executive-updates .image-exec-updates img {
       height:137px!important;
     }
-    .front div#social-side {
-    display:block!important;
-    position: inherit;
-    min-height: 250px;
-    max-height: 355px;
-    overflow: auto;
-  }
     .front .region.region-social-side {
       position: relative;
       top: 0px;
@@ -332,6 +261,11 @@ only screen and (                min-resolution: 2dppx) {
     div#block-atwork-activity-homepage,
     .front #social-side h2 {
     width: 100%!important;
+    }
+    .front .region.region-social-side {
+      position: relative;
+      top: 0px;
+      width: 100%;
     }
     .front div#block-atwork-activity-homepage,
     .front #social-side h2.block__title.block-title {
@@ -344,73 +278,12 @@ only screen and (                min-resolution: 2dppx) {
     .front div#social-side {
     display: block !important;
     position: inherit;
-    min-height: 320px;
+    min-height: 300px;
     max-height: 330px;
-    overflow: auto;
+    overflow: hidden;
     }
-    div#status-update {
-    width: 410px;
-    margin: 0 auto;
-   }
-   .front #social-side #status-update .form-textarea-wrapper textarea {
-    width: inherit;
-    }
-    .front #social-side #status-update .form-textarea-wrapper {
-    max-width:84%!important;
-    }
-      /* Executive Profile Landing Page */
-  /* PSA Head */
-  .page-executive-team #content .view-Executive-Profiles .attachment-before {
-    width:inherit!important;
-  }
-  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first.views-row-last {
-    width:470px!important;
-    margin-left:75px;
-  }
-  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first {
-    height:226px!important;
-  }
-  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first .profile-image {
-    margin: 5px 15px 0px 5px !important;
-    width: 35.5%;
-  }
-  /* Executive Profiles */
-
-.page-executive-team #content .view-content .views-row-odd,
-.page-executive-team #content .view-content .views-row-even {
-    width: 230px!important;
-}
-#content > div.view.view-Executive-Profiles.view-id-Executive_Profiles.view-display-id-page_1 > div.view-content {
-  width:500px;
-  margin:0 auto;
-}
-  /* Group Landing Page */
-  #block-views-groups-block-2,
-  .create-group {
-    display:none;
-  }
-  #content > div.view.view-Executive-Profiles.view-id-Executive_Profiles .pager-item {
-    padding:0;
-  }
-  /* News Article Pages */
-  .not-front.logged-in.sidebar-first #content.column,
-  .not-front.logged-in.sidebar-second #content.column {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    clear:both!important;
-    float:none;
-  }
-  .sidebar-second .region-sidebar-second {;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    float:none;
-    clear:both!important;
-  }
   }
 }
-
 @media only screen and (max-width:820px) and (min-width:400px)
 and (orientation: portrait) {
   html {
@@ -424,7 +297,9 @@ and (orientation: portrait) {
   #block-block-5,
   #block-custom-search-blocks-1,
   #block-boxes-homepage-logos,
-  #views_slideshow_controls_text_home_page_blocks_zen-block_5 {
+  #views_slideshow_controls_text_home_page_blocks_zen-block_5,
+  #social-side .admin-advanced-feed-settings-view,
+  /*.jsNewActivityWindow.atwork-activity-processed*/  {
     display: none!important;
   }
   #social-side .block-header-inner {
@@ -442,7 +317,7 @@ and (orientation: portrait) {
     width: 315px;
     margin: 0 auto;
   }
-  #content.column {
+  .front #content.column {
       max-width: 98% !important;
       margin: 0 auto;
   }
@@ -540,7 +415,7 @@ and (orientation: portrait) {
   .not-front .new-activity-window #header.header {
     background: none !important;
   }
-  #content.column {
+  .front #content.column {
       max-width: 98% !important;
       margin: 0 auto;
   }
@@ -589,7 +464,7 @@ and (orientation: portrait) {
     #block-block-45 { // show social sidebar only on wide screen view - 1240 or greater
         display: none !important;
     }
-    #content.column {
+    .front #content.column {
         max-width: 960px;
     }
 }

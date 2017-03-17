@@ -606,7 +606,7 @@ div.header-user {
 
 
 #navigation .mm-home, #navigation .mm-news, #navigation .mm-social, #navigation .mm-bcps, #navigation .mm-recog, #navigation .mm-tools {
-  line-height: 1.4em;
+  line-height: 1.5em;
   text-align: center;
   /*background-color: rgba(237,237,237,.5) !important;*/
   /*background-color: #EEE\0/ !important; /* For IE only */
@@ -926,7 +926,7 @@ div.header-user {
 }
 #views_slideshow_controls_text_previous_home_page_blocks_zen-block_5 {
   position: relative;
-  left: 1px;
+  left: 2px;
   z-index: 50;
 }
 #views_slideshow_controls_text_previous_home_page_blocks_zen-block_5 a {
@@ -946,8 +946,8 @@ div.header-user {
   display: none;
 }
 #views_slideshow_controls_text_next_home_page_blocks_zen-block_5 {
-  position: absolute;
-  left: 935px;
+  position: relative;
+  float:right;
   z-index: 50;
 }
 #views_slideshow_controls_text_next_home_page_blocks_zen-block_5 a {

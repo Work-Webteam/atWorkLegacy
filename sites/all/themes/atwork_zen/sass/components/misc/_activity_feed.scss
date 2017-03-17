@@ -198,8 +198,8 @@
     height: 18px;
     background: url(/sites/all/modules/custom/atwork_activity/img/speech-arrow.png) no-repeat;
     padding: 0;
-    margin: -68px 0 50px 42px;
-    position:relative;
+    margin: -65px 0 50px 41px;
+    position:absolute;
     }
     .form-textarea-wrapper {
       float: right;
@@ -708,13 +708,6 @@
 }
 .not-front .new-activity-window #social-side .item-list {
   position: inherit;
-}
-/* Minor adjustment for the pop out window on mobile devices */
-@media only screen
-  and (max-width:679px) and (min-width:350px) {
-    .not-front .new-activity-window #social-side .region.region-social-side {
-      zoom: 1.15;
-      }
 }
 
 
