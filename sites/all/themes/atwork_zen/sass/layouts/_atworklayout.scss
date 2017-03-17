@@ -70,7 +70,6 @@ only screen and (                min-resolution: 2dppx) {
   #block-views-gallery-reference-block-2,
   #block-boxes-homepage-logos,
   #footer #footer-copyright table td.sideBrdr,
-  /*.jsNewActivityWindow.atwork-activity-processed,*/
   #block-block-52 {
     display: none!important;
   }
@@ -143,12 +142,34 @@ only screen and (                min-resolution: 2dppx) {
     margin-left: 45px!important;
   }
   /* Executive Profile Landing Page */
-  
+  /* PSA Head */
+  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first.views-row-last {
+    width:350px!important;
+  }
+  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first {
+    height:226px!important;
+  }
+  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first .profile-image {
+    margin:5px 15px 0 0!important;
+  }
+  /* Executive Profiles */
 
+.page-executive-team #content .view-content .views-row-odd,
+.page-executive-team #content .view-content .views-row-even {
+    width: 230px!important;
+    height: inherit!important;
+}
+#content > div.view.view-Executive-Profiles.view-id-Executive_Profiles.view-display-id-page_1 > div.view-content {
+  width:240px;
+  margin:0 auto;
+}
   /* Group Landing Page */
   #block-views-groups-block-2,
   .create-group {
     display:none;
+  }
+  #content > div.view.view-Executive-Profiles.view-id-Executive_Profiles .pager-item {
+    padding:0;
   }
 }
 @media only screen
@@ -337,6 +358,56 @@ only screen and (                min-resolution: 2dppx) {
     .front #social-side #status-update .form-textarea-wrapper {
     max-width:84%!important;
     }
+      /* Executive Profile Landing Page */
+  /* PSA Head */
+  .page-executive-team #content .view-Executive-Profiles .attachment-before {
+    width:inherit!important;
+  }
+  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first.views-row-last {
+    width:470px!important;
+    margin-left:75px;
+  }
+  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first {
+    height:226px!important;
+  }
+  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first .profile-image {
+    margin: 5px 15px 0px 5px !important;
+    width: 35.5%;
+  }
+  /* Executive Profiles */
+
+.page-executive-team #content .view-content .views-row-odd,
+.page-executive-team #content .view-content .views-row-even {
+    width: 230px!important;
+}
+#content > div.view.view-Executive-Profiles.view-id-Executive_Profiles.view-display-id-page_1 > div.view-content {
+  width:500px;
+  margin:0 auto;
+}
+  /* Group Landing Page */
+  #block-views-groups-block-2,
+  .create-group {
+    display:none;
+  }
+  #content > div.view.view-Executive-Profiles.view-id-Executive_Profiles .pager-item {
+    padding:0;
+  }
+  /* News Article Pages */
+  .not-front.logged-in.sidebar-first #content.column,
+  .not-front.logged-in.sidebar-second #content.column {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    clear:both!important;
+    float:none;
+  }
+  .sidebar-second .region-sidebar-second {;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    float:none;
+    clear:both!important;
+  }
   }
 }
 
@@ -371,7 +442,7 @@ and (orientation: portrait) {
     width: 315px;
     margin: 0 auto;
   }
-  .front #content.column {
+  #content.column {
       max-width: 98% !important;
       margin: 0 auto;
   }
@@ -469,7 +540,7 @@ and (orientation: portrait) {
   .not-front .new-activity-window #header.header {
     background: none !important;
   }
-  .front #content.column {
+  #content.column {
       max-width: 98% !important;
       margin: 0 auto;
   }
@@ -518,7 +589,7 @@ and (orientation: portrait) {
     #block-block-45 { // show social sidebar only on wide screen view - 1240 or greater
         display: none !important;
     }
-    .front #content.column {
+    #content.column {
         max-width: 960px;
     }
 }
