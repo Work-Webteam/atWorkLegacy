@@ -136,6 +136,7 @@
       // Show field for ministry
       $('#edit-field-lsa-pin-ministry-org').slideDown('slow');
       $('#field-lsa-ministry-rep-email-add-more-wrapper').show();
+      $('#edit-field-lsa-ministry-rep-email-und-0-value').show();
 
           // depending on the situation, show or change the description field
       if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
