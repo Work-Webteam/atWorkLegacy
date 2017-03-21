@@ -140,6 +140,28 @@ only screen and (                min-resolution: 2dppx) {
   #social-side #status-update div#speech-pointer {
     margin-left: 45px!important;
   }
+  /* Employee Landing Page */
+  .section-employees .view-content .views-row,
+  .view-people-admin .view-content .views-row {
+    width:48%!important;
+    height: 370px!important;
+  }
+  .section-employees .view-content .views-row .image-employee-landing,
+  .view-people-admin .view-content .views-row .image-employee-landing {
+    width:inherit!important;
+    border-width: 12px!important;
+  }
+  form#views-exposed-form-people-admin-public-page #edit-last-name-wrapper,
+  form#views-exposed-form-people-admin-public-page #edit-first-name-wrapper,
+  form#views-exposed-form-people-admin-public-page #edit-interests-wrapper {
+    width:100%;
+  }
+  form#views-exposed-form-people-admin-public-page #edit-title-wrapper,
+  form#views-exposed-form-people-admin-public-page #edit-ministry-wrapper,
+  form#views-exposed-form-people-admin-public-page #edit-city-wrapper,
+  form#views-exposed-form-people-admin-public-page #edit-skills-wrapper {
+    width: 48%;
+  }
   /* Executive Profile Landing Page */
   /* PSA Head */
   .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first.views-row-last {
@@ -202,9 +224,29 @@ only screen and (                min-resolution: 2dppx) {
     padding:0;
   }
   /* Group Article Page */
-  .not-front.logged-in.sidebar-first #content.column {
-    margin-left: inherit!important;
-    clear:both;
+  .sidebar-first aside .region.region-sidebar-first,
+  .sidebar-second aside .region.region-sidebar-second {
+    border:none!important;
+  }
+ .not-front.logged-in.sidebar-first #content.column {
+    margin-left:inherit!important;
+    clear:both!important;
+  }
+  .og-context.og-context-node aside.sidebars {
+    clear:both!important;
+    width: 100%;
+  }
+  .og-context.og-context-node #page #main {
+    padding-top: 10px!important;
+  }
+  .og-context.og-context-node #main h1 {
+   position:relative!important;
+   top: 0px!important;
+   font-size: 1.25em;
+   padding: 0 10px 0 0;
+  }
+  .one-sidebar.sidebar-first .pre-title-snipet {
+    padding: 0!important;
   }
 }
 @media only screen
@@ -256,12 +298,12 @@ only screen and (                min-resolution: 2dppx) {
         clear: both;
         height: inherit;
     }
-    .section-employees .view-content .views-row, .view-people-admin .view-content .views-row {
+/*    .section-employees .view-content .views-row, .view-people-admin .view-content .views-row {
       height:140px;
       min-width: 100% !important;
       max-width:786px;
       clear: both;
-    }
+    }*/
     .front .front-promoted-image {
       display: inline-block;
       clear:none;
@@ -392,7 +434,31 @@ only screen and (                min-resolution: 2dppx) {
     .front #social-side #status-update .form-textarea-wrapper {
     max-width:84%!important;
     }
-      /* Executive Profile Landing Page */
+      /* Employee Landing Page */
+  .section-employees .view-content .views-row,
+  .view-people-admin .view-content .views-row {
+    width:24%!important;
+    height: 370px!important;
+  }
+  .section-employees .view-content .views-row .image-employee-landing,
+  .view-people-admin .view-content .views-row .image-employee-landing {
+    width:inherit!important;
+    height:inherit!important;
+    border-width: 12px!important;
+  }
+  form#views-exposed-form-people-admin-public-page #edit-last-name-wrapper,
+  form#views-exposed-form-people-admin-public-page #edit-first-name-wrapper,
+  form#views-exposed-form-people-admin-public-page #edit-interests-wrapper {
+    width:100%;
+  }
+  form#views-exposed-form-people-admin-public-page #edit-title-wrapper,
+  form#views-exposed-form-people-admin-public-page #edit-ministry-wrapper,
+  form#views-exposed-form-people-admin-public-page #edit-city-wrapper,
+  form#views-exposed-form-people-admin-public-page #edit-skills-wrapper {
+    width: 48%;
+  }
+  
+  /* Executive Profile Landing Page */
   /* PSA Head */
   .page-executive-team #content .view-Executive-Profiles .attachment-before {
     width:inherit!important;
@@ -466,7 +532,30 @@ only screen and (                min-resolution: 2dppx) {
 #comments #comment-form {
   margin:0 0 10px 0!important;
 }
-
+  .sidebar-first aside .region.region-sidebar-first,
+  .sidebar-second aside .region.region-sidebar-second {
+    border:none!important;
+  }
+ .not-front.logged-in.sidebar-first #content.column {
+    margin-left:inherit!important;
+    clear:both!important;
+  }
+  .og-context.og-context-node aside.sidebars {
+    clear:both!important;
+    width: 100%;
+  }
+  .og-context.og-context-node #page #main {
+    padding-top: 10px!important;
+  }
+  .og-context.og-context-node #main h1 {
+   position:relative!important;
+   top: 0px!important;
+   font-size: 1.25em;
+   padding: 0 10px 0 0;
+  }
+  .one-sidebar.sidebar-first .pre-title-snipet {
+    padding: 0!important;
+  }
   }
 }
 
