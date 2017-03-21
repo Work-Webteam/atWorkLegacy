@@ -405,19 +405,23 @@ function lsa_email_send($lsa_node){
   create_pdf($lsa_node);
 
   // get pdf url
-  $filepath =  'sites/default/files/lsa_pdfs' . "/invitation_" . $lsa_node->nid . ".pdf";
+  $filepath =  'sites/default/files/lsa_pdfs/invitation_' . $lsa_node->nid . ".pdf";
 
   $attachment = array(
-    'filepath' => $filepath, // or $uri
+     'filecontent' => $filepath,
+     'filename' => 'invitation_' . $lsa_node->nid . '.pdf',
+     'filemime' => 'application/pdf',
   );
+
   // If no errors, then continue with mailing
   // Set the custom message up
   $params = array(
     'subject' => $applicant_subject,
     'body' => $applicant_body,
     // add pdf attachment here
-    'attachment' => $attachment
+    'attachment' => $attachment,
   );
+  dpm($params);
 
   // Need to send to all emails we have, to make sure we have the best chance to reach all recipients.
   if(isset($alt_email)){
