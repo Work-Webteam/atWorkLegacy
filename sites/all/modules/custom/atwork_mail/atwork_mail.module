@@ -134,7 +134,6 @@ function atwork_mail_mail_alter(&$message) {
  */
 function atwork_mail_mail($key, &$message, $params) {
   //dpm($key);
-  //dpm($params);
   if($key ==  'atwork_mail_default') {
     if (isset($params['subject'])) {
       $message['subject'] = $params['subject'];
@@ -146,9 +145,8 @@ function atwork_mail_mail($key, &$message, $params) {
       $message['headers'] += $params['headers'];
     }
     if(isset($params['attachment']) && is_array($params['attachment'])) {
-      //$message['params']['attachment'][] = $params['attachment'];
+      $message['params']['attachments'][] = $params['attachment'];
     }
 
-    //dpm($message);
   }
 }
