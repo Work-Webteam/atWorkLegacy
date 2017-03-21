@@ -419,7 +419,7 @@ function lsa_email_send($lsa_node){
     'subject' => $applicant_subject,
     'body' => $applicant_body,
     // add pdf attachment here
-    'attachment' => $attachment,
+    'attachments' => $attachment,
   );
 
   // Need to send to all emails we have, to make sure we have the best chance to reach all recipients.
