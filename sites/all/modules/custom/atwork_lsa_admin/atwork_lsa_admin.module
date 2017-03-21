@@ -401,11 +401,22 @@ function lsa_email_send($lsa_node){
     return($send_status);
   }
 
+  // Lets create a pdf of the invitation for the user
+  create_pdf($lsa_node);
+
+  // get pdf url
+  $filepath =  'sites/default/files/lsa_pdfs' . "/invitation_" . $lsa_node->nid . ".pdf";
+
+  $attachment = array(
+    'filepath' => $filepath, // or $uri
+  );
   // If no errors, then continue with mailing
   // Set the custom message up
   $params = array(
     'subject' => $applicant_subject,
     'body' => $applicant_body,
+    // add pdf attachment here
+    'attachment' => $attachment
   );
 
   // Need to send to all emails we have, to make sure we have the best chance to reach all recipients.
@@ -451,6 +462,73 @@ function lsa_email_send($lsa_node){
   // Send back our message array
   return($send_status);
 }
+
+
+/**
+ * This function creates a pdf that we can then attach to an email via drupal mail
+ * params:
+ * $user - the user this invitation is for
+ * Code adapted from http://www.fpdf.org/
+ * Can be added to drupal mail via drupal standards: http://drupal.stackexchange.com/questions/101035/send-attachments-with-drupal-mail
+ */
+
+function create_pdf($lsa_node){
+  // include the pdf generator
+  require(drupal_get_path('module', 'atwork_lsa_admin') . '/fpdf/fpdf181/fpdf.php');
+  global $base_url;
+  // Get name for this user
+  $username = $lsa_node->title;
+
+  // Get full date item for cert
+  if(isset($lsa_node->field_lsa_ceremonydate['und'][0]['value']) && $lsa_node->field_lsa_ceremonydate['und'][0]['value']){
+    $list_of_values = list_allowed_values(field_info_field('field_lsa_ceremonydate'));
+    $ceremony_date_key = $lsa_node->field_lsa_ceremonydate['und'][0]['value'];
+    foreach($list_of_values as $key=>$value){
+      if($key == $ceremony_date_key){
+        $date = $value;
+      }
+    }
+  } else {
+    $date = '';
+  }
+  // Create handle for new PDF document
+  $pdf = new FPDF('P', 'pt', 'Letter');
+
+  // Will save pdfs here
+  $filepath = 'sites/default/files/lsa_pdfs/lsa_' . $lsa_node->nid . '.pdf';
+  // Add our first page The origin is at the upper-left corner and the current position is by default set at 1 cm from the borders; the margins can be changed with SetMargins().
+  $pdf->AddPage();
+
+  // Get font ready, include in file, We could have specified italics with I, underlined with U or a regular font with an empty string (or any combination). font size specified by points
+  $pdf->SetFont("Times", '', 16);
+
+  // Grab our invitation image
+  $invitation = drupal_get_path('module', 'atwork_lsa_admin') . '/Invitation/LSA_Invite_June1.jpg';
+  // Add the image
+  $pdf->Image($invitation, 10,10,592,0,'JPG');
+
+  // Set our mark in the proper place for the name
+  $pdf->SetY(250);
+
+  // Add name Text(float x, float y, string txt)
+  $pdf->Cell(0,0,$username,0,1,C);
+  //$pdf->Text(250, 100, $username);
+
+  // Now set our marker to the date field
+  $pdf->SetY(315);
+  // Add date
+  $pdf->Cell(0,0,$date,0,1,C);
+ //$pdf->Text(60,300, $date);
+
+  // Save to file string Output([string dest [, string name [, boolean isUTF8]]])
+  $pdf->Output('F', $filepath);
+  // Should be destroyed in output, but we can crush it here just in case
+  $pdf->Close();
+
+}
+
+
+
 
 
 /**
