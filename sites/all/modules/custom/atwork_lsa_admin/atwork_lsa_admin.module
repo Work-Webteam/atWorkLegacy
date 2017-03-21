@@ -409,6 +409,8 @@ function lsa_email_send($lsa_node){
 
   $attachment = array(
      'filepath' => $filepath,
+     'filemime' => 'application/pdf',
+     'filename' => 'invitation_' . $lsa_node->nid . '.pdf',
   );
 
   // If no errors, then continue with mailing
