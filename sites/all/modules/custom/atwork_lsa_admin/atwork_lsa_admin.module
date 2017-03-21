@@ -511,13 +511,14 @@ function create_pdf($lsa_node){
   $pdf->SetY(250);
 
   // Add name Text(float x, float y, string txt)
-  $pdf->Cell(0,0,$username,0,1,C);
+  $pdf->Cell(0,0,$username,0,1,'C');
   //$pdf->Text(250, 100, $username);
 
-  // Now set our marker to the date field
+  // Now set our marker to the date field5pudGr@vy1
+  //
   $pdf->SetY(315);
   // Add date
-  $pdf->Cell(0,0,$date,0,1,C);
+  $pdf->Cell(0,0,$date,0,1,'C');
  //$pdf->Text(60,300, $date);
 
   // Save to file string Output([string dest [, string name [, boolean isUTF8]]])
