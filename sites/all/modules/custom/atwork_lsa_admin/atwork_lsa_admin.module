@@ -405,7 +405,7 @@ function lsa_email_send($lsa_node){
   create_pdf($lsa_node);
 
   // get pdf url
-  $filepath =  'sites/default/files/lsa_pdfs/invitation_' . $lsa_node->nid . ".pdf";
+  $filepath =  'sites/default/files/lsa_pdfs/';
 
   $attachment = array(
      'filecontent' => $filepath,
@@ -421,7 +421,6 @@ function lsa_email_send($lsa_node){
     // add pdf attachment here
     'attachment' => $attachment,
   );
-  dpm($params);
 
   // Need to send to all emails we have, to make sure we have the best chance to reach all recipients.
   if(isset($alt_email)){
