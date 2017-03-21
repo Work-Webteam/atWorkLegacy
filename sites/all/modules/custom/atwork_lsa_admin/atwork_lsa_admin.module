@@ -405,10 +405,10 @@ function lsa_email_send($lsa_node){
   create_pdf($lsa_node);
 
   // get pdf url
-  $filepath = 'sites/default/files/lsa_pdfs/invitation_' . $lsa_node->nid . '.pdf';
+  $filepath = 'sites/default/files/lsa_pdfs/';
 
   $attachment = array(
-     'filepath' => $filepath,
+     'filecontent' => $filepath,
      'filemime' => 'application/pdf',
      'filename' => 'invitation_' . $lsa_node->nid . '.pdf',
   );
