@@ -397,6 +397,12 @@ function lsa_email_send($lsa_node){
      'filename' => 'invitation_' . $lsa_node->nid . '.pdf',
      'filemime' => 'application/pdf',
   );
+  // We now cc supervisors
+  if(isset($lsa_node->field_lsa_supervisor_email['und'][0]['email']) && $lsa_node->field_lsa_supervisor_email['und'][0]['email']){
+    $supervisor_email = $lsa_node->field_lsa_supervisor_email['und'][0]['email'];
+  } else {
+    $supervisor_email = '';
+  }
 
   // If no errors, then continue with mailing
   // Set the custom message up
@@ -405,6 +411,9 @@ function lsa_email_send($lsa_node){
     'body' => $applicant_body,
     // add pdf attachment here
     'attachment' => $attachment,
+    'headers' => array(
+      'Cc' => $supervisor_email,
+    ),
   );
 
   // Need to send to all emails we have, to make sure we have the best chance to reach all recipients.
