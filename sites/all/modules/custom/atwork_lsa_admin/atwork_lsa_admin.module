@@ -499,6 +499,7 @@ function create_pdf($lsa_node){
 
   // Will save pdfs here
   $filepath = 'sites/default/files/lsa_pdfs/invitation_' . $lsa_node->nid . '.pdf';
+
   // Add our first page The origin is at the upper-left corner and the current position is by default set at 1 cm from the borders; the margins can be changed with SetMargins().
   $pdf->AddPage();
 
@@ -530,10 +531,6 @@ function create_pdf($lsa_node){
   $pdf->Close();
 
 }
-
-
-
-
 
 /**
  * Implements hook_node_view
