@@ -41,3 +41,4 @@ $applicant_not_attending_body = <<<EOT
     </body>
 </html>
 EOT;
+
