@@ -98,7 +98,6 @@ function update_lsa_node_submit(&$form, &$form_state){
         }
         node_save($node);
       }
-      //dpm($node);
       $messages = drupal_get_messages();
       if(isset($messages['status'][0]) && $messages['status'][0]){
         $message_check = substr($messages['status'][0], 0, 5);
@@ -107,8 +106,6 @@ function update_lsa_node_submit(&$form, &$form_state){
           $_SESSION['messages'] = $messages;
         }
       }
-
-
   }
   return;
 }
@@ -158,7 +155,6 @@ function custom_vbo_submit_handler(&$form, &$form_state){
   $send_num = 0;
   $error_num = 0;
 
-  //dpm($status_message);
   // Build output and save as a txt file with the date as a #id - https://www.drupal.org/node/1875456
   if(isset($status_message['success']) && $status_message['success']){
     foreach($status_message['success'] as $key=>$value){
@@ -206,7 +202,6 @@ function custom_vbo_submit_handler(&$form, &$form_state){
     }
   }
 
-  //dpm($form);
 
   // Redirect back to email page, we do not need any more of VBO's functionality
   //drupal_goto('lsa-admin/email');
@@ -244,7 +239,6 @@ function send_to_all_applicants(&$form, &$form_state){
   $form['lsa_send_filters'] = array(
     '#type' => "array",
     );
-  //dpm($form_state);
   if(isset($form_state['build_info']['args'][0]->exposed_data['field_lsa_ceremonydate_value']) && $form_state['build_info']['args'][0]->exposed_data['field_lsa_ceremonydate_value']) {
     $ceremony_id = $form_state['build_info']['args'][0]->exposed_data['field_lsa_ceremonydate_value'];
     $ceremony_compare = " = " ;
@@ -270,7 +264,6 @@ function send_to_all_applicants(&$form, &$form_state){
       $rsvp_compare = " >= ";
     }
   }
-  //dpm($form_state);
   if(isset($form_state['build_info']['args'][0]->exposed_data['field_lsa_retro_active_value'])){
     $retro_active_compare = ' = ';
     $retro_active = $form_state['build_info']['args'][0]->exposed_data['field_lsa_retro_active_value'];
@@ -292,13 +285,11 @@ function send_to_all_applicants(&$form, &$form_state){
     LEFT JOIN {field_data_field_lsa_retro_active} retroactive ON node.nid = retroactive.entity_id
     WHERE (( (node.status =  '1') AND (node.type IN ('lsa_application')) AND (ceremony_date.field_lsa_ceremonydate_value  $ceremony_compare '$ceremony_id') AND (rsvp.field_lsa_rsvp_value $rsvp_compare '$rsvp') AND (org.field_lsa_org_value $ministry_compare '$ministry_id') AND (retroactive.field_lsa_retro_active_value $retro_active_compare '$retro_active')))");
 
-  //dpm($results);
   if($results){
     foreach($results as $record){
       $lsa_list[] = $record;
     }
   }
-  //dpm($lsa_list);
 
   if(isset($lsa_list)){
     // Record total number of elements
@@ -311,7 +302,6 @@ function send_to_all_applicants(&$form, &$form_state){
       $lsa_node = node_load($node_id);
       // Send entire node object over to send function, retrieve info on send details
       $return_message = lsa_email_send($lsa_node);
-      //dpm($return_message);
       foreach($return_message as $key=>$value){
         $status_message[$key][] = $value;
       }
@@ -319,8 +309,6 @@ function send_to_all_applicants(&$form, &$form_state){
   } else {
     $status_message['error'][] = "No records found";
   }
-  //dpm($lsa_node);
-  //dpm($status_message);
   return $status_message;
 }
 
@@ -332,7 +320,6 @@ function send_to_all_applicants(&$form, &$form_state){
  * @return   $status_message [array returned to submit function in order to display a message confirming the sends]
  */
 function send_to_selected_applicants($form, $form_state){
-  //dpm($form);
   $status_message = array();
   $return_message = array();
 
@@ -360,8 +347,6 @@ function send_to_selected_applicants($form, $form_state){
       $status_message[$key][] = $value;
     }
   }
-  //dpm($status_message);
-  //dpm($lsa_node);
   return $status_message;
 }
 
@@ -461,7 +446,6 @@ function lsa_email_send($lsa_node){
   $lsa_node->field_lsa_invitation_sent = $update_send_time;
   node_save($lsa_node);
 
-  //dpm($lsa_node);
   // Send back our message array
   return($send_status);
 }
@@ -553,7 +537,6 @@ function atwork_lsa_admin_node_view($node, $view_mode, $langcode) {
   if($user->uid == 0){
     return;
   }
-  //dpm($user_object);
   // Conditions that allow us to see the node, else we redirect and give a message.
   if($node->uid == $user->uid){
     return;
@@ -568,9 +551,6 @@ function atwork_lsa_admin_node_view($node, $view_mode, $langcode) {
     //drupal_goto('career/long-service-awards');
     $node->content['#access'] = false;
   }
-
-  //dpm($node); https://test2.gww.gov.bc.ca/career/long-service-awards/applications/19331
-
 }
 
 
@@ -586,7 +566,6 @@ function atwork_lsa_admin_menu_local_tasks_alter(&$data, $router_item, $root_pat
   }
   //  remove the 'edit' & 'view' tab when viewing the node.
   if(isset($router_item['page_arguments'][0]->type) && $router_item['page_arguments'][0]->type == 'lsa_application'){
-    //dpm('Yes');
     foreach ($router_item['page_arguments'] as $key => $argument) {
       if (is_object($argument) && $router_item['page_arguments'][$key]->type == 'lsa_application') {
         foreach ($data['tabs'][0]['output'] as $key => $value) {
@@ -658,7 +637,5 @@ function atwork_lsa_admin_block_list_alter(&$blocks){
       }
     }
   }
-  //dpm($node);
-  //dpm($blocks);
 }
 
