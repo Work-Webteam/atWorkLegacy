@@ -125,10 +125,11 @@ function update_lsa_node_submit(&$form, &$form_state){
  * Helper function to send email after RSVP
  */
 function rsvp_email_send($form, $form_state, $node){
-  if(isset($form_state['input']['node'][$nid]['field_lsa_ceremony_response']) && $form_state['input']['node'][$nid]['field_lsa_ceremony_response']){
+  if(isset($form_state['input']['node'][$node->nid]['field_lsa_ceremony_response']) && $form_state['input']['node'][$node->nid]['field_lsa_ceremony_response']){
     // Grab our mail in file
+    $lang = $node->language;
     require(drupal_get_path('module', 'atwork_lsa_admin') . '/atwork_lsa_admin_rsvp.mail.inc');
-    switch ($form_state['input']['node'][$nid]['field_lsa_ceremony_response']['und']){
+    switch ($form_state['input']['node'][$node->nid]['field_lsa_ceremony_response']['und']){
       // Should not be able to reach this if _none, but just in case.
       case "_none":
         break;
@@ -153,7 +154,7 @@ function rsvp_email_send($form, $form_state, $node){
     }
     // Check if this user has more than one email address... if so, then send a mailing to both
     // No addresses would be an error
-    if(isset($node->field_lsa_alt_email_address) && $lsa_node->field_lsa_alt_email_address){
+    if(isset($node->field_lsa_alt_email_address) && $node->field_lsa_alt_email_address){
       $alt_email = $node->field_lsa_alt_email_address[$lang][0]['email'];
       $email = $node->field_lsa_email[$lang][0]['email'];
     } elseif(isset($node->field_lsa_email[$lang][0]['email'])) {
