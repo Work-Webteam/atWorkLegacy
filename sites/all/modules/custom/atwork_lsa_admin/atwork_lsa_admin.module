@@ -55,10 +55,15 @@ function atwork_lsa_admin_form_alter(&$form, &$form_state, $form_id) {
       }
     }
   }
-
 }
 
-
+/**
+ * Submit handler for RSVP form submit on lsa nod
+ * 
+ * @param  $form
+ * @param  $form_state
+ * @return void
+ */
 function update_lsa_node_submit(&$form, &$form_state){
   if (arg(0) == 'node' && is_numeric(arg(1))) {
       // Get the nid
@@ -75,23 +80,29 @@ function update_lsa_node_submit(&$form, &$form_state){
             $node->field_lsa_rsvp['und'][0]['value'] = "0";
             $node->field_lsa_number_attending['und'][0]['value'] = "0";
             break;
+          // Attending with Guest
           case "1":
             $node->field_lsa_attending_ceremony['und'][0]['value'] = "2";
             $node->field_lsa_guest['und'][0]['value'] = "0";
             $node->field_lsa_rsvp['und'][0]['value'] = "1";
             $node->field_lsa_number_attending['und'][0]['value'] = "1";
+            rsvp_email_send($form, $form_state, $node);
             break;
           case "2":
+          // Attending without Guest
             $node->field_lsa_attending_ceremony['und'][0]['value'] = "2";
             $node->field_lsa_guest['und'][0]['value'] = "1";
             $node->field_lsa_rsvp['und'][0]['value'] = "1";
             $node->field_lsa_number_attending['und'][0]['value'] = "2";
+            rsvp_email_send($form, $form_state, $node);
             break;
+          // Not attending
           case "3":
             $node->field_lsa_attending_ceremony['und'][0]['value'] = "3";
             $node->field_lsa_guest['und'][0]['value'] = "0";
             $node->field_lsa_rsvp['und'][0]['value'] = "1";
             $node->field_lsa_number_attending['und'][0]['value'] = "0";
+            rsvp_email_send($form, $form_state, $node);
             break;
           default:
             break;
@@ -109,6 +120,55 @@ function update_lsa_node_submit(&$form, &$form_state){
   }
   return;
 }
+
+/**
+ * Helper function to send email after RSVP
+ */
+function rsvp_email_send($form, $form_state, $node){
+  if(isset($form_state['input']['node'][$nid]['field_lsa_ceremony_response']) && $form_state['input']['node'][$nid]['field_lsa_ceremony_response']){
+    // Grab our mail in file
+    require(drupal_get_path('module', 'atwork_lsa_admin') . '/atwork_lsa_admin_rsvp.mail.inc');
+    switch ($form_state['input']['node'][$nid]['field_lsa_ceremony_response']['und']){
+      // Should not be able to reach this if _none, but just in case.
+      case "_none":
+        break;
+      // Attending with Guest
+      case "1":
+      // Attending without Guest - same email either way - we can fall through
+      case "2":
+        $params = array(
+          'subject' => $applicant_attending_subject,
+          'body' => $applicant_attending_body,
+          );
+        break;
+      // Not attending
+      case "3":
+        $params = array(
+          'subject' => $applicant_not_attending_subject,
+          'body' => $applicant_not_attending_body,
+        );
+        break;
+      default:
+        break;
+    }
+    // Check if this user has more than one email address... if so, then send a mailing to both
+    // No addresses would be an error
+    if(isset($node->field_lsa_alt_email_address) && $lsa_node->field_lsa_alt_email_address){
+      $alt_email = $node->field_lsa_alt_email_address[$lang][0]['email'];
+      $email = $node->field_lsa_email[$lang][0]['email'];
+    } elseif(isset($node->field_lsa_email[$lang][0]['email'])) {
+      $email = $node->field_lsa_email[$lang][0]['email'];
+    }
+    //Send to Drupal mail to go out from lsa_administration.
+    drupal_mail('atwork_mail', 'atwork_mail_default', $email, language_default(), $params, 'longserviceawards@gov.bc.ca');
+    if(isset($alt_email) && $alt_email){
+      drupal_mail('atwork_mail', 'atwork_mail_default', $alt_email, language_default(), $params, 'longserviceawards@gov.bc.ca');
+    }
+  }
+}
+
+
+
 
 /**
  * Implements hook_views_bulk_operations_form_alter
@@ -202,11 +262,6 @@ function custom_vbo_submit_handler(&$form, &$form_state){
     }
   }
 
-
-  // Redirect back to email page, we do not need any more of VBO's functionality
-  //drupal_goto('lsa-admin/email');
-
-
   //If errors, send a message
   if(isset($error_num) && $error_num > 0){
     drupal_set_message("There " . ($error_num > 1 ? "were " : "was ") . $error_num . ($error_num > 1 ? "errors.  " : "error.  ") . "Please see error log");
@@ -216,9 +271,8 @@ function custom_vbo_submit_handler(&$form, &$form_state){
     drupal_set_message($send_num . ($send_num >  1 ? " applicants were" : " applicant was") . " emailed");
   }
 
+  // Redirect back to email page, we do not need any more of VBO's functionality
   drupal_goto('lsa-admin/email');
-
-
 }
 
 /**
