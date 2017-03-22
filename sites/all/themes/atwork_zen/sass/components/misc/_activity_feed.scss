@@ -14,7 +14,7 @@
     border: 5px solid #26669E;
   }
   #profile-comment-link { // shows the Message Check link
-    // display: none; 
+    display: none; 
   }
   #saving-notification-status {
     @include atwork-messages(green, ok);

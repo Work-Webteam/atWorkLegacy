@@ -744,19 +744,9 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'semantic_field_format' => 0,
-          'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
-        ),
-        'type' => 'date_default',
-        'weight' => 12,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -827,12 +817,9 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'list_default',
-        'weight' => 11,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1414,19 +1401,9 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'semantic_field_format' => 0,
-          'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
-        ),
-        'type' => 'date_default',
-        'weight' => 13,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1498,12 +1475,9 @@ function homepage_activity_feed_feature_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'list_default',
-        'weight' => 12,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
       ),
       'ecard' => array(
         'label' => 'above',
