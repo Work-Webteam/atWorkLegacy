@@ -144,7 +144,7 @@ function atwork_mail_mail($key, &$message, $params) {
     if (isset($params['headers']) && is_array($params['headers'])) {
       $message['headers'] += $params['headers'];
     }
-    if(isset($params['attachments']) && is_array($params['attachments'])) {
+    if(isset($params['attachment']) && is_array($params['attachment'])) {
       $message['params']['attachments'][] = $params['attachment'];
     }
 
