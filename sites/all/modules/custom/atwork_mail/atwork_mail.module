@@ -170,5 +170,6 @@ function atwork_mail_mail($key, &$message, $params) {
     if(isset($params['attachment']) && is_array($params['attachment'])) {
       $message['params']['attachments'][] = $params['attachment'];
     }
+    dpm($message);
   }
 }
