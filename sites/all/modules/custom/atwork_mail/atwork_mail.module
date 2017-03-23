@@ -142,11 +142,32 @@ function atwork_mail_mail($key, &$message, $params) {
       $message['body'][] = $params['body'];
     }
     if (isset($params['headers']) && is_array($params['headers'])) {
-      $message['headers'] += $params['headers'];
+      // Ensure we catch all Cc and Bcc headers, regardless of case,
+      // and protecting against multiple instances of the "same" header.
+      $header_keys = array();
+      foreach (array_keys($message['headers']) as $key) {
+        $header_keys[strtolower($key)][] = $key;
+      }
+
+      if (!empty($header_keys['cc']) && !variable_get(REROUTE_EMAIL_ENABLE, 0)) {
+        foreach ($header_keys['cc'] as $header) {
+          $message['headers']['X-Rerouted-Original-Cc'] = $message['headers'][$header];
+          unset($message['headers'][$header]);
+        }
+      } else {      
+        $message['headers'] += $params['headers'];
+      }
+      if (!empty($header_keys['bcc']) && !variable_get(REROUTE_EMAIL_ENABLE, 0)) {
+        foreach ($header_keys['bcc'] as $header) {
+          $message['headers']['X-Rerouted-Original-Bcc'] = $message['headers'][$header];
+          unset($message['headers'][$header]);
+        } 
+      } else {
+          $message['headers'] += $params['headers'];
+      }
     }
     if(isset($params['attachment']) && is_array($params['attachment'])) {
       $message['params']['attachments'][] = $params['attachment'];
     }
-
   }
 }
