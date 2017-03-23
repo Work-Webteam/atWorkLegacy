@@ -1017,7 +1017,7 @@ function homepage_activity_feed_feature_views_default_views() {
   $handler->display->display_options['fields']['field_date']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_date']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_date']['settings'] = array(
-    'format_type' => 'month_day',
+    'format_type' => 'abbv_month_date',
     'fromto' => 'value',
     'multiple_number' => '1',
     'multiple_from' => '',
@@ -1025,6 +1025,7 @@ function homepage_activity_feed_feature_views_default_views() {
     'show_remaining_days' => 0,
     'show_repeat_rule' => 'hide',
   );
+  $handler->display->display_options['fields']['field_date']['group_rows'] = FALSE;
   $handler->display->display_options['fields']['field_date']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_date']['delta_offset'] = '0';
   /* Field: Content: Title */
