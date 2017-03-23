@@ -153,6 +153,7 @@ function atwork_mail_mail($key, &$message, $params) {
         foreach ($header_keys['cc'] as $header) {
           $message['headers']['X-Rerouted-Original-Cc'] = $params['headers'][$header];
           unset($message['headers'][$header]);
+          unset($params['headers'][$header]);
         }
       } elseif(!empty($header_keys['cc']) && variable_get(REROUTE_EMAIL_ENABLE) == 0) {      
         $message['headers'] += $params['headers'];
@@ -162,6 +163,8 @@ function atwork_mail_mail($key, &$message, $params) {
         foreach ($header_keys['bcc'] as $header) {
           $message['headers']['X-Rerouted-Original-Bcc'] = $params['headers'][$header];
           unset($message['headers'][$header]);
+          unset($params['headers'][$header]);
+
         } 
       } elseif(!empty($header_keys['bcc']) && variable_get(REROUTE_EMAIL_ENABLE) == 0) {
           $message['headers'] += $params['headers'];
