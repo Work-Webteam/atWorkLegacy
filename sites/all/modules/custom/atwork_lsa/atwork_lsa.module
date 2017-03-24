@@ -302,8 +302,22 @@ function atwork_lsa_application_submit(&$form, &$form_state) {
   } elseif(!isset($form_state['values']['field_lsa_award_id']['und'][0]['value'])){
     $form_state['values']['field_lsa_award_id']['und'][0]['value'] = $id;
   }
+
+  // Check if we have a middle name. If it is a single initial, add a . (if length is == 1 )
+  if(isset($form_state['values']['field_lsa_middle_name']['und'][0]['value']) && $form_state['values']['field_lsa_middle_name']['und'][0]['value']){
+    $middle_name = $form_state['values']['field_lsa_middle_name']['und'][0]['value'];
+    // If they entered a single letter for their middle name, lets add a .
+    if(strlen($middle_name) > 0 && strlen($middle_name) < 2){
+      $middle_name .= ".";
+    }
+    // If we have a middle name, we need an extra space for the cert
+    $middle_name .= " ";
+  } else {
+    $middle_name = '';
+  }
+
   if(isset($form_state['values']['field_lsa_certificate_ordered']['und'][0]['value']) && $form_state['values']['field_lsa_certificate_ordered']['und'][0]['value'] == 1){
-    $form_state['values']['field_lsa_25year_certificatename']['und'][0]['value'] = $form_state['values']['field_lsa_first_name']['und'][0]['value'] . " " . $form_state['values']['field_lsa_last_name']['und'][0]['value'];
+    $form_state['values']['field_lsa_25year_certificatename']['und'][0]['value'] = $form_state['values']['field_lsa_first_name']['und'][0]['value'] . " " . $middle_name . $form_state['values']['field_lsa_last_name']['und'][0]['value'];
   }
 }
 
@@ -359,7 +373,6 @@ function get_award_id_number($form_state){
   $award_id = array_search($award, $awards);
   return $award_id;
 }
-
 function atwork_lsa_node_view($node, $view_mode, $langcode) {
   if($node->type === 'lsa_pin_application'){
     $node->content['top_message'] = array(
