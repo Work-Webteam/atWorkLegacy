@@ -35,7 +35,7 @@ $applicant_not_attending_body = <<<EOT
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     </head>
     <body id="mimemail-body" class="atwork-mail-default">
-        <p>Thank you for notifying us that you will <u>not</u> be attending this year’s Long Service Award Ceremony. </p>
+        <p>Thank you for notifying us that you will <u>not</u> be attending this year’s Long Service Award (LSA) Ceremony. </p>
         <p>Long Service Awards are presented the year the employee registers. <strong>Your award will be sent to your organization following the fall ceremonies, and your <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts" target="_blank">ministry/organization contact</a> will make the arrangements to have your award presented to you internally</strong>.</p>
         <p><strong>Reminder:</strong> If this is the first year you have registered, you have a one-year deferral to attend next year. You are responsible for <a href="https://gww.gov.bc.ca/career/long-service-awards" target="_blank"> re-registering next year</a>. The registration period is from the beginning of March to the end of April each year.</p>
         <p>If you have any questions, please visit our website <a href="https://gww.gov.bc.ca/career/long-service-awards/faq" target="_blank">FAQs</a>, connect with your <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts" target="_blank">ministry LSA contact</a> or send an email to <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20question" target="_top">longserviceawards@gov.bc.ca</a>.</p>
