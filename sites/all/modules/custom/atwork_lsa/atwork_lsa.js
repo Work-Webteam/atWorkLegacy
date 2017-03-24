@@ -146,8 +146,8 @@
     $('.collapsible.required-fields.group-lsa-first-donation.field-group-fieldset.form-wrapper.collapse-processed').hide();
     $('.collapsible.required-fields.group-lsa-second-donation.field-group-fieldset.form-wrapper.collapse-processed').hide();
     // Only we can change this:
-    $('#edit-field-lsa-donation-amount-und-0-value').prop("disabled", true);
-    $('#edit-field-lsa-donation-amount-2-und-0-value').prop("disabled", true);
+    $('#edit-field-lsa-donation-amount-und-0-value').prop("readonly", true);
+    $('#edit-field-lsa-donation-amount-2-und-0-value').prop("readonly", true);
     // We will manipulate this behind the scenes
     $('#edit-field-lsa-certificate-ordered').hide();
     // We want option A before option b for the PECSF
@@ -340,9 +340,9 @@
         amount = '$' + amount;
         // Add it into the two donation text boxes
         $('#edit-field-lsa-donation-amount-und-0-value').val(amount);
-        $('#edit-field-lsa-donation-amount-und-0-value').prop("disabled", true);
+        $('#edit-field-lsa-donation-amount-und-0-value').prop("readonly", true);
         $('#edit-field-lsa-donation-amount-2-und-0-value').val(amount);
-        $('#edit-field-lsa-donation-amount-2-und-0-value').prop("disabled", true);
+        $('#edit-field-lsa-donation-amount-2-und-0-value').prop("readonly", true);
         $('.collapsible.required-fields.group-lsa-second-donation.field-group-fieldset.form-wrapper.collapse-processed').slideDown('fast');
         $('#edit-field-lsa-pecsf-id-2').slideDown('fast');
         $('#edit-field-lsa-charity-name-2').slideDown('fast');
