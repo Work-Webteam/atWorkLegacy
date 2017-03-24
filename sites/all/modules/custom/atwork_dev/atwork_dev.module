@@ -12,11 +12,11 @@ function atwork_dev_init() {
     }
   }
   else {
-    if (variable_get(REROUTE_EMAIL_ENABLE, 0)) {
-      variable_set(REROUTE_EMAIL_ENABLE, 0);
-      variable_set(REROUTE_EMAIL_ENABLE_MESSAGE, 1);
-      variable_set(REROUTE_EMAIL_ADDRESS, ATWORK_TECHNICAL_EMAIL);
-    }
+    //if (variable_get(REROUTE_EMAIL_ENABLE, 0)) {
+    //  variable_set(REROUTE_EMAIL_ENABLE, 0);
+     // variable_set(REROUTE_EMAIL_ENABLE_MESSAGE, 1);
+     // variable_set(REROUTE_EMAIL_ADDRESS, ATWORK_TECHNICAL_EMAIL);
+   // }
   }
 }
 

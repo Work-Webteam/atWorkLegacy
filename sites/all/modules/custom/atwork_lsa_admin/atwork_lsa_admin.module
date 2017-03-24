@@ -17,6 +17,7 @@ function atwork_lsa_admin_form_alter(&$form, &$form_state, $form_id) {
       // foreach here to remove all the fields we don't need to confuse LSA Admin staff with
       foreach($form['field_lsa_notes_value_op']['#options'] as $key => $value){
         if($value == "Is empty (NULL)"){
+
           // Remove uneeded lingo
           $form['field_lsa_notes_value_op']['#options'][$key] = "Is empty";
           continue;
@@ -467,7 +468,7 @@ function lsa_email_send($lsa_node){
     // add pdf attachment here
     'attachment' => $attachment,
     'headers' => array(
-      'Cc' => $supervisor_email,
+      'cc' => $supervisor_email,
     ),
   );
 
