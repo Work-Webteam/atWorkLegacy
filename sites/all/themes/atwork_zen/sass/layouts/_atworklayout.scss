@@ -75,6 +75,9 @@ only screen and (                min-resolution: 2dppx) {
   .create-event {
     display: none!important;
   }
+  .new-activity-window #social-side #activity-feed {
+      display: block;
+    }
   .front #social-side #status-update .form-textarea-wrapper textarea {
     width: inherit;
 }
@@ -302,6 +305,9 @@ only screen and (                min-resolution: 2dppx) {
     #block-block-52,
     .create-event {
       display: none!important;
+    }
+    .new-activity-window #social-side #activity-feed {
+      display: block;
     }
     #social-side .jsNewActivityWindow {
     margin-right: 15px!important;
