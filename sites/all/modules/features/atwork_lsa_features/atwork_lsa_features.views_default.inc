@@ -6347,6 +6347,279 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: People */
+  $handler = $view->new_display('page', 'People', 'page_11');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'LSA 25 Year Certificate';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'editableviews_table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+    'field_lsa_employee_number' => 'field_lsa_employee_number',
+    'field_lsa_first_name_editable' => 'field_lsa_first_name_editable',
+    'field_lsa_middle_name_editable' => 'field_lsa_middle_name_editable',
+    'field_lsa_last_name_editable' => 'field_lsa_last_name_editable',
+    'field_lsa_first_name' => 'field_lsa_first_name',
+    'field_lsa_last_name' => 'field_lsa_last_name',
+  );
+  $handler->display->display_options['style_options']['default'] = 'title';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_lsa_employee_number' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_lsa_first_name_editable' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_lsa_middle_name_editable' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_lsa_last_name_editable' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_lsa_first_name' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_lsa_last_name' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['batch_size'] = '10';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Name';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['node_in_colorbox_width'] = '600';
+  $handler->display->display_options['fields']['title']['node_in_colorbox_height'] = '600';
+  $handler->display->display_options['fields']['title']['node_in_colorbox_rel'] = '';
+  /* Field: Content: Employee Number */
+  $handler->display->display_options['fields']['field_lsa_employee_number']['id'] = 'field_lsa_employee_number';
+  $handler->display->display_options['fields']['field_lsa_employee_number']['table'] = 'field_data_field_lsa_employee_number';
+  $handler->display->display_options['fields']['field_lsa_employee_number']['field'] = 'field_lsa_employee_number';
+  /* Field: Content: First Name (editable) */
+  $handler->display->display_options['fields']['field_lsa_first_name_editable']['id'] = 'field_lsa_first_name_editable';
+  $handler->display->display_options['fields']['field_lsa_first_name_editable']['table'] = 'field_data_field_lsa_first_name';
+  $handler->display->display_options['fields']['field_lsa_first_name_editable']['field'] = 'field_lsa_first_name_editable';
+  $handler->display->display_options['fields']['field_lsa_first_name_editable']['label'] = 'First Name ';
+  $handler->display->display_options['fields']['field_lsa_first_name_editable']['widget_type'] = '0';
+  $handler->display->display_options['fields']['field_lsa_first_name_editable']['suppress_label'] = 1;
+  $handler->display->display_options['fields']['field_lsa_first_name_editable']['suppress_description'] = 1;
+  /* Field: Content: Middle Name (editable) */
+  $handler->display->display_options['fields']['field_lsa_middle_name_editable']['id'] = 'field_lsa_middle_name_editable';
+  $handler->display->display_options['fields']['field_lsa_middle_name_editable']['table'] = 'field_data_field_lsa_middle_name';
+  $handler->display->display_options['fields']['field_lsa_middle_name_editable']['field'] = 'field_lsa_middle_name_editable';
+  $handler->display->display_options['fields']['field_lsa_middle_name_editable']['label'] = 'Middle Name';
+  $handler->display->display_options['fields']['field_lsa_middle_name_editable']['widget_type'] = '0';
+  $handler->display->display_options['fields']['field_lsa_middle_name_editable']['suppress_label'] = 1;
+  $handler->display->display_options['fields']['field_lsa_middle_name_editable']['suppress_description'] = 1;
+  /* Field: Content: Last Name (editable) */
+  $handler->display->display_options['fields']['field_lsa_last_name_editable']['id'] = 'field_lsa_last_name_editable';
+  $handler->display->display_options['fields']['field_lsa_last_name_editable']['table'] = 'field_data_field_lsa_last_name';
+  $handler->display->display_options['fields']['field_lsa_last_name_editable']['field'] = 'field_lsa_last_name_editable';
+  $handler->display->display_options['fields']['field_lsa_last_name_editable']['label'] = 'Last Name';
+  $handler->display->display_options['fields']['field_lsa_last_name_editable']['widget_type'] = '0';
+  $handler->display->display_options['fields']['field_lsa_last_name_editable']['suppress_label'] = 1;
+  $handler->display->display_options['fields']['field_lsa_last_name_editable']['suppress_description'] = 1;
+  /* Field: Content: First Name */
+  $handler->display->display_options['fields']['field_lsa_first_name']['id'] = 'field_lsa_first_name';
+  $handler->display->display_options['fields']['field_lsa_first_name']['table'] = 'field_data_field_lsa_first_name';
+  $handler->display->display_options['fields']['field_lsa_first_name']['field'] = 'field_lsa_first_name';
+  $handler->display->display_options['fields']['field_lsa_first_name']['label'] = '';
+  $handler->display->display_options['fields']['field_lsa_first_name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_lsa_first_name']['element_label_colon'] = FALSE;
+  /* Field: Content: Last Name */
+  $handler->display->display_options['fields']['field_lsa_last_name']['id'] = 'field_lsa_last_name';
+  $handler->display->display_options['fields']['field_lsa_last_name']['table'] = 'field_data_field_lsa_last_name';
+  $handler->display->display_options['fields']['field_lsa_last_name']['field'] = 'field_lsa_last_name';
+  $handler->display->display_options['fields']['field_lsa_last_name']['label'] = '';
+  $handler->display->display_options['fields']['field_lsa_last_name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_lsa_last_name']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'lsa_application' => 'lsa_application',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'contains';
+  $handler->display->display_options['filters']['title']['group'] = 1;
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Name';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    15 => 0,
+    16 => 0,
+  );
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_filter'] = 1;
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_field'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_dependent'] = 0;
+  /* Filter criterion: Content: Employee Number (field_lsa_employee_number) */
+  $handler->display->display_options['filters']['field_lsa_employee_number_value']['id'] = 'field_lsa_employee_number_value';
+  $handler->display->display_options['filters']['field_lsa_employee_number_value']['table'] = 'field_data_field_lsa_employee_number';
+  $handler->display->display_options['filters']['field_lsa_employee_number_value']['field'] = 'field_lsa_employee_number_value';
+  $handler->display->display_options['filters']['field_lsa_employee_number_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_lsa_employee_number_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['operator_id'] = 'field_lsa_employee_number_value_op';
+  $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['label'] = 'Employee Number';
+  $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['operator'] = 'field_lsa_employee_number_value_op';
+  $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['identifier'] = 'field_lsa_employee_number_value';
+  $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    15 => 0,
+    16 => 0,
+  );
+  $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['autocomplete_filter'] = 1;
+  $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['autocomplete_field'] = 'field_lsa_employee_number';
+  $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['autocomplete_dependent'] = 0;
+  /* Filter criterion: Content: First Name (field_lsa_first_name) */
+  $handler->display->display_options['filters']['field_lsa_first_name_value']['id'] = 'field_lsa_first_name_value';
+  $handler->display->display_options['filters']['field_lsa_first_name_value']['table'] = 'field_data_field_lsa_first_name';
+  $handler->display->display_options['filters']['field_lsa_first_name_value']['field'] = 'field_lsa_first_name_value';
+  $handler->display->display_options['filters']['field_lsa_first_name_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_lsa_first_name_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_lsa_first_name_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_lsa_first_name_value']['expose']['operator_id'] = 'field_lsa_first_name_value_op';
+  $handler->display->display_options['filters']['field_lsa_first_name_value']['expose']['label'] = 'First Name';
+  $handler->display->display_options['filters']['field_lsa_first_name_value']['expose']['operator'] = 'field_lsa_first_name_value_op';
+  $handler->display->display_options['filters']['field_lsa_first_name_value']['expose']['identifier'] = 'field_lsa_first_name_value';
+  $handler->display->display_options['filters']['field_lsa_first_name_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    15 => 0,
+    16 => 0,
+  );
+  $handler->display->display_options['filters']['field_lsa_first_name_value']['expose']['autocomplete_filter'] = 1;
+  $handler->display->display_options['filters']['field_lsa_first_name_value']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['field_lsa_first_name_value']['expose']['autocomplete_field'] = 'field_lsa_first_name';
+  $handler->display->display_options['filters']['field_lsa_first_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['field_lsa_first_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['field_lsa_first_name_value']['expose']['autocomplete_dependent'] = 0;
+  /* Filter criterion: Content: Last Name (field_lsa_last_name) */
+  $handler->display->display_options['filters']['field_lsa_last_name_value']['id'] = 'field_lsa_last_name_value';
+  $handler->display->display_options['filters']['field_lsa_last_name_value']['table'] = 'field_data_field_lsa_last_name';
+  $handler->display->display_options['filters']['field_lsa_last_name_value']['field'] = 'field_lsa_last_name_value';
+  $handler->display->display_options['filters']['field_lsa_last_name_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_lsa_last_name_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_lsa_last_name_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_lsa_last_name_value']['expose']['operator_id'] = 'field_lsa_last_name_value_op';
+  $handler->display->display_options['filters']['field_lsa_last_name_value']['expose']['label'] = 'Last Name ';
+  $handler->display->display_options['filters']['field_lsa_last_name_value']['expose']['operator'] = 'field_lsa_last_name_value_op';
+  $handler->display->display_options['filters']['field_lsa_last_name_value']['expose']['identifier'] = 'field_lsa_last_name_value';
+  $handler->display->display_options['filters']['field_lsa_last_name_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    15 => 0,
+    16 => 0,
+  );
+  $handler->display->display_options['filters']['field_lsa_last_name_value']['expose']['autocomplete_filter'] = 1;
+  $handler->display->display_options['filters']['field_lsa_last_name_value']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['field_lsa_last_name_value']['expose']['autocomplete_field'] = 'field_lsa_last_name';
+  $handler->display->display_options['filters']['field_lsa_last_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['field_lsa_last_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['field_lsa_last_name_value']['expose']['autocomplete_dependent'] = 0;
+  $handler->display->display_options['path'] = 'lsa-admin/people';
+  $handler->display->display_options['menu']['type'] = 'tab';
+  $handler->display->display_options['menu']['title'] = 'People';
+  $handler->display->display_options['menu']['weight'] = '4';
+  $handler->display->display_options['menu']['name'] = 'menu-lsa-admin';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
   $export['lsa_admin'] = $view;
 
   return $export;
