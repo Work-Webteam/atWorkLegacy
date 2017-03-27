@@ -50,7 +50,8 @@ $applicant_body = <<<EOT
 
 <body id="mimemail-body" class="atwork-mail-default">
 <p> If you are having trouble seeing the images in this email, please ensure you click <strong>“download images”</strong>. </p>
-<p  style = "page-break-after:always" > Use the orange RSVP button at the bottom of the email to electronically confirm all of your pertinent details.</p> <br /> <br />
+<p> To confirm your attendance, click on the RSVP button below (do not reply to this email).</p> 
+<p style = "page-break-after:always">If you are retired, or unable to access the RSVP link below – please contact us at <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20link" target="_top">LongServiceAwards@gov.bc.ca</a>.</p><br /> <br />
 <table width="750" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always" >
   <tbody>
     <tr>
