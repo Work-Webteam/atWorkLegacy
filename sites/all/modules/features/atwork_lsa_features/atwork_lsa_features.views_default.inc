@@ -2449,19 +2449,20 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['filters']['field_lsa_supervisor_last_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['field_lsa_supervisor_last_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
   $handler->display->display_options['filters']['field_lsa_supervisor_last_name_value']['expose']['autocomplete_dependent'] = 0;
-  /* Filter criterion: Content: Are you celebrating a current service milestone in 2017? (field_lsa_milestone_year) */
-  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['id'] = 'field_lsa_milestone_year_value';
-  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['table'] = 'field_data_field_lsa_milestone_year';
-  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['field'] = 'field_lsa_milestone_year_value';
-  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['operator'] = 'not';
-  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['expose']['operator_id'] = 'field_lsa_milestone_year_value_op';
-  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['expose']['label'] = 'current service milestone';
-  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['expose']['operator'] = 'field_lsa_milestone_year_value_op';
-  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['expose']['identifier'] = 'field_lsa_milestone_year_value';
-  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['expose']['remember_roles'] = array(
+  /* Filter criterion: Content: Please select the retroactive milestone pin(s) you would like to order (field_lsa_previous_service_miles) */
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['id'] = 'field_lsa_previous_service_miles_value';
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['table'] = 'field_data_field_lsa_previous_service_miles';
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['field'] = 'field_lsa_previous_service_miles_value';
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['operator'] = 'not';
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['operator_id'] = 'field_lsa_previous_service_miles_value_op';
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['label'] = 'retroactive milestone pins';
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['operator'] = 'field_lsa_previous_service_miles_value_op';
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['identifier'] = 'field_lsa_previous_service_miles_value';
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -2478,19 +2479,19 @@ function atwork_lsa_features_views_default_views() {
     16 => 0,
     17 => 0,
   );
-  /* Filter criterion: Content: Please select the retroactive milestone pin(s) you would like to order (field_lsa_previous_service_miles) */
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['id'] = 'field_lsa_previous_service_miles_value';
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['table'] = 'field_data_field_lsa_previous_service_miles';
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['field'] = 'field_lsa_previous_service_miles_value';
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['operator'] = 'not';
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['operator_id'] = 'field_lsa_previous_service_miles_value_op';
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['label'] = 'retroactive milestone pins';
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['operator'] = 'field_lsa_previous_service_miles_value_op';
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['identifier'] = 'field_lsa_previous_service_miles_value';
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['remember_roles'] = array(
+  /* Filter criterion: Content: Service Milestone (field_lsa_pin_service_milestone) */
+  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['id'] = 'field_lsa_pin_service_milestone_value_1';
+  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['table'] = 'field_data_field_lsa_pin_service_milestone';
+  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['field'] = 'field_lsa_pin_service_milestone_value';
+  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['expose']['operator_id'] = 'field_lsa_pin_service_milestone_value_1_op';
+  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['expose']['label'] = 'Service Milestone Value';
+  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['expose']['operator'] = 'field_lsa_pin_service_milestone_value_1_op';
+  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['expose']['identifier'] = 'field_lsa_pin_service_milestone_value_1';
+  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
