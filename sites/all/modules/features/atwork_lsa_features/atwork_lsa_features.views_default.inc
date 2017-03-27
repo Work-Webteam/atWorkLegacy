@@ -1888,42 +1888,42 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
-    'title' => 'title',
     'edit_node' => 'edit_node',
     'delete_node' => 'delete_node',
+    'title' => 'title',
     'nothing' => 'nothing',
     'created' => 'created',
+    'field_lsa_pin_ministry_org' => 'field_lsa_pin_ministry_org',
     'field_lsa_pin_employee_number' => 'field_lsa_pin_employee_number',
-    'field_lsa_pin_service_milestone' => 'field_lsa_pin_service_milestone',
-    'field_lsa_pin_prefix' => 'field_lsa_pin_prefix',
     'field_lsa_pin_first_name' => 'field_lsa_pin_first_name',
     'field_lsa_pin_last_name' => 'field_lsa_pin_last_name',
-    'field_lsa_org' => 'field_lsa_org',
+    'field_lsa_pin_service_milestone' => 'field_lsa_pin_service_milestone',
+    'field_lsa_previous_service_miles' => 'field_lsa_previous_service_miles',
+    'field_lsa_email' => 'field_lsa_email',
     'field_lsa_branch_department' => 'field_lsa_branch_department',
+    'field_lsa_office_address' => 'field_lsa_office_address',
+    'field_lsa_office_city' => 'field_lsa_office_city',
+    'field_lsa_office_postal_code' => 'field_lsa_office_postal_code',
     'field_lsa_supervisor_first_name' => 'field_lsa_supervisor_first_name',
     'field_lsa_supervisor_last_name' => 'field_lsa_supervisor_last_name',
     'field_lsa_supervisor_email' => 'field_lsa_supervisor_email',
-    'field_lsa_office_address' => 'field_lsa_office_address',
-    'field_lsa_office_city' => 'field_lsa_office_city',
-    'field_lsa_postal_code' => 'field_lsa_postal_code',
     'field_lsa_work_phone' => 'field_lsa_work_phone',
-    'field_lsa_work_phone_ext' => 'field_lsa_work_phone_ext',
   );
   $handler->display->display_options['style_options']['default'] = 'created';
   $handler->display->display_options['style_options']['info'] = array(
-    'title' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'edit_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'delete_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -1940,106 +1940,104 @@ function atwork_lsa_features_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'field_lsa_pin_ministry_org' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'field_lsa_pin_employee_number' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_lsa_pin_service_milestone' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_lsa_pin_prefix' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_lsa_pin_first_name' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_lsa_pin_last_name' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_lsa_org' => array(
-      'sortable' => 0,
+    'field_lsa_pin_service_milestone' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_lsa_previous_service_miles' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_lsa_email' => array(
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_lsa_branch_department' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_lsa_supervisor_first_name' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_lsa_supervisor_last_name' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_lsa_supervisor_email' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_lsa_office_address' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_lsa_office_city' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_lsa_postal_code' => array(
-      'sortable' => 0,
+    'field_lsa_office_postal_code' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_lsa_supervisor_first_name' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_lsa_supervisor_last_name' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_lsa_supervisor_email' => array(
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_lsa_work_phone' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_lsa_work_phone_ext' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -2451,6 +2449,64 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['filters']['field_lsa_supervisor_last_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['field_lsa_supervisor_last_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
   $handler->display->display_options['filters']['field_lsa_supervisor_last_name_value']['expose']['autocomplete_dependent'] = 0;
+  /* Filter criterion: Content: Are you celebrating a current service milestone in 2017? (field_lsa_milestone_year) */
+  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['id'] = 'field_lsa_milestone_year_value';
+  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['table'] = 'field_data_field_lsa_milestone_year';
+  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['field'] = 'field_lsa_milestone_year_value';
+  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['operator'] = 'not';
+  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['expose']['operator_id'] = 'field_lsa_milestone_year_value_op';
+  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['expose']['label'] = 'current service milestone';
+  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['expose']['operator'] = 'field_lsa_milestone_year_value_op';
+  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['expose']['identifier'] = 'field_lsa_milestone_year_value';
+  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_lsa_milestone_year_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    15 => 0,
+    16 => 0,
+    17 => 0,
+  );
+  /* Filter criterion: Content: Please select the retroactive milestone pin(s) you would like to order (field_lsa_previous_service_miles) */
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['id'] = 'field_lsa_previous_service_miles_value';
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['table'] = 'field_data_field_lsa_previous_service_miles';
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['field'] = 'field_lsa_previous_service_miles_value';
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['operator'] = 'not';
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['operator_id'] = 'field_lsa_previous_service_miles_value_op';
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['label'] = 'retroactive milestone pins';
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['operator'] = 'field_lsa_previous_service_miles_value_op';
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['identifier'] = 'field_lsa_previous_service_miles_value';
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    15 => 0,
+    16 => 0,
+    17 => 0,
+  );
   $handler->display->display_options['path'] = 'administration/long-service-pin';
 
   /* Display: Data export */
