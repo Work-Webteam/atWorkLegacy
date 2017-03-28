@@ -189,7 +189,9 @@ function atwork_lsa_pin_application_validate($form, &$form_state){
       ->fetchAll();
   if(isset($exists) && !empty($exists)){
     // They already have an application, so we set an error.
-    form_set_error('field_lsa_pin_employee_number', t('This employee has already been registered for a service pin. Contact Gillian Kish (<a href="mailto:gillian.kish@gov.bc.ca?subject=Question%20about%20existing%20pin%20application">Gillian.kish@gov.bc.ca</a>) if additional pins are required.'));
+    //form_set_error('field_lsa_pin_employee_number', t('This employee has already been registered for a service pin. Contact Gillian Kish (<a href="mailto:gillian.kish@gov.bc.ca?subject=Question%20about%20existing%20pin%20application">Gillian.kish@gov.bc.ca</a>) if additional pins are required.'));
+    form_set_error('field_lsa_pin_employee_number', t('This employee has already been registered for a service pin. Contact your <a href="/career/employee-appreciation/recognition-contacts" target="blank">Ministry Recognition Contact</a> if additional pins are required.'));
+
   }
 
   // Make sure we have selected one or the other - don't want an empty application.
@@ -382,7 +384,7 @@ function atwork_lsa_node_view($node, $view_mode, $langcode) {
       );
     $node->content['bottom_message'] = array(
       '#weight' => 90,
-      '#markup' => '<p class="feature_box_yellow" style="margin-top: 1em;">If you have any questions, please contact your <a href="/career/employee-appreciation/recognition-contacts">Ministry Recognition Contact</a>, or the corporate  contact at the BC Public Service Agency, <a href="mailto:Gillian.Kish@gov.bc.ca">Gillian.Kish@gov.bc.ca</a></p>',
+      '#markup' => '<p class="feature_box_yellow" style="margin-top: 1em;">If you have any questions, please contact your <a href="/career/employee-appreciation/recognition-contacts">Ministry Recognition Contact</a>.' /*, or the corporate  contact at the BC Public Service Agency, <a href="mailto:Gillian.Kish@gov.bc.ca">Gillian.Kish@gov.bc.ca</a></p>' */,
       );
 
   }
