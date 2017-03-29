@@ -309,6 +309,9 @@
     // position all first message paragraphs. Status updates, etc. under the date.
     p[class^="msg-"] {
       margin: -25px 10px 4px 48px;
+      + div.field-name-field-message-node {
+        margin-left: 48px;
+      }
     }
     p {
       margin-left: 48px;
