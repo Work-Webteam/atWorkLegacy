@@ -18,6 +18,9 @@ function node_revision_delete_drush_command() {
       'revisions' => 'The maximum amount of revisions to keep per node for this content type.',
     ),
     'required-arguments' => TRUE,
+    'options' => array(
+      'show-deleted' => 'Whether to print the list of deleted revisions or not. Defaults to FALSE',
+    ),
     'examples' => array(
       'drush nrd article 50' => 'Keeps the latest 50 revisions of every article. Deletes the rest.',
     ),
@@ -26,26 +29,6 @@ function node_revision_delete_drush_command() {
   );
 
   return $items;
-}
-
-/**
- * Implements drush_hook_COMMAND_validate().
- */
-function drush_node_revision_delete_validate($content_type, $revisions_to_keep) {
-  // Make sure the content type exists.
-  $content_types = array_keys(node_type_get_types());
-  if (!in_array($content_type, $content_types)) {
-    drush_set_error('NODE_REVISION_DELETE_WRONG_TYPE', dt('The content type "!type" does not exist. Available content types are !types', array(
-      '!type' => $content_type,
-      '!types' => implode(', ', $content_types),
-    )));
-  }
-
-  // Make sure the number of revisions is a positive integer.
-  // Based on Drupal's element_validate_integer_positive().
-  if (!is_numeric($revisions_to_keep) || intval($revisions_to_keep) != $revisions_to_keep || $revisions_to_keep <= 0) {
-    drush_set_error('NODE_REVISION_DELETE_WRONG_REVISIONS', dt('The amount of revisions to keep must be a positive integer.'));
-  }
 }
 
 /**
