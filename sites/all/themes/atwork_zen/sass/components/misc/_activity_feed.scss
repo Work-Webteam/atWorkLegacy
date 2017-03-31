@@ -42,7 +42,6 @@
     }
   }
   .new-message-count {
-    display: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -52,8 +51,9 @@
   }
   #message-count-number { // TODO: Need a better icon and placement
     position: absolute;
-    top: 20px;
-    left: 24px;
+    top: 7px;
+    left: 15px;
+    font-weight: bold;
   }
   .comment-icon:before { // this was placed with jQuery since can't use :before on input tag
     position: absolute;

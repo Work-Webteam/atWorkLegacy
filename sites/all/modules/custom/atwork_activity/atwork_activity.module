@@ -85,7 +85,7 @@ function atwork_activity_homepage_ajax_get_ajax($idir, $uid, $latest_rendered_ti
     $new_message_count[0]->expression = ($new_message_count[0]->expression - (8 * $return_modifier));
   }
   if($new_message_count[0]->expression > 0){
-    $return_message = '<div id="message-counter" class="new-message-count"><img src=" /sites/all/modules/custom/atwork_activity/img/newmessages.png" alt="messages" id="new-message-image-icon"><span id="message-count-number">'. $new_message_count[0]->expression . '</span></div>';
+    $return_message = '<div id="message-counter" class="new-message-count"><img src=" /sites/all/modules/custom/atwork_activity/img/message-icon.png" alt="messages" id="new-message-image-icon"><span id="message-count-number">'. $new_message_count[0]->expression . '</span></div>';
   }else {
      $return_message = '<div id="message-counter" class="no-new-messages"></div>';
   }
