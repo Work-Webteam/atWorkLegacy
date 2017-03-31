@@ -56,7 +56,7 @@ function atwork_activity_menu() {
     'page arguments' => array(1,2,3,4),
     'type' => MENU_CALLBACK,
     'access arguments' => array('access content'),
-    //'delivery callback' => 'atwork_activity_ajax_callback',  // Magic goes here.
+    'delivery callback' => 'atwork_activity_ajax_callback',  // Magic goes here.
   );
 
 
@@ -65,7 +65,7 @@ function atwork_activity_menu() {
     'page arguments' => array(1,2,3,4),
     'type' => MENU_CALLBACK,
     'access arguments' => array('access content'),
-    //'delivery callback' => 'atwork_activity_ajax_callback',  // Magic goes here.
+    'delivery callback' => 'atwork_activity_ajax_callback',  // Magic goes here.
   );
 
   return $items;
@@ -733,7 +733,7 @@ function _atwork_activity_render_messages($result, $activityType) {
   }
 
   // Pass timestamp to js settings
-  //drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $author->name, 'uid' => $author->uid)), 'setting');
+  drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $author->name, 'uid' => $author->uid)), 'setting');
 
   $output .= '<span style="display:none" id="timestamp-latest">' . $time_stamp . '</span>';
   // The front page feed pager
@@ -2161,7 +2161,7 @@ function atwork_activity_block_view($delta = '') {
       );
      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_click_handlers.js');
 */
-      //drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_homepage_ajax.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_homepage_ajax.js');
 
       $block['subject'] = t('My News Feed');
       $block['subject'] .= '<div class="block-header-inner">';
@@ -2194,7 +2194,7 @@ function atwork_activity_block_view($delta = '') {
       //feed_block_init();
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_atwork_activity_profile_feed.js');
 
-      //drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_profile_page_ajax.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_profile_page_ajax.js');
       break;
   }
   return $block;
@@ -2417,7 +2417,7 @@ function _atwork_activity_profile_page_block_content($user_id){
     }
   }
   // Pass timestamp to js settings
-  //drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $account->name, 'uid' => $account->uid)), 'setting');
+  drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $account->name, 'uid' => $account->uid)), 'setting');
 
   $output .= '<span style="display:none" id="timestamp-latest">' . $time_stamp . '</span>';
   // The profile page pager
