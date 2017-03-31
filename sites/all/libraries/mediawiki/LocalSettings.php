@@ -52,7 +52,7 @@ $wgEmailAuthentication = true;
 
 ## Database settings
 $wgDBtype           = "mysql";
-$wgDBserver         = "142.34.152.24";
+//$wgDBserver         = "142.34.152.24";
 $wgDBname           = "mediawiki";
 $wgDBuser           = "drupal";
 $wgDBpassword       = "aal1^Ong";
@@ -153,4 +153,4 @@ $wgForeignFileRepos[] = array(
    'directory'        => '/var/www/html/sites/default/files/wiki/userimage',
    'url'              => 'https://gww.gov.bc.ca/sites/default/files/wiki/userimage',
    'hashLevels'       => 0,
-); 
+);
