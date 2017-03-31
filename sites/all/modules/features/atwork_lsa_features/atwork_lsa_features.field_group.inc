@@ -330,7 +330,7 @@ function atwork_lsa_features_field_group_info() {
         'classes' => 'group-lsa-pin-terms field-group-fieldset',
         'description' => 'If the above information is complete, and you have agreed to the terms below, click the “SUBMIT” button at the bottom of the screen. You will then receive:
 <ul>
-<li> a confirmation page displaying all of the information you’ve entered. Please check this page to ensure the information is accurate. If something is incorrect, contact Gillian Kish <a href="mailto:gillian.kish@gov.bc.ca?Subject=LSA%20pin%20application%20question">(Gillian.kish@gov.bc.ca)</a></li>
+<li> a confirmation page displaying all of the information you’ve entered. Please check this page to ensure the information is accurate. If something is incorrect, contact  your<a href="/career/employee-appreciation/recognition-contacts"> Ministry Recognition Contact</a>. </li>
 <li>an automated email thanking you for your registration.</li>
 </ul>
 <p class="style-red"> <strong>IMPORTANT:</strong> If you do not receive a confirmation email, you will need to re-submit the request again.</p>
@@ -586,11 +586,11 @@ function atwork_lsa_features_field_group_info() {
     'children' => array(
       0 => 'field_lsa_pin_service_milestone',
       1 => 'field_lsa_milestone_year',
-      2 => 'field_lsa_other_milestone_years',
-      3 => 'field_lsa_pin_ministry_org',
-      4 => 'field_lsa_previous_service_miles',
-      5 => 'field_lsa_registerer',
-      6 => 'field_lsa_ministry_rep_email',
+      2 => 'field_lsa_ministry_rep_email',
+      3 => 'field_lsa_other_milestone_years',
+      4 => 'field_lsa_pin_ministry_org',
+      5 => 'field_lsa_previous_service_miles',
+      6 => 'field_lsa_registerer',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
