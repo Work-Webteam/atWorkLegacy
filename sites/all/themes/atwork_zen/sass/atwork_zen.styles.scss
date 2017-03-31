@@ -1410,12 +1410,12 @@ h3.front-promoted-title {
 	display: block;
 	font-family: inherit;
 	font-size: 1em;
-	font-weight: bold;
 	padding: 2px;
 	margin: 0;
 }
 .front .event-calendar .event-title h3 a {
   color:#135ab0;
+  font-weight: normal;
 }
 .front .event-calendar .event-time:before {
 	content:"Time:";

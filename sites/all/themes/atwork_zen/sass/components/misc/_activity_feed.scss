@@ -332,6 +332,11 @@
         margin: 0.5em 0 3em 0;
       }
     }
+    .activity-comment {
+      &:before {
+        @include quotes-open;
+      }
+    }
   }
 
   .field-name-field-profile-comment + .field-name-field-feed-like-button {// inner reply like
@@ -455,7 +460,7 @@
           @include quotes-closed;
         } 
       }
-    }
+    }// end .entity-message
 
     // Position most of the inner elements absolutely
     .comment-submit-button,
