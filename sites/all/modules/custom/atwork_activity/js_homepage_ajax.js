@@ -10,10 +10,15 @@
       if(currentTimeStamp < phpTimeStamp){
         currentTimeStamp = phpTimeStamp;
       }
+
+      console.log(settings.atwork_activity);
+      console.log(name.length);
+      console.log(uid);
       // Fixing case where user name returns blank and creates a 500 (employee news case)
-      if((name.length < 1) && uid === 0 ){
+      if((name.length < 1) && uid == 0 ){
         name = 'Employee News';
       }
+      console.log(name);
       // Only run if the link exists in the current page load or fragment refresh.
       $('#profile-comment-link:not(.atwork-activity-processed)', context)
         .addClass('atwork-activity-processed')
