@@ -10,6 +10,10 @@
       if(currentTimeStamp < phpTimeStamp){
         currentTimeStamp = phpTimeStamp;
       }
+      // Fixing case where user name returns blank and creates a 500 (employee news case)
+      if((name.length < 1) && uid === 0 ){
+        name = 'Employee News';
+      }
       // Only run if the link exists in the current page load or fragment refresh.
       $('#profile-comment-link:not(.atwork-activity-processed)', context)
         .addClass('atwork-activity-processed')
