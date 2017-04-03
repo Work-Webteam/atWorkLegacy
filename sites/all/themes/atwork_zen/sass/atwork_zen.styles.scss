@@ -1410,12 +1410,12 @@ h3.front-promoted-title {
 	display: block;
 	font-family: inherit;
 	font-size: 1em;
-	font-weight: bold;
 	padding: 2px;
 	margin: 0;
 }
 .front .event-calendar .event-title h3 a {
   color:#135ab0;
+  font-weight: normal;
 }
 .front .event-calendar .event-time:before {
 	content:"Time:";
@@ -2092,7 +2092,7 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-4 .views-row-odd, .section-series #block-views-article-series-block-4 .views-row-even,
 .section-series #block-views-article-series-block-5 .views-row-odd, .section-series #block-views-article-series-block-5 .views-row-even,
 .section-series #block-views-article-series-block-6 .views-row-odd, .section-series #block-views-article-series-block-6 .views-row-even,
-.section-series #block-views-article-series-block-7 .views-row-odd, .section-series #block-views-article-series-block-7 .views-row-even  {
+.section-series #block-views-article-series-block-7 .views-row-odd, .section-series #block-views-article-series-block-7 .views-row-even {
   display: inline-block;
   width: 32%;
   background-color: #ECECEC;
@@ -2112,7 +2112,7 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-4 .article-series-image img,
 .section-series #block-views-article-series-block-5 .article-series-image img,
 .section-series #block-views-article-series-block-6 .article-series-image img,
-.section-series #block-views-article-series-block-7 .article-series-image img   {
+.section-series #block-views-article-series-block-7 .article-series-image img {
   width: 100%;
 }
 .sidebar-first.og-context.og-context-node .posted-group-blog a.username,
@@ -2241,7 +2241,7 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-4 .article-series-teaser,
 .section-series #block-views-article-series-block-5 .article-series-teaser,
 .section-series #block-views-article-series-block-6 .article-series-teaser,
-.section-series #block-views-article-series-block-7 .article-series-teaser   {
+.section-series #block-views-article-series-block-7 .article-series-teaser {
   display: block;
   min-height: 95px;
   padding: 10px 10px 5px;

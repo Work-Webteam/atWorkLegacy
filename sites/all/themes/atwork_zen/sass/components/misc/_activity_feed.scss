@@ -42,18 +42,21 @@
     }
   }
   .new-message-count {
-    display: none;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -7px;
+    left: 88px;
     z-index: 100;
     width: 40px;
     height: auto;
   }
+  .atwork-activity-processed {
+    position: relative; // container for the message-count-number
+  }
   #message-count-number { // TODO: Need a better icon and placement
     position: absolute;
-    top: 20px;
-    left: 24px;
+    top: 7px;
+    left: 15px;
+    font-weight: bold;
   }
   .comment-icon:before { // this was placed with jQuery since can't use :before on input tag
     position: absolute;
@@ -309,6 +312,9 @@
     // position all first message paragraphs. Status updates, etc. under the date.
     p[class^="msg-"] {
       margin: -25px 10px 4px 48px;
+      + div.field-name-field-message-node {
+        margin-left: 48px;
+      }
     }
     p {
       margin-left: 48px;
@@ -327,6 +333,11 @@
       a[href^=node] { // if exists, push more link out of quotes
         float: right;
         margin: 0.5em 0 3em 0;
+      }
+    }
+    .activity-comment {
+      &:before {
+        @include quotes-open;
       }
     }
   }
@@ -420,6 +431,14 @@
     .form-item-status {
       margin-bottom: 5px;
     }
+    .new-message-count {
+      position: absolute;
+      top: 100px;
+      left: 45px;
+      z-index: 100;
+      width: 40px;
+      height: auto;
+    }
     #edit-status-counter {
       text-indent: 60px;
       margin-top: 6px;
@@ -452,7 +471,7 @@
           @include quotes-closed;
         } 
       }
-    }
+    }// end .entity-message
 
     // Position most of the inner elements absolutely
     .comment-submit-button,
@@ -659,6 +678,11 @@
   }
   .atwork-activity-block-container {
     padding: 5px;
+  }
+  .new-message-count {
+    position: absolute;
+    top: -7px;
+    left: 88px;
   }
   #full_menu {// hide the hamburger menu
     display: none;

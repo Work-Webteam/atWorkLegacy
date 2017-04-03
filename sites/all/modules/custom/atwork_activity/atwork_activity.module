@@ -56,7 +56,7 @@ function atwork_activity_menu() {
     'page arguments' => array(1,2,3,4),
     'type' => MENU_CALLBACK,
     'access arguments' => array('access content'),
-    //'delivery callback' => 'atwork_activity_ajax_callback',  // Magic goes here.
+    'delivery callback' => 'atwork_activity_ajax_callback',  // Magic goes here.
   );
 
 
@@ -65,7 +65,7 @@ function atwork_activity_menu() {
     'page arguments' => array(1,2,3,4),
     'type' => MENU_CALLBACK,
     'access arguments' => array('access content'),
-    //'delivery callback' => 'atwork_activity_ajax_callback',  // Magic goes here.
+    'delivery callback' => 'atwork_activity_ajax_callback',  // Magic goes here.
   );
 
   return $items;
@@ -85,7 +85,7 @@ function atwork_activity_homepage_ajax_get_ajax($idir, $uid, $latest_rendered_ti
     $new_message_count[0]->expression = ($new_message_count[0]->expression - (8 * $return_modifier));
   }
   if($new_message_count[0]->expression > 0){
-    $return_message = '<div id="message-counter" class="new-message-count"><img src=" /sites/all/modules/custom/atwork_activity/img/newmessages.png" alt="messages" id="new-message-image-icon"><span id="message-count-number">'. $new_message_count[0]->expression . '</span></div>';
+    $return_message = '<div id="message-counter" class="new-message-count"><img src=" /sites/all/modules/custom/atwork_activity/img/message-icon.png" alt="messages" id="new-message-image-icon"><span id="message-count-number">'. $new_message_count[0]->expression . '</span></div>';
   }else {
      $return_message = '<div id="message-counter" class="no-new-messages"></div>';
   }
@@ -110,7 +110,7 @@ function atwork_activity_ajax_get_ajax($idir, $uid, $latest_rendered_time_stamp,
     $new_message_count[0]->expression = ($new_message_count[0]->expression - (5 * $return_modifier));
   }
   if($new_message_count[0]->expression > 0){
-    $return_message = '<div id="message-counter" class="new-message-count"><img src=" /sites/all/modules/custom/atwork_activity/img/newmessages.png" alt="messages" id="new-message-image-icon"><span id="message-count-number">'. $new_message_count[0]->expression . '</span></div>';
+    $return_message = '<div id="message-counter" class="new-message-count"><img src=" /sites/all/modules/custom/atwork_activity/img/message-icon.png" alt="messages" id="new-message-image-icon"><span id="message-count-number">'. $new_message_count[0]->expression . '</span></div>';
   }else {
      $return_message = '<div id="message-counter" class="no-new-messages"></div>';
   }
@@ -665,8 +665,13 @@ function _atwork_activity_render_messages($result, $activityType) {
       }
 
       // We want to add images to the activity feed.
+      // We need to force Employee News - seeing as this user is "special" as both user 0 and 10
+      if($author->uid == 0 || $author->uid == 10){
+        // Want to use ENews profile 
+        $e_news = user_load(10);
+        $user_image = field_view_field('user', $e_news, 'field_image', array('settings' => array('label'=>'hidden', 'image_style' => 'profile_thumbs_med')));
       // Check if an image exists:
-      if(isset($author->field_image) && $author->field_image){
+      } else if(isset($author->field_image) && $author->field_image){
         // If it does, then grab a renderable view of it
         $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
       } else {
@@ -733,7 +738,7 @@ function _atwork_activity_render_messages($result, $activityType) {
   }
 
   // Pass timestamp to js settings
-  //drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $author->name, 'uid' => $author->uid)), 'setting');
+  drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $author->name, 'uid' => $author->uid)), 'setting');
 
   $output .= '<span style="display:none" id="timestamp-latest">' . $time_stamp . '</span>';
   // The front page feed pager
@@ -1453,14 +1458,44 @@ function atwork_activity_form_reply_form_alter(&$form, &$form_state, $form_id){
         drupal_set_title('Edit');
       }
     }
+    // We need to change or remove the weird entity message we get on submit
+    $form['#submit'][] = 'reply_custom_submit';
   }
 }
+
+/**
+ * helper function to change message when user submits a reply in activity feed $...['status'][1]
+ */
+function reply_custom_submit($form, &$form_state){
+  // Pull all current messages and clear var
+  $messages = drupal_get_messages();
+  /// Replace only the 'status' message, other messages can remain the same
+  foreach($messages as $type=>$message){
+    if($type != 'status'){
+      drupal_set_message($message, $type);
+    }
+    // get at the actual messages
+    if($type == 'status'){
+      foreach($message as $key=>$value){
+        if($value != '<em class="placeholder">Entity Comments</em> was successfully updated.' ){
+          // Keep messages that we are not looking to change
+          drupal_set_message($value, $type);
+        } else {
+          // Set our new reply message
+          $value = t('Your reply has been saved');
+          drupal_set_message($value, $type);
+        }
+      }
+    }
+  }
+}
+
+
 /**
  * Implements hook_form_alter
  * Need to include displayname and date in comments to make them similar to other site comment strings
  */
 function atwork_activity_form_alter(&$form, &$form_state, $form_id){
-
   if(isset($form['bundle']) && $form['bundle']['#value'] == "entity_comments" && $form_state['build_info']['args'][0]->bundle == 'entity_comments' && $form['#type'] == 'form'){
     if($form_id == 'field_ui_field_delete_form' || $form_id == "reply_delete_form" ){
       return;
@@ -1971,167 +2006,13 @@ function atwork_activity_block_view($delta = '') {
 
   switch ($delta) {
 
-    // currently not being used. required user_relationships
-    /*
-    case 'profile':
-      if (arg(0) != 'user' || !is_numeric(arg(1))) {
-        break;
-      }
-
-      $account = user_load(arg(1));
-      if (!$account) {
-        break;
-      }
-
-      // We want our js script to act on this block, not the standard one
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity.js');
-      $output = '';
-      global $user;
-
-      if ($account->uid == $user->uid) {
-        $output .= t('You can also view your own personalized !activity. It includes updates from employees you follow and groups you belong to.', array(
-          '!activity' => l(t('news feed'), 'user/' . $user->uid . '/activity'),
-        ));
-      }
-      else {
-        $relationship = user_relationships_load(
-          array(
-            'requester_id' => $user->uid,
-            'requestee_id' => $account->uid,
-          ),
-          array(
-            'count' => TRUE,
-          )
-        );
-
-        if ($relationship) {
-          $output .= t('Since you are following this employee their activity also appears in your personalized !activity.', array(
-            '!activity' => l(t('news feed'), 'user/' . $user->uid . '/activity'),
-          ));
-        }
-        else {
-          $output .= t('You can follow this employee to have their activity appear in your own !activity.', array(
-            '!activity' => l(t('news feed'), 'user/' . $user->uid . '/activity'),
-          ));
-        }
-      }
-
-      $query = db_select('message', 'm')
-        ->fields('m', array('mid'))
-        ->orderBy('m.timestamp', 'DESC')
-        ->condition('m.uid', $account->uid);
-
-      $result = $query
-        ->extend('PagerDefault')
-        ->limit(10)
-        ->execute()
-        ->fetchAll();
-
-      //TODO: use the render function here
-      $i = 1;
-      foreach ($result as $record) {
-        $message = message_load($record->mid);
-
-        $classes = array();
-        $classes[] = 'message';
-        $classes[] = 'message-' . $message->mid;
-
-        if ($i % 2 == 0) {
-          $classes[] = 'even';
-        }
-        else {
-          $classes[] = 'odd';
-        }
-
-
-        $tmpMsg = str_replace("background","webpage", $message->getText());
-        // Lets fix all badly formed html.
-        $stripHtml = new DOMDocument();
-        $stripHtml->loadHTML($tmpMsg);
-        $tmpMsg = $stripHtml->saveHTML();
-        // Get rid of that weird symbol that the XML is leaving
-        $tmpMsg = html_entity_decode($tmpMsg,ENT_QUOTES,"UTF-8");
-        $tmpMsg = str_replace("Â","", $tmpMsg);
-
-        $output .= '<div class="' . implode(' ', $classes) . '">' . $tmpMsg . '</div>';
-
-        $i++;
-      }
-
-
-
-      $block['subject'] = _atwork_fa('circle-blank') . t('Activity');
-      $block['content'] = array(
-        '#markup' => '<div id="activity-feed">' . $output . '</div>' . theme('pager'),
-      );
-
-      break;
-
-      */
-
-    case 'group':
-
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity.js');
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_group.js');
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/jquery.url.js');
-      drupal_add_js('initializeActivity();', 'inline');
-
-      $block['subject'] = _atwork_fa('circle-blank') . t('Activity');
-      $block['content'] = array(
-        '#markup' => '<div id="group-activity"><div class="activity-feed-progress"><img src="/sites/all/themes/atwork_zen/images/progress.gif" title="Loading" /></div><!-- /.activity-feed-progress --><div id="group-activity-ajax"></div><!-- /#group-activity-ajax --></div><!-- /#group-activity" -->',
-      );
-
-      break;
-
     case 'homepage':
 
-      //drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity.js');
-      //drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_home.js');
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/jquery.url.js');
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_undock.js');
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_filters.js');
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_profile_feed.js');
-
-      //drupal_add_js('initializeAllActivity();', 'inline');
-
-       /// this is now handled by click-handlers - too much strain on queries otherwise
-      //drupal_add_js('initializeGroupActivity();', 'inline');
-      //drupal_add_js('initializeMyActivity();', 'inline');
-      //drupal_add_js('initializeCommentActivity();', 'inline');
-
-
-      //drupal_add_library('system', 'ui.tabs');
-/*
-
-
-      drupal_add_js($js, 'inline');
-
-      $block['subject'] = t('Current Activity');
-      $block['content'] = array(
-        '#markup' => '
-<a href="node/21603" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="Click for pop-out Activity Feed window" /></a>
-<div id="tabs">
-<div class="activity-feed-progress"><img src="/sites/all/themes/atwork_zen/images/progress.gif" title="Loading" /></div>
-  <ul>
-    <li><a href="#tabs-1">All Activity</a></li>
-
-    <!-- <li><a href="#tabs-4">Comment Activity</a></li> -->
-    <li><a href="#tabs-3">My Activity</a></li>
-    <!--  <li><a href="#tabs-2">My Groups</a></li> -->
-  </ul>
-  <div id="tabs-1">
-  </div>
-  <!--<div id="tabs-4">
-  </div>->
-  <!--<div id="tabs-2">
-  </div>-->
-  <div id="tabs-3">
-  </div>
-</div>',
-      );
-     drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/atwork_activity_click_handlers.js');
-*/
-      //drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_homepage_ajax.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_homepage_ajax.js');
 
       $block['subject'] = t('My News Feed');
       $block['subject'] .= '<div class="block-header-inner">';
@@ -2161,10 +2042,9 @@ function atwork_activity_block_view($delta = '') {
       // This helps to keep this code a little cleaner - all content is located in it's own function below.
       $block['content'] = _atwork_activity_profile_page_block_content(arg(1));
       // Don't think I need to pass these values anymore - will keep this for now to check.
-      //feed_block_init();
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_atwork_activity_profile_feed.js');
 
-      //drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_profile_page_ajax.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_profile_page_ajax.js');
       break;
   }
   return $block;
@@ -2308,7 +2188,7 @@ function _atwork_activity_profile_page_block_content($user_id){
       }
 
       // Check if an image exists:
-      if(isset($author->field_image) && $author->field_image){
+       if(isset($author->field_image) && $author->field_image){
         // If it does, then grab a renderable view of it
         $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
       } else {
@@ -2387,7 +2267,7 @@ function _atwork_activity_profile_page_block_content($user_id){
     }
   }
   // Pass timestamp to js settings
-  //drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $account->name, 'uid' => $account->uid)), 'setting');
+  drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $account->name, 'uid' => $account->uid)), 'setting');
 
   $output .= '<span style="display:none" id="timestamp-latest">' . $time_stamp . '</span>';
   // The profile page pager
