@@ -2014,7 +2014,7 @@ function atwork_activity_block_view($delta = '') {
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_profile_feed.js');
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_homepage_ajax.js');
 
-      $block['subject'] = t('My News Feed');
+      $block['subject'] = t('News Feed');
       $block['subject'] .= '<div class="block-header-inner">';
       $block['subject'] .= '<button class="activity-filters-my" title="My Activity">&nbsp;</button>';
       $block['subject'] .= '<button class="activity-filters-all" title="All Activity">&nbsp;</button>';
