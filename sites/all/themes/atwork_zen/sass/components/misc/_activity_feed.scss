@@ -90,6 +90,7 @@
     border: none;
   }
   .activity-filters-my {// button to show filters for my-actions
+    width:24px;
     background: url(/sites/all/themes/atwork_zen/images/icons/activity-selectors-my-off.png) no-repeat center center;
     &.active,
     &:hover {
