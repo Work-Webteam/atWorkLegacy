@@ -14,7 +14,7 @@
       $('#profile-comment-link:not(.atwork-activity-processed)', context)
         .addClass('atwork-activity-processed')
         .bind('click', function(){
-          //$.get('/noodle/' + name + '/' + uid + '/' + currentTimeStamp + '/' + query.page, null, feedDetails);
+          $.get('/noodle/' + name + '/' + uid + '/' + currentTimeStamp + '/' + query.page, null, feedDetails);
           return false;
        });
     }
@@ -29,7 +29,7 @@
 
   var feedDetails = function(response){
     //var result = $.parseJSON(response);
-    //$('#ajax-target').html(response);
+    $('#ajax-target').html(response);
     return false;
 
   };
