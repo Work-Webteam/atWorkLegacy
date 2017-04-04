@@ -90,7 +90,7 @@ function atwork_activity_homepage_ajax_get_ajax($idir, $uid, $latest_rendered_ti
      $return_message = '<div id="message-counter" class="no-new-messages"></div>';
   }
   // Return to js
-  print($return_message);
+  echo json_encode(array($return_message, $new_message_count[0]->expression));
   // Stops themeing layer from interacting with this
   die();
   return;
@@ -2024,7 +2024,7 @@ function atwork_activity_block_view($delta = '') {
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_undock.js');
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_filters.js');
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_profile_feed.js');
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_homepage_ajax.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_homepage_ajax.js');
 
       $block['subject'] = t('News Feed');
       $block['subject'] .= '<div class="block-header-inner">';
@@ -2047,7 +2047,7 @@ function atwork_activity_block_view($delta = '') {
         $block['subject'] = t("My Status");
       } else {
         $account = user_load(arg(1));
-        // Show the user's first name for the activity title if this is not the current user's feed
+        // Show the user's first name for the activityd title if this is not the current user's feed
         $block['subject'] = $account->field_gal_first_name['und'][0]['safe_value'] . t("'s Activity");
       }
 

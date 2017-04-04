@@ -30,9 +30,25 @@
   var phpTimeStamp = '';
   var query = '';
   var feedDetails = function(response){
-    //var result = $.parseJSON(response);
-    //console.log(response);
-    $('#ajax-target').html(response);
+    var result = $.parseJSON(response);
+
+    // See if we already have had messages outstanding
+    var prevNumber = $('#message-count-number').text();
+    //  If we previously had a message
+    if(prevNumber.length > 0){
+      // See if our new number is more than previously - aka has there been a change since the last ajax check
+      if(result[1] > prevNumber){
+        // TODO: Add div with message that we show and then roll up.
+      }
+    }
+
+    var numberClass = $('#message-counter').attr('class');
+    // If we have previously had no new messages, and now have more than 0, add message.
+    if(numberClass == "no-new-messages" && result[1] > 0){
+      // TODO: Add div with message that we show and then roll up
+    }
+    // Add the result div to the current div ajax-target.
+    $('#ajax-target').html(result[0]);
     return false;
   };
 
