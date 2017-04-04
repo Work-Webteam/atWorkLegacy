@@ -52,12 +52,11 @@
     text-align: center;
     color:#FFF;
     font-weight:bold;
-    padding-top:3px;
   }
   #message-count-number { // TODO: Need a better icon and placement
     position: absolute;
-    top: 20px;
-    left: 24px;
+    top: 2px;
+    left: 8px;
   }
   .comment-icon:before { // this was placed with jQuery since can't use :before on input tag
     position: absolute;
