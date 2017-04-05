@@ -641,9 +641,7 @@ only screen and (                min-resolution: 2dppx) {
 }
 
 @media only screen and (max-width: 1240px) {
-  #page {
-    width:960px;
-  }
+
     .front #social-side,
     #block-block-45 { // show social sidebar only on wide screen view - 1240 or greater
         display: none !important;
