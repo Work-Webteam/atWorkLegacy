@@ -35,12 +35,10 @@
 
     // See if we already have had messages outstanding
     var prevNumber = $('#message-count-number').text();
-    console.log(prevNumber);
     //  If we previously had a message
     if(prevNumber.length > 0){
       // See if our new number is more than previously - aka has there been a change since the last ajax check
       if(result[1] > prevNumber){
-        console.log("New number is larger");
         // If it is, then show the message
         newMessage = true;
       }
@@ -50,7 +48,6 @@
     var currentClass = $('#message-counter').attr('class');
     // If we have previously had no new messages, and now have more than 0, add message.
     if( currentClass == "no-new-messages" && result[1] > 0){
-      console.log("Net new");
       newMessage = true;
     }
     // Add the result div to the current div ajax-target.

@@ -115,7 +115,7 @@ function atwork_activity_ajax_get_ajax($idir, $uid, $latest_rendered_time_stamp,
      $return_message = '<div id="message-counter" class="no-new-messages"></div>';
   }
   // Return to js
-  print($return_message);
+  echo json_encode(array($return_message, $new_message_count[0]->expression));
   // Stops themeing layer from interacting with this
   die();
   return;
