@@ -648,9 +648,6 @@ only screen and (                min-resolution: 2dppx) {
     #block-block-45 { // show social sidebar only on wide screen view - 1240 or greater
         display: none !important;
     }
-    #content.column {
-        max-width: 960px;
-    }
 }
 
 
