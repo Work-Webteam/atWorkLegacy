@@ -90,7 +90,7 @@ function atwork_activity_homepage_ajax_get_ajax($idir, $uid, $latest_rendered_ti
      $return_message = '<div id="message-counter" class="no-new-messages"></div>';
   }
   // Return to js
-  print($return_message);
+  echo json_encode(array($return_message, $new_message_count[0]->expression));
   // Stops themeing layer from interacting with this
   die();
   return;
@@ -115,7 +115,7 @@ function atwork_activity_ajax_get_ajax($idir, $uid, $latest_rendered_time_stamp,
      $return_message = '<div id="message-counter" class="no-new-messages"></div>';
   }
   // Return to js
-  print($return_message);
+  echo json_encode(array($return_message, $new_message_count[0]->expression));
   // Stops themeing layer from interacting with this
   die();
   return;
@@ -480,7 +480,7 @@ function _atwork_activity_render_messages($result, $activityType) {
       $message_string = $message['message__message_text__0']['#markup'];
       $no_tags_message = strip_tags($message_string);
       $message_string_length = strlen($no_tags_message);
-      global $user;
+       global $user;
 
       if($message_string_length > 100){
         $string_is_too_long = true;
@@ -584,9 +584,26 @@ function _atwork_activity_render_messages($result, $activityType) {
         $rebuilt_string = strip_tags($rebuilt_string, '<p><a>');
         // Now put it back in markup
         $message['message__message_text__0']['#markup'] = $rebuilt_string;
-
+      // Comments are the other message type that prints user markup - so we need to sanitize that portion as well. 
+      } else if($string_is_too_long === true && $message['#bundle'] == 'new_comment'){
+        // Make new array
+        $finished_array = array();
+        // explode out the user generated text, we will need to keep the first bit ([0])
+        $message_split = explode('<span class="activity-comment">', $message_string);
+        // cut end off of the message, we will need to keep the last item on array
+        $message_end_split = explode('</span>', $message_split[1]);
+        // Now sanitize it
+        $comment_text = strip_tags($message_end_split[0]);
+        // Put it all back 
+        $finished_array[] = ($message_split[0]);
+        $finished_array[] = '<span class="activity-comment">';
+        $finished_array[] = $comment_text;
+        $finished_array[] = '</span>';
+        $finished_array[] = (end($message_end_split));
+        $finished_string = implode(' ', $finished_array);
+        $message['message__message_text__0']['#markup'] = $finished_string;
       }
-
+      
 
       // Use a function to check if message is stickied
       $sticky_check = check_sticky_status($message['#entity']->mid);
@@ -2012,9 +2029,9 @@ function atwork_activity_block_view($delta = '') {
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_undock.js');
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_filters.js');
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_profile_feed.js');
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/' . 'js_homepage_ajax.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_homepage_ajax.js');
 
-      $block['subject'] = t('My News Feed');
+      $block['subject'] = t('News Feed');
       $block['subject'] .= '<div class="block-header-inner">';
       $block['subject'] .= '<button class="activity-filters-my" title="My Activity">&nbsp;</button>';
       $block['subject'] .= '<button class="activity-filters-all" title="All Activity">&nbsp;</button>';
@@ -2035,7 +2052,7 @@ function atwork_activity_block_view($delta = '') {
         $block['subject'] = t("My Status");
       } else {
         $account = user_load(arg(1));
-        // Show the user's first name for the activity title if this is not the current user's feed
+        // Show the user's first name for the activityd title if this is not the current user's feed
         $block['subject'] = $account->field_gal_first_name['und'][0]['safe_value'] . t("'s Activity");
       }
 
