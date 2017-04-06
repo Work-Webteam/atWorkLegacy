@@ -91,25 +91,7 @@ a.avpw_cursor {
   list-style-image: url(/sites/all/themes/atwork_zen/images/arrow_blue_right.png);
 }
 
-
-
-
-
-
-
-
-
-
-
 /*----------------- End of Section--------------------*/
-
-
-
-
-
-
-
-
 
 
 /*#####################################################################################################################################################*/
@@ -118,7 +100,7 @@ a.avpw_cursor {
 
 /*----------------- Main graphics, banner and footer---------------------*/
 html, body {
-  height: 100%;
+  height: inherit;
 }
 html {
   background: url(/sites/all/themes/atwork_zen/images/top-bar.png) repeat-x scroll center -30px;
@@ -163,10 +145,9 @@ html {
 }
 #footer {
   position: relative;
-  /*! margin-top: -300px; */
   padding-top: 15px;
-  /*! height: 300px; */
   clear: both;
+  display:block;
 }
 .not-front #footer {
   position: relative;
