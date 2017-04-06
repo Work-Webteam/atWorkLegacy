@@ -585,7 +585,7 @@ function _atwork_activity_render_messages($result, $activityType) {
         // Now put it back in markup
         $message['message__message_text__0']['#markup'] = $rebuilt_string;
       // Comments are the other message type that prints user markup - so we need to sanitize that portion as well. 
-      } else if($string_is_too_long === true && $message['#bundle'] == 'new_comment'){
+      } /* else if($string_is_too_long === true && $message['#bundle'] == 'new_comment'){
         // explode out the user generated text, we will need to keep the first bit ([0])
         $message_split = explode('<span class="activity-comment">', $message_string);
         // cut end off of the message, we will need to keep the last item on array
@@ -599,6 +599,7 @@ function _atwork_activity_render_messages($result, $activityType) {
         $finished_string = implode(' ', $finished_array);
         $message['message__message_text__0']['#markup'] = $finished_string;
       }
+      */
 
       // Use a function to check if message is stickied
       $sticky_check = check_sticky_status($message['#entity']->mid);
