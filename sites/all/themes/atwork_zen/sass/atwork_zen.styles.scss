@@ -542,19 +542,13 @@ div.header-user {
 
 #navigation .region-navigation {
   display: block;
-  margin: 0 auto;
+  margin: 1px auto 0;
   padding: 0px;
   top: 0;
-  /* width: 100%; */
   position: fixed;
   clear: both;
   line-height: 1.5em;
   z-index: 100;
-  /*background-color: #ECECEC;*/
-  /*background: url(/sites/all/themes/atwork_zen/images/menu-grey-panel.png) repeat center top;
-  border-top: 1px solid #CCCCCC;*/
-}
-.front #navigation .region-navigation {
 }
 #navigation .ext {
   display: none;
