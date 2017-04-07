@@ -1,0 +1,26 @@
+/** @media queries for mobile devices **/
+/** Mobile - 768px to 820px **/
+/** Narrow Screen - 821px to 979px **/
+/** Desktop - 980px to max 1260px **/
+/** Social sidebar cuts out at 1240px and reappears at mobile resolutions lower than 980px **/
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   min--moz-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx) {
+
+@media only screen
+  and (max-width:679px)
+  and (orientation: portrait)  {
+      #user-user-full-group-profile-card {
+          width: 95%;
+          margin: 0 auto;
+      }
+      #user-user-full-group-profile-card .field-name-field-image {
+          margin: 2em 3em 0;
+      }
+  }
+  }

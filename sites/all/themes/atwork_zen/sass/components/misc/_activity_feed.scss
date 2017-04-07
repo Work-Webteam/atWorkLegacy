@@ -53,14 +53,24 @@
     color: #FFF;
     font-weight: bold;
   }
-  #message-count-number { // TODO: Need a better icon and placement
+  #message-count-number { 
     position: absolute;
     top: 2px;
-    left: 7px;
+    left: 0;
+    width: 100%;
     font-size: .9em;
     &:hover {
       cursor:pointer;
     }
+    #notification-pop {
+    border: solid 1px #000;
+    display: inline;
+    padding: 2px 5px;
+    background-color: #FFF;
+    position: absolute;
+    top: 8px;
+    z-index: 100;
+}
   }
   .comment-icon:before { // this was placed with jQuery since can't use :before on input tag
     position: absolute;
