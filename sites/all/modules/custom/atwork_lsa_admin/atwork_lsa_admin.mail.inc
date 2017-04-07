@@ -37,7 +37,8 @@ foreach($list_of_values as $key=>$value){
 $nid = $lsa_node->nid;
 
 // Get a url value
-$url = $base_url . '/mem_fs/images/lsa/LSA_Invite_June1.jpg';
+$invite = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_print.jpg';
+$invite_button = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_RSVP.png';
 //$url = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_Invite_June1.jpg";
 
 
@@ -55,10 +56,10 @@ $applicant_body = <<<EOT
 <table width="750" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always" >
   <tbody>
     <tr>
-      <td bgcolor="#E7E7E7" width="750" height="800" valign="top" BACKGROUND="$url"><a href="$base_url/node/$nid">
+      <td bgcolor="#E7E7E7" width="750" height="800" valign="top" BACKGROUND="$invite"><a href="$base_url/node/$nid">
 <!--[if gte mso 9]>
   <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:800;" href="$base_url/node/$nid">
-    <v:fill type="frame" src="https://gww.gov.bc.ca/mem_fs/images/LSA_Invite_June1.jpg" color="##FFFFFF"  />
+    <v:fill type="frame" src="$invite" color="##FFFFFF"  />
     <v:textbox inset="0,0,0,0">
   <![endif]-->
         <div id="main">
@@ -78,6 +79,9 @@ $applicant_body = <<<EOT
               </tr>
               <tr>
                 <td><p>&nbsp;</p></td>
+              </tr>
+              <tr>
+                <td align="center" valign="middle"> <img src="$invite_button" alt="RSVP Button"> </td>
               </tr>
             </tbody>
           </table>
