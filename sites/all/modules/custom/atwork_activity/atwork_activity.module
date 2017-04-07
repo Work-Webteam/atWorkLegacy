@@ -2023,6 +2023,19 @@ function atwork_activity_block_view($delta = '') {
 
   switch ($delta) {
 
+	  case 'group':		
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity.js');		
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_group.js');		
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/jquery.url.js');		
+      drupal_add_js('initializeActivity();', 'inline');		
+      $block['subject'] = _atwork_fa('circle-blank') . t('Activity');		
+      $block['content'] = array(		
+        '#markup' => '<div id="group-activity"><div class="activity-feed-progress"><img src="/sites/all/themes/atwork_zen/images/progress.gif" title="Loading" /></div><!-- /.activity-feed-progress --><div id="group-activity-ajax"></div><!-- /#group-activity-ajax --></div><!-- /#group-activity" -->',		
+      );		
+    break;
+
+
+
     case 'homepage':
 
       drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/jquery.url.js');
