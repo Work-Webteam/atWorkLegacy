@@ -483,7 +483,8 @@ function lsa_email_send($lsa_node){
     // add pdf attachment here
     'attachment' => $attachment,
     'headers' => array(
-      'cc' => $supervisor_email,
+      // WARNING - reroute email does not capture this CC
+      //'cc' => $supervisor_email,
     ),
   );
 
@@ -495,6 +496,7 @@ function lsa_email_send($lsa_node){
     $send_status['success']['email'] = $email;
     $send_status['success']['alt_email'] = $alt_email;
     $send_status['success']['employee_id'] = $lsa_node->field_lsa_employee_number[$lang][0]['safe_value'];
+    dpm($params);
     // Send our mailing
     drupal_mail('atwork_mail', 'atwork_mail_default', $email, language_default(), $params, 'longserviceawards@gov.bc.ca');
     drupal_mail('atwork_mail', 'atwork_mail_default', $alt_email, language_default(), $params, 'longserviceawards@gov.bc.ca');
