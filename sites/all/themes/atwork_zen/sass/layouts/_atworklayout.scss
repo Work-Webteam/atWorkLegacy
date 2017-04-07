@@ -76,7 +76,7 @@ only screen and (                min-resolution: 2dppx) {
     display: none!important;
   }
   .new-activity-window #social-side #activity-feed {
-      display: block;
+      display: block!important;
     }
   .front #social-side #status-update .form-textarea-wrapper textarea {
     width: inherit;
