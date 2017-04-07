@@ -16,11 +16,35 @@ only screen and (                min-resolution: 2dppx) {
   and (max-width:679px)
   and (orientation: portrait)  {
       #user-user-full-group-profile-card {
-          width: 95%;
+          width: 100%;
           margin: 0 auto;
       }
       #user-user-full-group-profile-card .field-name-field-image {
           margin: 2em 3em 0;
+      }
+      #user-user-full-group-profile-card .group-profile-identity-bundle {
+          max-width: 100%;
+          padding: 0 10px;
+          margin-bottom: 10px;
+      }
+      #user-user-full-group-profile-extra {
+          display: block;
+      }
+      #user-user-full-group-profile-extra .field-group-htabs-wrapper {
+          min-width:100%!important;
+      }
+      #block-views-people-admin-block-followers,
+      #block-views-people-admin-block-following {
+          float:none;
+          margin: 0 auto;
+          width: 100%;
+      }
+      #block-views-people-admin-block-followers .view-content a,
+      #block-views-people-admin-block-following .view-content a,
+      #block-views-people-admin-block-followers .view-content a:nth-child(3n+2),
+      #block-views-people-admin-block-following .view-content a:nth-child(3n+2) {
+          margin: 2px;
+          float: none;
       }
   }
   }

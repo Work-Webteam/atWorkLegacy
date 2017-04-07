@@ -62,6 +62,7 @@
     &:hover {
       cursor:pointer;
     }
+  }
     #notification-pop {
     border: solid 1px #000;
     display: inline;
@@ -70,8 +71,7 @@
     position: absolute;
     top: 8px;
     z-index: 100;
-}
-  }
+    }
   .comment-icon:before { // this was placed with jQuery since can't use :before on input tag
     position: absolute;
     left: 4px;
