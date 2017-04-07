@@ -316,7 +316,7 @@ only screen and (                min-resolution: 2dppx) {
       display: none!important;
     }
     .new-activity-window #social-side #activity-feed {
-      display: block;
+      display: block !important;
     }
     #social-side .jsNewActivityWindow {
     margin-right: 15px!important;
