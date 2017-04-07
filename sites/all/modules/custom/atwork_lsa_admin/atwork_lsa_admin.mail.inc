@@ -38,7 +38,7 @@ $nid = $lsa_node->nid;
 
 // Get a url value
 $invite = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_print.jpg';
-$invite_button = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_RSVP.png';
+//$invite_button = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_RSVP.png';
 //$url = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_Invite_June1.jpg";
 
 
@@ -107,7 +107,13 @@ $applicant_body = <<<EOT
       <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
       <tr>
         <td>
-
+          <table align="center" border="0" cellspacing="0" cellpadding="0" style="font-size: 14pt; color:#333333; text-align:center; font-family: Merienda, 'Times New Roman', serif, sans-serif;" >
+            <tr>
+              <td align="center">
+                Please <a href="$base_url/node/$nid" target="_blank" style="color: #ffffff; text-decoration: none; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; background-color: #EB7035; border-top: 12px solid #EB7035; border-bottom: 12px solid #EB7035; border-right: 18px solid #EB7035; border-left: 18px solid #EB7035; display: inline-block;">RSVP</a> before August 1, 2016.
+              </td>
+            </tr>
+          </table>
         </td>
       </tr>
       </table>
