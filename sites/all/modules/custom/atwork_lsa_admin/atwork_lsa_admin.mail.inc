@@ -82,7 +82,7 @@ $applicant_body = <<<EOT
                 <td><p>&nbsp;</p></td>
               </tr>
               <tr>
-                <td align="center" valign="middle" background="$invite_button"></td>
+                <td td bgcolor="#E7E7E7" width="750" height="60" valign="middle" BACKGROUND="$invite_button"></td>
               </tr>
             </tbody>
           </table>
