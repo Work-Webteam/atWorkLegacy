@@ -37,8 +37,10 @@ foreach($list_of_values as $key=>$value){
 $nid = $lsa_node->nid;
 
 // Get a url value
-//$invite = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_print.jpg';
-//$invite_button = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_RSVP.png';
+$invite = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_print.jpg';
+$invite_button = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_RSVP.png';
+//                <td align="center" valign="middle"> <img src="$invite_button" alt="RSVP Button"> </td>
+
 //$url = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_Invite_June1.jpg";
 
 
@@ -48,7 +50,6 @@ $applicant_body = <<<EOT
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
-
 <body id="mimemail-body" class="atwork-mail-default">
 <p> If you are having trouble seeing the images in this email, please ensure you click <strong>“download images”</strong>. </p>
 <p> To confirm your attendance, click on the RSVP button below (do not reply to this email).</p> 
@@ -81,7 +82,6 @@ $applicant_body = <<<EOT
                 <td><p>&nbsp;</p></td>
               </tr>
               <tr>
-                <td align="center" valign="middle"> <img src="$invite_button" alt="RSVP Button"> </td>
               </tr>
             </tbody>
           </table>
