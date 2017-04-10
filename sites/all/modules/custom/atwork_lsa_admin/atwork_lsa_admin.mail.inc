@@ -37,8 +37,8 @@ foreach($list_of_values as $key=>$value){
 $nid = $lsa_node->nid;
 
 // Get a url value
-$invite = $base_url . '/mem_fs/LSA_print.jpg';
-//$url = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_Invite_June1.jpg";
+//$invite = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_print.jpg';
+$invite = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_print.jpg";
 
 
 $applicant_subject = t('You Are Invited to the Long Service Awards Ceremony');
