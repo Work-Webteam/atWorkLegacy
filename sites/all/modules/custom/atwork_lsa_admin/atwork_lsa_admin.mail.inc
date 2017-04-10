@@ -82,7 +82,7 @@ $applicant_body = <<<EOT
                 <td><p>&nbsp;</p></td>
               </tr>
               <tr>
-                <td align="center" valign="middle"> <img src="$invite_button" alt="RSVP Button"> </td>
+                <td align="center" valign="middle" background="$invite_button"></td>
               </tr>
             </tbody>
           </table>
