@@ -38,8 +38,10 @@ $nid = $lsa_node->nid;
 
 // Get a url value
 //$invite = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_print.jpg';
-$invite = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_print.jpg";
+//$invite_button = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_RSVP.png';
 
+$invite = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_print.jpg";
+$invite_button = 'https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_RSVP.png';
 
 $applicant_subject = t('You Are Invited to the Long Service Awards Ceremony');
 $applicant_body = <<<EOT
@@ -79,10 +81,12 @@ $applicant_body = <<<EOT
               <tr>
                 <td><p>&nbsp;</p></td>
               </tr>
+              <tr>
+                <td align="center" valign="middle"> <img src="$invite_button" alt="RSVP Button"> </td>
+              </tr>
             </tbody>
           </table>
         </div>
-
   <!--[if gte mso 9]>
     </v:textbox>
   </v:rect>
