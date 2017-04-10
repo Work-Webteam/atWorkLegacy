@@ -50,18 +50,27 @@
     width: 24px;
     height: 21px;
     text-align: center;
+<<<<<<< HEAD
     color: #FFF;
     font-weight: bold;
+=======
+    color:#FFF;
+    font-weight:bold;
+>>>>>>> origin/master
   }
   #message-count-number { 
     position: absolute;
     top: 2px;
+<<<<<<< HEAD
     left: 0;
     width: 100%;
     font-size: .9em;
     &:hover {
       cursor:pointer;
     }
+=======
+    left: 8px;
+>>>>>>> origin/master
   }
     #notification-pop {
     border: solid 1px #000;

@@ -6,7 +6,7 @@ function showProgress() {
 }
 function refreshActivity(page) {
 	if(!page) page = 0;
-	console.log(Drupal.settings);
+	//console.log(Drupal.settings);
 	jQuery.ajax({
 		cache: false,
 		url: Drupal.settings.basePath + '?q=atwork-activity/group/' + Drupal.settings.ogContext.gid,

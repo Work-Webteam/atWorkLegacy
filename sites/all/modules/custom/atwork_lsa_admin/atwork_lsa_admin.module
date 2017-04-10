@@ -553,15 +553,15 @@ function create_pdf($lsa_node){
   $pdf->AddPage();
 
   // Get font ready, include in file, We could have specified italics with I, underlined with U or a regular font with an empty string (or any combination). font size specified by points
-  $pdf->SetFont("Times", '', 16);
+  $pdf->SetFont("Times", 'B', 20);
 
   // Grab our invitation image
-  $invitation = drupal_get_path('module', 'atwork_lsa_admin') . '/Invitation/LSA_Invite_June1.jpg';
+  $invitation = drupal_get_path('module', 'atwork_lsa_admin') . '/Invitation/LSA_print.jpg';
   // Add the image
-  $pdf->Image($invitation, 10,10,592,0,'JPG');
+  $pdf->Image($invitation, 15,15, 580,0,'JPG');
 
   // Set our mark in the proper place for the name
-  $pdf->SetY(250);
+  $pdf->SetY(300);
 
   // Add name Text(float x, float y, string txt)
   $pdf->Cell(0,0,$username,0,1,'C');
@@ -569,7 +569,7 @@ function create_pdf($lsa_node){
 
   // Now set our marker to the date field5pudGr@vy1
   //
-  $pdf->SetY(315);
+  $pdf->SetY(380);
   // Add date
   $pdf->Cell(0,0,$date,0,1,'C');
  //$pdf->Text(60,300, $date);
