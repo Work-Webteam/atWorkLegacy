@@ -42,7 +42,7 @@
     }
   }
   .new-message-count {
-    display: none;
+    display: block;
     position: absolute;
     top: 10px;
     left: 125px;
@@ -50,14 +50,37 @@
     width: 24px;
     height: 21px;
     text-align: center;
+<<<<<<< HEAD
+    color: #FFF;
+    font-weight: bold;
+=======
     color:#FFF;
     font-weight:bold;
+>>>>>>> origin/master
   }
-  #message-count-number { // TODO: Need a better icon and placement
+  #message-count-number { 
     position: absolute;
     top: 2px;
+<<<<<<< HEAD
+    left: 0;
+    width: 100%;
+    font-size: .9em;
+    &:hover {
+      cursor:pointer;
+    }
+=======
     left: 8px;
+>>>>>>> origin/master
   }
+    #notification-pop {
+    border: solid 1px #000;
+    display: inline;
+    padding: 2px 5px;
+    background-color: #FFF;
+    position: absolute;
+    top: 8px;
+    z-index: 100;
+    }
   .comment-icon:before { // this was placed with jQuery since can't use :before on input tag
     position: absolute;
     left: 4px;
@@ -254,9 +277,6 @@
     #status-submit-button {
       text-align: right;
       margin-top: -3em;
-    }
-    .message { // common to both outer and inner message box
-      
     }
     label {
       display: none; //hide all labels. We don't need them
@@ -690,6 +710,7 @@
 }
 .not-front .new-activity-window {
   width: 275px!important;
+  min-width:initial!important;
 }
 .not-front .new-activity-window {
   background-color: #FFF;

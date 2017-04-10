@@ -32,6 +32,7 @@
 @import "components/node/article/teaser.scss";
 
 @import "components/node/profile/default.scss";
+@import "components/node/profile/mobileprofile.scss";
 
 @import "components/blocks.scss";
 @import "components/fields.scss";
@@ -91,25 +92,7 @@ a.avpw_cursor {
   list-style-image: url(/sites/all/themes/atwork_zen/images/arrow_blue_right.png);
 }
 
-
-
-
-
-
-
-
-
-
-
 /*----------------- End of Section--------------------*/
-
-
-
-
-
-
-
-
 
 
 /*#####################################################################################################################################################*/
@@ -163,10 +146,9 @@ html {
 }
 #footer {
   position: relative;
-  /*! margin-top: -300px; */
   padding-top: 15px;
-  /*! height: 300px; */
   clear: both;
+  display:block;
 }
 .not-front #footer {
   position: relative;
@@ -561,19 +543,13 @@ div.header-user {
 
 #navigation .region-navigation {
   display: block;
-  margin: 0 auto;
+  margin: 1px auto 0;
   padding: 0px;
   top: 0;
-  /* width: 100%; */
   position: fixed;
   clear: both;
   line-height: 1.5em;
   z-index: 100;
-  /*background-color: #ECECEC;*/
-  /*background: url(/sites/all/themes/atwork_zen/images/menu-grey-panel.png) repeat center top;
-  border-top: 1px solid #CCCCCC;*/
-}
-.front #navigation .region-navigation {
 }
 #navigation .ext {
   display: none;
@@ -726,14 +702,18 @@ div.header-user {
 	background-color: #A7A7A7;
 	text-decoration: none;
 }
+.front #block-views-home-page-blocks-zen-block-2 .view-header {
+	display: block;
+	text-align: center;
+}
 .front #block-views-home-page-blocks-zen-block-2 h2.block__title,
 .front #top-tools-panel h2 {
-	height: 36px;
-	padding: 0 0 0 15px;
+	padding: 0;
 	margin: 0;
-	background: url(/sites/all/themes/atwork_zen/images/top-tools-ribbon.png) no-repeat 0;
-	background-color: #818283;
+	background-color: #26669E;
 	color: #FFF;
+  text-align: center;
+  height:36px;
 }
 
 .front .view-home-page-blocks-zen {
@@ -1445,12 +1425,7 @@ h3.front-promoted-title {
 	padding-bottom: 1px;
 	border: solid 1px #C7C7C7;;
 }
-.front #block-views-home-page-blocks-zen-block-2 .view-header {
-	display: block;
-	width: 150px;
-	margin: -26px 0 26px 125px;
-	text-align: center;
-}
+
 .front #block-views-home-page-blocks-zen-block-2 .view-header a {
 	color: #FFF;
 }

@@ -76,7 +76,7 @@ only screen and (                min-resolution: 2dppx) {
     display: none!important;
   }
   .new-activity-window #social-side #activity-feed {
-      display: block;
+      display: block!important;
     }
   .front #social-side #status-update .form-textarea-wrapper textarea {
     width: inherit;
@@ -148,26 +148,35 @@ only screen and (                min-resolution: 2dppx) {
   #social-side #status-update div#speech-pointer {
     margin-left: 45px!important;
   }
-  /* Employee Landing Page */
+  /* Employee Landing Page and User following page */
   .section-employees .view-content .views-row,
-  .view-people-admin .view-content .views-row {
+  .view-people-admin .view-content .views-row,
+  .page-user-following .view-content .views-row {
     width:48%!important;
     height: 370px!important;
   }
   .section-employees .view-content .views-row .image-employee-landing,
-  .view-people-admin .view-content .views-row .image-employee-landing {
-    width:inherit!important;
+  .view-people-admin .view-content .views-row .image-employee-landing,
+  .page-user-following .view-content .views-row .image-employee-landing {
+    width:initial!important;
     border-width: 12px!important;
   }
   form#views-exposed-form-people-admin-public-page #edit-last-name-wrapper,
   form#views-exposed-form-people-admin-public-page #edit-first-name-wrapper,
-  form#views-exposed-form-people-admin-public-page #edit-interests-wrapper {
+  form#views-exposed-form-people-admin-public-page #edit-interests-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-field-gal-last-name-value-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-field-gal-first-name-value-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-title-wrapper {
     width:100%;
   }
   form#views-exposed-form-people-admin-public-page #edit-title-wrapper,
   form#views-exposed-form-people-admin-public-page #edit-ministry-wrapper,
   form#views-exposed-form-people-admin-public-page #edit-city-wrapper,
-  form#views-exposed-form-people-admin-public-page #edit-skills-wrapper {
+  form#views-exposed-form-people-admin-public-page #edit-skills-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-ministry-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-city-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-skills-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-interests-wrapper  {
     width: 48%;
   }
   /* Executive Profile Landing Page */
@@ -307,7 +316,7 @@ only screen and (                min-resolution: 2dppx) {
       display: none!important;
     }
     .new-activity-window #social-side #activity-feed {
-      display: block;
+      display: block !important;
     }
     #social-side .jsNewActivityWindow {
     margin-right: 15px!important;
@@ -321,12 +330,6 @@ only screen and (                min-resolution: 2dppx) {
         clear: both;
         height: inherit;
     }
-/*    .section-employees .view-content .views-row, .view-people-admin .view-content .views-row {
-      height:140px;
-      min-width: 100% !important;
-      max-width:786px;
-      clear: both;
-    }*/
     .front .front-promoted-image {
       display: inline-block;
       clear:none;
@@ -457,27 +460,36 @@ only screen and (                min-resolution: 2dppx) {
     .front #social-side #status-update .form-textarea-wrapper {
     max-width:84%!important;
     }
-      /* Employee Landing Page */
+  /* Employee Landing Page and User following page */
   .section-employees .view-content .views-row,
-  .view-people-admin .view-content .views-row {
+  .view-people-admin .view-content .views-row,
+  .page-user-following .view-content .views-row {
     width:24%!important;
     height: 370px!important;
   }
   .section-employees .view-content .views-row .image-employee-landing,
-  .view-people-admin .view-content .views-row .image-employee-landing {
-    width:inherit!important;
-    height:inherit!important;
+  .view-people-admin .view-content .views-row .image-employee-landing,
+  .page-user-following .view-content .views-row .image-employee-landing {
+    width:initial!important;
+    height:initial!important;
     border-width: 12px!important;
   }
   form#views-exposed-form-people-admin-public-page #edit-last-name-wrapper,
   form#views-exposed-form-people-admin-public-page #edit-first-name-wrapper,
-  form#views-exposed-form-people-admin-public-page #edit-interests-wrapper {
+  form#views-exposed-form-people-admin-public-page #edit-interests-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-field-gal-last-name-value-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-field-gal-first-name-value-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-title-wrapper {
     width:100%;
   }
   form#views-exposed-form-people-admin-public-page #edit-title-wrapper,
   form#views-exposed-form-people-admin-public-page #edit-ministry-wrapper,
   form#views-exposed-form-people-admin-public-page #edit-city-wrapper,
-  form#views-exposed-form-people-admin-public-page #edit-skills-wrapper {
+  form#views-exposed-form-people-admin-public-page #edit-skills-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-ministry-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-city-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-skills-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-interests-wrapper  {
     width: 48%;
   }
   
@@ -641,15 +653,12 @@ only screen and (                min-resolution: 2dppx) {
 }
 
 @media only screen and (max-width: 1240px) {
-  #page {
-    width:960px;
+    #page {
+    min-width:960px;
   }
     .front #social-side,
     #block-block-45 { // show social sidebar only on wide screen view - 1240 or greater
         display: none !important;
-    }
-    #content.column {
-        max-width: 960px;
     }
 }
 
