@@ -65,13 +65,13 @@ $applicant_body = <<<EOT
           <table width="750" height="800" border="0" align="center" cellpadding="0" cellspacing="0">
             <tbody>
               <tr>
-                <td height="295"><p>&nbsp;</p></td>
+                <td height="290"><p>&nbsp;</p></td>
               </tr>
               <tr>
                 <td height="60" align="center" valign="middle" style="font-size: $name_font_size; color: #333333; text-align: center; font-family: Cambria, 'Hoefler Text', 'Liberation Serif', Times, 'Times New Roman', serif; font-weight: bold; font-style: oblique;">$applicant_full_name</td>
               </tr>
               <tr>
-                <td height="25"><p>&nbsp;</p></td>
+                <td height="30"><p>&nbsp;</p></td>
               </tr>
               <tr>
                 <td height="60" align="center" valign="middle" style="font-size: 21pt; color: #333333; text-align: center; font-family: Cambria, 'Hoefler Text', 'Liberation Serif', Times, 'Times New Roman', serif; font-weight: bold; font-style: oblique;">$ceremony_date</td>
