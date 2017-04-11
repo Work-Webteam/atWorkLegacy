@@ -1464,7 +1464,14 @@ function atwork_activity_form_og_ui_confirm_unsubscribe_alter(&$form, &$form_sta
  *
  */
 function atwork_activity_form_reply_form_alter(&$form, &$form_state, $form_id){
+    // Only admin can post as employee news
+    if(_atwork_is_admin($user) && $form['#entity']->bundle == "entity_comments"){
+      //dpm($form);
+      //dpm($form_state);
+    }
+
   if($form['form_id']['#id'] == "edit-reply-form"){
+    global $user;
     // We are on the form, but the same form is used for add and edit, need to find which we are really on
     // Get rid of query string
     $check_url = explode('?', $_SERVER['REQUEST_URI']);
@@ -1475,7 +1482,9 @@ function atwork_activity_form_reply_form_alter(&$form, &$form_state, $form_id){
         drupal_set_title('Edit');
       }
     }
+
     // We need to change or remove the weird entity message we get on submit
+    // In addition, we will use the custom submit to save as employee news if that has been selected.
     $form['#submit'][] = 'reply_custom_submit';
   }
 }
