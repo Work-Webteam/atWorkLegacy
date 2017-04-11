@@ -1465,9 +1465,11 @@ function atwork_activity_form_og_ui_confirm_unsubscribe_alter(&$form, &$form_sta
  */
 function atwork_activity_form_reply_form_alter(&$form, &$form_state, $form_id){
     // Only admin can post as employee news
-    if(_atwork_is_admin($user) && $form['#entity']->bundle == "entity_comments"){
+    if(_atwork_is_admin($user) && $form['#entity']->bundle == "entity_comments" ){
       //dpm($form);
       //dpm($form_state);
+      // TODO: Use form_id as another check - will need to explode adn check [0] and [1]
+      //dpm($form_id);
     }
 
   if($form['form_id']['#id'] == "edit-reply-form"){
