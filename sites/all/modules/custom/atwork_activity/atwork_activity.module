@@ -1464,13 +1464,11 @@ function atwork_activity_form_og_ui_confirm_unsubscribe_alter(&$form, &$form_sta
  *
  */
 function atwork_activity_form_reply_form_alter(&$form, &$form_state, $form_id){
-    // Only admin can post as employee news
-    if(_atwork_is_admin($user) && $form['#entity']->bundle == "entity_comments" ){
-      //dpm($form);
-      //dpm($form_state);
-      // TODO: Use form_id as another check - will need to explode adn check [0] and [1]
-      //dpm($form_id);
-    }
+  global $user;
+  // Only admin can post as employee news
+  //TODO: Make this !_atwork_is_admin - that is when we want to make this change.
+  
+
 
   if($form['form_id']['#id'] == "edit-reply-form"){
     global $user;
@@ -1528,10 +1526,20 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
     if($form_id == 'field_ui_field_delete_form' || $form_id == "reply_delete_form" ){
       return;
     }
+    global $user;
     // hide these fields on all forms
     $form['field_hashtags']['#access'] = FALSE;
     $form['field_display_name']['#access'] = FALSE;
     $form['field_profile_comment_date']['#access'] = FALSE;
+    if(!_atwork_is_admin($user) && $form['#entity']->bundle == "entity_comments" ){
+    // Need to make sure this is the right form
+      $form_name_array = explode('_',$form_id);
+        if(isset($form_name_array) && $form_name_array[0] == 'reply' && $form_name_array[1] == "form"){
+        // No posting as employee news.
+        $form['field_post_as_employee_news']['#access'] = FALSE;
+      }
+    }
+
     // These can be updated regardless if there are available
     $author = user_load($form_state['reply']->uid);
     // Add image render as a #prefix to name?
@@ -1543,6 +1551,7 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
     // Leave out Reply/Edit and Delete versions of the form -- so far this field seems to be the only one that differentiates them
     $url_test = explode('/', $form['#action']);
     if($url_test[1] == "reply"){
+      $form['#submit'][] = 'atwork_activity_reply_form_submit_custom';
       return;
     }
    // hide this submit button when we use our own.
@@ -1579,6 +1588,11 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
  */
 
 function atwork_activity_reply_form_submit_custom($form, &$form_state) {
+  // Check if this is E News or not
+  if(isset($form_state['values']['field_post_as_employee_news']['und'][0]['value'])&& $form_state['values']['field_post_as_employee_news']['und'][0]['value'] == 1){
+    $form_state['reply']->uid = '10';
+    $form_state['values']['field_display_name']['und'][0]['value'] = t('Employee News');
+  }
   // Save this entity manually, and then we will refresh with Block Refresh (via JQuery)
   $reply = (object) $form_state['reply'];
   entity_form_submit_build_entity('reply', $reply, $form, $form_state);
