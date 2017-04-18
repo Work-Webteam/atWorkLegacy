@@ -158,17 +158,21 @@ only screen and (                min-resolution: 2dppx) {
     width:inherit!important;
     border-width: 12px!important;
   }
-  form#views-exposed-form-people-admin-public-page #edit-last-name-wrapper,
-  form#views-exposed-form-people-admin-public-page #edit-first-name-wrapper,
-  form#views-exposed-form-people-admin-public-page #edit-interests-wrapper {
-    width:100%;
+  form#views-exposed-form-people-admin-public-page {
+    #edit-last-name-wrapper,
+    #edit-first-name-wrapper,
+    #edit-interests-wrapper {
+      width:100%;
+    }
   }
-  form#views-exposed-form-people-admin-public-page #edit-title-wrapper,
-  form#views-exposed-form-people-admin-public-page #edit-ministry-wrapper,
-  form#views-exposed-form-people-admin-public-page #edit-city-wrapper,
-  form#views-exposed-form-people-admin-public-page #edit-skills-wrapper {
-    width: 48%;
-  }
+  form#views-exposed-form-people-admin-public-page {
+    #edit-title-wrapper,
+    #edit-ministry-wrapper,
+    #edit-city-wrapper,
+    #edit-skills-wrapper {
+      width: 48%;
+      }
+  } 
   /* Executive Profile Landing Page */
   /* PSA Head */
   .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first.views-row-last {
@@ -320,12 +324,6 @@ only screen and (                min-resolution: 2dppx) {
         clear: both;
         height: inherit;
     }
-/*    .section-employees .view-content .views-row, .view-people-admin .view-content .views-row {
-      height:140px;
-      min-width: 100% !important;
-      max-width:786px;
-      clear: both;
-    }*/
     .front .front-promoted-image {
       display: inline-block;
       clear:none;
@@ -468,17 +466,21 @@ only screen and (                min-resolution: 2dppx) {
     height:inherit!important;
     border-width: 12px!important;
   }
-  form#views-exposed-form-people-admin-public-page #edit-last-name-wrapper,
-  form#views-exposed-form-people-admin-public-page #edit-first-name-wrapper,
-  form#views-exposed-form-people-admin-public-page #edit-interests-wrapper {
-    width:100%;
+  form#views-exposed-form-people-admin-public-page {
+    #edit-last-name-wrapper,
+    #edit-first-name-wrapper,
+    #edit-interests-wrapper {
+      width:100%;
+    }
   }
-  form#views-exposed-form-people-admin-public-page #edit-title-wrapper,
-  form#views-exposed-form-people-admin-public-page #edit-ministry-wrapper,
-  form#views-exposed-form-people-admin-public-page #edit-city-wrapper,
-  form#views-exposed-form-people-admin-public-page #edit-skills-wrapper {
-    width: 48%;
-  }
+  form#views-exposed-form-people-admin-public-page {
+    #edit-title-wrapper,
+    #edit-ministry-wrapper,
+    #edit-city-wrapper,
+    #edit-skills-wrapper {
+      width: 48%;
+      }
+  } 
   
   /* Executive Profile Landing Page */
   /* PSA Head */
@@ -581,7 +583,7 @@ only screen and (                min-resolution: 2dppx) {
   }
   .one-sidebar.sidebar-first .pre-title-snipet {
     padding: 0!important;
-  }
+    }
   }
 }
 
@@ -589,7 +591,7 @@ only screen and (                min-resolution: 2dppx) {
 
 
 
-@media only screen and (max-width:979px) {
+@media only screen and (max-width:979px) { // includes iPads portrait
   html,
   #header.header,
   .not-front .new-activity-window #header.header {
@@ -598,6 +600,26 @@ only screen and (                min-resolution: 2dppx) {
   #content.column {
       max-width: 98% !important;
       margin: 0 auto;
+  }
+  #block-views-home-page-blocks-zen-block-1,
+  #block-views-home-page-blocks-zen-block-3,
+  #block-views-home-page-blocks-zen-block-4 {
+    max-width:32.5%!important;
+  }
+  .section-classifieds .view-classifieds .views-row-odd, .section-classifieds .view-classifieds .views-row-even, .page-galleries .view-gallery-reference .views-row-odd, .page-galleries .view-gallery-reference .views-row-even, .section-blogs #block-views-blogs-block-3 .views-row-odd, .section-blogs #block-views-blogs-block-3 .views-row-even, .section-news .view-id-news.view-display-id-page_2 .views-row-odd, .section-news .view-id-news.view-display-id-page_2 .views-row-even, .section-corporate-news .view-id-news.view-display-id-page_3 .views-row-odd, .section-corporate-news .view-id-news.view-display-id-page_3 .views-row-even, .section-videos .view-display-id-page_1 .views-row-odd, .section-videos .view-display-id-page_1 .views-row-even, .section-videos .view-display-id-page_2 .views-row-odd, .section-videos .view-display-id-page_2 .views-row-even, .section-corporate-polls .view-display-id-page_2 .views-row-odd, .section-corporate-polls .view-display-id-page_2 .views-row-even, .section-polls .view-display-id-page_3 .views-row-odd, .section-polls .view-display-id-page_3 .views-row-even, .section-etc-talks #block-views-videos-block-4 .views-row-odd, .section-etc-talks #block-views-videos-block-4 .views-row-even, .section-executive-messages #block-views-executive-updates-block-2 .views-row-odd, .section-executive-messages #block-views-executive-updates-block-2 .views-row-even {
+    max-width: 238px!important;
+  }
+  .front #awards_logos img {
+    width:91px!important;
+    height:90px!important;
+  }
+  #footer-copyright {
+    table td p {
+    padding: 0 10px;
+    }
+    table ul {
+      padding-left: 20px;
+    }
   }
 	#navigation,
 	#block-views-top-tools-block,
@@ -617,8 +639,34 @@ only screen and (                min-resolution: 2dppx) {
 	.front #block-views-home-page-blocks-zen-block-2.block.block-views {
 		min-width: 100%;
 	}
+    form#views-exposed-form-people-admin-public-page {
+    #edit-last-name-wrapper,
+    #edit-first-name-wrapper,
+    #edit-interests-wrapper,
+    #edit-skills-wrapper  {
+      width:49%;
+    }
+  }
+  form#views-exposed-form-people-admin-public-page {
+    #edit-title-wrapper,
+    #edit-ministry-wrapper,
+    #edit-city-wrapper {
+      width: 32.5%;
+      }
+  }
+  .section-employees .view-content .views-row, .view-people-admin .view-content .views-row {
+    margin-left:9px!important;
+  }
+  #views-exposed-form-people-admin-public-page .views-exposed-form .views-exposed-widget {
+    label {
+      display:initial;
+    }
+    .form-submit {
+      margin-top:0;
+    }
+  }
 }
-@media only screen and (min-width:980px) {
+@media only screen and (min-width:980px) {// includes iPads horizontal
   .not-front .new-activity-window #header.header {
     background: none !important;
   }
@@ -637,6 +685,37 @@ only screen and (                min-resolution: 2dppx) {
 	}
   .front #block-views-home-page-blocks-zen-block-2 {
     }
+      .section-classifieds .view-classifieds .views-row-odd, .section-classifieds .view-classifieds .views-row-even, .page-galleries .view-gallery-reference .views-row-odd, .page-galleries .view-gallery-reference .views-row-even, .section-blogs #block-views-blogs-block-3 .views-row-odd, .section-blogs #block-views-blogs-block-3 .views-row-even, .section-news .view-id-news.view-display-id-page_2 .views-row-odd, .section-news .view-id-news.view-display-id-page_2 .views-row-even, .section-corporate-news .view-id-news.view-display-id-page_3 .views-row-odd, .section-corporate-news .view-id-news.view-display-id-page_3 .views-row-even, .section-videos .view-display-id-page_1 .views-row-odd, .section-videos .view-display-id-page_1 .views-row-even, .section-videos .view-display-id-page_2 .views-row-odd, .section-videos .view-display-id-page_2 .views-row-even, .section-corporate-polls .view-display-id-page_2 .views-row-odd, .section-corporate-polls .view-display-id-page_2 .views-row-even, .section-polls .view-display-id-page_3 .views-row-odd, .section-polls .view-display-id-page_3 .views-row-even, .section-etc-talks #block-views-videos-block-4 .views-row-odd, .section-etc-talks #block-views-videos-block-4 .views-row-even, .section-executive-messages #block-views-executive-updates-block-2 .views-row-odd, .section-executive-messages #block-views-executive-updates-block-2 .views-row-even {
+    max-width: 227px!important;
+  }
+  #footer-copyright {
+    table td p {
+    padding: 0 10px;
+    }
+  }
+    form#views-exposed-form-people-admin-public-page {
+    #edit-last-name-wrapper,
+    #edit-first-name-wrapper,
+    #edit-interests-wrapper,
+    #edit-skills-wrapper  {
+      width:49%;
+    }
+  }
+  form#views-exposed-form-people-admin-public-page {
+    #edit-title-wrapper,
+    #edit-ministry-wrapper,
+    #edit-city-wrapper {
+      width: 32.5%;
+      }
+  }
+    #views-exposed-form-people-admin-public-page .views-exposed-form .views-exposed-widget {
+    label {
+      display:initial;
+    }
+    .form-submit {
+      margin-top:0;
+    }
+  }  
 }
 
 @media only screen and (max-width: 1240px) {
@@ -646,5 +725,7 @@ only screen and (                min-resolution: 2dppx) {
     }
     #content.column {
         max-width: 960px;
+        margin-left:auto;
+        margin-right:auto;
     }
 }
