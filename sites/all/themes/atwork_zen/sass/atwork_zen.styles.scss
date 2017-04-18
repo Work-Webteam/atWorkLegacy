@@ -21,6 +21,7 @@
 @import "components/buttons.scss";
 @import "components/menus/navigation.scss";
 @import "components/menus/quicktabs.scss";
+@import "components/menus/mobilemenu.scss";
 @import "components/misc/logo.scss";
 @import "components/misc/pagination.scss";
 @import "components/misc/search.scss";
@@ -37,8 +38,6 @@
 @import "components/blocks.scss";
 @import "components/fields.scss";
 @import "components/forms.scss";
-
-@import "layouts/grid.scss";
 
 @import "states/state.scss";
 
@@ -1144,6 +1143,7 @@ ol.search-results h3.title {
 	position: absolute;
   top: 0;
 	right: 0;
+  width:275px;
 }
 #block-atwork-activity-homepage {
   background-color: #fcfcfc;
@@ -2299,7 +2299,7 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-6 .article-series-views,
 .section-series #block-views-article-series-block-7 .article-series-views {
   float: right;
-  margin-right: 15px;
+  margin-right: 0px;
   font-style: oblique;
 }
 .gallery-status {
