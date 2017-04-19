@@ -1637,7 +1637,12 @@ function atwork_activity_entity_view_alter(&$build, $type){
           // Will only ever be one of these
           $author_uid = $parent_reply_author[0]->uid;
           $reply_author = user_load($author_uid);
-          $author_first_name = $reply_author->field_gal_first_name['und'][0]['safe_value'];
+          if($author_uid == 10){
+            // Employee News user 10 does not have a traditional first name, so we need to take care of that here.
+            $author_first_name = t("Employee News");
+          } else {
+              $author_first_name = $reply_author->field_gal_first_name['und'][0]['safe_value'];
+          }
           $author_line = " replied to $author_first_name";
         }
       }
@@ -1704,8 +1709,14 @@ function atwork_activity_entity_view_alter(&$build, $type){
           ->fetchAll();
     // Will only ever be one of these
     $author = user_load($author_uid[0]->uid);
+
     // Add a link to their profile to encourage connections
-    $build["field_display_name"][0]['#markup'] = ' <a href="/employees/' . $author->name . '"> ' . $build["field_display_name"][0]['#markup'] . '</a> ' . $author_line;
+    if($author_uid[0]->uid == 10){
+      // We need to deal with the link from Employee News
+      $build['field_display_name'][0]['#markup'] = 'Employee News ' . $author_line;
+    } else {
+      $build["field_display_name"][0]['#markup'] = ' <a href="/employees/' . $author->name . '"> ' . $build["field_display_name"][0]['#markup'] . '</a> ' . $author_line;
+    }
     // Add image to the comment
     $image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
     // Now lets set a more dynamic date
@@ -2091,7 +2102,9 @@ function atwork_activity_block_view($delta = '') {
       } else {
         $account = user_load(arg(1));
         // Show the user's first name for the activityd title if this is not the current user's feed
-        $block['subject'] = $account->field_gal_first_name['und'][0]['safe_value'] . t("'s Activity");
+        if(isset($account->field_gal_first_name['und'][0]['safe_value']) && $account->field_gal_first_name['und'][0]['safe_value']){
+          $block['subject'] = $account->field_gal_first_name['und'][0]['safe_value'] . t("'s Activity");
+        }
       }
 
       // This helps to keep this code a little cleaner - all content is located in it's own function below.
