@@ -36,6 +36,9 @@ only screen and (                min-resolution: 2dppx) {
     padding-left: 10px;
     padding-right: 10px;
   }
+  #footer {
+    min-width:350px!important;
+  }
   #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row.views-slideshow-xtra-overlay-row {
     width:inherit!important;
     height:inherit!important;
@@ -279,6 +282,12 @@ only screen and (                min-resolution: 2dppx) {
     #page .breadcrumb,
     #page #content {
       padding-left: 10px;
+    }
+    #footer #footer-copyright table td.sideBrdr {
+      width:50%!important;
+    }
+    #footer #users_online {
+      top:-200px;
     }
     #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row.views-slideshow-xtra-overlay-row {
       width:inherit!important;
@@ -688,6 +697,9 @@ only screen and (                min-resolution: 2dppx) {
       .section-classifieds .view-classifieds .views-row-odd, .section-classifieds .view-classifieds .views-row-even, .page-galleries .view-gallery-reference .views-row-odd, .page-galleries .view-gallery-reference .views-row-even, .section-blogs #block-views-blogs-block-3 .views-row-odd, .section-blogs #block-views-blogs-block-3 .views-row-even, .section-news .view-id-news.view-display-id-page_2 .views-row-odd, .section-news .view-id-news.view-display-id-page_2 .views-row-even, .section-corporate-news .view-id-news.view-display-id-page_3 .views-row-odd, .section-corporate-news .view-id-news.view-display-id-page_3 .views-row-even, .section-videos .view-display-id-page_1 .views-row-odd, .section-videos .view-display-id-page_1 .views-row-even, .section-videos .view-display-id-page_2 .views-row-odd, .section-videos .view-display-id-page_2 .views-row-even, .section-corporate-polls .view-display-id-page_2 .views-row-odd, .section-corporate-polls .view-display-id-page_2 .views-row-even, .section-polls .view-display-id-page_3 .views-row-odd, .section-polls .view-display-id-page_3 .views-row-even, .section-etc-talks #block-views-videos-block-4 .views-row-odd, .section-etc-talks #block-views-videos-block-4 .views-row-even, .section-executive-messages #block-views-executive-updates-block-2 .views-row-odd, .section-executive-messages #block-views-executive-updates-block-2 .views-row-even {
     max-width: 227px!important;
   }
+    #footer {
+    width:initial!important;
+  }
   #footer-copyright {
     table td p {
     padding: 0 10px;
@@ -715,17 +727,25 @@ only screen and (                min-resolution: 2dppx) {
     .form-submit {
       margin-top:0;
     }
-  }  
+  } 
 }
-
+@media only screen and (width:768px) {//iPad Portrait only
+   #footer {
+     min-width:960px!important;
+   }
+}
+@media only screen and (width:1024px) {//iPad Horizontal only
+  #content.column {
+    width:960px;
+    margin:0 auto;
+  }
+}
 @media only screen and (max-width: 1240px) {
+  #page {
+    min-width:960px;
+  }
     .front #social-side,
     #block-block-45 { // show social sidebar only on wide screen view - 1240 or greater
         display: none !important;
-    }
-    #content.column {
-        max-width: 960px;
-        margin-left:auto;
-        margin-right:auto;
     }
 }
