@@ -1618,8 +1618,20 @@ function atwork_activity_entity_view_alter(&$build, $type){
         $ids[] = $build['#entity']->entity_id;
         $parent_message = entity_load($build['#entity']->entity_type, $ids );
         $message_author = user_load($parent_message[$build['#entity']->entity_id]->uid);
-        $message_name = $message_author->field_gal_first_name['und'][0]['safe_value'];
-        $author_line = " commented on $message_name" . "'s" . " status";
+        // See if this is employee news - need to manually add if anonymous user.
+        if(isset($parent_message[$build['#entity']->entity_id]->uid) && ($parent_message[$build['#entity']->entity_id]->uid == 10 || $parent_message[$build['#entity']->entity_id]->uid == 0)){
+          $message_name = t("Employee News");
+        } else {
+          $message_name = $message_author->field_gal_first_name['und'][0]['safe_value'];
+        }
+        // Need to check grammer
+        $grammer_check = substr($message_name, -1);
+        if($grammer_check == "s"){
+          $posessive = "'";
+        } else {
+          $posessive = "'s";
+        }
+        $author_line = " commented on $message_name" . $posessive . " status";
       } elseif($build['#entity']->depth > 0){
         // We have parents, so lets grab the immediate parent's author for this reply
         $mid = $build;
