@@ -88,7 +88,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 16,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -239,7 +239,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 15,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -313,7 +313,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 12,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -462,7 +462,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 23,
+        'weight' => 19,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -536,7 +536,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 9,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -614,7 +614,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 7,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -747,7 +747,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 24,
+        'weight' => 20,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -818,7 +818,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 28,
+        'weight' => 24,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -888,7 +888,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 20,
+        'weight' => 17,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -963,7 +963,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 30,
+        'weight' => 26,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1020,7 +1020,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 39,
+        'weight' => 35,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1243,7 +1243,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 36,
+        'weight' => 32,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1320,7 +1320,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 40,
+        'weight' => 36,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1396,7 +1396,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 32,
+        'weight' => 28,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1723,7 +1723,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 6,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1809,7 +1809,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 13,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -2095,7 +2095,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 17,
+        'weight' => 14,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -2301,7 +2301,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 10,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -2374,7 +2374,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 21,
+        'weight' => 18,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -2448,7 +2448,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 25,
+        'weight' => 21,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -2963,7 +2963,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 35,
+        'weight' => 31,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -3039,7 +3039,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 34,
+        'weight' => 30,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -3115,7 +3115,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 38,
+        'weight' => 34,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -3191,7 +3191,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 33,
+        'weight' => 29,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -3451,7 +3451,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 29,
+        'weight' => 25,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -3523,7 +3523,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 11,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -3596,7 +3596,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 37,
+        'weight' => 33,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -3684,7 +3684,7 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_specialrequirements',
-    'label' => 'Special Requirements',
+    'label' => 'Special Requirements for You OR Your Guest',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -3700,14 +3700,13 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
+      'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-      ),
+      'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 24,
     ),
@@ -3786,7 +3785,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 8,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -3973,7 +3972,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 31,
+        'weight' => 27,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4036,7 +4035,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 26,
+        'weight' => 22,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4093,7 +4092,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 27,
+        'weight' => 23,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -6321,7 +6320,7 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Second Charity');
   t('Service Milestone');
   t('Service pins will be sent to the employee\'s supervisor for presentation during Public Service Week - June 12-16, 2017.');
-  t('Special Requirements');
+  t('Special Requirements for You OR Your Guest');
   t('Street');
   t('Supervisor Email');
   t('Supervisor First Name');

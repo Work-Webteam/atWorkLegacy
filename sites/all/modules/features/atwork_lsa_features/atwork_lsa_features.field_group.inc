@@ -218,7 +218,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Office Information',
-    'weight' => '3',
+    'weight' => '4',
     'children' => array(
       0 => 'field_lsa_org',
       1 => 'field_lsa_work_phone',
@@ -413,15 +413,15 @@ function atwork_lsa_features_field_group_info() {
   $field_group->mode = 'default';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Special Requirements',
-    'weight' => '8',
+    'label' => 'Special Requirements for You OR Your Guest',
+    'weight' => '0',
     'children' => array(
       0 => 'field_lsa_specialrequirements',
       1 => 'field_specialrequirement_descrip',
     ),
     'format_type' => 'div',
     'format_settings' => array(
-      'label' => 'Special Requirements',
+      'label' => 'Special Requirements for You OR Your Guest',
       'instance_settings' => array(
         'id' => 'node_lsa_application_full_group_lsad_special_requirements',
         'classes' => '',
@@ -477,7 +477,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Contact Information',
-    'weight' => '2',
+    'weight' => '3',
     'children' => array(
       0 => 'field_lsa_street',
       1 => 'field_lsa_city',
@@ -515,7 +515,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Name',
-    'weight' => '1',
+    'weight' => '2',
     'children' => array(
       0 => 'field_lsa_first_name',
       1 => 'field_lsa_middle_name',
@@ -549,7 +549,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Supervisor Information',
-    'weight' => '4',
+    'weight' => '5',
     'children' => array(
       0 => 'field_lsa_supervisor_first_name',
       1 => 'field_lsa_supervisor_last_name',
@@ -649,8 +649,8 @@ function atwork_lsa_features_field_group_info() {
   $field_group->mode = 'default';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Service Information',
-    'weight' => '0',
+    'label' => 'Years of Service Information',
+    'weight' => '1',
     'children' => array(
       0 => 'field_lsa_register_last_year',
       1 => 'field_lsa_employee_number',
@@ -664,15 +664,15 @@ function atwork_lsa_features_field_group_info() {
     ),
     'format_type' => 'div',
     'format_settings' => array(
-      'label' => 'Service Information',
+      'label' => 'Years of Service Information',
       'instance_settings' => array(
+        'id' => 'node_lsa_application_full_group_service_information',
         'classes' => 'group-service-information',
         'description' => '',
-        'show_label' => '0',
+        'show_label' => '1',
         'label_element' => 'h2',
         'effect' => 'none',
         'speed' => 'fast',
-        'id' => 'node_lsa_application_full_group_service_information',
       ),
       'formatter' => 'open',
     ),
@@ -724,11 +724,11 @@ function atwork_lsa_features_field_group_info() {
   t('Pin Options');
   t('RSVP Information');
   t('Recipient Details');
-  t('Service Information');
-  t('Special Requirements');
+  t('Special Requirements for You OR Your Guest');
   t('Supervisor Details');
   t('Supervisor Information');
   t('Work Information');
+  t('Years of Service Information');
 
   return $field_groups;
 }

@@ -461,11 +461,11 @@ function lsa_email_send($lsa_node){
   create_pdf($lsa_node);
 
   // get pdf url
-  $filepath = 'sites/default/files/lsa_pdfs/invitation_' . $lsa_node->nid . '.pdf';
+  $filepath = 'sites/default/files/lsa_pdfs/Printable_Keepsake_Invitation_' . $lsa_node->nid . '.pdf';
 
   $attachment = array(
      'filecontent' => file_get_contents($filepath),
-     'filename' => 'invitation_' . $lsa_node->nid . '.pdf',
+     'filename' => 'Printable_Keepsake_Invitation_' . $lsa_node->nid . '.pdf',
      'filemime' => 'application/pdf',
   );
   // We now cc supervisors
@@ -496,7 +496,6 @@ function lsa_email_send($lsa_node){
     $send_status['success']['email'] = $email;
     $send_status['success']['alt_email'] = $alt_email;
     $send_status['success']['employee_id'] = $lsa_node->field_lsa_employee_number[$lang][0]['safe_value'];
-    dpm($params);
     // Send our mailing
     drupal_mail('atwork_mail', 'atwork_mail_default', $email, language_default(), $params, 'longserviceawards@gov.bc.ca');
     drupal_mail('atwork_mail', 'atwork_mail_default', $alt_email, language_default(), $params, 'longserviceawards@gov.bc.ca');
@@ -564,7 +563,7 @@ function create_pdf($lsa_node){
   $pdf = new FPDF('P', 'pt', 'Letter');
 
   // Will save pdfs here
-  $filepath = 'sites/default/files/lsa_pdfs/invitation_' . $lsa_node->nid . '.pdf';
+  $filepath = 'sites/default/files/lsa_pdfs/Printable_Keepsake_Invitation_' . $lsa_node->nid . '.pdf';
 
   // Make sure this doesn't already exist - if it does delete it.
   if(file_exists($filepath)){

@@ -43,7 +43,7 @@ $nid = $lsa_node->nid;
 $invite = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_Invite_complete.jpg";
 //$invite_button = 'https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_RSVP.jpg';
 
-$applicant_subject = t('You Are Invited to the Long Service Awards Ceremony');
+$applicant_subject = t('Your Long Service Awards invitation is enclosed – please RSVP using the clickable button');
 $applicant_body = <<<EOT
 <html>
 <head>
@@ -51,9 +51,11 @@ $applicant_body = <<<EOT
 </head>
 
 <body id="mimemail-body" class="atwork-mail-default">
-<p> If you are having trouble seeing the images in this email, please ensure you click <strong>“download images”</strong>. </p>
-<p> To confirm your attendance, click on the RSVP button below (do not reply to this email).</p>
+<p><strong>**DO NOT REPLY TO THIS EMAIL – PLEASE FOLLOW THE INSTRUCTIONS BELOW TO RSVP.**</strong></p>
+<p> Your electronic invitation with RSVP button should appear below. If you are having trouble seeing the image in this email, please ensure you click <strong>“download images”</strong>. </p>
+<p> To confirm your attendance OR to confirm you are unable to attend, <strong>please click on the <a href="$base_url/node/$nid">RSVP button</a></strong> in the invitation below.</p>
 <p style = "page-break-after:always">If you are retired, or unable to access the RSVP link below – please contact us at <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20link" target="_top">LongServiceAwards@gov.bc.ca</a>.</p><br /> <br />
+<p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p>
 <table width="750" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always" >
   <tbody>
     <tr>
@@ -70,13 +72,13 @@ $applicant_body = <<<EOT
                 <td height="290"><p>&nbsp;</p></td>
               </tr>
               <tr>
-                <td height="60" align="center" valign="middle" style="font-size: $name_font_size; color: #333333; text-align: center; font-family: Cambria, 'Hoefler Text', 'Liberation Serif', Times, 'Times New Roman', serif; font-weight: bold; font-style: oblique;">$applicant_full_name</td>
+                <td height="60" align="center" valign="middle" style="font-size: 20pt; color: #333333; text-align: center; font-family: Times; font-weight: bold; ">$applicant_full_name</td>
               </tr>
               <tr>
                 <td height="30"><p>&nbsp;</p></td>
               </tr>
               <tr>
-                <td height="60" align="center" valign="middle" style="font-size: 21pt; color: #333333; text-align: center; font-family: Cambria, 'Hoefler Text', 'Liberation Serif', Times, 'Times New Roman', serif; font-weight: bold; font-style: oblique;">$ceremony_date</td>
+                <td height="60" align="center" valign="middle" style="font-size: 20pt; color: #333333; text-align: center; font-family: Times; font-weight: bold;">$ceremony_date</td>
               </tr>
               <tr>
                 <td height="20"><p>&nbsp;</p></td>
@@ -90,32 +92,6 @@ $applicant_body = <<<EOT
   <![endif]-->
   </a>
   </td>
-    </tr>
-  </tbody>
-</table>
-<table width="750" border="0" align="center" cellpadding="0" cellspacing="0" style="font-size: 14pt; color:#333333; text-align:center; font-family: Merienda, 'Times New Roman', serif, sans-serif;">
-  <tbody>
-    <tr>
-      <td height="20"><br></td>
-    </tr>
-    <tr>
-      <td>
-
-      <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-      <tr>
-        <td>
-          <table align="center" border="0" cellspacing="0" cellpadding="0" style="font-size: 14pt; color:#333333; text-align:center; font-family: Merienda, 'Times New Roman', serif, sans-serif;" >
-            <tr>
-              <td align="center">
-                Please <a href="$base_url/node/$nid" target="_blank" style="color: #ffffff; text-decoration: none; background-color: #EB7035; border-top: 12px solid #EB7035; border-bottom: 12px solid #EB7035; border-right: 18px solid #EB7035; border-left: 18px solid #EB7035; ">RSVP</a> before August 1, 2016.
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      </table>
-      <p style="font-size: 10pt;">NOTE: If you are a retired employee, or cannot access the online RSVP link above, please contact <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP">longserviceawards@gov.bc.ca</a><br /> or call Jenny Pescod at (250) 356-7916 to confirm your attendance.</p>
-      </td>
     </tr>
   </tbody>
 </table>
