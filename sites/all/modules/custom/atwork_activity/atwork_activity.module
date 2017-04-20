@@ -2056,10 +2056,6 @@ function atwork_activity_block_info() {
   return $blocks;
 }
 
-
-
-
-
 /*
  * Implementation of hook_block_view()
  *
@@ -2081,7 +2077,6 @@ function atwork_activity_block_view($delta = '') {
         '#markup' => '<div id="group-activity"><div class="activity-feed-progress"><img src="/sites/all/themes/atwork_zen/images/progress.gif" title="Loading" /></div><!-- /.activity-feed-progress --><div id="group-activity-ajax"></div><!-- /#group-activity-ajax --></div><!-- /#group-activity" -->',		
       );		
     break;
-
 
 
     case 'homepage':

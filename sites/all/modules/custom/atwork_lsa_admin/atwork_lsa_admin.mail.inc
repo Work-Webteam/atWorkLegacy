@@ -37,10 +37,11 @@ foreach($list_of_values as $key=>$value){
 $nid = $lsa_node->nid;
 
 // Get a url value
-$invite = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_print.jpg';
-$invite_button = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_RSVP.png';
-//$url = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_Invite_June1.jpg";
+//$invite = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_print.jpg';
+//$invite_button = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_RSVP.png';
 
+$invite = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_Invite_complete.jpg";
+//$invite_button = 'https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_RSVP.jpg';
 
 $applicant_subject = t('You Are Invited to the Long Service Awards Ceremony');
 $applicant_body = <<<EOT
@@ -51,7 +52,7 @@ $applicant_body = <<<EOT
 
 <body id="mimemail-body" class="atwork-mail-default">
 <p> If you are having trouble seeing the images in this email, please ensure you click <strong>“download images”</strong>. </p>
-<p> To confirm your attendance, click on the RSVP button below (do not reply to this email).</p> 
+<p> To confirm your attendance, click on the RSVP button below (do not reply to this email).</p>
 <p style = "page-break-after:always">If you are retired, or unable to access the RSVP link below – please contact us at <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20link" target="_top">LongServiceAwards@gov.bc.ca</a>.</p><br /> <br />
 <table width="750" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always" >
   <tbody>
@@ -66,27 +67,23 @@ $applicant_body = <<<EOT
           <table width="750" height="800" border="0" align="center" cellpadding="0" cellspacing="0">
             <tbody>
               <tr>
-                <td height="270"><p>&nbsp;</p></td>
+                <td height="290"><p>&nbsp;</p></td>
               </tr>
               <tr>
                 <td height="60" align="center" valign="middle" style="font-size: $name_font_size; color: #333333; text-align: center; font-family: Cambria, 'Hoefler Text', 'Liberation Serif', Times, 'Times New Roman', serif; font-weight: bold; font-style: oblique;">$applicant_full_name</td>
               </tr>
               <tr>
-                <td height="25"><p>&nbsp;</p></td>
+                <td height="30"><p>&nbsp;</p></td>
               </tr>
               <tr>
                 <td height="60" align="center" valign="middle" style="font-size: 21pt; color: #333333; text-align: center; font-family: Cambria, 'Hoefler Text', 'Liberation Serif', Times, 'Times New Roman', serif; font-weight: bold; font-style: oblique;">$ceremony_date</td>
               </tr>
               <tr>
-                <td><p>&nbsp;</p></td>
-              </tr>
-              <tr>
-                <td align="center" valign="middle"> <img src="$invite_button" alt="RSVP Button"> </td>
+                <td height="20"><p>&nbsp;</p></td>
               </tr>
             </tbody>
           </table>
         </div>
-
   <!--[if gte mso 9]>
     </v:textbox>
   </v:rect>
@@ -110,7 +107,7 @@ $applicant_body = <<<EOT
           <table align="center" border="0" cellspacing="0" cellpadding="0" style="font-size: 14pt; color:#333333; text-align:center; font-family: Merienda, 'Times New Roman', serif, sans-serif;" >
             <tr>
               <td align="center">
-                Please <a href="$base_url/node/$nid" target="_blank" style="color: #ffffff; text-decoration: none; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; background-color: #EB7035; border-top: 12px solid #EB7035; border-bottom: 12px solid #EB7035; border-right: 18px solid #EB7035; border-left: 18px solid #EB7035; display: inline-block;">RSVP</a> before August 1, 2016.
+                Please <a href="$base_url/node/$nid" target="_blank" style="color: #ffffff; text-decoration: none; background-color: #EB7035; border-top: 12px solid #EB7035; border-bottom: 12px solid #EB7035; border-right: 18px solid #EB7035; border-left: 18px solid #EB7035; ">RSVP</a> before August 1, 2016.
               </td>
             </tr>
           </table>
