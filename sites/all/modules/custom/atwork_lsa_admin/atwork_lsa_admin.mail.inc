@@ -54,8 +54,8 @@ $applicant_body = <<<EOT
 <p><strong>**DO NOT REPLY TO THIS EMAIL – PLEASE FOLLOW THE INSTRUCTIONS BELOW TO RSVP.**</strong></p>
 <p> Your electronic invitation with RSVP button should appear below. If you are having trouble seeing the image in this email, please ensure you click <strong>“download images”</strong>. </p>
 <p> To confirm your attendance OR to confirm you are unable to attend, <strong>please click on the <a href="$base_url/node/$nid">RSVP button</a></strong> in the invitation below.</p>
-<p style = "page-break-after:always">If you are retired, or unable to access the RSVP link below – please contact us at <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20link" target="_top">LongServiceAwards@gov.bc.ca</a>.</p><br /> <br />
-<p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p>
+<p style = "page-break-after:always">If you are retired, or unable to access the RSVP link below – please contact us at <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20link" target="_top">LongServiceAwards@gov.bc.ca</a>.</p>
+<p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p><br />
 <table width="750" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always" >
   <tbody>
     <tr>
@@ -72,13 +72,13 @@ $applicant_body = <<<EOT
                 <td height="290"><p>&nbsp;</p></td>
               </tr>
               <tr>
-                <td height="60" align="center" valign="middle" style="font-size: 20pt; color: #333333; text-align: center; font-family: Times; font-weight: bold; ">$applicant_full_name</td>
+                <td height="60" align="center" valign="middle" style="font-size: 18pt; color: #333333; text-align: center; font-family: Times; font-weight: bold; ">$applicant_full_name</td>
               </tr>
               <tr>
                 <td height="30"><p>&nbsp;</p></td>
               </tr>
               <tr>
-                <td height="60" align="center" valign="middle" style="font-size: 20pt; color: #333333; text-align: center; font-family: Times; font-weight: bold;">$ceremony_date</td>
+                <td height="60" align="center" valign="middle" style="font-size: 18pt; color: #333333; text-align: center; font-family: Times; font-weight: bold;">$ceremony_date</td>
               </tr>
               <tr>
                 <td height="20"><p>&nbsp;</p></td>
