@@ -1,4 +1,4 @@
-//----------------- Common Activity Feed styles - Applies to both front and profile page 
+//----------------- Common Activity Feed styles - Applies to both front and profile page
 
 .block-atwork-activity {
   #edit-status { // textarea status box
@@ -14,7 +14,7 @@
     border: 5px solid #26669E;
   }
   #profile-comment-link { // shows the Message Check link
-    display: none; 
+    display: none;
   }
   #saving-notification-status {
     @include atwork-messages(green, ok);
@@ -50,27 +50,18 @@
     width: 24px;
     height: 21px;
     text-align: center;
-<<<<<<< HEAD
     color: #FFF;
     font-weight: bold;
-=======
-    color:#FFF;
-    font-weight:bold;
->>>>>>> origin/master
   }
-  #message-count-number { 
+  #message-count-number {
     position: absolute;
     top: 2px;
-<<<<<<< HEAD
     left: 0;
     width: 100%;
     font-size: .9em;
     &:hover {
       cursor:pointer;
     }
-=======
-    left: 8px;
->>>>>>> origin/master
   }
     #notification-pop {
     border: solid 1px #000;
@@ -100,14 +91,14 @@
 
 //----- General Layout
 #social-side {
-  // start all Header items 
+  // start all Header items
   h2 {
     position: absolute;
     left: 0;
     top: 0;
     z-index: 99;
   }
-  .block-header-inner { 
+  .block-header-inner {
     float: right;
     margin-top: -3px;
   }
@@ -155,7 +146,7 @@
   }
   // end Advanced Filters
 
-  // end all Header items 
+  // end all Header items
 
   // start feed-ad-space
     .feed-ad-space-image { // Lives outside of the ad-space container
@@ -247,7 +238,7 @@
   }
   #atwork-activity-customize-feed-form .description {
     margin-bottom: 1em;
-  }    
+  }
   .item-list { // the pager
     display: block;
     width: 252px;
@@ -281,7 +272,7 @@
     label {
       display: none; //hide all labels. We don't need them
     }
-    
+
     > .message  { // start outer message div styling
       position: relative;
       min-height: 100px;
@@ -291,10 +282,10 @@
       background: lighten(#777, 49%) url(/sites/all/themes/atwork_zen/images/grey-trans.png) bottom center repeat-x;
       background-size: 18px;
     }
-    .date, 
+    .date,
     ul.links,
     .field-name-field-feed-like-button {
-      position: absolute; // unfortunately needed  
+      position: absolute; // unfortunately needed
       bottom: 0px;
       font-size: 10px;
     }
@@ -338,7 +329,7 @@
       margin-left: 48px;
     }
   }
-  
+
   // inner nested message div styling
   .entity-message {
     p[class^="msg-"] + p + p { // start with this class and then only the 3rd p
@@ -347,7 +338,7 @@
       }
       &:after {
         @include quotes-closed;
-      }  
+      }
       a[href^=node] { // if exists, push more link out of quotes
         float: right;
         margin: 0.5em 0 3em 0;
@@ -391,7 +382,7 @@
   .reply-links a[href*="delete"] {// temp hide the delete button to help styling
     display: none;
   }
-  .replies { 
+  .replies {
     .field-name-field-image {
       max-width: 24px;
     }
@@ -474,7 +465,7 @@
       p:nth-last-of-type(2) {
         &:after {
           @include quotes-closed;
-        } 
+        }
       }
     }
 
@@ -523,7 +514,7 @@
       }
     }
     .field-name-field-comment-message-comments h3 {// not sure why this is here but hide it.
-      display: none; 
+      display: none;
     }
     .toggle-com-button {
       left: 17px;
@@ -548,7 +539,7 @@
 
 
 
-//---------- Comment Replies 
+//---------- Comment Replies
 
 .atwork-rate-widget-feed_like_button {
   a {
@@ -556,7 +547,7 @@
   }
 }
 
-.reply { 
+.reply {
   border: 1px solid #e0e0e0;
   position: relative;
   margin-bottom: 1em;
@@ -573,7 +564,7 @@
     }
     .field-item:after {
       @include quotes-closed;
-    }  
+    }
   }
   .field-name-field-profile-comment-date,
   .field-name-field-display-name {
@@ -597,7 +588,7 @@
     .field-name-field-image {
       margin: 0;
     }
-  } 
+  }
 }
 
 
@@ -630,7 +621,7 @@
 
 // Common Reply and Edit pages
 
-.page-reply { 
+.page-reply {
   #main {
     width: 620px;
   }
@@ -669,7 +660,7 @@
 
 
 
-//------------------ Pop-out User Activity Window specifics 
+//------------------ Pop-out User Activity Window specifics
 
 .new-activity-window {
   background-color: #D7D7D7;
@@ -744,4 +735,4 @@
 
 
 
-//----------------- End Pop-out User Activity Window 
+//----------------- End Pop-out User Activity Window
