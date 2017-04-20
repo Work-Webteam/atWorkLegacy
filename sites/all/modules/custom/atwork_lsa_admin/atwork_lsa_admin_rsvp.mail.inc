@@ -1,5 +1,5 @@
 <?php
-$image_source = drupal_get_path('module', 'atwork_lsa') . '/Invitation/LongServiceawards_2017_Feb21.jpg';
+$image_source = drupal_get_path('module', 'atwork_lsa') . '/Invitation/LongServiceAwards_2017_Feb21';
 $applicant_attending_subject = t('Long Service Awards 2017 – RSVP Confirmation');
 $applicant_attending_body = <<<EOT
 <html>
