@@ -20,8 +20,8 @@
       $('.form-item.form-type-textfield.form-item-field-lsa-award-und-0-value').hide();
 
 
-      // Also reset the engravement choice - in case it is no loger relevant
-      $('#edit-field-lsa-engravement-und-0-value').val('');
+      // Also reset the engravement choice - in case it is no longer relevant
+      //$('#edit-field-lsa-engravement-und-0-value').val('');
       $('#edit-field-lsa-engravement-und-0-value').hide();
       $('.form-item.form-type-textfield.form-item-field-lsa-engravement-und-0-value').hide();
     }

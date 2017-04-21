@@ -1544,62 +1544,6 @@ function profile_feed_comments_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'message-updated_user-field_follow_feed_comments'.
-  $field_instances['message-updated_user-field_follow_feed_comments'] = array(
-    'bundle' => 'updated_user',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'reply',
-        'settings' => array(
-          'semantic_field_format' => '',
-        ),
-        'type' => 'reply_default',
-        'weight' => 2,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'message',
-    'field_name' => 'field_follow_feed_comments',
-    'label' => 'follow feed comments',
-    'required' => 0,
-    'settings' => array(
-      'access' => -1,
-      'allow_reply' => -1,
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'display' => -1,
-      'form' => -1,
-      'semantic_field_format' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'reply',
-      'settings' => array(),
-      'type' => 'reply',
-      'weight' => 1,
-    ),
-  );
-
   // Exported field_instance:
   // 'message-user_liked_comment-field_message_comment'.
   $field_instances['message-user_liked_comment-field_message_comment'] = array(
@@ -2119,7 +2063,7 @@ function profile_feed_comments_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'text',
         'settings' => array(
-          'semantic_field_format' => 0,
+          'semantic_field_format' => '',
         ),
         'type' => 'text_default',
         'weight' => 1,
@@ -2289,6 +2233,60 @@ function profile_feed_comments_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance:
+  // 'reply-entity_comments-field_post_as_employee_news'.
+  $field_instances['reply-entity_comments-field_post_as_employee_news'] = array(
+    'bundle' => 'entity_comments',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(
+          'semantic_field_format' => 0,
+        ),
+        'type' => 'list_default',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'reply',
+    'field_name' => 'field_post_as_employee_news',
+    'label' => 'Post as Employee News',
+    'required' => 0,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'semantic_field_format' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 39,
+    ),
+  );
+
   // Exported field_instance: 'reply-entity_comments-field_profile_comment'.
   $field_instances['reply-entity_comments-field_profile_comment'] = array(
     'bundle' => 'entity_comments',
@@ -2396,6 +2394,7 @@ function profile_feed_comments_field_default_field_instances() {
   t('Hashtags');
   t('Message text');
   t('Node');
+  t('Post as Employee News');
   t('Reason');
   t('Status');
   t('This is the text of all messages of this type.');

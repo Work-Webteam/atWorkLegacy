@@ -23,6 +23,7 @@ function atwork_zen_preprocess_page(&$variables, $hook) {
   drupal_add_library('system', 'jquery.cookie');
   //drupal_add_library('system', 'ui.cookie');
 
+
    // check if this is a node page
   if (isset($variables['page']['content']['system_main']['nodes'][arg(1)])) {
     $node = $variables['page']['content']['system_main']['nodes'][arg(1)]['#node'];
