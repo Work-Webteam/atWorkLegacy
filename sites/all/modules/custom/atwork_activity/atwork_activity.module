@@ -1779,6 +1779,7 @@ function atwork_activity_entity_view_alter(&$build, $type){
 
     // Append the user image here
     $build["field_profile_comment_date"][0]['#markup'] = '<div class="feed-user-image">' . render($image) . '</div><!-- /.feed-user-image -->'. " Posted: " . $build["field_profile_comment_date"][0]['#markup'];
+
     // Add flag icon:
     $build['links']['flag']['#links']['flag-flag_for_message_replies']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $build['links']['flag']['#links']['flag-flag_for_message_replies']['title']);
   }
