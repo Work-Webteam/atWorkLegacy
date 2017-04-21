@@ -238,7 +238,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['relationship'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: Email */
+  /* Field: Field: Display Name */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
@@ -401,7 +401,7 @@ function atwork_lsa_features_views_default_views() {
     7 => 0,
     8 => 0,
   );
-  /* Filter criterion: Field: Email (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
@@ -578,7 +578,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['relationship'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: Email */
+  /* Field: Field: Display Name */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
@@ -777,7 +777,7 @@ function atwork_lsa_features_views_default_views() {
     7 => 0,
     8 => 0,
   );
-  /* Filter criterion: Field: Email (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
@@ -962,7 +962,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['relationship'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: Email */
+  /* Field: Field: Display Name */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
@@ -1066,7 +1066,7 @@ function atwork_lsa_features_views_default_views() {
     13 => 0,
   );
   $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
-  /* Filter criterion: Field: Email (field_display_name) */
+  /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
@@ -1685,7 +1685,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_supervisor_email']['id'] = 'field_lsa_supervisor_email';
   $handler->display->display_options['fields']['field_lsa_supervisor_email']['table'] = 'field_data_field_lsa_supervisor_email';
   $handler->display->display_options['fields']['field_lsa_supervisor_email']['field'] = 'field_lsa_supervisor_email';
-  /* Field: Content: Special Requirements for You OR Your Guest */
+  /* Field: Content: Special Requirements */
   $handler->display->display_options['fields']['field_lsa_specialrequirements']['id'] = 'field_lsa_specialrequirements';
   $handler->display->display_options['fields']['field_lsa_specialrequirements']['table'] = 'field_data_field_lsa_specialrequirements';
   $handler->display->display_options['fields']['field_lsa_specialrequirements']['field'] = 'field_lsa_specialrequirements';
@@ -4552,7 +4552,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_employee_number']['id'] = 'field_lsa_employee_number';
   $handler->display->display_options['fields']['field_lsa_employee_number']['table'] = 'field_data_field_lsa_employee_number';
   $handler->display->display_options['fields']['field_lsa_employee_number']['field'] = 'field_lsa_employee_number';
-  /* Field: Content: Special Requirements for You OR Your Guest (editable) */
+  /* Field: Content: Special Requirements (editable) */
   $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['id'] = 'field_lsa_specialrequirements_editable';
   $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['table'] = 'field_data_field_lsa_specialrequirements';
   $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['field'] = 'field_lsa_specialrequirements_editable';
@@ -4651,7 +4651,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['autocomplete_raw_dropdown'] = 1;
   $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['autocomplete_dependent'] = 0;
-  /* Filter criterion: Content: Special Requirements for You OR Your Guest (field_lsa_specialrequirements) */
+  /* Filter criterion: Content: Special Requirements (field_lsa_specialrequirements) */
   $handler->display->display_options['filters']['field_lsa_specialrequirements_value']['id'] = 'field_lsa_specialrequirements_value';
   $handler->display->display_options['filters']['field_lsa_specialrequirements_value']['table'] = 'field_data_field_lsa_specialrequirements';
   $handler->display->display_options['filters']['field_lsa_specialrequirements_value']['field'] = 'field_lsa_specialrequirements_value';
@@ -5504,7 +5504,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_supervisor_email']['id'] = 'field_lsa_supervisor_email';
   $handler->display->display_options['fields']['field_lsa_supervisor_email']['table'] = 'field_data_field_lsa_supervisor_email';
   $handler->display->display_options['fields']['field_lsa_supervisor_email']['field'] = 'field_lsa_supervisor_email';
-  /* Field: Content: Special Requirements for You OR Your Guest */
+  /* Field: Content: Special Requirements */
   $handler->display->display_options['fields']['field_lsa_specialrequirements']['id'] = 'field_lsa_specialrequirements';
   $handler->display->display_options['fields']['field_lsa_specialrequirements']['table'] = 'field_data_field_lsa_specialrequirements';
   $handler->display->display_options['fields']['field_lsa_specialrequirements']['field'] = 'field_lsa_specialrequirements';
