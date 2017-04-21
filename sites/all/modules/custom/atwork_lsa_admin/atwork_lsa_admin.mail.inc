@@ -37,12 +37,13 @@ foreach($list_of_values as $key=>$value){
 $nid = $lsa_node->nid;
 
 // Get a url value
-$invite = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_print.jpg';
-$invite_button = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_RSVP.png';
-//$url = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_Invite_June1.jpg";
+//$invite = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_print.jpg';
+//$invite_button = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_RSVP.png';
 
+$invite = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_Invite_complete.jpg";
+//$invite_button = 'https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_RSVP.jpg';
 
-$applicant_subject = t('You Are Invited to the Long Service Awards Ceremony');
+$applicant_subject = t('Your Long Service Awards invitation is enclosed – please RSVP using the clickable button');
 $applicant_body = <<<EOT
 <html>
 <head>
@@ -50,9 +51,11 @@ $applicant_body = <<<EOT
 </head>
 
 <body id="mimemail-body" class="atwork-mail-default">
-<p> If you are having trouble seeing the images in this email, please ensure you click <strong>“download images”</strong>. </p>
-<p> To confirm your attendance, click on the RSVP button below (do not reply to this email).</p> 
-<p style = "page-break-after:always">If you are retired, or unable to access the RSVP link below – please contact us at <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20link" target="_top">LongServiceAwards@gov.bc.ca</a>.</p><br /> <br />
+<p><strong>**DO NOT REPLY TO THIS EMAIL – PLEASE FOLLOW THE INSTRUCTIONS BELOW TO RSVP.**</strong></p>
+<p> Your electronic invitation with RSVP button should appear below. If you are having trouble seeing the image in this email, please ensure you click <strong>“download images”</strong>. </p>
+<p> To confirm your attendance OR to confirm you are unable to attend, <strong>please click on the <a href="$base_url/node/$nid">RSVP button</a></strong> in the invitation below.</p>
+<p style = "page-break-after:always">If you are retired, or unable to access the RSVP link below – please contact us at <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20link" target="_top">LongServiceAwards@gov.bc.ca</a>.</p>
+<p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p><br />
 <table width="750" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always" >
   <tbody>
     <tr>
@@ -66,59 +69,29 @@ $applicant_body = <<<EOT
           <table width="750" height="800" border="0" align="center" cellpadding="0" cellspacing="0">
             <tbody>
               <tr>
-                <td height="270"><p>&nbsp;</p></td>
+                <td height="290"><p>&nbsp;</p></td>
               </tr>
               <tr>
-                <td height="60" align="center" valign="middle" style="font-size: $name_font_size; color: #333333; text-align: center; font-family: Cambria, 'Hoefler Text', 'Liberation Serif', Times, 'Times New Roman', serif; font-weight: bold; font-style: oblique;">$applicant_full_name</td>
+                <td height="60" align="center" valign="middle" style="font-size: 18pt; color: #333333; text-align: center; font-family: Times; font-weight: bold; ">$applicant_full_name</td>
               </tr>
               <tr>
-                <td height="25"><p>&nbsp;</p></td>
+                <td height="30"><p>&nbsp;</p></td>
               </tr>
               <tr>
-                <td height="60" align="center" valign="middle" style="font-size: 21pt; color: #333333; text-align: center; font-family: Cambria, 'Hoefler Text', 'Liberation Serif', Times, 'Times New Roman', serif; font-weight: bold; font-style: oblique;">$ceremony_date</td>
+                <td height="60" align="center" valign="middle" style="font-size: 18pt; color: #333333; text-align: center; font-family: Times; font-weight: bold;">$ceremony_date</td>
               </tr>
               <tr>
-                <td><p>&nbsp;</p></td>
-              </tr>
-              <tr>
-                <td align="center" valign="middle"> <img src="$invite_button" alt="RSVP Button"> </td>
+                <td height="20"><p>&nbsp;</p></td>
               </tr>
             </tbody>
           </table>
         </div>
-
   <!--[if gte mso 9]>
     </v:textbox>
   </v:rect>
   <![endif]-->
   </a>
   </td>
-    </tr>
-  </tbody>
-</table>
-<table width="750" border="0" align="center" cellpadding="0" cellspacing="0" style="font-size: 14pt; color:#333333; text-align:center; font-family: Merienda, 'Times New Roman', serif, sans-serif;">
-  <tbody>
-    <tr>
-      <td height="20"><br></td>
-    </tr>
-    <tr>
-      <td>
-
-      <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-      <tr>
-        <td>
-          <table align="center" border="0" cellspacing="0" cellpadding="0" style="font-size: 14pt; color:#333333; text-align:center; font-family: Merienda, 'Times New Roman', serif, sans-serif;" >
-            <tr>
-              <td align="center">
-                Please <a href="$base_url/node/$nid" target="_blank" style="color: #ffffff; text-decoration: none; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; background-color: #EB7035; border-top: 12px solid #EB7035; border-bottom: 12px solid #EB7035; border-right: 18px solid #EB7035; border-left: 18px solid #EB7035; display: inline-block;">RSVP</a> before August 1, 2016.
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      </table>
-      <p style="font-size: 10pt;">NOTE: If you are a retired employee, or cannot access the online RSVP link above, please contact <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP">longserviceawards@gov.bc.ca</a><br /> or call Jenny Pescod at (250) 356-7916 to confirm your attendance.</p>
-      </td>
     </tr>
   </tbody>
 </table>
