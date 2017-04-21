@@ -1460,50 +1460,6 @@ function profile_feed_comments_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance:
-  // 'message-updated_user-field_comment_message_comments'.
-  $field_instances['message-updated_user-field_comment_message_comments'] = array(
-    'bundle' => 'updated_user',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'reply',
-        'settings' => array(
-          'semantic_field_format' => '',
-        ),
-        'type' => 'reply_default',
-        'weight' => 0,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'message',
-    'field_name' => 'field_comment_message_comments',
-    'label' => 'Comment Message Comments',
-    'required' => 0,
-    'settings' => array(
-      'access' => -1,
-      'allow_reply' => -1,
-      'display' => -1,
-      'form' => -1,
-      'semantic_field_format' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'reply',
-      'settings' => array(),
-      'type' => 'reply',
-      'weight' => 0,
-    ),
-  );
-
   // Exported field_instance: 'message-updated_user-field_feed_like_button'.
   $field_instances['message-updated_user-field_feed_like_button'] = array(
     'bundle' => 'updated_user',
