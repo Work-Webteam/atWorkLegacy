@@ -159,16 +159,11 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'email',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'email_default',
         'weight' => 12,
       ),
       'ecard' => array(
@@ -1099,16 +1094,11 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 8,
       ),
       'ecard' => array(
@@ -1479,16 +1469,11 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'email',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'email_default',
         'weight' => 11,
       ),
       'ecard' => array(
@@ -1682,16 +1667,11 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 8,
       ),
       'ecard' => array(
@@ -1903,16 +1883,11 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'phone',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'phone',
         'weight' => 13,
       ),
       'ecard' => array(
@@ -1972,16 +1947,11 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 10,
       ),
       'ecard' => array(
@@ -2056,16 +2026,11 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 9,
       ),
       'ecard' => array(
@@ -2217,16 +2182,11 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 10,
       ),
       'ecard' => array(
@@ -2284,16 +2244,11 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 9,
       ),
       'ecard' => array(
@@ -3702,16 +3657,11 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'editablefields',
+        'module' => 'list',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'list_default',
         'weight' => 5,
       ),
       'ecard' => array(
@@ -3779,16 +3729,11 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 7,
       ),
       'ecard' => array(
@@ -4434,16 +4379,11 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 6,
       ),
       'ecard' => array(
