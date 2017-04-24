@@ -5,7 +5,13 @@ $applicant_first_name =  $lsa_node->field_lsa_first_name['und'][0]['safe_value']
 //$applicant_first_name = ucfirst(strtolower($applicant_first_name));
 $applicant_last_name = $lsa_node->field_lsa_last_name['und'][0]['safe_value'];
 //$applicant_last_name = ucfirst(strtolower($applicant_last_name));
-$applicant_full_name = $applicant_first_name . ' ' . $applicant_last_name;
+// Add middlename if applicable
+if(isset($lsa_node->field_lsa_middle_name['und'][0]['safe_value']) && $lsa_node->field_lsa_middle_name['und'][0]['safe_value']){
+  $applicant_middle_name = $lsa_node->field_lsa_middle_name['und'][0]['safe_value'];
+  $applicant_full_name = $applicant_first_name . ' ' . $applicant_middle_name . ' ' . $applicant_last_name;
+} else {
+  $applicant_full_name = $applicant_first_name . ' ' . $applicant_last_name;
+}
 // Need to shrink font if the name is too long
 switch(true){
   case (strlen($applicant_full_name)<= 27):
@@ -72,7 +78,7 @@ $applicant_body = <<<EOT
                 <td height="290"><p>&nbsp;</p></td>
               </tr>
               <tr>
-                <td height="60" align="center" valign="middle" style="font-size: 18pt; color: #333333; text-align: center; font-family: Times; font-weight: bold; "><strong>$applicant_full_name</strong></td>
+                <td height="60" align="center" valign="middle" style="font-size: 18pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; "><strong>$applicant_full_name</strong></td>
               </tr>
               <tr>
                 <td height="30"><p>&nbsp;</p></td>
