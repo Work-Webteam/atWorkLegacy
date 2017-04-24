@@ -57,7 +57,7 @@ $applicant_not_attending_body = <<<EOT
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     </head>
     <body id="mimemail-body" class="atwork-mail-default">
-        <p><img src="$image_source" align="left"></p>
+        <p><img height="280" width="280" src="$image_source" align="left"></p>
         <p>Thank you for notifying us that you will <u>not</u> be attending this year’s Long Service Award (LSA) ceremony. </p>
         <p>Long Service Awards are presented the year the employee registers. <strong>Your award will be sent to your organization following the fall ceremonies, and your <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts" target="_blank">ministry/organization contact</a> will make the arrangements to have your award presented to you internally</strong>.</p>
         <p><strong>Reminder:</strong> If this is the first year you have registered, you have the option of a one-year deferral to attend next year. You are responsible for <a href="https://gww.gov.bc.ca/career/long-service-awards" target="_blank"> re-registering next year</a>. The registration period is from the beginning of March to the end of April each year.</p>
