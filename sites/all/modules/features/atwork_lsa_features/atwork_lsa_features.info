@@ -2,12 +2,7 @@ name = Atwork LSA Feature
 description = LSA function bundle
 core = 7.x
 package = Atwork Features
-<<<<<<< HEAD
-version = 7.x-2.19
-=======
-version = 7.x-2.17
->>>>>>> Development---Sprint-13
-dependencies[] = atwork_lsa
+version = 7.x-2.18
 dependencies[] = atwork_lsa_admin
 dependencies[] = better_exposed_filters
 dependencies[] = boxes
@@ -32,6 +27,10 @@ dependencies[] = tb_megamenu
 dependencies[] = text
 dependencies[] = views
 dependencies[] = views_data_export
+<<<<<<< HEAD
+version = 7.x-2.19
+>>>>>>> Development---Sprint-13
+dependencies[] = atwork_lsa
 features[conditional_fields][] = node:lsa_application
 features[ctools][] = boxes:box:1
 features[ctools][] = field_group:field_group:1
@@ -306,6 +305,7 @@ features[variable][] = webform_node_lsa_application
 features[variable][] = webform_node_lsa_pin_application
 features[variable][] = workbench_moderation_default_state_lsa_application
 features[variable][] = workbench_moderation_default_state_lsa_pin_application
+features[views_view][] = content
 features[views_view][] = lsa_admin
 features_exclude[dependencies][ctools] = ctools
 features_exclude[dependencies][entity] = entity
