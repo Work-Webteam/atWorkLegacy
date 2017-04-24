@@ -1,5 +1,9 @@
 <?php
-$image_source = drupal_get_path('module', 'atwork_lsa') . '/Invitation/LongServiceAwards_2017_Feb21.jpg';
+// Changing this to take advantage of mem_fs functionality, especially since beta2 and test2 do not have cert, so image never opens in email. 
+//$image_source = drupal_get_path('module', 'atwork_lsa') . '/Invitation/LongServiceAwards_2017_Feb21.jpg';
+//
+$image_source = "https://gww.gov.bc.ca/mem_fs/images/lsa/LongServiceAwards_2017_Feb21.jpg";
+
 $applicant_attending_subject = t('Long Service Awards 2017 – RSVP Confirmation');
 $applicant_attending_body = <<<EOT
 <html>
@@ -22,7 +26,7 @@ $applicant_attending_body = <<<EOT
                 </tr>
                 <tr>
                     <td>
-                        <p>If you previously indicated that you or your guest has special requirements, <strong>we will contact you</strong> to discuss these further. If you need to notify us of any changes to your information, or to cancel your attendance, please email us as <u>prior to your ceremony date</u> at <a href="mailto:longserviceawards@gov.bc.ca?Subject=Changes%20to%20Application" target="_top">longserviceawards@gov.bc.ca</a>.</p>
+                        <p>If you previously indicated that you or your guest has special requirements, <strong>we will contact you</strong> to discuss these further. If you need to notify us of any changes to your information, or to cancel your attendance, please email us <u>prior to your ceremony date</u> at <a href="mailto:longserviceawards@gov.bc.ca?Subject=Changes%20to%20Application" target="_top">longserviceawards@gov.bc.ca</a>.</p>
                     </td>
                 <tr>
             </tbody>
