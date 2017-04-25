@@ -39,6 +39,8 @@
 @import "components/fields.scss";
 @import "components/forms.scss";
 
+@import "layouts/grid.scss";
+
 @import "states/state.scss";
 
 
@@ -900,6 +902,7 @@ div.header-user {
 #views_slideshow_controls_text_home_page_blocks_zen-block_5 {
     position: absolute;
     width:100%;
+    max-width:960px;
     top:120px;
 }
 #views_slideshow_controls_text_previous_home_page_blocks_zen-block_5 {
@@ -1143,7 +1146,6 @@ ol.search-results h3.title {
 	position: absolute;
   top: 0;
 	right: 0;
-  width:275px;
 }
 #block-atwork-activity-homepage {
   background-color: #fcfcfc;
@@ -1152,7 +1154,7 @@ ol.search-results h3.title {
 	width: 275px;
 	height: 1356px;
   overflow-x: hidden; // don't show horizontal scrollbar
-  overflow-y: scroll;
+  overflow-y: auto; 
   box-sizing: border-box;
   padding: 4px;
 }
@@ -1341,7 +1343,7 @@ h3.front-promoted-title {
 }
 .front #block-atwork-activity-homepage h2.block__title {
   text-align:left;
-  padding-left: 12px;
+  padding-left: 8px;
 }
 
 /*------------------ New Front Page Events Block -----------------------------*/
@@ -1350,8 +1352,7 @@ h3.front-promoted-title {
 	display: inline-block;
 	float: left;
 	background-color: #D7D7D7;
-	min-width:619px;
-  max-width:63%;
+  min-width:620px;
 	height: 390px;
 	padding-bottom: 15px;
 }
@@ -2298,7 +2299,7 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-6 .article-series-views,
 .section-series #block-views-article-series-block-7 .article-series-views {
   float: right;
-  margin-right: 0px;
+  margin-right: 15px;
   font-style: oblique;
 }
 .gallery-status {

@@ -1,3 +1,4 @@
+/* Hides Drupal warning boxes at the top of the page */
 
 #block-views-home-page-blocks-zen-ad-space,
 #widget_pager_bottom_home_page_blocks_zen-block_5 {
@@ -25,19 +26,12 @@ only screen and (                min-resolution: 192dpi),
 only screen and (                min-resolution: 2dppx) {
 
 @media only screen
-  and (max-width:679px)
+  and (max-width:768px)
+  and (max-height:1024px)
   and (orientation: portrait)  {
   #page {
       min-width:348px!important;
-      max-width:677px!important;
-  }
-  #page .breadcrumb,
-  #page #content {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-  #footer {
-    min-width:350px!important;
+      max-width:768px!important;
   }
   #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row.views-slideshow-xtra-overlay-row {
     width:inherit!important;
@@ -87,8 +81,8 @@ only screen and (                min-resolution: 2dppx) {
     margin-right: 15px!important;
 }
   .front #block-views-home-page-blocks-zen-block-2 {
-    width:inherit!important;
-    margin: 0 auto;
+    width:100%!important;
+    margin: 0 auto!important;
   }
   .section-classifieds .view-classifieds .views-row-odd, .section-classifieds .view-classifieds .views-row-even,
   .page-galleries .view-gallery-reference .views-row-odd, .page-galleries .view-gallery-reference .views-row-even,
@@ -125,8 +119,8 @@ only screen and (                min-resolution: 2dppx) {
   .front div#social-side {
     display:block!important;
     position: inherit;
-    min-height: 250px;
-    max-height: 355px;
+    min-height: 200px;
+    max-height: 415px;
   }
   .front div#social-side #block-atwork-activity-homepage {
     height:inherit!important;
@@ -163,21 +157,24 @@ only screen and (                min-resolution: 2dppx) {
     width:initial!important;
     border-width: 12px!important;
   }
-  form#views-exposed-form-people-admin-public-page {
-    #edit-last-name-wrapper,
-    #edit-first-name-wrapper,
-    #edit-interests-wrapper {
-      width:100%;
-    }
+  form#views-exposed-form-people-admin-public-page #edit-last-name-wrapper,
+  form#views-exposed-form-people-admin-public-page #edit-first-name-wrapper,
+  form#views-exposed-form-people-admin-public-page #edit-interests-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-field-gal-last-name-value-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-field-gal-first-name-value-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-title-wrapper {
+    width:100%;
   }
-  form#views-exposed-form-people-admin-public-page {
-    #edit-title-wrapper,
-    #edit-ministry-wrapper,
-    #edit-city-wrapper,
-    #edit-skills-wrapper {
-      width: 48%;
-      }
-  } 
+  form#views-exposed-form-people-admin-public-page #edit-title-wrapper,
+  form#views-exposed-form-people-admin-public-page #edit-ministry-wrapper,
+  form#views-exposed-form-people-admin-public-page #edit-city-wrapper,
+  form#views-exposed-form-people-admin-public-page #edit-skills-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-ministry-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-city-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-skills-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-interests-wrapper  {
+    width: 48%;
+  }
   /* Executive Profile Landing Page */
   /* PSA Head */
   .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first.views-row-last {
@@ -275,21 +272,12 @@ only screen and (                min-resolution: 2dppx) {
   }
 }
 @media only screen
-  and (max-width:767px)
+  and (max-width:1024px)
+  and (max-height:768px)
   and (orientation: landscape) {
     #page {
         min-width:352px!important;
-        max-width:765px!important;
-    }
-    #page .breadcrumb,
-    #page #content {
-      padding-left: 10px;
-    }
-    #footer #footer-copyright table td.sideBrdr {
-      width:50%!important;
-    }
-    #footer #users_online {
-      top:-200px;
+        max-width:980px!important;
     }
     #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row.views-slideshow-xtra-overlay-row {
       width:inherit!important;
@@ -309,7 +297,6 @@ only screen and (                min-resolution: 2dppx) {
     top: 0px!important;
     }
     #admin-menu,
-    #block-atwork-profiles-header,
     .front #block-block-5,
     #views_slideshow_controls_text_home_page_blocks_zen-block_5,
     #social-side #activity-feed,
@@ -328,12 +315,18 @@ only screen and (                min-resolution: 2dppx) {
     }
     #block-views-home-page-blocks-zen-block-1,
     #block-views-home-page-blocks-zen-block-3,
-    #block-views-home-page-blocks-zen-block-4,
-    #block-views-home-page-blocks-zen-block-2 {
+    #block-views-home-page-blocks-zen-block-4 {
         min-width: 100% !important;
         max-width:786px;
         clear: both;
         height: inherit;
+    }
+    .front #block-views-home-page-blocks-zen-block-2 {
+      width:609px!important;
+      margin:0 auto!important;
+    }
+    .front #top-tools-panel {
+      width:inherit!important;
     }
     .front .front-promoted-image {
       display: inline-block;
@@ -479,21 +472,25 @@ only screen and (                min-resolution: 2dppx) {
     height:initial!important;
     border-width: 12px!important;
   }
-  form#views-exposed-form-people-admin-public-page {
-    #edit-last-name-wrapper,
-    #edit-first-name-wrapper,
-    #edit-interests-wrapper {
-      width:100%;
-    }
+  form#views-exposed-form-people-admin-public-page #edit-last-name-wrapper,
+  form#views-exposed-form-people-admin-public-page #edit-first-name-wrapper,
+  form#views-exposed-form-people-admin-public-page #edit-interests-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-field-gal-last-name-value-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-field-gal-first-name-value-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-title-wrapper {
+    width:100%;
   }
-  form#views-exposed-form-people-admin-public-page {
-    #edit-title-wrapper,
-    #edit-ministry-wrapper,
-    #edit-city-wrapper,
-    #edit-skills-wrapper {
-      width: 48%;
-      }
-  } 
+  form#views-exposed-form-people-admin-public-page #edit-title-wrapper,
+  form#views-exposed-form-people-admin-public-page #edit-ministry-wrapper,
+  form#views-exposed-form-people-admin-public-page #edit-city-wrapper,
+  form#views-exposed-form-people-admin-public-page #edit-skills-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-ministry-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-city-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-skills-wrapper,
+  form#views-exposed-form-people-admin-page-following2 #edit-interests-wrapper  {
+    width: 48%;
+  }
+  
   /* Executive Profile Landing Page */
   /* PSA Head */
   .page-executive-team #content .view-Executive-Profiles .attachment-before {
@@ -595,7 +592,7 @@ only screen and (                min-resolution: 2dppx) {
   }
   .one-sidebar.sidebar-first .pre-title-snipet {
     padding: 0!important;
-    }
+  }
   }
 }
 
@@ -603,7 +600,7 @@ only screen and (                min-resolution: 2dppx) {
 
 
 
-@media only screen and (max-width:979px) { // includes iPads portrait
+@media only screen and (max-width:979px) {
   html,
   #header.header,
   .not-front .new-activity-window #header.header {
@@ -612,26 +609,6 @@ only screen and (                min-resolution: 2dppx) {
   #content.column {
       max-width: 98% !important;
       margin: 0 auto;
-  }
-  #block-views-home-page-blocks-zen-block-1,
-  #block-views-home-page-blocks-zen-block-3,
-  #block-views-home-page-blocks-zen-block-4 {
-    max-width:32.5%!important;
-  }
-  .section-classifieds .view-classifieds .views-row-odd, .section-classifieds .view-classifieds .views-row-even, .page-galleries .view-gallery-reference .views-row-odd, .page-galleries .view-gallery-reference .views-row-even, .section-blogs #block-views-blogs-block-3 .views-row-odd, .section-blogs #block-views-blogs-block-3 .views-row-even, .section-news .view-id-news.view-display-id-page_2 .views-row-odd, .section-news .view-id-news.view-display-id-page_2 .views-row-even, .section-corporate-news .view-id-news.view-display-id-page_3 .views-row-odd, .section-corporate-news .view-id-news.view-display-id-page_3 .views-row-even, .section-videos .view-display-id-page_1 .views-row-odd, .section-videos .view-display-id-page_1 .views-row-even, .section-videos .view-display-id-page_2 .views-row-odd, .section-videos .view-display-id-page_2 .views-row-even, .section-corporate-polls .view-display-id-page_2 .views-row-odd, .section-corporate-polls .view-display-id-page_2 .views-row-even, .section-polls .view-display-id-page_3 .views-row-odd, .section-polls .view-display-id-page_3 .views-row-even, .section-etc-talks #block-views-videos-block-4 .views-row-odd, .section-etc-talks #block-views-videos-block-4 .views-row-even, .section-executive-messages #block-views-executive-updates-block-2 .views-row-odd, .section-executive-messages #block-views-executive-updates-block-2 .views-row-even {
-    max-width: 238px!important;
-  }
-  .front #awards_logos img {
-    width:91px!important;
-    height:90px!important;
-  }
-  #footer-copyright {
-    table td p {
-    padding: 0 10px;
-    }
-    table ul {
-      padding-left: 20px;
-    }
   }
 	#navigation,
 	#block-views-top-tools-block,
@@ -651,34 +628,8 @@ only screen and (                min-resolution: 2dppx) {
 	.front #block-views-home-page-blocks-zen-block-2.block.block-views {
 		min-width: 100%;
 	}
-    form#views-exposed-form-people-admin-public-page {
-    #edit-last-name-wrapper,
-    #edit-first-name-wrapper,
-    #edit-interests-wrapper,
-    #edit-skills-wrapper  {
-      width:49%;
-    }
-  }
-  form#views-exposed-form-people-admin-public-page {
-    #edit-title-wrapper,
-    #edit-ministry-wrapper,
-    #edit-city-wrapper {
-      width: 32.5%;
-      }
-  }
-  .section-employees .view-content .views-row, .view-people-admin .view-content .views-row {
-    margin-left:9px!important;
-  }
-  #views-exposed-form-people-admin-public-page .views-exposed-form .views-exposed-widget {
-    label {
-      display:initial;
-    }
-    .form-submit {
-      margin-top:0;
-    }
-  }
 }
-@media only screen and (min-width:980px) {// includes iPads horizontal
+@media only screen and (min-width:980px) {
   .not-front .new-activity-window #header.header {
     background: none !important;
   }
@@ -695,148 +646,14 @@ only screen and (                min-resolution: 2dppx) {
 		min-width: 820px;
 		max-width: 1280px; //container in top banner
 	}
-  .front #block-views-home-page-blocks-zen-block-2 {
-    }
-      .section-classifieds .view-classifieds .views-row-odd, .section-classifieds .view-classifieds .views-row-even, .page-galleries .view-gallery-reference .views-row-odd, .page-galleries .view-gallery-reference .views-row-even, .section-blogs #block-views-blogs-block-3 .views-row-odd, .section-blogs #block-views-blogs-block-3 .views-row-even, .section-news .view-id-news.view-display-id-page_2 .views-row-odd, .section-news .view-id-news.view-display-id-page_2 .views-row-even, .section-corporate-news .view-id-news.view-display-id-page_3 .views-row-odd, .section-corporate-news .view-id-news.view-display-id-page_3 .views-row-even, .section-videos .view-display-id-page_1 .views-row-odd, .section-videos .view-display-id-page_1 .views-row-even, .section-videos .view-display-id-page_2 .views-row-odd, .section-videos .view-display-id-page_2 .views-row-even, .section-corporate-polls .view-display-id-page_2 .views-row-odd, .section-corporate-polls .view-display-id-page_2 .views-row-even, .section-polls .view-display-id-page_3 .views-row-odd, .section-polls .view-display-id-page_3 .views-row-even, .section-etc-talks #block-views-videos-block-4 .views-row-odd, .section-etc-talks #block-views-videos-block-4 .views-row-even, .section-executive-messages #block-views-executive-updates-block-2 .views-row-odd, .section-executive-messages #block-views-executive-updates-block-2 .views-row-even {
-    max-width: 227px!important;
-  }
-    #footer {
-    width:initial!important;
-  }
-  #footer-copyright {
-    table td p {
-    padding: 0 10px;
-    }
-  }
-    form#views-exposed-form-people-admin-public-page {
-    #edit-last-name-wrapper,
-    #edit-first-name-wrapper,
-    #edit-interests-wrapper,
-    #edit-skills-wrapper  {
-      width:49%;
-    }
-  }
-  form#views-exposed-form-people-admin-public-page {
-    #edit-title-wrapper,
-    #edit-ministry-wrapper,
-    #edit-city-wrapper {
-      width: 32.5%;
-      }
-  }
-    #views-exposed-form-people-admin-public-page .views-exposed-form .views-exposed-widget {
-    label {
-      display:initial;
-    }
-    .form-submit {
-      margin-top:0;
-    }
-  } 
 }
-@media only screen and (width:768px) {//iPad Portrait only
-   #footer {
-     min-width:960px!important;
-   }
-}
-@media only screen and (width:1024px) {//iPad Horizontal only
-  #content.column {
-    width:960px;
-    margin:0 auto;
-  }
-}
+
 @media only screen and (max-width: 1240px) {
-  #page {
+    #page {
     min-width:960px;
   }
     .front #social-side,
     #block-block-45 { // show social sidebar only on wide screen view - 1240 or greater
         display: none !important;
     }
-}
-
-
-
-/* Mobile Menu Appearance */
-#block-atwork-mobile-atwork-mobile-menu-block #full_menu {
-  padding:20px 0 0 10px;
-}
-
-#block-atwork-mobile-atwork-mobile-menu-block {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-height: 56px;
-  overflow-y: scroll;
-  padding: 0;
-  background-color: #ECECEC;
-  background-image: url(/sites/all/themes/atwork_zen/images/atwork-logo-menu.png);
-  background-repeat: no-repeat;
-  background-position: center 5px;
-  z-index: 10000;
-  border-bottom: solid 8px #004B8D !important;
-}
-#block-atwork-mobile-atwork-mobile-menu-block i.fa.fa-bars {
-  font-size: 125%;
-}
-#block-atwork-mobile-atwork-mobile-menu-block i.fa.fa-bars:after {
-  content: " Menu";
-  font-family: atwork-font;
-  font-size: 125%;
-}
-#block-atwork-mobile-atwork-mobile-menu-block #full_menu #atwork_menu {
-  padding: 0;
-  margin: 0;
-  line-height: normal;
-}
-#block-atwork-mobile-atwork-mobile-menu-block .menu-title {
-  display: block;
-  padding: 8px;
-  margin: 0 25px 0 0;
-  border-bottom: solid 1px #A7A7A7;
-}
-
-#block-atwork-mobile-atwork-mobile-menu-block .menu-sub-title {
-  display: block;
-  padding: 8px;
-  margin-left: 25px;
-}
-#block-atwork-mobile-atwork-mobile-menu-block ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-#block-atwork-mobile-atwork-mobile-menu-block li a {
-  color: #000;
-  display: block;
-}
-li.atwork_menu_nested a {
-  display: block;
-  margin: 5px 25px;
-  padding: 5px;
-  border: solid 1px #CCC;
-}
-li.atwork_menu_nested a:hover {
-  background-color: #CCC;
-  text-decoration:none;
-}
-
-li.atwork_menu_top_level .menu-title i.fa.fa-plus,
-li.atwork_menu_top_level .menu-sub-title i.fa.fa-plus {
-  padding: 2px;
-  border: solid 1px #999;
-  color: #999;
-  background-color: none;
-}
-li.atwork_menu_top_level .menu-title:hover,
-li.atwork_menu_top_level .menu-sub-title:hover {
-  background-color: #FFF;
-}
-
-li.atwork_menu_top_level .menu-title i.fa.fa-minus,
-li.atwork_menu_top_level .menu-sub-title i.fa.fa-minus {
-  padding: 2px;
-  border: solid 1px #000;
-  background-color: #26669E;
-  color: #FFF;
 }
