@@ -11,7 +11,7 @@ $applicant_attending_body = <<<EOT
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     </head>
     <body id="mimemail-body" class="atwork-mail-default">
-        <p><img src="$image_source" height="100" width="100" align="middle"></p>
+        <center><img src="$image_source" height="100" width="100" align="middle"></center>
         <br />
         <p>Thank you for confirming your attendance for your Long Service Award (LSA) ceremony.  We have now received your RSVP information. </p>
         <p>If you have any questions relating to travel arrangements, pre-receptions, or reimbursement, please visit our <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility/policy">website</a>  or contact your workplace <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts">LSA contact</a>.  If your questions are related to the LSA ceremonies at Government House, please contact <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20question" target="_top">longserviceawards@gov.bc.ca</a>.</p>
@@ -58,7 +58,7 @@ $applicant_not_attending_body = <<<EOT
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     </head>
     <body id="mimemail-body" class="atwork-mail-default">
-        <p><img height="100" width="100" src="$image_source" align="middle"></p>
+        <center><img height="100" width="100" src="$image_source" align="middle"></center>
         <br />
         <p>Thank you for notifying us that you will <u>not</u> be attending this year’s Long Service Award (LSA) ceremony. </p>
         <p>Long Service Awards are presented the year the employee registers. <strong>Your award will be sent to your organization following the fall ceremonies, and your <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts" target="_blank">ministry/organization contact</a> will make the arrangements to have your award presented to you internally</strong>.</p>
