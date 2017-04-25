@@ -28,8 +28,8 @@ node/add/*',
     'roles' => array(),
     'themes' => array(
       'atwork_zen' => array(
-        'region' => 'pre_content',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'atwork_zen',
         'weight' => 8,
       ),
