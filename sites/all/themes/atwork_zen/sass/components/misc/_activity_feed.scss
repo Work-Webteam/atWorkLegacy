@@ -44,8 +44,8 @@
   .new-message-count {
     display: block;
     position: absolute;
-    top: 10px;
-    left: 125px;
+    top: 13px;
+    left: 102px;
     z-index: 100;
     width: 24px;
     height: 21px;
@@ -56,7 +56,7 @@
   #message-count-number {
     position: absolute;
     top: 2px;
-    left: 8px;
+    left: 0px;
     width: 100%;
     font-size: .9em;
     &:hover {
@@ -93,7 +93,7 @@
 #social-side {
   // start all Header items
   h2 {
-    position: absolute;
+    // position: absolute;
     left: 0;
     top: 0;
     z-index: 99;
@@ -101,6 +101,7 @@
   .block-header-inner {
     float: right;
     margin-top: -3px;
+    margin-right:12px;
   }
   .activity-filters-my,
   .activity-filters-all {
@@ -190,9 +191,9 @@
 
     // end feed-ad-space
 
-  .atwork-activity-block-container {
+/*  .atwork-activity-block-container {
     margin-top: 46px; // push down the container because the header is positioned absolutely
-  }
+  }*/
   #atwork-activity-form {
     .form-item {
       margin-top: 0.5em;
@@ -309,6 +310,7 @@
     .field-name-field-feed-like-button {
       width: 130px; //needed because ajax changes mean the reload applies the styling twice
       font-family: Arial, sans-serif;
+      left:35%;
       i:before {
         padding-right: 0.2em;
       }
@@ -577,7 +579,13 @@
     }
   }
 }
-
+// Post as Employee News Selector Toggle
+.field-name-field-post-as-employee-news label.option {
+  display:inline!important;
+}
+.toggle-com-button[value="Comment"] ~ .field-name-field-post-as-employee-news {
+  display: none!important; // Hides the option is the value of the toggle is Comment
+}
 .reply-body,
 .reply-links {
   padding: 0.2em;
