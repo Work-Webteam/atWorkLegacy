@@ -8,6 +8,10 @@
  */
 
 
+/** Utility functions for loading IP/Country DB from external sources */
+module_load_include('inc', 'ip2country');
+
+
 /**
  * Need 1 class for unit tests, 1 class for functional tests
  * 1 function for DB tests because filling takes so long
@@ -47,7 +51,7 @@ class ip2countryTestCase extends DrupalWebTestCase {
     //
     // Set a run-time long enough so the script won't break
     //
-    $this->timeLimit = 15 * 60;  // 15 minutes!
+    $this->timeLimit = 3 * 60;  // 3 minutes!
     drupal_set_time_limit($this->timeLimit);
 
     // Turn off automatic DB download when module is installed.
@@ -67,7 +71,7 @@ class ip2countryTestCase extends DrupalWebTestCase {
       t('Database is empty.')
     );
 
-    // Create and log in our test user.
+    // Create our test users.
     $this->admin_user = $this->drupalCreateUser(array(
       'administer site configuration',
       'access administration pages',
@@ -92,14 +96,24 @@ class ip2countryTestCase extends DrupalWebTestCase {
     // Real working IPs
     $ip_array = array(
       '125.29.33.201', '212.58.224.138',
-      '184.51.240.110', '210.87.9.66'
+      '184.51.240.110', '210.87.9.66',
+      '93.184.216.119'
     );
     foreach ($ip_array as $ip_address) {
+      // Test dotted quad string form of address
       $country = ip2country_get_country($ip_address);
       $this->assertTrue(
         $country,
         t('@ip found, resolved to @country.', array('@ip' => $ip_address, '@country' => $country))
       );
+
+      // Test 32-bit unsigned long form of address
+      $usl_country = ip2country_get_country(ip2long($ip_address));
+      $this->assertTrue(
+        $usl_country == $country,
+        t('Unsigned long lookup found same country code.')
+      );
+
       $this->pass(t('Valid IP found in database.'));
     }
 
@@ -211,14 +225,14 @@ class ip2countryTestCase extends DrupalWebTestCase {
     $this->drupalGet('admin/reports/dblog');
     $this->assertText(t('Recent log messages'));
     $this->assertText('ip2country');
-    $this->assertLink(t('Database updated from @rir server.', array('@rir' => strtoupper($rir))));
+    $this->assertLink(t('Manual database update from @rir server.', array('@rir' => strtoupper($rir))));
 
     // Drill down
-    $this->clickLink(t('Database updated from @rir server.', array('@rir' => strtoupper($rir))));
+    $this->clickLink(t('Manual database update from @rir server.', array('@rir' => strtoupper($rir))));
     $this->assertText(t('Details'));
     $this->assertText('ip2country');
-    $this->assertText(t('Database updated from @rir server.', array('@rir' => strtoupper($rir))));
-    
+    $this->assertText(t('Manual database update from @rir server.', array('@rir' => strtoupper($rir))));
+
     $this->drupalLogout();
   }
 

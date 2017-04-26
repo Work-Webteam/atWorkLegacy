@@ -46,7 +46,7 @@ function ip2country_schema() {
         'not null'    => TRUE,
       ),
       'registry' => array(
-        'description' => 'Regional Internet Resgistry',
+        'description' => 'Regional Internet Registry',
         'type'        => 'char',
         'length'      => 10,
         'not null'    => TRUE,
@@ -94,6 +94,7 @@ function ip2country_install() {
   // leave the database table empty on install.
   //
   if (variable_get('ip2country_populate_database_on_install', TRUE)) {
+    module_load_include('inc', 'ip2country');
     ip2country_update_database();
   }
 }
@@ -159,17 +160,21 @@ function ip2country_update_1() {
   variable_del('uc_ip2country_test_country');
   variable_del('uc_ip2country_rir');
   variable_del('uc_ip2country_last_update');
+  variable_del('uc_ip2country_last_update_rir');
   variable_del('uc_ip2country_update_interval');
   variable_del('uc_ip2country_update_database');
   variable_del('uc_ip2country_watchdog');
+  variable_del('uc_ip2country_md5_checksum');
 
   return $ret;
 }
 
 
 /**
- * Drop ip_range_date column as it is never used and just
- * takes up database space and processing time.
+ * Drop ip_range_date column.
+ *
+ * ip_range_date it is never used and just takes up database space and
+ * processing time.
  */
 function ip2country_update_2() {
   $ret = array();
