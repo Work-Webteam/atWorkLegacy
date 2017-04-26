@@ -1,10 +1,10 @@
 <?php
 
-
 /**
- * Defines the classes necessary for a True/False quiz.
- *
  * @file
+ * TrueFalse classes.
+ *
+ * This module uses the question interface to define the True/False question type.
  */
 
 /**
@@ -13,72 +13,53 @@
 class TrueFalseQuestion extends QuizQuestion {
 
   /**
-   * Implementation of saveNodeProperties
+   * Implementation of saveNodeProperties().
    *
-   * @see QuizQuestion#saveNodeProperties($is_new)
+   * @see QuizQuestion::saveNodeProperties()
    */
   public function saveNodeProperties($is_new = FALSE) {
-    if (!isset($this->node->feedback)) {
-      $this->node->feedback = '';
-    }
-    if ($is_new || $this->node->revision == 1) {
-      $id = db_insert('quiz_truefalse_node')
-        ->fields(array(
-          'nid' => $this->node->nid,
-          'vid' => $this->node->vid,
-          'correct_answer' => (int) $this->node->correct_answer,
-          'feedback' => $this->node->feedback,
-        ))
-        ->execute();
-    }
-    else {
-      db_update('quiz_truefalse_node')
-        ->fields(array(
-          'correct_answer' => (int) $this->node->correct_answer,
-          'feedback' => $this->node->feedback,
-        ))
-        ->condition('nid', $this->node->nid)
-        ->condition('vid', $this->node->vid)
-        ->execute();
-    }
+    db_merge('quiz_truefalse_node')->
+      key(array(
+        'nid' => $this->node->nid,
+        'vid' => $this->node->vid,
+      ))
+      ->fields(array(
+        'nid' => $this->node->nid,
+        'vid' => $this->node->vid,
+        'correct_answer' => $this->node->correct_answer,
+      ))
+      ->execute();
   }
 
   /**
-   * Implementation of validateNode
+   * Implementation of validateNode().
    *
-   * @see QuizQuestion#validateNode($form)
+   * @see QuizQuestion::validateNode()
    */
   public function validateNode(array &$form) {
     // This space intentionally left blank. :)
   }
 
   /**
-   * Implementation of delete
+   * Implementation of delete().
    *
-   * @see QuizQuestion#delete($only_this_version)
+   * @see QuizQuestion::delete()
    */
   public function delete($only_this_version = FALSE) {
-    parent::delete($only_this_version);
-
-    $delete_ans = db_delete('quiz_truefalse_user_answers');
-    $delete_ans->condition('question_nid', $this->node->nid);
-
     $delete_node = db_delete('quiz_truefalse_node');
     $delete_node->condition('nid', $this->node->nid);
-
     if ($only_this_version) {
-      $delete_ans->condition('question_vid', $this->node->vid);
       $delete_node->condition('vid', $this->node->vid);
     }
-
-    $delete_ans->execute();
     $delete_node->execute();
+
+    parent::delete($only_this_version);
   }
 
   /**
-   * Implementation of getNodeProperties
+   * Implementation of getNodeProperties().
    *
-   * @see QuizQuestion#getNodeProperties()
+   * @see QuizQuestion::getNodeProperties()
    */
   public function getNodeProperties() {
     if (isset($this->nodeProperties)) {
@@ -86,7 +67,7 @@ class TrueFalseQuestion extends QuizQuestion {
     }
     $props = parent::getNodeProperties();
 
-    $res_a = db_query('SELECT correct_answer, feedback FROM {quiz_truefalse_node} WHERE nid = :nid AND vid = :vid', array(':nid' => $this->node->nid, ':vid' => $this->node->vid))->fetchAssoc();
+    $res_a = db_query('SELECT correct_answer FROM {quiz_truefalse_node} WHERE nid = :nid AND vid = :vid', array(':nid' => $this->node->nid, ':vid' => $this->node->vid))->fetchAssoc();
 
     if (is_array($res_a)) {
       $props = array_merge($props, $res_a);
@@ -96,9 +77,9 @@ class TrueFalseQuestion extends QuizQuestion {
   }
 
   /**
-   * Implementation of getNodeView
+   * Implementation of getNodeView().
    *
-   * @see QuizQuestion#getNodeView()
+   * @see QuizQuestion::getNodeView()
    */
   public function getNodeView() {
     $content = parent::getNodeView();
@@ -109,54 +90,60 @@ class TrueFalseQuestion extends QuizQuestion {
     }
     else {
       $content['answers'] = array(
-      '#markup' => '<div class="quiz-answer-hidden">' . t('Answer hidden') . '</div>',
-      '#weight' => 2,
+        '#markup' => '<div class="quiz-answer-hidden">' . t('Answer hidden') . '</div>',
+        '#weight' => 2,
       );
     }
     return $content;
   }
 
   /**
-   * Implementation of getAnsweringForm
+   * Implementation of getAnsweringForm().
    *
-   * @see QuizQuestion#getAnsweringForm($form_state, $rid)
+   * @see QuizQuestion::getAnsweringForm()
    */
-  public function getAnsweringForm(array $form_state = NULL, $rid) {
-    $form = parent::getAnsweringForm($form_state, $rid);
-    //$form['#theme'] = 'truefalse_answering_form';
-
-    // 'tries' is unfortunately required by quiz.module
-    $form['tries'] = array(
+  public function getAnsweringForm(array $form_state = NULL, $result_id) {
+    $element = parent::getAnsweringForm($form_state, $result_id);
+    $element += array(
       '#type' => 'radios',
       '#title' => t('Choose one'),
       '#options' => array(
         1 => t('True'),
         0 => t('False')
       ),
-      '#default_value' => NULL, // prevent default value set to NULL
     );
 
-    if (isset($rid)) {
-      $response = new TrueFalseResponse($rid, $this->node);
+    if (isset($result_id)) {
+      $response = new TrueFalseResponse($result_id, $this->node);
       $default = $response->getResponse();
-      $form['tries']['#default_value'] = is_null($default) ? NULL : $default;
+      $element['#default_value'] = is_null($default) ? NULL : $default;
     }
-    return $form;
+
+    return $element;
   }
 
   /**
-   * Implementation of getBodyFieldTitle
+   * Question response validator.
+   */
+  public function getAnsweringFormValidate(array &$element, &$value) {
+    if (is_null($value)) {
+      form_error($element, t('You must provide an answer.'));
+    }
+  }
+
+  /**
+   * Implementation of getBodyFieldTitle().
    *
-   * @see QuizQuestion#getBodyFieldTitle()
+   * @see QuizQuestion::getBodyFieldTitle()
    */
   public function getBodyFieldTitle() {
     return t('True/false statement');
   }
 
   /**
-   * Implementation of getCreationForm
+   * Implementation of getCreationForm().
    *
-   * @see QuizQuestion#getCreationForm($form_state)
+   * @see QuizQuestion::getCreationForm()
    */
   public function getCreationForm(array &$form_state = NULL) {
     $form['correct_answer'] = array(
@@ -171,44 +158,30 @@ class TrueFalseQuestion extends QuizQuestion {
       '#weight' => -4,
       '#description' => t('Choose if the correct answer for this question is "true" or "false".')
     );
-    $form['feedback_fields'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Feedback Settings'),
-      '#description' => t('Settings pertaining to feedback given along with results.'),
-      '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
-      '#weight' => -3,
-    );
-    $form['feedback_fields']['feedback'] = array(// @todo: Does this make sense?
-      '#type' => 'textarea',
-      '#title' => t('Feedback Text'),
-      '#description' => t('Text to be displayed when the results are displayed'),
-      '#rows' => 5,
-      '#cols' => 60,
-      '#required' => FALSE,
-      '#default_value' => isset($this->node->feedback) ? $this->node->feedback : '',
-    );
     return $form;
   }
 
   /**
-   * Implementation of getMaximumScore
+   * Implementation of getMaximumScore().
    *
-   * @see QuizQuestion#getMaximumScore()
+   * @see QuizQuestion::getMaximumScore()
    */
   public function getMaximumScore() {
     return 1;
   }
 
-
   /**
-   * Get the answer to this question.
+   * Get the correct answer to this question.
    *
    * This is a utility function. It is not defined in the interface.
+   *
+   * @return bool
+   *   Boolean indicating if the correct answer is TRUE or FALSE
    */
   public function getCorrectAnswer() {
     return db_query('SELECT correct_answer FROM {quiz_truefalse_node} WHERE nid = :nid AND vid = :vid', array(':nid' => $this->node->nid, ':vid' => $this->node->vid))->fetchField();
   }
+
 }
 
 /**
@@ -217,42 +190,42 @@ class TrueFalseQuestion extends QuizQuestion {
 class TrueFalseResponse extends QuizQuestionResponse {
 
   /**
-   * Constructor
+   * Constructor.
+   *
+   * @param int $result_id
+   *   The result ID for the user's result set. There is one result ID per time
+   *   the user takes a quiz.
+   * @param stdClass $question_node
+   *   The question node.
+   * @param mixed $values
+   *   Array with values
    */
   public function __construct($result_id, stdClass $question_node, $answer = NULL) {
     parent::__construct($result_id, $question_node, $answer);
     if (!isset($answer)) {
-      $r = $this->getCorrectAnswer();
+      // Get from DB.
+      $r = $this->getUserAnswer();
       if (!empty($r)) {
         $this->answer = $r->answer;
         $this->score = $r->score;
       }
     }
     else {
+      // Load from input.
       $this->answer = $answer;
     }
   }
 
   /**
-   * Implementation of isValid
+   * Implementation of save().
    *
-   * @see QuizQuestionResponse#isValid()
-   */
-  public function isValid() {
-    return ($this->answer === NULL) ? t('You must provide an answer') : TRUE;
-  }
-
-  /**
-   * Implementation of save
-   *
-   * @see QuizQuestionResponse#save()
+   * @see QuizQuestionResponse::save()
    */
   public function save() {
-    db_insert('quiz_truefalse_user_answers')
+    db_merge('quiz_truefalse_user_answers')
+      ->key(array('result_answer_id' => $this->result_answer_id))
       ->fields(array(
-        'question_nid' => $this->question->nid,
-        'question_vid' => $this->question->vid,
-        'result_id' => $this->rid,
+        'result_answer_id' => $this->result_answer_id,
         'answer' => (int) $this->answer,
         'score' => (int) $this->getScore(),
       ))
@@ -260,22 +233,20 @@ class TrueFalseResponse extends QuizQuestionResponse {
   }
 
   /**
-   * Implementation of delete
+   * Implementation of delete().
    *
-   * @see QuizQuestionResponse#delete()
+   * @see QuizQuestionResponse::delete()
    */
   public function delete() {
     db_delete('quiz_truefalse_user_answers')
-      ->condition('question_nid', $this->question->nid)
-      ->condition('question_vid', $this->question->vid)
-      ->condition('result_id', $this->rid)
+      ->condition('result_answer_id', $this->result_answer_id)
       ->execute();
   }
 
   /**
-   * Implementation of score
+   * Implementation of score().
    *
-   * @see QuizQuestionResponse#score()
+   * @see QuizQuestionResponse::score()
    */
   public function score() {
     $tfQuestion = new TrueFalseQuestion($this->question);
@@ -283,63 +254,81 @@ class TrueFalseResponse extends QuizQuestionResponse {
   }
 
   /**
-   * Implementation of getResponse
+   * Implementation of getResponse().
    *
-   * @see QuizQuestionResponse#getResponse()
+   * @see QuizQuestionResponse::getResponse()
    */
   public function getResponse() {
-    if (!isset($this->answer)) {
-      $correct_answer = $this->getCorrectAnswer();
-      $this->answer = isset($correct_answer->answer) ? $correct_answer->answer : NULL;
-    }
     return $this->answer;
   }
 
   /**
-   * Implementation of getCorrectAnswer
+   * Get the user's answer from the database.
+   *
+   * @return array
+   *   An array containing both the answer and the score
    */
-  public function getCorrectAnswer() {
-    return db_query('SELECT answer, score FROM {quiz_truefalse_user_answers} WHERE question_vid = :qvid AND result_id = :rid', array(':qvid' => $this->question->vid, ':rid' => $this->rid))->fetch();
+  public function getUserAnswer() {
+    if (isset($this->result_answer_id)) {
+      return db_query('SELECT answer, score FROM {quiz_truefalse_user_answers} WHERE result_answer_id = :raid', array(':raid' => $this->result_answer_id))->fetch();
+    }
   }
 
   /**
-   * Implementation of getReportFormResponse
+   * Implementation of getFeedbackValues().
    *
-   * @see QuizQuestionResponse#getReportFormResponse($showpoints, $showfeedback, $allow_scoring)
+   * @see QuizQuestionResponse::getFeedbackValues()
    */
-  public function getReportFormResponse($showpoints = TRUE, $showfeedback = TRUE, $allow_scoring = FALSE) {
-    if (empty($this->question->answers)) {
-      return array(
-        '#markup' => t('Missing question.'),
-      );
+  public function getFeedbackValues() {
+
+    $answer = $this->question->answers[0]['answer'];
+    if (!is_null($answer)) {
+      $answer = intval($answer);
     }
-    $metadata = array();
+    $correct_answer = intval($this->question->correct_answer);
+
     $data = array();
-    // Build the question answers header (add blank space for IE).
-    if ($showpoints) {
-      $metadata[] = t('Correct Answer');
-    }
-    $metadata[] = t('User answer');
-    if ($showfeedback && !empty($this->question->feedback)) {
-      $metadata[] = 'Feedback';
-    }
-
-    $answer = $this->question->answers[0];
-    $correct_answer = $answer['is_correct'] ? $answer['answer'] : !$answer['answer'];
-    $user_answer = $answer['answer'];
-
-    if ($showpoints) {
-      $data[0]['correct_answer'] = ($correct_answer ? t('True') : t('False'));
-    }
-    $data[0]['user_answer'] = (($user_answer === NULL) ? '' : ($user_answer ? t('True') : t('False')));
-
-    if ($showfeedback && !empty($this->question->feedback)) {
-      $data[0]['feedback'] = check_markup($this->question->feedback, $this->getFormat());
-    }
-
-    // Return themed output
-    return array(
-      '#markup' => theme('truefalse_response', array('metadata' => $metadata, 'data' => $data)),
+    $data[] = array(
+      'choice' => t('True'),
+      'attempt' => $answer === 1 ? quiz_icon('selected') : '',
+      'correct' => $answer === 1 ? quiz_icon($correct_answer ? 'correct' : 'incorrect') : '',
+      'score' => intval($correct_answer === 1 && $answer === 1),
+      'answer_feedback' => '',
+      'solution' => $correct_answer === 1 ? quiz_icon('should') : '',
     );
+
+    $data[] = array(
+      'choice' => t('False'),
+      'attempt' => $answer === 0 ? quiz_icon('selected') : '',
+      'correct' => $answer === 0 ? (quiz_icon(!$correct_answer ? 'correct' : 'incorrect')) : '',
+      'score' => intval($correct_answer === 0 && $answer === 0),
+      'answer_feedback' => '',
+      'solution' => $correct_answer === 0 ? quiz_icon('should') : '',
+    );
+
+    return $data;
   }
+
+  /**
+   * Get answers for a question in a result.
+   *
+   * This static method assists in building views for the mass export of
+   * question answers.
+   *
+   * @see views_handler_field_prerender_list for the expected return value.
+   */
+  public static function viewsGetAnswers(array $result_answer_ids = array()) {
+    $items = array();
+
+    $sql = "SELECT * FROM {quiz_node_results_answers} qnra
+      INNER JOIN {quiz_truefalse_user_answers} tfua on (qnra.result_answer_id = tfua.result_answer_id)
+      WHERE qnra.result_answer_id in (:result_answer_id)";
+    $result = db_query($sql, array(':result_answer_id' => $result_answer_ids));
+
+    while ($row = $result->fetch()) {
+      $items[$row->result_id][] = array('answer' => $row->answer ? t('True') : t('False'));
+    }
+    return $items;
+  }
+
 }
