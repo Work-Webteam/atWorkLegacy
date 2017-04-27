@@ -1732,7 +1732,7 @@ function atwork_lsa_features_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         6 => 'None',
-        1 => 'Severe Food Allergy',
+        1 => 'Food Allergy',
         2 => 'Deaf or Hard of Hearing',
         3 => 'Visual Impairment',
         4 => 'Wheelchair/Walker Accessibility',
