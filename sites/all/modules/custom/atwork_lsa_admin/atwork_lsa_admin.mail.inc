@@ -57,7 +57,7 @@ $applicant_body = <<<EOT
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 
-<body id="mimemail-body" class="atwork-mail-default">
+<body >
 <p><strong>**DO NOT REPLY TO THIS EMAIL – PLEASE FOLLOW THE INSTRUCTIONS BELOW TO RSVP.**</strong></p>
 <p> Your electronic invitation with RSVP button should appear below. If you are having trouble seeing the image in this email, please ensure you click <strong>“download images”</strong>. </p>
 <p> To confirm your attendance OR to confirm you are unable to attend, <strong>please click on the <a href="$base_url/node/$nid">RSVP button</a></strong> in the invitation below.</p>
