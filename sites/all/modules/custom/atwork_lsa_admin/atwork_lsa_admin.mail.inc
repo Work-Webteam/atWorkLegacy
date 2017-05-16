@@ -5,8 +5,14 @@ $applicant_first_name =  $lsa_node->field_lsa_first_name['und'][0]['safe_value']
 //$applicant_first_name = ucfirst(strtolower($applicant_first_name));
 $applicant_last_name = $lsa_node->field_lsa_last_name['und'][0]['safe_value'];
 //$applicant_last_name = ucfirst(strtolower($applicant_last_name));
-$applicant_full_name = $applicant_first_name . ' ' . $applicant_last_name;
+if(isset($lsa_node=>field_lsa_middle_name['und'][0]['safe_value']) && $lsa_node=>field_lsa_middle_name['und'][0]['safe_value']){
+  $applicant_middle_name = $lsa_node=>field_lsa_middle_name['und'][0]['safe_value'] . ' ';
+} else {
+  $applicant_middle_name = '';
+}
+$applicant_full_name = $applicant_first_name . ' ' . $applicant_middle_name . $applicant_last_name;
 // Need to shrink font if the name is too long
+/*
 switch(true){
   case (strlen($applicant_full_name)<= 27):
     $name_font_size = '21pt';
@@ -23,6 +29,7 @@ switch(true){
   default:
     $name_font_size = '8pt';
 }
+*/
 // Get ceremony date label value
 //$all_fields = field_info_fields();
 $list_of_values = list_allowed_values(field_info_field('field_lsa_ceremonydate'));
