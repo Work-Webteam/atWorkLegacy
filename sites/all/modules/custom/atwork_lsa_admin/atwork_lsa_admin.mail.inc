@@ -5,8 +5,8 @@ $applicant_first_name =  $lsa_node->field_lsa_first_name['und'][0]['safe_value']
 //$applicant_first_name = ucfirst(strtolower($applicant_first_name));
 $applicant_last_name = $lsa_node->field_lsa_last_name['und'][0]['safe_value'];
 //$applicant_last_name = ucfirst(strtolower($applicant_last_name));
-if(isset($lsa_node=>field_lsa_middle_name['und'][0]['safe_value']) && $lsa_node=>field_lsa_middle_name['und'][0]['safe_value']){
-  $applicant_middle_name = $lsa_node=>field_lsa_middle_name['und'][0]['safe_value'] . ' ';
+if(isset($lsa_node->field_lsa_middle_name['und'][0]['safe_value']) && $lsa_node->field_lsa_middle_name['und'][0]['safe_value']){
+  $applicant_middle_name = $lsa_node->field_lsa_middle_name['und'][0]['safe_value'] . ' ';
 } else {
   $applicant_middle_name = '';
 }
