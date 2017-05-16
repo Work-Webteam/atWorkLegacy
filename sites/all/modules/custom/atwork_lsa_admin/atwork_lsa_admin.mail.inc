@@ -68,8 +68,8 @@ $applicant_body = <<<EOT
     <tr>
       <td bgcolor="#E7E7E7" width="750" height="800" valign="top" BACKGROUND="$invite" style="width:750px;height:800px;" ><a href="$base_url/node/$nid">
 <!--[if gte mso 9]>
-  <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:800px;" href="$base_url/node/$nid" >
     <v:fill type="frame" src="$invite" color="##FFFFFF" style="width:750px;height:800px;" />
+    <v:image xmlns:v="urn:schemas-microsoft-com:vml" id="theImage" style='behavior: url(#default#VML); display:inline-block;position:absolute; height:800px; width:750px;top:0;left:0;border:0;z-index:1;' src="$invite"/>
     <v:textbox inset="0,0,0,0">
   <![endif]-->
         <div id="main">
