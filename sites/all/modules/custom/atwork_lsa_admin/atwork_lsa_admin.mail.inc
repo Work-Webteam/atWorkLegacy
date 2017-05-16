@@ -67,9 +67,7 @@ $applicant_body = <<<EOT
 <table width="750" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always" >
   <tbody>
     <tr>
-     <td class="yhoofx bg_cov owaoff" bgcolor="#000001" valign="top" background="$invite_sized" 
-height="auto" style="background: url($invite) 0 0 / cover; background-size: 100%; 
-background-repeat:no-repeat !important; background-position:center top; max-width:750px;" ><a href="$base_url/node/$nid">
+     <td bgcolor="#E7E7E7" max-width="750px" valign="top" BACKGROUND="$invite" style="width:100%;height:100%;background-size:100%;" ><a href="$base_url/node/$nid">
 <!--[if gte mso 9]>
   <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:800px;" href="$base_url/node/$nid" >
     <v:fill type="frame" src="$invite" color="##FFFFFF" style="width:750px;height:800px;" />
