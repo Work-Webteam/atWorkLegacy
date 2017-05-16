@@ -68,7 +68,7 @@ $applicant_body = <<<EOT
     <tr>
      <td class="yhoofx bg_cov owaoff" bgcolor="#000001" valign="top" background="$invite" 
 height="auto" style="background: url($invite) 0 0 / cover; background-size: 100%; 
-background-repeat:no-repeat !important; background-position:center top;" ><a href="$base_url/node/$nid">
+background-repeat:no-repeat !important; background-position:center top; max-width:750px;" ><a href="$base_url/node/$nid">
 <!--[if gte mso 9]>
   <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:800px;" href="$base_url/node/$nid" >
     <v:fill type="frame" src="$invite" color="##FFFFFF" style="width:750px;height:800px;" />
