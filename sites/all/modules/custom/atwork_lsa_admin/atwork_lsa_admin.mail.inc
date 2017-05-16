@@ -72,13 +72,13 @@ $applicant_body = <<<EOT
                 <td height="290"><p>&nbsp;</p></td>
               </tr>
               <tr>
-                <td height="60" align="center" valign="middle" style="font-size: 18pt; color: #333333; text-align: center; font-family: Times; font-weight: bold; "><strong>$applicant_full_name</strong></td>
+                <td height="60" align="center" valign="middle" style="font-size: 18pt; color: #333333; text-align: center; font-family: Times; font-weight: bold; "><strong><b>$applicant_full_name</b></strong></td>
               </tr>
               <tr>
                 <td height="30"><p>&nbsp;</p></td>
               </tr>
               <tr>
-                <td height="60" align="center" valign="middle" style="font-size: 18pt; color: #333333; text-align: center; font-family: Times; font-weight: bold;"><strong>$ceremony_date</strong></td>
+                <td height="60" align="center" valign="middle" style="font-size: 18pt; color: #333333; text-align: center; font-family: Times; font-weight: bold;"><strong><b>$ceremony_date</b></strong></td>
               </tr>
               <tr>
                 <td height="20"><p>&nbsp;</p></td>
