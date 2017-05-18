@@ -79,7 +79,7 @@ $applicant_body = <<<EOT
                 <td>
                 </td>
               <tr>
-                <td height="100"><p>&nbsp;</p>
+                <td height="290"><p>&nbsp;</p>
                 </td>
               </tr>
               <tr>
