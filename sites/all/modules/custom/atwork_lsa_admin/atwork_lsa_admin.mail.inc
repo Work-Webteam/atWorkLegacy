@@ -69,7 +69,7 @@ $applicant_body = <<<EOT
     <tr>
      <td bgcolor="#E7E7E7" max-width="750" max-height="886" valign="top" BACKGROUND="$invite_sized" ><a href="$base_url/node/$nid">
 <!--[if gte mso 9]>
-  <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:886px;" href="$base_url/node/$nid" >
+  <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:886px;top:10pt;" href="$base_url/node/$nid" >
     <v:fill type="frame" src="$invite_sized" color="#FFFFFF" />
     <v:textbox inset="0,0,0,0">
   <![endif]-->
@@ -78,10 +78,6 @@ $applicant_body = <<<EOT
             <tbody>
               <tr>
                 <td height="100"><p>&nbsp;</p>
-                <!--[if gte mso 9]>
-                  <v:rect xmlns:v="urn:schemas-microsoft-com:vml"  fill="true" stroke="false" style="width:750px;height:100px;">
-                  </v:rect>
-                <![endif]-->
                 </td>
               </tr>
               <tr>
