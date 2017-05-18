@@ -70,9 +70,10 @@ $applicant_body = <<<EOT
      <td bgcolor="#E7E7E7" max-width="750" max-height="886" valign="top" BACKGROUND="$invite_sized" ><a href="$base_url/node/$nid">
 <!--[if gte mso 9]>
   <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:886px;top:10pt;" href="$base_url/node/$nid" >
-    <v:fill type="frame" src="$invite_sized" color="#FFFFFF" />
-    <v:textbox inset="0,0,0,0">
-  <![else]>
+  <v:fill type="frame" src="$invite_sized" color="#FFFFFF" />
+  <v:textbox inset="0,0,0,0">
+<![endif]-->
+  <!--[if !mso 9]>
         <div id="main">
           <table width="750" height="886" border="0" align="center" cellpadding="0" cellspacing="0">
             <tbody>
