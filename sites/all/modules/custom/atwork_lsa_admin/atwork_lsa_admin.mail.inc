@@ -77,7 +77,7 @@ $applicant_body = <<<EOT
           <table width="750" height="800" border="0" align="center" cellpadding="0" cellspacing="0">
             <tbody>
               <tr>
-                <td height="290"><p>&nbsp;</p></td>
+                <td height="125"><p>&nbsp;</p></td>
               </tr>
               <tr>
                 <td height="60" align="center" valign="middle" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; "><strong>$applicant_full_name</strong></td>
