@@ -74,7 +74,7 @@ $applicant_body = <<<EOT
   <tbody>
     <tr>
      <td height="800" width="750" bgcolor="#cccccc" >
-      <div style="background: url($invite); position:absolute; height:800px; width:750px;top:0;left:0;border:0;z-index:1;">
+      <div background="$invite"; style="position:absolute; height:800px; width:750px;top:0;left:0;border:0;z-index:1;"></div>
 <!--[if gte mso 9]>
 <v:image xmlns:v="urn:schemas-microsoft-com:vml" id="theImage" style='behavior: url(#default#VML); display:inline-block;position:absolute; height:800px; width:750px;top:0;left:0;border:0;z-index:1;' src="$invite"/>
 <v:shape xmlns:v="urn:schemas-microsoft-com:vml" id="theText" style='behavior: url(#default#VML); display:inline-block;position:absolute; height:800px; width:750px;top:-5;left:-10;border:0;z-index:2;'>
