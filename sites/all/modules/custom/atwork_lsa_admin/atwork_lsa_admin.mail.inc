@@ -61,8 +61,6 @@ $applicant_body = <<<EOT
     max-width:750px;
     max-height:800px;
   }
-
-
 </style>
 </head>
 
