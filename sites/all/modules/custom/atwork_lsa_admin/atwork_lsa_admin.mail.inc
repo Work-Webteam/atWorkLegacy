@@ -67,14 +67,14 @@ $applicant_body = <<<EOT
 <table border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always;" >
   <tbody>
     <tr>
-     <td height="800" width="750" bgcolor="#cccccc">
+     <td height="800" width="750" bgcolor="#cccccc" background="$invite">
 <!--[if gte mso 9]>
 <v:image xmlns:v="urn:schemas-microsoft-com:vml" id="theImage" style='behavior: url(#default#VML); display:inline-block;position:absolute; height:800px; width:750px;top:0;left:0;border:0;z-index:1;' src="$invite"/>
 <v:shape xmlns:v="urn:schemas-microsoft-com:vml" id="theText" style='behavior: url(#default#VML); display:inline-block;position:absolute; height:800px; width:750px;top:-5;left:-10;border:0;z-index:2;'>
 <div>
 <![endif]-->
 <!-- This is where you nest a table with the content that will float over the image -->
-<table width="600" cellpadding="0" cellspacing="0" border="0">
+<table width="750" cellpadding="0" cellspacing="0" border="0">
 <tr>
 <td width="750" height="800" valign="top">
 Insert content here, including additional nested tables.
