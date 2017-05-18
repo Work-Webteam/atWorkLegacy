@@ -67,6 +67,7 @@ $applicant_body = <<<EOT
 <table width="720" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always"  >
   <tbody >
     <tr style ="max-width:720px; max-height:800px">
+      <td style="max-width:100%;height:auto;"><a href="$base_url/node/$nid">
   <!--[if gte mso 9]>
   <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:720px;height:800px;">
     <v:fill type="tile" src="https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_Invite_complete.jpg" color="#7bceeb" />
