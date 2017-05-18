@@ -80,6 +80,16 @@ $applicant_body = <<<EOT
                 <td>
                 <!--[if gte mso 9]>
                     <p style="margin:0;height:100px;"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
+                    <p style="margin:0;height:100px;"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
+                    <p style="margin:0;height:100px;"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
+                    <p style="margin:0;height:100px;"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
+                    <p style="margin:0;height:100px;"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
+                    <p style="margin:0;height:100px;"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
+                    <p style="margin:0;height:100px;"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
+                    <p style="margin:0;height:100px;"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
+                    <p style="margin:0;height:100px;"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
+                    <p style="margin:0;height:100px;"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
+                    
                 <![endif]-->
                 </td>
               <tr>
