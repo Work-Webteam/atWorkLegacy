@@ -73,7 +73,7 @@ $applicant_body = <<<EOT
   <v:fill type="frame" src="$invite_sized" color="#FFFFFF" />
   <v:textbox inset="0,0,0,0">
 <![endif]-->
-  <!--[if !mso 9]>
+  <!--[if !mso]>
         <div id="main">
           <table width="750" height="886" border="0" align="center" cellpadding="0" cellspacing="0">
             <tbody>
