@@ -53,8 +53,8 @@ $invite_sized = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_720x800.jpg";
 
 $applicant_subject = t('Your Long Service Awards invitation is enclosed – please RSVP using the clickable button');
 $applicant_body = <<<EOT
-<html>
-<head>
+<html xmlns: v="urn:schemas-microsoft.com:vml">
+<head v\:* { behavior: url(#default#VML); display: inline-block;>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 
@@ -65,14 +65,12 @@ $applicant_body = <<<EOT
 <p style = "page-break-after:always">If you are retired, or unable to access the RSVP link below – please contact us at <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20link" target="_top">LongServiceAwards@gov.bc.ca</a>.</p>
 <p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p><br />
 <table width="720" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always"  >
-  <tbody BACKGROUND="$invite" >
+  <tbody >
     <tr style ="max-width:720px; max-height:800px">
-     <td bgcolor="#E7E7E7" valign="top" style="width:720px !important;height:800px !important;background-size:100%;max-width:720px; max-height:800px" ><a href="$base_url/node/$nid">
-     <!--[if gte mso 9]>
-  <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:800px;" href="$base_url/node/$nid" >
-    <v:fill type="frame" src="$invite" color="#FFFFFF" style="width:750px;height:800px;" />
-    <v:textbox inset="0,0,0,0">
-  <![endif]-->
+      <td><a href="$base_url/node/$nid">
+      <!--[if gte vml 1]>
+        <v:image style='width: 720px; height: 800px; position: absolute; top: 0; left: 0; border: 0; z-index: -1;' src="$image" />
+      <![endif]-->
         <div id="main">
           <table width="750" height="800" border="0" align="center" cellpadding="0" cellspacing="0">
             <tbody>
