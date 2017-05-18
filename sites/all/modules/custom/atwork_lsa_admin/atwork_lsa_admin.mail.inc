@@ -72,7 +72,7 @@ $applicant_body = <<<EOT
   <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:886px;top:10pt;" href="$base_url/node/$nid" >
     <v:fill type="frame" src="$invite_sized" color="#FFFFFF" />
     <v:textbox inset="0,0,0,0">
-  [else]
+  <![else]>
         <div id="main">
           <table width="750" height="886" border="0" align="center" cellpadding="0" cellspacing="0">
             <tbody>
