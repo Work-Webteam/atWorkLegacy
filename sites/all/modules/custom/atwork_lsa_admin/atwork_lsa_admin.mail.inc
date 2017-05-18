@@ -84,7 +84,7 @@ $applicant_body = <<<EOT
                 <!--[if gte mso 9]>
                   <v:textbox style="width:750px;height:150px;">
                   </v:textbox>
-                </v:textbox>
+                <![endif]-->
                 </td>
               </tr>
               <tr>
