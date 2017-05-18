@@ -77,10 +77,13 @@ $applicant_body = <<<EOT
           <table width="750" height="886" border="0" align="center" cellpadding="0" cellspacing="0">
             <tbody>
               <tr>
-                <td height="100"><p>&nbsp;</p>
+                <td>
                 <!--[if gte mso 9]>
-                  <p style="margin:0;height:100;mso-hide:all"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
+                    <p style="margin:0;height:100;mso-hide:all"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
                 <![endif]-->
+                </td>
+              <tr>
+                <td height="100"><p>&nbsp;</p>
                 </td>
               </tr>
               <tr>
