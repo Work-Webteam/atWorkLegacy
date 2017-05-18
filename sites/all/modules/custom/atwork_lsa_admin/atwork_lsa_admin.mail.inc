@@ -78,19 +78,6 @@ $applicant_body = <<<EOT
             <tbody>
               <tr>
                 <td>
-                <!--[if gte mso 9]>
-                    <p style="margin:0;height:100px;"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
-                    <p style="margin:0;height:100px;"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
-                    <p style="margin:0;height:100px;"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
-                    <p style="margin:0;height:100px;"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
-                    <p style="margin:0;height:100px;"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
-                    <p style="margin:0;height:100px;"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
-                    <p style="margin:0;height:100px;"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
-                    <p style="margin:0;height:100px;"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
-                    <p style="margin:0;height:100px;"><o:p xmlns:o="urn:schemas-microsoft-com:office:office">&nbsp;</o:p></p>
-                    <div style="margin:0;height:100px;>"<o:div xmlns:o="urn:schemas-microsoft-com:office:office" style="margin:0;height:100px;>&nbsp;</o:div></div>
-                    
-                <![endif]-->
                 </td>
               <tr>
                 <td height="100"><p>&nbsp;</p>
