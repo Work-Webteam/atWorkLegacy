@@ -79,7 +79,7 @@ $applicant_body = <<<EOT
               <tr>
                 <td height="100"><p>&nbsp;</p>
                 <!--[if gte mso 9]>
-                  <v:rect style="width:750px;height:100px;">
+                  <v:rect xmlns:v="urn:schemas-microsoft-com:vml"  fill="true" stroke="false" style="width:750px;height:100px;">
                   </v:rect>
                 <![endif]-->
                 </td>
