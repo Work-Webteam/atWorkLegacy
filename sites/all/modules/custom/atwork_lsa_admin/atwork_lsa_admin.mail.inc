@@ -67,16 +67,16 @@ $applicant_body = <<<EOT
 <table width="750" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always" >
   <tbody>
     <tr>
-     <td bgcolor="#E7E7E7" max-width="750" max-height="800" valign="top" BACKGROUND="$invite_sized" ><a href="$base_url/node/$nid">
+     <td bgcolor="#E7E7E7" max-width="750" max-height="886" valign="top" BACKGROUND="$invite_sized" ><a href="$base_url/node/$nid">
 <!--[if gte mso 9]>
   <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:800px;" href="$base_url/node/$nid" >
     <v:fill type="frame" src="$invite" color="#FFFFFF" />
-    <v:shape xmlns:v="urn:schemas-microsoft-com:vml" id="theText" style='behavior: url(#default#VML); display:inline-block;position:absolute; height:800px; width:750px;top:-5;left:-10;border:0;z-index:2;'>
+    <v:shape xmlns:v="urn:schemas-microsoft-com:vml" id="theText" style='behavior: url(#default#VML); display:inline-block;position:absolute; height:886px; width:750px;top:-5;left:-10;border:0;z-index:2;'>
 
     <v:textbox inset="0,0,0,0">
   <![endif]-->
         <div id="main">
-          <table width="750" height="800" border="0" align="center" cellpadding="0" cellspacing="0">
+          <table width="750" height="886" border="0" align="center" cellpadding="0" cellspacing="0">
             <tbody>
               <tr>
                 <td height="125"><p>&nbsp;</p></td>
