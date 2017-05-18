@@ -72,8 +72,33 @@ $applicant_body = <<<EOT
   <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:886px;top:10pt;" href="$base_url/node/$nid" >
   <v:fill type="frame" src="$invite_sized" color="#FFFFFF" />
   <v:textbox inset="0,0,0,0">
+  <div id="main">
+          <table width="750" height="886" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tbody>
+              <tr>
+                <td>
+                </td>
+              <tr>
+                <td height="100"><p>&nbsp;</p>
+                </td>
+              </tr>
+              <tr>
+                <td height="60" align="center" valign="middle" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; "><strong>$applicant_full_name</strong></td>
+              </tr>
+              <tr>
+                <td height="30"><p>&nbsp;</p></td>
+              </tr>
+              <tr>
+                <td height="60" align="center" valign="middle" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900;"><strong><b>$ceremony_date</b></strong></td>
+              </tr>
+              <tr>
+                <td height="20"><p>&nbsp;</p></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 <![endif]-->
-  <!--[if !mso]>
+  <!--[if !mso]><!-- -->
         <div id="main">
           <table width="750" height="886" border="0" align="center" cellpadding="0" cellspacing="0">
             <tbody>
@@ -99,7 +124,7 @@ $applicant_body = <<<EOT
             </tbody>
           </table>
         </div>
-  <![endif]-->
+  <!--<![endif]-->
   <!--[if gte mso 9]>
     </v:textbox>
   </v:rect>
