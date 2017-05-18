@@ -64,19 +64,44 @@ $applicant_body = <<<EOT
 <p> To confirm your attendance OR to confirm you are unable to attend, <strong>please click on the <a href="$base_url/node/$nid">RSVP button</a></strong> in the invitation below.</p>
 <p style = "page-break-after:always">If you are retired, or unable to access the RSVP link below – please contact us at <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20link" target="_top">LongServiceAwards@gov.bc.ca</a>.</p>
 <p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p><br />
-<div style="background-color:#7bceeb;">
+<table width="720" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always"  >
+  <tbody >
+    <tr style ="max-width:720px; max-height:800px">
   <!--[if gte mso 9]>
-  <v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
-    <v:fill type="tile" src="https://i.imgur.com/YJOX1PC.png" color="#7bceeb"/>
-  </v:background>
+  <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:720px;height:800px;">
+    <v:fill type="tile" src="https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_Invite_complete.jpg" color="#7bceeb" />
+    <v:textbox inset="0,0,0,0">
   <![endif]-->
-  <table height="100%" width="100%" cellpadding="0" cellspacing="0" border="0">
-    <tr>
-      <td valign="top" align="left" background="https://i.imgur.com/YJOX1PC.png">
-            </td>
+        <div id="main">
+          <table width="750" height="800" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tbody>
+              <tr>
+                <td height="290"><p>&nbsp;</p></td>
+              </tr>
+              <tr>
+                <td height="60" align="center" valign="middle" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; "><strong>$applicant_full_name</strong></td>
+              </tr>
+              <tr>
+                <td height="30"><p>&nbsp;</p></td>
+              </tr>
+              <tr>
+                <td height="60" align="center" valign="middle" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900;"><strong><b>$ceremony_date</b></strong></td>
+              </tr>
+              <tr>
+                <td height="20"><p>&nbsp;</p></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+  <!--[if gte mso 9]>
+    </v:textbox>
+  </v:rect>
+  <![endif]-->
+  </a>
+  </td>
     </tr>
-  </table>
-</div>
+  </tbody>
+</table>
 </body>
 </html>
 EOT;
