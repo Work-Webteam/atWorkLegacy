@@ -66,13 +66,8 @@ $applicant_body = <<<EOT
 <p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p><br />
 <table width="720" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always" >
   <tbody>
-    <tr>
-     <td bgcolor="#E7E7E7" max-width="720" max-height="800" valign="top" BACKGROUND="$invite_sized" style="width:720 !important;height:800 !important;background-size:100%;" ><a href="$base_url/node/$nid">
-<!--[if gte mso 9]>
-  <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:800px;" href="$base_url/node/$nid" >
-    <v:fill type="frame" src="$invite" color="#FFFFFF" style="width:750px;height:800px;" />
-    <v:textbox inset="0,0,0,0">
-  <![endif]-->
+    <tr style ="max-width:720px; max-height:800px">
+     <td bgcolor="#E7E7E7" valign="top" BACKGROUND="$invite_sized" style="width:720 !important;height:800 !important;background-size:100%;max-width:720px; max-height:800px" ><a href="$base_url/node/$nid">
         <div id="main">
           <table width="750" height="800" border="0" align="center" cellpadding="0" cellspacing="0">
             <tbody>
