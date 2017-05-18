@@ -64,13 +64,13 @@ $applicant_body = <<<EOT
 <p> To confirm your attendance OR to confirm you are unable to attend, <strong>please click on the <a href="$base_url/node/$nid">RSVP button</a></strong> in the invitation below.</p>
 <p style = "page-break-after:always">If you are retired, or unable to access the RSVP link below – please contact us at <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20link" target="_top">LongServiceAwards@gov.bc.ca</a>.</p>
 <p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p><br />
-<table width="720" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always" >
+<table width="720" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always; width:100%;" >
   <tbody>
     <tr>
-     <td bgcolor="#E7E7E7" valign="top" BACKGROUND="$invite_sized" style="width:720 !important;height:800 !important;background-size:100%;" ><a href="$base_url/node/$nid">
+     <td bgcolor="#E7E7E7" valign="top" fill="true" BACKGROUND="$invite_sized" style="width:720 !important;height:800 !important;background-size:100%;" ><a href="$base_url/node/$nid">
 <!--[if gte mso 9]>
   <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:800px;" href="$base_url/node/$nid" >
-    <v:fill type="frame" src="$invite_sized" color="#FFFFFF" style="width:750px;height:800px;" />
+    <v:fill type="frame" src="$invite" color="#FFFFFF" style="width:750px;height:800px;" />
     <v:textbox inset="0,0,0,0">
   <![endif]-->
         <div id="main">
