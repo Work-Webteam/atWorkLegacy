@@ -53,8 +53,8 @@ $invite_sized = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_720x800.jpg";
 
 $applicant_subject = t('Your Long Service Awards invitation is enclosed – please RSVP using the clickable button');
 $applicant_body = <<<EOT
-<html xmlns: v="urn:schemas-microsoft.com:vml">
-<head v\:* { behavior: url(#default#VML); display: inline-block;>
+<html>
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 
@@ -64,13 +64,13 @@ $applicant_body = <<<EOT
 <p> To confirm your attendance OR to confirm you are unable to attend, <strong>please click on the <a href="$base_url/node/$nid">RSVP button</a></strong> in the invitation below.</p>
 <p style = "page-break-after:always">If you are retired, or unable to access the RSVP link below – please contact us at <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20link" target="_top">LongServiceAwards@gov.bc.ca</a>.</p>
 <p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p><br />
-<table border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always"  >
-  <tbody >
-    <tr style ="width:720px;height:800px;">
-      <td style="max-width:100%;height:100%;"><a href="$base_url/node/$nid">
-  <!--[if gte mso 9]>
-  <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:720px;height:800px;">
-    <v:fill type="tile" src="https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_Invite_complete.jpg" color="#7bceeb" />
+<table width="720" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always" >
+  <tbody>
+    <tr>
+     <td bgcolor="#E7E7E7" valign="top" BACKGROUND="$invite_sized" style="width:720 !important;height:800 !important;background-size:100%;" ><a href="$base_url/node/$nid">
+<!--[if gte mso 9]>
+  <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:800px;" href="$base_url/node/$nid" >
+    <v:fill type="frame" src="$invite_sized" color="#FFFFFF" style="width:750px;height:800px;" />
     <v:textbox inset="0,0,0,0">
   <![endif]-->
         <div id="main">
