@@ -64,10 +64,10 @@ $applicant_body = <<<EOT
 <p> To confirm your attendance OR to confirm you are unable to attend, <strong>please click on the <a href="$base_url/node/$nid">RSVP button</a></strong> in the invitation below.</p>
 <p style = "page-break-after:always">If you are retired, or unable to access the RSVP link below – please contact us at <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20link" target="_top">LongServiceAwards@gov.bc.ca</a>.</p>
 <p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p><br />
-<table width="720" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always"  >
+<table border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always"  >
   <tbody >
-    <tr style ="max-width:720px; max-height:800px">
-      <td style="max-width:100%;height:auto;"><a href="$base_url/node/$nid">
+    <tr style ="width:720px;height:800px;">
+      <td style="max-width:100%;height:100%;"><a href="$base_url/node/$nid">
   <!--[if gte mso 9]>
   <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:720px;height:800px;">
     <v:fill type="tile" src="https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_Invite_complete.jpg" color="#7bceeb" />
