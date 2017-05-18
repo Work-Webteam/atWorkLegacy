@@ -67,7 +67,12 @@ $applicant_body = <<<EOT
 <table width="720" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always" >
   <tbody>
     <tr style ="max-width:720px; max-height:800px">
-     <td bgcolor="#E7E7E7" valign="top" BACKGROUND="$invite_sized" style="width:720 !important;height:800 !important;background-size:100%;max-width:720px; max-height:800px" ><a href="$base_url/node/$nid">
+     <td bgcolor="#E7E7E7" valign="top" BACKGROUND="$invite" style="width:720px !important;height:800px !important;background-size:100%;max-width:720px; max-height:800px" ><a href="$base_url/node/$nid">
+     <!--[if gte mso 9]>
+  <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:800px;" href="$base_url/node/$nid" >
+    <v:fill type="frame" src="$invite" color="#FFFFFF" style="width:750px;height:800px;" />
+    <v:textbox inset="0,0,0,0">
+  <![endif]-->
         <div id="main">
           <table width="750" height="800" border="0" align="center" cellpadding="0" cellspacing="0">
             <tbody>
