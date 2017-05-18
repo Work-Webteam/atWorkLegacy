@@ -61,6 +61,11 @@ $applicant_body = <<<EOT
     max-width:750px;
     max-height:800px;
   }
+  #image-td{
+    max-width:750px;
+    max-height:750px;
+    display:block;
+  }
 </style>
 </head>
 
@@ -73,7 +78,7 @@ $applicant_body = <<<EOT
 <table id="main-table" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always;" >
   <tbody>
     <tr>
-     <td height="800" width="750" bgcolor="#cccccc" BACKGROUND="$invite" style="position:absolute; height:800px; width:750px;top:0;left:0;border:0;z-index:1;">
+     <td id="image-td" height="800" width="750" bgcolor="#cccccc" BACKGROUND="$invite" style="position:absolute; height:800px; width:750px;top:0;left:0;border:0;z-index:1;">
 <!--[if gte mso 9]>
 <v:image xmlns:v="urn:schemas-microsoft-com:vml" id="theImage" style='behavior: url(#default#VML); display:inline-block;position:absolute; height:800px; width:750px;top:0;left:0;border:0;z-index:1;' src="$invite"/>
 <v:shape xmlns:v="urn:schemas-microsoft-com:vml" id="theText" style='behavior: url(#default#VML); display:inline-block;position:absolute; height:800px; width:750px;top:-5;left:-10;border:0;z-index:2;'>
