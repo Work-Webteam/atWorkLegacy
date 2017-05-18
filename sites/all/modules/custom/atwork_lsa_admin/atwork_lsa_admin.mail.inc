@@ -98,7 +98,7 @@ $applicant_body = <<<EOT
           </table>
         </div>
 <![endif]-->
-  <!--[if !(gte mso 9)]><!-- -->
+  <!--[if !(gte mso 9)]>
         <div id="main">
           <table width="750" height="886" border="0" align="center" cellpadding="0" cellspacing="0">
             <tbody>
@@ -124,7 +124,7 @@ $applicant_body = <<<EOT
             </tbody>
           </table>
         </div>
-  <!--<![endif]-->
+  <![endif]-->
   <!--[if gte mso 9]>
     </v:textbox>
   </v:rect>
