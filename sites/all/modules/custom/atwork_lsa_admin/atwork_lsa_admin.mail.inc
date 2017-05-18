@@ -68,7 +68,7 @@ $applicant_body = <<<EOT
   <tbody>
     <tr>
      <td bgcolor="#E7E7E7" valign="top" BACKGROUND="$invite_sized" style="width:720px !important;height:800px !important;background-size:100%;"><a href="$base_url/node/$nid">
-<!--[if gte mso 9]>
+<!--[if mso 9]>
   <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:886px;top:10pt;" href="$base_url/node/$nid" >
   <v:fill type="frame" src="$invite" color="#FFFFFF" />
   <v:textbox inset="0,0,0,0">
@@ -98,7 +98,7 @@ $applicant_body = <<<EOT
           </table>
         </div>
 <![endif]-->
-  <!--[if gte mso 11]>
+  <!--[if !mso 11]>
         <div id="main">
           <table width="750" height="886" border="0" align="center" cellpadding="0" cellspacing="0">
             <tbody>
