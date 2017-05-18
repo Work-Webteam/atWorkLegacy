@@ -67,39 +67,26 @@ $applicant_body = <<<EOT
 <table width="720" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always; width:100%;" >
   <tbody>
     <tr>
-     <td bgcolor="#E7E7E7" valign="top" fill="true" BACKGROUND="$invite_sized" style="width:720 !important;height:800 !important;background-size:100%;" ><a href="$base_url/node/$nid">
+     <td background="http://www.thiespublishing.com/oneimage.gif" height="402" width="600" bgcolor="#cccccc">
 <!--[if gte mso 9]>
-  <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:800px;" href="$base_url/node/$nid" >
-    <v:fill type="frame" src="$invite" color="#FFFFFF" style="width:750px;height:800px;" />
-    <v:textbox inset="0,0,0,0">
-  <![endif]-->
-        <div id="main">
-          <table width="750" height="800" border="0" align="center" cellpadding="0" cellspacing="0">
-            <tbody>
-              <tr>
-                <td height="290"><p>&nbsp;</p></td>
-              </tr>
-              <tr>
-                <td height="60" align="center" valign="middle" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; "><strong>$applicant_full_name</strong></td>
-              </tr>
-              <tr>
-                <td height="30"><p>&nbsp;</p></td>
-              </tr>
-              <tr>
-                <td height="60" align="center" valign="middle" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900;"><strong><b>$ceremony_date</b></strong></td>
-              </tr>
-              <tr>
-                <td height="20"><p>&nbsp;</p></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-  <!--[if gte mso 9]>
-    </v:textbox>
-  </v:rect>
-  <![endif]-->
-  </a>
-  </td>
+<v:image xmlns:v="urn:schemas-microsoft-com:vml" id="theImage" style='behavior: url(#default#VML); display:inline-block;position:absolute; height:402px; width:600px;top:0;left:0;border:0;z-index:1;' src="http://www.thiespublishing.com/oneimage.gif"/>
+<v:shape xmlns:v="urn:schemas-microsoft-com:vml" id="theText" style='behavior: url(#default#VML); display:inline-block;position:absolute; height:407px; width:610px;top:-5;left:-10;border:0;z-index:2;'>
+<div>
+<![endif]-->
+<!-- This is where you nest a table with the content that will float over the image -->
+<table width="600" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td width="600" height="402" valign="top">
+Insert content here, including additional nested tables.
+</td>
+</tr>
+</table>
+<!-- This ends the nested table content -->
+<!--[if gte mso 9]>
+</div>
+</v:shape>
+<![endif]-->
+</td>
     </tr>
   </tbody>
 </table>
