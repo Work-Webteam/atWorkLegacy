@@ -73,7 +73,6 @@ $applicant_body = <<<EOT
     <v:fill type="frame" src="$invite" color="#FFFFFF" />
     <v:textbox style="width:750px;height:150px;">
     </v:textbox>
-
     <v:textbox inset="0,0,0,0">
   <![endif]-->
         <div id="main">
@@ -82,8 +81,8 @@ $applicant_body = <<<EOT
               <tr>
                 <td height="100"><p>&nbsp;</p>
                 <!--[if gte mso 9]>
-                  <v:textbox style="width:750px;height:150px;">
-                  </v:textbox>
+                  <v:line from="1 1" to="1 100">
+                  </v:line>
                 <![endif]-->
                 </td>
               </tr>
