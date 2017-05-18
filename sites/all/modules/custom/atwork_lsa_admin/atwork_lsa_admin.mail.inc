@@ -56,17 +56,6 @@ $applicant_body = <<<EOT
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<style>
-  #main-table{
-    max-width:750px;
-    max-height:800px;
-  }
-  #image-td{
-    max-width:750px;
-    max-height:750px;
-    display:block;
-  }
-</style>
 </head>
 
 <body id="mimemail-body" class="atwork-mail-default">
@@ -75,29 +64,42 @@ $applicant_body = <<<EOT
 <p> To confirm your attendance OR to confirm you are unable to attend, <strong>please click on the <a href="$base_url/node/$nid">RSVP button</a></strong> in the invitation below.</p>
 <p style = "page-break-after:always">If you are retired, or unable to access the RSVP link below – please contact us at <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20link" target="_top">LongServiceAwards@gov.bc.ca</a>.</p>
 <p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p><br />
-<table id="main-table" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always;" >
+<table width="720" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always" >
   <tbody>
     <tr>
-     <td id="image-td" height="800" width="750" bgcolor="#cccccc" BACKGROUND="$invite" style="background-size:200px 300px; position:absolute; height:800px; width:750px;top:0;left:0;border:0;z-index:1;">
+     <td bgcolor="#E7E7E7" max-width="720" max-height="800" valign="top" BACKGROUND="$invite_sized" style="width:720 !important;height:800 !important;background-size:100%;" ><a href="$base_url/node/$nid">
 <!--[if gte mso 9]>
-<v:image xmlns:v="urn:schemas-microsoft-com:vml" id="theImage" style='behavior: url(#default#VML); display:inline-block;position:absolute; height:800px; width:750px;top:0;left:0;border:0;z-index:1;' src="$invite"/>
-<v:shape xmlns:v="urn:schemas-microsoft-com:vml" id="theText" style='behavior: url(#default#VML); display:inline-block;position:absolute; height:800px; width:750px;top:-5;left:-10;border:0;z-index:2;'>
-<div>
-<![endif]-->
-<!-- This is where you nest a table with the content that will float over the image -->
-<table width="750" cellpadding="0" cellspacing="0" border="0">
-<tr>
-<td width="750" height="800" valign="top">
-Insert content here, including additional nested tables.
-</td>
-</tr>
-</table>
-<!-- This ends the nested table content -->
-<!--[if gte mso 9]>
-</div>
-</v:shape>
-<![endif]-->
-</td>
+  <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:800px;" href="$base_url/node/$nid" >
+    <v:fill type="frame" src="$invite" color="#FFFFFF" style="width:750px;height:800px;" />
+    <v:textbox inset="0,0,0,0">
+  <![endif]-->
+        <div id="main">
+          <table width="750" height="800" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tbody>
+              <tr>
+                <td height="290"><p>&nbsp;</p></td>
+              </tr>
+              <tr>
+                <td height="60" align="center" valign="middle" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; "><strong>$applicant_full_name</strong></td>
+              </tr>
+              <tr>
+                <td height="30"><p>&nbsp;</p></td>
+              </tr>
+              <tr>
+                <td height="60" align="center" valign="middle" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900;"><strong><b>$ceremony_date</b></strong></td>
+              </tr>
+              <tr>
+                <td height="20"><p>&nbsp;</p></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+  <!--[if gte mso 9]>
+    </v:textbox>
+  </v:rect>
+  <![endif]-->
+  </a>
+  </td>
     </tr>
   </tbody>
 </table>
