@@ -64,7 +64,7 @@ $applicant_body = <<<EOT
 <p> To confirm your attendance OR to confirm you are unable to attend, <strong>please click on the <a href="$base_url/node/$nid">RSVP button</a></strong> in the invitation below.</p>
 <p style = "page-break-after:always">If you are retired, or unable to access the RSVP link below – please contact us at <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20link" target="_top">LongServiceAwards@gov.bc.ca</a>.</p>
 <p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p><br />
-<table width="720" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always; width:100%;" >
+<table border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always;" >
   <tbody>
     <tr>
      <td height="800" width="750" bgcolor="#cccccc">
@@ -76,7 +76,7 @@ $applicant_body = <<<EOT
 <!-- This is where you nest a table with the content that will float over the image -->
 <table width="600" cellpadding="0" cellspacing="0" border="0">
 <tr>
-<td width="600" height="402" valign="top">
+<td width="750" height="800" valign="top">
 Insert content here, including additional nested tables.
 </td>
 </tr>
