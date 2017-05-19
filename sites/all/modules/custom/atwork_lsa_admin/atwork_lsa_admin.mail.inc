@@ -56,7 +56,7 @@ $applicant_body = <<<EOT
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<style type="text/css">
+<style>
     /* Your Outlook-specific CSS goes here. */
   .ExternalClass{
     width:100%;
@@ -88,6 +88,12 @@ $applicant_body = <<<EOT
       border: 1px solid red !important;
     }
 
+    #ecxinitial-height-box {
+      border: 1px solid red !important;
+
+    }
+
+
     </style>
 
 
@@ -111,9 +117,6 @@ $applicant_body = <<<EOT
   <div id="main">
           <table width="750" height="886" border="0" align="center" cellpadding="0" cellspacing="0">
             <tbody>
-              <tr>
-                <td>
-                </td>
               <tr>
                 <td id="initial-height-box" height="100"><p>&nbsp;</p>
                 </td>
