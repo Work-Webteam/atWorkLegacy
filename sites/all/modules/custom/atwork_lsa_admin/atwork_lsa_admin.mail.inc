@@ -90,7 +90,7 @@ $applicant_body = <<<EOT
 <!--[if gte mso 11]>
   <style>
     .outlook-box {
-      height: 30 !important;
+      height: 320 !important;
     }
   </style>
 <![endif]-->
