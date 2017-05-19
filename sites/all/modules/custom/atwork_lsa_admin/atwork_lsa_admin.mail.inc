@@ -118,11 +118,7 @@ $applicant_body = <<<EOT
           <table width="750" height="886" border="0" cellpadding="0" cellspacing="0">
             <tbody>
               <tr>
-                <td id="initial-height-box" height="100" style="padding:0;"><p>&nbsp;</p>
-                </td>
-              </tr>
-              <tr>
-                <td height="60"style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; padding:0;"><strong>$applicant_full_name</strong></td>
+                <td height="60"style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; padding:0; padding-top:150px;"><strong>$applicant_full_name</strong></td>
               </tr>
               <tr>
                 <td height="50"><p>&nbsp;</p></td>
