@@ -84,11 +84,13 @@ $applicant_body = <<<EOT
         -ms-interpolation-mode:bicubic;
     }
 
+    [owa] #initial-height-box {
+      border: 1px solid red !important;
+    }
+
     </style>
 
-    #initial-height-box {
-      border: 1px solid red !important;
-      }
+
 </head>
 
 <body id="mimemail-body" class="atwork-mail-default">
