@@ -99,13 +99,13 @@ $applicant_body = <<<EOT
 
 </head>
 
-<body id="mimemail-body" class="atwork-mail-default">
+<body id="mimemail-body" class="atwork-mail-default" style="padding:0;">
 <p><strong>**DO NOT REPLY TO THIS EMAIL – PLEASE FOLLOW THE INSTRUCTIONS BELOW TO RSVP.**</strong></p>
 <p> Your electronic invitation with RSVP button should appear below. If you are having trouble seeing the image in this email, please ensure you click <strong>“download images”</strong>. </p>
 <p> To confirm your attendance OR to confirm you are unable to attend, <strong>please click on the <a href="$base_url/node/$nid">RSVP button</a></strong> in the invitation below.</p>
 <p style = "page-break-after:always">If you are retired, or unable to access the RSVP link below – please contact us at <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20link" target="_top">LongServiceAwards@gov.bc.ca</a>.</p>
 <p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p><br />
-<table width="750" height="886" border="0" cellpadding="0" cellspacing="0" style = "page-break-before:always" >
+<table width="750" height="886" border="0" cellpadding="0" cellspacing="0" style = "page-break-before:always; padding:0;" >
   <tbody>
     <tr>
      <td bgcolor="#E7E7E7" BACKGROUND="$invite_sized" style="width:720px !important;height:800px !important;background-size:100%;"><a href="$base_url/node/$nid">
@@ -118,20 +118,20 @@ $applicant_body = <<<EOT
           <table width="750" height="886" border="0" cellpadding="0" cellspacing="0">
             <tbody>
               <tr>
-                <td id="initial-height-box" height="100"><p>&nbsp;</p>
+                <td id="initial-height-box" height="100" style="padding:0;"><p>&nbsp;</p>
                 </td>
               </tr>
               <tr>
-                <td height="60"style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; "><strong>$applicant_full_name</strong></td>
+                <td height="60"style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; padding:0;"><strong>$applicant_full_name</strong></td>
               </tr>
               <tr>
                 <td height="50"><p>&nbsp;</p></td>
               </tr>
               <tr>
-                <td height="60" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900;"><strong><b>$ceremony_date</b></strong></td>
+                <td height="60" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; padding:0;"><strong><b>$ceremony_date</b></strong></td>
               </tr>
               <tr>
-                <td height="20"><p>&nbsp;</p></td>
+                <td height="20" style="padding:0;"><p>&nbsp;</p></td>
               </tr>
             </tbody>
           </table>
