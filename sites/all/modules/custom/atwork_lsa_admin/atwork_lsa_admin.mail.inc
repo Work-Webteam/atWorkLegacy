@@ -106,7 +106,7 @@ $applicant_body = <<<EOT
 <table width="750" height="886" border="0" cellpadding="0" cellspacing="0" style = "page-break-before:always; padding:0;" >
   <tbody>
     <tr  style="width:720px !important; height:886px !important; max-height:886px !important; background-size:100%; padding:0 !important; vertical-align:top; float: left;">
-     <td bgcolor="#E7E7E7" BACKGROUND="$invite_sized" width="750" style="width:720px !important;height:800px !important; max-height:800px !important; background-size:100%; padding:0 !important; vertical-align:top; float: left;"><a href="$base_url/node/$nid">
+     <td bgcolor="#E7E7E7" BACKGROUND="$invite_sized" width="750" style="width:720px !important;height:886px !important; max-height:886px !important; background-size:100%; padding:0 !important; vertical-align:top; float: left;"><a href="$base_url/node/$nid">
 <!--[if gte mso 11]>
   <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:886px;top:10pt;" href="$base_url/node/$nid" >
   <v:fill type="frame" src="$invite" color="#FFFFFF" />
@@ -115,8 +115,8 @@ $applicant_body = <<<EOT
   <div id="main" style="padding:0 !important">
           <table width="750" height="886" border="0" cellpadding="0" cellspacing="0" border-spacing="0">
             <tbody>
-              <tr style="max-height:310px; padding:0 !important; vertical-align:top;float:left;">
-                <td width="750" height="310" style="max-height:310px !important; padding:0 !important; vertical-align:top;"><span style="padding:0 !important vertical-align:top; float:left;">&nbsp;</span></td>
+              <tr style="max-height:380px; padding:0 !important; vertical-align:top;float:left;">
+                <td width="750" height="380" style="max-height:380px !important; padding:0 !important; vertical-align:top;"><span style="padding:0 !important vertical-align:top; float:left;">&nbsp;</span></td>
               </tr>
               <tr style="max-height:60px; padding:0 !important; vertical-align:top;float:left;">
                 <td class="initial-height-box" width="750" height="60"style="max-height:60px !important;font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; padding:0 !important; vertical-align:top;float:left;"><span style="padding:0 !important"><b>$applicant_full_name</b></span></td>
