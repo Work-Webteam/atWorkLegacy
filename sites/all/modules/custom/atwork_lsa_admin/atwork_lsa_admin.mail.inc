@@ -120,7 +120,7 @@ $applicant_body = <<<EOT
                 <td class="initial-height-box" width="750" height="60"style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; padding:0 !important; vertical-align:top;"><span style="padding:0 !important"><b>$applicant_full_name</b></span></td>
               </tr>
               <tr>
-                <td width="750" height="50"s style="padding:0 !important; vertical-align:top;"><span style="padding:0 !important">&nbsp;</span></td>
+                <td width="750" height="50" style="padding:0 !important; vertical-align:top;"><span style="padding:0 !important">&nbsp;</span></td>
               </tr>
               <tr>
                 <td width="750" height="60" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; padding:0 !important; vertical-align:top;"><b>$ceremony_date</b></span></td>
