@@ -105,30 +105,30 @@ $applicant_body = <<<EOT
 <p> To confirm your attendance OR to confirm you are unable to attend, <strong>please click on the <a href="$base_url/node/$nid">RSVP button</a></strong> in the invitation below.</p>
 <p style = "page-break-after:always">If you are retired, or unable to access the RSVP link below – please contact us at <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20link" target="_top">LongServiceAwards@gov.bc.ca</a>.</p>
 <p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p><br />
-<table width="750" height="886" border="0" align="center" cellpadding="0" cellspacing="0" style = "page-break-before:always" >
+<table width="750" height="886" border="0" cellpadding="0" cellspacing="0" style = "page-break-before:always" >
   <tbody>
     <tr>
-     <td bgcolor="#E7E7E7" valign="top" BACKGROUND="$invite_sized" style="width:720px !important;height:800px !important;background-size:100%;"><a href="$base_url/node/$nid">
+     <td bgcolor="#E7E7E7" BACKGROUND="$invite_sized" style="width:720px !important;height:800px !important;background-size:100%;"><a href="$base_url/node/$nid">
 <!--[if gte mso 11]>
   <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:886px;top:10pt;" href="$base_url/node/$nid" >
   <v:fill type="frame" src="$invite" color="#FFFFFF" />
   <v:textbox inset="0,0,0,0">
 <![endif]-->
   <div id="main">
-          <table width="750" height="886" border="0" align="center" cellpadding="0" cellspacing="0">
+          <table width="750" height="886" border="0" cellpadding="0" cellspacing="0">
             <tbody>
               <tr>
                 <td id="initial-height-box" height="100"><p>&nbsp;</p>
                 </td>
               </tr>
               <tr>
-                <td height="60" align="center" valign="middle" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; "><strong>$applicant_full_name</strong></td>
+                <td height="60"style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; "><strong>$applicant_full_name</strong></td>
               </tr>
               <tr>
                 <td height="50"><p>&nbsp;</p></td>
               </tr>
               <tr>
-                <td height="60" align="center" valign="middle" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900;"><strong><b>$ceremony_date</b></strong></td>
+                <td height="60" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900;"><strong><b>$ceremony_date</b></strong></td>
               </tr>
               <tr>
                 <td height="20"><p>&nbsp;</p></td>
