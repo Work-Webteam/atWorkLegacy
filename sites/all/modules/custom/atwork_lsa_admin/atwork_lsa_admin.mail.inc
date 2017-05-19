@@ -119,7 +119,7 @@ $applicant_body = <<<EOT
                 <td width="750" height="20" style="max-height:20px !important; padding:0 !important; vertical-align:top;"><span style="padding:0 !important vertical-align:top; float:left;">&nbsp;</span></td>
               </tr>
               <tr>
-                <td class="initial-height-box" width="750" height="60"style="max-height:60px;font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; padding:0 !important; vertical-align:top;float:left;"><span style="padding:0 !important"><b>$applicant_full_name</b></span></td>
+                <td class="initial-height-box" width="750" height="60"style="max-height:60px !important;font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; padding:0 !important; vertical-align:top;float:left;"><span style="padding:0 !important"><b>$applicant_full_name</b></span></td>
               </tr>
               <tr>
                 <td width="750" height="50" style="max-height:50px; padding:0 !important; vertical-align:top;float:left;"><span style="padding:0 !important">&nbsp;</span></td>
