@@ -56,8 +56,7 @@ $applicant_body = <<<EOT
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<!--[if gte mso 9]>
-    <style type="text/css">
+<style type="text/css">
     /* Your Outlook-specific CSS goes here. */
   .ExternalClass{
     width:100%;
@@ -90,8 +89,6 @@ $applicant_body = <<<EOT
     #initial-height-box {
       border: 1px solid red !important;
       }
-    
-<![endif]-->
 </head>
 
 <body id="mimemail-body" class="atwork-mail-default">
