@@ -933,6 +933,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
+      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
