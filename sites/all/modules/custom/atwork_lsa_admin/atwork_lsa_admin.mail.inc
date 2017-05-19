@@ -91,7 +91,7 @@ $applicant_body = <<<EOT
   <style>
     /* For outlook only - OWA spaces just a tiny bit differently. */
     .outlook-box {
-      height: 330 !important;
+      height: 335 !important;
     }
   </style>
 <![endif]-->
