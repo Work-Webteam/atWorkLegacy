@@ -56,6 +56,42 @@ $applicant_body = <<<EOT
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--[if gte mso 9]>
+    <style type="text/css">
+    /* Your Outlook-specific CSS goes here. */
+  .ExternalClass{
+    width:100%;
+  }
+
+  .ExternalClass,
+  .ExternalClass p,
+  .ExternalClass span,
+  .ExternalClass font,
+  .ExternalClass td,
+  .ExternalClass div{
+    line-height: 100%;
+  }
+
+  #outlook a{
+      padding:0;
+  }
+
+  table{
+      mso-table-lspace:0pt;
+      mso-table-rspace:0pt;
+  }
+
+   img{
+        -ms-interpolation-mode:bicubic;
+    }
+
+    </style>
+
+    #initial-height-box {
+      border: 1px solid red !important;
+      }
+    
+<![endif]-->
 </head>
 
 <body id="mimemail-body" class="atwork-mail-default">
@@ -72,6 +108,7 @@ $applicant_body = <<<EOT
   <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:886px;top:10pt;" href="$base_url/node/$nid" >
   <v:fill type="frame" src="$invite" color="#FFFFFF" />
   <v:textbox inset="0,0,0,0">
+<![endif]-->
   <div id="main">
           <table width="750" height="886" border="0" align="center" cellpadding="0" cellspacing="0">
             <tbody>
@@ -79,7 +116,7 @@ $applicant_body = <<<EOT
                 <td>
                 </td>
               <tr>
-                <td height="320"><p>&nbsp;</p>
+                <td id="initial-height-box" height="100"><p>&nbsp;</p>
                 </td>
               </tr>
               <tr>
@@ -97,35 +134,7 @@ $applicant_body = <<<EOT
             </tbody>
           </table>
         </div>
-<![endif]-->
-  <!--[if !gte mso 11]>
-        <div id="main">
-          <table width="750" height="886" border="0" align="center" cellpadding="0" cellspacing="0">
-            <tbody>
-              <tr>
-                <td>
-                </td>
-              <tr>
-                <td height="100"><p>&nbsp;</p>
-                </td>
-              </tr>
-              <tr>
-                <td height="60" align="center" valign="middle" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; "><strong>$applicant_full_name</strong></td>
-              </tr>
-              <tr>
-                <td height="30"><p>&nbsp;</p></td>
-              </tr>
-              <tr>
-                <td height="60" align="center" valign="middle" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900;"><strong><b>$ceremony_date</b></strong></td>
-              </tr>
-              <tr>
-                <td height="20"><p>&nbsp;</p></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-  <![endif]-->
-  <!--[if gte mso 9]>
+    <!--[if gte mso 9]>
     </v:textbox>
     </v:rect>
   <![endif]-->
