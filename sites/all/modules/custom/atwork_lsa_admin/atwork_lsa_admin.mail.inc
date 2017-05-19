@@ -116,19 +116,19 @@ $applicant_body = <<<EOT
           <table width="750" height="886" border="0" cellpadding="0" cellspacing="0" border-spacing="0">
             <tbody>
               <tr>
-                <td width="750" height="20" style="padding:0 !important; vertical-align:top;"><span style="padding:0 !important vertical-align:top;">&nbsp;</span></td>
+                <td width="750" height="20" style="padding:0 !important; vertical-align:top;"><span style="padding:0 !important vertical-align:top; float:left;">&nbsp;</span></td>
               </tr>
               <tr>
-                <td class="initial-height-box" width="750" height="60"style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; padding:0 !important; vertical-align:top;"><span style="padding:0 !important"><b>$applicant_full_name</b></span></td>
+                <td class="initial-height-box" width="750" height="60"style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; padding:0 !important; vertical-align:top;float:left;"><span style="padding:0 !important"><b>$applicant_full_name</b></span></td>
               </tr>
               <tr>
-                <td width="750" height="50" style="padding:0 !important; vertical-align:top;"><span style="padding:0 !important">&nbsp;</span></td>
+                <td width="750" height="50" style="padding:0 !important; vertical-align:top;float:left;"><span style="padding:0 !important">&nbsp;</span></td>
               </tr>
               <tr>
-                <td width="750" height="60" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; padding:0 !important; vertical-align:top;"><b>$ceremony_date</b></span></td>
+                <td width="750" height="60" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; padding:0 !important; vertical-align:top;float:left;"><b>$ceremony_date</b></span></td>
               </tr>
               <tr>
-                <td width="750" height="20" style="padding:0 !important; vertical-align:top;"><span style="padding:0 !important vertical-align:top;">&nbsp;</span></td>
+                <td width="750" height="20" style="padding:0 !important; vertical-align:top;float:left;"><span style="padding:0 !important vertical-align:top;">&nbsp;</span></td>
               </tr>
             </tbody>
           </table>
