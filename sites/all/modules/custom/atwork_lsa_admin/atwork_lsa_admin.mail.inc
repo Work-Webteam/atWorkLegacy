@@ -108,26 +108,26 @@ $applicant_body = <<<EOT
 <table width="750" height="886" border="0" cellpadding="0" cellspacing="0" style = "page-break-before:always; padding:0;" >
   <tbody>
     <tr>
-     <td bgcolor="#E7E7E7" BACKGROUND="$invite_sized" style="width:720px !important;height:800px !important;background-size:100%;"><a href="$base_url/node/$nid">
+     <td bgcolor="#E7E7E7" BACKGROUND="$invite_sized" width="750" style="width:720px !important;height:800px !important;background-size:100%; padding:0 !important;"><a href="$base_url/node/$nid">
 <!--[if gte mso 11]>
   <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:886px;top:10pt;" href="$base_url/node/$nid" >
   <v:fill type="frame" src="$invite" color="#FFFFFF" />
   <v:textbox inset="0,0,0,0">
 <![endif]-->
-  <div id="main">
-          <table width="750" height="886" border="0" cellpadding="0" cellspacing="0">
+  <div id="main" style="padding:0 !important">
+          <table width="750" height="886" border="0" cellpadding="0" cellspacing="0" border-spacing="0">
             <tbody>
               <tr>
-                <td height="60"style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; padding:0; padding-top:150px;"><strong>$applicant_full_name</strong></td>
+                <td width="750" height="60"style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; padding:0 !important;"><span style="padding:0 !important"><b>$applicant_full_name</b></span></td>
               </tr>
               <tr>
-                <td height="50"><p>&nbsp;</p></td>
+                <td width="750" height="50"><span style="padding:0 !important">&nbsp</span></td>
               </tr>
               <tr>
-                <td height="60" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; padding:0;"><strong><b>$ceremony_date</b></strong></td>
+                <td width="750" height="60" style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; padding:0 !important;"><b>$ceremony_date</b></span></td>
               </tr>
               <tr>
-                <td height="20" style="padding:0;"><p>&nbsp;</p></td>
+                <td width="750" height="20" style="padding:0;"><span style="padding:0 !important">&nbsp;</span></td>
               </tr>
             </tbody>
           </table>
