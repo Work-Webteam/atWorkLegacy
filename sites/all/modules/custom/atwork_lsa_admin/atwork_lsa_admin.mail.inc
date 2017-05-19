@@ -69,6 +69,7 @@ $applicant_body = <<<EOT
   .ExternalClass td,
   .ExternalClass div{
     line-height: 100%;
+    padding: 0px !important;
   }
 
   #outlook a{
@@ -87,11 +88,6 @@ $applicant_body = <<<EOT
     [owa] .initial-height-box {
       border: 1px solid red !important;
     }
-
-    .initial-height-box {
-      border: 1px solid red !important;
-    }
-
 
     </style>
 
@@ -116,6 +112,9 @@ $applicant_body = <<<EOT
   <div id="main" style="padding:0 !important">
           <table width="750" height="886" border="0" cellpadding="0" cellspacing="0" border-spacing="0">
             <tbody>
+              <tr>
+                <td width="750" height="20" style="padding:0 !important; vertical-align:top;"><span style="padding:0 !important vertical-align:top;">&nbsp;</span></td>
+              </tr>
               <tr>
                 <td class="initial-height-box" width="750" height="60"style="font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; padding:0 !important; vertical-align:top;"><span style="padding:0 !important"><b>$applicant_full_name</b></span></td>
               </tr>
