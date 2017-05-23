@@ -576,7 +576,7 @@ function create_pdf($lsa_node){
   $pdf->AddPage();
 
   // Get font ready, include in file, We could have specified italics with I, underlined with U or a regular font with an empty string (or any combination). font size specified by points
-  $pdf->SetFont("Times", 'B', 20);
+  $pdf->SetFont("Times", 'IB', 20);
 
   // Grab our invitation image
   $invitation = drupal_get_path('module', 'atwork_lsa_admin') . '/Invitation/LSA_invite_Apr28_with_text.jpg';
