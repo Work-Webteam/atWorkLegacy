@@ -107,7 +107,7 @@ $applicant_body = <<<EOT
 <table width="750" border="0" cellpadding="0" cellspacing="0" style = "page-break-before:always; padding:0;" >
   <tbody>
     <tr  style="width:720px !important; height:100% !important; max-height:100% !important; background-size:100%; padding:0 !important; vertical-align:top; float: left;">
-     <td BACKGROUND="$invite_sized" width="750" style="width:720px !important;height:100% !important; max-height:100% !important; background-size:100%; padding:0 !important; vertical-align:top; float: left;"><a href="$base_url/node/$nid">
+     <td BACKGROUND="$invite_sized" width="750" style="width:720px !important;height:100% !important; max-height:886% !important; background-size:100%; padding:0 !important; vertical-align:top; float: left;"><a href="$base_url/node/$nid">
 <!--[if gte mso 11]>
   <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:886px;top:10pt;" href="$base_url/node/$nid" >
   <v:fill type="frame" src="$invite" color="#FFFFFF" />
