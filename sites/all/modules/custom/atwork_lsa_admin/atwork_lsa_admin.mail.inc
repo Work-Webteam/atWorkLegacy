@@ -116,8 +116,8 @@ $applicant_body = <<<EOT
   <div id="main" style="padding:0 !important">
           <table width="750" height="886" border="0" cellpadding="0" cellspacing="0" border-spacing="0">
             <tbody>
-              <tr style="max-height:300px; padding:0 !important; vertical-align:top;float:left;">
-                <td class="outlook-box" width="750" height="300" style="max-height:300px !important; padding:0 !important; vertical-align:top;"><span style="padding:0 !important vertical-align:top; float:left;">&nbsp;</span></td>
+              <tr style="max-height:315px; padding:0 !important; vertical-align:top;float:left;">
+                <td class="outlook-box" width="750" height="315" style="max-height:315px !important; padding:0 !important; vertical-align:top;"><span style="padding:0 !important vertical-align:top; float:left;">&nbsp;</span></td>
               </tr>
               <tr style="max-height:60px; padding:0 !important; vertical-align:top;float:left;">
                 <td class="initial-height-box" width="750" height="60"style="max-height:60px !important;font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; padding:0 !important; vertical-align:top;float:left;"><span style="padding:0 !important"><i><b>$applicant_full_name</b></i></span></td>
