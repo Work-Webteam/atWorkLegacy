@@ -584,7 +584,7 @@ function create_pdf($lsa_node){
   $pdf->Image($invitation, 15,15, 580,0,'JPG');
 
   // Set our mark in the proper place for the name
-  $pdf->SetY(300);
+  $pdf->SetY(315);
 
   // Add name Text(float x, float y, string txt)
   $pdf->Cell(0,0,$username,0,1,'C');
