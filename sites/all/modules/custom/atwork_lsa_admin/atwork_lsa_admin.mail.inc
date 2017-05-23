@@ -104,17 +104,17 @@ $applicant_body = <<<EOT
 <p> To confirm your attendance OR to confirm you are unable to attend, <strong>please click on the <a href="$base_url/node/$nid">RSVP button</a></strong> in the invitation below.</p>
 <p style = "page-break-after:always">If you are retired, or unable to access the RSVP link below – please contact us at <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20link" target="_top">LongServiceAwards@gov.bc.ca</a>.</p>
 <p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p><br />
-<table width="750" height="800" border="0" cellpadding="0" cellspacing="0" style = "page-break-before:always; padding:0;" >
+<table width="750" height="886" border="0" cellpadding="0" cellspacing="0" style = "page-break-before:always; padding:0;" >
   <tbody>
-    <tr  style="width:720px !important; height:800px !important; max-height:800px !important; background-size:100%; padding:0 !important; vertical-align:top; float: left;">
-     <td bgcolor="#E7E7E7" BACKGROUND="$invite_sized" width="750" style="width:720px !important;height:800px !important; max-height:800px !important; background-size:100%; padding:0 !important; vertical-align:top; float: left;"><a href="$base_url/node/$nid">
+    <tr  style="width:720px !important; height:886px !important; max-height:886px !important; background-size:100%; padding:0 !important; vertical-align:top; float: left;">
+     <td bgcolor="#E7E7E7" BACKGROUND="$invite_sized" width="750" style="background-repeat: no-repeat; width:720px !important;height:886px !important; max-height:886px !important; background-size:100%; padding:0 !important; vertical-align:top; float: left;"><a href="$base_url/node/$nid">
 <!--[if gte mso 11]>
-  <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:800px;top:10pt;" href="$base_url/node/$nid" >
+  <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:750px;height:886px;top:10pt;" href="$base_url/node/$nid" >
   <v:fill type="frame" src="$invite" color="#FFFFFF" />
   <v:textbox inset="0,0,0,0">
 <![endif]-->
   <div id="main" style="padding:0 !important">
-          <table width="750" height="800" border="0" cellpadding="0" cellspacing="0" border-spacing="0">
+          <table width="750" height="886" border="0" cellpadding="0" cellspacing="0" border-spacing="0">
             <tbody>
               <tr style="max-height:315px; padding:0 !important; vertical-align:top;float:left;">
                 <td class="outlook-box" width="750" height="315" style="max-height:315px !important; padding:0 !important; vertical-align:top;"><span style="padding:0 !important vertical-align:top; float:left;">&nbsp;</span></td>
