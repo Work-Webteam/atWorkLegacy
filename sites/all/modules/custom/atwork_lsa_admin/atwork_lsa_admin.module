@@ -579,7 +579,7 @@ function create_pdf($lsa_node){
   $pdf->SetFont("Times", 'B', 20);
 
   // Grab our invitation image
-  $invitation = drupal_get_path('module', 'atwork_lsa_admin') . '/Invitation/LSA_print.jpg';
+  $invitation = drupal_get_path('module', 'atwork_lsa_admin') . '/Invitation/LSA_invite_Apr28_with_text.jpg';
   // Add the image
   $pdf->Image($invitation, 15,15, 580,0,'JPG');
 
