@@ -47,8 +47,8 @@ $nid = $lsa_node->nid;
 //$invite = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_print.jpg';
 //$invite_button = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_RSVP.png';
 
-$invite = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_Invite_complete.jpg";
-$invite_sized = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_Invite_complete_resize.jpg";
+$invite = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_invite_Apr28_with_RSVP.jpg";
+$invite_sized = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_720x800.jpg";
 //$invite_button = 'https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_RSVP.jpg';
 
 $applicant_subject = t('Your Long Service Awards invitation is enclosed – please RSVP using the clickable button');
