@@ -50,74 +50,24 @@ only screen and (                min-resolution: 2dppx) {
 .front.logged-in.no-sidebars .skin-default .views-slideshow-controls-bottom {
     top: 0px!important;
 }
-/*#block-views-home-page-blocks-zen-block-1,
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 667px)
+and (orientation : portrait) {
+  #block-views-home-page-blocks-zen-block-1,
 	#block-views-home-page-blocks-zen-block-3,
 	#block-views-home-page-blocks-zen-block-4 {
     display: block!important;
     min-width:325px;
     max-width: 90%;
     margin: 0 auto 10px!important;
-  }*/
-  #block-views-home-page-blocks-zen-block-1,
-  #block-views-home-page-blocks-zen-block-3,
-  #block-views-home-page-blocks-zen-block-4 {
-      min-width: 100% !important;
-      max-width:786px;
-      clear: both;
-      height: inherit;
-    }
-    /********************************/
-    .front .front-promoted-image {
-      display: inline-block;
-      clear:none;
-      height:165px;
-      width: 40%;
-      overflow: hidden;
-      float:left;
-      margin-right: 10px;
-    }
-    .front .front-promoted-image img{
-      display: block;
-    }
-    .front .promoted-info {
-      margin-left:31%;
-      padding: 10px 20px;
-    }
-    .front h3.front-promoted-title {
-      clear:none;
-      min-height:inherit;
-      max-height:inherit;
-      padding:10px 0 0 0;
-      margin:0 0 10px 10px;
-    }
-    .front .front-promoted-posted,
-    .front .front-promoted-teaser,
-    .front .front-promoted-read,
-    .front .front-promoted-comments,
-    .front .front-promoted-likes,
-    .front .front-promoted-more {
-      clear:none;
-      min-height:inherit;
-      max-height:inherit;
-      padding:0 10px 0 0;
-      margin:0;
-    }
-    .front .front-promoted-teaser {
-      max-height: 36px;
-      overflow:hidden;
-    }
-    .front .front-promoted-more {
-      border-top: none;
-    }
-    .front .front-promoted-comments,
-    .front .front-promoted-likes,
-    .front .front-promoted-more {
-      display: inline-block;
-      margin-top: 10px;
-      float: none;
-    }
-/********************************/
-
+  }
+}
+#block-views-home-page-blocks-zen-block-1,
+	#block-views-home-page-blocks-zen-block-3,
+	#block-views-home-page-blocks-zen-block-4 {
+    max-width: 32.5%!important;
+  }
   #admin-menu,
   #block-atwork-profiles-header,
   .front #block-block-5,

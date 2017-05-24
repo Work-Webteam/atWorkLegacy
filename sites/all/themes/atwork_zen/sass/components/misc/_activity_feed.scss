@@ -43,9 +43,10 @@
   }
   .new-message-count {
     display: block;
-    position: absolute;
-    top: 13px;
-    left: 102px;
+    position: relative;
+    top: -33px;
+    left: 98px;
+    left: 92px\0/ !important;/* For IE only */
     z-index: 100;
     width: 24px;
     height: 21px;
@@ -69,7 +70,8 @@
     padding: 2px 5px;
     background-color: #FFF;
     position: absolute;
-    top: 8px;
+    top: 12px;
+    left: 10px;
     z-index: 100;
     }
   .comment-icon:before { // this was placed with jQuery since can't use :before on input tag
@@ -101,7 +103,7 @@
   .block-header-inner {
     float: right;
     margin-top: -3px;
-    margin-right:12px;
+    margin-right: 7px;
   }
   .activity-filters-my,
   .activity-filters-all {
@@ -242,11 +244,11 @@
   }
   .item-list { // the pager
     display: block;
-    width: 252px;
+    width: 100%;
     position: absolute;
     bottom: 18px;
-    padding: 0 0 4px 0;
-    margin: 0 0 0 5px;
+    padding: 0;
+    margin: 0;
     left:  0;
     background-color: #FFF;
   }
@@ -318,23 +320,27 @@
     .field-name-field-comment-message-comments,
     .field-name-field-follow-feed-comments,
     .field-name-field-node-feed-reply {
-      + .field-name-field-feed-like-button {// outer message 'like'
+/*      + .field-name-field-feed-like-button {// outer message 'like'
         left: 35%;
-      }
+      }*/
     }
 
     // position all first message paragraphs. Status updates, etc. under the date.
     p[class^="msg-"] {
-      margin: -25px 10px 4px 48px;
+      margin: -25px 10px 5px 48px;
     }
     p {
+      margin-left: 48px;
+    }
+    .field-type-entityreference {
       margin-left: 48px;
     }
   }
 
   // inner nested message div styling
   .entity-message {
-    p[class^="msg-"] + p + p { // start with this class and then only the 3rd p
+    p[class^="msg-"] + p + p, // start with this class and then only the 3rd p
+    span.activity-comment { // now includes comments made
       &:before {
         @include quotes-open;
       }
@@ -343,8 +349,23 @@
       }
       a[href^=node] { // if exists, push more link out of quotes
         float: right;
-        margin: 0.5em 0 3em 0;
+        margin: 2em 10px 2.5em 0;
+        &:before {
+          content:"...";
+        }
       }
+      display: block;
+      margin-top:5px;
+      margin-bottom: 5px;
+      line-height: 12px;
+    }
+    span.activity-comment ~ a {
+      &:before {
+        content:"...";
+      }
+      display: inline;
+      float: right;
+      font-size: .9em;
     }
   }
 
@@ -698,7 +719,7 @@
 // Moved Chris files from atworklayout to here for the feed. Needs to be Sassily cleaned
 /* Pop Window on front page for the Social Sidebar */
 // Don't use a node id. There is a custom class called 'new-activity-window'
-.not-front .new-activity-window #headebox,
+.not-front .new-activity-window #headerbox,
 .not-front .new-activity-window #admin-menu,
 .not-front .new-activity-window #block-atwork-profiles-header,
 .not-front .new-activity-window #block-block-7 {
@@ -726,9 +747,17 @@
   width: 275px;
   margin: 0px auto;
 }
-.not-front .new-activity-window #social-side h2 {
-  position: initial;
-  padding: 0 10px;
+.not-front .new-activity-window #social-side {
+  .block-header-inner {
+    margin-top: 0;
+  }
+  h2 {
+    position: initial;
+    margin-top: 0;
+    padding: 5px 10px;
+    background-color: #818283;
+    color: #FFF;
+    }
 }
 .not-front .new-activity-window #social-side .item-list {
   position: inherit;
