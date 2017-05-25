@@ -50,6 +50,10 @@ only screen and (                min-resolution: 2dppx) {
 .front.logged-in.no-sidebars .skin-default .views-slideshow-controls-bottom {
     top: 0px!important;
 }
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 667px)
+and (orientation : portrait) {
   #block-views-home-page-blocks-zen-block-1,
 	#block-views-home-page-blocks-zen-block-3,
 	#block-views-home-page-blocks-zen-block-4 {
@@ -57,6 +61,12 @@ only screen and (                min-resolution: 2dppx) {
     min-width:325px;
     max-width: 90%;
     margin: 0 auto 10px!important;
+  }
+}
+#block-views-home-page-blocks-zen-block-1,
+	#block-views-home-page-blocks-zen-block-3,
+	#block-views-home-page-blocks-zen-block-4 {
+    max-width: 32.5%!important;
   }
   #admin-menu,
   #block-atwork-profiles-header,
@@ -83,6 +93,9 @@ only screen and (                min-resolution: 2dppx) {
   .front #block-views-home-page-blocks-zen-block-2 {
     width:100%!important;
     margin: 0 auto!important;
+    .view-content {
+      margin: 0px !important;
+    }
   }
   .section-classifieds .view-classifieds .views-row-odd, .section-classifieds .view-classifieds .views-row-even,
   .page-galleries .view-gallery-reference .views-row-odd, .page-galleries .view-gallery-reference .views-row-even,
