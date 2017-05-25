@@ -96,7 +96,7 @@ function _atwork_polls_custom_submit($form, &$form_state){
   $messages = drupal_get_messages('status');
   if(isset($form_state['build_info']['args'][0]->og_group_ref) && $form_state['build_info']['args'][0]->og_group_ref){
     if(isset($form['title']['#default_value'])){
-      drupal_set_message(t('Your poll <em class="placeholder">' . $form['title']['#default_value'] . '</em> has been updated and appears on your <a href = "/node/' . $form_state['build_info']['args'][0]->og_group_ref['und'][0]['target_id'] . '/polls">group poll page</a>. To make edits, click on your polle select Edit. '));
+      drupal_set_message(t('Your poll <em class="placeholder">' . $form['title']['#default_value'] . '</em> has been updated and appears on your <a href = "/node/' . $form_state['build_info']['args'][0]->og_group_ref['und'][0]['target_id'] . '/polls">group poll page</a>. To make edits, click on your poll select Edit. '));
     } else {
     drupal_set_message(t('Your poll <em class="placeholder">' . $form_state['build_info']['args'][0]->title . '</em> has been created and appears on your <a href = "/node/' . $form_state['build_info']['args'][0]->og_group_ref['und'][0]['target_id'] . '/polls">group poll page</a>. To make edits, click on your poll and select Edit. '));
     }

@@ -60,19 +60,19 @@
 @mixin quotes-open {
   content:"\201C";
   font-size: 2em;
-  color: lighten(#000000, 70%);
+  color: lighten(#000000,55%);
   font-family: Georgia, serif;
   position: relative;
-  top: 6px;
+  top: 8px;
 }
 
 @mixin quotes-closed {
   content:"\201D";
   font-size: 2em;
-  color: lighten(#000000, 70%);
+  color: lighten(#000000, 55%);
   font-family: Georgia, serif;
   position: relative;
-  top: 6px;
+  top: 8px;
 }
 
 // Boxed Messages. Images are borrowed from Drupal core, stored in /misc

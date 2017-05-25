@@ -13,7 +13,8 @@ only screen and (                min-resolution: 192dpi),
 only screen and (                min-resolution: 2dppx) {
 
 @media only screen
-  and (max-width:679px)
+  and (max-width:768px)
+  and (max-height:1024px)
   and (orientation: portrait)  {
       .masquerade-switch {
           display: none!important;
@@ -21,14 +22,18 @@ only screen and (                min-resolution: 2dppx) {
       #user-user-full-group-profile-card {
           width: 100%;
           margin: 0 auto;
+          text-align:center;
       }
-      #user-user-full-group-profile-card .field-name-field-image {
-          margin: 2em 3em 0;
-      }
-      #user-user-full-group-profile-card .group-profile-identity-bundle {
-          max-width: 100%;
-          padding: 0 10px;
-          margin-bottom: 10px;
+      #user-user-full-group-profile-card {
+          .field-name-field-image {
+              margin: 2em 4em 0;
+              }
+         .group-profile-identity-bundle {
+             max-width: 100%;
+             padding: 0 10px;
+             margin-bottom: 10px;
+             text-align:left;
+             }     
       }
       #user-user-full-group-profile-extra {
           display: block;
@@ -41,6 +46,10 @@ only screen and (                min-resolution: 2dppx) {
           float:none;
           margin: 0 auto;
           width: 100%;
+      }
+      #block-views-people-admin-block-following .view-display-id-block_following .view-content,
+      #block-views-people-admin-block-followers .view-display-id-block_followers .view-content {
+          text-align: center;
       }
       #block-views-people-admin-block-followers .view-content a,
       #block-views-people-admin-block-following .view-content a,
@@ -64,7 +73,8 @@ only screen and (                min-resolution: 2dppx) {
       }
   }
   @media only screen
-  and (max-width:960px)
+  and (max-width:1024px)
+  and (max-height:768px)
   and (orientation: landscape)  {
      .masquerade-switch {
           display: none!important;
@@ -73,16 +83,20 @@ only screen and (                min-resolution: 2dppx) {
           width: 100%;
           margin: 0 auto;
       }
-      #user-user-full-group-profile-card .field-name-field-image {
-          width: 200px;
-          margin-right: 1em;
+
+      #user-user-full-group-profile-card {
+          .field-name-field-image {
+              width: 200px;
+              margin-right: 1em;
+              }
+          .group-profile-identity-bundle {
+              max-width: 65%;
+              padding: 0;
+              margin-top: .8em;
+              margin-bottom: 10px;
+              }
       }
-      #user-user-full-group-profile-card .group-profile-identity-bundle {
-          max-width: 65%;
-          padding: 0;
-          margin-top: .8em;
-          margin-bottom: 10px;
-      }
+      #user-user-full-group-profile-card 
       #user-user-full-group-profile-card .field-name-field-summary {
           position: relative;
           top: 30px;
@@ -101,6 +115,10 @@ only screen and (                min-resolution: 2dppx) {
           float:none;
           margin: 0 auto;
           width: 100%;
+      }
+      #block-views-people-admin-block-following .view-display-id-block_following .view-content,
+      #block-views-people-admin-block-followers .view-display-id-block_followers .view-content {
+          text-align: center;
       }
       #block-views-people-admin-block-followers .view-content a,
       #block-views-people-admin-block-following .view-content a,

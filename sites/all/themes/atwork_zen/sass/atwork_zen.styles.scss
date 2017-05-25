@@ -1152,9 +1152,9 @@ ol.search-results h3.title {
   border: 1px solid #f1f1f1;
 	padding-bottom: 15px;
 	width: 275px;
-	height: 1356px;
+	height: 1365px;
   overflow-x: hidden; // don't show horizontal scrollbar
-  overflow-y: auto; 
+  overflow-y: auto;
   box-sizing: border-box;
   padding: 4px;
 }
@@ -1352,7 +1352,7 @@ h3.front-promoted-title {
 	display: inline-block;
 	float: left;
 	background-color: #D7D7D7;
-  width:620px;
+  min-width:615px;
 	height: 390px;
 	padding-bottom: 15px;
 }
@@ -4822,6 +4822,7 @@ article.node-tools #node-tools .node-links,
 .forum-post-panel-main {
     margin-left: 150px;
     height: auto !important;
+    min-height: auto!important;
 }
 #comments {
   background-color: #D7D7D7;
@@ -5369,6 +5370,19 @@ a.word {
   background: none;
   text-indent: 0;
   margin-right: 5px;
+}
+.forum-post-content {
+  .rate-thumbs-up-btn-up {
+    display: inline;
+    position: relative;
+    top: 30px;
+  }
+  .rate-info {
+    display: inline;
+    position: relative;
+    top: 30px;
+    left: 5px;
+  }
 }
 .rate-thumbs-up-btn-up:after {
   content: " Like";
