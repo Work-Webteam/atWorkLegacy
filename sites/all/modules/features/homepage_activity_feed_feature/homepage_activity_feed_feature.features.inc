@@ -24,31 +24,6 @@ function homepage_activity_feed_feature_views_api($module = NULL, $api = NULL) {
 }
 
 /**
- * Implements hook_image_default_styles().
- */
-function homepage_activity_feed_feature_image_default_styles() {
-  $styles = array();
-
-  // Exported image style: ad_space_250w.
-  $styles['ad_space_250w'] = array(
-    'label' => 'Ad Space 250w',
-    'effects' => array(
-      96 => array(
-        'name' => 'image_scale',
-        'data' => array(
-          'width' => 250,
-          'height' => '',
-          'upscale' => 0,
-        ),
-        'weight' => 1,
-      ),
-    ),
-  );
-
-  return $styles;
-}
-
-/**
  * Implements hook_node_info().
  */
 function homepage_activity_feed_feature_node_info() {
