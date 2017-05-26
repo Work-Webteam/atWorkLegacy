@@ -1,17 +1,15 @@
-name = Quiz Direction
-package = Quiz Question
+name = Quiz - Directions
+package = Quiz core
 description = Provide a slot to add directions for a quiz or some sub-portion of a quiz.
 core = 7.x
-
 dependencies[] = quiz
 dependencies[] = quiz_question
-
 files[] = quiz_directions.classes.inc
+files[] = QuizDirectionsTestCase.test
 
-
-; Information added by Drupal.org packaging script on 2016-01-21
-version = "7.x-4.0-rc2"
+; Information added by Drupal.org packaging script on 2017-03-16
+version = "7.x-5.1"
 core = "7.x"
 project = "quiz"
-datestamp = "1453399821"
+datestamp = "1489693108"
 

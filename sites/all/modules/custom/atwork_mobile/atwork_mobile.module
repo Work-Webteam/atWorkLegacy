@@ -84,7 +84,7 @@ function _atwork_menu_block_builder(){
         <li id="atwork_menu_item_standards_of_conduct" class="atwork_menu_nested"><a href="http://www2.gov.bc.ca/gov/content/careers-myhr/managers-supervisors/employee-labour-relations/conditions-agreements/policy#standards" target="_blank">Standards of Conduct</a></li>
         <li id="atwork_menu_item_community_involvement" class="atwork_menu_nested"><a href="/community-involvement">Community Involvement</a></li>
         <li id="atwork_menu_item_where_ideas_work" class="atwork_menu_nested"><a href="/org/where-ideas-work-brand">Where Ideas Work</a></li>
-        <li id="atwork_menu_item_core_policies" class="atwork_menu_nested"><a href="/reference/core-government-policies">Core Policies</a></li>
+        <li id="atwork_menu_item_core_policies" class="atwork_menu_nested"><a href="http://www2.gov.bc.ca/gov/content/governments/services-for-government">Core Policies</a></li>
       </ul>
     </li>
   </ul>

@@ -1323,6 +1323,9 @@ function atwork_misc_preprocess_node(&$variables) {
     if (isset($variables['content']['rate_thumbup_nodes']) && $variables['content']['rate_thumbup_nodes']) {
       $variables['content']['footer']['rate_thumbup_nodes'] = $variables['content']['rate_thumbup_nodes'];
       $variables['content']['footer']['rate_thumbup_nodes']['#weight'] = 60;
+      // Remove odd label display that came with update
+      // https://www.drupal.org/node/2196731
+      $variables['content']['footer']['rate_thumbup_nodes']['#title'] = '';
       unset($variables['content']['rate_thumbup_nodes']);
     }
     if (isset($variables['content']['ical_link']) && $variables['content']['ical_link']) {

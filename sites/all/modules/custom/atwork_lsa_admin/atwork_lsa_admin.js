@@ -21,6 +21,7 @@
       // show the submit button that is generally found in this area
       try {
           target.parent().parent().parent().next().children().css("display", "block");
+          console.log(target.parent().parent().parent().next().children());
       }
       // If it is not there, we will suppress the error message
       catch(err){
@@ -53,6 +54,8 @@
 
   function settings(){
     // Deciding which fields should be visible to user on initial load
+    // Change all save buttons to "save changes"
+    $('.form-submit.ajax-processed').val('Save Changes');
 
     // If they are not retiring this year, no need to have a field to enter a retirement date.
     var retired = $(".field.field-name-field-lsa-retiring-thisyear.field-type-list-boolean.field-label-inline.clearfix div.field-item").text();

@@ -1,0 +1,143 @@
+/** @media queries for mobile devices **/
+/** Mobile - 768px to 820px **/
+/** Narrow Screen - 821px to 979px **/
+/** Desktop - 980px to max 1260px **/
+/** Social sidebar cuts out at 1240px and reappears at mobile resolutions lower than 980px **/
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   min--moz-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx) {
+
+@media only screen
+  and (max-width:768px)
+  and (max-height:1024px)
+  and (orientation: portrait)  {
+      .masquerade-switch {
+          display: none!important;
+      }
+      #user-user-full-group-profile-card {
+          width: 100%;
+          margin: 0 auto;
+          text-align:center;
+      }
+      #user-user-full-group-profile-card {
+          .field-name-field-image {
+              margin: 2em 4em 0;
+              }
+         .group-profile-identity-bundle {
+             max-width: 100%;
+             padding: 0 10px;
+             margin-bottom: 10px;
+             text-align:left;
+             }     
+      }
+      #user-user-full-group-profile-extra {
+          display: block;
+      }
+      #user-user-full-group-profile-extra .field-group-htabs-wrapper {
+          min-width:100%!important;
+      }
+      #block-views-people-admin-block-followers,
+      #block-views-people-admin-block-following {
+          float:none;
+          margin: 0 auto;
+          width: 100%;
+      }
+      #block-views-people-admin-block-following .view-display-id-block_following .view-content,
+      #block-views-people-admin-block-followers .view-display-id-block_followers .view-content {
+          text-align: center;
+      }
+      #block-views-people-admin-block-followers .view-content a,
+      #block-views-people-admin-block-following .view-content a,
+      #block-views-people-admin-block-followers .view-content a:nth-child(3n+2),
+      #block-views-people-admin-block-following .view-content a:nth-child(3n+2) {
+          margin: 2px;
+          float: none;
+      }
+      .page-user .region-post-content {
+          width: inherit;
+      }
+      .page-user h2.profile-section {
+          margin-top: 5px!important;
+      }
+      .not-front.page-user.section-employees #footer {
+          margin-top:0px!important;
+      }
+      .group-profile-identity-bundle .atwork-relationship-action {
+          right: 140px;
+          top: 15px;
+      }
+  }
+  @media only screen
+  and (max-width:1024px)
+  and (max-height:768px)
+  and (orientation: landscape)  {
+     .masquerade-switch {
+          display: none!important;
+      }
+      #user-user-full-group-profile-card {
+          width: 100%;
+          margin: 0 auto;
+      }
+
+      #user-user-full-group-profile-card {
+          .field-name-field-image {
+              width: 200px;
+              margin-right: 1em;
+              }
+          .group-profile-identity-bundle {
+              max-width: 65%;
+              padding: 0;
+              margin-top: .8em;
+              margin-bottom: 10px;
+              }
+      }
+      #user-user-full-group-profile-card 
+      #user-user-full-group-profile-card .field-name-field-summary {
+          position: relative;
+          top: 30px;
+          left:-200px;
+          width:145%!important;
+          margin-bottom: 35px;
+      }
+      #user-user-full-group-profile-extra {
+          display: block;
+      }
+      #user-user-full-group-profile-extra .field-group-htabs-wrapper {
+          min-width:100%!important;
+      }
+      #block-views-people-admin-block-followers,
+      #block-views-people-admin-block-following {
+          float:none;
+          margin: 0 auto;
+          width: 100%;
+      }
+      #block-views-people-admin-block-following .view-display-id-block_following .view-content,
+      #block-views-people-admin-block-followers .view-display-id-block_followers .view-content {
+          text-align: center;
+      }
+      #block-views-people-admin-block-followers .view-content a,
+      #block-views-people-admin-block-following .view-content a,
+      #block-views-people-admin-block-followers .view-content a:nth-child(3n+2),
+      #block-views-people-admin-block-following .view-content a:nth-child(3n+2) {
+          margin: 2px;
+          float: none;
+      }
+      .page-user .region-post-content {
+          width: inherit;
+      }
+      .page-user h2.profile-section {
+          margin-top: 5px!important;
+      }
+      .not-front.page-user.section-employees #footer {
+          margin-top:0px!important;
+      }
+      .group-profile-identity-bundle .atwork-relationship-action {
+          top: 7px;
+      }
+  }
+  }

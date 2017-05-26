@@ -1,0 +1,86 @@
+/* Mobile Menu Appearance */
+#block-atwork-mobile-atwork-mobile-menu-block #full_menu {
+  padding:20px 0 0 5px;
+}
+
+#block-atwork-mobile-atwork-mobile-menu-block {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 60px;
+  overflow-y: scroll;
+  padding: 0;
+  background-color: #ECECEC;
+  background-image: url(/sites/all/themes/atwork_zen/images/atwork-logo-menu.png);
+  background-repeat: no-repeat;
+  background-position: center 5px;
+  z-index: 10000;
+  border-bottom: solid 8px #004B8D !important;
+}
+#block-atwork-mobile-atwork-mobile-menu-block i.fa.fa-bars {
+  font-size: 200%;
+  color: #666;
+}
+/*#block-atwork-mobile-atwork-mobile-menu-block i.fa.fa-bars:after {
+  content: " Menu";
+  font-family: atwork-font;
+  font-size: 125%;
+}*/
+#block-atwork-mobile-atwork-mobile-menu-block #full_menu #atwork_menu {
+  padding: 0;
+  margin: 0;
+  line-height: normal;
+}
+#block-atwork-mobile-atwork-mobile-menu-block .menu-title {
+  display: block;
+  padding: 8px;
+  margin: 0 25px 0 0;
+  border-bottom: solid 1px #A7A7A7;
+}
+
+#block-atwork-mobile-atwork-mobile-menu-block .menu-sub-title {
+  display: block;
+  padding: 8px;
+  margin-left: 25px;
+}
+#block-atwork-mobile-atwork-mobile-menu-block ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#block-atwork-mobile-atwork-mobile-menu-block li a {
+  color: #000;
+  display: block;
+}
+li.atwork_menu_nested a {
+  display: block;
+  margin: 5px 25px;
+  padding: 5px;
+  border: solid 1px #CCC;
+}
+li.atwork_menu_nested a:hover {
+  background-color: #CCC;
+  text-decoration:none;
+}
+
+li.atwork_menu_top_level .menu-title i.fa.fa-plus,
+li.atwork_menu_top_level .menu-sub-title i.fa.fa-plus {
+  padding: 2px;
+  border: solid 1px #999;
+  color: #999;
+  background-color: none;
+}
+li.atwork_menu_top_level .menu-title:hover,
+li.atwork_menu_top_level .menu-sub-title:hover {
+  background-color: #FFF;
+}
+
+li.atwork_menu_top_level .menu-title i.fa.fa-minus,
+li.atwork_menu_top_level .menu-sub-title i.fa.fa-minus {
+  padding: 2px;
+  border: solid 1px #000;
+  background-color: #26669E;
+  color: #FFF;
+}

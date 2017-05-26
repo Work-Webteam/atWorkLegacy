@@ -1,26 +1,17 @@
 <?php
 
 /**
- * The installer file for short_answer.
  * @file
+ * Short_answer questions install file.
  */
 
 /**
  * Implements hook_install().
  */
 function short_answer_install() {
-  // Add body field to short answer node
+  // Add body field to short answer node.
   quiz_question_add_body_field('short_answer');
   variable_set('node_options_short_answer', array('status'));
-  cache_clear_all('autoload:', 'cache');
-}
-
-/**
- * Implements hook_uninstall().
- */
-function short_answer_uninstall() {
-  // TODO The drupal_(un)install_schema functions are called automatically in D7.
-  // drupal_uninstall_schema('short_answer')
 }
 
 /**
@@ -46,7 +37,7 @@ function short_answer_schema() {
         'not null' => TRUE,
         'default' => 1,
       ),
-      // One of (0) textfield and (1) textare
+      // One of (0) textfield and (1) textarea.
       'text_entry_type' => array(
         'type' => 'int',
         'size' => 'tiny',
@@ -54,7 +45,7 @@ function short_answer_schema() {
         'not null' => TRUE,
         'default' => 0
       ),
-      // One of exact (0), case insensitive (1), regex (2), manual (3)
+      // One of exact (0), case insensitive (1), regex (2), manual (3).
       'correct_answer_evaluation' => array(
         'type' => 'int',
         'size' => 'tiny',
@@ -62,16 +53,16 @@ function short_answer_schema() {
         'not null' => TRUE,
         'default' => 0
       ),
-      // Correct answer
+      // Correct answer.
       'correct_answer' => array(
         'type' => 'text'
       ),
-      // Feedback if answer is correct
-      'feedback_correct'  => array(
+      // Feedback if answer is correct.
+      'feedback_correct' => array(
         'type' => 'text'
       ),
-      // Feedback if answer is incorrect
-      'feedback_incorrect'  => array(
+      // Feedback if answer is incorrect.
+      'feedback_incorrect' => array(
         'type' => 'text'
       ),
     ),
@@ -86,20 +77,10 @@ function short_answer_schema() {
         'unsigned' => TRUE,
         'not null' => TRUE,
       ),
-      'question_nid' => array(
+      'result_answer_id' => array(
         'type' => 'int',
         'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'question_vid' => array(
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'result_id' => array(
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
+        'not null' => FALSE,
       ),
       'score' => array(
         'type' => 'float',
@@ -128,15 +109,14 @@ function short_answer_schema() {
     ),
     'primary key' => array('answer_id'),
     'unique keys' => array(
-      'ids' => array('result_id', 'question_nid', 'question_vid'),
+      'result_answer_id' => array('result_answer_id'),
     ),
   );
   return $schema;
 }
 
-
 /**
- * Adding feedback field to table {quiz_short_answer_user_answers}
+ * Adding feedback field to table {quiz_short_answer_user_answers}.
  */
 function short_answer_update_7401() {
   if (!db_field_exists('quiz_short_answer_user_answers', 'answer_feedback')) {
@@ -149,14 +129,36 @@ function short_answer_update_7401() {
 }
 
 /**
- * Adding feedback format field to table {quiz_short_answer_user_answers}
+ * Adding feedback format field to table {quiz_short_answer_user_answers}.
  */
 function short_answer_update_7402() {
   if (!db_field_exists('quiz_short_answer_user_answers', 'answer_feedback_format')) {
     $spec = array(
-        'type' => 'varchar',
-        'length' => 255,
+      'type' => 'varchar',
+      'length' => 255,
     );
     db_add_field('quiz_short_answer_user_answers', 'answer_feedback_format', $spec);
   }
+}
+
+/**
+ * Normalize data storage.
+ */
+function short_answer_update_7500() {
+  db_drop_unique_key('quiz_short_answer_user_answers', 'ids');
+  db_add_field('quiz_short_answer_user_answers', 'result_answer_id', array(
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => FALSE,
+  ));
+  db_query("UPDATE {quiz_short_answer_user_answers} qtua
+    INNER JOIN {quiz_node_results_answers} qnra ON (qtua.question_nid = qnra.question_nid
+    AND qtua.question_vid = qnra.question_vid
+    AND qtua.result_id = qnra.result_id)
+    SET qtua.result_answer_id = qnra.result_answer_id");
+  db_drop_field('quiz_short_answer_user_answers', 'result_id');
+  db_drop_field('quiz_short_answer_user_answers', 'question_nid');
+  db_drop_field('quiz_short_answer_user_answers', 'question_vid');
+
+  db_add_unique_key('quiz_short_answer_user_answers', 'result_answer_id', array('result_answer_id'));
 }

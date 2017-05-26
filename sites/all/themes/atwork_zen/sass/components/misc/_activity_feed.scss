@@ -1,4 +1,4 @@
-//----------------- Common Activity Feed styles - Applies to both front and profile page 
+//----------------- Common Activity Feed styles - Applies to both front and profile page
 
 .block-atwork-activity {
   #edit-status { // textarea status box
@@ -14,7 +14,7 @@
     border: 5px solid #26669E;
   }
   #profile-comment-link { // shows the Message Check link
-    display: none; 
+    display: none;
   }
   #saving-notification-status {
     @include atwork-messages(green, ok);
@@ -42,22 +42,38 @@
     }
   }
   .new-message-count {
-    display: none;
-    position: absolute;
-    top: 10px;
-    left: 125px;
+    display: block;
+    position: relative;
+    top: -33px;
+    left: 98px;
+    left: 92px\0/ !important;/* For IE only */
     z-index: 100;
     width: 24px;
     height: 21px;
     text-align: center;
-    color:#FFF;
-    font-weight:bold;
+    color: #FFF;
+    font-weight: bold;
   }
-  #message-count-number { // TODO: Need a better icon and placement
+  #message-count-number {
     position: absolute;
     top: 2px;
-    left: 8px;
+    left: 0px;
+    width: 100%;
+    font-size: .9em;
+    &:hover {
+      cursor:pointer;
+    }
   }
+    #notification-pop {
+    border: solid 1px #000;
+    display: inline;
+    padding: 2px 5px;
+    background-color: #FFF;
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    z-index: 100;
+    }
   .comment-icon:before { // this was placed with jQuery since can't use :before on input tag
     position: absolute;
     left: 4px;
@@ -77,16 +93,17 @@
 
 //----- General Layout
 #social-side {
-  // start all Header items 
+  // start all Header items
   h2 {
-    position: absolute;
+    // position: absolute;
     left: 0;
     top: 0;
     z-index: 99;
   }
-  .block-header-inner { 
+  .block-header-inner {
     float: right;
     margin-top: -3px;
+    margin-right: 7px;
   }
   .activity-filters-my,
   .activity-filters-all {
@@ -132,7 +149,7 @@
   }
   // end Advanced Filters
 
-  // end all Header items 
+  // end all Header items
 
   // start feed-ad-space
     .feed-ad-space-image { // Lives outside of the ad-space container
@@ -176,9 +193,9 @@
 
     // end feed-ad-space
 
-  .atwork-activity-block-container {
+/*  .atwork-activity-block-container {
     margin-top: 46px; // push down the container because the header is positioned absolutely
-  }
+  }*/
   #atwork-activity-form {
     .form-item {
       margin-top: 0.5em;
@@ -224,14 +241,14 @@
   }
   #atwork-activity-customize-feed-form .description {
     margin-bottom: 1em;
-  }    
+  }
   .item-list { // the pager
     display: block;
-    width: 252px;
+    width: 100%;
     position: absolute;
     bottom: 18px;
-    padding: 0 0 4px 0;
-    margin: 0 0 0 5px;
+    padding: 0;
+    margin: 0;
     left:  0;
     background-color: #FFF;
   }
@@ -255,13 +272,10 @@
       text-align: right;
       margin-top: -3em;
     }
-    .message { // common to both outer and inner message box
-      
-    }
     label {
       display: none; //hide all labels. We don't need them
     }
-    
+
     > .message  { // start outer message div styling
       position: relative;
       min-height: 100px;
@@ -271,10 +285,10 @@
       background: lighten(#777, 49%) url(/sites/all/themes/atwork_zen/images/grey-trans.png) bottom center repeat-x;
       background-size: 18px;
     }
-    .date, 
+    .date,
     ul.links,
     .field-name-field-feed-like-button {
-      position: absolute; // unfortunately needed  
+      position: absolute; // unfortunately needed
       bottom: 0px;
       font-size: 10px;
     }
@@ -298,6 +312,7 @@
     .field-name-field-feed-like-button {
       width: 130px; //needed because ajax changes mean the reload applies the styling twice
       font-family: Arial, sans-serif;
+      left:35%;
       i:before {
         padding-right: 0.2em;
       }
@@ -305,33 +320,52 @@
     .field-name-field-comment-message-comments,
     .field-name-field-follow-feed-comments,
     .field-name-field-node-feed-reply {
-      + .field-name-field-feed-like-button {// outer message 'like'
+/*      + .field-name-field-feed-like-button {// outer message 'like'
         left: 35%;
-      }
+      }*/
     }
 
     // position all first message paragraphs. Status updates, etc. under the date.
     p[class^="msg-"] {
-      margin: -25px 10px 4px 48px;
+      margin: -25px 10px 5px 48px;
     }
     p {
       margin-left: 48px;
     }
+    .field-type-entityreference {
+      margin-left: 48px;
+    }
   }
-  
+
   // inner nested message div styling
   .entity-message {
-    p[class^="msg-"] + p + p { // start with this class and then only the 3rd p
+    p[class^="msg-"] + p + p, // start with this class and then only the 3rd p
+    span.activity-comment { // now includes comments made
       &:before {
         @include quotes-open;
       }
       &:after {
         @include quotes-closed;
-      }  
+      }
       a[href^=node] { // if exists, push more link out of quotes
         float: right;
-        margin: 0.5em 0 3em 0;
+        margin: 2em 10px 2.5em 0;
+        &:before {
+          content:"...";
+        }
       }
+      display: block;
+      margin-top:5px;
+      margin-bottom: 5px;
+      line-height: 12px;
+    }
+    span.activity-comment ~ a {
+      &:before {
+        content:"...";
+      }
+      display: inline;
+      float: right;
+      font-size: .9em;
     }
   }
 
@@ -371,7 +405,7 @@
   .reply-links a[href*="delete"] {// temp hide the delete button to help styling
     display: none;
   }
-  .replies { 
+  .replies {
     .field-name-field-image {
       max-width: 24px;
     }
@@ -454,7 +488,7 @@
       p:nth-last-of-type(2) {
         &:after {
           @include quotes-closed;
-        } 
+        }
       }
     }
 
@@ -503,7 +537,7 @@
       }
     }
     .field-name-field-comment-message-comments h3 {// not sure why this is here but hide it.
-      display: none; 
+      display: none;
     }
     .toggle-com-button {
       left: 17px;
@@ -528,7 +562,7 @@
 
 
 
-//---------- Comment Replies 
+//---------- Comment Replies
 
 .atwork-rate-widget-feed_like_button {
   a {
@@ -536,7 +570,7 @@
   }
 }
 
-.reply { 
+.reply {
   border: 1px solid #e0e0e0;
   position: relative;
   margin-bottom: 1em;
@@ -553,7 +587,7 @@
     }
     .field-item:after {
       @include quotes-closed;
-    }  
+    }
   }
   .field-name-field-profile-comment-date,
   .field-name-field-display-name {
@@ -566,7 +600,13 @@
     }
   }
 }
-
+// Post as Employee News Selector Toggle
+.field-name-field-post-as-employee-news label.option {
+  display:inline!important;
+}
+.toggle-com-button[value="Comment"] ~ .field-name-field-post-as-employee-news {
+  display: none!important; // Hides the option is the value of the toggle is Comment
+}
 .reply-body,
 .reply-links {
   padding: 0.2em;
@@ -577,7 +617,7 @@
     .field-name-field-image {
       margin: 0;
     }
-  } 
+  }
 }
 
 
@@ -610,7 +650,7 @@
 
 // Common Reply and Edit pages
 
-.page-reply { 
+.page-reply {
   #main {
     width: 620px;
   }
@@ -649,7 +689,7 @@
 
 
 
-//------------------ Pop-out User Activity Window specifics 
+//------------------ Pop-out User Activity Window specifics
 
 .new-activity-window {
   background-color: #D7D7D7;
@@ -679,7 +719,7 @@
 // Moved Chris files from atworklayout to here for the feed. Needs to be Sassily cleaned
 /* Pop Window on front page for the Social Sidebar */
 // Don't use a node id. There is a custom class called 'new-activity-window'
-.not-front .new-activity-window #headebox,
+.not-front .new-activity-window #headerbox,
 .not-front .new-activity-window #admin-menu,
 .not-front .new-activity-window #block-atwork-profiles-header,
 .not-front .new-activity-window #block-block-7 {
@@ -690,6 +730,7 @@
 }
 .not-front .new-activity-window {
   width: 275px!important;
+  min-width:initial!important;
 }
 .not-front .new-activity-window {
   background-color: #FFF;
@@ -706,9 +747,17 @@
   width: 275px;
   margin: 0px auto;
 }
-.not-front .new-activity-window #social-side h2 {
-  position: initial;
-  padding: 0 10px;
+.not-front .new-activity-window #social-side {
+  .block-header-inner {
+    margin-top: 0;
+  }
+  h2 {
+    position: initial;
+    margin-top: 0;
+    padding: 5px 10px;
+    background-color: #818283;
+    color: #FFF;
+    }
 }
 .not-front .new-activity-window #social-side .item-list {
   position: inherit;
@@ -723,4 +772,4 @@
 
 
 
-//----------------- End Pop-out User Activity Window 
+//----------------- End Pop-out User Activity Window

@@ -23,6 +23,7 @@ function atwork_zen_preprocess_page(&$variables, $hook) {
   drupal_add_library('system', 'jquery.cookie');
   //drupal_add_library('system', 'ui.cookie');
 
+
    // check if this is a node page
   if (isset($variables['page']['content']['system_main']['nodes'][arg(1)])) {
     $node = $variables['page']['content']['system_main']['nodes'][arg(1)]['#node'];
@@ -49,15 +50,6 @@ function atwork_zen_preprocess_page(&$variables, $hook) {
  *   The name of the template being rendered ("node" in this case.)
  */
 function atwork_zen_preprocess_node(&$variables, $hook) {
-
-
-  // Creating category class on simplenews content type.
-  //if($variables['type'] == 'simplenews'){
-  //  global $user;
-  //  $category = field_get_items('node', $variables['elements']['#node'], 'field_simplenews_term');
-  //  $variables['classes_array'][] = 'layout-' . drupal_html_class($category[0]['taxonomy_term']->name);
-  // }
-
   $node = $variables['node'];
 
   // edit submitted by
@@ -172,7 +164,6 @@ function atwork_zen_preprocess_node(&$variables, $hook) {
  * Do some stuff on the homepage
  */
 function atwork_zen_process_page(&$variables, $hooks){
-  //dpm($variables);
 
   // do wikis here
   if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'discussion') {
@@ -213,6 +204,8 @@ function atwork_zen_process_page(&$variables, $hooks){
     $variables['tabs'] = array();
     $variables['title'] = '';
   }
+
+
 }
 
 
@@ -352,3 +345,4 @@ function atwork_zen_pager($variables) { // used to change 'previous' to just 'pr
     ));
   }
 }
+

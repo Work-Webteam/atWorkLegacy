@@ -1464,7 +1464,14 @@ function atwork_activity_form_og_ui_confirm_unsubscribe_alter(&$form, &$form_sta
  *
  */
 function atwork_activity_form_reply_form_alter(&$form, &$form_state, $form_id){
+  global $user;
+  // Only admin can post as employee news
+  //TODO: Make this !_atwork_is_admin - that is when we want to make this change.
+  
+
+
   if($form['form_id']['#id'] == "edit-reply-form"){
+    global $user;
     // We are on the form, but the same form is used for add and edit, need to find which we are really on
     // Get rid of query string
     $check_url = explode('?', $_SERVER['REQUEST_URI']);
@@ -1475,7 +1482,9 @@ function atwork_activity_form_reply_form_alter(&$form, &$form_state, $form_id){
         drupal_set_title('Edit');
       }
     }
+
     // We need to change or remove the weird entity message we get on submit
+    // In addition, we will use the custom submit to save as employee news if that has been selected.
     $form['#submit'][] = 'reply_custom_submit';
   }
 }
@@ -1517,10 +1526,20 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
     if($form_id == 'field_ui_field_delete_form' || $form_id == "reply_delete_form" ){
       return;
     }
+    global $user;
     // hide these fields on all forms
     $form['field_hashtags']['#access'] = FALSE;
     $form['field_display_name']['#access'] = FALSE;
     $form['field_profile_comment_date']['#access'] = FALSE;
+    if(!_atwork_is_admin($user) && $form['#entity']->bundle == "entity_comments" ){
+    // Need to make sure this is the right form
+      $form_name_array = explode('_',$form_id);
+        if(isset($form_name_array) && $form_name_array[0] == 'reply' && $form_name_array[1] == "form"){
+        // No posting as employee news.
+        $form['field_post_as_employee_news']['#access'] = FALSE;
+      }
+    }
+
     // These can be updated regardless if there are available
     $author = user_load($form_state['reply']->uid);
     // Add image render as a #prefix to name?
@@ -1532,6 +1551,7 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
     // Leave out Reply/Edit and Delete versions of the form -- so far this field seems to be the only one that differentiates them
     $url_test = explode('/', $form['#action']);
     if($url_test[1] == "reply"){
+      $form['#submit'][] = 'atwork_activity_reply_form_submit_custom';
       return;
     }
    // hide this submit button when we use our own.
@@ -1568,6 +1588,11 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
  */
 
 function atwork_activity_reply_form_submit_custom($form, &$form_state) {
+  // Check if this is E News or not
+  if(isset($form_state['values']['field_post_as_employee_news']['und'][0]['value'])&& $form_state['values']['field_post_as_employee_news']['und'][0]['value'] == 1){
+    $form_state['reply']->uid = '10';
+    $form_state['values']['field_display_name']['und'][0]['value'] = t('Employee News');
+  }
   // Save this entity manually, and then we will refresh with Block Refresh (via JQuery)
   $reply = (object) $form_state['reply'];
   entity_form_submit_build_entity('reply', $reply, $form, $form_state);
@@ -1593,8 +1618,20 @@ function atwork_activity_entity_view_alter(&$build, $type){
         $ids[] = $build['#entity']->entity_id;
         $parent_message = entity_load($build['#entity']->entity_type, $ids );
         $message_author = user_load($parent_message[$build['#entity']->entity_id]->uid);
-        $message_name = $message_author->field_gal_first_name['und'][0]['safe_value'];
-        $author_line = " commented on $message_name" . "'s" . " status";
+        // See if this is employee news - need to manually add if anonymous user.
+        if(isset($parent_message[$build['#entity']->entity_id]->uid) && ($parent_message[$build['#entity']->entity_id]->uid == 10 || $parent_message[$build['#entity']->entity_id]->uid == 0)){
+          $message_name = t("Employee News");
+        } else {
+          $message_name = $message_author->field_gal_first_name['und'][0]['safe_value'];
+        }
+        // Need to check grammer
+        $grammer_check = substr($message_name, -1);
+        if($grammer_check == "s"){
+          $posessive = "'";
+        } else {
+          $posessive = "'s";
+        }
+        $author_line = " commented on $message_name" . $posessive . " status";
       } elseif($build['#entity']->depth > 0){
         // We have parents, so lets grab the immediate parent's author for this reply
         $mid = $build;
@@ -1612,7 +1649,12 @@ function atwork_activity_entity_view_alter(&$build, $type){
           // Will only ever be one of these
           $author_uid = $parent_reply_author[0]->uid;
           $reply_author = user_load($author_uid);
-          $author_first_name = $reply_author->field_gal_first_name['und'][0]['safe_value'];
+          if($author_uid == 10){
+            // Employee News user 10 does not have a traditional first name, so we need to take care of that here.
+            $author_first_name = t("Employee News");
+          } else {
+              $author_first_name = $reply_author->field_gal_first_name['und'][0]['safe_value'];
+          }
           $author_line = " replied to $author_first_name";
         }
       }
@@ -1679,8 +1721,14 @@ function atwork_activity_entity_view_alter(&$build, $type){
           ->fetchAll();
     // Will only ever be one of these
     $author = user_load($author_uid[0]->uid);
+
     // Add a link to their profile to encourage connections
-    $build["field_display_name"][0]['#markup'] = ' <a href="/employees/' . $author->name . '"> ' . $build["field_display_name"][0]['#markup'] . '</a> ' . $author_line;
+    if($author_uid[0]->uid == 10){
+      // We need to deal with the link from Employee News
+      $build['field_display_name'][0]['#markup'] = 'Employee News ' . $author_line;
+    } else {
+      $build["field_display_name"][0]['#markup'] = ' <a href="/employees/' . $author->name . '"> ' . $build["field_display_name"][0]['#markup'] . '</a> ' . $author_line;
+    }
     // Add image to the comment
     $image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
     // Now lets set a more dynamic date
@@ -1731,6 +1779,7 @@ function atwork_activity_entity_view_alter(&$build, $type){
 
     // Append the user image here
     $build["field_profile_comment_date"][0]['#markup'] = '<div class="feed-user-image">' . render($image) . '</div><!-- /.feed-user-image -->'. " Posted: " . $build["field_profile_comment_date"][0]['#markup'];
+
     // Add flag icon:
     $build['links']['flag']['#links']['flag-flag_for_message_replies']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $build['links']['flag']['#links']['flag-flag_for_message_replies']['title']);
   }
@@ -2008,10 +2057,6 @@ function atwork_activity_block_info() {
   return $blocks;
 }
 
-
-
-
-
 /*
  * Implementation of hook_block_view()
  *
@@ -2033,7 +2078,6 @@ function atwork_activity_block_view($delta = '') {
         '#markup' => '<div id="group-activity"><div class="activity-feed-progress"><img src="/sites/all/themes/atwork_zen/images/progress.gif" title="Loading" /></div><!-- /.activity-feed-progress --><div id="group-activity-ajax"></div><!-- /#group-activity-ajax --></div><!-- /#group-activity" -->',		
       );		
     break;
-
 
 
     case 'homepage':
@@ -2066,7 +2110,9 @@ function atwork_activity_block_view($delta = '') {
       } else {
         $account = user_load(arg(1));
         // Show the user's first name for the activityd title if this is not the current user's feed
-        $block['subject'] = $account->field_gal_first_name['und'][0]['safe_value'] . t("'s Activity");
+        if(isset($account->field_gal_first_name['und'][0]['safe_value']) && $account->field_gal_first_name['und'][0]['safe_value']){
+          $block['subject'] = $account->field_gal_first_name['und'][0]['safe_value'] . t("'s Activity");
+        }
       }
 
       // This helps to keep this code a little cleaner - all content is located in it's own function below.

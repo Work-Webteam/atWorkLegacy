@@ -43,7 +43,7 @@ function profile_feed_comments_strongarm() {
         'delta' => 'homepage',
       ),
       'bypass_page_cache' => 1,
-      'bypass_external_cache' => '',
+      'bypass_external_cache' => '0',
     ),
     'block-views-people-admin-block-following' => array(
       'element' => 'block-views-people-admin-block-following',

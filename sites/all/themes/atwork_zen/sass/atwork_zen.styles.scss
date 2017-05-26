@@ -21,6 +21,7 @@
 @import "components/buttons.scss";
 @import "components/menus/navigation.scss";
 @import "components/menus/quicktabs.scss";
+@import "components/menus/mobilemenu.scss";
 @import "components/misc/logo.scss";
 @import "components/misc/pagination.scss";
 @import "components/misc/search.scss";
@@ -32,6 +33,7 @@
 @import "components/node/article/teaser.scss";
 
 @import "components/node/profile/default.scss";
+@import "components/node/profile/mobileprofile.scss";
 
 @import "components/blocks.scss";
 @import "components/fields.scss";
@@ -91,25 +93,7 @@ a.avpw_cursor {
   list-style-image: url(/sites/all/themes/atwork_zen/images/arrow_blue_right.png);
 }
 
-
-
-
-
-
-
-
-
-
-
 /*----------------- End of Section--------------------*/
-
-
-
-
-
-
-
-
 
 
 /*#####################################################################################################################################################*/
@@ -163,10 +147,9 @@ html {
 }
 #footer {
   position: relative;
-  /*! margin-top: -300px; */
   padding-top: 15px;
-  /*! height: 300px; */
   clear: both;
+  display:block;
 }
 .not-front #footer {
   position: relative;
@@ -561,19 +544,13 @@ div.header-user {
 
 #navigation .region-navigation {
   display: block;
-  margin: 0 auto;
+  margin: 1px auto 0;
   padding: 0px;
   top: 0;
-  /* width: 100%; */
   position: fixed;
   clear: both;
   line-height: 1.5em;
   z-index: 100;
-  /*background-color: #ECECEC;*/
-  /*background: url(/sites/all/themes/atwork_zen/images/menu-grey-panel.png) repeat center top;
-  border-top: 1px solid #CCCCCC;*/
-}
-.front #navigation .region-navigation {
 }
 #navigation .ext {
   display: none;
@@ -726,14 +703,18 @@ div.header-user {
 	background-color: #A7A7A7;
 	text-decoration: none;
 }
+.front #block-views-home-page-blocks-zen-block-2 .view-header {
+	display: block;
+	text-align: center;
+}
 .front #block-views-home-page-blocks-zen-block-2 h2.block__title,
 .front #top-tools-panel h2 {
-	height: 36px;
-	padding: 0 0 0 15px;
+	padding: 0;
 	margin: 0;
-	background: url(/sites/all/themes/atwork_zen/images/top-tools-ribbon.png) no-repeat 0;
-	background-color: #818283;
+	background-color: #26669E;
 	color: #FFF;
+  text-align: center;
+  height:36px;
 }
 
 .front .view-home-page-blocks-zen {
@@ -921,6 +902,7 @@ div.header-user {
 #views_slideshow_controls_text_home_page_blocks_zen-block_5 {
     position: absolute;
     width:100%;
+    max-width:960px;
     top:120px;
 }
 #views_slideshow_controls_text_previous_home_page_blocks_zen-block_5 {
@@ -1170,9 +1152,9 @@ ol.search-results h3.title {
   border: 1px solid #f1f1f1;
 	padding-bottom: 15px;
 	width: 275px;
-	height: 1356px;
+	height: 1365px;
   overflow-x: hidden; // don't show horizontal scrollbar
-  overflow-y: scroll;
+  overflow-y: auto;
   box-sizing: border-box;
   padding: 4px;
 }
@@ -1361,7 +1343,7 @@ h3.front-promoted-title {
 }
 .front #block-atwork-activity-homepage h2.block__title {
   text-align:left;
-  padding-left: 12px;
+  padding-left: 8px;
 }
 
 /*------------------ New Front Page Events Block -----------------------------*/
@@ -1370,8 +1352,7 @@ h3.front-promoted-title {
 	display: inline-block;
 	float: left;
 	background-color: #D7D7D7;
-	min-width:619px;
-  max-width:63%;
+  min-width:615px;
 	height: 390px;
 	padding-bottom: 15px;
 }
@@ -1412,7 +1393,6 @@ h3.front-promoted-title {
 	display: block;
 	font-family: inherit;
 	font-size: 1em;
-	font-weight: bold;
 	padding: 2px;
 	margin: 0;
 }
@@ -1445,12 +1425,7 @@ h3.front-promoted-title {
 	padding-bottom: 1px;
 	border: solid 1px #C7C7C7;;
 }
-.front #block-views-home-page-blocks-zen-block-2 .view-header {
-	display: block;
-	width: 150px;
-	margin: -26px 0 26px 125px;
-	text-align: center;
-}
+
 .front #block-views-home-page-blocks-zen-block-2 .view-header a {
 	color: #FFF;
 }
@@ -4847,6 +4822,7 @@ article.node-tools #node-tools .node-links,
 .forum-post-panel-main {
     margin-left: 150px;
     height: auto !important;
+    min-height: auto!important;
 }
 #comments {
   background-color: #D7D7D7;
@@ -5394,6 +5370,19 @@ a.word {
   background: none;
   text-indent: 0;
   margin-right: 5px;
+}
+.forum-post-content {
+  .rate-thumbs-up-btn-up {
+    display: inline;
+    position: relative;
+    top: 30px;
+  }
+  .rate-info {
+    display: inline;
+    position: relative;
+    top: 30px;
+    left: 5px;
+  }
 }
 .rate-thumbs-up-btn-up:after {
   content: " Like";

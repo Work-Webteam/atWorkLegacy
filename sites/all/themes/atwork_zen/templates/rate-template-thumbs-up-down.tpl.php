@@ -40,3 +40,6 @@ if ($info) {
 if ($display_options['description']) {
   print '<div class="rate-description">' . $display_options['description'] . '</div>';
 }
+
+$display_options['title'] = '';
+?>

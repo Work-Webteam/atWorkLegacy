@@ -7,6 +7,12 @@
  */
 
 ?>
+<?php 
+if(isset($display_options['title'])){
+  $display_options['title'] = '';
+}
+?>
+
 <?php
 if(isset($up_button)){
   if(substr($up_button, 0, 2 ) == "<a") {
@@ -46,3 +52,4 @@ if ($info) {
 if ($display_options['description']) {
   print '<div class="rate-description">' . $display_options['description'] . '</div>';
 }
+

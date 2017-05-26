@@ -40,7 +40,7 @@ node/add/*',
         'weight' => 0,
       ),
     ),
-    'title' => '',
+    'title' => 'Your RSVP',
     'visibility' => 0,
   );
 

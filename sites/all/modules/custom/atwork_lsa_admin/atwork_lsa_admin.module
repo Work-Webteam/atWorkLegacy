@@ -229,7 +229,19 @@ function custom_vbo_submit_handler(&$form, &$form_state){
         'Alt_Email' => $value['alt_email'],
         'Employee ID' => $value['employee_id'],
         );
-      $file = fopen('/var/www/html/sites/all/modules/custom/atwork_lsa_admin/send_logs/' . $date . '_lsa_mail_send.csv', "a");
+      $base_path = $_SERVER["DOCUMENT_ROOT"];
+      
+      $csv_path = $base_path . "/sites/all/modules/custom/atwork_lsa_admin/send_logs/' . $date . '_lsa_mail_send.csv";
+
+      // if it exists, we can write to it, or else append
+      if(file_exists($csv_path)){
+        // Open todays .csv  
+        $file = fopen($base_path . '/sites/all/modules/custom/atwork_lsa_admin/send_logs/' . $date . '_lsa_mail_send.csv', "w");
+      } else {
+        // We need to create one
+        $file = fopen($base_path . '/sites/all/modules/custom/atwork_lsa_admin/send_logs/' . $date . '_lsa_mail_send.csv', "a");
+      }
+
       // Append to .csv
       fputcsv($file, $success_output);
 
@@ -252,7 +264,10 @@ function custom_vbo_submit_handler(&$form, &$form_state){
         'Employee ID' => $value['employee_id'],
         'error' => $value['reason'],
         );
-      $file = fopen('/var/www/html/sites/all/modules/custom/atwork_lsa_admin/send_logs/' . $date . '_lsa_mail_error.csv', "a");
+
+      $base_path = $_SERVER["DOCUMENT_ROOT"];
+
+      $file = fopen($base_path . '/sites/all/modules/custom/atwork_lsa_admin/send_logs/' . $date . '_lsa_mail_error.csv', "a");
       // Append to .csv
       fputcsv($file, $success_output);
 
@@ -446,11 +461,11 @@ function lsa_email_send($lsa_node){
   create_pdf($lsa_node);
 
   // get pdf url
-  $filepath = 'sites/default/files/lsa_pdfs/invitation_' . $lsa_node->nid . '.pdf';
+  $filepath = 'sites/default/files/lsa_pdfs/Printable_Keepsake_Invitation_' . $lsa_node->nid . '.pdf';
 
   $attachment = array(
      'filecontent' => file_get_contents($filepath),
-     'filename' => 'invitation_' . $lsa_node->nid . '.pdf',
+     'filename' => 'Printable_Keepsake_Invitation_' . $lsa_node->nid . '.pdf',
      'filemime' => 'application/pdf',
   );
   // We now cc supervisors
@@ -468,7 +483,8 @@ function lsa_email_send($lsa_node){
     // add pdf attachment here
     'attachment' => $attachment,
     'headers' => array(
-      'cc' => $supervisor_email,
+      // WARNING - reroute email does not capture this CC
+      //'cc' => $supervisor_email,
     ),
   );
 
@@ -547,21 +563,28 @@ function create_pdf($lsa_node){
   $pdf = new FPDF('P', 'pt', 'Letter');
 
   // Will save pdfs here
-  $filepath = 'sites/default/files/lsa_pdfs/invitation_' . $lsa_node->nid . '.pdf';
+  $filepath = 'sites/default/files/lsa_pdfs/Printable_Keepsake_Invitation_' . $lsa_node->nid . '.pdf';
+
+  // Make sure this doesn't already exist - if it does delete it.
+  if(file_exists($filepath)){
+    unlink($filepath);
+    // Rebuild php cache to show file is gone.
+    clearstatcache();
+  }
 
   // Add our first page The origin is at the upper-left corner and the current position is by default set at 1 cm from the borders; the margins can be changed with SetMargins().
   $pdf->AddPage();
 
   // Get font ready, include in file, We could have specified italics with I, underlined with U or a regular font with an empty string (or any combination). font size specified by points
-  $pdf->SetFont("Times", 'B', 20);
+  $pdf->SetFont("Times", 'IB', 20);
 
   // Grab our invitation image
-  $invitation = drupal_get_path('module', 'atwork_lsa_admin') . '/Invitation/LSA_print.jpg';
+  $invitation = drupal_get_path('module', 'atwork_lsa_admin') . '/Invitation/LSA_invite_Apr28_with_text.jpg';
   // Add the image
   $pdf->Image($invitation, 15,15, 580,0,'JPG');
 
   // Set our mark in the proper place for the name
-  $pdf->SetY(300);
+  $pdf->SetY(305);
 
   // Add name Text(float x, float y, string txt)
   $pdf->Cell(0,0,$username,0,1,'C');
