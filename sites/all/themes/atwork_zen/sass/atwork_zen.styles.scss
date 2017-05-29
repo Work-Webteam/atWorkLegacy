@@ -533,6 +533,7 @@ div.header-user {
 }
 #block-tb-megamenu-menu-main-menu-zen {
   width: 960px;
+  margin: auto;
 }
 #block-tb-megamenu-menu-main-menu-zen .tb-megamenu-row.row-fluid {
   max-width: 100% !important;
@@ -551,6 +552,9 @@ div.header-user {
   clear: both;
   line-height: 1.5em;
   z-index: 100;
+  width: 100vw;
+  left: calc(-50vw + 50%);
+  background-color: rgb(236,236,236);
 }
 #navigation .ext {
   display: none;
