@@ -36,6 +36,7 @@ class UserRelationshipsPrivatemsgRecipientTestCase extends DrupalWebTestCase {
     // Create relationship.
     $relationship = array(
       'name' => $this->randomName(),
+      'machine_name' => strtolower($this->randomName()),
       'plural_name' => $this->randomName(),
       'requires_approval' => FALSE,
       'expires_val' => 0,
@@ -46,9 +47,9 @@ class UserRelationshipsPrivatemsgRecipientTestCase extends DrupalWebTestCase {
     drupal_static_reset('user_relationships_types_load');
     $this->checkPermissions(array(), TRUE);
 
-    $have_permission = 'can have ' . $relationship['name'] . ' relationships';
-    $request_permission = 'can request ' . $relationship['name'] . ' relationships';
-    $maintain_permission = 'maintain ' . $relationship['name'] . ' relationships';
+    $have_permission = 'can have ' . $relationship['machine_name'] . ' relationships';
+    $request_permission = 'can request ' . $relationship['machine_name'] . ' relationships';
+    $maintain_permission = 'maintain ' . $relationship['machine_name'] . ' relationships';
 
     $admin = $this->drupalCreateUser(array('read privatemsg', 'write privatemsg', $have_permission, $request_permission, 'view relationship recipients', 'administer user relationships', $maintain_permission, 'write privatemsg to relationships', 'access user profiles'));
     $userA = $this->drupalCreateUser(array('read privatemsg', 'write privatemsg', $have_permission, $request_permission, 'view relationship recipients', 'write privatemsg to relationships'));
@@ -220,6 +221,7 @@ class UserRelationshipsPrivatemsgRecipientTestCase extends DrupalWebTestCase {
     // Create relationship.
     $relationship = array(
       'name' => $this->randomName(),
+      'machine_name' => strtolower($this->randomName()),
       'plural_name' => $this->randomName(),
       'requires_approval' => FALSE,
       'expires_val' => 0,
@@ -230,9 +232,9 @@ class UserRelationshipsPrivatemsgRecipientTestCase extends DrupalWebTestCase {
     drupal_static_reset('user_relationships_types_load');
     $this->checkPermissions(array(), TRUE);
 
-    $have_permission = 'can have ' . $relationship['name'] . ' relationships';
-    $request_permission = 'can request ' . $relationship['name'] . ' relationships';
-    $maintain_permission = 'maintain ' . $relationship['name'] . ' relationships';
+    $have_permission = 'can have ' . $relationship['machine_name'] . ' relationships';
+    $request_permission = 'can request ' . $relationship['machine_name'] . ' relationships';
+    $maintain_permission = 'maintain ' . $relationship['machine_name'] . ' relationships';
     $admin = $this->drupalCreateUser(array('read privatemsg', 'write privatemsg', $have_permission, $request_permission, 'view relationship recipients', 'administer user relationships', $maintain_permission, 'write privatemsg to relationships', 'access user profiles'));
 
     $this->drupalLogin($admin);
