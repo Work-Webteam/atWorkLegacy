@@ -8,9 +8,9 @@ files[] = views_dataviz_plugin_style_dataviz.inc
 files[] = views_dataviz_plugin_display_extender_dataviz_bigtext.inc
 dependencies[] = views
 
-; Information added by drupal.org packaging script on 2013-02-05
+; Information added by drupal.org packaging script on 2013-10-19
 version = "7.x-1.0-alpha3+4-dev"
 core = "7.x"
 project = "views_dataviz"
-datestamp = "1360030355"
+datestamp = "1382164706"
 
