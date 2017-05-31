@@ -54,7 +54,7 @@
   font-weight: bold;
   padding: 0 0 0 10px;
   margin: 0;
-  text-transform: none;
+  text-transform: uppercase;
 }
 .tb-megamenu .mega-nav .mega-group > .mega-group-title:hover,
 .tb-megamenu .dropdown-menu .mega-nav .mega-group > .mega-group-title:hover,
@@ -130,10 +130,6 @@
 }
 .tb-megamenu .nav > .dropdown > .dropdown-toggle .caret {
   display: inline-block;
-}
-.tb-megamenu .nav [class^="icon-"],
-.tb-megamenu .nav [class*=" icon-"] {
-  margin-right: 5px;
 }
 
 .tb-megamenu .nav {
@@ -231,29 +227,29 @@
 .tb-megamenu .dropdown-submenu:hover > a {
 	text-decoration: none;
 	color: #fff;
-	background-color: #26669E;
-	/* background-color: #0081c2; */
-	/* background-image: -moz-linear-gradient(top,#08c,#0077b3);
+	background-color: #08c;
+	background-color: #0081c2;
+	background-image: -moz-linear-gradient(top,#08c,#0077b3);
 	background-image: -webkit-gradient(linear,0 0,0 100%,from(#08c),to(#0077b3));
 	background-image: -webkit-linear-gradient(top,#08c,#0077b3);
 	background-image: -o-linear-gradient(top,#08c,#0077b3);
 	background-image: linear-gradient(to bottom,#08c,#0077b3);
 	background-repeat: repeat-x;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0076b2', GradientType=0); */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0076b2', GradientType=0);
 }
 .tb-megamenu .dropdown-menu .active > a,
 .tb-megamenu .dropdown-menu .active > a:hover {
 	color: #fff;
 	text-decoration: none;
 	outline: 0;
-	background-color: #26669E;
-	/* background-color: #004B8D; */
-	/* background-image: -moz-linear-gradient(top,#08c,#0077b3); */
-	/* background-image: -webkit-gradient(linear,0 0,0 100%,from(#08c),to(#0077b3)); */
-	/* background-image: -webkit-linear-gradient(top,#08c,#0077b3); */
-	/* background-image: -o-linear-gradient(top,#08c,#0077b3); */
-	/* background-image: linear-gradient(to bottom,#08c,#0077b3); */
-	/* background-repeat: repeat-x; */
+	background-color: #08c;
+	background-color: #0081c2;
+	background-image: -moz-linear-gradient(top,#08c,#0077b3);
+	background-image: -webkit-gradient(linear,0 0,0 100%,from(#08c),to(#0077b3));
+	background-image: -webkit-linear-gradient(top,#08c,#0077b3);
+	background-image: -o-linear-gradient(top,#08c,#0077b3);
+	background-image: linear-gradient(to bottom,#08c,#0077b3);
+	background-repeat: repeat-x;
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0076b2', GradientType=0);
 }
 .tb-megamenu .dropdown-menu .disabled > a,
@@ -613,7 +609,7 @@
 }
 .tb-megamenu .btn-group > .btn,
 .tb-megamenu .btn-group > .dropdown-menu {
-	font-size: 13px;
+	/*font-size: 13px;*/
 }
 .tb-megamenu .btn-group > .btn.first,
 .tb-megamenu .btn-group > .btn:first-child {
@@ -970,7 +966,7 @@
 	}
 .tb-megamenu .nav-collapse .nav li a {
 		margin-bottom: 0;
-		border-top: 1px solid #d9d9d9;		
+		border-top: 1px solid #d9d9d9;
 	}
 .tb-megamenu .nav-collapse .nav li ul li ul.dropdown-menu,
 .tb-megamenu .nav-collapse .nav li ul li:hover ul.dropdown-menu,
@@ -978,7 +974,7 @@
 		display: none !important;
 	}
 .tb-megamenu .nav-collapse .nav > li > a,
-.tb-megamenu .nav-collapse .dropdown-menu a {			
+.tb-megamenu .nav-collapse .dropdown-menu a {
 		-webkit-border-radius: 0;
 		-moz-border-radius: 0;
 		border-radius: 0;
