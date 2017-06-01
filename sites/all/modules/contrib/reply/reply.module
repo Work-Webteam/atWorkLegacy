@@ -967,7 +967,12 @@ function reply_menu_breadcrumb_alter(&$active_trail, $item) {
       $entity = reset($entity);
       $parent_path = drupal_get_path_alias($entity_type . '/' . $entity_id);
       $crumb['href'] = $parent_path;
-      $crumb['title'] = htmlspecialchars_decode($entity->title);
+      if(isset($entity->title) && $entity->title){
+        $crumb['title'] = htmlspecialchars_decode($entity->title);
+      } else {
+        $crumb['title'] = "Reply";
+      }
+
       $active_trail[$key] = $crumb;
     }
   }
