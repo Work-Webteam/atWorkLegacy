@@ -16,3 +16,9 @@ module: Views
 file:   views_plugin_display_attachment.inc
 source: https://www.drupal.org/node/2481401
 issue:  Notice: Undefined property: view::$exposed_input in views_plugin_display_attachment->attach_to()
+
+date:   2017-06-01
+module: Reply
+file:   Reply module
+source: https://www.drupal.org/node/2397007
+issue:  Reply module was never updated to allow for new admin menu mapping automation, this was patched in.
