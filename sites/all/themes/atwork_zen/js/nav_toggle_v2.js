@@ -76,10 +76,10 @@ Drupal.behaviors.atwork_quicklinks = {
   	});
 
 	$(window).scroll(function(){
-			$(".region-navigation").css("top", Math.max(-2, 161 - $(window).scrollTop()));
-			$("#block-tb-megamenu-menu-moderator-menu").css("top", Math.max(-2, 161 - $(window).scrollTop()));
-			$("#block-tb-megamenu-menu-lsa-admin").css("top", Math.max(-2, 161 - $(window).scrollTop()));
-			$(".view-top-tools").css("top", Math.max(30, 225 - $(window).scrollTop()));
+		$(".region-navigation").css("top", Math.max(-2, 161 - $(window).scrollTop()));
+		$("#block-tb-megamenu-menu-moderator-menu").css("top", Math.max(-2, 161 - $(window).scrollTop()));
+		$("#block-tb-megamenu-menu-lsa-admin").css("top", Math.max(-2, 161 - $(window).scrollTop()));
+		$(".view-top-tools").css("top", Math.max(30, 225 - $(window).scrollTop()));
 	});
 
 	if($(window).scrollTop() === -2){
