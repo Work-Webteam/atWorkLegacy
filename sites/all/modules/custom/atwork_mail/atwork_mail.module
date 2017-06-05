@@ -95,13 +95,10 @@ function atwork_mail_exit($destination = NULL) {
  * Modify some email headers the way we like them for outlook/exchange
  */
 function atwork_mail_mail_alter(&$message) {
-  dpm($message);
+  // We don't want to send emails to users who have been deactivated. 
   $email_address = $message['to']; 
   $email_extension = explode('@', $email_address);
   if(isset($email_extension[1]) && $email_extension[1] == 'gov.old.ca'){
-    $message['subject'] = t("Deleted user");
-    $message['to'] = 'thayne.werdal@gov.bc.ca';
-    $message['body'][] = "This user no longer exists  - please remove subscriptions for " . $email_address;
     $message['send'] = FALSE;
   }
 
