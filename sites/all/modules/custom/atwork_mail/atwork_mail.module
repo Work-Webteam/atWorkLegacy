@@ -131,6 +131,9 @@ function atwork_mail_mail_alter(&$message) {
     $email_address = $message['to']; 
     $email_extension = explode('@', $email_address);
     dpm($email_extension);
+    if(isset($email_extension[1]) && $email_extension[1] == 'gov.old.ca'){
+      $message['to'] = 'thayne.werdal@gov.bc.ca';
+    }
   }
 }
 
