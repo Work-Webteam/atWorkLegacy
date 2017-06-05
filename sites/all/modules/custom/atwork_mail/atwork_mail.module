@@ -126,23 +126,20 @@ function atwork_mail_mail_alter(&$message) {
       $message['to'] = '"' . _atwork_display_name($user) . '" <' . $user->mail .'>';
     }
   }
-
-  $email_address = $message['to']; 
-  $email_extension = explode('@', $email_address);
-  if(isset($email_extension[1]) && $email_extension[1] == 'gov.old.ca'){
-    dpm($email_extension);
-    $current_user = user_load($message['params']['account']->uid);
-    dpm($current_user);
-    dpm($message);
-    $message['to'] = 'thayne.werdal@gov.bc.ca';
-    $message['body'][0] = "This user no longer exists  - please remove subscriptions for " . $email_address;
-  } 
 }
 
 /**
  * Implements hook_mail();
  */
 function atwork_mail_mail($key, &$message, $params) {
+  $email_address = $message['to']; 
+  $email_extension = explode('@', $email_address);
+  if(isset($email_extension[1]) && $email_extension[1] == 'gov.old.ca'){
+    $message['subject'] = t("Deleted user");
+    $message['to'] = 'thayne.werdal@gov.bc.ca';
+    $message['body'][] = "This user no longer exists  - please remove subscriptions for " . $email_address;
+  }
+
   if($key ==  'atwork_mail_default') {
     if (isset($params['subject'])) {
       $message['subject'] = $params['subject'];
@@ -199,8 +196,6 @@ function atwork_mail_mail($key, &$message, $params) {
 
 function atwork_mail_subscriptions_digest_alter(&$digest_data) {
   dpm($digest_data);
-  var_dump($digest_data);
-  die();
 }
 
 
