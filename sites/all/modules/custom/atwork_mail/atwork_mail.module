@@ -129,8 +129,8 @@ function atwork_mail_mail_alter(&$message) {
 
   if($message['id'] == 'subscriptions_mail_digest'){
     if($message['to'] == 'Brendan.Jennings@gov.bc.ca'){
-      uset($message);
       dpm($message);
+      uset($message);
       return;
     }
   }
