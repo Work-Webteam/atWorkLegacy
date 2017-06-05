@@ -127,23 +127,19 @@ function atwork_mail_mail_alter(&$message) {
     }
   }
 
-  if($message['id'] == 'subscriptions_mail_digest'){
     $email_address = $message['to']; 
     $email_extension = explode('@', $email_address);
-    dpm($email_extension);
     if(isset($email_extension[1]) && $email_extension[1] == 'gov.old.ca'){
+      dpm($email_extension);
       $message['to'] = 'thayne.werdal@gov.bc.ca';
+      $message['body'][0] = "This user no longer exists  - please remove subscriptions for " . $email_address;
     }
-  }
 }
 
 /**
  * Implements hook_mail();
  */
 function atwork_mail_mail($key, &$message, $params) {
-  dpm($key);
-  dpm($message);
-  dpm($params);
   if($key ==  'atwork_mail_default') {
     if (isset($params['subject'])) {
       $message['subject'] = $params['subject'];
