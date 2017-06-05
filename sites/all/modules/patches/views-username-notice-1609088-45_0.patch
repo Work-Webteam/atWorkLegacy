@@ -1,0 +1,127 @@
+diff --git a/modules/user/views_handler_field_user.inc b/modules/user/views_handler_field_user.inc
+index f6b15b5..65ecd48 100644
+--- a/modules/user/views_handler_field_user.inc
++++ b/modules/user/views_handler_field_user.inc
+@@ -16,9 +16,7 @@ class views_handler_field_user extends views_handler_field {
+    */
+   function init(&$view, &$data) {
+     parent::init($view, $data);
+-    if (!empty($this->options['link_to_user'])) {
+-      $this->additional_fields['uid'] = 'uid';
+-    }
++    $this->additional_fields['uid'] = 'uid';
+   }
+ 
+   function option_definition() {
+diff --git a/modules/user/views_handler_field_user_language.inc b/modules/user/views_handler_field_user_language.inc
+index e29da31..c3bd854 100644
+--- a/modules/user/views_handler_field_user_language.inc
++++ b/modules/user/views_handler_field_user_language.inc
+@@ -31,9 +31,4 @@ class views_handler_field_user_language extends views_handler_field_user {
+ 
+     return $this->sanitize_value($lang->name);
+   }
+-
+-  function render($values) {
+-    $value = $this->get_value($values);
+-    return $this->render_link($this->sanitize_value($value), $values);
+-  }
+ }
+diff --git a/modules/user/views_handler_field_user_name.inc b/modules/user/views_handler_field_user_name.inc
+index 4551451..2fc9d53 100644
+--- a/modules/user/views_handler_field_user_name.inc
++++ b/modules/user/views_handler_field_user_name.inc
+@@ -11,16 +11,6 @@
+  * @ingroup views_field_handlers
+  */
+ class views_handler_field_user_name extends views_handler_field_user {
+-  /**
+-   * Add uid in the query so we can test for anonymous if needed.
+-   */
+-  function init(&$view, &$data) {
+-    parent::init($view, $data);
+-    if (!empty($this->options['overwrite_anonymous']) || !empty($this->options['format_username'])) {
+-      $this->additional_fields['uid'] = 'uid';
+-    }
+-  }
+-
+   function option_definition() {
+     $options = parent::option_definition();
+ 
+diff --git a/tests/user/views_handler_field_user_name.test b/tests/user/views_handler_field_user_name.test
+index 6ace471..b6e0b6c 100644
+--- a/tests/user/views_handler_field_user_name.test
++++ b/tests/user/views_handler_field_user_name.test
+@@ -49,9 +49,24 @@ class viewsHandlerFieldUserNameTest extends ViewsSqlTest {
+     $anon_name = $view->field['name']->options['anonymous_text'] = $this->randomName();
+     $render = $view->field['name']->advanced_render($view->result[0]);
+     $this->assertIdentical($render, $anon_name , 'For user0 it should use the configured anonymous text if overwrite_anonymous is checked.');
++  }
+ 
++  /**
++   * Tests that deselecting 'link_to_user' and 'format_username' works.
++   */
++  public function testOptions() {
++    $view = $this->view_raw_user_name();
++    $view->init_display();
++    $this->executeView($view);
+ 
++    $view->row_index = 0;
++
++    $username = $view->result[0]->users_name = 'test';
++    $view->result[0]->uid = 1;
++    $render = $view->field['name']->advanced_render($view->result[0]);
++    $this->assertTrue(strpos($render, $username) !== FALSE, 'If link to user is checked the username should be part of the output.');
+   }
++
+   function view_user_name() {
+     $view = new view;
+     $view->name = 'test_views_handler_field_user_name';
+@@ -93,4 +108,47 @@ class viewsHandlerFieldUserNameTest extends ViewsSqlTest {
+ 
+     return $view;
+   }
++
++  function view_raw_user_name() {
++    $view = new view;
++    $view->name = 'test_views_handler_field_user_name';
++    $view->description = '';
++    $view->tag = 'default';
++    $view->base_table = 'users';
++    $view->human_name = 'test_views_handler_field_user_name';
++    $view->core = 7;
++    $view->api_version = '3.0';
++    $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
++
++    /* Display: Master */
++    $handler = $view->new_display('default', 'Master', 'default');
++    $handler->display->display_options['access']['type'] = 'none';
++    $handler->display->display_options['cache']['type'] = 'none';
++    $handler->display->display_options['query']['type'] = 'views_query';
++    $handler->display->display_options['query']['options']['query_comment'] = FALSE;
++    $handler->display->display_options['exposed_form']['type'] = 'basic';
++    $handler->display->display_options['pager']['type'] = 'full';
++    $handler->display->display_options['style_plugin'] = 'default';
++    $handler->display->display_options['row_plugin'] = 'fields';
++    /* Field: User: Name */
++    $handler->display->display_options['fields']['name']['id'] = 'name';
++    $handler->display->display_options['fields']['name']['table'] = 'users';
++    $handler->display->display_options['fields']['name']['field'] = 'name';
++    $handler->display->display_options['fields']['name']['label'] = '';
++    $handler->display->display_options['fields']['name']['alter']['alter_text'] = 0;
++    $handler->display->display_options['fields']['name']['alter']['make_link'] = 0;
++    $handler->display->display_options['fields']['name']['alter']['absolute'] = 0;
++    $handler->display->display_options['fields']['name']['alter']['word_boundary'] = 0;
++    $handler->display->display_options['fields']['name']['alter']['ellipsis'] = 0;
++    $handler->display->display_options['fields']['name']['alter']['strip_tags'] = 0;
++    $handler->display->display_options['fields']['name']['alter']['trim'] = 0;
++    $handler->display->display_options['fields']['name']['alter']['html'] = 0;
++    $handler->display->display_options['fields']['name']['hide_empty'] = 0;
++    $handler->display->display_options['fields']['name']['empty_zero'] = 0;
++    $handler->display->display_options['fields']['name']['link_to_user'] = 0;
++    $handler->display->display_options['fields']['name']['format_username'] = 0;
++    $handler->display->display_options['fields']['name']['overwrite_anonymous'] = 0;
++
++    return $view;
++  }
+ }
