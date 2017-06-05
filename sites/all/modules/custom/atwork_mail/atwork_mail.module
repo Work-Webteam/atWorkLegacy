@@ -95,7 +95,6 @@ function atwork_mail_exit($destination = NULL) {
  * Modify some email headers the way we like them for outlook/exchange
  */
 function atwork_mail_mail_alter(&$message) {
-  dpm($message);
   if ($message['id'] == 'forward_forward_page') {
     // we added quotes around the name in atwork_misc atwork_forward_form_validate()
     // now remove them from the subject
@@ -129,8 +128,9 @@ function atwork_mail_mail_alter(&$message) {
   }
 
   if($message['id'] == 'subscriptions_mail_digest'){
-    if($message['to'] == 'Brendan.Jennings@gov.bc/ca'){
+    if($message['to'] == 'Brendan.Jennings@gov.bc.ca'){
       uset($message);
+      dpm($message);
       return;
     }
   }
