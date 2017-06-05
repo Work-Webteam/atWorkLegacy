@@ -137,8 +137,7 @@ function atwork_mail_mail_alter(&$message) {
       dpm($message);
       $message['to'] = 'thayne.werdal@gov.bc.ca';
       $message['body'][0] = "This user no longer exists  - please remove subscriptions for " . $email_address;
-      var_dump($current_user);
-      die();
+      var_dump($message);
     }
 }
 
