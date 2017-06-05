@@ -126,7 +126,7 @@ function atwork_mail_mail_alter(&$message) {
       $message['to'] = '"' . _atwork_display_name($user) . '" <' . $user->mail .'>';
     }
   }
-/**
+/*
   $email_address = $message['to']; 
   $email_extension = explode('@', $email_address);
   if(isset($email_extension[1]) && $email_extension[1] == 'gov.old.ca'){
@@ -136,7 +136,7 @@ function atwork_mail_mail_alter(&$message) {
     dpm($message);
     $message['to'] = 'thayne.werdal@gov.bc.ca';
     $message['body'][0] = "This user no longer exists  - please remove subscriptions for " . $email_address;
-  } **/
+  } */
 }
 
 /**
