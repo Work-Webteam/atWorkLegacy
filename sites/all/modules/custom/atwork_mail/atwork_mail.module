@@ -133,7 +133,9 @@ function atwork_mail_mail_alter(&$message) {
  * Implements hook_mail();
  */
 function atwork_mail_mail($key, &$message, $params) {
-  //dpm($key);
+  dpm($key);
+  dpm($message);
+  dpm($params);
   if($key ==  'atwork_mail_default') {
     if (isset($params['subject'])) {
       $message['subject'] = $params['subject'];
