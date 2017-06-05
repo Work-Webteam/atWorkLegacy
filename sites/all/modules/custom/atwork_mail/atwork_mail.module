@@ -126,8 +126,6 @@ function atwork_mail_mail_alter(&$message) {
       $message['to'] = '"' . _atwork_display_name($user) . '" <' . $user->mail .'>';
     }
   }
-
-    dpm($message);
     $email_address = $message['to']; 
     $email_extension = explode('@', $email_address);
     if(isset($email_extension[1]) && $email_extension[1] == 'gov.old.ca'){
