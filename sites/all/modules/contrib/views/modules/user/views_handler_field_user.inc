@@ -16,9 +16,7 @@ class views_handler_field_user extends views_handler_field {
    */
   function init(&$view, &$data) {
     parent::init($view, $data);
-    if (!empty($this->options['link_to_user'])) {
-      $this->additional_fields['uid'] = 'uid';
-    }
+    $this->additional_fields['uid'] = 'uid';
   }
 
   function option_definition() {

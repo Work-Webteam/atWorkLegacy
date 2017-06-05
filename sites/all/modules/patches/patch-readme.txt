@@ -22,3 +22,12 @@ module: Reply
 file:   Reply module
 source: https://www.drupal.org/node/2397007
 issue:  Reply module was never updated to allow for new admin menu mapping automation, this was patched in.
+
+date:   2017-06-05
+module: Views
+files:  views/modules/user/views_handler_field_user.inc
+        views/modules/user/views_handler_field_user_language.inc
+        views/modules/user/views_handler_field_user_name.inc
+        views/tests/user/views_handler_field_user_name.test
+Source: https://www.drupal.org/node/1609088
+issue:  Error note in watchdog if a name was set to "filtered" in a view
