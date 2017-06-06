@@ -135,16 +135,17 @@ function _subscriptions_mail_mail_edit_form_extra(array &$form, array &$form_sta
     $node_type_id = 'subscriptions_mail_node-type-';
     if (strpos($form['id']['#value'], $node_type_id) === 0) {
       $content_type = substr($form['id']['#value'], strlen($node_type_id));
+      $note = module_exists('field_ui') ? '' : ' (' . t('Requires the !Field_UI core module.', array('!Field_UI' => 'Field UI')) . ')';
       $description = $description . t('Alternatively, @t7 provides the entire rendered item as defined in the <a href="!link">display settings for the %Subscriptions view mode</a>.', array(
         '@t7' => '[subs:view]',
         '%Subscriptions' => t('Subscriptions'),
         '!link' => url("admin/structure/types/manage/$content_type/display"),
-      ));
+      )) . $note;
       $comment_description = $comment_description . t('Alternatively, @t8 provides the entire rendered comment as defined in the <a href="!link">comment display settings for the %Subscriptions view mode</a>.', array(
         '@t8' => '[subs:view]',
         '%Subscriptions' => t('Subscriptions'),
         '!link' => url("admin/structure/types/manage/$content_type/comment/display"),
-       ));
+       )) . $note;
     }
     $form['mail']['body']['#description'] = $description;
 

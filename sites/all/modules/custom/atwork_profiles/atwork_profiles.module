@@ -352,9 +352,9 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
   $form['#validate'][] = '_atwork_profiles_required_validate';
 
   $account = $form['#user'];
-
+  $current_user = user_load($user->uid);
   // if not an admin hide important user fields
-  if (user_access(!'administer users')) {
+  if (!_atwork_is_admin($current_user)) {
     $form['signature_settings']['#access'] = FALSE;
     $form['og_user_node']['#access'] = FALSE;
     $form['contact']['#access'] = FALSE;

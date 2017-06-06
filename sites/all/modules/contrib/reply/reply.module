@@ -122,6 +122,9 @@ function reply_admin_menu_map() {
   if (!user_access('administer reply bundles')) {
     return;
   }
+
+  $map = array();
+
   $reply_bundles = reply_load_bundles();
   $path = 'admin/structure/reply/manage/%reply_bundle';
   $map[$path] = array(
@@ -130,21 +133,6 @@ function reply_admin_menu_map() {
       array('%reply_bundle' => array_keys($reply_bundles)),
     ),
   );
-
-  foreach ($reply_bundles as $bundle_name => $bundle_info) {
-    $fields = array();
-    foreach (field_info_instances('reply', $bundle_name) as $field) {
-      $fields[] = $field['field_name'];
-    }
-    $arguments = array(
-      '%reply_bundle' => array($bundle_name),
-      '%field_ui_menu' => $fields,
-    );
-    if (!empty($arguments)) {
-      $map["$path/fields/%field_ui_menu"]['parent'] = "$path/fields";
-      $map["$path/fields/%field_ui_menu"]['arguments'][] = $arguments;
-    }
-  }
 
   return $map;
 }
@@ -967,7 +955,12 @@ function reply_menu_breadcrumb_alter(&$active_trail, $item) {
       $entity = reset($entity);
       $parent_path = drupal_get_path_alias($entity_type . '/' . $entity_id);
       $crumb['href'] = $parent_path;
-      $crumb['title'] = htmlspecialchars_decode($entity->title);
+      if(isset($entity->title) && $entity->title){
+        $crumb['title'] = htmlspecialchars_decode($entity->title);
+      } else {
+        $crumb['title'] = "Reply";
+      }
+
       $active_trail[$key] = $crumb;
     }
   }

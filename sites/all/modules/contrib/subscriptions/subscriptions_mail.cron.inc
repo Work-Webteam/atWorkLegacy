@@ -11,6 +11,7 @@
  * Takes items from {subscriptions_queue} and generates notification emails.
  */
 function _subscriptions_mail_cron() {
+
   global $user, $language;
   _subscriptions_mail_module_load_include('templates.inc');
 
@@ -47,12 +48,15 @@ function _subscriptions_mail_cron() {
       break;  // No more ready queue items, terminate loop.
     }
 
-    $saved_user = $user;
+    $saved_user     = $user;
     $saved_language = $language;
     drupal_save_session(FALSE);
-    $user = user_load($queue_item['uid']);
+    $user      = user_load($queue_item['uid']);
     $lang_code = $language->language;
-    $digest_data = array('subs' => array('type' => 'digest'));
+    // Clear the term cache to avoid getting a different user's set of terms.
+    entity_load('taxonomy_term', array(), array(), TRUE);
+
+    $digest_data                      = array('subs' => array('type' => 'digest'));
     $watchdog_variables['%user_name'] = $user->name;
 
     do {  // once and repeat while adding to a digest
@@ -62,7 +66,7 @@ function _subscriptions_mail_cron() {
           $watchdog('subscriptions', t('Subscription of blocked user %user_name ignored.', $watchdog_variables), NULL, WATCHDOG_DEBUG);
         }
       }
-      elseif (!$user->access) {
+      elseif (!$user->access && !variable_get('subscriptions_mail_unaccessed_users', FALSE)) {
         if ($watchall) {
           $watchdog('subscriptions', t('Subscription of never-logged-in user %user_name ignored.', $watchdog_variables), NULL, WATCHDOG_DEBUG);
         }
@@ -71,7 +75,7 @@ function _subscriptions_mail_cron() {
         $queue_item['mail'] = $user->mail;
         /** @var $load_function string */
         $load_function = $queue_item['load_function'];
-        $load_args = $queue_item['load_args'];
+        $load_args     = $queue_item['load_args'];
         if (!isset($loaded_objects[$user->uid][$load_function][$load_args]) && $load_function($queue_item)) {
           $object = $queue_item['object'];
           $access = module_invoke_all('subscriptions', 'access', $load_function, $load_args, $object);
@@ -81,28 +85,28 @@ function _subscriptions_mail_cron() {
           // One FALSE vote is enough to deny. Also, we need a non-empty array.
           $allow = !empty($access) && array_search(FALSE, $access) === FALSE;
           if (!$allow && $watchall) {
-            $watchdog('subscriptions', t("User %user_name was denied access to %load(%args).", $watchdog_variables + array('%load' => $load_function, '%args' => serialize($load_args))), NULL, WATCHDOG_DEBUG);
+            $watchdog('subscriptions', t("User %user_name was denied access to %load(!args).", $watchdog_variables + array('%load' => $load_function, '!args' => filter_xss(serialize($load_args)))), NULL, WATCHDOG_DEBUG);
             $watchall = FALSE;
           }
           $loaded_objects[$user->uid][$load_function][$load_args] = $allow ? $object : FALSE;
         }
         if (empty($loaded_objects[$user->uid][$load_function][$load_args])) {
           if ($watchall) {
-            $watchdog('subscriptions', t('User %user_name was unable or not allowed to %load(%args).', $watchdog_variables + array('%load' => $load_function, '%args' => serialize($load_args))), NULL, WATCHDOG_DEBUG);
+            $watchdog('subscriptions', t('User %user_name was unable or not allowed to %load(!args).', $watchdog_variables + array('%load' => $load_function, '!args' => filter_xss(serialize($load_args)))), NULL, WATCHDOG_DEBUG);
           }
         }
         else {
-          $object = $loaded_objects[$user->uid][$load_function][$load_args];
-          $module = $queue_item['module'];
+          $object    = $loaded_objects[$user->uid][$load_function][$load_args];
+          $module    = $queue_item['module'];
           $ori_field = $field = $queue_item['field'];
           $ori_value = $value = $queue_item['value'];
           if (!isset($fields[$lang_code][$module])) {
             $fields[$lang_code][$module] = module_invoke_all('subscriptions', 'fields', $module);
           }
           $data_function = $fields[$lang_code][$module][$field]['data_function'];
-          $mailmod = (empty($fields[$lang_code][$module][$field]['mail_module']) ? 'subscriptions_mail' : $fields[$lang_code][$module][$field]['mail_module']);
-          $mailkey = $fields[$lang_code][$module][$field]['mailkey'];
-          if ($mailkey_altered = module_invoke_all('subscriptions', 'mailkey_alter', $mailkey, $object)) {
+          $mailmod       = (empty($fields[$lang_code][$module][$field]['mail_module']) ? 'subscriptions_mail' : $fields[$lang_code][$module][$field]['mail_module']);
+          $mailkey       = $fields[$lang_code][$module][$field]['mailkey'];
+          if ($mailkey_altered = module_invoke_all('subscriptions', 'mailkey_alter', $mailkey, $object, $queue_item)) {
             $mailkey = $mailkey_altered[0];
           }
           $digest = $queue_item['digest'] > 0 || $queue_item['digest'] == -1 && _subscriptions_get_setting('digest', 0) > 0;
@@ -120,7 +124,7 @@ function _subscriptions_mail_cron() {
           //mail_edit_format($values['subscriptions_comment_body'], $data + array('comment' => $comment), array('language' => $language));
 
           if ($digest) {
-            $digest_data = subscriptions_mail_digest_add_item($digest_data, $mailmod, $mailkey, $data, $user);
+            $digest_data                                                         = subscriptions_mail_digest_add_item($digest_data, $mailmod, $mailkey, $data, $user);
             $digest_data['subs']['send_intervals'][$queue_item['send_interval']] = $queue_item['send_interval'];
           }
           else {
@@ -144,16 +148,19 @@ function _subscriptions_mail_cron() {
           (_subscriptions_mail_send($mailmod, SUBSCRIPTIONS_DIGEST_MAILKEY, $digest_data['subs']['name'], $digest_data['subs']['mail'], $from, $digest_data['subs']['uid'], $digest_data['subs']['send_intervals'], $digest_data)
             ? ++$digest_count
             : ++$digest_failed);
-          $digest = FALSE;
+          $digest      = FALSE;
           $digest_data = array('subs' => array('type' => 'digest'));
         }
       }
     } while (!empty($digest));
 
-    $user = $saved_user;
+    $user     = $saved_user;
     $language = $saved_language;
     drupal_save_session(TRUE);
   }
+
+  // Clear the term cache again for the next cron client.
+  entity_load('taxonomy_term', array(), array(), TRUE);
 
   if ($single_count + $digest_count + $single_failed + $digest_failed > 0) {
     $current_seconds = timer_read('page')/1000;
@@ -332,9 +339,46 @@ function _subscriptions_mail_send($module, $mailkey, $name, $to, $from, $uid, $s
 /**
  * Implements hook_mail_alter().
  *
+ * Optionally change links to use HTTPS, but only for Subscriptions mails.
+ *
  * @param $message
  */
-function subscriptions_mail_mail_alter(&$message) {
+function _subscriptions_mail_mail_alter(array &$message) {
+  global $user;
+  static $site_url = NULL;
+  static $replacement;
+
+  if (!isset($site_url)) {
+    $site_url = url('', array('absolute' => TRUE));
+    if (_subscriptions_get_setting('secure_links', $user) > 0) {
+      if (strpos($site_url, 'http:') === 0) {
+        $site_url = $replacement[$site_url] = 'https:' . substr($site_url, 5);
+      }
+    }
+    else {
+      if (strpos($site_url, 'https:') === 0) {
+        $site_url = $replacement[$site_url] = 'http:' . substr($site_url, 6);
+      }
+    }
+  }
+
+  if (!empty($replacement)) {
+    $msg = strtr($message['body'][0], $replacement);
+    while (preg_match("#(?P<before>(.*)(<[aA] +)(href|HREF)=([\"']))/(?P<after>.*)$#sAD", $msg, $matches)) {
+      $msg = $matches['before'] . $site_url . $matches['after'];
+    }
+    while (preg_match("#(?P<before>(.*)<(img|IMG) +(src|SRC)=([\"']))/(?P<after>.*)$#sAD", $msg, $matches)) {
+      $msg = $matches['before'] . $site_url . $matches['after'];
+    }
+    $message['body'][0] = $msg;
+  }
+  
+  if (variable_get('subscriptions_showmailkeys', 0)) {
+    $prefix = substr($message['body'][0], 0, 2);
+    $prefix = ( $prefix[1] == ' ' ? $prefix : '' );
+    $message['body'][0] = $message['body'][0] . $prefix . $message['id'] . "\n";
+  }
+
   /* Comment this line for debugging...
   dpm($message, 'drupal_mail() is disabled in subscriptions_mail_mail_alter(); this would be sent');
   $message['to'] = '';

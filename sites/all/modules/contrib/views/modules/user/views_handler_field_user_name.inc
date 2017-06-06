@@ -14,14 +14,13 @@ class views_handler_field_user_name extends views_handler_field_user {
   /**
    * Add uid in the query so we can test for anonymous if needed.
    */
-  /*
   function init(&$view, &$data) {
     parent::init($view, $data);
     if (!empty($this->options['overwrite_anonymous']) || !empty($this->options['format_username'])) {
       $this->additional_fields['uid'] = 'uid';
     }
   }
-  */
+
   function option_definition() {
     $options = parent::option_definition();
 
@@ -75,7 +74,7 @@ class views_handler_field_user_name extends views_handler_field_user {
       }
     }
     // If we want a formatted username, do that.
-    if (!empty($this->options['format_username'])) {
+    if (!empty($this->options['format_username']) && !is_null($account->uid)) {
       return format_username($account);
     }
     // Otherwise, there's no special handling, so return the data directly.

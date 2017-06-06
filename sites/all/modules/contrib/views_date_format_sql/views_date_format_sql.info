@@ -8,9 +8,9 @@ files[] = views_date_format_sql.module
 ; Views handlers
 files[] = includes/views_date_format_sql_handler_field_date.inc
 
-; Information added by drupal.org packaging script on 2012-06-13
-version = "7.x-3.1"
+; Information added by Drupal.org packaging script on 2016-01-20
+version = "7.x-3.3"
 core = "7.x"
 project = "views_date_format_sql"
-datestamp = "1339585620"
+datestamp = "1453313347"
 
