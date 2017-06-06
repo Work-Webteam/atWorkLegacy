@@ -76,16 +76,16 @@ Drupal.behaviors.atwork_quicklinks = {
   	});
 
 	$(window).scroll(function(){
-			$(".region-navigation").css("top", Math.max(0, 161 - $(window).scrollTop()));
-			$("#block-tb-megamenu-menu-moderator-menu").css("top", Math.max(0, 161 - $(window).scrollTop()));
-			$("#block-tb-megamenu-menu-lsa-admin").css("top", Math.max(0, 161 - $(window).scrollTop()));
-			$(".view-top-tools").css("top", Math.max(30, 225 - $(window).scrollTop()));
+		$(".region-navigation").css("top", Math.max(-2, 162 - $(window).scrollTop()));
+		$("#block-tb-megamenu-menu-moderator-menu").css("top", Math.max(-2, 162 - $(window).scrollTop()));
+		$("#block-tb-megamenu-menu-lsa-admin").css("top", Math.max(-2, 162 - $(window).scrollTop()));
+		$(".view-top-tools").css("top", Math.max(30, 225 - $(window).scrollTop()));
 	});
 
-	if($(window).scrollTop() === 0){
-		$(".region-navigation").css("top", 161);
-		$("#block-tb-megamenu-menu-moderator-menu").css("top", 161);
-		$("#block-tb-megamenu-menu-lsa-admin").css("top", 161);
+	if($(window).scrollTop() === -2){
+		$(".region-navigation").css("top", 162);
+		$("#block-tb-megamenu-menu-moderator-menu").css("top", 162);
+		$("#block-tb-megamenu-menu-lsa-admin").css("top", 162);
 		$(".view-top-tools").css("top", 225);
 	}
 	// Short term code to give a title on hover to banner div
