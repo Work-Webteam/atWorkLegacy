@@ -243,7 +243,6 @@ function atwork_zen_pager($variables) { // used to change 'previous' to just 'pr
   $parameters = $variables['parameters'];
   $quantity = $variables['quantity'];
   global $pager_page_array, $pager_total;
-
   // Calculate various markers within this pager piece:
   // Middle is used to "center" pages around the current page.
   $pager_middle = ceil($quantity / 2);
@@ -254,7 +253,13 @@ function atwork_zen_pager($variables) { // used to change 'previous' to just 'pr
   // last is the last page listed by this pager piece (re quantity)
   $pager_last = $pager_current + $quantity - $pager_middle;
   // max is the maximum page number
-  $pager_max = $pager_total[$element];
+  if(isset($pager_total[$element]) && $pager_total[$element]){
+    $pager_max = $pager_total[$element];
+  } else {
+    // We have to eject here if we don't have this variable, or we will run into exceptions below.
+    // Mainly an error in for the followers/following blocks on profile page.
+    return;
+  }
   // End of marker calculations.
 
   // Prepare for generation loop.

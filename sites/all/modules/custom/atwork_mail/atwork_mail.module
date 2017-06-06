@@ -95,6 +95,13 @@ function atwork_mail_exit($destination = NULL) {
  * Modify some email headers the way we like them for outlook/exchange
  */
 function atwork_mail_mail_alter(&$message) {
+  // We don't want to send emails to users who have been deactivated. 
+  $email_address = $message['to']; 
+  $email_extension = explode('@', $email_address);
+  if(isset($email_extension[1]) && $email_extension[1] == 'gov.old.ca'){
+    $message['send'] = FALSE;
+  }
+
   if ($message['id'] == 'forward_forward_page') {
     // we added quotes around the name in atwork_misc atwork_forward_form_validate()
     // now remove them from the subject
@@ -126,14 +133,12 @@ function atwork_mail_mail_alter(&$message) {
       $message['to'] = '"' . _atwork_display_name($user) . '" <' . $user->mail .'>';
     }
   }
-
 }
 
 /**
  * Implements hook_mail();
  */
 function atwork_mail_mail($key, &$message, $params) {
-  //dpm($key);
   if($key ==  'atwork_mail_default') {
     if (isset($params['subject'])) {
       $message['subject'] = $params['subject'];
@@ -181,3 +186,15 @@ function atwork_mail_mail($key, &$message, $params) {
     }
   }
 }
+
+/**
+ * Implements hook_subscriptions_digest_alter() 
+ * From subscriptions module
+ * Need a way to avoid sending emails to users who have been deactivated.
+ **/
+
+function atwork_mail_subscriptions_digest_alter(&$digest_data) {
+  dpm($digest_data);
+}
+
+

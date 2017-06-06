@@ -5,9 +5,9 @@ core = 7.x
 dependencies[] = videojs
 
 configure = admin/config/media/videojs
-; Information added by drupal.org packaging script on 2013-10-19
-version = "7.x-3.0-alpha2+9-dev"
+; Information added by Drupal.org packaging script on 2017-05-01
+version = "7.x-3.0-alpha3"
 core = "7.x"
 project = "videojs"
-datestamp = "1382151905"
+datestamp = "1493622793"
 

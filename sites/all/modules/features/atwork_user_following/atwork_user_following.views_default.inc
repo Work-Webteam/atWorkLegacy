@@ -112,7 +112,7 @@ function atwork_user_following_views_default_views() {
   );
   /* Field: Bulk operations: User */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
-  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'users';
+  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'views_entity_user';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '0';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
@@ -346,7 +346,7 @@ function atwork_user_following_views_default_views() {
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Bulk operations: User */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
-  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'users';
+  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'views_entity_user';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '0';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
@@ -2866,6 +2866,14 @@ echo(\'<p style="margin-top:10px;">To update and publish <a href="/employees/\' 
   $handler->display->display_options['fields']['name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
+  /* Field: Field: Display Name */
+  $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
+  $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
+  $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
+  $handler->display->display_options['fields']['field_display_name']['relationship'] = 'requestee_id';
+  $handler->display->display_options['fields']['field_display_name']['label'] = '';
+  $handler->display->display_options['fields']['field_display_name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_display_name']['element_label_colon'] = FALSE;
   /* Field: User: Title */
   $handler->display->display_options['fields']['field_gal_title']['id'] = 'field_gal_title';
   $handler->display->display_options['fields']['field_gal_title']['table'] = 'field_data_field_gal_title';
@@ -2891,14 +2899,6 @@ echo(\'<p style="margin-top:10px;">To update and publish <a href="/employees/\' 
     'image_link' => '',
   );
   $handler->display->display_options['fields']['field_image']['delta_offset'] = '0';
-  /* Field: Field: Display Name */
-  $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
-  $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
-  $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
-  $handler->display->display_options['fields']['field_display_name']['relationship'] = 'requestee_id';
-  $handler->display->display_options['fields']['field_display_name']['label'] = '';
-  $handler->display->display_options['fields']['field_display_name']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_display_name']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Global: Random */
   $handler->display->display_options['sorts']['random']['id'] = 'random';

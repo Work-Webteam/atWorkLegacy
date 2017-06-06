@@ -44,7 +44,11 @@ and (orientation : portrait) {
     max-width: 90%;
     margin: 0 auto 10px!important;
   }
-}
+
+  .views-slideshow-pager-fields div {
+    display: inherit;
+  }
+
 
 @media only screen // ipad
   and (max-width:768px)
@@ -57,11 +61,14 @@ and (orientation : portrait) {
   #block-views-home-page-blocks-zen-block-5 {
     margin-bottom: 25px!important;
   }
-  #widget_pager_bottom_home_page_blocks_zen-block_5 {
+  #widget_pager_bottom_home_page_blocks_zen-block_5  {
     position:relative;
     display: block;
-    width: 315px;
+    width: 340px;
     margin: 0 auto;
+  }
+  .views-slideshow-pager-fields div {
+    display: inherit;
   }
 .front.logged-in.no-sidebars .skin-default .views-slideshow-controls-bottom {
     top: 0px!important;
@@ -342,9 +349,12 @@ and (orientation : landscape) {
     #widget_pager_bottom_home_page_blocks_zen-block_5 {
       position:relative;
       display: block;
-      width: 315px;
+      width: 340px;
       margin: 0 auto;
     }
+  views-slideshow-pager-fields div {
+    display: inherit;
+  }
     .front.logged-in.no-sidebars .skin-default .views-slideshow-controls-bottom {
     top: 0px!important;
     }
@@ -633,6 +643,9 @@ and (orientation : landscape) {
 
 
 @media only screen and (max-width:979px) {
+  .views-slideshow-pager-fields div {
+    display: inherit;
+  }
   html,
   #header.header,
   .not-front .new-activity-window #header.header {
@@ -662,6 +675,9 @@ and (orientation : landscape) {
 	}
 }
 @media only screen and (min-width:980px) {
+  .views-slideshow-pager-fields div {
+    display: inherit;
+  }
   .not-front .new-activity-window #header.header {
     background: none !important;
   }

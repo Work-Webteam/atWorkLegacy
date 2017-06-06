@@ -1375,7 +1375,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'hashtag_settings' => array(
       'hashtag_field' => 0,
     ),
-    'label' => 'Donation Amount',
+    'label' => 'Donation Amount 2',
     'required' => 0,
     'settings' => array(
       'authcache' => array(
@@ -1391,6 +1391,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
+      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -6407,6 +6408,7 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Do you wish to request any service pin(s) retroactively?');
   t('Does your supervisor work in a different office location than you? ');
   t('Donation Amount');
+  t('Donation Amount 2');
   t('Donation options');
   t('Email Address');
   t('Email address');

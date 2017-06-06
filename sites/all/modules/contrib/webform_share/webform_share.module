@@ -123,6 +123,15 @@ function webform_share_components_update_form($form, &$form_state, $node, $op = 
 function webform_share_components_update_form_submit($form, &$form_state) {
   $node = $form_state['node'];
   if ($webform = _webform_share_eval($form_state['values']['import'])) {
+    $hook_params = array(
+      'operation' => 'update',
+      'node' => $node,
+      'options' => array(
+        'components_only' => $form_state['values']['components_only'],
+        'keep_existing_components' => $form_state['values']['keep_existing_components'],
+      ),
+    );
+    drupal_alter('webform_share_import', $webform, $hook_params);
     // Load the original node and use this to map any fields based off
     // the form_key parameter. We need to preserve the existing cid if
     // possible to preserve the submission data.
@@ -131,13 +140,18 @@ function webform_share_components_update_form_submit($form, &$form_state) {
     foreach ($original->webform['components'] as $cid => $component) {
       $existing_components[$component['form_key']] = $cid;
     }
-    $next_id = empty($existing_components) ? 1 : max($existing_components) + 1;
+
+    // Get the max cid for this node's webform so we know where our safe
+    // starting point is.
+    $current_max_cid = webform_share_get_next_max_cid($node->nid);
 
     // Overwrite the entire form if the user is updating everything.
     if (empty($form_state['values']['components_only'])) {
       $node->webform = $webform;
       $webform['nid'] = $node->nid;
     }
+
+    $old_to_new_mappings = array();
 
     // Map the imported components to the existing webform components.
     $node->webform['components'] = array();
@@ -147,11 +161,57 @@ function webform_share_components_update_form_submit($form, &$form_state) {
         unset($existing_components[$component['form_key']]);
       }
       else {
-        $cid = $next_id++;
+        $cid = ++$current_max_cid;
       }
+
+      $old_to_new_mappings[$component['cid']] = $cid;
+      if (!empty($component['pid'])) {
+        // This mapping assumes that parents always come before children.
+        if (empty($old_to_new_mappings[$component['pid']])) {
+          drupal_set_message(t('Unable to find the correct fieldset for %component.', array(
+            '%component' => $component['name'],
+            )), 'error', TRUE);
+        }
+        else {
+          $component['pid'] = $old_to_new_mappings[$component['pid']];
+        }
+      }
+      // Set the new cid.
       $component['cid'] = $cid;
       $component['nid'] = $node->nid;
       $node->webform['components'][$cid] = $component;
+    }
+
+    // Map the imported conditionals.
+    $webform['conditionals'] = isset($webform['conditionals']) ? $webform['conditionals'] : array();
+    foreach ($webform['conditionals'] as $index => $conditional) {
+      foreach ($conditional['rules'] as $rindex => $rule) {
+        if (isset($rule['source']) && $rule['source'] != NULL) {
+          $rule['nid'] = $node->nid;
+          if (!empty($old_to_new_mappings[$rule['source']])) {
+            $rule['source'] = $old_to_new_mappings[$rule['source']];
+          }
+          else {
+            drupal_set_message(t('Unable to find the correct sources for conditionals.'), 'error', FALSE);
+          }
+          $conditional['rules'][$rindex] = $rule;
+        }
+      }
+
+      foreach ($conditional['actions'] as $aindex => $action) {
+        if (isset($action['target']) && $action['target'] != NULL) {
+          $action['nid'] = $node->nid;
+          if (!empty($old_to_new_mappings[$action['target']])) {
+            $action['target'] = $old_to_new_mappings[$action['target']];
+          }
+          else {
+            drupal_set_message(t('Unable to find the correct targets for conditionals.'), 'error', FALSE);
+          }
+          $conditional['actions'][$aindex] = $action;
+        }
+      }
+
+      $node->webform['conditionals'][$index] = $conditional;
     }
 
     // If requested, re-add the existing components rather than allowing these
@@ -161,16 +221,40 @@ function webform_share_components_update_form_submit($form, &$form_state) {
         $node->webform['components'][$cid] = $original->webform['components'][$cid];
       }
     }
+
+    if (isset($node->webform['emails'])) {
+      foreach ($node->webform['emails'] as $index => $component) {
+        $node->webform['emails'][$index]['nid'] = $node->nid;
+      }
+    }
     node_save($node);
   }
   $form_state['redirect'] = 'node/' . $node->nid . '/webform';
 }
 
+/**
+ * Retrieves that last "cid" for a node's webform.
+ *
+ * @param int $nid
+ * @return int
+ */
+function webform_share_get_next_max_cid($nid) {
+  $max_cid = db_select('webform_component', 'w')
+      ->fields('w', array('cid'))
+      ->condition('nid', $nid)
+      ->orderBy('cid', 'DESC')
+      ->range(0, 1)
+      ->execute()
+      ->fetchField();
+  return (empty($max_cid) ? 0 : $max_cid);
+}
 
 /**
  * Menu callback to generate the webform dump.
  */
 function webform_share_export($node) {
+  drupal_alter('webform_share_export', $node);
+
   $webform = '$webform = ' . var_export($node->webform, TRUE) . ";\n\n";
 
   if (ob_get_level()) {
@@ -216,12 +300,27 @@ function webform_share_form_node_type_form_alter(&$form, $form_state) {
 function webform_share_node_insert($node) {
   if ($type_defaults = webform_share_node_type_defaults($node->type)) {
     if ($webform = _webform_share_eval($type_defaults)) {
+      $hook_params = array(
+        'operation' => 'insert',
+        'node' => $node,
+        'options' => array(
+          'components_only' => FALSE,
+          'keep_existing_components' => FALSE,
+        ),
+      );
+      drupal_alter('webform_share_import', $webform, $hook_params);
       $node->webform = $webform;
       $node->webform['nid'] = $node->nid;
-      $node->webform['components'] = array_filter((array) $node->webform['components']);
-      foreach ($node->webform['components'] as $index => $component) {
-        $node->webform['components'][$index]['nid'] = $node->nid;
-        $node->webform['components'][$index]['pid'] = 0;
+      if (isset($node->webform['components'])) {
+        $node->webform['components'] = array_filter((array) $node->webform['components']);
+        foreach ($node->webform['components'] as $index => $component) {
+          $node->webform['components'][$index]['nid'] = $node->nid;
+        }
+      }
+      if (isset($node->webform['emails'])) {
+        foreach ($node->webform['emails'] as $index => $email) {
+          $node->webform['emails'][$index]['nid'] = $node->nid;
+        }
       }
     }
   }

@@ -11,6 +11,9 @@
  * auto-loaded when needed.
  */
 class videojs_utility {
+  const VERSION_REGEX = '/(?:v[ ]*|Version |Video.js )([\d.]{2,})/i';
+  const CDN_HOST = 'https://vjs.zencdn.net/';
+
   public static function getDisplaySettingsForm(array &$element, array $values = NULL) {
     if ($values === NULL) {
       $values = self::getDefaultDisplaySettings();
@@ -275,5 +278,19 @@ class videojs_utility {
         }
       }
     }
+  }
+  
+  /**
+   * Returns the configured CDN version or a default version if none is set.
+   *
+   * @return string
+   *   The CDN Video.js player version
+   */
+  public static function getCdnVersion() {
+    $cdnversion = variable_get('videojs_cdn_version', NULL);
+    if (empty($cdnversion)) {
+      $cdnversion = '6.0.0';
+    }
+    return $cdnversion;
   }
 }

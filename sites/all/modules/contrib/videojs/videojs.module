@@ -364,28 +364,8 @@ function videojs_field_formatter_settings_summary($field, $instance, $view_mode)
 function videojs_add($add = TRUE) {
   $added = &drupal_static(__FUNCTION__);
 
-  switch (variable_get('videojs_location', 'cdn')) {
-    case 'path':
-      $path = variable_get('videojs_directory', 'sites/all/libraries/video-js');
-      $remote = strpos($path, '://') !== FALSE || strncmp('//', $path, 2) === 0;
-      break;
-
-    case 'libraries':
-      if (!module_exists('libraries')) {
-        return FALSE;
-      }
-      $path = libraries_get_path('video-js');
-      if ($path === FALSE) {
-        return FALSE;
-      }
-      $remote = FALSE;
-      break;
-
-    case 'cdn':
-    default:
-      $path = '//vjs.zencdn.net/4.0';
-      $remote = TRUE;
-  }
+  $path = videojs_get_path();
+  $remote = strpos($path, '://') !== FALSE || strncmp('//', $path, 2) === 0;
 
   $jsdata = $path . '/video.js';
   $jsopts = array('group' => JS_LIBRARY, 'preprocess' => !$remote, 'type' => $remote ? 'external' : 'file', 'weight' => 1);
@@ -430,7 +410,11 @@ function videojs_get_version($path = NULL) {
   $version = NULL;
 
   if (!isset($path)) {
-    $path = variable_get('videojs_directory', 'sites/all/libraries/video-js');
+    // Don't hit the network for each call when using CDN.
+    if (variable_get('videojs_location', 'cdn') === 'cdn') {
+      return videojs_utility::getCdnVersion();
+    }
+    $path = videojs_get_path();
   }
 
   // When admins specify a protocol-relative URL, add http because file_get_contents doesn't understand it.
@@ -443,12 +427,39 @@ function videojs_get_version($path = NULL) {
   $contents = @file_get_contents($path . '/video.js', FALSE, NULL, 0, 400);
   if (!empty($contents)) {
     $matches = array();
-    if (preg_match('/(?:v[ ]*|Version )([\d.]{2,})/i', $contents, $matches)) {
+    if (preg_match(videojs_utility::VERSION_REGEX, $contents, $matches)) {
       $version = $matches[1];
     }
   }
 
   return $version;
+}
+
+/**
+ * Return the configured path or URL of Video.js.
+ *
+ * The validity of the path is not checked.
+ *
+ * @return string|bool
+ *   The path or URL to video js, without a filename.
+ *   FALSE when the path can't be determined.
+ */
+function videojs_get_path() {
+  switch (variable_get('videojs_location', 'cdn')) {
+    case 'path':
+      return variable_get('videojs_directory', 'sites/all/libraries/video-js');
+
+    case 'libraries':
+      if (!module_exists('libraries')) {
+        return FALSE;
+      }
+      return libraries_get_path('video-js');
+
+    case 'cdn':
+    default:
+      $cdnversion = videojs_utility::getCdnVersion();
+      return videojs_utility::CDN_HOST . $cdnversion;
+  }
 }
 
 /**
@@ -463,7 +474,7 @@ function videojs_libraries_info() {
     'download url' => 'http://videojs.com',
     'version arguments' => array(
       'file' => 'video.js',
-      'pattern' => '/(?:v[ ]*|Version )([\d.]{2,})/i',
+      'pattern' => videojs_utility::VERSION_REGEX,
       'lines' => 2,
       'cols' => 50,
     ),
@@ -509,6 +520,38 @@ function videojs_libraries_info() {
               'files' => array(
                 'js' => array('video.js' => array('group' => JS_LIBRARY)),
                 'css' => array('video-js.css'),
+              ),
+            ),
+          ),
+        ),
+      ),
+      '5' => array(
+        'files' => array(
+          'js' => array('video.js' => array('group' => JS_LIBRARY)),
+          'css' => array('video-js.css'),
+        ),
+        'variants' => array(
+          'source' => array(
+            'minified' => array(
+              'files' => array(
+                'js' => array('video.min.js' => array('group' => JS_LIBRARY)),
+                'css' => array('video-js.min.css'),
+              ),
+            ),
+          ),
+        ),
+      ),
+      '6' => array(
+        'files' => array(
+          'js' => array('video.js' => array('group' => JS_LIBRARY)),
+          'css' => array('video-js.css'),
+        ),
+        'variants' => array(
+          'source' => array(
+            'minified' => array(
+              'files' => array(
+                'js' => array('video.min.js' => array('group' => JS_LIBRARY)),
+                'css' => array('video-js.min.css'),
               ),
             ),
           ),

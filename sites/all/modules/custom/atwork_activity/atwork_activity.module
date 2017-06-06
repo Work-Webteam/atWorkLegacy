@@ -1541,13 +1541,17 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
     }
 
     // These can be updated regardless if there are available
-    $author = user_load($form_state['reply']->uid);
+    if(isset($form_state['reply']) && $form_state['reply']){
+      $author = user_load($form_state['reply']->uid);
+    }
     // Add image render as a #prefix to name?
     if(isset($author->field_display_name['und'][0]['safe_value']) && $author->field_display_name['und'][0]['safe_value']){
       $form['field_display_name']['und'][0]['value']['#default_value'] =  $author->field_display_name['und'][0]['safe_value'];
     }
     // TODO: Set prefix and suffix for display name in form (image render and <a> tags)
-    $form['field_profile_comment_date']['und']['#prefix'] = "Posted: " . $form['field_profile_comment_date']['und']['#prefix'];
+    if(isset($form['field_profile_comment_date']['und']['#prefix']) && $form['field_profile_comment_date']['und']['#prefix']){
+      $form['field_profile_comment_date']['und']['#prefix'] = "Posted: " . $form['field_profile_comment_date']['und']['#prefix'];
+    }
     // Leave out Reply/Edit and Delete versions of the form -- so far this field seems to be the only one that differentiates them
     $url_test = explode('/', $form['#action']);
     if($url_test[1] == "reply"){
@@ -2092,7 +2096,9 @@ function atwork_activity_block_view($delta = '') {
       $block['subject'] .= '<div class="block-header-inner">';
       $block['subject'] .= '<button class="activity-filters-my" title="My Activity">&nbsp;</button>';
       $block['subject'] .= '<button class="activity-filters-all" title="All Activity">&nbsp;</button>';
-      $block['subject'] .= '<a href="node/21603" class="jsNewActivityWindow"><img src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="See Activity in New Window" /></a>';
+      
+      $block['subject'] .= '<a href="node/21603" class="jsNewActivityWindow"><img id="ActivityWindowButton" src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="See Activity in New Window" /></a>';
+      
       $block['subject'] .= '</div><!-- /.block-header-inner -->';
 
       $block['content'] = '<div class="atwork-activity-block-container">';

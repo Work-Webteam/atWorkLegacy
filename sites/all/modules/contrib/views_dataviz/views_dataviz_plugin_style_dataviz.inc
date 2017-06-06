@@ -197,7 +197,7 @@ class views_dataviz_plugin_style_dataviz extends views_plugin_style {
             // Jumping through some hoops to push new values to the beginning of the
             // array instead of to the end. Needed because in views we want values
             // before labels but G Charts wants labels before values.
-            if ((!isset($data[$row_index+1])) || (!is_array($data[$row_index+1]))) $data[$row_index+1] = array();
+            if (!isset($data[$row_index+1])) $data[$row_index+1] = array();
             array_unshift($data[$row_index+1], ($key === $header) ? $value : floatVal($value)) ;
           }
         }

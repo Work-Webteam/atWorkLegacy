@@ -25,11 +25,12 @@ function wysiwyg_markitup_editor() {
       ),
     ),
     'install note callback' => 'wysiwyg_markitup_install_note',
+    'verified version range' => array('1.1.5', '1.1.14'),
     'version callback' => 'wysiwyg_markitup_version',
     'themes callback' => 'wysiwyg_markitup_themes',
     'settings form callback' => 'wysiwyg_markitup_settings_form',
     'settings callback' => 'wysiwyg_markitup_settings',
-    'plugin callback' => 'wysiwyg_markitup_plugins',
+    'plugin callback' => '_wysiwyg_markitup_plugins',
     'versions' => array(
       '1.1.5' => array(
         'js files' => array('markitup.js'),
@@ -128,90 +129,40 @@ function wysiwyg_markitup_settings($editor, $config, $theme) {
 
   // Add configured buttons or all available.
   $default_buttons = array(
-    'h1' => array (
-      'name' => 'Heading 1',
-      'key' => '1',
-      'openWith' => '== ',
-      'closeWith' => ' ==',
-      'placeHolder' => 'Your title here...',
-      'className' => 'markitup-h1',
-    ),
-    'h2' => array (
-      'name' => 'Heading 2',
-      'key' => '2',
-      'openWith' => '=== ',
-      'closeWith' => ' ===',
-      'placeHolder' => 'Your title here...',
-      'className' => 'markitup-h2',
-    ),
-    'h3' => array (
-      'name' => 'Heading 3',
-      'key' => '3',
-      'openWith' => '==== ',
-      'closeWith' => ' ====',
-      'placeHolder' => 'Your title here...',
-      'className' => 'markitup-h3',
-    ),
-    'h4' => array (
-      'name' => 'Heading 4',
-      'key' => '4',
-      'openWith' => '===== ',
-      'closeWith' => ' =====',
-      'placeHolder' => 'Your title here...',
-      'className' => 'markitup-h4',
-    ),
-    'h5' => array (
-      'name' => 'Heading 5',
-      'key' => '5',
-      'openWith' => '====== ',
-      'closeWith' => ' ======',
-      'placeHolder' => 'Your title here...',
-      'className' => 'markitup-h5',
-    ),
-    'bold' => array (
-      'name' => 'Bold',
-      'key' => 'B',
-      'openWith' => '\'\'\'',
-      'closeWith' => '\'\'\'',
+    'bold' => array(
+      'name' => t('Bold'),
       'className' => 'markitup-bold',
+      'key' => 'B',
+      'openWith' => '(!(<strong>|!|<b>)!)',
+      'closeWith' => '(!(</strong>|!|</b>)!)',
     ),
-    'italic' => array (
-      'name' => 'Italic',
-      'key' => 'I',
-      'openWith' => '\'\'',
-      'closeWith' => '\'\'',
+    'italic' => array(
+      'name' => t('Italic'),
       'className' => 'markitup-italic',
+      'key' => 'I',
+      'openWith' => '(!(<em>|!|<i>)!)',
+      'closeWith' => '(!(</em>|!|</i>)!)',
     ),
-    'strike' => array (
-      'name' => 'Strike through',
+    'stroke' => array(
+      'name' => t('Strike-through'),
+      'className' => 'markitup-stroke',
       'key' => 'S',
-      'openWith' => '<s>',
-      'closeWith' => '</s>',
-      'className' => 'markitup-strike',
+      'openWith' => '<del>',
+      'closeWith' => '</del>',
     ),
-    'ul' => array (
-      'name' => 'Bulleted list',
-      'openWith' => '(!(* |!|*)!)',
-      'className' => 'markitup-ul',
-    ),
-    'ol' => array (
-      'name' => 'Numeric list',
-      'openWith' => '(!(# |!|#)!)',
-      'className' => 'markitup-ol',
-    ),
-    'image' => array (
-      'name' => 'Picture',
-      'key' => 'P',
-      'replaceWith' => '[[Image:[![Url:!:http://]!]|[![name]!]]]',
+    'image' => array(
+      'name' => t('Image'),
       'className' => 'markitup-image',
+      'key' => 'P',
+      'replaceWith' => '<img src="[![Source:!:http://]!]" alt="[![Alternative text]!]" />',
     ),
-    'link' => array (
-      'name' => 'Link',
-      'key' => 'L',
-      'openWith' => '[[![Link]!] ',
-      'closeWith' => ']',
-      'placeHolder' => 'Your text to link here...',
+    'link' => array(
+      'name' => t('Link'),
       'className' => 'markitup-link',
+      'key' => 'K',
+      'openWith' => '<a href="[![Link:!:http://]!]"(!( title="[![Title]!]")!)>',
+      'closeWith' => '</a>',
+      'placeHolder' => 'Your text to link...',
     ),
     // @todo
     // 'cleanup' => array('name' => t('Clean-up'), 'className' => 'markitup-cleanup', 'replaceWith' => 'function(markitup) { return markitup.selection.replace(/<(.*?)>/g, "") }'),
@@ -238,21 +189,15 @@ function wysiwyg_markitup_settings($editor, $config, $theme) {
 /**
  * Return internal plugins for this editor; semi-implementation of hook_wysiwyg_plugin().
  */
-function wysiwyg_markitup_plugins($editor) {
+function _wysiwyg_markitup_plugins($editor) {
   return array(
     'default' => array(
       'buttons' => array(
         'bold' => t('Bold'), 'italic' => t('Italic'),
-        'strike' => t('Strike-through'),
-        'image' => t('Image'),
+        'stroke' => t('Strike-through'),
         'link' => t('Link'),
-        'h1' => t('heading 1'),
-        'h2' => t('heading 2'),
-        'h3' => t('heading 3'),
-        'h4' => t('heading 4'),
-        'h5' => t('heading 5'),
-        'ol' => t('ordered list'),
-        'ul' => t('unordered list'),
+        'image' => t('Image'),
+        // 'cleanup' => t('Clean-up'),
         'preview' => t('Preview'),
       ),
       'internal' => TRUE,
