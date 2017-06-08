@@ -821,6 +821,7 @@ echo(\'<p style="margin-top:10px;">To update and publish <a href="/employees/\' 
   );
   $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_filter'] = 1;
   $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_items'] = '25';
+  $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_min_chars'] = '1';
   $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_field'] = 'field_gal_last_name';
   $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['field_gal_last_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
@@ -855,6 +856,7 @@ echo(\'<p style="margin-top:10px;">To update and publish <a href="/employees/\' 
   );
   $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_filter'] = 1;
   $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_items'] = '20';
+  $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_min_chars'] = '1';
   $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_field'] = 'field_gal_first_name';
   $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['field_gal_first_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
@@ -889,9 +891,13 @@ echo(\'<p style="margin-top:10px;">To update and publish <a href="/employees/\' 
     11 => 0,
     12 => 0,
     13 => 0,
+    15 => 0,
+    16 => 0,
+    17 => 0,
   );
   $handler->display->display_options['filters']['field_gal_title_value']['expose']['autocomplete_filter'] = 1;
   $handler->display->display_options['filters']['field_gal_title_value']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['field_gal_title_value']['expose']['autocomplete_min_chars'] = '1';
   $handler->display->display_options['filters']['field_gal_title_value']['expose']['autocomplete_field'] = 'field_gal_title';
   $handler->display->display_options['filters']['field_gal_title_value']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['field_gal_title_value']['expose']['autocomplete_raw_dropdown'] = 1;
@@ -920,9 +926,13 @@ echo(\'<p style="margin-top:10px;">To update and publish <a href="/employees/\' 
     11 => 0,
     12 => 0,
     13 => 0,
+    15 => 0,
+    16 => 0,
+    17 => 0,
   );
   $handler->display->display_options['filters']['field_gal_ministry_name_value']['expose']['autocomplete_filter'] = 1;
   $handler->display->display_options['filters']['field_gal_ministry_name_value']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['field_gal_ministry_name_value']['expose']['autocomplete_min_chars'] = '1';
   $handler->display->display_options['filters']['field_gal_ministry_name_value']['expose']['autocomplete_field'] = 'field_gal_ministry_name';
   $handler->display->display_options['filters']['field_gal_ministry_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['field_gal_ministry_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
@@ -951,9 +961,13 @@ echo(\'<p style="margin-top:10px;">To update and publish <a href="/employees/\' 
     11 => 0,
     12 => 0,
     13 => 0,
+    15 => 0,
+    16 => 0,
+    17 => 0,
   );
   $handler->display->display_options['filters']['field_gal_city_value']['expose']['autocomplete_filter'] = 1;
   $handler->display->display_options['filters']['field_gal_city_value']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['field_gal_city_value']['expose']['autocomplete_min_chars'] = '1';
   $handler->display->display_options['filters']['field_gal_city_value']['expose']['autocomplete_field'] = 'field_gal_city';
   $handler->display->display_options['filters']['field_gal_city_value']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['field_gal_city_value']['expose']['autocomplete_raw_dropdown'] = 1;
