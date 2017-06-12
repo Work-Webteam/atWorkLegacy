@@ -992,8 +992,6 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
     if (isset($account->content['field_summary']) && ($account->content['field_summary']) && ($account->field_public_profile))  {
       $account->content['field_summary']['#label_display'] = 'hidden';
       if (isset($account->content['field_summary']['#title'])) {
-        $account->content['field_summary'][0]['#markup'] = '<div id="article-fade"></div>' . $account->content['field_summary'][0]['#markup'];
-        $account->content['field_summary'][0]['#markup'] = '<h2 class="profile-section">' . $account->content['field_summary']['#title'] . '</h2>' . $account->content['field_summary'][0]['#markup'];
       }
     // About me field is filled in but not published
     } elseif (isset($account->field_summary) && ($account->field_summary) && (empty($account->field_public_profile ))) {
@@ -1041,6 +1039,7 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
     if (isset($account->content['field_extended_biography']) && $account->content['field_extended_biography'] && $account->field_public_profile) {
       if (isset($account->content['field_extended_biography']['#title'])) {
         $account->content['field_extended_biography'][0]['#markup'] = '<h2 class="profile-section">' . $account->content['field_extended_biography']['#title'] . '</h2>' . $account->content['field_extended_biography'][0]['#markup'];
+        $account->content['field_extended_biography'][0]['#markup'] = '<div id="article-fade"></div>' . $account->content['field_extended_biography'][0]['#markup'];
       }
       $account->content['field_extended_biography']['#label_display'] = 'hidden';
     } elseif (isset($account-> field_extended_biography) && ($account-> field_extended_biography) && (empty($account->field_public_profile ))) {
@@ -1056,6 +1055,7 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
         $account->content['field_extended_biography']['#access'] = TRUE;
         if (isset($account->content['field_extended_biography']['#title'])) {
           $account->content['field_extended_biography'][0]['#markup'] = t('<h2 class="profile-section-unfilled">' . $account->content['field_extended_biography']['#title'] . '</h2>');
+        $account->content['field_summary'][0]['#markup'] = '<h2 class="profile-section">' . $account->content['field_summary']['#title'] . '</h2>' . $account->content['field_summary'][0]['#markup'];
           $account->content['field_extended_biography']['#label_display'] = 'hidden';
         }
       }
