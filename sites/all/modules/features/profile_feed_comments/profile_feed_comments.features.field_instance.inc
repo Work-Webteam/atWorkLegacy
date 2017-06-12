@@ -707,6 +707,7 @@ function profile_feed_comments_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'colorbox_node_classes' => '',
           'colorbox_node_height' => 600,
           'colorbox_node_link' => FALSE,
@@ -1026,6 +1027,7 @@ function profile_feed_comments_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'colorbox_node_classes' => '',
           'colorbox_node_height' => 600,
           'colorbox_node_link' => FALSE,
@@ -1556,6 +1558,7 @@ function profile_feed_comments_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'colorbox_node_classes' => '',
           'colorbox_node_height' => 600,
           'colorbox_node_link' => FALSE,
@@ -1604,6 +1607,7 @@ function profile_feed_comments_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'colorbox_node_classes' => '',
           'colorbox_node_height' => 600,
           'colorbox_node_link' => FALSE,
@@ -1659,6 +1663,7 @@ function profile_feed_comments_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'colorbox_node_classes' => '',
           'colorbox_node_height' => 600,
           'colorbox_node_link' => FALSE,
@@ -1714,6 +1719,7 @@ function profile_feed_comments_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'colorbox_node_classes' => '',
           'colorbox_node_height' => 600,
           'colorbox_node_link' => FALSE,
@@ -1769,6 +1775,7 @@ function profile_feed_comments_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'colorbox_node_classes' => '',
           'colorbox_node_height' => 600,
           'colorbox_node_link' => FALSE,
@@ -1824,6 +1831,7 @@ function profile_feed_comments_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'colorbox_node_classes' => '',
           'colorbox_node_height' => 600,
           'colorbox_node_link' => FALSE,
@@ -1879,6 +1887,7 @@ function profile_feed_comments_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'colorbox_node_classes' => '',
           'colorbox_node_height' => 600,
           'colorbox_node_link' => FALSE,

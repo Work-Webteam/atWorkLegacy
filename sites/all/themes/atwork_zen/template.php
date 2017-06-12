@@ -258,7 +258,7 @@ function atwork_zen_pager($variables) { // used to change 'previous' to just 'pr
   } else {
     // We have to eject here if we don't have this variable, or we will run into exceptions below.
     // Mainly an error in for the followers/following blocks on profile page.
-    return;
+    $pager_max = 0;
   }
   // End of marker calculations.
 
