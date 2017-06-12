@@ -31,3 +31,10 @@ files:  views/modules/user/views_handler_field_user.inc
         views/tests/user/views_handler_field_user_name.test
 Source: https://www.drupal.org/node/1609088
 issue:  Error note in watchdog if a name was set to "filtered" in a view
+
+
+date:   2017-06-12
+module: ip2country
+files:  ip2country.inc
+source: https://www.drupal.org/node/2839722
+issue:  Server not able to curl the file, so we need to access it directly instead.
