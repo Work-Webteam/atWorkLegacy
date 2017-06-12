@@ -82,7 +82,7 @@ function atwork_auth_init() {
     // this is now all handled by idir script - we should never update/remove or add a user here.
     drupal_set_message(t("Something has gone wrong, please try again or contact the @Work team", error));
     echo("Something has gone wrong, please try again or contact the @Work team");
-    die();
+    drupal_exit();
     return;
     // check if $sm_user is available as $user->name
     $name = _atwork_auth_get_unique_name($sm_user);
