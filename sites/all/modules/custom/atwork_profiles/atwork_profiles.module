@@ -992,6 +992,7 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
     if (isset($account->content['field_summary']) && ($account->content['field_summary']) && ($account->field_public_profile))  {
       $account->content['field_summary']['#label_display'] = 'hidden';
       if (isset($account->content['field_summary']['#title'])) {
+        $account->content['field_summary'][0]['#markup'] = '<div id="article-fade"></div>' . $account->content['field_summary'][0]['#markup'];
         $account->content['field_summary'][0]['#markup'] = '<h2 class="profile-section">' . $account->content['field_summary']['#title'] . '</h2>' . $account->content['field_summary'][0]['#markup'];
       }
     // About me field is filled in but not published
