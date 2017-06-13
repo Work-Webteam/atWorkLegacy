@@ -2721,6 +2721,21 @@ aside.sidebars h2 {
   }
 }
 
+.profile {
+    .field-item {
+        position:relative;
+    }
+}
+
+#article-fade {
+    background-image: url(/sites/all/themes/atwork_zen/images/article-fade.png);
+    width: 639px;
+    height: 130px;
+    position: absolute;
+    margin-top: 20px;
+}
+
+
 /*----------------- Employee Landing Page, Following/ers Search Area --------------------*/
 .section-employees .view-filters #views-exposed-form-people-admin-public-page,
 .section-employees .view-filters #views-exposed-form-people-admin-page-following2,
