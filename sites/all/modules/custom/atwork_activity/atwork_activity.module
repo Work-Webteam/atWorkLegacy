@@ -1788,7 +1788,7 @@ function atwork_activity_entity_view_alter(&$build, $type){
     $build['links']['flag']['#links']['flag-flag_for_message_replies']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $build['links']['flag']['#links']['flag-flag_for_message_replies']['title']);
   }
 
-  if($type == "message"){
+  if($type == "message" && isset($build['links']['flag']['#links']['flag-activity_feed_messages_flag']['title'])){
     $build['links']['flag']['#links']['flag-activity_feed_messages_flag']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'),$build['links']['flag']['#links']['flag-activity_feed_messages_flag']['title']);
   }
 }

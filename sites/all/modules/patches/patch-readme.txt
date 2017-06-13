@@ -17,11 +17,13 @@ file:   views_plugin_display_attachment.inc
 source: https://www.drupal.org/node/2481401
 issue:  Notice: Undefined property: view::$exposed_input in views_plugin_display_attachment->attach_to()
 
+
 date:   2017-06-01
 module: Reply
 file:   Reply module
 source: https://www.drupal.org/node/2397007
 issue:  Reply module was never updated to allow for new admin menu mapping automation, this was patched in.
+
 
 date:   2017-06-05
 module: Views
@@ -31,3 +33,17 @@ files:  views/modules/user/views_handler_field_user.inc
         views/tests/user/views_handler_field_user_name.test
 Source: https://www.drupal.org/node/1609088
 issue:  Error note in watchdog if a name was set to "filtered" in a view
+
+
+date:   2017-06-12
+module: ip2country
+files:  ip2country.inc
+source: https://www.drupal.org/node/2839722
+issue:  Server not able to curl the file, so we need to access it directly instead.
+
+
+date:   2017-06-12
+module: autchace
+files:  AuthcacheNodeHistorySetting.inc
+source: None - we did this ourselves.
+issue:  Fix for an error we were seeing in watchdog. Assignment seemed incorrect and code was not protected from failure.
