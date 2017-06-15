@@ -44,6 +44,49 @@ and (orientation : portrait) {
     max-width: 90%;
     margin: 0 auto 10px!important;
   }
+    .section-employees .view-content .views-row,
+  .view-people-admin .view-content .views-row,
+  .page-user-following .view-content .views-row {
+    min-width:48%;
+    .title-employee-landing {
+      margin: 4px 10px!important;
+    }
+  }
+    /* Executive Profile Landing Page */
+  /* PSA Head */
+  .page-executive-team #content .view-content {
+    padding-left: 15px;
+    text-align:center;
+  }
+.page-executive-team #content .attachment-before .views-row.views-row-1.views-row-odd.views-row-first {
+  max-width:335px;
+  height:initial!important;
+  text-align:left;
+}
+.page-executive-team #content .attachment-before .views-row.views-row-1.views-row-odd.views-row-first.views-row-last {
+  margin-bottom:20px;
+}
+  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first .profile-image {
+    margin: 5px 15px 0px 5px !important;
+    width:initial;
+  }
+  .page-executive-team #content .attachment-before .views-row.views-row-1.views-row-odd.views-row-first {
+    h3 {
+      margin:0 0 0 15px!important;
+    }
+    h4 {
+      margin-bottom:25px;
+    }
+  }
+  /* Executive Profiles */
+.page-executive-team #content .view-content .views-row.views-row-odd,
+.page-executive-team #content .view-content .views-row.views-row-even {
+  min-width:230px;
+  text-align:left;
+}
+#content > div.view.view-Executive-Profiles.view-id-Executive_Profiles.view-display-id-page_1 > div.view-content > div.views-row.views-row-1.views-row-odd.views-row-first {
+  margin-left:0!important;
+}
 }
 
 @media only screen // ipad
@@ -60,13 +103,16 @@ and (orientation : portrait) {
   #widget_pager_bottom_home_page_blocks_zen-block_5 {
     position:relative;
     display: block;
-    width: 315px;
+    width: 330px;
     margin: 0 auto;
   }
 .front.logged-in.no-sidebars .skin-default .views-slideshow-controls-bottom {
     top: 0px!important;
 }
-
+    .front .views-slideshow-pager-fields > div {
+      padding-left:0;
+      display: inline-block;
+    }
   .front .region.region-social-side {
       position: relative;
       top: 0px;
@@ -175,8 +221,7 @@ and (orientation : portrait) {
   .section-employees .view-content .views-row,
   .view-people-admin .view-content .views-row,
   .page-user-following .view-content .views-row {
-    width:48%!important;
-    height: 370px!important;
+    max-width:24%;
   }
   .section-employees .view-content .views-row .image-employee-landing,
   .view-people-admin .view-content .views-row .image-employee-landing,
@@ -204,26 +249,21 @@ and (orientation : portrait) {
   }
   /* Executive Profile Landing Page */
   /* PSA Head */
-  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first.views-row-last {
-    width:350px!important;
+  .page-executive-team #content .view-content {
+    padding-left: 15px;
   }
-  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first {
-    height:226px!important;
-  }
-  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first .profile-image {
-    margin:5px 15px 0 0!important;
-  }
+.page-executive-team #content .attachment-before .views-row.views-row-1.views-row-odd.views-row-first {
+  width:470px!important;
+}
   /* Executive Profiles */
+.page-executive-team #content .view-content .views-row.views-row-odd,
+.page-executive-team #content .view-content .views-row.views-row-even {
+  width: 31%!important;
+}
+#content > div.view.view-Executive-Profiles.view-id-Executive_Profiles.view-display-id-page_1 > div.view-content > div.views-row.views-row-1.views-row-odd.views-row-first {
+  margin-left: 120px;
+}
 
-.page-executive-team #content .view-content .views-row-odd,
-.page-executive-team #content .view-content .views-row-even {
-    width: 230px!important;
-    height: inherit!important;
-}
-#content > div.view.view-Executive-Profiles.view-id-Executive_Profiles.view-display-id-page_1 > div.view-content {
-  width:240px;
-  margin:0 auto;
-}
 /* Article Pages */
   .sidebar-second .region-sidebar-second {
     max-width:none;
@@ -327,6 +367,25 @@ and (orientation : landscape) {
       margin: 0!important;
       padding: 0 10px 0 0!important;
     }
+    /* Executive Profiles */
+  .page-executive-team #content .attachment-before {
+    width: 425px!important;
+  }
+  .page-executive-team #content .view-content {
+      margin-left:10px;
+    }
+.page-executive-team #content .view-content .views-row.views-row-odd,
+.page-executive-team #content .view-content .views-row.views-row-even {
+  min-width:31%;
+  text-align:left;
+  height:340px!important;
+}
+.page-executive-team #content .profile-image img {
+  height:initial!important;
+}
+#content > div.view.view-Executive-Profiles.view-id-Executive_Profiles.view-display-id-page_1 > div.view-content > div.views-row.views-row-1.views-row-odd.views-row-first {
+  margin-left:0!important;
+}    
 }
 @media only screen // ipad
   and (max-width:1024px)
@@ -342,8 +401,12 @@ and (orientation : landscape) {
     #widget_pager_bottom_home_page_blocks_zen-block_5 {
       position:relative;
       display: block;
-      width: 315px;
+      width: 330px;
       margin: 0 auto;
+    }
+    .front .views-slideshow-pager-fields > div {
+      padding-left:0;
+      display: inline-block;
     }
     .front.logged-in.no-sidebars .skin-default .views-slideshow-controls-bottom {
     top: 0px!important;
@@ -495,7 +558,7 @@ and (orientation : landscape) {
   .view-people-admin .view-content .views-row,
   .page-user-following .view-content .views-row {
     width:24%!important;
-    height: 370px!important;
+    height: 415px!important;
   }
   .section-employees .view-content .views-row .image-employee-landing,
   .view-people-admin .view-content .views-row .image-employee-landing,
@@ -522,33 +585,7 @@ and (orientation : landscape) {
   form#views-exposed-form-people-admin-page-following2 #edit-interests-wrapper  {
     width: 48%;
   }
-  
-  /* Executive Profile Landing Page */
-  /* PSA Head */
-  .page-executive-team #content .view-Executive-Profiles .attachment-before {
-    width:inherit!important;
-  }
-  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first.views-row-last {
-    width:470px!important;
-    margin-left:75px;
-  }
-  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first {
-    height:226px!important;
-  }
-  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first .profile-image {
-    margin: 5px 15px 0px 5px !important;
-    width: 35.5%;
-  }
-  /* Executive Profiles */
 
-.page-executive-team #content .view-content .views-row-odd,
-.page-executive-team #content .view-content .views-row-even {
-    width: 230px!important;
-}
-#content > div.view.view-Executive-Profiles.view-id-Executive_Profiles.view-display-id-page_1 > div.view-content {
-  width:500px;
-  margin:0 auto;
-}
   /* Group Landing Page */
   #block-views-groups-block-2,
   .create-group {
