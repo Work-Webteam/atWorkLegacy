@@ -709,6 +709,10 @@ function og_field_delete_instance($instance) {
 function og_field_attach_form($entity_type, $entity, &$form, &$form_state, $langcode) {
   list(,, $bundle) = entity_extract_ids($entity_type, $entity);
 
+  if (!isset($form['#entity'])) {
+    $form['#entity'] = $entity;
+  }
+
   if (og_get_group_audience_fields($entity_type, $bundle)) {
     $form['#validate'][] = 'og_form_group_reference_validate';
   }
@@ -870,7 +874,7 @@ function og_entity_update($entity, $entity_type) {
   }
 
   list($id, , $bundle) = entity_extract_ids($entity_type, $entity);
-  if (!empty($entity->uid) && !og_is_member($entity_type, $entity, 'user', $entity->uid)) {
+  if (!empty($entity->uid) && !og_is_member($entity_type, $id, 'user', $entity->uid)) {
     // Subscribe the group manager, in case the owner changed.
     og_group($entity_type, $id, array('entity' => $entity->uid));
     // Assign roles to group manager.
@@ -1810,15 +1814,21 @@ function og_membership_access($op, $entity, $account = NULL, $entity_type = 'og_
  *   The entity type.
  * @param $entity
  *   The entity object, or the entity ID.
+ *
+ * @return
+ *   TRUE or FALSE if the entity is a group.
  */
 function og_is_group($entity_type, $entity) {
-  $wrapper = entity_metadata_wrapper($entity_type, $entity);
-  $bundle = $wrapper->getBundle();
-
+  if (is_numeric($entity)) {
+    $entity = entity_load_single($entity_type, $entity);
+  }
+  list(,, $bundle) = entity_extract_ids($entity_type, $entity);
   if (!field_info_instance($entity_type, OG_GROUP_FIELD, $bundle)) {
     return variable_get("og_is_group__{$entity_type}__{$bundle}", FALSE);
   }
-  return !empty($wrapper->{OG_GROUP_FIELD}) && $wrapper->{OG_GROUP_FIELD}->value();
+  $items = field_get_items($entity_type, $entity, OG_GROUP_FIELD);
+
+  return !empty($items[0]['value']);
 }
 
 
@@ -2208,6 +2218,16 @@ function og_user_access($group_type, $gid, $string, $account = NULL, $skip_alter
  *   The entity object, or the entity ID.
  * @param $account
  *   (optional) The user object. If empty the current user will be used.
+ * @param $skip_alter
+ *   (optional) If TRUE then user access will not be sent to other modules
+ *   using drupal_alter(). This can be used by modules implementing
+ *   hook_og_user_access_alter() that still want to use og_user_access(), but
+ *   without causing a recursion. Defaults to FALSE.
+ * @param $ignore_admin
+ *   (optional) When TRUE the specific permission is checked, ignoring the
+ *   "administer group" permission if the user has it. When FALSE, a user
+ *   with "administer group" will be granted all permissions.
+ *   Defaults to FALSE.
  *
  * @return
  *   Returns TRUE if the user has access to the permission, otherwise FALSE, or
@@ -2215,7 +2235,7 @@ function og_user_access($group_type, $gid, $string, $account = NULL, $skip_alter
  *   a distinction between FALSE - no access, and NULL - no access as no OG
  *   context found.
  */
-function og_user_access_entity($perm, $entity_type, $entity, $account = NULL) {
+function og_user_access_entity($perm, $entity_type, $entity, $account = NULL, $skip_alter = FALSE, $ignore_admin = FALSE) {
   if (empty($account)) {
     global $user;
     $account = clone $user;
@@ -2258,7 +2278,7 @@ function og_user_access_entity($perm, $entity_type, $entity, $account = NULL) {
   if ($is_group_content && $groups = og_get_entity_groups($entity_type, $entity)) {
     foreach ($groups as $group_type => $gids) {
       foreach ($gids as $gid) {
-        if (og_user_access($group_type, $gid, $perm, $account)) {
+        if (og_user_access($group_type, $gid, $perm, $account, $skip_alter, $ignore_admin)) {
           return TRUE;
         }
       }
