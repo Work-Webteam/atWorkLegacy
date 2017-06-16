@@ -44,7 +44,10 @@ and (orientation : portrait) {
     max-width: 90%;
     margin: 0 auto 10px!important;
   }
-    .section-employees .view-content .views-row,
+  #block-views-executive-updates-block-2 {
+      text-align: center;
+  }
+  .section-employees .view-content .views-row,
   .view-people-admin .view-content .views-row,
   .page-user-following .view-content .views-row {
     min-width:48%;
@@ -162,6 +165,7 @@ and (orientation : portrait) {
       margin: 0px !important;
     }
   }
+
   .section-classifieds .view-classifieds .views-row-odd, .section-classifieds .view-classifieds .views-row-even,
   .page-galleries .view-gallery-reference .views-row-odd, .page-galleries .view-gallery-reference .views-row-even,
   .section-blogs #block-views-blogs-block-3 .views-row-odd, .section-blogs #block-views-blogs-block-3 .views-row-even,
@@ -173,12 +177,11 @@ and (orientation : portrait) {
   .section-polls .view-display-id-page_3 .views-row-odd, .section-polls .view-display-id-page_3 .views-row-even,
   .section-etc-talks #block-views-videos-block-4 .views-row-odd, .section-etc-talks #block-views-videos-block-4 .views-row-even,
   .section-executive-messages #block-views-executive-updates-block-2 .views-row-odd, .section-executive-messages #block-views-executive-updates-block-2 .views-row-even {
-    display: block!important;
-    clear:both;
-    min-width:325px;
+    min-width:230px;
     max-width: 90%;
-    margin: 0 auto 20px!important;
+    margin-left: 1.3vw!important;
     padding-bottom: 25px;
+    text-align: left;
   }
   .section-blogs #block-views-blogs-block-3 .image-blog-landing img,
   .section-news .view-id-news.view-display-id-page_2 .image-news-landing img,
@@ -481,6 +484,9 @@ and (orientation : landscape) {
       margin-top: 10px;
       float: none;
     }
+    #block-views-executive-updates-block-2 {
+      text-align: center;
+    }
     .section-classifieds .view-classifieds .views-row-odd, .section-classifieds .view-classifieds .views-row-even,
     .page-galleries .view-gallery-reference .views-row-odd, .page-galleries .view-gallery-reference .views-row-even,
     .section-blogs #block-views-blogs-block-3 .views-row-odd, .section-blogs #block-views-blogs-block-3 .views-row-even,
@@ -494,11 +500,12 @@ and (orientation : landscape) {
     .section-executive-messages #block-views-executive-updates-block-2 .views-row-odd, .section-executive-messages #block-views-executive-updates-block-2 .views-row-even {
       display: inline-block!important;
       width:210px;
-      margin: 0 auto 20px!important;
+      //margin: 0 auto 20px!important;
       padding-bottom: 25px;
       font-size:.9em;
+      text-align:left;
     }
-    .section-blogs #block-views-blogs-block-3 .image-blog-landing img,
+/*    .section-blogs #block-views-blogs-block-3 .image-blog-landing img,
     .section-news .view-id-news.view-display-id-page_2 .image-news-landing img,
     .section-corporate-news .view-id-news.view-display-id-page_3 .image-news-landing img,
     .section-videos .view-display-id-page_1 .image-video-landing img,
@@ -510,8 +517,8 @@ and (orientation : landscape) {
     .page-taxonomy .view-id-term_landing_page .views-row img,
     .section-etc-talks #block-views-videos-block-4 img,
     .view-executive-updates .image-exec-updates img {
-      height:137px!important;
-    }
+      height:initial!important;
+    }*/
     .front div#social-side {
     display:block!important;
     position: inherit;
