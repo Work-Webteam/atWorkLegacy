@@ -2343,7 +2343,7 @@ function _atwork_activity_profile_page_block_content($user_id){
       // strip out any tags that could cause problems later
       $result['message__message_text__0']['#markup'] = strip_tags($result['message__message_text__0']['#markup'], '<p><a>');
        // Put everything together in the order we would like for this message
-      $output .= '<div class="' . implode(' ', $classes) . '"><span class="date"> ' . $time_record . '</span> <span class="feed_image">' . render($user_image) . '</span>' . render($result) .
+      $output .= '<div class="' . implode(' ', $classes) . '"><span class="date"> ' . $time_record . '</span> <span class="feed_image">' . render($user_image) . '</span>' . ' ' . render($result) .
     /* print rate_generate_widget($widget_id, 'message', $entity->cid) . */ '</div><!-- /.message -->' ;
      $j++;
     }
