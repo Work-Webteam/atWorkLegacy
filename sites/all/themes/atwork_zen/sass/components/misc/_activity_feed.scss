@@ -719,11 +719,11 @@
 // Moved Chris files from atworklayout to here for the feed. Needs to be Sassily cleaned
 /* Pop Window on front page for the Social Sidebar */
 // Don't use a node id. There is a custom class called 'new-activity-window'
-.not-front .new-activity-window #headerbox,
-.not-front .new-activity-window #admin-menu,
-.not-front .new-activity-window #block-atwork-profiles-header,
-.not-front .new-activity-window #block-block-7 {
-  display: none;
+#page .new-activity-window #headerbox,
+#page .new-activity-window #admin-menu,
+#page .new-activity-window #block-atwork-profiles-header,
+#page .new-activity-window #block-block-7 {
+  display: none!important;
 }
 .not-front .new-activity-window #block-atwork-mobile-atwork-mobile-menu-block {
   display:block!important;

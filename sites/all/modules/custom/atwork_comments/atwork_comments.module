@@ -3,7 +3,7 @@
  * Implementation of hook_menu_alter()
  */
 function atwork_comments_menu_alter(&$items) {
-  $items['comment/%']['page callback'] = 'atwork_comments_view';
+  //$items['comment/%']['page callback'] = 'atwork_comments_view';
 }
 
 /*
@@ -13,6 +13,8 @@ function atwork_comments_menu_alter(&$items) {
  * so we can direct to the appropriate page if necessary
  *
  */
+// Currently turned off - seemed it may have caused an issue with switching comment pages.
+/*
 function atwork_comments_view($cid) {
   $comment = comment_load($cid);
   if ($comment) {
@@ -31,6 +33,7 @@ function atwork_comments_view($cid) {
   }
   return drupal_not_found();
 }
+*/
 
 /*
  * Implementation of hook_form_FORMID_alter()
@@ -446,10 +449,12 @@ function atwork_comments_views_pre_render(&$view) {
  * Add the comment form to our view
  *
  */
+
 function atwork_comments_views_post_render(&$view, &$output, &$cache) {
   if ($view->name == 'node_comments') {
     $output = preg_replace('/<span class="new">New<\/span>/', '<span id="new" class="new">New</span>', $output, 1);
   }
+
   if ($view->name == 'node_comments' && $view->current_display == 'block') {
     if (isset($view->args[0])) {
       $node = node_load($view->args[0]);
@@ -459,6 +464,7 @@ function atwork_comments_views_post_render(&$view, &$output, &$cache) {
           $output = '';
           return;
         }
+
 
         if (isset($node->atwork_comment)) {
           //$output = '';
@@ -475,7 +481,10 @@ function atwork_comments_views_post_render(&$view, &$output, &$cache) {
               //dpm($view);
               if (!isset($view->exposed_input['sort_by'])) {
                 $form_output = drupal_get_form('comment_node_' . $node->type . '_form', (object) array('nid' => $view->args[0]));
-                $output .= drupal_render($form_output);
+                // Need to make sure we do not already have a form - this insures it is not duplicated.
+                if(!isset($view->preview)){
+                  $output .= drupal_render($form_output);
+                }
               }
               break;
           }
@@ -497,7 +506,6 @@ function atwork_comments_views_post_render(&$view, &$output, &$cache) {
     $output = '';
   }
 }
-
 /**
  * Implementation of hook_preprocess_block
 */

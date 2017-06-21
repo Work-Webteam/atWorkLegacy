@@ -470,7 +470,8 @@ function atwork_polls_block_view_alter(&$data, $block) {
         $data['subject'] = '';
 
         if ($poll->active && isset($poll->vote) && $poll->vote < 0) {
-          $data['content'] = drupal_render(drupal_get_form('poll_view_voting', $poll));
+          $new_form = drupal_get_form('poll_view_voting', $poll);
+          $data['content'] = drupal_render($new_form);
         }
         else {
           $data['content'] = atwork_polls_view_results($poll, 'full', TRUE);

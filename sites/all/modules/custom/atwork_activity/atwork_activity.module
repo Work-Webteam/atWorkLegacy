@@ -1788,7 +1788,7 @@ function atwork_activity_entity_view_alter(&$build, $type){
     $build['links']['flag']['#links']['flag-flag_for_message_replies']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $build['links']['flag']['#links']['flag-flag_for_message_replies']['title']);
   }
 
-  if($type == "message"){
+  if($type == "message" && isset($build['links']['flag']['#links']['flag-activity_feed_messages_flag']['title'])){
     $build['links']['flag']['#links']['flag-activity_feed_messages_flag']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'),$build['links']['flag']['#links']['flag-activity_feed_messages_flag']['title']);
   }
 }
@@ -2173,7 +2173,7 @@ function _atwork_activity_profile_page_block_content($user_id){
   // Grab all messages related to user, User name, and picture of User.
   $classes = array();
 
-  $hidden_types = array(
+  $current_types = array(
     'group_subscribe',
     'new_answer',
     'new_comment',
@@ -2188,11 +2188,11 @@ function _atwork_activity_profile_page_block_content($user_id){
     ->fields('m', array('mid'))
     ->orderBy('m.timestamp', 'DESC')
     ->condition('m.uid', $account->uid)
-    ->condition('m.type', $hidden_types , "IN");
+    ->condition('m.type', $current_types , "IN");
 
   $result = $query
     //->extend('PagerDefault')
-    //->limit(15)
+    //->limit(5)
     ->execute()
     ->fetchAll();
 
@@ -2228,7 +2228,6 @@ function _atwork_activity_profile_page_block_content($user_id){
           $user_on_own_feed = TRUE;
         }
         break;
-      // TODO: Forum case, image case, background page, ??Broken Case?? (starts with [])?
       default:
         break;
     }
@@ -2341,7 +2340,7 @@ function _atwork_activity_profile_page_block_content($user_id){
           break;
       }
       // strip out any tags that could cause problems later
-      $result['message__message_text__0']['#markup'] = strip_tags($result['message__message_text__0']['#markup'], '<p><a>');
+      $result['message__message_text__0']['#markup'] = strip_tags($result['message__message_text__0']['#markup'], '<p><a><br>');
        // Put everything together in the order we would like for this message
       $output .= '<div class="' . implode(' ', $classes) . '"><span class="date"> ' . $time_record . '</span> <span class="feed_image">' . render($user_image) . '</span>' . render($result) .
     /* print rate_generate_widget($widget_id, 'message', $entity->cid) . */ '</div><!-- /.message -->' ;

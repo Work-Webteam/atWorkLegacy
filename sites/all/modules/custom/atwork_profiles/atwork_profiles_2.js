@@ -15,11 +15,13 @@
                   $this.data('expanded',"no");
                   $('#user-user-full-group-profile-extra').animate({height:'140px'});
                   $('#bio-toggle-button').text("Show More");
+                  $('#article-fade').fadeIn(400);
               } else {
                   $this.data('expanded',"yes");
                   // fetch the DOM Element auto height from the jQuery Element by calling get(0)
                   $("#user-user-full-group-profile-extra").animate({height: $("#user-user-full-group-profile-extra").get(0).scrollHeight}, 500 );
                   $('#bio-toggle-button').text("Show Less");
+                  $('#article-fade').fadeOut(300);
               }         
           });
           clickHandlerSet = true;

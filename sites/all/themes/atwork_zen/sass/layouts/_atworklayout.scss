@@ -1,4 +1,5 @@
 /* Hides Drupal warning boxes at the top of the page */
+
 #header-box #home-link a {
   display: none!important;
 }
@@ -12,7 +13,9 @@
 #main {
   margin-top: 2em;
 }
-
+  i.fa.fa-search {
+    display: none!important;
+  }
 /** @media queries for mobile devices **/
 /** Mobile - 768px to 820px **/
 /** Narrow Screen - 821px to 979px **/
@@ -44,6 +47,105 @@ and (orientation : portrait) {
     max-width: 90%;
     margin: 0 auto 10px!important;
   }
+  #block-views-executive-updates-block-2 {
+      text-align: center;
+  }
+  .section-employees .view-content .views-row,
+  .view-people-admin .view-content .views-row,
+  .page-user-following .view-content .views-row {
+    min-width:48%;
+    .title-employee-landing {
+      margin: 4px 10px!important;
+    }
+  }
+    /* Executive Profile Landing Page */
+  /* PSA Head */
+  .page-executive-team #content .view-content {
+    padding-left: 15px;
+    text-align:center;
+  }
+.page-executive-team #content .attachment-before .views-row.views-row-1.views-row-odd.views-row-first {
+  max-width:335px;
+  height:initial!important;
+  text-align:left;
+}
+.page-executive-team #content .attachment-before .views-row.views-row-1.views-row-odd.views-row-first.views-row-last {
+  margin-bottom:20px;
+}
+  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first .profile-image {
+    margin: 5px 15px 0px 5px !important;
+    width:initial;
+  }
+  .page-executive-team #content .attachment-before .views-row.views-row-1.views-row-odd.views-row-first {
+    h3 {
+      margin:0 0 0 15px!important;
+    }
+    h4 {
+      margin-bottom:25px;
+    }
+  }
+  /* Executive Profiles */
+.page-executive-team #content .view-content .views-row.views-row-odd,
+.page-executive-team #content .view-content .views-row.views-row-even {
+  min-width:230px;
+  text-align:left;
+}
+#content > div.view.view-Executive-Profiles.view-id-Executive_Profiles.view-display-id-page_1 > div.view-content > div.views-row.views-row-1.views-row-odd.views-row-first {
+  margin-left:0!important;
+}
+
+//Article Landing Pages
+aside.sidebars {
+  display: none;
+}
+
+.view-id-news, .view-id-videos, .view-id-article_series {
+  text-align: center;
+}
+
+.region.region-bottom .view-display-id-related_content .views-row-odd,
+ .region.region-bottom .view-display-id-related_content .views-row-even {
+   min-width: 45%!important;
+   margin-left: 5px;
+}
+.region.region-bottom .view-display-id-related_content .image-related-content img {
+  height: 100px!important;
+}
+/* Group Landing Page */
+.section-groups .views-exposed-widget ul,
+.page-my-groups .views-exposed-widget ul {
+    width: 100%!important;
+    padding: 0px;
+    text-align:center;
+    li a.really-active {
+      padding: 0!important;
+      width: 30px;
+    }
+    li {
+        border-right: none!important;
+        padding: 0!important;
+        margin: 0 3px 5px;
+    }
+    li a {
+      display: block;
+      border: solid 1px #999;
+      width: 30px;
+      height: 20px;
+      text-align: center;
+    }
+}
+/* Group landing page */
+.section-groups .views-exposed-widget,
+.page-my-groups .views-exposed-widget
+.section-groups #edit-title-1-wrapper,
+.section-groups #edit-desc-1-wrapper {
+  margin-left: 0!important;
+  width:100%!important;
+  input {
+    min-width: 360px;
+    background-color: aliceblue;
+  }
+}
 }
 
 @media only screen // ipad
@@ -60,13 +162,16 @@ and (orientation : portrait) {
   #widget_pager_bottom_home_page_blocks_zen-block_5 {
     position:relative;
     display: block;
-    width: 315px;
+    width: 330px;
     margin: 0 auto;
   }
 .front.logged-in.no-sidebars .skin-default .views-slideshow-controls-bottom {
     top: 0px!important;
 }
-
+    .front .views-slideshow-pager-fields > div {
+      padding-left:0;
+      display: inline-block;
+    }
   .front .region.region-social-side {
       position: relative;
       top: 0px;
@@ -88,7 +193,8 @@ and (orientation : portrait) {
   #block-boxes-homepage-logos,
   #footer #footer-copyright table td.sideBrdr,
   #block-block-52,
-  .create-event {
+  .create-event,
+  aside.sidebars {
     display: none!important;
   }
   .new-activity-window #social-side {
@@ -116,6 +222,7 @@ and (orientation : portrait) {
       margin: 0px !important;
     }
   }
+
   .section-classifieds .view-classifieds .views-row-odd, .section-classifieds .view-classifieds .views-row-even,
   .page-galleries .view-gallery-reference .views-row-odd, .page-galleries .view-gallery-reference .views-row-even,
   .section-blogs #block-views-blogs-block-3 .views-row-odd, .section-blogs #block-views-blogs-block-3 .views-row-even,
@@ -126,13 +233,12 @@ and (orientation : portrait) {
   .section-corporate-polls .view-display-id-page_2 .views-row-odd, .section-corporate-polls .view-display-id-page_2 .views-row-even,
   .section-polls .view-display-id-page_3 .views-row-odd, .section-polls .view-display-id-page_3 .views-row-even,
   .section-etc-talks #block-views-videos-block-4 .views-row-odd, .section-etc-talks #block-views-videos-block-4 .views-row-even,
-  .section-executive-messages #block-views-executive-updates-block-2 .views-row-odd, .section-executive-messages #block-views-executive-updates-block-2 .views-row-even {
-    display: block!important;
-    clear:both;
-    min-width:325px;
+  .section-executive-messages #block-views-executive-updates-block-2 .views-row-odd, .section-executive-messages #block-views-executive-updates-block-2 .views-row-even,
+  .section-series #block-views-article-series-block-2 .views-row-odd, .section-series #block-views-article-series-block-2 .views-row-even {
+    min-width:230px;
     max-width: 90%;
-    margin: 0 auto 20px!important;
     padding-bottom: 25px;
+    text-align: left;
   }
   .section-blogs #block-views-blogs-block-3 .image-blog-landing img,
   .section-news .view-id-news.view-display-id-page_2 .image-news-landing img,
@@ -175,8 +281,7 @@ and (orientation : portrait) {
   .section-employees .view-content .views-row,
   .view-people-admin .view-content .views-row,
   .page-user-following .view-content .views-row {
-    width:48%!important;
-    height: 370px!important;
+    max-width:24%;
   }
   .section-employees .view-content .views-row .image-employee-landing,
   .view-people-admin .view-content .views-row .image-employee-landing,
@@ -204,26 +309,21 @@ and (orientation : portrait) {
   }
   /* Executive Profile Landing Page */
   /* PSA Head */
-  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first.views-row-last {
-    width:350px!important;
+  .page-executive-team #content .view-content {
+    padding-left: 15px;
   }
-  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first {
-    height:226px!important;
-  }
-  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first .profile-image {
-    margin:5px 15px 0 0!important;
-  }
+.page-executive-team #content .attachment-before .views-row.views-row-1.views-row-odd.views-row-first {
+  width:470px!important;
+}
   /* Executive Profiles */
+.page-executive-team #content .view-content .views-row.views-row-odd,
+.page-executive-team #content .view-content .views-row.views-row-even {
+  width: 31%!important;
+}
+#content > div.view.view-Executive-Profiles.view-id-Executive_Profiles.view-display-id-page_1 > div.view-content > div.views-row.views-row-1.views-row-odd.views-row-first {
+  margin-left: 120px;
+}
 
-.page-executive-team #content .view-content .views-row-odd,
-.page-executive-team #content .view-content .views-row-even {
-    width: 230px!important;
-    height: inherit!important;
-}
-#content > div.view.view-Executive-Profiles.view-id-Executive_Profiles.view-display-id-page_1 > div.view-content {
-  width:240px;
-  margin:0 auto;
-}
 /* Article Pages */
   .sidebar-second .region-sidebar-second {
     max-width:none;
@@ -237,8 +337,11 @@ and (orientation : portrait) {
 }
   .region.region-bottom .view-display-id-related_content .views-row-odd,
   .region.region-bottom .view-display-id-related_content .views-row-even {
-    width:46%!important;
-    margin-left:5px;
+    max-width: 18%!important;
+    margin-left: 5px;
+}
+.region.region-bottom .view-display-id-related_content .image-related-content img {
+  height: 100px!important;
 }
 #content article p > img { // adjustment for inline images
     float: none!important;
@@ -297,7 +400,20 @@ and (orientation : portrait) {
   .one-sidebar.sidebar-first .pre-title-snipet {
     padding: 0!important;
   }
+  /* Group Landing Page */
+.section-groups .views-exposed-widget ul,
+.page-my-groups .views-exposed-widget ul {
+  width:inherit!important;
+  margin: 0!important;
+  padding: 0!important;
+  text-align: center;
 }
+}
+
+/*********************************************************************************/
+/*************** Break between Portrait and Landscape settings *******************/
+/*********************************************************************************/
+
 @media only screen // iphone
 and (min-device-width : 375px)
 and (max-device-width : 667px)
@@ -327,7 +443,75 @@ and (orientation : landscape) {
       margin: 0!important;
       padding: 0 10px 0 0!important;
     }
+    /* Executive Profiles */
+  .page-executive-team #content .attachment-before {
+    width: 425px!important;
+  }
+  .page-executive-team #content .view-content {
+      margin-left:10px;
+    }
+.page-executive-team #content .view-content .views-row.views-row-odd,
+.page-executive-team #content .view-content .views-row.views-row-even {
+  min-width:31%;
+  text-align:left;
+  height:340px!important;
 }
+.page-executive-team #content .profile-image img {
+  height:initial!important;
+}
+#content > div.view.view-Executive-Profiles.view-id-Executive_Profiles.view-display-id-page_1 > div.view-content > div.views-row.views-row-1.views-row-odd.views-row-first {
+  margin-left:0!important;
+}
+//Article Landing Pages
+section.region.region-sidebar-second.column.sidebar {
+  display: none;
+}
+.view-id-news, .view-id-videos, .view-id-article_series {
+  text-align: center;
+}
+.view-id-news, .view-id-videos, .view-id-article_series {
+  .reads-news-landing,
+  .reads-video-landing {
+    margin-right: 5px!important;
+  }
+}
+  /* Group Landing Page*/
+.section-groups .views-exposed-widget ul,
+.page-my-groups .views-exposed-widget ul {
+    width: 83%!important;
+    padding: 0px;
+    text-align:center;
+    li a.really-active {
+      padding: 0!important;
+      width: 30px;
+    }
+    li {
+        border-right: none!important;
+        padding: 0!important;
+        margin: 0 3px 5px;
+    }
+    li a {
+      display: block;
+      border: solid 1px #999;
+      width: 30px;
+      height: 20px;
+      text-align: center;
+    }
+}
+.section-groups #edit-title-1-wrapper,
+.section-groups #edit-desc-1-wrapper {
+  margin-left: 0!important;
+  width:100%!important;
+  input {
+    min-width: 600px;
+    background-color: aliceblue;
+  }
+}
+.views-exposed-form .views-exposed-widget {
+  padding: initial;
+}
+}
+
 @media only screen // ipad
   and (max-width:1024px)
   and (max-height:768px)
@@ -342,8 +526,12 @@ and (orientation : landscape) {
     #widget_pager_bottom_home_page_blocks_zen-block_5 {
       position:relative;
       display: block;
-      width: 315px;
+      width: 330px;
       margin: 0 auto;
+    }
+    .front .views-slideshow-pager-fields > div {
+      padding-left:0;
+      display: inline-block;
     }
     .front.logged-in.no-sidebars .skin-default .views-slideshow-controls-bottom {
     top: 0px!important;
@@ -418,6 +606,16 @@ and (orientation : landscape) {
       margin-top: 10px;
       float: none;
     }
+    #block-views-executive-updates-block-2,
+    .view-id-news, .view-id-videos {
+      text-align: center;
+    }
+    .view-id-news,.view-id-videos, .view-id-article_series {
+      .reads-news-landing,
+      .reads-video-landing {
+        margin-right: 5px!important;
+      }
+    }
     .section-classifieds .view-classifieds .views-row-odd, .section-classifieds .view-classifieds .views-row-even,
     .page-galleries .view-gallery-reference .views-row-odd, .page-galleries .view-gallery-reference .views-row-even,
     .section-blogs #block-views-blogs-block-3 .views-row-odd, .section-blogs #block-views-blogs-block-3 .views-row-even,
@@ -428,33 +626,22 @@ and (orientation : landscape) {
     .section-corporate-polls .view-display-id-page_2 .views-row-odd, .section-corporate-polls .view-display-id-page_2 .views-row-even,
     .section-polls .view-display-id-page_3 .views-row-odd, .section-polls .view-display-id-page_3 .views-row-even,
     .section-etc-talks #block-views-videos-block-4 .views-row-odd, .section-etc-talks #block-views-videos-block-4 .views-row-even,
-    .section-executive-messages #block-views-executive-updates-block-2 .views-row-odd, .section-executive-messages #block-views-executive-updates-block-2 .views-row-even {
+    .section-executive-messages #block-views-executive-updates-block-2 .views-row-odd, .section-executive-messages #block-views-executive-updates-block-2 .views-row-even,
+    .section-series #block-views-article-series-block-2 .views-row-odd, .section-series #block-views-article-series-block-2 .views-row-even {
       display: inline-block!important;
-      width:210px;
-      margin: 0 auto 20px!important;
+      width:200px;
+      //margin: 0 auto 20px!important;
       padding-bottom: 25px;
       font-size:.9em;
+      text-align:left;
     }
-    .section-blogs #block-views-blogs-block-3 .image-blog-landing img,
-    .section-news .view-id-news.view-display-id-page_2 .image-news-landing img,
-    .section-corporate-news .view-id-news.view-display-id-page_3 .image-news-landing img,
-    .section-videos .view-display-id-page_1 .image-video-landing img,
-    .section-videos .view-display-id-page_2 .image-video-landing img,
-    .section-corporate-polls .view-display-id-page_2 .image-poll-landing img,
-    .section-polls .view-display-id-page_3 .image-poll-landing img,
-    .section-classifieds .view-classifieds .views-row .image-classifieds-section img,
-    .node-type-classified.section-classifieds .region-post-content .views-row .image-addtional-classifieds img,
-    .page-taxonomy .view-id-term_landing_page .views-row img,
-    .section-etc-talks #block-views-videos-block-4 img,
-    .view-executive-updates .image-exec-updates img {
-      height:137px!important;
-    }
+
     .front div#social-side {
     display:block!important;
     position: inherit;
     min-height: 250px;
     overflow: auto;
-  }
+    }
     .front .region.region-social-side {
       position: relative;
       top: 0px;
@@ -495,7 +682,7 @@ and (orientation : landscape) {
   .view-people-admin .view-content .views-row,
   .page-user-following .view-content .views-row {
     width:24%!important;
-    height: 370px!important;
+    height: 415px!important;
   }
   .section-employees .view-content .views-row .image-employee-landing,
   .view-people-admin .view-content .views-row .image-employee-landing,
@@ -522,33 +709,7 @@ and (orientation : landscape) {
   form#views-exposed-form-people-admin-page-following2 #edit-interests-wrapper  {
     width: 48%;
   }
-  
-  /* Executive Profile Landing Page */
-  /* PSA Head */
-  .page-executive-team #content .view-Executive-Profiles .attachment-before {
-    width:inherit!important;
-  }
-  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first.views-row-last {
-    width:470px!important;
-    margin-left:75px;
-  }
-  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first {
-    height:226px!important;
-  }
-  .page-executive-team #content .view-Executive-Profiles .attachment-before .views-row.views-row-1.views-row-odd.views-row-first .profile-image {
-    margin: 5px 15px 0px 5px !important;
-    width: 35.5%;
-  }
-  /* Executive Profiles */
 
-.page-executive-team #content .view-content .views-row-odd,
-.page-executive-team #content .view-content .views-row-even {
-    width: 230px!important;
-}
-#content > div.view.view-Executive-Profiles.view-id-Executive_Profiles.view-display-id-page_1 > div.view-content {
-  width:500px;
-  margin:0 auto;
-}
   /* Group Landing Page */
   #block-views-groups-block-2,
   .create-group {
@@ -557,11 +718,20 @@ and (orientation : landscape) {
   #content > div.view.view-Executive-Profiles.view-id-Executive_Profiles .pager-item {
     padding:0;
   }
-  /* News Article Pages */
-  .column {
+.section-groups .views-exposed-widget ul,
+.page-my-groups .views-exposed-widget ul {
   width:inherit!important;
-  clear:both;
-  }
+  margin: 0!important;
+  text-align: center;
+}
+
+  /* News Article Pages */
+section.region.region-sidebar-second.column.sidebar {
+    float: right;
+    width: inherit;
+    clear: none;
+    margin-top: -40px;
+}
   ul.tabs-primary.tabs.primary {
     display: none;
   }
@@ -583,9 +753,6 @@ and (orientation : landscape) {
   .region.region-bottom .view-display-id-related_content .views-row-even {
     width:18.7%!important;
     height:inherit!important;
-}
-.region.region-bottom .view-display-id-related_content .image-related-content img {
-  height:82px!important;
 }
 .commentArticle .rate-widget {
   top: inherit!important;
