@@ -148,7 +148,7 @@ img {
   image-rendering: -moz-auto;         /* Firefox */
   image-rendering:   -o-auto;         /* Opera */
   image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
-  image-rendering: auto;
+  /*image-rendering: auto;*/
   -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
 }
 

@@ -78,6 +78,16 @@ a.avpw_cursor {
   -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
 
 /*----------------- H1 - H6 Size adjustments --------------------*/
+/* IMG classes for IE images */
+.bicubic {
+    -ms-interpolation-mode: bicubic;
+    image-rendering: optimizeQuality;
+}
+.nearest {
+   -ms-interpolation-mode: nearest-neighbor;
+    image-rendering: optimizeSpeed;
+}
+
 
 /*----------------- Font Size: 1.75em --------------------*/
 /* User Profile Card */
