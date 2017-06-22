@@ -13,9 +13,7 @@
 #main {
   margin-top: 2em;
 }
-  i.fa.fa-search {
-    display: none!important;
-  }
+
 /** @media queries for mobile devices **/
 /** Mobile - 768px to 820px **/
 /** Narrow Screen - 821px to 979px **/
@@ -34,6 +32,9 @@ only screen and (                min-resolution: 2dppx) {
 and (min-device-width : 375px)
 and (max-device-width : 667px)
 and (orientation : portrait) {
+  i.fa.fa-search {
+    display: none;
+  }
   #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row.views-slideshow-xtra-overlay-row {
     width:inherit!important;
     height:inherit!important;
@@ -418,6 +419,9 @@ aside.sidebars {
 and (min-device-width : 375px)
 and (max-device-width : 667px)
 and (orientation : landscape) {
+  i.fa.fa-search {
+    display: none;
+  }
     #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row {
       width:80%!important;
     }
