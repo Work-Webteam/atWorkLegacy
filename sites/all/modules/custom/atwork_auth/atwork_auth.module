@@ -79,15 +79,20 @@ function atwork_auth_init() {
 
   // if no guid was found there is no account yet
   if (!$uid) {
+    // this is now all handled by idir script - we should never update/remove or add a user here.
+    drupal_set_message(t("Something has gone wrong, please try again or contact the @Work team", error));
+    echo("Something has gone wrong, please try again or contact the @ork team");
+    drupal_exit();
+    return;
     // check if $sm_user is available as $user->name
     $name = _atwork_auth_get_unique_name($sm_user);
 
     // if a different name is returned we will need to rename the
     // account using $sm_user so it will be freed up
     if ($sm_user != $name) {
-      _atwork_auth_rename_user($sm_user, $name);
+      //_atwork_auth_rename_user($sm_user, $name);
     }
-    $uid = _atwork_auth_create_new_user($sm_user);
+    //$uid = _atwork_auth_create_new_user($sm_user);
     //return;
   }
 
@@ -116,6 +121,8 @@ function atwork_auth_init() {
     // use an alter hook so other modules can update fields as well
     drupal_alter('atwork_auth_update_fields_on_access', $external_account, $save);
 
+    // We no longer want to save here - this is all handled by an external script. Save should always be "FALSE"
+    $save = FALSE;
     if ($save) {
       user_save($external_account);
     }
@@ -341,7 +348,7 @@ function _atwork_auth_add_gal_fields($user, $query_field = 'mail', $query_value 
  */
 function _atwork_auth_create_new_user($name) {
   global $user;
-
+  return;
   // this is the proper function for external authentication
   // but for some reason doesn't require - or even take into account the
   // user mail. We therefore need to add the mail after and re-save the user
@@ -511,6 +518,7 @@ function atwork_auth_atwork_auth_new_user_alter(&$user) {
  * Implementation of hook_atwork_auth_rename_user()
  */
 function atwork_auth_atwork_auth_rename_user($user, $new_name) {
+    return;
     // once we got a replacement save the user
     $random = str_replace(array(' ', '.'), array('', ''), microtime());
 

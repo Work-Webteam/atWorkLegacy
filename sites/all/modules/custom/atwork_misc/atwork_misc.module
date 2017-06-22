@@ -330,7 +330,7 @@ EOT;
     drupal_add_js($js, 'inline');
     // Tutorials
     Global $user;
-    if($user->theme == 'atwork_zen'){
+    if(isset($user->theme) && $user->theme == 'atwork_zen'){
       $account = user_load($user->uid);
       if(!isset($account->field_home_page_tutorial['und'][0]['value']) || isset($account->field_home_page_tutorial['und'][0]['value']) && $account->field_home_page_tutorial['und'][0]['value'] == 1){
         //drupal_clear_js_cache();

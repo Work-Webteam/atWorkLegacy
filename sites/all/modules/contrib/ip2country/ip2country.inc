@@ -211,18 +211,21 @@ function ip2country_update_database($registry = 'arin') {
  *   of the fetched file.
  */
 function _ip2country_fetch_page($url) {
-  $curl = curl_init();
+  // Updated as suggested here: https://www.drupal.org/node/2839722
+  //$curl = curl_init();
 
   // Fetch requested file.
-  curl_setopt($curl, CURLOPT_URL, $url);
-  curl_setopt($curl, CURLOPT_TIMEOUT, 60*2);
-  curl_setopt($curl, CURLOPT_USERAGENT, 'Drupal (+http://drupal.org/)');
-  curl_setopt($curl, CURLOPT_HEADER, FALSE);
-  curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
-  curl_setopt($curl, CURLOPT_FOLLOWLOCATION, TRUE);
+  //curl_setopt($curl, CURLOPT_URL, $url);
+  //curl_setopt($curl, CURLOPT_TIMEOUT, 60*2);
+  //curl_setopt($curl, CURLOPT_USERAGENT, 'Drupal (+http://drupal.org/)');
+  //curl_setopt($curl, CURLOPT_HEADER, FALSE);
+  //curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+  //curl_setopt($curl, CURLOPT_FOLLOWLOCATION, TRUE);
 
-  $html = curl_exec($curl);
-  curl_close($curl);
+  //$html = curl_exec($curl);
+  //curl_close($curl);
+
+  $html = file_get_contents($url);
 
   return $html;
 }
