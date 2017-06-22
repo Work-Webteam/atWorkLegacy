@@ -28,12 +28,16 @@ only screen and (        min-device-pixel-ratio: 2),
 only screen and (                min-resolution: 192dpi),
 only screen and (                min-resolution: 2dppx) {
 
+/*********************************************************************************/
+/*************************** PORTRAIT IPHONE SETTINGS ****************************/
+/*********************************************************************************/
+
 @media only screen // iphone
 and (min-device-width : 375px)
 and (max-device-width : 667px)
 and (orientation : portrait) {
-  i.fa.fa-search {
-    display: none;
+  #block-views-home-page-blocks-zen-block-2 {
+    display: none!important;
   }
   #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row.views-slideshow-xtra-overlay-row {
     width:inherit!important;
@@ -47,6 +51,9 @@ and (orientation : portrait) {
     min-width:325px;
     max-width: 90%;
     margin: 0 auto 10px!important;
+  }
+  .front #block-views-top-tools-block {
+    margin-left: 4.5vw!important;
   }
   #block-views-executive-updates-block-2 {
       text-align: center;
@@ -149,6 +156,10 @@ aside.sidebars {
 }
 }
 
+/*********************************************************************************/
+/**************************** PORTRAIT IPAD SETTINGS *****************************/
+/*********************************************************************************/
+
 @media only screen // ipad
   and (max-width:768px)
   and (max-height:1024px)
@@ -216,13 +227,9 @@ aside.sidebars {
 #social-side .jsNewActivityWindow {
     margin-right: 15px!important;
 }
-  .front #block-views-home-page-blocks-zen-block-2 {
-    width:100%!important;
-    margin: 0 auto!important;
-    .view-content {
-      margin: 0px !important;
-    }
-  }
+.front #block-views-home-page-blocks-zen-block-2.block.block-views {
+  min-width:54%!important;
+}
 
   .section-classifieds .view-classifieds .views-row-odd, .section-classifieds .view-classifieds .views-row-even,
   .page-galleries .view-gallery-reference .views-row-odd, .page-galleries .view-gallery-reference .views-row-even,
@@ -412,15 +419,15 @@ aside.sidebars {
 }
 
 /*********************************************************************************/
-/*************** Break between Portrait and Landscape settings *******************/
+/*************************** LANDSCAPE IPHONE SETTINGS ***************************/
 /*********************************************************************************/
 
 @media only screen // iphone
 and (min-device-width : 375px)
 and (max-device-width : 667px)
 and (orientation : landscape) {
-  i.fa.fa-search {
-    display: none;
+  #block-views-home-page-blocks-zen-block-2 {
+    display: none!important;
   }
     #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row {
       width:80%!important;
@@ -433,6 +440,16 @@ and (orientation : landscape) {
         clear: both;
         height: inherit;
     }
+  .front #block-views-top-tools-block {
+    width: 100%;
+    margin-left: 0!important;
+    height: 240px!important;
+    #top-tools-links p {
+      width: 49%;
+      display: inline-block;
+      margin-right: 3px;
+    }
+  }
     .front .front-promoted-image {
       display: inline-block;
       clear:none;
@@ -516,6 +533,11 @@ section.region.region-sidebar-second.column.sidebar {
 }
 }
 
+/*********************************************************************************/
+/*************************** LANDSCAPE IPAD SETTINGS *****************************/
+/*********************************************************************************/
+
+
 @media only screen // ipad
   and (max-width:1024px)
   and (max-height:768px)
@@ -544,7 +566,6 @@ section.region.region-sidebar-second.column.sidebar {
     .front #block-block-5,
     #views_slideshow_controls_text_home_page_blocks_zen-block_5,
     #social-side #activity-feed,
-    #social-side .atwork-activity-block-container .item-list,
     #block-views-gallery-reference-block-2,
     #block-boxes-homepage-logos,
     #block-block-52,
@@ -806,7 +827,7 @@ section.region.region-sidebar-second.column.sidebar {
 @media only screen and (max-width:979px) {
   html,
   #header.header,
-  .not-front .new-activity-window #header.header {
+  .new-activity-window #header.header {
     background: none !important;
   }
   #content.column {
@@ -814,7 +835,6 @@ section.region.region-sidebar-second.column.sidebar {
       margin: 0 auto;
   }
 	#navigation,
-	#block-views-top-tools-block,
   #block-custom-search-blocks-1,
   #block-block-45 {// hides the top tools panel
    		display: none !important;
@@ -828,12 +848,12 @@ section.region.region-sidebar-second.column.sidebar {
     top: 0 !important;
     width: 100%;
   	}
-	.front #block-views-home-page-blocks-zen-block-2.block.block-views {
-		min-width: 100%;
+	.front #block-views-home-page-blocks-zen-block-2 {
+		min-width: 63%!important;
 	}
 }
 @media only screen and (min-width:980px) {
-  .not-front .new-activity-window #header.header {
+  .new-activity-window #header.header {
     background: none !important;
   }
   #block-atwork-mobile-atwork-mobile-menu-block,

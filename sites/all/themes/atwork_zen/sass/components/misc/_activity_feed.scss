@@ -692,12 +692,39 @@
 //------------------ Pop-out User Activity Window specifics
 
 .new-activity-window {
+  #atwork-advanced-feed-settings,
+  .feed-ad-space-image,
+  .feed-ad-space-outer,
+  #block-block-7 {
+    display: none;
+  }
+  #header-box {
+    width: inherit!important;
+  }
+  #social-side #status-update {
+    width:inherit!important;
+  }
+  #social-side #status-update div#speech-pointer {
+    margin-top: -88px;
+  }
+  #social-side #status-update .form-textarea-wrapper {
+    float:none;
+    display: inline-block;
+    margin-left: 13px;
+  }
+  #social-side #status-update .form-textarea-wrapper textarea {
+    width: 100%;
+  }
+}
+
+
+.new-activity-window {
   background-color: #D7D7D7;
   overflow: hidden;
   #block-atwork-activity-homepage {
     width: 275px;
     height: auto;
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
     top: 20px;
   }
@@ -725,26 +752,25 @@
 #page .new-activity-window #block-block-7 {
   display: none!important;
 }
-.not-front .new-activity-window #block-atwork-mobile-atwork-mobile-menu-block {
+.new-activity-window #block-atwork-mobile-atwork-mobile-menu-block {
   display:block!important;
 }
-.not-front .new-activity-window {
+.new-activity-window {
   width: 275px!important;
   min-width:initial!important;
 }
-.not-front .new-activity-window {
+.new-activity-window {
   background-color: #FFF;
 }
-.not-front .new-activity-window #header.header {
+.new-activity-window #header.header {
   background: none;
   height:60px!important;
 }
-.not-front .new-activity-window .atwork-activity-block-container {
+.new-activity-window .atwork-activity-block-container {
   margin-top:6px;
 }
-.not-front .new-activity-window #social-side .region-social-side{
+.new-activity-window #social-side .region-social-side{
   position: initial;
-  width: 275px;
   margin: 0px auto;
 }
 .not-front .new-activity-window #social-side {
@@ -762,13 +788,7 @@
 .not-front .new-activity-window #social-side .item-list {
   position: inherit;
 }
-/* Minor adjustment for the pop out window on mobile devices */
-@media only screen
-  and (max-width:679px) and (min-width:350px) {
-    .not-front .new-activity-window #social-side .region.region-social-side {
-      zoom: 1.15;
-      }
-}
+
 
 
 
