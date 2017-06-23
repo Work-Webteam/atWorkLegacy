@@ -1,4 +1,5 @@
 name = Atwork Search
 description = Changes to the default search module
 package = Atwork
+scripts{} = js/atwork_search.js
 core = 7.x
