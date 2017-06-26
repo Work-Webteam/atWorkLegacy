@@ -36,13 +36,26 @@ only screen and (                min-resolution: 2dppx) {
 and (min-device-width : 375px)
 and (max-device-width : 667px)
 and (orientation : portrait) {
+  #page {
+    margin-left: 10px;
+    margin-right:10px;
+  }
   #block-views-home-page-blocks-zen-block-2 {
     display: none!important;
   }
   .front .region.region-social-side {
     min-width:100%;
   }
-
+#social-side div#status-update {
+  width: 275px;
+  margin: 0 auto;
+  .form-textarea-wrapper {
+    max-width:none;
+  }
+  .form-textarea-wrapper textarea {
+    width: 225px;
+  }
+}
   #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row.views-slideshow-xtra-overlay-row {
     width:inherit!important;
     height:inherit!important;
@@ -172,6 +185,10 @@ aside.sidebars {
       min-width:348px!important;
       max-width:768px!important;
   }
+  .not-front #page {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
   #block-views-home-page-blocks-zen-block-5 {
     margin-bottom: 25px!important;
   }
@@ -193,7 +210,18 @@ aside.sidebars {
       top: 0px;
       min-width:100%;
       margin: 0 auto;
-    }
+  }
+#social-side div#status-update {
+  width: 350px;
+  margin: 0 auto;
+  .form-textarea-wrapper {
+    max-width:none;
+  }
+  .form-textarea-wrapper textarea {
+    width: 297px;
+  }
+}
+
 #block-views-home-page-blocks-zen-block-1,
 #block-views-home-page-blocks-zen-block-3,
 #block-views-home-page-blocks-zen-block-4 {
@@ -226,9 +254,7 @@ aside.sidebars {
       }
   }
 
-  .front #social-side #status-update .form-textarea-wrapper textarea {
-    width: inherit;
-}
+
 #social-side .jsNewActivityWindow {
     margin-right: 15px!important;
 }
@@ -283,12 +309,6 @@ aside.sidebars {
   .front #social-side h2.block__title.block-title {
      text-align: left;
      padding-left: 12px;
-  }
-  .front #social-side #status-update .form-textarea-wrapper {
-    max-width:84%!important;
-  }
-  #social-side #status-update div#speech-pointer {
-    margin-left: 45px!important;
   }
   /* Employee Landing Page and User following page */
   .section-employees .view-content .views-row,
@@ -431,24 +451,38 @@ aside.sidebars {
 and (min-device-width : 375px)
 and (max-device-width : 667px)
 and (orientation : landscape) {
+  .not-front #page {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
   #block-views-home-page-blocks-zen-block-2,
   .atwork-activity-block-container .item-list ul.pager {
     display: none!important;
   }
-.front .region.region-social-side {
-   min-width:100%;
- }
-    #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row {
-      width:80%!important;
-    }
-    #block-views-home-page-blocks-zen-block-1,
-    #block-views-home-page-blocks-zen-block-3,
-    #block-views-home-page-blocks-zen-block-4 {
-        min-width: 100% !important;
-        max-width:786px;
-        clear: both;
-        height: inherit;
-    }
+  .front .region.region-social-side {
+    min-width:100%;
+  }
+  #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row {
+     width:80%!important;
+  }
+#social-side div#status-update {
+  width: 350px;
+  margin: 0 auto;
+  .form-textarea-wrapper {
+    max-width:none;
+  }
+  .form-textarea-wrapper textarea {
+    width: 297px;
+  }
+}
+  #block-views-home-page-blocks-zen-block-1,
+  #block-views-home-page-blocks-zen-block-3,
+  #block-views-home-page-blocks-zen-block-4 {
+      min-width: 100% !important;
+      max-width:786px;
+      clear: both;
+      height: inherit;
+  }
   .front #block-views-top-tools-block {
     width: 100%;
     margin-left: 0!important;
@@ -558,6 +592,10 @@ section.region.region-sidebar-second.column.sidebar {
         min-width:352px!important;
         max-width:980px!important;
     }
+    .not-front #page {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
     #block-views-home-page-blocks-zen-block-5 {
       margin-bottom: 25px!important;
     }
@@ -584,13 +622,23 @@ section.region.region-sidebar-second.column.sidebar {
     .create-event {
       display: none!important;
     }
+
     .new-activity-window #social-side #activity-feed {
       display: block !important;
     }
     #social-side .jsNewActivityWindow {
     margin-right: 15px!important;
     }
-
+#social-side div#status-update {
+  width: 350px;
+  margin: 0 auto;
+  .form-textarea-wrapper {
+    max-width:none;
+  }
+  .form-textarea-wrapper textarea {
+    width: 297px;
+  }
+}
     .front #block-views-home-page-blocks-zen-block-2 {
       width:609px!important;
       margin:0 auto!important;
@@ -705,12 +753,6 @@ section.region.region-sidebar-second.column.sidebar {
       padding-left: 12px;
     }
 
-   .front #social-side #status-update .form-textarea-wrapper textarea {
-    width: inherit;
-    }
-    .front #social-side #status-update .form-textarea-wrapper {
-    max-width:84%!important;
-    }
   /* Employee Landing Page and User following page */
   .section-employees .view-content .views-row,
   .view-people-admin .view-content .views-row,
