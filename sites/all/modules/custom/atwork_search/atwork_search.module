@@ -80,9 +80,11 @@ function atwork_search_form_alter(&$form, &$form_state, $form_id) {
   }
 
   if ($form_id == 'custom_search_blocks_form_1') {
+ 
+    drupal_add_js(drupal_get_path('module', 'atwork_search') . '/js/atwork_search.js');
 
     //$form['actions']['submit']['#type'] = 'image_button';
-    $form['custom_search_blocks_form_1']['#suffix'] = _atwork_fa('search', 'style="cursor: pointer;"');
+    $form['custom_search_blocks_form_1']['#suffix'] = _atwork_fa('search', 'style="cursor: pointer;" id="search-button"');
     $form['actions']['submit']['#value'] = '';
     $form['custom_search_blocks_form_1']['#size'] = 40;
 
