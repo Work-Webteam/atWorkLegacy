@@ -1,8 +1,5 @@
 /* Hides Drupal warning boxes at the top of the page */
 
-#header-box #home-link a {
-  display: none!important;
-}
 #block-views-home-page-blocks-zen-ad-space,
 #widget_pager_bottom_home_page_blocks_zen-block_5 {
     display: none; // hides the slideshow selector boxes until needed.
@@ -27,6 +24,18 @@ only screen and (     -o-min-device-pixel-ratio: 2/1),
 only screen and (        min-device-pixel-ratio: 2),
 only screen and (                min-resolution: 192dpi),
 only screen and (                min-resolution: 2dppx) {
+#header-box {
+  display:none;
+}
+#content.column {
+    max-width: inherit;
+    margin: 0 auto;
+}
+.section-ecards {
+  .form-type-bef-checkbox {
+  width: initial!important;
+  }
+}
 
 /*********************************************************************************/
 /*************************** PORTRAIT IPHONE SETTINGS ****************************/
@@ -36,11 +45,9 @@ only screen and (                min-resolution: 2dppx) {
 and (min-device-width : 375px)
 and (max-device-width : 667px)
 and (orientation : portrait) {
-  #page {
-    margin-left: 10px;
-    margin-right:10px;
-  }
-  #block-views-home-page-blocks-zen-block-2 {
+
+  #block-views-home-page-blocks-zen-block-2,
+  aside.sidebars .region.region-sidebar-second {
     display: none!important;
   }
   .front .region.region-social-side {
@@ -120,16 +127,16 @@ and (orientation : portrait) {
 }
 
 //Article Landing Pages
-aside.sidebars {
-  display: none;
-}
 
 .view-id-news, .view-id-videos, .view-id-article_series {
   text-align: center;
 }
-
+  .not-front.logged-in.sidebar-first #content.column,
+  .not-front.logged-in.sidebar-second #content.column {
+    width:inherit!important;
+  }
 .region.region-bottom .view-display-id-related_content .views-row-odd,
- .region.region-bottom .view-display-id-related_content .views-row-even {
+.region.region-bottom .view-display-id-related_content .views-row-even {
    min-width: 45%!important;
    margin-left: 5px;
 }
@@ -171,6 +178,24 @@ aside.sidebars {
     background-color: aliceblue;
   }
 }
+aside.sidebars .region.region-sidebar-first {
+  position: relative!important;
+  margin-left:10px;
+  margin-right:10px;
+}
+/* Ministry Internet sites landing page */
+.page-node-258 {
+  article .field-name-body {
+    text-align: center;
+  }
+  .field-item li {
+    width: 140px!important;
+  }
+}
+/* Ecards */
+  .view-e-cards .views-row {
+    min-height: 220px!important;
+  } 
 }
 
 /*********************************************************************************/
@@ -185,10 +210,14 @@ aside.sidebars {
       min-width:348px!important;
       max-width:768px!important;
   }
+  .front #page #main {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
   .not-front #page {
     margin-left: 10px;
     margin-right: 10px;
-  }
+}
   #block-views-home-page-blocks-zen-block-5 {
     margin-bottom: 25px!important;
   }
@@ -222,6 +251,7 @@ aside.sidebars {
   }
 }
 
+
 #block-views-home-page-blocks-zen-block-1,
 #block-views-home-page-blocks-zen-block-3,
 #block-views-home-page-blocks-zen-block-4 {
@@ -237,8 +267,7 @@ aside.sidebars {
   #block-boxes-homepage-logos,
   #footer #footer-copyright table td.sideBrdr,
   #block-block-52,
-  .create-event,
-  aside.sidebars {
+  .create-event {
     display: none!important;
   }
   .new-activity-window #social-side {
@@ -359,15 +388,13 @@ aside.sidebars {
 
 /* Article Pages */
   .sidebar-second .region-sidebar-second {
-    max-width:none;
-    float:none;
-    clear:both;
+    max-width:24%;
+    float:right;
+    clear:none;
     margin:0 15px 0 10px;
     padding:0;
   }
-.column {
-  width:inherit!important;
-}
+
   .region.region-bottom .view-display-id-related_content .views-row-odd,
   .region.region-bottom .view-display-id-related_content .views-row-even {
     max-width: 18%!important;
@@ -377,8 +404,7 @@ aside.sidebars {
   height: 100px!important;
 }
 #content article p > img { // adjustment for inline images
-    float: none!important;
-    width: 100%!important;
+    max-width: 100%!important;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -419,7 +445,7 @@ aside.sidebars {
   }
   .og-context.og-context-node aside.sidebars {
     clear:both!important;
-    width: 100%;
+    width: inherit;
   }
   .og-context.og-context-node #page #main {
     padding-top: 10px!important;
@@ -441,6 +467,19 @@ aside.sidebars {
   padding: 0!important;
   text-align: center;
 }
+/* Ministry Internet sites */
+.page-node-258 {
+  article .field-name-body {
+    text-align: center;
+  }
+  .field-item li {
+    min-width: 25%;
+  }
+}
+/* Ecards */
+  .view-e-cards .views-row {
+    min-height: 310px;
+  }
 }
 
 /*********************************************************************************/
@@ -451,11 +490,16 @@ aside.sidebars {
 and (min-device-width : 375px)
 and (max-device-width : 667px)
 and (orientation : landscape) {
-  .not-front #page {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
+.front #page #main {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.not-front #page {
+    margin-left: 5px;
+    margin-right: 5px;
+}
   #block-views-home-page-blocks-zen-block-2,
+  #block-boxes-homepage-logos,
   .atwork-activity-block-container .item-list ul.pager {
     display: none!important;
   }
@@ -508,12 +552,17 @@ and (orientation : landscape) {
       padding: 0 10px 0 0!important;
     }
     /* Executive Profiles */
-  .page-executive-team #content .attachment-before {
-    width: 425px!important;
-  }
-  .page-executive-team #content .view-content {
-      margin-left:10px;
-    }
+
+.not-front .page-executive-team #page {
+  margin-left:inherit!important;
+  margin-right:inherit!important;
+}
+.page-executive-team #content .attachment-before {
+   width: 425px!important;
+}
+.page-executive-team #content .view-content {
+   margin-left:10px;
+}
 .page-executive-team #content .view-content .views-row.views-row-odd,
 .page-executive-team #content .view-content .views-row.views-row-even {
   min-width:31%;
@@ -527,8 +576,9 @@ and (orientation : landscape) {
   margin-left:0!important;
 }
 //Article Landing Pages
-section.region.region-sidebar-second.column.sidebar {
-  display: none;
+.not-front.logged-in.sidebar-first #content.column,
+.not-front.logged-in.sidebar-second #content.column {
+  width:66.66%!important;
 }
 .view-id-news, .view-id-videos, .view-id-article_series {
   text-align: center;
@@ -574,6 +624,35 @@ section.region.region-sidebar-second.column.sidebar {
 .views-exposed-form .views-exposed-widget {
   padding: initial;
 }
+/* Article / Blog pages with sidebars */
+.og-context.og-context-node {
+  aside.sidebars {
+    display: block;
+    clear:none!important;
+  }
+  #content article {
+    padding-left: 0;
+  }
+  #main h1 {
+    width:inherit!important;
+    margin-right:10px;
+  }
+}
+.two-sidebars.section-groups.og-context.og-context-node .region-sidebar-first {
+  margin-top: -14px!important;
+}
+.page-node-258 {
+  article .field-name-body {
+    text-align: center;
+  }
+  .field-item li {
+    min-width: 25%;
+  }
+}
+/* Ecards */
+  .view-e-cards .views-row {
+    min-height: 280px;
+  }
 }
 
 /*********************************************************************************/
@@ -591,10 +670,6 @@ section.region.region-sidebar-second.column.sidebar {
     #page {
         min-width:352px!important;
         max-width:980px!important;
-    }
-    .not-front #page {
-      margin-left: 10px;
-      margin-right: 10px;
     }
     #block-views-home-page-blocks-zen-block-5 {
       margin-bottom: 25px!important;
@@ -617,7 +692,7 @@ section.region.region-sidebar-second.column.sidebar {
     #views_slideshow_controls_text_home_page_blocks_zen-block_5,
     #social-side #activity-feed,
     #block-views-gallery-reference-block-2,
-    #block-boxes-homepage-logos,
+    //#block-boxes-homepage-logos,
     #block-block-52,
     .create-event {
       display: none!important;
@@ -804,7 +879,7 @@ section.region.region-sidebar-second.column.sidebar {
   /* News Article Pages */
 section.region.region-sidebar-second.column.sidebar {
     float: right;
-    width: inherit;
+    max-width:28%;
     clear: none;
     margin-top: -40px;
 }
@@ -852,10 +927,10 @@ section.region.region-sidebar-second.column.sidebar {
     margin-left:inherit!important;
     clear:both!important;
   }
-  .og-context.og-context-node aside.sidebars {
+/*  .og-context.og-context-node aside.sidebars {
     clear:both!important;
     width: 100%;
-  }
+  }*/
   .og-context.og-context-node #page #main {
     padding-top: 10px!important;
   }
@@ -868,6 +943,16 @@ section.region.region-sidebar-second.column.sidebar {
   .one-sidebar.sidebar-first .pre-title-snipet {
     padding: 0!important;
   }
+  }
+ /* Ministry Internet sites */ 
+  .page-node-258 {
+  article .field-name-body {
+    text-align: center;
+  }
+}
+/* Ecards */
+  .view-e-cards .views-row {
+    min-height: 310px;
   }
 }
 
@@ -882,7 +967,7 @@ section.region.region-sidebar-second.column.sidebar {
     background: none !important;
   }
   #content.column {
-      max-width: 98% !important;
+      // max-width: 98%;
       margin: 0 auto;
   }
 	#navigation,
