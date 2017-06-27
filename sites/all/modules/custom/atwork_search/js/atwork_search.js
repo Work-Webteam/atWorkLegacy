@@ -5,7 +5,7 @@
         // Handle clicking on search button here.
         $("#custom-search-blocks-form-1 #search-button").click(function(){
             // Process search request
-            //$("#custom-search-blocks-form-1").submit();
+            $("#custom-search-blocks-form-1").submit();
 
             setLoadingAnimation();            
         });
