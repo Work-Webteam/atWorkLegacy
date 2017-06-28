@@ -7,9 +7,7 @@
 .front.logged-in.no-sidebars .skin-default {
 	height: 260px; // removes the space used by the selector boxes.
 }
-#main {
-  margin-top: 2em;
-}
+
 
 /** @media queries for mobile devices **/
 /** Mobile - 768px to 820px **/
@@ -50,6 +48,7 @@ and (orientation : portrait) {
   aside.sidebars .region.region-sidebar-second {
     display: none!important;
   }
+ 
   .front .region.region-social-side {
     min-width:100%;
   }
@@ -68,6 +67,10 @@ and (orientation : portrait) {
     height:inherit!important;
     margin:10px!important;
   }
+.front fieldset#edit-advanced-search .fieldset-legend {
+  top:-10px;
+  left:35%;
+} 
   #block-views-home-page-blocks-zen-block-1,
 	#block-views-home-page-blocks-zen-block-3,
 	#block-views-home-page-blocks-zen-block-4 {
@@ -76,6 +79,9 @@ and (orientation : portrait) {
     max-width: 90%;
     margin: 0 auto 10px!important;
   }
+  #block-block-7 {
+    display: none!important;
+}
   .front #block-views-top-tools-block {
     margin-left: 4.5vw!important;
   }
@@ -166,7 +172,6 @@ and (orientation : portrait) {
       text-align: center;
     }
 }
-/* Group landing page */
 .section-groups .views-exposed-widget,
 .page-my-groups .views-exposed-widget
 .section-groups #edit-title-1-wrapper,
@@ -218,6 +223,9 @@ aside.sidebars .region.region-sidebar-first {
     margin-left: 10px;
     margin-right: 10px;
 }
+.front fieldset#edit-advanced-search .fieldset-legend {
+  right:0;
+} 
   #block-views-home-page-blocks-zen-block-5 {
     margin-bottom: 25px!important;
   }
@@ -282,7 +290,12 @@ aside.sidebars .region.region-sidebar-first {
         padding: 0;
       }
   }
-
+#block-block-7 {
+  display:block;
+  float:right;
+  position:relative;
+  top:100px;
+}
 
 #social-side .jsNewActivityWindow {
     margin-right: 15px!important;
@@ -503,6 +516,10 @@ and (orientation : landscape) {
   .atwork-activity-block-container .item-list ul.pager {
     display: none!important;
   }
+ .front fieldset#edit-advanced-search .fieldset-legend {
+  top:-10px;
+  left:35%;
+}
   .front .region.region-social-side {
     min-width:100%;
   }
@@ -551,6 +568,11 @@ and (orientation : landscape) {
       margin: 0!important;
       padding: 0 10px 0 0!important;
     }
+
+#block-block-7 {
+  display:block;
+  float:right;
+}
     /* Executive Profiles */
 
 .not-front .page-executive-team #page {
@@ -866,6 +888,14 @@ and (orientation : landscape) {
   .create-group {
     display:none;
   }
+.two-sidebars.section-groups #content {
+    position:relative;
+    margin-left:20.5%;
+    width:58%;
+  }
+  .og-context.og-context-node .region-sidebar-second.column.sidebar {
+    float: none;
+  }
   #content > div.view.view-Executive-Profiles.view-id-Executive_Profiles .pager-item {
     padding:0;
   }
@@ -971,7 +1001,7 @@ section.region.region-sidebar-second.column.sidebar {
       margin: 0 auto;
   }
 	#navigation,
-  #block-custom-search-blocks-1,
+  //#block-custom-search-blocks-1,
   #block-block-45 {// hides the top tools panel
    		display: none !important;
     }

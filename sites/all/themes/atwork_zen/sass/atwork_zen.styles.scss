@@ -195,7 +195,10 @@ html {
   image-rendering: auto;
   -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
 }
-
+/* Header search box no on front page */
+.front #header.header #block-block-7 {
+  display:none;
+}
 #header-box {
   position: absolute;
   height: 110px;

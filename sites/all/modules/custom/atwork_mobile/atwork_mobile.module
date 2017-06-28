@@ -57,6 +57,16 @@ function _atwork_menu_block_builder(){
         <li id = "atwork_menu_item_videos" class = "atwork_menu_nested"><a href = "/videos"> Videos </a></li>
       </ul>
     </li>
+    <li id="atwork_menu_item_about_the_bc_public_service" class="atwork_menu_top_level"><span class="menu-title"><i class="fa fa-plus" aria-hidden="true"></i> About the BC Public Service</span>
+      <ul id="atwork_menu_item_abps_menu">
+        <li id="atwork_menu_item_our_organization" class="atwork_menu_nested"><a href="/our-organization">Our Organization</a></li>
+        <li id="atwork_menu_item_our_values" class="atwork_menu_nested"><a href="/org/bcps-values">Our Values</a></li>
+        <li id="atwork_menu_item_standards_of_conduct" class="atwork_menu_nested"><a href="http://www2.gov.bc.ca/gov/content/careers-myhr/managers-supervisors/employee-labour-relations/conditions-agreements/policy#standards" target="_blank">Standards of Conduct</a></li>
+        <li id="atwork_menu_item_community_involvement" class="atwork_menu_nested"><a href="/community-involvement">Community Involvement</a></li>
+        <li id="atwork_menu_item_where_ideas_work" class="atwork_menu_nested"><a href="/org/where-ideas-work-brand">Where Ideas Work</a></li>
+        <li id="atwork_menu_item_core_policies" class="atwork_menu_nested"><a href="http://www2.gov.bc.ca/gov/content/governments/services-for-government" target="_blank">Services and Policies</a></li>
+      </ul>
+    </li>    
     <li id="atwork_menu_item_our_community" class="atwork_menu_top_level"><span class="menu-title"><i class="fa fa-plus" aria-hidden="true"></i> Our Community</span>
       <ul id="atwork_menu_item_our_community_menu">
         <li id="atwork_menu_item_employee_profiles" class="atwork_menu_nested"><a href="/employees">Employee Profiles</a></li>
@@ -74,16 +84,6 @@ function _atwork_menu_block_builder(){
         <li id="atwork_menu_item_wes" class="atwork_menu_nested"><a href="/wes">Work Environment Survey</a></li>
         <li id="atwork_menu_item_premiers_awards" class="atwork_menu_nested"><a href="/career/premiers-awards">Premier's Awards</a></li>
         <li id="atwork_menu_item_lsa" class="atwork_menu_nested"><a href="/career/long-service-awards">Long Service Awards</a></li>
-      </ul>
-    </li>
-    <li id="atwork_menu_item_about_the_bc_public_service" class="atwork_menu_top_level"><span class="menu-title"><i class="fa fa-plus" aria-hidden="true"></i> About the BC Public Service</span>
-      <ul id="atwork_menu_item_abps_menu">
-        <li id="atwork_menu_item_our_organization" class="atwork_menu_nested"><a href="/our-organization">Our Organization</a></li>
-        <li id="atwork_menu_item_our_values" class="atwork_menu_nested"><a href="/org/bcps-values">Our Values</a></li>
-        <li id="atwork_menu_item_standards_of_conduct" class="atwork_menu_nested"><a href="http://www2.gov.bc.ca/gov/content/careers-myhr/managers-supervisors/employee-labour-relations/conditions-agreements/policy#standards" target="_blank">Standards of Conduct</a></li>
-        <li id="atwork_menu_item_community_involvement" class="atwork_menu_nested"><a href="/community-involvement">Community Involvement</a></li>
-        <li id="atwork_menu_item_where_ideas_work" class="atwork_menu_nested"><a href="/org/where-ideas-work-brand">Where Ideas Work</a></li>
-        <li id="atwork_menu_item_core_policies" class="atwork_menu_nested"><a href="http://www2.gov.bc.ca/gov/content/governments/services-for-government" target="_blank">Services and Policies</a></li>
       </ul>
     </li>
   </ul>
