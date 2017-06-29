@@ -238,11 +238,15 @@ function atwork_zen_breadcrumb($variables) {
 
 
 function atwork_zen_pager($variables) { // used to change 'previous' to just 'prev'. Overkill for whole function?
+
   $tags = $variables['tags'];
   $element = $variables['element'];
   $parameters = $variables['parameters'];
   $quantity = $variables['quantity'];
   global $pager_page_array, $pager_total;
+  if($pager_page_array[0] == -1 || !isset($pager_page_array) || empty($pager_total)){
+    return;
+  }
   // Calculate various markers within this pager piece:
   // Middle is used to "center" pages around the current page.
   $pager_middle = ceil($quantity / 2);
