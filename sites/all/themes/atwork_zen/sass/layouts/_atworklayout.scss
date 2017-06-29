@@ -85,7 +85,7 @@ and (orientation : portrait) {
   .front #block-views-top-tools-block {
     margin-left: 4.5vw!important;
   }
-  #block-views-executive-updates-block-2 {
+  #block-views-executive-updates-block-2, .view-id-blogs, .view-id-polls {
       text-align: center;
   }
   .section-employees .view-content .views-row,
@@ -617,9 +617,10 @@ and (orientation : landscape) {
 .view-id-news, .view-id-videos, .view-id-article_series {
   text-align: center;
 }
-.view-id-news, .view-id-videos, .view-id-article_series {
+.view-id-news, .view-id-videos, .view-id-article_series, .view-id-polls {
   .reads-news-landing,
-  .reads-video-landing {
+  .reads-video-landing,
+  .reads-polls-landing {
     margin-right: 5px!important;
   }
 }
@@ -819,12 +820,14 @@ and (orientation : landscape) {
       float: none;
     }
     #block-views-executive-updates-block-2,
-    .view-id-news, .view-id-videos {
+    .view-id-news, .view-id-videos, .view-id-blogs, .view-id-polls {
       text-align: center;
     }
-    .view-id-news,.view-id-videos, .view-id-article_series {
+    .view-id-news,.view-id-videos, .view-id-article_series, .view-id-blogs, .view-id-polls  {
       .reads-news-landing,
-      .reads-video-landing {
+      .reads-video-landing,
+      .reads-blogs-landing,
+      .reads-polls-landing {
         margin-right: 5px!important;
       }
     }
