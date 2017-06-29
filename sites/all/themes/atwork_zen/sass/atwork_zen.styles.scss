@@ -193,7 +193,10 @@ html {
   image-rendering: auto;
   -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
 }
-
+/* Header search box no on front page */
+.front #header.header #block-block-7 {
+  display:none;
+}
 #header-box {
   position: absolute;
   height: 110px;
@@ -787,7 +790,7 @@ div.header-user {
   display: none; /* TWERDAL EDII */
   overflow: hidden;
   background-color: rgba(255,255,255,.85);
-  background: url(/sites/all/themes/atwork_zen/images/white-trans.png) repeat center center;
+  background: url(/sites/all/themes/atwork_zen/images/panel-trans.png) repeat center center;
   margin: 20px 0px 0px 40px;
   width: 350px;
   height: 165px;
