@@ -200,7 +200,11 @@ aside.sidebars .region.region-sidebar-first {
 /* Ecards */
   .view-e-cards .views-row {
     min-height: 220px!important;
-  } 
+  }
+/* New Activity Window */
+.new-activity-window #social-side div#status-update .form-textarea-wrapper {
+  max-width:200px;
+}  
 }
 
 /*********************************************************************************/
@@ -278,6 +282,14 @@ aside.sidebars .region.region-sidebar-first {
   .create-event {
     display: none!important;
   }
+  .not-front #page.new-activity-window {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /* New Activity Window */
+.new-activity-window #social-side div#status-update .form-textarea-wrapper {
+  max-width:200px;
+}  
   .new-activity-window #social-side {
     #block-atwork-activity-homepage {
       background-color:#fff;
@@ -492,7 +504,7 @@ aside.sidebars .region.region-sidebar-first {
 /* Ecards */
   .view-e-cards .views-row {
     min-height: 310px;
-  }
+  } 
 }
 
 /*********************************************************************************/
@@ -526,7 +538,7 @@ and (orientation : landscape) {
   #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row {
      width:80%!important;
   }
-#social-side div#status-update {
+.front #social-side div#status-update {
   width: 350px;
   margin: 0 auto;
   .form-textarea-wrapper {
@@ -675,6 +687,18 @@ and (orientation : landscape) {
   .view-e-cards .views-row {
     min-height: 280px;
   }
+/* social status pop out window */
+.not-front #page.new-activity-window {
+  margin-left: auto;
+  margin-right: auto;
+  ul.pager {
+    display:block!important;
+  }
+}
+/* New Activity Window */
+.new-activity-window #social-side div#status-update .form-textarea-wrapper {
+  max-width:280px;
+}    
 }
 
 /*********************************************************************************/
@@ -719,10 +743,16 @@ and (orientation : landscape) {
     .create-event {
       display: none!important;
     }
-
+.not-front #page.new-activity-window ul.pager {
+  display:block!important;
+} 
     .new-activity-window #social-side #activity-feed {
       display: block !important;
     }
+    /* New Activity Window */
+.new-activity-window #social-side div#status-update .form-textarea-wrapper {
+  max-width:280px;
+}  
     #social-side .jsNewActivityWindow {
     margin-right: 15px!important;
     }
