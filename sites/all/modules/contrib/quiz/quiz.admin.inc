@@ -319,9 +319,7 @@ function quiz_admin_results($quiz, $quiz_result) {
  * @return
  *   String containing the form.
  */
-function quiz_questions($node) {
-  // Set page title.
-  drupal_set_title($node->title);
+function quiz_questions_page($node) {
   if ($node->randomization < 3) {
     $mq_form = drupal_get_form('quiz_questions_form', $node);
     $manage_questions = drupal_render($mq_form);
@@ -346,7 +344,11 @@ function quiz_questions($node) {
   else {
     $form = drupal_get_form('quiz_categorized_form', $node);
   }
-  return $form;
+  $variables = array(
+    'node' => $node,
+    'form' => $form,
+  );
+  return theme('quiz_questions_page', $variables);
 }
 
 /**
@@ -1113,7 +1115,7 @@ function quiz_questions_form_submit($form, &$form_state) {
   $quiz->max_score_for_random = isset($form_state['values']['max_score_for_random']) ? $form_state['values']['max_score_for_random'] : 1;
 
   // Store what questions belong to the quiz
-  $questions = _quiz_update_items($quiz, $weight_map, $max_scores, $auto_update_max_scores, $is_new_revision, $refreshes, $stayers, $qnr_ids_map, $qnr_pids_map, $compulsories, $stayers);
+  $questions = _quiz_update_items($quiz, $weight_map, $max_scores, $auto_update_max_scores, $is_new_revision, $refreshes, $stayers, $qnr_ids_map, $qnr_pids_map, $compulsories);
 
   // If using random questions and no term ID is specified, make sure we have enough.
   $assigned_random = 0;
@@ -1194,7 +1196,6 @@ function _quiz_question_browser_submit($form, &$form_state) {
     }
   }
 }
-
 
 // HELPER FUNCTIONS
 

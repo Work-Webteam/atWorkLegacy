@@ -101,10 +101,6 @@ function theme_quiz_progress($variables) {
   }
 
   $output .= '</div>' . "\n";
-  // Add div to be used by jQuery countdown
-  if ($variables['time_limit']) {
-    $output .= '<div class="countdown"></div>';
-  }
   return $output;
 }
 
@@ -321,4 +317,13 @@ function theme_question_selection_table($variables) {
   return drupal_render($form['random_settings'])
     . $table
     . drupal_render_children($form);
+}
+
+/**
+ * Theme the quiz questions admin page
+ */
+function theme_quiz_questions_page($variables) {
+  // Set page title.
+  drupal_set_title($variables['node']->title);
+  return $variables['form'];
 }
