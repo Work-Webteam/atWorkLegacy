@@ -172,6 +172,10 @@ and (orientation : portrait) {
       text-align: center;
     }
 }
+/* Group Home page */
+.two-sidebars.section-groups aside.sidebars{
+  display:block!important;
+}
 .section-groups .views-exposed-widget,
 .page-my-groups .views-exposed-widget
 .section-groups #edit-title-1-wrapper,
@@ -459,6 +463,28 @@ aside.sidebars .region.region-sidebar-first {
   #content > div.view.view-Executive-Profiles.view-id-Executive_Profiles .pager-item {
     padding:0;
   }
+/* Group Home page */
+  .og-context.og-context-node {
+    .region-sidebar-second.column.sidebar {
+    display: none;
+    }
+    #main h1 {
+      width:auto!important;
+      margin-left:10px;
+      margin-right:10px;
+    }
+  }
+  .two-sidebars.section-groups {
+    #content {
+    float:right;
+    margin-top: 10px;
+    }
+    aside.sidebars {
+      display:inline;
+      width:inherit;
+    }
+  }
+
   /* Group Article Page */
   .sidebar-first aside .region.region-sidebar-first,
   .sidebar-second aside .region.region-sidebar-second {
@@ -585,7 +611,51 @@ and (orientation : landscape) {
   display:block;
   float:right;
 }
-    /* Executive Profiles */
+/* Footer padding */
+#boxes-box-copyright_terms_user table td:nth-of-type(1) {
+  padding-left:5px;
+  padding-right:5px;
+}
+#boxes-box-copyright_terms_user table td:nth-of-type(3) {
+  padding-left: 10px;
+  padding-right:10px;
+  ul {
+    padding-left: 10px;
+  }
+}
+/* Group Home page */
+  .og-context.og-context-node {
+    .region-sidebar-first {
+      position: relative!important;
+      top: -28px!important;
+      }
+    .region-sidebar-second.column.sidebar {
+      position:inherit;
+      display: inline;
+      clear:both;
+      }
+    #main h1 {
+      width:initial!important;
+    }
+  }
+  .two-sidebars.section-groups {
+    #content {
+      top:-52px;
+      width:66%!important;
+      float:right;
+      margin-top: 10px;
+    }
+    aside.sidebars {
+      display:inline;
+      width:inherit;
+    }
+    .region-sidebar-first {
+      top:30px;
+    }
+  }
+
+
+/* Executive Profiles */
 
 .not-front .page-executive-team #page {
   margin-left:inherit!important;
@@ -669,7 +739,6 @@ and (orientation : landscape) {
     padding-left: 0;
   }
   #main h1 {
-    width:inherit!important;
     margin-right:10px;
   }
 }
@@ -750,6 +819,10 @@ and (orientation : landscape) {
     .new-activity-window #social-side #activity-feed {
       display: block !important;
     }
+/* Footer padding */
+#boxes-box-copyright_terms_user table td:nth-of-type(1) {
+  padding-right:10px;
+}
     /* New Activity Window */
 .new-activity-window #social-side div#status-update .form-textarea-wrapper {
   max-width:280px;
@@ -939,7 +1012,7 @@ and (orientation : landscape) {
   text-align: center;
 }
 
-  /* News Article Pages */
+/* News Article Pages */
 section.region.region-sidebar-second.column.sidebar {
     float: right;
     max-width:28%;
