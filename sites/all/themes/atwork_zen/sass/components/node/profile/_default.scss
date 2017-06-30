@@ -119,8 +119,8 @@
 
     .group-profile-identity-bundle .atwork-relationship-action { // follow button
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: -30px;
+      right: -190px;
       font-size: 12px;
       font-weight: bold;
       @include button-normal;

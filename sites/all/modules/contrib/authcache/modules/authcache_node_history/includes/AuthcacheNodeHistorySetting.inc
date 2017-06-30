@@ -42,8 +42,11 @@ class AuthcacheNodeHistorySetting implements AuthcacheP13nSettingInterface {
           // timestamp. Therefore it is necessary to preserve the original
           // last-viewed timestamp in the session, such that it can be retrieved
           // during the subsequent personalization phase.
-          $history = &drupal_static('node_last_viewed', array());
-          $history = $_SESSION['authcache_node_history_last_viewed'];
+          if(isset($_SESSION['authcache_node_history_last_viewed'])){
+            $history = $_SESSION['authcache_node_history_last_viewed'];
+          } else {
+            $history = &drupal_static('node_last_viewed', array());
+          }
 
           foreach ($params['n'] as $nid) {
             if (isset($history[$nid]->timestamp)) {
