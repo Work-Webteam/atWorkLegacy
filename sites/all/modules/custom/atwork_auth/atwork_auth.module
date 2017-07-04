@@ -78,10 +78,9 @@ function atwork_auth_init() {
     ->fetchAssoc();
 
   // if no guid was found there is no account yet
-  if (!$uid) {
+  if (!$uid && $uid != '0') {
     // this is now all handled by idir script - we should never update/remove or add a user here.
-    drupal_set_message(t("Something has gone wrong, please try again or contact the @Work team", error));
-    echo("Something has gone wrong, please try again or contact the @ork team");
+    drupal_set_message(t("Something has gone wrong, please try again or contact the @Work team"), 'error');
     drupal_exit();
     return;
     // check if $sm_user is available as $user->name
