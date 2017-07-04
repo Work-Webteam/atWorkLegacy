@@ -254,14 +254,22 @@ aside.sidebars .region.region-sidebar-first {
   aside.sidebars {
     clear:both;
     padding:0;
-    display: inline-block;
+    display: inline;
   }
   .region-sidebar-first.column.sidebar {
     max-width:initial!important;
     padding:0;
     clear:both;
   }
-}   
+}
+  .og-context.og-context-node aside.sidebars {
+    .region-sidebar-first.column.sidebar {
+      max-width:none!important;
+      padding-top:10px;
+    }
+    display: inherit!important;
+    width: inherit!important;
+  } 
 }
 
 /*********************************************************************************/
@@ -384,7 +392,8 @@ aside.sidebars .region.region-sidebar-first {
   .section-polls .view-display-id-page_3 .views-row-odd, .section-polls .view-display-id-page_3 .views-row-even,
   .section-etc-talks #block-views-videos-block-4 .views-row-odd, .section-etc-talks #block-views-videos-block-4 .views-row-even,
   .section-executive-messages #block-views-executive-updates-block-2 .views-row-odd, .section-executive-messages #block-views-executive-updates-block-2 .views-row-even,
-  .section-series #block-views-article-series-block-2 .views-row-odd, .section-series #block-views-article-series-block-2 .views-row-even {
+  .section-series #block-views-article-series-block-2 .views-row-odd, .section-series #block-views-article-series-block-2 .views-row-even,
+  .view-display-id-group_blogs .views-row {
     min-width:230px;
     max-width: 90%;
     padding-bottom: 25px;
@@ -608,7 +617,8 @@ aside.sidebars .region.region-sidebar-first {
   width:45%!important;
 }
 /* Admin - Edit screens */
-.not-front.logged-in.sidebar-first.section-node-edit{
+.not-front.logged-in.sidebar-first.section-node-edit,
+.not-front.logged-in.sidebar-first.og-context.og-context-node {
   #content.column {
   float:right!important;
   }
@@ -620,7 +630,7 @@ aside.sidebars .region.region-sidebar-first {
     max-width:31%;
     padding-right:0px;
   }
-}  
+}
 }
 
 /*********************************************************************************/
@@ -1213,6 +1223,8 @@ section.region.region-sidebar-second.column.sidebar {
    top: 0px!important;
    font-size: 1.25em;
    padding: 0 10px 0 0;
+   width:initial;
+   max-width:98.5%;
   }
   .one-sidebar.sidebar-first .pre-title-snipet {
     padding: 0!important;
@@ -1244,7 +1256,11 @@ section.region.region-sidebar-second.column.sidebar {
     width:initial;
     padding-right:30px;
   }
-}  
+}
+/* Group landing pages, blogs, posts, articles */
+.not-front.logged-in.sidebar-first #content.column {
+  float:right!important;
+} 
 }
 
 
