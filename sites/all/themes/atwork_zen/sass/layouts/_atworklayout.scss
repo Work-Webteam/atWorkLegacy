@@ -208,7 +208,60 @@ aside.sidebars .region.region-sidebar-first {
 /* New Activity Window */
 .new-activity-window #social-side div#status-update .form-textarea-wrapper {
   max-width:200px;
-}  
+}
+/* Classifieds */
+.no-sidebars.section-classifieds {
+  #block-views-classifieds-block-4 {
+    display:none;
+  }
+  #block-boxes-classifieds-homepage,
+  #block-atwork-classifieds-categories {
+    width:inherit;
+  }
+ #block-atwork-classifieds-categories ul li {
+   width:25%;
+   min-height:55px;
+   text-align:center;
+   word-wrap:initial;
+   font-size:.9em;
+   border-color:#999;
+ }
+ #block-atwork-classifieds-homepage-tabs #tabs .ui-state-default {
+   width:inherit;
+   font-size:.9em;
+ }
+ article .field-name-body.field-type-text-with-summary {
+   width:100%;
+ }
+ #atwork-classifieds-info {
+   width:90%;
+ }
+ article .view-classified-gallery {
+   width:360px!important;
+ }
+}
+/* Admin - Edit screens */ 
+#section-node-form,
+#blog-node-form {
+  padding: 0!important;
+  max-width:350px!important;
+  margin-bottom:10px;
+}
+.not-front.logged-in.sidebar-first.section-node-edit{
+  #content.column {
+  float:none!important;
+  }
+  aside.sidebars {
+    clear:both;
+    padding:0;
+    display: inline-block;
+  }
+  .region-sidebar-first.column.sidebar {
+    max-width:initial!important;
+    padding:0;
+    clear:both;
+  }
+}   
 }
 
 /*********************************************************************************/
@@ -530,7 +583,44 @@ aside.sidebars .region.region-sidebar-first {
 /* Ecards */
   .view-e-cards .views-row {
     min-height: 310px;
-  } 
+  }
+/* Classifieds */
+.no-sidebars.section-classifieds {
+ #block-atwork-classifieds-categories ul li {
+   width:25%;
+   min-height:55px;
+   text-align:center;
+   word-wrap:initial;
+   font-size:.9em;
+   border-color:#999;
+ }
+ #block-atwork-classifieds-homepage-tabs #tabs .ui-state-default {
+   width:inherit;
+   font-size:.9em;
+ }
+  #block-atwork-classifieds-homepage-tabs .views-row {
+   width:22%;
+   min-height:205px;
+   padding-bottom:0px;
+ }
+}
+.node-type-classified.section-classifieds article .field-name-body {
+  width:45%!important;
+}
+/* Admin - Edit screens */
+.not-front.logged-in.sidebar-first.section-node-edit{
+  #content.column {
+  float:right!important;
+  }
+  aside.sidebars {
+    clear:none;
+    display: inline;
+  }
+  .region-sidebar-first.column.sidebar {
+    max-width:31%;
+    padding-right:0px;
+  }
+}  
 }
 
 /*********************************************************************************/
@@ -768,7 +858,55 @@ and (orientation : landscape) {
 /* New Activity Window */
 .new-activity-window #social-side div#status-update .form-textarea-wrapper {
   max-width:280px;
-}    
+}
+
+/* Classifieds */
+.no-sidebars.section-classifieds {
+  #block-views-classifieds-block-4 {
+    display:block;
+  }
+ #block-atwork-classifieds-categories ul li {
+   width:25%;
+   min-height:55px;
+   text-align:center;
+   word-wrap:initial;
+   font-size:.9em;
+   border-color:#999;
+ }
+ #block-atwork-classifieds-homepage-tabs #tabs .ui-state-default {
+   width:inherit;
+   font-size:.9em;
+ }
+ #block-atwork-classifieds-homepage-tabs .views-row {
+   width:22%!important;
+   min-height:205px;
+   padding-bottom:0px;
+ }
+  article .field-name-body.field-type-text-with-summary {
+   width:100%;
+ }
+ #atwork-classifieds-info {
+   width:50%;
+   margin-left:25%;
+ }
+  article .view-classified-gallery {
+   width:390px!important;
+   margin:0 auto;
+   clear:both;
+   float:none!important;
+ }
+}
+/* Admin - Edit screens */
+.not-front.logged-in.sidebar-first.section-node-edit{
+  #content.column {
+  float:right!important;
+  margin-top:-28px;
+  }
+  .region-sidebar-first.column.sidebar {
+    max-width:initial;
+    padding-right:10px!important;
+  }
+}
 }
 
 /*********************************************************************************/
@@ -1090,6 +1228,23 @@ section.region.region-sidebar-second.column.sidebar {
   .view-e-cards .views-row {
     min-height: 310px;
   }
+
+/* Classifieds */
+ #block-atwork-classifieds-homepage-tabs .views-row {
+   width:23%!important;
+   min-height:205px;
+   padding-bottom:0px;
+ }
+/* Admin - Edit screens */
+.not-front.logged-in.sidebar-first.section-node-edit{
+  #content.column {
+  float:right!important;
+  }
+  .region-sidebar-first.column.sidebar {
+    width:initial;
+    padding-right:30px;
+  }
+}  
 }
 
 
