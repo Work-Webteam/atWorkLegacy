@@ -1992,7 +1992,17 @@ aside.sidebars h2 {
   display: block;
   float: left;
 }
-
+ .section-classifieds {
+   #views_slideshow_controls_text_classified_gallery-block {
+    clear:both;
+    padding-top: 10px;
+      a {
+        display: inline;
+        border: solid 1px #999;
+        padding: 2px 5px;
+        }
+    }
+ }
 .page-galleries .views-view-grid.cols-4 .row-first .col-first {
   display: block;
   width: initial;

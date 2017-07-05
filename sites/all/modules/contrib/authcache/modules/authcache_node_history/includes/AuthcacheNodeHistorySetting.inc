@@ -35,6 +35,9 @@ class AuthcacheNodeHistorySetting implements AuthcacheP13nSettingInterface {
           ':uid' => $user->uid,
           ':nids' => $params['n'],
         ))->fetchAllKeyed();
+        
+        // Here $tsmap is associative array - we need it to be an object.
+        $tsmap = $tsmap ? object($tsmap) : null;
 
         if (!empty($_SESSION['authcache_node_history_last_viewed'])) {
           // After a page was cleared from the cache, the first user requesting

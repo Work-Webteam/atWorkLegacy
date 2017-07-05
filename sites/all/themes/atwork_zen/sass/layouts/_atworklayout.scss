@@ -172,6 +172,10 @@ and (orientation : portrait) {
       text-align: center;
     }
 }
+/* Group Home page */
+.two-sidebars.section-groups aside.sidebars{
+  display:block!important;
+}
 .section-groups .views-exposed-widget,
 .page-my-groups .views-exposed-widget
 .section-groups #edit-title-1-wrapper,
@@ -204,7 +208,68 @@ aside.sidebars .region.region-sidebar-first {
 /* New Activity Window */
 .new-activity-window #social-side div#status-update .form-textarea-wrapper {
   max-width:200px;
-}  
+}
+/* Classifieds */
+.no-sidebars.section-classifieds {
+  #block-views-classifieds-block-4 {
+    display:none;
+  }
+  #block-boxes-classifieds-homepage,
+  #block-atwork-classifieds-categories {
+    width:inherit;
+  }
+ #block-atwork-classifieds-categories ul li {
+   width:25%;
+   min-height:55px;
+   text-align:center;
+   word-wrap:initial;
+   font-size:.9em;
+   border-color:#999;
+ }
+ #block-atwork-classifieds-homepage-tabs #tabs .ui-state-default {
+   width:inherit;
+   font-size:.9em;
+ }
+ article .field-name-body.field-type-text-with-summary {
+   width:100%;
+ }
+ #atwork-classifieds-info {
+   width:90%;
+ }
+ article .view-classified-gallery {
+   width:360px!important;
+ }
+}
+/* Admin - Edit screens */ 
+#section-node-form,
+#blog-node-form {
+  padding: 0!important;
+  max-width:350px!important;
+  margin-bottom:10px;
+}
+.not-front.logged-in.sidebar-first.section-node-edit{
+  #content.column {
+  float:none!important;
+  }
+  aside.sidebars {
+    clear:both;
+    padding:0;
+    display: inline;
+  }
+  .region-sidebar-first.column.sidebar {
+    max-width:initial!important;
+    padding:0;
+    clear:both;
+  }
+}
+  .og-context.og-context-node aside.sidebars {
+    .region-sidebar-first.column.sidebar {
+      max-width:none!important;
+      padding-top:10px;
+    }
+    display: inherit!important;
+    width: inherit!important;
+  } 
 }
 
 /*********************************************************************************/
@@ -327,7 +392,8 @@ aside.sidebars .region.region-sidebar-first {
   .section-polls .view-display-id-page_3 .views-row-odd, .section-polls .view-display-id-page_3 .views-row-even,
   .section-etc-talks #block-views-videos-block-4 .views-row-odd, .section-etc-talks #block-views-videos-block-4 .views-row-even,
   .section-executive-messages #block-views-executive-updates-block-2 .views-row-odd, .section-executive-messages #block-views-executive-updates-block-2 .views-row-even,
-  .section-series #block-views-article-series-block-2 .views-row-odd, .section-series #block-views-article-series-block-2 .views-row-even {
+  .section-series #block-views-article-series-block-2 .views-row-odd, .section-series #block-views-article-series-block-2 .views-row-even,
+  .view-display-id-group_blogs .views-row {
     min-width:230px;
     max-width: 90%;
     padding-bottom: 25px;
@@ -459,6 +525,28 @@ aside.sidebars .region.region-sidebar-first {
   #content > div.view.view-Executive-Profiles.view-id-Executive_Profiles .pager-item {
     padding:0;
   }
+/* Group Home page */
+  .og-context.og-context-node {
+    .region-sidebar-second.column.sidebar {
+    display: none;
+    }
+    #main h1 {
+      width:auto!important;
+      margin-left:10px;
+      margin-right:10px;
+    }
+  }
+  .two-sidebars.section-groups {
+    #content {
+    float:right;
+    margin-top: 10px;
+    }
+    aside.sidebars {
+      display:inline;
+      width:inherit;
+    }
+  }
+
   /* Group Article Page */
   .sidebar-first aside .region.region-sidebar-first,
   .sidebar-second aside .region.region-sidebar-second {
@@ -504,7 +592,45 @@ aside.sidebars .region.region-sidebar-first {
 /* Ecards */
   .view-e-cards .views-row {
     min-height: 310px;
-  } 
+  }
+/* Classifieds */
+.no-sidebars.section-classifieds {
+ #block-atwork-classifieds-categories ul li {
+   width:25%;
+   min-height:55px;
+   text-align:center;
+   word-wrap:initial;
+   font-size:.9em;
+   border-color:#999;
+ }
+ #block-atwork-classifieds-homepage-tabs #tabs .ui-state-default {
+   width:inherit;
+   font-size:.9em;
+ }
+  #block-atwork-classifieds-homepage-tabs .views-row {
+   width:22%;
+   min-height:205px;
+   padding-bottom:0px;
+ }
+}
+.node-type-classified.section-classifieds article .field-name-body {
+  width:45%!important;
+}
+/* Admin - Edit screens */
+.not-front.logged-in.sidebar-first.section-node-edit,
+.not-front.logged-in.sidebar-first.og-context.og-context-node {
+  #content.column {
+  float:right!important;
+  }
+  aside.sidebars {
+    clear:none;
+    display: inline;
+  }
+  .region-sidebar-first.column.sidebar {
+    max-width:31%;
+    padding-right:0px;
+  }
+}
 }
 
 /*********************************************************************************/
@@ -585,7 +711,51 @@ and (orientation : landscape) {
   display:block;
   float:right;
 }
-    /* Executive Profiles */
+/* Footer padding */
+#boxes-box-copyright_terms_user table td:nth-of-type(1) {
+  padding-left:5px;
+  padding-right:5px;
+}
+#boxes-box-copyright_terms_user table td:nth-of-type(3) {
+  padding-left: 10px;
+  padding-right:10px;
+  ul {
+    padding-left: 10px;
+  }
+}
+/* Group Home page */
+  .og-context.og-context-node {
+    .region-sidebar-first {
+      position: relative!important;
+      top: -28px!important;
+      }
+    .region-sidebar-second.column.sidebar {
+      position:inherit;
+      display: inline;
+      clear:both;
+      }
+    #main h1 {
+      width:initial!important;
+    }
+  }
+  .two-sidebars.section-groups {
+    #content {
+      top:-52px;
+      width:66%!important;
+      float:right;
+      margin-top: 10px;
+    }
+    aside.sidebars {
+      display:inline;
+      width:inherit;
+    }
+    .region-sidebar-first {
+      top:30px;
+    }
+  }
+
+
+/* Executive Profiles */
 
 .not-front .page-executive-team #page {
   margin-left:inherit!important;
@@ -669,7 +839,6 @@ and (orientation : landscape) {
     padding-left: 0;
   }
   #main h1 {
-    width:inherit!important;
     margin-right:10px;
   }
 }
@@ -699,7 +868,55 @@ and (orientation : landscape) {
 /* New Activity Window */
 .new-activity-window #social-side div#status-update .form-textarea-wrapper {
   max-width:280px;
-}    
+}
+
+/* Classifieds */
+.no-sidebars.section-classifieds {
+  #block-views-classifieds-block-4 {
+    display:block;
+  }
+ #block-atwork-classifieds-categories ul li {
+   width:25%;
+   min-height:55px;
+   text-align:center;
+   word-wrap:initial;
+   font-size:.9em;
+   border-color:#999;
+ }
+ #block-atwork-classifieds-homepage-tabs #tabs .ui-state-default {
+   width:inherit;
+   font-size:.9em;
+ }
+ #block-atwork-classifieds-homepage-tabs .views-row {
+   width:22%!important;
+   min-height:205px;
+   padding-bottom:0px;
+ }
+  article .field-name-body.field-type-text-with-summary {
+   width:100%;
+ }
+ #atwork-classifieds-info {
+   width:50%;
+   margin-left:25%;
+ }
+  article .view-classified-gallery {
+   width:390px!important;
+   margin:0 auto;
+   clear:both;
+   float:none!important;
+ }
+}
+/* Admin - Edit screens */
+.not-front.logged-in.sidebar-first.section-node-edit{
+  #content.column {
+  float:right!important;
+  margin-top:-28px;
+  }
+  .region-sidebar-first.column.sidebar {
+    max-width:initial;
+    padding-right:10px!important;
+  }
+}
 }
 
 /*********************************************************************************/
@@ -750,6 +967,10 @@ and (orientation : landscape) {
     .new-activity-window #social-side #activity-feed {
       display: block !important;
     }
+/* Footer padding */
+#boxes-box-copyright_terms_user table td:nth-of-type(1) {
+  padding-right:10px;
+}
     /* New Activity Window */
 .new-activity-window #social-side div#status-update .form-textarea-wrapper {
   max-width:280px;
@@ -939,7 +1160,7 @@ and (orientation : landscape) {
   text-align: center;
 }
 
-  /* News Article Pages */
+/* News Article Pages */
 section.region.region-sidebar-second.column.sidebar {
     float: right;
     max-width:28%;
@@ -1002,6 +1223,8 @@ section.region.region-sidebar-second.column.sidebar {
    top: 0px!important;
    font-size: 1.25em;
    padding: 0 10px 0 0;
+   width:initial;
+   max-width:98.5%;
   }
   .one-sidebar.sidebar-first .pre-title-snipet {
     padding: 0!important;
@@ -1017,6 +1240,27 @@ section.region.region-sidebar-second.column.sidebar {
   .view-e-cards .views-row {
     min-height: 310px;
   }
+
+/* Classifieds */
+ #block-atwork-classifieds-homepage-tabs .views-row {
+   width:23%!important;
+   min-height:205px;
+   padding-bottom:0px;
+ }
+/* Admin - Edit screens */
+.not-front.logged-in.sidebar-first.section-node-edit{
+  #content.column {
+  float:right!important;
+  }
+  .region-sidebar-first.column.sidebar {
+    width:initial;
+    padding-right:30px;
+  }
+}
+/* Group landing pages, blogs, posts, articles */
+.not-front.logged-in.sidebar-first #content.column {
+  float:right!important;
+} 
 }
 
 
