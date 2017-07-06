@@ -35,9 +35,6 @@ class AuthcacheNodeHistorySetting implements AuthcacheP13nSettingInterface {
           ':uid' => $user->uid,
           ':nids' => $params['n'],
         ))->fetchAllKeyed();
-        
-        // Here $tsmap is associative array - we need it to be an object.
-        $tsmap = $tsmap ? object($tsmap) : null;
 
         if (!empty($_SESSION['authcache_node_history_last_viewed'])) {
           // After a page was cleared from the cache, the first user requesting
@@ -45,15 +42,12 @@ class AuthcacheNodeHistorySetting implements AuthcacheP13nSettingInterface {
           // timestamp. Therefore it is necessary to preserve the original
           // last-viewed timestamp in the session, such that it can be retrieved
           // during the subsequent personalization phase.
-          if(isset($_SESSION['authcache_node_history_last_viewed'])){
-            $history = $_SESSION['authcache_node_history_last_viewed'];
-          } else {
-            $history = &drupal_static('node_last_viewed', array());
-          }
+          $history = &drupal_static('node_last_viewed', array());
+          $history = $_SESSION['authcache_node_history_last_viewed'];
 
           foreach ($params['n'] as $nid) {
-            if (isset($history[$nid]->timestamp)) {
-              $tsmap[$nid]->timestamp = $history[$nid]->timestamp;
+            if (isset($history[$nid])) {
+              $tsmap[$nid] = $history[$nid]->timestamp;
             }
           }
         }
