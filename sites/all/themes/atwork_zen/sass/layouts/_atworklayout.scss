@@ -42,6 +42,9 @@ only screen and (                min-resolution: 2dppx) {
     max-width:100%;
   }
 }
+.not-front.section-groups #block-views-exp-groups-page-2 i.fa.fa-search {
+  display:none!important;
+}
 /*********************************************************************************/
 /*************************** PORTRAIT IPHONE SETTINGS ****************************/
 /*********************************************************************************/
@@ -199,11 +202,16 @@ and (orientation : portrait) {
     background-color: aliceblue;
   }
 }
-aside.sidebars .region.region-sidebar-first {
-  position: relative!important;
-  margin-left:10px;
-  margin-right:10px;
+.not-front.logged-in.one-sidebar.sidebar-first aside.sidebars {
+  width: 100%;
+  .region.region-sidebar-first {
+    position: relative!important;
+    margin-left:10px;
+    margin-right:10px;
+    clear:both;
+    }
 }
+
 /* Ministry Internet sites landing page */
 .page-node-258 {
   article .field-name-body {
@@ -879,6 +887,13 @@ and (orientation : landscape) {
   padding: initial;
 }
 /* Article / Blog pages with sidebars */
+.not-front.logged-in.one-sidebar.sidebar-first aside.sidebars {
+  width: 100%;
+  .region.region-sidebar-first {
+    width:30%;
+    }
+}
+
 .not-front.logged-in.sidebar-first.og-context.og-context-node #content.column {
   float:right!important;
 }
@@ -963,8 +978,11 @@ and (orientation : landscape) {
  }
  #block-atwork-classifieds-homepage-tabs .views-row {
    width:22%!important;
-   min-height:205px;
+   min-height:222px;
    padding-bottom:0px;
+   .views-field.views-field-field-image {
+     overflow:hidden;
+   }
  }
   article .field-name-body.field-type-text-with-summary {
    width:100%;

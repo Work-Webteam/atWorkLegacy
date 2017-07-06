@@ -2157,7 +2157,7 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-6 .article-series-title,
 .section-series #block-views-article-series-block-7 .article-series-title {
   display: block;
-  height: 50px;
+  min-height: 60px;
   margin: 7px 0 0;
   padding: 0 10px;
   line-height: 16px;
@@ -3193,7 +3193,7 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 .sidebar-first aside.sidebars {
   position: relative;
   position: absolute\0/ !important; /* For IE only */
-  /*top: 65px\0/ !important; /* For IE only */
+  top: 20px\0/ !important; /* For IE only */
   left: 0;
   width: 25%;
   width: none\0/ !important; /* For IE only */
