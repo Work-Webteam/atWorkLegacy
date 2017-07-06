@@ -2,6 +2,7 @@
 
 // Load variables first, then mixins, then everything else
 @import "variables/colors.scss";
+@import "variables/typography.scss";
 @import "abstractions/mixins.scss";
 
 @import "abstractions/extends.scss";
@@ -12,6 +13,7 @@
 @import "base/forms.scss";
 @import "base/lists.scss";
 @import "base/media.scss";
+@import "base/typography.scss";
 
 @import "layouts/grid.scss";
 @import "layouts/atworklayout.scss";
@@ -2748,13 +2750,6 @@ aside.sidebars h2 {
     }
 }
 
-#article-fade {
-  background-image: url(/sites/all/themes/atwork_zen/images/article-fade.png);
-  width: 639px;
-  height: 130px;
-  position: absolute;
-  margin-top: 20px;
-}
 
 /*----------------- Employee Landing Page, Following/ers Search Area --------------------*/
 .section-employees .view-filters #views-exposed-form-people-admin-public-page,
@@ -3218,7 +3213,8 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 .not-front.logged-in.sidebar-first #content.column,
 .not-front.logged-in.sidebar-second #content.column {
   width: 72%;
-  float: left !important;
+  float: left;
+  //float: left !important;
 }
 .not-front.logged-in.sidebar-first #content.column {
   margin-left: 26%;

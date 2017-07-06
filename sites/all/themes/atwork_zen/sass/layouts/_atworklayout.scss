@@ -34,7 +34,14 @@ only screen and (                min-resolution: 2dppx) {
   width: initial!important;
   }
 }
-
+.section-node-add {
+  .form-item.form-type-textfield.form-item-title {
+    width:98%!important;
+  }
+  input#edit-title {
+    max-width:100%;
+  }
+}
 /*********************************************************************************/
 /*************************** PORTRAIT IPHONE SETTINGS ****************************/
 /*********************************************************************************/
@@ -85,8 +92,11 @@ and (orientation : portrait) {
   .front #block-views-top-tools-block {
     margin-left: 4.5vw!important;
   }
-  #block-views-executive-updates-block-2, .view-id-blogs, .view-id-polls {
+  #block-views-executive-updates-block-2, .view-id-blogs, .view-id-polls, .view-gallery-reference  {
       text-align: center;
+  }
+  #block-views-gallery-reference-block-thumbs p {
+    text-align: left;
   }
   .section-employees .view-content .views-row,
   .view-people-admin .view-content .views-row,
@@ -139,7 +149,9 @@ and (orientation : portrait) {
 }
   .not-front.logged-in.sidebar-first #content.column,
   .not-front.logged-in.sidebar-second #content.column {
-    width:inherit!important;
+    margin-left:inherit!important;
+    clear:both!important;
+    min-width:100%!important;
   }
 .region.region-bottom .view-display-id-related_content .views-row-odd,
 .region.region-bottom .view-display-id-related_content .views-row-even {
@@ -218,13 +230,18 @@ aside.sidebars .region.region-sidebar-first {
   #block-atwork-classifieds-categories {
     width:inherit;
   }
- #block-atwork-classifieds-categories ul li {
-   width:25%;
-   min-height:55px;
-   text-align:center;
-   word-wrap:initial;
-   font-size:.9em;
-   border-color:#999;
+ #block-atwork-classifieds-categories {
+   ul {
+     padding-left:10px;
+   }
+   ul li {
+    width:26%;
+    min-height:55px;
+    text-align:center;
+    word-wrap:initial;
+    font-size:.9em;
+    border-color:#999;
+   }
  }
  #block-atwork-classifieds-homepage-tabs #tabs .ui-state-default {
    width:inherit;
@@ -269,7 +286,25 @@ aside.sidebars .region.region-sidebar-first {
     }
     display: inherit!important;
     width: inherit!important;
-  } 
+  }
+  .create-blog, .create-event, .create-poll, .ask-question {
+    margin-top:0px!important;
+    margin-right:10px;
+  }
+/* Gallery / Group Gallery */  
+.node-type-image.section-groups {
+  .view-id-gallery_reference.view-display-id-block_thumbs .view-content {
+    width:65%!important;
+    margin:0 auto!important;
+    float:none!important;
+  }
+  .node-image.node-tools ul.links {
+    text-align: left!important;
+  }
+  .field.field-name-field-image {
+    margin-left: 0px!important;
+  }
+}
 }
 
 /*********************************************************************************/
@@ -393,7 +428,8 @@ aside.sidebars .region.region-sidebar-first {
   .section-etc-talks #block-views-videos-block-4 .views-row-odd, .section-etc-talks #block-views-videos-block-4 .views-row-even,
   .section-executive-messages #block-views-executive-updates-block-2 .views-row-odd, .section-executive-messages #block-views-executive-updates-block-2 .views-row-even,
   .section-series #block-views-article-series-block-2 .views-row-odd, .section-series #block-views-article-series-block-2 .views-row-even,
-  .view-display-id-group_blogs .views-row {
+  .sidebar-first.og-context.og-context-node .view-display-id-group_blogs .views-row, .sidebar-first.og-context.og-context-node .view-gallery-reference .views-row,
+  .sidebar-first.og-context.og-context-node .view-id-polls .views-row, .sidebar-first.og-context.og-context-node .view-id-news .views-row {
     min-width:230px;
     max-width: 90%;
     padding-bottom: 25px;
@@ -528,7 +564,7 @@ aside.sidebars .region.region-sidebar-first {
 /* Group Home page */
   .og-context.og-context-node {
     .region-sidebar-second.column.sidebar {
-    display: none;
+      display: none;
     }
     #main h1 {
       width:auto!important;
@@ -555,19 +591,26 @@ aside.sidebars .region.region-sidebar-first {
  .not-front.logged-in.sidebar-first #content.column {
     margin-left:inherit!important;
     clear:both!important;
+    max-width:68%!important;
   }
-  .og-context.og-context-node aside.sidebars {
-    clear:both!important;
-    width: inherit;
-  }
-  .og-context.og-context-node #page #main {
-    padding-top: 10px!important;
-  }
-  .og-context.og-context-node #main h1 {
-   position:relative!important;
-   top: 0px!important;
-   font-size: 1.25em;
-   padding: 0 10px 0 0;
+  .og-context.og-context-node { 
+    #page #main {
+      padding-top: 30px!important;
+    }
+    aside.sidebars {
+      clear:both!important;
+      width: inherit;
+    }
+   #main h1 {
+    position:relative!important;
+    top: 0px!important;
+    font-size: 1.25em;
+    padding: 0 10px 0 0;
+    }
+  .create-blog, .create-event, .create-poll, .ask-question {
+    margin-top:0px;
+    margin-right:10px;
+  }   
   }
   .one-sidebar.sidebar-first .pre-title-snipet {
     padding: 0!important;
@@ -595,13 +638,18 @@ aside.sidebars .region.region-sidebar-first {
   }
 /* Classifieds */
 .no-sidebars.section-classifieds {
- #block-atwork-classifieds-categories ul li {
-   width:25%;
-   min-height:55px;
-   text-align:center;
-   word-wrap:initial;
-   font-size:.9em;
-   border-color:#999;
+ #block-atwork-classifieds-categories {
+   ul {
+     padding-left:10px;
+   }
+   ul li {
+    width:26%;
+    min-height:55px;
+    text-align:center;
+    word-wrap:initial;
+    font-size:.9em;
+    border-color:#999;
+    }
  }
  #block-atwork-classifieds-homepage-tabs #tabs .ui-state-default {
    width:inherit;
@@ -784,6 +832,7 @@ and (orientation : landscape) {
 .not-front.logged-in.sidebar-second #content.column {
   width:66.66%!important;
 }
+
 .view-id-news, .view-id-videos, .view-id-article_series {
   text-align: center;
 }
@@ -830,16 +879,36 @@ and (orientation : landscape) {
   padding: initial;
 }
 /* Article / Blog pages with sidebars */
+.not-front.logged-in.sidebar-first.og-context.og-context-node #content.column {
+  float:right!important;
+}
 .og-context.og-context-node {
   aside.sidebars {
     display: block;
     clear:none!important;
+    top: 28px;
+    min-width:30%;
+    padding-right:10px;
   }
   #content article {
     padding-left: 0;
   }
   #main h1 {
     margin-right:10px;
+  }
+  .create-blog, .create-event, .create-poll, .ask-question  {
+    margin-top:0px;
+    margin-right:10px;
+  }
+  .view-display-id-group_blogs .views-row-odd,
+  .view-display-id-group_blogs .views-row-even,
+  .view-id-polls .views-row, .view-id-news .views-row,
+  .view-gallery-reference .views-row {
+    width:48%!important;
+    text-align: left;
+  }
+  .view-id-blogs, .view-id-polls, .view-id-news {
+    text-align:left;
   }
 }
 .two-sidebars.section-groups.og-context.og-context-node .region-sidebar-first {
@@ -875,13 +944,18 @@ and (orientation : landscape) {
   #block-views-classifieds-block-4 {
     display:block;
   }
- #block-atwork-classifieds-categories ul li {
-   width:25%;
-   min-height:55px;
-   text-align:center;
-   word-wrap:initial;
-   font-size:.9em;
-   border-color:#999;
+ #block-atwork-classifieds-categories {
+   ul {
+     padding-left:10px;
+   }
+   ul li {
+    width:25%;
+    min-height:55px;
+    text-align:center;
+    word-wrap:initial;
+    font-size:.9em;
+    border-color:#999;
+   }
  }
  #block-atwork-classifieds-homepage-tabs #tabs .ui-state-default {
    width:inherit;
@@ -1040,8 +1114,7 @@ and (orientation : landscape) {
       margin-top: 10px;
       float: none;
     }
-    #block-views-executive-updates-block-2,
-    .view-id-news, .view-id-videos, .view-id-blogs, .view-id-polls {
+    #block-views-executive-updates-block-2 {
       text-align: center;
     }
     .view-id-news,.view-id-videos, .view-id-article_series, .view-id-blogs, .view-id-polls  {
@@ -1211,10 +1284,6 @@ section.region.region-sidebar-second.column.sidebar {
     margin-left:inherit!important;
     clear:both!important;
   }
-/*  .og-context.og-context-node aside.sidebars {
-    clear:both!important;
-    width: 100%;
-  }*/
   .og-context.og-context-node #page #main {
     padding-top: 10px!important;
   }
@@ -1225,6 +1294,10 @@ section.region.region-sidebar-second.column.sidebar {
    padding: 0 10px 0 0;
    width:initial;
    max-width:98.5%;
+  }
+    .create-blog, .create-event, .create-poll, .ask-question  {
+    margin-top:0px!important;
+    margin-right:0px;
   }
   .one-sidebar.sidebar-first .pre-title-snipet {
     padding: 0!important;
