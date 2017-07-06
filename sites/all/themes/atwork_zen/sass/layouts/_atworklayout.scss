@@ -314,6 +314,10 @@ and (orientation : portrait) {
     margin-left: 0px!important;
   }
 }
+.spinner {
+  padding-right: 24px!important;
+  top: -15px!important;
+}
 }
 
 /*********************************************************************************/
@@ -688,6 +692,10 @@ and (orientation : portrait) {
     padding-right:0px;
   }
 }
+.spinner {
+  padding-right: 100px!important;
+  top: -15px!important;
+}
 }
 
 /*********************************************************************************/
@@ -1009,6 +1017,10 @@ and (orientation : landscape) {
     max-width:initial;
     padding-right:10px!important;
   }
+}
+.spinner {
+  padding-right: 80px!important;
+  top: -15px!important;
 }
 }
 
