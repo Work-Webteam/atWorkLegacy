@@ -289,6 +289,7 @@ and (orientation : portrait) {
 }
   .og-context.og-context-node aside.sidebars {
     .region-sidebar-first.column.sidebar {
+      position: relative;
       max-width:none!important;
       padding-top:10px;
     }
