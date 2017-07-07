@@ -384,13 +384,13 @@ and (orientation : portrait) {
 }
 .front h3.front-promoted-title {
    clear:none;
-   min-height:40px;
+   min-height:50px;
 }
 .front .front-promoted-posted {
-  min-height:30px;
+  min-height:40px;
 }
 .front .front-promoted-teaser {
-  min-height:75px;
+  min-height:80px;
 }
   #admin-menu,
   #block-atwork-profiles-header,
@@ -1134,7 +1134,7 @@ and (orientation : landscape) {
     }
     .front h3.front-promoted-title {
       clear:none;
-      min-height:inherit;
+      min-height:60px;
       max-height:inherit;
       padding:10px 0 0 0;
       margin:0 0 10px 10px;
@@ -1148,8 +1148,14 @@ and (orientation : landscape) {
       clear:none;
       min-height:inherit;
       max-height:inherit;
-      padding:0 10px;
+      padding:0 5px;
     }
+     .front .front-promoted-posted {
+       min-height:40px;
+     }
+     .front .front-promoted-teaser {
+       min-height: 60px;
+     }
     .front .front-promoted-more {
       border-top: none;
     }
