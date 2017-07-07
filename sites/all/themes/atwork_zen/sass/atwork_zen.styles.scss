@@ -5404,17 +5404,27 @@ a.word {
   text-indent: 0;
   margin-right: 5px;
 }
+.forum-post-panel-main #node-tools .rate-widget {
+    display: inline;
+    position: relative;
+    top: 0px;  
+}
 .forum-post-content {
   .rate-thumbs-up-btn-up {
     display: inline;
     position: relative;
-    top: 30px;
+    top: 0px;
   }
   .rate-info {
     display: inline;
     position: relative;
-    top: 30px;
+    top: 0px;
     left: 5px;
+  }
+  .rate-widget {
+    position: relative;
+    display: inline-block;
+    top:30px;
   }
 }
 .rate-thumbs-up-btn-up:after {
