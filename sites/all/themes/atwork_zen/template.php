@@ -244,7 +244,8 @@ function atwork_zen_pager($variables) { // used to change 'previous' to just 'pr
   $parameters = $variables['parameters'];
   $quantity = $variables['quantity'];
   global $pager_page_array, $pager_total;
-  if($pager_page_array[0] == -1 || !isset($pager_page_array) || empty($pager_total)){
+  // Having issues with undefined offsets - this line is to take care of that prior to using the above $vars.
+  if((isset($pager_page_array[0]) && $pager_page_array[0] == -1) || !isset($pager_page_array) || empty($pager_total) || (isset($pager_page_array[2]) && $pager_page_array[2] == -1)){
     return;
   }
   // Calculate various markers within this pager piece:
