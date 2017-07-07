@@ -775,11 +775,20 @@ and (orientation : landscape) {
       float:left;
       margin-right: 10px;
     }
+    .front h3.front-promoted-title,
+    .front .front-promoted-posted,
+    .front .front-promoted-teaser,
+    .front .front-promoted-read,
     .front .front-promoted-comments,
     .front .front-promoted-likes,
     .front .front-promoted-more {
+      min-height:inherit!important;
+      max-height:inherit!important;
       margin: 0!important;
-      padding: 0 10px 0 0!important;
+      padding: 0 10px 10px 0!important;
+    }
+    .front h3.front-promoted-title {
+      padding-top:5px!important;
     }
 
 #block-block-7 {
