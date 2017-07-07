@@ -543,6 +543,7 @@ and (orientation : portrait) {
     clear:none;
     margin:0 15px 0 10px;
     padding:0;
+    position:relative;
   }
 
   .region.region-bottom .view-display-id-related_content .views-row-odd,
@@ -1300,6 +1301,7 @@ section.region.region-sidebar-second.column.sidebar {
     max-width:28%;
     clear: none;
     margin-top: -40px;
+    position: inherit;
 }
   ul.tabs-primary.tabs.primary {
     display: none;
