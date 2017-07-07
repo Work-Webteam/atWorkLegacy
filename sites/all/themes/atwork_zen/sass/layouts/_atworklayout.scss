@@ -543,7 +543,7 @@ and (orientation : portrait) {
     clear:none;
     margin:0 15px 0 10px;
     padding:0;
-    position:relative;
+    position:relative!important;
   }
 
   .region.region-bottom .view-display-id-related_content .views-row-odd,
