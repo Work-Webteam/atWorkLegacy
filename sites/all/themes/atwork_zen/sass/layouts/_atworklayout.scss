@@ -381,7 +381,17 @@ and (orientation : portrait) {
 #block-views-home-page-blocks-zen-block-3,
 #block-views-home-page-blocks-zen-block-4 {
     max-width: 32.5%!important;
-  }
+}
+.front h3.front-promoted-title {
+   clear:none;
+   min-height:40px;
+}
+.front .front-promoted-posted {
+  min-height:30px;
+}
+.front .front-promoted-teaser {
+  min-height:75px;
+}
   #admin-menu,
   #block-atwork-profiles-header,
   .front #block-block-5,
@@ -1048,6 +1058,11 @@ and (orientation : landscape) {
       display: block;
       width: 330px;
       margin: 0 auto;
+    }
+    #block-views-home-page-blocks-zen-block-1,
+    #block-views-home-page-blocks-zen-block-3,
+    #block-views-home-page-blocks-zen-block-4 {
+      vertical-align: top;
     }
     .front .views-slideshow-pager-fields > div {
       padding-left:0;
