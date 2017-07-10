@@ -63,13 +63,13 @@ and (orientation : portrait) {
     min-width:100%;
   }
 #social-side div#status-update {
-  width: 275px;
+  width: inherit!important;
   margin: 0 auto;
   .form-textarea-wrapper {
     max-width:none;
   }
   .form-textarea-wrapper textarea {
-    width: 225px;
+    max-width:305px;
   }
 }
   #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row.views-slideshow-xtra-overlay-row {
@@ -366,13 +366,13 @@ and (orientation : portrait) {
       margin: 0 auto;
   }
 #social-side div#status-update {
-  width: 350px;
+  width: 75%;
   margin: 0 auto;
   .form-textarea-wrapper {
     max-width:none;
   }
   .form-textarea-wrapper textarea {
-    width: 297px;
+    width: 510px!important;
   }
 }
 
@@ -475,7 +475,7 @@ and (orientation : portrait) {
   .front div#social-side {
     display:block!important;
     position: inherit;
-    min-height: 200px;
+    min-height: inherit;
     max-height: 415px;
   }
   .front div#social-side #block-atwork-activity-homepage {
@@ -741,13 +741,13 @@ and (orientation : landscape) {
      width:80%!important;
   }
 .front #social-side div#status-update {
-  width: 350px;
+  width:85%;
   margin: 0 auto;
   .form-textarea-wrapper {
     max-width:none;
   }
   .form-textarea-wrapper textarea {
-    width: 297px;
+    width: 505px;
   }
 }
   #block-views-home-page-blocks-zen-block-1,
@@ -1109,13 +1109,13 @@ and (orientation : landscape) {
     margin-right: 15px!important;
     }
 #social-side div#status-update {
-  width: 350px;
+  width: 85%;
   margin: 0 auto;
   .form-textarea-wrapper {
     max-width:none;
   }
   .form-textarea-wrapper textarea {
-    width: 297px;
+    width: 570px;
   }
 }
     .front #block-views-home-page-blocks-zen-block-2 {
@@ -1210,7 +1210,7 @@ and (orientation : landscape) {
     .front div#social-side {
     display:block!important;
     position: inherit;
-    min-height: 250px;
+    min-height: inherit;
     overflow: auto;
     }
     .front .region.region-social-side {
