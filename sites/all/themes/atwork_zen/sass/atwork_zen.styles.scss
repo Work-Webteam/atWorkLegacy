@@ -3206,7 +3206,6 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 
 .not-front.logged-in.one-sidebar #content.column {
   float: left;
-  float: none\0/ !important; /* For IE only */
   min-height: 400px;
   /*width: 80%;*/
 }
