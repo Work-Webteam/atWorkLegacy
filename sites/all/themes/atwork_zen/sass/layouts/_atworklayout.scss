@@ -539,7 +539,7 @@ and (orientation : portrait) {
 /* Article Pages */
   .sidebar-second .region-sidebar-second {
     max-width:24%;
-    float:right;
+    float:none;
     clear:none;
     margin:0 15px 0 10px;
     padding:0;
@@ -1297,7 +1297,7 @@ and (orientation : landscape) {
 
 /* News Article Pages */
 section.region.region-sidebar-second.column.sidebar {
-    float: right;
+    float: none;
     max-width:28%;
     clear: none;
     margin-top: -40px;
@@ -1307,6 +1307,8 @@ section.region.region-sidebar-second.column.sidebar {
     display: none;
   }
   .sidebar-second .region-sidebar-second {
+    position: absolute!important;
+    right:0;
     max-width:none;
     float:none;
     clear:both;
@@ -1399,9 +1401,9 @@ section.region.region-sidebar-second.column.sidebar {
 } 
 }
 
-
-
-
+/*********************************************************************************/
+/************************* MAX WIDTH 979PX  SETTINGS *****************************/
+/*********************************************************************************/
 
 @media only screen and (max-width:979px) {
   html,
@@ -1430,7 +1432,16 @@ section.region.region-sidebar-second.column.sidebar {
 	.front #block-views-home-page-blocks-zen-block-2 {
 		min-width: 63%!important;
 	}
+  .sidebar-second .region-sidebar-second {
+    width:23%;
+    margin-left:73%;
+  }
 }
+
+/*********************************************************************************/
+/************************* MIN WIDTH 980PX  SETTINGS *****************************/
+/*********************************************************************************/
+
 @media only screen and (min-width:980px) {
   .new-activity-window #header.header {
     background: none !important;
@@ -1449,6 +1460,11 @@ section.region.region-sidebar-second.column.sidebar {
 		max-width: 1280px; //container in top banner
 	}
 }
+
+/*********************************************************************************/
+/******************** WIDTH 960PX - 1240PX  SETTINGS *****************************/
+/*********************************************************************************/
+
 
 @media only screen and (max-width: 1240px) {
     #page {
