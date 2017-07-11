@@ -69,7 +69,9 @@ and (orientation : portrait) {
     max-width:none;
   }
   .form-textarea-wrapper textarea {
-    max-width:305px;
+    min-width:none;
+    max-width: none;
+    width:230px;
   }
 }
   #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row.views-slideshow-xtra-overlay-row {
@@ -366,16 +368,16 @@ and (orientation : portrait) {
       margin: 0 auto;
   }
 #social-side div#status-update {
-  width: 75%;
+  width: 75%!important;
   margin: 0 auto;
   .form-textarea-wrapper {
     max-width:none;
   }
   .form-textarea-wrapper textarea {
-    width: 510px!important;
+    min-width:197px;
+    max-width:510px;
   }
 }
-
 
 #block-views-home-page-blocks-zen-block-1,
 #block-views-home-page-blocks-zen-block-3,

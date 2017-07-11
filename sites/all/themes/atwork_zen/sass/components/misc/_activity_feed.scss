@@ -228,7 +228,8 @@
       float: none;
       max-width: none;
       textarea {
-        min-width: 197px;
+        min-width:none;
+        max-width: 197px;
       }
     }
   }
