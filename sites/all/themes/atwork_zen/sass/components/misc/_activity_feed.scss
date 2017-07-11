@@ -219,14 +219,16 @@
     height: 18px;
     background: url(/sites/all/modules/custom/atwork_activity/img/speech-arrow.png) no-repeat;
     padding: 0;
-    margin: -68px 0 50px 42px;
-    position:relative;
+    margin: -85px 0 50px 42px;
+    position:inherit;
     }
     .form-textarea-wrapper {
-      float: right;
-      max-width: 200px;
+      position: relative;
+      left: 12px;
+      float: none;
+      max-width: none;
       textarea {
-        max-width: 197px;
+        min-width: 197px;
       }
     }
   }

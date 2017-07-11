@@ -480,6 +480,7 @@ and (orientation : portrait) {
   }
   .front div#social-side #block-atwork-activity-homepage {
     height:inherit!important;
+    padding:0 0 20px 0!important;
   }
   .front div#block-atwork-activity-homepage,
   .front #social-side h2.block__title.block-title {
@@ -741,13 +742,13 @@ and (orientation : landscape) {
      width:80%!important;
   }
 .front #social-side div#status-update {
-  width:85%;
+  width:570px;
   margin: 0 auto;
   .form-textarea-wrapper {
     max-width:none;
   }
   .form-textarea-wrapper textarea {
-    width: 505px;
+    max-width: 505px;
   }
 }
   #block-views-home-page-blocks-zen-block-1,
@@ -1112,10 +1113,10 @@ and (orientation : landscape) {
   width: 85%;
   margin: 0 auto;
   .form-textarea-wrapper {
-    max-width:none;
+    max-width:inherit;
   }
   .form-textarea-wrapper textarea {
-    width: 570px;
+    max-width: 570px;
   }
 }
     .front #block-views-home-page-blocks-zen-block-2 {
@@ -1228,7 +1229,7 @@ and (orientation : landscape) {
     background-color:#FFF;
     border: none;
     overflow-y:hidden;
-    padding:0!important;
+    padding:0 0 18px 0!important;
   }
     .front div#block-atwork-activity-homepage,
     .front #social-side h2.block__title.block-title {
