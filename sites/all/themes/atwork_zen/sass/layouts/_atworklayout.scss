@@ -91,12 +91,18 @@ and (orientation : portrait) {
     max-width: 90%;
     margin: 0 auto 10px!important;
   }
+  .front #block-views-top-tools-block {
+    width: 100%;
+    min-height: 390px!important;
+    margin-left: 0!important;
+    #top-tools-links p {
+      width: 100%!important;
+    }
+  }
+
   #block-block-7 {
     display: none!important;
 }
-  .front #block-views-top-tools-block {
-    margin-left: 4.5vw!important;
-  }
   #block-views-executive-updates-block-2, .view-id-blogs, .view-id-polls, .view-gallery-reference  {
       text-align: center;
   }
@@ -378,7 +384,16 @@ and (orientation : portrait) {
     max-width:510px;
   }
 }
-
+  .front #block-views-top-tools-block {
+    width: 100%;
+    margin-left: 0!important;
+    height: 240px!important;
+    #top-tools-links p {
+      width: 49%;
+      display: inline-block;
+      margin-right: 3px;
+    }
+  }
 #block-views-home-page-blocks-zen-block-1,
 #block-views-home-page-blocks-zen-block-3,
 #block-views-home-page-blocks-zen-block-4 {
@@ -438,7 +453,7 @@ and (orientation : portrait) {
     margin-right: 15px!important;
 }
 .front #block-views-home-page-blocks-zen-block-2.block.block-views {
-  min-width:54%!important;
+  min-width:100%!important;
 }
 
   .section-classifieds .view-classifieds .views-row-odd, .section-classifieds .view-classifieds .views-row-even,
