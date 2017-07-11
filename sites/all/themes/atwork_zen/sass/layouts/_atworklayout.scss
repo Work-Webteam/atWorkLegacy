@@ -22,7 +22,7 @@ only screen and (     -o-min-device-pixel-ratio: 2/1),
 only screen and (        min-device-pixel-ratio: 2),
 only screen and (                min-resolution: 192dpi),
 only screen and (                min-resolution: 2dppx) {
-#header-box {
+#header-box,   .resizable-textarea .grippie {
   display:none;
 }
 #content.column {
@@ -71,7 +71,7 @@ and (orientation : portrait) {
   .form-textarea-wrapper textarea {
     min-width:none;
     max-width: none;
-    width:230px;
+    width:215px;
   }
 }
   #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row.views-slideshow-xtra-overlay-row {
