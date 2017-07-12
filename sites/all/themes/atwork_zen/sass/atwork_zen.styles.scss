@@ -945,7 +945,7 @@ div.header-user {
 }
 #views_slideshow_controls_text_next_home_page_blocks_zen-block_5 {
   position: absolute;
-  right:0;
+  right:5px;
   z-index: 50;
 }
 #views_slideshow_controls_text_next_home_page_blocks_zen-block_5 a {
@@ -1172,7 +1172,7 @@ ol.search-results h3.title {
 	height: 1365px;
   overflow-x: hidden; // don't show horizontal scrollbar
   overflow-y: auto;
-  box-sizing: border-box;
+  //box-sizing: border-box;
   padding: 4px;
 }
 #tabs {
