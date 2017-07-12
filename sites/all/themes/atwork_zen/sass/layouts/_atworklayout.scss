@@ -45,6 +45,17 @@ only screen and (                min-resolution: 2dppx) {
 .not-front.section-groups #block-views-exp-groups-page-2 i.fa.fa-search {
   display:none!important;
 }
+.view-id-news, .view-id-videos, .view-id-executive_updates, .view-article-series {
+  .view-content {
+    text-align: center;
+  }
+}
+.field-name-field-tags {
+  clear:both;
+  .field-items {
+    float:none;
+  }
+}
 /*********************************************************************************/
 /*************************** PORTRAIT IPHONE SETTINGS ****************************/
 /*********************************************************************************/
@@ -155,9 +166,6 @@ and (orientation : portrait) {
 
 //Article Landing Pages
 
-.view-id-news, .view-id-videos, .view-id-article_series {
-  text-align: center;
-}
   .not-front.logged-in.sidebar-first #content.column,
   .not-front.logged-in.sidebar-second #content.column {
     margin-left:inherit!important;
@@ -467,9 +475,16 @@ and (orientation : portrait) {
   .section-polls .view-display-id-page_3 .views-row-odd, .section-polls .view-display-id-page_3 .views-row-even,
   .section-etc-talks #block-views-videos-block-4 .views-row-odd, .section-etc-talks #block-views-videos-block-4 .views-row-even,
   .section-executive-messages #block-views-executive-updates-block-2 .views-row-odd, .section-executive-messages #block-views-executive-updates-block-2 .views-row-even,
-  .section-series #block-views-article-series-block-2 .views-row-odd, .section-series #block-views-article-series-block-2 .views-row-even,
   .sidebar-first.og-context.og-context-node .view-display-id-group_blogs .views-row, .sidebar-first.og-context.og-context-node .view-gallery-reference .views-row,
-  .sidebar-first.og-context.og-context-node .view-id-polls .views-row, .sidebar-first.og-context.og-context-node .view-id-news .views-row {
+  .sidebar-first.og-context.og-context-node .view-id-polls .views-row, .sidebar-first.og-context.og-context-node .view-id-news .views-row,
+  .section-series #block-views-article-series-block .views-row-odd, .section-series #block-views-article-series-block .views-row-even,
+.section-series #block-views-article-series-block-1 .views-row-odd, .section-series #block-views-article-series-block-1 .views-row-even,
+.section-series #block-views-article-series-block-2 .views-row-odd, .section-series #block-views-article-series-block-2 .views-row-even,
+.section-series #block-views-article-series-block-3 .views-row-odd, .section-series #block-views-article-series-block-3 .views-row-even,
+.section-series #block-views-article-series-block-4 .views-row-odd, .section-series #block-views-article-series-block-4 .views-row-even,
+.section-series #block-views-article-series-block-5 .views-row-odd, .section-series #block-views-article-series-block-5 .views-row-even,
+.section-series #block-views-article-series-block-6 .views-row-odd, .section-series #block-views-article-series-block-6 .views-row-even,
+.section-series #block-views-article-series-block-7 .views-row-odd, .section-series #block-views-article-series-block-7 .views-row-even  {
     min-width:230px;
     max-width: 90%;
     padding-bottom: 25px;
@@ -888,9 +903,6 @@ and (orientation : landscape) {
   width:66.66%!important;
 }
 
-.view-id-news, .view-id-videos, .view-id-article_series {
-  text-align: center;
-}
 .view-id-news, .view-id-videos, .view-id-article_series, .view-id-polls {
   .reads-news-landing,
   .reads-video-landing,
@@ -898,6 +910,21 @@ and (orientation : landscape) {
     margin-right: 5px!important;
   }
 }
+/* Series Landing pages */
+.section-series #block-views-article-series-block .views-row-odd, .section-series #block-views-article-series-block .views-row-even,
+.section-series #block-views-article-series-block-1 .views-row-odd, .section-series #block-views-article-series-block-1 .views-row-even,
+.section-series #block-views-article-series-block-2 .views-row-odd, .section-series #block-views-article-series-block-2 .views-row-even,
+.section-series #block-views-article-series-block-3 .views-row-odd, .section-series #block-views-article-series-block-3 .views-row-even,
+.section-series #block-views-article-series-block-4 .views-row-odd, .section-series #block-views-article-series-block-4 .views-row-even,
+.section-series #block-views-article-series-block-5 .views-row-odd, .section-series #block-views-article-series-block-5 .views-row-even,
+.section-series #block-views-article-series-block-6 .views-row-odd, .section-series #block-views-article-series-block-6 .views-row-even,
+.section-series #block-views-article-series-block-7 .views-row-odd, .section-series #block-views-article-series-block-7 .views-row-even  {
+    min-width:48%;
+    max-width: 200px;
+    padding-bottom: 25px;
+    text-align: left;
+    float:left;
+  }
   /* Group Landing Page*/
 .section-groups .views-exposed-widget ul,
 .page-my-groups .views-exposed-widget ul {
@@ -1218,13 +1245,14 @@ and (orientation : landscape) {
     .section-executive-messages #block-views-executive-updates-block-2 .views-row-odd, .section-executive-messages #block-views-executive-updates-block-2 .views-row-even,
     .section-series #block-views-article-series-block-2 .views-row-odd, .section-series #block-views-article-series-block-2 .views-row-even {
       display: inline-block!important;
-      width:200px;
-      //margin: 0 auto 20px!important;
+      //width:200px;
       padding-bottom: 25px;
       font-size:.9em;
       text-align:left;
     }
-
+    .view-article-series .view-content {
+      text-align:left;
+    }
     .front div#social-side {
     display:block!important;
     position: inherit;
