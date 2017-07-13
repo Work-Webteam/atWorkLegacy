@@ -659,6 +659,7 @@ function atwork_comments_comment_insert($comment) {
 function atwork_comments_comment_view_alter(&$build){
   if(isset($build['#entity_type']) && $build['#entity_type'] == 'comment'){
     if(isset($build['#bundle']) && $build['#bundle'] == 'comment_node_forum'){
+      // Add in edit link if not there
       if(isset($build['links']['comment']['#links']) && !isset($build['links']['comment']['#links']['comment-edit'])){
         $build['links']['comment']['#links']['comment-edit'] = array(
             'title' => "<span>edit</span>",
@@ -671,6 +672,7 @@ function atwork_comments_comment_view_alter(&$build){
             )
         );
       }
+      // Delete link if missing
       if(isset($build['links']['comment']['#links']) && !isset($build['links']['comment']['#links']['comment-delete'])){
         $build['links']['comment']['#links']['comment-delete'] = array(
             'title' => "<span>delete</span>",
@@ -683,6 +685,7 @@ function atwork_comments_comment_view_alter(&$build){
             )
         );
       }
+      // Reply link if missing
       if(isset($build['links']['comment']['#links']) && !isset($build['links']['comment']['#links']['comment-reply'])){
         $build['links']['comment']['#links']['comment-reply'] = array(
             'title' => "<span>reply</span>",
