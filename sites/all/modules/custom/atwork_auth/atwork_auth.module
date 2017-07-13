@@ -78,7 +78,7 @@ function atwork_auth_init() {
     ->fetchAssoc();
 
   // if no guid was found there is no account yet
-  if (!$uid || $uid == '0') {
+  if (empty($uid)) {
     // this is now all handled by idir script - we should never update/remove or add a user here.
     drupal_set_message(t("Something has gone wrong, please try again or contact the @Work team"), 'error');
     drupal_exit();
@@ -106,11 +106,11 @@ function atwork_auth_init() {
     $new_name = _atwork_auth_get_unique_name($sm_user);
     if ($new_name != $sm_user) {
       // if this IDIR is being used we will need to first rename the older account using our re-used IDIR
-      _atwork_auth_rename_user($sm_user, $new_name);
+      //_atwork_auth_rename_user($sm_user, $new_name);
     }
 
     // now rename the newer account
-    _atwork_auth_rename_user($external_account->name, $sm_user);
+    //_atwork_auth_rename_user($external_account->name, $sm_user);
   }
 
   // almost done, now lets check for field changes
