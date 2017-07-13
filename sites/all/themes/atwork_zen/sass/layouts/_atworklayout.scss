@@ -229,6 +229,7 @@ and (orientation : portrait) {
 }
 .not-front.logged-in.one-sidebar.sidebar-first aside.sidebars {
   width: 100%;
+  position:relative;
   .region.region-sidebar-first {
     position: relative!important;
     margin-left:10px;

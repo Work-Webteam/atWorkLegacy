@@ -3193,12 +3193,11 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
   width: 21%;
 }
 .sidebar-first aside.sidebars {
-  position: relative;
-  position: absolute\0/ !important; /* For IE only */
-  top: 20px\0/ !important; /* For IE only */
+  position: absolute;
+  top: inherit;
   left: 0;
   width: 25%;
-  width: none\0/ !important; /* For IE only */
+  //width: none\0/ !important; /* For IE only */
 }
 /* IE8 */
 .sidebar-first aside.sidebars {
