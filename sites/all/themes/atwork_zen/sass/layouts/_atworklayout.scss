@@ -644,8 +644,6 @@ and (orientation : portrait) {
     }
     #main h1 {
       width:auto!important;
-      margin-left:10px;
-      margin-right:10px;
     }
   }
   .two-sidebars.section-groups {
@@ -655,19 +653,15 @@ and (orientation : portrait) {
     }
     aside.sidebars {
       display:inline;
-      width:inherit;
+      width:initial;
     }
   }
 
   /* Group Article Page */
-  .sidebar-first aside .region.region-sidebar-first,
-  .sidebar-second aside .region.region-sidebar-second {
-    border:none!important;
-  }
  .not-front.logged-in.sidebar-first #content.column {
     margin-left:inherit!important;
     clear:both!important;
-    max-width:68%!important;
+    max-width:72%!important;
   }
   .og-context.og-context-node { 
     #page #main {
@@ -675,7 +669,6 @@ and (orientation : portrait) {
     }
     aside.sidebars {
       clear:both!important;
-      width: inherit;
     }
    #main h1 {
     position:relative!important;
@@ -751,7 +744,7 @@ and (orientation : portrait) {
     display: inline;
   }
   .region-sidebar-first.column.sidebar {
-    max-width:31%;
+    max-width:none;
     padding-right:0px;
   }
 }
@@ -864,7 +857,7 @@ and (orientation : landscape) {
   .og-context.og-context-node {
     .region-sidebar-first {
       position: relative!important;
-      top: -28px!important;
+      //top: -28px!important;
       }
     .region-sidebar-second.column.sidebar {
       position:inherit;
@@ -990,14 +983,15 @@ and (orientation : landscape) {
 }
 /* Article / Blog pages with sidebars */
 .not-front.logged-in.one-sidebar.sidebar-first aside.sidebars {
-  width: 100%;
+  width: inherit;
   .region.region-sidebar-first {
-    width:30%;
+    width:100%;
     }
 }
 
 .not-front.logged-in.sidebar-first.og-context.og-context-node #content.column {
   float:right!important;
+  margin-top: -28px;
 }
 .og-context.og-context-node {
   aside.sidebars {
@@ -1417,10 +1411,6 @@ section.region.region-sidebar-second.column.sidebar {
 #comments #comment-form {
   margin:0 0 10px 0!important;
 }
-  .sidebar-first aside .region.region-sidebar-first,
-  .sidebar-second aside .region.region-sidebar-second {
-    border:none!important;
-  }
  .not-front.logged-in.sidebar-first #content.column {
     margin-left:inherit!important;
     clear:both!important;
