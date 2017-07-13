@@ -369,9 +369,8 @@ function atwork_comments_preprocess_comment(&$variables){
     }
     else {
       $reply_to_name = variable_get('anonymous', t('Employee News'));
+      $parent_author = '';
     }
-//    dpm($comment);
-//    dpm($parent_comment);
 
     if ($parent_comment->status == 1) {
       $title = $parent_comment->comment_body[$parent_comment->language][0]['safe_value'];
