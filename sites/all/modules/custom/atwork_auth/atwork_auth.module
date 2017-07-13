@@ -699,6 +699,7 @@ function atwork_auth_user_load($users) {
  * Remove deleted users from our atwork_auth table
  */
 function atwork_auth_user_delete($account) {
+  return;
   db_delete('atwork_auth')
     ->condition('uid', $account->uid)
     ->execute();
