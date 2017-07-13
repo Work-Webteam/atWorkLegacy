@@ -57,7 +57,7 @@ only screen and (                min-resolution: 2dppx) {
   }
 }
 .sidebar-first aside .region.region-sidebar-first {
-  border-top:solid 4px #008D7B;
+  border-top:none!important;
 }
 /*********************************************************************************/
 /*************************** PORTRAIT IPHONE SETTINGS ****************************/
@@ -468,6 +468,7 @@ and (orientation : portrait) {
   float:right;
   position:relative;
   top:100px;
+  margin-bottom:0!important;
 }
 
 #social-side .jsNewActivityWindow {
@@ -843,6 +844,7 @@ and (orientation : landscape) {
 #block-block-7 {
   display:block;
   float:right;
+  margin-bottom:0!important;
 }
 /* Footer padding */
 #boxes-box-copyright_terms_user table td:nth-of-type(1) {
@@ -873,10 +875,10 @@ and (orientation : landscape) {
   }
   .two-sidebars.section-groups {
     #content {
-      top:-52px;
+      top:0;
       width:66%!important;
       float:right;
-      margin-top: 10px;
+      margin-top: 16px;
     }
     aside.sidebars {
       display:inline;
@@ -1479,10 +1481,6 @@ section.region.region-sidebar-second.column.sidebar {
   .new-activity-window #header.header {
     background: none !important;
   }
-  #content.column {
-      // max-width: 98%;
-      margin: 0 auto;
-  }
 	#navigation,
   //#block-custom-search-blocks-1,
   #block-block-45 {// hides the top tools panel
@@ -1535,11 +1533,8 @@ section.region.region-sidebar-second.column.sidebar {
 
 
 @media only screen and (max-width: 1240px) {
-    #page {
-    min-width:960px;
+.front #social-side,
+   #block-block-45 { // show social sidebar only on wide screen view - 1240 or greater
+      display: none !important;
   }
-    .front #social-side,
-    #block-block-45 { // show social sidebar only on wide screen view - 1240 or greater
-        display: none !important;
-    }
 }
