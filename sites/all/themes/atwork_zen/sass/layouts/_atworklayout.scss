@@ -652,8 +652,18 @@ and (orientation : portrait) {
   }
 /* Group Home page */
   .og-context.og-context-node {
+    .region-sidebar-first {
+      position: relative!important;
+      padding-bottom: 45px;
+    }
     .region-sidebar-second.column.sidebar {
-      display: none;
+      position:inherit;
+      display: inline;
+      width:initial!important;
+    }
+    .region-sidebar-second.column.sidebar #block-views-groups-details {
+      margin-left:-10px;
+      padding-right: 30px;
     }
     #main h1 {
       width:auto!important;
@@ -757,7 +767,6 @@ and (orientation : portrait) {
     display: inline;
   }
   .region-sidebar-first.column.sidebar {
-    max-width:none;
     padding-right:0px;
   }
 }
@@ -871,7 +880,7 @@ and (orientation : landscape) {
   .og-context.og-context-node {
     .region-sidebar-first {
       position: relative!important;
-      //top: -28px!important;
+      padding-bottom: 45px;
       }
     .region-sidebar-second.column.sidebar {
       position:inherit;
@@ -1499,7 +1508,7 @@ section.region.region-sidebar-second.column.sidebar {
   }
 	#navigation,
   //#block-custom-search-blocks-1,
-  #block-block-45 {// hides the top tools panel
+  #block-block-45 { // hides the top tools panel 
    		display: none !important;
     }
 	#header.header,
