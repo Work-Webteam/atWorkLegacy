@@ -2,6 +2,7 @@
 
 // Load variables first, then mixins, then everything else
 @import "variables/colors.scss";
+@import "variables/typography.scss";
 @import "abstractions/mixins.scss";
 
 @import "abstractions/extends.scss";
@@ -12,6 +13,7 @@
 @import "base/forms.scss";
 @import "base/lists.scss";
 @import "base/media.scss";
+@import "base/typography.scss";
 
 @import "layouts/grid.scss";
 @import "layouts/atworklayout.scss";
@@ -943,7 +945,7 @@ div.header-user {
 }
 #views_slideshow_controls_text_next_home_page_blocks_zen-block_5 {
   position: absolute;
-  right:0;
+  right:5px;
   z-index: 50;
 }
 #views_slideshow_controls_text_next_home_page_blocks_zen-block_5 a {
@@ -1170,7 +1172,7 @@ ol.search-results h3.title {
 	height: 1365px;
   overflow-x: hidden; // don't show horizontal scrollbar
   overflow-y: auto;
-  box-sizing: border-box;
+  //box-sizing: border-box;
   padding: 4px;
 }
 #tabs {
@@ -2116,6 +2118,8 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-6 .article-series-image img,
 .section-series #block-views-article-series-block-7 .article-series-image img   {
   width: 100%;
+  min-height:147px;
+  max-height:150px;
 }
 .sidebar-first.og-context.og-context-node .posted-group-blog a.username,
 .sidebar-first.og-context.og-context-node .uid-group-blog a.username {
@@ -2155,7 +2159,7 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-6 .article-series-title,
 .section-series #block-views-article-series-block-7 .article-series-title {
   display: block;
-  height: 50px;
+  min-height: 60px;
   margin: 7px 0 0;
   padding: 0 10px;
   line-height: 16px;
@@ -2748,13 +2752,6 @@ aside.sidebars h2 {
     }
 }
 
-#article-fade {
-  background-image: url(/sites/all/themes/atwork_zen/images/article-fade.png);
-  width: 639px;
-  height: 130px;
-  position: absolute;
-  margin-top: 20px;
-}
 
 /*----------------- Employee Landing Page, Following/ers Search Area --------------------*/
 .section-employees .view-filters #views-exposed-form-people-admin-public-page,
@@ -3196,12 +3193,11 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
   width: 21%;
 }
 .sidebar-first aside.sidebars {
-  position: relative;
-  position: absolute\0/ !important; /* For IE only */
-  /*top: 65px\0/ !important; /* For IE only */
+  position: absolute;
+  top: inherit;
   left: 0;
   width: 25%;
-  width: none\0/ !important; /* For IE only */
+  //width: none\0/ !important; /* For IE only */
 }
 /* IE8 */
 .sidebar-first aside.sidebars {
@@ -3211,22 +3207,24 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 
 .not-front.logged-in.one-sidebar #content.column {
   float: left;
-  float: none\0/ !important; /* For IE only */
   min-height: 400px;
   /*width: 80%;*/
 }
 .not-front.logged-in.sidebar-first #content.column,
 .not-front.logged-in.sidebar-second #content.column {
   width: 72%;
-  float: left !important;
+  float: left;
+  //float: left !important;
 }
 .not-front.logged-in.sidebar-first #content.column {
   margin-left: 26%;
 }
 .sidebar-second .region-sidebar-second {
   width: 25% \0/ !important; /* For IE only */
+  position: absolute;
   position: absolute \0/ !important; /* For IE only */
   right: 0px \0/ !important; /* For IE only */
+  top:20px;
   top: 200px \0/ !important; /* For IE only */
 
 }
@@ -3795,6 +3793,7 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 .two-sidebars.section-groups.og-context.og-context-node .region-sidebar-first {
   position: absolute;
   padding-top: 0px;
+  padding-right:10px;
   margin-top: 10px;
   width: 20%\0/ !important; /* For IE only */
   /*top: 300px\0/ !important; /* For IE only */
@@ -5408,17 +5407,27 @@ a.word {
   text-indent: 0;
   margin-right: 5px;
 }
+.forum-post-panel-main #node-tools .rate-widget {
+    display: inline;
+    position: relative;
+    top: 0px;  
+}
 .forum-post-content {
   .rate-thumbs-up-btn-up {
     display: inline;
     position: relative;
-    top: 30px;
+    top: 0px;
   }
   .rate-info {
     display: inline;
     position: relative;
-    top: 30px;
+    top: 0px;
     left: 5px;
+  }
+  .rate-widget {
+    position: relative;
+    display: inline-block;
+    top:30px;
   }
 }
 .rate-thumbs-up-btn-up:after {
