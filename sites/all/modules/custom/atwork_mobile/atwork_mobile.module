@@ -45,7 +45,7 @@ function _atwork_menu_block_builder(){
       <ul id="atwork_menu_item_tool_menu">
         <li id = "atwork_menu_item_myhr" class="atwork_menu_nested"><a href="http://www2.gov.bc.ca/gov/content/careers-myhr" target="_blank">MYHR</a></li>
         <li id = "atwork_menu_item_tech_support" class="atwork_menu_nested"><a href="https://77000.gov.bc.ca" target="_blank">Technology Support</a></li>
-        <li id = "atwork_menu_item_account_services" class="atwork_menu_nested"><a href="/tools/intranets" target="_blank">Ministry Intranets</a></li>
+        <li id = "atwork_menu_item_account_services" class="atwork_menu_nested"><a href="/tools/intranets">Ministry Intranets</a></li>
         <li id = "atwork_menu_item_myperformance" class="atwork_menu_nested"><a href="http://www2.gov.bc.ca/" target="_blank">gov.bc.ca</a></li>
       </ul>
     </li>

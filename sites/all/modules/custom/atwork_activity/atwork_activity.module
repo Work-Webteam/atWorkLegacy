@@ -453,8 +453,8 @@ function _atwork_activity_render_messages($result, $activityType) {
   $form = drupal_get_form('atwork_activity_form');
   $output .= '<div id="status-update">';
   $output .= '<a href="employees/' . $current_user->name . '">' .  render($user_image) . '</a>';
-  $output .= render($form);
   $output .= '<div id="speech-pointer"></div>';
+  $output .= render($form);
   $output .= '</div><!-- /#status-update" -->';
   $output .= '<div id="activity-feed" class="atwork-activity">';
 
