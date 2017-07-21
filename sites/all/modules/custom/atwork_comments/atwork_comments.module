@@ -369,9 +369,8 @@ function atwork_comments_preprocess_comment(&$variables){
     }
     else {
       $reply_to_name = variable_get('anonymous', t('Employee News'));
+      $parent_author = '';
     }
-//    dpm($comment);
-//    dpm($parent_comment);
 
     if ($parent_comment->status == 1) {
       $title = $parent_comment->comment_body[$parent_comment->language][0]['safe_value'];
@@ -646,5 +645,59 @@ function atwork_comments_wiki_submit($form, &$form_state) {
 function atwork_comments_comment_insert($comment) {
   if (!$comment->atwork_subscribe) {
     subscriptions_delete($GLOBALS['user']->uid, 'node', 'nid', $comment->nid);
+  }
+}
+
+/**
+ * Implementation of hook_comment_view_alter
+ *
+ * @param $build
+ * @return void
+ * For some reason, our first forum post keeps losing its edit/reply/delete buttons
+ * We will check here and re-implement them if they are missing.
+ */
+function atwork_comments_comment_view_alter(&$build){
+  if(isset($build['#entity_type']) && $build['#entity_type'] == 'comment'){
+    if(isset($build['#bundle']) && $build['#bundle'] == 'comment_node_forum'){
+      // Add in edit link if not there
+      if(isset($build['links']['comment']['#links']) && !isset($build['links']['comment']['#links']['comment-edit'])){
+        $build['links']['comment']['#links']['comment-edit'] = array(
+            'title' => "<span>edit</span>",
+            'href' => "comment/" . $build['#node']->cid .'/edit',
+            'html' => TRUE,
+            'attributes' => array(
+              'class' => array(
+                '0' => 'af-button-small',
+              )
+            )
+        );
+      }
+      // Delete link if missing
+      if(isset($build['links']['comment']['#links']) && !isset($build['links']['comment']['#links']['comment-delete'])){
+        $build['links']['comment']['#links']['comment-delete'] = array(
+            'title' => "<span>delete</span>",
+            'href' => "comment/" . $build['#node']->cid .'/delete',
+            'html' => TRUE,
+            'attributes' => array(
+              'class' => array(
+                '0' => 'af-button-small',
+              )
+            )
+        );
+      }
+      // Reply link if missing
+      if(isset($build['links']['comment']['#links']) && !isset($build['links']['comment']['#links']['comment-reply'])){
+        $build['links']['comment']['#links']['comment-reply'] = array(
+            'title' => "<span>reply</span>",
+            'href' => "comment/reply/" . $build['#node']->nid . '/' . $build['#node']->cid,
+            'html' => TRUE,
+            'attributes' => array(
+              'class' => array(
+                '0' => 'af-button-small',
+              )
+            )
+        );
+      }
+    }
   }
 }
