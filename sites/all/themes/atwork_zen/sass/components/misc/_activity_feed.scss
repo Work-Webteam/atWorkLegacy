@@ -199,6 +199,7 @@
   #atwork-activity-form {
     .form-item {
       margin-top: 0.5em;
+      margin-bottom: .5em;
     }
   }
   #status-submit-button {
@@ -206,7 +207,7 @@
     text-align: right;
   }
   #status-update {
-    margin-top: -.5em;
+    margin-top: 10px;
   }
   #status-update {
     .field-name-field-image {
@@ -215,20 +216,27 @@
     }
     div#speech-pointer {//adds pointer arrow to status update bubble on activity feed
     display: block;
+    float:left;
     width: 12px;
     height: 18px;
     background: url(/sites/all/modules/custom/atwork_activity/img/speech-arrow.png) no-repeat;
     padding: 0;
-    margin: -68px 0 50px 42px;
+    margin: 15px 0 0 0;
     position:relative;
     }
     .form-textarea-wrapper {
-      float: right;
-      max-width: 200px;
+      position: relative;
+      left: 0px;
+      float: none;
+      max-width: none;
       textarea {
-        width: 197px;
+        min-width:none;
+        max-width: 197px;
       }
     }
+   .resizable-textarea .grippie {
+     margin-top:3px;
+   } 
   }
   #saving-notification-status {
     margin-left: 50px;
@@ -705,12 +713,12 @@
     width:inherit!important;
   }
   #social-side #status-update div#speech-pointer {
-    margin-top: -88px;
+    margin-top: 10px;
   }
   #social-side #status-update .form-textarea-wrapper {
     float:none;
     display: inline-block;
-    margin-left: 13px;
+    margin-left: 0px;
   }
   #social-side #status-update .form-textarea-wrapper textarea {
     width: 100%;
