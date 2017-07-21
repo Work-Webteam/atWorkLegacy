@@ -71,6 +71,7 @@ function _atwork_menu_block_builder(){
       <ul id="atwork_menu_item_our_community_menu">
         <li id="atwork_menu_item_employee_profiles" class="atwork_menu_nested"><a href="/employees">Employee Profiles</a></li>
         <li id="atwork_menu_item_executive_profiles" class="atwork_menu_nested"><a href="/executive-team">Executive Profiles</a></li>
+        <li id="atwork_menu_item_executive_team" class="atwork_menu_nested"><a href="/exec/profiles">Executive Team</a></li>
         <li id="atwork_menu_item_groups" class="atwork_menu_nested"><a href="/groups">Groups</a></li>
         <li id="atwork_menu_item_blogs" class="atwork_menu_nested"><a href="/blogs">Blogs</a></li>
         <li id="atwork_menu_item_polls" class="atwork_menu_nested"><a href="/polls">Polls</a></li>
