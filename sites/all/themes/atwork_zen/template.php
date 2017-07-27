@@ -263,7 +263,7 @@ function atwork_zen_pager($variables) { // used to change 'previous' to just 'pr
   } else {
     // We have to eject here if we don't have this variable, or we will run into exceptions below.
     // Mainly an error in for the followers/following blocks on profile page.
-    $pager_max = 0;
+    $pager_max = -1;
   }
   // End of marker calculations.
 
@@ -287,13 +287,13 @@ function atwork_zen_pager($variables) { // used to change 'previous' to just 'pr
   $li_last = theme('pager_last', array('text' => (isset($tags[4]) ? $tags[4] : t('last »')), 'element' => $element, 'parameters' => $parameters));
 
   if (isset($pager_total[$element]) && $pager_total[$element] > 1) {
-    if ($li_first) {
+    if ($li_first && $li_first != 0) {
       $items[] = array(
         'class' => array('pager-first'),
         'data' => $li_first,
       );
     }
-    if ($li_previous) {
+    if ($li_previous && $li_previous != 0) {
       $items[] = array(
         'class' => array('pager-previous'),
         'data' => $li_previous,
