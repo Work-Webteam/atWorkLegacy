@@ -353,6 +353,9 @@ table#sn-newsletter-layout {
   transform: scale(0.45)!important;
   transform-origin: left top;
 }
+.page-user .block-atwork-activity .entity-message p:first-of-type {
+  max-width:85%!important;
+}
 }
 
 /*********************************************************************************/
