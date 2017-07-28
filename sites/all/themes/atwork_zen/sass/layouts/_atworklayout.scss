@@ -619,9 +619,9 @@ table#sn-newsletter-layout {
   .region.region-bottom .view-display-id-related_content .views-row-even {
     max-width: 18%!important;
     margin-left: 5px;
-}
-.region.region-bottom .view-display-id-related_content .image-related-content img {
-  height: 100px!important;
+    img {
+      height:100px!important;
+    }
 }
 #content article p > img { // adjustment for inline images
     max-width: 100%!important;
@@ -999,6 +999,9 @@ and (orientation : landscape) {
       height: 20px;
       text-align: center;
     }
+}
+.region.region-bottom .view-display-id-related_content .image-related-content img {
+  max-height: 100px!important;
 }
 .section-groups #edit-title-1-wrapper,
 .section-groups #edit-desc-1-wrapper {
@@ -1434,6 +1437,9 @@ section.region.region-sidebar-second.column.sidebar {
   }
   .region.region-bottom .view-display-id-related_content .views-row-odd,
   .region.region-bottom .view-display-id-related_content .views-row-even {
+    img {
+      height:130px!important;
+    }
     width:18.7%!important;
     height:inherit!important;
 }
@@ -1477,7 +1483,12 @@ section.region.region-sidebar-second.column.sidebar {
  /* Ministry Internet sites */ 
   .page-node-258 {
   article .field-name-body {
+  ul {
     text-align: center;
+  }
+  p {
+    text-align: left;
+  }
   }
 }
 /* Ecards */
