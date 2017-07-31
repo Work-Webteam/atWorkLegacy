@@ -1050,13 +1050,6 @@ echo(\'<p style="margin-top:10px;">To update and publish <a href="/employees/\' 
   $handler->display->display_options['filters']['field_gal_ministry_name_value_1']['operator'] = 'longerthan';
   $handler->display->display_options['filters']['field_gal_ministry_name_value_1']['value'] = '1';
   $handler->display->display_options['filters']['field_gal_ministry_name_value_1']['group'] = 1;
-  /* Filter criterion: User: Phone (field_gal_phone_number) */
-  $handler->display->display_options['filters']['field_gal_phone_number_value']['id'] = 'field_gal_phone_number_value';
-  $handler->display->display_options['filters']['field_gal_phone_number_value']['table'] = 'field_data_field_gal_phone_number';
-  $handler->display->display_options['filters']['field_gal_phone_number_value']['field'] = 'field_gal_phone_number_value';
-  $handler->display->display_options['filters']['field_gal_phone_number_value']['operator'] = 'longerthan';
-  $handler->display->display_options['filters']['field_gal_phone_number_value']['value'] = '1';
-  $handler->display->display_options['filters']['field_gal_phone_number_value']['group'] = 1;
   /* Filter criterion: Field: Display Name (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value_2']['id'] = 'field_display_name_value_2';
   $handler->display->display_options['filters']['field_display_name_value_2']['table'] = 'field_data_field_display_name';
