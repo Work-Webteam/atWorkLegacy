@@ -59,6 +59,7 @@ function subscriptions_taxonomy_tokens($type, $tokens, array $data = array(), ar
           // Above was causing a "Pass by reference error" - taken care of by assigning to variable.
           $replacement_holder = taxonomy_term_view($term, 'full', $language_code);
           $replacements[$original] = render($replacement_holder);
+
           break;
       }
     }

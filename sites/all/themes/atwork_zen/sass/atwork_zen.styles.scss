@@ -2747,10 +2747,18 @@ aside.sidebars h2 {
 }
 
 .profile {
+    #article-fade {
+      background-image: url("/sites/all/themes/atwork_zen/images/article-fade.png");
+      width: 639px;
+      height: 130px;
+      position: absolute;
+      margin-top: 20px;
+    }
     .field-item {
         position:relative;
     }
 }
+
 
 
 /*----------------- Employee Landing Page, Following/ers Search Area --------------------*/

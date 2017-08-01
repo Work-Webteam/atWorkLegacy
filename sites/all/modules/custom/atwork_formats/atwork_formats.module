@@ -106,23 +106,23 @@ function atwork_formats_after_build($element, &$form_state) {
       }
       // user-submitted content should always be filtered_html
       elseif (in_array($element['#bundle'], array('event', 'forum', 'classified', 'question', 'answer'))) {
-        $element['format']['format']['#options'] = array(
-          'filtered_html' => 'Filtered HTML',
-        );
+        //$element['format']['format']['#options'] = array(
+        //  'filtered_html' => 'Filtered HTML',
+        //);
       }
       
       // content shared by admins/users - set to filtered as default but leave option
       elseif (in_array($element['#bundle'], array('section_page', 'section', 'blog'))) {
-        if (!$exisiting_content) {
-          $element['format']['format']['#value'] = 'filtered_html';
-          $element['format']['format']['#default_value'] = 'filtered_html';
-        }
+        //if (!$exisiting_content) {
+        //  $element['format']['format']['#value'] = 'filtered_html';
+        //  $element['format']['format']['#default_value'] = 'filtered_html';
+        //}
         
         // if regular user remove options
         if (!_atwork_is_admin() && !in_array('blogger', $user->roles)) {
-          $element['format']['format']['#options'] = array(
-            'filtered_html' => 'Filtered HTML',
-          );
+          //$element['format']['format']['#options'] = array(
+          //  'filtered_html' => 'Filtered HTML',
+          //);
         }
       }
     }
@@ -143,9 +143,3 @@ function atwork_formats_after_build($element, &$form_state) {
   return $element;
 }
 
-/**
- * Implements hook_js_alter();
- */
-function atwork_formats_js_alter(&$javascript) {
-  //dpm($javascript);
-}

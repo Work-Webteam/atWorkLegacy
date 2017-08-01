@@ -656,6 +656,7 @@ function atwork_comments_comment_insert($comment) {
  * For some reason, our first forum post keeps losing its edit/reply/delete buttons
  * We will check here and re-implement them if they are missing.
  */
+/*
 function atwork_comments_comment_view_alter(&$build){
   if(isset($build['#entity_type']) && $build['#entity_type'] == 'comment'){
     if(isset($build['#bundle']) && $build['#bundle'] == 'comment_node_forum'){
@@ -701,3 +702,4 @@ function atwork_comments_comment_view_alter(&$build){
     }
   }
 }
+*/
