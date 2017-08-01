@@ -4495,12 +4495,17 @@ function atwork_lsa_features_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
-        'module' => 'text',
+        'label' => 'above',
+        'module' => 'editablefields',
         'settings' => array(
+          'click_to_edit' => 0,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => 'text_default',
+          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'text_default',
+        'type' => 'editable',
         'weight' => 6,
       ),
       'ecard' => array(
