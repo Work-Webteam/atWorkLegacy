@@ -22,7 +22,7 @@ only screen and (     -o-min-device-pixel-ratio: 2/1),
 only screen and (        min-device-pixel-ratio: 2),
 only screen and (                min-resolution: 192dpi),
 only screen and (                min-resolution: 2dppx) {
-#header-box,   .resizable-textarea .grippie {
+#header-box,  .resizable-textarea .grippie {
   display:none;
 }
 #content.column {
@@ -1533,7 +1533,8 @@ section.region.region-sidebar-second.column.sidebar {
   }
 	#navigation,
   //#block-custom-search-blocks-1,
-  #block-block-45 { // hides the top tools panel 
+  #block-block-45, // hides the top tools panel 
+  #theme-banner { // hides the theme banner
    		display: none !important;
     }
 	#header.header,
