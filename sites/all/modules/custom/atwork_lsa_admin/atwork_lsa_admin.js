@@ -169,6 +169,31 @@
     });
 
   }
+  function setTooltip(){
+    // First add an icon behind the block we wish to mark
+    // For the "Attending" dropdown
+    $(".chosen-disable.form-select").after('<i class="fa fa-info-circle" id="attending-icon"></i>');
+    $("#attending-icon").qtip({
+      content: {
+        title: "RSVP Status",
+        text: "Recipients are scheduled with the ministry/organization they currently work for. Because of the logistical complexity of scheduling ceremonies for over 1500 recipients, it’s extremely difficult to allow recipients to switch nights. However, if your ministry has another ceremony date scheduled, please email the longserviceawards@gov.bc.ca with your request.",
+      },
+      style: {
+        classes: "qtip-blue qtip-shadow qtip-rounded",
+        def: false,
+      },
+      show: {
+        effect: function() {
+          $(this).show('slide', 500);
+        }
+      },
+      hide: {
+        effect: function() {
+          $(this).hide('puff', 500);
+        }
+      }
+    });
+  }
 
 
 /**
@@ -178,7 +203,7 @@
   $(document).ready(function(){
     close_button();
     settings();
-
+    setTooltip();
     document.body.addEventListener('click', open_button, true);
 
   });
