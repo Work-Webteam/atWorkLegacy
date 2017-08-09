@@ -20,12 +20,17 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'text',
+        'module' => 'editablefields',
         'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'text_default',
-        'weight' => 14,
+        'type' => 'editable',
+        'weight' => 26,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -971,10 +976,18 @@ function atwork_lsa_features_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 26,
+        'label' => 'inline',
+        'module' => 'editablefields',
+        'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
+          'semantic_field_format' => '',
+        ),
+        'type' => 'editable',
+        'weight' => 14,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1028,9 +1041,12 @@ function atwork_lsa_features_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
         'weight' => 35,
       ),
       'ecard' => array(
@@ -1172,18 +1188,16 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'date',
+        'module' => 'editablefields',
         'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
           'semantic_field_format' => '',
-          'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
         ),
-        'type' => 'date_default',
+        'type' => 'editable',
         'weight' => 7,
       ),
       'ecard' => array(
@@ -1263,9 +1277,12 @@ function atwork_lsa_features_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
         'weight' => 32,
       ),
       'ecard' => array(
@@ -1340,9 +1357,12 @@ function atwork_lsa_features_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
         'weight' => 36,
       ),
       'ecard' => array(
@@ -1417,9 +1437,12 @@ function atwork_lsa_features_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'inline',
+        'module' => 'list',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'list_default',
         'weight' => 28,
       ),
       'ecard' => array(
@@ -3068,9 +3091,12 @@ function atwork_lsa_features_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
         'weight' => 31,
       ),
       'ecard' => array(
@@ -3144,9 +3170,12 @@ function atwork_lsa_features_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
         'weight' => 30,
       ),
       'ecard' => array(
@@ -3220,9 +3249,12 @@ function atwork_lsa_features_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
         'weight' => 34,
       ),
       'ecard' => array(
@@ -3296,9 +3328,12 @@ function atwork_lsa_features_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'inline',
+        'module' => 'list',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'list_default',
         'weight' => 29,
       ),
       'ecard' => array(
@@ -3354,11 +3389,16 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'list',
+        'module' => 'editablefields',
         'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'list_default',
+        'type' => 'editable',
         'weight' => 9,
       ),
       'ecard' => array(
@@ -3495,11 +3535,16 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'list',
+        'module' => 'editablefields',
         'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'list_default',
+        'type' => 'editable',
         'weight' => 6,
       ),
       'ecard' => array(
@@ -3701,9 +3746,12 @@ function atwork_lsa_features_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'inline',
+        'module' => 'list',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'list_default',
         'weight' => 33,
       ),
       'ecard' => array(
@@ -3901,10 +3949,18 @@ function atwork_lsa_features_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 8,
+        'label' => 'inline',
+        'module' => 'editablefields',
+        'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
+          'semantic_field_format' => '',
+        ),
+        'type' => 'editable',
+        'weight' => 10,
       ),
       'ecard' => array(
         'label' => 'above',

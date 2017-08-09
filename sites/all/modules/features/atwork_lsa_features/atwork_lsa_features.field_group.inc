@@ -553,6 +553,7 @@ function atwork_lsa_features_field_group_info() {
     'children' => array(
       0 => 'field_lsa_supervisor_first_name',
       1 => 'field_lsa_supervisor_last_name',
+      2 => 'field_lsa_supervisor_email',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -661,6 +662,16 @@ function atwork_lsa_features_field_group_info() {
       6 => 'field_lsa_25year_certificatename',
       7 => 'field_lsa_award',
       8 => 'field_lsa_date_of_retirement',
+      9 => 'field_lsa_certificate_ordered',
+      10 => 'field_lsa_charity_name_2',
+      11 => 'field_lsa_donation_amount',
+      12 => 'field_lsa_donation_amount_2',
+      13 => 'field_lsa_donation_options',
+      14 => 'field_lsa_pecsf_charity_name',
+      15 => 'field_lsa_pecsf_id',
+      16 => 'field_lsa_pecsf_id_2',
+      17 => 'field_lsa_pecsf_region',
+      18 => 'field_lsa_second_donation',
     ),
     'format_type' => 'div',
     'format_settings' => array(
