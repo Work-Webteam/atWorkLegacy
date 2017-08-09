@@ -58,11 +58,10 @@
     $('.form-submit.ajax-processed').val('Save Changes');
 
     // If they are not retiring this year, no need to have a field to enter a retirement date.
-    var retired = $(".field.field-name-field-lsa-retiring-thisyear.field-type-list-boolean.field-label-inline.clearfix div.field-item").text();
-
-    if (retired == "No"){
-      $(".field.field-name-field-lsa-retiring-thisyear").hide();
+    if($("input[name='field_lsa_retiring_thisyear[und]']:checked").prop('value') == 0){
       $("div.field.field-name-field-lsa-date-of-retirement").hide();
+    } else {
+      $("div.field.field-name-field-lsa-date-of-retirement").show();
     }
 
     var years_of_service = $(".field.field-name-field-lsa-years-of-service.field-type-list-integer.field-label-inline.clearfix div.field-items div.field-item").text();
@@ -70,6 +69,12 @@
     // Do they get a certificate?
     if(years_of_service != "25"){
       $("div.field.field-name-field-lsa-25year-certificatename").hide();
+      $(".field-name-field-lsa-certificate-ordered").hide();
+    }
+    if($("input[name='field_lsa_certificate_ordered[und]']").prop("checked") == true){
+      $(".field-name-field-lsa-25year-certificatename").show();
+    } else {
+      $(".field-name-field-lsa-25year-certificatename").hide();
     }
 
     var award = $(".field.field-name-field-lsa-award.field-type-text.field-label-inline.clearfix").text();
@@ -184,17 +189,41 @@
       },
       show: {
         effect: function() {
-          $(this).show('slide', 500);
+          $(this).fadeTo(250, 1);
         }
       },
       hide: {
         effect: function() {
-          $(this).hide('puff', 500);
+          $(this).hide('puff', 250);
         }
       }
     });
-  }
 
+
+    // For the "Register last year", "employee number", "Years of service", "Award"
+    // NOTE: Ministry/Org was originally on this list, but because of gov moves, this was allowed to be changeable.
+    $('.field-name-field-lsa-register-last-year, .field-name-field-lsa-employee-number, .field-name-field-lsa-years-of-service, .field-name-field-lsa-award').append('<i class="fa fa-info-circle contact-lsa"></i>');
+    $('.contact-lsa').qtip({
+      content: {
+        title: "Contact Us",
+        text: "If changes are required, please contact longserviceawards@gov.bc.ca",
+      },
+      style: {
+        classes: "qtip-blue qtip-shadow qtip-rounded",
+        def: false,
+      },
+      show: {
+        effect: function() {
+          $(this).fadeTo(250, 1);
+        }
+      },
+      hide: {
+        effect: function() {
+          $(this).hide('puff', 250);
+        }
+      }
+    })
+  }
 
 /**
  * Main function, various click handlers/event listener.

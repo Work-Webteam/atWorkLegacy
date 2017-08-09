@@ -19,8 +19,8 @@
 	max-width: 380px;
 	min-width: 50px;
 
-	font-size: 12.5px;
-	line-height: 12px;
+	font-size: 1empx;
+	line-height: 1.2px;
 
 	direction: ltr;
 
@@ -217,10 +217,12 @@
 	background-color: #E5F6FE;
 	border-color: #ADD9ED;
 	color: #5E99BD;
+	font-size:1em;
 }
 
 	.qtip-blue .qtip-titlebar{
 		background-color: #D0E9F5;
+		font-size: 1.3em;
 	}
 
 	.qtip-blue .qtip-close .qtip-icon{
