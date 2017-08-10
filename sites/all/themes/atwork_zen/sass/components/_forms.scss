@@ -123,3 +123,90 @@
     width: 175px;
   }
 }
+
+// Update / additions to 2017 form update. /career/long-service-awards/applications
+.node-lsa-application .form-item {
+  margin: 0 5px;
+}
+table.views-table.cols-2 {
+  margin-bottom: 10px;
+  td.views-field.views-field-field-lsa-ceremonydate {
+    width:130px;
+  }
+  .fa.fa-info-circle {
+    margin: 0 4px;
+    color: #26669E;
+    font-size: 1.2em;
+  }
+}
+#node-lsa-application-full-group-lsad-special-requirements,
+.field-name-field-lsa-retiring-thisyear {
+  .form-required {
+    display: none;
+  }
+    h2:after,
+    .field-label:after {
+    content:"*";
+    color:red;
+  }
+  #edit-actions--24 {
+    margin-top: 10px;
+  }
+}
+.fa.fa-info-circle.contact-lsa {
+  margin: 0 4px;
+  color: #26669E;
+  font-size:1.2em;
+}
+#node-lsa-application-full-group-lsad-special-requirements {
+  .form-item.form-type-checkboxes.form-item-field-lsa-specialrequirements-und {
+    margin-top:0;
+  }
+}
+#node-lsa-application-full-group-service-information {
+  margin-top: 15px;
+  div[class^="field-name-field-lsa-"], div[class*=" field-name-field-lsa-"] {
+    margin-bottom:5px;
+  }
+}
+.view-header > strong:nth-child(1) > p:nth-child(3),
+.view-footer > span:nth-child(1) > strong:nth-child(2) > p:nth-child(1),
+#node-lsa-application-full-group-service-information > strong:nth-child(1) {
+  border: solid 1px #ccc;
+  padding: 3px 5px;
+  display: block;
+}
+#node-lsa-application-full-group-service-information {
+  strong:nth-child(1) {
+    margin-bottom: 15px;
+  }
+  br {
+    display: none;
+  }
+}
+#node-lsa-application-full-group-lsad-personal-info,
+#node-lsa-application-full-group-lsad-contact-info,
+#node-lsa-application-full-group-lsad-supervisor-info,
+.collapsible.group-lsa-office-contact {
+  border: solid 1px #ccc;
+  padding: 5px;
+  margin: 10px 0;
+  .field-label {
+    width: 160px;
+    text-align:right;
+  }
+  .field-items {
+    margin-bottom: 5px;
+  }
+  #edit-field-lsa-middle-name-und-0-value,
+  #edit-field-lsa-alt-email-address-und-0-email,
+  #edit-field-lsa-office-work-group-und-0-value,
+  #edit-field-lsa-work-phone-ext-und-0-value {
+    margin-left: 10px; 
+  }
+  h2:nth-child(1) {
+    margin: 0 0 10px 0!important;
+    padding: 0 10px;
+    background-color: #dcdcdc;
+  }
+}
