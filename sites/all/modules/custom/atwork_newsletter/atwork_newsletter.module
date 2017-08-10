@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * Implements hook_preprocess
+ */
+//function atwork_newsletter_preprocess(&$variables, $hook){
+  //$view = $variables['view'];
+  //dpm($view);
+  //if($node->type == "simplenews"){
+    //dpm($variables);
+  //}
+  //if(isset($variables['page']['content']['system_main']['type']['#value'])&& $variables['page']['content']['system_main']['type']['#value'] == 'simplenews'){
+    //dpm($variables);
+  //}
+//}
+
+
+/**
+ * Implements hook_theme_registry
+ *
+ * We need to intercept the theme for the simple news content selector
+ * This allows us to theme content ourselve prior to any rendering, without hacking the default .tpl in the contrib module.
+ * 
+ * @param array $theme_registry
+ */
+function atwork_newsletter_theme_registry_alter(&$theme_registry){
+  $theme_registry['scs_newsletter']['template'] = 'sites/all/themes/atwork_zen/templates/scs-newsletter';
+}
+

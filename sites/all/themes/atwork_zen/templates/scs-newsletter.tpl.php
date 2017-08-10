@@ -10,26 +10,32 @@
  *    render() function.
  */
 ?>
-<?php //dpm($nodes);
-
-
-	// Function to encode images:
-   	//function getDataURI($image, $mime = '') {
-	//	return 'data: '.(function_exists('mime_content_type') ? mime_content_type($image) : $mime).';base64,'. base64_encode(file_get_contents($image));
-	//}
-
-
-	// Grab current date for webtrends
-    $currentDate = "?nl=" . date("dmy");
-    $atwork_base_url = $GLOBALS['base_url'];
- ?>
+<?php 
+// Require atowork_newsletter.inc
+// A file that will take the above vars, returning an associate array with the keys for [TODO: add in keys here]
+require drupal_get_path('module', 'atwork_newsletter') . "/atwork_newsletter.inc";
+$atwork_newsletter_render_array = atwork_newsletter_create_render_arrays($nodes);
+dpm($atwork_newsletter_render_array);
+// Grab current date for webtrends
+$currentDate = "?nl=" . date("dmy");
+$atwork_base_url = $GLOBALS['base_url'];
+?>
 <?php //********************* Header section ********************* ?>
+
+
+<!--  Outlook specific styles -->
+<!--[if lte mso 14]>
+<style>
+	.outlook-title {height: 35px !important;}
+	.outlook-body {height: 123px !important;}
+</style>
+<[endif]-->
 
 <table width="775" border="0" align="center" cellpadding="0" cellspacing="0" id="sn-newsletter-layout" style="background-color: #FFF;">
   <tr>
     <td style="background-color:#FFF;"><table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-newsletter-header">
         <tr>
-          <td align="right" style="background-color:#004B8D; font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; padding-right:15px; padding-top: 5px; padding-bottom:5px; "><?php  echo "[node:title]" ?></td>
+          <td align="right" style="background-color:#004B8D; font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; padding-right:15px; padding-top: 5px; padding-bottom:5px; "><?php  echo "@Work Newsletter | " . date("F d, Y"); ?></td>
         </tr>
         <tr>
           <td bgcolor="#FFFFFF" align="center" valign="middle" style="border: none;"><?php echo '<a href="' . $atwork_base_url . $currentDate . '"> <img src = "' . $atwork_base_url . '/sites/all/themes/atwork/images/atwork-logo-newsletter.png?nltest=testbanner" width="439" height="93" border="0" /> </a></td>'; ?>
@@ -40,12 +46,10 @@
 
 		// Grab all keys from $nodes var
 		$nids = array_keys($nodes);
-
 		/****************************   Check to see if this is an executive (single story) mailing. **********************/
 		if (isset($nids[0]) && !isset($nids[1])):
 			// Load render node for feature spot.
 			$node_first = node_load($nids[0]);
-			// dpm($node_first);
 
 			// collect title and url alias of original node
 			$atwork_newsletter_title = $node_first -> title;
@@ -53,7 +57,6 @@
 
 			//Build aliased URL with webtrends query tag
 			$atwork_newsletter_aliased = drupal_get_path_alias('node/'.$atwork_newsletter_location) . $currentDate;
-			//dpm($atwork_newsletter_aliased);
 
 			// Collect title and url for output
 			$output_atwork_newsletter_title = '<div id="feature_title"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px; line-height: 24px;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" >' . $atwork_newsletter_title . '</a></h2></div>';
@@ -73,18 +76,11 @@
 
 			$image_output['#path']['path'] = $atwork_base_url . '/' . $atwork_newsletter_aliased;
 
-			//$im = $image_output['#item']['uri'];
-
-			//dpm($im);
-
-			//$image_output2 = getDataURI($im);
-
 			// Output tag line
 			echo '<tr>';
-          	echo '<td align="center" style="background-color:#ECECEC; font-family: Calibri, sans-serif; font-size:10pt; letter-spacing: 4px; padding-top: 5px; padding-bottom: 5px; border:none;">' . "&bull; EXECUTIVE UPDATE &bull;" . '</td>';
+          	echo '<td align="center" style="background-color:#ECECEC; font-family: Calibri, sans-serif; font-size:10pt; letter-spacing: 4px; padding-top: 5px; padding-bottom: 5px; border: none;">' . "&bull; EXECUTIVE UPDATE &bull;" . '</td>';
         	echo '</tr>';
       		echo '</table>';
-
 
 			//Output image
 			echo '<table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-newsletter-feature" style="background-color:#FFF;">';
@@ -93,31 +89,29 @@
 			echo '<td>';
 			echo '<div id="feature-image" name="featureimage" width="775" height="250" style="background-color:#FFF;">';
 			echo render($image_output);
-			//echo '<img src="'. $image_output2 .'" />';
 			echo '</div>';
 			echo '</td>';
 			echo '</tr>';
 
-
-			echo '<tr>';
 			//Output title
+			echo '<tr>';
 			echo '<td>';
 			echo '<table width="100%" border="0" cellpadding="0" cellspacing="0" id="sn-feature-title">';
 			echo '<tr>';
-			echo '<td width="348" height="110" valign="top">';
+			echo '<td width="35%" height="110" valign="top">';
 			echo '<div id="feature-title">';
 			echo $output_atwork_newsletter_title;
 			echo '</div>';
 			echo '</td>';
 
 			// Output teaser
-			echo '<td width="55%" valign="top">';
+			echo '<td width="65%" valign="top">';
 			echo '<div id="feature-teaser">';
-			echo '<table width="100%" border="0" cellspacing="0" cellpadding="0">';
+			echo '<table width="100%" border="0" cellspacing="0" cellpadding="0" padding=" 0 0 0 5px">';
 			echo '<tr>';
 			echo '<td height="110" valign="top">';
 			echo '<p style="font-family: Calibri, sans-serif; font-size:11pt; color:#004B8D; margin-top: 10px; margin-right: 10px; line-height: 20px;">';
-			echo $atwork_newsletter_body[0]['summary'];
+			echo $atwork_newsletter_body[1]['summary'];
 			echo '</p>';
 			echo '</div>';
 			echo '</td>';
@@ -137,7 +131,7 @@
 			echo '</div>';
 			echo '</table>';
 			echo '</table>';
-			echo '<table width="775" border="0" align="center" cellpadding="0" cellspacing="0" >';
+			echo '<table width="775" border="0" align="center" cellpadding="0" cellspacing="0">';
 
 		/***************  Not an executive (single story) mailing, build full newsletter *****************************************/
 		else:
@@ -145,7 +139,6 @@
 			if(isset($nids[0])){
 				// Load render node for feature spot.
 				$node_first = node_load($nids[0]);
-				// dpm($node_first);
 
 				// collect title and url alias of original node
 				$atwork_newsletter_title = $node_first -> title;
@@ -153,13 +146,12 @@
 
 				//Build aliased URL with webtrends query tag
 				$atwork_newsletter_aliased = drupal_get_path_alias('node/'.$atwork_newsletter_location) . $currentDate;
-				//dpm($atwork_newsletter_aliased);
 
 				// Collect title and url for output
 				$output_atwork_newsletter_title = '<div id="feature_title"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px; line-height: 24px;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" >' . $atwork_newsletter_title . '</a></h2></div>';
+				
 				// collect teaser of news story for output.
 				$atwork_newsletter_body = field_get_items('node',$node_first, 'body');
-
 
 				// Grab image for render.
 				$image = field_get_items('node', $node_first, 'field_image');
@@ -173,17 +165,14 @@
 
 				$image_output['#path']['path'] = $atwork_base_url . '/' . $atwork_newsletter_aliased;
 
-
 				// Output tag line
 				echo '<tr>';
           		echo '<td align="center" style="background-color:#ECECEC; font-family: Calibri, sans-serif; font-size:10pt; letter-spacing: 4px; padding-top: 5px; padding-bottom: 5px; border:none;">' . "&bull; A SELECTION OF WHAT'S MAKING NEWS RIGHT NOW &bull;" . '</td>';
         		echo '</tr>';
       			echo '</table>';
 
-
 				//Output image
 				echo '<table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-newsletter-feature">';
-
 				echo '<tr>';
 				echo '<td>';
 				echo '<div id="feature-image" name="featureimage" width="775" height="250">';
@@ -192,24 +181,26 @@
 				echo '</td>';
 				echo '</tr>';
 
-
-				echo '<tr>';
 				//Output title
-				echo '<td>';
-				echo '<table width="100%" border="0" cellpadding="0" cellspacing="0" id="sn-feature-title" style="background-color:#FFF;">';
 				echo '<tr>';
-				echo '<td width="348" height="110" valign="top">';
+				echo '<td>';
+				echo '<table width="100%" border="0" cellpadding="0" cellspacing="0" id="sn-feature-title" style="background-color:#FFF; border-bottom: 1px solid black;">';
+				echo '<tr>';
+				echo '<td width="35%" height="110" valign="top">';
 				echo '<div id="feature-title">';
 				echo $output_atwork_newsletter_title;
 				echo '</div>';
 				echo '</td>';
+				echo '<td>';
+				echo '<img src = "' . $atwork_base_url . '/sites/all/themes/atwork/images/whitespace_20_110.png"/>';
+				echo '</td>';
 
 				// Output teaser
-				echo '<td width="55%" valign="top">';
+				echo '<td width="65%" valign="top">';
 				echo '<div id="feature-teaser">';
 				echo '<table width="100%" border="0" cellspacing="0" cellpadding="0">';
 				echo '<tr>';
-				echo '<td height="110" valign="top">';
+				echo '<td height="110" valign="top" style="padding: 0 0 0 0;">';
 				echo '<p style="font-family: Calibri, sans-serif; font-size:11pt; color:#004B8D; margin-top: 10px; margin-right: 10px; line-height: 20px;">';
 				echo $atwork_newsletter_body[0]['summary'];
 				echo '</p>';
@@ -218,201 +209,215 @@
 				echo '</tr>';
 				echo '<tr>';
 				echo '<td>';
-				echo '<p style="margin-bottom: 10px;"><a style="font-family: Calibri, sans-serif; text-decoration: none; display: block; font-size: 10pt; line-height: 20px; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '"> Read more >> </a></p>';
-				echo '</td>';
-				echo '</tr>';
-				echo '<tr>';
-				echo '<td align="right">';
-				echo '<div class="content-type">';
-				echo '<p style="font-family: Calibri, sans-serif; font-size:10pt; margin-right:10px; margin-bottom: 10px; padding-top: 10px; padding-right: 10px; border-top: solid 1px #000;"> <a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/news' .$currentDate . '"> News </a> </p>';
-				echo '</div>';
+				echo '<p style="margin-bottom: 10px; padding: 0 0 0 0;"><a style="font-family: Calibri, sans-serif; text-decoration: none; display: block; font-size: 10pt; line-height: 20px; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '"> Read more >> </a></p>';
 				echo '</td>';
 				echo '</tr>';
 			}
 	?>
-      </table>
+      </table> <!-- End of inner table -->
       </div></td>
   </tr>
-  <tr style="background-color:#ECECEC;">
-    <td height="10" colspan="2" valign="top">&nbsp;</td>
-  </tr>
-</table>
 </td>
 </tr>
-</table>
+</table> <!-- end of outer table -->
 <?php //********************* Middle-Block Section **********************  ?>
 <?php
-  	// Collect info for middle row left if available
-  	if(isset($nids[1])) {
-  		//$second_node=$nodes[$nids[1]];
-  		//echo render($second_node);
+    		    
+    /* Build markup for newsletter body articles */
 
-  		// Load render node for second news spot.
-  		$node_second = node_load($nids[1]);
+    for($i = 1; $i <= sizeof($nids); $i++) {
+    	
+        //Collect info for each row if available
+    	if(isset($nids[$i])) {
+    		
+	        $curr_node = node_load($nids[$i]);
+	        
+	        // Check for article type 
+	        if($curr_node -> type === 'article') {	    
+	        	
+		  	    // Collect title and url alias for node.
+			 	$atwork_newsletter_title = $curr_node -> title;
+			 	$atwork_newsletter_location = $curr_node-> nid;
+			 	$atwork_newsletter_aliased = drupal_get_path_alias('node/' . $atwork_newsletter_location) . $currentDate;
+		       
+			 	// Build title for article
+			 	$output_atwork_newsletter_title = '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px;"><a style="text-decoration: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" >' . $atwork_newsletter_title . '</a></h2>';
+			 		
+				// Collect image from node
+				$image = field_get_items('node', $curr_node, 'field_image');
+				
+				$image_output = field_view_value('node', $curr_node, 'field_image', $image[0], array(
+						'type' => 'image',
+						'settings' => array(
+					'image_style' => 'atwork_newsletter_other_image',
+					'image_link' => 'content',
+						),
+				));
+				
+				// Attach tag to image
+				$image_output['#path']['path'] = $atwork_base_url . '/' . $atwork_newsletter_aliased;
+				$image_output['#item']['width'] = "270";
+				$atwork_newsletter_body = field_get_items('node',$curr_node, 'body');
+				
+				// beginning of article block.
+			    echo '<table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-middle-content">';
+				echo '<tr>';
+		    	echo '<td height="10" colspan="3" valign="top" align="right">News</td>';
+				echo '</tr>';
+				echo '<tr height="auto">';
+				echo '<td valign="top">';
+				echo '<div id="article-left" style="background-color: grey;">';
+				
+				// Call to render image to generate markup. 
+				$image_markup =  render($image_output);
+				
+				// Get original image Height & Width from rendered photo / markup
+				preg_match('/height="[0-9]+"/', $image_markup, $matches);
+				preg_match('/[0-9]+/', $matches[0], $height);
+				preg_match('/width="[0-9]+"/', $image_markup, $matches);
+				preg_match('/[0-9]+/', $matches[0], $width);
+				$height = $height[0];
+				$width = $width[0];
+				
+				// Calculate Aspect ratio
+				$hw_ratio = ($height / $width);
+				$wh_ratio = ($width/ $height);
+				
+				$height = 'height="179"';
+				$width = 'width="270"';
+				
+				// Set image style
+				$image_markup = str_replace('img', 'img style="margin: auto; display: block;"', $image_markup);
+				
+				// Insert new rationalized dimensions and display Photo.
+				$image_markup = preg_replace('/width="[0-9]+"/', $width, $image_markup);
+				$image_markup = preg_replace('/height="[0-9]+"/', $height, $image_markup);
+				echo $image_markup;
+				
+				echo '</div>';
+				echo '</td>';
+				echo '<td>';
+				echo '<img src = "' . $atwork_base_url . '/sites/all/themes/atwork/images/whitespace_10_179.png"/>';
+				echo '</td>';
+				echo '<td width=65%>';
+			    echo '<table width=100% border="0" cellpadding="0" cellspacing="0";>';
+			        
+				// Article Title
+				echo '<tr valign="top">';
+				echo '<td valign="top" class="outlook-title" style="line-height: 24px;">';
+				echo '<div outlook-body class="outlook-title" id="middle-left-content" style="line-height: 24px;">';
+				echo $output_atwork_newsletter_title;
+				echo '</div>';
+				echo '</td>';	
+				echo '</tr>';
+				
+				echo '<tr>';	
+				echo '<td class="outlook-body" valign="top" style="height: 119px;">';
+				echo '<div class="outlook-body" id="middle-left-tease" style="height: 119px;">';
+				// Article Teaser
+				echo '<p style="font-family: Calibri, sans-serif; font-size:11pt; color:#004B8D; margin-right: 10px; line-height: 20px;">';
+				echo $atwork_newsletter_body[0]['summary'];
+				echo '</p>';
+				echo '</div>';
+				echo '</td>';
+				echo '</tr>';
+				echo '<tr><td style="padding: 0 0 0 0; border-bottom: 1px solid black;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" > Read more >> </a></td></tr>';					
+				echo '</table>';
+			    echo '</td>';
+				echo '</tr>';
+			    echo '</table>';
+			    
+	        } //endif
+	       
+    	} // endif
+    }
 
-  		// Collect title and url alias for node.
-  		$atwork_newsletter_title_left = $node_second -> title;
-  		$atwork_newsletter_location = $node_second -> nid;
-  		$atwork_newsletter_aliased_left = drupal_get_path_alias('node/' . $atwork_newsletter_location) . $currentDate;
+  /* Build markup for newsletter body blog postings */
+    
+    for($i = 1; $i <= sizeof($nids); $i++) {
+    	
+        //Collect info for each row if available
+    	if(isset($nids[$i])) {
+    		
+	        $curr_node = node_load($nids[$i]);
+	        
+    		// Check for article type
+    		if($curr_node -> type === 'blog') {
+    			
+		  		// Collect author information for blog post
+				$author_name_blog = $curr_node-> name;
+		  		$author_uid = $curr_node -> uid;
+		  		$blog_author_information = user_load($author_uid);
+		  		$blog_author_name_full = $blog_author_information ->field_display_name['und'][0]['safe_value'];
+    			
+		  	    // Collect title and url alias for node.
+			 	$atwork_blog_title = $curr_node -> title;
+			 	$atwork_blog_location = $curr_node-> nid;
+			 	$atwork_blog_aliased = drupal_get_path_alias('node/' . $atwork_blog_location) . $currentDate;
+		       
+				// Grab teaser of news story for output
+			 	$atwork_blog_body = field_get_items('node', $curr_node, 'body');
+			 	
+			 	// Build title for blog
+			 	$output_atwork_blog_title = '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork__aliased . '" >' . $atwork_blog_title . '</a></h2>';
+			 	
+			    echo '<table height="110" valign="top" width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-middle-content" style="border-bottom: 1px solid black;">';
+				echo '<tr>';
+		    		echo '<td height="10" colspan="2" valign="top" align="right">Blogs</td>';
+				echo '</tr>';
+				echo '</tr>';
+				echo '<tr>';
+				echo '<tr valign="top">';
+				echo '<td valign="top" height="90" colspan="2">';
+				echo '<div id="middle-left-content">';
+				echo '<div id="middle-left-title" style="height: 30px;">';
+				echo $output_atwork_blog_title;
+				echo '</div>';
+				echo '<p style="font-family: Calibri,sans-serif; font-size:11pt; color:#004B8D; display:block; height: auto; margin-top: 10px; margin-left: 10px; margin-right: 10px; margin-bottom: 0; padding-bottom: 15px; line-height: 20px;">';
+				echo ($atwork_blog_body[0]['summary'] === "" ? $atwork_blog_body[0]['summary'] : '"' . $atwork_blog_body[0]['summary'] . '"') ;
+				echo '</p>';
+				echo '</td>';
+				echo '</tr>';
+				echo '<tr>';
+				echo '<td width="50%" style="padding: 0 0 10px 10px;">';
+				echo '<a style="text-decoration: none; font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_blog_aliased . '" > Read more >> </a>';
+				echo '</td>';
+				echo '<td width="50%" style="padding-bottom: 10px;">';
+				echo 'Posted by: ';
+				echo $blog_author_name_full;
+				echo '</td>';
+				echo '</tr>';
+			    echo '</table>';
+    		}
+    	}
+    	
+    }
 
-  		$output_atwork_newsletter_title_left = '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased_left . '" >' . $atwork_newsletter_title_left . '</a></h2>';
+/* Build markup for comments */
 
-		// Collect image from node
-		$image = field_get_items('node', $node_second, 'field_image');
-		$image_output_left = field_view_value('node', $node_second, 'field_image', $image[2], array(
-				'type' => 'image',
-				'settings' => array(
-			'image_style' => 'atwork_newsletter_other_image',
-			'image_link' => 'content',
-				),
-		));
+    echo '<table height="110" valign="top" width="775" border="0" cellpadding="0" cellspacing="0" id="sn-middle-content" style="border-bottom: 1px solid black;">';
+    echo '<tr>';
+    echo '<td height="10" colspan="2" valign="top" align="right">Comments</td>';
+    echo '</tr>';
+    
+    // Join the Conversation 
+    echo '<tr valign="top">';
+    echo '<td colspan="2" valign="top" height="90">';
+	echo '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-left: 10px; margin-right: 10px; margin-top: 0px;"><a style="text-decoration: none; color:#004B8D;">Join the Conversation</a></h2>';
+	echo '<p style="font-family: Calibri,sans-serif; font-size:11pt; color:#004B8D; display:block; height: auto; margin-top: 10px; margin-left: 10px; margin-right: 10px; margin-bottom: 15px; padding: 0; line-height: 20px;">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc volutpat eros et arcu blandit, a malesuada metus luctus. Aenean euismod volutpat enim vitae dignissim."</p>';
+    echo '</td>';
+    echo '</tr>';
+	echo '<tr>';
+	echo '<td width="50%" style="padding: 0 0 10px 10px;">';
+	echo '<a style="text-decoration: none; font-size: 10pt;" href="" > Read more >> </a>';
+	echo '</td>';
+	echo '<td width="50%" style="padding-bottom: 10px;">';
+	echo 'Posted by: ';
+	echo '</td>';
+    echo '</tr>';
+    echo '</table>';
+?>
 
-		// Attach tag to image
-		$image_output_left['#path']['path'] = $atwork_base_url . '/' . $atwork_newsletter_aliased_left;
-
-		$atwork_newsletter_body_left = field_get_items('node',$node_second, 'body');
-  	}
-
-  ?>
-<?php
-  // Collect info for middle row right if available
-  	if(isset($nids[2])) {
-
-		$node_third = node_load($nids[2]);
-
-		// Collect title and url alias for node.
-  		$atwork_newsletter_title_right = $node_third -> title;
-  		$atwork_newsletter_location = $node_third -> nid;
-  		$atwork_newsletter_aliased_right = drupal_get_path_alias('node/' . $atwork_newsletter_location) . $currentDate;
-
-  		$output_atwork_newsletter_title_right = '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased_right . '" >' . $atwork_newsletter_title_right . '</a></h2>';
-
-  		// collect image
-		$image = field_get_items('node', $node_third, 'field_image');
-		$image_output_right = field_view_value('node', $node_third, 'field_image', $image[2], array(
-				'type' => 'image',
-				'settings' => array(
-			'image_style' => 'atwork_newsletter_other_image',
-			'image_link' => 'content',
-				),
-		));
-
-		// add webtrends tag to image
-		$image_output_right['#path']['path'] = $atwork_base_url . '/' . $atwork_newsletter_aliased_right;
-
-		// Grab teaser of news story for output
-		$atwork_newsletter_body_right = field_get_items('node',$node_third, 'body');
-  	}
-
-	?>
-<?php
-  	// Output for middle row if we collected both stories
-  	if($node_third && $node_second) {
-
-		// beginning of middle-block.
-		echo '<table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-middle-content">';
-
-		echo '<tr valign="top">';
-		echo '<td valign="top" style="background-color:#FFF;" width="382"><div id="sn-middle-left">';
-		// middle-block left table.
-		echo '<table width="100%" border="0" cellspacing="0" cellpadding="0">';
-		//image output
-		echo '<tr valign="top">';
-		echo '<td valign="top">';
-		echo '<div id="middle-left-image" width="372" style="background-color: #FFF">';
-		echo render($image_output_left);
-		echo '</div>';
-		echo '</td>';
-		echo '</tr>';
-		// Title
-		echo '<tr valign="top">';
-		echo '<td valign="top" height="150">';
-		echo '<div id="middle-left-content">';
-		echo '<div id="middle-left-title" style="height: 50px;">';
-		echo $output_atwork_newsletter_title_left;
-		echo '</div>';
-		// Teaser
-		echo '<div id="middle-left-tease" style="height: 75px;">';
-		echo '<p style="font-family: Calibri, sans-serif; font-size:11pt; color:#004B8D; margin-left: 10px; margin-right: 10px; line-height: 20px;">';
-		echo $atwork_newsletter_body_left[0]['summary'];
-		echo '</p>';
-		echo '</div>';
-		echo '</td>';
-		echo '</tr>';
-		echo '<tr>';
-		echo '<td>';
-		echo '<p style="font-family: Calibri, sans-serif; margin-left:10px; margin-bottom: 10px; font-size: 10pt;"><a style="text-decoration: none; color:#004B8D; " href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased_left . '" > Read more >> </a></p>';
-		echo '</td>';
-		echo '</tr>';
-		// Content Type cell.
-		echo '<tr>';
-		echo '<td align="right" valign="top">';
-		echo '<div class="content-type">';
-		echo '<p style="font-family: Calibri,sans-serif; font-size:10pt; margin-right:10px; margin-left: 10px; margin-bottom: 10px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; align: right; border-top: solid 1px #000;">';
-		echo '<a style="text-decoration: none; color:#004B8D; " href="' . $atwork_base_url . '/news' . $currentDate . '"> News </a>';
-		echo '</p>';
-		echo '</div>';
-		echo '</td>';
-		echo '</tr>';
-		// End of middle-block-left.
-		echo '</table>';
-		echo '</div>';
-		echo '</td>';
-		echo '<td width="11" style="background-color:#ECECEC;">&nbsp;</td>';
-
-
-		// Beginning of middle-block-right
-		echo '<td valign="top" style="background-color:#FFF;" width="382">';
-		echo '<div id="sn-middle-right">';
-		echo '<table width="100%" border="0" cellspacing="0" cellpadding="0">';
-		//image output
-		echo '<tr valign="top">';
-		echo '<td valign="top">';
-		echo '<div id="middle-right-image" width="372" height="200" id="middleleftimage2" style="background-color: #FFF">';
-		echo render($image_output_right);
-		echo '</div>';
-		echo '</td>';
-		echo '</tr>';
-		// Title
-		echo '<tr>';
-		echo '<td valign="top" height="150">';
-		echo '<div id="middle-right-content">';
-		echo '<div id="middle-right-title" style="height: 50px;">';
-		echo $output_atwork_newsletter_title_right;
-		echo '</div>';
-		// Teaser
-		echo '<div id="middle-right-tease" style="height: 85px;">';
-		echo '<p style="font-family: Calibri, sans-serif; font-size:11pt; color:#004B8D; margin-left: 10px; margin-right: 10px; line-height: 20px;">';
-		echo $atwork_newsletter_body_right[0]['summary'];
-		echo '</p>';
-		echo '</div>';
-		echo '</td>';
-		echo '</tr>';
-		echo '<tr>';
-		echo '<td>';
-		echo '<p style="font-family: Calibri, sans-serif; margin-left:10px; margin-bottom: 10px; font-size: 10pt;"><a style="text-decoration: none; color:#004B8D; " href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased_right . '" > Read more >> </a></p>';
-		echo '</td>';
-		echo '</tr>';
-		// Content Type cell.
-		echo '<tr>';
-		echo '<td align="right" valign="top">';
-		echo '<div class="content-type">';
-		echo '<p style="font-family: Calibri,sans-serif; font-size:10pt; margin-right:10px; margin-left: 10px; margin-bottom: 10px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; align=right;  border-top: solid 1px #000;">';
-		echo '<a style="text-decoration: none; color:#004B8D; " href="' . $atwork_base_url . '/news' . $currentDate . '"> News </a>';
-		echo '</p>';
-		echo '</div>';
-		echo '</td>';
-		echo '</tr>';
-		// end of middle-block-right.
-		echo '</table>';
-		echo '</div>';
-		echo '</td>';
-
-		// End of middle-block content type
-		echo '</tr>';
-
-  	}
- 	?>
 <table width="775" align="center" border="0" cellpadding="0" cellspacing="0">
   <tbody>
     <tr style="background-color:#ECECEC;">
@@ -444,126 +449,7 @@
     <td height="10" style="background-color:#ECECEC;">&nbsp;</td>
   </tr>
 </table>
-<?php  //************************  Featured Blog  and Quote Section ********************** ?>
-<?php
-		if(isset($nids[3])) {
-			//$fourth_node=$nodes[$nids[3]];
-			//echo render($fourth_node);
 
-			$node_fourth = node_load($nids[3]);
-			// Collect title and url alias for node.
-	  		$atwork_newsletter_title = $node_fourth -> title;
-	  		$atwork_newsletter_location = $node_fourth -> nid;
-	  		$atwork_newsletter_aliased = drupal_get_path_alias('node/' . $atwork_newsletter_location) . $currentDate;
-	  		$output_atwork_newsletter_title = '<a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" >' . $atwork_newsletter_title . '</a></h2>';
-
-	  		// Collect author information for blog post
-			$author_name_blog = $node_fourth -> name;
-	  		$author_uid = $node_fourth -> uid;
-	  		$blog_author_information = user_load($author_uid);
-	  		$blog_author_name_full = $blog_author_information ->field_display_name['und'][0]['safe_value'];
-
-			// Collect image for the blog entry;
-			/**************
-			* No image in this location any longer
-			*$image = field_get_items('node', $node_fourth, 'field_image');
-			*$image_output = field_view_value('node', $node_fourth, 'field_image', $image[0], array(
-  			*	'type' => 'image',
-  			*	'settings' => array(
-    		*	'image_style' => 'node_full',
-    		*	'image_link' => 'content',
-  			*	),
-			*));
-			***********************/
-
-
-			// Grab teaser of news story for output
-			$atwork_newsletter_body = field_get_items('node',$node_fourth, 'body');
-
-			// Beginning of atwork newsletter blog and comment info spots
-			echo '<table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-blog-comment">';
-			echo '<tr valign="top">';
-
-			// Blog top content
-			echo '<td width="383" valign="top" style="background-color:#FFF;"><table width="100%" border="0" cellpadding="0" cellspacing="0" id="sn-blog">';
-			echo '<tr valign="top">';
-
-			//echo render($image_output);
-			echo '<td height="165" valign="top">';
-			echo '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px;">';
-			//title
-			echo $output_atwork_newsletter_title;
-			echo '</h2>';
-			//teaser
-			echo '<p style="font-family: Calibri,sans-serif; font-size:11pt; color:#004B8D; display:block; height:90px; margin-top: 10px; margin-left: 10px; margin-right: 10px; margin-bottom: 0; padding-bottom: 0; line-height: 20px;">';
-			echo $atwork_newsletter_body[0]['summary'];
-			echo '</p>';
-			echo '<p style="font-family: Calibri,sans-serif; font-size:10pt; color:#004B8D; margin-left: 10px;">';
-			echo '<a style="text-decoration: none; font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" > Read more >> </a>';
-			echo '</p>';
-			echo '<p style="font-family: Calibri,sans-serif; font-size:10pt; color:#004B8D; margin-left: 10px; margin-bottom: 5px;">';
-			echo 'Posted by: ';
-			echo $blog_author_name_full;
-			echo '</p>';
-			echo '</td>';
-			echo '</tr>';
-
-			// Blog content-type
-			echo '<tr valign="top">';
-			echo '<td align="right" valign="top">';
-			echo '<div class="content-type">';
-			echo '<p style="font-family: Calibri,sans-serif; font-size:10pt; margin-right:10px; margin-left: 10px; margin-bottom: 10px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; border-top: solid 1px #000;">';
-			echo '<a style="text-decoration: none;" href="' . $atwork_base_url . '/blogs' . $currentDate . '">Blogs</a>';
-			echo '</p>';
-			echo '</div>';
-			echo '</td>';
-			echo '</tr>';
-			echo '</table>';
-			echo '</td>';
-			echo '<td width="10" valign="top" style="background-color:#ECECEC;">&nbsp;</td>';
-
-			// Join the conversation top content
-			echo '<td width="383" valign="top" style="background-color:#FFF;">';
-			echo '<table width="100%" border="0" cellpadding="0" cellspacing="0" id="sn-comment">';
-			echo '<tr valign="top">';
-			echo '<td height="165" valign="top">';
-			echo '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px;">';
-			echo '<a style="color:#004B8D; text-decoration:none;" href= "' . $atwork_base_url  . '/recent-comments' . $currentDate . '" > Join the Conversation </a>';
-			echo '</h2>';
-			echo '<p style="font-family: Calibri,sans-serif; font-size:11pt; color:#004B8D; display:block; height:90px; margin-top: 10px; margin-left: 10px; margin-right: 10px; margin-bottom: 0; padding: 0; line-height: 20px;">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc volutpat eros et arcu blandit, a malesuada metus luctus. Aenean euismod volutpat enim vitae dignissim."</p>';
-			echo '<p style="font-family: Calibri,sans-serif; font-size:10pt; color:#004B8D; margin-left: 10px;">';
-			echo '<a style="text-decoration: none; font-size: 10pt;" href="' . $atwork_base_url . '/recent-comments' . $currentDate . '" > Read more >> </a></p>';
-			echo '<p style="font-family: Calibri,sans-serif; font-size:10pt; color:#004B8D; margin-left: 10px; margin-bottom: 5px;">';
-			echo 'Posted by: ';
-			echo 'Author Name';
-			echo '</p>';
-			echo '</td>';
-			echo '</tr>';
-
-			// Join the conversation content-type
-			echo '<tr valign="top">';
-			echo '<td align="right" valign="top">';
-			echo '<div class="content-type">';
-			echo '<p style="font-family: Calibri,sans-serif; font-size:10pt; margin-right:10px; margin-left: 10px; margin-bottom: 10px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; border-top: solid 1px #000;">';
-			echo '<a style="text-decoration: none;" href="' . $atwork_base_url . '/recent-comments' . $currentDate . '">Comments </a>';
-			echo '</p>';
-			echo '</div>';
-			echo '</td>';
-
-			// end of atwork newsletter blog and comment info spots
-			echo '</tr>';
-			echo '</table>';
-			echo '</td>';
-			echo '</tr>';
-		}
-	?>
-<table width="775" align="center" border="0" cellpadding="0" cellspacing="0">
-  <tbody>
-    <tr style="background-color:#ECECEC;">
-      <td>&nbsp;</td>
-    </tr>
-  </tbody>
-</table>
 <?php // ************************ Footer Section ************************** ?>
 <?php endif; // All footers are the same  ?>
 <table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-footer" style="background-color: #ECECEC;">
@@ -576,7 +462,7 @@
       </table></td>
     <td valign="middle" height="140"><table width="100%" border="0" cellspacing="0" cellpadding="0" >
         <tr>
-          <td><p style="font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; margin-top: 10px; margin-right: 25px; margin-bottom: 10px; margin-left: 25px;">You’re one of 26,000+ employees receiving the <?php echo '<a color="#FFF" href="' . $atwork_base_url . '/newsletters' . $currentDate . '"'; ?> style="color:#FFF;">@Work&nbspnewsletter</a> – a selection of noteworthy news from your corporate intranet. Visit <?php echo '<a color="#FFF" href="' . $atwork_base_url . '/' . $currentDate . '"'; ?> style="color:#FFF;">@Work</a> to stay informed and connect with your colleagues across the BC Public Service.</a> </p></td>
+          <td><p style="font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; margin-top: 10px; margin-right: 25px; margin-bottom: 10px; margin-left: 25px;">You’re one of 27,000+ employees receiving the <?php echo '<a color="#FFF" href="' . $atwork_base_url . '/newsletters' . $currentDate . '"'; ?> style="color:#FFF;">@Work&nbspnewsletter</a> – a selection of noteworthy news from your corporate intranet. Visit <?php echo '<a color="#FFF" href="' . $atwork_base_url . '/' . $currentDate . '"'; ?> style="color:#FFF;">@Work</a> to stay informed and connect with your colleagues across the BC Public Service.</a> </p></td>
         </tr>
       </table></td>
   </tr>
