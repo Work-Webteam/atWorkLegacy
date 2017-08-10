@@ -11,6 +11,7 @@
  */
 
 function atwork_newsletter_create_render_arrays($nodes){
+  // Replace this with logic that converts the $nodes array to a renderable array with all necessary content for the newsletter.
   $atwork_newsletter_render_array = array(
     "test" => "array",
   );

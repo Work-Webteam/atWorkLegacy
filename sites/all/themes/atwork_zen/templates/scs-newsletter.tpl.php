@@ -15,7 +15,8 @@
 // A file that will take the above vars, returning an associate array with the keys for [TODO: add in keys here]
 require drupal_get_path('module', 'atwork_newsletter') . "/atwork_newsletter.inc";
 $atwork_newsletter_render_array = atwork_newsletter_create_render_arrays($nodes);
-dpm($atwork_newsletter_render_array);
+//dpm($atwork_newsletter_render_array);
+
 // Grab current date for webtrends
 $currentDate = "?nl=" . date("dmy");
 $atwork_base_url = $GLOBALS['base_url'];
