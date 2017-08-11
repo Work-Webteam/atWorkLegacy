@@ -10,15 +10,15 @@
  *    render() function.
  */
 ?>
-<?php //dpm($nodes);
-
+<?php 
 
 	// Function to encode images:
    	//function getDataURI($image, $mime = '') {
 	//	return 'data: '.(function_exists('mime_content_type') ? mime_content_type($image) : $mime).';base64,'. base64_encode(file_get_contents($image));
 	//}
-
-
+	dpm($nodes);
+	dpm($comment);
+	dpm($notes);
 	// Grab current date for webtrends
     $currentDate = "?nl=" . date("dmy");
     $atwork_base_url = $GLOBALS['base_url'];

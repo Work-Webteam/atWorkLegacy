@@ -10,11 +10,15 @@
  *    render() function.
  */
 
-function atwork_newsletter_create_render_arrays($nodes){
+function atwork_newsletter_create_render_arrays($nodes, $toc, $comments, $notes){
   // Replace this with logic that converts the $nodes array to a renderable array with all necessary content for the newsletter.
+  dpm($nodes);
+  dpm($toc);
+  dpm($comments);
+  dpm($notes);
   $atwork_newsletter_render_array = array(
     "test" => "array",
   );
-  return $atwork_newsletter_render_array;
+  return($atwork_newsletter_render_array);
 }
 

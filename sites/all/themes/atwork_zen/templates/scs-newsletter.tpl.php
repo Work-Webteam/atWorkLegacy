@@ -8,13 +8,19 @@
  *    theme_scs_toc() or your own.
  *    - $nodes Array of built selected nodes, ready to be outputed with the
  *    render() function.
+ * 	  - $comments, if it exists, as added in the view form (will this be a comment object? Or a CID that requires further work?)
+ * 	  - $notes, if it exists, as added in the textbox, ready to be used
  */
 ?>
 <?php 
+
+if(!isset($comment)){
+	return;
+}
 // Require atowork_newsletter.inc
 // A file that will take the above vars, returning an associate array with the keys for [TODO: add in keys here]
-require drupal_get_path('module', 'atwork_newsletter') . "/atwork_newsletter.inc";
-$atwork_newsletter_render_array = atwork_newsletter_create_render_arrays($nodes);
+include_once drupal_get_path('module', 'atwork_newsletter') . "/atwork_newsletter.inc";
+$atwork_newsletter_render_array = atwork_newsletter_create_render_arrays($nodes, $toc, $comment, $notes);
 //dpm($atwork_newsletter_render_array);
 
 // Grab current date for webtrends
@@ -360,7 +366,7 @@ $atwork_base_url = $GLOBALS['base_url'];
 			 	$atwork_blog_body = field_get_items('node', $curr_node, 'body');
 			 	
 			 	// Build title for blog
-			 	$output_atwork_blog_title = '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork__aliased . '" >' . $atwork_blog_title . '</a></h2>';
+			 	$output_atwork_blog_title = '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '" >' . $atwork_blog_title . '</a></h2>';
 			 	
 			    echo '<table height="110" valign="top" width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-middle-content" style="border-bottom: 1px solid black;">';
 				echo '<tr>';
