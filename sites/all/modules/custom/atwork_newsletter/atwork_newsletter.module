@@ -10,21 +10,23 @@
  * @param array $theme_registry
  */
 function atwork_newsletter_theme_registry_alter(&$theme_registry){
+  // We are overwriting the theme registry, redirecting functions to our own template.
   $theme_registry['scs_newsletter']['template'] = 'sites/all/themes/atwork_zen/templates/scs-newsletter';
   $theme_registry['scs_newsletter']['file'] = 'atwork_newsletter.theme.inc';
   $theme_registry['scs_newsletter']['theme path'] = 'sites/all/modules/custom/atwork_newsletter';
-  $theme_registry['scs_newsletter']['includes'] = '';
+  //$theme_registry['scs_newsletter']['includes'] = '';
   $theme_registry['scs_newsletter']['includes'][] = 'sites/all/modules/custom/atwork_newsletter/atwork_newsletter.theme.inc';
+  // We may need to do some preprocessing, so add our custom function to the list. This function exists in atwork_newsletter.inc
   $theme_registry['scs_newsletter']['preprocess functions'][] = 'template_preprocess_atwork_newsletter';
 }
 
 /**
  * Implements hook_form_alter().
+ * Hook the form so we can take the data from comments and notes section of the form_state and commit it to the form.
  */
 function atwork_newsletter_form_node_form_alter(&$form, &$form_state, $form_id) {
   // Check that we are creating a newsletter and that we come from the
   // admin/content/node
-  //dpm($form_id);
   if (!empty($form['#node_edit_form'])
     && in_array($form['type']['#value'], simplenews_get_content_types())
     && isset($form_state['input']['nodes'])
@@ -42,20 +44,21 @@ function atwork_newsletter_form_node_form_alter(&$form, &$form_state, $form_id) 
       "#markup" => t('text'),
     );
 
-    // Now rebuild the array from scs
-      $form['body']['und'][0]['#default_value'] = theme(scs_newsletter, array(
+    // Now rebuild the array from scs, this puts the variables into the body field (using our theme)
+      $form['body']['und'][0]['#default_value'] = theme('scs_newsletter', array(
         'nodes' => $nodes,
         'toc' => empty($form_state['input']['scs_toc']) ? FALSE : TRUE,
         'comment' => $form_state['input']['comments'],
         'notes' => $form_state['input']['notes'],
       ));
-      dpm($form);
+      //dpm($form);
     }
 }
 
 
 /**
  * Implements hook_theme()
+ * Here we are telling the theme that it should expect 4 variables rather than two, and are forcing it to use the template in the atwork-zen path rather than its own.
  */
 function atwork_newsletter_theme() {
   return array(
@@ -67,11 +70,13 @@ function atwork_newsletter_theme() {
   );
 }
 
+//TODO: Hook the view/bulk operations for the newsletter to add the comments and notes fields into the initial array.
 
-function atwork_newsletter_preprocess_node(&$variables){
-  //dpm($variables);
-}
 
-function atwork_newsletter_preprocess_page(&$variables){
+//function atwork_newsletter_preprocess_node(&$variables){
   //dpm($variables);
-}
+//}
+
+//function atwork_newsletter_preprocess_page(&$variables){
+  //dpm($variables);
+//}

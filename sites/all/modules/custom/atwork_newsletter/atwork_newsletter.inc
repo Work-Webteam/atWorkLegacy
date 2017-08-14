@@ -8,17 +8,21 @@
  *    theme_scs_toc() or your own.
  *    - $nodes Array of built selected nodes, ready to be outputed with the
  *    render() function.
+ *    - $comments Array of comment nid's, ready to be loaded ant then output
+ *    - $notes String that has bullet points for the notes section.
  */
 
-function atwork_newsletter_create_render_arrays($nodes, $toc, $comments, $notes){
+function atwork_newsletter_create_render_arrays($nodes, $comments, $notes){
   // Replace this with logic that converts the $nodes array to a renderable array with all necessary content for the newsletter.
   dpm($nodes);
-  dpm($toc);
   dpm($comments);
   dpm($notes);
   $atwork_newsletter_render_array = array(
     "test" => "array",
   );
+  // TODO: Sort your $nodes array by $node->type, add to render array
+  // TODO: get ahold of proper fields in comment - depending on how this is implemented in view, you may need to load teh comment(s) first using  comment_load($cid); Then add to the render arry
+  // TODO $notes:This should just be a string with or without markup that will need to be set up for the take note section. Add to render array
   return($atwork_newsletter_render_array);
 }
 
