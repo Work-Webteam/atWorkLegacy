@@ -6,7 +6,20 @@
       // At this point, the modules css hides the button after we click it, so no need to do it ourselves.
   }
 
+  function add_Icon(element){
+    // Only want to attach this once
+    if(element.next().hasClass('change-confirmed-message')){
+      return;
+    } else {
+      element.after('<span class="change-confirmed-message">&nbsp<i class="fa fa-check-circle"/>&nbsp<p>Changes&nbspsaved...</p></span>');
+      element.next().hide();
+    }
+  }
 
+  // Function to show the saved message for a number of seconds after user has clicked to save
+  function show_Saved_Message(element){
+
+  }
 
   // Open relevant button when its text field is clicked
   function open_button(event){
@@ -20,8 +33,8 @@
     if(target.is("input.text-full") ) {
       // show the submit button that is generally found in this area
       try {
-          target.parent().parent().parent().next().children().css("display", "block");
-          console.log(target.parent().parent().parent().next().children());
+        target.parent().parent().parent().next().children().css("display", "block");
+        add_Icon(target);
       }
       // If it is not there, we will suppress the error message
       catch(err){
@@ -32,6 +45,7 @@
     if (target.is("input.form-text")){
       try {
         target.parent().parent().parent().parent().next().children().css("display","block");
+        add_Icon(target);
       }
       catch(err){
         //console.log(err);
@@ -42,10 +56,18 @@
     if (target.is("input#edit-field-lsa-home-phone-und-0-value") || target.is("input#edit-field-lsa-work-phone-und-0-value")){
       try {
         target.parent().parent().parent().next().children().css("display","block");
+        add_Icon(target);
+
       }
       catch(err){
         //console.log(err);
       }
+    }
+
+    if(target.is(".form-submit.ajax-processed")){
+      console.log(target.parent().parent().children().children());
+      //$('.hideSubmitButton-processed').setTimeout(function() {
+      //})
     }
 
     // If anything has changed, we should re-run settings()
@@ -54,9 +76,19 @@
 
   function settings(){
     // Deciding which fields should be visible to user on initial load
+    // Move the messages to just above the Step 2 message.
+    // Get text, and make sure it is the correct message.
+    var checkMessage = $('.messages--status.messages.status').text();
+    if(checkMessage.indexOf("RSVP") >= 0){
+      // If it is the string we are looking for, place the message lower and focus on it.
+      $('.messages--status.messages.status').insertAfter('#editableviews-entity-form-lsa-admin');
+      // replace the text with a call to move to step 2
+      $('.messages--status.messages.status').text("Your RSVP has been saved. Please move on to Step 2 below.");
+    }
+
     // Change all save buttons to "save changes"
     $('.form-submit.ajax-processed').val('Save Changes');
-
+    
     // If they are not retiring this year, no need to have a field to enter a retirement date.
     if($("input[name='field_lsa_retiring_thisyear[und]']:checked").prop('value') == 0){
       $("div.field.field-name-field-lsa-date-of-retirement").hide();
@@ -199,7 +231,28 @@
       }
     });
 
-
+    // For Step 2 note
+    $('.rsvp-step-2').after('<i class="fa fa-info-circle special-requirements-lsa"></i>');
+    $('.special-requirements-lsa').qtip({
+      content: {
+        title: "Special Requirements",
+        text: "If you indicate that you or your guest have special requirements, the Long Service Awards team will contact you to discuss your specific needs in more detail.",
+      },
+      style: {
+        classes: "qtip-blue qtip-shadow qtip-rounded",
+        def: false,
+      },
+      show: {
+        effect: function() {
+          $(this).fadeTo(250, 1);
+        }
+      },
+      hide: {
+        effect: function() {
+          $(this).hide('puff', 250);
+        }
+      }
+    });
     // For the "Register last year", "employee number", "Years of service", "Award"
     // NOTE: Ministry/Org was originally on this list, but because of gov moves, this was allowed to be changeable.
     $('.field-name-field-lsa-register-last-year, .field-name-field-lsa-employee-number, .field-name-field-lsa-years-of-service, .field-name-field-lsa-award').append('<i class="fa fa-info-circle contact-lsa"></i>');
@@ -234,6 +287,5 @@
     settings();
     setTooltip();
     document.body.addEventListener('click', open_button, true);
-
   });
 })(jQuery);
