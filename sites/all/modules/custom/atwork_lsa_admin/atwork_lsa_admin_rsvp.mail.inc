@@ -14,7 +14,6 @@ $applicant_attending_body = <<<EOT
         <center><img src="$image_source" height="100" width="100" align="middle"></center>
         <br />
         <p>Thank you for confirming your attendance for your Long Service Award (LSA) ceremony.  We have now received your RSVP information. </p>
-        <p>If you have any questions relating to travel arrangements, pre-receptions, or reimbursement, please visit our <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility/policy">website</a>  or contact your workplace <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts">LSA contact</a>.  If your questions are related to the LSA ceremonies at Government House, please contact <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20question" target="_top">longserviceawards@gov.bc.ca</a>.</p>
         <hr></hr>
         <table frame="hsides" bgcolor="#ffffcc" width="100%">
             <tbody>
@@ -32,6 +31,7 @@ $applicant_attending_body = <<<EOT
         </table>
         <hr></hr>
         <br />
+        <p>If you have any questions relating to travel arrangements, pre-receptions, or reimbursement, please visit our <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility/policy">website</a>  or contact your workplace <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts">LSA contact</a>.  If your questions are related to the LSA ceremonies at Government House, please contact <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20question" target="_top">longserviceawards@gov.bc.ca</a>.</p>
         <p><strong>Please Note:</strong></p>
         <p>The LSA ceremonies take place at <a href="http://www.ltgov.bc.ca/contact/default.html" target="_blank">Government House</a>, the home of the Lieutenant Governor of British Columbia. It is recommended that you “dress your best” for these formal, evening occasions and, in consideration of others, <strong>please be “scent-aware” and refrain from wearing heavily scented products.</strong></p>
         <p><strong>Itinerary:</strong>
