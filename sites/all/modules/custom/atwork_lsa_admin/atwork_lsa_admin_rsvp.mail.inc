@@ -36,7 +36,7 @@ $applicant_attending_body = <<<EOT
         <p>The LSA ceremonies take place at <a href="http://www.ltgov.bc.ca/contact/default.html" target="_blank">Government House</a>, the home of the Lieutenant Governor of British Columbia. It is recommended that you “dress your best” for these formal, evening occasions and, in consideration of others, <strong>please be “scent-aware” and refrain from wearing heavily scented products.</strong></p>
         <p><strong>Itinerary:</strong>
             <ul>
-                <li>5:45 – 6:15 p.m.- Registration, Reception and Welcom</li>
+                <li>5:45 – 6:15 p.m.- Registration, Reception and Welcome</li>
                 <li>6:15 – 7:15 p.m.- Dinner Buffet</li>
                 <li>7:30 – 7:50 p.m.- Speeches</li>
                 <li>7:50 – 8:30 p.m.- Awards Presentation</li>
