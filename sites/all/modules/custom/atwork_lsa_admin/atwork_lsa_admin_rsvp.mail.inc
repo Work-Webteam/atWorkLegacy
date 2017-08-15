@@ -24,16 +24,16 @@ $applicant_attending_body = <<<EOT
                 </tr>
                 <tr>
                     <td>
-                        <p>Please notify us of any changes to your information, or if you need to cancel your attendance. Email <a href="mailto:longserviceawards@gov.bc.ca?Subject=Changes%20to%20Application" target="_top">longserviceawards@gov.bc.ca</a> <u>prior to your ceremony date</u>.</p>
+                        <p>Please notify us (<a href="mailto:longserviceawards@gov.bc.ca?Subject=Changes%20to%20Application" target="_top">longserviceawards@gov.bc.ca</a>) prior to your ceremony date if you need to cancel your attendance or make any changes to your information.</p>
                     </td>
                 <tr>
             </tbody>
         </table>
         <hr></hr>
         <br />
-        <p>If you have any questions relating to travel arrangements, pre-receptions, or reimbursement, please visit our <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility/policy">website</a>  or contact your workplace <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts">LSA contact</a>.  If your questions are related to the LSA ceremonies at Government House, please contact <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20question" target="_top">longserviceawards@gov.bc.ca</a>.</p>
+        <p>If you have any questions relating to travel arrangements, pre-receptions, or reimbursement, please visit our <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility/policy">website</a> or connnect with your workplace <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts">LSA contact</a>.  If your questions are related to the LSA ceremonies at Government House, please contact <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20question" target="_top">longserviceawards@gov.bc.ca</a>.</p>
         <p><strong>Please Note:</strong></p>
-        <p>The LSA ceremonies take place at <a href="http://www.ltgov.bc.ca/contact/default.html" target="_blank">Government House</a>, the home of the Lieutenant Governor of British Columbia. It is recommended that you “dress your best” for these formal, evening occasions and, in consideration of others, <strong>please be “scent-aware” and refrain from wearing heavily scented products.</strong></p>
+        <p>The LSA ceremonies take place at <a href="http://www.ltgov.bc.ca/contact/default.html" target="_blank">Government House</a>, the home of the Lieutenant Governor of British Columbia. It is recommended that you “dress your best” for these formal, evening occasions and, in consideration of others, <strong>please refrain from wearing heavily scented products.</strong></p>
         <p><strong>Itinerary:</strong>
             <ul>
                 <li>5:45 – 6:15 p.m.- Registration, Reception and Welcome</li>
