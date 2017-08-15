@@ -6,20 +6,6 @@
       // At this point, the modules css hides the button after we click it, so no need to do it ourselves.
   }
 
-  function add_Icon(element){
-    // Only want to attach this once
-    if(element.next().hasClass('change-confirmed-message')){
-      return;
-    } else {
-      element.after('<span class="change-confirmed-message">&nbsp<i class="fa fa-check-circle"/>&nbsp<p>Changes&nbspsaved...</p></span>');
-      element.next().hide();
-    }
-  }
-
-  // Function to show the saved message for a number of seconds after user has clicked to save
-  function show_Saved_Message(element){
-
-  }
 
   // Open relevant button when its text field is clicked
   function open_button(event){
@@ -34,7 +20,6 @@
       // show the submit button that is generally found in this area
       try {
         target.parent().parent().parent().next().children().css("display", "block");
-        add_Icon(target);
       }
       // If it is not there, we will suppress the error message
       catch(err){
@@ -45,29 +30,34 @@
     if (target.is("input.form-text")){
       try {
         target.parent().parent().parent().parent().next().children().css("display","block");
-        add_Icon(target);
       }
       catch(err){
-        //console.log(err);
       }
     }
-    //console.log(target);
 
     if (target.is("input#edit-field-lsa-home-phone-und-0-value") || target.is("input#edit-field-lsa-work-phone-und-0-value")){
       try {
         target.parent().parent().parent().next().children().css("display","block");
-        add_Icon(target);
-
       }
       catch(err){
         //console.log(err);
       }
     }
-
+    // We want to send feedback as a checkmark when the user clicks to save changes.
     if(target.is(".form-submit.ajax-processed")){
-      console.log(target.parent().parent().children().children());
-      //$('.hideSubmitButton-processed').setTimeout(function() {
-      //})
+      if(target.parent().parent().parent().parent().hasClass('editablefield-processed')){
+        // Only want to attach this once
+        if(target.parent().parent().parent().next().hasClass('change-confirmed-message')){
+          return;
+        } else {
+          target.parent().parent().parent().after('<span class="change-confirmed-message">&nbsp<i class="fa fa-check-circle"/>&nbsp<p>Changes&nbspsaved...</p></span>');
+          target.parent().parent().parent().next().hide();
+          target.parent().parent().parent().next().fadeIn();
+          setTimeout(function(){
+            target.parent().parent().parent().next().fadeOut();
+          }, 2000);
+        }
+      }
     }
 
     // If anything has changed, we should re-run settings()
