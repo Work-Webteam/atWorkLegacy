@@ -14,37 +14,37 @@ $applicant_attending_body = <<<EOT
         <center><img src="$image_source" height="100" width="100" align="middle"></center>
         <br />
         <p>Thank you for confirming your attendance for your Long Service Award (LSA) ceremony.  We have now received your RSVP information. </p>
-        <p>If you have any questions relating to travel arrangements, pre-receptions, or reimbursement, please visit our <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility/policy">website</a>  or contact your workplace <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts">LSA contact</a>.  If your questions are related to the LSA ceremonies at Government House, please contact <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20question" target="_top">longserviceawards@gov.bc.ca</a>.</p>
-        <p><strong>Please Note:</strong></p>
-        <p>The LSA ceremonies take place at <a href="http://www.ltgov.bc.ca/contact/default.html" target="_blank">Government House</a>, the home of the Lieutenant Governor of British Columbia. It is recommended that you “dress your best” for these formal, evening occasions and, in consideration of others, <strong>please be “scent-aware” and refrain from wearing heavily scented products.</strong></p>
         <hr></hr>
-        <table frame="hsides" bgcolor="#ffffcc">
+        <table frame="hsides" bgcolor="#ffffcc" width="100%">
             <tbody>
                 <tr>
                     <td>
-                        <p><strong> Need to Make Changes? </strong></p>      
+                        <p><strong> Need to Make Changes or Cancel Attendance? </strong></p>      
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <p>If you previously indicated that you or your guest has special requirements, <strong>we will contact you</strong> to discuss these further. If you need to notify us of any changes to your information, or to cancel your attendance, please email us <u>prior to your ceremony date</u> at <a href="mailto:longserviceawards@gov.bc.ca?Subject=Changes%20to%20Application" target="_top">longserviceawards@gov.bc.ca</a>.</p>
+                        <p>Please notify us (<a href="mailto:longserviceawards@gov.bc.ca?Subject=Changes%20to%20Application" target="_top">longserviceawards@gov.bc.ca</a>) prior to your ceremony date if you need to cancel your attendance or make any changes to your information.</p>
                     </td>
                 <tr>
             </tbody>
         </table>
         <hr></hr>
         <br />
+        <p>If you have any questions relating to travel arrangements, pre-receptions, or reimbursement, please visit our <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility/policy">website</a> or connnect with your workplace <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts">LSA contact</a>.  If your questions are related to the LSA ceremonies at Government House, please contact <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20question" target="_top">longserviceawards@gov.bc.ca</a>.</p>
+        <p><strong>Please Note:</strong></p>
+        <p>The LSA ceremonies take place at <a href="http://www.ltgov.bc.ca/contact/default.html" target="_blank">Government House</a>, the home of the Lieutenant Governor of British Columbia. It is recommended that you “dress your best” for these formal, evening occasions and, in consideration of others, <strong>please refrain from wearing heavily scented products.</strong></p>
         <p><strong>Itinerary:</strong>
             <ul>
-                <li>5:45 – 6:15 p.m.- Registration</li>
-                <li>6:15 – 6:40 p.m.- Dinner Buffet</li>
-                <li>6:40 – 7:40 p.m.- Speeches</li>
-                <li>7:40 – 8:30 p.m.- Awards Presentation</li>
+                <li>5:45 – 6:15 p.m.- Registration, Reception and Welcome</li>
+                <li>6:15 – 7:15 p.m.- Dinner Buffet</li>
+                <li>7:30 – 7:50 p.m.- Speeches</li>
+                <li>7:50 – 8:30 p.m.- Awards Presentation</li>
                 <li>8:15 p.m.- Dessert Buffet</li>
                 <li>9:00 – 10:00 p.m.- Dancing</li>
+                <li>10:00 p.m. - Evening Concludes</li>
             </ul>
         </p>
-        <p>If you have any questions, please visit our website <a href="https://gww.gov.bc.ca/career/long-service-awards/faq" target="_blank">FAQs</a>, connect with your <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts" target="_blank">ministry LSA contact</a> or send an email to <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20question" target="_top">longserviceawards@gov.bc.ca</a>.</p>
         <p>We look forward to welcoming you to your LSA ceremony this fall. Congratulations on reaching this important milestone in your career! </p>
         <p>Long Service Awards Team</p>
     </body>

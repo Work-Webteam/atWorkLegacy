@@ -42,7 +42,7 @@ function atwork_lsa_admin_form_alter(&$form, &$form_state, $form_id) {
   // For the RSVP block located on content pages, need to fill in hidden fields
   if($form['#id'] == 'editableviews-entity-form-lsa-admin' && $form['#view_display_name'] == 'block_lsa_rsvp'){
     // Change submit button text
-    $form['actions']['submit']['#value'] = "Submit RSVP";
+    $form['actions']['submit']['#value'] = "Save RSVP";
     drupal_add_css("#edit-actions-submit {font-weight:bolder; font-size:125%;}", "inline");
     // Add submit handler
     $form['#submit'][] = 'update_lsa_node_submit';
@@ -542,7 +542,7 @@ function lsa_email_send($lsa_node){
 
 function create_pdf($lsa_node){
   // include the pdf generator
-  require(drupal_get_path('module', 'atwork_lsa_admin') . '/fpdf/fpdf181/fpdf.php');
+  require_once(drupal_get_path('module', 'atwork_lsa_admin') . '/fpdf/fpdf181/fpdf.php');
   global $base_url;
   // Get name for this user
   $username = $lsa_node->title;

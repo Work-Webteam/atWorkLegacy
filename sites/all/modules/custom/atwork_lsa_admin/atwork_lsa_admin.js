@@ -7,7 +7,6 @@
   }
 
 
-
   // Open relevant button when its text field is clicked
   function open_button(event){
     if(!event){
@@ -20,8 +19,7 @@
     if(target.is("input.text-full") ) {
       // show the submit button that is generally found in this area
       try {
-          target.parent().parent().parent().next().children().css("display", "block");
-          console.log(target.parent().parent().parent().next().children());
+        target.parent().parent().parent().next().children().css("display", "block");
       }
       // If it is not there, we will suppress the error message
       catch(err){
@@ -34,10 +32,8 @@
         target.parent().parent().parent().parent().next().children().css("display","block");
       }
       catch(err){
-        //console.log(err);
       }
     }
-    //console.log(target);
 
     if (target.is("input#edit-field-lsa-home-phone-und-0-value") || target.is("input#edit-field-lsa-work-phone-und-0-value")){
       try {
@@ -47,6 +43,22 @@
         //console.log(err);
       }
     }
+    // We want to send feedback as a checkmark when the user clicks to save changes.
+    if(target.is(".form-submit.ajax-processed")){
+      if(target.parent().parent().parent().parent().hasClass('editablefield-processed')){
+        // Only want to attach this once
+        if(target.parent().parent().parent().next().hasClass('change-confirmed-message')){
+          return;
+        } else {
+          target.parent().parent().parent().after('<span class="change-confirmed-message">&nbsp<i class="fa fa-check-circle"/>&nbsp<p>Changes&nbspsaved...</p></span>');
+          target.parent().parent().parent().next().hide();
+          target.parent().parent().parent().next().fadeIn();
+          setTimeout(function(){
+            target.parent().parent().parent().next().fadeOut();
+          }, 2000);
+        }
+      }
+    }
 
     // If anything has changed, we should re-run settings()
     settings();
@@ -54,15 +66,24 @@
 
   function settings(){
     // Deciding which fields should be visible to user on initial load
+    // Move the messages to just above the Step 2 message.
+    // Get text, and make sure it is the correct message.
+    var checkMessage = $('.messages--status.messages.status').text();
+    if(checkMessage.indexOf("RSVP") >= 0){
+      // If it is the string we are looking for, place the message lower and focus on it.
+      $('.messages--status.messages.status').insertAfter('#editableviews-entity-form-lsa-admin');
+      // replace the text with a call to move to step 2
+      $('.messages--status.messages.status').text("Your RSVP has been saved. Please move on to Step 2 below.");
+    }
+
     // Change all save buttons to "save changes"
-    $('.form-submit.ajax-processed').val('Save Changes');
-
+    $('.form-submit.ajax-processed').val('Save Change');
+    
     // If they are not retiring this year, no need to have a field to enter a retirement date.
-    var retired = $(".field.field-name-field-lsa-retiring-thisyear.field-type-list-boolean.field-label-inline.clearfix div.field-item").text();
-
-    if (retired == "No"){
-      $(".field.field-name-field-lsa-retiring-thisyear").hide();
+    if($("input[name='field_lsa_retiring_thisyear[und]']:checked").prop('value') == 0){
       $("div.field.field-name-field-lsa-date-of-retirement").hide();
+    } else {
+      $("div.field.field-name-field-lsa-date-of-retirement").show();
     }
 
     var years_of_service = $(".field.field-name-field-lsa-years-of-service.field-type-list-integer.field-label-inline.clearfix div.field-items div.field-item").text();
@@ -70,6 +91,12 @@
     // Do they get a certificate?
     if(years_of_service != "25"){
       $("div.field.field-name-field-lsa-25year-certificatename").hide();
+      $(".field-name-field-lsa-certificate-ordered").hide();
+    }
+    if($("input[name='field_lsa_certificate_ordered[und]']").prop("checked") == true){
+      $(".field-name-field-lsa-25year-certificatename").show();
+    } else {
+      $(".field-name-field-lsa-25year-certificatename").hide();
     }
 
     var award = $(".field.field-name-field-lsa-award.field-type-text.field-label-inline.clearfix").text();
@@ -169,7 +196,54 @@
     });
 
   }
+  function setTooltip(){
+    // First add an icon behind the block we wish to mark
+    // For the "Attending" dropdown
+    $(".chosen-disable.form-select").after('<i class="fa fa-info-circle" id="attending-icon"></i>');
+    $("#attending-icon").qtip({
+      content: {
+        title: "RSVP Status",
+        text: "Recipients are scheduled with the ministry/organization they currently work for. Because of the logistical complexity of scheduling ceremonies for over 1500 recipients, it’s extremely difficult to allow recipients to switch nights. However, if your ministry has another ceremony date scheduled, please email the longserviceawards@gov.bc.ca with your request.",
+      },
+      style: {
+        classes: "qtip-blue qtip-shadow qtip-rounded",
+        def: false,
+      },
+      show: {
+        effect: function() {
+          $(this).fadeTo(250, 1);
+        }
+      },
+      hide: {
+        effect: function() {
+          $(this).hide('puff', 250);
+        }
+      }
+    });
 
+    // For Step 2 note
+    $('.rsvp-step-2').after('<i class="fa fa-info-circle special-requirements-lsa"></i>');
+    $('.special-requirements-lsa').qtip({
+      content: {
+        title: "Special Requirements",
+        text: "If you indicate that you or your guest have special requirements, the Long Service Awards team will contact you to discuss your specific needs in more detail.",
+      },
+      style: {
+        classes: "qtip-blue qtip-shadow qtip-rounded",
+        def: false,
+      },
+      show: {
+        effect: function() {
+          $(this).fadeTo(250, 1);
+        }
+      },
+      hide: {
+        effect: function() {
+          $(this).hide('puff', 250);
+        }
+      }
+    });
+  }
 
 /**
  * Main function, various click handlers/event listener.
@@ -178,8 +252,7 @@
   $(document).ready(function(){
     close_button();
     settings();
-
+    setTooltip();
     document.body.addEventListener('click', open_button, true);
-
   });
 })(jQuery);
