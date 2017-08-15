@@ -77,7 +77,7 @@
     }
 
     // Change all save buttons to "save changes"
-    $('.form-submit.ajax-processed').val('Save Changes');
+    $('.form-submit.ajax-processed').val('Save Change');
     
     // If they are not retiring this year, no need to have a field to enter a retirement date.
     if($("input[name='field_lsa_retiring_thisyear[und]']:checked").prop('value') == 0){
@@ -243,29 +243,6 @@
         }
       }
     });
-    // For the "Register last year", "employee number", "Years of service", "Award"
-    // NOTE: Ministry/Org was originally on this list, but because of gov moves, this was allowed to be changeable.
-    $('.field-name-field-lsa-register-last-year, .field-name-field-lsa-employee-number, .field-name-field-lsa-years-of-service, .field-name-field-lsa-award').append('<i class="fa fa-info-circle contact-lsa"></i>');
-    $('.contact-lsa').qtip({
-      content: {
-        title: "Contact Us",
-        text: "If changes are required, please contact longserviceawards@gov.bc.ca",
-      },
-      style: {
-        classes: "qtip-blue qtip-shadow qtip-rounded",
-        def: false,
-      },
-      show: {
-        effect: function() {
-          $(this).fadeTo(250, 1);
-        }
-      },
-      hide: {
-        effect: function() {
-          $(this).hide('puff', 250);
-        }
-      }
-    })
   }
 
 /**

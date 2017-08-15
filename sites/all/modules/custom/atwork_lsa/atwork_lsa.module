@@ -443,8 +443,9 @@ function atwork_lsa_node_view($node, $view_mode, $langcode) {
   } else {
     drupal_add_css('.field-name-field-lsa-25year-certificatename {display:block; }', 'inline');
   }
-  // Adding in our third step of instructions that isn't in the block - TODO: hide this until we are ready to allow users to alter their fields
-    $node->content['field_lsa_retiring_thisyear']['#prefix'] = '<strong style="color: red;"> Step 3: Please verify your contact information below is correct. If necessary, make any changes and use the “Save change” button.  If you are unable to make changes, please contact <a href="mailto:longserviceawards@gov.bc.ca?subject=Change%20request">longserviceawards@gov.bc.ca</a></strong><br /><br />'; 
+  // Adding in our third and final steps of instructions that isn't in the block - TODO: hide this until we are ready to allow users to alter their fields
+  $node->content['field_lsa_retiring_thisyear']['#prefix'] = '<strong style="color: red;"> Step 3: Please verify your contact information below is correct. If necessary, make any changes and use the “Save change” button.  If you are unable to make changes, please contact <a href="mailto:longserviceawards@gov.bc.ca?subject=Change%20request">longserviceawards@gov.bc.ca</a></strong><br /><br />'; 
+  $node->content['field_lsa_supervisor_email']['#suffix'] = '<strong style="color: red;"> <br /><br />Thank you for confirming your information. Once all your changes are saved, please visit the <a href="https://gww.gov.bc.ca/career/long-service-awards/faq">Long Service Awards FAQs</a> for more information.</strong><br />';
 }
 
 function atwork_lsa_views_pre_view(&$view, &$display_id, &$args) {
