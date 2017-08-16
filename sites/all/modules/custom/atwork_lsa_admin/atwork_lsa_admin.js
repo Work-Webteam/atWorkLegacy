@@ -222,7 +222,7 @@
     });
 
     // For Step 2 note
-    $('.rsvp-step-2').after('<i class="fa fa-info-circle special-requirements-lsa"></i>');
+    $('#node-lsa-application-full-group-lsad-special-requirements h2').after('&nbsp<i class="fa fa-info-circle special-requirements-lsa"></i>');
     $('.special-requirements-lsa').qtip({
       content: {
         title: "Special Requirements",
