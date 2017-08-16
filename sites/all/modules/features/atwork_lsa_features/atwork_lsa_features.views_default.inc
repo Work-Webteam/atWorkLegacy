@@ -6211,22 +6211,17 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<strong style="color: red;"><p> **Please follow the three steps below to RSVP**</p>
-<p>&nbsp;</p>
-<p>Step 1: Indicate whether you are attending or not, using the drop-down menu and “Submit RSVP” button below.</p>
-</strong>';
+  $handler->display->display_options['header']['area']['content'] = '<strong style="color: red;"><p> RSVP Instructions: please ensure you compete the <u>three</u> steps below.</p></strong>
+<p>Step 1: Using the drop-down menu, indicate whether or not you are attending the ceremony, then click the “Save RSVP” button.</p>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['footer'] = FALSE;
   /* Footer: Global: Text area */
   $handler->display->display_options['footer']['area']['id'] = 'area';
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
-  $handler->display->display_options['footer']['area']['content'] = '<span style="color: red;">
-<p>&nbsp;</p>
-<strong >
-<p>Step 2: Confirm any special requirements for you OR for your guest using the checkboxes below.</p>
-</strong>
-</span>';
+  $handler->display->display_options['footer']['area']['content'] = '<p>&nbsp;</p>
+<p>Step 2: Using the checkboxes, indicate if you OR your guest have any special requirements.</p>
+';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Ceremony Date */
