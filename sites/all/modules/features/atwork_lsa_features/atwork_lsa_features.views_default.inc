@@ -6211,7 +6211,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<strong style="color: red;"><p> RSVP Instructions: please ensure you compete the <u>three</u> steps below.</p></strong>
+  $handler->display->display_options['header']['area']['content'] = '<strong style="color: red;"><p> RSVP Instructions: please ensure you complete the <u>three</u> steps below.</p></strong>
 <p>Step 1: Using the drop-down menu, indicate whether or not you are attending the ceremony, then click the “Save RSVP” button.</p>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['footer'] = FALSE;
