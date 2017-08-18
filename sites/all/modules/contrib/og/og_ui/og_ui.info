@@ -16,9 +16,9 @@ files[] = includes/migrate/7000/add_field.inc
 files[] = includes/migrate/7000/populate_field.inc
 files[] = includes/migrate/7000/set_roles.inc
 
-; Information added by Drupal.org packaging script on 2017-04-17
-version = "7.x-2.9+10-dev"
+; Information added by Drupal.org packaging script on 2017-07-14
+version = "7.x-2.9+41-dev"
 core = "7.x"
 project = "og"
-datestamp = "1492452853"
+datestamp = "1500054553"
 

@@ -30,9 +30,9 @@ features[node][] = post
 features[page_manager_handlers][] = node_view_panel_context
 features[rules_config][] = rules_og_new_content_message
 
-; Information added by Drupal.org packaging script on 2017-04-17
-version = "7.x-2.9+10-dev"
+; Information added by Drupal.org packaging script on 2017-07-14
+version = "7.x-2.9+41-dev"
 core = "7.x"
 project = "og"
-datestamp = "1492452853"
+datestamp = "1500054553"
 
