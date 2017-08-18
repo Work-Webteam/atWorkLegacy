@@ -60,7 +60,7 @@ function atwork_lsa_admin_form_alter(&$form, &$form_state, $form_id) {
 
 /**
  * Submit handler for RSVP form submit on lsa nod
- * 
+ *
  * @param  $form
  * @param  $form_state
  * @return void
@@ -230,12 +230,12 @@ function custom_vbo_submit_handler(&$form, &$form_state){
         'Employee ID' => $value['employee_id'],
         );
       $base_path = $_SERVER["DOCUMENT_ROOT"];
-      
+
       $csv_path = $base_path . "/sites/all/modules/custom/atwork_lsa_admin/send_logs/' . $date . '_lsa_mail_send.csv";
 
       // if it exists, we can write to it, or else append
       if(file_exists($csv_path)){
-        // Open todays .csv  
+        // Open todays .csv
         $file = fopen($base_path . '/sites/all/modules/custom/atwork_lsa_admin/send_logs/' . $date . '_lsa_mail_send.csv', "w");
       } else {
         // We need to create one
@@ -721,7 +721,7 @@ function atwork_lsa_admin_block_list_alter(&$blocks){
     } else {
       // Don't show this block if user should not have access to it.
       if(isset($blocks['1973']) && $blocks['1973']){
-        unset($blocks['1973']);
+        //unset($blocks['1973']);
       }
     }
   }
