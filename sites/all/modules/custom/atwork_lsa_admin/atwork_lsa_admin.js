@@ -6,6 +6,7 @@
       // At this point, the modules css hides the button after we click it, so no need to do it ourselves.
       // Misses this one:
       $('[id^=edit-field-lsa-specialrequirements]').next().children().hide();
+      $(".message").hide();
   }
 
 
@@ -13,7 +14,6 @@
   function open_button(event){
     if(!event){
       event = $(window.event);
-      console.log(event);
     }
     // Check what was clicked
     var target = $(event.target) || $(event.srcElement);
@@ -21,14 +21,12 @@
     // If it is a special requirements textbox
     if(target.is("[id^=edit-field-specialrequirement-descrip]")){
       target.parent().parent().parent().parent().next().children().show();
-      console.log("pong");
     }
 
     // If it is a special requirements checkbox.
     if(target.is("[id^=edit-field-lsa-specialrequirements-und]")){
       //console.log(target);
       target.parent().parent().parent().parent().next().children().show();
-      console.log("ping");
     }
 
 
@@ -287,6 +285,5 @@
   $(document).ajaxComplete(function() {
     close_button();
     settings();
-    console.log("ajax finished");
   });
 })(jQuery);
