@@ -48,7 +48,7 @@
       if(target.parent().parent().parent().parent().hasClass('editablefield-processed')){
         // Only want to attach this once
         if(target.parent().parent().parent().next().hasClass('change-confirmed-message')){
-          return;
+          // Do nothing in this case.
         } else {
           target.parent().parent().parent().after('<span class="change-confirmed-message">&nbsp<i class="fa fa-check-circle"/>&nbsp<p>Changes&nbspsaved...</p></span>');
           target.parent().parent().parent().next().hide();
