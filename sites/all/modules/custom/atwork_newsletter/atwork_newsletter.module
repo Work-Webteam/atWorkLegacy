@@ -27,18 +27,11 @@ function atwork_newsletter_theme_registry_alter(&$theme_registry){
 function atwork_newsletter_form_node_form_alter(&$form, &$form_state, $form_id) {
   // Check that we are creating a newsletter and that we come from the
   // admin/content/node
-  if (!empty($form['#node_edit_form'])
-    && in_array($form['type']['#value'], simplenews_get_content_types())
-    && isset($form_state['input']['nodes'])
-  ) {
+  if (!empty($form['#node_edit_form']) && in_array($form['type']['#value'], simplenews_get_content_types()) && isset($form_state['input']['nodes'])) {
     $nodes = node_load_multiple(array_keys($form_state['input']['nodes']));
     foreach($nodes as $node) {
       $node->scs_view_mode = $form_state['input']['nodes'][$node->nid]['view_mode'];
     }
-    //TODO: Check for comment field, and put into the input array 
-    $form_state['input']['comments'] = array(
-      "comment" => "cid"
-    );
     // TODO: Grab any note fields and throw them into the input array.
     $form_state['input']['notes'][] = array(
       "#markup" => t('text'),
@@ -48,11 +41,12 @@ function atwork_newsletter_form_node_form_alter(&$form, &$form_state, $form_id) 
       $form['body']['und'][0]['#default_value'] = theme('scs_newsletter', array(
         'nodes' => $nodes,
         'toc' => empty($form_state['input']['scs_toc']) ? FALSE : TRUE,
-        'comment' => $form_state['input']['comments'],
-        'notes' => $form_state['input']['notes'],
+        'comment' => $form_state['input']['cid'],
+        'notes' => $form_state['input']['take_note'],
       ));
-      //dpm($form);
-    }
+      dpm($form);
+      dpm($form_state);
+  }
 }
 
 
@@ -70,13 +64,52 @@ function atwork_newsletter_theme() {
   );
 }
 
+
 //TODO: Hook the view/bulk operations for the newsletter to add the comments and notes fields into the initial array.
+function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state, $vbo){
+  if($form['#form_id'] == 'views_form_newsletter_creation_page'){
+    // We want a text field to add a comment ID
+    $form['cid'] = array(
+      '#type'=>'textfield',
+      '#title' => t('Comment CID'),
+      '#default_value' => t('none'),
+      '#size' => 60,
+      '#maxlength' => 64,
+      '#description' => t("Add the CID of the comment you would like to appear in the newsletter. The CID can be found at the end of the comments URL (ex. #comment-42119). <br />NOTE: Enter only the number of the comment (ex 42119 from the previous example)"),
+    );
+    // Spot for "Take Note"
+    $form['take_note'] = array(
+      '#type' => 'text_format', // gives us ckeditor functionality
+      '#title' => t('Take Note'),
+      '#default_value' => t('none'),
+      '#format' => NULL,
+      '#description' => t('Add in Take Note bulleted list, or leave as "none" if this is not part of the newsletter'),
+    );
+    // Spot for "Did You Know?"
+    //$form['dyk'] = array(
+    //  '#type'
+    //);
 
+    // Add our own validation
+    $form['#validate'][] = 'atwork_newsletter_validate';
+    // Add our own submit handler
+    $form['#submit'][] = 'atwork_newsletter_submit';
 
-//function atwork_newsletter_preprocess_node(&$variables){
-  //dpm($variables);
-//}
+  }
+  dpm($form);
+  dpm($form_state);
+}
 
-//function atwork_newsletter_preprocess_page(&$variables){
-  //dpm($variables);
-//}
+function atwork_newsletter_validate(&$form, &$form_state){
+  // TODO: Add logic in here, checking that it is a number, perhaps even that the comment exists.
+  return true;
+}
+
+function atwork_newsletter_submit(&$form, &$form_state){
+  // Pass on our Comment id number
+  $form_state['values']['cid']['und'][0]['cid'] = $form_state['input']['cid'];
+  // Pass on the take note text
+  $form_state['values']['take_note']['und'][0]['take_note'] = $form_state['input']['take_note'];
+  // TODO: Add other fields to $form so we can use them later
+  return;
+}
