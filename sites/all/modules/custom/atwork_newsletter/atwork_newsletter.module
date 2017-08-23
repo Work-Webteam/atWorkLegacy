@@ -32,10 +32,7 @@ function atwork_newsletter_form_node_form_alter(&$form, &$form_state, $form_id) 
     foreach($nodes as $node) {
       $node->scs_view_mode = $form_state['input']['nodes'][$node->nid]['view_mode'];
     }
-    // TODO: Grab any note fields and throw them into the input array.
-    $form_state['input']['notes'][] = array(
-      "#markup" => t('text'),
-    );
+
 
     // Now rebuild the array from scs, this puts the variables into the body field (using our theme)
       $form['body']['und'][0]['#default_value'] = theme('scs_newsletter', array(
@@ -43,6 +40,7 @@ function atwork_newsletter_form_node_form_alter(&$form, &$form_state, $form_id) 
         'toc' => empty($form_state['input']['scs_toc']) ? FALSE : TRUE,
         'comment' => $form_state['input']['cid'],
         'notes' => $form_state['input']['take_note'],
+        //TODO: Add in Did you know section
       ));
       dpm($form);
       dpm($form_state);

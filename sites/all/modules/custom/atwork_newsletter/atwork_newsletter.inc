@@ -17,6 +17,8 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes){
   dpm($nodes);
   dpm($comments);
   dpm($notes);
+  // TODO: Add in the Did You Know field
+  
   $atwork_newsletter_render_array = array(
     "test" => "array",
   );
