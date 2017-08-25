@@ -89,21 +89,38 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
     //);
 
     // Add our own validation
-    $form['#validate'][] = 'atwork_newsletter_validate';
-    // Add our own submit handler
-    $form['#submit'][] = 'atwork_newsletter_submit';
-
+    if((isset($form['select']['action::scs_views_create_newsletter_action']['#validate'])) &&
+    (is_array($form['select']['action::scs_views_create_newsletter_action']['#validate']))) {
+	  array_unshift($form['select']['action::scs_views_create_newsletter_action']['#validate'], 'atwork_newsletter_validate');
+	} else {
+	  $form['select']['action::scs_views_create_newsletter_action']['#validate'] = 'atwork_newsletter_validate';
+	}
+	
+	// Add our own submit handler
+	if((isset($form['select']['action::scs_views_create_newsletter_action']['#submit'])) &&
+    (is_array($form['select']['action::scs_views_create_newsletter_action']['#submit']))) {
+	  array_unshift($form['select']['action::scs_views_create_newsletter_action']['#submit'], 'atwork_newsletter_validate');
+	} else {
+	  $form['select']['action::scs_views_create_newsletter_action']['#submit'] = 'atwork_newsletter_validate';
+	}
   }
-  dpm($form);
-  dpm($form_state);
 }
 
 function atwork_newsletter_validate(&$form, &$form_state){
   // TODO: Add logic in here, checking that cid is a number, perhaps even that the comment exists with comment_load function.
   // If we do not have a comment, return set an error message (drupal_set_message) and return FALSE
+
+  // Validate Comment(s)
+  if($form['cid']['#value'] !== 'none') {
+    if(!is_numeric($form['cid']['#value']) || !is_object(comment_load($form['cid']['#value']))) {
+      drupal_set_message("Please enter a valid Comment ID");
+      return false;
+    }
+  }
+      
   return true;
 }
-
+  
 function atwork_newsletter_submit(&$form, &$form_state){
   // Pass on our Comment id number
   $form_state['values']['cid']['und'][0]['cid'] = $form_state['input']['cid'];
