@@ -102,3 +102,84 @@ EOT;
     }
   }
 }
+
+/**
+ * Create a a block for the Comms team that they can use to randomize a winner for the emerging leaders quiz
+ */
+
+
+
+
+ /**
+ * Implements hook_block_info().
+ * Short term solution to display twitter block on front page.
+ */
+function atwork_webform_block_info(){
+  //dpm($blocks);
+  $blocks = array();
+  $blocks['randomizer_block'] = array(
+    'info' => t("Emerging Leaders Randomizer"),
+    );
+  return $blocks;
+}
+
+ /**
+ * Implements hook_block_view().
+ */
+function atwork_webform_block_view($delta = '') {
+  $block = array();
+
+  switch($delta) {
+    case ('randomizer_block'):
+      $block['subject'] = '';
+      $block['content'] = _atwork_webform_block_content();
+      $block['submit'] = _atwork_get_winner();
+      drupal_add_js(drupal_get_path('module', 'atwork_webform').'/js_atwork_webform_block.js');
+      dpm($block);
+      break;
+  }
+  
+  return $block;
+}
+
+function _atwork_webform_block_content(){
+  // Find all users who voted:
+  $voted = db_select('webform_submissions', 'd')
+    ->fields('d', array('uid'))
+    ->condition('d.nid', 19843)
+    ->execute()
+    ->fetchAll();
+
+  // Add the table
+  $output = '<div id="randomizer_block">';
+  $output .= '<table id="voter_list" >';
+  $output .= '<tr><th><h2>User </h2></th></tr>';
+  foreach($voted as $key => $value){
+    $voter = user_load($value->uid);
+    $output .= '<tr><td><a href="/user/' . $voter->uid . '">' .  $voter->field_gal_first_name['und'][0]['safe_value'] . ' ' . $voter->field_gal_last_name['und'][0]['safe_value'] . '</a></td></tr>';
+  }
+  $output .= '</table></div>';
+  // TODO: Create a button with a submit handler that pulls up a winner via AJAX
+  //$output .= '<button id="get-winner" type="submit"> Choose a Winner! </button>';
+  
+  return $output;
+}
+
+function _atwork_get_winner(){
+  $output .= drupal_get_form('_emerging_leader_randomize_form');
+  return $output;  
+}
+
+function _emerging_leader_randomize_form(){
+  $form = array();
+  $form['randomize'] = array(
+    '#type' => 'submit',
+    '#value' => 'Choose a winner',
+    '#submit' => 'randomize_emerging_leaders',
+  );
+  return $form;
+}
+function randomize_emerging_leaders($form, &$form_state){
+  dpm($form);
+  dpm($form_state);
+}
