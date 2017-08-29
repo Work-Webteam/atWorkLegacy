@@ -3010,10 +3010,6 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['header']['result']['id'] = 'result';
   $handler->display->display_options['header']['result']['table'] = 'views';
   $handler->display->display_options['header']['result']['field'] = 'result';
-  /* Relationship: Content: Author */
-  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
-  $handler->display->display_options['relationships']['uid']['table'] = 'node';
-  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -6965,6 +6961,382 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['menu']['name'] = 'menu-lsa-admin';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Page LSA Volunteers */
+  $handler = $view->new_display('page', 'Page LSA Volunteers', 'page_12');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'value' => 'value',
+    'value_1' => 'value_1',
+    'value_2' => 'value_2',
+    'value_3' => 'value_3',
+    'value_4' => 'value_4',
+    'value_5' => 'value_5',
+    'value_6' => 'value_6',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'value' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => 'views-align-left',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'value_1' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => 'views-align-center',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'value_2' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => 'views-align-right',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'value_3' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => 'views-align-left',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'value_4' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => 'views-align-center',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'value_5' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => 'views-align-left',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'value_6' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => 'views-align-left',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<style="text/css">
+  table.views-table.cols-7 {
+    width: 100%;
+  }
+</style>';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Footer: Global: Unfiltered text */
+  $handler->display->display_options['footer']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['footer']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['footer']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['footer']['area_text_custom']['content'] = '<a href="https://gww.gov.bc.ca/career/long-service-awards/call-volunteers/webform-results/download">Download CSV</a>';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Webform: Node */
+  $handler->display->display_options['relationships']['nid']['id'] = 'nid';
+  $handler->display->display_options['relationships']['nid']['table'] = 'webform';
+  $handler->display->display_options['relationships']['nid']['field'] = 'nid';
+  /* Relationship: Content: Webform submission */
+  $handler->display->display_options['relationships']['webform_submission']['id'] = 'webform_submission';
+  $handler->display->display_options['relationships']['webform_submission']['table'] = 'node';
+  $handler->display->display_options['relationships']['webform_submission']['field'] = 'webform_submission';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Webform submission data: Value */
+  $handler->display->display_options['fields']['value']['id'] = 'value';
+  $handler->display->display_options['fields']['value']['table'] = 'webform_submissions';
+  $handler->display->display_options['fields']['value']['field'] = 'value';
+  $handler->display->display_options['fields']['value']['relationship'] = 'webform_submission';
+  $handler->display->display_options['fields']['value']['label'] = 'Availability';
+  $handler->display->display_options['fields']['value']['custom_label'] = 'custom';
+  $handler->display->display_options['fields']['value']['webform_nid'] = '6007';
+  $handler->display->display_options['fields']['value']['webform_cid'] = '13';
+  /* Field: Webform submission data: Value */
+  $handler->display->display_options['fields']['value_1']['id'] = 'value_1';
+  $handler->display->display_options['fields']['value_1']['table'] = 'webform_submissions';
+  $handler->display->display_options['fields']['value_1']['field'] = 'value';
+  $handler->display->display_options['fields']['value_1']['relationship'] = 'webform_submission';
+  $handler->display->display_options['fields']['value_1']['label'] = 'Cancellations';
+  $handler->display->display_options['fields']['value_1']['custom_label'] = 'custom';
+  $handler->display->display_options['fields']['value_1']['webform_nid'] = '6007';
+  $handler->display->display_options['fields']['value_1']['webform_cid'] = '14';
+  /* Field: Webform submission data: Value */
+  $handler->display->display_options['fields']['value_2']['id'] = 'value_2';
+  $handler->display->display_options['fields']['value_2']['table'] = 'webform_submissions';
+  $handler->display->display_options['fields']['value_2']['field'] = 'value';
+  $handler->display->display_options['fields']['value_2']['relationship'] = 'webform_submission';
+  $handler->display->display_options['fields']['value_2']['label'] = 'Last Name';
+  $handler->display->display_options['fields']['value_2']['custom_label'] = 'custom';
+  $handler->display->display_options['fields']['value_2']['webform_nid'] = '6007';
+  $handler->display->display_options['fields']['value_2']['webform_cid'] = '19';
+  /* Field: Webform submission data: Value */
+  $handler->display->display_options['fields']['value_3']['id'] = 'value_3';
+  $handler->display->display_options['fields']['value_3']['table'] = 'webform_submissions';
+  $handler->display->display_options['fields']['value_3']['field'] = 'value';
+  $handler->display->display_options['fields']['value_3']['relationship'] = 'webform_submission';
+  $handler->display->display_options['fields']['value_3']['label'] = 'First Name';
+  $handler->display->display_options['fields']['value_3']['custom_label'] = 'custom';
+  $handler->display->display_options['fields']['value_3']['webform_nid'] = '6007';
+  $handler->display->display_options['fields']['value_3']['webform_cid'] = '2';
+  /* Field: Webform submission data: Value */
+  $handler->display->display_options['fields']['value_4']['id'] = 'value_4';
+  $handler->display->display_options['fields']['value_4']['table'] = 'webform_submissions';
+  $handler->display->display_options['fields']['value_4']['field'] = 'value';
+  $handler->display->display_options['fields']['value_4']['relationship'] = 'webform_submission';
+  $handler->display->display_options['fields']['value_4']['label'] = 'Email';
+  $handler->display->display_options['fields']['value_4']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['value_4']['alter']['text'] = '<a href="mailto:[value_4]">[value_4]</a>';
+  $handler->display->display_options['fields']['value_4']['custom_label'] = 'custom';
+  $handler->display->display_options['fields']['value_4']['webform_nid'] = '6007';
+  $handler->display->display_options['fields']['value_4']['webform_cid'] = '9';
+  /* Field: Webform submission data: Value */
+  $handler->display->display_options['fields']['value_5']['id'] = 'value_5';
+  $handler->display->display_options['fields']['value_5']['table'] = 'webform_submissions';
+  $handler->display->display_options['fields']['value_5']['field'] = 'value';
+  $handler->display->display_options['fields']['value_5']['relationship'] = 'webform_submission';
+  $handler->display->display_options['fields']['value_5']['label'] = 'Work Phone';
+  $handler->display->display_options['fields']['value_5']['custom_label'] = 'custom';
+  $handler->display->display_options['fields']['value_5']['webform_nid'] = '6007';
+  $handler->display->display_options['fields']['value_5']['webform_cid'] = '20';
+  /* Field: Webform submission data: Value */
+  $handler->display->display_options['fields']['value_6']['id'] = 'value_6';
+  $handler->display->display_options['fields']['value_6']['table'] = 'webform_submissions';
+  $handler->display->display_options['fields']['value_6']['field'] = 'value';
+  $handler->display->display_options['fields']['value_6']['relationship'] = 'webform_submission';
+  $handler->display->display_options['fields']['value_6']['label'] = 'Cell Phone';
+  $handler->display->display_options['fields']['value_6']['custom_label'] = 'custom';
+  $handler->display->display_options['fields']['value_6']['webform_nid'] = '6007';
+  $handler->display->display_options['fields']['value_6']['webform_cid'] = '21';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Webform: Node */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'webform';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Webform: Node */
+  $handler->display->display_options['filters']['nid']['id'] = 'nid';
+  $handler->display->display_options['filters']['nid']['table'] = 'webform';
+  $handler->display->display_options['filters']['nid']['field'] = 'nid';
+  $handler->display->display_options['filters']['nid']['value']['value'] = '6007';
+  $handler->display->display_options['path'] = 'lsa-admin/lsa-volunteers';
+  $handler->display->display_options['menu']['type'] = 'tab';
+  $handler->display->display_options['menu']['title'] = 'LSA Volunteers';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Data export - Volunteers */
+  $handler = $view->new_display('views_data_export', 'Data export - Volunteers', 'views_data_export_1');
+  $handler->display->display_options['enabled'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '0';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_options']['provide_file'] = 0;
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['quote'] = 1;
+  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['replace_newlines'] = 0;
+  $handler->display->display_options['style_options']['newline_token'] = '1';
+  $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['style_options']['keep_html'] = 0;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Webform: Node */
+  $handler->display->display_options['relationships']['nid']['id'] = 'nid';
+  $handler->display->display_options['relationships']['nid']['table'] = 'webform';
+  $handler->display->display_options['relationships']['nid']['field'] = 'nid';
+  /* Relationship: Content: Webform submission */
+  $handler->display->display_options['relationships']['webform_submission']['id'] = 'webform_submission';
+  $handler->display->display_options['relationships']['webform_submission']['table'] = 'node';
+  $handler->display->display_options['relationships']['webform_submission']['field'] = 'webform_submission';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Webform submission data: Value */
+  $handler->display->display_options['fields']['value']['id'] = 'value';
+  $handler->display->display_options['fields']['value']['table'] = 'webform_submissions';
+  $handler->display->display_options['fields']['value']['field'] = 'value';
+  $handler->display->display_options['fields']['value']['relationship'] = 'webform_submission';
+  $handler->display->display_options['fields']['value']['label'] = 'Avaialbility';
+  $handler->display->display_options['fields']['value']['format'] = 'text';
+  $handler->display->display_options['fields']['value']['custom_label'] = 'custom';
+  $handler->display->display_options['fields']['value']['webform_nid'] = '6007';
+  $handler->display->display_options['fields']['value']['webform_cid'] = '13';
+  /* Field: Webform submission data: Value */
+  $handler->display->display_options['fields']['value_1']['id'] = 'value_1';
+  $handler->display->display_options['fields']['value_1']['table'] = 'webform_submissions';
+  $handler->display->display_options['fields']['value_1']['field'] = 'value';
+  $handler->display->display_options['fields']['value_1']['relationship'] = 'webform_submission';
+  $handler->display->display_options['fields']['value_1']['label'] = 'Cancellations';
+  $handler->display->display_options['fields']['value_1']['format'] = 'text';
+  $handler->display->display_options['fields']['value_1']['custom_label'] = 'custom';
+  $handler->display->display_options['fields']['value_1']['webform_nid'] = '6007';
+  $handler->display->display_options['fields']['value_1']['webform_cid'] = '14';
+  /* Field: Webform submission data: Value */
+  $handler->display->display_options['fields']['value_2']['id'] = 'value_2';
+  $handler->display->display_options['fields']['value_2']['table'] = 'webform_submissions';
+  $handler->display->display_options['fields']['value_2']['field'] = 'value';
+  $handler->display->display_options['fields']['value_2']['relationship'] = 'webform_submission';
+  $handler->display->display_options['fields']['value_2']['label'] = '';
+  $handler->display->display_options['fields']['value_2']['format'] = 'text';
+  $handler->display->display_options['fields']['value_2']['webform_nid'] = '6007';
+  $handler->display->display_options['fields']['value_2']['webform_cid'] = '19';
+  /* Field: Webform submission data: Value */
+  $handler->display->display_options['fields']['value_3']['id'] = 'value_3';
+  $handler->display->display_options['fields']['value_3']['table'] = 'webform_submissions';
+  $handler->display->display_options['fields']['value_3']['field'] = 'value';
+  $handler->display->display_options['fields']['value_3']['relationship'] = 'webform_submission';
+  $handler->display->display_options['fields']['value_3']['label'] = '';
+  $handler->display->display_options['fields']['value_3']['format'] = 'text';
+  $handler->display->display_options['fields']['value_3']['webform_nid'] = '6007';
+  $handler->display->display_options['fields']['value_3']['webform_cid'] = '2';
+  /* Field: Webform submission data: Value */
+  $handler->display->display_options['fields']['value_10']['id'] = 'value_10';
+  $handler->display->display_options['fields']['value_10']['table'] = 'webform_submissions';
+  $handler->display->display_options['fields']['value_10']['field'] = 'value';
+  $handler->display->display_options['fields']['value_10']['relationship'] = 'webform_submission';
+  $handler->display->display_options['fields']['value_10']['label'] = '';
+  $handler->display->display_options['fields']['value_10']['format'] = 'text';
+  $handler->display->display_options['fields']['value_10']['webform_nid'] = '6007';
+  $handler->display->display_options['fields']['value_10']['webform_cid'] = '9';
+  /* Field: Webform submission data: Value */
+  $handler->display->display_options['fields']['value_4']['id'] = 'value_4';
+  $handler->display->display_options['fields']['value_4']['table'] = 'webform_submissions';
+  $handler->display->display_options['fields']['value_4']['field'] = 'value';
+  $handler->display->display_options['fields']['value_4']['relationship'] = 'webform_submission';
+  $handler->display->display_options['fields']['value_4']['label'] = '';
+  $handler->display->display_options['fields']['value_4']['format'] = 'text';
+  $handler->display->display_options['fields']['value_4']['webform_nid'] = '6007';
+  $handler->display->display_options['fields']['value_4']['webform_cid'] = '3';
+  /* Field: Webform submission data: Value */
+  $handler->display->display_options['fields']['value_5']['id'] = 'value_5';
+  $handler->display->display_options['fields']['value_5']['table'] = 'webform_submissions';
+  $handler->display->display_options['fields']['value_5']['field'] = 'value';
+  $handler->display->display_options['fields']['value_5']['relationship'] = 'webform_submission';
+  $handler->display->display_options['fields']['value_5']['label'] = '';
+  $handler->display->display_options['fields']['value_5']['format'] = 'text';
+  $handler->display->display_options['fields']['value_5']['webform_nid'] = '6007';
+  $handler->display->display_options['fields']['value_5']['webform_cid'] = '4';
+  /* Field: Webform submission data: Value */
+  $handler->display->display_options['fields']['value_6']['id'] = 'value_6';
+  $handler->display->display_options['fields']['value_6']['table'] = 'webform_submissions';
+  $handler->display->display_options['fields']['value_6']['field'] = 'value';
+  $handler->display->display_options['fields']['value_6']['relationship'] = 'webform_submission';
+  $handler->display->display_options['fields']['value_6']['label'] = '';
+  $handler->display->display_options['fields']['value_6']['format'] = 'text';
+  $handler->display->display_options['fields']['value_6']['webform_nid'] = '6007';
+  $handler->display->display_options['fields']['value_6']['webform_cid'] = '5';
+  /* Field: Webform submission data: Value */
+  $handler->display->display_options['fields']['value_7']['id'] = 'value_7';
+  $handler->display->display_options['fields']['value_7']['table'] = 'webform_submissions';
+  $handler->display->display_options['fields']['value_7']['field'] = 'value';
+  $handler->display->display_options['fields']['value_7']['relationship'] = 'webform_submission';
+  $handler->display->display_options['fields']['value_7']['label'] = '';
+  $handler->display->display_options['fields']['value_7']['format'] = 'text';
+  $handler->display->display_options['fields']['value_7']['webform_nid'] = '6007';
+  $handler->display->display_options['fields']['value_7']['webform_cid'] = '6';
+  /* Field: Webform submission data: Value */
+  $handler->display->display_options['fields']['value_8']['id'] = 'value_8';
+  $handler->display->display_options['fields']['value_8']['table'] = 'webform_submissions';
+  $handler->display->display_options['fields']['value_8']['field'] = 'value';
+  $handler->display->display_options['fields']['value_8']['relationship'] = 'webform_submission';
+  $handler->display->display_options['fields']['value_8']['label'] = '';
+  $handler->display->display_options['fields']['value_8']['format'] = 'text';
+  $handler->display->display_options['fields']['value_8']['webform_nid'] = '6007';
+  $handler->display->display_options['fields']['value_8']['webform_cid'] = '7';
+  /* Field: Webform submission data: Value */
+  $handler->display->display_options['fields']['value_9']['id'] = 'value_9';
+  $handler->display->display_options['fields']['value_9']['table'] = 'webform_submissions';
+  $handler->display->display_options['fields']['value_9']['field'] = 'value';
+  $handler->display->display_options['fields']['value_9']['relationship'] = 'webform_submission';
+  $handler->display->display_options['fields']['value_9']['label'] = '';
+  $handler->display->display_options['fields']['value_9']['format'] = 'text';
+  $handler->display->display_options['fields']['value_9']['webform_nid'] = '6007';
+  $handler->display->display_options['fields']['value_9']['webform_cid'] = '8';
+  /* Field: Webform submission data: Value */
+  $handler->display->display_options['fields']['value_11']['id'] = 'value_11';
+  $handler->display->display_options['fields']['value_11']['table'] = 'webform_submissions';
+  $handler->display->display_options['fields']['value_11']['field'] = 'value';
+  $handler->display->display_options['fields']['value_11']['relationship'] = 'webform_submission';
+  $handler->display->display_options['fields']['value_11']['label'] = '';
+  $handler->display->display_options['fields']['value_11']['format'] = 'text';
+  $handler->display->display_options['fields']['value_11']['webform_nid'] = '6007';
+  $handler->display->display_options['fields']['value_11']['webform_cid'] = '20';
+  /* Field: Webform submission data: Value */
+  $handler->display->display_options['fields']['value_12']['id'] = 'value_12';
+  $handler->display->display_options['fields']['value_12']['table'] = 'webform_submissions';
+  $handler->display->display_options['fields']['value_12']['field'] = 'value';
+  $handler->display->display_options['fields']['value_12']['relationship'] = 'webform_submission';
+  $handler->display->display_options['fields']['value_12']['label'] = '';
+  $handler->display->display_options['fields']['value_12']['format'] = 'text';
+  $handler->display->display_options['fields']['value_12']['webform_nid'] = '6007';
+  $handler->display->display_options['fields']['value_12']['webform_cid'] = '21';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Webform: Node */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'webform';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Webform: Node */
+  $handler->display->display_options['filters']['nid']['id'] = 'nid';
+  $handler->display->display_options['filters']['nid']['table'] = 'webform';
+  $handler->display->display_options['filters']['nid']['field'] = 'nid';
+  $handler->display->display_options['filters']['nid']['value']['value'] = '6007';
+  $handler->display->display_options['path'] = 'lsa-admin/lsa-volunteers/export.csv';
+  $handler->display->display_options['displays'] = array(
+    'default' => 0,
+    'page' => 0,
+    'page_3' => 0,
+    'page_1' => 0,
+    'page_2' => 0,
+    'page_4' => 0,
+    'page_5' => 0,
+    'page_6' => 0,
+    'page_7' => 0,
+    'page_8' => 0,
+    'block_lsa_rsvp' => 0,
+    'page_9' => 0,
+    'page_10' => 0,
+    'page_11' => 0,
+    'page_12' => 0,
+  );
+  $handler->display->display_options['use_batch'] = 'batch';
+  $handler->display->display_options['segment_size'] = '100';
   $export['lsa_admin'] = $view;
 
   return $export;

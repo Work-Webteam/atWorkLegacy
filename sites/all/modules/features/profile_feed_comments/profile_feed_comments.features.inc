@@ -118,21 +118,21 @@ function profile_feed_comments_image_default_styles() {
   $styles['profile_thumbs_med'] = array(
     'label' => 'Profile Thumbs Med',
     'effects' => array(
-      98 => array(
+      97 => array(
         'name' => 'image_scale',
         'data' => array(
-          'width' => 43,
+          'width' => 44,
           'height' => '',
           'upscale' => 0,
         ),
         'weight' => 1,
       ),
-      99 => array(
+      98 => array(
         'name' => 'image_crop',
         'data' => array(
           'width' => 40,
           'height' => 40,
-          'anchor' => 'center-top',
+          'anchor' => 'center-center',
         ),
         'weight' => 2,
       ),
