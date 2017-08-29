@@ -1,0 +1,111 @@
+<?php
+
+
+/**
+ * Implements hook_theme_registry
+ *
+ * We need to intercept the theme for the simple news content selector
+ * This allows us to theme content ourselve prior to any rendering, without hacking the default .tpl in the contrib module.
+ * 
+ * @param array $theme_registry
+ */
+function atwork_newsletter_theme_registry_alter(&$theme_registry){
+  // We are overwriting the theme registry, redirecting functions to our own template.
+  $theme_registry['scs_newsletter']['template'] = 'sites/all/themes/atwork_zen/templates/scs-newsletter';
+  $theme_registry['scs_newsletter']['file'] = 'atwork_newsletter.theme.inc';
+  $theme_registry['scs_newsletter']['theme path'] = 'sites/all/modules/custom/atwork_newsletter';
+  //$theme_registry['scs_newsletter']['includes'] = '';
+  $theme_registry['scs_newsletter']['includes'][] = 'sites/all/modules/custom/atwork_newsletter/atwork_newsletter.theme.inc';
+  // We may need to do some preprocessing, so add our custom function to the list. This function exists in atwork_newsletter.inc
+  $theme_registry['scs_newsletter']['preprocess functions'][] = 'template_preprocess_atwork_newsletter';
+}
+
+/**
+ * Implements hook_form_alter().
+ * Hook the form so we can take the data from comments and notes section of the form_state and commit it to the form.
+ */
+function atwork_newsletter_form_node_form_alter(&$form, &$form_state, $form_id) {
+  // Check that we are creating a newsletter and that we come from the
+  // admin/content/node
+  if (!empty($form['#node_edit_form']) && in_array($form['type']['#value'], simplenews_get_content_types()) && isset($form_state['input']['nodes'])) {
+    $nodes = node_load_multiple(array_keys($form_state['input']['nodes']));
+    foreach($nodes as $node) {
+      $node->scs_view_mode = $form_state['input']['nodes'][$node->nid]['view_mode'];
+    }
+
+
+    // Now rebuild the array from scs, this puts the variables into the body field (using our theme)
+      $form['body']['und'][0]['#default_value'] = theme('scs_newsletter', array(
+        'nodes' => $nodes,
+        'toc' => empty($form_state['input']['scs_toc']) ? FALSE : TRUE,
+        'comment' => $form_state['input']['cid'],
+        'notes' => $form_state['input']['take_note'],
+        //TODO: Add in Did you know section
+      ));
+      dpm($form);
+      dpm($form_state);
+  }
+}
+
+
+/**
+ * Implements hook_theme()
+ * Here we are telling the theme that it should expect 4 variables rather than two, and are forcing it to use the template in the atwork-zen path rather than its own.
+ */
+function atwork_newsletter_theme() {
+  return array(
+    'scs_newsletter' => array(
+      'variables' => array('nodes' => array(), 'toc' => FALSE, 'comments' => array(), 'notes' => array(),),
+      'template' => '/sites/all/themes/atwork-zen/templates/scs-newsletter',
+      'file' => 'atwork_newsletter.theme.inc',
+    ),
+  );
+}
+
+
+//TODO: Hook the view/bulk operations for the newsletter to add the comments and notes fields into the initial array.
+function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state, $vbo){
+  if($form['#form_id'] == 'views_form_newsletter_creation_page'){
+    // We want a text field to add a comment ID
+    $form['cid'] = array(
+      '#type'=>'textfield',
+      '#title' => t('Comment CID'),
+      '#default_value' => t('none'),
+      '#size' => 60,
+      '#maxlength' => 64,
+      '#description' => t("Add the CID of the comment you would like to appear in the newsletter. The CID can be found at the end of the comments URL (ex. #comment-42119). <br />NOTE: Enter only the number of the comment (ex 42119 from the previous example)"),
+    );
+    // Spot for "Take Note"
+    $form['take_note'] = array(
+      '#type' => 'text_format', // gives us ckeditor functionality
+      '#title' => t('Take Note'),
+      '#default_value' => t('none'),
+      '#format' => NULL,
+      '#description' => t('Add in Take Note bulleted list, or leave as "none" if this is not part of the newsletter'),
+    );
+    // TODO: Spot for "Did You Know?"
+
+    // Add our own validation
+    $form['#validate'][] = 'atwork_newsletter_validate';
+    // Add our own submit handler
+    $form['#submit'][] = 'atwork_newsletter_submit';
+
+  }
+  dpm($form);
+  dpm($form_state);
+}
+
+function atwork_newsletter_validate(&$form, &$form_state){
+  // TODO: Add logic in here, checking that cid is a number, perhaps even that the comment exists with comment_load function.
+  // If we do not have a comment, return set an error message (drupal_set_message) and return FALSE
+  return true;
+}
+
+function atwork_newsletter_submit(&$form, &$form_state){
+  // Pass on our Comment id number
+  $form_state['values']['cid']['und'][0]['cid'] = $form_state['input']['cid'];
+  // Pass on the take note text
+  $form_state['values']['take_note']['und'][0]['take_note'] = $form_state['input']['take_note'];
+  // TODO: Add other fields to $form so we can use them later
+  return;
+}

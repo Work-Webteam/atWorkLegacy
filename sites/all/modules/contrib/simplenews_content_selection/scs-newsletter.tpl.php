@@ -10,14 +10,12 @@
  *    render() function.
  */
 ?>
-<?php //dpm($nodes);
-
+<?php 
 
 	// Function to encode images:
    	//function getDataURI($image, $mime = '') {
 	//	return 'data: '.(function_exists('mime_content_type') ? mime_content_type($image) : $mime).';base64,'. base64_encode(file_get_contents($image));
 	//}
-
 
 	// Grab current date for webtrends
     $currentDate = "?nl=" . date("dmy");

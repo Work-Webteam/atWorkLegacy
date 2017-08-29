@@ -102,3 +102,108 @@ EOT;
     }
   }
 }
+
+/**
+ * Create a a block for the Comms team that they can use to randomize a winner for the emerging leaders quiz
+ */
+
+
+
+
+ /**
+ * Implements hook_block_info().
+ * Short term solution to display twitter block on front page.
+ */
+function atwork_webform_block_info(){
+  //dpm($blocks);
+  $blocks = array();
+  $blocks['randomizer_block'] = array(
+    'info' => t("Emerging Leaders Randomizer"),
+    );
+  return $blocks;
+}
+
+ /**
+ * Implements hook_block_view().
+ */
+function atwork_webform_block_view($delta = '') {
+  $block = array();
+
+  switch($delta) {
+    case ('randomizer_block'):
+      drupal_add_js(drupal_get_path('module', 'atwork_webform').'/js_atwork_webform_ajax.js');
+      $block['subject'] = '';
+      $block['content'] = _atwork_webform_block_content();
+      break;
+  }
+  
+  return $block;
+}
+
+function _atwork_webform_block_content(){
+  // Find all users who voted:
+  $voted = db_select('webform_submissions', 'd')
+    ->fields('d', array('uid'))
+    ->condition('d.nid', 19843)
+    ->execute()
+    ->fetchAll();
+
+  // Add the table
+  $output = '<div id="randomizer_block">';
+  $output .= '<table id="voter_list" >';
+  $output .= '<tr><th><h2>User </h2></th></tr>';
+  foreach($voted as $key => $value){
+    $voter = user_load($value->uid);
+    $output .= '<tr><td><a href="/user/' . $voter->uid . '">' .  $voter->field_gal_first_name['und'][0]['safe_value'] . ' ' . $voter->field_gal_last_name['und'][0]['safe_value'] . '</a></td></tr>';
+  }
+  $output .= '</table>';
+  // This button will be used to fire an Ajax function to choose a winner.
+  $output .= '<button type="submit" id="randomize">Choose Winner</button></div>';
+  
+  return $output;
+}
+
+/**
+ * Implements hook_menu();
+ */
+function atwork_webform_menu() {
+    // this one has an access callback which was handy when it was a menu tab
+    
+    $items['random'] = array(
+      'page callback' => 'atwork_webform_ajax_callback', // Render HTML.
+      'page arguments' => array(1),
+      'type' => MENU_CALLBACK,
+      'access arguments' => array('access content'),
+      'delivery callback' => 'atwork_webform_ajax',  // Magic goes here.
+    );
+  
+    return $items;
+  }
+  
+function atwork_webform_ajax_callback($var){
+  // Find all users who voted:
+  $voted = db_select('webform_submissions', 'd')
+    ->fields('d', array('uid'))
+    ->condition('d.nid', 19843)
+    ->execute()
+    ->fetchAll();
+
+  // Get total # of voters 
+  $total = count($voted);
+  // Choose a winner:
+  $winning_number = mt_rand(0,$total-1);
+  // Winner is:
+  $winner = $voted[$winning_number];
+  $winning_user = user_load($winner->uid);
+  // Return winners info
+  $winner_name = $winning_user->field_gal_first_name['und'][0]['safe_value'] . " " . $winning_user->field_gal_last_name['und'][0]['safe_value'];
+  $picture_url = $winning_user->field_image['und'][0]['uri'];
+  $picture_location = str_replace("public://", "", $picture_url);
+  $winner_picture = '/sites/default/files/' . $picture_location; 
+  $return_string = '<div id="winner_profile"><h1>The Winner is....</p><img src="' . $winner_picture . '" style="width:160px;height:200px;"><h2><a href="/user/' . $winning_user->uid . '">' . $winner_name .'</a></h2></div>';
+    // Return image and winner name to js
+  echo json_encode($return_string);
+    // Stops themeing layer from interacting with this
+  die();
+  return;
+}
