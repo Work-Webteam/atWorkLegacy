@@ -7,26 +7,129 @@
  *    render() function.
  *    - $comments Array of comment nid's, ready to be loaded ant then output
  *    - $notes String that has bullet points for the notes section.
- *    TODO: Add in the Did you know field
+ *    - $didYouKnow contains any text input from form. 
  * 
  *    @return array
  */
 
-function atwork_newsletter_create_render_arrays($nodes, $comments, $notes){
+function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_you_know){
+	
+	$atwork_base_url = $GLOBALS['base_url'];
+	
   // Replace this with logic that converts the $nodes array to a renderable array with all necessary content for the newsletter.
   // There is a possibility that the node will not have a usable image - if this is the case should we put in a default to avoid error?
-  dpm($nodes);
-  dpm($comments);
-  dpm($notes);
-  // TODO: Add in the Did You Know field
+  
+  // Load Comments for rendering (and maybe put everything into an array?)
+  if($comments !== 'none') {
+  	// Load Comment Object
+  	$comments = comment_load($comments);
+  	
+  	// Retrieve Username from UID and place in commens array
+  	$user = user_load($comments->uid);
+  	$comments->name = $user->field_display_name['und'][0]['value'];
+  	
+  	dpm($comments);
+  	
+  	// Trim comment body for length and make it format nicely.
+  	if(strlen($comments->comment_body['und'][0]['value']) > 240) {
+  		$comments->comment_body['und'][0]['formatted'] = substr($comments->comment_body['und'][0]['value'],0,240);
+  		
+  		if(!preg_match('[A-Za-z]', substr($comments->comment_body['und'][0]['formatted'],-1,-2))) {
+  		  $comments->comment_body['und'][0]['formatted'] = substr($comments->comment_body['und'][0]['formatted'],0,-2);
+  		}
+  		
+  		$comments->comment_body['und'][0]['formatted'] = $comments->comment_body['und'][0]['formatted']. '...';
+  	}
+  	
+  } else {
+  	$comments->comment_body['und'][0]['formatted'] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc volutpat eros et arcu blandit, a malesuada metus luctus. Aenean euismod volutpat enim vitae dignissim.";
+  }
+dpm($notes);
+if($notes['value'] === 'none') {
+	$notes['value'] = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc volutpat eros et arcu blandit, a malesuada metus luctus.';
+  }
+  
+  
+  
+  
+  
+  
+  
   // If a comment/note/did you know were NOT entered, our value should be "none" - we may want to account for this possibility here or in the template when deciding how exactly to theme in these instances
-
   $atwork_newsletter_render_array = array(
-    "test" => "array",
+  	"comments" => $comments,
+  	"take_note" => $notes,
+  	"did_you_know" => $did_you_know,
+  	"nodes" => array(),
   );
-  // TODO: Sort your $nodes array by $node->type, add to render array, include relevant image?
-  // TODO: get ahold of proper fields in comment - depending on how this is implemented in view, you may need to load teh comment(s) first using  comment_load($cid); Then add to the render arry
-  // TODO: $notes:This should just be a string with or without markup that will need to be set up for the take note section. Add to render array
+
+  //Directory/image locations on prod
+  $articlesDir = '/sites/default/files/';
+  $newsletterDir = '/html/nl_images/';
+  $imgSrc = NULL; 
+  $imgDest = NULL;
+  
+      	
+  foreach($nodes as $node) {
+  	
+    //Keep track if no images are copied to img server for newsletter and inform user.
+    $imgFound = FALSE;
+  
+  	//Check to see if Article/Blog has a valid picture. 
+    foreach($node['body']['#object']->field_image['und'] as $newsletterImg) {
+      
+      //$imgSrc = DRUPAL_ROOT . $articlesDir . substr($newsletterImg['uri'], 9);
+      //$imgDest = DRUPAL_ROOT . $newsletterDir . $newsletterImg['filename'];
+      $imgSrc = $articlesDir . substr($newsletterImg['uri'], 9);
+      $imgDest = $newsletterDir . $newsletterImg['filename'];
+      
+      if(file_exists($imgSrc)) {
+      	// Either this is the first article and we grab the larger 775 image, 
+      	// or this is one of the regular articles and we take the smaller 382 image.
+      	if(((array_search($node['body']['#object']->nid,array_keys($nodes)) == 0) && strpos($newsletterImg['filename'], '775')) 
+      	  || ((array_search($node['body']['#object']->nid,array_keys($nodes)) != 0) && strpos($newsletterImg['filename'], '382'))){
+      		
+    	  //Pass image to the newsletter image folder.
+          if(!file_exists($imgDest)) {
+            if(copy($imgSrc, $imgDest)) {
+              $imgFound = TRUE;
+            }
+            chmod($imgDest,0670);
+          }
+          if(file_exists($imgDest)) {
+              $imgFound = TRUE;
+          }
+      	}
+      	
+      } else {
+       	
+        //Placeholder image
+        $node['body']['#object']->field_image['und'][0]['uri'] = DRUPAL_ROOT . '/mem_fs/images/image-not-found.jpg';
+        
+      }
+    }
+    
+    // Image couldn't be transferred to/found in newsletter image folder. Inform user.
+    if(!$imgFound) {
+    	drupal_set_message("The image corresponding to " . $node['body']['#object']->title . " could not be found. The image for this article will need to be transferred manually.");
+    }
+      
+    //Update img path & then add node to render array. 
+    $node['body']['#object']->field_image['und'][0]['uri'] = $atwork_base_url . $imgDest;
+    $atwork_newsletter_render_array['nodes'][] = $node;
+    
+    //Sort order matters, therefore this is a bad idea.
+    //if($node['body']['#object']->type === 'article') {
+    //	
+    //  //Articles first
+    //	array_unshift($atwork_newsletter_render_array['nodes'], $node);
+    //	
+    //} elseif($node['body']['#object']->type === 'blog') {
+    //	
+    //	//Blogs Last
+    //	array_push($atwork_newsletter_render_array['nodes'], $node);
+    //}
+  }
   return($atwork_newsletter_render_array);
 }
 

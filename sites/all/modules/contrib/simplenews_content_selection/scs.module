@@ -123,7 +123,9 @@ function scs_form_node_form_alter(&$form, &$form_state) {
   ) {
     $nodes = node_load_multiple(array_keys($form_state['input']['nodes']));
     foreach($nodes as $node) {
-      $node->scs_view_mode = $form_state['input']['nodes'][$node->nid]['view_mode'];
+      if(isset($form_state['input']['nodes'][$node->nid]['view_mode'])){
+        $node->scs_view_mode = $form_state['input']['nodes'][$node->nid]['view_mode'];      	
+      }
     }
     //$form['body'][LANGUAGE_NONE][0]['#default_value'] = theme('scs_newsletter', array(
     //  'nodes' => $nodes,
