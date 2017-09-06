@@ -21,6 +21,8 @@
     // If it is a special requirements textbox
     if(target.is("[id^=edit-field-specialrequirement-descrip]")){
       target.parent().parent().parent().parent().next().children().show();
+      // If they click to change this  - make sure the checkbox's are already saved or else user could save in wrong order and lose text
+      $('input[type=submit]','.field-name-field-lsa-specialrequirements').click();
     }
 
     // If it is a special requirements checkbox.
