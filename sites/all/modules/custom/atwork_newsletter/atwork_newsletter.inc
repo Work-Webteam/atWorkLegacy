@@ -20,15 +20,13 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
   // There is a possibility that the node will not have a usable image - if this is the case should we put in a default to avoid error?
   
   // Load Comments for rendering (and maybe put everything into an array?)
-  if($comments !== 'none') {
+  if($comments !== '') {
   	// Load Comment Object
   	$comments = comment_load($comments);
   	
   	// Retrieve Username from UID and place in commens array
   	$user = user_load($comments->uid);
   	$comments->name = $user->field_display_name['und'][0]['value'];
-  	
-  	dpm($comments);
   	
   	// Trim comment body for length and make it format nicely.
   	if(strlen($comments->comment_body['und'][0]['value']) > 240) {
@@ -44,17 +42,29 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
   } else {
   	$comments->comment_body['und'][0]['formatted'] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc volutpat eros et arcu blandit, a malesuada metus luctus. Aenean euismod volutpat enim vitae dignissim.";
   }
-dpm($notes);
-if($notes['value'] === 'none') {
-	$notes['value'] = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc volutpat eros et arcu blandit, a malesuada metus luctus.';
+
+  if($notes['value'] !== '') {
+  	//Add in the call to action link for take note.
+  	if(strpos($notes['value'], '<ul>')) {
+  	  $notes['value'] = str_replace('</li>', ' <a href="https://gww.gov.bc.ca" style="color:#3200C5;">Call to action </a></li>', $notes['value']);
+  	} else {
+  		$notes['value'] = str_replace('</p>',' <a href="https://gww.gov.bc.ca" style="color:#3200C5;">Call to action </a></p>', $notes['value']);
+  	}
+  } else {
+  	$notes['value'] = '<ul style="font-family: Calibri,sans-serif; font-size:11pt; color:#000000; margin-top: 10px; margin-right: 10px; margin-bottom: 20px;">'
+        . '<li style="margin-left: 5px;">Item One <a style="color:#3200C5;" href="https://gww.gov.bc.ca"> Call to action </a></li>'
+        . '<li style="margin-left: 5px;">Item two <a style="color:#3200C5;" href="https://gww.gov.bc.ca"> Call to action </a></li>'
+        . '<li style="margin-left: 5px;">Item three <a style="color:#3200C5;" href="https://gww.gov.bc.ca"> Call to action </a></li>'
+      . '</ul></td>';
   }
   
-  
-  
-  
-  
-  
-  
+  if($did_you_know['value'] === '') {
+  	$did_you_know['value'] = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc volutpat eros et arcu blandit, a malesuada metus luctus. Aenean euismod volutpat enim vitae dignissim.'
+  			. ' <a href="https://gww.gov.bc.ca" style="color:#3200C5;">Call to action </a></li>';
+  } else {
+  	$did_you_know['value']= str_replace('</p>',' <a href="https://gww.gov.bc.ca" style="color:#3200C5;">Call to action </a></p>', $did_you_know['value']);
+  }
+
   // If a comment/note/did you know were NOT entered, our value should be "none" - we may want to account for this possibility here or in the template when deciding how exactly to theme in these instances
   $atwork_newsletter_render_array = array(
   	"comments" => $comments,
@@ -68,10 +78,8 @@ if($notes['value'] === 'none') {
   $newsletterDir = '/html/nl_images/';
   $imgSrc = NULL; 
   $imgDest = NULL;
-  
       	
   foreach($nodes as $node) {
-  	
     //Keep track if no images are copied to img server for newsletter and inform user.
     $imgFound = FALSE;
   
@@ -82,21 +90,23 @@ if($notes['value'] === 'none') {
       //$imgDest = DRUPAL_ROOT . $newsletterDir . $newsletterImg['filename'];
       $imgSrc = $articlesDir . substr($newsletterImg['uri'], 9);
       $imgDest = $newsletterDir . $newsletterImg['filename'];
-      
-      if(file_exists($imgSrc)) {
+      if(file_exists(DRUPAL_ROOT . $imgSrc)) {
       	// Either this is the first article and we grab the larger 775 image, 
       	// or this is one of the regular articles and we take the smaller 382 image.
       	if(((array_search($node['body']['#object']->nid,array_keys($nodes)) == 0) && strpos($newsletterImg['filename'], '775')) 
       	  || ((array_search($node['body']['#object']->nid,array_keys($nodes)) != 0) && strpos($newsletterImg['filename'], '382'))){
+  	    dpm($node);
+  	    dpm(DRUPAL_ROOT . $imgSrc);
+        dpm(DRUPAL_ROOT . $imgDest);
       		
     	  //Pass image to the newsletter image folder.
-          if(!file_exists($imgDest)) {
-            if(copy($imgSrc, $imgDest)) {
+          if(!file_exists(DRUPAL_ROOT . $imgDest)) {
+            if(copy(DRUPAL_ROOT . $imgSrc, DRUPAL_ROOT . $imgDest)) {
               $imgFound = TRUE;
             }
-            chmod($imgDest,0670);
+            chmod(DRUPAL_ROOT . $imgDest,0670);
           }
-          if(file_exists($imgDest)) {
+          if(file_exists(DRUPAL_ROOT . $imgDest)) {
               $imgFound = TRUE;
           }
       	}
@@ -108,7 +118,6 @@ if($notes['value'] === 'none') {
         
       }
     }
-    
     // Image couldn't be transferred to/found in newsletter image folder. Inform user.
     if(!$imgFound) {
     	drupal_set_message("The image corresponding to " . $node['body']['#object']->title . " could not be found. The image for this article will need to be transferred manually.");
@@ -118,17 +127,6 @@ if($notes['value'] === 'none') {
     $node['body']['#object']->field_image['und'][0]['uri'] = $atwork_base_url . $imgDest;
     $atwork_newsletter_render_array['nodes'][] = $node;
     
-    //Sort order matters, therefore this is a bad idea.
-    //if($node['body']['#object']->type === 'article') {
-    //	
-    //  //Articles first
-    //	array_unshift($atwork_newsletter_render_array['nodes'], $node);
-    //	
-    //} elseif($node['body']['#object']->type === 'blog') {
-    //	
-    //	//Blogs Last
-    //	array_push($atwork_newsletter_render_array['nodes'], $node);
-    //}
   }
   return($atwork_newsletter_render_array);
 }
