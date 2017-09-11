@@ -13,7 +13,6 @@
  */
 ?>
 <?php 
-
 if(!isset($comment)){
 	return;
 }
@@ -51,7 +50,7 @@ $atwork_base_url = $GLOBALS['base_url'];
         <?php
 
 		// Grab all keys from $nodes var
-		$nids = array_keys($nodes);
+		$nids = array_keys($atwork_newsletter_render_array['nodes']);
 		/****************************   Check to see if this is an executive (single story) mailing. **********************/
 		if (isset($nids[0]) && !isset($nids[1])):
 			// Load render node for feature spot.
@@ -68,7 +67,6 @@ $atwork_base_url = $GLOBALS['base_url'];
 			$output_atwork_newsletter_title = '<div id="feature_title"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px; line-height: 24px;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" >' . $atwork_newsletter_title . '</a></h2></div>';
 			// collect teaser of news story for output.
 			$atwork_newsletter_body = field_get_items('node',$node_first, 'body');
-
 
 			// Grab image for render.
 			$image = field_get_items('node', $node_first, 'field_image');
@@ -145,12 +143,13 @@ $atwork_base_url = $GLOBALS['base_url'];
 			if(isset($nids[0])){
 				// Load render node for feature spot.
 				$node_first = node_load($nids[0]);
+				dpm($node_first);
 				// collect title and url alias of original node
 				$atwork_newsletter_title = $node_first -> title;
 				$atwork_newsletter_location = $node_first -> nid;
 
 				//Build aliased URL with webtrends query tag
-				//$atwork_newsletter_aliased = drupal_get_path_alias('node/'.$atwork_newsletter_location) . $currentDate;
+				$atwork_newsletter_aliased = drupal_get_path_alias('node/'.$atwork_newsletter_location) . $currentDate;
 
 				// Collect title and url for output
 				$output_atwork_newsletter_title = '<div id="feature_title"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px; line-height: 24px;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" >' . $atwork_newsletter_title . '</a></h2></div>';
@@ -161,17 +160,16 @@ $atwork_base_url = $GLOBALS['base_url'];
 				// Grab image for render.
 				$image = field_get_items('node', $node_first, 'field_image');
 				
-				$image_output['#path']['path'] = $atwork_base_url . $curr_node->field_image['und'][0]['uri'];
-				$image_output = field_view_value('node', $node_first, 'field_image', $image[1], array(
+				$image_output = field_view_value('node', $node_first, 'field_image', $image, array(
 						'type' => 'image',
 						'settings' => array(
 					'image_style' => 'atwork_newsletter_feature_image',
 					'image_link' => 'content',
 						),
 				));
-
-				$image_output['#path']['path'] = $atwork_base_url . $node_first->field_image['und'][0]['uri'];
-
+				dpm($node_first->field_image);
+				$image_output['#path']['path'] = $atwork_base_url . $node_first->field_image['und'][0][0]['uri'];
+				dpm($image_output);
 				// Output tag line
 				echo '<tr>';
           		echo '<td align="center" style="background-color:#ECECEC; font-family: Calibri, sans-serif; font-size:10pt; letter-spacing: 4px; padding-top: 5px; padding-bottom: 5px; border:none;">' . "&bull; A SELECTION OF WHAT'S MAKING NEWS RIGHT NOW &bull;" . '</td>';
@@ -229,7 +227,6 @@ $atwork_base_url = $GLOBALS['base_url'];
 </table> <!-- end of outer table -->
 <?php //********************* Articles Section **********************  ?>
 <?php
-    		    
     /* Build markup for newsletter body articles */
 
     for($i = 1; $i <= sizeof($nids); $i++) {
