@@ -632,7 +632,10 @@ function atwork_lsa_admin_node_view($node, $view_mode, $langcode) {
     return;
   } elseif($node->uid == 41854){
     return;
-  } else*/if(_atwork_is_admin() || in_array('lsa admin', $user->roles) || in_array('lsa contact', $user->roles) ){
+  } else*/
+  
+  // This was changed at the end of the application period.
+  if(_atwork_is_admin() || in_array('lsa admin', $user->roles) || in_array('lsa contact', $user->roles) ){
     return;
   } else {   
     drupal_set_message(t("The RSVP period has ended. Please contact us at <a href='mailto:longserviceawards@gov.bc.ca'>LongServiceAwards@gov.bc.ca</a> for more information."), 'warning');
