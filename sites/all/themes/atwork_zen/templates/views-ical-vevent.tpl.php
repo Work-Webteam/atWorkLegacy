@@ -1,26 +1,3 @@
-//126 atwork_events
-/**
- * Implements hook_views_pre_render
- * @param  &$view
- * To clear group events out of calendar
- */
-function atwork_events_views_pre_render(&$view){
-  if($view->name == 'calendar'){
-    foreach($view->result as $key){
-      if(isset($key->_field_data['nid']['entity']->og_group_ref) && $key->_field_data['nid']['entity']->og_group_ref) {
-        continue;
-      } elseif($view->nid == '27000' ) {
-        continue;
-      } else {
-        $result_no_group[] = $key;
-      }
-    }
-    $view->result = $result_no_group;
-  }
-}
-
-
-//viwes-ical-vevent.tpl.php
 <?php
 
 /**
@@ -82,7 +59,7 @@ foreach ($fields as $id => $field):
     
     $field->content = str_replace("\n", '\n', $field->content);
     // Don't want the footer for these special case events
-    if(isset($field->raw) && $field->raw == '27000'){
+    if(isset($field->raw) && $field->raw == '27024'){
       $field->content = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">\n<HTML>\n<HEAD>\n<META HTTP-EQUIV="Content-Type" CONTENT="text/html\; charset=iso-8859-1">\n<META NAME="Generator" CONTENT="MS Exchange Server version 08.03.0330.000">\n<TITLE>' . $title . '</TITLE>\n</HEAD>\n<BODY><FONT FACE="Calibri">\n<!-- Converted from text/rtf format -->\n\n' . $field->content . '</FONT></BODY>\n</HTML>';
     } else {
       $field->content = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">\n<HTML>\n<HEAD>\n<META HTTP-EQUIV="Content-Type" CONTENT="text/html\; charset=iso-8859-1">\n<META NAME="Generator" CONTENT="MS Exchange Server version 08.03.0330.000">\n<TITLE>' . $title . '</TITLE>\n</HEAD>\n<BODY><FONT FACE="Calibri">\n<!-- Converted from text/rtf format -->\n\n' . $field->content . $footer . '</FONT></BODY>\n</HTML>';
@@ -101,7 +78,7 @@ foreach ($fields as $id => $field):
   
 endforeach;
 // Adding in a 15 min alert for ical sent on specific node. This is a test for the PECSEF campaign
-if(isset($fields['body_1']->raw) && $fields['body_1']->raw == '27000'){
+if(isset($fields['body_1']->raw) && $fields['body_1']->raw == '27024'){
   print "BEGIN:VALARM\r\n";
   print "TRIGGER:-PT15M\r\n";
   print "REPEAT:1\r\n";

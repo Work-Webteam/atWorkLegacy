@@ -133,7 +133,7 @@ function atwork_events_views_pre_render(&$view){
     foreach($view->result as $key){
       if(isset($key->_field_data['nid']['entity']->og_group_ref) && $key->_field_data['nid']['entity']->og_group_ref) {
         continue;
-      } elseif($key->nid == '27000' ) {
+      } elseif($key->nid == '27024' ) {
         continue;
       } else {
         $result_no_group[] = $key;
@@ -145,7 +145,7 @@ function atwork_events_views_pre_render(&$view){
   if($view->name == 'home_page_blocks_zen' && $view->current_display == 'block_2'){
     $result_no_pecsf = array();
     foreach($view->result as $key){
-      if($key->nid == '27000'){
+      if($key->nid == '27024'){
         continue;
       } else {
         $result_no_pecsf[] = $key;
@@ -156,7 +156,7 @@ function atwork_events_views_pre_render(&$view){
   if($view->name == 'events'){
     $result_no_pecsf = array();
     foreach($view->result as $key){
-      if($key->nid == '27000'){
+      if($key->nid == '27024'){
         continue;
       } else {
         $result_no_pecsf[] = $key;
