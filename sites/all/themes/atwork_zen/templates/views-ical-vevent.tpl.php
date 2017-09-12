@@ -100,14 +100,15 @@ foreach ($fields as $id => $field):
   print "\r\n";
   
 endforeach;
-  // Adding in a 15 min alert for ical sent on specific node. This is a test for the PECSEF campaign
-  if($isset($fields['body_1']->raw) && $fields['body_1']->raw == '27000'){
-    print "BEGIN:VALARM\r\n";
-    print "TRIGGER:-PT15M\r\n";
-    print "REPEAT:1\r\n";
-    print "DURATION:PT15M\r\n";
-    print "ACTION:DISPLAY\r\n";
-    print "DESCRIPTION:Reminder\r\n";
-    print "END:VALARM\r\n";
-  }
+// Adding in a 15 min alert for ical sent on specific node. This is a test for the PECSEF campaign
+if(isset($fields['body_1']->raw) && $fields['body_1']->raw == '27000'){
+  print "BEGIN:VALARM\r\n";
+  print "TRIGGER:-PT15M\r\n";
+  print "REPEAT:1\r\n";
+  print "DURATION:PT15M\r\n";
+  print "ACTION:DISPLAY\r\n";
+  print "DESCRIPTION:Reminder\r\n";
+  print "END:VALARM\r\n";
+}
+  
 print "END:VEVENT\r\n";
