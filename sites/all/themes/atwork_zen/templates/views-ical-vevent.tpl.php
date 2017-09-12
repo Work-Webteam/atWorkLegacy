@@ -14,6 +14,7 @@
  */
 
 $title = '';
+
 print "BEGIN:VEVENT\r\n";
 foreach ($fields as $id => $field):
   $field->content = htmlspecialchars_decode($field->content, ENT_QUOTES);
@@ -77,7 +78,7 @@ foreach ($fields as $id => $field):
   print "\r\n";
   
 endforeach;
-// Adding in a 15 min alert for ical sent on specific node. This is a test for the PECSEF campaign
+
 if(isset($fields['body_1']->raw) && $fields['body_1']->raw == '27024'){
   print "BEGIN:VALARM\r\n";
   print "TRIGGER:-PT15M\r\n";
@@ -87,5 +88,4 @@ if(isset($fields['body_1']->raw) && $fields['body_1']->raw == '27024'){
   print "DESCRIPTION:Reminder\r\n";
   print "END:VALARM\r\n";
 }
-  
 print "END:VEVENT\r\n";
