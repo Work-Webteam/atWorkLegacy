@@ -1,4 +1,4 @@
- <?php
+<?php
 
 /*
  * Implementation of hook_form_alter()
@@ -133,7 +133,7 @@ function atwork_events_views_pre_render(&$view){
     foreach($view->result as $key){
       if(isset($key->_field_data['nid']['entity']->og_group_ref) && $key->_field_data['nid']['entity']->og_group_ref) {
         continue;
-      } elseif($key->nid == '27025') {
+      } elseif($key->nid == '27024' ) {
         continue;
       } else {
         $result_no_group[] = $key;
@@ -153,7 +153,7 @@ function atwork_events_views_pre_render(&$view){
     }
     $view->result = $result_no_pecsf;  
   }
-  if($view->name == 'events'){
+  if($view->name == 'events' && ($view->current_display=="block" || $view->current_display=="block_1")){
     $result_no_pecsf = array();
     foreach($view->result as $key){
       if($key->nid == '27024'){
