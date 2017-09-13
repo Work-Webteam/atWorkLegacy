@@ -12,7 +12,11 @@
 
         // Handle when users presses 'enter' to search
         $('#edit-custom-search-blocks-form-1--2').keypress(function(event) {
-            if (event.which == 13) setLoadingAnimation();
+            if (event.which == 13) {
+                 $("#custom-search-blocks-form-1").submit();
+                 setLoadingAnimation();
+            }
+            
         });
 
         var setLoadingAnimation = function () {

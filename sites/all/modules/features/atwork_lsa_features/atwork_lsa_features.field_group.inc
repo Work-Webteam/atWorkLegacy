@@ -232,11 +232,13 @@ function atwork_lsa_features_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Office Information',
       'instance_settings' => array(
-        'description' => '',
+        'id' => '',
         'classes' => 'group-lsa-office-contact field-group-fieldset ',
+        'description' => '<p>If retired, please enter the last organization and supervisor you worked with.</p><br />',
       ),
+      'formatter' => 'collapsible',
     ),
   );
   $field_groups['group_lsa_office_contact|node|lsa_application|default'] = $field_group;
@@ -553,6 +555,7 @@ function atwork_lsa_features_field_group_info() {
     'children' => array(
       0 => 'field_lsa_supervisor_first_name',
       1 => 'field_lsa_supervisor_last_name',
+      2 => 'field_lsa_supervisor_email',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -652,15 +655,16 @@ function atwork_lsa_features_field_group_info() {
     'label' => 'Service Information',
     'weight' => '1',
     'children' => array(
-      0 => 'field_lsa_register_last_year',
-      1 => 'field_lsa_employee_number',
-      2 => 'field_lsa_years_of_service',
-      3 => 'field_lsa_received_award',
-      4 => 'field_lsa_engravement',
-      5 => 'field_lsa_retiring_thisyear',
-      6 => 'field_lsa_25year_certificatename',
-      7 => 'field_lsa_award',
-      8 => 'field_lsa_date_of_retirement',
+      0 => 'field_lsa_employee_number',
+      1 => 'field_lsa_years_of_service',
+      2 => 'field_lsa_received_award',
+      3 => 'field_lsa_retiring_thisyear',
+      4 => 'field_lsa_award',
+      5 => 'field_lsa_date_of_retirement',
+      6 => 'field_lsa_charity_name_2',
+      7 => 'field_lsa_pecsf_charity_name',
+      8 => 'field_lsa_pecsf_region',
+      9 => 'field_lsa_second_donation',
     ),
     'format_type' => 'div',
     'format_settings' => array(

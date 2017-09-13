@@ -97,6 +97,7 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
       '#description' => t("Add in 'Did you Know?' text, or leave blank if this is not part of the newsletter"),
     );
 
+
     // Add our own validation
     if((isset($form['select']['action::scs_views_create_newsletter_action']['#validate'])) &&
     (is_array($form['select']['action::scs_views_create_newsletter_action']['#validate']))) {

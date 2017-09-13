@@ -42,7 +42,7 @@ function atwork_lsa_admin_form_alter(&$form, &$form_state, $form_id) {
   // For the RSVP block located on content pages, need to fill in hidden fields
   if($form['#id'] == 'editableviews-entity-form-lsa-admin' && $form['#view_display_name'] == 'block_lsa_rsvp'){
     // Change submit button text
-    $form['actions']['submit']['#value'] = "Submit RSVP";
+    $form['actions']['submit']['#value'] = "Save RSVP";
     drupal_add_css("#edit-actions-submit {font-weight:bolder; font-size:125%;}", "inline");
     // Add submit handler
     $form['#submit'][] = 'update_lsa_node_submit';
@@ -60,7 +60,7 @@ function atwork_lsa_admin_form_alter(&$form, &$form_state, $form_id) {
 
 /**
  * Submit handler for RSVP form submit on lsa nod
- * 
+ *
  * @param  $form
  * @param  $form_state
  * @return void
@@ -230,12 +230,12 @@ function custom_vbo_submit_handler(&$form, &$form_state){
         'Employee ID' => $value['employee_id'],
         );
       $base_path = $_SERVER["DOCUMENT_ROOT"];
-      
+
       $csv_path = $base_path . "/sites/all/modules/custom/atwork_lsa_admin/send_logs/' . $date . '_lsa_mail_send.csv";
 
       // if it exists, we can write to it, or else append
       if(file_exists($csv_path)){
-        // Open todays .csv  
+        // Open todays .csv
         $file = fopen($base_path . '/sites/all/modules/custom/atwork_lsa_admin/send_logs/' . $date . '_lsa_mail_send.csv', "w");
       } else {
         // We need to create one
@@ -542,7 +542,7 @@ function lsa_email_send($lsa_node){
 
 function create_pdf($lsa_node){
   // include the pdf generator
-  require(drupal_get_path('module', 'atwork_lsa_admin') . '/fpdf/fpdf181/fpdf.php');
+  require_once(drupal_get_path('module', 'atwork_lsa_admin') . '/fpdf/fpdf181/fpdf.php');
   global $base_url;
   // Get name for this user
   $username = $lsa_node->title;
@@ -634,8 +634,8 @@ function atwork_lsa_admin_node_view($node, $view_mode, $langcode) {
     return;
   } elseif(_atwork_is_admin() || in_array('lsa admin', $user->roles) || in_array('lsa contact', $user->roles) ){
     return;
-  } else {
-    drupal_set_message(t("Something has gone wrong. Please contact us at <a href='mailto:longserviceawards@gov.bc.ca'>LongServiceAwards@gov.bc.ca</a> for more information."), 'warning');
+  } else {   
+    drupal_set_message(t("The RSVP period has ended. Please contact us at <a href='mailto:longserviceawards@gov.bc.ca'>LongServiceAwards@gov.bc.ca</a> for more information."), 'warning');
     //drupal_goto('career/long-service-awards');
     $node->content['#access'] = false;
   }
@@ -721,7 +721,7 @@ function atwork_lsa_admin_block_list_alter(&$blocks){
     } else {
       // Don't show this block if user should not have access to it.
       if(isset($blocks['1973']) && $blocks['1973']){
-        unset($blocks['1973']);
+        //unset($blocks['1973']);
       }
     }
   }
