@@ -39,7 +39,7 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 		}
 		
 	} else {
-		$comments = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc volutpat eros et arcu blandit, a malesuada metus luctus. Aenean euismod volutpat enim vitae dignissim.";
+		$comments->comment_body['und'][0]['formatted'] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc volutpat eros et arcu blandit, a malesuada metus luctus. Aenean euismod volutpat enim vitae dignissim.";
 	}
 	
 	if($notes['value'] !== '') {
