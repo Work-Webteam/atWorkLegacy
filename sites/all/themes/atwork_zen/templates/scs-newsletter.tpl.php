@@ -20,7 +20,6 @@ if(!isset($comment)){
 // A file that will take the above vars, returning an associate array with the keys for [TODO: add in keys here]
 include_once drupal_get_path('module', 'atwork_newsletter') . "/atwork_newsletter.inc";
 $atwork_newsletter_render_array = atwork_newsletter_create_render_arrays($nodes, $comment, $notes, $did_you_know);
-dpm($atwork_newsletter_render_array);
 // Grab current date for webtrends
 $currentDate = "?nl=" . date("dmy");
 $atwork_base_url = $GLOBALS['base_url'];
@@ -143,7 +142,6 @@ $atwork_base_url = $GLOBALS['base_url'];
 			if(isset($nids[0])){
 				// Load render node for feature spot.
 				$node_first = node_load($nids[0]);
-				dpm($node_first);
 				// collect title and url alias of original node
 				$atwork_newsletter_title = $node_first -> title;
 				$atwork_newsletter_location = $node_first -> nid;
@@ -159,17 +157,14 @@ $atwork_base_url = $GLOBALS['base_url'];
 
 				// Grab image for render.
 				$image = field_get_items('node', $node_first, 'field_image');
-				
-				$image_output = field_view_value('node', $node_first, 'field_image', $image, array(
+				$image_output = field_view_value('node', $node_first, 'field_image', $image[1], array(
 						'type' => 'image',
 						'settings' => array(
-					'image_style' => 'atwork_newsletter_feature_image',
+					//'image_style' => 'atwork_newsletter_feature_image',
 					'image_link' => 'content',
 						),
 				));
-				dpm($node_first->field_image);
-				$image_output['#path']['path'] = $atwork_base_url . $node_first->field_image['und'][0][0]['uri'];
-				dpm($image_output);
+				$image_output['#path']['path'] = $node_first->field_image['und'][0]['uri'];
 				// Output tag line
 				echo '<tr>';
           		echo '<td align="center" style="background-color:#ECECEC; font-family: Calibri, sans-serif; font-size:10pt; letter-spacing: 4px; padding-top: 5px; padding-bottom: 5px; border:none;">' . "&bull; A SELECTION OF WHAT'S MAKING NEWS RIGHT NOW &bull;" . '</td>';
@@ -429,6 +424,7 @@ $atwork_base_url = $GLOBALS['base_url'];
   <tr>
     <td style="background-color:#E0ECF5;"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px;"> Take Note </h2>
         <?php echo '<div style="margin-left: 10px;" >' . $atwork_newsletter_render_array['take_note']['value'] . '</div>'?>
+        <p style="font-family: Calibri,sans-serif; font-size:11pt; color:#FFF; margin-top: 10px; margin-bottom: 15px; margin-left: 10px; margin-right: 10px;"></p></td>
     </td>
   </tr>
   <tr>
@@ -440,7 +436,7 @@ $atwork_base_url = $GLOBALS['base_url'];
   <tr>
     <td style="background-color:#E0ECF5;"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px;"> Did You Know? </h2>
       <?php echo '<div style="color:#000000; margin-left: 10px;">' . $atwork_newsletter_render_array['did_you_know']['value'] . '</div>';?>
-      <p style="font-family: Calibri,sans-serif; font-size:11pt; color:#FFF; margin-top: 10px; margin-bottom: 20px; margin-left: 10px; margin-right: 10px;"></p></td>
+      <p style="font-family: Calibri,sans-serif; font-size:11pt; color:#FFF; margin-top: 10px; margin-bottom: 15px; margin-left: 10px; margin-right: 10px;"></p></td>
   </tr>
   <tr>
     <td height="10" style="background-color:#FFF;">&nbsp;</td>

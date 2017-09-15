@@ -74,7 +74,7 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 	
 	//Directory/image locations on prod
 	$articlesDir = '/sites/default/files/';
-	$newsletterDir = '/mem_fs/images/';
+	$newsletterDir = '/var/www/html-8888/mem_fs/images/';
 	$imgSrc = NULL;
 	$imgDest = NULL;
 
@@ -84,7 +84,6 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 		
 		//Check to see if Article/Blog has a valid picture.
 		foreach($node['body']['#object']->field_image['und'] as $newsletterImg) {
-			
 			//$imgSrc = DRUPAL_ROOT . $articlesDir . substr($newsletterImg['uri'], 9);
 			//$imgDest = DRUPAL_ROOT . $newsletterDir . $newsletterImg['filename'];
 			$imgSrc = $articlesDir . substr($newsletterImg['uri'], 9);
@@ -96,11 +95,11 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 						|| ((array_search($node['body']['#object']->nid,array_keys($nodes)) != 0) && strpos($newsletterImg['filename'], '382'))){
 							
 							//Pass image to the newsletter image folder.
-							if(file_exists(DRUPAL_ROOT . $imgDest)) {
-								if(copy(DRUPAL_ROOT . $imgSrc, DRUPAL_ROOT . $imgDest)) {
+							if(!file_exists($imgDest)) {
+								if(copy(DRUPAL_ROOT . $imgSrc, $imgDest)) {
 									$imgFound = TRUE;
 								}
-								chmod(DRUPAL_ROOT . $imgDest,0670);
+								chmod($imgDest,0670);
 							}
 							if(file_exists($imgDest)) {
 								$imgFound = TRUE;
@@ -110,20 +109,20 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 			} else {
 				
 				//Placeholder image
-				$node['body']['#object']->field_image['und'][0]['uri'] = DRUPAL_ROOT . '/mem_fs/images/image-not-found.jpg';
+				$node['body']['#object']->field_image['und'][0]['uri'] = DRUPAL_ROOT . '/html-8888/mem_fs/images/image-not-found.jpg';
 				
 			}
 		}
 		// Image couldn't be transferred to/found in newsletter image folder. Inform user.
 		if(!$imgFound && $node['body']['#object']->type != 'blog') {
 			//if(!$imgFound && $node['body']['#object']->type != 'blog') {
-			drupal_set_message("The image corresponding to " . $node['body']['#object']->title . " could not be found. The image for this article will need to be transferred manually.");
+			drupal_set_message("The image corresponding to " . $node['body']['#object']->title . " could not transferred automatically. The image for this article will need to be transferred manually.", 'warning');
 		}
 		
 		//Update img path & then add node to render array.
-		$node['body']['#object']->field_image['und'][0]['uri'] = $atwork_base_url . $imgDest;
+		//$node['body']['#object']->field_image['und'][0]['uri'] = $atwork_base_url . $imgDest;
 		$atwork_newsletter_render_array['nodes'][$node['body']['#object']->nid] = $node;
-		
+
 	}
 	return($atwork_newsletter_render_array);
 }
