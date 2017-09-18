@@ -127,10 +127,10 @@ function scs_form_node_form_alter(&$form, &$form_state) {
         $node->scs_view_mode = $form_state['input']['nodes'][$node->nid]['view_mode'];      	
       }
     }
-    $form['body'][LANGUAGE_NONE][0]['#default_value'] = theme('scs_newsletter', array(
-      'nodes' => $nodes,
-      'toc' => empty($form_state['input']['scs_toc']) ? FALSE : TRUE,
-    ));
+    //$form['body'][LANGUAGE_NONE][0]['#default_value'] = theme('scs_newsletter', array(
+    //  'nodes' => $nodes,
+    //  'toc' => empty($form_state['input']['scs_toc']) ? FALSE : TRUE,
+    //));
   }
 }
 
@@ -186,7 +186,7 @@ function scs_view_mode_options() {
 
   $options = array();
   foreach ($view_modes as $machine_name => $status) {
-    if ($status) {
+    if (isset($status) && isset($entity_info['node']['view modes'][$machine_name]['label'])) {
       $options[$machine_name] = $entity_info['node']['view modes'][$machine_name]['label'];
     }
   }
