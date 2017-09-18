@@ -628,13 +628,16 @@ function atwork_lsa_admin_node_view($node, $view_mode, $langcode) {
   // Conditions that allow us to see the node, else we redirect and give a message.
 
   // TODO: Next year we will need to uncomment the code below - this was to turn off the application period.
+  /*
   if($node->uid == $user->uid){
     return;
   } elseif (isset($user_object->field_gal_employee_number['und'][0]['safe_value']) && isset($node->content['field_lsa_employee_number']['#items'][0]['value']) && ($user_object->field_gal_employee_number['und'][0]['safe_value'] == $node->content['field_lsa_employee_number']['#items'][0]['value'])){
     return;
   } elseif($node->uid == 41854){
     return;
-  } elseif(_atwork_is_admin() || in_array('lsa admin', $user->roles) || in_array('lsa contact', $user->roles) ){
+  } elseif
+  */
+  if(_atwork_is_admin() || in_array('lsa admin', $user->roles) || in_array('lsa contact', $user->roles) ){
     return;
   } else {   
     drupal_set_message(t("The RSVP period has ended. Please contact us at <a href='mailto:longserviceawards@gov.bc.ca'>LongServiceAwards@gov.bc.ca</a> for more information."), 'warning');
