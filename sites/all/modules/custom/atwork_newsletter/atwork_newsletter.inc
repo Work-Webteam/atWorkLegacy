@@ -39,11 +39,11 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 	
 	if($notes['value'] !== '') {
 		//Add in the call to action link for take note.
-		if(strpos($notes['value'], '<ul>')) {
-			$notes['value'] = str_replace('</li>', ' <a href="https://gww.gov.bc.ca" style="color:#3200C5;">Call to action </a></li>', $notes['value']);
-		} else {
-			$notes['value'] = str_replace('</p>',' <a href="https://gww.gov.bc.ca" style="color:#3200C5;">Call to action </a></p>', $notes['value']);
-		}
+		//if(strpos($notes['value'], '<ul>')) {
+		//	$notes['value'] = str_replace('</li>', ' <a href="https://gww.gov.bc.ca" style="color:#3200C5;">Call to action </a></li>', $notes['value']);
+		//} else {
+		//	$notes['value'] = str_replace('</p>',' <a href="https://gww.gov.bc.ca" style="color:#3200C5;">Call to action </a></p>', $notes['value']);
+		//}
 	} else {
 		//$notes['value'] = '<ul style="font-family: Calibri,sans-serif; font-size:11pt; color:#000000; margin-top: 10px; margin-right: 10px; margin-bottom: 20px;">'
 		//		. '<li style="margin-left: 5px;">Item One <a style="color:#3200C5;" href="https://gww.gov.bc.ca"> Call to action </a></li>'
@@ -56,7 +56,7 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 		//$did_you_know['value'] = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc volutpat eros et arcu blandit, a malesuada metus luctus. Aenean euismod volutpat enim vitae dignissim.'
 		//		. ' <a href="https://gww.gov.bc.ca" style="color:#3200C5;">Call to action </a></li>';
 	} else {
-		$did_you_know['value']= str_replace('</p>',' <a href="https://gww.gov.bc.ca" style="color:#3200C5;">Call to action </a></p>', $did_you_know['value']);
+		//$did_you_know['value']= str_replace('</p>',' <a href="https://gww.gov.bc.ca" style="color:#3200C5;">Call to action </a></p>', $did_you_know['value']);
 	}
 	
 	// If a comment/note/did you know were NOT entered, our value should be "none" - we may want to account for this possibility here or in the template when deciding how exactly to theme in these instances
