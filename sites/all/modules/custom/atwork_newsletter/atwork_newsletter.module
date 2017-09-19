@@ -41,14 +41,19 @@ function atwork_newsletter_form_node_form_alter(&$form, &$form_state, $form_id) 
       }
     }
 
+    dpm($form);
     // Now rebuild the array from scs, this puts the variables into the body field (using our theme)
-      $form['body']['und'][0]['#default_value'] = theme('scs_newsletter', array(
-        'nodes' => $nodes,
-        'toc' => empty($form_state['input']['scs_toc']) ? FALSE : TRUE,
-        'comment' => $form_state['input']['cid'],
-        'notes' => $form_state['input']['take_note'],
-        'did_you_know' => $form_state['input']['did_you_know'],
-      ));
+    $form['body']['und'][0]['#default_value'] = theme('scs_newsletter', array(
+      'nodes' => $nodes,
+      'toc' => empty($form_state['input']['scs_toc']) ? FALSE : TRUE,
+      'comment' => $form_state['input']['cid'],
+      'notes' => $form_state['input']['take_note'],
+      'did_you_know' => $form_state['input']['did_you_know'],
+    ));
+    // Remove marker that allows scs to overwrite this form
+    if(isset($form['#node_edit_form'])){
+      unset($form['#node_edit_form']);
+    }
   }
 }
 
