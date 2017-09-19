@@ -41,7 +41,6 @@ function atwork_newsletter_form_node_form_alter(&$form, &$form_state, $form_id) 
       }
     }
 
-    dpm($form);
     // Now rebuild the array from scs, this puts the variables into the body field (using our theme)
     $form['body']['und'][0]['#default_value'] = theme('scs_newsletter', array(
       'nodes' => $nodes,
