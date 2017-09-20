@@ -604,9 +604,9 @@ function atwork_misc_admin_paths_alter(&$paths) {
  * Many misc changes described within
  */
 function atwork_misc_form_alter(&$form, &$form_state, $form_id) {
-  if ($form['#id'] == 'views-exposed-form-content-page') {
-//    dpm($form);
-//    dpm($_POST);
+  // We decided that we always want Send subscriptions notifications to default to unchecked. There is no setting for this behaviour in the front end. We will do it here.
+  if(isset($form['options']['subscriptions_notify']['subscriptions_notify']['#default_value']) && $form['options']['subscriptions_notify']['subscriptions_notify']['#default_value'] == TRUE){
+    $form['options']['subscriptions_notify']['subscriptions_notify']['#default_value'] = FALSE;
   }
 
   // add date popups on comment admin
