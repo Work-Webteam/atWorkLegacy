@@ -20,7 +20,7 @@ var instanceMap;
  *   An object containing global plugin configuration.
  */
 Drupal.wysiwyg.editor.init.ckeditor = function(settings, pluginInfo) {
-  instanceMap = {};
+  //instanceMap = {};
   // Nothing to do here other than register new plugins etc.
   Drupal.wysiwyg.editor.update.ckeditor(settings, pluginInfo);
 };
@@ -182,6 +182,9 @@ Drupal.wysiwyg.editor.attach.ckeditor = function(context, params, settings) {
       delete instanceMap[this.name];
     }
   };
+  if("undefined" === typeof instanceMap){
+    instanceMape = {};
+  }
   instanceMap[params.field] = this;
   // Attach editor.
   var editorInstance = CKEDITOR.replace(params.field, settings);
