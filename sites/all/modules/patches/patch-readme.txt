@@ -47,3 +47,9 @@ module: autchace
 files:  AuthcacheNodeHistorySetting.inc
 source: None - we did this ourselves.
 issue:  Fix for an error we were seeing in watchdog. Assignment seemed incorrect and code was not protected from failure.
+
+
+date: 2017-09-20
+module: WYSIWYG
+files: sites/all/modules/contrib/wysiwyg/editors/js/ckeditor-3.0.js
+Source: https://www.drupal.org/node/2883072
