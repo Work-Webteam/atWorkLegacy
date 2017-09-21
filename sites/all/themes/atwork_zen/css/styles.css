@@ -17,9 +17,7 @@
 @import "components/misc.css";
 /* Optionally, add your own components here. */
 @import "print.css";
-/* SMACSS theme rules */
-/* @import "theme-A.css"; */
-/* @import "theme-B.css"; */
+
 
 /* Import SASS compiled atwork_zen style */
 @import "atwork_zen.styles.css";

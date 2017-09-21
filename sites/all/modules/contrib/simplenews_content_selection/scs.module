@@ -186,7 +186,7 @@ function scs_view_mode_options() {
 
   $options = array();
   foreach ($view_modes as $machine_name => $status) {
-    if ($status) {
+    if (isset($status) ) {
       $options[$machine_name] = $entity_info['node']['view modes'][$machine_name]['label'];
     }
   }

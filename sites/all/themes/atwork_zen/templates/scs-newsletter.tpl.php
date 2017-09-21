@@ -156,8 +156,28 @@ $atwork_base_url = $GLOBALS['base_url'];
 				$atwork_newsletter_body = field_get_items('node',$node_first, 'body');
 
 				// Grab image for render.
-				$image = field_get_items('node', $node_first, 'field_image');
-				$image_output = field_view_value('node', $node_first, 'field_image', $image[1], array(
+				$images = field_get_items('node', $node_first, 'field_image');
+				// Rather than location, lets parse out the image sizes
+				if(isset($images) && $images){
+					// Grab the features sized image
+					foreach($images as $image){
+						// We can get image by image size - $image['height'] && $image['width']
+						// For some reason, sizes come in at like 774 instead of 775, so we will look for a range here in case we are a pixel or two off.
+						$height = intval($image['height']);
+						$width = intval($image['width']);
+						if(($height > 245 && $height < 255) && ($width > 770 && $width < 780)){
+							// Get image that has feature image range so we can load it in the next part.
+							$feature_image = $image;
+							//We wil only take the first match.
+							break;
+						} 
+					}
+					// Make sure we have a feature image
+					if(!isset($feature_image)){
+						$feature_image = $images[0];
+					}
+				}
+				$image_output = field_view_value('node', $node_first, 'field_image', $feature_image, array(
 						'type' => 'image',
 						'settings' => array(
 					//'image_style' => 'atwork_newsletter_feature_image',
@@ -388,38 +408,43 @@ $atwork_base_url = $GLOBALS['base_url'];
     }
 
 /* Build markup for comments */
+		// Only put this in if we have a comment.
+		if(isset($atwork_newsletter_render_array['comments']) && $atwork_newsletter_render_array['comments']):
 
-    echo '<table height="110" valign="top" width="775" border="0" cellpadding="0" cellspacing="0" id="sn-middle-content" style="border-bottom: 1px solid black;">';
-    echo '<tr>';
-    echo '<td height="10" colspan="2" valign="top" align="right" style="color:#004B8D;">Comments</td>';
-    echo '</tr>';
-    
-    // Join the Conversation 
-    echo '<tr valign="top">';
-    echo '<td colspan="2" valign="top" height="90">';
-	echo '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-left: 10px; margin-right: 10px; margin-top: 0px;"><a style="text-decoration: none; color:#004B8D;">Join the Conversation</a></h2>';
-	echo '<p style="font-family: Calibri,sans-serif; font-size:11pt; color:#000000; display:block; height: auto; margin-top: 10px; margin-left: 10px; margin-right: 10px; margin-bottom: 15px; padding: 0; line-height: 20px;">' . $atwork_newsletter_render_array['comments']->comment_body['und'][0]['formatted']. '</p>';
-    echo '</td>';
-    echo '</tr>';
-	echo '<tr>';
-	echo '<td width="50%" style="padding: 0 0 10px 10px;">';
-	echo '<a style="text-decoration: none; color:#004B8D; font-size: 10pt;" href="" > Read more >> </a>';
-	echo '</td>';
-	echo '<td width="50%" style="padding-bottom: 10px; color:#004B8D">';
-	echo 'Posted by: ' . $atwork_newsletter_render_array['comments']->name;
-	echo '</td>';
-    echo '</tr>';
-    echo '</table>';
-?>
+			echo '<table height="110" valign="top" width="775" border="0" cellpadding="0" cellspacing="0" id="sn-middle-content" style="border-bottom: 1px solid black;">';
+			echo '<tr>';
+			echo '<td height="10" colspan="2" valign="top" align="right" style="color:#004B8D;">Comments</td>';
+			echo '</tr>';
+			
+			// Join the Conversation \
+			echo '<tr valign="top">';
+			echo '<td colspan="2" valign="top" height="90">';
+			echo '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-left: 10px; margin-right: 10px; margin-top: 0px;"><a style="text-decoration: none; color:#004B8D;">Join the Conversation</a></h2>';
+			echo '<p style="font-family: Calibri,sans-serif; font-size:11pt; color:#000000; display:block; height: auto; margin-top: 10px; margin-left: 10px; margin-right: 10px; margin-bottom: 15px; padding: 0; line-height: 20px;">' . $atwork_newsletter_render_array['comments']->comment_body['und'][0]['formatted'] . '</p>';
+			echo '</td>';
+			echo '</tr>';
+			echo '<tr>';
+			echo '<td width="50%" style="padding: 0 0 10px 10px;">';
+			echo '<a style="text-decoration: none; color:#004B8D; font-size: 10pt;" href="" > Read more >> </a>';
+			echo '</td>';
+			echo '<td width="50%" style="padding-bottom: 10px; color:#004B8D">';
+			echo 'Posted by: ' . $atwork_newsletter_render_array['comments']->name;
+			echo '</td>';
+			echo '</tr>';
+			echo '</table>';
+	?>
 
-<table width="775" align="center" border="0" cellpadding="0" cellspacing="0">
-  <tbody>
-    <tr style="background-color:#FFF;">
-      <td>&nbsp;</td>
-    </tr>
-  </tbody>
-</table>
+			<table width="775" align="center" border="0" cellpadding="0" cellspacing="0">
+				<tbody>
+					<tr style="background-color:#FFF;">
+						<td>&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+		<?php endif ?>
 <?php  //************************ Take Note Section ************************** ?>
+<?php // Only show if we have Take Note Content    ?>
+<?php if(isset($atwork_newsletter_render_array['take_note']['value']) && !empty($atwork_newsletter_render_array['take_note']['value'])): ?>
 <table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-take-note" style="background-color: #FFF;">
   <tr>
     <td style="background-color:#E0ECF5;"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px;"> Take Note </h2>
@@ -431,7 +456,9 @@ $atwork_base_url = $GLOBALS['base_url'];
     <td height="10" style="background-color:#FFF;">&nbsp;</td>
   </tr>
 </table>
+<?php endif; ?>
 <?php // ************************  Did You Know? Section **************************** ?>
+<?php if(isset($atwork_newsletter_render_array['did_you_know']['value']) && !empty($atwork_newsletter_render_array['did_you_know']['value'])): ?>
 <table width="775" align="center" border="0" cellspacing="0" cellpadding="0" style="background-color: #ECECEC;">
   <tr>
     <td style="background-color:#E0ECF5;"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px;"> Did You Know? </h2>
@@ -442,7 +469,7 @@ $atwork_base_url = $GLOBALS['base_url'];
     <td height="10" style="background-color:#FFF;">&nbsp;</td>
   </tr>
 </table>
-
+<?php endif; ?>
 <?php // ************************ Footer Section ************************** ?>
 <?php endif; // All footers are the same  ?>
 <table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-footer" style="background-color: #ECECEC;">
