@@ -1,0 +1,48 @@
+<?php
+
+// Demo app from https://www.alloymagnetic.com/blog/192/angular-2-boilerplate-setup-small-drupal-7-applications
+function atwork_premiers_awards_angular_menu() {
+  $items = [];
+  $items['angular2'] = [
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,    
+    'access arguments' => array('access content'),
+    'page callback' => 'angular_demo_callback',
+  ];
+  return $items;
+}
+
+function angular_demo_callback() {
+  $build['content'] = [
+    '#theme' => [
+      'atwork_premiers_awards_angular_component',
+    ],
+    '#attached' => [
+      'js' => [
+        libraries_get_path('node_modules') . '/core-js/client/shim.min.js',
+        libraries_get_path('node_modules') . '/zone.js/dist/zone.js',
+        libraries_get_path('node_modules') . '/reflect-metadata/Reflect.js',
+        libraries_get_path('node_modules') . '/rxjs/bundles/Rx.js',
+        libraries_get_path('node_modules') . '/@angular/core/bundles/core.umd.js',
+        libraries_get_path('node_modules') . '/@angular/common/bundles/common.umd.js',
+        libraries_get_path('node_modules') . '/@angular/compiler/bundles/compiler.umd.js',
+        libraries_get_path('node_modules') . '/@angular/platform-browser/bundles/platform-browser.umd.js',
+        libraries_get_path('node_modules') . '/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
+        drupal_get_path('module', 'atwork_premiers_awards_angular') . '/atwork_premiers_awards_angular.component.js',
+        drupal_get_path('module', 'atwork_premiers_awards_angular') . '/atwork_premiers_awards_angular.module.js',
+        drupal_get_path('module', 'atwork_premiers_awards_angular') . '/atwork_premiers_awards_angular.main.js',
+      ],
+    ],
+  ];
+  return $build;
+}
+
+function atwork_premiers_awards_angular_theme($existing, $type, $theme, $path) {
+  return [
+    'atwork_premiers_awards_angular_component' => [
+      'template' => 'atwork-premiers-awards-angular-component',
+      'variables' => array(),
+      'path' => drupal_get_path('module', 'atwork_premiers_awards_angular') . '/theme',
+    ],
+  ];
+}
