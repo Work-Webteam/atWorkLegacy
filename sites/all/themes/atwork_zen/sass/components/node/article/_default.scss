@@ -1,0 +1,29 @@
+/* Article / Poll Group Admin Screens - Sept 2017 */
+
+#article-node-form, #poll-node-form, #section-node-form, #section-page-node-form, #blog-node-form {
+    .news-step h3, h2.multipage-pane-title {
+            border: solid 1px #999;
+            padding: 2px 5px!important;
+            margin: 10px 0;
+            background-color: beige;
+    }
+    .form-type-textfield {
+        margin: 5px 0;
+    }
+    fieldset {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+#poll-node-form {
+    #edit-settings {
+        padding: 5px 10px 0;
+    }
+    #edit-settings .form-item {
+        margin-top: 0;
+        padding:0;
+    }
+}
+#edit-field-group-description-und-0-value {
+    width: 100%;
+}
