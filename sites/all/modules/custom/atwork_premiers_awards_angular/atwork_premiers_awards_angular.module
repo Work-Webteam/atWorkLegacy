@@ -28,9 +28,12 @@ function angular_demo_callback() {
         libraries_get_path('node_modules') . '/@angular/compiler/bundles/compiler.umd.js',
         libraries_get_path('node_modules') . '/@angular/platform-browser/bundles/platform-browser.umd.js',
         libraries_get_path('node_modules') . '/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
-        drupal_get_path('module', 'atwork_premiers_awards_angular') . '/atwork_premiers_awards_angular.component.js',
-        drupal_get_path('module', 'atwork_premiers_awards_angular') . '/atwork_premiers_awards_angular.module.js',
-        drupal_get_path('module', 'atwork_premiers_awards_angular') . '/atwork_premiers_awards_angular.main.js',
+        drupal_get_path('module', 'atwork_premiers_awards_angular') . '/js/atwork_premiers_awards_angular.component.js',
+        drupal_get_path('module', 'atwork_premiers_awards_angular') . '/js/atwork_premiers_awards_angular.module.js',
+        drupal_get_path('module', 'atwork_premiers_awards_angular') . '/js/atwork_premiers_awards_angular.main.js',
+      ],
+      'ts' => [
+        drupal_get_path('module', 'atwork_premiers_awards_angular') . '/js/atwork_premiers_awards_angular.component.js',
       ],
     ],
   ];
@@ -38,11 +41,25 @@ function angular_demo_callback() {
 }
 
 function atwork_premiers_awards_angular_theme($existing, $type, $theme, $path) {
+  // TODO: Pass $user to the theme
+  // TODO: Check if user has previously filled out an application
+  global $user;
+  $current_user = user_load($user->uid);
+  $previous_reg = get_registration_number($current_user);
   return [
     'atwork_premiers_awards_angular_component' => [
       'template' => 'atwork-premiers-awards-angular-component',
-      'variables' => array(),
+      'variables' => array(
+        'user'=>$current_user,
+        'previous_reg'=>$previous_reg,
+      ),
       'path' => drupal_get_path('module', 'atwork_premiers_awards_angular') . '/theme',
     ],
   ];
+}
+
+function get_registration_number($current_user){
+  //TODO: Look in DB and find out if user has registered yet, and how many people they registered
+  // return an array of these properties, or a false.
+  return true;
 }
