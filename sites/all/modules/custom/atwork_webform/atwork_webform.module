@@ -106,10 +106,6 @@ EOT;
 /**
  * Create a a block for the Comms team that they can use to randomize a winner for the emerging leaders quiz
  */
-
-
-
-
  /**
  * Implements hook_block_info().
  * Short term solution to display twitter block on front page.
@@ -180,17 +176,26 @@ function _atwork_webform_block_content(){
 
   // Now make  table of emerging leaders and vote counts
   $output = '<div id="count-block">';
-  $output .= '<table id="leaders-list">';
-  $output .= '<tr><td><th><h2>Emerging Leader</h2></th></td><td><th><h2>Votes</h2></th></td></tr>';
+  $output .= '<table id="leaders-list" style="width:100%; border:1px solid black;" >';
+  $output .= '<tr style="border:1px solid black; background-color:#E0EEEE;"><td style="border:1px solid black !important;"><h2>Emerging Leader</h2></td><td style="border:1px solid black !important;"><h2>Votes</h2></td></tr>';
   
+  // To color stripes
+  $i = 1;
   foreach($formated_choices_array as $key=>$value){   
     // Need to cast our key to an int to traverse arrays
     $key = (int)$key;
-    if(isset($vote_count[$key]) || array_key_exists($key, $vote_count)){
-      $output .= '<tr><td>' . $value . '</td><td>' . $vote_count[$key]['count'] . '</td></tr>';
+    // pick our background color
+    if($i & 1 ){
+      $background = '#FFFFFF';
     } else {
-      $output .= '<tr><td>' . $value . '</td><td>0</td></tr>';
+      $background = '#E0EEEE';
     }
+    if(isset($vote_count[$key]) || array_key_exists($key, $vote_count)){
+      $output .= '<tr style="border:1px solid black; background-color:' . $background . ';"><td style="border:1px solid black !important;">' . $value . '</td><td style="border:1px solid black !important; background-color:' . $background . ';">' . $vote_count[$key]['count'] . '</td></tr>';
+    } else {
+      $output .= '<tr><td style="border:1px solid black !important; background-color:' . $background . ';">' . $value . '</td><td style="border:1px solid black !important; background-color:' . $background . ';">0</td></tr>';
+    }
+    $i++;
   }
   $output .= '</table>';
 
@@ -204,20 +209,29 @@ function _atwork_webform_block_content(){
 
   // Add the table
   $output .= '<div id="randomizer_block">';
-  $output .= '<table id="voter_list" >';
-  $output .= '<tr><th><h2>User </h2></th></tr>';
-
-  
-  foreach($voted as $key => $value){
-    $voter = user_load($value->uid);
-    $output .= '<tr><td><a href="/user/' . $voter->uid . '">' .  $voter->field_gal_first_name['und'][0]['safe_value'] . ' ' . $voter->field_gal_last_name['und'][0]['safe_value'] . '</a></td></tr>';
-  }
-  $output .= '</table>';
   // This button will be used to fire an Ajax function to choose a winner.
   $output .= '<button type="submit" id="randomize">Choose Winner</button></div>';
+  $output .= '<input type="button" value="Show Voters List" id="contestant-button" />';
+  $output .= '<table id="voter_list" >';
+  $output .= '<tr style="border:1px solid black !important; background-color:#E0EEEE;"><th><h2>Voters:  </h2></th></tr>';
   
+  // To color stripes
+  $i = 1;
+  // Create voters table
+  foreach($voted as $key => $value){
+    // pick our background color
+    if($i & 1 ){
+      $background = '#FFFFFF';
+    } else {
+      $background = '#E0EEEE';
+    }
+    $voter = user_load($value->uid);
+    $output .= '<tr style="border:1px solid black !important; background-color:' . $background . ';"><td><a href="/user/' . $voter->uid . '">' .  $voter->field_gal_first_name['und'][0]['safe_value'] . ' ' . $voter->field_gal_last_name['und'][0]['safe_value'] . '</a></td></tr>';
+    $i++;
+  }
+  $output .= '</table>';
   return $output;
-}
+} 
 
 /**
  * Implements hook_menu();

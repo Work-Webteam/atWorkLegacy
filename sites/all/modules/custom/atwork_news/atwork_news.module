@@ -28,7 +28,6 @@ function atwork_news_form_article_node_form_alter(&$form, &$form_state, $form_id
       _atwork_hide_exec_tags($form);
     }
   }
-  //dpm($form);
 }
 
 

@@ -3,13 +3,19 @@
     attach: function(context, settings) {
 
       // Only run if the link exists in the current page load or fragment refresh.
-      $('#profile-comment-link:not(.atwork-activity-processed)', context)
       $('#randomize:not(.atwork-processed)', context)
         .addClass('atwork-processed')
         .bind('click', function(){
           $.get('/random', null, feedDetails);
-          return false;
-       });
+        return false;
+        });
+      // Need to be able to open and close list of users.
+      $('#contestant-button:not(.atwork-processed)', context)
+        .addClass('atwork-processed')
+        .bind('click', function(){
+          $('#voter_list').slideToggle("slow");
+      });
+      $('#voter_list').hide();
     }
   };
   
@@ -22,5 +28,10 @@
     $('#winner_profile_image').slideDown('slow');
     return false;
   };
+
+  function openClose(){
+  }
+
+
 
 })(jQuery);
