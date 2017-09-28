@@ -98,7 +98,7 @@ EOT;
     // This is used for the current years emergent leaders - code above is for last years.
     foreach ($form['submitted']['finalists']['#options'] as $key => $data) {
       list($name, $video_id, $thumb_path, $caption) = explode('&&&', $data);
-      $form['submitted']['finalists']['#options'][$key] = '<div class="video-finalist video-'. $key .'"><h3>'. $name .'</h3><a href="//www.youtube.com/v/'. $video_id .'?wmode=transparent&amp;fs=1&amp;width=640&amp;height=385&amp;hl=en_US1&amp;iframe=true&amp;rel=0&amp;showinfo=0" class="colorbox-load" title="' . $caption . '" rel="Click to see ' . $name . '\'s video"><img src="/sites/default/files/webform/premieres_awards/2016/'. $thumb_path .'" alt = "Click me" /></a></div>';
+      $form['submitted']['finalists']['#options'][$key] = '<div class="video-finalist video-'. $key .'"><h3>'. $name .'</h3><a href="//www.youtube.com/embed/'. $video_id .'?wmode=transparent&amp;fs=1&amp;width=640&amp;height=385&amp;hl=en_US1&amp;iframe=true&amp;rel=0&amp;showinfo=0" class="colorbox-load" title="' . $caption . '" rel="Click to see ' . $name . '\'s video"><img src="/sites/default/files/webform/premieres_awards/2017/'. $thumb_path .'" alt = "Click me" /></a></div>';
     }
   }
 }
