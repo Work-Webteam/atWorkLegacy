@@ -387,7 +387,7 @@ $atwork_base_url = $GLOBALS['base_url'];
 				echo '<div id="middle-left-title" style="height: 30px;">';
 				echo $output_atwork_blog_title;
 				echo '</div>';
-				echo '<p style="font-family: Calibri,sans-serif; font-size:11pt; color:#004B8D; display:block; height: auto; margin-top: 10px; margin-left: 10px; margin-right: 10px; margin-bottom: 0; padding-bottom: 15px; line-height: 20px;">';
+				echo '<p style="font-family: Calibri,sans-serif; font-size:11pt; color:#000000; display:block; height: auto; margin-top: 10px; margin-left: 10px; margin-right: 10px; margin-bottom: 0; padding-bottom: 15px; line-height: 20px;">';
 				echo ($atwork_blog_body[0]['summary'] === "" ? $atwork_blog_body[0]['summary'] : '"' . $atwork_blog_body[0]['summary'] . '"') ;
 				echo '</p>';
 				echo '</td>';

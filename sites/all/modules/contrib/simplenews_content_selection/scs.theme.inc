@@ -10,7 +10,8 @@
  */
 function theme_scs_sortable_table($form) {
   $form = $form['form'];
-  $headers = array(t('Node title'), t('Weight'), t('View mode'));
+  //$headers = array(t('Node title'), t('Weight'), t('View mode'));
+  $headers = array(t('Node title'), t('Weight'), t('Node Type'));
   $rows = array();
 
   $nids = element_children($form['nodes']);
@@ -32,6 +33,7 @@ function theme_scs_sortable_table($form) {
       'class' => array('draggable'),
     );
   }
+
   $output = theme('table', array('header' => $headers, 'rows' => $rows, 'attributes' => array('id' => 'scs-sort-nodes')));
   $info = '';
   if (isset($form['scs_title']) && isset($form['scs_toc'])) {
