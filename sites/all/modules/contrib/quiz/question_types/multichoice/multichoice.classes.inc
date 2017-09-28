@@ -435,7 +435,7 @@ class MultichoiceQuestion extends QuizQuestion {
     }
     else {
       $element['user_answer']['#type'] = 'radios';
-      $element['user_answer']['#title'] = t('Choose one');
+      $element['user_answer']['#title'] = t(' ');
       if (isset($response)) {
         $selection = $response->getResponse();
         if (is_array($selection)) {
