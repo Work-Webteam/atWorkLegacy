@@ -141,17 +141,73 @@ function atwork_webform_block_view($delta = '') {
 }
 
 function _atwork_webform_block_content(){
+  // Our current webform
+  $nid = 19843;
+  // First lets make a table of all contestants and their vote numbers
+  // We need to get all of our votes cast per contestant key
+  $votes = db_select('webform_submitted_data', 's')
+    ->fields('s', array('data'))
+    ->condition('s.nid', $nid)
+    ->execute()
+    ->fetchAll();
+
+  // Count votes by key option
+  $vote_count = array();
+  foreach($votes as $key=>$value){
+    if(isset($vote_count[$value->data])){
+      $vote_count[$value->data]['count'] += 1; 
+    } else {
+      $vote_count[$value->data] = array(
+        'count' => 1,
+      );
+    }
+  }
+
+  //Get the form to match names to selection
+  $webform = node_load($nid);
+  $choices = $webform->webform['components'][1]['extra']['items'];
+
+  $formated_choices_array = array();
+  $choices_array = explode(';/p&gt;', $choices);
+  foreach($choices_array as $choice_string){
+    if(strlen($choice_string > 0 )){
+      // Split off all extra info in string past name
+      $choice_string = strstr($choice_string, '&&&', true);
+      $split_choice = explode('|', $choice_string);
+      $formated_choices_array[$split_choice[0]] = $split_choice[1];  
+    }
+  }
+
+  // Now make  table of emerging leaders and vote counts
+  $output = '<div id="count-block">';
+  $output .= '<table id="leaders-list">';
+  $output .= '<tr><td><th><h2>Emerging Leader</h2></th></td><td><th><h2>Votes</h2></th></td></tr>';
+  
+  foreach($formated_choices_array as $key=>$value){   
+    // Need to cast our key to an int to traverse arrays
+    $key = (int)$key;
+    if(isset($vote_count[$key]) || array_key_exists($key, $vote_count)){
+      $output .= '<tr><td>' . $value . '</td><td>' . $vote_count[$key]['count'] . '</td></tr>';
+    } else {
+      $output .= '<tr><td>' . $value . '</td><td>0</td></tr>';
+    }
+  }
+  $output .= '</table>';
+
+
   // Find all users who voted:
   $voted = db_select('webform_submissions', 'd')
     ->fields('d', array('uid'))
-    ->condition('d.nid', 19843)
+    ->condition('d.nid', $nid)
     ->execute()
     ->fetchAll();
 
   // Add the table
-  $output = '<div id="randomizer_block">';
+  $output .= '<div id="randomizer_block">';
   $output .= '<table id="voter_list" >';
   $output .= '<tr><th><h2>User </h2></th></tr>';
+
+  
   foreach($voted as $key => $value){
     $voter = user_load($value->uid);
     $output .= '<tr><td><a href="/user/' . $voter->uid . '">' .  $voter->field_gal_first_name['und'][0]['safe_value'] . ' ' . $voter->field_gal_last_name['und'][0]['safe_value'] . '</a></td></tr>';
@@ -197,7 +253,13 @@ function atwork_webform_ajax_callback($var){
   $winning_user = user_load($winner->uid);
   // Return winners info
   $winner_name = $winning_user->field_gal_first_name['und'][0]['safe_value'] . " " . $winning_user->field_gal_last_name['und'][0]['safe_value'];
-  $picture_url = $winning_user->field_image['und'][0]['uri'];
+  if(isset($winning_user->field_image['und'][0]['uri'] )&& $winning_user->field_image['und'][0]['uri'] ){
+    $picture_url = $winning_user->field_image['und'][0]['uri'];
+  } else {
+    global $base_url;    
+    global $base_path;
+    $picture_url = $base_path . 'default_images/default_profile220x220b_0.gif';
+  }
   $picture_location = str_replace("public://", "", $picture_url);
   $winner_picture = '/sites/default/files/' . $picture_location; 
   $return_string = '<div id="winner_profile"><h1>The Winner is....</p><img src="' . $winner_picture . '" style="width:160px;height:200px;"><h2><a href="/user/' . $winning_user->uid . '">' . $winner_name .'</a></h2></div>';
