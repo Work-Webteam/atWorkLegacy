@@ -139,9 +139,7 @@ function scs_form_node_form_alter(&$form, &$form_state) {
  */
 function scs_node_sort_form($form, &$form_state) {
   $nodes = array_filter($form_state['values']['nodes']);
-
-/* Not Needed
-
+/*
   // Checkbox for Table of contents
   $form['scs_toc'] = array(
     '#type' => 'checkbox',
@@ -192,7 +190,9 @@ function scs_view_mode_options() {
   $options = array();
   foreach ($view_modes as $machine_name => $status) {
     if (isset($status) ) {
-      $options[$machine_name] = $entity_info['node']['view modes'][$machine_name]['label'];
+      if(array_key_exists('view_mode',$entity_info['node'])) { 
+        $options[$machine_name] = $entity_info['node']['view modes'][$machine_name]['label'];
+      }
     }
   }
   return $options;
