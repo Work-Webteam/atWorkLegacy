@@ -776,7 +776,7 @@ EOT;
 * Create menu path for accessing values via Ajax.
 */ 
 function atwork_prem_awards_menu(){
-  $items['premiers-awards/registration/%/%'] = array(
+  $items['p-awards/registration/%/%'] = array(
     'page callback' => 'atwork_prem_awards_callback', // Render HTML.
     'page arguments' => array(2,3),
     'type' => MENU_CALLBACK,
@@ -795,18 +795,22 @@ function atwork_prem_awards_menu(){
   return $items;
 }
 
-function atwork_prem_awards_callback($var_1, $var_2){
-  dpm($var_1);
-  dpm($var_2);
+function atwork_prem_awards_callback($user, $current_uid){
+  // This has to be included on custom pages.
+  include_once(drupal_get_path('module', 'webform') . '/webform_submission.inc');
+  // TODO: Look for forms that have the uid, if they are there, return them all. JQuery can hand back any updates - or we can just move on.
+  // else we can tell jQuery this is new, and we can build fields to submit back to a secondary php function where we can save the form
+  $submissions = webform_get_submissions(array('nid' => PA_REG_FORM_NID, 'uid' => $current_uid));
+  // https://www.drupal.org/node/1731742
   $return_array = array(
     "test"=>"this",
     "test2" => "that"
   );
   
   // Return to js
-   echo json_encode($return_array);
-   // Stops themeing layer from interacting with this
-   die();
+  echo json_encode($submissions);
+  // Stops themeing layer from interacting with this
+  die();
 }
 
 /**
@@ -862,8 +866,8 @@ function premiers_awards_registration_information(){
   $current_user = user_load($user->uid);
   // 2017 node number
   // 2016 node number 
-  $sign_up_node = 13361;
-  $full_node = node_load(13361);
+  $sign_up_node = PA_REG_FORM_NID;
+  $full_node = node_load($sign_up_node);
   // The output string we will return
   $output = '';
   $output = '<br/><p>Hello ' . $current_user->field_gal_first_name['und'][0]['safe_value'] . ',</p>';
