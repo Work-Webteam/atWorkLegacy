@@ -776,9 +776,9 @@ EOT;
 * Create menu path for accessing values via Ajax.
 */ 
 function atwork_prem_awards_menu(){
-  $items['premiers_awards/registration/%'] = array(
+  $items['premiers-awards/registration/%/%'] = array(
     'page callback' => 'atwork_prem_awards_callback', // Render HTML.
-    'page arguments' => array(1,),
+    'page arguments' => array(2,3),
     'type' => MENU_CALLBACK,
     'access arguments' => array('access content'),
     //'delivery callback' => 'atwork_prem_ajax_callback',  // Magic goes here.
@@ -792,10 +792,21 @@ function atwork_prem_awards_menu(){
     'weight' => 1,
     'type' => MENU_LOCAL_TASK,
   );
+  return $items;
 }
 
-function atwork_prem_awards_callback(){
-
+function atwork_prem_awards_callback($var_1, $var_2){
+  dpm($var_1);
+  dpm($var_2);
+  $return_array = array(
+    "test"=>"this",
+    "test2" => "that"
+  );
+  
+  // Return to js
+   echo json_encode($return_array);
+   // Stops themeing layer from interacting with this
+   die();
 }
 
 /**
