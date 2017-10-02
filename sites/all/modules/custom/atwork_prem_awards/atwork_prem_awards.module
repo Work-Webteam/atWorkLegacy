@@ -266,45 +266,6 @@ function _atwork_prem_awards_get_contacts() {
   return $contacts;
 }
 
-function atwork_prem_awards_menu(){
-    $items['node/%node/prem-award-roles'] = array(
-      'title' => 'Assign Roles',
-      'page callback' => 'drupal_get_form',
-      'page arguments' => array('atwork_prem_awards_roles_form', 1),
-      'access callback' => 'atwork_prem_awards_roles_access',
-      'access arguments' => array(1),
-      'weight' => 1,
-      'type' => MENU_LOCAL_TASK,
-    );
-
-    return $items;
-}
-
-function atwork_prem_awards_block_info() {
-  // This example comes from node.module.
-  $blocks['nav'] = array(
-    'info' => t("Premiere's Awards Navigation"),
-    'cache' => DRUPAL_NO_CACHE,
-  );
-
-  return $blocks;
-}
-
-function atwork_prem_awards_block_view($delta = '') {
-  // This example is adapted from node.module.
-  $block = array();
-
-  switch ($delta) {
-    case 'nav':
-      $block['subject'] = '';
-      $block['content'] = array(
-        '#markup' => _atwork_prem_awards_nav_block(),
-      );
-      break;
-  }
-  return $block;
-}
-
 function _atwork_prem_awards_nav_block() {
   drupal_add_js(drupal_get_path('module', 'jquery_update') . '/replace/ui/ui/minified/jquery.ui.accordion.min.js');
 
@@ -568,7 +529,7 @@ function atwork_prem_awards_form_alter(&$form, $form_state, $form_id) {
     }
   }
 
-  if ($form_id == 'webform_client_form_' . PA_REG_FORM_NID) {
+  if ($form_id == 'webform_client_form_' . PA_REG_FORM_NID && (arg(0)==='node' && is_numeric(arg(1)) && arg(1)== PA_REG_FORM_NID)) {
     $form['#submit'][] = 'atwork_prem_awards_registration_submit';
   }
 }
@@ -803,4 +764,171 @@ EOT;
     //$vars['renderable']['attachments']['#access'] = FALSE;
 
   }
+}
+
+/**
+* Block to act as a registration page for Prem awards.
+* Uses Ajax/JQuery callbacks to populate webform.
+*/
+
+/**
+* Implements hook_menu();
+* Create menu path for accessing values via Ajax.
+*/ 
+function atwork_prem_awards_menu(){
+  $items['premiers_awards/registration/%'] = array(
+    'page callback' => 'atwork_prem_awards_callback', // Render HTML.
+    'page arguments' => array(1,),
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+    //'delivery callback' => 'atwork_prem_ajax_callback',  // Magic goes here.
+  );
+  $items['node/%node/prem-award-roles'] = array(
+    'title' => 'Assign Roles',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('atwork_prem_awards_roles_form', 1),
+    'access callback' => 'atwork_prem_awards_roles_access',
+    'access arguments' => array(1),
+    'weight' => 1,
+    'type' => MENU_LOCAL_TASK,
+  );
+}
+
+function atwork_prem_awards_callback(){
+
+}
+
+/**
+* Implements hook_block_info
+* We want a block that can be used to grab info on Prem awards viewers
+*/
+function atwork_prem_awards_block_info() {
+  $blocks['prem_registration'] = array(
+    'info' => t("Premiers awards registration form"),
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  // This example comes from node.module.
+  $blocks['nav'] = array(
+      'info' => t("Premiere's Awards Navigation"),
+      'cache' => DRUPAL_NO_CACHE,
+  );
+  
+  return $blocks;
+}
+
+
+
+/**
+* Implements hook_block_view
+* Specialized block to check/receive/update viewer numbers for the premiers awards.
+*/ 
+function atwork_prem_awards_block_view($delta = ''){
+  $block = array();
+  switch ($delta) {
+    case 'prem_registration':
+      //$block['title'] = t("Premiers Awards Registration");
+      $block['subject'] = t("Premiers Awards Registration");
+      $block['content'] = array(
+        '#markup' => premiers_awards_registration_information(),
+      );
+      break;
+    case 'nav':
+      $block['subject'] = '';
+      $block['content'] = array(
+        '#markup' => _atwork_prem_awards_nav_block(),
+      );
+      break;
+  }
+  return $block;
+}
+
+/**
+* Function that gets info for user and their past applications/lack of application
+**/
+function premiers_awards_registration_information(){
+  global $user;
+  $current_user = user_load($user->uid);
+  // 2017 node number
+  // 2016 node number 
+  $sign_up_node = 13361;
+  $full_node = node_load(13361);
+  // The output string we will return
+  $output = '';
+  $output = '<br/><p>Hello ' . $current_user->field_gal_first_name['und'][0]['safe_value'] . ',</p>';
+
+  // Check if the user currently has a webform
+  $query = db_select('webform_submissions', 'w')
+    ->fields('w', array('sid'))
+    ->condition('w.uid', $current_user->uid)
+    ->condition('w.nid', $sign_up_node);
+  $result = $query
+    ->execute()
+    ->fetchAll();
+
+  //$submissions = webform_get_submissions(array('nid' => $sign_up_node, 'uid' => $current_user->uid));
+
+  // Now lets extract all user info for this form if applicable.
+  if($result != null){
+    $output .= "<p> Our records show that you registered with the following information:<p><br />";
+    $submitted_form_array = get_user_form_status($result, $sign_up_node);
+    // TODO: Print out fields from the array
+    foreach($submitted_form_array as $key=>$value){
+      $output .=  "<div class='registration-option'><p class='prem-award-webcast'><strong>Webcast:</strong> " . $value['webcast'] . ".</p><p class='prem-award-webcast'><strong>Number of Viewers: </strong>" . $value['number attending'] . "</p><input type='button' value='update/Edit' class='prem-award-button' id='prem-ajax-" . $key . "'></input><br /></div>";
+    }
+  } else {
+    $output .= "<p> Our records have not recorded any registration data for you. Please take a moment to fill out the information below.</p>";
+    //TODO: Get and render the original form?
+    $new_form = webform_node_view($full_node, 'full');
+    $output .= render(theme_webform_view($full_node->content));
+  }
+  //$new_form = webform_node_view($full_node, 'full');
+  //$output .= render(theme_webform_view($full_node->content));
+  $new_form = drupal_get_form('webform_client_form_' . $sign_up_node, $full_node, array(), TRUE);
+  // Strip off the atwork custom submit - we want to redirect elsewhere
+  // Add in our redirect here:
+  $new_form['#node']->webform['redirect_url'] = 'http://video.web.gov.bc.ca/psa/pa/vod/';
+  $output .= drupal_render($new_form);
+  // Pass our UID to jQuery to create a pop.
+  drupal_add_js(array('atwork_prem_awards' => array('user' => $current_user->name, 'uid' => $current_user->uid)), 'setting');
+  // And attach our AJAX sheet
+  drupal_add_js(drupal_get_path('module', 'atwork_prem_awards') . '/' . 'js_prem_awards_form.js');
+  TODO:// Rebuild output from arrays above.
+  return '';
+}
+
+/**
+* User form info by id number
+* @param $sids = array of suibmission id (sid) numbers sent as strings
+*/
+function  get_user_form_status($sids, $sign_up_node){
+  $return_info_array = array();
+  //In case they have more than one form 
+  foreach ($sids as $sid){
+    $user_webform = webform_get_submission($sign_up_node, $sid->sid, FALSE);
+    $webform_node = node_load($sign_up_node);
+    // Signed up for Vancouver Island
+    if(isset($user_webform->data[5][0]) && $user_webform->data[5][0] > 0){
+      $return_info_array[$sid->sid] = array(
+        'webcast' => $webform_node->webform['components'][4]['name'],
+        'number attending' => $user_webform->data[5][0],
+      );
+    }
+    // Signed up for Int/North
+    if(isset($user_webform->data[15][0]) && $user_webform->data[15][0] > 0){
+      $return_info_array[$sid->sid] = array(
+        'webcast' => $webform_node->webform['components'][14]['name'],
+        'number attending' => $user_webform->data[15][0],
+      );
+    }      
+
+    // Signed up for Lower Mainland
+    if(isset($user_webform->data[7][0]) && $user_webform->data[7][0] > 0){
+      $return_info_array[$sid->sid] = array(
+        'webcast' => $webform_node->webform['components'][6]['name'],
+        'number attending' => $user_webform->data[7][0],
+      );
+    }      
+  }
+  return $return_info_array;
 }

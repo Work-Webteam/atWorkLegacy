@@ -24,6 +24,8 @@ function angular_demo_callback() {
         libraries_get_path('node_modules') . '/reflect-metadata/Reflect.js',
         libraries_get_path('node_modules') . '/rxjs/bundles/Rx.js',
         libraries_get_path('node_modules') . '/@angular/core/bundles/core.umd.js',
+        libraries_get_path('node_modules') . '/@angular/forms/bundles/forms.umd.js', 
+        libraries_get_path('node_modules') . '/@angular/http/bundles/http.umd.js',
         libraries_get_path('node_modules') . '/@angular/common/bundles/common.umd.js',
         libraries_get_path('node_modules') . '/@angular/compiler/bundles/compiler.umd.js',
         libraries_get_path('node_modules') . '/@angular/platform-browser/bundles/platform-browser.umd.js',
