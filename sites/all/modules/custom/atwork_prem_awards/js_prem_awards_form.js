@@ -32,7 +32,6 @@
     var i = 0;
     // TODO: Put this into its own function to make this cleaner.
     $.each(items, function(index, value) {
-      console.log(value);
       i ++;
       if(index == 'applicant'){
         // skipping this one\
@@ -100,7 +99,6 @@
       },
       close: function(){
         form[ 0 ].reset();
-        allFields.removeClass("ui-state-error");
       }
     });
     return;

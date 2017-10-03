@@ -819,32 +819,26 @@ function atwork_prem_awards_callback($user, $current_uid){
   $return_info_array = array();
   $applicant = user_load($current_uid);  
   $return_info_array['applicant'] = $applicant->field_gal_first_name['und'][0]['safe_value'];
+  dpm($submissions);
   foreach($submissions as $key=>$value){
     if(isset($value->data[5][0]) && $user_webform->data[5][0] > 0){
-      $applicant = user_load($value->uid);
       $return_info_array[$key] = array(
         'webcast' => $webform_node->webform['components'][4]['name'],
         'number attending' =>$value->data[5][0],
-        'applicant'=>$applicant->field_gal_first_name['und'][0]['safe_value'],
       );
     }
     // Signed up for Int/North
     if(isset($value->data[15][0]) && $value->data[15][0] > 0){
-      $applicant = user_load($value->uid);
       $return_info_array[$key] = array(
         'webcast' => $webform_node->webform['components'][14]['name'],
         'number attending' => $value->data[15][0],
-        'applicant'=>$applicant->field_gal_first_name['und'][0]['safe_value'],
       );
     }      
-
     // Signed up for Lower Mainland
     if(isset($value->data[7][0]) && $value->data[7][0] > 0){
-      $applicant = user_load($value->uid);
       $return_info_array[$key] = array(
         'webcast' => $webform_node->webform['components'][6]['name'],
         'number attending' => $value->data[7][0],
-        'applicant'=>$applicant->field_gal_first_name['und'][0]['safe_value'],
       );
     }      
   }
@@ -925,17 +919,11 @@ function premiers_awards_registration_information(){
 
   // Now lets extract all user info for this form if applicable.
   if($result != null){
-    $output .= "<p> Our records show that you registered with the following information:<p><br />";
-    //$submitted_form_array = get_user_form_status($result, $sign_up_node);
     // TODO: Print out fields from the array
-    foreach($submitted_form_array as $key=>$value){
-      $output .=  "<div class='registration-option'><p class='prem-award-webcast'><strong>Webcast:</strong> " . $value['webcast'] . ".</p><p class='prem-award-webcast'><strong>Number of Viewers: </strong>" . $value['number attending'] . "</p><input type='button' value='update/Edit' class='prem-award-button' id='prem-ajax-" . $key . "'></input><br /></div>";
-    }
   } else {
-    $output .= "<p> Our records have not recorded any registration data for you. Please take a moment to fill out the information below.</p>";
     //TODO: Get and render the original form?
-    $new_form = webform_node_view($full_node, 'full');
-    $output .= render(theme_webform_view($full_node->content));
+    //$new_form = webform_node_view($full_node, 'full');
+    //$output .= render(theme_webform_view($full_node->content));
   }
   //$new_form = drupal_get_form('webform_client_form_' . $sign_up_node, $full_node, array(), TRUE);
   // Strip off the atwork custom submit - we want to redirect elsewhere
@@ -948,5 +936,5 @@ function premiers_awards_registration_information(){
   // TODO: add a conditional that checks for any submissions, and if there are none, attaches a different js. Maybe us the if and else above
   drupal_add_js(drupal_get_path('module', 'atwork_prem_awards') . '/' . 'js_prem_awards_form.js');
   TODO:// Rebuild output from arrays above.
-  return '';
+  return $output;
 }
