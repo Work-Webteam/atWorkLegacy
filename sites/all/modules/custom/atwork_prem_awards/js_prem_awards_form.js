@@ -42,6 +42,7 @@
         formString += '<label for="webcast-' + i + '">Webcast: ' + value.webcast + '</label>';
         // This should be hidden on initial form launch
         formString += '<input type="text" name="webcast-' + i + '" value="' + value.webcast + '" class="prem-award-input">';
+        formString += '<input type="button" class="show-input-field" value="Edit">';
         formString += '</fieldset>';
       }
     });
@@ -49,13 +50,22 @@
     $('#block-atwork-activity-homepage').append('<div id="modal-pop"></div>');
 
     $('<div id="premiers-awards-form" class="prem-awards-form-wrapper">' +
-      '<p>Hello ' + user_name + ' our records indicate that you have pre-registered for the following webcast(s). Please make any required chagnes and confirm the registration information below.</p>'  +
-      '<form>' +
+        '<p>Hello ' + user_name + ', our records indicate that you have pre-registered for the following webcast(s). Please make any required chagnes and confirm the registration information below.</p>'  +
+        '<form>' +
           formString + 
         '</form>' +
       '</div>').appendTo('#modal-pop');
-        
+    
+    $('.prem-award-input').hide();
+    
+    // Now set up the dialog box    
     setDialog();
+
+    $(".show-input-field").click(function(){
+      $(this).prev().show();
+      $(this).hide();
+    })
+
     form = dialog.find("form").on("submit", function(event) {
       event.preventDefault();
       redirectSubmit();
