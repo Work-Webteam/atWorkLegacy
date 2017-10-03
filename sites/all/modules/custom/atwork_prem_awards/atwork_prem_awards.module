@@ -797,18 +797,50 @@ function atwork_prem_awards_menu(){
 
 function atwork_prem_awards_callback($user, $current_uid){
   // This has to be included on custom pages.
-  include_once(drupal_get_path('module', 'webform') . '/webform_submission.inc');
+  //module_load_include('inc', 'webform', 'webform.submission');
+  include_once(drupal_get_path('module', 'webform') . '/includes/webform.submissions.inc');
   // TODO: Look for forms that have the uid, if they are there, return them all. JQuery can hand back any updates - or we can just move on.
   // else we can tell jQuery this is new, and we can build fields to submit back to a secondary php function where we can save the form
   $submissions = webform_get_submissions(array('nid' => PA_REG_FORM_NID, 'uid' => $current_uid));
+  // Get static webform for titles
+  $webform_node = node_load(PA_REG_FORM_NID);
   // https://www.drupal.org/node/1731742
-  $return_array = array(
-    "test"=>"this",
-    "test2" => "that"
-  );
+  // Break these out into specific sid's and values
+  $return_info_array = array();
+  $applicant = user_load($current_uid);  
+  $return_info_array['applicant'] = $applicant->field_gal_first_name['und'][0]['safe_value'];
+  foreach($submissions as $key=>$value){
+    if(isset($value->data[5][0]) && $user_webform->data[5][0] > 0){
+      $applicant = user_load($value->uid);
+      $return_info_array[$key] = array(
+        'webcast' => $webform_node->webform['components'][4]['name'],
+        'number attending' =>$value->data[5][0],
+        'applicant'=>$applicant->field_gal_first_name['und'][0]['safe_value'],
+      );
+    }
+    // Signed up for Int/North
+    if(isset($value->data[15][0]) && $value->data[15][0] > 0){
+      $applicant = user_load($value->uid);
+      $return_info_array[$key] = array(
+        'webcast' => $webform_node->webform['components'][14]['name'],
+        'number attending' => $value->data[15][0],
+        'applicant'=>$applicant->field_gal_first_name['und'][0]['safe_value'],
+      );
+    }      
+
+    // Signed up for Lower Mainland
+    if(isset($value->data[7][0]) && $value->data[7][0] > 0){
+      $applicant = user_load($value->uid);
+      $return_info_array[$key] = array(
+        'webcast' => $webform_node->webform['components'][6]['name'],
+        'number attending' => $value->data[7][0],
+        'applicant'=>$applicant->field_gal_first_name['und'][0]['safe_value'],
+      );
+    }      
+  }
   
   // Return to js
-  echo json_encode($submissions);
+  echo json_encode($return_info_array);
   // Stops themeing layer from interacting with this
   die();
 }
@@ -843,7 +875,7 @@ function atwork_prem_awards_block_view($delta = ''){
   switch ($delta) {
     case 'prem_registration':
       //$block['title'] = t("Premiers Awards Registration");
-      $block['subject'] = t("Premiers Awards Registration");
+      //$block['subject'] = t("Premiers Awards Registration");
       $block['content'] = array(
         '#markup' => premiers_awards_registration_information(),
       );
@@ -886,7 +918,7 @@ function premiers_awards_registration_information(){
   // Now lets extract all user info for this form if applicable.
   if($result != null){
     $output .= "<p> Our records show that you registered with the following information:<p><br />";
-    $submitted_form_array = get_user_form_status($result, $sign_up_node);
+    //$submitted_form_array = get_user_form_status($result, $sign_up_node);
     // TODO: Print out fields from the array
     foreach($submitted_form_array as $key=>$value){
       $output .=  "<div class='registration-option'><p class='prem-award-webcast'><strong>Webcast:</strong> " . $value['webcast'] . ".</p><p class='prem-award-webcast'><strong>Number of Viewers: </strong>" . $value['number attending'] . "</p><input type='button' value='update/Edit' class='prem-award-button' id='prem-ajax-" . $key . "'></input><br /></div>";
@@ -897,13 +929,11 @@ function premiers_awards_registration_information(){
     $new_form = webform_node_view($full_node, 'full');
     $output .= render(theme_webform_view($full_node->content));
   }
-  //$new_form = webform_node_view($full_node, 'full');
-  //$output .= render(theme_webform_view($full_node->content));
-  $new_form = drupal_get_form('webform_client_form_' . $sign_up_node, $full_node, array(), TRUE);
+  //$new_form = drupal_get_form('webform_client_form_' . $sign_up_node, $full_node, array(), TRUE);
   // Strip off the atwork custom submit - we want to redirect elsewhere
   // Add in our redirect here:
-  $new_form['#node']->webform['redirect_url'] = 'http://video.web.gov.bc.ca/psa/pa/vod/';
-  $output .= drupal_render($new_form);
+  //$new_form['#node']->webform['redirect_url'] = 'http://video.web.gov.bc.ca/psa/pa/vod/';
+  //$output .= drupal_render($new_form);
   // Pass our UID to jQuery to create a pop.
   drupal_add_js(array('atwork_prem_awards' => array('user' => $current_user->name, 'uid' => $current_user->uid)), 'setting');
   // And attach our AJAX sheet
