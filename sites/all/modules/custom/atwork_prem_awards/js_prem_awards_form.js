@@ -30,6 +30,7 @@
     var user_name = items.applicant;
     var formString = '';
     var i = 0;
+    // TODO: Put this into its own function to make this cleaner.
     $.each(items, function(index, value) {
       console.log(value);
       i ++;
@@ -48,7 +49,7 @@
     });
 
     $('#block-atwork-activity-homepage').append('<div id="modal-pop"></div>');
-
+    // TODO: Put this in its own function, to make code a little cleaner.
     $('<div id="premiers-awards-form" class="prem-awards-form-wrapper">' +
         '<p>Hello ' + user_name + ', our records indicate that you have pre-registered for the following webcast(s). Please make any required chagnes and confirm the registration information below.</p>'  +
         '<form>' +
@@ -56,11 +57,13 @@
         '</form>' +
       '</div>').appendTo('#modal-pop');
     
+      // TODO: We need to add another hidden button, may want all of this in its own function as well.
     $('.prem-award-input').hide();
     
     // Now set up the dialog box    
     setDialog();
 
+    // TODO: Make this into an actual function
     $(".show-input-field").click(function(){
       $(this).prev().show();
       $(this).hide();
@@ -70,13 +73,13 @@
       event.preventDefault();
       redirectSubmit();
     });
-    
-
+    // End
     return;
   }
 
   // This function submits results to php and then redirects
   function redirectSubmit(){
+    // TODO: At this point we have already saved any changes, so we can just redirect.
     window.location.replace("/user/twerdal");
   }
 

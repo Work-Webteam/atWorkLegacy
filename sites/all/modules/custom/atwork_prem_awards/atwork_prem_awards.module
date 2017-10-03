@@ -792,9 +792,19 @@ function atwork_prem_awards_menu(){
     'weight' => 1,
     'type' => MENU_LOCAL_TASK,
   );
+  // TODO: add a submission function
   return $items;
 }
 
+// TODO: we are going to add a submission callback for updating forms here.
+
+/**
+ * Callback function for premiers award function if user has previously submitted an application.
+ *
+ * @param [string] $user - the idir of the user
+ * @param [string] $current_uid - the uid of the user.
+ * @return echo's a JSON string used by jQuery.
+ */
 function atwork_prem_awards_callback($user, $current_uid){
   // This has to be included on custom pages.
   //module_load_include('inc', 'webform', 'webform.submission');
@@ -860,8 +870,7 @@ function atwork_prem_awards_block_info() {
       'info' => t("Premiere's Awards Navigation"),
       'cache' => DRUPAL_NO_CACHE,
   );
-  
-  return $blocks;
+ return $blocks;
 }
 
 
@@ -874,9 +883,8 @@ function atwork_prem_awards_block_view($delta = ''){
   $block = array();
   switch ($delta) {
     case 'prem_registration':
-      //$block['title'] = t("Premiers Awards Registration");
-      //$block['subject'] = t("Premiers Awards Registration");
       $block['content'] = array(
+        // We don't really want to show anything here - so we are not receiving anything more than an empty string back.
         '#markup' => premiers_awards_registration_information(),
       );
       break;
@@ -900,10 +908,10 @@ function premiers_awards_registration_information(){
   // 2016 node number 
   $sign_up_node = PA_REG_FORM_NID;
   $full_node = node_load($sign_up_node);
-  // The output string we will return
+  // The output string we will return, we don't really want anything to show in the block, so we pass nothing back.
+  // TODO: Do we want to set out the scaffolding for the modal here? May be better than in the callback.
   $output = '';
-  $output = '<br/><p>Hello ' . $current_user->field_gal_first_name['und'][0]['safe_value'] . ',</p>';
-
+  
   // Check if the user currently has a webform
   $query = db_select('webform_submissions', 'w')
     ->fields('w', array('sid'))
@@ -937,43 +945,8 @@ function premiers_awards_registration_information(){
   // Pass our UID to jQuery to create a pop.
   drupal_add_js(array('atwork_prem_awards' => array('user' => $current_user->name, 'uid' => $current_user->uid)), 'setting');
   // And attach our AJAX sheet
+  // TODO: add a conditional that checks for any submissions, and if there are none, attaches a different js. Maybe us the if and else above
   drupal_add_js(drupal_get_path('module', 'atwork_prem_awards') . '/' . 'js_prem_awards_form.js');
   TODO:// Rebuild output from arrays above.
   return '';
-}
-
-/**
-* User form info by id number
-* @param $sids = array of suibmission id (sid) numbers sent as strings
-*/
-function  get_user_form_status($sids, $sign_up_node){
-  $return_info_array = array();
-  //In case they have more than one form 
-  foreach ($sids as $sid){
-    $user_webform = webform_get_submission($sign_up_node, $sid->sid, FALSE);
-    $webform_node = node_load($sign_up_node);
-    // Signed up for Vancouver Island
-    if(isset($user_webform->data[5][0]) && $user_webform->data[5][0] > 0){
-      $return_info_array[$sid->sid] = array(
-        'webcast' => $webform_node->webform['components'][4]['name'],
-        'number attending' => $user_webform->data[5][0],
-      );
-    }
-    // Signed up for Int/North
-    if(isset($user_webform->data[15][0]) && $user_webform->data[15][0] > 0){
-      $return_info_array[$sid->sid] = array(
-        'webcast' => $webform_node->webform['components'][14]['name'],
-        'number attending' => $user_webform->data[15][0],
-      );
-    }      
-
-    // Signed up for Lower Mainland
-    if(isset($user_webform->data[7][0]) && $user_webform->data[7][0] > 0){
-      $return_info_array[$sid->sid] = array(
-        'webcast' => $webform_node->webform['components'][6]['name'],
-        'number attending' => $user_webform->data[7][0],
-      );
-    }      
-  }
-  return $return_info_array;
 }
