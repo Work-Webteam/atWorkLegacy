@@ -823,7 +823,7 @@ function atwork_prem_awards_callback($user, $current_uid){
     if(isset($value->data[5][0]) && $user_webform->data[5][0] > 0){
       $return_info_array[$key] = array(
         'webcast' => $webform_node->webform['components'][4]['name'],
-        'number attending' =>$value->data[5][0],
+        'numberAttending' =>$value->data[5][0],
         'ministry' => $value->data[10][0],
         'name' => $value->data[9][0],
         'city' => $value->data[11][0], 
@@ -833,7 +833,7 @@ function atwork_prem_awards_callback($user, $current_uid){
     if(isset($value->data[15][0]) && $value->data[15][0] > 0){
       $return_info_array[$key] = array(
         'webcast' => $webform_node->webform['components'][14]['name'],
-        'number attending' => $value->data[15][0],
+        'numberAttending' => $value->data[15][0],
         'ministry' => $value->data[10][0],
         'name' => $value->data[9][0],
         'city' => $value->data[11][0], 
@@ -843,7 +843,7 @@ function atwork_prem_awards_callback($user, $current_uid){
     if(isset($value->data[7][0]) && $value->data[7][0] > 0){
       $return_info_array[$key] = array(
         'webcast' => $webform_node->webform['components'][6]['name'],
-        'number attending' => $value->data[7][0],
+        'numberAttending' => $value->data[7][0],
         'ministry' => $value->data[10][0],
         'name' => $value->data[9][0],
         'city' => $value->data[11][0],     

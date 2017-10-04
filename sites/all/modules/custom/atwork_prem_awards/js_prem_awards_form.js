@@ -49,11 +49,24 @@
     setDialog();
 
     // TODO: Make this into an actual function
-    $(".show-input-field").click(function(){
-      //TODO: We need to account for the sid here - so only show fields within the specific fieldset.
-      $('.prem-award-input').show();
-      console.log($(this).val());
+    $(".show-input-field").click(function (){
+      // We need to account for the sid here - so only show fields within the specific fieldset.
+      var currentSid = $(this).attr("sid");
+      
+      $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-input').show();
+      $('.fieldset-prem-award-class-' + currentSid + ' .cancel-show-input-field').show();
+      $('.fieldset-prem-award-class-' + currentSid + ' save-form-field').show();
       $(this).hide();
+    });
+
+    $(".cancel-show-input-field").click(function (){
+      // We need to account for the sid here - so only show fields within the specific fieldset
+      var currentSID = $(this)attr("sid");
+      $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-input').hide();
+      $('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').show();
+      $('.fieldset-prem-award-class-' + currentSid + ' save-form-field').hide();      
+      $(this).hide();
+      
     });
 
     form = dialog.find("form").on("submit", function(event) {
@@ -105,7 +118,7 @@
         return;
       } else {
         // Embed the sid in the fieldset to keep information wrapped in the submission id.
-        formString += '<fieldset sid="' + index + '">';
+        formString += '<fieldset sid="' + index + '" class="fieldset-prem-award-class-' + index + '">';
           // Webcast bundle
           // Using the label to show the current information that is entered. If this changes we should reflect that change here
           formString += '<label for="webcast-' + index + '">Webcast: ' + value.webcast + '</label>';
@@ -124,7 +137,9 @@
           formString += '<label for="city-' + index + '">City: ' + value.city + '</label>';
           formString += '<input type="text" name="city-' + index + '" value="' + value.city + '" class="prem-award-input">';
           // The field edit and confirm button should be the only button available initially.
-          formString += '<input type="button" class="show-input-field" sid="' + value.sid + 'value="Edit">';
+          formString += '<input type="button" class="show-input-field" sid="' + index + '" value="Edit">';
+          // Cancel button in case they don't want to edit afterall
+          formString += '<input type="button" class="cancel-show-input-field" sid="' + index + '" value="Cancel">';
           // Holder button to fire a function to post changes. This is hidden initially
           formString += '<input type="button" class="save-form-field" id="save-form-field-' + index + '" value="save">';
         formString += '</fieldset>';
