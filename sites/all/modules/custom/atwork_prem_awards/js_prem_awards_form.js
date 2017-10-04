@@ -43,7 +43,7 @@
       '</div>').appendTo('#modal-pop');
     
       // TODO: We need to add another hidden button, may want all of this in its own function as well.
-    $('.prem-award-input').hide();
+    $('.prem-award-input, .save-form-field, .cancel-show-input-field').hide();
     
     // Now set up the dialog box    
     setDialog();
@@ -55,16 +55,16 @@
       
       $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-input').show();
       $('.fieldset-prem-award-class-' + currentSid + ' .cancel-show-input-field').show();
-      $('.fieldset-prem-award-class-' + currentSid + ' save-form-field').show();
+      $('.fieldset-prem-award-class-' + currentSid + ' .save-form-field').show();
       $(this).hide();
     });
 
     $(".cancel-show-input-field").click(function (){
       // We need to account for the sid here - so only show fields within the specific fieldset
-      var currentSID = $(this).attr("sid");
+      var currentSid = $(this).attr("sid");
       $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-input').hide();
       $('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').show();
-      $('.fieldset-prem-award-class-' + currentSid + ' save-form-field').hide();      
+      $('.fieldset-prem-award-class-' + currentSid + ' .save-form-field').hide();      
       $(this).hide();
       
     });
@@ -123,7 +123,12 @@
           // Using the label to show the current information that is entered. If this changes we should reflect that change here
           formString += '<label for="webcast-' + index + '">Webcast: ' + value.webcast + '</label>';
           // All input fields should be hidden on initial form launch
-          formString += '<input type="text" name="webcast-' + index + '" value="' + value.webcast + '" class="prem-award-input">';
+          formString += '<select name="webcast-' + index + '" value="' + value.webcast + '" class="prem-award-input">';
+            // TODO: Get proper dates/times for this.  
+            formString += '<option value="Sept-17">VancouverIsland</option>';
+            formString += '<option value="Sept-22">Mainland</option>';
+            formString += '<option value="Sept-31">Outer Reaches</option>';
+          formString += '</select>';
           // Number attending bundle
           formString += '<label for="attending-' + index + '">Number of Attendies: ' + value.numberAttending + '</label>';
           formString += '<input type="text" name="attending-' + index + '" value="' + value.numberAttending + '" class="prem-award-input">';
