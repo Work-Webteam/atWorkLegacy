@@ -61,7 +61,7 @@
 
     $(".cancel-show-input-field").click(function (){
       // We need to account for the sid here - so only show fields within the specific fieldset
-      var currentSID = $(this)attr("sid");
+      var currentSID = $(this).attr("sid");
       $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-input').hide();
       $('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').show();
       $('.fieldset-prem-award-class-' + currentSid + ' save-form-field').hide();      
