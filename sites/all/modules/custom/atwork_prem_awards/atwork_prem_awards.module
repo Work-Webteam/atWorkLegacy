@@ -792,7 +792,7 @@ function atwork_prem_awards_menu(){
     'weight' => 1,
     'type' => MENU_LOCAL_TASK,
   );
-  // TODO: add a submission function
+  // TODO: add a submission function path
   return $items;
 }
 
@@ -819,7 +819,6 @@ function atwork_prem_awards_callback($user, $current_uid){
   $return_info_array = array();
   $applicant = user_load($current_uid);  
   $return_info_array['applicant'] = $applicant->field_gal_first_name['und'][0]['safe_value'];
-  dpm($submissions);
   foreach($submissions as $key=>$value){
     if(isset($value->data[5][0]) && $user_webform->data[5][0] > 0){
       $return_info_array[$key] = array(
