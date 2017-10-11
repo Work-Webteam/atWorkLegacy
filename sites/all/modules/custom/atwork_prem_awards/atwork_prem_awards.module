@@ -830,38 +830,39 @@ function atwork_prem_awards_callback($user, $current_uid){
   $applicant = user_load($current_uid);  
   $return_info_array['applicant'] = $applicant->field_gal_first_name['und'][0]['safe_value'];
   $return_info_array['uid'] = $current_uid;
-  foreach($submissions as $key=>$value){
-    if(isset($value->data[5][0]) && $value->data[5][0] > 0){
-      $return_info_array[$key] = array(
-        'webcast' => $webform_node->webform['components'][4]['name'],
-        'numberAttending' =>$value->data[5][0],
-        'ministry' => $value->data[10][0],
-        'name' => $value->data[9][0],
-        'city' => $value->data[11][0], 
-      );
+  if(isset($submissions) && !empty($submissions)){
+    foreach($submissions as $key=>$value){
+      if(isset($value->data[5][0]) && $value->data[5][0] > 0){
+        $return_info_array[$key] = array(
+          'webcast' => $webform_node->webform['components'][4]['name'],
+          'numberAttending' =>$value->data[5][0],
+          'ministry' => $value->data[10][0],
+          'name' => $value->data[9][0],
+          'city' => $value->data[11][0], 
+        );
+      }
+      // Signed up for Int/North
+      if(isset($value->data[15][0]) && $value->data[15][0] > 0){
+        $return_info_array[$key] = array(
+          'webcast' => $webform_node->webform['components'][14]['name'],
+          'numberAttending' => $value->data[15][0],
+          'ministry' => $value->data[10][0],
+          'name' => $value->data[9][0],
+          'city' => $value->data[11][0], 
+        );
+      }      
+      // Signed up for Lower Mainland
+      if(isset($value->data[7][0]) && $value->data[7][0] > 0){
+        $return_info_array[$key] = array(
+          'webcast' => $webform_node->webform['components'][6]['name'],
+          'numberAttending' => $value->data[7][0],
+          'ministry' => $value->data[10][0],
+          'name' => $value->data[9][0],
+          'city' => $value->data[11][0],     
+        );
+      }      
     }
-    // Signed up for Int/North
-    if(isset($value->data[15][0]) && $value->data[15][0] > 0){
-      $return_info_array[$key] = array(
-        'webcast' => $webform_node->webform['components'][14]['name'],
-        'numberAttending' => $value->data[15][0],
-        'ministry' => $value->data[10][0],
-        'name' => $value->data[9][0],
-        'city' => $value->data[11][0], 
-      );
-    }      
-    // Signed up for Lower Mainland
-    if(isset($value->data[7][0]) && $value->data[7][0] > 0){
-      $return_info_array[$key] = array(
-        'webcast' => $webform_node->webform['components'][6]['name'],
-        'numberAttending' => $value->data[7][0],
-        'ministry' => $value->data[10][0],
-        'name' => $value->data[9][0],
-        'city' => $value->data[11][0],     
-      );
-    }      
-  }
-  
+  } 
   // Return to js
   echo json_encode($return_info_array);
   // Stops themeing layer from interacting with this
@@ -940,7 +941,10 @@ function atwork_prem_awards_submit_callback(){
 }
 
 function atwork_prem_awards_new_submit_callback(){
-  
+  module_load_include('inc', 'webform', 'includes/webform.submissions');
+  $submission_array = $_POST;
+  $status = '500';
+  $status = create_new_webform_entry($submission_array);
 }
 
 /**
