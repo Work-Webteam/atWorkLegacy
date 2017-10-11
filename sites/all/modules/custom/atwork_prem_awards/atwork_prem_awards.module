@@ -792,11 +792,21 @@ function atwork_prem_awards_menu(){
     'weight' => 1,
     'type' => MENU_LOCAL_TASK,
   );
-  // TODO: add a submission function path
+ // submission function path for updates
+  $items['p-awards/submit'] = array(
+    'page callback' => 'atwork_prem_awards_submit_callback',
+    //'page arguements' => array(2),
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+  );
+  // submission function path for new
+  $items['p-awards/submit/new'] = array(
+    'page callback' => 'atwork_prem_awards_new_submit_callback',
+    'types' => MENU_CALLBACK,
+    'access arguements' => array('access content'),
+  );
   return $items;
 }
-
-// TODO: we are going to add a submission callback for updating forms here.
 
 /**
  * Callback function for premiers award function if user has previously submitted an application.
@@ -819,8 +829,9 @@ function atwork_prem_awards_callback($user, $current_uid){
   $return_info_array = array();
   $applicant = user_load($current_uid);  
   $return_info_array['applicant'] = $applicant->field_gal_first_name['und'][0]['safe_value'];
+  $return_info_array['uid'] = $current_uid;
   foreach($submissions as $key=>$value){
-    if(isset($value->data[5][0]) && $user_webform->data[5][0] > 0){
+    if(isset($value->data[5][0]) && $value->data[5][0] > 0){
       $return_info_array[$key] = array(
         'webcast' => $webform_node->webform['components'][4]['name'],
         'numberAttending' =>$value->data[5][0],
@@ -856,6 +867,147 @@ function atwork_prem_awards_callback($user, $current_uid){
   // Stops themeing layer from interacting with this
   die();
 }
+
+function atwork_prem_awards_submit_callback(){
+  module_load_include('inc', 'webform', 'includes/webform.submissions');
+  $submission_array = $_POST;
+  $status = '500';
+  // This is a new webform
+  if($submission_array['sid'] == null){
+    // create a new webform (insert function)
+    $status = create_new_webform_entry($submission_array);    
+  } else {
+     // Get existing webform
+    $webform = webform_get_submission(PA_REG_FORM_NID, $submission_array['sid']);
+    // Check if this matches webcast for existing webform
+    if($submission_array['webcast'] == 'vancouverIsland' && isset($webform->data[13][0]) && $webform->data[13][0] == 'vi_webcast'){
+      //continue
+    } elseif ($submission_array['webcast'] == 'lowerMainland' && isset($webform->data[13][0]) && $webform->data[13][0] == 'main_webcast') {
+      //continue
+    } elseif ($submission_array['webcast'] == 'interiorNorth'&& isset($webform->data[13][0]) && $webform->data[13][0] == 'int_webcast') {
+      //continue
+    } else {
+      // This is net new, or they have changed the webcast, should be a new entry
+      $status = create_new_webform_entry($submission_array);
+      echo json_encode($status);
+      die();
+    }
+    // If found, update webform with any changes
+    $changes = 0;
+    // Check name
+    if($webform->data[9][0] != $submission_array['name']){
+      $webform->data[9][0] = $submission_array['name'];
+      $changes ++;
+    }
+    //check ministry
+    if($webform->data[10][0] != $submission_array['ministry']){
+      $webform->data[10][0] = $submission_array['ministry'];
+      $changes ++;
+    }
+    // check number attending 
+    if(isset($webform->data[5][0]) && $webform->data[5][0] > 1 && $webform->data[5][0] != $submission_array['attending']){
+      $webform->data[5][0] = $submission_array['attending'];
+      $changes ++;
+      
+    }
+    if(isset($webform->data[7][0]) &&  $webform->data[7][0] > 1 && $webform->data[7][0] != $submission_array['attending']){
+      $webform->data[7][0] = $submission_array['attending'];
+      $changes ++;
+      
+    }
+    if(isset($webform->data[15][0]) &&  $webform->data[15][0] > 1 && $webform->data[15][0] != $submission_array['attending']){
+      $webform->data[15][0] = $submission_array['attending'];
+      $changes ++;
+      
+    }
+    // check city
+    if($webform->data[11][0] != $submission_array['city']){
+      $webform->data[11][0] = $submission_array['city'];
+      $changes ++;
+      
+    }
+    // update webform if any changes
+    if($changes > 0){
+      $form_node = node_load(PA_REG_FORM_NID);
+      webform_submission_update($form_node, $webform);
+    }
+    $status = "200";
+  }
+  
+  // TODO: Return either a 200 or 500 to js, so we can mark if it is successful or not.
+  echo json_encode($status);
+  die();
+}
+
+function atwork_prem_awards_new_submit_callback(){
+  
+}
+
+/**
+ * Helper function to create new webform if required
+ *
+ * @param [array] $submission_array
+ * @return string of status (200 okay, 500 error)
+ */
+function create_new_webform_entry($submission_array){
+  $current_user = user_load($submission_array['uid']);
+  $data = array(
+    '9' => array(
+      '0' => $submission_array['name'],
+    ),
+    '10' => array(
+      '0' => $submission_array['ministry'],
+    ),
+    '11' => array(
+      '0' => $submission_array['city'],
+    ),
+    '12' => array(
+      '0' => $current_user->mail,
+    ),
+  );
+
+  // Now check for webcast choice
+  if($submission_array['webcast'] == 'vancouverIsland'){
+    $data['13'] = array(
+      "0" => "vi_webcast"
+    );
+    $data['5'] = array(
+      "0" => $submission_array['attending']
+    );
+  } elseif($submission_array['webcast'] == 'interiorNorth') {
+    $data['13'] = array(
+      "0" => "int_webcast"
+    );
+    $data['15'] = array(
+      "0" => $submission_array['attending']
+    );
+  } elseif($submission_array['webcast'] == 'lowerMainland'){
+    $data['13'] = array(
+      "0" => "main_webcast"
+    );
+    $data['7'] = array(
+      "0" => $submission_array['attending']
+    );
+  } else {
+    return '500 : No webcast selected';
+  }
+  $webform_node = node_load(PA_REG_FORM_NID);
+  //webform_submission_create()
+  $submission = (object) array(
+    'nid' => PA_REG_FORM_NID,
+    'uid' => $current_user->uid,
+    'sid' => NULL,
+    'submitted' => REQUEST_TIME,
+    'completed' => REQUEST_TIME,
+    'remote_addr' => ip_address(),
+    'is_draft' => FALSE,
+    'data' => $data,
+  );
+
+  $sid = webform_submission_insert($webform_node, $submission);
+  return '200';
+}
+
 
 /**
 * Implements hook_block_info
@@ -927,22 +1079,13 @@ function premiers_awards_registration_information(){
 
   // Now lets extract all user info for this form if applicable.
   if($result != null){
-    // TODO: Print out fields from the array
+    // Add form update js
+    drupal_add_js(drupal_get_path('module', 'atwork_prem_awards') . '/' . 'js_prem_awards_form.js');
   } else {
-    //TODO: Get and render the original form?
-    //$new_form = webform_node_view($full_node, 'full');
-    //$output .= render(theme_webform_view($full_node->content));
+    // Add new form js
+    drupal_add_js(drupal_get_path('module', 'atwork_prem_awards') . '/' . 'js_prem_awards_new_form.js');
   }
-  //$new_form = drupal_get_form('webform_client_form_' . $sign_up_node, $full_node, array(), TRUE);
-  // Strip off the atwork custom submit - we want to redirect elsewhere
-  // Add in our redirect here:
-  //$new_form['#node']->webform['redirect_url'] = 'http://video.web.gov.bc.ca/psa/pa/vod/';
-  //$output .= drupal_render($new_form);
-  // Pass our UID to jQuery to create a pop.
+   // Pass our UID to jQuery to create a pop.
   drupal_add_js(array('atwork_prem_awards' => array('user' => $current_user->name, 'uid' => $current_user->uid)), 'setting');
-  // And attach our AJAX sheet
-  // TODO: add a conditional that checks for any submissions, and if there are none, attaches a different js. Maybe us the if and else above
-  drupal_add_js(drupal_get_path('module', 'atwork_prem_awards') . '/' . 'js_prem_awards_form.js');
-  TODO:// Rebuild output from arrays above.
   return $output;
 }
