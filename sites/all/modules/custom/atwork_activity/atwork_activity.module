@@ -2450,8 +2450,6 @@ function atwork_activity_user_view_alter(&$build){
       drupal_set_message($value, 'status');
     }
   }
-
-
 }
 
 
