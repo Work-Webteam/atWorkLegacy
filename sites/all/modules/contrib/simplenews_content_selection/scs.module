@@ -139,14 +139,14 @@ function scs_form_node_form_alter(&$form, &$form_state) {
  */
 function scs_node_sort_form($form, &$form_state) {
   $nodes = array_filter($form_state['values']['nodes']);
-/*
+
   // Checkbox for Table of contents
   $form['scs_toc'] = array(
     '#type' => 'checkbox',
     '#title' => t('Create a table of contents'),
     '#description' => t('Create a table of contents at top of the newsletter with the titles of the selected nodes. If newsletter is HTML format, these table of contents will be bookmarks.'),
   );
-*/
+
   // Create elements for the tablesort
   $form['nodes']['#tree'] = TRUE;
   foreach ($nodes as $nid) {
