@@ -61,68 +61,131 @@
     }
     // Now set up the dialog box    
     setDialog();
-
-    // TODO: Make this into an actual function. 
-    // Click handler for "edit" functionality
-    $(".show-input-field").click(function (){
-      // We need to account for the sid here - so only show fields within the specific fieldset.
-      if($(this).attr("sid") != 'Null'){
-        var currentSid = $(this).attr("sid");
-      } else if (($(this).attr("id").length) > 0 ){
-        var currentSid = $(this).attr("id");        
-      } 
-      
-      $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-input').show();
-      $('.fieldset-prem-award-class-' + currentSid + ' .cancel-show-input-field').show();
-      $('.fieldset-prem-award-class-' + currentSid + ' .save-form-field').show();
-      
-      $(this).hide();
-    });
-
-    // Click handler for "cancel" functionality
-    $(".cancel-show-input-field").click(function (){
-      // We need to account for the sid here - so only show fields within the specific fieldset
-      if($(this).attr("sid") != 'Null'){
-        var currentSid = $(this).attr("sid");
-      } else if (($(this).attr("id").length) > 0 ){
-        var currentSid = $(this).attr("id");        
-      }       
-      $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-input').hide();
-      $('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').show();
-      $('.fieldset-prem-award-class-' + currentSid + ' .save-form-field').hide();      
-      $(this).hide();
-    });
-
-    // Click handler for save functionality
-    $(".save-form-field").click(function (){
-      // Get sid so we know which form we are saving
-      if($(this).attr("sid") != 'Null'){
-        var currentSid = $(this).attr("sid");
-      } else if (($(this).attr("id").length) > 0 ){
-        var currentSid = $(this).attr("id");
-        var id = true;        
-      }   
-      var confirmation = saveUpdates(currentSid, uid, id);
-    });
-
-    // Click handler to add new form
-    $(".add-new-form").click(function (){
-      console.log('click');
-      var blankForm = newForm();
-      $('#add-new-form').before(blankForm);
-      // TODO: A function that adds click handlers to the new form. This could be used above as well with a marker class, so we don't double down on it.
-    });
-    form = dialog.find("form").on("submit", function(event) {
-      event.preventDefault();
-      redirectSubmit();
-    });
+    // Set all existing click handlers
+    setClickHandlers();
     // End
     return;
   }
 
-  // This function submits results to php and then redirects
+  /**
+   * Function that sets all click handlers, and makes sure we are not setting them twice. Passes off logic to seperate functions
+   */
+  function setClickHandlers(){
+    // Click handler for "edit" functionality
+    $('.show-input-field:not(.atwork-prem-awards-processed)')
+      .addClass('atwork-prem-awards-processed')
+      .bind('click', function (){
+        editButtonClickHandler($(this));
+      });
+
+    // Click handler for "cancel" functionality
+    $(".cancel-show-input-field:not(.atwork-prem-awards-processed)")
+      .addClass('atwork-prem-awards-processed')
+      .bind('click', function (){
+        cancelButtonClickHandler($(this));
+      });
+
+    // Click handler for "cancel" functionality
+    $(".save-form-field:not(.atwork-prem-awards-processed)")
+      .addClass('atwork-prem-awards-processed')
+      .bind('click', function (){
+        saveButtonClickHandler($(this), uid);
+      });
+
+    // Click handler to add new form
+    $(".add-new-form:not(.atwork-prem-awards-processed)")
+    .addClass('atwork-prem-awards-processed')
+    .bind('click', function (){
+      var blankForm = newForm();
+      $('#add-new-form').before(blankForm);
+      setClickHandlers();
+    });
+    // Submit handler - this simply redirects form to video
+    form = dialog.find("form").on("submit", function(event) {
+      event.preventDefault();
+      redirectSubmit();
+    });
+  }
+
+  /**
+   * This functoin handles save button functions
+   */
+  function saveButtonClickHandler(element, uid){
+    // We need to account for the sid here - so only show fields within the specific fieldset.
+    if((element).attr("sid") != 'Null'){
+      var currentSid = (element).attr("sid");
+    } else if (((element).attr("id").length) > 0 ){
+      var currentSid = (element).attr("id");        
+    } 
+    var id = (element).attr("id");
+    // Check that all fields are filled out.
+    var attend = $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-attending').val();
+    var name = $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-name').val();
+    var ministry = $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-ministry').val();
+    var city = $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-city').val();
+    if(attend.length < 1 || attend == 0){
+      $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-attending').css('border-color', 'red');
+      $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-attending').after('<p class="error-note-attend" style="color: red;">* Attending field cannot be blank, please enter number of viewers.</p>');
+      return;
+    }
+    if(name.length < 1){
+      $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-name').css('border-color', 'red');
+      $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-name').after('<p class="error-note-name" style="color: red;">* Name field cannot be blank, please enter name.</p>');
+      return;
+    }
+    if(ministry.length < 1){
+      $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-ministry').css('border-color', 'red');
+      $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-ministry').after('<p class="error-note-ministry" style="color: red;">* Ministry field cannot be blank, please enter the name of your Ministry.</p>');
+      return;
+    }
+    
+    // If they are, then save items.
+    var confirmation = saveUpdates(currentSid, uid, id);
+    // Else mark that field requires info.
+    // Hide text boxes and put text into labels.
+    return;
+  }
+
+  /**
+   * This function handles edit button functions
+   */
+  function editButtonClickHandler(element){
+    // We need to account for the sid here - so only show fields within the specific fieldset.
+    if((element).attr("sid") != 'Null'){
+      var currentSid = (element).attr("sid");
+    } else if (((element).attr("id").length) > 0 ){
+      var currentSid = (element).attr("id");        
+    } 
+
+    $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-input').show();
+    $('.fieldset-prem-award-class-' + currentSid + ' .cancel-show-input-field').show();
+    $('.fieldset-prem-award-class-' + currentSid + ' .save-form-field').show();
+
+    $(element).hide();
+    return;
+  }
+
+  /**
+   * This function handles edit button functions
+   */
+  function cancelButtonClickHandler(element){
+    // We need to account for the sid here - so only show fields within the specific fieldset.
+    if((element).attr("sid") != 'Null'){
+      var currentSid = (element).attr("sid");
+    } else if (((element).attr("id").length) > 0 ){
+      var currentSid = (element).attr("id");        
+    } 
+
+    $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-input').hide();
+    $('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').show();
+    $('.fieldset-prem-award-class-' + currentSid + ' .save-form-field').hide();      
+    $(element).hide();
+  }
+  /**
+   * This function submits redirects user to prem awards video
+   **/ 
   function redirectSubmit(){
-    // TODO: At this point we have already saved any changes via AJAX, so we can just redirect.
+    // TODO: At this point we have already saved any changes via AJAX, so we can just redirect to prem awards vid.
     window.location.replace("/user/twerdal");
   }
 

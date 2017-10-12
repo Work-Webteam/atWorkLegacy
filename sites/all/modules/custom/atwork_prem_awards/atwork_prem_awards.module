@@ -1057,39 +1057,16 @@ function atwork_prem_awards_block_view($delta = ''){
 }
 
 /**
-* Function that gets info for user and their past applications/lack of application
+* Function that gets info for user, and passes it to the dom for registration check.
 **/
 function premiers_awards_registration_information(){
   global $user;
   $current_user = user_load($user->uid);
-  // 2017 node number
-  // 2016 node number 
-  $sign_up_node = PA_REG_FORM_NID;
-  $full_node = node_load($sign_up_node);
   // The output string we will return, we don't really want anything to show in the block, so we pass nothing back.
-  // TODO: Do we want to set out the scaffolding for the modal here? May be better than in the callback.
   $output = '';
   
-  // Check if the user currently has a webform
-  $query = db_select('webform_submissions', 'w')
-    ->fields('w', array('sid'))
-    ->condition('w.uid', $current_user->uid)
-    ->condition('w.nid', $sign_up_node);
-  $result = $query
-    ->execute()
-    ->fetchAll();
-
-  //$submissions = webform_get_submissions(array('nid' => $sign_up_node, 'uid' => $current_user->uid));
-
-  // Now lets extract all user info for this form if applicable.
-  if($result != null){
-    // Add form update js
-    drupal_add_js(drupal_get_path('module', 'atwork_prem_awards') . '/' . 'js_prem_awards_form.js');
-  } else {
-    // Add new form js
-    drupal_add_js(drupal_get_path('module', 'atwork_prem_awards') . '/' . 'js_prem_awards_new_form.js');
-  }
-   // Pass our UID to jQuery to create a pop.
+  // Add form update js
+  drupal_add_js(drupal_get_path('module', 'atwork_prem_awards') . '/' . 'js_prem_awards_form.js');
   drupal_add_js(array('atwork_prem_awards' => array('user' => $current_user->name, 'uid' => $current_user->uid)), 'setting');
   return $output;
 }
