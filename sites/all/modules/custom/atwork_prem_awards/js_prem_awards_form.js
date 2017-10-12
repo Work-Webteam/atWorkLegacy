@@ -401,13 +401,12 @@
     $('<div id="save-confirmation-message-' + currentSid + '"><p>Saved</p></div>').insertAfter('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').show();
 
     setTimeout(function(){
-      console.log("Timeout Worked");
       $('#save-confirmation-message-' + currentSid).slideToggle("fast");    
     }, 5000);
   }
 
 
-
+  // TODO: set teh confirmation message and save on returnData. Will need relevant sid to do this.
   function ajaxCompleted (returnData) {
     console.log(returnData);
     console.log("returned");
