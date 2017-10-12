@@ -26,6 +26,10 @@
     return false;
   };
 
+  /**
+   * Main function that sets form/modal and click-handlers.
+   * @param {array} items 
+   */
   function printResults(items) {
     // Need to generate some HTML here and pop a model
     var user_name = items.applicant;
@@ -114,7 +118,7 @@
   }
 
   /**
-   * This functoin handles save button functions
+   * This functoin handles save logic
    */
   function saveButtonClickHandler(element, uid){
     // We need to account for the sid here - so only show fields within the specific fieldset.
@@ -164,10 +168,12 @@
 
     // If they are, then save items.
     var confirmation = saveUpdates(currentSid, uid, id);
+    // If they were restricted from adding another form, now they can
     $('#add-new-form').show();
+    // If they were restricted from continuing to prem awards, now they can go there (have at least one form filled out)
     $(".ui-dialog-buttonset :first(.ui-button.ui-widget.ui-corner-all)").prop("disabled", false);
-    // Else mark that field requires info.
     // Hide text boxes and put text into labels.
+    updateFieldLabels(currentSid);
     return;
   }
 
@@ -368,6 +374,39 @@
       data: data,
     });
   }
+  
+  function updateFieldLabels(currentSid){
+    var webcast = $('.fieldset-prem-award-class-' + currentSid + ' select.prem-award-input').val();
+    var attending = $('.fieldset-prem-award-class-' + currentSid + ' input.prem-award-input.prem-award-attending').val();
+    var name = $('.fieldset-prem-award-class-' + currentSid + ' input.prem-award-input.prem-award-name').val();    
+    var ministry = $('.fieldset-prem-award-class-' + currentSid + ' input.prem-award-input.prem-award-ministry').val();
+    var city = $('.fieldset-prem-award-class-' + currentSid + ' input.prem-award-input.prem-award-city').val();
+
+    $('.fieldset-prem-award-class-' + currentSid + ' label[for="webcast-' + currentSid + '"]').html('Webcast: ' + webcast);
+    $('.fieldset-prem-award-class-' + currentSid + ' label[for="attending-' + currentSid + '"]').html('Number Attending: ' + attending);
+    $('.fieldset-prem-award-class-' + currentSid + ' label[for="name-' + currentSid + '"]').html('Name: ' + name);
+    $('.fieldset-prem-award-class-' + currentSid + ' label[for="ministry-' + currentSid + '"]').html('Ministry: ' + ministry);
+    $('.fieldset-prem-award-class-' + currentSid + ' label[for="city-' + currentSid + '"]').html('City: ' + city);
+     
+    $('.fieldset-prem-award-class-' + currentSid + ' select.prem-award-input').slideUp("slow");
+    $('.fieldset-prem-award-class-' + currentSid + ' input.prem-award-input.prem-award-attending').slideUp("slow");
+    $('.fieldset-prem-award-class-' + currentSid + ' input.prem-award-input.prem-award-name').slideUp("slow");
+    $('.fieldset-prem-award-class-' + currentSid + ' input.prem-award-input.prem-award-ministry').slideUp("slow");
+    $('.fieldset-prem-award-class-' + currentSid + ' input.prem-award-input.prem-award-city').slideUp("slow");
+
+    $('.fieldset-prem-award-class-' + currentSid + ' .cancel-show-input-field').hide();
+    $('.fieldset-prem-award-class-' + currentSid + ' .save-form-field').hide();
+    $('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').show();
+    
+    $('<div id="save-confirmation-message-' + currentSid + '"><p>Saved</p></div>').insertAfter('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').show();
+
+    setTimeout(function(){
+      console.log("Timeout Worked");
+      $('#save-confirmation-message-' + currentSid).slideToggle("fast");    
+    }, 5000);
+  }
+
+
 
   function ajaxCompleted (returnData) {
     console.log(returnData);
