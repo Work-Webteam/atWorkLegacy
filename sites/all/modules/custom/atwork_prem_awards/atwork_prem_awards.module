@@ -816,7 +816,7 @@ function atwork_prem_awards_callback($user, $current_uid){
   // This has to be included on custom pages.
   //module_load_include('inc', 'webform', 'webform.submission');
   include_once(drupal_get_path('module', 'webform') . '/includes/webform.submissions.inc');
-  // TODO: Look for forms that have the uid, if they are there, return them all. JQuery can hand back any updates - or we can just move on.
+  // Look for forms that have the uid, if they are there, return them all. JQuery can hand back any updates - or we can just move on.
   // else we can tell jQuery this is new, and we can build fields to submit back to a secondary php function where we can save the form
   $submissions = webform_get_submissions(array('nid' => PA_REG_FORM_NID, 'uid' => $current_uid));
   // Get static webform for titles

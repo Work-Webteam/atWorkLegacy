@@ -7,7 +7,7 @@
         settings.atwork_prem_awards.user = 'Employee News';
       }
       // Only run if the link exists in the current page load or fragment refresh.
-      // TODO: Create a button or link with a specific ID in the ad space
+      // Note: this module requires the activiation of a block, and that you create a button or link with a specific ID in the ad space
       $('#prem-awards-form:not(.atwork-prem-awards-processed)', context)
         .addClass('atwork-prem-awards-processed')
         .bind('click', function (){
@@ -41,7 +41,6 @@
       formString = buildString(items);
       
       $('#block-atwork-activity-homepage').append('<div id="modal-pop"></div>');
-      // TODO: Put this in its own function, to make code a little cleaner.
       $('<div id="premiers-awards-form" class="prem-awards-form-wrapper">' +
           '<p>Hello ' + user_name + ', our records indicate that you have pre-registered for the following webcast(s). Please make any required changes and confirm the registration information below.</p>'  +
           '<form>' +
@@ -50,7 +49,6 @@
           '</form>' + 
         '</div>').appendTo('#modal-pop');
       
-        // TODO: We need to add another hidden button, may want all of this in its own function as well.
       $('.prem-award-input, .save-form-field, .cancel-show-input-field').hide();
     } else {
       $('#block-atwork-activity-homepage').append('<div id="modal-pop"></div>');
@@ -397,7 +395,7 @@
     $('.fieldset-prem-award-class-' + currentSid + ' .save-form-field').hide();
     $('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').show();
     
-    $('<div id="save-confirmation-message-' + currentSid + '"><p>Saved</p></div>').insertAfter('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').slideDown();
+    $('<div id="save-confirmation-message-' + currentSid + ' class="save-confirmation-message"><p>Saved</p></div>').insertAfter('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').slideDown();
 
     setTimeout(function(){
       $('#save-confirmation-message-' + currentSid).slideToggle("fast");    
@@ -408,19 +406,19 @@
 
   // set teh confirmation message and save on returnData. Will need relevant sid to do this.
   function ajaxCompleted (returnData) {
-    // TODO: = general error, and one that appears in form-field
     if(returnData['response'] == 200){
       updateFieldLabels(returnData['sid']);
+    // general error, and one that appears in form-field
     } else if ("response" in returnData && returnData['response'] == "500"){
       // Something is wrong, so lets let them know and keep teh form open for review/resubmit.
-      $('<p id="error-message">Something went wrong. Please review information and try to save again.</p>').insertAfter('.fieldset-prem-award-class-' + returnData['sid']).slideDown();
+      $('<div id="error-message" class="error-message-prem-form"><p>Something went wrong. Please review information and try to save again.</p></div>').insertAfter('.fieldset-prem-award-class-' + returnData['sid']).slideDown();
       setTimeout(function(){
         $('#error-message').slideToggle("fast");    
         $('#error-message').remove();
       }, 10000);
     } else {
       // Something is wrong, we received no legible response so lets let them know and keep teh form open for review/resubmit.
-      $('<p id="error-message">Something went wrong. Please review information and try to save again.</p>').insertAfter('#premiers-awards-form').slideDown();
+      $('<div id="error-message" class="error-message-prem-form"><p>Something went wrong. Please review information and try to save again.</p></div>').insertAfter('#premiers-awards-form').slideDown();
       setTimeout(function(){
         $('#error-message').slideToggle("fast");    
         $('#error-message').remove();
