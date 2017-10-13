@@ -945,7 +945,7 @@ function atwork_prem_awards_submit_callback(){
          );
       }
     } else {
-      // No actual updates required, so send back a 200
+      // No actual updates required, so send back a 200, keep data as is
       $status = array(
         'sid'=>$submission_array['sid'],
         'response'=>'200',

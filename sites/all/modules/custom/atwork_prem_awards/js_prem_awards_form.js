@@ -352,7 +352,6 @@
 
   function saveUpdates (sid, uid, id){
     // Gather all fields and post to php
-    console.log(id);
     var data = {};
     data['webcast'] = $('.fieldset-prem-award-class-' + sid + ' select.prem-award-input').val();
     data['attending'] = $('.fieldset-prem-award-class-' + sid + ' input.prem-award-input.prem-award-attending').val();
@@ -398,20 +397,34 @@
     $('.fieldset-prem-award-class-' + currentSid + ' .save-form-field').hide();
     $('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').show();
     
-    $('<div id="save-confirmation-message-' + currentSid + '"><p>Saved</p></div>').insertAfter('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').show();
+    $('<div id="save-confirmation-message-' + currentSid + '"><p>Saved</p></div>').insertAfter('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').slideDown();
 
     setTimeout(function(){
       $('#save-confirmation-message-' + currentSid).slideToggle("fast");    
+      $('#save-confirmation-message-' + currentSid).remove();
     }, 5000);
   }
 
 
   // set teh confirmation message and save on returnData. Will need relevant sid to do this.
   function ajaxCompleted (returnData) {
-    console.log(returnData['sid']);
-    console.log(returnData['response']);
+    // TODO: = general error, and one that appears in form-field
     if(returnData['response'] == 200){
       updateFieldLabels(returnData['sid']);
+    } else if ("response" in returnData && returnData['response'] == "500"){
+      // Something is wrong, so lets let them know and keep teh form open for review/resubmit.
+      $('<p id="error-message">Something went wrong. Please review information and try to save again.</p>').insertAfter('.fieldset-prem-award-class-' + returnData['sid']).slideDown();
+      setTimeout(function(){
+        $('#error-message').slideToggle("fast");    
+        $('#error-message').remove();
+      }, 10000);
+    } else {
+      // Something is wrong, we received no legible response so lets let them know and keep teh form open for review/resubmit.
+      $('<p id="error-message">Something went wrong. Please review information and try to save again.</p>').insertAfter('#premiers-awards-form').slideDown();
+      setTimeout(function(){
+        $('#error-message').slideToggle("fast");    
+        $('#error-message').remove();
+      }, 10000);
     }
   }
 })(jQuery);
