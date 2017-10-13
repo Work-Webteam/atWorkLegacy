@@ -172,8 +172,6 @@
     $('#add-new-form').show();
     // If they were restricted from continuing to prem awards, now they can go there (have at least one form filled out)
     $(".ui-dialog-buttonset :first(.ui-button.ui-widget.ui-corner-all)").prop("disabled", false);
-    // Hide text boxes and put text into labels.
-    updateFieldLabels(currentSid);
     return;
   }
 
@@ -354,6 +352,7 @@
 
   function saveUpdates (sid, uid, id){
     // Gather all fields and post to php
+    console.log(id);
     var data = {};
     data['webcast'] = $('.fieldset-prem-award-class-' + sid + ' select.prem-award-input').val();
     data['attending'] = $('.fieldset-prem-award-class-' + sid + ' input.prem-award-input.prem-award-attending').val();
@@ -366,6 +365,7 @@
       data['sid'] = sid;
     }
     data['uid'] = uid;
+    data['id'] = id;
     $.ajax({
       type: 'POST',
       url: '/p-awards/submit',
@@ -406,10 +406,12 @@
   }
 
 
-  // TODO: set teh confirmation message and save on returnData. Will need relevant sid to do this.
+  // set teh confirmation message and save on returnData. Will need relevant sid to do this.
   function ajaxCompleted (returnData) {
-    console.log(returnData);
-    console.log("returned");
-    // Add some stuff to your DOM if this was successful - error and mark if it was not.
+    console.log(returnData['sid']);
+    console.log(returnData['response']);
+    if(returnData['response'] == 200){
+      updateFieldLabels(returnData['sid']);
+    }
   }
 })(jQuery);
