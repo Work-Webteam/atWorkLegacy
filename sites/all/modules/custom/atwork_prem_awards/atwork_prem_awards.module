@@ -54,7 +54,6 @@ EOT;
 
   if ($sid) {
     $submission = webform_get_submission(PA_REG_FORM_NID, $sid);
-    //dpm($submission);
     // this output depends on a submission existing
     /* $output .= <<<EOT
 <div class="field-label-above"><div class="field-label">Registrant Name:&nbsp;</div><div class="field-items"><div class="field-item odd">{$submission->data[12][0]}</div></div></div>
@@ -503,7 +502,6 @@ function atwork_prem_awards_form_alter(&$form, $form_state, $form_id) {
       '#value' => t('Save'),
       '#prefix' => '<p>' . t('Saving the application will not trigger any emails.') . '</p>',
     );
-    //dpm($form);
 
     // check for existence of application type (innovation, leadership, etc)
     if (!isset($form['submitted']['application_type']['#default_value']) || !$form['submitted']['application_type']['#default_value']) {
@@ -668,7 +666,6 @@ function atwork_prem_awards_preprocess_webform_submission(&$vars) {
   global $user;
   require_once drupal_get_path('module', 'atwork_prem_awards') . '/atwork_prem_awards.replacements.inc';
 
-  //dpm($vars['submission']);
   $application_type = $vars['submission']->data[41][0];
   $translations = _atwork_prem_awards_questions();
   $headers = _atwork_prem_awards_headers();
