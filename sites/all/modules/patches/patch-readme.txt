@@ -49,3 +49,8 @@ source: None - we did this ourselves.
 issue:  Fix for an error we were seeing in watchdog. Assignment seemed incorrect and code was not protected from failure.
 
 
+date: 2017-10-16
+module: WYSIWYG filter
+files: wysiwyg_filter.inc
+source: None - we did this ourselves
+issue: Fix for an error where the module was attempting to attach an array to a string if the object was b or i.
