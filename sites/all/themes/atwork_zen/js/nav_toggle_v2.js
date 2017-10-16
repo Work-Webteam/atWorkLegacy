@@ -82,8 +82,6 @@ Drupal.behaviors.atwork_quicklinks = {
 		$(".view-top-tools").css("top", Math.max(30, 225 - $(window).scrollTop()));
 	});
 
-
-	console.log($(window).scrollTop());
 	if($(window).scrollTop() === -2){
 
 		$(".region-navigation").css("top", 162);
