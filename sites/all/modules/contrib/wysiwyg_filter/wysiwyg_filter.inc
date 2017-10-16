@@ -280,8 +280,6 @@ function wysiwyg_filter_parse_valid_elements($valid_elements) {
     }
   }
 
-  dpm($attributes);
-  dpm($parsed_elements);
   // Sort HTML elements alphabetically (for filter tips).
   ksort($parsed_elements);
 
