@@ -430,7 +430,10 @@ $atwork_base_url = $GLOBALS['base_url'];
 			// Join the Conversation \
 			echo '<tr valign="top">';
 			echo '<td colspan="3" valign="top" height="90">';
+			echo '<div id="middle-left-content">';
+			echo '<div id="middle-left-title" style="height: 30px;">';
 			echo '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-left: 10px; margin-right: 10px; margin-top: 0px;"><a style="text-decoration: none; color:#004B8D;">Join the Conversation</a></h2>';
+			echo '</div>';
 			echo '<p style="font-family: Calibri,sans-serif; font-size:11pt; color:#000000; display:block; height: auto; margin-top: 10px; margin-left: 10px; margin-right: 10px; margin-bottom: 15px; padding: 0; line-height: 20px;">' . $atwork_newsletter_render_array['comments']->comment_body['und'][0]['formatted'] . '</p>';
 			echo '</td>';
 			echo '</tr>';
