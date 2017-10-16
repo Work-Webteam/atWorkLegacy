@@ -7,7 +7,7 @@
         settings.atwork_prem_awards.user = 'Employee News';
       }
       // Only run if the link exists in the current page load or fragment refresh.
-      // TODO: Create a button or link with a specific ID in the ad space
+      // Note: this module requires the activiation of a block, and that you create a button or link with a specific ID in the ad space
       $('#prem-awards-form:not(.atwork-prem-awards-processed)', context)
         .addClass('atwork-prem-awards-processed')
         .bind('click', function (){
@@ -17,17 +17,20 @@
     }
   };
 
+  /**
+   * Drupal passes submission information back to jQuery here.
+   * @param {jSON} response 
+   */
   var checkForm = function (response) {
+     // Create a workable array of results
     var result = $.parseJSON(response);
-    // Create a workable array of results
     // Print it all out in the dom
     printResults(result);
-    // Now set click handlers for updating fields
     return false;
   };
 
   /**
-   * Main function that sets form/modal and click-handlers.
+   * Main function that sets form/modal and click-handlers. Prints them to the page and contains all form logic.
    * @param {array} items 
    */
   function printResults(items) {
@@ -41,7 +44,6 @@
       formString = buildString(items);
       
       $('#block-atwork-activity-homepage').append('<div id="modal-pop"></div>');
-      // TODO: Put this in its own function, to make code a little cleaner.
       $('<div id="premiers-awards-form" class="prem-awards-form-wrapper">' +
           '<p>Hello ' + user_name + ', our records indicate that you have pre-registered for the following webcast(s). Please make any required changes and confirm the registration information below.</p>'  +
           '<form>' +
@@ -50,7 +52,6 @@
           '</form>' + 
         '</div>').appendTo('#modal-pop');
       
-        // TODO: We need to add another hidden button, may want all of this in its own function as well.
       $('.prem-award-input, .save-form-field, .cancel-show-input-field').hide();
     } else {
       $('#block-atwork-activity-homepage').append('<div id="modal-pop"></div>');
@@ -172,13 +173,12 @@
     $('#add-new-form').show();
     // If they were restricted from continuing to prem awards, now they can go there (have at least one form filled out)
     $(".ui-dialog-buttonset :first(.ui-button.ui-widget.ui-corner-all)").prop("disabled", false);
-    // Hide text boxes and put text into labels.
-    updateFieldLabels(currentSid);
     return;
   }
 
   /**
    * This function handles edit button functions
+   * @param {object} element - The element that the user had clicked the edit button in
    */
   function editButtonClickHandler(element){
     // We need to account for the sid here - so only show fields within the specific fieldset.
@@ -197,7 +197,8 @@
   }
 
   /**
-   * This function handles edit button functions
+   * This function handles cancel button functions
+   * @param {object} element - The element that the user had clicked the cancel button in
    */
   function cancelButtonClickHandler(element){
     // We need to account for the sid here - so only show fields within the specific fieldset.
@@ -212,6 +213,7 @@
     $('.fieldset-prem-award-class-' + currentSid + ' .save-form-field').hide();      
     $(element).hide();
   }
+
   /**
    * This function submits redirects user to prem awards video
    **/ 
@@ -220,7 +222,9 @@
     window.location.replace("/user/twerdal");
   }
 
-  // Set the dialogue box
+  /**
+   * This function creates a module for our form
+   */
   function setDialog(){
     dialog = $('#modal-pop').dialog({
       autoOpen: true,
@@ -315,6 +319,10 @@
     return formString;
   }
 
+  /**
+   * Function that builds dom object (as a string) if the user has never created a submission for Prem awards this year thus far.
+   * @return {string} formString
+   */
   function newForm(){
     var formString = '';
     var timeStamp = $.now();
@@ -352,6 +360,13 @@
     return formString;
   }
 
+  /**
+   * Function that pulls information out of the form fields, itemizes it and sends it back to drupal
+   * @param {string} sid 
+   * @param {integer} uid 
+   * @param {string} id 
+   * @param {Object} data
+   */
   function saveUpdates (sid, uid, id){
     // Gather all fields and post to php
     var data = {};
@@ -366,6 +381,7 @@
       data['sid'] = sid;
     }
     data['uid'] = uid;
+    data['id'] = id;
     $.ajax({
       type: 'POST',
       url: '/p-awards/submit',
@@ -375,6 +391,11 @@
     });
   }
   
+  /**
+   * Function to show/hide/update fields and labels if we receive a notification that this info has been saved by drupal
+   * @param {string} currentSid 
+   */
+
   function updateFieldLabels(currentSid){
     var webcast = $('.fieldset-prem-award-class-' + currentSid + ' select.prem-award-input').val();
     var attending = $('.fieldset-prem-award-class-' + currentSid + ' input.prem-award-input.prem-award-attending').val();
@@ -398,18 +419,36 @@
     $('.fieldset-prem-award-class-' + currentSid + ' .save-form-field').hide();
     $('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').show();
     
-    $('<div id="save-confirmation-message-' + currentSid + '"><p>Saved</p></div>').insertAfter('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').show();
+    $('<div id="save-confirmation-message-' + currentSid + ' class="save-confirmation-message"><p>Saved</p></div>').insertAfter('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').slideDown();
 
     setTimeout(function(){
       $('#save-confirmation-message-' + currentSid).slideToggle("fast");    
-    }, 5000);
+      $('#save-confirmation-message-' + currentSid).remove();
+    }, 5000);xz
   }
 
 
-  // TODO: set teh confirmation message and save on returnData. Will need relevant sid to do this.
+  /**
+   * @param {array} returnData Should include both ['sid'] -> the id number used in the form field (an sid if updating, and id generated by timestamp if new) and ['response] -> A 500 or 200 depending on Drupal feedback.
+   */ 
   function ajaxCompleted (returnData) {
-    console.log(returnData);
-    console.log("returned");
-    // Add some stuff to your DOM if this was successful - error and mark if it was not.
+    if(returnData['response'] == 200){
+      updateFieldLabels(returnData['sid']);
+    // general error, and one that appears in form-field
+    } else if ("response" in returnData && returnData['response'] == "500"){
+      // Something is wrong, so lets let them know and keep teh form open for review/resubmit.
+      $('<div id="error-message" class="error-message-prem-form"><p>Something went wrong. Please review information and try to save again.</p></div>').insertAfter('.fieldset-prem-award-class-' + returnData['sid']).slideDown();
+      setTimeout(function(){
+        $('#error-message').slideToggle("fast");    
+        $('#error-message').remove();
+      }, 10000);
+    } else {
+      // Something is wrong, we received no legible response so lets let them know and keep teh form open for review/resubmit.
+      $('<div id="error-message" class="error-message-prem-form"><p>Something went wrong. Please review information and try to save again.</p></div>').insertAfter('#premiers-awards-form').slideDown();
+      setTimeout(function(){
+        $('#error-message').slideToggle("fast");    
+        $('#error-message').remove();
+      }, 10000);
+    }
   }
 })(jQuery);

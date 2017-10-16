@@ -54,7 +54,6 @@ EOT;
 
   if ($sid) {
     $submission = webform_get_submission(PA_REG_FORM_NID, $sid);
-    //dpm($submission);
     // this output depends on a submission existing
     /* $output .= <<<EOT
 <div class="field-label-above"><div class="field-label">Registrant Name:&nbsp;</div><div class="field-items"><div class="field-item odd">{$submission->data[12][0]}</div></div></div>
@@ -503,7 +502,6 @@ function atwork_prem_awards_form_alter(&$form, $form_state, $form_id) {
       '#value' => t('Save'),
       '#prefix' => '<p>' . t('Saving the application will not trigger any emails.') . '</p>',
     );
-    //dpm($form);
 
     // check for existence of application type (innovation, leadership, etc)
     if (!isset($form['submitted']['application_type']['#default_value']) || !$form['submitted']['application_type']['#default_value']) {
@@ -668,7 +666,6 @@ function atwork_prem_awards_preprocess_webform_submission(&$vars) {
   global $user;
   require_once drupal_get_path('module', 'atwork_prem_awards') . '/atwork_prem_awards.replacements.inc';
 
-  //dpm($vars['submission']);
   $application_type = $vars['submission']->data[41][0];
   $translations = _atwork_prem_awards_questions();
   $headers = _atwork_prem_awards_headers();
@@ -819,7 +816,7 @@ function atwork_prem_awards_callback($user, $current_uid){
   // This has to be included on custom pages.
   //module_load_include('inc', 'webform', 'webform.submission');
   include_once(drupal_get_path('module', 'webform') . '/includes/webform.submissions.inc');
-  // TODO: Look for forms that have the uid, if they are there, return them all. JQuery can hand back any updates - or we can just move on.
+  // Look for forms that have the uid, if they are there, return them all. JQuery can hand back any updates - or we can just move on.
   // else we can tell jQuery this is new, and we can build fields to submit back to a secondary php function where we can save the form
   $submissions = webform_get_submissions(array('nid' => PA_REG_FORM_NID, 'uid' => $current_uid));
   // Get static webform for titles
@@ -872,7 +869,7 @@ function atwork_prem_awards_callback($user, $current_uid){
 function atwork_prem_awards_submit_callback(){
   module_load_include('inc', 'webform', 'includes/webform.submissions');
   $submission_array = $_POST;
-  $status = '500';
+  $status = array();
   // This is a new webform
   if($submission_array['sid'] == null){
     // create a new webform (insert function)
@@ -888,7 +885,8 @@ function atwork_prem_awards_submit_callback(){
     } elseif ($submission_array['webcast'] == 'interiorNorth'&& isset($webform->data[13][0]) && $webform->data[13][0] == 'int_webcast') {
       //continue
     } else {
-      // This is net new, or they have changed the webcast, should be a new entry
+      // This is net new, or they have changed the webcast, should be a new entry, need to keep the original sid as id for next func
+      $submission_array['id'] = $submission_array['sid'];
       $status = create_new_webform_entry($submission_array);
       echo json_encode($status);
       die();
@@ -930,21 +928,32 @@ function atwork_prem_awards_submit_callback(){
     // update webform if any changes
     if($changes > 0){
       $form_node = node_load(PA_REG_FORM_NID);
-      webform_submission_update($form_node, $webform);
+      $new_webform = webform_submission_update($form_node, $webform);
+      if(isset($new_webform) && $new_webform > 0){
+        // WE got an sid back - this has been saved
+        $status = array(
+         'sid'=>$new_webform,
+         'response'=>'200',
+        );
+      } else {
+        array(
+          'sid'=>Null,
+          'response'=>'500',
+         );
+      }
+    } else {
+      // No actual updates required, so send back a 200, keep data as is
+      $status = array(
+        'sid'=>$submission_array['sid'],
+        'response'=>'200',
+       );
     }
-    $status = "200";
+
   }
   
-  // TODO: Return either a 200 or 500 to js, so we can mark if it is successful or not.
+  // Return either a 200 or 500 to js, so we can mark if it is successful or not.
   echo json_encode($status);
   die();
-}
-
-function atwork_prem_awards_new_submit_callback(){
-  module_load_include('inc', 'webform', 'includes/webform.submissions');
-  $submission_array = $_POST;
-  $status = '500';
-  $status = create_new_webform_entry($submission_array);
 }
 
 /**
@@ -955,6 +964,10 @@ function atwork_prem_awards_new_submit_callback(){
  */
 function create_new_webform_entry($submission_array){
   $current_user = user_load($submission_array['uid']);
+  $response = array(
+    'sid' => $submission_array['id'],
+    'response' => '',
+  );
   $data = array(
     '9' => array(
       '0' => $submission_array['name'],
@@ -993,7 +1006,8 @@ function create_new_webform_entry($submission_array){
       "0" => $submission_array['attending']
     );
   } else {
-    return '500 : No webcast selected';
+    $response['response'] = 500;    
+    return $resopnse;
   }
   $webform_node = node_load(PA_REG_FORM_NID);
   //webform_submission_create()
@@ -1009,7 +1023,14 @@ function create_new_webform_entry($submission_array){
   );
 
   $sid = webform_submission_insert($webform_node, $submission);
-  return '200';
+  if(isset($sid) && $sid > 0){
+    $response['response'] = "200";
+    return $response;
+  } else {
+    $response['response'] = "500";
+    return $response;
+  }
+  return $response;
 }
 
 
