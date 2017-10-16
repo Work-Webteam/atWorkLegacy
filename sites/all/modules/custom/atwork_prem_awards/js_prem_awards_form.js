@@ -419,11 +419,11 @@
     $('.fieldset-prem-award-class-' + currentSid + ' .save-form-field').hide();
     $('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').show();
     
-    $('<div id="save-confirmation-message-' + currentSid + ' class="save-confirmation-message"><p>Saved</p></div>').insertAfter('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').slideDown();
+    $('<div id="save-confirmation-message-' + currentSid + '"' + ' class="save-confirmation-message"><p>Saved</p></div>').insertAfter('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').slideDown();
 
     setTimeout(function(){
-      $('#save-confirmation-message-' + currentSid).slideToggle("fast");    
-      $('#save-confirmation-message-' + currentSid).remove();
+      $('#save-confirmation-message-' + currentSid ).slideToggle("fast");    
+      $('#save-confirmation-message-' + currentSid ).remove();
     }, 5000);
   }
 
