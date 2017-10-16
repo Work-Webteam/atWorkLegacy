@@ -424,7 +424,7 @@
     setTimeout(function(){
       $('#save-confirmation-message-' + currentSid).slideToggle("fast");    
       $('#save-confirmation-message-' + currentSid).remove();
-    }, 5000);xz
+    }, 5000);
   }
 
 
