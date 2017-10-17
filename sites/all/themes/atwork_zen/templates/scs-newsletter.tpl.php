@@ -440,13 +440,13 @@ $atwork_base_url = $GLOBALS['base_url'];
 			
 			echo '<tr>';
 		    echo '<td width="48%" style="padding: 0 0 5px 10px; color:#004B8D">';
-		    echo '<a style="text-decoration: none; font-size: 10pt; color:#004B8D" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . '" > Read more >> </a>';
+		    echo '<a style="text-decoration: none; font-size: 10pt; color:#004B8D" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . $pubDate . '" > Read more >> </a>';
 		    echo '<br>';
 		    echo 'Posted by: ';
 		    echo '<a style="text-decoration: none; font-size: 10pt; color:#004B8D" href="' . $atwork_base_url . '/employees/' . $atwork_newsletter_render_array['comments']->registered_name . '">';
 		    echo $atwork_newsletter_render_array['comments']->name;
 		    echo '</a></td>';
-		    echo '<td style="padding: 17px 0 5px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . '"> Comments </a></td>';
+		    echo '<td style="padding: 17px 0 5px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . $pubDate . '"> Comments </a></td>';
 		    echo '</tr>';
 			echo '</table>';
             ?>

@@ -26,14 +26,14 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 		$comment->name = $user->field_display_name['und'][0]['value'];
 		$comment->comment_body['und'][0]['formatted'] = $comment->comment_body['und'][0]['value'];
 		// Trim comment body for length 
-		if(strlen($comment->comment_body['und'][0]['formatted']) > 240) {
-			$comment->comment_body['und'][0]['formatted'] = substr($comment->comment_body['und'][0]['formatted'],0,240);
-			$comment->comment_body['und'][0]['formatted'] = $comment->comment_body['und'][0]['formatted'] . "...";
-		}
-		// make it format nicely.
-		if(!preg_match('[A-Za-z]', substr($comment->comment_body['und'][0]['formatted'],-1,-2))) {
-			$comment->comment_body['und'][0]['formatted'] = substr($comment->comment_body['und'][0]['formatted'],0,-2);
-		}
+		//if(strlen($comment->comment_body['und'][0]['formatted']) > 240) {
+		//	$comment->comment_body['und'][0]['formatted'] = substr($comment->comment_body['und'][0]['formatted'],0,240);
+		//	$comment->comment_body['und'][0]['formatted'] = $comment->comment_body['und'][0]['formatted'] . "...";
+		//}
+		//// make it format nicely.
+		//if(!preg_match('[A-Za-z]', substr($comment->comment_body['und'][0]['formatted'],-1,-2))) {
+		//	$comment->comment_body['und'][0]['formatted'] = substr($comment->comment_body['und'][0]['formatted'],0,-2);
+		//}
 		// Add in link to parent article
 		$parent = node_load($comment->nid);
 		$comment->parent_url = drupal_get_path_alias('node/' . $comment->nid);

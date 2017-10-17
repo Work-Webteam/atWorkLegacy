@@ -111,14 +111,14 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
     $form['cid'] = array(
       '#type'=>'textfield',
       '#disabled' => $comment_disabled,
-      '#title' => t('Content ID'),
+      '#title' => t('Comment Content ID'),
       '#default_value' => $comment_value,
       '#size' => 60,
       '#maxlength' => 64,
       '#suffix' => t($comment_suffix),
       '#description' => t("Add the CID of the comment you would like to appear in the newsletter. 
         If this field is left blank, no comment will be displayed. 
-        The CID is a five-digit number found at the end of each comment URL (e.g. https:// gww.gov.bc.ca/comment/reply/26948/42378)<br> 
+        The CID is a five-digit number found at the end of each comment URL (e.g. https:// gww.gov.bc.ca/comment/reply/26948/<strong>42378</strong>)<br> 
         NOTE: You can find the CID by mousing over the comment or by hitting \"reply\" to the comment."),
     );
     // Spot for "Take Note"
