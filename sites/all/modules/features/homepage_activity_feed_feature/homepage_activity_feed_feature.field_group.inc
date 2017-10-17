@@ -78,9 +78,9 @@ function homepage_activity_feed_feature_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'poll';
   $field_group->mode = 'form';
-  $field_group->parent_name = 'group_multi';
+  $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => ' - Poll Question and Options',
+    'label' => 'Poll Question and Options',
     'weight' => '2',
     'children' => array(
       0 => 'og_group_ref',
@@ -91,15 +91,20 @@ function homepage_activity_feed_feature_field_group_info() {
       5 => 'settings',
       6 => 'redirect',
     ),
-    'format_type' => 'multipage',
+    'format_type' => 'div',
     'format_settings' => array(
-      'label' => ' - Poll Question and Options',
+      'label' => 'Poll Question and Options',
       'instance_settings' => array(
         'required_fields' => 1,
-        'classes' => 'group-multi2 ',
+        'id' => '',
+        'classes' => 'news-step',
         'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
-      'formatter' => 'no-start',
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_multi2|node|poll|form'] = $field_group;
@@ -112,10 +117,10 @@ function homepage_activity_feed_feature_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'blog';
   $field_group->mode = 'form';
-  $field_group->parent_name = 'group_multi';
+  $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => '- Blog Tags',
-    'weight' => '18',
+    'label' => 'Blog Tags',
+    'weight' => '3',
     'children' => array(
       0 => 'field_tags',
       1 => 'og_group_ref',
@@ -124,16 +129,21 @@ function homepage_activity_feed_feature_field_group_info() {
       4 => 'redirect',
       5 => 'group_js_files',
     ),
-    'format_type' => 'multipage',
+    'format_type' => 'div',
     'format_settings' => array(
-      'label' => '- Blog Tags',
+      'label' => 'Blog Tags',
       'instance_settings' => array(
-        'required_fields' => 0,
-        'classes' => 'blog-step4',
+        'required_fields' => 1,
+        'id' => '',
+        'classes' => 'news-step',
         'description' => '<p>Choose some tags for your blog. Tags are keywords that reflect your blog’s content and theme. They help your colleagues to find information they’re looking for. Ideally you’ll want to choose no more than 2-3 tags. Make sure they’re specific and no more than 2-3 words each.</p>
 <p>The tags available to you will automatically appear as you type the letters.</p>',
+        'show_label' => '1',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
-      'formatter' => 'no-start',
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_multi4|node|blog|form'] = $field_group;
@@ -146,10 +156,10 @@ function homepage_activity_feed_feature_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'section_page';
   $field_group->mode = 'form';
-  $field_group->parent_name = 'group_multi';
+  $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Group Page Tags',
-    'weight' => '21',
+    'weight' => '2',
     'children' => array(
       0 => 'og_group_ref',
       1 => 'field_tags',
@@ -162,19 +172,24 @@ function homepage_activity_feed_feature_field_group_info() {
       8 => 'redirect',
       9 => 'group_js_files',
     ),
-    'format_type' => 'multipage',
+    'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Group Page Tags',
       'instance_settings' => array(
         'required_fields' => 1,
-        'classes' => 'group-multi4 ',
+        'id' => '',
+        'classes' => 'news-step',
         'description' => '<p>Choose some tags for your article. Tags are keywords that reflect your article’s content and theme. They help your colleagues to find information they’re looking for. Ideally you’ll want to choose no more than 2-3 tags. Make sure they’re specific and no more than 2-3 words each.</p>
 <p>The tags available to you will automatically appear as you type the letters.</p>
 <p>After adding your tags, you can add your group page to your menu. Click "Menu Settings" below and choose a  link title to appear in the group menu on the left side of your group page. Keep it short and relevant.</p>
 <p>After adding your page to your menu, click on "Publishing Options" to make sure the "Published" checkbox is checked. Your new custom group page will show up in your menu after you save!</p> 
 ',
+        'show_label' => '1',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
-      'formatter' => 'no-start',
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_multi4|node|section_page|form'] = $field_group;
@@ -187,10 +202,10 @@ function homepage_activity_feed_feature_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'article';
   $field_group->mode = 'form';
-  $field_group->parent_name = 'group_multi';
+  $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'News Tags',
-    'weight' => '6',
+    'weight' => '5',
     'children' => array(
       0 => 'field_tags',
       1 => 'field_poll',
@@ -199,22 +214,27 @@ function homepage_activity_feed_feature_field_group_info() {
       4 => 'group_js_files',
       5 => 'group_relationship',
     ),
-    'format_type' => 'multipage',
+    'format_type' => 'div',
     'format_settings' => array(
       'label' => 'News Tags',
       'instance_settings' => array(
-        'required_fields' => 0,
-        'classes' => 'news-step5',
+        'required_fields' => 1,
+        'id' => '',
+        'classes' => 'news-step',
         'description' => '<p>Choose some tags for your article. Tags are keywords that reflect your article’s content and theme. They help your colleagues to find information they’re looking for. Ideally you’ll want to choose no more than 2-3 tags. Make sure they’re specific and no more than 2-3 words each.</p>
 <p>The tags available to you will automatically appear as you type the letters.</p>',
+        'show_label' => '1',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
-      'formatter' => 'no-start',
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_multi5|node|article|form'] = $field_group;
 
   $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_multi|node|article|form';
   $field_group->group_name = 'group_multi';
@@ -247,7 +267,7 @@ function homepage_activity_feed_feature_field_group_info() {
   $field_groups['group_multi|node|article|form'] = $field_group;
 
   $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_multi|node|blog|form';
   $field_group->group_name = 'group_multi';
@@ -279,7 +299,7 @@ function homepage_activity_feed_feature_field_group_info() {
   $field_groups['group_multi|node|blog|form'] = $field_group;
 
   $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_multi|node|poll|form';
   $field_group->group_name = 'group_multi';
@@ -309,7 +329,7 @@ function homepage_activity_feed_feature_field_group_info() {
   $field_groups['group_multi|node|poll|form'] = $field_group;
 
   $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->disabled = TRUE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_multi|node|section_page|form';
   $field_group->group_name = 'group_multi';
@@ -342,15 +362,15 @@ function homepage_activity_feed_feature_field_group_info() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t(' - Poll Question and Options');
-  t('- Blog Tags');
   t('Blog Settings');
+  t('Blog Tags');
   t('Custom Code');
   t('Group Page Settings');
   t('Group Page Tags');
   t('Image Collection');
   t('News Settings');
   t('News Tags');
+  t('Poll Question and Options');
   t('Poll Settings');
 
   return $field_groups;

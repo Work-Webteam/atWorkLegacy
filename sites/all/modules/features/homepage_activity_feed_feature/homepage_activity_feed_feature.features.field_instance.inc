@@ -554,7 +554,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 22,
+      'weight' => 7,
     ),
   );
 
@@ -615,7 +615,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 21,
+      'weight' => 6,
     ),
   );
 
@@ -677,7 +677,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 10,
+      'weight' => 6,
     ),
   );
 
@@ -732,7 +732,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 9,
+      'weight' => 5,
     ),
   );
 
@@ -1457,7 +1457,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 12,
+      'weight' => 4,
     ),
   );
 
@@ -1519,7 +1519,7 @@ function homepage_activity_feed_feature_field_default_field_instances() {
         'display_label' => 0,
       ),
       'type' => 'options_onoff',
-      'weight' => 11,
+      'weight' => 3,
     ),
   );
 
