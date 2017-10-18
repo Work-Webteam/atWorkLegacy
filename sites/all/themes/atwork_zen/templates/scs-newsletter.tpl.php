@@ -280,7 +280,6 @@ $atwork_base_url = $GLOBALS['base_url'];
 				
 				// Attach tag to image
 				$image_output['#path']['path'] = $atwork_base_url . $curr_node->field_image['und'][$curr_node->newsletter_image[0]]['uri'];
-				dpm($image_output['#path']['path']);
 				$image_output['#item']['width'] = "270";
 				$atwork_newsletter_body = field_get_items('node',$curr_node, 'body');
 				// beginning of article block.
