@@ -69,6 +69,7 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 				    		&& ($newsletterImg['height'] <= '255' && $newsletterImg['height'] >= '245' )) {
 				    		if(!file_exists($imgDest)) {
 				    			if(copy(DRUPAL_ROOT . $imgSrc, $imgDest)) {
+				    			    $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
 					                $node->field_image['und'][1]['uri'] = DRUPAL_ROOT . '/html-8888/mem_fs/' . $newsletterImg['filename'];
 				    				$imgFound = TRUE;
 				    			}
@@ -76,11 +77,13 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 				    		}
 						    if(file_exists($imgDest)) {
 						   	  //Verify file is now in memfs directory
+				    		  $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
 						   	  $imgFound = TRUE;
 						    }
 				    	} else if(strpos($newsletterImg['filename'],'775') && (($newsletterImg['width'] > '780')&&($newsletterImg['height'] > '255'))) {
 				    		if(!file_exists($imgDest)) {
 				    			if(copy(DRUPAL_ROOT . $imgSrc, $imgDest)) {
+				    				$node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
 				    				$node->field_image['und'][1]['uri'] = DRUPAL_ROOT . '/html-8888/mem_fs/' . $newsletterImg['filename'];
 				    				$imgFound = TRUE;
 				    			}
@@ -88,6 +91,7 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 				    		}
 				    		if(file_exists($imgDest)) {
 				    			//Verify file is now in memfs directory
+				    		    $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
 				    			$imgFound = TRUE;
 				    		}
 				    	}
@@ -97,6 +101,7 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 				    		&& ($newsletterImg['height'] <= '255' && $newsletterImg['height'] >= '245' )) {
 				    		if(!file_exists($imgDest)) {
 				    			if(copy(DRUPAL_ROOT . $imgSrc, $imgDest)) {
+				    				$node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
 					                $node->field_image['und'][0]['uri'] = DRUPAL_ROOT . '/html-8888/mem_fs/' . $newsletterImg['filename'];
 				    				$imgFound = TRUE;
 				    			}
@@ -104,6 +109,7 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 				    		}
 						    if(file_exists($imgDest)) {
 						   	  //Verify file is now in memfs directory
+				    		  $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
 						   	  $imgFound = TRUE;
 						    }
 				    		
@@ -134,4 +140,3 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 	}
 	return($atwork_newsletter_render_array);
 }
-

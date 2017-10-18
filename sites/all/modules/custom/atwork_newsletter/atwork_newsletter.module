@@ -80,7 +80,7 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
   if(!array_key_exists('nodes',$form)) {
     $form['#prefix'] = $form['#prefix'] . t('Click (in any order) the content you\'d like to appear in the newsletter.');
   } else {
-    $form['#prefix'] = $form['#prefix'] . t('Note: You can re-order the content from top to bottom. However, the top-spot article must be in the first row.');
+    $form['#prefix'] = $form['#prefix'] . t('Note: You can re-order the content from top to bottom. However, the top-spot article must be in the first row. Articles will always appear above blogs in the final newsletter.');
   }
 
   // Move article/blog form to top
@@ -96,13 +96,9 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
     $comment_value = 'none';
     $comment_suffix = NULL; 
     if(array_key_exists('nodes',$form)) {
-      //$comment_disabled = TRUE;
      $comment_value = $form_state['input']['cid'];
      $comment_preview = comment_load($comment_value);
-      $comment_body = substr($comment_preview->comment_body['und'][0]['value'],0,280); 
-      if(!preg_match('[A-Za-z]', substr($comment_body,-1,-2))) {
-      	$comment_body= substr($comment_body,0,-2) . '...';
-      }
+      $comment_body = $comment_preview->comment_body['und'][0]['value']; 
       if($_POST['cid'] !== 'none') {
         $comment_suffix = '<div><table style="border: 1px solid #bebfb9;"><tr><td style="border: 1px solid #bebfb9; background-color: #e1e2dc;">COMMENT PREVIEW</td><td>'. $comment_body . '</td></tr></table></div>';
       }
@@ -118,7 +114,7 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
       '#suffix' => t($comment_suffix),
       '#description' => t("Add the CID of the comment you would like to appear in the newsletter. 
         If this field is left blank, no comment will be displayed. 
-        The CID is a five-digit number found at the end of each comment URL (e.g. https:// gww.gov.bc.ca/comment/reply/26948/<strong>42378</strong>)<br> 
+        The CID is a five-digit number found at the end of each comment URL (e.g. In https:// gww.gov.bc.ca/comment/reply/26948/<strong>42378</strong>, the CID is 42378)<br> 
         NOTE: You can find the CID by mousing over the comment or by hitting \"reply\" to the comment."),
     );
     // Spot for "Take Note"

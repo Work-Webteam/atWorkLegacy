@@ -20,7 +20,7 @@ if(!isset($comment)){
 // A file that will take the above vars, returning an associate array with the keys for [TODO: add in keys here]
 include_once drupal_get_path('module', 'atwork_newsletter') . "/atwork_newsletter.inc";
 $atwork_newsletter_render_array = atwork_newsletter_create_render_arrays($nodes, $comment, $notes, $did_you_know);
-
+dpm($atwork_newsletter_render_array);
 // Grab (probable) publishing date for webtrends
 $pubDate = "?nl=" . date("dmy", strtotime("next Wednesday"));
 $atwork_base_url = $GLOBALS['base_url'];
@@ -175,7 +175,7 @@ $atwork_base_url = $GLOBALS['base_url'];
 					}
 					// Make sure we have a feature image
 					if(!isset($feature_image)){
-						$feature_image = $images[0];
+						$feature_image = $images[$node_first->newsletter_image[0]];
 					}
 				}
 				$image_output = field_view_value('node', $node_first, 'field_image', $feature_image, array(
@@ -185,7 +185,7 @@ $atwork_base_url = $GLOBALS['base_url'];
 					'image_link' => 'content',
 						),
 				));
-				$image_output['#path']['path'] = $node_first->field_image['und'][0]['uri'];
+				$image_output['#path']['path'] = $node_first->field_image['und'][$node_first->newsletter_image[0]]['uri'];
 				// Output tag line
 				echo '<tr>';
           		echo '<td align="center" style="background-color:#ECECEC; font-family: Calibri, sans-serif; font-size:10pt; letter-spacing: 4px; padding-top: 5px; padding-bottom: 5px; border:none;">' . "&bull; A SELECTION OF WHAT'S MAKING NEWS RIGHT NOW &bull;" . '</td>';
@@ -270,18 +270,17 @@ $atwork_base_url = $GLOBALS['base_url'];
 			 		
 				// Collect image from node
 				$image = field_get_items('node', $curr_node, 'field_image');
-				
-				$image_output = field_view_value('node', $curr_node, 'field_image', $image[0], array(
+				$image_output = field_view_value('node', $curr_node, 'field_image', $image[$curr_node->newsletter_image[0]], array(
 						'type' => 'image',
 						'settings' => array(
-					//'image_style' => 'atwork_newsletter_other_image',
+					'image_style' => 'atwork_newsletter_other_image',
 					'image_link' => 'content',
 						),
 				));
 				
 				// Attach tag to image
-				//$image_output['#path']['path'] = $atwork_base_url . '/' . $atwork_newsletter_aliased;
-				$image_output['#path']['path'] = $atwork_base_url . $curr_node->field_image['und'][0]['uri'];
+				$image_output['#path']['path'] = $atwork_base_url . $curr_node->field_image['und'][$curr_node->newsletter_image[0]]['uri'];
+				dpm($image_output['#path']['path']);
 				$image_output['#item']['width'] = "270";
 				$atwork_newsletter_body = field_get_items('node',$curr_node, 'body');
 				// beginning of article block.
