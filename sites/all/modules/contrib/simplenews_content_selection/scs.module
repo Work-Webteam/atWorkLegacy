@@ -150,16 +150,19 @@ function scs_node_sort_form($form, &$form_state) {
   // Create elements for the tablesort
   $form['nodes']['#tree'] = TRUE;
   foreach ($nodes as $nid) {
+    $node = node_load($nid);
     $form['nodes'][$nid]['weight'] = array(
       '#type' => 'weight',
       '#attributes' => array('class' => array('node-weight')),
     );
-
     $form['nodes'][$nid]['view_mode'] = array(
-      '#type' => 'select',
+      '#type' => 'fieldset',
+      '#value' => $node->type,
+      '#attributes' => array('style' => 'height: 10px; border: none; padding: 0'),
       '#options' => scs_view_mode_options(),
     );
   }
+
   $form['#theme'] = 'scs_sortable_table';
 
   $form['actions']['submit'] = array(
@@ -187,7 +190,9 @@ function scs_view_mode_options() {
   $options = array();
   foreach ($view_modes as $machine_name => $status) {
     if (isset($status) ) {
-      $options[$machine_name] = $entity_info['node']['view modes'][$machine_name]['label'];
+      if(array_key_exists('view_mode',$entity_info['node'])) { 
+        $options[$machine_name] = $entity_info['node']['view modes'][$machine_name]['label'];
+      }
     }
   }
   return $options;

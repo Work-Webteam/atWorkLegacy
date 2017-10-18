@@ -88,6 +88,11 @@ Drupal.behaviors.atwork_quicklinks = {
 		$("#block-tb-megamenu-menu-moderator-menu").css("top", 162);
 		$("#block-tb-megamenu-menu-lsa-admin").css("top", 162);
 		$(".view-top-tools").css("top", 225);
+	} else if ($(window).scrollTop() < 162){
+		var $navbarPos = 162 - $(window).scrollTop();
+		$(".region-navigation").css("top", $navbarPos)
+	} else {
+		$(".region-navigation").css("top", -2)
 	}
 	// Short term code to give a title on hover to banner div
 	//$('#header-box').prop('title', "First day of spring - March 20");

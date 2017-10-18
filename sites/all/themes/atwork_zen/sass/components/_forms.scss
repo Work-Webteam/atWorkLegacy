@@ -123,6 +123,15 @@
     width: 175px;
   }
 }
+#quiz_score_possible {
+  background: beige;
+  border: solid 1px #999;
+  padding: 5px 10px;
+  width: 40%;
+  margin: 0 auto;
+  text-align:center;
+  font-weight: bold;
+}
 
 // Update / additions to 2017 form update. /career/long-service-awards/applications
 .node-lsa-application .form-item {

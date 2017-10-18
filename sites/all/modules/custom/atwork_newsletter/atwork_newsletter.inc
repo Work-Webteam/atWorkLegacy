@@ -14,50 +14,30 @@
 
 function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_you_know){
 	$atwork_base_url = $GLOBALS['base_url'];
-	
 	// Replace this with logic that converts the $nodes array to a renderable array with all necessary content for the newsletter.
 	// There is a possibility that the node will not have a usable image - if this is the case should we put in a default to avoid error?
-	
 	// Load Comments for rendering (and maybe put everything into an array?)
 	if($comments !== 'none') {
 		// Load Comment Object
 		$comment = comment_load($comments);
-		// Retrieve Username from UID and place in commens array
+		
+		// Retrieve Username from UID and place in comments array
 		$user = user_load($comment->uid);
 		$comment->name = $user->field_display_name['und'][0]['value'];
 		$comment->comment_body['und'][0]['formatted'] = $comment->comment_body['und'][0]['value'];
 		// Trim comment body for length 
-		if(strlen($comment->comment_body['und'][0]['formatted']) > 240) {
-			$comment->comment_body['und'][0]['formatted'] = substr($comment->comment_body['und'][0]['formatted'],0,240);
-			$comment->comment_body['und'][0]['formatted'] = $comment->comment_body['und'][0]['formatted'] . "...";
-		}
-		// make it format nicely.
-		if(!preg_match('[A-Za-z]', substr($comment->comment_body['und'][0]['formatted'],-1,-2))) {
-			$comment->comment_body['und'][0]['formatted'] = substr($comment->comment_body['und'][0]['formatted'],0,-2);
-		}
-	} 
-	
-	if($notes['value'] !== '') {
-		//Add in the call to action link for take note.
-		//if(strpos($notes['value'], '<ul>')) {
-		//	$notes['value'] = str_replace('</li>', ' <a href="https://gww.gov.bc.ca" style="color:#3200C5;">Call to action </a></li>', $notes['value']);
-		//} else {
-		//	$notes['value'] = str_replace('</p>',' <a href="https://gww.gov.bc.ca" style="color:#3200C5;">Call to action </a></p>', $notes['value']);
+		//if(strlen($comment->comment_body['und'][0]['formatted']) > 240) {
+		//	$comment->comment_body['und'][0]['formatted'] = substr($comment->comment_body['und'][0]['formatted'],0,240);
+		//	$comment->comment_body['und'][0]['formatted'] = $comment->comment_body['und'][0]['formatted'] . "...";
 		//}
-	} else {
-		//$notes['value'] = '<ul style="font-family: Calibri,sans-serif; font-size:11pt; color:#000000; margin-top: 10px; margin-right: 10px; margin-bottom: 20px;">'
-		//		. '<li style="margin-left: 5px;">Item One <a style="color:#3200C5;" href="https://gww.gov.bc.ca"> Call to action </a></li>'
-		//				. '<li style="margin-left: 5px;">Item two <a style="color:#3200C5;" href="https://gww.gov.bc.ca"> Call to action </a></li>'
-		//						. '<li style="margin-left: 5px;">Item three <a style="color:#3200C5;" href="https://gww.gov.bc.ca"> Call to action </a></li>'
-		//								. '</ul></td>';
-	}
-	
-	if($did_you_know['value'] === '') {
-		//$did_you_know['value'] = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc volutpat eros et arcu blandit, a malesuada metus luctus. Aenean euismod volutpat enim vitae dignissim.'
-		//		. ' <a href="https://gww.gov.bc.ca" style="color:#3200C5;">Call to action </a></li>';
-	} else {
-		//$did_you_know['value']= str_replace('</p>',' <a href="https://gww.gov.bc.ca" style="color:#3200C5;">Call to action </a></p>', $did_you_know['value']);
-	}
+		//// make it format nicely.
+		//if(!preg_match('[A-Za-z]', substr($comment->comment_body['und'][0]['formatted'],-1,-2))) {
+		//	$comment->comment_body['und'][0]['formatted'] = substr($comment->comment_body['und'][0]['formatted'],0,-2);
+		//}
+		// Add in link to parent article
+		$parent = node_load($comment->nid);
+		$comment->parent_url = drupal_get_path_alias('node/' . $comment->nid);
+	} 
 	
 	// If a comment/note/did you know were NOT entered, our value should be "none" - we may want to account for this possibility here or in the template when deciding how exactly to theme in these instances
 	$atwork_newsletter_render_array = array(
@@ -72,56 +52,91 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 	$newsletterDir = '/var/www/html-8888/mem_fs/images/';
 	$imgSrc = NULL;
 	$imgDest = NULL;
-
+	$error = NULL;
 	foreach($nodes as $node) {
 		//Keep track if no images are copied to img server for newsletter and inform user.
 		$imgFound = FALSE;
-		//dpm($node);
 		//Check to see if Article/Blog has a valid picture.
 		if(isset($node->field_image['und']) && $node->field_image['und']){
 			foreach($node->field_image['und'] as $newsletterImg) {
-				//$imgSrc = DRUPAL_ROOT . $articlesDir . substr($newsletterImg['uri'], 9);
-				//$imgDest = DRUPAL_ROOT . $newsletterDir . $newsletterImg['filename'];
 				$imgSrc = $articlesDir . substr($newsletterImg['uri'], 9);
 				$imgDest = $newsletterDir . $newsletterImg['filename'];
 				if(file_exists(DRUPAL_ROOT . $imgSrc)) {
-					// Either this is the first article and we grab the larger 775 image,
-					// or this is one of the regular articles and we take the smaller 382 image.
-					if(((array_search($node->nid,array_keys($nodes)) == 0) && strpos($newsletterImg['filename'], '775'))
-							|| ((array_search($node->nid,array_keys($nodes)) != 0) && strpos($newsletterImg['filename'], '382'))){
-						//Pass image to the newsletter image folder.
-						if(!file_exists($imgDest)) {
-							if(copy(DRUPAL_ROOT . $imgSrc, $imgDest)) {
-								$imgFound = TRUE;
-							}
-							chmod($imgDest,0670);
-						}
-						if(file_exists($imgDest)) {
-							$imgFound = TRUE;
-						}
-					}
-					
-				} else {
-					
-					//Placeholder image
-					$node->field_image['und'][0]['uri'] = DRUPAL_ROOT . '/html-8888/mem_fs/images/image-not-found.jpg';
-					
+				  	//Check image size first
+				    if(array_search($node->nid,array_keys($nodes)) == 0) {
+				    	//Feature spot image
+				    	if(($newsletterImg['width'] <= '780' && $newsletterImg['width'] >= '770' )
+				    		&& ($newsletterImg['height'] <= '255' && $newsletterImg['height'] >= '245' )) {
+				    		if(!file_exists($imgDest)) {
+				    			if(copy(DRUPAL_ROOT . $imgSrc, $imgDest)) {
+				    			    $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
+					                $node->field_image['und'][1]['uri'] = DRUPAL_ROOT . '/html-8888/mem_fs/' . $newsletterImg['filename'];
+				    				$imgFound = TRUE;
+				    			}
+				    			chmod($imgDest,0670);
+				    		}
+						    if(file_exists($imgDest)) {
+						   	  //Verify file is now in memfs directory
+				    		  $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
+						   	  $imgFound = TRUE;
+						    }
+				    	} else if(strpos($newsletterImg['filename'],'775') && (($newsletterImg['width'] > '780')&&($newsletterImg['height'] > '255'))) {
+				    		if(!file_exists($imgDest)) {
+				    			if(copy(DRUPAL_ROOT . $imgSrc, $imgDest)) {
+				    				$node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
+				    				$node->field_image['und'][1]['uri'] = DRUPAL_ROOT . '/html-8888/mem_fs/' . $newsletterImg['filename'];
+				    				$imgFound = TRUE;
+				    			}
+				    			chmod($imgDest,0670);
+				    		}
+				    		if(file_exists($imgDest)) {
+				    			//Verify file is now in memfs directory
+				    		    $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
+				    			$imgFound = TRUE;
+				    		}
+				    	}
+				    } else {
+				    	//Regular News article
+				    	if(($newsletterImg['width'] <= '390' && $newsletterImg['width'] >= '370' ) 
+				    		&& ($newsletterImg['height'] <= '255' && $newsletterImg['height'] >= '245' )) {
+				    		if(!file_exists($imgDest)) {
+				    			if(copy(DRUPAL_ROOT . $imgSrc, $imgDest)) {
+				    				$node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
+					                $node->field_image['und'][0]['uri'] = DRUPAL_ROOT . '/html-8888/mem_fs/' . $newsletterImg['filename'];
+				    				$imgFound = TRUE;
+				    			}
+				    			chmod($imgDest,0670);
+				    		}
+						    if(file_exists($imgDest)) {
+						   	  //Verify file is now in memfs directory
+				    		  $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
+						   	  $imgFound = TRUE;
+						    }
+				    		
+				    	}
+				    }
 				}
 			}
-		} else {
-			$node->field_image['und'][0]['uri'] = DRUPAL_ROOT . '/html-8888/mem_fs/images/image-not-found.jpg';
+		  if(!$imgFound) {
+			$node->field_image['und'][0]['uri'] = '';
+			$node->field_image['und'][1]['uri'] = '';
+		  }
 		}
 		// Image couldn't be transferred to/found in newsletter image folder. Inform user.
 		if(!$imgFound && $node->type != 'blog') {
-			//if(!$imgFound && $node['body']['#object']->type != 'blog') {
-			drupal_set_message("The image corresponding to " . $node->title . " could not transferred automatically. The image for this article will need to be transferred manually.", 'warning');
+			$error .= "The image corresponding to <strong>" . $node->title . "</strong> could not be found.<br>";
 		}
 		
 		//Update img path & then add node to render array.
-		//$node['body']['#object']->field_image['und'][0]['uri'] = $atwork_base_url . $imgDest;
 		$atwork_newsletter_render_array['nodes'][$node->nid] = $node;
 
+	} 
+	if($error) {
+	  drupal_set_message($error . "<br>Please check the images in the article to make sure they are uploaded in this order:<br>"
+			. "&emsp;Small 382 X 775 px<br>"
+			. "&emsp;Medium 250 X 775 px<br>"
+			. "&emsp;Large 250 X 960 px<br>"
+			. "The width must be included in the image title (for example \"Capital_Park_382x250\")", 'warning');
 	}
 	return($atwork_newsletter_render_array);
 }
-

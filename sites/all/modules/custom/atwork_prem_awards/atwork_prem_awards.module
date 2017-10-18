@@ -55,7 +55,6 @@ EOT;
 
   if ($sid) {
     $submission = webform_get_submission(PA_REG_FORM_NID, $sid);
-    //dpm($submission);
     // this output depends on a submission existing
     /* $output .= <<<EOT
 <div class="field-label-above"><div class="field-label">Registrant Name:&nbsp;</div><div class="field-items"><div class="field-item odd">{$submission->data[12][0]}</div></div></div>
@@ -265,45 +264,6 @@ function _atwork_prem_awards_get_contacts() {
     $contacts[] = $row->mail;
   }
   return $contacts;
-}
-
-function atwork_prem_awards_menu(){
-    $items['node/%node/prem-award-roles'] = array(
-      'title' => 'Assign Roles',
-      'page callback' => 'drupal_get_form',
-      'page arguments' => array('atwork_prem_awards_roles_form', 1),
-      'access callback' => 'atwork_prem_awards_roles_access',
-      'access arguments' => array(1),
-      'weight' => 1,
-      'type' => MENU_LOCAL_TASK,
-    );
-
-    return $items;
-}
-
-function atwork_prem_awards_block_info() {
-  // This example comes from node.module.
-  $blocks['nav'] = array(
-    'info' => t("Premiere's Awards Navigation"),
-    'cache' => DRUPAL_NO_CACHE,
-  );
-
-  return $blocks;
-}
-
-function atwork_prem_awards_block_view($delta = '') {
-  // This example is adapted from node.module.
-  $block = array();
-
-  switch ($delta) {
-    case 'nav':
-      $block['subject'] = '';
-      $block['content'] = array(
-        '#markup' => _atwork_prem_awards_nav_block(),
-      );
-      break;
-  }
-  return $block;
 }
 
 function _atwork_prem_awards_nav_block() {
@@ -543,7 +503,6 @@ function atwork_prem_awards_form_alter(&$form, $form_state, $form_id) {
       '#value' => t('Save'),
       '#prefix' => '<p>' . t('Saving the application will not trigger any emails.') . '</p>',
     );
-    //dpm($form);
 
     // check for existence of application type (innovation, leadership, etc)
     if (!isset($form['submitted']['application_type']['#default_value']) || !$form['submitted']['application_type']['#default_value']) {
@@ -569,7 +528,7 @@ function atwork_prem_awards_form_alter(&$form, $form_state, $form_id) {
     }
   }
 
-  if ($form_id == 'webform_client_form_' . PA_REG_FORM_NID) {
+  if ($form_id == 'webform_client_form_' . PA_REG_FORM_NID && (arg(0)==='node' && is_numeric(arg(1)) && arg(1)== PA_REG_FORM_NID)) {
     $form['#submit'][] = 'atwork_prem_awards_registration_submit';
   }
 }
@@ -708,7 +667,6 @@ function atwork_prem_awards_preprocess_webform_submission(&$vars) {
   global $user;
   require_once drupal_get_path('module', 'atwork_prem_awards') . '/atwork_prem_awards.replacements.inc';
 
-  //dpm($vars['submission']);
   $application_type = $vars['submission']->data[41][0];
   $translations = _atwork_prem_awards_questions();
   $headers = _atwork_prem_awards_headers();
@@ -804,4 +762,333 @@ EOT;
     //$vars['renderable']['attachments']['#access'] = FALSE;
 
   }
+}
+
+/**
+* Block to act as a registration page for Prem awards.
+* Uses Ajax/JQuery callbacks to populate webform.
+*/
+
+/**
+* Implements hook_menu();
+* Create menu path for accessing values via Ajax.
+*/ 
+function atwork_prem_awards_menu(){
+  $items['p-awards/registration/%/%'] = array(
+    'page callback' => 'atwork_prem_awards_callback', // Render HTML.
+    'page arguments' => array(2,3),
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+    //'delivery callback' => 'atwork_prem_ajax_callback',  // Magic goes here.
+  );
+  $items['node/%node/prem-award-roles'] = array(
+    'title' => 'Assign Roles',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('atwork_prem_awards_roles_form', 1),
+    'access callback' => 'atwork_prem_awards_roles_access',
+    'access arguments' => array(1),
+    'weight' => 1,
+    'type' => MENU_LOCAL_TASK,
+  );
+ // submission function path for updates
+  $items['p-awards/submit'] = array(
+    'page callback' => 'atwork_prem_awards_submit_callback',
+    //'page arguements' => array(2),
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+  );
+  // submission function path for new
+  $items['p-awards/submit/new'] = array(
+    'page callback' => 'atwork_prem_awards_new_submit_callback',
+    'types' => MENU_CALLBACK,
+    'access arguements' => array('access content'),
+  );
+  return $items;
+}
+
+/**
+ * Callback function for premiers award function if user has previously submitted an application.
+ *
+ * @param [string] $user - the idir of the user
+ * @param [string] $current_uid - the uid of the user.
+ * @return echo's a JSON string used by jQuery.
+ */
+function atwork_prem_awards_callback($user, $current_uid){
+  // This has to be included on custom pages.
+  //module_load_include('inc', 'webform', 'webform.submission');
+  include_once(drupal_get_path('module', 'webform') . '/includes/webform.submissions.inc');
+  // Look for forms that have the uid, if they are there, return them all. JQuery can hand back any updates - or we can just move on.
+  // else we can tell jQuery this is new, and we can build fields to submit back to a secondary php function where we can save the form
+  $submissions = webform_get_submissions(array('nid' => PA_REG_FORM_NID, 'uid' => $current_uid));
+  // Get static webform for titles
+  $webform_node = node_load(PA_REG_FORM_NID);
+  // https://www.drupal.org/node/1731742
+  // Break these out into specific sid's and values
+  $return_info_array = array();
+  $applicant = user_load($current_uid);  
+  $return_info_array['applicant'] = $applicant->field_gal_first_name['und'][0]['safe_value'];
+  $return_info_array['uid'] = $current_uid;
+  if(isset($submissions) && !empty($submissions)){
+    foreach($submissions as $key=>$value){
+      if(isset($value->data[5][0]) && $value->data[5][0] > 0){
+        $return_info_array[$key] = array(
+          'webcast' => $webform_node->webform['components'][4]['name'],
+          'numberAttending' =>$value->data[5][0],
+          'ministry' => $value->data[10][0],
+          'name' => $value->data[9][0],
+          'city' => $value->data[11][0], 
+        );
+      }
+      // Signed up for Int/North
+      if(isset($value->data[15][0]) && $value->data[15][0] > 0){
+        $return_info_array[$key] = array(
+          'webcast' => $webform_node->webform['components'][14]['name'],
+          'numberAttending' => $value->data[15][0],
+          'ministry' => $value->data[10][0],
+          'name' => $value->data[9][0],
+          'city' => $value->data[11][0], 
+        );
+      }      
+      // Signed up for Lower Mainland
+      if(isset($value->data[7][0]) && $value->data[7][0] > 0){
+        $return_info_array[$key] = array(
+          'webcast' => $webform_node->webform['components'][6]['name'],
+          'numberAttending' => $value->data[7][0],
+          'ministry' => $value->data[10][0],
+          'name' => $value->data[9][0],
+          'city' => $value->data[11][0],     
+        );
+      }      
+    }
+  } 
+  // Return to js
+  echo json_encode($return_info_array);
+  // Stops themeing layer from interacting with this
+  die();
+}
+
+function atwork_prem_awards_submit_callback(){
+  module_load_include('inc', 'webform', 'includes/webform.submissions');
+  $submission_array = $_POST;
+  $status = array();
+  // This is a new webform
+  if($submission_array['sid'] == null){
+    // create a new webform (insert function)
+    $status = create_new_webform_entry($submission_array);    
+  } else {
+     // Get existing webform
+    $webform = webform_get_submission(PA_REG_FORM_NID, $submission_array['sid']);
+    // Check if this matches webcast for existing webform
+    if($submission_array['webcast'] == 'vancouverIsland' && isset($webform->data[13][0]) && $webform->data[13][0] == 'vi_webcast'){
+      //continue
+    } elseif ($submission_array['webcast'] == 'lowerMainland' && isset($webform->data[13][0]) && $webform->data[13][0] == 'main_webcast') {
+      //continue
+    } elseif ($submission_array['webcast'] == 'interiorNorth'&& isset($webform->data[13][0]) && $webform->data[13][0] == 'int_webcast') {
+      //continue
+    } else {
+      // This is net new, or they have changed the webcast, should be a new entry, need to keep the original sid as id for next func
+      $submission_array['id'] = $submission_array['sid'];
+      $status = create_new_webform_entry($submission_array);
+      echo json_encode($status);
+      die();
+    }
+    // If found, update webform with any changes
+    $changes = 0;
+    // Check name
+    if($webform->data[9][0] != $submission_array['name']){
+      $webform->data[9][0] = $submission_array['name'];
+      $changes ++;
+    }
+    //check ministry
+    if($webform->data[10][0] != $submission_array['ministry']){
+      $webform->data[10][0] = $submission_array['ministry'];
+      $changes ++;
+    }
+    // check number attending 
+    if(isset($webform->data[5][0]) && $webform->data[5][0] > 1 && $webform->data[5][0] != $submission_array['attending']){
+      $webform->data[5][0] = $submission_array['attending'];
+      $changes ++;
+      
+    }
+    if(isset($webform->data[7][0]) &&  $webform->data[7][0] > 1 && $webform->data[7][0] != $submission_array['attending']){
+      $webform->data[7][0] = $submission_array['attending'];
+      $changes ++;
+      
+    }
+    if(isset($webform->data[15][0]) &&  $webform->data[15][0] > 1 && $webform->data[15][0] != $submission_array['attending']){
+      $webform->data[15][0] = $submission_array['attending'];
+      $changes ++;
+      
+    }
+    // check city
+    if($webform->data[11][0] != $submission_array['city']){
+      $webform->data[11][0] = $submission_array['city'];
+      $changes ++;
+      
+    }
+    // update webform if any changes
+    if($changes > 0){
+      $form_node = node_load(PA_REG_FORM_NID);
+      $new_webform = webform_submission_update($form_node, $webform);
+      if(isset($new_webform) && $new_webform > 0){
+        // WE got an sid back - this has been saved
+        $status = array(
+         'sid'=>$new_webform,
+         'response'=>'200',
+        );
+      } else {
+        array(
+          'sid'=>Null,
+          'response'=>'500',
+         );
+      }
+    } else {
+      // No actual updates required, so send back a 200, keep data as is
+      $status = array(
+        'sid'=>$submission_array['sid'],
+        'response'=>'200',
+       );
+    }
+
+  }
+  
+  // Return either a 200 or 500 to js, so we can mark if it is successful or not.
+  echo json_encode($status);
+  die();
+}
+
+/**
+ * Helper function to create new webform if required
+ *
+ * @param [array] $submission_array
+ * @return string of status (200 okay, 500 error)
+ */
+function create_new_webform_entry($submission_array){
+  $current_user = user_load($submission_array['uid']);
+  $response = array(
+    'sid' => $submission_array['id'],
+    'response' => '',
+  );
+  $data = array(
+    '9' => array(
+      '0' => $submission_array['name'],
+    ),
+    '10' => array(
+      '0' => $submission_array['ministry'],
+    ),
+    '11' => array(
+      '0' => $submission_array['city'],
+    ),
+    '12' => array(
+      '0' => $current_user->mail,
+    ),
+  );
+
+  // Now check for webcast choice
+  if($submission_array['webcast'] == 'vancouverIsland'){
+    $data['13'] = array(
+      "0" => "vi_webcast"
+    );
+    $data['5'] = array(
+      "0" => $submission_array['attending']
+    );
+  } elseif($submission_array['webcast'] == 'interiorNorth') {
+    $data['13'] = array(
+      "0" => "int_webcast"
+    );
+    $data['15'] = array(
+      "0" => $submission_array['attending']
+    );
+  } elseif($submission_array['webcast'] == 'lowerMainland'){
+    $data['13'] = array(
+      "0" => "main_webcast"
+    );
+    $data['7'] = array(
+      "0" => $submission_array['attending']
+    );
+  } else {
+    $response['response'] = 500;    
+    return $resopnse;
+  }
+  $webform_node = node_load(PA_REG_FORM_NID);
+  //webform_submission_create()
+  $submission = (object) array(
+    'nid' => PA_REG_FORM_NID,
+    'uid' => $current_user->uid,
+    'sid' => NULL,
+    'submitted' => REQUEST_TIME,
+    'completed' => REQUEST_TIME,
+    'remote_addr' => ip_address(),
+    'is_draft' => FALSE,
+    'data' => $data,
+  );
+
+  $sid = webform_submission_insert($webform_node, $submission);
+  if(isset($sid) && $sid > 0){
+    $response['response'] = "200";
+    return $response;
+  } else {
+    $response['response'] = "500";
+    return $response;
+  }
+  return $response;
+}
+
+
+/**
+* Implements hook_block_info
+* We want a block that can be used to grab info on Prem awards viewers
+*/
+function atwork_prem_awards_block_info() {
+  $blocks['prem_registration'] = array(
+    'info' => t("Premiers awards registration form"),
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  // This example comes from node.module.
+  $blocks['nav'] = array(
+      'info' => t("Premiere's Awards Navigation"),
+      'cache' => DRUPAL_NO_CACHE,
+  );
+ return $blocks;
+}
+
+
+
+/**
+* Implements hook_block_view
+* Specialized block to check/receive/update viewer numbers for the premiers awards.
+*/ 
+function atwork_prem_awards_block_view($delta = ''){
+  $block = array();
+  switch ($delta) {
+    case 'prem_registration':
+      $block['content'] = array(
+        // We don't really want to show anything here - so we are not receiving anything more than an empty string back.
+        '#markup' => premiers_awards_registration_information(),
+      );
+      break;
+    case 'nav':
+      $block['subject'] = '';
+      $block['content'] = array(
+        '#markup' => _atwork_prem_awards_nav_block(),
+      );
+      break;
+  }
+  return $block;
+}
+
+/**
+* Function that gets info for user, and passes it to the dom for registration check.
+**/
+function premiers_awards_registration_information(){
+  global $user;
+  $current_user = user_load($user->uid);
+  // The output string we will return, we don't really want anything to show in the block, so we pass nothing back.
+  $output = '';
+  
+  // Add form update js
+  drupal_add_js(drupal_get_path('module', 'atwork_prem_awards') . '/' . 'js_prem_awards_form.js');
+  drupal_add_js(array('atwork_prem_awards' => array('user' => $current_user->name, 'uid' => $current_user->uid)), 'setting');
+  return $output;
 }

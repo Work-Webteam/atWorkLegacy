@@ -10,9 +10,9 @@
  */
 function theme_scs_sortable_table($form) {
   $form = $form['form'];
-  $headers = array(t('Node title'), t('Weight'), t('View mode'));
+  //$headers = array(t('Node title'), t('Weight'), t('View mode'));
+  $headers = array(t('Content title'), t('Weight'), t('Content Type'));
   $rows = array();
-
   $nids = element_children($form['nodes']);
 
   // Fetch the titles for each nid
@@ -32,6 +32,7 @@ function theme_scs_sortable_table($form) {
       'class' => array('draggable'),
     );
   }
+
   $output = theme('table', array('header' => $headers, 'rows' => $rows, 'attributes' => array('id' => 'scs-sort-nodes')));
   $info = '';
   if (isset($form['scs_title']) && isset($form['scs_toc'])) {
@@ -39,6 +40,7 @@ function theme_scs_sortable_table($form) {
   }
   $output = $info . $output . drupal_render_children($form);
   drupal_add_tabledrag('scs-sort-nodes', 'order', 'sibling', 'node-weight');
+
   return $output;
 }
 

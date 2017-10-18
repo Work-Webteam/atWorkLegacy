@@ -1,0 +1,5 @@
+lines 266 - 268
+
++      if($element == 'b' || $element == 'i'){
++        continue;
++      }
