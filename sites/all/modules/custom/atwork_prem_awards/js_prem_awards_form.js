@@ -107,8 +107,10 @@
     $(".add-new-form:not(.atwork-prem-awards-processed)")
     .addClass('atwork-prem-awards-processed')
     .bind('click', function (){
-      var blankForm = newForm(items);
-      $('#add-new-form').before(blankForm);
+      var blankForm = '';
+      blankForm = newForm(items);
+      console.log(blankForm);
+      $('.add-new-form').before(blankForm);
       setClickHandlers(items);
     });
     // Submit handler - this simply redirects form to video
@@ -239,6 +241,7 @@
           // Remove any save/error messages that exist
           $('.error-message-prem-form').remove();
           $('.save-confirmation-message').remove();
+          form[0].reset();
           dialog.dialog("close");
         }
       },
