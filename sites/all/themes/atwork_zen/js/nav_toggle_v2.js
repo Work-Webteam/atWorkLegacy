@@ -11,7 +11,7 @@
 (function($) {
 Drupal.behaviors.atwork_quicklinks = {
   attach: function (context, settings) {
-
+ /*
 	// Variable to track cookie state
 	var $navOpen = '';
 
@@ -66,6 +66,7 @@ Drupal.behaviors.atwork_quicklinks = {
 	$("#top-tools-panel .fa.fa-caret-up").mouseup(function() {
 		$(this).css("background-color", "#008D7B");
 	});
+	*/
 
 	// User profile menu actions:
   	$("#header-user-name").mousedown(function(){
