@@ -827,6 +827,12 @@ function atwork_prem_awards_callback($user, $current_uid){
   $return_info_array = array();
   $applicant = user_load($current_uid);  
   $return_info_array['applicant'] = $applicant->field_gal_first_name['und'][0]['safe_value'];
+  // Grab current webcast names
+  $return_info_array['webcasts'] = array(
+    'vancouver_island' =>  $webform_node->webform['components'][4]['name'],
+    'lower_mainland' => $webform_node->webform['components'][6]['name'],
+    'interior_north' =>  $webform_node->webform['components'][14]['name'],
+  );
   $return_info_array['uid'] = $current_uid;
   if(isset($submissions) && !empty($submissions)){
     foreach($submissions as $key=>$value){
@@ -879,11 +885,11 @@ function atwork_prem_awards_submit_callback(){
      // Get existing webform
     $webform = webform_get_submission(PA_REG_FORM_NID, $submission_array['sid']);
     // Check if this matches webcast for existing webform
-    if($submission_array['webcast'] == 'vancouverIsland' && isset($webform->data[13][0]) && $webform->data[13][0] == 'vi_webcast'){
+    if($submission_array['webcast'] ==  $webform_node->webform['components'][4]['name'] && isset($webform->data[13][0]) && $webform->data[13][0] == 'vi_webcast'){
       //continue
-    } elseif ($submission_array['webcast'] == 'lowerMainland' && isset($webform->data[13][0]) && $webform->data[13][0] == 'main_webcast') {
+    } elseif ($submission_array['webcast'] == $webform_node->webform['components'][6]['name'] && isset($webform->data[13][0]) && $webform->data[13][0] == 'main_webcast') {
       //continue
-    } elseif ($submission_array['webcast'] == 'interiorNorth'&& isset($webform->data[13][0]) && $webform->data[13][0] == 'int_webcast') {
+    } elseif ($submission_array['webcast'] == $webform_node->webform['components'][14]['name'] && isset($webform->data[13][0]) && $webform->data[13][0] == 'int_webcast') {
       //continue
     } else {
       // This is net new, or they have changed the webcast, should be a new entry, need to keep the original sid as id for next func
@@ -965,6 +971,11 @@ function atwork_prem_awards_submit_callback(){
  */
 function create_new_webform_entry($submission_array){
   $current_user = user_load($submission_array['uid']);
+   // Get static webform for titles
+  $webform_node = node_load(PA_REG_FORM_NID);
+  $vancouver_island =  $webform_node->webform['components'][4]['name'];
+  $lower_mainland = $webform_node->webform['components'][6]['name'];
+  $interior_north =  $webform_node->webform['components'][14]['name'];
   $response = array(
     'sid' => $submission_array['id'],
     'response' => '',
@@ -985,21 +996,21 @@ function create_new_webform_entry($submission_array){
   );
 
   // Now check for webcast choice
-  if($submission_array['webcast'] == 'vancouverIsland'){
+  if($submission_array['webcast'] == $vancouver_island){
     $data['13'] = array(
       "0" => "vi_webcast"
     );
     $data['5'] = array(
       "0" => $submission_array['attending']
     );
-  } elseif($submission_array['webcast'] == 'interiorNorth') {
+  } elseif($submission_array['webcast'] == $interior_north) {
     $data['13'] = array(
       "0" => "int_webcast"
     );
     $data['15'] = array(
       "0" => $submission_array['attending']
     );
-  } elseif($submission_array['webcast'] == 'lowerMainland'){
+  } elseif($submission_array['webcast'] == $lower_mainland){
     $data['13'] = array(
       "0" => "main_webcast"
     );
@@ -1008,7 +1019,7 @@ function create_new_webform_entry($submission_array){
     );
   } else {
     $response['response'] = 500;    
-    return $resopnse;
+    return $response;
   }
   $webform_node = node_load(PA_REG_FORM_NID);
   //webform_submission_create()

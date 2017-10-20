@@ -73,7 +73,7 @@
       $(".ui-dialog-buttonset :first(.ui-button.ui-widget.ui-corner-all)").prop("disabled", true);
     }
     // Set all existing click handlers
-    setClickHandlers();
+    setClickHandlers(items);
     // End
     return;
   }
@@ -81,7 +81,7 @@
   /**
    * Function that sets all click handlers, and makes sure we are not setting them twice. Passes off logic to seperate functions
    */
-  function setClickHandlers(){
+  function setClickHandlers(items){
     // Click handler for "edit" functionality
     $('.show-input-field:not(.atwork-prem-awards-processed)')
       .addClass('atwork-prem-awards-processed')
@@ -107,9 +107,9 @@
     $(".add-new-form:not(.atwork-prem-awards-processed)")
     .addClass('atwork-prem-awards-processed')
     .bind('click', function (){
-      var blankForm = newForm();
+      var blankForm = newForm(items);
       $('#add-new-form').before(blankForm);
-      setClickHandlers();
+      setClickHandlers(items);
     });
     // Submit handler - this simply redirects form to video
     form = dialog.find("form").on("submit", function(event) {
@@ -254,7 +254,7 @@
   function buildString(items) {
     var formString = '';
     $.each(items, function (index, value) {
-      if (index == 'applicant' || index == 'uid'){
+      if (index == 'applicant' || index == 'uid' || index == 'webcasts'){
         // skipping this one
         return;
       } else {
@@ -267,30 +267,30 @@
           // Use this to find default value
           var castValue = "default";
           if(value.webcast.indexOf('Island') > -1) {
-            castValue = 'vancouverIsland';
+            castValue = items['webcasts']['vancouver_island'];
           }
           if(value.webcast.indexOf('Lower') > -1) {
-            castValue = 'lowerMainland';
+            castValue = items['webcasts']['lower_mainland'];
           }
           if(value.webcast.indexOf('Interior') > -1) {
-            castValue = 'interiorNorth';
+            castValue = items['webcasts']['interior_north'];
           }
           formString += '<select name="webcast-' + index + '" value="' + castValue + '" class="prem-award-input">';
             // TODO: Get proper dates/times for this.
-            if(castValue == 'vancouverIsland'){
-              formString += '<option value="vancouverIsland" selected="selected">Vancouver Island</option>';
+            if(castValue == items['webcasts']['vancouver_island']){
+              formString += '<option value="' + castValue + '" selected="selected">' +  castValue + '</option>';
             } else {
-              formString += '<option value="vancouverIsland">Vancouver Island</option>';
+              formString += '<option value="' +  items['webcasts']['vancouver_island'] + '">' +  items['webcasts']['vancouver_island'] + '</option>';
             }
-            if(castValue =='lowerMainland'){
-              formString += '<option value="lowerMainland" selected="selected">Lower Mainland</option>';
+            if(castValue == items['webcasts']['lower_mainland']){
+              formString += '<option value="' + castValue + '" selected="selected">' + castValue + '</option>';
             } else {
-              formString += '<option value="lowerMainland">Lower Mainland</option>';
+              formString += '<option value="' + items['webcasts']['lower_mainland'] + '">' +  items['webcasts']['lower_mainland'] + '</option>';
             }
-            if(castValue == 'interiorNorth'){
-              formString += '<option value="interiorNorth" selected="selected">Interior / North</option>';
+            if(castValue == items['webcasts']['interior_north']){
+              formString += '<option value="' + castValue + '" selected="selected">' + castValue + '</option>';
             } else {
-              formString += '<option value="interiorNorth">Interior / North</option>';
+              formString += '<option value="' +  items['webcasts']['interior_north'] + '">' +  items['webcasts']['interior_north'] + '</option>';
             }
           formString += '</select>';
           // Number attending bundle
@@ -323,7 +323,8 @@
    * Function that builds dom object (as a string) if the user has never created a submission for Prem awards this year thus far.
    * @return {string} formString
    */
-  function newForm(){
+  function newForm(items){
+    console.log(items);
     var formString = '';
     var timeStamp = $.now();
     // Embed the sid in the fieldset to keep information wrapped in the submission id.
@@ -334,10 +335,10 @@
       // All input fields should be hidden on initial form launch
       formString += '<select name="webcast-' + timeStamp + '" value="webCast" class="prem-award-input">';
         // TODO: Get proper dates/times for this.
-        formString += '<option value="vancouverIsland">Vancouver Island</option>';
-        formString += '<option value="lowerMainland">Lower Mainland</option>';
-        formString += '<option value="interiorNorth">Interior / North</option>';
-      formString += '</select>';
+        formString += '<option value="' +  items['webcasts']['vancouver_island'] + '">' +  items['webcasts']['vancouver_island'] + '</option>';
+        formString += '<option value="' +  items['webcasts']['lower_mainland'] + '">' +  items['webcasts']['lower_mainland'] + '</option>';
+        formString += '<option value="' +  items['webcasts']['interior_north'] + '">' +  items['webcasts']['interior_north'] + '</option>';
+        formString += '</select>';
       // Number attending bundle
       formString += '<label for="attending-' + timeStamp + '">Number Attending: </label>';
       formString += '<input type="text" name="attending-' + timeStamp + '" value="0" class="prem-award-input prem-award-attending" required>';
@@ -419,10 +420,10 @@
     $('.fieldset-prem-award-class-' + currentSid + ' .save-form-field').hide();
     $('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').show();
 
-    $('<div id="save-confirmation-message-' + currentSid + '"' + ' class="save-confirmation-message">Saved</div>').insertAfter('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').slideDown();
+    $('<div id="save-confirmation-message-' + currentSid + '"' + ' class="save-confirmation-message">Saved</div>').insertAfter('.fieldset-prem-award-class-' + currentSid + ' .show-input-field').slideDown("slow");
 
     setTimeout(function(){
-      $('#save-confirmation-message-' + currentSid ).slideToggle("fast");
+      $('#save-confirmation-message-' + currentSid ).slideToggle("slow");
       $('#save-confirmation-message-' + currentSid ).remove();
     }, 5000);
   }
@@ -432,21 +433,32 @@
    * @param {array} returnData Should include both ['sid'] -> the id number used in the form field (an sid if updating, and id generated by timestamp if new) and ['response] -> A 500 or 200 depending on Drupal feedback.
    */
   function ajaxCompleted (returnData) {
+    // Nothing came back
+    if(returnData == null) {
+      // Something is wrong, we received no legible response so lets let them know and keep teh form open for review/resubmit.
+      $('<div id="error-message" class="error-message-prem-form">Something went wrong. Please review information and try to save again.</div>').insertAfter('#premiers-awards-form').slideDown("slow");
+      setTimeout(function(){
+        $('#error-message').slideToggle("slow");
+        $('#error-message').remove();
+      }, 10000);
+      return;
+    }
+    
     if(returnData['response'] == "200"){
       updateFieldLabels(returnData['sid']);
     // general error, and one that appears in form-field
     } else if ("response" in returnData && returnData['response'] == "500"){
       // Something is wrong, so lets let them know and keep teh form open for review/resubmit.
-      $('<div id="error-message" class="error-message-prem-form">Something went wrong. Please review information and try to save again.</div>').insertAfter('.fieldset-prem-award-class-' + returnData['sid']).slideDown();
+      $('<div id="error-message" class="error-message-prem-form">Something went wrong. Please review information and try to save again.</div>').insertAfter('.fieldset-prem-award-class-' + returnData['sid']).slideDown("slow");
       setTimeout(function(){
-        $('#error-message').slideToggle("fast");
+        $('#error-message').slideToggle("slow");
         $('#error-message').remove();
       }, 10000);
     } else {
       // Something is wrong, we received no legible response so lets let them know and keep teh form open for review/resubmit.
-      $('<div id="error-message" class="error-message-prem-form">Something went wrong. Please review information and try to save again.</div>').insertAfter('#premiers-awards-form').slideDown();
+      $('<div id="error-message" class="error-message-prem-form">Something went wrong. Please review information and try to save again.</div>').insertAfter('#premiers-awards-form').slideDown("slow");
       setTimeout(function(){
-        $('#error-message').slideToggle("fast");
+        $('#error-message').slideToggle("slow");
         $('#error-message').remove();
       }, 10000);
     }
