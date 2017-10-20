@@ -96,8 +96,8 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
     $comment_value = 'none';
     $comment_suffix = NULL; 
     if(array_key_exists('nodes',$form)) {
-     $comment_value = $form_state['input']['cid'];
-     $comment_preview = comment_load($comment_value);
+      $comment_value = $form_state['input']['cid'];
+      $comment_preview = comment_load($comment_value);
       $comment_body = $comment_preview->comment_body['und'][0]['value']; 
       if($_POST['cid'] !== 'none') {
         $comment_suffix = '<div><table style="border: 1px solid #bebfb9;"><tr><td style="border: 1px solid #bebfb9; background-color: #e1e2dc;">COMMENT PREVIEW</td><td>'. $comment_body . '</td></tr></table></div>';
