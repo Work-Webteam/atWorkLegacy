@@ -48,7 +48,7 @@
           '<p>Hello ' + user_name + ', our records indicate that you have pre-registered for the following webcast(s). Please make any required changes and confirm the registration information below.</p>'  +
           '<form>' +
             formString +
-          '<input type="button" class="add-new-form" id="add-new-form" value="Add new application">' +
+          '<input type="button" class="add-new-form" id="add-new-form" value="Add registration">' +
           '</form>' +
         '</div>').appendTo('#modal-pop');
 
@@ -60,7 +60,7 @@
         '<p>Hello ' + user_name + ', our records indicate that you have not registered for any webcasts. Please create a registration and then click the "save" button below.</p>'  +
         '<form>' +
         formString +
-        '<input type="button" class="add-new-form" id="add-new-form" value="Add new application">' +
+        '<input type="button" class="add-new-form" id="add-new-form" value="Add registration">' +
         '</form>' +
       '</div>').appendTo('#modal-pop');
       $('#add-new-form').hide();
@@ -218,12 +218,12 @@
    * This function submits redirects user to prem awards video
    **/
   function redirectSubmit(){
-    // TODO: At this point we have already saved any changes via AJAX, so we can just redirect to prem awards vid.
-    window.location.replace("/user/twerdal");
+    //  At this point we have already saved any changes via AJAX, so we can just redirect to prem awards vid.
+    window.location.replace("http://video.web.gov.bc.ca/psa/pa/vod/");
   }
 
   /**
-   * This function creates a module for our form
+   * This function creates a modal for our form
    */
   function setDialog(){
     dialog = $('#modal-pop').dialog({
@@ -234,8 +234,11 @@
       show: { effect: "blind", duration: 800 },
       background: '#FFFFFF',
       buttons: {
-        "Continue to awards show": redirectSubmit,
+        "Attend Awards Webcast": redirectSubmit,
         Cancel: function(){
+          // Remove any save/error messages that exist
+          $('.error-message-prem-form').remove();
+          $('.save-confirmation-message').remove();
           dialog.dialog("close");
         }
       },
@@ -276,7 +279,7 @@
             castValue = items['webcasts']['interior_north'];
           }
           formString += '<select name="webcast-' + index + '" value="' + castValue + '" class="prem-award-input">';
-            // TODO: Get proper dates/times for this.
+            // Get proper dates/times for this.
             if(castValue == items['webcasts']['vancouver_island']){
               formString += '<option value="' + castValue + '" selected="selected">' +  castValue + '</option>';
             } else {
@@ -294,7 +297,7 @@
             }
           formString += '</select>';
           // Number attending bundle
-          formString += '<label for="attending-' + index + '">Number of Attendies: ' + value.numberAttending + '</label>';
+          formString += '<label for="attending-' + index + '">Number of Attendees: ' + value.numberAttending + '</label>';
           formString += '<input type="text" name="attending-' + index + '" value="' + value.numberAttending + '" class="prem-award-input prem-award-attending" required>';
           // Name bundle
           formString += '<label for="name-' + index + '">Name: ' + value.name + '</label>';
@@ -334,7 +337,7 @@
       formString += '<label for="webcast-' + timeStamp + '">Webcast: </label>';
       // All input fields should be hidden on initial form launch
       formString += '<select name="webcast-' + timeStamp + '" value="webCast" class="prem-award-input">';
-        // TODO: Get proper dates/times for this.
+        // Get proper dates/times for this.
         formString += '<option value="' +  items['webcasts']['vancouver_island'] + '">' +  items['webcasts']['vancouver_island'] + '</option>';
         formString += '<option value="' +  items['webcasts']['lower_mainland'] + '">' +  items['webcasts']['lower_mainland'] + '</option>';
         formString += '<option value="' +  items['webcasts']['interior_north'] + '">' +  items['webcasts']['interior_north'] + '</option>';
