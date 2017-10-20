@@ -109,7 +109,6 @@
     .bind('click', function (){
       var blankForm = '';
       blankForm = newForm(items);
-      console.log(blankForm);
       $('.add-new-form').before(blankForm);
       setClickHandlers(items);
     });
@@ -121,7 +120,7 @@
   }
 
   /**
-   * This functoin handles save logic
+   * This function handles save logic
    */
   function saveButtonClickHandler(element, uid){
     // We need to account for the sid here - so only show fields within the specific fieldset.
@@ -330,7 +329,6 @@
    * @return {string} formString
    */
   function newForm(items){
-    console.log(items);
     var formString = '';
     var timeStamp = $.now();
     // Embed the sid in the fieldset to keep information wrapped in the submission id.
