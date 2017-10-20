@@ -884,8 +884,10 @@ function atwork_prem_awards_submit_callback(){
   } else {
      // Get existing webform
     $webform = webform_get_submission(PA_REG_FORM_NID, $submission_array['sid']);
+    $webform_node = node_load(PA_REG_FORM_NID);
+    
     // Check if this matches webcast for existing webform
-    if($submission_array['webcast'] ==  $webform_node->webform['components'][4]['name'] && isset($webform->data[13][0]) && $webform->data[13][0] == 'vi_webcast'){
+    if($submission_array['webcast'] == $webform_node->webform['components'][4]['name'] && isset($webform->data[13][0]) && $webform->data[13][0] == 'vi_webcast'){
       //continue
     } elseif ($submission_array['webcast'] == $webform_node->webform['components'][6]['name'] && isset($webform->data[13][0]) && $webform->data[13][0] == 'main_webcast') {
       //continue
