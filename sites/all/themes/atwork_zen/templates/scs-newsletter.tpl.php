@@ -77,7 +77,7 @@ $atwork_base_url = $GLOBALS['base_url'];
 			// Grab image for render.
 			$image = field_get_items('node', $node_first, 'field_image');
 
-			$image_output = field_view_value('node', $node_first, 'field_image', $image[1], array(
+			$image_output = field_view_value('node', $node_first, 'field_image', $image[0], array(
   				'type' => 'image',
   				'settings' => array(
     			'image_style' => 'atwork_newsletter_feature_image',
@@ -284,7 +284,6 @@ $atwork_base_url = $GLOBALS['base_url'];
 					'image_link' => 'content',
 						),
 				));
-				
 				// Attach tag to image
 				$image_output['#path']['path'] = $atwork_base_url . $curr_node->field_image['und'][$curr_node->newsletter_image[0]]['uri'];
 				$image_output['#item']['width'] = "270";
