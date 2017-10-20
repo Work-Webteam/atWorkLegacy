@@ -14,9 +14,8 @@
 
 function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_you_know){
 	$atwork_base_url = $GLOBALS['base_url'];
-	// Replace this with logic that converts the $nodes array to a renderable array with all necessary content for the newsletter.
-	// There is a possibility that the node will not have a usable image - if this is the case should we put in a default to avoid error?
-	// Load Comments for rendering (and maybe put everything into an array?)
+	$comment = NULL;
+	
 	if($comments !== 'none') {
 		// Load Comment Object
 		$comment = comment_load($comments);
@@ -65,12 +64,11 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 				  	//Check image size first
 				    if(array_search($node->nid,array_keys($nodes)) == 0) {
 				    	//Feature spot image
-				    	if(($newsletterImg['width'] <= '780' && $newsletterImg['width'] >= '770' )
-				    		&& ($newsletterImg['height'] <= '255' && $newsletterImg['height'] >= '245' )) {
+				    	if(($newsletterImg['width'] <= '800' && $newsletterImg['width'] >= '700' )
+				    		&& ($newsletterImg['height'] <= '300' && $newsletterImg['height'] >= '200' )) {
 				    		if(!file_exists($imgDest)) {
 				    			if(copy(DRUPAL_ROOT . $imgSrc, $imgDest)) {
 				    			    $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
-					                $node->field_image['und'][1]['uri'] = DRUPAL_ROOT . '/html-8888/mem_fs/' . $newsletterImg['filename'];
 				    				$imgFound = TRUE;
 				    			}
 				    			chmod($imgDest,0670);
@@ -80,11 +78,10 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 				    		  $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
 						   	  $imgFound = TRUE;
 						    }
-				    	} else if(strpos($newsletterImg['filename'],'775') && (($newsletterImg['width'] > '780')&&($newsletterImg['height'] > '255'))) {
+				    	} else if(strpos($newsletterImg['filename'],'775') && (($newsletterImg['width'] > '700')&&($newsletterImg['height'] > '200'))) {
 				    		if(!file_exists($imgDest)) {
 				    			if(copy(DRUPAL_ROOT . $imgSrc, $imgDest)) {
 				    				$node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
-				    				$node->field_image['und'][1]['uri'] = DRUPAL_ROOT . '/html-8888/mem_fs/' . $newsletterImg['filename'];
 				    				$imgFound = TRUE;
 				    			}
 				    			chmod($imgDest,0670);
@@ -97,12 +94,11 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 				    	}
 				    } else {
 				    	//Regular News article
-				    	if(($newsletterImg['width'] <= '390' && $newsletterImg['width'] >= '370' ) 
-				    		&& ($newsletterImg['height'] <= '255' && $newsletterImg['height'] >= '245' )) {
+				    	if(($newsletterImg['width'] <= '600' && $newsletterImg['width'] >= '200' ) 
+				    		&& ($newsletterImg['height'] <= '600' && $newsletterImg['height'] >= '200' )) {
 				    		if(!file_exists($imgDest)) {
 				    			if(copy(DRUPAL_ROOT . $imgSrc, $imgDest)) {
 				    				$node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
-					                $node->field_image['und'][0]['uri'] = DRUPAL_ROOT . '/html-8888/mem_fs/' . $newsletterImg['filename'];
 				    				$imgFound = TRUE;
 				    			}
 				    			chmod($imgDest,0670);
@@ -113,14 +109,27 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 						   	  $imgFound = TRUE;
 						    }
 				    		
+				    	} else if(strpos($newsletterImg['filename'],'382') && (($newsletterImg['width'] > '200')&&($newsletterImg['height'] > '200'))) {
+				    		if(!file_exists($imgDest)) {
+				    			if(copy(DRUPAL_ROOT . $imgSrc, $imgDest)) {
+				    				$node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
+				    				$imgFound = TRUE;
+				    			}
+				    			chmod($imgDest,0670);
+				    		}
+						    if(file_exists($imgDest)) {
+						   	  //Verify file is now in memfs directory
+				    		  $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
+						   	  $imgFound = TRUE;
+						    }
 				    	}
 				    }
 				}
 			}
-		  if(!$imgFound) {
-			$node->field_image['und'][0]['uri'] = '';
-			$node->field_image['und'][1]['uri'] = '';
-		  }
+	        if(!$imgFound) {
+	        	$node->field_image['und'][0]['uri'] = '';
+	        	$node->field_image['und'][1]['uri'] = '';
+	        }
 		}
 		// Image couldn't be transferred to/found in newsletter image folder. Inform user.
 		if(!$imgFound && $node->type != 'blog') {
@@ -129,7 +138,6 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 		
 		//Update img path & then add node to render array.
 		$atwork_newsletter_render_array['nodes'][$node->nid] = $node;
-
 	} 
 	if($error) {
 	  drupal_set_message($error . "<br>Please check the images in the article to make sure they are uploaded in this order:<br>"

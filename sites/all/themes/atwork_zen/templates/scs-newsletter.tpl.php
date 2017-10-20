@@ -77,7 +77,7 @@ $atwork_base_url = $GLOBALS['base_url'];
 			// Grab image for render.
 			$image = field_get_items('node', $node_first, 'field_image');
 
-			$image_output = field_view_value('node', $node_first, 'field_image', $image[1], array(
+			$image_output = field_view_value('node', $node_first, 'field_image', $image[0], array(
   				'type' => 'image',
   				'settings' => array(
     			'image_style' => 'atwork_newsletter_feature_image',
@@ -154,6 +154,10 @@ $atwork_base_url = $GLOBALS['base_url'];
 				$atwork_newsletter_title = $node_first -> title;
 				$atwork_newsletter_location = $node_first -> nid;
 
+				if(!isset($node_first->newsletter_image[0])){
+					$node_first->newsletter_image[0] = 0;
+				}
+				
 				//Build aliased URL with webtrends query tag
 				$atwork_newsletter_aliased = drupal_get_path_alias('node/'.$atwork_newsletter_location) . $pubDate;
 
@@ -236,14 +240,6 @@ $atwork_base_url = $GLOBALS['base_url'];
 				echo '</td>';
 				echo '</tr>';
 				echo '<tr>';
-				//echo '<td>';
-				//echo '<p style="margin-bottom: 5px; padding: 0 0 0 0;"><a style="font-family: Calibri, sans-serif; text-decoration: none; display: block; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '"> Read More >> </a></p>';
-				//echo '</td>';
-			    //echo '<td align="right">';
-			    //echo '<div class="content-type">';
-			    //echo '<p style="font-family: Calibri, sans-serif; margin-right:10px; margin-bottom: 10px; padding-top: 10px;"> <a> News </a> </p>';
-			    //echo '</div>';
-			    //echo '</td>';
 			    echo '<td style="padding: 0 0 5px 0;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" > Read more >> </a></td>';
 				echo '<td style="padding: 0 0 5px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/news' . $pubDate . '"> News </a></td>';
 				echo '</tr>';
@@ -266,7 +262,12 @@ $atwork_base_url = $GLOBALS['base_url'];
     		
 	        $curr_node = node_load($nids[$i]);
 	        // Check for article type 
-	        if($curr_node -> type === 'article') {	    
+	        if($curr_node -> type === 'article') {	
+	        	
+	        	if(!isset($curr_node->newsletter_image[0])){
+	        		$curr_node->newsletter_image[0] = 0;
+	        	}
+	        	
 		  	    // Collect title and url alias for node.
 			 	$atwork_newsletter_title = $curr_node -> title;
 			 	$atwork_newsletter_location = $curr_node-> nid;
@@ -274,17 +275,16 @@ $atwork_base_url = $GLOBALS['base_url'];
 			 	
 			 	// Build title for article
 			 	$output_atwork_newsletter_title = '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px;"><a style="text-decoration: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" >' . $atwork_newsletter_title . '</a></h2>';
-			 		
+			 	
 				// Collect image from node
 				$image = field_get_items('node', $curr_node, 'field_image');
 				$image_output = field_view_value('node', $curr_node, 'field_image', $image[$curr_node->newsletter_image[0]], array(
-						'type' => 'image',
-						'settings' => array(
+					'type' => 'image',
+					'settings' => array(
 					'image_style' => 'atwork_newsletter_other_image',
 					'image_link' => 'content',
 						),
 				));
-				
 				// Attach tag to image
 				$image_output['#path']['path'] = $atwork_base_url . $curr_node->field_image['und'][$curr_node->newsletter_image[0]]['uri'];
 				$image_output['#item']['width'] = "270";
