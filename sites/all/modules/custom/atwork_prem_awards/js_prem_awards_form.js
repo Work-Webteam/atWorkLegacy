@@ -235,7 +235,7 @@
       show: { effect: "blind", duration: 800 },
       background: '#FFFFFF',
       buttons: {
-        "Attend Awards Webcast": redirectSubmit,
+        "Go To Webcast": redirectSubmit,
         Close: function(){
           // Remove any save/error messages that exist
           $('.error-message-prem-form').remove();
