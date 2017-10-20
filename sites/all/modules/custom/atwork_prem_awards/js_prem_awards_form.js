@@ -45,7 +45,7 @@
 
       $('#block-atwork-activity-homepage').append('<div id="modal-pop"></div>');
       $('<div id="premiers-awards-form" class="prem-awards-form-wrapper">' +
-          '<p>Hello ' + user_name + ', our records indicate that you have pre-registered for the following webcast(s). Please make any required changes and confirm the registration information below.</p>'  +
+          '<p>Hello ' + user_name + ', our records indicate that you have pre-registered for the following webcast(s). Please make any required changes and confirm the registration information or go directly to the webcast below.</p>'  +
           '<form>' +
             formString +
           '<input type="button" class="add-new-form" id="add-new-form" value="Add registration">' +
@@ -123,6 +123,7 @@
    * This function handles save logic
    */
   function saveButtonClickHandler(element, uid){
+
     // We need to account for the sid here - so only show fields within the specific fieldset.
     if((element).attr("sid") != 'Null'){
       var currentSid = (element).attr("sid");
@@ -136,6 +137,7 @@
     var ministry = $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-ministry').val();
     var city = $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-city').val();
     if(attend.length < 1 || attend == 0 || ($.isNumeric(attend)==false)){
+      $('.error-note-attend').remove();      
       $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-attending').css('border-color', 'red');
       $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-attending').after('<p class="error-note-attend" style="color: red;">* Attending field cannot be blank and must be numeric, please enter number of viewers.</p>');
       return;
@@ -144,6 +146,7 @@
       $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-attending').css('border-color', 'green');
     }
     if(name.length < 1){
+      $('.error-note-name').remove();    
       $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-name').css('border-color', 'red');
       $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-name').after('<p class="error-note-name" style="color: red;">* Name field cannot be blank, please enter name.</p>');
       return;
@@ -152,6 +155,7 @@
       $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-name').css('border-color', 'green');
     }
     if(ministry.length < 1){
+      $('.error-note-ministry').remove();      
       $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-ministry').css('border-color', 'red');
       $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-ministry').after('<p class="error-note-ministry" style="color: red;">* Ministry field cannot be blank, please enter the name of your Ministry.</p>');
       return;
@@ -160,6 +164,7 @@
       $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-ministry').css('border-color', 'green');
     }
     if(city.length < 1){
+      $('.error-note-city').remove();      
       $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-city').css('border-color', 'red');
       $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-city').after('<p class="error-note-city" style="color: red;">* City field cannot be blank, please enter the name of the city you work in.</p>');
       return;
@@ -345,7 +350,7 @@
         formString += '</select>';
       // Number attending bundle
       formString += '<label for="attending-' + timeStamp + '">Number Attending: </label>';
-      formString += '<input type="text" name="attending-' + timeStamp + '" value="0" class="prem-award-input prem-award-attending" required>';
+      formString += '<input type="text" name="attending-' + timeStamp + '" value="1" class="prem-award-input prem-award-attending" required>';
       // Name bundle
       formString += '<label for="name-' + timeStamp + '">Name: </label>';
       formString += '<input type="text" name="name-' + timeStamp + '" value="" class="prem-award-input prem-award-name" required>';
