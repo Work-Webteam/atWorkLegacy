@@ -236,7 +236,7 @@
       background: '#FFFFFF',
       buttons: {
         "Attend Awards Webcast": redirectSubmit,
-        Cancel: function(){
+        Close: function(){
           // Remove any save/error messages that exist
           $('.error-message-prem-form').remove();
           $('.save-confirmation-message').remove();
