@@ -380,7 +380,7 @@
   function saveUpdates (sid, uid, id){
     // Gather all fields and post to php
     var data = {};
-    data['webcast'] = $('.fieldset-prem-award-class-' + sid + ' select.prem-award-input').val();
+    data['webcast'] = $('.fieldset-prem-award-class-' + sid + ' select.prem-award-input').find(":selected").text();
     data['attending'] = $('.fieldset-prem-award-class-' + sid + ' input.prem-award-input.prem-award-attending').val();
     data['name'] = $('.fieldset-prem-award-class-' + sid + ' input.prem-award-input.prem-award-name').val();
     data['ministry'] = $('.fieldset-prem-award-class-' + sid + ' input.prem-award-input.prem-award-ministry').val();
@@ -407,7 +407,7 @@
    */
 
   function updateFieldLabels(currentSid){
-    var webcast = $('.fieldset-prem-award-class-' + currentSid + ' select.prem-award-input').val();
+    var webcast = $('.fieldset-prem-award-class-' + currentSid + ' select.prem-award-input').find(":selected").text();
     var attending = $('.fieldset-prem-award-class-' + currentSid + ' input.prem-award-input.prem-award-attending').val();
     var name = $('.fieldset-prem-award-class-' + currentSid + ' input.prem-award-input.prem-award-name').val();
     var ministry = $('.fieldset-prem-award-class-' + currentSid + ' input.prem-award-input.prem-award-ministry').val();
