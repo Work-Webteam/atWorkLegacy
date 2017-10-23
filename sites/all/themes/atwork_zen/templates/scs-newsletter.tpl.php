@@ -481,13 +481,13 @@ $atwork_base_url = $GLOBALS['base_url'];
 <?php endif; ?>
 <?php // ************************  Did You Know? Section **************************** ?>
 <?php if(isset($atwork_newsletter_render_array['did_you_know']['value']) && !empty($atwork_newsletter_render_array['did_you_know']['value'])): ?>
+<?php dpm($atwork_newsletter_render_array); ?>
 <table width="775" align="center" border="0" cellspacing="0" cellpadding="0" style="background-color: #ECECEC;">
   <tr>
-    <td style="background-color:#E0ECF5;"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px;"> Did You Know? </h2>
-      echo '<p style="font-family: Calibri, sans-serif; font-size:11pt; color:#000000; margin-right: 10px; line-height: 20px;">';
-      <?php echo $atwork_newsletter_render_array['did_you_know']['value'] . '</p>';?>
-      <p style="font-family: Calibri,sans-serif; font-size:11pt; color:#FFF; margin-top: 10px; margin-bottom: 15px; margin-left: 10px; margin-right: 10px;"></p></td>
-  </tr>
+    <td style="background-color:#E0ECF5;"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px;"> Take Note </h2>
+        <?php echo '<div style="margin-left: 10px; font-family: Calibri,sans-serif; font-size:11pt; line-height: 20px !important;" >' . $atwork_newsletter_render_array['did_you_know']['value'] . '</div>'?>
+        <p style="font-family: Calibri,sans-serif; font-size:11pt; color:#FFF; margin-top: 10px; margin-bottom: 15px; margin-left: 10px; margin-right: 10px;"></p></td>
+    </td>
   <tr>
     <td height="10" style="background-color:#FFF;">&nbsp;</td>
   </tr>
