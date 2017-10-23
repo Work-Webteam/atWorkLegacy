@@ -481,7 +481,6 @@ $atwork_base_url = $GLOBALS['base_url'];
 <?php endif; ?>
 <?php // ************************  Did You Know? Section **************************** ?>
 <?php if(isset($atwork_newsletter_render_array['did_you_know']['value']) && !empty($atwork_newsletter_render_array['did_you_know']['value'])): ?>
-<?php dpm($atwork_newsletter_render_array); ?>
 <table width="775" align="center" border="0" cellspacing="0" cellpadding="0" style="background-color: #ECECEC;">
   <tr>
     <td style="background-color:#E0ECF5;"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px;"> Take Note </h2>
