@@ -877,6 +877,7 @@ function atwork_prem_awards_submit_callback(){
   module_load_include('inc', 'webform', 'includes/webform.submissions');
   $submission_array = $_POST;
   $status = array();
+  dpm($submission_array);
   // This is a new webform
   if($submission_array['sid'] == null){
     // create a new webform (insert function)
@@ -975,6 +976,8 @@ function create_new_webform_entry($submission_array){
   $current_user = user_load($submission_array['uid']);
    // Get static webform for titles
   $webform_node = node_load(PA_REG_FORM_NID);
+  dpm($webform_node);
+  dpm($submission_array);
   $vancouver_island =  $webform_node->webform['components'][4]['name'];
   $lower_mainland = $webform_node->webform['components'][6]['name'];
   $interior_north =  $webform_node->webform['components'][14]['name'];

@@ -123,12 +123,12 @@
    * This function handles save logic
    */
   function saveButtonClickHandler(element, uid){
-
+    var currentSid = '';
     // We need to account for the sid here - so only show fields within the specific fieldset.
     if((element).attr("sid") != 'Null'){
-      var currentSid = (element).attr("sid");
+      currentSid = (element).attr("sid");
     } else if (((element).attr("id").length) > 0 ){
-      var currentSid = (element).attr("id");
+      currentSid = (element).attr("id");
     }
     var id = (element).attr("id");
     // Check that all fields are filled out.
@@ -188,10 +188,11 @@
    */
   function editButtonClickHandler(element){
     // We need to account for the sid here - so only show fields within the specific fieldset.
+    var currentSid = '';
     if((element).attr("sid") != 'Null'){
-      var currentSid = (element).attr("sid");
+      currentSid = (element).attr("sid");
     } else if (((element).attr("id").length) > 0 ){
-      var currentSid = (element).attr("id");
+      currentSid = (element).attr("id");
     }
 
     $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-input').show();
@@ -207,11 +208,12 @@
    * @param {object} element - The element that the user had clicked the cancel button in
    */
   function cancelButtonClickHandler(element){
+    var currentSid = '';
     // We need to account for the sid here - so only show fields within the specific fieldset.
     if((element).attr("sid") != 'Null'){
-      var currentSid = (element).attr("sid");
+      currentSid = (element).attr("sid");
     } else if (((element).attr("id").length) > 0 ){
-      var currentSid = (element).attr("id");
+      currentSid = (element).attr("id");
     }
 
     $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-input').hide();
@@ -246,11 +248,12 @@
           $('.error-message-prem-form').remove();
           $('.save-confirmation-message').remove();
           form[0].reset();
-          dialog.dialog("close");
+          dialog.dialog("destroy").remove();
         }
       },
       close: function () {
         form[0].reset();
+        dialog.dialog("destroy").remove();
       }
     });
     return;
@@ -275,32 +278,24 @@
           formString += '<label for="webcast-' + index + '">Webcast: ' + value.webcast + '</label>';
           // All input fields should be hidden on initial form launch
           // Use this to find default value
-          var castValue = "default";
-          if(value.webcast.indexOf('Island') > -1) {
-            castValue = items['webcasts']['vancouver_island'];
-          }
-          if(value.webcast.indexOf('Lower') > -1) {
-            castValue = items['webcasts']['lower_mainland'];
-          }
-          if(value.webcast.indexOf('Interior') > -1) {
-            castValue = items['webcasts']['interior_north'];
-          }
+          var castValue = items.webcast;
+
           formString += '<select name="webcast-' + index + '" value="' + castValue + '" class="prem-award-input">';
             // Get proper dates/times for this.
-            if(castValue == items['webcasts']['vancouver_island']){
-              formString += '<option value="' + castValue + '" selected="selected">' +  castValue + '</option>';
+            if(castValue == items.webcasts.vancouver_island){
+              formString += '<option value="' + castValue + '" selected>' +  castValue + '</option>';
             } else {
-              formString += '<option value="' +  items['webcasts']['vancouver_island'] + '">' +  items['webcasts']['vancouver_island'] + '</option>';
+              formString += '<option value="' +  items.webcasts.vancouver_island + '">' +  items.webcasts.vancouver_island + '</option>';
             }
-            if(castValue == items['webcasts']['lower_mainland']){
-              formString += '<option value="' + castValue + '" selected="selected">' + castValue + '</option>';
+            if(castValue == items.webcasts.lower_mainland){
+              formString += '<option value="' + castValue + '" selected>' + castValue + '</option>';
             } else {
-              formString += '<option value="' + items['webcasts']['lower_mainland'] + '">' +  items['webcasts']['lower_mainland'] + '</option>';
+              formString += '<option value="' + items.webcasts.lower_mainland + '">' +  items.webcasts.lower_mainland + '</option>';
             }
-            if(castValue == items['webcasts']['interior_north']){
-              formString += '<option value="' + castValue + '" selected="selected">' + castValue + '</option>';
+            if(castValue == items.webcasts.interior_north){
+              formString += '<option value="' + castValue + '" selected>' + castValue + '</option>';
             } else {
-              formString += '<option value="' +  items['webcasts']['interior_north'] + '">' +  items['webcasts']['interior_north'] + '</option>';
+              formString += '<option value="' +   items.webcasts.interior_north + '">' +   items.webcasts.interior_north + '</option>';
             }
           formString += '</select>';
           // Number attending bundle
@@ -344,9 +339,9 @@
       // All input fields should be hidden on initial form launch
       formString += '<select name="webcast-' + timeStamp + '" value="webCast" class="prem-award-input">';
         // Get proper dates/times for this.
-        formString += '<option value="' +  items['webcasts']['vancouver_island'] + '">' +  items['webcasts']['vancouver_island'] + '</option>';
-        formString += '<option value="' +  items['webcasts']['lower_mainland'] + '">' +  items['webcasts']['lower_mainland'] + '</option>';
-        formString += '<option value="' +  items['webcasts']['interior_north'] + '">' +  items['webcasts']['interior_north'] + '</option>';
+        formString += '<option value="' +  items.webcasts.vancouver_island + '">' +  items.webcasts.vancouver_island + '</option>';
+        formString += '<option value="' +  items.webcasts.lower_mainland + '">' +   items.webcasts.lower_mainland + '</option>';
+        formString += '<option value="' +   items.webcasts.interior_north + '">' + items.webcasts.interior_north + '</option>';
         formString += '</select>';
       // Number attending bundle
       formString += '<label for="attending-' + timeStamp + '">Number Attending: </label>';
@@ -380,18 +375,21 @@
   function saveUpdates (sid, uid, id){
     // Gather all fields and post to php
     var data = {};
-    data['webcast'] = $('.fieldset-prem-award-class-' + sid + ' select.prem-award-input').find(":selected").text();
-    data['attending'] = $('.fieldset-prem-award-class-' + sid + ' input.prem-award-input.prem-award-attending').val();
-    data['name'] = $('.fieldset-prem-award-class-' + sid + ' input.prem-award-input.prem-award-name').val();
-    data['ministry'] = $('.fieldset-prem-award-class-' + sid + ' input.prem-award-input.prem-award-ministry').val();
-    data['city'] = $('.fieldset-prem-award-class-' + sid + ' input.prem-award-input.prem-award-city').val();
+    console.log($('.fieldset-prem-award-class-' + sid + ' input.prem-award-input.prem-award-name').prop('value'));
+    
+    data.webcast = $('.fieldset-prem-award-class-' + sid + ' select.prem-award-input option:selected').val();
+    data.attending = $('.fieldset-prem-award-class-' + sid + ' input.prem-award-input.prem-award-attending').prop('value');
+    data.name = $('.fieldset-prem-award-class-' + sid + ' input.prem-award-input.prem-award-name').prop('value');
+    data.ministry = $('.fieldset-prem-award-class-' + sid + ' input.prem-award-input.prem-award-ministry').prop('value');
+    data.city = $('.fieldset-prem-award-class-' + sid + ' input.prem-award-input.prem-award-city').prop('value');
     if(id == true){
-      data['sid'] = null;
+      data.sid = null;
     } else {
-      data['sid'] = sid;
+      data.sid = sid;
     }
-    data['uid'] = uid;
-    data['id'] = id;
+    data.uid = uid;
+    data.id = id;
+    console.log(data);
     $.ajax({
       type: 'POST',
       url: '/p-awards/submit',
@@ -441,6 +439,7 @@
    * @param {array} returnData Should include both ['sid'] -> the id number used in the form field (an sid if updating, and id generated by timestamp if new) and ['response] -> A 500 or 200 depending on Drupal feedback.
    */
   function ajaxCompleted (returnData) {
+    console.log(returnData);
     // Nothing came back
     if(returnData == null) {
       // Something is wrong, we received no legible response so lets let them know and keep teh form open for review/resubmit.
@@ -452,12 +451,12 @@
       return;
     }
     // Got a response - handle specific results or unknown
-    if(returnData['response'] == "200"){
-      updateFieldLabels(returnData['sid']);
+    if(returnData.response == "200"){
+      updateFieldLabels(returnData.sid);
     // general error, and one that appears in form-field
-    } else if ("response" in returnData && returnData['response'] == "500"){
+    } else if ("response" in returnData && returnData.response == "500"){
       // Something is wrong, so lets let them know and keep the form open for review/resubmit.
-      $('<div id="error-message" class="error-message-prem-form">Something went wrong. Please review information and try to save again.</div>').insertAfter('.fieldset-prem-award-class-' + returnData['sid']).slideDown("slow");
+      $('<div id="error-message" class="error-message-prem-form">Something went wrong. Please review information and try to save again.</div>').insertAfter('.fieldset-prem-award-class-' + returnData.sid).slideDown("slow");
       setTimeout(function(){
         $('#error-message').slideToggle("slow");
         $('#error-message').remove();
