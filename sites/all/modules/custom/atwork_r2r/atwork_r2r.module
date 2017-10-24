@@ -1,0 +1,88 @@
+<?php 
+
+// Current R2R application pages
+define("R2R_REG_FORM_NID", 20702); // 2017 reg form nid
+define("R2R_LIVECAST_URL", "http://gww.gov.bc.ca/region-to-region"); // 2017 R2R livestream url
+/**
+ * Implements hook_block_info
+ * We require a block to grab form submission data for users who are accessing R2R stream
+ */
+ function atwork_r2r_block_info(){
+  $blocks['r2r_registration'] = array(
+    'info' => t('Region to region registration pop-up form'),
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  return $blocks;
+ }
+
+ /**
+  * Implements hook_block_view
+  * Block to check/receive/update forms for users who want to view R2R streams
+  */
+function atwork_r2r_block_view($delta = ''){
+  $block = array();
+  switch ($delta){
+    case 'r2r_registration';
+      $block['content'] =  array(
+        // We don't want to show anything, so we are getting an empty string back. This simply launches the nec .js
+        '#markup' => r2r_registration_information(),
+      );
+    break;
+  }
+  return $block;
+}
+
+/**
+ * Helper function that loads js for the r2r form
+ * @return $output [empty string]
+ */
+function r2r_registration_information(){
+  global $user;
+  $current_user = user_load($user->uid);
+  // check for user form - if we have one, then pass them through to the video url
+  include_once(drupal_get_path('module', 'webform') . '/includes/webform.submissions.inc');
+  $submissions = webform_get_submissions(array('nid' => R2R_REG_FORM_NID, 'uid' => $current_user->uid));
+  // If we have a submission, we redirect user to the video automatically
+  if(isset($submissions) && !empty($submissions)){
+    drupal_goto(R2R_LIVECAST_URL);
+  }
+  // Otherwise we pop a form and get them to reg.
+  // Grab a copy of the webform to get dropdown city info
+  $webform_node = node_load(R2R_REG_FORM_NID);
+  // The output string we will return, don't want to pass anything back, just load js
+  $output = '';
+  // Gather user and form info we require for the jQuery form.
+  $name = $current_user->field_gal_first_name['und'][0]['safe_value'] . ' ' .  $current_user->field_gal_last_name['und'][0]['safe_value'];
+  $ministry = $current_user->field_gal_ministry_name['und'][0]['safe_value'];
+  $email = $current_user->mail;
+  // TODO: This will need to be expanded to a foreach if we ever have more than one webcast
+  list($k, $v) = explode('|', $webform_node->webform['components'][2]['extra']['items']);
+  $casts[$k] = $v;
+  // Add form update js
+  drupal_add_js(drupal_get_path('module', 'atwork_r2r') . '/' . 'js_r2r_form.js');
+  // Pass user info to settings, all info we require to fill out the form
+  drupal_add_js(array('atwork_r2r' => array('user' => $name, 'uid' => $current_user->uid, 'ministry' => $ministry, 'email' => $email, 'casts' => $casts)), 'setting');
+  dpm("Block live");
+  return $output;
+}
+
+/**
+ * Implements hook_menu()
+ * Create menu path for accessing values via Ajax
+ */
+function atwork_r2r_menu(){
+  // Initial submission URL for user.
+  $items['r2r/registration'] = array(
+    'page callback' => 'atwork_r2r_callback',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+  );
+  return $items;
+}
+
+function atwork_r2r_callback(){
+  // get post and use it.
+
+  // return 200 or 500
+}
