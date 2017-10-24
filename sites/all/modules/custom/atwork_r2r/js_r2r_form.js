@@ -46,8 +46,11 @@
   function submitR2RForm(){
     var data = {};
     // TODO: build data array from fields you filled out in the form you popped.
-
-    
+    data.name = 'name';
+    data.ministry = 'ministry';
+    data.email = 'email';
+    data.webcast = 'webcast';
+    console.log(data);
     $.ajax({
       type: "POST",
       url: "/r2r/registration",
@@ -58,7 +61,10 @@
   }
 
   function ajaxCompleted(response){
+    console.log(response);
     // TODO: Parse response and give feedback
+    // TODO: show saved or error message
+    // Next on a timer, give a redirecting message
     return;
   }
 
