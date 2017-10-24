@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This template is used to assemble all nodes selected during newsletter
  * creation with Simplenews Content Selection.
