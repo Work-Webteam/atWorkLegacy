@@ -1,3 +1,6 @@
+/**
+ * JQuery file that allows us to dynamically show and update forms for users who have not registered to watch the R2R. Also allows us to quickly redirect those who have.
+ */
 (function ($) {
   Drupal.behaviors.r2r_form = {
     attach: function (context, settings) { 
