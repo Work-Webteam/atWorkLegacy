@@ -6,7 +6,6 @@
     attach: function (context, settings) { 
       // Settings we passed from atwork_r2r.module mimic an object here - so we can access them anywhere in this script.
       var localR2rSettings;
-      console.log(Drupal);
       Object.defineProperty(window, 'r2rSettings', {
         get: function(){
           return localR2rSettings;
@@ -124,7 +123,6 @@
    * @param {jSon} response  // Only one value expected
    */
   function ajaxCompleted(response){
-    console.log(response);
     // get settings
     var r2rSettings = window.r2rSettings;
     if(typeof response == 'undefined' || response != "200" ){
