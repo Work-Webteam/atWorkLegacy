@@ -877,7 +877,7 @@ function atwork_prem_awards_submit_callback(){
   module_load_include('inc', 'webform', 'includes/webform.submissions');
   $submission_array = $_POST;
   $status = array();
-  dpm($submission_array);
+  //dpm($submission_array);
   // This is a new webform
   if($submission_array['sid'] == null){
     // create a new webform (insert function)
