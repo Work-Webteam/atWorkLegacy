@@ -2,7 +2,7 @@
 
 // Current R2R application pages
 define("R2R_REG_FORM_NID", 20702); // 2017 reg form nid
-define("R2R_LIVECAST_URL", "http://gww.gov.bc.ca/region-to-region"); // 2017 R2R livestream url
+define("R2R_LIVECAST_URL", "/region-to-region"); // 2017 R2R livestream url
 /**
  * Implements hook_block_info
  * We require a block to grab form submission data for users who are accessing R2R stream
@@ -43,10 +43,7 @@ function r2r_registration_information(){
   // check for user form - if we have one, then pass them through to the video url
   include_once(drupal_get_path('module', 'webform') . '/includes/webform.submissions.inc');
   $submissions = webform_get_submissions(array('nid' => R2R_REG_FORM_NID, 'uid' => $current_user->uid));
-  // If we have a submission, we redirect user to the video automatically
-  if(isset($submissions) && !empty($submissions)){
-    drupal_goto(R2R_LIVECAST_URL);
-  }
+
   // Otherwise we pop a form and get them to reg.
   // Grab a copy of the webform to get dropdown city info
   $webform_node = node_load(R2R_REG_FORM_NID);
@@ -62,7 +59,7 @@ function r2r_registration_information(){
   // Add form update js
   drupal_add_js(drupal_get_path('module', 'atwork_r2r') . '/' . 'js_r2r_form.js');
   // Pass user info to settings, all info we require to fill out the form
-  drupal_add_js(array('atwork_r2r' => array('user' => $name, 'uid' => $current_user->uid, 'ministry' => $ministry, 'email' => $email, 'casts' => $casts)), 'setting');
+  drupal_add_js(array('atwork_r2r' => array('user' => $name, 'uid' => $current_user->uid, 'ministry' => $ministry, 'email' => $email, 'casts' => $casts, 'redirect' => R2R_LIVECAST_URL)), 'setting');
   return $output;
 }
 
@@ -77,17 +74,87 @@ function atwork_r2r_menu(){
     'type' => MENU_CALLBACK,
     'access arguments' => array('access content'),
   );
+  $items['r2r/check'] = array(
+    'page callback' => 'atwork_r2r_sub_check',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+  );
   return $items;
 }
 
+function atwork_r2r_sub_check(){
+  global $user;
+  // check for user form - if we have one, then pass them through to the video url
+  include_once(drupal_get_path('module', 'webform') . '/includes/webform.submissions.inc');
+  $submissions = webform_get_submissions(array('nid' => R2R_REG_FORM_NID, 'uid' => $user->uid));
+  // Otherwise we pop a form and get them to reg.
+  // The output string we will return, don't want to pass anything back, just load js
+  // If we have a submission, we redirect user to the video automatically
+  if(isset($submissions) && !empty($submissions)){
+    // Set redirect if submission forms have already been filled out.
+    $return_array = array(
+      '1' => true,
+      '2' => R2R_LIVECAST_URL,
+    );
+    echo json_encode($return_array);
+    die();
+  } else {
+    echo json_encode(false);
+    die();
+  }
+}
+
 function atwork_r2r_callback(){
+  global $user;
+  // We need to include the webform inc file to allow us to use its functions
+  include_once(drupal_get_path('module', 'webform') . '/includes/webform.submissions.inc');
+  
   // get post and use it.
   $submission_array = $_POST;
-  dpm($submission_array);
   // Grab a copy of the webform
+  $webform_node = node_load(R2R_REG_FORM_NID);
+  // Gather all the info we need for the form
+  $data = array(
+    // Webcast - this is static for now - eventually we may need to
+    "2" => array(
+      '0'=>"01",
+    ),
+    // This is automatically a virtual session
+    "4" => array( 
+      '0'=>"8",
+    ),
+    //' Ministry
+    "8" => array(
+      '0' => $submission_array['ministry'],
+    ),
+    // Name
+    "9" => array(
+      '0' => $submission_array['name'],
+    ),
+    // email
+    "10" => array(
+      '0' => $submission_array['email'],
+    ),
+  );
   // now fill in and submit it.
+  $submission = (object) array(
+    'nid' => R2R_REG_FORM_NID,
+    'uid' => $user->uid,
+    'sid' => NULL,
+    'submitted' => REQUEST_TIME,
+    'completed' => REQUEST_TIME,
+    'remote_addr' => ip_address(),
+    'is_draft' => FALSE,
+    'data' => $data,
+  );
+  $sid = webform_submission_insert($webform_node, $submission);
   // If it works return a 200, any error is 500.
+  if(isset($sid) && $sid != null){
+    echo json_encode("200");
+    die();
+    return;
+  }
   // return 200 or 500
-  echo json_encode('200');
+  echo json_encode('500');
   die();
 }
