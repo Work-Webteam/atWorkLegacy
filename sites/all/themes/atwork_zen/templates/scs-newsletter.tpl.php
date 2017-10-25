@@ -500,7 +500,7 @@ $atwork_base_url = $GLOBALS['base_url'];
     <td width="387" height="140" valign="middle" style="border-right: solid 1px #FFF;"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" >
         <tr >
           <td><p style="font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; margin: 10px 10px; text-align: center;"><a href="mailto:employeenews@gov.bc.ca?Subject=@Work Newsletter"  style="color:#FFF;"><img alt="Contact us at employeenews@gov.bc.ca" title="Contact us at employeenews@gov.bc.ca" <?php echo 'src="' . $atwork_base_url ?>/sites/all/themes/atwork/images/email-us.png" style="width: 61px; height: 62px;"></a></p>
-          <p style="font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; margin: 10px 10px; text-align: center;"><a href="mailto:employeenews@gov.bc.ca?Subject=@Work%20Website" style="color:#FFFFFF";>EmployeeNews</a></p></td>
+          <p style="font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; margin: 10px 10px; text-align: center;"><a href="mailto:employeenews@gov.bc.ca?Subject=@Work%20Website" style="color:#FFFFFF";>Contact us @EmployeeNews</a></p></td>
         </tr>
       </table></td>
     <td valign="middle" height="140"><table width="100%" border="0" cellspacing="0" cellpadding="0" >
