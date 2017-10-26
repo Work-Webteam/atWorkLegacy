@@ -2,7 +2,7 @@
 
 // Current R2R application pages
 define("R2R_REG_FORM_NID", 20702); // 2017 reg form nid
-define("R2R_LIVECAST_URL", "/region-to-region"); // 2017 R2R livestream url
+define("R2R_LIVECAST_URL", "http://video.web.gov.bc.ca/psa/townhall/"); // 2017 R2R livestream url
 /**
  * Implements hook_block_info
  * We require a block to grab form submission data for users who are accessing R2R stream
