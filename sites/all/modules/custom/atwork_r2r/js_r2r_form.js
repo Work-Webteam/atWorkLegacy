@@ -61,7 +61,6 @@
    */
   function setDialog(){
     dialog = $('#modal-pop').dialog({
-      title: "Premier's Awards Webcast Registration",
       autoOpen: true,
       appendTo: "#block-atwork-activity-homepage",
       modal: true,
