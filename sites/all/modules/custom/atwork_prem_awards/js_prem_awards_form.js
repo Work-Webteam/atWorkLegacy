@@ -69,7 +69,7 @@
     // Now set up the dialog box
     setDialog();
     // Disbable the continue button until we have at least one submission
-    if(count <= 2){
+    if(count <= 3){
       $(".ui-dialog-buttonset :first(.ui-button.ui-widget.ui-corner-all)").prop("disabled", true);
     }
     // Set all existing click handlers
