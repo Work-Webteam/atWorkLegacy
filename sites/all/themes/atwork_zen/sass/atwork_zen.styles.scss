@@ -269,10 +269,14 @@ img {
   list-style-image: none !important;
 }
 
-.node-type-simplenews #sn-take-note ul li,
 .node-type-simplenews #didyouknow ul li {
   list-style-image: url("/sites/all/themes/atwork_zen/images/arrow_white_right.png") !important;
 }
+
+.node-type-simplenews #sn-take-note ul li {
+  list-style-image: none !important;
+}
+
 .node-type-simplenews span.ext {
   display: none;
 }
