@@ -141,14 +141,14 @@
     var ministry = $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-ministry').val();
     var city = $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-city').val();
     var webcast = $('.fieldset-prem-award-class-' + currentSid + ' select.prem-award-input').find(":selected").text();
-    console.log(webcast);
     if(webcast == "--- Choose a Webcast ---"){
       $('.error-note-attend').remove();
       $('.fieldset-prem-award-class-' + currentSid + ' select.prem-award-input').css('border-color', 'red');
-      $('.fieldset-prem-award-class-' + currentSid + ' select.prem-award-input').after('<p class="error-note-attend" style="color: red;">* You must select a valid webcast.</p>');
+      $('.fieldset-prem-award-class-' + currentSid + ' select.prem-award-input').after('<p class="error-note-webcast" style="color: red;">* You must select a valid webcast.</p>');
+      return;
     } else {
-      $('.error-note-attend').remove();
-      $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-attending').css('border-color', 'green');
+      $('.error-note-webcast').remove();
+      $('.fieldset-prem-award-class-' + currentSid + ' select.prem-award-input').css('border-color', 'green');
     }
     if(attend.length < 1 || attend == 0 || ($.isNumeric(attend)==false)){
       $('.error-note-attend').remove();      
@@ -302,7 +302,7 @@
           formString += '<label for="webcast-' + index + '">Webcast: ' + value.webcast + '</label>';
           // All input fields should be hidden on initial form launch
           // Use this to find default value
-          var castValue = items.webcast;
+          var castValue = value.webcast;
 
           formString += '<select name="webcast-' + index + '" value="' + castValue + '" class="prem-award-input">';
             // Get proper dates/times for this.
@@ -353,7 +353,6 @@
    * @return {string} formString
    */
   function newForm(items){
-    console.log(items);
     var formString = '';
     var timeStamp = $.now();
     var account = items.applicant.name;
