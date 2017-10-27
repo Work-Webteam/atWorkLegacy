@@ -11,6 +11,10 @@
       $('#prem-awards-form:not(.atwork-prem-awards-processed)', context)
         .addClass('atwork-prem-awards-processed')
         .bind('click', function (){
+          // Stop double clicks
+          $('#pre-award-form').prop('disabled', true);
+          // Throw in Brendans cool spinner
+          $('#prem-award-form').after('<div id="prem-spinner" class="spinner"><div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div><div class="rect6"></div></div>');
           $.get('/p-awards/registration/' + settings.atwork_prem_awards.user + '/' + settings.atwork_prem_awards.uid, null, checkForm);
           return false;
        });
@@ -226,8 +230,12 @@
    * This function submits redirects user to prem awards video
    **/
   function redirectSubmit(){
-    //  At this point we have already saved any changes via AJAX, so we can just redirect to prem awards vid.
-    window.location.replace("http://video.web.gov.bc.ca/psa/pa/vod/");
+    // Reset adspace button for use.
+    $('#pre-award-form').prop('disabled', false);
+    $('#prem-spinner').remove();
+    //  At this point we have already saved any changes via AJAX, so we can just redirect to prem awards vid and destroy the modal.
+    dialog.dialog("destroy").remove();
+    window.open("http://video.web.gov.bc.ca/psa/pa/vod/");
   }
 
   /**
@@ -247,11 +255,17 @@
           // Remove any save/error messages that exist
           $('.error-message-prem-form').remove();
           $('.save-confirmation-message').remove();
+          // Reset adspace button for use.
+          $('#pre-award-form').prop('disabled', false);
+          $('#prem-spinner').remove();
           form[0].reset();
           dialog.dialog("destroy").remove();
         }
       },
       close: function () {
+        // Reset adspace button for use.
+        $('#pre-award-form').prop('disabled', false);
+        $('#prem-spinner').remove();
         form[0].reset();
         dialog.dialog("destroy").remove();
       }
