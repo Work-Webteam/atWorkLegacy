@@ -825,8 +825,12 @@ function atwork_prem_awards_callback($user, $current_uid){
   // https://www.drupal.org/node/1731742
   // Break these out into specific sid's and values
   $return_info_array = array();
-  $applicant = user_load($current_uid);  
-  $return_info_array['applicant'] = $applicant->field_gal_first_name['und'][0]['safe_value'];
+  $applicant = user_load($current_uid);
+  $return_info_array['applicant'] = array(
+    "name" => $applicant->field_gal_first_name['und'][0]['safe_value'] . " " . $applicant->field_gal_last_name['und'][0]['safe_value'],
+    "ministry" => $applicant->field_gal_ministry_name['und'][0]['safe_value'],
+    "city" => $applicant->field_gal_city['und'][0]['safe_value'],
+  );
   // Grab current webcast names
   $return_info_array['webcasts'] = array(
     'vancouver_island' =>  $webform_node->webform['components'][4]['name'],

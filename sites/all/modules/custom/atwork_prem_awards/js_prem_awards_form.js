@@ -12,9 +12,9 @@
         .addClass('atwork-prem-awards-processed')
         .bind('click', function (){
           // Stop double clicks
-          $('#pre-award-form').prop('disabled', true);
+          $('#prem-awards-form').prop('disabled', true);
           // Throw in Brendans cool spinner
-          $('#prem-award-form').after('<div id="prem-spinner" class="spinner"><div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div><div class="rect6"></div></div>');
+          $('#prem-awards-form').after('<div id="prem-spinner" class="spinner"><div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div><div class="rect6"></div></div>');
           $.get('/p-awards/registration/' + settings.atwork_prem_awards.user + '/' + settings.atwork_prem_awards.uid, null, checkForm);
           return false;
        });
@@ -39,7 +39,7 @@
    */
   function printResults(items) {
     // Need to generate some HTML here and pop a model
-    var user_name = items.applicant;
+    var user_name = items.applicant.name;
     var formString = '';
     var uid = items.uid;
     var count = Object.keys(items).length;
@@ -140,6 +140,16 @@
     var name = $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-name').val();
     var ministry = $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-ministry').val();
     var city = $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-city').val();
+    var webcast = $('.fieldset-prem-award-class-' + currentSid + ' select.prem-award-input').find(":selected").text();
+    console.log(webcast);
+    if(webcast == "--- Choose a Webcast ---"){
+      $('.error-note-attend').remove();
+      $('.fieldset-prem-award-class-' + currentSid + ' select.prem-award-input').css('border-color', 'red');
+      $('.fieldset-prem-award-class-' + currentSid + ' select.prem-award-input').after('<p class="error-note-attend" style="color: red;">* You must select a valid webcast.</p>');
+    } else {
+      $('.error-note-attend').remove();
+      $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-attending').css('border-color', 'green');
+    }
     if(attend.length < 1 || attend == 0 || ($.isNumeric(attend)==false)){
       $('.error-note-attend').remove();      
       $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-attending').css('border-color', 'red');
@@ -231,11 +241,11 @@
    **/
   function redirectSubmit(){
     // Reset adspace button for use.
-    $('#pre-award-form').prop('disabled', false);
+    $('#prem-awards-form').prop('disabled', false);
     $('#prem-spinner').remove();
     //  At this point we have already saved any changes via AJAX, so we can just redirect to prem awards vid and destroy the modal.
     dialog.dialog("destroy").remove();
-    window.open("http://video.web.gov.bc.ca/psa/pa/vod/");
+    window.open("http://video.web.gov.bc.ca/psa/pa/vod/index.html");
   }
 
   /**
@@ -256,7 +266,7 @@
           $('.error-message-prem-form').remove();
           $('.save-confirmation-message').remove();
           // Reset adspace button for use.
-          $('#pre-award-form').prop('disabled', false);
+          $('#prem-awards-form').prop('disabled', false);
           $('#prem-spinner').remove();
           form[0].reset();
           dialog.dialog("destroy").remove();
@@ -264,7 +274,7 @@
       },
       close: function () {
         // Reset adspace button for use.
-        $('#pre-award-form').prop('disabled', false);
+        $('#prem-awards-form').prop('disabled', false);
         $('#prem-spinner').remove();
         form[0].reset();
         dialog.dialog("destroy").remove();
@@ -343,9 +353,13 @@
    * @return {string} formString
    */
   function newForm(items){
+    console.log(items);
     var formString = '';
     var timeStamp = $.now();
-    // Embed the sid in the fieldset to keep information wrapped in the submission id.
+    var account = items.applicant.name;
+    var ministry = items.applicant.ministry;
+    var city = items.applicant.city;
+    // Embed the sid in the fieldset to keep information wrapped in the submission id, even of we dont have one at this point.
     formString += '<fieldset sid="null" class="fieldset-prem-award-class-' + timeStamp + '">';
       // Webcast bundle
       // Using the label to show the current information that is entered. If this changes we should reflect that change here
@@ -353,6 +367,7 @@
       // All input fields should be hidden on initial form launch
       formString += '<select name="webcast-' + timeStamp + '" value="webCast" class="prem-award-input">';
         // Get proper dates/times for this.
+        formString += '<option value="--- Choose a Webcast ---">--- Choose a Webcast ---</option>';
         formString += '<option value="' +  items.webcasts.vancouver_island + '">' +  items.webcasts.vancouver_island + '</option>';
         formString += '<option value="' +  items.webcasts.lower_mainland + '">' +   items.webcasts.lower_mainland + '</option>';
         formString += '<option value="' +   items.webcasts.interior_north + '">' + items.webcasts.interior_north + '</option>';
@@ -362,13 +377,13 @@
       formString += '<input type="text" name="attending-' + timeStamp + '" value="1" class="prem-award-input prem-award-attending" required>';
       // Name bundle
       formString += '<label for="name-' + timeStamp + '">Name: </label>';
-      formString += '<input type="text" name="name-' + timeStamp + '" value="" class="prem-award-input prem-award-name" required>';
+      formString += '<input type="text" name="name-' + timeStamp + '" value="' + account + '" class="prem-award-input prem-award-name" required>';
       // Ministry bundle
       formString += '<label for="ministry-' + timeStamp + '">Ministry: </label>';
-      formString += '<input type="text" name="ministry-' + timeStamp + '" value="" class="prem-award-input prem-award-ministry" required>';
+      formString += '<input type="text" name="ministry-' + timeStamp + '" value="' + ministry + '" class="prem-award-input prem-award-ministry" required>';
       // City bundle
       formString += '<label for="city-' + timeStamp + '">City: </label>';
-      formString += '<input type="text" name="city-' + timeStamp + '" value="" class="prem-award-input prem-award-city" required>';
+      formString += '<input type="text" name="city-' + timeStamp + '" value="' + city + '" class="prem-award-input prem-award-city" required>';
       // The field edit and confirm button should be the only button available initially.
       formString += '<input type="button" class="show-input-field" sid="Null" id="'+ timeStamp + '" value="Edit" hidden="true">';
       // Cancel button in case they don't want to edit afterall
