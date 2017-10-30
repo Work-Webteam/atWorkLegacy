@@ -58,6 +58,8 @@ function r2r_registration_information(){
   $casts[$k] = $v;
   // Add form update js
   drupal_add_js(drupal_get_path('module', 'atwork_r2r') . '/' . 'js_r2r_form.js');
+  drupal_add_library('system', 'ui.dialog');
+  
   // Pass user info to settings, all info we require to fill out the form
   drupal_add_js(array('atwork_r2r' => array('user' => $name, 'uid' => $current_user->uid, 'ministry' => $ministry, 'email' => $email, 'casts' => $casts, 'redirect' => R2R_LIVECAST_URL)), 'setting');
   return $output;

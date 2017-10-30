@@ -6,6 +6,7 @@
     attach: function (context, settings) { 
       // Settings we passed from atwork_r2r.module mimic an object here - so we can access them anywhere in this script.
       var localR2rSettings;
+      $.noConflict();      
       Object.defineProperty(window, 'r2rSettings', {
         get: function(){
           return localR2rSettings;
@@ -48,7 +49,7 @@
       return;
     } else {
       // Already had an application, so redirect them
-      window.open(result[2]);
+      window.open(result[2], '_blank');
       // Remove spinner and make button clickable again
       $('#r2r-form').prop('disabled', false);
       $('#r2r-spinner').remove();
