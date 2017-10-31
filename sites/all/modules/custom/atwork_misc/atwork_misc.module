@@ -582,6 +582,11 @@ function atwork_misc_admin_paths_alter(&$paths) {
  * Many misc changes described within
  */
 function atwork_misc_form_alter(&$form, &$form_state, $form_id) {
+  dpm($form);
+  global $user;
+  if(isset($form['options']['promote']) && !_atwork_is_admin($user)){
+
+  }
   // We decided that we always want Send subscriptions notifications to default to unchecked. There is no setting for this behaviour in the front end. We will do it here.
   if(isset($form['options']['subscriptions_notify']['subscriptions_notify']['#default_value']) && $form['options']['subscriptions_notify']['subscriptions_notify']['#default_value'] == TRUE){
     $form['options']['subscriptions_notify']['subscriptions_notify']['#default_value'] = FALSE;
@@ -611,7 +616,6 @@ function atwork_misc_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'reroute_email_settings') {
     $form['reroute_email_address']['#type'] = 'textarea';
   }
-  global $user;
 
   if ($form_id == 'subscriptions_ui_node_form') {
     // remove subscribe to tag by author
@@ -733,6 +737,9 @@ EOT;
       if (isset($form['field_register'])) $form['field_register']['#access'] = FALSE;
       if (isset($form['field_group_special'])) $form['field_group_special']['#access'] = FALSE;
       if (isset($form['field_promoted'])) $form['field_promoted']['#access'] = FALSE;
+      if (isset($form['options']['promote'] )) $form['options']['promote']['#access'] = FALSE;
+      if (isset($form['options']['sticky'] )) $form['options']['sticky']['#access'] = FALSE;
+      
 
       if (in_array($node->type, array('forum', 'question')) && isset($form['field_image'])) {
         $form['field_image']['#access'] = FALSE;
