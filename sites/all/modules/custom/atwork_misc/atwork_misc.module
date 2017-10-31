@@ -207,18 +207,8 @@ function _atwork_add_link_icons(&$variables) {
     $variables['content']['footer']['links']['node']['#links']['node-readmore']['title'] = _atwork_fa('angle-right') . $variables['content']['footer']['links']['node']['#links']['node-readmore']['title'];
     $variables['content']['footer']['links']['node']['#links']['node-readmore']['html'] = TRUE;
   }
-
-  //dpm($variables['content']);
 }
 
-/*
- * Implementation of hook_colorbox_settings_alter()
- */
-function atwork_misc_colorbox_settings_alter(&$settings, &$style) {
-  //$settings['speed'] = 9999;
-  //$settings['onComplete'] = "function(){alert('loaded')}";
-  //dpm($settings);
-}
 
 /*
  * This function exists in some nodes
@@ -297,18 +287,6 @@ function _atwork_first_name($user) {
   return $user->name;
 }
 
-/*
- * Implementation of hook_boot().
- *
- * was used to block som government web crawlers killing our site
- */
-//function atwork_misc_boot() {
-//  if (isset($_SERVER['HTTP_SM_USER'])) {
-//    if (_atwork_auth_excluded_idirs(str_replace("idir\\", "", strtolower($_SERVER['HTTP_SM_USER'])))) {
-//      exit();
-//    }
-//  }
-//}
 
 /*
  * Implementation of hook_node_view()

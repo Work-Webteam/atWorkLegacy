@@ -352,9 +352,11 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
   $form['#validate'][] = '_atwork_profiles_required_validate';
 
   $account = $form['#user'];
-  $current_user = user_load($user->uid);
+
   // if not an admin hide important user fields
-  if (!_atwork_is_admin($current_user)) {
+  if (!_atwork_is_admin($current_user)) { 
+    field_group_hide_field_groups($form, array('group_contact_info'));
+    field_group_hide_field_groups($form, array('group_account_settings'));
     $form['signature_settings']['#access'] = FALSE;
     $form['og_user_node']['#access'] = FALSE;
     $form['contact']['#access'] = FALSE;
@@ -369,6 +371,8 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
     $form['user_relationships_ui_settings']['#access'] = FALSE;
     $form['field_feed_options']['#access'] = FALSE;
     $form['field_employee_number']['#access'] = FALSE;
+    $form['masquerade']['#access'] = FALSE;
+
   }
 
   // Group permissions are being weird on profiles, deal with it here
@@ -403,6 +407,7 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
     '#type' => 'checkbox',
     '#title' => t('Check this box to update your @Work profile with current GAL information'),
     '#description' => t('Please be patient after saving your profile as the refresh can take a bit of time.'),
+    '#access'=>FALSE,
     '#tree' => TRUE,
     '#weight' => 0,
     '#prefix' => t('Your contact information is pulled automatically from GAL (the Global Address List found in Outlook) and is visible to your colleagues. <a href = "https://77000.gov.bc.ca/">Update your GAL information.</a>'),
