@@ -2,4 +2,3 @@ name = Atwork Newletter
 description = Code for Newsletter logic and themeing
 package = Atwork
 core = 7.x
-scripts[] = atwork_newsletter.js
