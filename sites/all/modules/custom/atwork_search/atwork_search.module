@@ -34,6 +34,7 @@ function atwork_search_query_alter(&$query) {
       $query->condition('n.type', 'poll', '<>');
       $query->condition('n.type', 'lsa_application', '<>');
       $query->condition('n.type', 'lsa_pin_application', '<>');
+      $query->condition('n.type', 'wiki', '<>');
     }
   }
 }
