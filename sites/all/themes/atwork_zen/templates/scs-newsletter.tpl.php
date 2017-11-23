@@ -33,6 +33,7 @@ if(date('D') === 'Wed') {
 
 $atwork_base_url = $GLOBALS['base_url'];
 
+			dpm ($atwork_newsletter_render_array);
 ?>
 <?php //********************* Header section ********************* ?>
 
@@ -49,7 +50,7 @@ $atwork_base_url = $GLOBALS['base_url'];
   <tr>
     <td style="background-color:#FFF;"><table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-newsletter-header">
         <tr>
-          <td align="right" style="background-color:#004B8D; font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; padding-right:15px; padding-top: 5px; padding-bottom:5px; "><?php  echo "@Work Newsletter | " . date("F j, Y"); ?></td>
+          <td align="right" style="background-color:#004B8D; font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; padding-right:15px; padding-top: 5px; padding-bottom:5px; "><?php  echo "[node:title]" ?></td>
         </tr>
         <tr>
           <td bgcolor="#FFFFFF" align="center" valign="middle" style="border: none;"><?php echo '<a href="' . $atwork_base_url . $pubDate . '"> <img src = "' . $atwork_base_url . '/sites/all/themes/atwork/images/atwork-logo-newsletter.png?nltest=testbanner" width="439" height="93" border="0" /> </a></td>'; ?>
@@ -219,7 +220,7 @@ $atwork_base_url = $GLOBALS['base_url'];
 				echo '<td>';
 				echo '<table width="98%" border="0" cellpadding="0" cellspacing="0" id="sn-feature-title" style="background-color:#FFF; border-bottom: 1px solid black;">';
 				echo '<tr>';
-				echo '<td width="40%" height="110" valign="top">';
+				echo '<td width="45%" height="110" valign="top">';
 				echo '<div id="feature-title">';
 				echo $output_atwork_newsletter_title;
 				echo '</div>';
@@ -241,8 +242,8 @@ $atwork_base_url = $GLOBALS['base_url'];
 				echo '</td>';
 				echo '</tr>';
 				echo '<tr>';
-			    echo '<td style="padding: 0 0 5px 0;"><a style="text-decoration: none; color:#004B8D; font-size: 12px;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" > Read more >> </a></td>';
-				echo '<td style="padding: 0 0 5px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D;  font-size: 12px;" href="' . $atwork_base_url . '/news' . $pubDate . '"> News </a></td>';
+			    echo '<td style="padding: 0 0 5px 0;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" > Read more >> </a></td>';
+				echo '<td style="padding: 0 0 5px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/news' . $pubDate . '"> News </a></td>';
 				echo '</tr>';
 			}
 	?>
@@ -313,11 +314,11 @@ $atwork_base_url = $GLOBALS['base_url'];
 				$hw_ratio = ($height / $width);
 				$wh_ratio = ($width/ $height);
 				
-				$height = 'height="190"';
-				$width = 'width="293"';
+				$height = 'height="215"';
+				$width = 'width="330"';
 				
 				// Set image style
-				$image_markup = str_replace('img', 'img style="margin: auto; display: block; height: 190px; width: 293px;"', $image_markup);
+				$image_markup = str_replace('img', 'img style="margin: auto; display: block; height: 215px; width: 330px;"', $image_markup);
 				
 				// Insert new rationalized dimensions and display Photo.
 				$image_markup = preg_replace('/width="[0-9]+"/', $width, $image_markup);
@@ -329,7 +330,7 @@ $atwork_base_url = $GLOBALS['base_url'];
 				echo '<td>';
 				echo '<img src = "' . $atwork_base_url . '/sites/all/themes/atwork/images/whitespace_10_179.png"/>';
 				echo '</td>';
-				echo '<td width=61%>';
+				echo '<td width=56%>';
 			    echo '<table width=97% border="0" cellpadding="0" cellspacing="0";>';
 			        
 				// Article Title
@@ -343,7 +344,7 @@ $atwork_base_url = $GLOBALS['base_url'];
 				
 				echo '<tr>';	
 				echo '<td colspan="2" class="outlook-body" valign="top" style="height: 119px;">';
-				echo '<div class="outlook-body" id="middle-left-tease" style="height: 130px;">';
+				echo '<div class="outlook-body" id="middle-left-tease" style="height: 154px;">';
 				// Article Teaser
 				echo '<p style="font-family: Calibri, sans-serif; font-size:11pt; color:#000000; margin-right: 10px; line-height: 20px;">';
 				echo $atwork_newsletter_body[0]['summary'];
@@ -352,8 +353,8 @@ $atwork_base_url = $GLOBALS['base_url'];
 				echo '</td>';
 				echo '</tr>';
 				echo '<tr>';
-				echo '<td style="padding: 0 0 5px 0; border-bottom: 1px solid black;"><a style="text-decoration: none; color:#004B8D;font-size: 12px;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" > Read more >> </a></td>';
-				echo '<td style="padding: 0 0 5px 0; text-align: right; border-bottom: 1px solid black;"><a style="text-decoration: none; color:#004B8D;font-size: 12px;" href="' . $atwork_base_url . '/news' . $pubDate . '"> News </a></td>';
+				echo '<td style="padding: 0 0 5px 0; border-bottom: 1px solid black;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" > Read more >> </a></td>';
+				echo '<td style="padding: 0 0 5px 0; text-align: right; border-bottom: 1px solid black;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; font-size: 10pt;" href="' . $atwork_base_url . '/news' . $pubDate . '"> News </a></td>';
 				echo '</tr>';					
 				echo '</table>';
 			    echo '</td>';
@@ -379,7 +380,7 @@ $atwork_base_url = $GLOBALS['base_url'];
 
 <table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-take-note" style="background-color: #FFF;">
   <tr>
-    <td height="30" style="background-color:#E0ECF5;"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; margin-top: 10px; margin-left: 10px; margin-right: 10px;"> Take Note </h2>
+    <td height="30" style="background-color:#E0ECF5;"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; margin-top: 10px; margin-left: 10px; margin-right: 10px;"> Take Note </h2>
         <?php echo '<div style="margin-left: 10px; font-family: Calibri,sans-serif; font-size:11pt; line-height: 20px !important;" >' . $atwork_newsletter_render_array['take_note']['value'] . '</div>'?>
     </td>
   </tr>
@@ -393,7 +394,7 @@ $atwork_base_url = $GLOBALS['base_url'];
     <td height="10" style="background-color:#FFF;">&nbsp;</td>
   </tr>
   <tr>
-    <td style="background-color:#E0ECF5;"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; margin-top: 10px; margin-left: 10px; margin-right: 10px;"> Did You Know? </h2>
+    <td style="background-color:#E0ECF5;"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; margin-top: 10px; margin-left: 10px; margin-right: 10px;"> Did You Know? </h2>
         <?php echo '<div style="margin-left: 10px; padding 0 0 20px 0; font-family: Calibri,sans-serif; font-size:11pt; line-height: 20px !important;" >' . $atwork_newsletter_render_array['did_you_know']['value'] . '</div>'?>
     </td>
   </tr>
@@ -429,7 +430,7 @@ $atwork_base_url = $GLOBALS['base_url'];
 			 	$atwork_blog_body = field_get_items('node', $curr_node, 'body');
 			 	
 			 	// Build title for blog
-			 	$output_atwork_blog_title = '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_blog_aliased . '" >' . $atwork_blog_title . '</a></h2>';
+			 	$output_atwork_blog_title = '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px; margin-left: 10px; margin-right: 10px;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_blog_aliased . '" >' . $atwork_blog_title . '</a></h2>';
 			 	
 			    echo '<table height="110" valign="top" width="758" align="left" border="0" cellpadding="0" cellspacing="0" id="sn-middle-content" style="border-bottom: 1px solid black;">';
 				echo '<tr>';
@@ -443,20 +444,20 @@ $atwork_base_url = $GLOBALS['base_url'];
 				echo '<div id="middle-left-title" style="height: 30px;">';
 				echo $output_atwork_blog_title;
 				echo '</div>';
-				echo '<p style="font-family: Calibri,sans-serif; font-size:11pt; color:#000000; display:block; height: auto; margin-top: 10px; margin-left: 10px; margin-right: 10px; margin-bottom: 0; padding-bottom: 15px; line-height: 20px;">';
+				echo '<p style="font-family: Calibri,sans-serif; font-size:11pt; color:#000000; display:block; height: auto; margin-top: 6px; margin-left: 10px; margin-right: 10px; margin-bottom: 0; padding-bottom: 15px; line-height: 20px;">';
 				echo ($atwork_blog_body[0]['summary'] === "" ? $atwork_blog_body[0]['summary'] : '"' . $atwork_blog_body[0]['summary'] . '"');
 				echo '</p>';
 				echo '</td>';
 				echo '</tr>';
 				echo '<tr>';
-				echo '<td width="48%" style="padding: 0 0 5px 10px; color:#004B8D">';
-				echo '<a style="text-decoration: none; color:#004B8D;  padding-bottom: 3px; line-height: 24px; font-size: 12px;" href="' . $atwork_base_url . '/' . $atwork_blog_aliased . '" > Read more >> </a>';
+				echo '<td width="48%" style="padding: 0 0 9px 10px; color:#004B8D">';
+				echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; padding-bottom: 3px; line-height: 24px; font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_blog_aliased . '" > Read more >> </a>';
 				echo '<br>';
-				echo '<a style="text-decoration: none; color:#004B8D;  padding-bottom: 3px; font-size: 12px; line-height: 24px;">Posted by: </a>';
-				echo '<a style="text-decoration: none; color:#004B8D;   font-size: 12px; line-height: 24px;" href="' . $atwork_base_url . '/employees/' . $author_name_blog . '">';
+				echo '<a style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D;  padding-bottom: 3px; font-size: 10pt; line-height: 24px;">Posted by: </a>';
+				echo '<a style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D;   font-size: 10pt; line-height: 24px;" href="' . $atwork_base_url . '/employees/' . $author_name_blog . '">';
 				echo $blog_author_name_full;
 				echo '</a></td>';
-				echo '<td style="padding: 17px 0 5px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D; font-size: 12px; line-height: 24px;" href="' . $atwork_base_url . '/blogs' . $pubDate . '"> Blogs </a></td>';
+				echo '<td style="padding: 19px 0 0 0; text-align: right;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; font-size: 10pt; line-height: 24px;" href="' . $atwork_base_url . '/blogs' . $pubDate . '"> Blogs </a></td>';
 				echo '</tr>';
 			    echo '</table>';
     		}
@@ -471,10 +472,6 @@ $atwork_base_url = $GLOBALS['base_url'];
 		// Only put this in if we have a comment.
 		if(isset($atwork_newsletter_render_array['comments']) && $atwork_newsletter_render_array['comments']):
 			echo '<table height="110" valign="top" width="758" border="0" cellpadding="0" cellspacing="0" id="sn-middle-content" style="border-bottom: 1px solid black;">';
-			//echo '<tr>';
-			//echo '<td height="10" colspan="2" valign="top" align="right" style="color:#004B8D;"></td>';
-			//echo '</tr>';
-			
 			// Join the Conversation \
 			echo '<tr valign="top">';
 			echo '<td colspan="3" valign="top" height="110">';
@@ -482,18 +479,17 @@ $atwork_base_url = $GLOBALS['base_url'];
 			echo '<div id="middle-left-title" style="height: 30px;">';
 			echo '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-left: 10px; margin-right: 10px; margin-top: 0px;"><a style="text-decoration: none; color:#004B8D;">Join the Conversation</a></h2>';
 			echo '</div>';
-			echo '<p style="font-family: Calibri,sans-serif; font-size:11pt; color:#000000; display:block; height: auto; margin-top: 10px; margin-left: 10px; margin-right: 10px; margin-bottom: 15px; padding: 0; line-height: 20px;">' . $atwork_newsletter_render_array['comments']->comment_body['und'][0]['formatted']; 
+			echo '<p style="font-family: Calibri,sans-serif; font-size:11pt; color:#000000; display:block; height: auto; margin-top: 6px; margin-left: 10px; margin-right: 10px; margin-bottom: 15px; padding: 0; line-height: 20px;">' . $atwork_newsletter_render_array['comments']->comment_body['und'][0]['formatted']; 
 			echo '</td>';
 			echo '</tr>';
 			echo '<tr>';
 		    echo '<td width="48%" style="padding: 0 0 5px 10px; color:#004B8D">';
-        	echo '<a style="text-decoration: none; color:#004B8D; line-height: 24px; font-size: 12px;" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . $pubDate . '" > Read more >> </a>';
-		    echo '<br>';
-		    echo '<a style="text-decoration: none; color:#004B8D; font-size: 12px; line-height: 24px;">Posted by: </a>';
-		    echo '<a style="text-decoration: none; color:#004B8D; font-size: 12px; line-height: 24px;" href="' . $atwork_base_url . '/employees/' . $atwork_newsletter_render_array['comments']->registered_name . '">';
-		    echo $atwork_newsletter_render_array['comments']->name;
-		    echo '</a></td>';
-		    echo '<td style="padding: 17px 0 0px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D; font-size: 12px;" href="' . $atwork_base_url . '/' . 'recent-comments' . $pubDate . '"> Comments </a></td>';
+			echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; padding-bottom: 3px; line-height: 24px; font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . '" > Read more >> </a>';
+			echo '<br>';
+			echo '<a style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D;  padding-bottom: 3px; font-size: 10pt; line-height: 24px;">Posted by: </a>';
+		    echo '<a style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; font-size: 10pt;" href="' . $atwork_base_url . '/employees/' . $atwork_newsletter_render_array['comments']->registered_name . '">' . $atwork_newsletter_render_array['comments']->name. '</a>';
+		    echo '</td>';
+		    echo '<td style="padding: 35px 0 9px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D; font-size: 10pt; font-family: Calibri,sans-serif;" href="' . $atwork_base_url . '/' . 'recent-comments' . $pubDate . '"> Comments </a></td>';
 		    echo '</tr>';
 			echo '</table>';
 			echo '<tr>';
