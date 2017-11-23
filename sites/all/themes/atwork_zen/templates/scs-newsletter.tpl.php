@@ -32,8 +32,6 @@ if(date('D') === 'Wed') {
 }
 
 $atwork_base_url = $GLOBALS['base_url'];
-
-			dpm ($atwork_newsletter_render_array);
 ?>
 <?php //********************* Header section ********************* ?>
 
