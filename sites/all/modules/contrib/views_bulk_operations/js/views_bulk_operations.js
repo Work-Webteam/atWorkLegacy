@@ -65,7 +65,6 @@
             // that's why we manually set the checkmark first, then trigger the
             // event (so that listeners get notified), then re-set the checkmark
             // which the trigger will have toggled. yuck!
-            this.checked = !checked;
             $(this).trigger('click');
             this.checked = !checked;
           });
@@ -144,18 +143,22 @@
   }
 
   Drupal.vbo.toggleButtonsState = function(form) {
-    // If no rows are checked, disable any form submit actions.
-    var selectbox = $('select[name="operation"]', form);
-    var checkedCheckboxes = $('.vbo-select:checked', form);
-    var buttons = $('[id^="edit-select"] input[type="submit"]', form);
-
-    if (selectbox.length) {
-      var has_selection = checkedCheckboxes.length && selectbox.val() !== '0';
-      buttons.prop('disabled', !has_selection);
-    }
-    else {
-      buttons.prop('disabled', !checkedCheckboxes.length);
-    }
+	  
+	  
+   // // If no rows are checked, disable any form submit actions.
+   var selectbox = $('select[name="operation"]', form);
+   var checkedCheckboxes = $('.vbo-select:checked', form);
+   console.log(checkedCheckboxes);
+   var buttons = $('[id^="edit-select"] input[type="submit"]', form);
+   
+   console.log(checkedCheckboxes.length);
+   if (selectbox.length) {
+     var has_selection = checkedCheckboxes.length && selectbox.val() !== '0';
+     buttons.prop('disabled', !has_selection);
+   }
+   else {
+     buttons.prop('disabled', !checkedCheckboxes.length);
+   }
   };
 
 })(jQuery);
