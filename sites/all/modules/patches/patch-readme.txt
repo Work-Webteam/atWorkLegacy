@@ -54,3 +54,10 @@ module: WYSIWYG filter
 files: wysiwyg_filter.inc
 source: None - we did this ourselves
 issue: Fix for an error where the module was attempting to attach an array to a string if the object was b or i.
+
+
+date: 2017-11-27
+module: views_bulk_operations
+file: viws_bulk_operations.js
+source: None - we did this ourselves
+issue: Script breaking input select behaviour in VBO forms. The select anywhere on row was not toggling the create butoon enable/disable correctly. Removed line 68 entirely (this.checked = !checked;). 
