@@ -78,9 +78,10 @@ function atwork_newsletter_theme() {
 function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state, $vbo){
   //Added instructions to content selection
   if(!array_key_exists('nodes',$form)) {
-    $form['#prefix'] = $form['#prefix'] . t('Click (in any order) the content you\'d like to appear in the newsletter.');
+    $form['#prefix'] = $form['#prefix'] . t('Click (in any order) the content you\'d like to appear in the newsletter. There is no maximum number, but you must have at least one news article.
+      Reminder: Create the newsletter in Chrome or Firefox browser.<br>');
   } else {
-    $form['#prefix'] = $form['#prefix'] . t('Note: You can re-order the content from top to bottom. However, the top-spot article must be in the first row. Articles will always appear above blogs in the final newsletter.');
+    $form['#prefix'] = $form['#prefix'] . t('Note: Use the "+" sign to drag and drop the content into the order you would like it to appear in the newsletter.  An article must be in the top spot.');
   }
 
   // Move article/blog form to top
@@ -93,13 +94,13 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
 
     // Comment Settings
     $comment_disabled = FALSE;
-    $comment_value = 'none';
+    $comment_value = '';
     $comment_suffix = NULL; 
     if(array_key_exists('nodes',$form)) {
       $comment_value = $form_state['input']['cid'];
       $comment_preview = comment_load($comment_value);
       $comment_body = $comment_preview->comment_body['und'][0]['value']; 
-      if($_POST['cid'] !== 'none') {
+      if($_POST['cid'] !== '') {
         $comment_suffix = '<div><table style="border: 1px solid #bebfb9;"><tr><td style="border: 1px solid #bebfb9; background-color: #e1e2dc;">COMMENT PREVIEW</td><td>'. $comment_body . '</td></tr></table></div>';
       }
     } 
@@ -112,10 +113,11 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
       '#size' => 60,
       '#maxlength' => 64,
       '#suffix' => t($comment_suffix),
-      '#description' => t("Add the CID of the comment you would like to appear in the newsletter. 
-        If this field is left blank, no comment will be displayed. 
-        The CID is a five-digit number found at the end of each comment URL (e.g. In https:// gww.gov.bc.ca/comment/reply/26948/<strong>42378</strong>, the CID is 42378)<br> 
-        NOTE: You can find the CID by mousing over the comment or by hitting \"reply\" to the comment."),
+      '#description' => t('To add the comment you would like to appear in the newsletter, add the comment ID  in the field above. The comment ID is a five-digit number found at the end of each comment URL.<br> 
+        For example, the ID is "42378" in this URL: 
+        https:// gww.gov.bc.ca/comment/reply/26948/<strong>42378</strong>)
+        If this field is left blank, no comment will be displayed.<br> 
+        NOTE: You can find the comment ID by pressing "reply" to the comment and copying the ID from the URL.'),
     );
     // Spot for "Take Note"
     $form['take_note'] = array(
@@ -123,7 +125,8 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
       '#title' => t('Take Note'),
       '#default_value' => t(''),
       '#format' => NULL,
-      '#description' => t('Add in Take Note bulleted list, or leave as blank if this is not part of the newsletter<br><br><br>'),
+      '#description' => t('Click the "Paste from Word" icon and paste bulleted content into the dialogue box and select "ok".
+        Leave the field blank if this content is not part of the newsletter.<br><br><br>'),
     );
     // Spot for "Did You Know?"
     $form['did_you_know'] = array(
@@ -131,7 +134,8 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
       '#title' => t('Did You Know?'),
       '#default_value' => t(''),
       '#format' => NULL,
-      '#description' => t("Add in 'Did you Know?' text, or leave blank if this is not part of the newsletter<br><br><br>"),
+      '#description' => t('Click the "Paste from Word" icon and paste content into the dialogue box and select "ok".
+        Leave the field blank if this content is not part of the newsletter.<br><br><br>'),
     );
     // Add our own validation
     if((isset($form['select']['action::scs_views_create_newsletter_action']['#validate'])) &&
@@ -157,7 +161,7 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
 function atwork_newsletter_validate(&$form, &$form_state){
   // Check if user input is a valid. If not, set error message (drupal_set_message) and return FALSE
   // Validate Comment(s)
-  if($form_state['input']['cid'] !== 'none') {
+  if($form_state['input']['cid'] !== '') {
   	if(!is_numeric($form_state['input']['cid']) || !is_object(comment_load($form_state['input']['cid']))) {
       form_set_error('cid',t("Please enter a valid Comment ID"));
     }
