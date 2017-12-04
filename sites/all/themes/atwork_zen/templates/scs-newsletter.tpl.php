@@ -77,7 +77,7 @@ $atwork_base_url = $GLOBALS['base_url'];
 			// Grab image for render.
 			$image = field_get_items('node', $node_first, 'field_image');
 
-			$image_output = field_view_value('node', $node_first, 'field_image', $image[0], array(
+			$image_output = field_view_value('node', $node_first, 'field_image', $image[1], array(
   				'type' => 'image',
   				'settings' => array(
     			'image_style' => 'atwork_newsletter_feature_image',
