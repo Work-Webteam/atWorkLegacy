@@ -123,8 +123,8 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 				}
 			}
 	        if(!$imgFound) {
-	        	$node->field_image['und'][0]['uri'] = '';
-	        	$node->field_image['und'][1]['uri'] = '';
+	        	$node->field_image['und'][0]['uri'] = 'default_images/no_image_found_nl.jpg';
+	        	$node->field_image['und'][1]['uri'] = 'default_images/no_image_found_nl.jpg';
 	        }
 		}
 		// Image couldn't be transferred to/found in newsletter image folder. Inform user.
@@ -137,10 +137,10 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 	} 
 	if($error) {
 	  drupal_set_message($error . "<br>Please check the images in the article to make sure they are uploaded in this order:<br>"
-			. "&emsp;Small 382 X 775 px<br>"
-			. "&emsp;Medium 250 X 775 px<br>"
-			. "&emsp;Large 250 X 960 px<br>"
-			. "The width must be included in the image title (for example \"Capital_Park_382x250\")", 'warning');
+			. "&emsp;Small 382 X 250 px<br>"
+			. "&emsp;Medium 775 X 250 px<br>"
+			. "&emsp;Large 960 X 250 px<br>"
+			. "The width must be included in the image title. For example \"Capital_Park_382x250\"", 'warning');
 	}
 	return($atwork_newsletter_render_array);
 }

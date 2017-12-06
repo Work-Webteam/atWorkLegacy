@@ -484,7 +484,7 @@ $atwork_base_url = $GLOBALS['base_url'];
 			// Join the Conversation \
 			
 			echo '<tr valign="top">';
-			echo '<td class="outlook-title" style="line-height: 24px;" valign="top" colspan="2">';
+			echo '<td class="outlook-title" style="line-height: 24px; border-bottom: none !important;" valign="top" colspan="2">';
 			echo '<div class="outlook-title" id="middle-left-content" outlook-body style="line-height: 24px;" >';
 			echo '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px; margin-left: 10px;">';
 			echo '<a style="text-decoration: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . '">Join the Conversation</a></h2>';
@@ -525,7 +525,7 @@ $atwork_base_url = $GLOBALS['base_url'];
 			echo '<td height="10" style="background-color:#FFF;">&nbsp;</td>';
 			echo '</tr>';
 			
-//test
+//
 echo '</table>';
 
 
