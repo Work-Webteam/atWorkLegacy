@@ -2208,40 +2208,6 @@ function profile_feed_comments_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'reply-entity_comments-field_hashtags'.
-  $field_instances['reply-entity_comments-field_hashtags'] = array(
-    'bundle' => 'entity_comments',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 1,
-      ),
-    ),
-    'entity_type' => 'reply',
-    'field_name' => 'field_hashtags',
-    'label' => 'Hashtags',
-    'required' => 0,
-    'settings' => array(
-      'semantic_field_format' => 'field_collection',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'taxonomy',
-      'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
-      ),
-      'type' => 'taxonomy_autocomplete',
-      'weight' => 38,
-    ),
-  );
-
   // Exported field_instance:
   // 'reply-entity_comments-field_post_as_employee_news'.
   $field_instances['reply-entity_comments-field_post_as_employee_news'] = array(
@@ -2400,7 +2366,6 @@ function profile_feed_comments_field_default_field_instances() {
   t('Display Name');
   t('Ecard');
   t('Feed Like Button');
-  t('Hashtags');
   t('Message text');
   t('Node');
   t('Post as Employee News');
