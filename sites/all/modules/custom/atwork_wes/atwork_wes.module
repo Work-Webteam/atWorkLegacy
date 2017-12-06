@@ -64,7 +64,7 @@ function _atwork_wes_schema() {
 }
 
 function atwork_wes_cron() {
-  return;
+  //return;
 
   // update every hour?
   $timestamp = date('YmdH');
@@ -78,7 +78,7 @@ function atwork_wes_cron() {
   $total_pop = 0;
   $total_submissions = 0;
 
-  if (($handle = fopen("https://securesurveys.gov.bc.ca/wes2015%20PSA/responseRate.csv", "r")) !== FALSE) {
+  if (($handle = fopen("https://securesurveys.gov.bc.ca/responses/wes2018/responseRate.csv", "r")) !== FALSE) {
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
       $ministry = str_replace('&#34;', '', $data[0]);
       $branch = str_replace('&#34;', '', $data[1]);
