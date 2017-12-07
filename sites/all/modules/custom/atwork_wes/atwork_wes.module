@@ -322,6 +322,6 @@ function _atwork_wes_block_theme($top_three_ministries){
     $block_html .= "<span class='percent'>" . $value . "</span>";
     $block_html .= "</div>";
   }
-  $block_html = "</div>";
+  $block_html .= "</div>";
   return $block_html;
 }
