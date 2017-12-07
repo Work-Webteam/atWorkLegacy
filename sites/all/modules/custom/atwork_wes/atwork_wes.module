@@ -245,3 +245,80 @@ EOT;
     }
   }
 }
+
+/**
+ * WES front-page top 3 block (Ajax driven?)
+ */
+
+ /**
+  * Implements hook_block_info()
+  * Block to display top 3 ministries on the hompage.
+  */
+function atwork_wes_block_info(){
+  $blocks = array();
+  $blocks['wes_top_three'] = array(
+    'info' => t("WES top three"),
+  );
+  return $blocks;
+}
+
+  /**
+   * Implements hook_block_view()
+   * Populate our WES block with top three ministries
+   */
+function atwork_wes_block_view($delta = ''){
+  $block = array();
+
+  switch($delta){
+    case ('wes_top_three'):
+      $block['subject'] = '';
+      $block['content'] = _atwork_wes_block_content();
+      drupal_add_js(drupal_get_path('module', 'atwork_wes') . '/wes.js');
+    break;
+  }
+  return $block;
+}
+
+/**
+ * Helper function to sort out top 3 ministries, encapsulate them in HTML, and pass them back to the block ready to be rendered
+ */
+function _atwork_wes_block_content(){
+  // Default case, something to show if we don't get any data from DB
+  $ministry_html = '<div>Something has gone wrong, please standby</div>';
+   // get data
+  $data = db_query("SELECT data FROM {atwork_wes} ORDER BY timestamp DESC LIMIT 1")->fetchCol();
+  // Unserialize this data
+  if (isset($data[0]) && $data[0]) {
+    $data = unserialize($data[0]);
+  }
+  $ministries = array();
+  if(isset($data)){
+    // Pull out just the data we need
+    foreach($data as $id => $ministry){
+      $ministries[$ministry['ministry']] = $ministry['percent'];
+    }
+    // Sort in decending
+    arsort($ministries);
+    // Take just the top three
+    $top_three_ministries = array_slice($ministries, 0, 3);
+    // Theme this data 
+    $ministry_html = _atwork_wes_block_theme($top_three_ministries);
+  }
+  return $ministry_html;
+}
+
+/**
+ * Helper function to wrap top three ministries in HTML
+ */
+function _atwork_wes_block_theme($top_three_ministries){
+  $block_html = '';
+  $block_html = "<div id='ministry-top-three'>";
+  foreach($top_three_ministries as $key => $value){
+    $block_html .= "<div class='ministry-stats'>";
+    $block_html .= "<span class='ministry-name'>" . $key . "</span>";
+    $block_html .= "<span class='percent'>" . $value . "</span>";
+    $block_html .= "</div>";
+  }
+  $block_html = "</div>";
+  return $block_html;
+}
