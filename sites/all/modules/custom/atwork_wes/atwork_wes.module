@@ -316,6 +316,9 @@ function _atwork_wes_block_theme($top_three_ministries){
   foreach($top_three_ministries as $key => $value){
     $block_html .= "<div class='ministry-stats'>";
     $block_html .= "<span class='ministry-name'>" . $key . "</span>";
+    $block_html .= '<div class="wes-bar-container">';
+    $block_html .= '<div class="wes-bar" style="width: ' . $value . '"></div>';
+    $block_html .= '</div>';
     $block_html .= "<span class='percent'>" . $value . "</span>";
     $block_html .= "</div>";
   }
