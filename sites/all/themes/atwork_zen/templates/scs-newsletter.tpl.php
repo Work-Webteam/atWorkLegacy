@@ -576,9 +576,9 @@ $atwork_base_url = $GLOBALS['base_url'];
           </tr>
           <tr>
             <td valign="top" height="70" colspan="2">
-              <p style="font-family: Calibri,sans-serif; font-size:11pt; color:#000000; display:block; height: auto; margin-left: 10px; margin-right: 10px; margin-bottom: 0; padding-bottom: 15px; line-height: 20px;">
+              <!-- p style="font-family: Calibri,sans-serif; font-size:11pt; color:#000000; display:block; height: auto; margin-left: 10px; margin-right: 10px; margin-bottom: 0; padding-bottom: 15px; line-height: 20px;"-->
                 <?php echo $atwork_newsletter_render_array['comments']->comment_body['und'][0]['formatted']; ?>
-              </p>
+              <!-- /p -->
             </td>
           </tr>
           <tr>

@@ -23,7 +23,8 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 		// Retrieve Username from UID and place in comments array
 		$user = user_load($comment->uid);
 		$comment->name = $user->field_display_name['und'][0]['value'];
-		$comment->comment_body['und'][0]['formatted'] = $comment->comment_body['und'][0]['value'];
+				
+		$comment->comment_body['und'][0]['formatted'] = str_replace('<p>', '<p style="margin-left: 10px; font-size: 11pt; font-family: Calibri,sans-serif; margin-right: 10px; padding-bottom: 5px; line-height: 20px;">', $comment->comment_body['und'][0]['value']);
 
 		// Add in link to parent article
 		$parent = node_load($comment->nid);
