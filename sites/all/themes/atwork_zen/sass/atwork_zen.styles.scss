@@ -1576,25 +1576,39 @@ h3.front-promoted-title {
 }
 /*----------------- End of Section--------------------*/
 
+#block-atwork-wes-wes-top-three {
+  padding-top: 5px; }
 
+#ministry-top-three {
+  padding: 5px 15px 0px 10px;
+  width: 360px;
+  position: absolute;
+  left: 390px;
+  top: 43px;
+  height: 123px;
+  font-family: Open-sans, bold; }
 
+#ministry-top-three .wes-bar-container {
+  width: 320px;
+  height: 17px;
+  background-color: #EEE;
+  border: none; }
+#ministry-top-three .wes-bar {
+  width: 0px;
+  height: 17px;
+  background-color: #278acb; }
+#ministry-top-three .percent {
+  float: right;
+  position: relative;
+  top: -18px;
+  left: 25px;
+  font-weight: bold;
+  font-size: 11pt; }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.ministry-stats {
+  width: 330px;
+  color: #26669E;
+  padding-bottom: 5px; }
 
 /*#####################################################################################################################################################*/
 /* Styling for the Moderator Admin menu - only seen by admin/editor roles */
