@@ -310,11 +310,15 @@ function _atwork_wes_block_content(){
  */
 function _atwork_wes_block_theme($top_three_ministries){
 	$block_html = '';
-	$block_html .= '<img src="/sites/default/files/images/WES/WES_tracker_without-graphs.jpg" height="42" width="42"/>';
+	$block_html .= '<img src="/sites/default/files/images/WES/WES_tracker_without-graphs.jpg" height="42" width="42" usemap="Map"/>';
+	$block_html .= '<map name="Map">';
+	$block_html .= '<area shape="circle" coords="861,97,57" href="#">';
+	$block_html .= '</map>';
+	
 	$block_html .= "<div id='ministry-top-three'>";
 	foreach($top_three_ministries as $key => $value){
 		$block_html .= "<div class='ministry-stats'>";
-		$block_html .= "<span class='ministry-name'>" . $key . "</span>";
+		$block_html .= "<span class='ministry-name'>Ministry of " . $key . "</span>";
 		$block_html .= '<div class="wes-bar-container">';
 		$block_html .= '<div class="wes-bar" style="width: ' . $value . '"></div>';
 		$block_html .= '</div>';
