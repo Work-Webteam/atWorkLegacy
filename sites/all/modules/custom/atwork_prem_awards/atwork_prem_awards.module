@@ -207,7 +207,7 @@ function _atwork_prem_awards_count_words($files) {
         $longest_doc = $title;
       }
     }
-
+/*
     elseif(strpos(' ' . strtolower($file), '.pdf')){
       $im = new Imagick();
       $im->pingImage($file);
@@ -220,7 +220,7 @@ function _atwork_prem_awards_count_words($files) {
         $longest_doc = $title;
       }
     }
-
+*/
     if (isset($text)) {
       $text = preg_replace('/\s+/', ' ', $text);
       $words = explode(' ', $text);
