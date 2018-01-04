@@ -198,16 +198,26 @@ function _atwork_prem_awards_count_words($files) {
     if (isset($text)) {
       $text = preg_replace('/\s+/', ' ', $text);
       $words = explode(' ', $text);
+      $doc_words = count($words);
+      if ($doc_words > 0){
+        $pages = number_format(($doc_words / 300), 1);
+        if ($pages > 5) {
+          $file_split = explode('/', $file);
+          $title = array_pop($file_split);
+          drupal_set_message(t('Over 5 pages of text has been detected in your attachment titled ' . $title . '. Please review this document to ensure it isn\'t over the 5 page limit. *NOTE: Pages are assumed to be 300 words max'), 'warning');
+        }
+      }
+      // We should check these individually and give users feedback - 
       $attached_words = $attached_words + count($words);
     }
   }
 
-  if ($attached_words) {
-    $pages = number_format(($attached_words / 300), 1);
-    if ($pages > 5) {
-      drupal_set_message(t('Over 5 pages of text has been detected in your attachments. Please review them to ensure you aren\'t over the 5 page limit.'), 'warning');
-    }
-  }
+  //if ($attached_words) {
+  //  $pages = number_format(($attached_words / 300), 1);
+  //  if ($pages > 5) {
+  //    drupal_set_message(t('Over 5 pages of text has been detected in your attachments. Please review them to ensure you aren\'t over the 5 page limit.'), 'warning');
+  //  }
+  //}
 
   return 0;
 }
@@ -498,6 +508,7 @@ function atwork_prem_awards_form_alter(&$form, $form_state, $form_id) {
     }
 
     $form['actions']['submit']['#prefix'] = '<p>' . t('Submitting the application will send an email copy to the Nominator Contact and Ministry Contact.') . '</p>';
+    $form['actions']['submit']['#value'] = t('Submit');
     $form['actions']['save'] = array(
       '#type' => 'submit',
       '#value' => t('Save'),
@@ -638,7 +649,11 @@ function atwork_prem_awards_application_submit($form, &$form_state) {
     drupal_set_message('Thank you for your submission. An email has been sent to '. l($email['email'], 'mailto:'. $email['email']) . ' (Nomination Contact) and ' . l($ministry_contacts[$ministry], 'mailto:'. $ministry_contacts[$ministry]) . ' (Ministry Contact).');
   }
   elseif ($form_state['clicked_button']['#value'] == 'Save') {
-    drupal_set_message(t('Your submission has been saved. You may review and edit your submission !here.', array( '!here' => l('here', 'node/' . PA_APP_NID . '/submissions'))));
+    if(isset($form_state['storage']['details']['sid']) && $form_state['storage']['details']['is_new'] == TRUE){
+      $sid = $form_state['storage']['details']['sid'];
+      drupal_goto('/premiers-award-application-2017/submission/' . $sid . '/edit');
+    } 
+    drupal_set_message(t('Your submission has been saved. You may review and edit any of your submissions !here.', array( '!here' => l('here', 'node/' . PA_APP_NID . '/submissions'))));
   }
 
   $files = array();
