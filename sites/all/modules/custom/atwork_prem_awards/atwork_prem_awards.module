@@ -176,8 +176,8 @@ function _atwork_prem_awards_count_words($files) {
   foreach ($files as $file) {
     if (strpos(' ' . strtolower($file), '.docx')) {
       $text = readDocx($file);
-      if(count($text) > count($longest_length_of_doc)){
-        $longest_length_of_doc = count($text);
+      if(str_word_count($text) > $longest_length_of_doc){
+        $longest_length_of_doc = str_word_count($text);
         $file_split = explode('/', $file);
         $title = array_pop($file_split);
         $longest_doc = $title;
@@ -200,27 +200,28 @@ function _atwork_prem_awards_count_words($files) {
 
       $outtext = preg_replace("/[^a-zA-Z0-9\s\,\.\-\n\r\t@\/\_\(\)]/","",$outtext);
       list($text) = explode('Y, dXiJ', $outtext);
-      if(count($text) > count($longest_length_of_doc)){
-        $longest_length_of_doc = count($text);
+      if(str_word_count($text) > $longest_length_of_doc){
+        $longest_length_of_doc = str_word_count($text);
         $file_split = explode('/', $file);
         $title = array_pop($file_split);
         $longest_doc = $title;
       }
     }
-/*
+
     elseif(strpos(' ' . strtolower($file), '.pdf')){
-      $im = new Imagick();
-      $im->pingImage($file);
-      $pdf_page += ($im->getNumberImages());
-      $pages_longest = $longest_length_of_doc/300;
-      if($pages_logest < $pdf_page){
+      $target_pdf = $file;
+      $cmd = sprintf('identify %s', $target_pdf);
+      exec($cmd, $output);
+      $pdf_page += count($output);
+      $pages_longest = ceil($longest_length_of_doc/300);
+      if($pages_longest < $pdf_page){
         $longest_length_of_doc = $pdf_page * 300;
         $file_split = explode('/', $file);
         $title = array_pop($file_split);
         $longest_doc = $title;
       }
     }
-*/
+
     if (isset($text)) {
       $text = preg_replace('/\s+/', ' ', $text);
       $words = explode(' ', $text);
