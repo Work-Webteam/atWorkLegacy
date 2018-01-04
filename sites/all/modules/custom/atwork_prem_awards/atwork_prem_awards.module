@@ -207,7 +207,7 @@ function _atwork_prem_awards_count_words($files) {
       //    $title = array_pop($file_split);
       //    drupal_set_message(t('Over 5 pages of text has been detected in your attachment titled ' . $title . '. Please review this document to ensure it isn\'t over the 5 page limit. *NOTE: Pages are assumed to be 300 words max'), 'warning');
       //  }
-      }
+      //}
       // We should check these individually and give users feedback - changed Jan 4, 2018 to above check within loop.
       $attached_words = $attached_words + count($words);
     }
