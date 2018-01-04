@@ -198,26 +198,27 @@ function _atwork_prem_awards_count_words($files) {
     if (isset($text)) {
       $text = preg_replace('/\s+/', ' ', $text);
       $words = explode(' ', $text);
-      $doc_words = count($words);
-      if ($doc_words > 0){
-        $pages = number_format(($doc_words / 300), 1);
-        if ($pages > 5) {
-          $file_split = explode('/', $file);
-          $title = array_pop($file_split);
-          drupal_set_message(t('Over 5 pages of text has been detected in your attachment titled ' . $title . '. Please review this document to ensure it isn\'t over the 5 page limit. *NOTE: Pages are assumed to be 300 words max'), 'warning');
-        }
+      // Removed the per-doc update - pages total should equal 5 - but if you have multiple content types I'm not sure how you would measure this.
+      //$doc_words = count($words);
+      //if ($doc_words > 0){
+      //  $pages = number_format(($doc_words / 300), 1);
+      //  if ($pages > 5) {
+      //    $file_split = explode('/', $file);
+      //    $title = array_pop($file_split);
+      //    drupal_set_message(t('Over 5 pages of text has been detected in your attachment titled ' . $title . '. Please review this document to ensure it isn\'t over the 5 page limit. *NOTE: Pages are assumed to be 300 words max'), 'warning');
+      //  }
       }
       // We should check these individually and give users feedback - changed Jan 4, 2018 to above check within loop.
-      //$attached_words = $attached_words + count($words);
+      $attached_words = $attached_words + count($words);
     }
   }
 
-  //if ($attached_words) {
-  //  $pages = number_format(($attached_words / 300), 1);
-  //  if ($pages > 5) {
-  //    drupal_set_message(t('Over 5 pages of text has been detected in your attachments. Please review them to ensure you aren\'t over the 5 page limit.'), 'warning');
-  //  }
-  //}
+  if ($attached_words) {
+    $pages = number_format(($attached_words / 300), 1);
+    if ($pages > 5) {
+      drupal_set_message(t('Over 5 pages of text has been detected across all of your attachments. Please review them to ensure you aren\'t over the 5 page limit. *NOTE: Pages are assumed to be 300 words max'), 'warning');
+    }
+  }
 
   return 0;
 }
