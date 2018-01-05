@@ -23,15 +23,17 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 		// Retrieve Username from UID and place in comments array
 		$user = user_load($comment->uid);
 		$comment->name = $user->field_display_name['und'][0]['value'];
-		$comment->comment_body['und'][0]['formatted'] = $comment->comment_body['und'][0]['value'];
-
+				
+		$comment->comment_body['und'][0]['formatted'] = str_replace('<p>', '<p class="outlook-comment-body" style="margin: 0 10px 0 15px; font-size: 12pt; font-family: Calibri,sans-serif; padding-bottom: 5px; line-height: 20px;">"', $comment->comment_body['und'][0]['value']);
+		$comment->comment_body['und'][0]['formatted']= str_replace('</p>', '"</p>', $comment->comment_body['und'][0]['formatted']);
+		
 		// Add in link to parent article
 		$parent = node_load($comment->nid);
 		$comment->parent_url = drupal_get_path_alias('node/' . $comment->nid);
 	} 
 	
 	//Fix formatting in bulleted lists in Take Note
-	$notes = str_replace('<ul>', '<ul style="font-family: Calibri,sans-serif; font-size:11pt; margin-top: 10px; margin-right: 10px; margin-bottom: 20px;">', $notes);
+	$notes = str_replace('<ul>', '<ul style="font-family: Calibri,sans-serif; font-size:12pt; margin-top: 10px; margin-right: 10px; margin-bottom: 20px;">', $notes);
 	$notes = str_replace('<li>', '<li class="outlook-list" style="margin-left: 5px;">', $notes);
 	
 	// If a comment/note/did you know were NOT entered, our value should be "none" - we may want to account for this possibility here or in the template when deciding how exactly to theme in these instances

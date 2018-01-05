@@ -1,6 +1,6 @@
 <?php
 
-define("ATWORK_WES_NID", 7468);
+define("ATWORK_WES_NID", 28197);
 
 function _atwork_wes_id_safe($string) {
 	// Replace with dashes anything that isn't A-Z, numbers, dashes, or underscores.
@@ -216,6 +216,9 @@ function atwork_wes_node_view($node, $view_mode, $langcode) {
 			
 			$ministries = <<<EOT
 <div id="wes-popup" style="margin-bottom: 20px; width: 100%; float: left;">
+<h1>2018 <br>
+WORK ENVIRONMENT SURVEY</h1>
+<p>To complete your survey by February 23, click on the unique and personalized link found in your email invitation.</p>
 <div id="wes-image">
 $last_updated
 <div id="wes-links-container">

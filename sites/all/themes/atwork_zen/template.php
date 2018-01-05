@@ -40,10 +40,16 @@ function atwork_zen_preprocess_page(&$variables, $hook) {
   }
   
   // If this is an article page, add js file to correct sidebar image.
+<<<<<<< HEAD
   if (isset($variables['node']->type) && !empty($variables['node']->type) && ($variables['node']->type == 'article')){
   	drupal_add_js('sites/all/themes/atwork_zen/js/article_sidebar_image.js');
   }
   
+=======
+  if (isset($variables['node']->type) && !empty($variables['node']->type) && ($variables['node']->type == 'simplenews')){
+  	drupal_add_js('sites/all/themes/atwork_zen/js/newsletter.js');
+  }
+>>>>>>> master
 }
 
 
