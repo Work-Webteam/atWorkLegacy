@@ -23,10 +23,15 @@ jQuery(document).ready(function($) {
       $(this).addClass('selected');
       $(thisId).addClass('selected');
     }
-    
-
-    
-    //console.log(thisId);
   });
+  
+  var i = 1;
+  $("#ministry-top-three .wes-bar").each(function() {
+    var percent = $(this).parent().siblings(".percent").text();
+    var max_width = $(this).parent().width();
+    var wesbar_width = (max_width * percent) / 100; 
+    $(this).delay(200*i).animate({width: wesbar_width}, 500);
+    i++;
+  }); 
 });
 

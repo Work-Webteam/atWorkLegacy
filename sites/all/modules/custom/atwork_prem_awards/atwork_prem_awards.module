@@ -150,8 +150,8 @@ function readDocx($filePath) {
         if (($index = $zip->locateName($dataFile)) !== false) {
             // If found, read it to the string
             $data = $zip->getFromIndex($index);
-            $data = str_replace('<w:t>', '<w:t> ', $data);
-            $data = str_replace('</w:t>', ' </w:t>', $data);
+            $data = str_replace('</w:r></w:p></w:tc><w:tc>', ' ', $data);
+            $data = str_replace('</w:r></w:p>', '\r\n', $data);
             // Close archive file
             $zip->close();
             $contents = explode('\n',strip_tags($data));
@@ -170,10 +170,18 @@ function readDocx($filePath) {
 
 function _atwork_prem_awards_count_words($files) {
   $attached_words = 0;
-
+  $pdf_page = 0;
+  $longest_doc = '';
+  $longest_length_of_doc = 0;
   foreach ($files as $file) {
     if (strpos(' ' . strtolower($file), '.docx')) {
       $text = readDocx($file);
+      if(str_word_count($text) > $longest_length_of_doc){
+        $longest_length_of_doc = str_word_count($text);
+        $file_split = explode('/', $file);
+        $title = array_pop($file_split);
+        $longest_doc = $title;
+      }
     }
 
     elseif (strpos(' ' . strtolower($file), '.doc')) {
@@ -191,21 +199,51 @@ function _atwork_prem_awards_count_words($files) {
       }
 
       $outtext = preg_replace("/[^a-zA-Z0-9\s\,\.\-\n\r\t@\/\_\(\)]/","",$outtext);
-
       list($text) = explode('Y, dXiJ', $outtext);
+      if(str_word_count($text) > $longest_length_of_doc){
+        $longest_length_of_doc = str_word_count($text);
+        $file_split = explode('/', $file);
+        $title = array_pop($file_split);
+        $longest_doc = $title;
+      }
+    }
+
+    elseif(strpos(' ' . strtolower($file), '.pdf')){
+      $target_pdf = $file;
+      $cmd = sprintf('identify %s', $target_pdf);
+      exec($cmd, $output);
+      $pdf_page += count($output);
+      $pages_longest = ceil($longest_length_of_doc/300);
+      if($pages_longest < $pdf_page){
+        $longest_length_of_doc = $pdf_page * 300;
+        $file_split = explode('/', $file);
+        $title = array_pop($file_split);
+        $longest_doc = $title;
+      }
     }
 
     if (isset($text)) {
       $text = preg_replace('/\s+/', ' ', $text);
       $words = explode(' ', $text);
+      // Removed the per-doc update - pages total should equal 5 - but if you have multiple content types I'm not sure how you would measure this.
+      //$doc_words = count($words);
+      //if ($doc_words > 0){
+      //  $pages = number_format(($doc_words / 300), 1);
+      //  if ($pages > 5) {
+      //    $file_split = explode('/', $file);
+      //    $title = array_pop($file_split);
+      //    drupal_set_message(t('Over 5 pages of text has been detected in your attachment titled ' . $title . '. Please review this document to ensure it isn\'t over the 5 page limit. *NOTE: Pages are assumed to be 300 words max'), 'warning');
+      //  }
+      //}
       $attached_words = $attached_words + count($words);
     }
   }
 
   if ($attached_words) {
     $pages = number_format(($attached_words / 300), 1);
-    if ($pages > 5) {
-      drupal_set_message(t('Over 5 pages of text has been detected in your attachments. Please review them to ensure you aren\'t over the 5 page limit.'), 'warning');
+    $pages = $pdf_page + $pages;
+    if ($pages > 6) {
+      drupal_set_message(t('Over 5 pages of text has been detected across all of your attachments. Please review them to ensure you aren\'t over the 5 page limit. *NOTE: Pages are assumed to be 300 words max, your longest document looks to be ' . $longest_doc), 'warning');
     }
   }
 
@@ -498,6 +536,7 @@ function atwork_prem_awards_form_alter(&$form, $form_state, $form_id) {
     }
 
     $form['actions']['submit']['#prefix'] = '<p>' . t('Submitting the application will send an email copy to the Nominator Contact and Ministry Contact.') . '</p>';
+    $form['actions']['submit']['#value'] = t('Submit');
     $form['actions']['save'] = array(
       '#type' => 'submit',
       '#value' => t('Save'),
@@ -638,7 +677,11 @@ function atwork_prem_awards_application_submit($form, &$form_state) {
     drupal_set_message('Thank you for your submission. An email has been sent to '. l($email['email'], 'mailto:'. $email['email']) . ' (Nomination Contact) and ' . l($ministry_contacts[$ministry], 'mailto:'. $ministry_contacts[$ministry]) . ' (Ministry Contact).');
   }
   elseif ($form_state['clicked_button']['#value'] == 'Save') {
-    drupal_set_message(t('Your submission has been saved. You may review and edit your submission !here.', array( '!here' => l('here', 'node/' . PA_APP_NID . '/submissions'))));
+    if(isset($form_state['storage']['details']['sid']) && $form_state['storage']['details']['is_new'] == TRUE){
+      $sid = $form_state['storage']['details']['sid'];
+      drupal_goto('/premiers-award-application-2017/submission/' . $sid . '/edit');
+    } 
+    drupal_set_message(t('Your submission has been saved. You may review and edit any of your submissions !here.', array( '!here' => l('here', 'node/' . PA_APP_NID . '/submissions'))));
   }
 
   $files = array();

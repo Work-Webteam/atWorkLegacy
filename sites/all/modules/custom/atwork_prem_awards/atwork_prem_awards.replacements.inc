@@ -3,7 +3,7 @@
 function _atwork_prem_awards_ministry_contacts() {
   return array(
     // All ministry contacts must be included in the exact same order as the ministry dropdown (i.e. aboriginal contact in array [1], advanced ed in array [2])
-    1 => 'Jeff.Keene@gov.bc.ca', //Aboriginal Relations & Reconciliation
+    1 => 'Jeff.Keene@gov.bc.ca;Ross.Palin@gov.bc.ca', //Aboriginal Relations & Reconciliation
     2 => 'Ross.Palin@gov.bc.ca', //Ministry of Advanced Education
     3 => 'Susan.Fair@gov.bc.ca', //Agriculture
     4 => 'Gail.Crosby@gov.bc.ca', //Children & Family Development

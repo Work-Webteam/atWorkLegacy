@@ -14,7 +14,7 @@ function atwork_user_following_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'views_seed_name-people_admin-page_following2';
-  $strongarm->value = 1488844655;
+  $strongarm->value = 1508452533;
   $export['views_seed_name-people_admin-page_following2'] = $strongarm;
 
   return $export;

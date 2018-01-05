@@ -132,7 +132,7 @@ function profile_feed_comments_image_default_styles() {
         'data' => array(
           'width' => 40,
           'height' => 40,
-          'anchor' => 'center-center',
+          'anchor' => 'center-top',
         ),
         'weight' => 2,
       ),

@@ -171,52 +171,6 @@ if (isset($node->field_lsa_middle_name[$node->language][0][\'value\']) && $node-
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'content_access_lsa_application';
-  $strongarm->value = array(
-    'view_own' => array(
-      0 => 1,
-      1 => 2,
-      2 => 12,
-      3 => 3,
-      4 => 4,
-      5 => 13,
-    ),
-    'view' => array(
-      0 => 1,
-      1 => 2,
-      2 => 11,
-      3 => 12,
-      4 => 3,
-      5 => 4,
-      6 => 13,
-    ),
-  );
-  $export['content_access_lsa_application'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'content_access_lsa_pin_application';
-  $strongarm->value = array(
-    'view_own' => array(
-      0 => 2,
-      1 => 16,
-      2 => 3,
-      3 => 4,
-      4 => 13,
-    ),
-    'view' => array(
-      0 => 16,
-      1 => 3,
-      2 => 4,
-      3 => 13,
-    ),
-  );
-  $export['content_access_lsa_pin_application'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'cpn_css_enabled_lsa_application';
   $strongarm->value = 0;
   $export['cpn_css_enabled_lsa_application'] = $strongarm;

@@ -138,7 +138,7 @@ function simplenews_send_test($node, $test_addresses) {
   }
   if (count($recipients['anonymous'])) {
     $recipients_txt = implode(', ', $recipients['anonymous']);
-    drupal_set_message(t('Test newsletter sent to anonymous %recipient.', array('%recipient' => $recipients_txt)));
+    drupal_set_message(t('Test newsletter sent to %recipient.', array('%recipient' => $recipients_txt)));
   }
 
   $GLOBALS['user'] = $original_user;
