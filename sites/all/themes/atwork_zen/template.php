@@ -38,6 +38,11 @@ function atwork_zen_preprocess_page(&$variables, $hook) {
       $variables['title_prefix'] = $snipet[0]['value'];
     }
   }
+  
+  // If this is an article page, add js file to correct sidebar image.
+  if (isset($variables['node']->type) && !empty($variables['node']->type) && ($variables['node']->type == 'simplenews')){
+  	drupal_add_js('sites/all/themes/atwork_zen/js/newsletter.js');
+  }
 }
 
 

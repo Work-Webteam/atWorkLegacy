@@ -2965,7 +2965,6 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     11 => '11',
-    12 => '12',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -3065,12 +3064,6 @@ function atwork_lsa_features_views_default_views() {
 
   /* Display: Page: LSA Admin */
   $handler = $view->new_display('page', 'Page: LSA Admin', 'page');
-  $handler->display->display_options['defaults']['access'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'role';
-  $handler->display->display_options['access']['role'] = array(
-    11 => '11',
-    12 => '12',
-  );
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '30';

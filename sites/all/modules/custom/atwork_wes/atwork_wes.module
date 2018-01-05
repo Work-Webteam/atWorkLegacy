@@ -1,6 +1,6 @@
 <?php
 
-define("ATWORK_WES_NID", 7468);
+define("ATWORK_WES_NID", 28197);
 
 function _atwork_wes_id_safe($string) {
   // Replace with dashes anything that isn't A-Z, numbers, dashes, or underscores.
@@ -78,7 +78,7 @@ function atwork_wes_cron() {
   $total_pop = 0;
   $total_submissions = 0;
 
-  if (($handle = fopen("https://securesurveys.gov.bc.ca/wes2015%20PSA/responseRate.csv", "r")) !== FALSE) {
+  if (($handle = fopen("https://securesurveys.gov.bc.ca/responses/wes2018/responseRate.csv", "r")) !== FALSE) {
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
       $ministry = str_replace('&#34;', '', $data[0]);
       $branch = str_replace('&#34;', '', $data[1]);
@@ -216,6 +216,9 @@ function atwork_wes_node_view($node, $view_mode, $langcode) {
 
       $ministries = <<<EOT
 <div id="wes-popup" style="margin-bottom: 20px; width: 100%; float: left;">
+<h1>2018 <br>
+WORK ENVIRONMENT SURVEY</h1>
+<p>To complete your survey by February 23, click on the unique and personalized link found in your email invitation.</p>
 <div id="wes-image">
 $last_updated
 <div id="wes-links-container">
@@ -226,7 +229,7 @@ $last_updated
   </div>
 </div>
 <div id="wes-graphs">
-  <p>Click on an organization name to see its sub-divisions.</p>
+  <p>Click on the organization names below to see further breakdown of participation rates where available.</p>
   $ministries
   <div id="wes-closure"></div>
 </div>
