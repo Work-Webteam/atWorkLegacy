@@ -1,19 +1,19 @@
 <?php
 
-define("ATWORK_WES_NID", 7468);
+define("ATWORK_WES_NID", 28197);
 
 function _atwork_wes_id_safe($string) {
-  // Replace with dashes anything that isn't A-Z, numbers, dashes, or underscores.
-  $string = strtolower(preg_replace('/[^a-zA-Z0-9_-]+/', '-', $string));
-  // If the first character is not a-z, add 'n' in front.
-  if (!ctype_lower($string{0})) { // Don't use ctype_alpha since its locale aware.
-    $string = 'id'. $string;
-  }
-  return $string;
+	// Replace with dashes anything that isn't A-Z, numbers, dashes, or underscores.
+	$string = strtolower(preg_replace('/[^a-zA-Z0-9_-]+/', '-', $string));
+	// If the first character is not a-z, add 'n' in front.
+	if (!ctype_lower($string{0})) { // Don't use ctype_alpha since its locale aware.
+		$string = 'id'. $string;
+	}
+	return $string;
 }
 
 function _atwork_wes_theme($id, $name, $percent) {
-  return <<<EOT
+	return <<<EOT
 <div class="wes-graph" id="$id">
   <div class="wes-graph-container">
     <div class="wes-min-title-container">
@@ -36,197 +36,198 @@ EOT;
  * Helper function that provides our schema
  */
 function _atwork_wes_schema() {
-  $schema['atwork_wes'] = array(
-    'description' => t('Table to hold WES data'),
-    'fields' => array(
-      'wid' => array(
-        'description' => t('WES id'),
-        'type' => 'serial',
-        'not null' => TRUE,
-      ),
-      'data' => array(
-        'description' => t('Serialized data'),
-        'type' => 'text',
-        'size' => 'big',
-        'not null' => TRUE,
-      ),
-      'timestamp' => array(
-        'description' => t('Date'),
-        'type' => 'int',
-        'not null' => TRUE,
-        'default' => 0,
-      ),
-    ),
-    'primary key' => array('wid'),
-  );
-
-  return $schema;
+	$schema['atwork_wes'] = array(
+			'description' => t('Table to hold WES data'),
+			'fields' => array(
+					'wid' => array(
+							'description' => t('WES id'),
+							'type' => 'serial',
+							'not null' => TRUE,
+					),
+					'data' => array(
+							'description' => t('Serialized data'),
+							'type' => 'text',
+							'size' => 'big',
+							'not null' => TRUE,
+					),
+					'timestamp' => array(
+							'description' => t('Date'),
+							'type' => 'int',
+							'not null' => TRUE,
+							'default' => 0,
+					),
+			),
+			'primary key' => array('wid'),
+	);
+	
+	return $schema;
 }
 
 function atwork_wes_cron() {
-  return;
-
-  // update every hour?
-  $timestamp = date('YmdH');
-
-  //$existing = db_result(db_query("SELECT wid FROM {atwork_wes} WHERE timestamp = %d", $timestamp));
-  $existing = db_query('SELECT wid FROM {atwork_wes} WHERE timestamp = :tsd', array(':tsd' => $timestamp))->fetchField();
-
-  // get data
-  $result = array();
-
-  $total_pop = 0;
-  $total_submissions = 0;
-
-  if (($handle = fopen("https://securesurveys.gov.bc.ca/wes2015%20PSA/responseRate.csv", "r")) !== FALSE) {
-    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-      $ministry = str_replace('&#34;', '', $data[0]);
-      $branch = str_replace('&#34;', '', $data[1]);
-      $submissions = $data[2];
-      $population = $data[3];
-      $percent = $data[4];
-
-      $total_pop = $total_pop + $population;
-      $total_submissions = $total_submissions + $submissions;
-
-      $id = _atwork_wes_id_safe($ministry);
-
-      if (!$branch) {
-        $result[$id] = array(
-          'ministry' => $ministry,
-          'population' => $population,
-          'submissions' => $submissions,
-          'percent' => $percent,
-        );
-      }
-      else {
-        $result[$id]['branches'][] = array(
-          'name' => $branch,
-          'population' => $population,
-          'submissions' => $submissions,
-          'percent' => $percent,
-        );
-      }
-    }
-    fclose($handle);
-  }
-
-  if ($result) {
-    $record = array(
-      'data' => serialize($result),
-    );
-
-    $total_rate = $total_submissions / $total_pop;
-
-    if (!$existing) {
-      //db_query('INSERT INTO {atwork_wes} SET data = "%s", timestamp = %d', array(
-      //  serialize($result),
-      //  $timestamp,
-      //));
-
-      // Update to drupal 7 syntax
-      db_insert('atwork_wes')
-        ->fields(array(
-        'data' =>serialize($result),
-        'timestamp' => $timestamp,
-        ))
-      ->execute();
-      watchdog('atwork_wes', 'A new record was created for ' . $timestamp . '. The total submissions rate is ' . $total_rate);
-    }
-    else {
-      //db_query('UPDATE {atwork_wes} SET data = "%s", timestamp = %d WHERE wid = %d', array(
-      //  serialize($result),
-      //  $timestamp,
-      //  $existing,
-      //));
-
-      // Update to drupal 7 syntax
-      db_update('atwork_wes')
-        ->fields(array(
-          'data' => serialize($result),
-          'timestamp' => $timestamp,
-          ))
-        ->condition('wid', $existing)
-        ->execute();
-      watchdog('atwork_wes', 'The record for ' . $timestamp . ' was updated. The total submissions rate is ' . $total_rate);
-    }
-  }
+	//return;
+	
+	// update every hour?
+	$timestamp = date('YmdH');
+	
+	//$existing = db_result(db_query("SELECT wid FROM {atwork_wes} WHERE timestamp = %d", $timestamp));
+	$existing = db_query('SELECT wid FROM {atwork_wes} WHERE timestamp = :tsd', array(':tsd' => $timestamp))->fetchField();
+	
+	// get data
+	$result = array();
+	
+	$total_pop = 0;
+	$total_submissions = 0;
+	
+	if (($handle = fopen("https://securesurveys.gov.bc.ca/responses/wes2018/responseRate.csv", "r")) !== FALSE) {
+		while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+			$ministry = str_replace('&#34;', '', $data[0]);
+			$branch = str_replace('&#34;', '', $data[1]);
+			$submissions = $data[2];
+			$population = $data[3];
+			$percent = $data[4];
+			
+			$total_pop = $total_pop + $population;
+			$total_submissions = $total_submissions + $submissions;
+			
+			$id = _atwork_wes_id_safe($ministry);
+			
+			if (!$branch) {
+				$result[$id] = array(
+						'ministry' => $ministry,
+						'population' => $population,
+						'submissions' => $submissions,
+						'percent' => $percent,
+				);
+			}
+			else {
+				$result[$id]['branches'][] = array(
+						'name' => $branch,
+						'population' => $population,
+						'submissions' => $submissions,
+						'percent' => $percent,
+				);
+			}
+		}
+		fclose($handle);
+	}
+	
+	if ($result) {
+		$record = array(
+				'data' => serialize($result),
+		);
+		
+		$total_rate = $total_submissions / $total_pop;
+		
+		if (!$existing) {
+			//db_query('INSERT INTO {atwork_wes} SET data = "%s", timestamp = %d', array(
+			//  serialize($result),
+			//  $timestamp,
+			//));
+			
+			// Update to drupal 7 syntax
+			db_insert('atwork_wes')
+			->fields(array(
+					'data' =>serialize($result),
+					'timestamp' => $timestamp,
+			))
+			->execute();
+			watchdog('atwork_wes', 'A new record was created for ' . $timestamp . '. The total submissions rate is ' . $total_rate);
+		}
+		else {
+			//db_query('UPDATE {atwork_wes} SET data = "%s", timestamp = %d WHERE wid = %d', array(
+			//  serialize($result),
+			//  $timestamp,
+			//  $existing,
+			//));
+			
+			// Update to drupal 7 syntax
+			db_update('atwork_wes')
+			->fields(array(
+					'data' => serialize($result),
+					'timestamp' => $timestamp,
+			))
+			->condition('wid', $existing)
+			->execute();
+			watchdog('atwork_wes', 'The record for ' . $timestamp . ' was updated. The total submissions rate is ' . $total_rate);
+		}
+	}
 }
 
 function atwork_wes_node_view($node, $view_mode, $langcode) {
-  if ($node->nid == ATWORK_WES_NID) {
-    // add js
-    drupal_add_js(drupal_get_path('module', 'atwork_wes') . '/wes.js');
-
-    // get data
-    $data = db_query("SELECT data FROM {atwork_wes} ORDER BY timestamp DESC LIMIT 1")->fetchCol();
-
-    if (isset($data[0]) && $data[0]) {
-      $data = unserialize($data[0]);
-    }
-
-    if ($data) {
-
-      // make pieces
-      $ministries = '';
-      $last_ministry_html = '';
-      $last_branches_html = '';
-      $i = 1;
-
-      foreach ($data as $id => $ministry) {
-        // first do branches
-        if (isset($ministry['branches'])) {
-          $branches_html = '';
-          foreach ($ministry['branches'] as $bid => $branch) {
-            $branches_html .= _atwork_wes_theme("$id-$bid", $branch['name'], $branch['percent']);
-          }
-          $branches_html = '<div id="' . $id . '-branches" class="wes-branches" style="display: none;">' . $branches_html . '</div>';
-        }
-
-        $ministry_html = _atwork_wes_theme($id, $ministry['ministry'], $ministry['percent']);
-
-
-
-        if (($i > 1 && $i % 2 == 0) || count($data) == $i) {
-          $ministry_html = $last_ministry_html . $ministry_html;
-          $branches_html = $last_branches_html . $branches_html;
-
-          $ministries .= '<div class="wes-graph-pair">' . $ministry_html . $branches_html . '</div>';
-
-          $last_ministry_html = '';
-          $last_branches_html = '';
-        }
-        else {
-          $last_ministry_html = $ministry_html;
-          $last_branches_html = $branches_html;
-        }
-
-        $i++;
-      }
-
-      // get last update
-      $cron_last = variable_get('cron_last', '');
-      if ($cron_last) {
-        $difference = time() - $cron_last;
-        $minutes = ceil($difference / 60);
-        $last_updated = format_plural($minutes,
-          '<div id="wes-last-updated">Last updated 1 minute ago</div>',
-          '<div id="wes-last-updated">Last updated @count minutes ago</div>');
-      }
-
-      $ministries = <<<EOT
+	if ($node->nid == ATWORK_WES_NID) {
+		// add js
+		drupal_add_js(drupal_get_path('module', 'atwork_wes') . '/wes.js');
+		
+		// get data
+		$data = db_query("SELECT data FROM {atwork_wes} ORDER BY timestamp DESC LIMIT 1")->fetchCol();
+		
+		if (isset($data[0]) && $data[0]) {
+			$data = unserialize($data[0]);
+		}
+		
+		if ($data) {
+			
+			// make pieces
+			$ministries = '';
+			$last_ministry_html = '';
+			$last_branches_html = '';
+			$i = 1;
+			
+			foreach ($data as $id => $ministry) {
+				// first do branches
+				if (isset($ministry['branches'])) {
+					$branches_html = '';
+					foreach ($ministry['branches'] as $bid => $branch) {
+						$branches_html .= _atwork_wes_theme("$id-$bid", $branch['name'], $branch['percent']);
+					}
+					$branches_html = '<div id="' . $id . '-branches" class="wes-branches" style="display: none;">' . $branches_html . '</div>';
+				}
+				
+				$ministry_html = _atwork_wes_theme($id, $ministry['ministry'], $ministry['percent']);
+				
+				
+				
+				if (($i > 1 && $i % 2 == 0) || count($data) == $i) {
+					$ministry_html = $last_ministry_html . $ministry_html;
+					$branches_html = $last_branches_html . $branches_html;
+					
+					$ministries .= '<div class="wes-graph-pair">' . $ministry_html . $branches_html . '</div>';
+					
+					$last_ministry_html = '';
+					$last_branches_html = '';
+				}
+				else {
+					$last_ministry_html = $ministry_html;
+					$last_branches_html = $branches_html;
+				}
+				
+				$i++;
+			}
+			
+			// get last update
+			$cron_last = variable_get('cron_last', '');
+			if ($cron_last) {
+				$difference = time() - $cron_last;
+				$minutes = ceil($difference / 60);
+				$last_updated = format_plural($minutes,
+						'<div id="wes-last-updated">Last updated 1 minute ago</div>',
+						'<div id="wes-last-updated">Last updated @count minutes ago</div>');
+			}
+			
+			$ministries = <<<EOT
 <div id="wes-popup" style="margin-bottom: 20px; width: 100%; float: left;">
+<h1>2018 <br>
+WORK ENVIRONMENT SURVEY</h1>
+<p>To complete your survey by February 23, click on the unique and personalized link found in your email invitation.</p>
 <div id="wes-image">
 $last_updated
 <div id="wes-links-container">
   <div id="wes-links">
-    <p>
-      Don't forget to complete the WES before the <strong>October 25</strong> deadline.
-    </p>
+  
   </div>
 </div>
 <div id="wes-graphs">
-  <p>Click on an organization name to see its sub-divisions.</p>
+  <p>Click on the organization names below to see a further breakdown of participation rates, where available.</p>
   $ministries
   <div id="wes-closure"></div>
 </div>
@@ -237,11 +238,96 @@ $last_updated
 <p>Final response rates, including mail responses, will be published in the reports. Not every organization displayed in the Response Rate Tracker will receive reports.</p>
 </div>
 EOT;
+			
+			$node->content['wes_tracker'] = array(
+					'#markup' => $ministries,
+					'#weight' => 0,
+			);
+		}
+	}
+}
 
-      $node->content['wes_tracker'] = array(
-        '#markup' => $ministries,
-        '#weight' => 0,
-      );
-    }
-  }
+/**
+ * WES front-page top 3 block (Ajax driven?)
+ */
+
+/**
+ * Implements hook_block_info()
+ * Block to display top 3 ministries on the hompage.
+ */
+function atwork_wes_block_info(){
+	$blocks = array();
+	$blocks['wes_top_three'] = array(
+			'info' => t("WES top three"),
+	);
+	return $blocks;
+}
+
+/**
+ * Implements hook_block_view()
+ * Populate our WES block with top three ministries
+ */
+function atwork_wes_block_view($delta = ''){
+	$block = array();
+	
+	switch($delta){
+		case ('wes_top_three'):
+			$block['subject'] = '';
+			$block['content'] = _atwork_wes_block_content();
+			drupal_add_js(drupal_get_path('module', 'atwork_wes') . '/wes.js');
+			break;
+	}
+	return $block;
+}
+
+/**
+ * Helper function to sort out top 3 ministries, encapsulate them in HTML, and pass them back to the block ready to be rendered
+ */
+function _atwork_wes_block_content(){
+	// Default case, something to show if we don't get any data from DB
+	$ministry_html = '<div>Something has gone wrong, please standby</div>';
+	// get data
+	$data = db_query("SELECT data FROM {atwork_wes} ORDER BY timestamp DESC LIMIT 1")->fetchCol();
+	// Unserialize this data
+	if (isset($data[0]) && $data[0]) {
+		$data = unserialize($data[0]);
+	}
+	$ministries = array();
+	if(isset($data)){
+		// Pull out just the data we need
+		foreach($data as $id => $ministry){
+			$ministries[$ministry['ministry']] = $ministry['percent'];
+		}
+		// Sort in decending
+		arsort($ministries);
+		// Take just the top three
+		$top_three_ministries = array_slice($ministries, 0, 3);
+		// Theme this data
+		$ministry_html = _atwork_wes_block_theme($top_three_ministries);
+	}
+	return $ministry_html;
+}
+
+/**
+ * Helper function to wrap top three ministries in HTML
+ */
+function _atwork_wes_block_theme($top_three_ministries){
+	$block_html = '';
+	$block_html .= '<img src="/sites/default/files/images/WES/WES_tracker_Jan2_without-graphs.png" height="42" width="42" usemap="Map"/>';
+	$block_html .= '<map name="Map">';
+	$block_html .= '<area shape="circle" coords="861,97,57" href="#">';
+	$block_html .= '</map>';
+	
+	$block_html .= "<div id='ministry-top-three'>";
+	foreach($top_three_ministries as $key => $value){
+		$block_html .= "<div class='ministry-stats'>";
+		$block_html .= "<span class='ministry-name'>Ministry of " . $key . "</span>";
+		$block_html .= '<div class="wes-bar-container">';
+		$block_html .= '<div class="wes-bar" style="width: ' . $value . '"></div>';
+		$block_html .= '</div>';
+		$block_html .= "<span class='percent'>" . $value . "</span>";
+		$block_html .= "</div>";
+	}
+	$block_html .= "</div>";
+	return $block_html;
 }
