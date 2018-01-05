@@ -26,7 +26,7 @@ jQuery(document).ready(function($) {
   });
   
   var i = 1;
-  $(".wes-bar").each(function() {
+  $("#ministry-top-three .wes-bar").each(function() {
     var percent = $(this).parent().siblings(".percent").text();
     var max_width = $(this).parent().width();
     var wesbar_width = (max_width * percent) / 100; 

@@ -13,541 +13,645 @@
  * 	  - $notes, if it exists, as added in the textbox, ready to be used
  */
 ?>
-<?php 
-if(!isset($comment)){
-	return;
-}
-// Require atwork_newsletter.inc
-// A file that will take the above vars, returning an associate array with the keys for [TODO: add in keys here]
-include_once drupal_get_path('module', 'atwork_newsletter') . "/atwork_newsletter.inc";
-$atwork_newsletter_render_array = atwork_newsletter_create_render_arrays($nodes, $comment, $notes, $did_you_know);
-// Grab (probable) publishing date for webtrends
-
-if(date('D') === 'Wed') {
-   // Publish date is current date
-  $pubDate = "?nl=" . date("dmy", strtotime("today"));
-} else {
-  // Publish date is next wednesday
-  $pubDate = "?nl=" . date("dmy", strtotime("next Wednesday"));
-}
-
-$atwork_base_url = $GLOBALS['base_url'];
-?>
-<?php //********************* Header section ********************* ?>
-
-
-<!--  Outlook specific styles -->
-<!--[if lte mso 14]>
-<style>
-	.outlook-title {height: 35px !important;}
-	.outlook-body {height: 156px !important;}
+                                                                                                                                                                                                                                                                                                                                                                                                                   
+<?php                                                                                                                                                                                                                                                                                                                                                                                                              
+if(!isset($comment)){                                                                                                                                                                                                                                                                                                                                                                                              
+	return;                                                                                                                                                                                                                                                                                                                                                                                                        
+}                                                                                                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                                                                   
+// Require atwork_newsletter.inc                                                                                                                                                                                                                                                                                                                                                                                   
+// A file that will take the above vars, returning an associate array with keys                                                                                                                                                                                                                                                                                                                                    
+include_once drupal_get_path('module', 'atwork_newsletter') . "/atwork_newsletter.inc";                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                   
+//Build render array for dynamic content                                                                                                                                                                                                                                                                                                                                                                           
+$atwork_newsletter_render_array = atwork_newsletter_create_render_arrays($nodes, $comment, $notes, $did_you_know);                                                                                                                                                                                                                                                                                                 
+                                                                                                                                                                                                                                                                                                                                                                                                                   
+// Grab (probable) publishing date for webtrends                                                                                                                                                                                                                                                                                                                                                                   
+if(date('D') === 'Wed') {                                                                                                                                                                                                                                                                                                                                                                                          
+	// Publish date is current date                                                                                                                                                                                                                                                                                                                                                                                
+	$pubDate = "?nl=" . date("dmy", strtotime("today"));                                                                                                                                                                                                                                                                                                                                                           
+} else {                                                                                                                                                                                                                                                                                                                                                                                                           
+	// Publish date is next wednesday                                                                                                                                                                                                                                                                                                                                                                              
+	$pubDate = "?nl=" . date("dmy", strtotime("next Wednesday"));                                                                                                                                                                                                                                                                                                                                                  
+}                                                                                                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                                                                   
+// Get base URL                                                                                                                                                                                                                                                                                                                                                                                                    
+$atwork_base_url = $GLOBALS['base_url'];                                                                                                                                                                                                                                                                                                                                                                           
+?>                                                                                                                                                                                                                                                                                                                                                                                                                 
+                                                                                                                                                                                                                                                                                                                                                                                                                   
+<!--  Outlook specific styles -->                                                                                                                                                                                                                                                                                                                                                                                  
+<!--[if lte mso 14]>                                                                                                                                                                                                                                                                                                                                                                                               
+<style>                                                                                                                                                                                                                                                                                                                                                                                                            
+	.outlook-title {height: 35px !important;}                                                                                                                                                                                                                                                                                                                                                                      
+	.outlook-comment-title {height: 30px !important;}                                                                                                                                                                                                                                                                                                                                                                      
+	.outlook-blog-title {height: 30px !important;}                                                                                                                                                                                                                                                                                                                                                                      
+	.outlook-feature-title {height: 18px !important;}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+	.outlook-body {height: 105px !important;}                                                                                                                                                                                                                                                                                                                                                                      
 	.outlook-list {margin-left: -5px !important;}
-	[owa].outlook-body {height: 140px !important;}
-</style>
-<[endif]-->
-
-<table width="775" border="0" align="center" cellpadding="0" cellspacing="0" id="sn-newsletter-layout" style="background-color: #FFF;">
+	.outlook-blog-body {margin-top: 5px !important; background-color: #FFFFFF;}
+	.outlook-no-mso-border {mso-border-bottom-alt: none #FFFFFF 0; mso-border-style-alt: none #FFFFFF 0; border-collapse: collapse;}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+	.outlook-comment-body {margin-top: 5px !important}
+	.outlook-didyouknow-takenote-title {line-height: 16px !important; padding-top: 5px !important}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+</style>                                                                                                                                                                                                                                                                                                                                                                                                           
+<[endif]-->                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                   
+<table width="775" border="0" align="center" cellpadding="0" cellspacing="0" id="sn-newsletter-layout" style="background-color: #FFF;">                                                                                                                                                                                                                                                                            
+  <tr>                                                                                                                                                                                                                                                                                                                                                                                                             
+    <td style="background-color:#FFF;">                                                                                                                                                                                                                                                                                                                                                                            
+      <table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-newsletter-header">                                                                                                                                                                                                                                                                                                      
+        <tr>                                                                                                                                                                                                                                                                                                                                                                                                       
+          <td align="right" style="background-color:#004B8D; font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; padding-right:15px; padding-top: 5px; padding-bottom:5px; "><?php  echo "[node:title]" ?></td>                                                                                                                                                                                          
+        </tr>                                                                                                                                                                                                                                                                                                                                                                                                      
+        <tr>                                                                                                                                                                                                                                                                                                                                                                                                       
+          <td bgcolor="#FFFFFF" align="center" valign="middle" style="border: none;">                                                                                                                                                                                                                                                                                                                              
+            <?php echo '<a href="' . $atwork_base_url . $pubDate . '"> <img src = "' . $atwork_base_url . '/sites/all/themes/atwork/images/atwork-logo-newsletter.png?nltest=testbanner" width="439" height="93" border="0" /> </a>'; ?>                                                                                                                                                                           
+          </td>                                                                                                                                                                                                                                                                                                                                                                                                    
+        </tr>                                                                                                                                                                                                                                                                                                                                                                                                      
+      </table>                                                                                                                                                                                                                                                                                                                                                                                                     
+    </td>                                                                                                                                                                                                                                                                                                                                                                                                          
+  </tr>                                                                                                                                                                                                                                                                                                                                                                                                          
+        <!-- Start Executive Update Section -->                                                                                                                                                                                                                                                                                                                                                                    
+  <?php                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                   
+    // Grab all keys from $nodes var                                                                                                                                                                                                                                                                                                                                                                               
+    $nids = array_keys($atwork_newsletter_render_array['nodes']);                                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                                                                   
+    // Determine if this is an executive update (single story)                                                                                                                                                                                                                                                                                                                                                     
+    if (isset($nids[0]) && !isset($nids[1])) {                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                   
+    	// Load render node for executive update.                                                                                                                                                                                                                                                                                                                                                                  
+      $node_first = node_load($nids[0]);                                                                                                                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                                                                                                                                   
+      // collect title and url alias of original node                                                                                                                                                                                                                                                                                                                                                              
+      $atwork_newsletter_title = $node_first -> title;                                                                                                                                                                                                                                                                                                                                                             
+      $atwork_newsletter_location = $node_first -> nid;                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                   
+      //Build aliased URL with webtrends query tag                                                                                                                                                                                                                                                                                                                                                                 
+      $atwork_newsletter_aliased = drupal_get_path_alias('node/'.$atwork_newsletter_location) . $pubDate;                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                                                                                   
+      // Collect title and url for output                                                                                                                                                                                                                                                                                                                                                                          
+      $output_atwork_newsletter_title = '<div id="feature_title"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px; line-height: 24px;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" >' . $atwork_newsletter_title . '</a></h2></div>';
+                                                                                                                                                                                                                                                                                                                                                                                                                   
+      // collect teaser of news story for output.                                                                                                                                                                                                                                                                                                                                                                  
+      $atwork_newsletter_body = field_get_items('node',$node_first, 'body');                                                                                                                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                                                                                                                                                                                                   
+      // Grab image for render.                                                                                                                                                                                                                                                                                                                                                                                    
+      $image = field_get_items('node', $node_first, 'field_image');                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                   
+      $image_output = field_view_value('node', $node_first, 'field_image', $image[1], array(
+      		'type' => 'image',
+      		'settings' => array(
+      				'image_style' => 'atwork_newsletter_feature_image',
+      				'image_link' => 'content',
+      		),
+      ));
+                                                                                                                                                                                                                                                                                                                                                                                                                   
+      $image_output['#path']['path'] = $atwork_base_url . '/' . $atwork_newsletter_aliased; 
+  ?>                                                                                                                                                                                                                                                                                                                                                                                                               
+  <tr>                                                                                                                                                                                                                                                                                                                                                                                                           
+    <td>                                                                                                                                                                                                                                                                                                                                                                                                         
+      <table width="100%">                                                                                                                                                                                                                                                                                                                                                                                       
+        <tr>                                                                                                                                                                                                                                                                                                                                                                                                   
+          <?php echo '<td align="center" style="background-color:#ECECEC; font-family: Calibri, sans-serif; font-size:10pt; letter-spacing: 4px; padding-top: 5px; padding-bottom: 5px; border: none;">' . "&bull; EXECUTIVE UPDATE &bull;" . '</td>'; ?>                                                                                                                                                      
+        </tr>
+      </table>
+    </td>
+  </tr>
+                                                                                                                                                                                                                                                                                                                                                                                                          
+  <!-- Output Exec Update Image -->                                                                                                                                                                                                                                                                                                                                                                                
+  <tr>                                                                                                                                                                                                                                                                                                                                                                                                   
+    <table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-newsletter-feature" style="background-color:#FFF;">                                                                                                                                                                                                                                                                                            
+      <tr>                                                                                                                                                                                                                                                                                                                                                                                               
+        <td>                                                                                                                                                                                                                                                                                                                                                                                             
+          <div id="feature-image" name="featureimage" width="775" height="250" style="background-color:#FFF;">                                                                                                                                                                                                                                                                                                                          
+            <?php echo render($image_output);?>                                                                                                                                                                                                                                                                                                                                                               
+          </div>                                                                                                                                                                                                                                                                                                                                                                                         
+        </td>                                                                                                                                                                                                                                                                                                                                                                                            
+      </tr>
+    </table>
+  </tr>
+              
+  <!--  Output Exec Update Title/Teaser -->
   <tr>
-    <td style="background-color:#FFF;"><table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-newsletter-header">
+    <td>
+      <table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-feature-title" style="background-color:#FFF; border-bottom: 1px solid black;">
         <tr>
-          <td align="right" style="background-color:#004B8D; font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; padding-right:15px; padding-top: 5px; padding-bottom:5px; "><?php  echo "[node:title]" ?></td>
+        
+          <!--  Output Exec Update Title -->
+          <td width="35%" height="110" valign="top">
+            <div id="feature-title">
+              <?php echo $output_atwork_newsletter_title; ?>
+            </div>
+          </td>
+          <!-- End Exec Update Title -->
+          
+          <!--  Output Exec Update Teaser -->
+          <td width="65%" valign="top">
+            <div id="feature-teaser">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" padding=" 0 0 0 5px">
+                <tr>
+                  <td height="110" valign="top">
+                    <p style="font-family: Calibri, sans-serif; font-size:12pt; color:#004B8D; margin-top: 10px; margin-right: 10px; line-height: 20px;">
+                      <?php echo $atwork_newsletter_body[1]['summary'];?>
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <?php echo '<p style="margin-bottom: 10px;"><a style="font-family: Calibri, sans-serif; text-decoration: none; display: block; font-size: 10pt; line-height: 20px; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '"> Read more >> </a></p>'; ?>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <div class="content-type">
+                      <?php echo '<p style="font-family: Calibri, sans-serif; margin-right:10px; margin-bottom: 10px; padding-top: 10px; padding-right: 10px; border-top: solid 1px #000;"> <a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . $pubDate . '"> News </a> </p>'; ?>                    
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </td>
+          <!-- End Exec Update Teaser -->
+          
         </tr>
-        <tr>
-          <td bgcolor="#FFFFFF" align="center" valign="middle" style="border: none;"><?php echo '<a href="' . $atwork_base_url . $pubDate . '"> <img src = "' . $atwork_base_url . '/sites/all/themes/atwork/images/atwork-logo-newsletter.png?nltest=testbanner" width="439" height="93" border="0" /> </a></td>'; ?>
-        </tr>
-        <?php //***************** feature section ***********************  ?>
-        <?php
-
-		// Grab all keys from $nodes var
-		$nids = array_keys($atwork_newsletter_render_array['nodes']);
-		/****************************   Check to see if this is an executive (single story) mailing. **********************/
-		if (isset($nids[0]) && !isset($nids[1])):
-			// Load render node for feature spot.
-			$node_first = node_load($nids[0]);
-			// collect title and url alias of original node
-			$atwork_newsletter_title = $node_first -> title;
-			$atwork_newsletter_location = $node_first -> nid;
-
-			//Build aliased URL with webtrends query tag
-			$atwork_newsletter_aliased = drupal_get_path_alias('node/'.$atwork_newsletter_location) . $pubDate;
-
-			// Collect title and url for output
-			$output_atwork_newsletter_title = '<div id="feature_title"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px; line-height: 24px;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" >' . $atwork_newsletter_title . '</a></h2></div>';
-			// collect teaser of news story for output.
-			$atwork_newsletter_body = field_get_items('node',$node_first, 'body');
-
-			// Grab image for render.
-			$image = field_get_items('node', $node_first, 'field_image');
-
-			$image_output = field_view_value('node', $node_first, 'field_image', $image[1], array(
+      </table>
+    </td>
+  </tr>
+  
+  <!-- End of Executive Update Section -->                                                                                                                                                                                                                                                                                                                                                                 
+  <?php } else { 
+    
+  	if(isset($nids[0])){
+  		// Load render node for feature spot.
+  		$node_first = node_load($nids[0]);
+  		// collect title and url alias of original node
+  		$atwork_newsletter_title = $node_first -> title;
+  		$atwork_newsletter_location = $node_first -> nid;
+  		
+  		if(!isset($node_first->newsletter_image[0])){
+  			$node_first->newsletter_image[0] = 0;
+  		}
+  		
+  		//Build aliased URL with webtrends query tag
+  		$atwork_newsletter_aliased = drupal_get_path_alias('node/'.$atwork_newsletter_location) . $pubDate;
+  		
+  		// Collect title and url for output
+  		$output_atwork_newsletter_title = '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; color:#004B8D; line-height: 24px; margin-top: 0px;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" >' . $atwork_newsletter_title . '</a></h2>';
+  		
+  		// collect teaser of news story for output.
+  		$atwork_newsletter_body = field_get_items('node',$node_first, 'body');
+  		
+  		// Grab image for render.
+  		$images = field_get_items('node', $node_first, 'field_image');
+  		// Rather than location, lets parse out the image sizes
+  		if(isset($images) && $images){
+  			// Grab the features sized image
+  			foreach($images as $image){
+  				// We can get image by image size - $image['height'] && $image['width']
+  				// For some reason, sizes come in at like 774 instead of 775, so we will look for a range here in case we are a pixel or two off.
+  				$height = intval($image['height']);
+  				$width = intval($image['width']);
+  				if(($height > 245 && $height < 255) && ($width > 770 && $width < 780)){
+  					// Get image that has feature image range so we can load it in the next part.
+  					$feature_image = $image;
+  					//We wil only take the first match.
+  					break;
+  				}
+  			}
+  			// Make sure we have a feature image
+  			if(!isset($feature_image)){
+  				$feature_image = $images[$node_first->newsletter_image[0]];
+  			}
+  		}
+  		$image_output = field_view_value('node', $node_first, 'field_image', $feature_image, array(
   				'type' => 'image',
   				'settings' => array(
-    			'image_style' => 'atwork_newsletter_feature_image',
-    			'image_link' => 'content',
+  						'image_style' => 'atwork_newsletter_feature_image',
+  						'image_link' => 'content',
   				),
-			));
-
-			$image_output['#path']['path'] = $atwork_base_url . '/' . $atwork_newsletter_aliased;
-
-			// Output tag line
-			echo '<tr>';
-          	echo '<td align="center" style="background-color:#ECECEC; font-family: Calibri, sans-serif; font-size:10pt; letter-spacing: 4px; padding-top: 5px; padding-bottom: 5px; border: none;">' . "&bull; EXECUTIVE UPDATE &bull;" . '</td>';
-        	echo '</tr>';
-      		echo '</table>';
-
-			//Output image
-			echo '<table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-newsletter-feature" style="background-color:#FFF;">';
-
-			echo '<tr>';
-			echo '<td>';
-			echo '<div id="feature-image" name="featureimage" width="775" height="250" style="background-color:#FFF;">';
-			echo render($image_output);
-			echo '</div>';
-			echo '</td>';
-			echo '</tr>';
-
-			//Output title
-			echo '<tr>';
-			echo '<td>';
-			echo '<table width="100%" border="0" cellpadding="0" cellspacing="0" id="sn-feature-title">';
-			echo '<tr>';
-			echo '<td width="35%" height="110" valign="top">';
-			echo '<div id="feature-title">';
-			echo $output_atwork_newsletter_title;
-			echo '</div>';
-			echo '</td>';
-
-			// Output teaser
-			echo '<td width="65%" valign="top">';
-			echo '<div id="feature-teaser">';
-			echo '<table width="100%" border="0" cellspacing="0" cellpadding="0" padding=" 0 0 0 5px">';
-			echo '<tr>';
-			echo '<td height="110" valign="top">';
-			echo '<p style="font-family: Calibri, sans-serif; font-size:11pt; color:#004B8D; margin-top: 10px; margin-right: 10px; line-height: 20px;">';
-			echo $atwork_newsletter_body[1]['summary']; 
-			echo '</p>';
-			echo '</div>';
-			echo '</td>';
-			echo '</tr>';
-			echo '<tr>';
-			echo '<td>';
-			echo '<p style="margin-bottom: 10px;"><a style="font-family: Calibri, sans-serif; text-decoration: none; display: block; font-size: 10pt; line-height: 20px; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '"> Read more >> </a></p>';
-			echo '</td>';
-			echo '</tr>';
-			echo '<tr>';
-			echo '<td align="right">';
-			echo '<div class="content-type">';
-			echo '<p style="font-family: Calibri, sans-serif; margin-right:10px; margin-bottom: 10px; padding-top: 10px; padding-right: 10px; border-top: solid 1px #000;"> <a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . $pubDate . '"> News </a> </p>';
-			echo '</div>';
-			echo '</td>';
-			echo '</tr>';
-			echo '</div>';
-			echo '</table>';
-			echo '</table>';
-			echo '<table width="775" border="0" align="center" cellpadding="0" cellspacing="0">';
-
-		/***************  Not an executive (single story) mailing, build full newsletter *****************************************/
-		else:
-
-			if(isset($nids[0])){
-				// Load render node for feature spot.
-				$node_first = node_load($nids[0]);
-				// collect title and url alias of original node
-				$atwork_newsletter_title = $node_first -> title;
-				$atwork_newsletter_location = $node_first -> nid;
-
-				if(!isset($node_first->newsletter_image[0])){
-					$node_first->newsletter_image[0] = 0;
-				}
-				
-				//Build aliased URL with webtrends query tag
-				$atwork_newsletter_aliased = drupal_get_path_alias('node/'.$atwork_newsletter_location) . $pubDate;
-
-				// Collect title and url for output
-				$output_atwork_newsletter_title = '<div id="feature_title"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; color:#004B8D; margin-top: 10px; margin-left: 10px; margin-right: 10px; line-height: 24px;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" >' . $atwork_newsletter_title . '</a></h2></div>';
-				
-				// collect teaser of news story for output.
-				$atwork_newsletter_body = field_get_items('node',$node_first, 'body');
-
-				// Grab image for render.
-				$images = field_get_items('node', $node_first, 'field_image');
-				// Rather than location, lets parse out the image sizes
-				if(isset($images) && $images){
-					// Grab the features sized image
-					foreach($images as $image){
-						// We can get image by image size - $image['height'] && $image['width']
-						// For some reason, sizes come in at like 774 instead of 775, so we will look for a range here in case we are a pixel or two off.
-						$height = intval($image['height']);
-						$width = intval($image['width']);
-						if(($height > 245 && $height < 255) && ($width > 770 && $width < 780)){
-							// Get image that has feature image range so we can load it in the next part.
-							$feature_image = $image;
-							//We wil only take the first match.
-							break;
-						} 
-					}
-					// Make sure we have a feature image
-					if(!isset($feature_image)){
-						$feature_image = $images[$node_first->newsletter_image[0]];
-					}
-				}
-				$image_output = field_view_value('node', $node_first, 'field_image', $feature_image, array(
-						'type' => 'image',
-						'settings' => array(
-					'image_style' => 'atwork_newsletter_feature_image',
-					'image_link' => 'content',
-						),
-				));
-				$image_output['#path']['path'] = $node_first->field_image['und'][$node_first->newsletter_image[0]]['uri'];
-				// Output tag line
-				echo '<tr>';
-          		echo '<td align="center" style="background-color:#ECECEC; font-family: Calibri, sans-serif; font-size:10pt; letter-spacing: 4px; padding-top: 5px; padding-bottom: 5px; border:none;">' . "&bull; A SELECTION OF WHAT'S MAKING NEWS RIGHT NOW &bull;" . '</td>';
-        		echo '</tr>';
-      			echo '</table>';
-
-				//Output image
-				echo '<table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-newsletter-feature">';
-				echo '<tr>';
-				echo '<td>';
-				echo '<div id="feature-image" name="featureimage" width="775" height="250">';
-				echo render($image_output);
-				echo '</div>';
-				echo '</td>';
-				echo '</tr>';
-
-				//Output title
-				echo '<tr>';
-				echo '<td>';
-				echo '<table width="98%" border="0" cellpadding="0" cellspacing="0" id="sn-feature-title" style="background-color:#FFF; border-bottom: 1px solid black;">';
-				echo '<tr>';
-				echo '<td width="45%" height="110" valign="top">';
-				echo '<div id="feature-title">';
-				echo $output_atwork_newsletter_title;
-				echo '</div>';
-				echo '</td>';
-
-				// Output teaser
-				echo '<td width="60%" valign="top">';
-				echo '<div id="feature-teaser">';
-				echo '<table width="100%" border="0" cellspacing="0" cellpadding="0">';
-				echo '<tr>';
-				echo '<td height="110" valign="top" style="padding: 0 0 0 0;" colspan="2">';
-				echo '<p style="font-family: Calibri, sans-serif; font-size:11pt; color:#000000; margin-top: 10px; margin-right: 10px; line-height: 20px;">';
-				echo $atwork_newsletter_body[0]['summary'];
-				echo '</p>';
-				echo '</div>';
-				echo '</td>';
-				echo '</tr>';
-				echo '<tr>';
-			    echo '<td style="padding: 0 0 5px 0;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" > Read more >> </a></td>';
-				echo '<td style="padding: 0 0 5px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/news' . $pubDate . '"> News </a></td>';
-				echo '</tr>';
-			}
-	?>
-      </table> <!-- End of inner table -->
-      </div></td>
-  </tr>
-</td>
-</tr>
-</table> <!-- end of outer table -->
-<?php //********************* Articles Section **********************  ?>
-<?php
-    /* Build markup for newsletter body articles */
-
-    for($i = 1; $i <= sizeof($nids); $i++) {
-    	
-        //Collect info for each row if available
-    	if(isset($nids[$i])) {
-    		
-	        $curr_node = node_load($nids[$i]);
-	        // Check for article type 
-	        if($curr_node -> type === 'article') {	
-	        	
-	        	if(!isset($curr_node->newsletter_image[0])){
-	        		$curr_node->newsletter_image[0] = 0;
-	        	}
-	        	
-		  	    // Collect title and url alias for node.
-			 	$atwork_newsletter_title = $curr_node -> title;
-			 	$atwork_newsletter_location = $curr_node-> nid;
-			 	$atwork_newsletter_aliased = drupal_get_path_alias('node/'.$atwork_newsletter_location) . $pubDate;
-			 	
-			 	// Build title for article
-			 	$output_atwork_newsletter_title = '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px;"><a style="text-decoration: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" >' . $atwork_newsletter_title . '</a></h2>';
-			 	
-				// Collect image from node
-				$image = field_get_items('node', $curr_node, 'field_image');
-				$image_output = field_view_value('node', $curr_node, 'field_image', $image[$curr_node->newsletter_image[0]], array(
-					'type' => 'image',
-					'settings' => array(
-					'image_style' => 'atwork_newsletter_other_image',
-					'image_link' => 'content',
-						),
-				));
-				// Attach tag to image
-				$image_output['#path']['path'] = $atwork_base_url . $curr_node->field_image['und'][$curr_node->newsletter_image[0]]['uri'];
-				$atwork_newsletter_body = field_get_items('node',$curr_node, 'body');
-				// beginning of article block.
-			    echo '<table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-middle-content">';
-				echo '<tr>';
-		    	echo '<td height="10" colspan="3" valign="top" align="right" style="color:#004B8D;"></td>';
-				echo '</tr>';
-				echo '<tr height="auto">';
-				echo '<td valign="top">';
-				echo '<div id="article-left" style="background-color: grey;">';
-				
-				// Call to render image to generate markup. 
-				$image_markup =  render($image_output);
-				
-				// Get original image Height & Width from rendered photo / markup
-				preg_match('/height="[0-9]+"/', $image_markup, $matches);
-				preg_match('/[0-9]+/', $matches[0], $height);
-				preg_match('/width="[0-9]+"/', $image_markup, $matches);
-				preg_match('/[0-9]+/', $matches[0], $width);
-				$height = $height[0];
-				$width = $width[0];
-				
-				// Calculate Aspect ratio
-				$hw_ratio = ($height / $width);
-				$wh_ratio = ($width/ $height);
-				
-				$height = 'height="215"';
-				$width = 'width="330"';
-				
-				// Set image style
-				$image_markup = str_replace('img', 'img style="margin: auto; display: block; height: 215px; width: 330px;"', $image_markup);
-				
-				// Insert new rationalized dimensions and display Photo.
-				$image_markup = preg_replace('/width="[0-9]+"/', $width, $image_markup);
-				$image_markup = preg_replace('/height="[0-9]+"/', $height, $image_markup);
-				echo $image_markup;
-				
-				echo '</div>';
-				echo '</td>';
-				echo '<td>';
-				echo '<img src = "' . $atwork_base_url . '/sites/all/themes/atwork/images/whitespace_10_179.png"/>';
-				echo '</td>';
-				echo '<td width=56%>';
-			    echo '<table width=97% border="0" cellpadding="0" cellspacing="0";>';
-			        
-				// Article Title
-				echo '<tr valign="top">';
-				echo '<td valign="top" class="outlook-title" style="line-height: 24px;">';
-				echo '<div outlook-body class="outlook-title" id="middle-left-content" style="line-height: 24px;">';
-				echo $output_atwork_newsletter_title;
-				echo '</div>';
-				echo '</td>';	
-				echo '</tr>';
-				
-				echo '<tr>';	
-				echo '<td colspan="2" class="outlook-body" valign="top" style="height: 119px;">';
-				echo '<div class="outlook-body" id="middle-left-tease" style="height: 154px;">';
-				// Article Teaser
-				echo '<p style="font-family: Calibri, sans-serif; font-size:11pt; color:#000000; margin-right: 10px; line-height: 20px;">';
-				echo $atwork_newsletter_body[0]['summary'];
-				echo '</p>';
-				echo '</div>';
-				echo '</td>';
-				echo '</tr>';
-				echo '<tr>';
-				echo '<td style="padding: 0 0 5px 0; border-bottom: 1px solid black;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" > Read more >> </a></td>';
-				echo '<td style="padding: 0 0 5px 0; text-align: right; border-bottom: 1px solid black;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; font-size: 10pt;" href="' . $atwork_base_url . '/news' . $pubDate . '"> News </a></td>';
-				echo '</tr>';					
-				echo '</table>';
-			    echo '</td>';
-				echo '</tr>';
-			    echo '</table>';
-			    
-	        } //endif
-	       
-    	} // endif
-    }
-?>
-
-<?php  //************************ Take Note Section ************************** ?>
-<?php if(isset($atwork_newsletter_render_array['take_note']['value']) && !empty($atwork_newsletter_render_array['take_note']['value'])): ?>
-    <table width="775" align="center" border="0" cellpadding="0" cellspacing="0">
-    <tbody>
-    <tr style="background-color:#FFF;">
-    <td>&nbsp;</td>
-    </tr>
-    </tbody>
-    </table>
-<?php // Only show if we have Take Note Content    ?>
-
-<table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-take-note" style="background-color: #FFF;">
+  		));
+  		$image_output['#path']['path'] = $node_first->field_image['und'][$node_first->newsletter_image[0]]['uri'];
+  
+  	} ?>
+  		
+  <!-- Start Feature Spot Section for Newsletter -->
+  
+  <!-- Output Tag Line -->
   <tr>
-    <td height="30" style="background-color:#E0ECF5;"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; margin-top: 10px; margin-left: 10px; margin-right: 10px;"> Take Note </h2>
-        <?php echo '<div style="margin-left: 10px; font-family: Calibri,sans-serif; font-size:11pt; line-height: 20px !important;" >' . $atwork_newsletter_render_array['take_note']['value'] . '</div>'?>
-    </td>
+    <?php echo '<td align="center" style="background-color:#ECECEC; font-family: Calibri, sans-serif; font-size:10pt; letter-spacing: 4px; padding-top: 5px; padding-bottom: 5px; border:none;">' . "&bull; A SELECTION OF WHAT'S MAKING NEWS RIGHT NOW &bull;" . '</td>';?>
   </tr>
-</table>
-<?php endif; ?>
-
-<?php // ************************  Did You Know? Section **************************** ?>
-<?php if(isset($atwork_newsletter_render_array['did_you_know']['value']) && !empty($atwork_newsletter_render_array['did_you_know']['value'])): ?>
-<table width="775" align="center" border="0" cellspacing="0" cellpadding="0" id="didyouknow" style="background-color: #ECECEC;">
+  
+  <!-- Output Feature Spot Image -->
   <tr>
-    <td style="background-color:#FFF;">&nbsp;</td>
-  </tr>
-  <tr>
-    <td style="background-color:#E0ECF5;"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; margin-top: 10px; margin-left: 10px; margin-right: 10px;"> Did You Know? </h2>
-        <?php echo '<div style="margin-left: 10px; margin-bottom: 20px; font-family: Calibri,sans-serif; font-size:11pt; line-height: 20px !important;" >' . $atwork_newsletter_render_array['did_you_know']['value'] . '</div>'?>
-    </td>
-  </tr>
-</table>
-<?php endif; ?>
-
-<?php 
-  /* Build markup for newsletter body blog postings */
-    
-    for($i = 1; $i <= sizeof($nids); $i++) {
-    	
-        //Collect info for each row if available
-    	if(isset($nids[$i])) {
-    		
-	        $curr_node = node_load($nids[$i]);
-    		// Check for article type
-    		if($curr_node -> type === 'blog') {
-		  		// Collect author information for blog post
-				$author_name_blog = $curr_node->name;
-		  		$author_uid = $curr_node -> uid;
-		  		$blog_author_information = user_load($author_uid);
-		  		$blog_author_name_full = $blog_author_information ->field_display_name['und'][0]['safe_value'];
-    			
-		  	    // Collect title and url alias for node.
-			 	$atwork_blog_title = $curr_node -> title;
-			 	$atwork_blog_location = $curr_node-> nid;
-			 	$atwork_blog_aliased = drupal_get_path_alias('node/' . $atwork_blog_location) . $pubDate;
-		       
-				// Grab teaser of news story for output
-			 	$atwork_blog_body = field_get_items('node', $curr_node, 'body');
-			 	
-			 	// Build title for blog
-			 	$output_atwork_blog_title = '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px; margin-left: 10px; margin-right: 10px;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_blog_aliased . '" >' . $atwork_blog_title . '</a></h2>';
-			 	
-			    echo '<table height="100" valign="top" width="758" align="left" border="0" cellpadding="0" cellspacing="0" id="sn-middle-content" style="border-bottom: 1px solid black;">';
-			    
-			    echo '<tr>';
-		    	echo '<td height="10" colspan="3" valign="top" align="right" style="color:#004B8D;"></td>';
-				echo '</tr>';
-			    echo '<tr valign="top">';
-			    echo '<td class="outlook-title" style="line-height: 24px;" valign="top" colspan="2">';
-			    echo '<div class="outlook-title" id="middle-left-content" outlook-body style="line-height: 24px;" >';
-		        echo '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px; margin-left: 10px;">';
-		        echo '<a style="text-decoration: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/' . $atwork_blog_aliased . '" >' . $atwork_blog_title . '</a></h2>';
-			    echo '</div>';
-			    echo '</td>';
-			    echo '</tr>';
-			    echo '<tr>';
-				echo '<td valign="top" height="70" colspan="2">';
-				echo '<p style="font-family: Calibri,sans-serif; font-size:11pt; color:#000000; display:block; height: auto; margin-left: 10px; margin-right: 10px; margin-bottom: 0; padding-bottom: 15px; line-height: 20px;">';
-				echo ($atwork_blog_body[0]['summary'] === "" ? $atwork_blog_body[0]['summary'] : '"' . $atwork_blog_body[0]['summary'] . '"');
-				echo '</p>';
-				echo '</td>';
-				echo '</tr>';
-				
-			    echo '<tr>';
-			    echo '<td colspan="2">';
-			    echo '<p>&nbsp;</p>';
-			    echo '</td>';
-			    echo '</tr>';
-				
-				echo '<tr>';
-		        echo '<td colspan="2" style="padding: 0 0 0 10px; color:#004B8D">';
-			    echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; /*line-height: 24px;*/ font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_blog_aliased . '" > Read more >> </a>';
-		        echo '</td>';
-		        echo '</tr>';
-			    echo '<tr>';
-		        echo '<td style="padding: 0 0 5px 10px; color:#004B8D">';
-			    echo '<p style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; margin-top: 0px; font-size: 10pt;">';
-			    echo 'Posted by: ';
-		        echo '<a style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; font-size: 10pt;" href="' . $atwork_base_url . '/employees/' . $author_name_blog . '">' . $blog_author_name_full . '</a>';
-		        echo '</td>';
-		        echo '<td style="padding: 0 0 5px 0; color:#004B8D;text-align: right;">';
-		        echo '<a style="text-decoration: none; color:#004B8D; font-size: 10pt; font-family: Calibri,sans-serif;" href="' . $atwork_base_url . '/blogs' . $pubDate . '"> Blogs </a>';
-		        echo '</td>';
-		        echo '</tr>';
-			    echo '</table>';
-    		}
-    	}
-    }
-      echo '<tr>';
-        echo '<td height="10" style="background-color:#FFF;">&nbsp;</td>';
-      echo '</tr>';	
-    ?>
-<?php 
-    /* Build markup for comments */
-		// Only put this in if we have a comment.
-		if(isset($atwork_newsletter_render_array['comments']) && $atwork_newsletter_render_array['comments']):
-			echo '<table height="100" valign="top" width="758"  align="left" border="0" cellpadding="0" cellspacing="0" id="sn-middle-content" style="border-bottom: 1px solid black;">';
-			// Join the Conversation \
-			
-			echo '<tr valign="top">';
-			echo '<td class="outlook-title" style="line-height: 24px;" valign="top" colspan="2">';
-			echo '<div class="outlook-title" id="middle-left-content" outlook-body style="line-height: 24px;" >';
-			echo '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px; margin-left: 10px;">';
-			echo '<a style="text-decoration: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . '">Join the Conversation</a></h2>';
-			echo '</div>';
-			echo '</td>';
-			echo '</tr>';
-			echo '<tr>';
-			echo '<td valign="top" height="70" colspan="2">';
-			echo '<p style="font-family: Calibri,sans-serif; font-size:11pt; color:#000000; display:block; height: auto; margin-left: 10px; margin-right: 10px; margin-bottom: 0; padding-bottom: 15px; line-height: 20px;">';
-			echo $atwork_newsletter_render_array['comments']->comment_body['und'][0]['formatted'];
-			echo '</p>';
-			echo '</td>';
-			echo '</tr>';
-			
-			echo '<tr>';
-			echo '<td colspan="2">';
-			echo '<p>&nbsp;</p>';
-			echo '</td>';
-			echo '</tr>';
-			
-			echo '<tr>';
-		    echo '<td colspan="2" style="padding: 0 0 0 10px; color:#004B8D">';
-			echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; /*line-height: 24px;*/ font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . '" > Read more >> </a>';
-		    echo '</td>';
-		    echo '</tr>';
-			echo '<tr>';
-		    echo '<td style="padding: 0 0 5px 10px; color:#004B8D">';
-			echo '<p style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; margin-top: 0px; font-size: 10pt;">';
-			echo 'Posted by: ';
-		    echo '<a style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; font-size: 10pt;" href="' . $atwork_base_url . '/employees/' . $atwork_newsletter_render_array['comments']->registered_name . '">' . $atwork_newsletter_render_array['comments']->name. '</a>';
-		    echo '</td>';
-		    echo '<td style="padding: 0 0 5px 0; color:#004B8D;text-align: right;">';
-		    echo '<a style="text-decoration: none; color:#004B8D; font-size: 10pt; font-family: Calibri,sans-serif;" href="' . $atwork_base_url . '/' . 'recent-comments' . $pubDate . '"> Comments </a>';
-		    echo '</td>';
-		    echo '</tr>';
-			echo '</table>';
-			echo '<tr>';
-			echo '<td height="10" style="background-color:#FFF;">&nbsp;</td>';
-			echo '</tr>';
-			
-//test
-echo '</table>';
-
-
-            ?>
-		<?php endif ?>
-<?php // ************************ Footer Section ************************** ?>
-<?php endif; // All footers are the same  ?>
-<table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-footer" style="background-color: #ECECEC;">
-  <tr bgcolor="#004B8D">
-    <td width="387" height="140" valign="middle" style="border-right: solid 1px #FFF;"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" >
-        <tr >
-          <td><p style="font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; margin: 10px 10px; text-align: center;"><a href="mailto:employeenews@gov.bc.ca?Subject=@Work Newsletter"  style="color:#FFF;"><img alt="Contact us at employeenews@gov.bc.ca" title="Contact us at employeenews@gov.bc.ca" <?php echo 'src="' . $atwork_base_url ?>/sites/all/themes/atwork/images/email-us.png" style="width: 61px; height: 62px;"></a></p>
-          <p style="font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; margin: 10px 10px; text-align: center;"><a href="mailto:employeenews@gov.bc.ca?Subject=@Work%20Website" style="color:#FFFFFF";>Contact us @EmployeeNews</a></p></td>
-        </tr>
-      </table></td>
-    <td valign="middle" height="140"><table width="100%" border="0" cellspacing="0" cellpadding="0" >
+    <td>
+      <table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-newsletter-feature">
         <tr>
-          <td><p style="font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; margin-top: 10px; margin-right: 25px; margin-bottom: 10px; margin-left: 25px;">You're one of 27,000+ employees receiving this newsletter. Visit <?php echo '<a color="#FFF" href="' . $atwork_base_url . '/' . $pubDate . '"'; ?> style="color:#FFF;">@Work</a> to stay informed and connect with your colleagues across the BC Public Service.</a> </p></td>
+          <td>
+            <div id="feature-image" name="featureimage" width="775" height="250">
+              <?php echo render($image_output); ?>
+            </div>
+          </td>
         </tr>
-      </table></td>
+      </table>
+    </td>
   </tr>
-</table>
-</td>
-</tr>
-</table>
+  
+  <!-- Output Feature Spot Title/Teaser -->
+  <tr>
+    <td>
+      <table width="98%" border="0" cellpadding="0" cellspacing="0" id="sn-feature-title" style="background-color:#FFF; border-bottom: 1px solid black;">
+        <tr>
+        
+          <!-- Output Feature Spot Title -->
+          <td width="34%" height="110" valign="top">
+            <div id="feature-title">
+              <?php //echo $output_atwork_newsletter_title;?>
+            </div>
+          </td>
+          
+          <!-- Output Feature Spot Teaser -->
+          <td width="66%" valign="top" style="padding-left: 5px;">
+            <div id="feature-teaser">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td valign="top" style="padding: 10px 0 0 0;" colspan="2" class="outlook-feature-title" style="line-height: 24px;">
+                    <div>
+                      <?php echo $output_atwork_newsletter_title;?>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td height="60" valign="top" style="padding: 0 0 0 0;" colspan="2">
+                    <p style="font-family: Calibri, sans-serif; font-size:12pt; color:#000000; margin-top: 10px; margin-right: 10px; line-height: 20px;">
+                      <?php echo $atwork_newsletter_body[0]['summary'];?>
+                    </p>
+                  </td>
+                </tr>
+                
+                <!--  Output Read More & News Links -->
+                <tr>
+                  <?php echo '<td style="padding: 0 0 5px 0;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" > Read more >> </a></td>'; ?>
+                  <?php echo '<td style="padding: 0 0 5px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/news' . $pubDate . '"> News </a></td>'; ?>
+                </tr>
+                
+              </table>
+            </div>
+          </td>
+          <!-- End Feature Spot Teaser -->
+          
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <!-- End Feature Spot Section for Newsletter  -->          
+       
+  <!-- Start Newsletter Articles Section -->
+    <?php 
+    
+    // Loop through the render array, generating the content and template for each subsequent article
+    for($i = 1; $i <= sizeof($nids); $i++) {
+      //Collect info for each row if available
+      if(isset($nids[$i])) {
+      	
+      	// Get current node
+      	$curr_node = node_load($nids[$i]);
+      	
+      	// Check for article type
+      	if($curr_node -> type === 'article') {
+      	  
+      		dpm($curr_node);
+      		
+          if(!isset($curr_node->newsletter_image[0])){
+            $curr_node->newsletter_image[0] = 0;
+          }
+          
+          // Collect title and url alias for node.
+          $atwork_newsletter_title = $curr_node -> title;
+          $atwork_newsletter_location = $curr_node-> nid;
+          $atwork_newsletter_aliased = drupal_get_path_alias('node/'.$atwork_newsletter_location) . $pubDate;
+          
+          // Build title for article
+          $output_atwork_newsletter_title = '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px;"><a style="text-decoration: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" >' . $atwork_newsletter_title . '</a></h2>';
+          
+          // Collect image from node
+          $image = field_get_items('node', $curr_node, 'field_image');
+          $image_output = field_view_value('node', $curr_node, 'field_image', $image[$curr_node->newsletter_image[0]], array(
+          		'type' => 'image',
+          		'settings' => array(
+          				'image_style' => 'atwork_newsletter_other_image',
+          				'image_link' => 'content',
+          		),
+          ));
+          
+          // Call to render image to generate markup.
+          $image_markup =  render($image_output);
+          
+          // Get original image Height & Width from rendered photo / markup
+          preg_match('/height="[0-9]+"/', $image_markup, $matches);
+          preg_match('/[0-9]+/', $matches[0], $height);
+          preg_match('/width="[0-9]+"/', $image_markup, $matches);
+          preg_match('/[0-9]+/', $matches[0], $width);
+          $height = $height[0];
+          $width = $width[0];
+          
+          // Calculate Aspect ratio
+          $hw_ratio = ($height / $width);
+          $wh_ratio = ($width/ $height);
+          
+          $height = 'height="161"';
+          $width = 'width="247"';
+          
+          // Set image style
+          $image_markup = str_replace('img', 'img style="margin: auto; display: block; height: 161px; width: 247px;"', $image_markup);
+          
+          // Insert new rationalized dimensions and display Photo.
+          $image_markup = preg_replace('/width="[0-9]+"/', $width, $image_markup);
+          $image_markup = preg_replace('/height="[0-9]+"/', $height, $image_markup);
+
+    ?>  
+    
+    <!-- Output News Article -->
+    <tr>
+      <td>
+        <table width="775" align="center" border="0" cellpadding="0" cellspacing="0" >
+          <tr>
+            <td height="10" colspan="3" valign="top" align="right" style="color:#004B8D;">
+            </td>
+          </tr>
+          
+          <tr height="auto">
+            
+            <td valign="top">
+              <div id="article-left">
+                <?php echo $image_markup; ?>
+              </div>
+            </td>
+            <td>
+              <?php echo '<img src = "' . $atwork_base_url . '/sites/all/themes/atwork/images/whitespace_10_179.png" style="height: 160px;"/>'; ?>
+            </td>
+            <td width=66% valign="top">
+              <table width=97% border="0" cellpadding="0" cellspacing="0" style="border-bottom: 1px solid black;" >
+              
+                <!--  Output Article Title -->
+                <tr valign="top">
+                  <td colspan="2" valign="top" class="outlook-title" style="line-height: 24px;">
+                    <div outlook-body class="outlook-title" id="middle-left-content" style="line-height: 24px;">
+                      <?php echo $output_atwork_newsletter_title; ?>
+                    </div>
+                  </td>
+                </tr>
+                
+                <!--  Output Article Teaser -->
+                <tr>
+                  <td colspan="2" class="outlook-body" valign="top">
+                    <div class="outlook-body" id="middle-left-tease" style="height: 102px;">
+                        <p style="font-family: Calibri, sans-serif; font-size:12pt; color:#000000; margin-right: 10px; line-height: 20px;">
+                          <?php echo  $atwork_newsletter_body[0]['summary'];?>
+                        </p>
+                    </div>
+                  </td>
+                </tr>
+                
+                <!--  Output Article Read More & News Landing Page links -->
+                <tr>
+                  <td style="padding: 0 0 5px 0;">
+                    <?php echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" > Read more >> </a>'; ?>
+                  </td>
+                  <td style="padding: 0 0 5px 0; text-align: right;">
+                    <?php echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; font-size: 10pt;" href="' . $atwork_base_url . '/news' . $pubDate . '"> News </a>'; ?>
+                  </td>
+                </tr>
+                
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    
+        <?php } ?>
+      <?php } ?>
+    <?php } ?>
+  <!-- End Newsletter Articles Section -->
+  
+  <!-- Start Take Note Section -->
+    <?php if(isset($atwork_newsletter_render_array['take_note']['value']) && !empty($atwork_newsletter_render_array['take_note']['value'])) { ?>
+    
+    <!-- Padding Between Last Article and Take Note Section -->
+    <tr>
+      <td>
+        <table width="775" align="center" border="0" cellpadding="0" cellspacing="0">
+          <tbody>
+            <tr style="background-color:#FFF;">
+              <td>&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    
+    <!-- Output Take Note Title and List -->
+    <tr>
+      <td>
+        <table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-take-note" style="background-color: #FFF;">
+          <tr>
+            <td height="30" style="background-color:#E0ECF5;">
+              <h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; margin-top: 10px; margin-left: 10px; margin-right: 10px;"> Take Note </h2>
+              <div class="outlook-didyouknow-takenote-title" style="margin-left: 10px; font-family: Calibri,sans-serif; font-size:12pt; line-height: 20px; margin-right: 27px;" >
+                <?php echo $atwork_newsletter_render_array['take_note']['value']; ?>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <?php } ?>
+  <!-- End Take Note Section -->  
+
+  <!-- Start Did you Know? Section -->
+    <?php if(isset($atwork_newsletter_render_array['did_you_know']['value']) && !empty($atwork_newsletter_render_array['did_you_know']['value'])){ ?>
+    
+    <tr>
+      <td>
+        <table width="775" align="center" border="0" cellspacing="0" cellpadding="0" id="didyouknow" style="background-color: #ECECEC;">
+          <tr>
+            <td style="background-color:#FFF;">&nbsp;</td>
+          </tr>
+          <tr>
+            <td style="background-color:#E0ECF5;"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; margin-top: 10px; margin-left: 10px; margin-right: 10px;"> Did You Know? </h2>
+              <div class="outlook-didyouknow-takenote-title" style="margin-left: 10px; margin-right: 27px; margin-bottom: 20px; font-family: Calibri,sans-serif; font-size:12pt; line-height: 20px;" >
+                <?php echo $atwork_newsletter_render_array['did_you_know']['value']; ?>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <?php } ?>
+  <!-- End Did you Know? Section -->  
+               
+  <!-- Start Blogs Section -->
+  <?php 
+  for($i = 1; $i <= sizeof($nids); $i++) {
+  	
+  	//Collect info for each row if available
+  	if(isset($nids[$i])) {
+      $curr_node = node_load($nids[$i]);
+      
+      // Check for article type
+      if($curr_node -> type === 'blog') {
+      	// Collect author information for blog post
+      	$author_name_blog = $curr_node->name;
+      	$author_uid = $curr_node -> uid;
+      	$blog_author_information = user_load($author_uid);
+      	$blog_author_name_full = $blog_author_information ->field_display_name['und'][0]['safe_value'];
+     
+      	// Collect title and url alias for node.
+      	$atwork_blog_title = $curr_node -> title;
+      	$atwork_blog_location = $curr_node-> nid;
+      	$atwork_blog_aliased = drupal_get_path_alias('node/' . $atwork_blog_location) . $pubDate;
+      	
+      	// Grab teaser of news story for output
+      	$atwork_blog_body = field_get_items('node', $curr_node, 'body');
+      	
+      	// Build title for blog
+      	$output_atwork_blog_title = '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px; margin-left: 10px; margin-right: 10px;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_blog_aliased . '" >' . $atwork_blog_title . '</a></h2>';
+  ?>
+  <tr>
+    <td>
+      <table class="outlook-no-mso-border" height="100" valign="top" width="758" align="left" border="0" cellpadding="0" cellspacing="0" style="border-bottom: 1px solid black;">
+        <tr>
+          <td height="10" colspan="3" valign="top" align="right">
+          </td>
+        </tr>
+        <tr valign="top" border="none">
+          <td class="outlook-blog-title" style="line-height: 24px;" valign="top" colspan="2" border="none">
+            <div class="outlook-blog-title" style="line-height: 24px; border: none !important;" >
+              <h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px; margin-left: 10px; border: none !important;">
+                <?php  echo '<a style="text-decoration: none; border: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/' . $atwork_blog_aliased . '" >' . $atwork_blog_title . '</a>'; ?>
+              </h2>
+            </div>
+          </td>
+        </tr>
+        <tr class="outlook-no-mso-border" border="none" style="border: none !important;">
+          <td class="outlook-no-mso-border" valign="top" height="40" colspan="2" border="none" style="border: none !important; background-color: #FFF;">
+            <p class="outlook-blog-body outlook-no-mso-border" style="font-family: Calibri,sans-serif; font-size:12pt; margin-left: 10px; margin-right: 10px; margin-bottom: 0; padding-bottom: 15px; line-height: 20px; border: none !important;">
+              <?php echo ($atwork_blog_body[0]['summary'] === "" ? $atwork_blog_body[0]['summary'] : $atwork_blog_body[0]['summary']); ?>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" style="padding: 20px 0 0 10px; color:#004B8D">
+            <?php echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; /*line-height: 24px;*/ font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_blog_aliased. '" > Read more >> </a>';?>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 0 0 5px 10px; color:#004B8D">
+            <p style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; margin-top: 0px; font-size: 10pt;">
+              <?php echo "Posted by: ";?>
+              <?php echo '<a style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; font-size: 10pt;" href="' . $atwork_base_url . '/employees/' . $author_name_blog . '">' . $blog_author_name_full . '</a>'; ?>
+            </p>
+          </td>
+          <td style="padding: 0 0 5px 0; color:#004B8D;text-align: right;">
+            <?php echo '<a style="text-decoration: none; color:#004B8D; font-size: 10pt; font-family: Calibri,sans-serif;" href="' . $atwork_base_url . '/blogs' . $pubDate . '"> Blogs </a>'; ?>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+      
+  <?php     
+      }	
+  	}
+  }
+  ?>
+               
+  <!-- End Blogs Section -->  
+  
+    <!-- Start Comments Section -->
+  <?php if(isset($atwork_newsletter_render_array['comments']) && $atwork_newsletter_render_array['comments']){ ?>
+  
+  <!-- Padding above Comments Section -->
+    <tr>
+      <td height="10" style="background-color:#FFF;">&nbsp;</td>
+    </tr>
+  
+    <tr>
+      <td>
+        <table height="100" valign="top" width="758"  align="left" border="0" cellpadding="0" cellspacing="0" id="sn-middle-content" style="border-bottom: 1px solid black;">
+          <tr valign="top">
+            <td class="outlook-comment-title" style="line-height: 24px; border-bottom: none !important;" valign="top" colspan="2">
+              <div class="outlook-comment-title" outlook-body style="line-height: 24px;" >
+                <h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px; margin-left: 10px;">
+                  <?php echo '<a style="text-decoration: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . '">Join the Conversation</a>'; ?>
+                </h2>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td valign="top" height="40" colspan="2">
+                <?php echo $atwork_newsletter_render_array['comments']->comment_body['und'][0]['formatted']; ?>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="padding: 20px 0 0 10px; color:#004B8D">
+              <?php echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; /*line-height: 24px;*/ font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . '" > Read more >> </a>';?>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 0 0 5px 10px; color:#004B8D">
+              <p style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; margin-top: 0px; font-size: 10pt;">
+                <?php echo "Posted by: ";?>
+                <?php echo '<a style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; font-size: 10pt;" href="' . $atwork_base_url . '/employees/' . $atwork_newsletter_render_array['comments']->registered_name . '">' . $atwork_newsletter_render_array['comments']->name. '</a>';?>
+              </p>
+            </td>
+            <td style="padding: 0 0 5px 0; color:#004B8D;text-align: right;">
+              <?php echo '<a style="text-decoration: none; color:#004B8D; font-size: 10pt; font-family: Calibri,sans-serif;" href="' . $atwork_base_url . '/' . 'recent-comments' . $pubDate . '"> Comments </a>'; ?>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td height="10" colspan="3" valign="top" align="right" style="color:#004B8D;">
+      </td>
+    </tr>
+  <?php } ?>
+  <!-- End Comments Section -->
+               
+  <?php } ?>
+  <!-- End Newsletter Content Section -->
+   
+  <!-- Footer -->
+  <tr>
+    <td>
+      <table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-footer" style="background-color: #ECECEC;">
+        <tr bgcolor="#004B8D">
+          <td width="387" height="140" valign="middle" style="border-right: solid 1px #FFF;">
+            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" >
+              <tr>
+                <td>
+                  <p style="font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; margin: 10px 10px; text-align: center;"><a href="mailto:employeenews@gov.bc.ca?Subject=@Work Newsletter"  style="color:#FFF;"><img alt="Contact us at employeenews@gov.bc.ca" title="Contact us at employeenews@gov.bc.ca" <?php echo 'src="' . $atwork_base_url ?>/sites/all/themes/atwork/images/email-us.png" style="width: 61px; height: 62px;"></a></p>
+                  <p style="font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; margin: 10px 10px; text-align: center;"><a href="mailto:employeenews@gov.bc.ca?Subject=@Work%20Website" style="color:#FFFFFF";>Contact us @EmployeeNews</a></p>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td valign="middle" height="140">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+              <tr>
+                <td>
+                  <p style="font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; margin-top: 10px; margin-right: 25px; margin-bottom: 10px; margin-left: 25px;">You're one of 27,000+ employees receiving this newsletter. Visit <?php echo '<a color="#FFF" href="' . $atwork_base_url . '/' . $pubDate . '"'; ?> style="color:#FFF;">@Work</a> to stay informed and connect with your colleagues across the BC Public Service.</a> </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <!-- End Footer -->
+                                                                                                                                                                                                                                                                                                                                                                                            
+</table> <!-- end of outer table -->                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                                                                                                                                                                                                   
