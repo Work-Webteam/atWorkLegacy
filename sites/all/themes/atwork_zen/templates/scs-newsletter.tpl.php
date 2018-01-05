@@ -39,23 +39,6 @@ if(date('D') === 'Wed') {
 $atwork_base_url = $GLOBALS['base_url'];                                                                                                                                                                                                                                                                                                                                                                           
 ?>                                                                                                                                                                                                                                                                                                                                                                                                                 
                                                                                                                                                                                                                                                                                                                                                                                                                    
-<<<<<<< HEAD
-<!--  Outlook specific styles -->                                                                                                                                                                                                                                                                                                                                                                                  
-<!--[if lte mso 14]>                                                                                                                                                                                                                                                                                                                                                                                               
-<style>                                                                                                                                                                                                                                                                                                                                                                                                            
-	.outlook-title {height: 35px !important;}                                                                                                                                                                                                                                                                                                                                                                      
-	.outlook-comment-title {height: 30px !important;}                                                                                                                                                                                                                                                                                                                                                                      
-	.outlook-blog-title {height: 30px !important;}                                                                                                                                                                                                                                                                                                                                                                      
-	.outlook-feature-title {height: 18px !important;}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-	.outlook-body {height: 105px !important;}                                                                                                                                                                                                                                                                                                                                                                      
-	.outlook-list {margin-left: -5px !important;}
-	.outlook-blog-body {margin-top: 5px !important; background-color: #FFFFFF;}
-	.outlook-no-mso-border {mso-border-bottom-alt: none #FFFFFF 0; mso-border-style-alt: none #FFFFFF 0; border-collapse: collapse;}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-	.outlook-comment-body {margin-top: 5px !important}
-	.outlook-didyouknow-takenote-title {line-height: 16px !important; padding-top: 5px !important}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-</style>                                                                                                                                                                                                                                                                                                                                                                                                           
-<[endif]-->                                                                                                                                                                                                                                                                                                                                                                                                        
-=======
 <!--  Outlook specific styles -->   
 <!--[if gte mso 9]>
 <style>                                                                                                                                                                                                                                                                                                                                                                                                            
@@ -72,7 +55,6 @@ $atwork_base_url = $GLOBALS['base_url'];
 	.outlook-padding-image-size {height: 160px important;}
 </style>                                                                                                                                                                                                                                                                                                                                                                                                           
 <[endif]-->                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
->>>>>>> master
                                                                                                                                                                                                                                                                                                                                                                                                                    
 <table width="775" border="0" align="center" cellpadding="0" cellspacing="0" id="sn-newsletter-layout" style="background-color: #FFF;">                                                                                                                                                                                                                                                                            
   <tr>                                                                                                                                                                                                                                                                                                                                                                                                             
@@ -88,11 +70,7 @@ $atwork_base_url = $GLOBALS['base_url'];
         </tr>                                                                                                                                                                                                                                                                                                                                                                                                      
       </table>                                                                                                                                                                                                                                                                                                                                                                                                     
     </td>                                                                                                                                                                                                                                                                                                                                                                                                          
-<<<<<<< HEAD
-  </tr>                                                                                                                                                                                                                                                                                                                                                                                                          
-=======
   </tr>
->>>>>>> master
         <!-- Start Executive Update Section -->                                                                                                                                                                                                                                                                                                                                                                    
   <?php                                                                                                                                                                                                                                                                                                                                                                                                            
                                                                                                                                                                                                                                                                                                                                                                                                                    
@@ -253,13 +231,8 @@ $atwork_base_url = $GLOBALS['base_url'];
   						'image_link' => 'content',
   				),
   		));
-<<<<<<< HEAD
-  		$image_output['#path']['path'] = $node_first->field_image['und'][$node_first->newsletter_image[0]]['uri'];
-  
-=======
   		$image_markup = render($image_output);
   		
->>>>>>> master
   	} ?>
   		
   <!-- Start Feature Spot Section for Newsletter -->
@@ -276,11 +249,7 @@ $atwork_base_url = $GLOBALS['base_url'];
         <tr>
           <td>
             <div id="feature-image" name="featureimage" width="775" height="250">
-<<<<<<< HEAD
-              <?php echo render($image_output); ?>
-=======
               <?php echo $image_markup; ?>
->>>>>>> master
             </div>
           </td>
         </tr>
@@ -293,21 +262,8 @@ $atwork_base_url = $GLOBALS['base_url'];
     <td>
       <table width="98%" border="0" cellpadding="0" cellspacing="0" id="sn-feature-title" style="background-color:#FFF; border-bottom: 1px solid black;">
         <tr>
-<<<<<<< HEAD
-        
-          <!-- Output Feature Spot Title -->
-          <td width="34%" height="110" valign="top">
-            <div id="feature-title">
-              <?php //echo $output_atwork_newsletter_title;?>
-            </div>
-          </td>
-          
-          <!-- Output Feature Spot Teaser -->
-          <td width="66%" valign="top" style="padding-left: 5px;">
-=======
           <!-- Output Feature Spot Teaser -->
           <td width="66%" valign="top" style="padding-left: 15px;">
->>>>>>> master
             <div id="feature-teaser">
               <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
@@ -319,11 +275,7 @@ $atwork_base_url = $GLOBALS['base_url'];
                 </tr>
                 <tr>
                   <td height="60" valign="top" style="padding: 0 0 0 0;" colspan="2">
-<<<<<<< HEAD
-                    <p style="font-family: Calibri, sans-serif; font-size:12pt; color:#000000; margin-top: 10px; margin-right: 10px; line-height: 20px;">
-=======
                     <p style="font-family: Calibri, sans-serif; font-size:12pt; color:#000000; margin-top: 0px; margin-right: 10px; line-height: 20px;">
->>>>>>> master
                       <?php echo $atwork_newsletter_body[0]['summary'];?>
                     </p>
                   </td>
@@ -360,29 +312,18 @@ $atwork_base_url = $GLOBALS['base_url'];
       	// Check for article type
       	if($curr_node -> type === 'article') {
       	  
-<<<<<<< HEAD
-      		dpm($curr_node);
-      		
-=======
->>>>>>> master
           if(!isset($curr_node->newsletter_image[0])){
             $curr_node->newsletter_image[0] = 0;
           }
           
           // Collect title and url alias for node.
           $atwork_newsletter_title = $curr_node -> title;
-<<<<<<< HEAD
-          $atwork_newsletter_location = $curr_node-> nid;
-          $atwork_newsletter_aliased = drupal_get_path_alias('node/'.$atwork_newsletter_location) . $pubDate;
-          
-=======
           $atwork_newsletter_location = $curr_node -> nid;
           $atwork_newsletter_aliased = drupal_get_path_alias('node/'.$atwork_newsletter_location) . $pubDate;
           
           // Get summary for current node
           $atwork_newsletter_body = $curr_node->body['und'][0]['summary'];
           
->>>>>>> master
           // Build title for article
           $output_atwork_newsletter_title = '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px;"><a style="text-decoration: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" >' . $atwork_newsletter_title . '</a></h2>';
           
@@ -435,20 +376,12 @@ $atwork_base_url = $GLOBALS['base_url'];
           <tr height="auto">
             
             <td valign="top">
-<<<<<<< HEAD
-              <div id="article-left">
-=======
               <div class="article-image">
->>>>>>> master
                 <?php echo $image_markup; ?>
               </div>
             </td>
             <td>
-<<<<<<< HEAD
-              <?php echo '<img src = "' . $atwork_base_url . '/sites/all/themes/atwork/images/whitespace_10_179.png" style="height: 160px;"/>'; ?>
-=======
               <?php echo '<img class="outlook-padding-image-size" src = "' . $atwork_base_url . '/sites/all/themes/atwork/images/whitespace_10_179.png" style="height: 100px;"/>'; ?>
->>>>>>> master
             </td>
             <td width=66% valign="top">
               <table width=97% border="0" cellpadding="0" cellspacing="0" style="border-bottom: 1px solid black;" >
@@ -456,11 +389,7 @@ $atwork_base_url = $GLOBALS['base_url'];
                 <!--  Output Article Title -->
                 <tr valign="top">
                   <td colspan="2" valign="top" class="outlook-title" style="line-height: 24px;">
-<<<<<<< HEAD
-                    <div outlook-body class="outlook-title" id="middle-left-content" style="line-height: 24px;">
-=======
                     <div class="outlook-title" id="middle-left-content" style="line-height: 24px;">
->>>>>>> master
                       <?php echo $output_atwork_newsletter_title; ?>
                     </div>
                   </td>
@@ -469,15 +398,9 @@ $atwork_base_url = $GLOBALS['base_url'];
                 <!--  Output Article Teaser -->
                 <tr>
                   <td colspan="2" class="outlook-body" valign="top">
-<<<<<<< HEAD
-                    <div class="outlook-body" id="middle-left-tease" style="height: 102px;">
-                        <p style="font-family: Calibri, sans-serif; font-size:12pt; color:#000000; margin-right: 10px; line-height: 20px;">
-                          <?php echo  $atwork_newsletter_body[0]['summary'];?>
-=======
                     <div class="outlook-body" id="middle-left-tease" style="height: 95px;">
                         <p style="font-family: Calibri, sans-serif; font-size:12pt; color:#000000; margin-top: 0px; margin-right: 10px; line-height: 20px;">
                           <?php echo  $atwork_newsletter_body;?>
->>>>>>> master
                         </p>
                     </div>
                   </td>
@@ -527,13 +450,8 @@ $atwork_base_url = $GLOBALS['base_url'];
         <table width="775" align="center" border="0" cellpadding="0" cellspacing="0" id="sn-take-note" style="background-color: #FFF;">
           <tr>
             <td height="30" style="background-color:#E0ECF5;">
-<<<<<<< HEAD
-              <h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; margin-top: 10px; margin-left: 10px; margin-right: 10px;"> Take Note </h2>
-              <div class="outlook-didyouknow-takenote-title" style="margin-left: 10px; font-family: Calibri,sans-serif; font-size:12pt; line-height: 20px; margin-right: 27px;" >
-=======
               <h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; margin-top: 10px; margin-left: 10px; margin-right: 15px;"> Take Note </h2>
               <div class="outlook-didyouknow-takenote-title" style="margin-left: 15px; font-family: Calibri,sans-serif; font-size:12pt; line-height: 20px; margin-right: 27px;" >
->>>>>>> master
                 <?php echo $atwork_newsletter_render_array['take_note']['value']; ?>
               </div>
             </td>
@@ -554,13 +472,8 @@ $atwork_base_url = $GLOBALS['base_url'];
             <td style="background-color:#FFF;">&nbsp;</td>
           </tr>
           <tr>
-<<<<<<< HEAD
-            <td style="background-color:#E0ECF5;"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; margin-top: 10px; margin-left: 10px; margin-right: 10px;"> Did You Know? </h2>
-              <div class="outlook-didyouknow-takenote-title" style="margin-left: 10px; margin-right: 27px; margin-bottom: 20px; font-family: Calibri,sans-serif; font-size:12pt; line-height: 20px;" >
-=======
             <td style="background-color:#E0ECF5;"><h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; margin-top: 10px; margin-left: 15px; margin-right: 10px;"> Did You Know? </h2>
               <div class="outlook-didyouknow-takenote-title" style="margin-left: 15px; margin-right: 27px; margin-bottom: 20px; font-family: Calibri,sans-serif; font-size:12pt; line-height: 20px;" >
->>>>>>> master
                 <?php echo $atwork_newsletter_render_array['did_you_know']['value']; ?>
               </div>
             </td>
@@ -606,49 +519,29 @@ $atwork_base_url = $GLOBALS['base_url'];
           </td>
         </tr>
         <tr valign="top" border="none">
-<<<<<<< HEAD
-          <td class="outlook-blog-title" style="line-height: 24px;" valign="top" colspan="2" border="none">
-            <div class="outlook-blog-title" style="line-height: 24px; border: none !important;" >
-              <h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px; margin-left: 10px; border: none !important;">
-                <?php  echo '<a style="text-decoration: none; border: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/' . $atwork_blog_aliased . '" >' . $atwork_blog_title . '</a>'; ?>
-=======
           <td class="outlook-comment-blog-title outlook-no-mso-border" style="line-height: 24px;" valign="top" colspan="2" border="none">
             <div class="outlook-comment-blog-title outlook-no-mso-border" style="line-height: 24px; border: none !important;" >
               <h2 class="outlook-no-mso-border" style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px; margin-bottom:15px; margin-left: 15px; border: none !important;">
                 <?php  echo '<a style="margin-top: 10px;text-decoration: none; border: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/' . $atwork_blog_aliased . '" >' . $atwork_blog_title . '</a>'; ?>
->>>>>>> master
               </h2>
             </div>
           </td>
         </tr>
         <tr class="outlook-no-mso-border" border="none" style="border: none !important;">
           <td class="outlook-no-mso-border" valign="top" height="40" colspan="2" border="none" style="border: none !important; background-color: #FFF;">
-<<<<<<< HEAD
-            <p class="outlook-blog-body outlook-no-mso-border" style="font-family: Calibri,sans-serif; font-size:12pt; margin-left: 10px; margin-right: 10px; margin-bottom: 0; padding-bottom: 15px; line-height: 20px; border: none !important;">
-=======
             <p class="outlook-blog-body outlook-no-mso-border" style="font-family: Calibri,sans-serif; font-size:12pt; margin: 0 10px 0 15px; padding-bottom: 15px; line-height: 20px; border: none !important;">
->>>>>>> master
               <?php echo ($atwork_blog_body[0]['summary'] === "" ? $atwork_blog_body[0]['summary'] : $atwork_blog_body[0]['summary']); ?>
             </p>
           </td>
         </tr>
         <tr>
-<<<<<<< HEAD
-          <td colspan="2" style="padding: 20px 0 0 10px; color:#004B8D">
-=======
           <td colspan="2" style="padding: 5px 0 0 15px; color:#004B8D">
->>>>>>> master
             <?php echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; /*line-height: 24px;*/ font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_blog_aliased. '" > Read more >> </a>';?>
           </td>
         </tr>
         <tr>
-<<<<<<< HEAD
-          <td style="padding: 0 0 5px 10px; color:#004B8D">
-            <p style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; margin-top: 0px; font-size: 10pt;">
-=======
           <td style="padding: 0 0 5px 15px; color:#004B8D">
             <p style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">
->>>>>>> master
               <?php echo "Posted by: ";?>
               <?php echo '<a style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; font-size: 10pt;" href="' . $atwork_base_url . '/employees/' . $author_name_blog . '">' . $blog_author_name_full . '</a>'; ?>
             </p>
@@ -681,15 +574,9 @@ $atwork_base_url = $GLOBALS['base_url'];
       <td>
         <table height="100" valign="top" width="758"  align="left" border="0" cellpadding="0" cellspacing="0" id="sn-middle-content" style="border-bottom: 1px solid black;">
           <tr valign="top">
-<<<<<<< HEAD
-            <td class="outlook-comment-title" style="line-height: 24px; border-bottom: none !important;" valign="top" colspan="2">
-              <div class="outlook-comment-title" outlook-body style="line-height: 24px;" >
-                <h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px; margin-left: 10px;">
-=======
             <td class="outlook-comment-blog-title" style="line-height: 24px; border-bottom: none !important;" valign="top" colspan="2">
               <div class="outlook-comment-blog-title" outlook-body style="line-height: 24px;" >
                 <h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px; margin-left: 15px; margin-bottom: 15px;">
->>>>>>> master
                   <?php echo '<a style="text-decoration: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . '">Join the Conversation</a>'; ?>
                 </h2>
               </div>
@@ -701,22 +588,13 @@ $atwork_base_url = $GLOBALS['base_url'];
             </td>
           </tr>
           <tr>
-<<<<<<< HEAD
-            <td colspan="2" style="padding: 20px 0 0 10px; color:#004B8D">
-=======
             <td class="outlook-no-mso-border" colspan="2" style="padding: 5px 0 0 15px; color:#004B8D">
->>>>>>> master
               <?php echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; /*line-height: 24px;*/ font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . '" > Read more >> </a>';?>
             </td>
           </tr>
           <tr>
-<<<<<<< HEAD
-            <td style="padding: 0 0 5px 10px; color:#004B8D">
-              <p style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; margin-top: 0px; font-size: 10pt;">
-=======
             <td style="padding: 0 0 5px 15px; color:#004B8D">
               <p style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">
->>>>>>> master
                 <?php echo "Posted by: ";?>
                 <?php echo '<a style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; font-size: 10pt;" href="' . $atwork_base_url . '/employees/' . $atwork_newsletter_render_array['comments']->registered_name . '">' . $atwork_newsletter_render_array['comments']->name. '</a>';?>
               </p>
