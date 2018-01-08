@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Atwork Hashtags feature.
- */
-
-include_once 'atwork_hashtags.features.inc';
