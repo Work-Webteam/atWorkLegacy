@@ -61,3 +61,9 @@ module: views_bulk_operations
 file: viws_bulk_operations.js
 source: None - we did this ourselves
 issue: Script breaking input select behaviour in VBO forms. The select anywhere on row was not toggling the create butoon enable/disable correctly. Removed line 68 entirely (this.checked = !checked;). 
+
+date: 2018-01-09
+module: Quiz (multichoice)
+file: quiz_question.module, line 460
+source: None - we did this ourselves
+issue: search hook query had incorrect condition, which would break views search_term functionality elsewhere. Fixed this hook by changing n.type to node.type.
