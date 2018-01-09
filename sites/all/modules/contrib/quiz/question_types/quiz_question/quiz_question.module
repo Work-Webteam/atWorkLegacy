@@ -239,7 +239,7 @@ function quiz_question_answering_form($form, $form_state, $nodes, $result_id) {
       $form['navigation']['#last'] = TRUE;
       $form['navigation']['last_text'] = array(
         '#weight' => 0,
-        '#markup' => '<p><em>' . t('This is the last question. Press Finish to deliver your answers.') . '</em></p>',
+        '#markup' => '<p><em>' . t('This is the last question. Press Finish to deliver your answers') . '</em></p>',
       );
     }
   }
@@ -457,7 +457,7 @@ function quiz_question_query_alter(QueryAlterableInterface $query) {
       foreach ($tables as $table) {
         if ($table['table'] == 'search_index') {
           // Remove the node IDs from the query.
-          $query->condition('n.type', $types, 'NOT IN');
+          $query->condition('node.type', $types, 'NOT IN');
         }
       }
     }
