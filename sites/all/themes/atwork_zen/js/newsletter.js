@@ -18,4 +18,12 @@ jQuery(function () {
   jQuery(".node-type-simplenews .article-image img").each(function () {
 	  jQuery(this).css({"margin-left": "0"});
   });
+  
+  jQuery(".node-type-simplenews .comment-body")
+    .contents()
+      .filter(function() {
+        return this.nodeType === 3;
+      })
+      .wrap('<p style="margin-left: 15px;"></p>');
+  
 });

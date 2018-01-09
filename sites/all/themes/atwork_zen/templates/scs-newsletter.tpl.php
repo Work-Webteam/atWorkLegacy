@@ -50,7 +50,6 @@ $atwork_base_url = $GLOBALS['base_url'];
 	.outlook-list {margin-left: -5px !important;}
 	.outlook-blog-body {margin-top: 0px !important;}
 	.outlook-no-mso-border {mso-border-top-alt: none #FFFFFF 0;mso-border-bottom-alt: none #FFFFFF 0; mso-border-style-alt: none #FFFFFF 0; border-collapse: collapse;}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-	.outlook-comment-body {margin-top: 0px !important; margin-bottom: 5px !important}
 	.outlook-didyouknow-takenote-title {line-height: 16px !important; padding-top: 5px !important}
 	.outlook-padding-image-size {height: 160px important;}
 </style>                                                                                                                                                                                                                                                                                                                                                                                                           
@@ -583,7 +582,7 @@ $atwork_base_url = $GLOBALS['base_url'];
             </td>
           </tr>
           <tr>
-            <td valign="top" height="40" colspan="2">
+            <td valign="top" height="40" colspan="2" id="comment-body">
                 <?php echo $atwork_newsletter_render_array['comments']->comment_body['und'][0]['formatted']; ?>
             </td>
           </tr>
