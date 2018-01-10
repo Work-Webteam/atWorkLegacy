@@ -19,11 +19,12 @@ jQuery(function () {
 	  jQuery(this).css({"margin-left": "0"});
   });
   
-  jQuery(".node-type-simplenews .comment-body")
+  jQuery(".node-type-simplenews #comment-body")
+    .css({"padding-left": "0"})
     .contents()
       .filter(function() {
         return this.nodeType === 3;
       })
-      .wrap('<p style="margin-left: 15px;"></p>');
+      .wrap('<p style="margin: 0 0 0 15px;"></p>');
   
 });

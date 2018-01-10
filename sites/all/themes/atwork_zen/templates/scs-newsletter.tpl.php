@@ -52,6 +52,7 @@ $atwork_base_url = $GLOBALS['base_url'];
 	.outlook-no-mso-border {mso-border-top-alt: none #FFFFFF 0;mso-border-bottom-alt: none #FFFFFF 0; mso-border-style-alt: none #FFFFFF 0; border-collapse: collapse;}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 	.outlook-didyouknow-takenote-title {line-height: 16px !important; padding-top: 5px !important}
 	.outlook-padding-image-size {height: 160px important;}
+	.outlook-image-margin {margin: auto;}
 </style>                                                                                                                                                                                                                                                                                                                                                                                                           
 <[endif]-->                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
                                                                                                                                                                                                                                                                                                                                                                                                                    
@@ -355,7 +356,8 @@ $atwork_base_url = $GLOBALS['base_url'];
           $width = 'width="247"';
           
           // Set image style
-          $image_markup = str_replace('img', 'img style="margin: auto; display: block; height: 161px; width: 247px;"', $image_markup);
+          //$image_markup = str_replace('img', 'img style="margin: auto; display: block; height: 161px; width: 247px;"', $image_markup);
+          $image_markup = str_replace('img', 'img class="outlook-image-margin" style="display: block; height: 161px; width: 247px;"', $image_markup);
           
           // Insert new rationalized dimensions and display Photo.
           $image_markup = preg_replace('/width="[0-9]+"/', $width, $image_markup);
@@ -397,7 +399,7 @@ $atwork_base_url = $GLOBALS['base_url'];
                 <!--  Output Article Teaser -->
                 <tr>
                   <td colspan="2" class="outlook-body" valign="top">
-                    <div class="outlook-body" id="middle-left-tease" style="height: 95px;">
+                    <div id="middle-left-tease" style="height: 95px;">
                         <p style="font-family: Calibri, sans-serif; font-size:12pt; color:#000000; margin-top: 0px; margin-right: 10px; line-height: 20px;">
                           <?php echo  $atwork_newsletter_body;?>
                         </p>
@@ -582,7 +584,7 @@ $atwork_base_url = $GLOBALS['base_url'];
             </td>
           </tr>
           <tr>
-            <td valign="top" height="40" colspan="2" id="comment-body">
+            <td valign="top" height="40" colspan="2" id="comment-body" style="padding-left: 15px;">
                 <?php echo $atwork_newsletter_render_array['comments']->comment_body['und'][0]['formatted']; ?>
             </td>
           </tr>
