@@ -209,6 +209,8 @@ function _atwork_prem_awards_count_words($files) {
     }
 
     elseif(strpos(' ' . strtolower($file), '.pdf')){
+      $cmd = '';
+      $output = '';
       $target_pdf = $file;
       $cmd = sprintf('identify %s', $target_pdf);
       exec($cmd, $output);
@@ -239,13 +241,18 @@ function _atwork_prem_awards_count_words($files) {
     }
   }
 
-  if ($attached_words) {
-    $pages = number_format(($attached_words / 300), 1);
-    $pages = $pdf_page + $pages;
-    if ($pages > 6) {
-      drupal_set_message(t('Over 5 pages of text has been detected across all of your attachments. Please review them to ensure you aren\'t over the 5 page limit. *NOTE: Pages are assumed to be 300 words max, your longest document looks to be ' . $longest_doc), 'warning');
-    }
+  if ($attached_words ) {
+    $pages += number_format(($attached_words / 300), 1);
   }
+
+  if($pdf_page){
+    $pages += $pdf_page;
+  }
+  // Everything up to 5.9 is acceptable
+  if ($pages >= 6) {
+    drupal_set_message(t('Over 5 pages of text has been detected across all of your attachments. Please review them to ensure you aren\'t over the 5 page limit. *NOTE: Pages are assumed to be 300 words max, your longest document looks to be ' . $longest_doc), 'warning');
+  }
+  
 
   return 0;
 }
