@@ -76,19 +76,19 @@ function atwork_newsletter_theme() {
  * We pull information (such as CID, and some text fields) and place them into $form.
  */ 
 function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state, $vbo){
-  //Added instructions to content selection
-  if(!array_key_exists('nodes',$form)) {
-    $form['#prefix'] = $form['#prefix'] . t('Click (in any order) the content you\'d like to appear in the newsletter. There is no maximum number, but you must have at least one news article.
-      Reminder: Create the newsletter in the Chrome browser.<br>');
-  } else {
-    $form['#prefix'] = $form['#prefix'] . t('Note: Use the "+" sign to drag and drop the content into the order you would like it to appear in the newsletter.  An article must be in the top spot.');
-  }
-
-  // Move article/blog form to top
-  $form['output']['#weight'] = -100;
-
   if($form['#form_id'] == 'views_form_newsletter_creation_page'){
-  
+
+    //Added instructions to content selection
+    if(!array_key_exists('nodes',$form)) {
+      $form['#prefix'] = $form['#prefix'] . t('Click (in any order) the content you\'d like to appear in the newsletter. There is no maximum number, but you must have at least one news article.
+        Reminder: Create the newsletter in the Chrome browser.<br>');
+    } else {
+      $form['#prefix'] = $form['#prefix'] . t('Note: Use the "+" sign to drag and drop the content into the order you would like it to appear in the newsletter.  An article must be in the top spot.');
+    }
+
+    // Move article/blog form to top
+    $form['output']['#weight'] = -100;
+
     //Place submit button at bottom of form
     $form['select']['#weight'] = '100';
 

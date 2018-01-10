@@ -1,0 +1,15 @@
+@@ -453 @@
+function quiz_question_query_alter(QueryAlterableInterface $query) {
+  if (!variable_get('quiz_index_questions')) {
+    if ($types = array_keys(quiz_question_get_info())) {
+      $tables = $query->getTables();
+      foreach ($tables as $table) {
+        if ($table['table'] == 'search_index') {
+          // Remove the node IDs from the query.
+-         $query->condition('n.type, types, 'NOT IN');
++         $query->condition('node.type', $types, 'NOT IN');
+        }
+      }
+    }
+  }
+}
