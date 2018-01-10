@@ -66,4 +66,4 @@ date: 2018-01-09
 module: Quiz (multichoice)
 file: quiz_question.module, line 460
 source: None - we did this ourselves
-issue: search hook query had incorrect condition, which would break views search_term functionality elsewhere. Fixed this hook by changing n.type to node.type.
+issue: search hook query had incorrect condition, which would break views search_term functionality elsewhere. If it was changed off of n.type, the sites search functionality would not work. This condition was added to every query on the site - which is far from optimal. This was fixed via rejection method - focusing to only add the condition to if the node type was multichoice or question.

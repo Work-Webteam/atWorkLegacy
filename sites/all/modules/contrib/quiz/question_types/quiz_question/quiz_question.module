@@ -451,6 +451,18 @@ function quiz_question_node_insert(stdClass $node) {
  * Remove questions from search.
  */
 function quiz_question_query_alter(QueryAlterableInterface $query) {
+  if(!isset($query->alterMetaData['node'])){
+    return;
+  }
+
+  if(isset($query->alterMetaData['node']) && $query->alterMetaData['node']){
+    if($query->alterMetaData['node']->type != 'question'){
+      return;
+    }
+    if($query->alterMetaData['node']->type != 'multichoice'){
+      return;
+    }
+  }
   if (!variable_get('quiz_index_questions')) {
     if ($types = array_keys(quiz_question_get_info())) {
       $tables = $query->getTables();
