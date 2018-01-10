@@ -457,7 +457,7 @@ function quiz_question_query_alter(QueryAlterableInterface $query) {
       foreach ($tables as $table) {
         if ($table['table'] == 'search_index') {
           // Remove the node IDs from the query.
-          $query->condition('node.type', $types, 'NOT IN');
+          $query->condition('n.type', $types, 'NOT IN');
         }
       }
     }
