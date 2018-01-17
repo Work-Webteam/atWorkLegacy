@@ -3,40 +3,32 @@
 function _atwork_prem_awards_ministry_contacts() {
   return array(
     // All ministry contacts must be included in the exact same order as the ministry dropdown (i.e. aboriginal contact in array [1], advanced ed in array [2])
-    1 => 'Jeff.Keene@gov.bc.ca;Ross.Palin@gov.bc.ca', //Aboriginal Relations & Reconciliation
-    2 => 'Ross.Palin@gov.bc.ca', //Ministry of Advanced Education
-    3 => 'Susan.Fair@gov.bc.ca', //Agriculture
+  	1 => 'Ross.Palin@gov.bc.ca', //Advanced Education, Skills and Training Jeff.Keene@gov.bc.ca;
+  	2 => 'Erin.Hansen@gov.bc.ca', //Agriculture
+    3 => 'Marlene.Dayman@gov.bc.ca;Robert.Meseyton@gov.bc.ca;Karla.Limion@gov.bc.ca', //Attorney General
     4 => 'Gail.Crosby@gov.bc.ca', //Children & Family Development
-    5 => 'Alicia.Matthews@gov.bc.ca', //Community Sport and Cultural Development
-    6 => 'Karli.Reeve@gov.bc.ca', //Education
-    7 => 'Janine.Crockett@gov.bc.ca', //Energy and Mines & Natural Gas Development
-    8 => 'Bev.Crozier@gov.bc.ca', //Environment
-    9 => 'Shelley.MacLean@gov.bc.ca', //Finance
-    10 => 'Dana.Eckardt@gov.bc.ca', //Forests, Lands and Natural Resource Operations
-    11 => 'Laura.Smithson@gov.bc.ca', //Health
-    12 => 'Rachel.Rilkoff@gov.bc.ca', //Health
-    13 => 'Alicia.Matthews@gov.bc.ca',  //International Trade
-    14 => 'Alicia.Matthews@gov.bc.ca', //Jobs, Tourism and Skills Training
-    15 => 'Marlene.Dayman@gov.bc.ca', //Justice and the Attorney General
-    16 => 'Robert.Meseyton@gov.bc.ca', //Justice and the Attorney General
-    17 => 'Marlene.Dayman@gov.bc.ca', //Justice and the Attorney General
-    18 => 'Kathy.Cornett@gov.bc.ca', //Public Safety & Solicitor General
-    19 => 'Karla.Limion@gov.bc.ca', //Public Safety & Solicitor General
-    20 => 'Robert.Meseyton@gov.bc.ca', //Public Safety & Solicitor General
-    21 => 'Janine.Crockett@gov.bc.ca', //Natural Gas Development
-    22 => 'Alicia.Matthews@gov.bc.ca', //Small Business and Red Tape Reduction
-    23 => 'Carolyn.Babakaiff@gov.bc.ca', //Social Development and Social Innovation
-    24 => 'Jeannette.Cook@gov.bc.ca', //Technology, Innovation and Citizens’ Services
-    25 => 'Gloria.Valle@gov.bc.ca', //Transportation and Infrastructure
-    26 => 'Sandra.Roe@gov.bc.ca', //BC Public Service Agency
-    27 => 'Janelle.Heron@gov.bc.ca', //Government Communications and Public Engagement
-    28 => 'Sandy.Wharf@gov.bc.ca', //Office of the Premier
-    29 => 'Elizabeth.Thomson@partnershipsbc.ca', //Partnerships BC
-    30 => 'smaloney@Trustee.bc.ca', //Public Guardian and Trustee
-    31 => 'Barbara.Wilson@gov.bc.ca', //Public Sector Employers Council
-    32 => 'Christina.Dawkins@gov.bc.ca', //Finance
-    33 => 'Yvonne.ChadwickWhittome@gov.bc.ca', //Finance
-    34 => 'Sabrina.Loiacono@gov.bc.ca', //EAO
+  	5 => 'Jeannette.Cook@gov.bc.ca', //Citizens' Services
+    6 => 'Karli.Reeve@gov.bc.ca;Devon.Phillips@gov.bc.ca', //Education
+  	7 => 'Janine.Crockett@gov.bc.ca', //Energy and Mines and Petroleum Resources
+  	8 => 'Coleen.Gooderham@gov.bc.ca', //Environment and Climate Change Strategy
+  	9 => 'Sabrina.Loiacono@gov.bc.ca', //Environmental Assessment Office
+  	10 => 'Jennifer.Michell@gov.bc.ca', //Finance
+  	11 => 'Dana.Eckardt@gov.bc.ca', //Forests, Lands and Natural Resource Operations and Rural Development
+    12 => 'Aleta.Mulane@gov.bc.ca;Nicole.Benbow@gov.bc.ca', //Health
+  	13 => 'Tonja.Joyce@gov.bc.ca',  //Indigenous Relations and Reconciliation
+    14 => 'Alicia.Matthews@gov.bc.ca', //Jobs, Trade and Technology
+    15 => 'Alicia.Matthews@gov.bc.ca', //Labour
+  	15 => 'Kimberley.Guidoriagao@gov.bc.ca', //Mental Health and Addictions
+  	16 => 'Alicia.Matthews@gov.bc.ca', //Municipal Affairs and Housing
+	17 => 'Christy.Gao@gov.bc.ca;Karla.Limion@gov.bc.ca;Robert.Meseyton@gov.bc.ca', //Public Safety and Solicitor General
+  	18 => 'Carly.Paulsen@gov.bc.ca;Maxine.Tobin@gov.bc.ca', //Social Development and Poverty Reduction
+  	19 => 'Alicia.Matthews@gov.bc.ca', //Tourism, Arts and Culture
+  	20 => 'Kim.Pilkington@gov.bc.ca', //Transportation and Infrastructure
+  	21 => 'Linsey.Tupper@gov.bc.ca', //BC Public Service Agency
+  	22 => 'Andrea.Kerrigan@gov.bc.ca;Gurmeet.Sall@gov.bc.ca', //Government Communications and Public Engagement
+	23 => 'Elizabeth.Thomson@partnershipsbc.ca', //Partnership BC
+	24 => 'smaloney@Trustee.bc.ca', //Public Guardian and Trustee
+	25 => 'Barbara.Wilson@gov.bc.ca', //Public Sector Employers Council
   );
 }
 
@@ -67,7 +59,7 @@ function _atwork_prem_awards_headers() {
 	<li>Measureable benefits to either their organizations(s) and/or the citizens of British Columbia through process improvements to transform business practices, and/or support sustainable revenue generation or savings.</li>
 	  </ul>',
     5 => '<h3>PARTNERSHIP</h3>The Partnership award recognizes joint-ventures or multi-party initiatives between BC Public Service organizations and organizations in the broader public sector, other levels of government, First Nations communities, or in the private or not-for-profit sectors. This award is recognized both regionally and provincially.',
-    6 => '<h3>LEGACY</h3>The Legacy award recognizes individuals who have made exceptional and lasting contributions to the BC Public Service and/or the province of British Columbia during a public service career of at least 15 years. The contributions may cover a nominee’s entire career or portions of it, provided that the contribution has a lasting and ongoing positive impact. This award is presented at the provincial level only.',
+    6 => '<h3>LEGACY</h3>The Legacy award recognizes individuals who have made exceptional and lasting contributions to the BC Public Service and/or the province of British Columbia during a public service career of at least 15 years. The contributions may cover a nomineeâ€™s entire career or portions of it, provided that the contribution has a lasting and ongoing positive impact. This award is presented at the provincial level only.',
     7 => '<h3>EMERGING LEADER</h3>The Emerging Leader award recognizes an employee, under the age of forty (40) and below the level of Director, who has made a significant impact on their ministry, division, workgroup, or the greater BC Public Service.  This award is presented at the provincial level only.',
     8 => '<h3>Evidence Based Design</h3>The Evidence-Based Design award recognizes groups, teams or organizations within the BC Public Service whose work is outstanding in the area of evidence-based or evidence-informed policy or program development and the process by which the policy or program was designed. This category showcases excellence in policy or program development for both internal BC Public Service and external regional or provincial policies or programs. This award is recognized both regionally and provincially.',
   );
@@ -85,7 +77,7 @@ function _atwork_prem_awards_questions() {
   $translations[1][8] = '';
   $translations[1][9] = '';
 
-  $translations[2][0] = 'In this section, provide a brief statement that that summarizes or restates the main points of the nomination, submission or project. The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br />(Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.)';
+  $translations[2][0] = 'In this section, provide a brief statement that that summarizes or restates the main points of the nomination, submission or project. The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br />(Note that this section will be used by the Premierâ€™s Awards team for communications purposes if this nomination is selected as a finalist.)';
   $translations[2][1] = "To establish a background that will provide perspective to the work achieved, briefly describe why the new innovative <strong>approach </strong>was undertaken.";
   $translations[2][3] = "<strong>Approach:</strong><br />Briefly describe how the new product or service was developed from inception to delivery including, but not limited to:<ul><li>Identify how the new <strong>approach </strong>demonstrates an improved process, product or service;</li><li>Using new technology to enhance a program or service delivery to improve upon existing processes and procedures;</li><li>Demonstrates why and how this was innovative;</li><li>Describe the any testing and process improvements along the way;</li><li>Explain how the team managed and overcame risks encountered to adapt and refine the process; or </li><li>Creativity in the design or redesign the programs or services.</li></ul>";
   $translations[2][2] = "<strong>Complexity:</strong><br />Identify and outline scope of the streamlined business processes, technology, or creative solutions to fulfill organizational mandates including, but not limited to:<ul><li>Size of the project, process, technology solution;</li><li>Risks encountered and overcome;</li><li>Technical or organizational difficulties addressed;</li><li>Financial constraints managed.</li><li>Challenges around introducing a new <strong>approach </strong>to solve a challenging problem;</li></ul>";
@@ -96,10 +88,10 @@ function _atwork_prem_awards_questions() {
   $translations[2][8] = '';
   $translations[2][9] = '';
 
-  $translations[3][0] = 'In this section, provide a brief statement that that summarizes or restates the main points of the nomination, submission or personal contribution.  The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br /> (Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.)';
+  $translations[3][0] = 'In this section, provide a brief statement that that summarizes or restates the main points of the nomination, submission or personal contribution.  The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br /> (Note that this section will be used by the Premierâ€™s Awards team for communications purposes if this nomination is selected as a finalist.)';
   $translations[3][1] = "To establish a background that will provide perspective to the work achieved, briefly describe the conditions under which the employee demonstrated exemplary leadership.";
-  $translations[3][2] = "<strong>Complexity:</strong><br />Describe the scope and scale of the nominee’s superior leadership acumen including, but not limited to:<ul><li>Size of the project, process, or initiative managed;</li><li>Constraints encountered and overcome under their leadership (i.e. time frame, technical, financial, organizational and/or policy);</li><li>Identify challenges around aligning stakeholder or partner group interests;</li><li>Technical or organizational difficulties addressed.</li></ul>";
-  $translations[3][3] = "<strong>Valuing People:</strong><br />Identify and describe the “people” element, in relation to:<ul><li>Champions continuous learning, employee recognition, and collaborative team-based environments;</li><li>Engages people and partners in developing opportunities for innovation and continuous learning;</li><li>Committed to service delivery in exceeding the needs/expectations of internal or external clients;</li><li>Involves, empowers, and leads staff through times of change.</li></ul>";
+  $translations[3][2] = "<strong>Complexity:</strong><br />Describe the scope and scale of the nomineeâ€™s superior leadership acumen including, but not limited to:<ul><li>Size of the project, process, or initiative managed;</li><li>Constraints encountered and overcome under their leadership (i.e. time frame, technical, financial, organizational and/or policy);</li><li>Identify challenges around aligning stakeholder or partner group interests;</li><li>Technical or organizational difficulties addressed.</li></ul>";
+  $translations[3][3] = "<strong>Valuing People:</strong><br />Identify and describe the â€œpeopleâ€� element, in relation to:<ul><li>Champions continuous learning, employee recognition, and collaborative team-based environments;</li><li>Engages people and partners in developing opportunities for innovation and continuous learning;</li><li>Committed to service delivery in exceeding the needs/expectations of internal or external clients;</li><li>Involves, empowers, and leads staff through times of change.</li></ul>";
   $translations[3][4] = "<strong>Impact:</strong><br />Describe, and use metrics to support (where applicable), the effect that the leader has had on employees, clients, the public service, and/or citizens of British Columbia. Considerations may include, but are not limited to:<ul><li>Creating, communicating and implementing a clear and compelling vision;</li><li>Measurable outcomes in client and/or organizational satisfaction;</li><li>Demonstrated improvement to the quality of the workplace for employees by contributing to the enhancement of diversity, health and safety, workplace culture and employee development; </li><li>Improvement to workplace processes by adopting innovative <strong>approache</strong>s to existing procedures, reducing costs and/or increasing efficiencies.</li></ul>";
   $translations[3][5] = "";
   $translations[3][6] = "";
@@ -107,10 +99,10 @@ function _atwork_prem_awards_questions() {
   $translations[3][8] = '';
   $translations[3][9] = '';
 
-  $translations[4][0] = "In this section, provide a brief statement that that summarizes or restates the main points of the nomination, submission or project.  The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main ideas and feature of the nomination.<br/> (Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.)";
+  $translations[4][0] = "In this section, provide a brief statement that that summarizes or restates the main points of the nomination, submission or project.  The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main ideas and feature of the nomination.<br/> (Note that this section will be used by the Premierâ€™s Awards team for communications purposes if this nomination is selected as a finalist.)";
   $translations[4][1] = "To establish a background that will provide perspective to the work achieved, briefly describe why the new <strong>approach </strong>to the process, policy or service was undertaken.";
   $translations[4][2] = "<strong>Complexity:</strong><br />Describe the scope and scale of the process, policy or service to citizens including, but not limited to:<ul><li>Size of the program, service, or initiative;</li><li>Risks encountered;</li><li>Identify constraints which may include time frames, financial, policy, etc.;</li><li>Use of creativity or fresh <strong>approach </strong>in achieving desired outcomes;</li><li>Technical or organizational difficulties identified and addressed;</li></ul>";
-  $translations[4][3] = "<strong>Approach:</strong><br />Identify key aspects of the program, service, or initiative that may include, but are not limited to:<ul><li>Customer consultation and the incorporation of the feedback;</li><li>Support for innovation, risk taking, and a commitment to ongoing improvements by incorporating  or contributing to best practices;</li><li>Removing barriers to overcome constraints;</li><li>Change resilience – demonstration of strategies that support success even while going through change and transformation;</li><li>Attention to cross-government processes critical for meeting stakeholder needs.</li></ul>";
+  $translations[4][3] = "<strong>Approach:</strong><br />Identify key aspects of the program, service, or initiative that may include, but are not limited to:<ul><li>Customer consultation and the incorporation of the feedback;</li><li>Support for innovation, risk taking, and a commitment to ongoing improvements by incorporating  or contributing to best practices;</li><li>Removing barriers to overcome constraints;</li><li>Change resilience â€“ demonstration of strategies that support success even while going through change and transformation;</li><li>Attention to cross-government processes critical for meeting stakeholder needs.</li></ul>";
   $translations[4][4] = "<strong>Impact:</strong><br />Describe, and use metrics to support, the outcomes that the process, policy or services to citizens has had including, not limited to;<ul><li>Process improvements in business practices;</li><li>Increased client satisfaction to high quality service delivery;</li><li>Improved quality, cost-effectiveness or productivity of services to the public;</li><li>Operational efficiencies as demonstrated by financial or other key performance indicators.</li></ul>";
   $translations[4][5] = "";
   $translations[4][6] = "";
@@ -119,7 +111,7 @@ function _atwork_prem_awards_questions() {
   $translations[4][9] = "";
 
 
-  $translations[5][0] = "In this section, provide a brief statement that that summarizes or restates the main points of the nomination, project or partnership.  The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br />(Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.)";
+  $translations[5][0] = "In this section, provide a brief statement that that summarizes or restates the main points of the nomination, project or partnership.  The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br />(Note that this section will be used by the Premierâ€™s Awards team for communications purposes if this nomination is selected as a finalist.)";
   $translations[5][1] = "To establish a background that will provide perspective to the work achieved, briefly describe why the partnership was undertaken.";
   $translations[5][2] = "<strong>Complexity:</strong><br />Identify and outline scope of partnership including, but not limited to:<ul><li>Size of the project or initiative;</li><li>Constraints encountered and overcome (i.e. time frame, technical, financial, organizational and/or policy);</li><li>Identify challenges around aligning stakeholder or partner group interests;</li><li>Technical or organizational difficulties addressed.</li></ul>";
   $translations[5][3] = "<strong>Approach:</strong><br />Identify key aspects of the partnership including, but not limited to:<ul><li>Creativity and/or use of new technology to achieve results;</li><li>Building relationships with internal or external stakeholder(s) to achieve mutually beneficial goals or mandates;</li><li>Risk and/or change management strategy;</li><li>Use of, or development of, best practices;</li><li>Application and/or development of best practices to remove barriers that may have prevented the successful outcome of the project.</li></ul>";
@@ -129,7 +121,7 @@ function _atwork_prem_awards_questions() {
   $translations[5][7] = '';
   $translations[5][8] = '';
 
-  $translations[6][0] = "In this section, provide a brief statement that that summarizes or restates the main points of the nomination, personal contribution or lasting legacy within the BC Public Service and/or the province of British Columbia.  The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br/>(Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.)";
+  $translations[6][0] = "In this section, provide a brief statement that that summarizes or restates the main points of the nomination, personal contribution or lasting legacy within the BC Public Service and/or the province of British Columbia.  The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br/>(Note that this section will be used by the Premierâ€™s Awards team for communications purposes if this nomination is selected as a finalist.)";
   $translations[6][1] = "To establish a background that will provide perspective to the work achieved, briefly describe the conditions under which the employee demonstrated their contribution to the BC Public Service including career highlights.";
   $translations[6][2] = "Complexity:<br />Explain how the employee has demonstrated superior leadership through complex situations including, but not limited to:<ul><li>Large-scale initiatives;</li><li>Managing and mitigating risks;</li><li>Creatively solving problems and implementing solutions;</li><li>Achieving outcomes in spite of constraints (e.g. technical, organizational, financial).</li></ul>";
   $translations[6][3] = "<strong>Contribution to BC Public Service excellence:</strong><br />Describe how the individual <strong>approache</strong>d leadership in public service excellence through, but not limited to:<ul><li>Facilitating, re-enforcing, and successfully leading through changes necessary to promote innovation, continuous improvement, or improved service delivery to internal or external clients;</li><li>Continually demonstrating the ability to exceed the needs of stakeholders and internal or external clients;</li><li>Outstanding dedication to their work while maintaining a high level of commitment to BC Public Service values;</li><li>Mentoring and empowering colleagues, coworkers, and staff to strive for excellence.</li></ul>";
@@ -139,7 +131,7 @@ function _atwork_prem_awards_questions() {
   $translations[6][7] = '';
   $translations[6][8] = '';
 
-  $translations[7][0] = 'In this section, provide a brief statement that that summarizes or restates the main points of the nomination, submission or personal contribution.  The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br />(Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.)';
+  $translations[7][0] = 'In this section, provide a brief statement that that summarizes or restates the main points of the nomination, submission or personal contribution.  The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br />(Note that this section will be used by the Premierâ€™s Awards team for communications purposes if this nomination is selected as a finalist.)';
   $translations[7][1] = "To establish a background that will provide perspective to the work achieved, briefly describe the conditions under which the employee demonstrated exemplary leadership.";
   $translations[7][2] = "<strong>Valuing People:</strong><br />Identify and describe how the employee has demonstrated their leadership in supporting the workplace through, but not limited to:<ul><li>Actively enhancing the quality of the workplace through innovative problem solving, collaboration and a strong client service orientation;</li><li>Championing continuous learning, employee recognition and collaborative team-based environments;</li><li>Articulating a vision that involves, empowers, and motivates others through times of change;</li><li>Demonstrating superior informal leadership abilities with colleagues and co-workers at all levels.</li></ul>";
   $translations[7][3] = "<strong>Commitment to the Organization:</strong><br />Identify and describe how the employee has demonstrated their leadership in operations through, but not limited to:<ul><li>Improving workplace processes;</li><li>Seeking creative solutions to improve efficiency;</li><li>Significantly reducing operating expenses without compromising service delivery to internal or external clients.</li></ul>";
