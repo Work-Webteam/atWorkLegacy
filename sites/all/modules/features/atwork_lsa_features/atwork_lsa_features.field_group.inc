@@ -454,6 +454,10 @@ function atwork_lsa_features_field_group_info() {
       0 => 'field_lsa_supervisor_first_name',
       1 => 'field_lsa_supervisor_last_name',
       2 => 'field_lsa_supervisor_email',
+      3 => 'field_supervisor_address',
+      4 => 'field_lsa_supervisor_city',
+      5 => 'field_lsa_supervisor_postal_code',
+      6 => 'field_lsa_supervisor_province',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -556,6 +560,10 @@ function atwork_lsa_features_field_group_info() {
       0 => 'field_lsa_supervisor_first_name',
       1 => 'field_lsa_supervisor_last_name',
       2 => 'field_lsa_supervisor_email',
+      3 => 'field_supervisor_address',
+      4 => 'field_lsa_supervisor_city',
+      5 => 'field_lsa_supervisor_province',
+      6 => 'field_lsa_supervisor_postal_code',
     ),
     'format_type' => 'div',
     'format_settings' => array(

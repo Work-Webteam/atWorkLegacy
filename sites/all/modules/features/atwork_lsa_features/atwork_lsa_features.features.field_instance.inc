@@ -3897,6 +3897,83 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-lsa_application-field_lsa_supervisor_city'.
+  $field_instances['node-lsa_application-field_lsa_supervisor_city'] = array(
+    'bundle' => 'lsa_application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 12,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_supervisor_city',
+    'label' => 'Supervisor City',
+    'required' => 0,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'maxlength_js' => 0,
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 41,
+    ),
+  );
+
   // Exported field_instance: 'node-lsa_application-field_lsa_supervisor_email'.
   $field_instances['node-lsa_application-field_lsa_supervisor_email'] = array(
     'bundle' => 'lsa_application',
@@ -4095,6 +4172,162 @@ function atwork_lsa_features_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 38,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-lsa_application-field_lsa_supervisor_postal_code'.
+  $field_instances['node-lsa_application-field_lsa_supervisor_postal_code'] = array(
+    'bundle' => 'lsa_application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 14,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_supervisor_postal_code',
+    'label' => 'Supervisor Postal Code',
+    'required' => 0,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'maxlength_js' => 0,
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 43,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-lsa_application-field_lsa_supervisor_province'.
+  $field_instances['node-lsa_application-field_lsa_supervisor_province'] = array(
+    'bundle' => 'lsa_application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 13,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_supervisor_province',
+    'label' => 'Supervisor Province',
+    'required' => 0,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'maxlength_js' => 0,
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 42,
     ),
   );
 
@@ -4592,6 +4825,83 @@ function atwork_lsa_features_field_default_field_instances() {
       ),
       'type' => 'text_textarea',
       'weight' => 25,
+    ),
+  );
+
+  // Exported field_instance: 'node-lsa_application-field_supervisor_address'.
+  $field_instances['node-lsa_application-field_supervisor_address'] = array(
+    'bundle' => 'lsa_application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 11,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_supervisor_address',
+    'label' => 'Supervisor Address',
+    'required' => 0,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'maxlength_js' => 0,
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 40,
     ),
   );
 
@@ -6479,9 +6789,13 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Service pins will be sent to the employee\'s supervisor for presentation during Public Service Week - June 12-16, 2017.');
   t('Special Requirements');
   t('Street');
+  t('Supervisor Address');
+  t('Supervisor City');
   t('Supervisor Email');
   t('Supervisor First Name');
   t('Supervisor Last Name');
+  t('Supervisor Postal Code');
+  t('Supervisor Province');
   t('Supervisors’ Address');
   t('Terms');
   t('This is how your name will appear on your 25 year certificate. Make any changes necessary.');
