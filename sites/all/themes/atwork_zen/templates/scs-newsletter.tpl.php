@@ -584,7 +584,7 @@ $atwork_base_url = $GLOBALS['base_url'];
             </td>
           </tr>
           <tr>
-            <td valign="top" height="40" colspan="2" id="comment-body" style="padding-left: 15px;">
+            <td valign="top" height="40" colspan="2" id="comment-body">
                 <?php echo $atwork_newsletter_render_array['comments']->comment_body['und'][0]['formatted']; ?>
             </td>
           </tr>
