@@ -353,6 +353,10 @@
     $('#edit-field-lsa-second-donation-und-0').on('click', function(){
       set_pecsef($("input[name='field_lsa_years_of_service[und]']:checked").val());
       $('#edit-field-lsa-donation-amount-2-und-0-value').val('');
+      $('#edit-field-lsa-pecsf-id-2-und-0-value').val('');
+      $('#edit-field-lsa-charity-name-2-und-0-value').val('');
+
+      // Also reset form fields so we don't get strange data
       $('.collapsible.required-fields.group-lsa-second-donation.field-group-fieldset.form-wrapper.collapse-processed').slideUp('fast');
       $('#edit-field-lsa-pecsf-id-2').slideUp('fast');
       $('#edit-field-lsa-charity-name-2').slideUp('fast');
