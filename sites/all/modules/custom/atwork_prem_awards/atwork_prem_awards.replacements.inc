@@ -3,32 +3,33 @@
 function _atwork_prem_awards_ministry_contacts() {
   return array(
     // All ministry contacts must be included in the exact same order as the ministry dropdown (i.e. aboriginal contact in array [1], advanced ed in array [2])
-  	1 => 'Ross.Palin@gov.bc.ca', //Advanced Education, Skills and Training Jeff.Keene@gov.bc.ca;
-  	2 => 'Erin.Hansen@gov.bc.ca', //Agriculture
-    3 => 'Marlene.Dayman@gov.bc.ca;Robert.Meseyton@gov.bc.ca;Karla.Limion@gov.bc.ca', //Attorney General
-    4 => 'Gail.Crosby@gov.bc.ca', //Children & Family Development
-  	5 => 'Jeannette.Cook@gov.bc.ca', //Citizens' Services
-    6 => 'Karli.Reeve@gov.bc.ca;Devon.Phillips@gov.bc.ca', //Education
-  	7 => 'Janine.Crockett@gov.bc.ca', //Energy and Mines and Petroleum Resources
-  	8 => 'Coleen.Gooderham@gov.bc.ca', //Environment and Climate Change Strategy
-  	9 => 'Sabrina.Loiacono@gov.bc.ca', //Environmental Assessment Office
-  	10 => 'Jennifer.Michell@gov.bc.ca', //Finance
-  	11 => 'Dana.Eckardt@gov.bc.ca', //Forests, Lands and Natural Resource Operations and Rural Development
-    12 => 'Aleta.Mulane@gov.bc.ca;Nicole.Benbow@gov.bc.ca', //Health
-  	13 => 'Tonja.Joyce@gov.bc.ca',  //Indigenous Relations and Reconciliation
-    14 => 'Alicia.Matthews@gov.bc.ca', //Jobs, Trade and Technology
-    15 => 'Alicia.Matthews@gov.bc.ca', //Labour
-  	15 => 'Kimberley.Guidoriagao@gov.bc.ca', //Mental Health and Addictions
-  	16 => 'Alicia.Matthews@gov.bc.ca', //Municipal Affairs and Housing
-	17 => 'Christy.Gao@gov.bc.ca;Karla.Limion@gov.bc.ca;Robert.Meseyton@gov.bc.ca', //Public Safety and Solicitor General
-  	18 => 'Carly.Paulsen@gov.bc.ca;Maxine.Tobin@gov.bc.ca', //Social Development and Poverty Reduction
-  	19 => 'Alicia.Matthews@gov.bc.ca', //Tourism, Arts and Culture
-  	20 => 'Kim.Pilkington@gov.bc.ca', //Transportation and Infrastructure
-  	21 => 'Linsey.Tupper@gov.bc.ca', //BC Public Service Agency
-  	22 => 'Andrea.Kerrigan@gov.bc.ca;Gurmeet.Sall@gov.bc.ca', //Government Communications and Public Engagement
-	23 => 'Elizabeth.Thomson@partnershipsbc.ca', //Partnership BC
-	24 => 'smaloney@Trustee.bc.ca', //Public Guardian and Trustee
-	25 => 'Barbara.Wilson@gov.bc.ca', //Public Sector Employers Council
+  		// All ministry contacts must be included in the exact same order as the ministry dropdown (i.e. aboriginal contact in array [1], advanced ed in array [2])
+  		1 => 'Ross.Palin@gov.bc.ca', //Ministry of Advanced Education, skills and Training
+  		2 => 'Erin.Hansen@gov.bc.ca', //Agriculture
+  		3 => 'Marlene.Dayman@gov.bc.ca;Robert.Meseyton@gov.bc.ca;Karla.Limion@gov.bc.ca', // Attorney General
+  		4 => 'Gail.Crosby@gov.bc.ca', //Children & Family Development
+  		5 => 'Jeannette.Cook@gov.bc.ca', // Citizens’ Services
+  		6 => 'Karli.Reeve@gov.bc.ca;Devon.Phillips@gov.bc.ca', //Education
+  		7 => 'Janine.Crockett@gov.bc.ca', // Energy, Mines and Petroleum Resources
+  		8 => 'Coleen.Gooderham@gov.bc.ca', //Environment and Climate Change Strategy
+  		9 => 'Sabrina.Loiacono@gov.bc.ca', //Environment Assessment Office
+  		10 => 'Jennifer.Michell@gov.bc.ca', //Finance
+  		11 => 'Dana.Eckardt@gov.bc.ca', //Forests, Lands, Natural Resource Operations and Rural Development
+  		12 => 'Aleta.Mullane@gov.bc.ca;Nicole.Benbow@gov.bc.ca', //Health
+  		13 => 'Tonja.Joyce@gov.bc.ca', //Aboriginal Relations & Reconciliation
+  		14 => 'Alicia.Matthews@gov.bc.ca', //Jobs, Trade and Technology
+  		15 => 'Alicia.Matthews@gov.bc.ca', //Labour
+  		16 => 'Kimberley.Guidoriagao@gov.bc.ca', // Mental Health and Addictions
+  		17 => 'Alicia.Matthews@gov.bc.ca', // Municipal Affairs and Housing
+  		18 => 'Robert.Meseyton@gov.bc.ca;Karla.Limion@gov.bc.ca;Christy.Gao@gov.bc.ca', //Public Safety & Solicitor General
+  		19 => 'Carly.Paulsen@gov.bc.ca;Maxine.Tobin@gov.bc.ca', // Social Development and Poverty Reduction
+  		20 => 'Alicia.Matthews@gov.bc.ca',  // Tourism, Arts and Culture
+  		21 => 'Kim.Pilkington@gov.bc.ca',  // Transportation and Infrastructure
+  		22 => 'Linsey.Tupper@gov.bc.ca', //BC Public Service Agency
+  		23 => 'Andrea.Kerrigan@gov.bc.ca;Gurmeet.Sall@gov.bc.ca', //Government Communications and Public Engagement
+  		24 => 'Elizabeth.Thomson@partnershipsbc.ca', //Partnerships BC
+  		25 => 'smaloney@Trustee.bc.ca', //Public Guardian and Trustee
+  		26 => 'Barbara.Wilson@gov.bc.ca', //Public Sector Employers Council
   );
 }
 
