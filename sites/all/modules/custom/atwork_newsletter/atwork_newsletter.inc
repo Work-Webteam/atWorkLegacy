@@ -22,11 +22,13 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 		
 		// Retrieve Username from UID and place in comments array
 		$user = user_load($comment->uid);
-		$comment->name = $user->field_display_name['und'][0]['value'];
-				
-		$comment->comment_body['und'][0]['formatted'] = str_replace('<p>', '<p class="outlook-comment-body" style="margin: 0 10px 0 15px; font-size: 12pt; font-family: Calibri,sans-serif; padding-bottom: 5px; line-height: 20px;">', $comment->comment_body['und'][0]['value']);
+		
+		$comment->comment_body['und'][0]['formatted'] = '<p class="outlook-comment-body" style="margin: 0 10px 0 15px; font-size: 12pt; font-family: Calibri,sans-serif; padding-bottom: 10px; line-height: 20px;">"'
+		  . substr($comment->comment_body['und'][0]['value'], 3);
+		$comment->comment_body['und'][0]['formatted'] = str_replace('<p>', '<p class="outlook-comment-body" style="margin: 0 10px 0 15px; font-size: 12pt; font-family: Calibri,sans-serif; padding-bottom: 10px; line-height: 20px;">', $comment->comment_body['und'][0]['formatted']);
 		$comment->comment_body['und'][0]['formatted'] = str_replace('</p>', '</p>', $comment->comment_body['und'][0]['formatted']);
 		$comment->comment_body['und'][0]['formatted'] = trim($comment->comment_body['und'][0]['formatted']);
+		$comment->comment_body['und'][0]['formatted'] = substr($comment->comment_body['und'][0]['formatted'],0,-6) .  '"</p>';
 		
 		// Add in link to parent article
 		$parent = node_load($comment->nid);
