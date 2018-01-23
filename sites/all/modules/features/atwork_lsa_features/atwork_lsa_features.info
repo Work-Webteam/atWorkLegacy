@@ -307,6 +307,7 @@ features[variable][] = webform_node_lsa_application
 features[variable][] = webform_node_lsa_pin_application
 features[variable][] = workbench_moderation_default_state_lsa_application
 features[variable][] = workbench_moderation_default_state_lsa_pin_application
+features[views_view][] = lsa_admin
 features_exclude[dependencies][ctools] = ctools
 features_exclude[dependencies][entity] = entity
 features_exclude[dependencies][features] = features
