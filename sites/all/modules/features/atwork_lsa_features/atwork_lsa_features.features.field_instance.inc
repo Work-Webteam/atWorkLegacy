@@ -3530,9 +3530,23 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_retiring_thisyear',
-    'label' => 'Retiring in 2017?',
+    'label' => 'Retiring in 2018?',
     'required' => 1,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -6782,7 +6796,7 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Postal Code');
   t('Province');
   t('RSVP');
-  t('Retiring in 2017?');
+  t('Retiring in 2018?');
   t('Retro-Active');
   t('Second Charity');
   t('Service Milestone');
