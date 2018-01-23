@@ -54,9 +54,10 @@ function atwork_lsa_features_field_group_info() {
     'children' => array(
       0 => 'field_lsa_notes',
       1 => 'field_lsa_form_date_stamp',
-      2 => 'field_lsa_retro_active',
-      3 => 'group_lsa_ceremony_details',
-      4 => 'group_lsa_rsvp',
+      2 => 'field_lsa_watch_engraving_sent',
+      3 => 'field_lsa_retro_active',
+      4 => 'group_lsa_ceremony_details',
+      5 => 'group_lsa_rsvp',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -454,10 +455,10 @@ function atwork_lsa_features_field_group_info() {
       0 => 'field_lsa_supervisor_first_name',
       1 => 'field_lsa_supervisor_last_name',
       2 => 'field_lsa_supervisor_email',
-      3 => 'field_supervisor_address',
-      4 => 'field_lsa_supervisor_city',
-      5 => 'field_lsa_supervisor_postal_code',
-      6 => 'field_lsa_supervisor_province',
+      3 => 'field_lsa_supervisor_city',
+      4 => 'field_lsa_supervisor_postal_code',
+      5 => 'field_lsa_supervisor_province',
+      6 => 'field_supervisor_address',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

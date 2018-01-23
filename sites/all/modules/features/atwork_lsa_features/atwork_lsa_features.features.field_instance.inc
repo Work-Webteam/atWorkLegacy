@@ -3627,7 +3627,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 37,
+      'weight' => 36,
     ),
   );
 
@@ -4547,7 +4547,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 20,
+      'weight' => 37,
     ),
   );
 
