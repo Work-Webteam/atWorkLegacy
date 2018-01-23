@@ -386,7 +386,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = 'group_lsa_pecsf';
   $field_group->data = array(
     'label' => '',
-    'weight' => '19',
+    'weight' => '18',
     'children' => array(
       0 => 'field_lsa_charity_name_2',
       1 => 'field_lsa_donation_amount_2',
