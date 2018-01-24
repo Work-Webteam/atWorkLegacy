@@ -115,7 +115,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = 'group_lsa_personal_info';
   $field_group->data = array(
-    'label' => 'Home Contact Information',
+    'label' => 'Home Mailing Address',
     'weight' => '13',
     'children' => array(
       0 => 'field_lsa_street',
@@ -130,12 +130,12 @@ function atwork_lsa_features_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => 'Home Contact Information',
+      'label' => 'Home Mailing Address',
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
         'classes' => 'group-lsa-contact-info field-group-fieldset ',
-        'description' => 'Home Mailing Address',
+        'description' => '',
       ),
       'formatter' => 'open',
     ),
@@ -287,7 +287,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Name',
+    'label' => 'Recipient Contact Information',
     'weight' => '22',
     'children' => array(
       0 => 'field_lsa_first_name',
@@ -297,7 +297,7 @@ function atwork_lsa_features_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => 'Name',
+      'label' => 'Recipient Contact Information',
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
@@ -730,12 +730,13 @@ function atwork_lsa_features_field_group_info() {
   t('Administration');
   t('Ceremony Details');
   t('Contact Information');
-  t('Home Contact Information');
+  t('Home Mailing Address');
   t('Name');
   t('Office Information');
   t('PECSF');
   t('Pin Options');
   t('RSVP Information');
+  t('Recipient Contact Information');
   t('Recipient Details');
   t('Service Information');
   t('Special Requirements');

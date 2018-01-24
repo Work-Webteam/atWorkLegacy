@@ -211,14 +211,15 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
       'module' => 'email',
       'settings' => array(
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 60,
+        'size' => 45,
       ),
       'type' => 'email_textfield',
       'weight' => 32,
@@ -1526,6 +1527,20 @@ function atwork_lsa_features_field_default_field_instances() {
     'label' => 'Email Address',
     'required' => 1,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -1533,7 +1548,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'active' => 1,
       'module' => 'email',
       'settings' => array(
-        'size' => 30,
+        'size' => 45,
       ),
       'type' => 'email_textfield',
       'weight' => 31,
@@ -4668,7 +4683,7 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_work_phone_ext',
-    'label' => 'Work Phone Ext',
+    'label' => 'Work Phone Extension',
     'required' => 0,
     'settings' => array(
       'authcache' => array(
@@ -4684,6 +4699,8 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -6817,7 +6834,7 @@ function atwork_lsa_features_field_default_field_instances() {
   t('What ministry/organization are you with?');
   t('Who is registering for this service pin?');
   t('Work Phone');
-  t('Work Phone Ext');
+  t('Work Phone Extension');
   t('Years of Service');
 
   return $field_instances;
