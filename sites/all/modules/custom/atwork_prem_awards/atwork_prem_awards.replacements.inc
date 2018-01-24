@@ -36,33 +36,67 @@ function _atwork_prem_awards_ministry_contacts() {
 function _atwork_prem_awards_headers() {
   return array(
     1 => '<h3>CROSS GOVERNMENT INTEGRATION</h3>This award, which is presented <em>regionally and provincially</em>, recognizes two or more BC Public Service organizations that have collaboratively delivered a program or service that has resulted in substantial benefits to clients, the public service, or citizens.',
-    2 => '<h3>INNOVATION</h3>The Innovation award recognizes groups, teams or organizations within the BC Public Service that have developed and transformed new ideas into tangible initiatives, programs or projects. Innovations may streamline business processes, leverage technology, or pursue creative solutions to fulfill organizational mandates. This award is recognized both regionally and provincially. <strong>Approache</strong>s to innovation in the workplace may include:
-	  <ul><li>The use of new technology to enhance program and service delivery or improve upon existing processes and procedures;</li>
-      <li>Improves performance by doing things that may be unique, leading-edge, or new to the public sector;</li>
-      <li>Changes the organizational culture or the traditional <strong>approach </strong>to management or problem solving; or</li>
-      <li>Challenging the status quo, trying something new, adapting and refining when things have not worked well, and learning from the development of policy or services.</li>
-      <li>Commitment to service delivery in exceeding the needs/expectations of internal or external clients;</li></ul>',
-    3 => '<h3>LEADERSHIP</h3>The Leadership award recognizes a BC Public Service employee who demonstrates the highest levels of exemplary leadership attributes and abilities. This award is recognized both regionally and provincially. Considerations include, but are not limited to:
-      <ul><li>Ability to create, communicate, and implement a clear and compelling vision;</li>
-	<li>Ability to establish trust, motivate, and receive high satisfaction ratings from their employees; </li>
-	<li>Anticipates future trends and works with others to develop strategies to meet future challenges;</li>
-	<li>Commitment to continuous learning, employee recognition, and collaborative team-based environments; </li>
-	<li>Ability to involve, empower, and lead staff through times of change;</li>
-	<li>Commitment to service delivery in exceeding the needs/expectations of internal or external clients;</li>
-	<li>Demonstrated support for innovation, new technology, and best practices; </li>
-	<li>Demonstrated leadership to achieve significant and superior results.</li>
-</ul>',
-    4 => '<h3>ORGANIZATIONAL EXCELLENCE</h3>The Organizational Excellence award recognizes one or more BC Public Service organizations that have delivered a program, service, or initiative resulting in substantial benefits to their organization(s), the public service, or citizens of British Columbia. This award is recognized both regionally and provincially. Considerations may include, but are not limited to:
-      <ul>
-	<li>Placing customer needs and feedback at the heart of the design and/or implementation of a policy/project and being open to new ways of working and new delivery models;</li>
-	<li>Significantly improving the quality, cost-effectiveness or productivity of services to internal or external stakeholders;</li>
-	<li>Outstanding contributions to the delivery of quality customer service; or</li>
-	<li>Measureable benefits to either their organizations(s) and/or the citizens of British Columbia through process improvements to transform business practices, and/or support sustainable revenue generation or savings.</li>
-	  </ul>',
-    5 => '<h3>PARTNERSHIP</h3>The Partnership award recognizes joint-ventures or multi-party initiatives between BC Public Service organizations and organizations in the broader public sector, other levels of government, First Nations communities, or in the private or not-for-profit sectors. This award is recognized both regionally and provincially.',
-    6 => '<h3>LEGACY</h3>The Legacy award recognizes individuals who have made exceptional and lasting contributions to the BC Public Service and/or the province of British Columbia during a public service career of at least 15 years. The contributions may cover a nomineeâ€™s entire career or portions of it, provided that the contribution has a lasting and ongoing positive impact. This award is presented at the provincial level only.',
-    7 => '<h3>EMERGING LEADER</h3>The Emerging Leader award recognizes an employee, under the age of forty (40) and below the level of Director, who has made a significant impact on their ministry, division, workgroup, or the greater BC Public Service.  This award is presented at the provincial level only.',
-    8 => '<h3>Evidence Based Design</h3>The Evidence-Based Design award recognizes groups, teams or organizations within the BC Public Service whose work is outstanding in the area of evidence-based or evidence-informed policy or program development and the process by which the policy or program was designed. This category showcases excellence in policy or program development for both internal BC Public Service and external regional or provincial policies or programs. This award is recognized both regionally and provincially.',
+    2 => '<h3>INNOVATION</h3>The Innovation award recognizes groups, teams, or organizations within the BC Public Service that have developed and transformed new ideas into tangible initiatives, programs, or projects. By applying a user-centric or citizen-centric approach, innovations may streamline business processes, leverage technology, or pursue creative solutions to fulfill organizational mandates. This award is recognized both regionally and provincially. Approaches to innovation in the workplace may include:
+	    <ul><li> Generating breakthrough ideas, fresh perspectives and new opportunities;</li>
+        <li>The use of new technology or tools to enhance program and service delivery or improve upon existing processes and procedures (i.e. Behavioural Insights, Data Science, Service Design,  Agile Methodology, etc.);</li>
+        <li>Improving performance by doing things that may be unique, leading-edge, or new to the public sector;</li>
+        <li>Changes to the organizational culture or the traditional approach to management or problem solving; </li>
+        <li>Ability to demonstrate an experimental or innovative mindset whereby being open to change, taking calculated risks and challenge the status quo to try something new, resulted in a measureable outcome;</li>
+        <li>Adapting and refining the approach or initiative when things have not worked well and learning from the setbacks/mistakes.</li></ul>',
+    3 => '<h3>LEADERSHIP</h3>The Leadership award recognizes a BC Public Service employee who demonstrates the highest levels of integrity and exemplary leadership attributes and abilities either leading a team or organization or as leader of a substantial project, process, or initiative. This award is recognized both regionally and provincially. Considerations include, but are not limited to:
+       <ul><li>Ability to create, communicate, and implement a clear and compelling vision;</li>
+	       <li>Ability to establish trust, motivate, and receive high satisfaction ratings from their employees;</li>
+	       <li>Ethical leadership practices;</li>
+	       <li>Anticipates future trends and works with others to develop strategies to meet future challenges;</li>
+	       <li>Commitment to succession management though knowledge transfer, support for continuous learning and mentorship; </li>
+	       <li>Ability to involve, empower, and lead staff through times of change;</li>
+	       <li>Commitment to service delivery in exceeding the needs/expectations of internal or external clients;</li>
+	       <li>Ability to demonstrate an experimental or innovative mindset whereby being open to change, taking calculated risks and challenging the status quo to try something new resulted in a measureable outcome;</li>
+	       <li>Demonstrated support for innovation, new technology, and best practices; </li>
+	       <li>Demonstrates a commitment to diversity and inclusiveness in both the work environment and in the development of programs, policies and services.	</li>
+       </ul>',
+
+    4 => '<h3>ORGANIZATIONAL EXCELLENCE</h3>The Organizational Excellence award recognizes one or more BC Public Service organizations that have delivered a program, service, or initiative resulting in substantial benefits to their organization(s), the public service, or citizens of British Columbia. This award is recognized both regionally and provincially. Considerations for outstanding organizational excellence may include, but are not limited to:
+       <ul><li>The use of a citizen-centric or customer-centric approach at the heart of the design and/or implementation of a policy/project;</li>
+	       <li>Significantly improved the quality, cost-effectiveness, or productivity of services to internal stakeholders;</li>
+	       <li>Significantly improved government-to-business or government-to-citizen service delivery;</li>
+	       <li>Measureable benefits to either their organization(s) and/or the citizens of British Columbia through process improvements to transform business practices, and/or support sustainable revenue generation or savings;</li>
+	     </ul>',
+
+    5 => '<h3>PARTNERSHIP</h3>The Partnership award recognizes joint-ventures or multi-party initiatives between BC Public Service organizations and organizations in the broader public sector, other levels of government, First Nations communities, or in the private or not-for-profit sectors. This award is recognized both regionally and provincially. Considerations include but are not limited to partnerships that have:
+			<ul><li>Developed, managed and sustained strategic partnerships with other government, private sector, volunteer or non-profit organizations that integrate policy and/or service delivery, with a view to better serving British Columbians;</li>
+				<li>Measureable benefits to either their organization(s) and/or the citizens of British Columbia through process improvements to transform business practices, and/or support sustainable revenue generation or savings;</li>
+				<li>Significantly improved the quality, cost-effectiveness, or productivity of services to internal stakeholders;</li>
+				<li>Significantly improved government-to-business or government-to-citizen program or service delivery;</li>
+				<li>Demonstrated inclusive employee or citizen engagement practices with diverse stakeholder groups.</li>
+			</ul>',
+  		
+    6 => '<h3>LEGACY</h3>The Legacy award recognizes individuals who have made exceptional and lasting contributions to the BC Public Service and/or the province of British Columbia during a public service career of at least 15 years. The contributions may cover a nominee’s entire career or portions of it, provided that the contribution has a lasting and ongoing positive impact. This award is presented at the provincial level only. Considerations include but are not limited to:
+			<ul><li>Developed, managed and sustained strategic partnerships with other government, private sector, volunteer or non-profit organizations that integrate policy and/or service delivery, with a view to better serving British Columbians;</li>
+				<li>Measureable benefits to either their organization(s) and/or the citizens of British Columbia through process improvements to transform business practices, and/or support sustainable revenue generation or savings;</li>
+				<li>Significantly improved the quality, cost-effectiveness, or productivity of services to internal stakeholders;</li>
+				<li>Significantly improved government-to-business or government-to-citizen program or service delivery;</li>
+				<li>Demonstrated inclusive employee or citizen engagement practices with diverse stakeholder groups.</li>
+			</ul>',
+
+    7 => '<h3>EMERGING LEADER</h3>The Emerging Leader award recognizes an employee, under the age of forty (40) and below the level of Director, who has made a significant impact on their ministry, division, workgroup, or the greater BC Public Service.  This award is presented at the provincial level only.
+			<ul><li>This award recognizes an employee, under the age of forty (40) and below the level of Director, who has made a significant impact on their ministry, division, workgroup, or the greater BC Public Service early on in their career.  This award is presented at the provincial level only.  Considerations for an Emerging leader nominee should include but are not limited to:</li>
+        <li>Ability to demonstrate superior informal leadership with colleagues and co-workers across all levels of the organization;</li>
+        <li>Ability to demonstrate superior informal leadership through innovative problem solving, team building, collaboration, and a strong client service orientation;</li>
+        <li>Proven thought-leader who can articulate a strong case for change, self-motivate and motivate others through change, and demonstrate success through measurable project/program outcomes;</li>
+        <li>Ethical leadership practices;</li>
+        <li>Demonstrated support for innovation, new technology, and best practices; </li>
+        <li>Demonstrates a commitment to diversity and inclusiveness in both the work environment and in the development of programs, policies and services.</li>
+  		</ul>',
+
+    8 => '<h3>Evidence Based Design</h3>
+  		<ul><li>Ability to demonstrate superior informal leadership with colleagues and co-workers across all levels of the organization;</li>
+        <li>Ability to demonstrate superior informal leadership through innovative problem solving, team building, collaboration, and a strong client service orientation;</li>
+        <li>Proven thought-leader who can articulate a strong case for change, self-motivate and motivate others through change, and demonstrate success through measurable project/program outcomes;</li>
+        <li>Ethical leadership practices;</li>
+        <li>Demonstrated support for innovation, new technology, and best practices; </li>
+        <li>Demonstrates a commitment to diversity and inclusiveness in both the work environment and in the development of programs, policies and services.</li>
+  		</ul>',
   );
 }
 // "<br /><ul><li></li><li></li><li></li><li></li></ul>";
