@@ -42,6 +42,37 @@ function atwork_lsa_features_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_lsa_accom|node|lsa_application|form';
+  $field_group->group_name = 'group_lsa_accom';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'lsa_application';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Ceremony Accommodations',
+    'weight' => '19',
+    'children' => array(
+      0 => 'field_lsa_ceremony_accommodation',
+      1 => 'field_lsa_accommodation_notes',
+      2 => 'field_lsa_recipient_accom',
+      3 => 'field_lsa_guest_accom',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-lsa-accom field-group-fieldset',
+        'required_fields' => 1,
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_lsa_accom|node|lsa_application|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_lsa_administration|node|lsa_application|form';
   $field_group->group_name = 'group_lsa_administration';
   $field_group->entity_type = 'node';
@@ -50,7 +81,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Administration',
-    'weight' => '28',
+    'weight' => '24',
     'children' => array(
       0 => 'field_lsa_notes',
       1 => 'field_lsa_form_date_stamp',
@@ -84,7 +115,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = 'group_lsa_administration';
   $field_group->data = array(
     'label' => 'Ceremony Details',
-    'weight' => '39',
+    'weight' => '62',
     'children' => array(
       0 => 'field_lsa_alternate_min_org',
       1 => 'field_lsa_actual_min_org',
@@ -145,6 +176,34 @@ function atwork_lsa_features_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_lsa_dietary_acc|node|lsa_application|form';
+  $field_group->group_name = 'group_lsa_dietary_acc';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'lsa_application';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Dietary Requirements',
+    'weight' => '20',
+    'children' => array(
+      0 => 'field_lsa_dietary_requirements',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-lsa-dietary-acc field-group-fieldset',
+        'required_fields' => 1,
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_lsa_dietary_acc|node|lsa_application|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_lsa_first_donation|node|lsa_application|form';
   $field_group->group_name = 'group_lsa_first_donation';
   $field_group->entity_type = 'node';
@@ -183,7 +242,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Work Information',
-    'weight' => '23',
+    'weight' => '18',
     'children' => array(
       0 => 'field_lsa_org',
       1 => 'field_lsa_branch_department',
@@ -254,7 +313,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'PECSF',
-    'weight' => '13',
+    'weight' => '12',
     'children' => array(
       0 => 'field_lsa_donation_options',
       1 => 'field_lsa_pecsf_region',
@@ -287,7 +346,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Recipient Contact Information',
-    'weight' => '22',
+    'weight' => '17',
     'children' => array(
       0 => 'field_lsa_first_name',
       1 => 'field_lsa_middle_name',
@@ -354,7 +413,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = 'group_lsa_administration';
   $field_group->data = array(
     'label' => 'RSVP Information',
-    'weight' => '38',
+    'weight' => '61',
     'children' => array(
       0 => 'field_lsa_rsvp',
       1 => 'field_lsa_attending_ceremony',
@@ -471,6 +530,35 @@ function atwork_lsa_features_field_group_info() {
     ),
   );
   $field_groups['group_lsa_supervisor_info|node|lsa_application|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_lsa_survey|node|lsa_application|form';
+  $field_group->group_name = 'group_lsa_survey';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'lsa_application';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Long Service Award Survey',
+    'weight' => '23',
+    'children' => array(
+      0 => 'field_lsa_survey',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Long Service Award Survey',
+      'instance_settings' => array(
+        'required_fields' => 0,
+        'id' => '',
+        'classes' => 'group-lsa-survey field-group-fieldset',
+        'description' => 'At the end of the year, a follow-up survey may be sent to collect feedback about your experience with the Long Service Awards program. Please indicate if you do not want to participate below.',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_lsa_survey|node|lsa_application|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -727,9 +815,12 @@ function atwork_lsa_features_field_group_info() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Administration');
+  t('Ceremony Accommodations');
   t('Ceremony Details');
   t('Contact Information');
+  t('Dietary Requirements');
   t('Home Mailing Address');
+  t('Long Service Award Survey');
   t('Name');
   t('Office Information');
   t('PECSF');

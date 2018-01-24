@@ -138,8 +138,6 @@
 
     // There will be no instructions unless we actually are choosing an award
     $('#edit-field-lsa-award-sp-instructions').hide();
-    // Hide the special requirements box unless we require it
-    $('#edit-field-specialrequirement-descrip').hide();
     // Hide PECSF unless user selects this choice
     $('#pecsf-fields').hide();
     // Change text for pecsf options (too long for text box in setup)
@@ -159,82 +157,6 @@
     // And no NA option here:
     $('#edit-field-lsa-donation-options-und-none').parent().hide();
     $('#edit-field-lsa-second-donation-und-none').parent().hide();
-  }
-
-/**
- * Helper function to decide when whe need special requirements text box - to set it to required - and to change label instructions
- */
-  function special_requirements(){
-    var checked_boxes = $('.form-checkbox');
-    $(checked_boxes).each(function() {
-      // None can only be checked if nothing else is
-      if($("#edit-field-lsa-specialrequirements-und-6").prop('checked') === true) {
-        $("#edit-field-lsa-specialrequirements-und-5").prop('checked',false);
-        $("#edit-field-lsa-specialrequirements-und-5").prop('disabled', true);
-        $("#edit-field-lsa-specialrequirements-und-4").prop('checked',false);
-        $("#edit-field-lsa-specialrequirements-und-4").prop('disabled',true);
-        $("#edit-field-lsa-specialrequirements-und-3").prop('checked',false);
-        $("#edit-field-lsa-specialrequirements-und-3").prop('disabled',true);
-        $("#edit-field-lsa-specialrequirements-und-2").prop('checked',false);
-        $("#edit-field-lsa-specialrequirements-und-2").prop('disabled',true);
-        $("#edit-field-lsa-specialrequirements-und-1").prop('checked',false);
-        $("#edit-field-lsa-specialrequirements-und-1").prop('disabled',true);
-        $('#edit-field-specialrequirement-descrip-und-0-value').val("");
-      } else {
-        $("#edit-field-lsa-specialrequirements-und-5").prop('disabled', false);
-        $("#edit-field-lsa-specialrequirements-und-4").prop('disabled',false);
-        $("#edit-field-lsa-specialrequirements-und-3").prop('disabled',false);
-        $("#edit-field-lsa-specialrequirements-und-2").prop('disabled',false);
-        $("#edit-field-lsa-specialrequirements-und-1").prop('disabled',false);
-      }
-
-      if($("#edit-field-lsa-specialrequirements-und-1").prop('checked') === true && $("#edit-field-lsa-specialrequirements-und-5").prop('checked') === true){
-        // We have an allergy and other box checked
-        // Show special requirements text box
-        $('#edit-field-specialrequirement-descrip').show();
-        //  Change the help prompt text
-        $("label[for=edit-field-specialrequirement-descrip-und-0-value]").html('Please tell us more about your food allergy, and other requirements.');
-        //  This is now required
-        $('#edit-field-specialrequirement-descript-und-0-value').prop('required', true);
-
-        return;
-      }
-      if($("#edit-field-lsa-specialrequirements-und-1").prop('checked') === true && $("#edit-field-lsa-specialrequirements-und-5").prop('checked') === false){
-        // Allergies only
-        // Show special requirements text box
-        $('#edit-field-specialrequirement-descrip').show();
-        // Required
-        $('#edit-field-specialrequirement-descript-und-0-value').prop('required', true);
-        // Change help prompt text
-        $("label[for=edit-field-specialrequirement-descrip-und-0-value]").html('Please tell us more about your food allergy.');
-
-
-        return;
-      }
-      if($("#edit-field-lsa-specialrequirements-und-1").prop('checked') === false && $("#edit-field-lsa-specialrequirements-und-5").prop('checked') === true){
-        // Other only
-        // Show special requirements text box
-        $('#edit-field-specialrequirement-descrip').show();
-        // Required
-        $('#edit-field-specialrequirement-descript-und-0-value').prop('required', true);
-        // Change help prompt text
-        $("label[for=edit-field-specialrequirement-descrip-und-0-value]").html('Please tell us more about your requirements.');
-
-
-        return;
-      }
-      if($("#edit-field-lsa-specialrequirements-und-1").prop('checked') === false && $("#edit-field-lsa-specialrequirements-und-5").prop('checked') === false){
-        // Hide special requirements box
-        $('#edit-field-specialrequirement-descrip').hide();
-        // Clear the special requirements box
-        $('#edit-field-specialrequirement-descrip-und-0-value').val('');
-        // No longer required
-        $('#edit-field-specialrequirement-descript-und-0-value').prop('required', false);
-        return;
-      }
-
-    });
-
   }
 
   // Make sure phone number is formatted right
@@ -307,12 +229,6 @@
 
     $('#edit-field-lsa-retiring-thisyear-und').change(function () {
       retirement();
-    });
-
-
-    // Click handler for special requirements
-    $('.form-checkbox').change(function(){
-      special_requirements();
     });
 
     $('#edit-field-lsa-home-phone-und-0-value').keyup(function(){
