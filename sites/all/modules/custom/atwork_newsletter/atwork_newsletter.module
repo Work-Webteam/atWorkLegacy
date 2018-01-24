@@ -6,21 +6,21 @@
  *
  * We need to intercept the theme for the simple news content selector
  * This allows us to theme content ourselve prior to any rendering, without hacking the default .tpl in the contrib module.
- * 
+ *
  * @param array $theme_registry
  */
 function atwork_newsletter_theme_registry_alter(&$theme_registry){
-  // We are overwriting the theme registry, redirecting functions to our own template.
-  $theme_registry['scs_newsletter']['template'] = 'sites/all/themes/atwork_zen/templates/scs-newsletter';
-  $theme_registry['scs_newsletter']['file'] = 'atwork_newsletter.theme.inc';
-  $theme_registry['scs_newsletter']['theme path'] = 'sites/all/modules/custom/atwork_newsletter';
-  //$theme_registry['scs_newsletter']['includes'] = '';
-  $theme_registry['scs_newsletter']['includes'][] = 'sites/all/modules/custom/atwork_newsletter/atwork_newsletter.theme.inc';
-  // We may need to do some preprocessing, so add our custom function to the list. This function exists in atwork_newsletter.inc
-  $theme_registry['scs_newsletter']['preprocess functions'][] = 'template_preprocess_atwork_newsletter';
-  if(in_array('template_preprocess_scs_newsletter',$theme_registry['scs_newsletter']['preprocess functions'])){
-    unset($theme_registry['scs_newsletter']['preprocess functions'][array_search('template_preprocess_scs_newsletter', $theme_registry['scs_newsletter']['preprocess functions'])]);
-  }
+	// We are overwriting the theme registry, redirecting functions to our own template.
+	$theme_registry['scs_newsletter']['template'] = 'sites/all/themes/atwork_zen/templates/scs-newsletter';
+	$theme_registry['scs_newsletter']['file'] = 'atwork_newsletter.theme.inc';
+	$theme_registry['scs_newsletter']['theme path'] = 'sites/all/modules/custom/atwork_newsletter';
+	//$theme_registry['scs_newsletter']['includes'] = '';
+	$theme_registry['scs_newsletter']['includes'][] = 'sites/all/modules/custom/atwork_newsletter/atwork_newsletter.theme.inc';
+	// We may need to do some preprocessing, so add our custom function to the list. This function exists in atwork_newsletter.inc
+	$theme_registry['scs_newsletter']['preprocess functions'][] = 'template_preprocess_atwork_newsletter';
+	if(in_array('template_preprocess_scs_newsletter',$theme_registry['scs_newsletter']['preprocess functions'])){
+		unset($theme_registry['scs_newsletter']['preprocess functions'][array_search('template_preprocess_scs_newsletter', $theme_registry['scs_newsletter']['preprocess functions'])]);
+	}
 }
 
 /**
@@ -28,33 +28,33 @@ function atwork_newsletter_theme_registry_alter(&$theme_registry){
  * Hook the form so we can take the data from comments and notes section of the form_state and commit it to the form.
  */
 function atwork_newsletter_form_node_form_alter(&$form, &$form_state, $form_id) {
-  // Check that we are creating a newsletter and that we come from the
-  // admin/content/node
-  if (!empty($form['#node_edit_form']) && in_array($form['type']['#value'], simplenews_get_content_types()) && isset($form_state['input']['nodes'])) {
-    $nodes = node_load_multiple(array_keys($form_state['input']['nodes']));
-    
-    foreach($nodes as $node) {
-      if(isset($form_state['input']['nodes'][$node->nid]['view_mode'])){	
-        $node->scs_view_mode = $form_state['input']['nodes'][$node->nid]['view_mode'];
-      } else {
-        $node->scs_view_mode = 'simplenews_content_selection';
-      }
-    }
-    
-    // Now rebuild the array from scs, this puts the variables into the body field (using our theme)
-    $form['body']['und'][0]['#default_value'] = theme('scs_newsletter', array(
-      'nodes' => $nodes,
-      'toc' => FALSE, //empty($form_state['input']['scs_toc']) ? FALSE : TRUE,
-      //'comment' => $form_state['input']['cid'],
-      'comment' => isset($form_state['input']['cid']) ? $form_state['input']['cid'] : 'none',
-      'notes' => $form_state['input']['take_note'],
-      'did_you_know' => $form_state['input']['did_you_know'],
-    ));
-    // Remove marker that allows scs to overwrite this form
-    if(isset($form['#node_edit_form'])){
-      unset($form['#node_edit_form']);
-    }
-  }
+	// Check that we are creating a newsletter and that we come from the
+	// admin/content/node
+	if (!empty($form['#node_edit_form']) && in_array($form['type']['#value'], simplenews_get_content_types()) && isset($form_state['input']['nodes'])) {
+		$nodes = node_load_multiple(array_keys($form_state['input']['nodes']));
+		
+		foreach($nodes as $node) {
+			if(isset($form_state['input']['nodes'][$node->nid]['view_mode'])){
+				$node->scs_view_mode = $form_state['input']['nodes'][$node->nid]['view_mode'];
+			} else {
+				$node->scs_view_mode = 'simplenews_content_selection';
+			}
+		}
+		
+		// Now rebuild the array from scs, this puts the variables into the body field (using our theme)
+		$form['body']['und'][0]['#default_value'] = theme('scs_newsletter', array(
+				'nodes' => $nodes,
+				'toc' => FALSE, //empty($form_state['input']['scs_toc']) ? FALSE : TRUE,
+				//'comment' => $form_state['input']['cid'],
+				'comment' => isset($form_state['input']['cid']) ? $form_state['input']['cid'] : 'none',
+				'notes' => $form_state['input']['take_note'],
+				'did_you_know' => $form_state['input']['did_you_know'],
+		));
+		// Remove marker that allows scs to overwrite this form
+		if(isset($form['#node_edit_form'])){
+			unset($form['#node_edit_form']);
+		}
+	}
 }
 
 /**
@@ -62,112 +62,116 @@ function atwork_newsletter_form_node_form_alter(&$form, &$form_state, $form_id) 
  * Here we are telling the theme that it should expect 4 variables rather than two, and are forcing it to use the template in the atwork-zen path rather than its own.
  */
 function atwork_newsletter_theme() {
-  return array(
-    'scs_newsletter' => array(
-      'variables' => array('nodes' => array(), 'toc' => FALSE, 'comments' => array(), 'notes' => array(), 'did_you_know' => array()),
-      'template' => '/sites/all/themes/atwork-zen/templates/scs-newsletter',
-      'file' => 'atwork_newsletter.theme.inc',
-    ),
-  );
+	return array(
+			'scs_newsletter' => array(
+					'variables' => array('nodes' => array(), 'toc' => FALSE, 'comments' => array(), 'notes' => array(), 'did_you_know' => array()),
+					'template' => '/sites/all/themes/atwork-zen/templates/scs-newsletter',
+					'file' => 'atwork_newsletter.theme.inc',
+			),
+	);
 }
 
 /**
  * Implements hook_form_alter()
  * We pull information (such as CID, and some text fields) and place them into $form.
- */ 
+ */
 function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state, $vbo){
-  if($form['#form_id'] == 'views_form_newsletter_creation_page'){
-
-    //Added instructions to content selection
-    if(!array_key_exists('nodes',$form)) {
-      $form['#prefix'] = $form['#prefix'] . t('Click (in any order) the content you\'d like to appear in the newsletter. There is no maximum number, but you must have at least one news article.
-        Reminder: Create the newsletter in the Chrome browser.<br>');
-    } else {
-      $form['#prefix'] = $form['#prefix'] . t('Note: Use the "+" sign to drag and drop the content into the order you would like it to appear in the newsletter.  An article must be in the top spot.');
-    }
-
-    // Move article/blog form to top
-    $form['output']['#weight'] = -100;
-
-    //Place submit button at bottom of form
-    $form['select']['#weight'] = '100';
-
-    // Comment Settings
-    $comment_disabled = FALSE;
-    $comment_value = '';
-    $comment_suffix = NULL; 
-    if(array_key_exists('nodes',$form)) {
-      $comment_value = $form_state['input']['cid'];
-      $comment_preview = comment_load($comment_value);
-      $comment_body = $comment_preview->comment_body['und'][0]['value']; 
-      if($_POST['cid'] !== '') {
-        $comment_suffix = '<div><table style="border: 1px solid #bebfb9;"><tr><td style="border: 1px solid #bebfb9; background-color: #e1e2dc;">COMMENT PREVIEW</td><td>'. $comment_body . '</td></tr></table></div>';
-      }
-    } 
-    // We want a text field to add a comment ID
-    $form['cid'] = array(
-      '#type'=>'textfield',
-      '#disabled' => $comment_disabled,
-      '#title' => t('Comment Content ID'),
-      '#default_value' => $comment_value,
-      '#size' => 60,
-      '#maxlength' => 64,
-      '#suffix' => t($comment_suffix),
-      '#description' => t('To add the comment you would like to appear in the newsletter, add the comment ID  in the field above. The comment ID is a five-digit number found at the end of each comment URL.<br> 
-        For example, the ID is "42378" in this URL: 
-        https:// gww.gov.bc.ca/comment/reply/26948/<strong>42378</strong>)
-        If this field is left blank, no comment will be displayed.<br> 
-        NOTE: You can find the comment ID by pressing "reply" to the comment and copying the ID from the URL.'),
-    );
-    // Spot for "Take Note"
-    $form['take_note'] = array(
-      '#type' => 'text_format', // gives us ckeditor functionality
-      '#title' => t('Take Note'),
-      '#default_value' => t(''),
-      '#format' => NULL,
-      '#description' => t('Click the "Paste from Word" icon and paste bulleted content into the dialogue box and select "ok".
-        Leave the field blank if this content is not part of the newsletter.<br><br><br>'),
-    );
-    // Spot for "Did You Know?"
-    $form['did_you_know'] = array(
-      '#type' => 'text_format',
-      '#title' => t('Did You Know?'),
-      '#default_value' => t(''),
-      '#format' => NULL,
-      '#description' => t('Click the "Paste from Word" icon and paste content into the dialogue box and select "ok".
-        Leave the field blank if this content is not part of the newsletter.<br><br><br>'),
-    );
-    // Add our own validation
-    if((isset($form['select']['action::scs_views_create_newsletter_action']['#validate'])) &&
-    (is_array($form['select']['action::scs_views_create_newsletter_action']['#validate']))) {
-	  array_unshift($form['select']['action::scs_views_create_newsletter_action']['#validate'], 'atwork_newsletter_validate');
-	} else {
-	  $form['select']['action::scs_views_create_newsletter_action']['#validate'] = 'atwork_newsletter_validate';
+	if($form['#form_id'] == 'views_form_newsletter_creation_page'){
+		
+		//Added instructions to content selection
+		if(!array_key_exists('nodes',$form)) {
+			$form['#prefix'] = $form['#prefix'] . t('<p>Ensure you are using the "Chrome" browser. To begin creating the newsletter, click the checkbox in the leftmost column beside the articles and blogs you would like to have in the newsletter.</p>
+      <p>There is no maximum number that can select. However, you must ensure there is at least one article. Once complete, scroll down to the next section - comments.</p><br>');
+		} else {
+			$form['#prefix'] = $form['#prefix'] . t('<p>Please review the content on this page to ensure it is how you would like the information to be displayed.</p>
+				<p>For the articles/blogs section, you can reorder the content as you\'d like it to appear in the newsletter. Use the "+" sign to drag and drop the content into the order you would like. Note, an article must be in the top spot.</p>
+				<p>Then review the Comment, Take Note and Did You Know sections to ensure the information is as you\'d like it to be displayed. You may edit content at this point directly in the fields, as needed.</p>
+				<p>Click the "Next" button at the bottom of this page to continue with newsletter creation.</p>
+			');
+		}
+		
+		// Move article/blog form to top
+		$form['output']['#weight'] = -100;
+		
+		//Place submit button at bottom of form
+		$form['select']['#weight'] = '100';
+		
+		// Comment Settings
+		$comment_disabled = FALSE;
+		$comment_value = '';
+		$comment_suffix = NULL;
+		if(array_key_exists('nodes',$form)) {
+			$comment_disabled = TRUE;
+			$comment_value = $form_state['input']['cid'];
+			$comment_preview = comment_load($comment_value);
+			$comment_body = $comment_preview->comment_body['und'][0]['value'];
+			if($_POST['cid'] !== '') {
+				$comment_suffix = '<div><table style="border: 1px solid #bebfb9;"><tr><td style="border: 1px solid #bebfb9; background-color: #e1e2dc;">COMMENT PREVIEW</td><td>'. $comment_body . '</td></tr></table></div>';
+			}
+		}
+		// We want a text field to add a comment ID
+		$form['cid'] = array(
+				'#type'=>'textfield',
+				'#disabled' => $comment_disabled,
+				'#title' => NULL,
+				'#default_value' => $comment_value,
+				'#size' => 60,
+				'#maxlength' => 64,
+				'#suffix' => t($comment_suffix),
+				'#prefix' => t('<br><strong>Comment</strong><br><p>To add a comment in the newsletter, type in the "comment ID" in the field below. The comment ID is a five-digit number found at the end of each comment URL.</p>
+        	<p>For example, the ID is "42378" in this URL: https:// gww.gov.bc.ca/comment/reply/26948/<strong>42378</strong></p>
+        	<p>You can find the comment ID by mousing over the "reply" link below the comment and typing it in the field or by pressing "reply" and copying the ID from the url.</p>'),
+		);
+		// Spot for "Take Note"
+		$form['take_note'] = array(
+				'#type' => 'text_format', // gives us ckeditor functionality
+				'#title' => NULL,
+				'#default_value' => t(''),
+				'#format' => NULL,
+				'#prefix' => t('<br><strong>Take Note</strong><br><P>To add content into the Take Note section, copy the bullets from the newsletter entry of the editorial calendar and use the "Paste from Word" icon to paste content into the field below.
+				Then select "ok."</p>'),
+		);
+		// Spot for "Did You Know?"
+		$form['did_you_know'] = array(
+				'#type' => 'text_format',
+				'#title' => NULL,
+				'#default_value' => t(''),
+				'#format' => NULL,
+				'#prefix' => t('<br><br><strong>Did You Know?</strong><br><p>To add content into the Did You Know? section, copy the content from the newsletter entry of the editorial calendar and use the "Paste from Word" icon to paste content into the field below.
+				Then select "ok."</p>'),
+				'#suffix' => t('<br><p>When you have completed the sections above, click the "Create newsletter" button below to review your information.<p>'),
+		);
+		// Add our own validation
+		if((isset($form['select']['action::scs_views_create_newsletter_action']['#validate'])) &&
+				(is_array($form['select']['action::scs_views_create_newsletter_action']['#validate']))) {
+					array_unshift($form['select']['action::scs_views_create_newsletter_action']['#validate'], 'atwork_newsletter_validate');
+				} else {
+					$form['select']['action::scs_views_create_newsletter_action']['#validate'] = 'atwork_newsletter_validate';
+				}
+				
+				// Add our own submit handler
+				if((isset($form['select']['action::scs_views_create_newsletter_action']['#submit'])) &&
+						(is_array($form['select']['action::scs_views_create_newsletter_action']['#submit']))) {
+							array_unshift($form['select']['action::scs_views_create_newsletter_action']['#submit'], 'atwork_newsletter_submit');
+						} else {
+							$form['select']['action::scs_views_create_newsletter_action']['#submit'] = 'atwork_newsletter_submit';
+						}
 	}
-	
-	// Add our own submit handler
-	if((isset($form['select']['action::scs_views_create_newsletter_action']['#submit'])) &&
-    (is_array($form['select']['action::scs_views_create_newsletter_action']['#submit']))) {
-	  array_unshift($form['select']['action::scs_views_create_newsletter_action']['#submit'], 'atwork_newsletter_submit');
-	} else {
-	  $form['select']['action::scs_views_create_newsletter_action']['#submit'] = 'atwork_newsletter_submit';
-    }
-  }
 }
 
 /**
  * Implements form validation for newsletter creation module
  **/
 function atwork_newsletter_validate(&$form, &$form_state){
-  // Check if user input is a valid. If not, set error message (drupal_set_message) and return FALSE
-  // Validate Comment(s)
-  if($form_state['input']['cid'] !== '') {
-  	if(!is_numeric($form_state['input']['cid']) || !is_object(comment_load($form_state['input']['cid']))) {
-      form_set_error('cid',t("Please enter a valid Comment ID"));
-    }
-  }   
+	// Check if user input is a valid. If not, set error message (drupal_set_message) and return FALSE
+	// Validate Comment(s)
+	if($form_state['input']['cid'] !== '') {
+		if(!is_numeric($form_state['input']['cid']) || !is_object(comment_load($form_state['input']['cid']))) {
+			form_set_error('cid',t("Please enter a valid Comment ID"));
+		}
+	}
 }
-  
+
 function atwork_newsletter_submit(&$form, &$form_state){
-  return;
+	return;
 }

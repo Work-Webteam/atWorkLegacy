@@ -43,7 +43,8 @@ $atwork_base_url = $GLOBALS['base_url'];
 <!--[if gte mso 9]>
 <style>                                                                                                                                                                                                                                                                                                                                                                                                            
 	.outlook-title {height: 35px !important;}                                                                                                                                                                                                                                                                                                                                                                      
-	.outlook-comment-blog-title {height: 30px !important;}                                                                                                                                                                                                                                                                                                                                                                      
+	.outlook-comment-blog-title {height: 30px !important;}  
+	.outlook-comment-body {padding-bottom: 10px;}                                                                                                                                                                                                                                                                                                                                                                    
 	.outlook-feature-title {height: 18px !important;}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 	.outlook-feature-title h2 {margin-bottom: 10px !important;}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 	.outlook-body {height: 105px !important;}                                                                                                                                                                                                                                                                                                                                                                      
@@ -452,7 +453,7 @@ $atwork_base_url = $GLOBALS['base_url'];
           <tr>
             <td height="30" style="background-color:#E0ECF5;">
               <h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; margin-top: 10px; margin-left: 10px; margin-right: 15px;"> Take Note </h2>
-              <div class="outlook-didyouknow-takenote-title" style="margin-left: 15px; font-family: Calibri,sans-serif; font-size:12pt; line-height: 20px; margin-right: 27px;" >
+              <div class="outlook-didyouknow-takenote-title" style="margin-left: 15px; font-family: Calibri,sans-serif; font-size:12pt; line-height: 20px; margin-right: 27px; margin-bottom: 20px;" >
                 <?php echo $atwork_newsletter_render_array['take_note']['value']; ?>
               </div>
             </td>
@@ -530,7 +531,7 @@ $atwork_base_url = $GLOBALS['base_url'];
         </tr>
         <tr class="outlook-no-mso-border" border="none" style="border: none !important;">
           <td class="outlook-no-mso-border" valign="top" height="40" colspan="2" border="none" style="border: none !important; background-color: #FFF;">
-            <p class="outlook-blog-body outlook-no-mso-border" style="font-family: Calibri,sans-serif; font-size:12pt; margin: 0 10px 0 15px; padding-bottom: 15px; line-height: 20px; border: none !important;">
+            <p class="outlook-blog-body outlook-no-mso-border" style="font-family: Calibri,sans-serif; font-size:12pt; margin: 0 10px 0 15px; padding-bottom: 10px; line-height: 20px; border: none !important;">
               <?php echo ($atwork_blog_body[0]['summary'] === "" ? $atwork_blog_body[0]['summary'] : $atwork_blog_body[0]['summary']); ?>
             </p>
           </td>
@@ -584,7 +585,7 @@ $atwork_base_url = $GLOBALS['base_url'];
             </td>
           </tr>
           <tr>
-            <td valign="top" height="40" colspan="2" id="comment-body" style="padding-left: 15px;">
+            <td valign="top" height="40" colspan="2" id="comment-body" class="outlook-comment-body">
                 <?php echo $atwork_newsletter_render_array['comments']->comment_body['und'][0]['formatted']; ?>
             </td>
           </tr>
