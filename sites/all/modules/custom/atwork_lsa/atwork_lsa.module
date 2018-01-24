@@ -142,18 +142,81 @@ function atwork_lsa_application_validate($form, &$form_state) {
     ));
   }
 
+  $postal_regex = '/^([a-zA-Z]\d[a-zA-Z])\ {0,1}(\d[a-zA-Z]\d)$/';
   // Quick validation to make sure we have the right number of chars for the Postal Codes
   if(isset($form_state['input']['field_lsa_home_postal_code']['und'][0]['value']) && $form_state['input']['field_lsa_home_postal_code']['und'][0]['value']){
+    // Format this postal code
+    // Upper case
+    $form_state['input']['field_lsa_home_postal_code']['und'][0]['value'] = strtoupper($form_state['input']['field_lsa_home_postal_code']['und'][0]['value']);
+    // remove spaces
+    $form_state['input']['field_lsa_home_postal_code']['und'][0]['value'] = preg_replace('/\s+/', '', $form_state['input']['field_lsa_home_postal_code']['und'][0]['value']);
+    // remove special characters
+    $form_state['input']['field_lsa_home_postal_code']['und'][0]['value'] = preg_replace('/[^A-Za-z0-9\-]/', '', $form_state['input']['field_lsa_home_postal_code']['und'][0]['value']);
+    // Put expected space back at 3rd spot
+    $form_state['input']['field_lsa_home_postal_code']['und'][0]['value'] = wordwrap($form_state['input']['field_lsa_home_postal_code']['und'][0]['value'], 3, ' ', true);
+    // Make sure this is no more than 7 characters long
+    if (strlen($form_state['input']['field_lsa_home_postal_code']['und'][0]['value']) > 7){
+      $form_state['input']['field_lsa_home_postal_code']['und'][0]['value'] = substr($node->field_lsa_home_postal_code[$lang][0]['value'],0,7);
+    }
     $postal_check = str_replace(" ", "", $form_state['input']['field_lsa_home_postal_code']['und'][0]['value']);
     if(strlen($postal_check) < 6 || strlen($postal_check) > 6){
       form_set_error('field_lsa_home_postal_code', t("The recipient postal code must have 6 characters."));
     }
+    // Quick regex to make sure we have relatively the right type of canadian postal
+    $validity = preg_match($postal_regex, $form_state['input']['field_lsa_home_postal_code']['und'][0]['value']);
+    if($validity == FALSE){
+      form_set_error('field_lsa_home_postal_code', t("Please enter a valid recipient postal code in the format A1A 1A1"));
+    }
   }
 
   if(isset($form_state['input']['field_lsa_office_postal_code']['und'][0]['value']) && $form_state['input']['field_lsa_office_postal_code']['und'][0]['value']){
+    // Format this postal code
+    // Upper case
+    $form_state['input']['field_lsa_office_postal_code']['und'][0]['value'] = strtoupper($form_state['input']['field_lsa_office_postal_code']['und'][0]['value']);
+    // remove spaces
+    $form_state['input']['field_lsa_office_postal_code']['und'][0]['value'] = preg_replace('/\s+/', '', $form_state['input']['field_lsa_office_postal_code']['und'][0]['value']);
+    // remove special characters
+    $form_state['input']['field_lsa_office_postal_code']['und'][0]['value'] = preg_replace('/[^A-Za-z0-9\-]/', '', $form_state['input']['field_lsa_office_postal_code']['und'][0]['value']);
+    // Put expected space back at 3rd spot
+    $form_state['input']['field_lsa_office_postal_code']['und'][0]['value'] = wordwrap($form_state['input']['field_lsa_office_postal_code']['und'][0]['value'], 3, ' ', true);
+    // Make sure this is no more than 7 characters long
+    if (strlen($form_state['input']['field_lsa_office_postal_code']['und'][0]['value']) > 7){
+      $form_state['input']['field_lsa_office_postal_code']['und'][0]['value'] = substr($node->field_lsa_home_postal_code[$lang][0]['value'],0,7);
+    }
     $postal_check = str_replace(" ", "", $form_state['input']['field_lsa_office_postal_code']['und'][0]['value']);
     if(strlen($postal_check) < 6 || strlen($postal_check) > 6){
       form_set_error('field_lsa_office_postal_code', t("The office postal code must have 6 characters."));
+    }
+    // Quick regex to make sure we have relatively the right type of canadian postal
+    $validity = preg_match($postal_regex, $form_state['input']['field_lsa_office_postal_code']['und'][0]['value']);
+    if($validity == FALSE){
+      form_set_error('field_lsa_office_postal_code', t("Please enter a valid office postal code in the format A1A 1A1"));
+    }
+  }
+
+  
+  if(isset($form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']) && $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']){
+    // Format this postal code
+    // Upper case
+    $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'] = strtoupper($form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']);
+    // remove spaces
+    $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'] = preg_replace('/\s+/', '', $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']);
+    // remove special characters
+    $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'] = preg_replace('/[^A-Za-z0-9\-]/', '', $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']);
+    // Put expected space back at 3rd spot
+    $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'] = wordwrap($form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'], 3, ' ', true);
+    // Make sure this is no more than 7 characters long
+    if (strlen($form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']) > 7){
+      $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'] = substr($node->field_lsa_home_postal_code[$lang][0]['value'],0,7);
+    }
+    $postal_check = str_replace(" ", "", $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']);
+    if(strlen($postal_check) < 6 || strlen($postal_check) > 6){
+      form_set_error('field_lsa_supervisor_postal_code', t("The supervisor postal code must have 6 characters."));
+    }
+    // Quick regex to make sure we have relatively the right type of canadian postal
+    $validity = preg_match($postal_regex, $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']);
+    if($validity == FALSE){
+      form_set_error('field_lsa_supervisor_postal_code', t("Please enter a valid postal code for the supervisor in the format A1A 1A1"));
     }
   }
 
@@ -216,12 +279,12 @@ function atwork_lsa_application_validate($form, &$form_state) {
 
 function atwork_lsa_pin_application_validate($form, &$form_state){
   $lang = $form_state['values']['language'];
-
   global $user;
 
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)) {
     return true;
   }
+
   // Check if an application has already been submitted for this user
   $exists = db_select('field_data_field_lsa_pin_employee_number', 'e')
       ->fields('e', array('entity_id'))
@@ -243,6 +306,9 @@ function atwork_lsa_pin_application_validate($form, &$form_state){
     // Form is empty
     form_set_error('field_lsa_', t('You have not selected any milestone'));
   }
+
+  // Lets make sure the Postal codes at least match standardized format - we are not looking up validity here.
+
 
   return true;
 }
@@ -274,27 +340,6 @@ function atwork_lsa_node_presave($node) {
   // standardize case
   $node->field_lsa_street[$lang][0]['value'] = ucwords(strtolower($node->field_lsa_street[$lang][0]['value']));
   $node->field_lsa_city[$lang][0]['value'] = ucwords(strtolower($node->field_lsa_city[$lang][0]['value']));
-  // Postal Code setup
-  // Upper case
-  $node->field_lsa_home_postal_code[$lang][0]['value'] = strtoupper($node->field_lsa_home_postal_code[$lang][0]['value']);
-  $node->field_lsa_office_postal_code[$lang][0]['value'] = strtoupper($node->field_lsa_office_postal_code[$lang][0]['value']);
-  // remove spaces
-  $node->field_lsa_home_postal_code[$lang][0]['value'] = preg_replace('/\s+/', '', $node->field_lsa_home_postal_code[$lang][0]['value']);
-  $node->field_lsa_office_postal_code[$lang][0]['value'] = preg_replace('/\s+/', '', $node->field_lsa_office_postal_code[$lang][0]['value']);
-  // remove special characters
-  $node->field_lsa_home_postal_code[$lang][0]['value'] = preg_replace('/[^A-Za-z0-9\-]/', '', $node->field_lsa_home_postal_code[$lang][0]['value']);
-  $node->field_lsa_office_postal_code[$lang][0]['value'] = preg_replace('/[^A-Za-z0-9\-]/', '', $node->field_lsa_office_postal_code[$lang][0]['value']);
-  // Put expected space back at 3rd spot
-  $node->field_lsa_home_postal_code[$lang][0]['value'] = wordwrap($node->field_lsa_home_postal_code[$lang][0]['value'], 3, ' ', true);
-  $node->field_lsa_office_postal_code[$lang][0]['value'] = wordwrap($node->field_lsa_office_postal_code[$lang][0]['value'], 3, ' ', true);
-  // Make sure this is no more than 7 characters long
-  if (strlen($node->field_lsa_home_postal_code[$lang][0]['value']) > 7){
-    $node->field_lsa_home_postal_code[$lang][0]['value'] = substr($node->field_lsa_home_postal_code[$lang][0]['value'],0,7);
-  }
-  if(strlen($node->field_lsa_office_postal_code[$lang][0]['value']) > 7){
-    $node->field_lsa_office_postal_code[$lang][0]['value'] = substr($node->field_lsa_office_postal_code[$lang][0]['value'], 0,7);
-  }
-
 
   // trim by request - probably not needed
   $node->field_lsa_first_name[$lang][0]['value'] = trim($node->field_lsa_first_name[$lang][0]['value']);
@@ -579,7 +624,6 @@ function atwork_lsa_node_insert($node) {
  */
 function atwork_lsa_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-
 // For LSA admin, allows to sort on whether a user has entered input.
   if($form['#id'] == 'views-exposed-form-lsa-admin-page-2'){
     if(isset($form['field_lsa_notes_value_op']['#options'])){
@@ -604,6 +648,7 @@ function atwork_lsa_form_alter(&$form, &$form_state, $form_id) {
   }
 
   if ($form['#id'] == 'views-exposed-form-content-lsa') {
+
     if (isset($form['#info']['filter-created']['label'])) {
       $form['#info']['filter-created']['label'] = '';
     }

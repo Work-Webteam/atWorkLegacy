@@ -712,7 +712,7 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_branch_department',
-    'label' => 'Branch/Department',
+    'label' => 'Branch',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -728,6 +728,8 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -1741,6 +1743,21 @@ function atwork_lsa_features_field_default_field_instances() {
     'label' => 'First Name',
     'required' => 1,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -1750,7 +1767,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 20,
+        'size' => 30,
       ),
       'type' => 'text_textfield',
       'weight' => 10,
@@ -2278,6 +2295,21 @@ function atwork_lsa_features_field_default_field_instances() {
     'label' => 'Last Name',
     'required' => 1,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -2287,7 +2319,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 20,
+        'size' => 30,
       ),
       'type' => 'text_textfield',
       'weight' => 12,
@@ -2345,6 +2377,21 @@ function atwork_lsa_features_field_default_field_instances() {
     'label' => 'Middle Name',
     'required' => 0,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -2354,7 +2401,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 20,
+        'size' => 30,
       ),
       'type' => 'text_textfield',
       'weight' => 11,
@@ -2904,87 +2951,6 @@ function atwork_lsa_features_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 21,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-lsa_application-field_lsa_office_work_group'.
-  $field_instances['node-lsa_application-field_lsa_office_work_group'] = array(
-    'bundle' => 'lsa_application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'inline',
-        'module' => 'editablefields',
-        'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
-          'semantic_field_format' => '',
-        ),
-        'type' => 'editable',
-        'weight' => 14,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'question' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_lsa_office_work_group',
-    'label' => 'Office',
-    'required' => 0,
-    'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'maxlength_js' => 0,
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 18,
     ),
   );
 
@@ -3970,7 +3936,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_lsa_supervisor_city',
     'label' => 'Supervisor City',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'authcache' => array(
         'clients' => array(
@@ -4054,14 +4020,28 @@ function atwork_lsa_features_field_default_field_instances() {
     'label' => 'Supervisor Email',
     'required' => 1,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
       'module' => 'email',
       'settings' => array(
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 60,
+        'size' => 45,
       ),
       'type' => 'email_textfield',
       'weight' => 39,
@@ -4120,6 +4100,21 @@ function atwork_lsa_features_field_default_field_instances() {
     'label' => 'First Name',
     'required' => 1,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -4129,7 +4124,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 20,
+        'size' => 30,
       ),
       'type' => 'text_textfield',
       'weight' => 37,
@@ -4188,6 +4183,21 @@ function atwork_lsa_features_field_default_field_instances() {
     'label' => 'Last Name',
     'required' => 1,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -4197,7 +4207,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 20,
+        'size' => 30,
       ),
       'type' => 'text_textfield',
       'weight' => 38,
@@ -4249,7 +4259,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_lsa_supervisor_postal_code',
     'label' => 'Supervisor Postal Code',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'authcache' => array(
         'clients' => array(
@@ -4275,7 +4285,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 60,
+        'size' => 7,
       ),
       'type' => 'text_textfield',
       'weight' => 43,
@@ -4286,7 +4296,11 @@ function atwork_lsa_features_field_default_field_instances() {
   // 'node-lsa_application-field_lsa_supervisor_province'.
   $field_instances['node-lsa_application-field_lsa_supervisor_province'] = array(
     'bundle' => 'lsa_application',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 'BC',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -4327,7 +4341,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_lsa_supervisor_province',
     'label' => 'Supervisor Province',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'authcache' => array(
         'clients' => array(
@@ -4353,7 +4367,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 60,
+        'size' => 2,
       ),
       'type' => 'text_textfield',
       'weight' => 42,
@@ -4903,7 +4917,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_supervisor_address',
     'label' => 'Supervisor Address',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'authcache' => array(
         'clients' => array(
@@ -6764,7 +6778,6 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Award Special Instructions');
   t('Award Year');
   t('Branch');
-  t('Branch/Department');
   t('Ceremony Date');
   t('Ceremony Night');
   t('Ceremony Response');
@@ -6801,7 +6814,6 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Ministry/Organization');
   t('Notes');
   t('Number Attending');
-  t('Office');
   t('Office Street Address');
   t('PECSF ID');
   t('PECSF ID 2');
