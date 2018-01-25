@@ -101,7 +101,7 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
 		$comment_value = '';
 		$comment_suffix = NULL;
 		if(array_key_exists('nodes',$form)) {
-			$comment_disabled = TRUE;
+			//$comment_disabled = TRUE;
 			$comment_value = $form_state['input']['cid'];
 			$comment_preview = comment_load($comment_value);
 			$comment_body = $comment_preview->comment_body['und'][0]['value'];
