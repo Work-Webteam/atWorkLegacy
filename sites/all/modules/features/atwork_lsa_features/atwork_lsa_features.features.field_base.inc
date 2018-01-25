@@ -540,6 +540,27 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'datetime',
   );
 
+  // Exported field_base: 'field_lsa_dietary_guest'.
+  $field_bases['field_lsa_dietary_guest'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_dietary_guest',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_lsa_dietary_requirements'.
   $field_bases['field_lsa_dietary_requirements'] = array(
     'active' => 1,
@@ -1648,6 +1669,27 @@ function atwork_lsa_features_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_lsa_recipient_accom',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_lsa_recipient_dietary'.
+  $field_bases['field_lsa_recipient_dietary'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_recipient_dietary',
     'indexes' => array(
       'format' => array(
         0 => 'format',

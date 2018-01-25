@@ -1413,6 +1413,96 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-lsa_application-field_lsa_dietary_guest'.
+  $field_instances['node-lsa_application-field_lsa_dietary_guest'] = array(
+    'bundle' => 'lsa_application',
+    'default_value' => array(
+      0 => array(
+        'value' => FALSE,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => 0,
+        ),
+        'type' => 'text_default',
+        'weight' => 43,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_dietary_guest',
+    'label' => 'My guest(s) request(s)',
+    'required' => 0,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'select_or_other',
+      'settings' => array(
+        'available_options' => 'Dairy Free
+Gluten Free
+Sugar Free
+No Shellfish
+Vegetarian
+Vegan',
+        'other' => 'Other',
+        'other_size' => 60,
+        'other_title' => '',
+        'other_unknown_defaults' => 'other',
+        'other_unknown_new_option' => 0,
+        'sort_options' => 0,
+      ),
+      'type' => 'select_or_other_buttons',
+      'weight' => 23,
+    ),
+  );
+
   // Exported field_instance:
   // 'node-lsa_application-field_lsa_dietary_requirements'.
   $field_instances['node-lsa_application-field_lsa_dietary_requirements'] = array(
@@ -2165,11 +2255,7 @@ function atwork_lsa_features_field_default_field_instances() {
   // Exported field_instance: 'node-lsa_application-field_lsa_guest_accom'.
   $field_instances['node-lsa_application-field_lsa_guest_accom'] = array(
     'bundle' => 'lsa_application',
-    'default_value' => array(
-      0 => array(
-        'value' => FALSE,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -2234,10 +2320,10 @@ function atwork_lsa_features_field_default_field_instances() {
       'active' => 1,
       'module' => 'select_or_other',
       'settings' => array(
-        'available_options' => '1|Sign language interpreter (ASL)
-2|Service dog
-3|Accessible parking/entrance
-4|Wheelchair/walker seating',
+        'available_options' => 'Sign language interpreter (ASL)
+Service dog
+Accessible parking/entrance
+Wheelchair/walker seating',
         'other' => 'Other',
         'other_size' => 60,
         'other_title' => '',
@@ -2873,7 +2959,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'rows' => 7,
       ),
       'type' => 'text_textarea',
-      'weight' => 57,
+      'weight' => 58,
     ),
   );
 
@@ -3709,11 +3795,7 @@ function atwork_lsa_features_field_default_field_instances() {
   // Exported field_instance: 'node-lsa_application-field_lsa_recipient_accom'.
   $field_instances['node-lsa_application-field_lsa_recipient_accom'] = array(
     'bundle' => 'lsa_application',
-    'default_value' => array(
-      0 => array(
-        'value' => FALSE,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -3778,20 +3860,110 @@ function atwork_lsa_features_field_default_field_instances() {
       'active' => 1,
       'module' => 'select_or_other',
       'settings' => array(
-        'available_options' => '1|Sign language interpreter (ASL)
-2|Service dog
-3|Accessible parking/entrance
-4|Wheelchair/walker seating
-some accommodation',
+        'available_options' => 'Sign language interpreter (ASL)
+Service dog
+Accessible parking/entrance
+Wheelchair/walker seating',
         'other' => 'Other',
         'other_size' => 45,
         'other_title' => '',
         'other_unknown_defaults' => 'other',
-        'other_unknown_new_option' => 1,
+        'other_unknown_new_option' => 0,
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 23,
+      'weight' => 24,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-lsa_application-field_lsa_recipient_dietary'.
+  $field_instances['node-lsa_application-field_lsa_recipient_dietary'] = array(
+    'bundle' => 'lsa_application',
+    'default_value' => array(
+      0 => array(
+        'value' => FALSE,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => 0,
+        ),
+        'type' => 'text_default',
+        'weight' => 42,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_recipient_dietary',
+    'label' => 'My Request(s)',
+    'required' => 0,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'select_or_other',
+      'settings' => array(
+        'available_options' => 'Dairy Free
+Gluten Free
+Sugar Free
+No Shellfish
+Vegetarian
+Vegan',
+        'other' => 'Other',
+        'other_size' => 60,
+        'other_title' => '',
+        'other_unknown_defaults' => 'other',
+        'other_unknown_new_option' => 0,
+        'sort_options' => 0,
+      ),
+      'type' => 'select_or_other_buttons',
+      'weight' => 22,
     ),
   );
 
@@ -4778,7 +4950,7 @@ some accommodation',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 31,
+      'weight' => 62,
     ),
   );
 
@@ -7092,6 +7264,8 @@ some accommodation',
   t('Ministry ID');
   t('Ministry Representative Email');
   t('Ministry/Organization');
+  t('My Request(s)');
+  t('My guest(s) request(s)');
   t('Notes');
   t('Number Attending');
   t('Office Street Address');

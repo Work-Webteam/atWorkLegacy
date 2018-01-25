@@ -473,7 +473,6 @@ function atwork_lsa_node_view($node, $view_mode, $langcode) {
       '#weight' => 90,
       '#markup' => '<p class="feature_box_yellow" style="margin-top: 1em;">If you have any questions, please contact your <a href="/career/employee-appreciation/recognition-contacts">Ministry Recognition Contact</a>.' /*, or the corporate  contact at the BC Public Service Agency, <a href="mailto:Gillian.Kish@gov.bc.ca">Gillian.Kish@gov.bc.ca</a></p>' */,
       );
-
   }
 
 
@@ -491,6 +490,21 @@ function atwork_lsa_node_view($node, $view_mode, $langcode) {
   // Adding in our third and final steps of instructions that isn't in the block - TODO: hide this until we are ready to allow users to alter their fields
   $node->content['field_lsa_retiring_thisyear']['#prefix'] = '<p> Step 3: Verify your contact information below is correct. If you make changes, click the “Save Change” button. If you are unable to make changes to certain fields, please notify us by email at <a href="mailto:longserviceawards@gov.bc.ca?subject=Change%20request">longserviceawards@gov.bc.ca</a>.</p><p>&nbsp</p>'; 
   $node->content['field_lsa_supervisor_email']['#suffix'] = '<strong style="color: red;"> <br /><p>Thank you for confirming your information.</p><p>Once all your changes are saved, please visit the <a href="https://gww.gov.bc.ca/career/long-service-awards/faq">Long Service Awards FAQs</a> for more information.</p></strong>';
+  // Change the confirmation message to make more sense.
+  if (isset($_SESSION['messages']['status']) && $_SESSION['messages']['status']){
+    $first_name = $node->field_lsa_first_name['und'][0]['safe_value'];
+    $last_name = $node->field_lsa_last_name['und'][0]['safe_value'];
+    if(isset($node->field_lsa_middle_name['und'][0]['safe_value']) && $node->field_lsa_middle_name['und'][0]['safe_value']) {
+      $full_name = $first_name . ' ' . $node->field_lsa_middle_name['und'][0]['safe_value'] . ' ' . $last_name;
+    } else {
+      $full_name = $first_name . ' ' . $last_name;
+    }
+    $message_check = 'Long Service Awards Application <em class="placeholder">' . $full_name . '</em> has been created.';
+    if (in_array($message_check, $_SESSION['messages']['status'])){
+      $i = array_search($message_check, $_SESSION['messages']['status']);
+      $_SESSION['messages']['status'][$i] = $full_name .'\'s Long Service Award registration has been received';
+    }
+  }
 }
 
 function atwork_lsa_views_pre_view(&$view, &$display_id, &$args) {
