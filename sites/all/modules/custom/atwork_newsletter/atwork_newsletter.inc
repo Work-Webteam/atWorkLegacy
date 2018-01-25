@@ -22,14 +22,24 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 		
 		// Retrieve Username from UID and place in comments array
 		$user = user_load($comment->uid);
-		
-		$comment->comment_body['und'][0]['formatted'] = '<p class="outlook-comment-body" style="margin: 0 10px 0 15px; font-size: 12pt; font-family: Calibri,sans-serif; padding-bottom: 10px; line-height: 20px;">"'
-		  . substr($comment->comment_body['und'][0]['value'], 3);
-		$comment->comment_body['und'][0]['formatted'] = str_replace('<p>', '<p class="outlook-comment-body" style="margin: 0 10px 0 15px; font-size: 12pt; font-family: Calibri,sans-serif; padding-bottom: 10px; line-height: 20px;">', $comment->comment_body['und'][0]['formatted']);
-		$comment->comment_body['und'][0]['formatted'] = str_replace('</p>', '</p>', $comment->comment_body['und'][0]['formatted']);
+		// We need to remove any image tags
+		$comment->comment_body['und'][0]['formatted'] = preg_replace("/<img[^>]+\>/i", "", $comment->comment_body['und'][0]['value'] ); 
+		// Trim whitespace
 		$comment->comment_body['und'][0]['formatted'] = trim($comment->comment_body['und'][0]['formatted']);
-		$comment->comment_body['und'][0]['formatted'] = substr($comment->comment_body['und'][0]['formatted'],0,-6) .  '"</p>';
-		
+		// remove first and last <p> tags
+		$comment->comment_body['und'][0]['formatted'] = substr($comment->comment_body['und'][0]['formatted'], 3);
+		$comment->comment_body['und'][0]['formatted'] = substr($comment->comment_body['und'][0]['formatted'], 0, -4);
+		// Change any double quotes to single quotes (if the author has started or ended comment with a quote or something)
+		// NOTE: The double quotes that are used onsite are not regular " so we need to use the correct ones.
+		$comment->comment_body['und'][0]['formatted'] = str_replace("“","'",$comment->comment_body['und'][0]['formatted']);
+		$comment->comment_body['und'][0]['formatted'] = str_replace("”","'",$comment->comment_body['und'][0]['formatted']);
+
+		// Now replace all remaining <p> tags with proper formatting
+		$comment->comment_body['und'][0]['formatted'] = str_replace('<p>', '<p class="outlook-comment-body" style="margin: 0 10px 0 15px; font-size: 12pt; font-family: Calibri,sans-serif; padding-bottom: 10px; line-height: 20px;">', $comment->comment_body['und'][0]['formatted']);
+		// Now add double quotes to front and end of comment
+		$comment->comment_body['und'][0]['formatted'] = "“" . $comment->comment_body['und'][0]['formatted'] . "”";
+		// Adding in formating for outlook
+		$comment->comment_body['und'][0]['formatted'] = '<p class="outlook-comment-body" style="margin: 0 10px 0 15px; font-size: 12pt; font-family: Calibri,sans-serif; padding-bottom: 10px; line-height: 20px;">' . $comment->comment_body['und'][0]['formatted'] . '</p>';
 		// Add in link to parent article
 		$parent = node_load($comment->nid);
 		$comment->parent_url = drupal_get_path_alias('node/' . $comment->nid);
