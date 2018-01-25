@@ -324,6 +324,9 @@ $atwork_base_url = $GLOBALS['base_url'];
           
           // Get summary for current node
           $atwork_newsletter_body = $curr_node->body['und'][0]['summary'];
+          // Sanitize summary for images
+          $atwork_newsletter_body = preg_replace("/<img[^>]+\>/i", "", $atwork_newsletter_body ); 
+
           
           // Build title for article
           $output_atwork_newsletter_title = '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px;"><a style="text-decoration: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" >' . $atwork_newsletter_title . '</a></h2>';
@@ -508,7 +511,10 @@ $atwork_base_url = $GLOBALS['base_url'];
       	$atwork_blog_aliased = drupal_get_path_alias('node/' . $atwork_blog_location) . $pubDate;
       	
       	// Grab teaser of news story for output
-      	$atwork_blog_body = field_get_items('node', $curr_node, 'body');
+        $atwork_blog_body = field_get_items('node', $curr_node, 'body');
+        // Sanitize teaser for images
+        $atwork_blog_body[0]['summary'] = preg_replace("/<img[^>]+\>/i", "", $atwork_blog_body[0]['summary']); 
+
       	
       	// Build title for blog
       	$output_atwork_blog_title = '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px; margin-left: 10px; margin-right: 10px;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_blog_aliased . '" >' . $atwork_blog_title . '</a></h2>';
@@ -579,7 +585,7 @@ $atwork_base_url = $GLOBALS['base_url'];
             <td class="outlook-comment-blog-title" style="line-height: 24px; border-bottom: none !important;" valign="top" colspan="2">
               <div class="outlook-comment-blog-title" outlook-body style="line-height: 24px;" >
                 <h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px; margin-left: 15px; margin-bottom: 15px;">
-                  <?php echo '<a style="text-decoration: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . '">Join the Conversation</a>'; ?>
+                  <?php echo '<a style="text-decoration: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . '?#comment-' . $atwork_newsletter_render_array['comments']->cid . '">Join the Conversation</a>'; ?>
                 </h2>
               </div>
             </td>
@@ -591,7 +597,7 @@ $atwork_base_url = $GLOBALS['base_url'];
           </tr>
           <tr>
             <td class="outlook-no-mso-border" colspan="2" style="padding: 5px 0 0 15px; color:#004B8D">
-              <?php echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; /*line-height: 24px;*/ font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . '" > Read more >> </a>';?>
+              <?php echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; /*line-height: 24px;*/ font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . '?#comment-' . $atwork_newsletter_render_array['comments']->cid . '" > Read more >> </a>';?>
             </td>
           </tr>
           <tr>
