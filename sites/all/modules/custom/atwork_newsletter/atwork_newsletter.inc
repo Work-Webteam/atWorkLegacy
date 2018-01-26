@@ -24,22 +24,40 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 		$user = user_load($comment->uid);
 		// We need to remove any image tags
 		$comment->comment_body['und'][0]['formatted'] = preg_replace("/<img[^>]+\>/i", "", $comment->comment_body['und'][0]['value'] ); 
+		// Get rid of <p>&nbsp;</p> if author has dropped in a bunch of returns
+		$pattern = "/<p>*(?:[[:blank:]]|[[:space:]]|\s|\W|X|h|\t|\r|\n)*<\/p>/";
+		$comment->comment_body['und'][0]['formatted'] = preg_replace($pattern, '',$comment->comment_body['und'][0]['formatted']);
 		// Trim whitespace
 		$comment->comment_body['und'][0]['formatted'] = trim($comment->comment_body['und'][0]['formatted']);
-		// remove first and last <p> tags
-		$comment->comment_body['und'][0]['formatted'] = substr($comment->comment_body['und'][0]['formatted'], 3);
-		$comment->comment_body['und'][0]['formatted'] = substr($comment->comment_body['und'][0]['formatted'], 0, -4);
-		// Change any double quotes to single quotes (if the author has started or ended comment with a quote or something)
-		// NOTE: The double quotes that are used onsite are not regular " so we need to use the correct ones.
-		$comment->comment_body['und'][0]['formatted'] = str_replace("“","'",$comment->comment_body['und'][0]['formatted']);
-		$comment->comment_body['und'][0]['formatted'] = str_replace("”","'",$comment->comment_body['und'][0]['formatted']);
+		// We need to check if this is an HTML comment or a regular text comment. Start by prefixing an x to the front so that we
+		// Do not have to deal with the case where the match occurs at 0 (mistaken for false)
+		// HTML Case
+		if(strpos('x' . $comment->comment_body['und'][0]['formatted'], '<p>') !== false){
+			// remove first and last <p> tags
+			$comment->comment_body['und'][0]['formatted'] = substr($comment->comment_body['und'][0]['formatted'], 3);
+			$comment->comment_body['und'][0]['formatted'] = substr($comment->comment_body['und'][0]['formatted'], 0, -4);
+			// Change any double quotes to single quotes (if the author has started or ended comment with a quote or something)
+			// NOTE: The double quotes that are used onsite are not regular " so we need to use the correct ones.
+			$comment->comment_body['und'][0]['formatted'] = str_replace("“","'",$comment->comment_body['und'][0]['formatted']);
+			$comment->comment_body['und'][0]['formatted'] = str_replace("”","'",$comment->comment_body['und'][0]['formatted']);
+			$comment->comment_body['und'][0]['formatted'] = str_replace("\"","'",$comment->comment_body['und'][0]['formatted']);
 
-		// Now replace all remaining <p> tags with proper formatting
-		$comment->comment_body['und'][0]['formatted'] = str_replace('<p>', '<p class="outlook-comment-body" style="margin: 0 10px 0 15px; font-size: 12pt; font-family: Calibri,sans-serif; padding-bottom: 10px; line-height: 20px;">', $comment->comment_body['und'][0]['formatted']);
-		// Now add double quotes to front and end of comment
-		$comment->comment_body['und'][0]['formatted'] = "“" . $comment->comment_body['und'][0]['formatted'] . "”";
-		// Adding in formating for outlook
-		$comment->comment_body['und'][0]['formatted'] = '<p class="outlook-comment-body" style="margin: 0 10px 0 15px; font-size: 12pt; font-family: Calibri,sans-serif; padding-bottom: 10px; line-height: 20px;">' . $comment->comment_body['und'][0]['formatted'] . '</p>';
+			// Now replace all remaining <p> tags with proper formatting
+			$comment->comment_body['und'][0]['formatted'] = str_replace('<p>', '<p class="outlook-comment-body" style="margin: 0 10px 0 15px; font-size: 12pt; font-family: Calibri,sans-serif; padding-bottom: 10px; line-height: 20px;">', $comment->comment_body['und'][0]['formatted']);
+			// Now add double quotes to front and end of comment
+			$comment->comment_body['und'][0]['formatted'] = "“" . $comment->comment_body['und'][0]['formatted'] . "”";
+			// Adding in formating for outlook
+			$comment->comment_body['und'][0]['formatted'] = '<p class="outlook-comment-body" style="margin: 0 10px 0 15px; font-size: 12pt; font-family: Calibri,sans-serif; padding-bottom: 10px; line-height: 20px;">' . $comment->comment_body['und'][0]['formatted'] . '</p>';
+		}
+		// Text case
+		else {
+			// replace all existing double-quotes with single quotes
+			$comment->comment_body['und'][0]['formatted'] = str_replace("\"","'",$comment->comment_body['und'][0]['formatted']);
+			// Add stylized quotes for newsletter
+			$comment->comment_body['und'][0]['formatted'] = "“" . $comment->comment_body['und'][0]['formatted'] . "”";
+			// Put in HTML tags so that we have the proper font
+			$comment->comment_body['und'][0]['formatted'] = '<p class="outlook-comment-body" style="margin: 0 10px 0 15px; font-size: 12pt; font-family: Calibri,sans-serif; padding-bottom: 10px; line-height: 20px;">' . $comment->comment_body['und'][0]['formatted'] . '</p>';
+		}
 		// Add in link to parent article
 		$parent = node_load($comment->nid);
 		$comment->parent_url = drupal_get_path_alias('node/' . $comment->nid);
