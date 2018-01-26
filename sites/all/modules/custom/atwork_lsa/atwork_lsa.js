@@ -17,6 +17,7 @@
       $("#edit-field-lsa-award-id-und-0-value").val('');
       //$('#edit-field-lsa-award-und-0-value').val('');
       $('#edit-field-lsa-award-und-0-value').hide();
+      $('#lsa-award-selector-img-display-panel').hide();
       $('.form-item.form-type-textfield.form-item-field-lsa-award-und-0-value').hide();
 
 
@@ -123,6 +124,8 @@
 
     // Setting award text box - will not be useable by applicant
     $('#edit-field-lsa-award-und-0-value').hide();
+    $('#lsa-award-selector-img-display-panel').hide();
+    
     $('.form-item.form-type-textfield.form-item-field-lsa-award-und-0-value').hide();
     $('#edit-field-lsa-award-und-0-value').prop("readonly", true);
     $('#edit-field-lsa-award-und-0-value').css('background-color' , '#DEDEDE');
@@ -143,6 +146,7 @@
     // Change text for pecsf options (too long for text box in setup)
     $("label[for=edit-field-lsa-donation-options-und-0]").html('Option A: Make a PECSF donation to the <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity">fund supported pool of charities in my region</a>.');
     $("label[for=edit-field-lsa-donation-options-und-1]").html('Option B: Make a PECSF donation to one or two charities of my choice. (Find the PECSF ID number for your choice(s) by reviewing the <a href="https://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions">charity list by region</a>.)');
+    $("form-item.form-type-radio.form-item-field-lsa-donation-options-und").attr("style", "display:block");
     // Hide alternate fields until they are required
     $('.collapsible.required-fields.group-lsa-first-donation.field-group-fieldset.form-wrapper.collapse-processed').hide();
     $('.collapsible.required-fields.group-lsa-second-donation.field-group-fieldset.form-wrapper.collapse-processed').hide();

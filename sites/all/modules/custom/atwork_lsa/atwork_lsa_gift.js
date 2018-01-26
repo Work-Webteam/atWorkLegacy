@@ -598,6 +598,11 @@ function gift_choice_populate_form(gifts){
   $('#edit-field-lsa-award-und-0-value').show();
   $('#edit-field-lsa-award-und-0-value').val(full_gift_name);
   $('#edit-field-lsa-award-id-und-0-value').val(gift_id_number);
+  
+  // Show the award image while we are at it
+  /* TODO: put in call to funciton that returns img URI's */
+  $('#lsa-award-selector-img-display-panel').attr("src", "/sites/default/files/lsa_2015/25_ballpoint-pen-final.jpg").show();
+  
   // Check if this is a pecsef donation, if it is, run a function to figure out values etc.
   switch(true){
     case gift_id_number == 11:
