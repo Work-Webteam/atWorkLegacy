@@ -14,7 +14,7 @@ function atwork_lsa_features_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_lsa_application';
-  $strongarm->value = 'edit-submission';
+  $strongarm->value = 'edit-auto-nodetitle';
   $export['additional_settings__active_tab_lsa_application'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -349,13 +349,13 @@ if (isset($node->field_lsa_middle_name[$node->language][0][\'value\']) && $node-
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '0',
-        ),
-        'path' => array(
           'weight' => '1',
         ),
-        'redirect' => array(
+        'path' => array(
           'weight' => '2',
+        ),
+        'redirect' => array(
+          'weight' => '3',
         ),
       ),
       'display' => array(),

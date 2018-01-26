@@ -94,25 +94,6 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_lsa_accommodation_notes'.
-  $field_bases['field_lsa_accommodation_notes'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_lsa_accommodation_notes',
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(),
-    'translatable' => 0,
-    'type' => 'text_long',
-  );
-
   // Exported field_base: 'field_lsa_actual_min_org'.
   $field_bases['field_lsa_actual_min_org'] = array(
     'active' => 1,
@@ -322,31 +303,6 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_lsa_ceremony_accommodation'.
-  $field_bases['field_lsa_ceremony_accommodation'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_lsa_ceremony_accommodation',
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        0 => 'No',
-        1 => 'Yes',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_boolean',
-  );
-
   // Exported field_base: 'field_lsa_ceremony_night'.
   $field_bases['field_lsa_ceremony_night'] = array(
     'active' => 1,
@@ -540,52 +496,6 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'datetime',
   );
 
-  // Exported field_base: 'field_lsa_dietary_guest'.
-  $field_bases['field_lsa_dietary_guest'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_lsa_dietary_guest',
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
-    'translatable' => 0,
-    'type' => 'text',
-  );
-
-  // Exported field_base: 'field_lsa_dietary_requirements'.
-  $field_bases['field_lsa_dietary_requirements'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_lsa_dietary_requirements',
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        0 => 'No',
-        1 => 'Yes',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_boolean',
-  );
-
   // Exported field_base: 'field_lsa_donation_amount'.
   $field_bases['field_lsa_donation_amount'] = array(
     'active' => 1,
@@ -644,8 +554,8 @@ function atwork_lsa_features_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        0 => 'Option A:',
-        1 => 'Option B: ',
+        0 => 'Option A: Please make a donation on my behalf, to the PECSF Fund Supported Pool of regional programs in my area.',
+        1 => 'Option B:  Please make a donation on my behalf, to the following charities. Maximum of two.',
       ),
       'allowed_values_function' => '',
     ),
@@ -784,27 +694,6 @@ function atwork_lsa_features_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_boolean',
-  );
-
-  // Exported field_base: 'field_lsa_guest_accom'.
-  $field_bases['field_lsa_guest_accom'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_lsa_guest_accom',
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
-    'translatable' => 0,
-    'type' => 'text',
   );
 
   // Exported field_base: 'field_lsa_home_phone'.
@@ -1127,6 +1016,27 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_lsa_office_work_group'.
+  $field_bases['field_lsa_office_work_group'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_office_work_group',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_lsa_org'.
   $field_bases['field_lsa_org'] = array(
     'active' => 1,
@@ -1143,80 +1053,73 @@ function atwork_lsa_features_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        15 => 'Ministry of Advanced Education, Skills and Training',
-        17 => 'Ministry of Agriculture',
-        18 => 'Ministry of Attorney General',
-        31 => 'Ministry of Children and Family Development',
-        33 => 'Ministry of Citizens\' Services',
-        39 => 'Ministry of Education',
-        43 => 'Ministry of Energy, Mines and Petroleum Resources',
-        44 => 'Ministry of Environment and Climate Change Strategy',
-        47 => 'Ministry of Finance',
-        52 => 'Ministry of Forests, Lands, Natural Resource Operations and Rural Development',
-        55 => 'Ministry of Health',
-        59 => 'Ministry of Indigenous Relations and Reconciliation',
-        63 => 'Ministry of Jobs, Trade and Technology',
-        64 => 'Ministry of Labour',
-        68 => 'Ministry of Mental Health and Addictions',
-        70 => 'Ministry of Municipal Affairs and Housing',
-        84 => 'Ministry of Public Safety and Solicitor General',
-        88 => 'Ministry of Social Development and Poverty Reduction',
-        90 => 'Ministry of Transportation and Infrastructure',
-        16 => 'Agricultural Land Commission',
-        20 => 'Auditor General for Local Government',
-        21 => 'BC Arts Council',
-        22 => 'BC Farm Industry Review Board',
-        23 => 'BC Human Rights Tribunal',
-        24 => 'BC Pension Corporation',
-        25 => 'BC Public Service Agency',
-        26 => 'BC Review Board',
-        27 => 'BC Transportation Financing Authority',
-        28 => 'BC Utilities Commission',
-        29 => 'Board Resourcing and Development Office',
-        30 => 'Building Code Appeal Board',
-        34 => 'Civil Resolution Tribunal',
-        35 => 'Community Care and Assisted Living Appeal Board',
-        36 => 'Community Living BC',
-        37 => 'Crown Agencies Resource Office',
-        38 => 'Destination BC',
-        40 => 'Elections BC',
-        41 => 'Employment and Assistance Appeal Tribunal',
-        42 => 'Employment Standards Tribunal',
-        45 => 'Environmental Appeal Board',
-        46 => 'Environmental Assessment Office',
-        48 => 'Financial Institutions Commission',
-        49 => 'Financial Services Tribunal',
-        50 => 'Forest Appeals Commission',
-        51 => 'Forest Practices Board',
-        54 => 'Government Communications and Public Engagement',
-        56 => 'Health Professions Review Board',
-        57 => 'Hospital Appeal Board',
-        58 => 'Independent Investigations Office',
-        60 => 'Industry Training Appeal Board',
-        61 => 'Intergovernmental Relations Secretariat',
-        62 => 'Islands Trust',
-        65 => 'Labour Relations Board',
-        66 => 'Legislative Assembly of British Columbia',
-        67 => 'Liquor Distribution Branch',
-        69 => 'Mental Health Review Board',
-        71 => 'Office of the Auditor General',
-        72 => 'Office of the Conflict of Interest Commissioner',
-        73 => 'Office of the Fire Commissioner',
-        74 => 'Office of the Information and Privacy Commissioner',
-        75 => 'Office of the Merit Commissioner',
-        76 => 'Office of the Ombudsperson',
-        77 => 'Office of the Police Complaint Commissioner',
-        78 => 'Office of the Premier',
-        79 => 'Office of the Representative for Children and Youth',
-        80 => 'Oil and Gas Appeal Tribunal',
-        81 => 'Passenger Transportation Board',
-        82 => 'Property Assessment Appeal Board',
-        83 => 'Public Guardian and Trustee',
-        85 => 'Public Sector Employers\' Council Secretariat',
-        86 => 'Royal BC Museum',
-        87 => 'Safety Standards Appeal Board',
-        89 => 'Surface Rights Board',
-        91 => 'Workers\' Compensation Appeal Tribunal',
+        16 => 'Ministry of Advanced Education, Skills and Training',
+        18 => 'Ministry of Agriculture',
+        54 => 'Ministry of Attorney General',
+        26 => 'Ministry of Children and Family Development',
+        81 => 'Ministry of Citizens\' Services',
+        33 => 'Ministry of Education',
+        35 => 'Ministry of Energy, Mines and Petroleum Resources',
+        36 => 'Ministry of Environment and Climate Change Strategy',
+        39 => 'Ministry of Finance',
+        44 => 'Ministry of Forests, Lands, Natural Resource Operations and Rural Development',
+        48 => 'Ministry of Health',
+        15 => 'Ministry of Indigenous Relations and Reconciliation',
+        53 => 'Ministry of Jobs, Trade and Technology',
+        90 => 'Ministry of Labour',
+        91 => 'Ministry of Mental Health and Addictions',
+        29 => 'Ministry of Municipal Affairs and Housing',
+        74 => 'Ministry of Public Safety and Solicitor General',
+        80 => 'Ministry of Social Development and Poverty Reduction',
+        92 => 'Ministry of Tourism, Arts and Culture',
+        82 => 'Ministry of Transportation and Infrastructure',
+        17 => 'Agricultural Land Commission',
+        19 => 'BC Arts Council',
+        20 => 'BC Farm Industry Review Board',
+        21 => 'BC Human Rights Tribunal',
+        22 => 'BC Pension Corporation',
+        23 => 'BC Public Service Agency',
+        24 => 'BC Review Board',
+        89 => 'BC Transportation Financing Authority',
+        25 => 'Board Resourcing and Development Office',
+        85 => 'Community Care and Assisted Living Appeal Board',
+        28 => 'Community Living BC',
+        31 => 'Crown Agencies Resource Office',
+        32 => 'Destination BC',
+        34 => 'Elections BC',
+        86 => 'Employment and Assistance Appeal Tribunal',
+        37 => 'Environmental Appeal Board',
+        38 => 'Environmental Assessment Office',
+        40 => 'Financial Institutions Commission',
+        41 => 'Financial Services Tribunal',
+        42 => 'Forest Appeals Commission',
+        43 => 'Forest Practices Board',
+        47 => 'Government Communications and Public Engagement',
+        87 => 'Hospital Appeal Board',
+        49 => 'Independent Investigations Office',
+        50 => 'Intergovernmental Relations Secretariat',
+        52 => 'Islands Trust',
+        57 => 'Legislative Assembly of BC',
+        58 => 'Liquor Distribution Branch',
+        61 => 'Office of the Auditor General',
+        62 => 'Office of the Auditor General for Local Government',
+        63 => 'Office of the Fire Commissioner',
+        64 => 'Office of the Information and Privacy Commissioner',
+        65 => 'Office of the Merit Commissioner',
+        66 => 'Office of the Ombudsperson',
+        67 => 'Office of the Police Complaint Commissioner',
+        68 => 'Office of the Premier',
+        69 => 'Office of the Registrar of Lobbyists',
+        76 => 'Office of the Representative for Children and Youth',
+        70 => 'Oil and Gas Appeal Tribunal',
+        71 => 'Passenger Transportation Board',
+        72 => 'Property Assessment Appeal Board',
+        73 => 'Public Guardian and Trustee',
+        75 => 'Public Sector Employers\' Council',
+        77 => 'Royal BC Museum',
+        78 => 'Safety Standards Appeal Board',
+        88 => 'Surface Rights Board of BC',
+        84 => 'Workers\' Compensation Appeal Tribunal',
       ),
       'allowed_values_function' => '',
     ),
@@ -1662,48 +1565,6 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'list_integer',
   );
 
-  // Exported field_base: 'field_lsa_recipient_accom'.
-  $field_bases['field_lsa_recipient_accom'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_lsa_recipient_accom',
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
-    'translatable' => 0,
-    'type' => 'text',
-  );
-
-  // Exported field_base: 'field_lsa_recipient_dietary'.
-  $field_bases['field_lsa_recipient_dietary'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_lsa_recipient_dietary',
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
-    'translatable' => 0,
-    'type' => 'text',
-  );
-
   // Exported field_base: 'field_lsa_register_last_year'.
   $field_bases['field_lsa_register_last_year'] = array(
     'active' => 1,
@@ -1853,6 +1714,35 @@ function atwork_lsa_features_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_boolean',
+  );
+
+  // Exported field_base: 'field_lsa_specialrequirements'.
+  $field_bases['field_lsa_specialrequirements'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_specialrequirements',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        6 => 'None',
+        1 => 'Food Allergy',
+        2 => 'Deaf or Hard of Hearing',
+        3 => 'Visual Impairment',
+        4 => 'Wheelchair/Walker Accessibility',
+        5 => 'Other',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_integer',
   );
 
   // Exported field_base: 'field_lsa_street'.
@@ -2141,6 +2031,25 @@ function atwork_lsa_features_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_integer',
+  );
+
+  // Exported field_base: 'field_specialrequirement_descrip'.
+  $field_bases['field_specialrequirement_descrip'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_specialrequirement_descrip',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
   );
 
   // Exported field_base: 'field_supervisor_address'.

@@ -70,87 +70,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-lsa_application-field_lsa_accommodation_notes'.
-  $field_instances['node-lsa_application-field_lsa_accommodation_notes'] = array(
-    'bundle' => 'lsa_application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Please specify your accommodations requirements, and specify if the accommodation is for you or your guest.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'text_default',
-        'weight' => 38,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'question' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_lsa_accommodation_notes',
-    'label' => 'Accommodation Notes',
-    'required' => 0,
-    'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'quiz_result' => FALSE,
-      'semantic_field_format' => '',
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'maxlength_js' => '',
-        'maxlength_js_enforce' => 0,
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'maxlength_js_truncate_html' => 0,
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 21,
+      'weight' => 17,
     ),
   );
 
@@ -291,15 +211,14 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
-      'quiz_result' => FALSE,
-      'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
       'module' => 'email',
       'settings' => array(
-        'size' => 45,
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        'size' => 60,
       ),
       'type' => 'email_textfield',
       'weight' => 32,
@@ -451,7 +370,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_select',
-      'weight' => 46,
+      'weight' => 22,
     ),
   );
 
@@ -460,7 +379,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'bundle' => 'lsa_application',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => '<img id="lsa-award-selector-img-display-panel"></img>',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -514,6 +433,8 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -526,7 +447,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -603,7 +524,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'number',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -678,7 +599,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 16,
+      'weight' => 21,
     ),
   );
 
@@ -739,7 +660,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -792,7 +713,7 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_branch_department',
-    'label' => 'Branch',
+    'label' => 'Branch/Department',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -808,8 +729,6 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
-      'quiz_result' => FALSE,
-      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -823,83 +742,6 @@ function atwork_lsa_features_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 17,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-lsa_application-field_lsa_ceremony_accommodation'.
-  $field_instances['node-lsa_application-field_lsa_ceremony_accommodation'] = array(
-    'bundle' => 'lsa_application',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '<span class="ceremony-acc-note">Do you or your guest require any accommodations to attend the Long Service Award ceremony at Government House? (e.g. sign language interpreter (ASL), service dog, accessible parking/entrance, etc.)</span>',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'list_default',
-        'weight' => 37,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'question' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_lsa_ceremony_accommodation',
-    'label' => 'Ceremony Accommodations',
-    'required' => 1,
-    'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'quiz_result' => FALSE,
-      'semantic_field_format' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 20,
     ),
   );
 
@@ -1173,7 +1015,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 14,
+      'weight' => 18,
     ),
   );
 
@@ -1409,174 +1251,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 5,
-    ),
-  );
-
-  // Exported field_instance: 'node-lsa_application-field_lsa_dietary_guest'.
-  $field_instances['node-lsa_application-field_lsa_dietary_guest'] = array(
-    'bundle' => 'lsa_application',
-    'default_value' => array(
-      0 => array(
-        'value' => FALSE,
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'text_default',
-        'weight' => 43,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'question' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_lsa_dietary_guest',
-    'label' => 'My guest(s) request(s)',
-    'required' => 0,
-    'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'quiz_result' => FALSE,
-      'semantic_field_format' => '',
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'select_or_other',
-      'settings' => array(
-        'available_options' => 'Dairy Free
-Gluten Free
-Sugar Free
-No Shellfish
-Vegetarian
-Vegan',
-        'other' => 'Other',
-        'other_size' => 60,
-        'other_title' => '',
-        'other_unknown_defaults' => 'other',
-        'other_unknown_new_option' => 0,
-        'sort_options' => 0,
-      ),
-      'type' => 'select_or_other_buttons',
-      'weight' => 23,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-lsa_application-field_lsa_dietary_requirements'.
-  $field_instances['node-lsa_application-field_lsa_dietary_requirements'] = array(
-    'bundle' => 'lsa_application',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
-    'deleted' => 0,
-    'description' => 'Do you or your guest have any food allergies or dietary restrictions? ',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'list_default',
-        'weight' => 41,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'question' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_lsa_dietary_requirements',
-    'label' => 'Dietary Requirements',
-    'required' => 1,
-    'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'quiz_result' => FALSE,
-      'semantic_field_format' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 21,
+      'weight' => 6,
     ),
   );
 
@@ -1798,7 +1473,7 @@ Vegan',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 16,
+      'weight' => 14,
     ),
   );
 
@@ -1853,20 +1528,6 @@ Vegan',
     'label' => 'Email Address',
     'required' => 1,
     'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -1874,7 +1535,7 @@ Vegan',
       'active' => 1,
       'module' => 'email',
       'settings' => array(
-        'size' => 45,
+        'size' => 30,
       ),
       'type' => 'email_textfield',
       'weight' => 31,
@@ -1939,7 +1600,7 @@ Vegan',
         'size' => 8,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -2012,7 +1673,7 @@ Vegan',
         'size' => 35,
       ),
       'type' => 'text_textfield',
-      'weight' => 15,
+      'weight' => 19,
     ),
   );
 
@@ -2067,21 +1728,6 @@ Vegan',
     'label' => 'First Name',
     'required' => 1,
     'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'quiz_result' => FALSE,
-      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -2091,7 +1737,7 @@ Vegan',
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 30,
+        'size' => 20,
       ),
       'type' => 'text_textfield',
       'weight' => 10,
@@ -2175,7 +1821,7 @@ Vegan',
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 56,
+      'weight' => 34,
     ),
   );
 
@@ -2248,91 +1894,7 @@ Vegan',
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_buttons',
-      'weight' => 47,
-    ),
-  );
-
-  // Exported field_instance: 'node-lsa_application-field_lsa_guest_accom'.
-  $field_instances['node-lsa_application-field_lsa_guest_accom'] = array(
-    'bundle' => 'lsa_application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'text_default',
-        'weight' => 40,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'question' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_lsa_guest_accom',
-    'label' => 'Guest Accommodations',
-    'required' => 0,
-    'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'quiz_result' => FALSE,
-      'semantic_field_format' => '',
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'select_or_other',
-      'settings' => array(
-        'available_options' => 'Sign language interpreter (ASL)
-Service dog
-Accessible parking/entrance
-Wheelchair/walker seating',
-        'other' => 'Other',
-        'other_size' => 60,
-        'other_title' => '',
-        'other_unknown_defaults' => 'other',
-        'other_unknown_new_option' => 0,
-        'sort_options' => 0,
-      ),
-      'type' => 'select_or_other_buttons',
-      'weight' => 22,
+      'weight' => 23,
     ),
   );
 
@@ -2648,7 +2210,7 @@ Wheelchair/walker seating',
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 49,
+      'weight' => 26,
     ),
   );
 
@@ -2703,21 +2265,6 @@ Wheelchair/walker seating',
     'label' => 'Last Name',
     'required' => 1,
     'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'quiz_result' => FALSE,
-      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -2727,7 +2274,7 @@ Wheelchair/walker seating',
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 30,
+        'size' => 20,
       ),
       'type' => 'text_textfield',
       'weight' => 12,
@@ -2785,21 +2332,6 @@ Wheelchair/walker seating',
     'label' => 'Middle Name',
     'required' => 0,
     'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'quiz_result' => FALSE,
-      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -2809,7 +2341,7 @@ Wheelchair/walker seating',
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 30,
+        'size' => 20,
       ),
       'type' => 'text_textfield',
       'weight' => 11,
@@ -2959,7 +2491,7 @@ Wheelchair/walker seating',
         'rows' => 7,
       ),
       'type' => 'text_textarea',
-      'weight' => 58,
+      'weight' => 35,
     ),
   );
 
@@ -3029,7 +2561,7 @@ Wheelchair/walker seating',
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_select',
-      'weight' => 48,
+      'weight' => 25,
     ),
   );
 
@@ -3359,6 +2891,87 @@ Wheelchair/walker seating',
       ),
       'type' => 'text_textfield',
       'weight' => 21,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-lsa_application-field_lsa_office_work_group'.
+  $field_instances['node-lsa_application-field_lsa_office_work_group'] = array(
+    'bundle' => 'lsa_application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'editablefields',
+        'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
+          'semantic_field_format' => '',
+        ),
+        'type' => 'editable',
+        'weight' => 14,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_office_work_group',
+    'label' => 'Office',
+    'required' => 0,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'maxlength_js' => 0,
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 18,
     ),
   );
 
@@ -3788,182 +3401,7 @@ Wheelchair/walker seating',
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_buttons',
-      'weight' => 8,
-    ),
-  );
-
-  // Exported field_instance: 'node-lsa_application-field_lsa_recipient_accom'.
-  $field_instances['node-lsa_application-field_lsa_recipient_accom'] = array(
-    'bundle' => 'lsa_application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'text_default',
-        'weight' => 39,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'question' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_lsa_recipient_accom',
-    'label' => 'Recipient Accommodations',
-    'required' => 0,
-    'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'quiz_result' => FALSE,
-      'semantic_field_format' => '',
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'select_or_other',
-      'settings' => array(
-        'available_options' => 'Sign language interpreter (ASL)
-Service dog
-Accessible parking/entrance
-Wheelchair/walker seating',
-        'other' => 'Other',
-        'other_size' => 45,
-        'other_title' => '',
-        'other_unknown_defaults' => 'other',
-        'other_unknown_new_option' => 0,
-        'sort_options' => 0,
-      ),
-      'type' => 'select_or_other_buttons',
-      'weight' => 24,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-lsa_application-field_lsa_recipient_dietary'.
-  $field_instances['node-lsa_application-field_lsa_recipient_dietary'] = array(
-    'bundle' => 'lsa_application',
-    'default_value' => array(
-      0 => array(
-        'value' => FALSE,
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'text_default',
-        'weight' => 42,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'question' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_lsa_recipient_dietary',
-    'label' => 'My Request(s)',
-    'required' => 0,
-    'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'quiz_result' => FALSE,
-      'semantic_field_format' => '',
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'select_or_other',
-      'settings' => array(
-        'available_options' => 'Dairy Free
-Gluten Free
-Sugar Free
-No Shellfish
-Vegetarian
-Vegan',
-        'other' => 'Other',
-        'other_size' => 60,
-        'other_title' => '',
-        'other_unknown_defaults' => 'other',
-        'other_unknown_new_option' => 0,
-        'sort_options' => 0,
-      ),
-      'type' => 'select_or_other_buttons',
-      'weight' => 22,
+      'weight' => 9,
     ),
   );
 
@@ -4037,7 +3475,7 @@ Vegan',
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_buttons',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -4119,7 +3557,7 @@ Vegan',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -4191,7 +3629,7 @@ Vegan',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 59,
+      'weight' => 37,
     ),
   );
 
@@ -4264,7 +3702,7 @@ Vegan',
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_buttons',
-      'weight' => 45,
+      'weight' => 21,
     ),
   );
 
@@ -4326,7 +3764,85 @@ Vegan',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 18,
+      'weight' => 20,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-lsa_application-field_lsa_specialrequirements'.
+  $field_instances['node-lsa_application-field_lsa_specialrequirements'] = array(
+    'bundle' => 'lsa_application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'editablefields',
+        'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
+          'semantic_field_format' => '',
+        ),
+        'type' => 'editable',
+        'weight' => 5,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_specialrequirements',
+    'label' => 'Special Requirements',
+    'required' => 1,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 24,
     ),
   );
 
@@ -4441,7 +3957,7 @@ Vegan',
     'entity_type' => 'node',
     'field_name' => 'field_lsa_supervisor_city',
     'label' => 'Supervisor City',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'authcache' => array(
         'clients' => array(
@@ -4525,28 +4041,14 @@ Vegan',
     'label' => 'Supervisor Email',
     'required' => 1,
     'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'quiz_result' => FALSE,
-      'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
       'module' => 'email',
       'settings' => array(
-        'size' => 45,
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        'size' => 60,
       ),
       'type' => 'email_textfield',
       'weight' => 39,
@@ -4605,21 +4107,6 @@ Vegan',
     'label' => 'First Name',
     'required' => 1,
     'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'quiz_result' => FALSE,
-      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -4629,7 +4116,7 @@ Vegan',
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 30,
+        'size' => 20,
       ),
       'type' => 'text_textfield',
       'weight' => 37,
@@ -4688,21 +4175,6 @@ Vegan',
     'label' => 'Last Name',
     'required' => 1,
     'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'quiz_result' => FALSE,
-      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -4712,7 +4184,7 @@ Vegan',
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 30,
+        'size' => 20,
       ),
       'type' => 'text_textfield',
       'weight' => 38,
@@ -4764,7 +4236,7 @@ Vegan',
     'entity_type' => 'node',
     'field_name' => 'field_lsa_supervisor_postal_code',
     'label' => 'Supervisor Postal Code',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'authcache' => array(
         'clients' => array(
@@ -4790,7 +4262,7 @@ Vegan',
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 7,
+        'size' => 60,
       ),
       'type' => 'text_textfield',
       'weight' => 43,
@@ -4801,11 +4273,7 @@ Vegan',
   // 'node-lsa_application-field_lsa_supervisor_province'.
   $field_instances['node-lsa_application-field_lsa_supervisor_province'] = array(
     'bundle' => 'lsa_application',
-    'default_value' => array(
-      0 => array(
-        'value' => 'BC',
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -4846,7 +4314,7 @@ Vegan',
     'entity_type' => 'node',
     'field_name' => 'field_lsa_supervisor_province',
     'label' => 'Supervisor Province',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'authcache' => array(
         'clients' => array(
@@ -4872,7 +4340,7 @@ Vegan',
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 2,
+        'size' => 60,
       ),
       'type' => 'text_textfield',
       'weight' => 42,
@@ -4888,7 +4356,7 @@ Vegan',
       ),
     ),
     'deleted' => 0,
-    'description' => 'I do not wish to take part in the survey.',
+    'description' => 'I do not wish to take part in the Long Service Awards survey.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -4926,20 +4394,6 @@ Vegan',
     'label' => 'LSA Survey',
     'required' => 0,
     'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -4950,7 +4404,7 @@ Vegan',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 62,
+      'weight' => 27,
     ),
   );
 
@@ -4963,7 +4417,9 @@ Vegan',
       ),
     ),
     'deleted' => 0,
-    'description' => '<p>I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="/career/long-service-awards/eligibility" target="_blank">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2018, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events.</p>',
+    'description' => '<p>I declare, to the best of my knowledge and consistent with the Long Service Awards Eligibility Guidelines (which I have reviewed) that as of December 31, 2017, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of this event.</p>
+
+<p>At the conclusion of the Long Service Award ceremonies, a follow up survey will be sent to collect feedback about your Long Service Awards experience. Your feedback is invaluable for the ongoing improvement and quality of the program. Please indicate below if you would prefer not to participate.</p>',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -5001,20 +4457,6 @@ Vegan',
     'label' => 'Terms',
     'required' => 1,
     'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -5025,7 +4467,7 @@ Vegan',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 22,
+      'weight' => 26,
     ),
   );
 
@@ -5107,7 +4549,7 @@ Vegan',
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 60,
+      'weight' => 20,
     ),
   );
 
@@ -5228,7 +4670,7 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_work_phone_ext',
-    'label' => 'Work Phone Extension',
+    'label' => 'Work Phone Ext',
     'required' => 0,
     'settings' => array(
       'authcache' => array(
@@ -5244,8 +4686,6 @@ Vegan',
         'peruser' => 1,
         'status' => 0,
       ),
-      'quiz_result' => FALSE,
-      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -5317,7 +4757,90 @@ Vegan',
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_buttons',
-      'weight' => 9,
+      'weight' => 10,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-lsa_application-field_specialrequirement_descrip'.
+  $field_instances['node-lsa_application-field_specialrequirement_descrip'] = array(
+    'bundle' => 'lsa_application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'editablefields',
+        'settings' => array(
+          'click_to_edit' => 0,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => 'text_default',
+          'fallback_settings' => array(),
+          'semantic_field_format' => '',
+        ),
+        'type' => 'editable',
+        'weight' => 6,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_specialrequirement_descrip',
+    'label' => 'Please Specify Your Requirements',
+    'required' => 0,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'maxlength_js' => 350,
+        'maxlength_js_enforce' => 0,
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        'maxlength_js_truncate_html' => 1,
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 25,
     ),
   );
 
@@ -5365,7 +4888,7 @@ Vegan',
     'entity_type' => 'node',
     'field_name' => 'field_supervisor_address',
     'label' => 'Supervisor Address',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'authcache' => array(
         'clients' => array(
@@ -7212,10 +6735,11 @@ Vegan',
   // Included for use with string extractors like potx.
   t('25 Year Certificate');
   t('<em> Service pins will be sent to the employee’s supervisor for presentation during Public Service Week - June 12-16, 2017.</em>');
+  t('<img id="lsa-award-selector-img-display-panel"></img>');
   t('<p class="style-red">For Victoria locations, please use the P.O. Box address</p>');
-  t('<p>I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="/career/long-service-awards/eligibility" target="_blank">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2018, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events.</p>');
-  t('<span class="ceremony-acc-note">Do you or your guest require any accommodations to attend the Long Service Award ceremony at Government House? (e.g. sign language interpreter (ASL), service dog, accessible parking/entrance, etc.)</span>');
-  t('Accommodation Notes');
+  t('<p>I declare, to the best of my knowledge and consistent with the Long Service Awards Eligibility Guidelines (which I have reviewed) that as of December 31, 2017, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of this event.</p>
+
+<p>At the conclusion of the Long Service Award ceremonies, a follow up survey will be sent to collect feedback about your Long Service Awards experience. Your feedback is invaluable for the ongoing improvement and quality of the program. Please indicate below if you would prefer not to participate.</p>');
   t('Actual_Min/Org');
   t('Alternate Email Address');
   t('Are you celebrating a current service milestone in 2017?');
@@ -7226,7 +6750,7 @@ Vegan',
   t('Award Special Instructions');
   t('Award Year');
   t('Branch');
-  t('Ceremony Accommodations');
+  t('Branch/Department');
   t('Ceremony Date');
   t('Ceremony Night');
   t('Ceremony Response');
@@ -7239,8 +6763,6 @@ Vegan',
   t('Department');
   t('Did you receive your award?');
   t('Did you register last year but were unable to attend the ceremony?');
-  t('Dietary Requirements');
-  t('Do you or your guest have any food allergies or dietary restrictions? ');
   t('Do you wish to request any service pin(s) retroactively?');
   t('Does your supervisor work in a different office location than you? ');
   t('Donation Amount');
@@ -7251,11 +6773,10 @@ Vegan',
   t('Employee Number');
   t('Engravement');
   t('First Name');
-  t('Guest Accommodations');
   t('Guest Attending');
   t('Home Phone');
   t('I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target ="_blank">Service Pin Recognition Eligibility Guidelines</a> (which I have reviewed) that as of December 31, 2017, I will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and am therefore eligible to receive a service pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.');
-  t('I do not wish to take part in the survey.');
+  t('I do not wish to take part in the Long Service Awards survey.');
   t('If retired, please enter the last organization and supervisor you worked with.');
   t('Invitation Send Date');
   t('LSA Survey');
@@ -7264,27 +6785,26 @@ Vegan',
   t('Ministry ID');
   t('Ministry Representative Email');
   t('Ministry/Organization');
-  t('My Request(s)');
-  t('My guest(s) request(s)');
   t('Notes');
   t('Number Attending');
+  t('Office');
   t('Office Street Address');
   t('PECSF ID');
   t('PECSF ID 2');
   t('PECSF Region');
   t('Phone');
+  t('Please Specify Your Requirements');
   t('Please select the retroactive milestone pin(s) you would like to order');
-  t('Please specify your accommodations requirements, and specify if the accommodation is for you or your guest.');
   t('Please use the format:A1A 1A1');
   t('Postal Code');
   t('Province');
   t('RSVP');
-  t('Recipient Accommodations');
   t('Retiring in 2018?');
   t('Retro-Active');
   t('Second Charity');
   t('Service Milestone');
   t('Service pins will be sent to the employee\'s supervisor for presentation during Public Service Week - June 12-16, 2017.');
+  t('Special Requirements');
   t('Street');
   t('Supervisor Address');
   t('Supervisor City');
@@ -7300,7 +6820,7 @@ Vegan',
   t('What ministry/organization are you with?');
   t('Who is registering for this service pin?');
   t('Work Phone');
-  t('Work Phone Extension');
+  t('Work Phone Ext');
   t('Years of Service');
 
   return $field_instances;

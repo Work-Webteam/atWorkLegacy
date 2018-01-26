@@ -207,6 +207,14 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_retro_active_editable']['widget_type'] = '0';
   $handler->display->display_options['fields']['field_lsa_retro_active_editable']['suppress_label'] = 0;
   $handler->display->display_options['fields']['field_lsa_retro_active_editable']['suppress_description'] = 0;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'ID';
+  $handler->display->display_options['fields']['nid']['node_in_colorbox_width'] = '600';
+  $handler->display->display_options['fields']['nid']['node_in_colorbox_height'] = '600';
+  $handler->display->display_options['fields']['nid']['node_in_colorbox_rel'] = '';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -404,6 +412,32 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['filters']['field_lsa_retro_active_value']['expose']['operator'] = 'field_lsa_retro_active_value_op';
   $handler->display->display_options['filters']['field_lsa_retro_active_value']['expose']['identifier'] = 'field_lsa_retro_active_value';
   $handler->display->display_options['filters']['field_lsa_retro_active_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+    6 => 0,
+    7 => 0,
+    8 => 0,
+    10 => 0,
+    11 => 0,
+    12 => 0,
+    13 => 0,
+    15 => 0,
+    16 => 0,
+    17 => 0,
+  );
+  /* Filter criterion: Content: Nid */
+  $handler->display->display_options['filters']['nid']['id'] = 'nid';
+  $handler->display->display_options['filters']['nid']['table'] = 'node';
+  $handler->display->display_options['filters']['nid']['field'] = 'nid';
+  $handler->display->display_options['filters']['nid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['nid']['expose']['operator_id'] = 'nid_op';
+  $handler->display->display_options['filters']['nid']['expose']['label'] = 'ID';
+  $handler->display->display_options['filters']['nid']['expose']['operator'] = 'nid_op';
+  $handler->display->display_options['filters']['nid']['expose']['identifier'] = 'nid';
+  $handler->display->display_options['filters']['nid']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -927,11 +961,11 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_org']['id'] = 'field_lsa_org';
   $handler->display->display_options['fields']['field_lsa_org']['table'] = 'field_data_field_lsa_org';
   $handler->display->display_options['fields']['field_lsa_org']['field'] = 'field_lsa_org';
-  /* Field: Content: Branch */
+  /* Field: Content: Branch/Department */
   $handler->display->display_options['fields']['field_lsa_branch_department']['id'] = 'field_lsa_branch_department';
   $handler->display->display_options['fields']['field_lsa_branch_department']['table'] = 'field_data_field_lsa_branch_department';
   $handler->display->display_options['fields']['field_lsa_branch_department']['field'] = 'field_lsa_branch_department';
-  /* Field: Broken/missing handler */
+  /* Field: Content: Office */
   $handler->display->display_options['fields']['field_lsa_office_work_group']['id'] = 'field_lsa_office_work_group';
   $handler->display->display_options['fields']['field_lsa_office_work_group']['table'] = 'field_data_field_lsa_office_work_group';
   $handler->display->display_options['fields']['field_lsa_office_work_group']['field'] = 'field_lsa_office_work_group';
@@ -1032,7 +1066,7 @@ function atwork_lsa_features_views_default_views() {
     15 => 0,
     16 => 0,
   );
-  /* Filter criterion: Content: Branch (field_lsa_branch_department) */
+  /* Filter criterion: Content: Branch/Department (field_lsa_branch_department) */
   $handler->display->display_options['filters']['field_lsa_branch_department_value']['id'] = 'field_lsa_branch_department_value';
   $handler->display->display_options['filters']['field_lsa_branch_department_value']['table'] = 'field_data_field_lsa_branch_department';
   $handler->display->display_options['filters']['field_lsa_branch_department_value']['field'] = 'field_lsa_branch_department_value';
@@ -1883,16 +1917,23 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_employee_number']['id'] = 'field_lsa_employee_number';
   $handler->display->display_options['fields']['field_lsa_employee_number']['table'] = 'field_data_field_lsa_employee_number';
   $handler->display->display_options['fields']['field_lsa_employee_number']['field'] = 'field_lsa_employee_number';
-  /* Field: Broken/missing handler */
+  /* Field: Content: Special Requirements (editable) */
   $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['id'] = 'field_lsa_specialrequirements_editable';
   $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['table'] = 'field_data_field_lsa_specialrequirements';
   $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['field'] = 'field_lsa_specialrequirements_editable';
   $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['label'] = 'Special Requirements';
-  /* Field: Broken/missing handler */
+  $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['widget_type'] = '0';
+  $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['suppress_label'] = 0;
+  $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['suppress_description'] = 0;
+  /* Field: Content: Please Specify Your Requirements (editable) */
   $handler->display->display_options['fields']['field_specialrequirement_descrip_editable']['id'] = 'field_specialrequirement_descrip_editable';
   $handler->display->display_options['fields']['field_specialrequirement_descrip_editable']['table'] = 'field_data_field_specialrequirement_descrip';
   $handler->display->display_options['fields']['field_specialrequirement_descrip_editable']['field'] = 'field_specialrequirement_descrip_editable';
   $handler->display->display_options['fields']['field_specialrequirement_descrip_editable']['label'] = 'Please Specify Your Requirements ';
+  $handler->display->display_options['fields']['field_specialrequirement_descrip_editable']['widget_type'] = '0';
+  $handler->display->display_options['fields']['field_specialrequirement_descrip_editable']['suppress_label'] = 1;
+  $handler->display->display_options['fields']['field_specialrequirement_descrip_editable']['suppress_description'] = 1;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -1975,7 +2016,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['autocomplete_raw_dropdown'] = 1;
   $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['autocomplete_dependent'] = 0;
-  /* Filter criterion: Broken/missing handler */
+  /* Filter criterion: Content: Special Requirements (field_lsa_specialrequirements) */
   $handler->display->display_options['filters']['field_lsa_specialrequirements_value']['id'] = 'field_lsa_specialrequirements_value';
   $handler->display->display_options['filters']['field_lsa_specialrequirements_value']['table'] = 'field_data_field_lsa_specialrequirements';
   $handler->display->display_options['filters']['field_lsa_specialrequirements_value']['field'] = 'field_lsa_specialrequirements_value';
@@ -2009,6 +2050,7 @@ function atwork_lsa_features_views_default_views() {
     15 => 0,
     16 => 0,
   );
+  $handler->display->display_options['filters']['field_lsa_specialrequirements_value']['expose']['reduce'] = TRUE;
   $handler->display->display_options['path'] = 'lsa-admin/special-requirements';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Special Requirements';
@@ -2184,7 +2226,7 @@ function atwork_lsa_features_views_default_views() {
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
-  /* Field: Content: Branch */
+  /* Field: Content: Branch/Department */
   $handler->display->display_options['fields']['field_lsa_branch_department']['id'] = 'field_lsa_branch_department';
   $handler->display->display_options['fields']['field_lsa_branch_department']['table'] = 'field_data_field_lsa_branch_department';
   $handler->display->display_options['fields']['field_lsa_branch_department']['field'] = 'field_lsa_branch_department';
@@ -2328,7 +2370,7 @@ function atwork_lsa_features_views_default_views() {
     15 => 0,
     16 => 0,
   );
-  /* Filter criterion: Content: Branch (field_lsa_branch_department) */
+  /* Filter criterion: Content: Branch/Department (field_lsa_branch_department) */
   $handler->display->display_options['filters']['field_lsa_branch_department_value']['id'] = 'field_lsa_branch_department_value';
   $handler->display->display_options['filters']['field_lsa_branch_department_value']['table'] = 'field_data_field_lsa_branch_department';
   $handler->display->display_options['filters']['field_lsa_branch_department_value']['field'] = 'field_lsa_branch_department_value';
@@ -2641,14 +2683,6 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['empty']['area']['content'] = 'No Content yet';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Nid */
-  $handler->display->display_options['fields']['nid']['id'] = 'nid';
-  $handler->display->display_options['fields']['nid']['table'] = 'node';
-  $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  $handler->display->display_options['fields']['nid']['label'] = 'ID';
-  $handler->display->display_options['fields']['nid']['node_in_colorbox_width'] = '600';
-  $handler->display->display_options['fields']['nid']['node_in_colorbox_height'] = '600';
-  $handler->display->display_options['fields']['nid']['node_in_colorbox_rel'] = '';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -2785,7 +2819,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_work_phone']['id'] = 'field_lsa_work_phone';
   $handler->display->display_options['fields']['field_lsa_work_phone']['table'] = 'field_data_field_lsa_work_phone';
   $handler->display->display_options['fields']['field_lsa_work_phone']['field'] = 'field_lsa_work_phone';
-  /* Field: Content: Work Phone Extension */
+  /* Field: Content: Work Phone Ext */
   $handler->display->display_options['fields']['field_lsa_work_phone_ext']['id'] = 'field_lsa_work_phone_ext';
   $handler->display->display_options['fields']['field_lsa_work_phone_ext']['table'] = 'field_data_field_lsa_work_phone_ext';
   $handler->display->display_options['fields']['field_lsa_work_phone_ext']['field'] = 'field_lsa_work_phone_ext';
@@ -2797,10 +2831,14 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_ministry_id']['id'] = 'field_lsa_ministry_id';
   $handler->display->display_options['fields']['field_lsa_ministry_id']['table'] = 'field_data_field_lsa_ministry_id';
   $handler->display->display_options['fields']['field_lsa_ministry_id']['field'] = 'field_lsa_ministry_id';
-  /* Field: Content: Branch */
+  /* Field: Content: Branch/Department */
   $handler->display->display_options['fields']['field_lsa_branch_department']['id'] = 'field_lsa_branch_department';
   $handler->display->display_options['fields']['field_lsa_branch_department']['table'] = 'field_data_field_lsa_branch_department';
   $handler->display->display_options['fields']['field_lsa_branch_department']['field'] = 'field_lsa_branch_department';
+  /* Field: Content: Office */
+  $handler->display->display_options['fields']['field_lsa_office_work_group']['id'] = 'field_lsa_office_work_group';
+  $handler->display->display_options['fields']['field_lsa_office_work_group']['table'] = 'field_data_field_lsa_office_work_group';
+  $handler->display->display_options['fields']['field_lsa_office_work_group']['field'] = 'field_lsa_office_work_group';
   /* Field: Content: Office Street Address */
   $handler->display->display_options['fields']['field_lsa_office_address']['id'] = 'field_lsa_office_address';
   $handler->display->display_options['fields']['field_lsa_office_address']['table'] = 'field_data_field_lsa_office_address';
@@ -2833,6 +2871,14 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_supervisor_email']['id'] = 'field_lsa_supervisor_email';
   $handler->display->display_options['fields']['field_lsa_supervisor_email']['table'] = 'field_data_field_lsa_supervisor_email';
   $handler->display->display_options['fields']['field_lsa_supervisor_email']['field'] = 'field_lsa_supervisor_email';
+  /* Field: Content: Special Requirements */
+  $handler->display->display_options['fields']['field_lsa_specialrequirements']['id'] = 'field_lsa_specialrequirements';
+  $handler->display->display_options['fields']['field_lsa_specialrequirements']['table'] = 'field_data_field_lsa_specialrequirements';
+  $handler->display->display_options['fields']['field_lsa_specialrequirements']['field'] = 'field_lsa_specialrequirements';
+  /* Field: Content: Please Specify Your Requirements */
+  $handler->display->display_options['fields']['field_specialrequirement_descrip']['id'] = 'field_specialrequirement_descrip';
+  $handler->display->display_options['fields']['field_specialrequirement_descrip']['table'] = 'field_data_field_specialrequirement_descrip';
+  $handler->display->display_options['fields']['field_specialrequirement_descrip']['field'] = 'field_specialrequirement_descrip';
   /* Field: Content: Notes */
   $handler->display->display_options['fields']['field_lsa_notes']['id'] = 'field_lsa_notes';
   $handler->display->display_options['fields']['field_lsa_notes']['table'] = 'field_data_field_lsa_notes';
@@ -2931,27 +2977,14 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_survey']['table'] = 'field_data_field_lsa_survey';
   $handler->display->display_options['fields']['field_lsa_survey']['field'] = 'field_lsa_survey';
   $handler->display->display_options['fields']['field_lsa_survey']['type'] = 'list_key';
-  /* Field: Content: Ceremony Accommodations */
-  $handler->display->display_options['fields']['field_lsa_ceremony_accommodation']['id'] = 'field_lsa_ceremony_accommodation';
-  $handler->display->display_options['fields']['field_lsa_ceremony_accommodation']['table'] = 'field_data_field_lsa_ceremony_accommodation';
-  $handler->display->display_options['fields']['field_lsa_ceremony_accommodation']['field'] = 'field_lsa_ceremony_accommodation';
-  /* Field: Content: Accommodation Notes */
-  $handler->display->display_options['fields']['field_lsa_accommodation_notes']['id'] = 'field_lsa_accommodation_notes';
-  $handler->display->display_options['fields']['field_lsa_accommodation_notes']['table'] = 'field_data_field_lsa_accommodation_notes';
-  $handler->display->display_options['fields']['field_lsa_accommodation_notes']['field'] = 'field_lsa_accommodation_notes';
-  /* Field: Content: Recipient Accommodations */
-  $handler->display->display_options['fields']['field_lsa_recipient_accom_1']['id'] = 'field_lsa_recipient_accom_1';
-  $handler->display->display_options['fields']['field_lsa_recipient_accom_1']['table'] = 'field_data_field_lsa_recipient_accom';
-  $handler->display->display_options['fields']['field_lsa_recipient_accom_1']['field'] = 'field_lsa_recipient_accom';
-  /* Field: Content: Guest Accommodations */
-  $handler->display->display_options['fields']['field_lsa_guest_accom']['id'] = 'field_lsa_guest_accom';
-  $handler->display->display_options['fields']['field_lsa_guest_accom']['table'] = 'field_data_field_lsa_guest_accom';
-  $handler->display->display_options['fields']['field_lsa_guest_accom']['field'] = 'field_lsa_guest_accom';
-  $handler->display->display_options['fields']['field_lsa_guest_accom']['delta_offset'] = '0';
-  /* Field: Content: Dietary Requirements */
-  $handler->display->display_options['fields']['field_lsa_dietary_requirements']['id'] = 'field_lsa_dietary_requirements';
-  $handler->display->display_options['fields']['field_lsa_dietary_requirements']['table'] = 'field_data_field_lsa_dietary_requirements';
-  $handler->display->display_options['fields']['field_lsa_dietary_requirements']['field'] = 'field_lsa_dietary_requirements';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'ID';
+  $handler->display->display_options['fields']['nid']['node_in_colorbox_width'] = '600';
+  $handler->display->display_options['fields']['nid']['node_in_colorbox_height'] = '600';
+  $handler->display->display_options['fields']['nid']['node_in_colorbox_rel'] = '';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
