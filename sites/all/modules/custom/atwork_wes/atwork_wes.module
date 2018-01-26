@@ -321,7 +321,7 @@ function _atwork_wes_block_theme($top_three_ministries){
 	$block_html .= "<div id='ministry-top-three'>";
 	foreach($top_three_ministries as $key => $value){
 		$block_html .= "<div class='ministry-stats'>";
-		$block_html .= "<span class='ministry-name'>Ministry of " . $key . "</span>";
+		$block_html .= "<span class='ministry-name'>" . $key . "</span>";
 		$block_html .= '<div class="wes-bar-container">';
 		$block_html .= '<div class="wes-bar" style="width: ' . $value . '"></div>';
 		$block_html .= '</div>';
