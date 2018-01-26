@@ -77,12 +77,19 @@ function atwork_newsletter_theme() {
  */
 function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state, $vbo){
 	if($form['#form_id'] == 'views_form_newsletter_creation_page'){
-		
 		//Added instructions to content selection
 		if(!array_key_exists('nodes',$form)) {
+			// protect prefix, which is tripping errors at times 
+			if(!isset($form['#prefix'])){
+				$form[] = '#prefix';
+			}
 			$form['#prefix'] = $form['#prefix'] . t('<p>Ensure you are using the "Chrome" browser. To begin creating the newsletter, click the checkbox in the leftmost column beside the articles and blogs you would like to have in the newsletter.</p>
       <p>There is no maximum number that can select. However, you must ensure there is at least one article. Once complete, scroll down to the next section - comments.</p><br>');
 		} else {
+			// protect prefix, which is tripping errors at times 
+			if(!isset($form['#prefix'])){
+				$form[] = '#prefix';
+			}	
 			$form['#prefix'] = $form['#prefix'] . t('<p>Please review the content on this page to ensure it is how you would like the information to be displayed.</p>
 				<p>For the articles/blogs section, you can reorder the content as you\'d like it to appear in the newsletter. Use the "+" sign to drag and drop the content into the order you would like. Note, an article must be in the top spot.</p>
 				<p>Then review the Comment, Take Note and Did You Know sections to ensure the information is as you\'d like it to be displayed. You may edit content at this point directly in the fields, as needed.</p>
