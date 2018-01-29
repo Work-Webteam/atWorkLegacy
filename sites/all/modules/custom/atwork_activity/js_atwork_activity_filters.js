@@ -93,12 +93,28 @@
         $('#edit-update').trigger("click");
       }
 
+      function postStatusUpdate(){
+        // Need to initially hide this - people think it is a search bar... Seriously.. 
+        $('#edit-status').slideToggle();
+        $('#atwork-activity-form div.form-item.form-type-textarea.form-item-status').slideToggle();
+        // Replace this with a button
+        $('.status-update-mock-button').slideToggle();
+        $('#edit-post').slideToggle();
+      }
+
 
   /**
    * Drupal attach function - click handlers etc.
    */
   Drupal.behaviors.profileFilterJquery = {
     attach: function(context, settings) {
+      // Need to initially hide this - people think it is a search bar... Seriously.. 
+      $('#edit-status').hide();
+      $('#atwork-activity-form div.form-item.form-type-textarea.form-item-status').hide();
+      $('#edit-post').hide();
+
+      // Replace this with a button
+      $('button.status-update-mock-button').length ? $('button.status-update-mock-button') : $("#speech-pointer").after('<button class="status-update-mock-button" name="status-update-mock">Update your status</button>');
 
       setChoices();
       // Hide this block if we haven't opened the advanced menu
@@ -106,20 +122,25 @@
         $("#edit-feed-choices").hide();
         $("#edit-update").hide();
       }
-
-
       // Listen for My Actions vs All Activity button changes
-    // Make sure we are not rebinding this
-    $('.activity-filters-my:not(.atwork-activity-processed)', context)
-      .addClass('atwork-activity-processed')
-      .bind('click', function(){
-        myActionsRules();
-      });
-    $('.activity-filters-all:not(.atwork-activity-processed)', context)
-      .addClass('atwork-activity-processed')
-      .bind('click', function(){
-        allActivityRules();
-        // Also need to lock these in - so click the update button
+      // Make sure we are not rebinding this
+      $('.activity-filters-my:not(.atwork-activity-processed)', context)
+        .addClass('atwork-activity-processed')
+        .bind('click', function(){
+          myActionsRules();
+        });
+      $('.activity-filters-all:not(.atwork-activity-processed)', context)
+        .addClass('atwork-activity-processed')
+        .bind('click', function(){
+          allActivityRules();
+          // Also need to lock these in - so click the update button
+        });
+        
+      // Set click handler for Post Status Update button
+      $('.status-update-mock-button:not(.atwork-activity-processed)', context)
+        .addClass('atwork-activity-processed')
+        .bind('click', function(){
+          postStatusUpdate();
       });
 
 
