@@ -209,16 +209,19 @@ $atwork_base_url = $GLOBALS['base_url'];
   		if(isset($images) && $images){
   			// Grab the features sized image
   			foreach($images as $image){
-  				// We can get image by image size - $image['height'] && $image['width']
-  				// For some reason, sizes come in at like 774 instead of 775, so we will look for a range here in case we are a pixel or two off.
-  				$height = intval($image['height']);
-  				$width = intval($image['width']);
-  				if(($height > 245 && $height < 255) && ($width > 770 && $width < 780)){
-  					// Get image that has feature image range so we can load it in the next part.
-  					$feature_image = $image;
-  					//We wil only take the first match.
-  					break;
-  				}
+          // Make sure we have images first
+          if(isset($image['height']) && isset($image['width'])){
+            // We can get image by image size - $image['height'] && $image['width']
+            // For some reason, sizes come in at like 774 instead of 775, so we will look for a range here in case we are a pixel or two off.
+            $height = intval($image['height']);
+            $width = intval($image['width']);
+            if(($height > 245 && $height < 255) && ($width > 770 && $width < 780)){
+              // Get image that has feature image range so we can load it in the next part.
+              $feature_image = $image;
+              //We wil only take the first match.
+              break;
+            }
+          }
   			}
   			// Make sure we have a feature image
   			if(!isset($feature_image)){
