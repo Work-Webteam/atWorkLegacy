@@ -94,10 +94,9 @@
       }
 
       function postStatusUpdate(){
-        // Need to initially hide this - people think it is a search bar... Seriously.. 
+        // On click, toggle the fields. We only need to do this one way. Once they post a status, it refreshes the block anyways. 
         $('#edit-status').slideToggle();
         $('#atwork-activity-form div.form-item.form-type-textarea.form-item-status').slideToggle();
-        // Replace this with a button
         $('.status-update-mock-button').slideToggle();
         $('#edit-post').slideToggle();
       }
@@ -113,7 +112,7 @@
       $('#atwork-activity-form div.form-item.form-type-textarea.form-item-status').hide();
       $('#edit-post').hide();
 
-      // Replace this with a button
+      // Drop in a new button if it isn't there yet
       $('button.status-update-mock-button').length ? $('button.status-update-mock-button') : $("#speech-pointer").after('<button class="status-update-mock-button" name="status-update-mock">Update your status</button>');
 
       setChoices();
