@@ -119,22 +119,22 @@ function _atwork_prem_awards_questions() {
   $translations[1][9] = '';
 
   /* Innovation */
-  $translations[2][0] = 'In this section, provide a brief statement that that summarizes or restates the main points of the nomination (goal and achievement). The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.
+  $translations[2][0] = 'In this section, provide a brief statement that that summarizes or restates the main points of the nomination (goal and achievement). The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br><br>
 		(Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.)';
   $translations[2][1] = "In this section, please establish a background that will provide perspective to the work achieved including highlighting what the problem was or why the new innovative approach was undertaken.";
-  $translations[2][2] = "<strong>Complexity:</strong><br />Describe the scope and scale of the new initiative, streamlined business processes, technology, or creative solution developed including, but not limited to:
-		<ul><li>Size of the project, process, technology solution;</li>
-		<li>Risks encountered and overcome;</li>
-		<li>Challenges around introducing a new approach to solve a challenging problem;</li>
-		<li>Technical or organizational difficulties addressed;</li>
-		<li>Financial constraints managed.</li></ul>";
-  $translations[2][3] = "<strong>Approach:</strong><br />Describe how the new initiative, product or service was developed from inception to delivery and transformed new ideas into tangible initiatives including, but not limited to:
+  $translations[2][2] = "<strong>Approach:</strong><br />Describe how the new initiative, product or service was developed from inception to delivery and transformed new ideas into tangible initiatives including, but not limited to:
 		<ul><li>The process used to generate breakthrough ideas, fresh perspectives and new opportunities;</li>
 		<li>The use of new technology or tools to enhance program and service delivery or improve upon existing processes and procedures (i.e. Behavioural Insights, Data Science, Service Design,  Agile Methodology, etc.);</li>
 		<li>Application of a user-centric or citizen-centric approach in the development of the initiative/program; </li>
 		<li>Adapting and refining the approach or initiative when things did not worked well and learning from the setbacks/mistakes;</li>
 		<li>Explain how the team managed and overcame risks encountered to adapt and refine the process; </li>
 		<li>Creativity in the design or redesign of the programs or services.</li></ul>";
+  $translations[2][3] = "<strong>Complexity:</strong><br />Describe the scope and scale of the new initiative, streamlined business processes, technology, or creative solution developed including, but not limited to:
+		<ul><li>Size of the project, process, technology solution;</li>
+		<li>Risks encountered and overcome;</li>
+		<li>Challenges around introducing a new approach to solve a challenging problem;</li>
+		<li>Technical or organizational difficulties addressed;</li>
+		<li>Financial constraints managed.</li></ul>";
   $translations[2][4] = "<strong>Impact:</strong><br />Capture the impact of, and use metrics to support (if applicable), the innovative approach to programs and services as demonstrated by, but not limited to:
 		<ul><li>Improved performance by doing things that may be unique, leading-edge, or new to the public service;</li>
 		<li>Changes to the organizational culture or the traditional approach to management or problem solving; </li>
@@ -150,16 +150,10 @@ function _atwork_prem_awards_questions() {
   $translations[2][9] = '';
 
   /* Leadership */
-  $translations[3][0] = 'In this section, provide a brief statement that that summarizes or restates the main points of the nomination, submission or personal contribution.  The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination. (Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.)';
+  $translations[3][0] = 'In this section, provide a brief statement that that summarizes or restates the main points of the nomination, submission or personal contribution.  The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br><br> 
+		(Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.)';
   $translations[3][1] = "To establish a background that will provide perspective to the work achieved, briefly describe the conditions under which the employee demonstrated exemplary leadership.";
-  $translations[3][2] = "<strong>Complexity:</strong><br />Describe the nominee’s ability to demonstrate exemplary leadership acumen including, but not limited to:
-		<ul><li>Size of the organization,  project, process, or initiative managed;</li>
-		<li>Managing complex situations including: large-scale initiatives, managing and mitigating risks, creatively solving problems and implementing solutions; </li>
-		<li>Constraints encountered and overcome under their leadership (i.e. time frame, technical, financial, organizational, policy, etc.);</li>
-		<li>Commitment to service delivery;</li>
-		<li>Ability to demonstrate an experimental or innovative mindset whereby being open to change, taking calculated risks and challenging the status quo to try something new resulted in a measureable outcome;</li>
-		<li>Continually demonstrating the ability to exceed the needs of stakeholders and internal or external clients.</li></ul>";
-  $translations[3][3] = "<strong>Valuing People:</strong><br />Identify and describe how the employee has demonstrated their leadership in supporting the workplace either by leading a team or organization or as leader of a substantial project, process, or initiative. Considerations may include, but are not limited to:
+  $translations[3][2] = "<strong>Valuing People:</strong><br />Identify and describe how the employee has demonstrated their leadership in supporting the workplace either by leading a team or organization or as leader of a substantial project, process, or initiative. Considerations may include, but are not limited to:
 		<ul><li>Ability to create, communicate, and implement a clear and compelling vision;</li>
 		<li>Anticipates future trends and works with others to develop strategies to meet future challenges;</li>
 		<li>Champions continuous learning, employee recognition, and collaborative team-based environments;</li>
@@ -168,12 +162,20 @@ function _atwork_prem_awards_questions() {
 		<li>Ability to involve, empower, and lead staff through times of change;</li>
 		<li>Ethical leadership practices;</li>
 		<li>Demonstrates a commitment to diversity and inclusiveness in both the work environment and in the development of programs, policies and services.</li></ul>";
+  $translations[3][3] = "<strong>Complexity:</strong><br />Describe the nominee’s ability to demonstrate exemplary leadership acumen including, but not limited to:
+		<ul><li>Size of the organization,  project, process, or initiative managed;</li>
+		<li>Managing complex situations including: large-scale initiatives, managing and mitigating risks, creatively solving problems and implementing solutions; </li>
+		<li>Constraints encountered and overcome under their leadership (i.e. time frame, technical, financial, organizational, policy, etc.);</li>
+		<li>Commitment to service delivery;</li>
+		<li>Ability to demonstrate an experimental or innovative mindset whereby being open to change, taking calculated risks and challenging the status quo to try something new resulted in a measureable outcome;</li>
+		<li>Continually demonstrating the ability to exceed the needs of stakeholders and internal or external clients.</li></ul>";
   $translations[3][4] = "<strong>Impact:</strong><br />Describe, and use metrics to support (where applicable), the effect that the leader has had on employees, clients, the public service, and/or citizens of British Columbia. Considerations may include, but are not limited to:
 		<ul><li>Demonstrated improvement to the quality of the workplace for employees by contributing to the enhancement of diversity, health and safety, workplace culture and employee development; </li>
 		<li>Demonstrated support for innovation, new technology, and best practices; that resulted in the improvement of workplace processes i.e.  reducing costs, increasing efficiencies, etc.</li>
 		<li>Significantly improved the quality, cost-effectiveness, or productivity of services to internal or external stakeholders;</li>
 		<li>Demonstrated improvement to the quality of the workplace for employees by contributing to the enhancement of </li>
 		<li>Measureable benefits to either their organization(s) and/or the citizens of British Columbia through process improvements to transform business practices, and/or support sustainable revenue generation or savings;</li>
+		<li>Operational efficiencies as demonstrated by financial or other key performance indicators.</li>
 		<li>Significantly improved organizational performance as indicated by Work Environment Survey scores.</li></ul>";
   $translations[3][5] = "";
   $translations[3][6] = "";
@@ -184,18 +186,18 @@ function _atwork_prem_awards_questions() {
   /* Organizational Excellence */
   $translations[4][0] = "In this section, provide a brief statement that that summarizes or restates the main points of the nomination, submission or project.  The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main ideas and feature of the nomination.";
   $translations[4][1] = "To establish a background that will provide perspective to the work achieved, briefly describe why the new approach to the process, policy or service was undertaken.";
-  $translations[4][2] = "<strong>Complexity:</strong><br />Describe the scope and scale of the delivery of the program, service, or initiative that resulted in substantial benefits to their organization, the public service  or citizens of British Columbia, including:
-		<ul><li>Size of the program, service, or initiative;</li>
-		<li>Risks encountered;</li>
-		<li>Identify constraints which may include time frames, financial, policy, etc.;</li>
-		<li>Identifies challenges around aligning stakeholder or partner group interests;</li>
-		<li>Technical or organizational difficulties identified and addressed;</li></ul>";
-  $translations[4][3] = "<strong>Approach:</strong><br />Identify key aspects of the approach taken in the delivery of the new program, service, or initiative that may include, but are not limited to:
+  $translations[4][2] = "<strong>Approach:</strong><br />Identify key aspects of the approach taken in the delivery of the new program, service, or initiative that may include, but are not limited to:
 		<ul><li>The use of a citizen-centric or customer-centric approach at the heart of the design and/or implementation of a policy/project;</li>
 		<li>Support for innovation, risk taking, and a commitment to ongoing improvements by incorporating  or contributing to best practices;</li>
 		<li>Removing barriers to overcome constraints;</li>
 		<li>Change resilience – demonstration of strategies that support success even while going through change and transformation;</li>
 		<li>Attention to cross-government processes critical for meeting stakeholder needs.</li></ul>";
+  $translations[4][3] = "<strong>Complexity:</strong><br />Describe the scope and scale of the delivery of the program, service, or initiative that resulted in substantial benefits to their organization, the public service  or citizens of British Columbia, including:
+		<ul><li>Size of the program, service, or initiative;</li>
+		<li>Risks encountered;</li>
+		<li>Identify constraints which may include time frames, financial, policy, etc.;</li>
+		<li>Identifies challenges around aligning stakeholder or partner group interests;</li>
+		<li>Technical or organizational difficulties identified and addressed;</li></ul>";
   $translations[4][4] = "<strong>Impact:</strong><br />
 		<ul><li>Process improvements in business practices;</li>
 		<li>Extent to which the outcomes and objectives have significantly improved government-to-business or government-to-citizen program or service delivery.</li>
@@ -213,7 +215,15 @@ function _atwork_prem_awards_questions() {
   $translations[5][0] = "In this section, provide a brief statement that that summarizes or restates the main points of the nomination, project or partnership.  The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br><br>
 		 (Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.)<br>";
   $translations[5][1] = "To establish a background that will provide perspective to the work achieved, briefly describe why the partnership was undertaken.";
-  $translations[5][2] = "<strong>Complexity:</strong><br />Describe the scope and scale of the joint-ventures or multi-party initiatives including, but not limited to:
+  $translations[5][2] = "<strong>Approach:</strong><br />Identify key aspects of the approach taken in key aspects of the partnership including, but not limited to:
+		<ul><li>Developing and managing sustained strategic partnerships with other government, private sector, volunteer or non-profit organizations that integrate policy and/or service delivery, with a view to better serving British Columbians;</li>
+		<li>Building relationships with internal or external stakeholder(s) to achieve mutually beneficial goals or mandates;</li>
+		<li>The use of a citizen-centric or customer-centric approach at the heart of the design and/or partnership.</li>
+		<li>Creativity and/or use of new technology or methods (i.e. behavioural  insights, service design) to achieve results;</li>
+		<li>Risk and/or change management strategy;</li>
+		<li>Application and/or development of best practices to remove barriers that may have prevented the successful outcome of the project.</li>
+		<li>Demonstration of inclusive employee or citizen engagement practices with diverse stakeholder groups.</li></ul>";
+  $translations[5][3] = "<strong>Complexity:</strong><br />Describe the scope and scale of the joint-ventures or multi-party initiatives including, but not limited to:
 		<ul><li>Size of the project, process, or initiative;</li>
 		<li>Risks encountered;</li>
 		<li>Constraints encountered and overcome (i.e. time frame, technical, financial, organizational, policy, etc.);</li>
@@ -222,14 +232,6 @@ function _atwork_prem_awards_questions() {
 		Describe the any testing and process improvements along the way;
 		<ul><li>Explain how the team managed and overcame risks encountered to adapt and refine the process; or</li>
 		<li>Creativity in the design or redesign the programs or services.</li></ul>";
-  $translations[5][3] = "<strong>Approach:</strong><br />Identify key aspects of the approach taken in key aspects of the partnership including, but not limited to:
-		<ul><li>Developing and managing sustained strategic partnerships with other government, private sector, volunteer or non-profit organizations that integrate policy and/or service delivery, with a view to better serving British Columbians;</li>
-		<li>Building relationships with internal or external stakeholder(s) to achieve mutually beneficial goals or mandates;</li>
-		<li>The use of a citizen-centric or customer-centric approach at the heart of the design and/or partnership.</li>
-		<li>Creativity and/or use of new technology or methods (i.e. behavioural  insights, service design) to achieve results;</li>
-		<li>Risk and/or change management strategy;</li>
-		<li>Application and/or development of best practices to remove barriers that may have prevented the successful outcome of the project.</li>
-		<li>Demonstration of inclusive employee or citizen engagement practices with diverse stakeholder groups.</li></ul>";
   $translations[5][4] = "<strong>Impact:</strong><br />Describe, and use metrics to support (where applicable), the effect that the partnership has had on the organization, public service or citizens of British Columbia including, not limited to:
 		<ul><li>Measureable benefits to the organization(s) and/or the citizens of British Columbia through process improvements  that transform business practices, and/or support sustainable revenue generation or savings;</li>
 		<li>Effect on the community, internal or external stakeholders including any social, economic, and environmental benefits achieved as the result of the partnership;</li>
@@ -246,11 +248,7 @@ function _atwork_prem_awards_questions() {
   $translations[6][0] = "In this section, provide a brief statement that that summarizes or restates the main points of the nomination (goal and achievement). The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br><br>
 		(Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.)";
   $translations[6][1] = "To establish a background that will provide perspective to the work achieved, briefly describe the conditions under which the employee demonstrated their contribution to the BC Public Service including career highlights.";
-  $translations[6][2] = "<strong>Complexity:</strong><br />Explain how the employee has demonstrated exemplary leadership throughout their career including, but not limited to:
-		<ul><li>Ability to demonstrate superior leadership through complex situations including: large-scale initiatives; managing and mitigating risks; creatively solving problems and implementing solutions; </li>
-		<li>Constraints encountered and overcome (i.e. time frame, technical, financial, organizational, policy, etc.);</li>
-		<li>Application and/or development of best practices to remove barriers that may have prevented successful outcomes.</li></ul>";
-  $translations[6][3] = "<strong>Contribution to BC Public Service excellence:</strong><br />Describe how the individual approached leadership in public service excellence through. Considerations include, but not limited to:
+  $translations[6][2] = "<strong>Contribution to BC Public Service excellence:</strong><br />Describe how the individual approached leadership that resulted in public service excellence. Considerations include, but are not limited to:
 		<ul><li>Facilitating, re-enforcing, and successfully leading through changes necessary to promote innovation, continuous improvement, or improved service delivery to internal or external clients;</li>
 		<li>Continuous improvement, or improved service delivery to exceed the needs of stakeholders and internal or external clients; </li>
 		<li>Outstanding dedication to their work while maintaining a high level of commitment to BC Public Service values and government direction;</li>
@@ -261,6 +259,10 @@ function _atwork_prem_awards_questions() {
 		<li>Demonstration of public service values throughout their career while continually developing their subject matter expertise;</li>
 		<li>Demonstration of their commitment to diversity and inclusiveness in both the work environment and in the development of programs, policies and services.</li>
 		<li>Contributions the nominee has made to the development and/or or application of best practices. </li></ul>";
+  $translations[6][3] = "<strong>Complexity:</strong><br />Explain how the employee has demonstrated exemplary leadership throughout their career including, but not limited to:
+		<ul><li>Ability to demonstrate superior leadership through complex situations including: large-scale initiatives; managing and mitigating risks; creatively solving problems and implementing solutions; </li>
+		<li>Constraints encountered and overcome (i.e. time frame, technical, financial, organizational, policy, etc.);</li>
+		<li>Application and/or development of best practices to remove barriers that may have prevented successful outcomes.</li></ul>";
   $translations[6][4] = "<strong>Impact:</strong><br />Describe, and use metrics to support (where applicable), the ongoing positive contributions the individual has made to the BC Public Service and/or the province of British Columbia. Considerations may include, but are not limited to:
 		<ul><li>Measureable benefits to either their organization(s) and/or the citizens of British Columbia;</li>
 		<li>Effect on the community, internal or external stakeholders including any social, economic, and environmental benefits achieved as the result of their body of work;</li>
@@ -280,19 +282,19 @@ function _atwork_prem_awards_questions() {
   $translations[7][0] = "In this section, provide a brief statement that that summarizes or restates the main points of the nomination (goal and achievement). The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br><br>
 		(Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.)";
   $translations[7][1] = "In this section, please establish a background that will provide perspective to the work achieved including highlighting what the problem was or why the new innovative approach was undertaken.";
-  $translations[7][2] = "<strong>Valuing People:</strong><br />Identify and describe how the employee has demonstrated their leadership in supporting the workplace including, but not limited to:
-		<ul><li>Ability to demonstrate leadership through innovative problem solving, team building and collaboration with colleagues at all levels of the organization;</li>
-		<li>Actively enhancing the quality of the workplace through demonstrating a commitment to diversity and inclusiveness in the workplace;</li>
-		<li>Strong client service orientation;</li>
-		<li>Championing continuous learning, employee recognition and collaborative team-based environments;</li>
-		<li>Motivates others through change, and demonstrate success through measurable project/program outcomes.</li></ul>";
-  $translations[7][3] = "<strong>Commitment to the Organization:</strong><br />Identify and describe how the employee has demonstrated their leadership in operations including, but not limited to:
+  $translations[7][2] = "<strong>Commitment to the Organization:</strong><br />Identify and describe how the employee has demonstrated their leadership in operations including, but not limited to:
 		<ul><li>Improving workplace processes;</li>
 		<li>Seeking creative solutions to improve efficiency;</li>
 		<li>Significantly improved the quality, cost-effectiveness, or productivity of services to internal or external stakeholders;</li>
 		<li>Significantly reducing operating expenses without compromising service delivery to internal or external clients;</li>
 		<li>Demonstrates support for workplace innovation through the use of new technology, and best practices;</li>
 		<li>Demonstrates a commitment to diversity and inclusiveness in the development of programs, policies and services.</li></ul>";
+  $translations[7][3] = "<strong>Valuing People:</strong><br />Identify and describe how the employee has demonstrated their leadership in supporting the workplace including, but not limited to:
+		<ul><li>Ability to demonstrate leadership through innovative problem solving, team building and collaboration with colleagues at all levels of the organization;</li>
+		<li>Actively enhancing the quality of the workplace through demonstrating a commitment to diversity and inclusiveness in the workplace;</li>
+		<li>Strong client service orientation;</li>
+		<li>Championing continuous learning, employee recognition and collaborative team-based environments;</li>
+		<li>Motivates others through change, and demonstrate success through measurable project/program outcomes.</li></ul>";
   $translations[7][4] = "<strong>Impact:</strong><br />Describe, and use metrics to support (if applicable), how the employee exemplifies the future of corporate leadership as demonstrated through, but not limited to:
 		<ul><li>The effect that the leader has had on employees, clients, the public service, and/or citizens of British Columbia. </li>
 		<li>Demonstrated improvement to the quality of the workplace for employees by contributing to the enhancement of diversity, health and safety, workplace culture and employee development; </li>
@@ -308,18 +310,18 @@ function _atwork_prem_awards_questions() {
   $translations[8][0] = "In this section, provide a brief statement that that summarizes or restates the main points of the nomination (goal and achievement). The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br><br>
 		(Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.)";
   $translations[8][1] = "In this section, please establish a background that will provide perspective to the work achieved including highlighting what the problem was or why the new innovative approach was undertaken.";
-  $translations[8][2] = "<strong>Complexity</strong><br />Describe the scope and scale of the evidence-based or evidence-informed approach to developing the policy or program including but not limited to:
-		<ul><li>What necessitated the development of the policy or program? Describe the reason and evidence for the change or initiative;</li>
-		<li>Risks encountered and overcome; </li>
-		<li>Identify constraints which may include time frames, financial, existing policy, etc.;</li>
-		<li>Identifies challenges around aligning stakeholder or partner group interests;</li>
-		<li>Technical or organizational difficulties identified and addressed.</li></ul>";
-  $translations[8][3] = "<strong>Approach</strong><br />Describe how the new policy or program used an evidence-based or evidence-informed approach for the development from inception to delivery including, but not limited to:
+  $translations[8][2] = "<strong>Approach</strong><br />Describe how the new policy or program used an evidence-based or evidence-informed approach for the development from inception to delivery including, but not limited to:
 		<ul><li>The evidence-based or evidence-informed process in which the policy framework was designed;</li>
 		<li>Demonstration of the policy cycle including clear problem identification, current state, best practices or leading edge and gap analysis, development and balanced analysis of options,  evidence-based or evidence-informed  decision making, implementation, evaluation;</li>
 		<li>The use of foundational policy analysis tools to support recommendations (i.e. data and/or cost analysis, cross-jurisdictional and/or international reviews, peer reviewed research, stakeholder engagement etc.);</li>
 		<li>The use of new technology or tools (i.e. Data Science, Service Design, etc. to support policy recommendations);</li>
 		<li>Inclusive citizen engagement practices that reflects a diverse population within British Columbia.</li></ul>";
+  $translations[8][3] = "<strong>Complexity</strong><br />Describe the scope and scale of the evidence-based or evidence-informed approach to developing the policy or program including but not limited to:
+		<ul><li>What necessitated the development of the policy or program? Describe the reason and evidence for the change or initiative;</li>
+		<li>Risks encountered and overcome; </li>
+		<li>Identify constraints which may include time frames, financial, existing policy, etc.;</li>
+		<li>Identifies challenges around aligning stakeholder or partner group interests;</li>
+		<li>Technical or organizational difficulties identified and addressed.</li></ul>";
   $translations[8][4] = "<strong>Impact</strong><br />Capture the impact of, and use metrics to support (if applicable), the innovative approach to programs and services as demonstrated by, but not limited to:
 		<ul><li>Improved performance by doing things that may be unique, leading-edge, or new to the public service;</li>
 		<li>Describe the long-term benefits to internal or external stakeholders;</li>
