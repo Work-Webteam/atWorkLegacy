@@ -31,6 +31,8 @@ $form = $node->atwork_form;
 $application_type = $submission->data[41][0];
 $application_title = $submission->data[5][0];
 
+dpm($submission->data);
+
 if (isset($form['submitted']['name_of_ministry_or_eligible_organization_sponsoring_this_application']['#options']['Ministries'][$submission->data[1][0]])) {
   $ministry = $form['submitted']['name_of_ministry_or_eligible_organization_sponsoring_this_application']['#options']['Ministries'][$submission->data[1][0]];
 } else {
@@ -38,7 +40,7 @@ if (isset($form['submitted']['name_of_ministry_or_eligible_organization_sponsori
 }
 
 $region = $form['submitted']['region']['#options'][$submission->data[4][0]];
-
+dpm($region);
 // remove non-standard fields
 unset($renderable_fields['name_of_ministry_or_eligible_organization_sponsoring_this_application']);
 unset($renderable_fields['application_type']);
@@ -53,6 +55,7 @@ $application_type_map = array(
   5 => 'Partnership',
   6 => 'Legacy',
   7 => 'Emerging Leader',
+	8 => 'Evidence-Based Design'
 );
 
 print 'Thank you for submitting the following nomination:<br /><br />';
@@ -64,7 +67,7 @@ print 'Ministry - '. $ministry .'<br />';
 print 'Category - '. $application_type_map[$application_type] .'<br />';
 print 'Region - '. $region .'<br /><br />';
 
-print 'Please ensure the correct name for the nomination and ministry are listed above, as well as the correct category. If applicable, please ensure the correct region is listed above. If any of the information is incorrect please contact Alysia Johnson at: <a href="mailto:Alysia.Johnson@gov.bc.ca">Alysia.Johnson@gov.bc.ca</a><br /><br />Please share this information with the nominators, nomination contacts and the nominees.<br /><br />Your participation in the 2016 Premier\'s Innovation and Excellence Awards is greatly appreciated.  We particularly want to thank the nominators. Without their considerable efforts the program could not operate. <em>Thank you!</em>';
+print 'Please ensure the correct name for the nomination and ministry are listed above, as well as the correct category. If applicable, please ensure the correct region is listed above. If any of the information is incorrect please contact Alysia Johnson at: <a href="mailto:Alysia.Johnson@gov.bc.ca">Alysia.Johnson@gov.bc.ca</a><br /><br />Please share this information with the nominators, nomination contacts and the nominees.<br /><br />Your participation in the 2018 Premier\'s Innovation and Excellence Awards is greatly appreciated.  We particularly want to thank the nominators. Without their considerable efforts the program could not operate. <em>Thank you!</em>';
 
 print '<br /><br /><h2>' . $application_title . '</h2>';
 
