@@ -31,8 +31,6 @@ $form = $node->atwork_form;
 $application_type = $submission->data[41][0];
 $application_title = $submission->data[5][0];
 
-dpm($submission->data);
-
 if (isset($form['submitted']['name_of_ministry_or_eligible_organization_sponsoring_this_application']['#options']['Ministries'][$submission->data[1][0]])) {
   $ministry = $form['submitted']['name_of_ministry_or_eligible_organization_sponsoring_this_application']['#options']['Ministries'][$submission->data[1][0]];
 } else {
@@ -40,7 +38,7 @@ if (isset($form['submitted']['name_of_ministry_or_eligible_organization_sponsori
 }
 
 $region = $form['submitted']['region']['#options'][$submission->data[4][0]];
-dpm($region);
+
 // remove non-standard fields
 unset($renderable_fields['name_of_ministry_or_eligible_organization_sponsoring_this_application']);
 unset($renderable_fields['application_type']);
