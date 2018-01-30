@@ -226,9 +226,9 @@ function _atwork_prem_awards_questions() {
 		<li>Risks encountered;</li>
 		<li>Constraints encountered and overcome (i.e. time frame, technical, financial, organizational, policy, etc.);</li>
 		<li>Identify challenges around aligning stakeholder or partner group interests;</li>
-		<li>Technical or organizational difficulties addressed.</li></ul>
-		Describe the any testing and process improvements along the way;
-		<ul><li>Explain how the team managed and overcame risks encountered to adapt and refine the process; or</li>
+		<li>Technical or organizational difficulties addressed;</li>
+		<li>Describe the any testing and process improvements along the way;</li>
+		<li>Explain how the team managed and overcame risks encountered to adapt and refine the process; or</li>
 		<li>Creativity in the design or redesign the programs or services.</li></ul>";
   $translations[5][4] = "<strong>Impact:</strong><br />Describe, and use metrics to support (where applicable), the effect that the partnership has had on the organization, public service or citizens of British Columbia including, not limited to:
 		<ul><li>Measureable benefits to the organization(s) and/or the citizens of British Columbia through process improvements  that transform business practices, and/or support sustainable revenue generation or savings;</li>
