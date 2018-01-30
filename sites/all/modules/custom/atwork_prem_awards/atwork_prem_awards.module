@@ -532,7 +532,7 @@ function atwork_prem_awards_form_alter(&$form, $form_state, $form_id) {
       }
     }
 
-    $form['actions']['submit']['#prefix'] = '<p>' . t('Submitting the application will send an email copy to the Nominator Contact and Ministry Contact.') . '</p>';
+    $form['actions']['submit']['#prefix'] = '<p>' . t('Submitting the application will send an email copy to the Nomination Contact and Ministry Contact.') . '</p>';
     $form['actions']['submit']['#value'] = t('Submit');
     $form['actions']['save'] = array(
       '#type' => 'submit',
