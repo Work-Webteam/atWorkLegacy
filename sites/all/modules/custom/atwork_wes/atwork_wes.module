@@ -313,10 +313,7 @@ function _atwork_wes_block_content(){
  */
 function _atwork_wes_block_theme($top_three_ministries){
 	$block_html = '';
-	$block_html .= '<img src="/sites/default/files/images/WES/WES_tracker_Jan2_without-graphs.png" height="42" width="42" usemap="Map"/>';
-	$block_html .= '<map name="Map">';
-	$block_html .= '<area shape="circle" coords="861,97,57" href="/wes/2018/tracker">';
-	$block_html .= '</map>';
+	$block_html .= '<a href ="/wes/2018/tracker"><div style="height: 190px; width: 955px; position: absolute;"></div></a><img src="/sites/default/files/images/WES/WES_tracker_Jan2_without-graphs.png" style="-ms-interpolation-mode: bicubic;"/>'; 
 	
 	$block_html .= "<div id='ministry-top-three'>";
 	foreach($top_three_ministries as $key => $value){
