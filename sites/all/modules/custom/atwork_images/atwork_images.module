@@ -39,7 +39,6 @@ function _atwork_images_gallery_manage_access($node) {
  */
 function atwork_images_gallery_form($form, $form_state, $node) {
 
-
   // Now get images adn display
   $query = new EntityFieldQuery();
 
@@ -138,6 +137,7 @@ function atwork_images_gallery_form($form, $form_state, $node) {
     '#type' => 'submit',
     '#value' => t('Submit'),
   );
+
   return $form;
 }
 
@@ -228,7 +228,6 @@ function atwork_images_permission() {
  * Provide validate callback
  */
 function atwork_images_form_alter(&$form, &$form_state, $form_id) {
-  // Alterations to the images form
   if ($form_id == 'image_node_form') {
     global $user;
     //Some tags are reserved for editors and admins only
@@ -300,6 +299,7 @@ function atwork_images_form_alter(&$form, &$form_state, $form_id) {
           $form['return_to_gallery'] = array(
             '#markup' => l(t('Return'), 'node/' . $group->nid . '/galleries'),
           );
+
           drupal_set_message(t('This gallery is closed, only the owner may add images to it.'), 'status');
         }
       }
@@ -324,7 +324,6 @@ function atwork_images_form_alter(&$form, &$form_state, $form_id) {
     }
     if(!isset($form["menu"])){
       $form['actions']['submit']['#submit'][] = 'unpublished_group_submit';
-      //dpm($form);
     }
   }
 
@@ -348,6 +347,7 @@ function atwork_images_form_alter(&$form, &$form_state, $form_id) {
  * Helper function to attache gallery to groups if they are unpublished
  */
 function unpublished_group_submit($form,$form_state){
+  //$gid = (int)$_GET['og_group_ref'];
   $gid = (int)og_context_determine_context('node');
   if($form_state['nid']){
     $values = array(
@@ -379,6 +379,7 @@ function atwork_images_node_insert($node) {
           'uri' => $file->uri,
           'status' => 1,
         );
+
         // now load gallery
         $gallery_nid = field_get_items('node', $node, 'field_gallery');
 
@@ -514,13 +515,13 @@ function atwork_images_node_view($node, $view_mode) {
         '#markup' => rate_generate_widget($widget_id, 'node', $node->nid, $display_mode),
       );
 
+      //$widget_code['#markup'] = str_replace('<a class="', '<a onclick="window.open(this.href); return false;" class="', $widget_code['#markup']);
       if ($widget->node_display == RATE_DISPLAY_DISABLE) {
         $node->$widget_name = $widget_code;
       }
       else {
         $node->content[$widget_name] = $widget_code;
       }
-
     }
   }
 
@@ -555,6 +556,7 @@ function atwork_images_node_view($node, $view_mode) {
   }
 
   if ($node->type == 'image') {
+
     $gallery_nid = field_get_items('node', $node, 'field_gallery');
     if (isset($gallery_nid[0]['target_id'])) {
 

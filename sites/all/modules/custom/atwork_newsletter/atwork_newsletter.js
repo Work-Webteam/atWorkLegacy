@@ -1,6 +1,5 @@
 (function ($) {
 	$(document).ready(function($) {
-		console.log('3');
 		// Hide table of contents
 		$('.page-admin-content-newsletter-creation .form-item.form-item-scs-toc.form-type-checkbox').css('display', 'none');
 		

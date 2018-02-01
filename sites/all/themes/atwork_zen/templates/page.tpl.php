@@ -24,24 +24,22 @@
    var c = document.getElementById('block-tb-megamenu-menu-main-menu-zen').getElementsByTagName('li');
 
    for(var i = 0; i < a.length; i++){
-      for(var j = 0; j < c.length; j++){
-        if(c[j].getAttribute("data-id") == a[i]){
-            c[j].onclick = function(){
-            var d = this.getElementsByTagName('a');
-            return !window.open(d[0], '_blank');
-          }
-        }
+     for(var j = 0; j < c.length; j++){
+      if(c[j].getAttribute("data-id") == a[i]){
+       c[j].onclick = function(){
+        var d = this.getElementsByTagName('a');
+        return !window.open(d[0], '_blank');
       }
     }
   }
-
+}
+}
 </script>
 
 
 <div id="page">
 
   <header class="header" id="header" role="banner">
-
     <?php if ($logo): ?>
       <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
     <?php endif; ?>
@@ -120,24 +118,20 @@
         <?php // change this for group ?>
         <?php $og_context = og_context(); ?>
         <?php if($og_context && (arg(0) == 'node') && is_numeric(arg(1)) && (arg(2) == NULL)): ?>
-          <?php 
-              switch($node->type) {
-              case 'article':
-              case 'blog':
-              case 'poll':
-              case 'question':
-              case 'section_page':
-              case 'event':
-                $group = node_load($og_context['gid']);
-                $title_prefix = $title;
-                $title = $group->title;
-              break;
-              default:
-              break;
-            }
-            if($node->type == "image"){
-              drupal_add_js(drupal_get_path('module', 'atwork_images') . '/' . 'js_atwork_images.js');
-            }
+          <?php switch($node->type) {
+            case 'article':
+            case 'blog':
+            case 'poll':
+            case 'question':
+            case 'section_page':
+            case 'event':
+              $group = node_load($og_context['gid']);
+              $title_prefix = $title;
+              $title = $group->title;
+            break;
+            default:
+            break;
+          }
           ?>
         <?php endif; ?>
       <?php endif ?>
@@ -177,6 +171,9 @@
         <?php print $sidebar_first; ?>
         <?php print $sidebar_second; ?>
       </aside>
+    <?php endif; ?>
+    <?php if ($node->type == "image"): ?>
+      <?php drupal_add_js(drupal_get_path('module', 'atwork_images') . '/' . 'js_atwork_images.js'); ?>
     <?php endif; ?>
   </div><!-- /#main -->
 

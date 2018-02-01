@@ -1097,35 +1097,6 @@ EOD;
 
   // for now lets add this all the time
   drupal_add_library('system', 'drupal.collapse');
-
-//  drupal_add_http_header(
-//    'Cache-Control',
-//    'cache',
-//    FALSE
-//  );
-
-
-  //drupal_add_css('.chzn-choices input {width: 100%} .chzn-choices .search-field {width: 100%}', $option['type'] = 'inline');
-  //node_delete(7172);
-  //node_access_rebuild();
-  //cache_clear_all();
-//  $atwork_ldap = new atwork_ldap;
-//
-//  $result = $atwork_ldap->query('person', 'mail', 'Trace.Muldoon@gov.bc.ca');
-//
-//  $image = base64_decode($result['thumbnailphoto'][0]);
-//
-//  dpm($image);
-//
-//  $image = '<img src="data:image/jpeg;base64,'. $image .'">';
-//
-//  echo $image;
-
-  //dpm($result);
-
-
-
-
 }
 
 /*
