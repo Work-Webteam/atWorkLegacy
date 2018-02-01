@@ -1609,3 +1609,46 @@ function atwork_misc_field_access($op, $field, $entity_type, $entity, $account){
   }
 
 }
+
+/**
+ * Implements hook_authcache_request_exclude
+ * Certain content types really don't work when cached.
+ *
+ * @return void
+ */
+function atwork_misc_authcache_request_exclude() {
+  // Quiz and multichoice
+  $node = menu_get_object();
+  // Do not cache Long Service Awards
+  if(!empty($node) && !empty($node->type) && $node->type == 'lsa_application'){
+    return t('Avoid caching lsa application');
+  }
+  // Do not cache Service pin applications
+  if(!empty($node) && !empty($node->type) && $node->type == 'lsa_pin_application'){
+    return t('Avoid caching service pin applications');
+  }
+  // Do not cache Webforms
+  if(!empty($node) && !empty($node->type) && $node->type == 'webform'){
+    return t('Avoid caching webforms');
+  }
+  // Do not cache Quizzes
+  if(!empty($node) && !empty($node->type) && $node->type == 'quiz'){
+    return t('We don\'t want to cache quizzes or multichoice questions ever.');
+  }
+  // Do not cache eCards
+  if(!empty($node) && !empty($node->type) && $node->type == 'ecard'){
+    return t('We don\'t want to cache eCards.');
+  }
+  // Do not cache premiers awards forms
+  if(!empty($node) && !empty($node->nid) && $node->nid == '5991'){
+    return t('Don\'t cache premiers awards forms');
+  }
+  // Do not cache multichoice questions in quizzes
+  if(NULL !== arg(2) && arg(2) == 'take' ){
+    return t('We don\'t want to cache quizzes or multichoice questions ever.');
+  }
+  // Do not cache profile pages
+  if(NULL !== arg(0) && arg(0) == 'user' ){
+    return t('We don\'t want to cache profiles');
+  }
+}

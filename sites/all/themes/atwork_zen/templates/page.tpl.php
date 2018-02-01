@@ -24,34 +24,16 @@
    var c = document.getElementById('block-tb-megamenu-menu-main-menu-zen').getElementsByTagName('li');
 
    for(var i = 0; i < a.length; i++){
-     for(var j = 0; j < c.length; j++){
-      if(c[j].getAttribute("data-id") == a[i]){
-       c[j].onclick = function(){
-        var d = this.getElementsByTagName('a');
-        return !window.open(d[0], '_blank');
+      for(var j = 0; j < c.length; j++){
+        if(c[j].getAttribute("data-id") == a[i]){
+            c[j].onclick = function(){
+            var d = this.getElementsByTagName('a');
+            return !window.open(d[0], '_blank');
+          }
+        }
       }
     }
   }
-}
-}
-
-	//GALLERY THUMBS
-	jQuery(document).ready(function($){
-		var newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname;
-		var pathArray = window.location.pathname.split( '/' );
-
-		if(pathArray[3] == 'gallery'){
-			var match = RegExp('[?&]' + 'page' + '=([^&]*)').exec(window.location.search);
-			var galPg = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
-			if(galPg == null) galPg = 0;
-
-			$('.views-field-field-image a').each(function(){
-				var $this = $(this),
-       href = $this.attr('href');
-       $this.attr('href', href +'?page='+ galPg);
-     })
-		}
-	});
 
 </script>
 
@@ -138,20 +120,24 @@
         <?php // change this for group ?>
         <?php $og_context = og_context(); ?>
         <?php if($og_context && (arg(0) == 'node') && is_numeric(arg(1)) && (arg(2) == NULL)): ?>
-          <?php switch($node->type) {
-            case 'article':
-            case 'blog':
-            case 'poll':
-            case 'question':
-            case 'section_page':
-            case 'event':
-            $group = node_load($og_context['gid']);
-            $title_prefix = $title;
-            $title = $group->title;
-            break;
-            default:
-            break;
-          }
+          <?php 
+              switch($node->type) {
+              case 'article':
+              case 'blog':
+              case 'poll':
+              case 'question':
+              case 'section_page':
+              case 'event':
+                $group = node_load($og_context['gid']);
+                $title_prefix = $title;
+                $title = $group->title;
+              break;
+              default:
+              break;
+            }
+            if($node->type == "image"){
+              drupal_add_js(drupal_get_path('module', 'atwork_images') . '/' . 'js_atwork_images.js');
+            }
           ?>
         <?php endif; ?>
       <?php endif ?>
