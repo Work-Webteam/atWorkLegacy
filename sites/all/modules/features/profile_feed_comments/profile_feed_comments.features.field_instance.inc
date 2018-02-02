@@ -863,11 +863,25 @@ function profile_feed_comments_field_default_field_instances() {
     'label' => 'Comment',
     'required' => 0,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
       'behaviors' => array(
         'prepopulate' => array(
           'status' => 0,
         ),
       ),
+      'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -875,9 +889,8 @@ function profile_feed_comments_field_default_field_instances() {
       'module' => 'entityreference',
       'settings' => array(
         'match_operator' => 'CONTAINS',
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
         'path' => '',
-        'size' => 60,
+        'size' => 300,
       ),
       'type' => 'entityreference_autocomplete',
       'weight' => 1,
