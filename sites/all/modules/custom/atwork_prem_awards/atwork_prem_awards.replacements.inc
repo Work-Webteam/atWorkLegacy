@@ -23,7 +23,7 @@ function _atwork_prem_awards_ministry_contacts() {
   		17 => 'Kimberley.Guidoriagao@gov.bc.ca', // Mental Health and Addictions
   		18 => 'Alicia.Matthews@gov.bc.ca', // Municipal Affairs and Housing
   		19 => 'Robert.Meseyton@gov.bc.ca;Karla.Limion@gov.bc.ca;Christy.Gao@gov.bc.ca', //Public Safety & Solicitor General
-  		20 => 'Carly.Paulsen@gov.bc.ca;Maxine.Tobin@gov.bc.ca', // Social Development and Poverty Reduction
+  		20 => 'Carly.Paulsen@gov.bc.ca;Kimberlee.Johns@gov.bc.ca', // Social Development and Poverty Reduction
   		21 => 'Alicia.Matthews@gov.bc.ca',  // Tourism, Arts and Culture
   		22 => 'Kim.Pilkington@gov.bc.ca',  // Transportation and Infrastructure
   		23 => 'Linsey.Tupper@gov.bc.ca', //BC Public Service Agency
