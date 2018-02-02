@@ -562,7 +562,6 @@ function _atwork_activity_render_messages($result, $activityType) {
 
         // Now we can implode the array, rebuild the string
         $rebuilt_array = implode($string_array);
-
         // This is a zero based function adn we counted the first character above as '1' - so now need to take taht into account.
         $rebuilt_string = substr($rebuilt_array, 0, $i-1);
         // Add ellipses and tagged more href on end
@@ -594,7 +593,18 @@ function _atwork_activity_render_messages($result, $activityType) {
         $message_end_split = explode('</span>', $message_split[1]);
         // Now sanitize it
         $comment_text = strip_tags($message_end_split[0]);
-        // Put it all back 
+        // We only want 100 characters or less. so lets count to 100.
+        $comment_text = substr($comment_text, 0, 100);
+        // If the last character is not a space, we will count back to the previous space.
+        $last_char = substr($comment_text, -1);
+        if($last_char != " "){
+          //trim a littl more
+          $last_space = strrpos($comment_text, ' ');
+          if($last_space !== false){
+            $comment_text = substr($comment_text, 0, $last_space);
+          }
+        }
+        // Put it all back together
         $finished_array[] = ($message_split[0]);
         $finished_array[] = '<span class="activity-comment">';
         $finished_array[] = $comment_text;
