@@ -6,6 +6,9 @@ define("R2R_LIVECAST_URL", "http://video.web.gov.bc.ca/psa/townhall/"); // 2017 
 // This is where we set the upcoming session by ID (as found in webform sessions)
 // Ex. [01| Vancouver – Wednesday, February 7 -  Holiday Inn and Suites Vancouver Downtown]  Would be set as 01
 define("WEBCAST_ID", '01');
+// For this module to work properly, it is required that you enable the 'Region to region pop-up form' block, and create a button in the adspace with the id r2r-form (i.e. <button id="r2r-form">Watch R2R</button>)
+
+
 /**
  * Implements hook_block_info
  * We require a block to grab form submission data for users who are accessing R2R stream
