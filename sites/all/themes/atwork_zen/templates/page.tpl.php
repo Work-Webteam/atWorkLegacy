@@ -172,7 +172,7 @@
         <?php print $sidebar_second; ?>
       </aside>
     <?php endif; ?>
-    <?php if ($node->type == "image"): ?>
+    <?php if (isset($node) && isset($node->type) && $node->type == "image"): ?>
       <?php drupal_add_js(drupal_get_path('module', 'atwork_images') . '/' . 'js_atwork_images.js'); ?>
     <?php endif; ?>
   </div><!-- /#main -->
