@@ -56,12 +56,21 @@ function r2r_registration_information(){
   $name = $current_user->field_gal_first_name['und'][0]['safe_value'] . ' ' .  $current_user->field_gal_last_name['und'][0]['safe_value'];
   $ministry = $current_user->field_gal_ministry_name['und'][0]['safe_value'];
   $email = $current_user->mail;
-  list($k, $v) = explode('|', $webform_node->webform['components'][2]['extra']['items']);
-  $casts[$k] = $v;
+  $arr = explode("\n", $webform_node->webform['components'][2]['extra']['items']);
+  $casts = array();
+  foreach($arr as $k=>$v){
+    $split[] = explode("|", $v);
+    foreach($split as $value ){
+      if(!isset($value[1])){
+        continue;
+      }
+      $casts[$value[0]] = $value[1];
+    }
+  }
   $cast_id = WEBCAST_ID;
   $cast_name = $casts[$cast_id];
   // Currently this is only used for the current webcast 
-  $session = "8";
+  $session = 8;
   // Add form update js
   drupal_add_js(drupal_get_path('module', 'atwork_r2r') . '/' . 'js_r2r_form.js');
   drupal_add_library('system', 'ui.dialog');
@@ -125,11 +134,11 @@ function atwork_r2r_callback(){
   $data = array(
     // Webcast - this is static for now - eventually we may need to make it dynamic
     "2" => array(
-      '0'=> $submission_array['session'],
+      '0'=> $submission_array['attendance'],
     ),
     // Session can be in person (7) or virtual (8)
     "4" => array( 
-      '0'=> $submission_array['attendance'],
+      '0'=> $submission_array['session'],
     ),
     //' Ministry
     "8" => array(
