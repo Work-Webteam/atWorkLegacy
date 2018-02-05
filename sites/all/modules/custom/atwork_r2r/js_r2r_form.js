@@ -66,6 +66,7 @@
       appendTo: "#block-atwork-activity-homepage",
       modal: true,
       opacity: 1,
+      title: "Region to Region",
       draggable: true,
       show: { effect: "blind", duration: 800 },
       buttons: {
