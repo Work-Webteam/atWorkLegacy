@@ -95,7 +95,7 @@ function atwork_wes_cron() {
 			if($ministry == ''){
 				$id = 'total';
 				$result[$id] = array(
-					'ministry' => 'total',
+					'ministry' => 'BC Public Service',
 					'population' => $population,
 					'submissions' => $submissions,
 					'percent' => $percent,
@@ -186,7 +186,7 @@ function atwork_wes_node_view($node, $view_mode, $langcode) {
 			
 			foreach ($data as $id => $ministry) {
 				// Pull out the total here
-				if(isset($ministry['ministry']) && $ministry['ministry'] == 'total'){
+				if(isset($ministry['ministry']) && $ministry['ministry'] == 'BC Public Service'){
 					$total_html = _atwork_wes_theme($id, $ministry['ministry'], $ministry['percent']);
 					$total_html = '<div id="' . $id . '" class="wes-total">' . $total_html . '</div>';
 				} elseif(isset($ministry['branches'])){
@@ -246,6 +246,12 @@ function atwork_wes_node_view($node, $view_mode, $langcode) {
 				<div id="wes-closure"></div>
 			</div>
 			</div>
+			</div>
+			<div id="total_graph">
+				<span id="total-title-span">Overall Participation Rate</span>
+				$total_html
+				<div id="wes-closure">
+				</div>
 			</div>
 			<div class="feature_box_blue" style="width:80%; margin:15px auto; clear: both;">
 			<p>The response rates are from BC Stats. Please note that BC Stats takes every step to ensure the confidentiality of your responses to the survey. Response rates are shown as totals, and small divisions are not displayed to protect respondent identities. Therefore, division percentages may not add up to the total ministry percentage. Percentages on this page should not be reproduced as final response rates.</p>
