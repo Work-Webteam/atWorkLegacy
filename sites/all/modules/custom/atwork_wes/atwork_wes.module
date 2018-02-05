@@ -90,6 +90,11 @@ function atwork_wes_cron() {
 			$total_submissions = $total_submissions + $submissions;
 			
 			$id = _atwork_wes_id_safe($ministry);
+
+			// Adding code to account for overall field - no name for this
+			if($ministry == ''){
+				continue;
+			}
 			
 			if (!$branch) {
 				$result[$id] = array(
