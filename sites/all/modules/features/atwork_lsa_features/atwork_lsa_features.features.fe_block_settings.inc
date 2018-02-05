@@ -31,7 +31,7 @@ node/add/*',
         'region' => 'pre_content',
         'status' => 1,
         'theme' => 'atwork_zen',
-        'weight' => 8,
+        'weight' => 10,
       ),
       'seven' => array(
         'region' => '',
