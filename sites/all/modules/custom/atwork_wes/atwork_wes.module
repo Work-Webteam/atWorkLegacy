@@ -93,6 +93,13 @@ function atwork_wes_cron() {
 
 			// Adding code to account for overall field - no name for this
 			if($ministry == ''){
+				$id = 'total';
+				$result[$id] = array(
+					'ministry' => 'total',
+					'population' => $population,
+					'submissions' => $submissions,
+					'percent' => $percent,
+				);
 				continue;
 			}
 			
@@ -179,16 +186,22 @@ function atwork_wes_node_view($node, $view_mode, $langcode) {
 			$i = 1;
 			
 			foreach ($data as $id => $ministry) {
-				// first do branches
-				if (isset($ministry['branches'])) {
+				// Pull out the total here
+				if(isset($ministry['ministry']) && $ministry['ministry'] == 'total'){
+					$total_html = _atwork_wes_theme($id, $ministry['ministry'], $ministry['percent']);
+					$total_html = '<div id="' . $id . '" class="wes-total">' . $total_html . '</div>';
+				} elseif(isset($ministry['branches'])){
+				// Next do branches
 					$branches_html = '';
 					foreach ($ministry['branches'] as $bid => $branch) {
 						$branches_html .= _atwork_wes_theme("$id-$bid", $branch['name'], $branch['percent']);
 					}
 					$branches_html = '<div id="' . $id . '-branches" class="wes-branches" style="display: none;">' . $branches_html . '</div>';
+					$ministry_html = _atwork_wes_theme($id, $ministry['ministry'], $ministry['percent']);
+				} else {
+					// Ministry only
+					$ministry_html = _atwork_wes_theme($id, $ministry['ministry'], $ministry['percent']);
 				}
-				
-				$ministry_html = _atwork_wes_theme($id, $ministry['ministry'], $ministry['percent']);
 				
 				
 				
@@ -237,6 +250,10 @@ $last_updated
   <div id="wes-closure"></div>
 </div>
 </div>
+</div>
+<div id="total_graph">
+			$total_html
+			<div id="wes-closure"></div>
 </div>
 <div class="feature_box_blue" style="width:80%; margin:15px auto; clear: both;">
 <p>The response rates are from BC Stats. Please note that BC Stats takes every step to ensure the confidentiality of your responses to the survey. Response rates are shown as totals, and small divisions are not displayed to protect respondent identities. Therefore, division percentages may not add up to the total ministry percentage. Percentages on this page should not be reproduced as final response rates.</p>
