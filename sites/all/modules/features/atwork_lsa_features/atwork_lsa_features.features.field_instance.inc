@@ -379,7 +379,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'bundle' => 'lsa_application',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '<img id="lsa-award-selector-img-display-panel"></img>',
+    'description' => '<img class="lsa-award-selector-img-display-panel"></img>',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -713,7 +713,7 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_branch_department',
-    'label' => 'Branch/Department',
+    'label' => 'Branch',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -729,6 +729,8 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -1473,7 +1475,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 14,
+      'weight' => 16,
     ),
   );
 
@@ -1528,6 +1530,20 @@ function atwork_lsa_features_field_default_field_instances() {
     'label' => 'Email Address',
     'required' => 1,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -1535,7 +1551,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'active' => 1,
       'module' => 'email',
       'settings' => array(
-        'size' => 30,
+        'size' => 60,
       ),
       'type' => 'email_textfield',
       'weight' => 31,
@@ -2878,6 +2894,8 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -3764,7 +3782,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 20,
+      'weight' => 19,
     ),
   );
 
@@ -4107,6 +4125,21 @@ function atwork_lsa_features_field_default_field_instances() {
     'label' => 'First Name',
     'required' => 1,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -4116,7 +4149,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 20,
+        'size' => 30,
       ),
       'type' => 'text_textfield',
       'weight' => 37,
@@ -4175,6 +4208,21 @@ function atwork_lsa_features_field_default_field_instances() {
     'label' => 'Last Name',
     'required' => 1,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -4184,7 +4232,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 20,
+        'size' => 30,
       ),
       'type' => 'text_textfield',
       'weight' => 38,
@@ -4262,7 +4310,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 60,
+        'size' => 7,
       ),
       'type' => 'text_textfield',
       'weight' => 43,
@@ -4340,7 +4388,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 60,
+        'size' => 2,
       ),
       'type' => 'text_textfield',
       'weight' => 42,
@@ -4670,7 +4718,7 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_work_phone_ext',
-    'label' => 'Work Phone Ext',
+    'label' => 'Work Phone Extension',
     'required' => 0,
     'settings' => array(
       'authcache' => array(
@@ -4686,6 +4734,8 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -6735,7 +6785,7 @@ function atwork_lsa_features_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('25 Year Certificate');
   t('<em> Service pins will be sent to the employee’s supervisor for presentation during Public Service Week - June 12-16, 2017.</em>');
-  t('<img id="lsa-award-selector-img-display-panel"></img>');
+  t('<img class="lsa-award-selector-img-display-panel"></img>');
   t('<p class="style-red">For Victoria locations, please use the P.O. Box address</p>');
   t('<p>I declare, to the best of my knowledge and consistent with the Long Service Awards Eligibility Guidelines (which I have reviewed) that as of December 31, 2017, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of this event.</p>
 
@@ -6750,7 +6800,6 @@ function atwork_lsa_features_field_default_field_instances() {
   t('Award Special Instructions');
   t('Award Year');
   t('Branch');
-  t('Branch/Department');
   t('Ceremony Date');
   t('Ceremony Night');
   t('Ceremony Response');
@@ -6820,7 +6869,7 @@ function atwork_lsa_features_field_default_field_instances() {
   t('What ministry/organization are you with?');
   t('Who is registering for this service pin?');
   t('Work Phone');
-  t('Work Phone Ext');
+  t('Work Phone Extension');
   t('Years of Service');
 
   return $field_instances;

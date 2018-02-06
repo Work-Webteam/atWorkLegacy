@@ -51,12 +51,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->data = array(
     'label' => 'Ceremony Accommodations',
     'weight' => '20',
-    'children' => array(
-      0 => 'field_lsa_ceremony_accommodation',
-      1 => 'field_lsa_accommodation_notes',
-      2 => 'field_lsa_recipient_accom',
-      3 => 'field_lsa_guest_accom',
-    ),
+    'children' => array(),
     'format_type' => 'fieldset',
     'format_settings' => array(
       'formatter' => 'collapsible',
@@ -81,7 +76,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Administration',
-    'weight' => '24',
+    'weight' => '25',
     'children' => array(
       0 => 'field_lsa_notes',
       1 => 'field_lsa_form_date_stamp',
@@ -115,7 +110,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = 'group_lsa_administration';
   $field_group->data = array(
     'label' => 'Ceremony Details',
-    'weight' => '62',
+    'weight' => '26',
     'children' => array(
       0 => 'field_lsa_alternate_min_org',
       1 => 'field_lsa_actual_min_org',
@@ -184,12 +179,8 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Dietary Requirements',
-    'weight' => '21',
-    'children' => array(
-      0 => 'field_lsa_dietary_requirements',
-      1 => 'field_lsa_recipient_dietary',
-      2 => 'field_lsa_dietary_guest',
-    ),
+    'weight' => '22',
+    'children' => array(),
     'format_type' => 'fieldset',
     'format_settings' => array(
       'formatter' => 'collapsible',
@@ -315,7 +306,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'PECSF',
-    'weight' => '12',
+    'weight' => '11',
     'children' => array(
       0 => 'field_lsa_donation_options',
       1 => 'field_lsa_pecsf_region',
@@ -348,7 +339,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Recipient Contact Information',
-    'weight' => '17',
+    'weight' => '14',
     'children' => array(
       0 => 'field_lsa_first_name',
       1 => 'field_lsa_middle_name',
@@ -415,7 +406,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = 'group_lsa_administration';
   $field_group->data = array(
     'label' => 'RSVP Information',
-    'weight' => '61',
+    'weight' => '25',
     'children' => array(
       0 => 'field_lsa_rsvp',
       1 => 'field_lsa_attending_ceremony',
@@ -447,7 +438,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = 'group_lsa_pecsf';
   $field_group->data = array(
     'label' => '',
-    'weight' => '19',
+    'weight' => '18',
     'children' => array(
       0 => 'field_lsa_charity_name_2',
       1 => 'field_lsa_donation_amount_2',
