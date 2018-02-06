@@ -1,0 +1,55 @@
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8; format=flowed; delsp=yes
+Content-Transfer-Encoding: 8Bit
+X-Mailer: Drupal
+Return-Path: EmployeeNews@gov.bc.ca
+Sender: EmployeeNews@gov.bc.ca
+From: EmployeeNews@gov.bc.ca
+X-Rerouted-Mail-Key: atwork_mail_atwork_mail_default
+X-Rerouted-Website: http://192.168.33.10
+X-Rerouted-Original-To: brendan.jennings@gov.bc.ca
+To: thayne.werdal@gov.bc.ca
+Subject: Your Long Service Award registration
+
+This email was rerouted.
+Web site: http://192.168.33.10
+Mail key: atwork_mail_atwork_mail_default
+Originally to: brendan.jennings@gov.bc.ca
+-----------------------
+
+
+THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.
+You have successfully registered for a Long Service Award.
+
+The 2018 ceremonies will be held at Government House in Victoria this fall
+between September and November.
+
+An electronic invitation to your Long Service Award ceremony will be emailed
+to you in June. The date for your ceremony will be specified on your
+invitation. Please note, because the ceremonies are tailored to host specific
+ministries and organizations, it will not be possible to change your ceremony
+date.
+
+If you have registered but find that you’re unable to attend your ceremony
+this fall, you have a one-year grace period to attend the ceremony next year.
+In this case, please RSVP your regrets and re-register for the Long Service
+Awards in 2019. Arrangements will be made to have your award presented to you
+at your workplace in 2018.
+
+An email has been sent to your supervisor so that he/she is aware of your
+registration for a Long Service Award and can provide you with the necessary
+supports to attend your ceremony. For information about travel reimbursement
+and taking time off, visit @Work [1] or contact your workplace Long Service
+Award Contact. [2]
+
+Note: You are responsible for booking your own travel to the ceremony. Please
+connect with your workplace Long Service Award Contact [3] to confirm if your
+organization has an internal travel process to follow and/or if someone will
+be coordinating specific hotel arrangements for you.
+
+
+[1] https://gww.gov.bc.ca/career/long-service-awards/eligibility/policy
+[2] 
+https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts
+[3] 
+https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts

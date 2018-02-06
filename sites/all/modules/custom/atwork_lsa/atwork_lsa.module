@@ -12,7 +12,6 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
   jquery_impromptu_add();
   drupal_add_library('system', 'drupal.ajax');
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)){
-    //dpm($user);
     drupal_add_css('.group-lsa-administration {dsplay:block !important;}', 'inline');
   } else {
     // Hide the administration panel from all users until after signup is over.

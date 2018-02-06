@@ -17,7 +17,7 @@
       $("#edit-field-lsa-award-id-und-0-value").val('');
       //$('#edit-field-lsa-award-und-0-value').val('');
       $('#edit-field-lsa-award-und-0-value').hide();
-      $('#lsa-award-selector-img-display-panel').hide();
+      $('.lsa-award-selector-img-display-panel').hide();
       $('.form-item.form-type-textfield.form-item-field-lsa-award-und-0-value').hide();
 
 
@@ -124,7 +124,7 @@
 
     // Setting award text box - will not be useable by applicant
     $('#edit-field-lsa-award-und-0-value').hide();
-    $('#lsa-award-selector-img-display-panel').hide();
+    $('.lsa-award-selector-img-display-panel').hide();
     
     $('.form-item.form-type-textfield.form-item-field-lsa-award-und-0-value').hide();
     $('#edit-field-lsa-award-und-0-value').prop("readonly", true);
