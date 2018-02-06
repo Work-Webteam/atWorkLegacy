@@ -14,7 +14,15 @@ function homepage_activity_feed_feature_default_fe_block_settings() {
 
   $export['atwork_activity-homepage'] = array(
     'cache' => 1,
-    'css' => '',
+    'css' => '#block-atwork-activity-homepage {
+ height: 1565px!important;
+}
+#social-side .entity-message p[class^="msg-"] + p + p, #social-side .entity-message span.activity-comment {
+ line-height: 18px;
+}
+#social-side p.message {
+ line-height:initial;
+}',
     'custom' => 0,
     'delta' => 'homepage',
     'js' => '',
