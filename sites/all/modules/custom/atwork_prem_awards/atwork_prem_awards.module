@@ -532,7 +532,7 @@ function atwork_prem_awards_form_alter(&$form, $form_state, $form_id) {
       }
     }
 
-    $form['actions']['submit']['#prefix'] = '<p>' . t('Submitting the application will send an email copy to the Nominator Contact and Ministry Contact.') . '</p>';
+    $form['actions']['submit']['#prefix'] = '<p>' . t('Submitting the application will send an email copy to the Nomination Contact and Ministry Contact.') . '</p>';
     $form['actions']['submit']['#value'] = t('Submit');
     $form['actions']['save'] = array(
       '#type' => 'submit',
@@ -553,8 +553,8 @@ function atwork_prem_awards_form_alter(&$form, $form_state, $form_id) {
 
     $translations = _atwork_prem_awards_questions();
 
-    $form['submitted']['summary_statement']['#title'] = '<h2>Evaluation Considerations</h2><strong>Summary (not to exceed 150 words):</strong><br />' . $translations[$form_type][0];
-    $form['submitted']['prem_award_q1']['#title'] = '<h2>Content (not to exceed 1500 words):</h2><strong>Context (please keep to approximately 250 words):</strong><br />' . $translations[$form_type][1];
+    $form['submitted']['summary_statement']['#title'] = '<h2>Evaluation Considerations - The combined sections below must not exceed 1500 words</h2><strong>Summary (not to exceed 150 words):</strong><br />' . $translations[$form_type][0];
+    $form['submitted']['prem_award_q1']['#title'] = '<h2>Content (not to exceed 1500 words):</h2><strong>Context (not to exceed 250 words):</strong><br />' . $translations[$form_type][1];
     for ($i=2;$i<10;$i++) {
       if (isset($translations[$form_type][$i]) && $translations[$form_type][$i]) {
         $form['submitted']['prem_award_q'. $i]['#title'] = str_replace('[prem-award-q'. $i .']', $translations[$form_type][$i], $form['submitted']['prem_award_q'. $i]['#title']);
@@ -676,7 +676,7 @@ function atwork_prem_awards_application_submit($form, &$form_state) {
   elseif ($form_state['clicked_button']['#value'] == 'Save') {
     if(isset($form_state['storage']['details']['sid']) && $form_state['storage']['details']['is_new'] == TRUE){
       $sid = $form_state['storage']['details']['sid'];
-      drupal_goto('/premiers-award-application-2017/submission/' . $sid . '/edit');
+      drupal_goto('/premiers-award-application-2018/submission/' . $sid . '/edit');
     } 
     drupal_set_message(t('Your submission has been saved. You may review and edit any of your submissions !here.', array( '!here' => l('here', 'node/' . PA_APP_NID . '/submissions'))));
   }
@@ -749,7 +749,7 @@ EOT;
   $vars['renderable']['prem_award_q1'] = array(
     '#weight' => $vars['renderable']['prem_award_q1']['#weight'],
     '#markup' => '<h3>' . $vars['renderable']['prem_award_q1']['#title'] .
-      '</h3>' . '<strong>' . 'Context (please keep to approximately 250 words):<br />' .
+      '</h3>' . '<strong>' . 'Context (not to exceed 250 words):<br />' .
       $translations[$application_type][1] . '</strong>' .
       check_markup($vars['renderable']['prem_award_q1']['#value']),
   );

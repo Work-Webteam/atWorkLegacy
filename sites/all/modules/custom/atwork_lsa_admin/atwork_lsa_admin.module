@@ -10,6 +10,9 @@
  */
 function atwork_lsa_admin_form_alter(&$form, &$form_state, $form_id) {
   global $user;
+  
+  // Add gift list so we can display the images for chosen awards.
+  drupal_add_js(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_gift_list.js');
 
   // For LSA admin, allows to sort on whether a user has entered input into the notes field or not.
   if($form['#id'] == 'views-exposed-form-lsa-admin-page-2'){

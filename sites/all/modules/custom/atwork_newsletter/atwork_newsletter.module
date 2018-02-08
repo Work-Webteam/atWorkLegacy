@@ -77,16 +77,23 @@ function atwork_newsletter_theme() {
  */
 function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state, $vbo){
 	if($form['#form_id'] == 'views_form_newsletter_creation_page'){
-		
 		//Added instructions to content selection
 		if(!array_key_exists('nodes',$form)) {
-			$form['#prefix'] = $form['#prefix'] . t('Ensure you are using the "Chrome" browser. To begin creating the newsletter, click the checkbox in the leftmost column beside the articles and blogs you would like to have in the newsletter.
-      There is no maximum number that can select. However, you must ensure there is at least one article. Once complete, scroll down to the next section - comments.<br>');
+			// protect prefix, which is tripping errors at times 
+			if(!isset($form['#prefix'])){
+				$form['#prefix'] = '';
+			}
+			$form['#prefix'] = $form['#prefix'] . t('<p>Ensure you are using the "Chrome" browser. To begin creating the newsletter, click the checkbox in the leftmost column beside the articles and blogs you would like to have in the newsletter.</p>
+      <p>There is no maximum number that can select. However, you must ensure there is at least one article. Once complete, scroll down to the next section - comments.</p><br>');
 		} else {
-			$form['#prefix'] = $form['#prefix'] . t('Please review the content on this page to ensure it is how you would like the information to be displayed.<br>
-				For the articles/blogs section, you can reorder the content as you\'d like it to appear in the newsletter. Use the "+" sign to drag and drop the content into the order you would like. Note, an article must be in the top spot.<br>
-				Then review the Comment, Take Note and Did You Know sections to ensure the information is as you\'d like it to be displayed. You may edit content at this point directly in the fields, as needed.<br>
-				Click the "Next" button at the bottom of this page to continue with newsletter creation.
+			// protect prefix, which is tripping errors at times 
+			if(!isset($form['#prefix'])){
+				$form['#prefix'] = '';
+			}	
+			$form['#prefix'] = $form['#prefix'] . t('<p>Please review the content on this page to ensure it is how you would like the information to be displayed.</p>
+				<p>For the articles/blogs section, you can reorder the content as you\'d like it to appear in the newsletter. Use the "+" sign to drag and drop the content into the order you would like. Note, an article must be in the top spot.</p>
+				<p>Then review the Comment, Take Note and Did You Know sections to ensure the information is as you\'d like it to be displayed. You may edit content at this point directly in the fields, as needed.</p>
+				<p>Click the "Next" button at the bottom of this page to continue with newsletter creation.</p>
 			');
 		}
 		
@@ -101,7 +108,7 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
 		$comment_value = '';
 		$comment_suffix = NULL;
 		if(array_key_exists('nodes',$form)) {
-			$comment_disabled = TRUE;
+			//$comment_disabled = TRUE;
 			$comment_value = $form_state['input']['cid'];
 			$comment_preview = comment_load($comment_value);
 			$comment_body = $comment_preview->comment_body['und'][0]['value'];
@@ -118,11 +125,9 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
 				'#size' => 60,
 				'#maxlength' => 64,
 				'#suffix' => t($comment_suffix),
-				'#prefix' => t('<br><strong>Comment</strong><br>To add the comment you would like to appear in the newsletter, add the comment ID  in the field above. The comment ID is a five-digit number found at the end of each comment URL.<br>
-        For example, the ID is "42378" in this URL:
-        https:// gww.gov.bc.ca/comment/reply/26948/<strong>42378</strong>)
-        If this field is left blank, no comment will be displayed.<br>
-        NOTE: You can find the comment ID by pressing "reply" to the comment and copying the ID from the URL.'),
+				'#prefix' => t('<br><strong>Comment</strong><br><p>To add a comment in the newsletter, type in the "comment ID" in the field below. The comment ID is a five-digit number found at the end of each comment URL.</p>
+        	<p>For example, the ID is "42378" in this URL: https:// gww.gov.bc.ca/comment/reply/26948/<strong>42378</strong></p>
+        	<p>You can find the comment ID by mousing over the "reply" link below the comment and typing it in the field or by pressing "reply" and copying the ID from the url.</p>'),
 		);
 		// Spot for "Take Note"
 		$form['take_note'] = array(
@@ -130,8 +135,8 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
 				'#title' => NULL,
 				'#default_value' => t(''),
 				'#format' => NULL,
-				'#prefix' => t('<br><strong>Take Note</strong><br>To add content into the Take Note section, copy the bullets from the newsletter entry of the editorial calendar and use the "Paste from Word" icon to paste content into the field below.
-				Then select "ok."'),
+				'#prefix' => t('<br><strong>Take Note</strong><br><P>To add content into the Take Note section, copy the bullets from the newsletter entry of the editorial calendar and use the "Paste from Word" icon to paste content into the field below.
+				Then select "ok."</p>'),
 		);
 		// Spot for "Did You Know?"
 		$form['did_you_know'] = array(
@@ -139,9 +144,9 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
 				'#title' => NULL,
 				'#default_value' => t(''),
 				'#format' => NULL,
-				'#prefix' => t('<br><br><strong>Did You Know?</strong><br>To add content into the Did You Know? section, copy the content from the newsletter entry of the editorial calendar and use the "Paste from Word" icon to paste content into the field below.
-				Then select "ok."'),
-				'#suffix' => t('<br><br>When you have completed the sections above, click the "Create newsletter" button below to review your information.'),
+				'#prefix' => t('<br><br><strong>Did You Know?</strong><br><p>To add content into the Did You Know? section, copy the content from the newsletter entry of the editorial calendar and use the "Paste from Word" icon to paste content into the field below.
+				Then select "ok."</p>'),
+				'#suffix' => t('<br><p>When you have completed the sections above, click the "Create newsletter" button below to review your information.<p>'),
 		);
 		// Add our own validation
 		if((isset($form['select']['action::scs_views_create_newsletter_action']['#validate'])) &&

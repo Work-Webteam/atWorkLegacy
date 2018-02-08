@@ -17,8 +17,8 @@
       $("#edit-field-lsa-award-id-und-0-value").val('');
       //$('#edit-field-lsa-award-und-0-value').val('');
       $('#edit-field-lsa-award-und-0-value').hide();
+      $('.lsa-award-selector-img-display-panel').hide();
       $('.form-item.form-type-textfield.form-item-field-lsa-award-und-0-value').hide();
-
 
       // Also reset the engravement choice - in case it is no longer relevant
       //$('#edit-field-lsa-engravement-und-0-value').val('');
@@ -26,6 +26,11 @@
       $('.form-item.form-type-textfield.form-item-field-lsa-engravement-und-0-value').hide();
     }
 
+    //Hide PECSF box on years of Service select change
+    $("#edit-field-lsa-years-of-service-und").change(function() {
+      $("#pecsf-fields").hide();
+    });
+    
     // Gift select button for users who choose 25 - 40 years
     if ($("input[name='field_lsa_register_last_year[und]']:checked").val() == 2 && $('input[name="field_lsa_years_of_service[und]"]:checked').val() >= 25 && $('input[name="field_lsa_years_of_service[und]"]:checked').val() <= 40)  {
       $('#gift_select').show();
@@ -123,6 +128,8 @@
 
     // Setting award text box - will not be useable by applicant
     $('#edit-field-lsa-award-und-0-value').hide();
+    $('.lsa-award-selector-img-display-panel').hide();
+    
     $('.form-item.form-type-textfield.form-item-field-lsa-award-und-0-value').hide();
     $('#edit-field-lsa-award-und-0-value').prop("readonly", true);
     $('#edit-field-lsa-award-und-0-value').css('background-color' , '#DEDEDE');
@@ -138,13 +145,12 @@
 
     // There will be no instructions unless we actually are choosing an award
     $('#edit-field-lsa-award-sp-instructions').hide();
-    // Hide the special requirements box unless we require it
-    $('#edit-field-specialrequirement-descrip').hide();
     // Hide PECSF unless user selects this choice
     $('#pecsf-fields').hide();
     // Change text for pecsf options (too long for text box in setup)
     $("label[for=edit-field-lsa-donation-options-und-0]").html('Option A: Make a PECSF donation to the <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity">fund supported pool of charities in my region</a>.');
     $("label[for=edit-field-lsa-donation-options-und-1]").html('Option B: Make a PECSF donation to one or two charities of my choice. (Find the PECSF ID number for your choice(s) by reviewing the <a href="https://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions">charity list by region</a>.)');
+    $("form-item.form-type-radio.form-item-field-lsa-donation-options-und").attr("style", "display:block");
     // Hide alternate fields until they are required
     $('.collapsible.required-fields.group-lsa-first-donation.field-group-fieldset.form-wrapper.collapse-processed').hide();
     $('.collapsible.required-fields.group-lsa-second-donation.field-group-fieldset.form-wrapper.collapse-processed').hide();
@@ -159,82 +165,10 @@
     // And no NA option here:
     $('#edit-field-lsa-donation-options-und-none').parent().hide();
     $('#edit-field-lsa-second-donation-und-none').parent().hide();
-  }
-
-/**
- * Helper function to decide when whe need special requirements text box - to set it to required - and to change label instructions
- */
-  function special_requirements(){
-    var checked_boxes = $('.form-checkbox');
-    $(checked_boxes).each(function() {
-      // None can only be checked if nothing else is
-      if($("#edit-field-lsa-specialrequirements-und-6").prop('checked') === true) {
-        $("#edit-field-lsa-specialrequirements-und-5").prop('checked',false);
-        $("#edit-field-lsa-specialrequirements-und-5").prop('disabled', true);
-        $("#edit-field-lsa-specialrequirements-und-4").prop('checked',false);
-        $("#edit-field-lsa-specialrequirements-und-4").prop('disabled',true);
-        $("#edit-field-lsa-specialrequirements-und-3").prop('checked',false);
-        $("#edit-field-lsa-specialrequirements-und-3").prop('disabled',true);
-        $("#edit-field-lsa-specialrequirements-und-2").prop('checked',false);
-        $("#edit-field-lsa-specialrequirements-und-2").prop('disabled',true);
-        $("#edit-field-lsa-specialrequirements-und-1").prop('checked',false);
-        $("#edit-field-lsa-specialrequirements-und-1").prop('disabled',true);
-        $('#edit-field-specialrequirement-descrip-und-0-value').val("");
-      } else {
-        $("#edit-field-lsa-specialrequirements-und-5").prop('disabled', false);
-        $("#edit-field-lsa-specialrequirements-und-4").prop('disabled',false);
-        $("#edit-field-lsa-specialrequirements-und-3").prop('disabled',false);
-        $("#edit-field-lsa-specialrequirements-und-2").prop('disabled',false);
-        $("#edit-field-lsa-specialrequirements-und-1").prop('disabled',false);
-      }
-
-      if($("#edit-field-lsa-specialrequirements-und-1").prop('checked') === true && $("#edit-field-lsa-specialrequirements-und-5").prop('checked') === true){
-        // We have an allergy and other box checked
-        // Show special requirements text box
-        $('#edit-field-specialrequirement-descrip').show();
-        //  Change the help prompt text
-        $("label[for=edit-field-specialrequirement-descrip-und-0-value]").html('Please tell us more about your food allergy, and other requirements.');
-        //  This is now required
-        $('#edit-field-specialrequirement-descript-und-0-value').prop('required', true);
-
-        return;
-      }
-      if($("#edit-field-lsa-specialrequirements-und-1").prop('checked') === true && $("#edit-field-lsa-specialrequirements-und-5").prop('checked') === false){
-        // Allergies only
-        // Show special requirements text box
-        $('#edit-field-specialrequirement-descrip').show();
-        // Required
-        $('#edit-field-specialrequirement-descript-und-0-value').prop('required', true);
-        // Change help prompt text
-        $("label[for=edit-field-specialrequirement-descrip-und-0-value]").html('Please tell us more about your food allergy.');
-
-
-        return;
-      }
-      if($("#edit-field-lsa-specialrequirements-und-1").prop('checked') === false && $("#edit-field-lsa-specialrequirements-und-5").prop('checked') === true){
-        // Other only
-        // Show special requirements text box
-        $('#edit-field-specialrequirement-descrip').show();
-        // Required
-        $('#edit-field-specialrequirement-descript-und-0-value').prop('required', true);
-        // Change help prompt text
-        $("label[for=edit-field-specialrequirement-descrip-und-0-value]").html('Please tell us more about your requirements.');
-
-
-        return;
-      }
-      if($("#edit-field-lsa-specialrequirements-und-1").prop('checked') === false && $("#edit-field-lsa-specialrequirements-und-5").prop('checked') === false){
-        // Hide special requirements box
-        $('#edit-field-specialrequirement-descrip').hide();
-        // Clear the special requirements box
-        $('#edit-field-specialrequirement-descrip-und-0-value').val('');
-        // No longer required
-        $('#edit-field-specialrequirement-descript-und-0-value').prop('required', false);
-        return;
-      }
-
-    });
-
+    // Set special requirements jQuery
+    $('#field-lsa-accommodation-notes-add-more-wrapper').hide();
+    $('#edit-field-lsa-recipient-dietary').hide();
+    $('#edit-field-lsa-dietary-guest').hide();
   }
 
   // Make sure phone number is formatted right
@@ -289,11 +223,38 @@
     set_form();
     lsaGift();
 
+    // Show textbox if there are accomodation requests
+    $('#edit-field-lsa-ceremony-accommodation-und-1').click(function() {
+      if($('#edit-field-lsa-ceremony-accommodation-und-1').is(":checked")){
+        $('#field-lsa-accommodation-notes-add-more-wrapper').slideDown("slow");
+      } 
+    });
+    // Otherwise hide
+    $('#edit-field-lsa-ceremony-accommodation-und-0').click(function() {
+      if($('#edit-field-lsa-ceremony-accommodation-und-0').is(":checked")){
+        $('#field-lsa-accommodation-notes-add-more-wrapper').slideUp("slow");
+      }
+    });
+
+    // Show dietary options if required
+    $('#edit-field-lsa-dietary-requirements-und-1').click(function() {
+      if($('#edit-field-lsa-dietary-requirements-und-1').is(":checked")){
+        $("#edit-field-lsa-recipient-dietary").slideDown();
+        $('#edit-field-lsa-dietary-guest').slideDown();
+      } 
+    });
+    // Otherwise hide
+    $('#edit-field-lsa-dietary-requirements-und-0').click(function() {
+      if($('#edit-field-lsa-dietary-requirements-und-0').is(":checked")){
+        $("#edit-field-lsa-recipient-dietary").slideUp();
+        $('#edit-field-lsa-dietary-guest').slideUp();
+      } 
+    });
+
     $('#edit-field-lsa-register-last-year-und').change(function () {
       lsaGift();
       change_award_year();
       certificate_populate();
-
     });
 
     $('#edit-field-lsa-years-of-service').change(function () {
@@ -307,12 +268,6 @@
 
     $('#edit-field-lsa-retiring-thisyear-und').change(function () {
       retirement();
-    });
-
-
-    // Click handler for special requirements
-    $('.form-checkbox').change(function(){
-      special_requirements();
     });
 
     $('#edit-field-lsa-home-phone-und-0-value').keyup(function(){

@@ -573,7 +573,7 @@ function profile_feed_comments_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'forward_display_status_update';
-  $strongarm->value = FALSE;
+  $strongarm->value = 0;
   $export['forward_display_status_update'] = $strongarm;
 
   $strongarm = new stdClass();
