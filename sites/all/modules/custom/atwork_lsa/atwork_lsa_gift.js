@@ -77,11 +77,11 @@
         // Certificate and certificate text box
         '<div id = "lsa_certificate_and_textbox_div">' +
           // Certificate - comes with all 25 year gifts
-          '<span id="info_25_year_certificate"><img src="/sites/default/files/bg/image/2015/0224/lsacertificategeneric-thumb.jpg" alt="25 year certificate" id="image_25_year_certificate"><p>The 25 year milestone award comes with an <em><strong>optional</strong></em> certificate of service: </p><br /></span>' +
+          '<span id="info_25_year_certificate"><img src="/sites/default/files/bg/image/2015/0224/lsacertificategeneric-thumb.jpg" alt="25 year certificate" id="image_25_year_certificate"><p>The 25 year milestone award comes with an framed certificate of service: </p><br /></span>' +
           // Create a radial button to let the user select if they would, or would not like a certificate.
-         // '<form name="_25_certificate_choice" required="required" id="certificate_choice">' +
-            '<input type = "radio" name="certificate" value="yes" checked="checked" id="_25_certificate_yes">Yes please – I would like a framed certificate, in addition to my chosen award above. <br />' +
-            '<input type = "radio" name="certificate" value="no" id="_25_certificate_no">No thanks – I do not require a certificate. <br />' +
+          //'<form name="_25_certificate_choice" required="required" id="certificate_choice">' +
+          '<input type = "hidden" name="certificate" value="yes" checked="checked" id="_25_certificate_yes" display="none">' +
+          //'<input type = "radio" name="certificate" value="no" id="_25_certificate_no">No thanks – I do not require a certificate. <br />' +
           //'</form>' +
           // Create a text box, make it required for 25 years
           //'<p>This is how your name will appear on the certificate, please make any changes you require</p>'+
@@ -601,10 +601,13 @@ function gift_choice_populate_form(gifts){
   $('#edit-field-lsa-award-und-0-value').val(full_gift_name.substr(4));
   $('#edit-field-lsa-award-id-und-0-value').val(gift_id_number);
 
-  // Show the award image while we are at it
+  // Show the award image and description while we are at it
   var giftImages = giftListImages();
-  var selectedImageURI = giftImages[gift_list_object[gift_id_number].slice(5)];  
-  $('.lsa-award-selector-img-display-panel').attr("src", selectedImageURI).show();
+  var selectedAward = giftImages[gift_list_object[gift_id_number].slice(5)];
+  $(".lsa-award-selector-img-display-panel").attr("src", selectedAward["URI"]).show();
+  // Uncomment for descriptions to be displayed alongside award photo. Also uncommnt .remove() functions in atwork_lsa.js.
+  //$("#lsa-award-selector-description-display").remove();
+  //$(".lsa-award-selector-img-display-panel").parent().append("<div id=\"lsa-award-selector-description-display\" style=\"margin: 30px; font-size: 10pt;\"><p>" + selectedAward["description"] + "</p></div>");
   
   // Check if this is a pecsef donation, if it is, run a function to figure out values etc.
   switch(true){
@@ -985,6 +988,7 @@ function gift_choice_populate_form(gifts){
         if ($('input[name="field_lsa_years_of_service[und]"]:checked').val() == 45 || $('input[name="field_lsa_years_of_service[und]"]:checked').val() == 50){
         gift_choices();
         $(".lsa-award-selector-img-display-panel").attr("src", "").hide();
+//        /$("#lsa-award-selector-description-display").remove();
       }
     });
   });
