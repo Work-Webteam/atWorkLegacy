@@ -2964,7 +2964,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_donation_amount_2']['id'] = 'field_lsa_donation_amount_2';
   $handler->display->display_options['fields']['field_lsa_donation_amount_2']['table'] = 'field_data_field_lsa_donation_amount_2';
   $handler->display->display_options['fields']['field_lsa_donation_amount_2']['field'] = 'field_lsa_donation_amount_2';
-  /* Field: Content: LSA Survey */
+  /* Field: Content: Long Service Award Survey */
   $handler->display->display_options['fields']['field_lsa_survey']['id'] = 'field_lsa_survey';
   $handler->display->display_options['fields']['field_lsa_survey']['table'] = 'field_data_field_lsa_survey';
   $handler->display->display_options['fields']['field_lsa_survey']['field'] = 'field_lsa_survey';
