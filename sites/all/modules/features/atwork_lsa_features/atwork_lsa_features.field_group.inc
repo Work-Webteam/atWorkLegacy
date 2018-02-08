@@ -51,7 +51,12 @@ function atwork_lsa_features_field_group_info() {
   $field_group->data = array(
     'label' => 'Ceremony Accommodations',
     'weight' => '20',
-    'children' => array(),
+    'children' => array(
+      0 => 'field_lsa_ceremony_accommodation',
+      1 => 'field_lsa_accommodation_notes',
+      2 => 'field_lsa_recipient_accom',
+      3 => 'field_lsa_guest_accom',
+    ),
     'format_type' => 'fieldset',
     'format_settings' => array(
       'formatter' => 'collapsible',
@@ -179,8 +184,12 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Dietary Requirements',
-    'weight' => '22',
-    'children' => array(),
+    'weight' => '21',
+    'children' => array(
+      0 => 'field_lsa_dietary_requirements',
+      1 => 'field_lsa_recipient_dietary',
+      2 => 'field_lsa_dietary_guest',
+    ),
     'format_type' => 'fieldset',
     'format_settings' => array(
       'formatter' => 'collapsible',

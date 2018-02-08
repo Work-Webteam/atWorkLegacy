@@ -94,6 +94,25 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_lsa_accommodation_notes'.
+  $field_bases['field_lsa_accommodation_notes'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_accommodation_notes',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
   // Exported field_base: 'field_lsa_actual_min_org'.
   $field_bases['field_lsa_actual_min_org'] = array(
     'active' => 1,
@@ -303,6 +322,31 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_lsa_ceremony_accommodation'.
+  $field_bases['field_lsa_ceremony_accommodation'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_ceremony_accommodation',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 'No',
+        1 => 'Yes',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
+  );
+
   // Exported field_base: 'field_lsa_ceremony_night'.
   $field_bases['field_lsa_ceremony_night'] = array(
     'active' => 1,
@@ -494,6 +538,52 @@ function atwork_lsa_features_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'datetime',
+  );
+
+  // Exported field_base: 'field_lsa_dietary_guest'.
+  $field_bases['field_lsa_dietary_guest'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_dietary_guest',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_lsa_dietary_requirements'.
+  $field_bases['field_lsa_dietary_requirements'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_dietary_requirements',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 'No',
+        1 => 'Yes',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
   );
 
   // Exported field_base: 'field_lsa_donation_amount'.
@@ -694,6 +784,27 @@ function atwork_lsa_features_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_boolean',
+  );
+
+  // Exported field_base: 'field_lsa_guest_accom'.
+  $field_bases['field_lsa_guest_accom'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_guest_accom',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
   );
 
   // Exported field_base: 'field_lsa_home_phone'.
@@ -1565,6 +1676,48 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'list_integer',
   );
 
+  // Exported field_base: 'field_lsa_recipient_accom'.
+  $field_bases['field_lsa_recipient_accom'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_recipient_accom',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_lsa_recipient_dietary'.
+  $field_bases['field_lsa_recipient_dietary'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_lsa_recipient_dietary',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_lsa_register_last_year'.
   $field_bases['field_lsa_register_last_year'] = array(
     'active' => 1,
@@ -1714,35 +1867,6 @@ function atwork_lsa_features_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_boolean',
-  );
-
-  // Exported field_base: 'field_lsa_specialrequirements'.
-  $field_bases['field_lsa_specialrequirements'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_lsa_specialrequirements',
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        6 => 'None',
-        1 => 'Food Allergy',
-        2 => 'Deaf or Hard of Hearing',
-        3 => 'Visual Impairment',
-        4 => 'Wheelchair/Walker Accessibility',
-        5 => 'Other',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_integer',
   );
 
   // Exported field_base: 'field_lsa_street'.
@@ -2031,25 +2155,6 @@ function atwork_lsa_features_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_integer',
-  );
-
-  // Exported field_base: 'field_specialrequirement_descrip'.
-  $field_bases['field_specialrequirement_descrip'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_specialrequirement_descrip',
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(),
-    'translatable' => 0,
-    'type' => 'text_long',
   );
 
   // Exported field_base: 'field_supervisor_address'.
