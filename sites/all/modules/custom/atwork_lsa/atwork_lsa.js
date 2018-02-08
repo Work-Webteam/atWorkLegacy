@@ -165,6 +165,10 @@
     // And no NA option here:
     $('#edit-field-lsa-donation-options-und-none').parent().hide();
     $('#edit-field-lsa-second-donation-und-none').parent().hide();
+    // Set special requirements jQuery
+    $('#field-lsa-accommodation-notes-add-more-wrapper').hide();
+    $('#edit-field-lsa-recipient-dietary').hide();
+    $('#edit-field-lsa-dietary-guest').hide();
   }
 
   // Make sure phone number is formatted right
@@ -219,11 +223,38 @@
     set_form();
     lsaGift();
 
+    // Show textbox if there are accomodation requests
+    $('#edit-field-lsa-ceremony-accommodation-und-1').click(function() {
+      if($('#edit-field-lsa-ceremony-accommodation-und-1').is(":checked")){
+        $('#field-lsa-accommodation-notes-add-more-wrapper').slideDown("slow");
+      } 
+    });
+    // Otherwise hide
+    $('#edit-field-lsa-ceremony-accommodation-und-0').click(function() {
+      if($('#edit-field-lsa-ceremony-accommodation-und-0').is(":checked")){
+        $('#field-lsa-accommodation-notes-add-more-wrapper').slideUp("slow");
+      }
+    });
+
+    // Show dietary options if required
+    $('#edit-field-lsa-dietary-requirements-und-1').click(function() {
+      if($('#edit-field-lsa-dietary-requirements-und-1').is(":checked")){
+        $("#edit-field-lsa-recipient-dietary").slideDown();
+        $('#edit-field-lsa-dietary-guest').slideDown();
+      } 
+    });
+    // Otherwise hide
+    $('#edit-field-lsa-dietary-requirements-und-0').click(function() {
+      if($('#edit-field-lsa-dietary-requirements-und-0').is(":checked")){
+        $("#edit-field-lsa-recipient-dietary").slideUp();
+        $('#edit-field-lsa-dietary-guest').slideUp();
+      } 
+    });
+
     $('#edit-field-lsa-register-last-year-und').change(function () {
       lsaGift();
       change_award_year();
       certificate_populate();
-
     });
 
     $('#edit-field-lsa-years-of-service').change(function () {
