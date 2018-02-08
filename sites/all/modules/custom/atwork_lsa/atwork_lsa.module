@@ -17,6 +17,8 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
     // Hide the administration panel from all users until after signup is over.
     drupal_add_js(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_admin_fields.js');
     drupal_add_css('.group-lsa-administration {display:none}', 'inline');
+    // Also hide some fields non-admins will not use
+    dpm($form);
   }
 
   $form['field_lsa_received_award']['#suffix'] = '<div style="display: none" id="lsa-no-gift">The Office of Protocol will contact you soon in this regard. Or you may contact them directly at (250) 387-1616.</div>';

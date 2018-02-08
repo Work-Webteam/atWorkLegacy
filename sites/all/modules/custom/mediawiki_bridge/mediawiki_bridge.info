@@ -1,0 +1,6 @@
+name = Mediawiki Bridge
+description = Incorporates a MediaWiki installation to save wiki entries and edit sections
+core = 7.x
+package = Wiki
+
+
