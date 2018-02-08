@@ -20,13 +20,17 @@
       $('.lsa-award-selector-img-display-panel').hide();
       $('.form-item.form-type-textfield.form-item-field-lsa-award-und-0-value').hide();
 
-
       // Also reset the engravement choice - in case it is no longer relevant
       //$('#edit-field-lsa-engravement-und-0-value').val('');
       $('#edit-field-lsa-engravement-und-0-value').hide();
       $('.form-item.form-type-textfield.form-item-field-lsa-engravement-und-0-value').hide();
     }
 
+    //Hide PECSF box on years of Service select change
+    $("#edit-field-lsa-years-of-service-und").change(function() {
+      $("#pecsf-fields").hide();
+    });
+    
     // Gift select button for users who choose 25 - 40 years
     if ($("input[name='field_lsa_register_last_year[und]']:checked").val() == 2 && $('input[name="field_lsa_years_of_service[und]"]:checked').val() >= 25 && $('input[name="field_lsa_years_of_service[und]"]:checked').val() <= 40)  {
       $('#gift_select').show();
