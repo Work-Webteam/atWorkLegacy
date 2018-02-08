@@ -379,7 +379,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'bundle' => 'lsa_application',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '<img class="lsa-award-selector-img-display-panel"></img>',
+    'description' => '<img class="lsa-award-selector-img-display-panel">',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -6785,7 +6785,7 @@ function atwork_lsa_features_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('25 Year Certificate');
   t('<em> Service pins will be sent to the employee’s supervisor for presentation during Public Service Week - June 12-16, 2017.</em>');
-  t('<img class="lsa-award-selector-img-display-panel"></img>');
+  t('<img class="lsa-award-selector-img-display-panel">');
   t('<p class="style-red">For Victoria locations, please use the P.O. Box address</p>');
   t('<p>I declare, to the best of my knowledge and consistent with the Long Service Awards Eligibility Guidelines (which I have reviewed) that as of December 31, 2017, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of this event.</p>
 
