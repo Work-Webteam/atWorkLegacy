@@ -14,7 +14,15 @@ function homepage_activity_feed_feature_default_fe_block_settings() {
 
   $export['atwork_activity-homepage'] = array(
     'cache' => 1,
-    'css' => '',
+    'css' => '#block-atwork-activity-homepage {
+ height: 1565px!important;
+}
+#social-side .entity-message p[class^="msg-"] + p + p, #social-side .entity-message span.activity-comment {
+ line-height: 18px;
+}
+#social-side p.message {
+ line-height:initial;
+}',
     'custom' => 0,
     'delta' => 'homepage',
     'js' => '',
@@ -145,7 +153,7 @@ node/21603',
         'region' => 'pre_content',
         'status' => 1,
         'theme' => 'atwork_zen',
-        'weight' => 28,
+        'weight' => 29,
       ),
       'seven' => array(
         'region' => '',
@@ -203,7 +211,7 @@ node/21603',
         'region' => 'pre_content',
         'status' => 1,
         'theme' => 'atwork_zen',
-        'weight' => 29,
+        'weight' => 30,
       ),
       'seven' => array(
         'region' => '',
@@ -232,7 +240,7 @@ node/21603',
         'region' => 'pre_content',
         'status' => 1,
         'theme' => 'atwork_zen',
-        'weight' => 30,
+        'weight' => 31,
       ),
       'seven' => array(
         'region' => '',
@@ -261,7 +269,7 @@ node/21603',
         'region' => 'pre_content',
         'status' => 1,
         'theme' => 'atwork_zen',
-        'weight' => 17,
+        'weight' => 18,
       ),
       'seven' => array(
         'region' => '',
