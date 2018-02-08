@@ -358,11 +358,8 @@
       $('#edit-field-lsa-donation-amount-2-und-0-value').val('');
       $('#edit-field-lsa-pecsf-id-2-und-0-value').val('');
       $('#edit-field-lsa-charity-name-2-und-0-value').val('');
-<<<<<<< HEAD
-=======
 
       // Also reset form fields so we don't get strange data
->>>>>>> LSA-11-test-and-fix-pecsf-donation-amoun
       $('.collapsible.required-fields.group-lsa-second-donation.field-group-fieldset.form-wrapper.collapse-processed').slideUp('fast');
       $('#edit-field-lsa-pecsf-id-2').slideUp('fast');
       $('#edit-field-lsa-charity-name-2').slideUp('fast');
