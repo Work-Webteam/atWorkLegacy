@@ -961,7 +961,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_org']['id'] = 'field_lsa_org';
   $handler->display->display_options['fields']['field_lsa_org']['table'] = 'field_data_field_lsa_org';
   $handler->display->display_options['fields']['field_lsa_org']['field'] = 'field_lsa_org';
-  /* Field: Content: Department */
+  /* Field: Content: Branch */
   $handler->display->display_options['fields']['field_lsa_branch_department']['id'] = 'field_lsa_branch_department';
   $handler->display->display_options['fields']['field_lsa_branch_department']['table'] = 'field_data_field_lsa_branch_department';
   $handler->display->display_options['fields']['field_lsa_branch_department']['field'] = 'field_lsa_branch_department';
@@ -1066,7 +1066,7 @@ function atwork_lsa_features_views_default_views() {
     15 => 0,
     16 => 0,
   );
-  /* Filter criterion: Content: Department (field_lsa_branch_department) */
+  /* Filter criterion: Content: Branch (field_lsa_branch_department) */
   $handler->display->display_options['filters']['field_lsa_branch_department_value']['id'] = 'field_lsa_branch_department_value';
   $handler->display->display_options['filters']['field_lsa_branch_department_value']['table'] = 'field_data_field_lsa_branch_department';
   $handler->display->display_options['filters']['field_lsa_branch_department_value']['field'] = 'field_lsa_branch_department_value';
@@ -2218,7 +2218,7 @@ function atwork_lsa_features_views_default_views() {
     'thousand_separator' => '',
     'prefix_suffix' => 1,
   );
-  /* Field: Content: Department */
+  /* Field: Content: Branch */
   $handler->display->display_options['fields']['field_lsa_branch_department']['id'] = 'field_lsa_branch_department';
   $handler->display->display_options['fields']['field_lsa_branch_department']['table'] = 'field_data_field_lsa_branch_department';
   $handler->display->display_options['fields']['field_lsa_branch_department']['field'] = 'field_lsa_branch_department';
@@ -2362,7 +2362,7 @@ function atwork_lsa_features_views_default_views() {
     15 => 0,
     16 => 0,
   );
-  /* Filter criterion: Content: Department (field_lsa_branch_department) */
+  /* Filter criterion: Content: Branch (field_lsa_branch_department) */
   $handler->display->display_options['filters']['field_lsa_branch_department_value']['id'] = 'field_lsa_branch_department_value';
   $handler->display->display_options['filters']['field_lsa_branch_department_value']['table'] = 'field_data_field_lsa_branch_department';
   $handler->display->display_options['filters']['field_lsa_branch_department_value']['field'] = 'field_lsa_branch_department_value';
@@ -2799,11 +2799,11 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_alt_email_address']['id'] = 'field_lsa_alt_email_address';
   $handler->display->display_options['fields']['field_lsa_alt_email_address']['table'] = 'field_data_field_lsa_alt_email_address';
   $handler->display->display_options['fields']['field_lsa_alt_email_address']['field'] = 'field_lsa_alt_email_address';
-  /* Field: Content: Email address */
+  /* Field: Content: Email Address */
   $handler->display->display_options['fields']['field_lsa_email']['id'] = 'field_lsa_email';
   $handler->display->display_options['fields']['field_lsa_email']['table'] = 'field_data_field_lsa_email';
   $handler->display->display_options['fields']['field_lsa_email']['field'] = 'field_lsa_email';
-  /* Field: Content: Phone */
+  /* Field: Content: Home Phone */
   $handler->display->display_options['fields']['field_lsa_home_phone']['id'] = 'field_lsa_home_phone';
   $handler->display->display_options['fields']['field_lsa_home_phone']['table'] = 'field_data_field_lsa_home_phone';
   $handler->display->display_options['fields']['field_lsa_home_phone']['field'] = 'field_lsa_home_phone';
@@ -2823,7 +2823,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_ministry_id']['id'] = 'field_lsa_ministry_id';
   $handler->display->display_options['fields']['field_lsa_ministry_id']['table'] = 'field_data_field_lsa_ministry_id';
   $handler->display->display_options['fields']['field_lsa_ministry_id']['field'] = 'field_lsa_ministry_id';
-  /* Field: Content: Department */
+  /* Field: Content: Branch */
   $handler->display->display_options['fields']['field_lsa_branch_department']['id'] = 'field_lsa_branch_department';
   $handler->display->display_options['fields']['field_lsa_branch_department']['table'] = 'field_data_field_lsa_branch_department';
   $handler->display->display_options['fields']['field_lsa_branch_department']['field'] = 'field_lsa_branch_department';
@@ -2831,7 +2831,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_office_work_group']['id'] = 'field_lsa_office_work_group';
   $handler->display->display_options['fields']['field_lsa_office_work_group']['table'] = 'field_data_field_lsa_office_work_group';
   $handler->display->display_options['fields']['field_lsa_office_work_group']['field'] = 'field_lsa_office_work_group';
-  /* Field: Content: Supervisors’ Address */
+  /* Field: Content: Office Street Address */
   $handler->display->display_options['fields']['field_lsa_office_address']['id'] = 'field_lsa_office_address';
   $handler->display->display_options['fields']['field_lsa_office_address']['table'] = 'field_data_field_lsa_office_address';
   $handler->display->display_options['fields']['field_lsa_office_address']['field'] = 'field_lsa_office_address';
@@ -2851,11 +2851,11 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_office_postal_code']['table'] = 'field_data_field_lsa_office_postal_code';
   $handler->display->display_options['fields']['field_lsa_office_postal_code']['field'] = 'field_lsa_office_postal_code';
   $handler->display->display_options['fields']['field_lsa_office_postal_code']['label'] = 'Office_Postal';
-  /* Field: Content: Supervisor First Name */
+  /* Field: Content: First Name */
   $handler->display->display_options['fields']['field_lsa_supervisor_first_name']['id'] = 'field_lsa_supervisor_first_name';
   $handler->display->display_options['fields']['field_lsa_supervisor_first_name']['table'] = 'field_data_field_lsa_supervisor_first_name';
   $handler->display->display_options['fields']['field_lsa_supervisor_first_name']['field'] = 'field_lsa_supervisor_first_name';
-  /* Field: Content: Supervisor Last Name */
+  /* Field: Content: Last Name */
   $handler->display->display_options['fields']['field_lsa_supervisor_last_name']['id'] = 'field_lsa_supervisor_last_name';
   $handler->display->display_options['fields']['field_lsa_supervisor_last_name']['table'] = 'field_data_field_lsa_supervisor_last_name';
   $handler->display->display_options['fields']['field_lsa_supervisor_last_name']['field'] = 'field_lsa_supervisor_last_name';
