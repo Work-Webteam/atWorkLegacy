@@ -604,10 +604,17 @@ function gift_choice_populate_form(gifts){
   // Show the award image and description while we are at it
   var giftImages = giftListImages();
   var selectedAward = giftImages[gift_list_object[gift_id_number].slice(5)];
-  $(".lsa-award-selector-img-display-panel").attr("src", selectedAward["URI"]).show();
-  // Uncomment for descriptions to be displayed alongside award photo. Also uncommnt .remove() functions in atwork_lsa.js.
-  //$("#lsa-award-selector-description-display").remove();
-  //$(".lsa-award-selector-img-display-panel").parent().append("<div id=\"lsa-award-selector-description-display\" style=\"margin: 30px; font-size: 10pt;\"><p>" + selectedAward["description"] + "</p></div>");
+
+  // If the selectedAward object exists, display it
+  if(typeof selectedAward != "undefined") {
+  	$(".lsa-award-selector-img-display-panel").attr("src", selectedAward["URI"]).show();
+  	
+  	// Uncomment for descriptions to be displayed alongside award photo. Also uncommnt .remove() functions in atwork_lsa.js.
+  	//$("#lsa-award-selector-description-display").remove();
+  	//$(".lsa-award-selector-img-display-panel").parent().append("<div id=\"lsa-award-selector-description-display\" style=\"margin: 30px; font-size: 10pt;\"><p>" + selectedAward["description"] + "</p></div>");
+  } else {
+  	$(".lsa-award-selector-img-display-panel").hide();
+  }
   
   // Check if this is a pecsef donation, if it is, run a function to figure out values etc.
   switch(true){
