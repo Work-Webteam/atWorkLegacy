@@ -97,6 +97,12 @@ function atwork_lsa_features_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -848,6 +854,12 @@ function atwork_lsa_features_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1428,6 +1440,12 @@ function atwork_lsa_features_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1508,6 +1526,12 @@ Vegan',
         'weight' => 41,
       ),
       'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -2231,6 +2255,12 @@ Vegan',
         'weight' => 40,
       ),
       'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -3823,6 +3853,12 @@ Wheelchair/walker seating',
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'scs' => array(
         'label' => 'above',
         'settings' => array(),
@@ -3901,6 +3937,12 @@ Wheelchair/walker seating',
         'weight' => 42,
       ),
       'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -4867,7 +4909,7 @@ Vegan',
       ),
     ),
     'deleted' => 0,
-    'description' => 'I do not wish to take part in the Long Service Awards survey.',
+    'description' => 'I do not wish to take part in the survey.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -4902,9 +4944,23 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_survey',
-    'label' => 'LSA Survey',
+    'label' => 'Long Service Award Survey',
     'required' => 0,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -4928,9 +4984,7 @@ Vegan',
       ),
     ),
     'deleted' => 0,
-    'description' => '<p>I declare, to the best of my knowledge and consistent with the Long Service Awards Eligibility Guidelines (which I have reviewed) that as of December 31, 2017, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of this event.</p>
-
-<p>At the conclusion of the Long Service Award ceremonies, a follow up survey will be sent to collect feedback about your Long Service Awards experience. Your feedback is invaluable for the ongoing improvement and quality of the program. Please indicate below if you would prefer not to participate.</p>',
+    'description' => '<p>I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2018, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events.</p>',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -4968,6 +5022,20 @@ Vegan',
     'label' => 'Terms',
     'required' => 1,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -7167,9 +7235,7 @@ Vegan',
   t('<em> Service pins will be sent to the employee’s supervisor for presentation during Public Service Week - June 12-16, 2017.</em>');
   t('<img class="lsa-award-selector-img-display-panel"></img>');
   t('<p class="style-red">For Victoria locations, please use the P.O. Box address</p>');
-  t('<p>I declare, to the best of my knowledge and consistent with the Long Service Awards Eligibility Guidelines (which I have reviewed) that as of December 31, 2017, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of this event.</p>
-
-<p>At the conclusion of the Long Service Award ceremonies, a follow up survey will be sent to collect feedback about your Long Service Awards experience. Your feedback is invaluable for the ongoing improvement and quality of the program. Please indicate below if you would prefer not to participate.</p>');
+  t('<p>I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2018, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events.</p>');
   t('<span class="ceremony-acc-note">Do you or your guest require any accommodations to attend the Long Service Award ceremony at Government House? (e.g. sign language interpreter (ASL), service dog, accessible parking/entrance, etc.)</span>');
   t('Accommodation Notes');
   t('Actual_Min/Org');
@@ -7211,11 +7277,11 @@ Vegan',
   t('Guest Attending');
   t('Home Phone');
   t('I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target ="_blank">Service Pin Recognition Eligibility Guidelines</a> (which I have reviewed) that as of December 31, 2017, I will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and am therefore eligible to receive a service pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.');
-  t('I do not wish to take part in the Long Service Awards survey.');
+  t('I do not wish to take part in the survey.');
   t('If retired, please enter the last organization and supervisor you worked with.');
   t('Invitation Send Date');
-  t('LSA Survey');
   t('Last Name');
+  t('Long Service Award Survey');
   t('Middle Name');
   t('Ministry ID');
   t('Ministry Representative Email');
