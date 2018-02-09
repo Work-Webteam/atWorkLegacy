@@ -71,6 +71,44 @@ only screen and (                min-resolution: 2dppx) {
 and (min-device-width : 375px)
 and (max-device-width : 667px)
 and (orientation : portrait) {
+
+  #block-atwork-wes-wes-top-three {
+    margin-top: 15px;
+    margin-bottom: 40px;
+   }
+   #block-atwork-wes-wes-top-three img {
+    display:none;
+   }
+   #block-atwork-wes-wes-top-three a {
+       display: block;
+       position: relative;
+       height: 100px;
+       width: 360px;
+   }
+   #ministry-top-three {
+         width: 320px!important;
+          left: 10px!important;
+          top: -30px!important;
+          height: inherit!important;
+          border: solid 1px #D7D7D7;
+    }
+   #ministry-top-three:before {
+    content: "2018 Work Environment Survey";
+    font-weight: bold;
+    font-size: 12px;
+   }
+   .wes-bar-container {
+        width:280px!important;
+   }
+   .ministry-stats {
+    width:280px;
+   }
+   #ministry-top-three .percent {
+     left: -65px!important;
+   }
+   #ministry-top-three .percent:after {
+     content:" %";
+   }
   #block-views-home-page-blocks-zen-block-2,
   aside.sidebars .region.region-sidebar-second {
     display: none!important;
@@ -838,6 +876,26 @@ table#sn-newsletter-layout {
 and (min-device-width : 375px)
 and (max-device-width : 667px)
 and (orientation : landscape) {
+  #ministry-top-three {
+    -ms-transform: scale(0.75);
+    -webkit-transform: scale(0.75);
+     transform: scale(0.75);
+     top: 10px!important;
+     left: 190px!important; 
+  }    
+  .ministry-stats {
+      width: 340px!important;
+  }
+  #ministry-top-three .wes-bar-container {
+      width: 340px!important;
+  }
+  #ministry-top-three .percent:after {
+    content:" %";
+  }
+  #ministry-top-three .percent {
+      font-size: initial!important;
+  } 
+
 .front #page #main {
   margin-left: 5px;
   margin-right: 5px;
