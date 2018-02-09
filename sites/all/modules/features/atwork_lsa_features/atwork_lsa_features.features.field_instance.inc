@@ -4789,7 +4789,7 @@ Vegan',
     'entity_type' => 'node',
     'field_name' => 'field_lsa_supervisor_postal_code',
     'label' => 'Supervisor Postal Code',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'authcache' => array(
         'clients' => array(

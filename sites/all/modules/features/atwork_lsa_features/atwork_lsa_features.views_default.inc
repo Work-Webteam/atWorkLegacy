@@ -1467,6 +1467,14 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['style_options']['header'] = 1;
   $handler->display->display_options['style_options']['keep_html'] = 0;
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'ID';
+  $handler->display->display_options['fields']['nid']['node_in_colorbox_width'] = '600';
+  $handler->display->display_options['fields']['nid']['node_in_colorbox_height'] = '600';
+  $handler->display->display_options['fields']['nid']['node_in_colorbox_rel'] = '';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
