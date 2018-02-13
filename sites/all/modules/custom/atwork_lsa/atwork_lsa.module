@@ -302,13 +302,10 @@ function atwork_lsa_pin_application_validate($form, &$form_state){
   }
 
   // Make sure we have selected one or the other - don't want an empty application.
-  if((isset($form_state['input']['field_lsa_other_milestone_years']['und']) && $form_state['input']['field_lsa_other_milestone_years']['und'] == 1) || (isset($form_state['input']['field_lsa_milestone_year']['und']) && $form_state['input']['field_lsa_milestone_year']['und'] == 1)){
-    return true;
-  } else {
+  if((isset($form_state['input']['field_lsa_other_milestone_years']['und']) && $form_state['input']['field_lsa_other_milestone_years']['und'] != 1) && (isset($form_state['input']['field_lsa_milestone_year']['und']) && $form_state['input']['field_lsa_milestone_year']['und'] != 1)){
     // Form is empty
     form_set_error('field_lsa_', t('You have not selected any milestone'));
   }
-
   // Lets make sure the Postal codes at least match standardized format - we are not looking up validity here.
 
 
