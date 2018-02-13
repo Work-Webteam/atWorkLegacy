@@ -282,7 +282,6 @@ function atwork_lsa_application_validate($form, &$form_state) {
 function atwork_lsa_pin_application_validate($form, &$form_state){
   $lang = $form_state['values']['language'];
   global $user;
-  dpm($form_state);
 
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)) {
     //return true;
