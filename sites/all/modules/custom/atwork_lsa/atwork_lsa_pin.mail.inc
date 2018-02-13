@@ -30,33 +30,33 @@ if($years == 1){
 
 
 $supervisor_to = $node->field_lsa_supervisor_email[$lang][0]['email'];
-$supervisor_subject = t('An employee you supervise has applied for a Service Pin');
+$supervisor_subject = t('An employee you supervise has applied for a service pin');
 $supervisor_body = <<<EOT
 <span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
 
-<p>FYI – an employee you supervise has registered for a BC Public Service Pin, in celebration of a service milestone they are currently celebrating, or have missed celebrating in the past.</p>
+<p>An employee you supervise has registered for a BC Public Service Pin, in celebration of a service milestone they are currently celebrating, or have missed celebrating in the past.</p>
 
 <p><strong> {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']}</strong> is registered for a $email_milestone year Service Pin(s)</p>
 
 <p>The pin(s) will be mailed directly to you at the beginning of June, and will include a list of all your employees who have registered. </p>
 
-<p><strong>Please present the pin(s) to {$node->field_lsa_pin_first_name[$lang][0]['value']} during Public Service Week  - June 12-16, 2017.</strong></p>
+<p><strong>Please present the pin(s) to {$node->field_lsa_pin_first_name[$lang][0]['value']} during Public Service Week  - June 11-15, 2018.</strong> This is a wonderful opportunity to thank your employee for their service and celebrate their commitment to the BC Public Service! </p>
 
-<p>If you have questions about the corporate pin program, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
+<p>If you have questions about the <a href="/career/service-pins" target="_blank">corporate service pin program</a>, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
 
 EOT;
 
 
 
 $applicant_to = $node->field_lsa_email[$lang][0]['email'];
-$applicant_subject = t('Your Service Milestone Pin application has been received');
+$applicant_subject = t('Your service pin application has been received');
 $applicant_body = <<<EOT
 <span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
 <p>Thank you for registering for your {$email_milestone} year BC Public Service Pin, and congratulations on this important career milestone!</p>
 
-<p>Your pin(s) will be sent directly to your supervisor, for presentation to you during <strong>Public Service Week (June 12-16)</strong></p>
+<p>Your pin(s) will be sent directly to your supervisor or ministry, for presentation to you during <strong>Public Service Week (June 11-15, 2018)</strong></p>
 
-<p>If you have questions about the corporate pin program, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.
+<p>If you have questions about the <a href="/career/service-pins" target="_blank">corporate pin program</a>, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.
 
 EOT;
 
