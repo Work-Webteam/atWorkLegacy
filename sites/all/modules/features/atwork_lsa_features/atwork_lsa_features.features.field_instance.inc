@@ -5419,94 +5419,6 @@ Vegan',
     ),
   );
 
-  // Exported field_instance: 'node-lsa_pin_application-field_lsa_branch'.
-  $field_instances['node-lsa_pin_application-field_lsa_branch'] = array(
-    'bundle' => 'lsa_pin_application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(
-          'semantic_field_format' => '',
-        ),
-        'type' => 'text_default',
-        'weight' => 10,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'full' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(
-          'semantic_field_format' => '',
-        ),
-        'type' => 'text_default',
-        'weight' => 10,
-      ),
-      'question' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_lsa_branch',
-    'hashtag_settings' => array(
-      'hashtag_field' => 0,
-    ),
-    'label' => 'Branch',
-    'required' => 0,
-    'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'semantic_field_format' => '',
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'maxlength_js' => 0,
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 20,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 32,
-    ),
-  );
-
   // Exported field_instance:
   // 'node-lsa_pin_application-field_lsa_branch_department'.
   $field_instances['node-lsa_pin_application-field_lsa_branch_department'] = array(
@@ -5563,7 +5475,7 @@ Vegan',
     'hashtag_settings' => array(
       'hashtag_field' => 0,
     ),
-    'label' => 'Department',
+    'label' => 'Branch',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -5589,7 +5501,7 @@ Vegan',
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 20,
+        'size' => 60,
       ),
       'type' => 'text_textfield',
       'weight' => 31,
@@ -5648,7 +5560,7 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_email',
-    'label' => 'Email address',
+    'label' => 'Email Address',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -5664,14 +5576,14 @@ Vegan',
         'peruser' => 1,
         'status' => 0,
       ),
+      'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
       'module' => 'email',
       'settings' => array(
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 20,
+        'size' => 60,
       ),
       'type' => 'email_textfield',
       'weight' => 29,
@@ -5767,7 +5679,11 @@ Vegan',
   // 'node-lsa_pin_application-field_lsa_milestone_year'.
   $field_instances['node-lsa_pin_application-field_lsa_milestone_year'] = array(
     'bundle' => 'lsa_pin_application',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -5816,9 +5732,22 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_milestone_year',
-    'label' => 'Are you celebrating a current service milestone in 2017?',
+    'label' => 'Are you celebrating a current service milestone in 2018?',
     'required' => 1,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -5887,6 +5816,19 @@ Vegan',
     'label' => 'Ministry Representative Email',
     'required' => 0,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
       'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -5897,7 +5839,7 @@ Vegan',
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 20,
+        'size' => 60,
       ),
       'type' => 'text_textfield',
       'weight' => 14,
@@ -5960,7 +5902,7 @@ Vegan',
     'hashtag_settings' => array(
       'hashtag_field' => 0,
     ),
-    'label' => 'Supervisors’ Address',
+    'label' => 'Supervisor Address',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -6157,11 +6099,7 @@ Vegan',
   // 'node-lsa_pin_application-field_lsa_other_milestone_years'.
   $field_instances['node-lsa_pin_application-field_lsa_other_milestone_years'] = array(
     'bundle' => 'lsa_pin_application',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -6207,6 +6145,19 @@ Vegan',
     'label' => 'Do you wish to request any service pin(s) retroactively?',
     'required' => 1,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -6288,6 +6239,7 @@ Vegan',
         'peruser' => 1,
         'status' => 0,
       ),
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -6373,6 +6325,7 @@ Vegan',
         'peruser' => 1,
         'status' => 0,
       ),
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -6382,7 +6335,7 @@ Vegan',
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 20,
+        'size' => 60,
       ),
       'type' => 'text_textfield',
       'weight' => 27,
@@ -6458,6 +6411,7 @@ Vegan',
         'peruser' => 1,
         'status' => 0,
       ),
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -6467,7 +6421,7 @@ Vegan',
       'settings' => array(
         'maxlength_js' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 20,
+        'size' => 60,
       ),
       'type' => 'text_textfield',
       'weight' => 28,
@@ -6480,7 +6434,7 @@ Vegan',
     'bundle' => 'lsa_pin_application',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Service pins will be sent to the employee\'s supervisor for presentation during Public Service Week - June 12-16, 2017.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -6530,6 +6484,19 @@ Vegan',
     'label' => 'What ministry/organization are you with?',
     'required' => 1,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -6624,7 +6591,7 @@ Vegan',
       ),
     ),
     'deleted' => 0,
-    'description' => '<em> Service pins will be sent to the employee’s supervisor for presentation during Public Service Week - June 12-16, 2017.</em>',
+    'description' => '<em><strong> Service pins will be sent to the employee’s supervisor for presentation during Public Service Week ( June 11-15, 2018).</strong></em>',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -6668,6 +6635,19 @@ Vegan',
     'label' => 'Does your supervisor work in a different office location than you? ',
     'required' => 0,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -6691,7 +6671,7 @@ Vegan',
       ),
     ),
     'deleted' => 0,
-    'description' => 'I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target ="_blank">Service Pin Recognition Eligibility Guidelines</a> (which I have reviewed) that as of December 31, 2017, I will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and am therefore eligible to receive a service pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.',
+    'description' => 'I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target ="_blank">Service Pin Recognition Eligibility Guidelines</a> (which I have reviewed) that as of December 31, 2018, I will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and am therefore eligible to receive a service pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -7232,7 +7212,7 @@ Vegan',
   // Translatables
   // Included for use with string extractors like potx.
   t('25 Year Certificate');
-  t('<em> Service pins will be sent to the employee’s supervisor for presentation during Public Service Week - June 12-16, 2017.</em>');
+  t('<em><strong> Service pins will be sent to the employee’s supervisor for presentation during Public Service Week ( June 11-15, 2018).</strong></em>');
   t('<img class="lsa-award-selector-img-display-panel"></img>');
   t('<p class="style-red">For Victoria locations, please use the P.O. Box address</p>');
   t('<p>I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2018, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events.</p>');
@@ -7240,7 +7220,7 @@ Vegan',
   t('Accommodation Notes');
   t('Actual_Min/Org');
   t('Alternate Email Address');
-  t('Are you celebrating a current service milestone in 2017?');
+  t('Are you celebrating a current service milestone in 2018?');
   t('Attending Ceremony');
   t('Attending with alternate Min/Org');
   t('Award');
@@ -7258,7 +7238,6 @@ Vegan',
   t('City');
   t('Date Stamp');
   t('Date of Retirement');
-  t('Department');
   t('Did you receive your award?');
   t('Did you register last year but were unable to attend the ceremony?');
   t('Dietary Requirements');
@@ -7269,14 +7248,13 @@ Vegan',
   t('Donation Amount 2');
   t('Donation options');
   t('Email Address');
-  t('Email address');
   t('Employee Number');
   t('Engravement');
   t('First Name');
   t('Guest Accommodations');
   t('Guest Attending');
   t('Home Phone');
-  t('I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target ="_blank">Service Pin Recognition Eligibility Guidelines</a> (which I have reviewed) that as of December 31, 2017, I will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and am therefore eligible to receive a service pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.');
+  t('I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target ="_blank">Service Pin Recognition Eligibility Guidelines</a> (which I have reviewed) that as of December 31, 2018, I will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and am therefore eligible to receive a service pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.');
   t('I do not wish to take part in the survey.');
   t('If retired, please enter the last organization and supervisor you worked with.');
   t('Invitation Send Date');
@@ -7307,7 +7285,6 @@ Vegan',
   t('Retro-Active');
   t('Second Charity');
   t('Service Milestone');
-  t('Service pins will be sent to the employee\'s supervisor for presentation during Public Service Week - June 12-16, 2017.');
   t('Street');
   t('Supervisor Address');
   t('Supervisor City');
@@ -7316,7 +7293,6 @@ Vegan',
   t('Supervisor Last Name');
   t('Supervisor Postal Code');
   t('Supervisor Province');
-  t('Supervisors’ Address');
   t('Terms');
   t('This is how your name will appear on your 25 year certificate. Make any changes necessary.');
   t('Watch Engraving Sent');

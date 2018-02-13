@@ -725,17 +725,18 @@ function atwork_lsa_features_field_group_info() {
       2 => 'field_lsa_pin_last_name',
       3 => 'field_lsa_branch_department',
       4 => 'field_lsa_email',
-      5 => 'field_lsa_branch',
-      6 => 'field_lsa_home_phone',
+      5 => 'field_lsa_home_phone',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Recipient Details',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-recipient-details field-group-fieldset ',
         'required_fields' => 1,
+        'id' => '',
+        'classes' => 'group-recipient-details field-group-fieldset ',
+        'description' => '',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_recipient_details|node|lsa_pin_application|form'] = $field_group;
