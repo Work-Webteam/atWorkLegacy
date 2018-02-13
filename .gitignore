@@ -19,6 +19,7 @@ sites/default/custom/
 files/
 sites/*/files
 sites/*/private
+sites/*/arrc
 
 # Ignore default text files
 //robots.txt
