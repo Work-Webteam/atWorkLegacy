@@ -391,13 +391,7 @@ function atwork_lsa_features_field_group_info() {
         'required_fields' => 1,
         'id' => 'lsa-pin-terms',
         'classes' => 'group-lsa-pin-terms field-group-fieldset',
-        'description' => 'If the above information is complete, and you have agreed to the terms below, click the “SUBMIT” button at the bottom of the screen. You will then receive:
-<ul>
-<li> a confirmation page displaying all of the information you’ve entered. Please check this page to ensure the information is accurate. If something is incorrect, contact  your<a href="/career/employee-appreciation/recognition-contacts"> Ministry Recognition Contact</a>. </li>
-<li>an automated email thanking you for your registration.</li>
-</ul>
-<p class="style-red"> <strong>IMPORTANT:</strong> If you do not receive a confirmation email, you will need to re-submit the request again.</p>
-',
+        'description' => '<p>If the above information is complete, and you have agreed to the terms below, click the SUBMIT button.</p>',
       ),
       'formatter' => 'open',
     ),
