@@ -24,15 +24,15 @@
          */
         '<label>Award Options: <select name="_25_year_option" id="gift_selection_box"><br />' +
           // Blue ballpoint pen
-          '<option value="Cross Starry Blue ballpoint pen" name="blue_xp_ball_point_pen" id="25_gift_blue_pen">Cross "Starry Blue" ballpoint pen</option>' +
+          '<option value="Cross Starry Blue ballpoint pen" name="blue_xp_ball_point_pen" id="25_gift_blue_pen">Cross pen</option>' +
           // Silver lapel pin
-          '<option value="Cross Tablet holder" name="cross_tablet_holder" id="25_cross_tablet_holder">Cross Tablet holder with note pad</option>' +
-          // Pearl Earrings
-          '<option value="Sterling Silver and White Pearl Earrings" name="pearl_earrings" id="25_gift_pearl_earrings">Pearl Earrings</option>' +
+          '<option value="Cross Tablet holder" name="cross_tablet_holder" id="25_cross_tablet_holder">Cross Tablet holder</option>' +
           // Padfolio/ipad holder
           '<option value="Passport and Luggage tag set" name="passport_luggage_tag" id="25_gift_passport_luggage_tag">Passport and Luggage tag set</option>' +
+          // Pearl Earrings
+          '<option value="Sterling Silver and White Pearl Earrings" name="pearl_earrings" id="25_gift_pearl_earrings">Pearl earrings</option>' +
           // PECSF donation
-          '<option value= "PECSF Fund" name="provincial_employees_community_services_fund" id="25_pecsf">Charitable Donation</option>' +
+          '<option value= "PECSF Fund" name="provincial_employees_community_services_fund" id="25_pecsf">Charitable donation</option>' +
         '</select></label>' +
 
 
@@ -48,16 +48,17 @@
          */
         '<div id="lsa_gift_images_div">' +
           // Blue ball point pen
-          '<img src="/sites/default/files/lsa_2015/25_ballpoint-pen-final.jpg" alt="Blue ballpoint pen" id="image_blue_xp_ball_point_pen">'+
+          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/cross-pen-2-thumb.jpg" alt="Blue ballpoint pen" id="image_blue_xp_ball_point_pen">'+
           //silver lapel pin
-          '<img src="/sites/default/files/lsa_2015/25_padfolio_with_embossed_image_2017.jpg" alt="Cross Tablet holder" id="image_cross_tablet_holder">' +
-          // Pearl Earrings
-          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/pearl-earrings-thumb.jpg" alt="Sterling Silver Pearl earrings" id="image_pearl_earrings">' +
+          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/padfolio-1-thumb.jpg" alt="Cross Tablet holder" id="image_cross_tablet_holder">' +
           //Padfolio
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/passport-luggage-thumb.jpg" alt="Passport and Luggage tag picture" id="image_passport_luggage_tag">' +
+          // Pearl Earrings
+          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0208/pearlearringthumb.jpg" alt="Sterling Silver Pearl earrings" id="image_pearl_earrings">' +
           // PECSF donation
           '<img src="/sites/default/files/lsa_2015/25_pecsf.jpg" alt="PECSF donation image" id="image_provincial_employees_community_services_fund">' +
         '</div>' +
+        
         /**
          * More info list
          * NOTE: related span id must match option "name" variable preceeded by info_ for the image to show.
@@ -66,11 +67,13 @@
           // Blue ball point pen
           '<span id="info_blue_xp_ball_point_pen"><p><strong>Cross® pen</strong></p><p>This Cross® Calais chrome and blue lacquer rollerball pen is lightweight with a bold profile. It comes in a box with 25 Years engraved on the lid.</p></span>' +
           // Tablet Holder
-          '<span id= "info_cross_tablet_holder"><p><strong>Cutter & Buck®</strong></p><p>Cutter & Buck® Pacific Series Tablet Holder/Writing Pad</p><p>This tablet holder is made with durable performance herringbone twill with genuine leather accents. It has 25 Years debossed on the front.</p><p>Adjustable brackets hold most tablet models including all versions of the iPad and iPad Air. It includes a magnetic closure strap, business card pockets, an elastic pen loop, a 6.75" x 9.5" writing pad and a screen cleaner that fits behind tablet. Tablet is not included.</p><br /><p>Size: 10.5" H X 1" W x 8.75" D</p></span>' +
+          '<span id= "info_cross_tablet_holder"><p><strong>Cross® tablet holder</strong></p><p>This genuine leather table holder has <em>25 Years</em> debossed on the front. The zippered closure keeps your tablet secure during transport, and adjustable brackets hold most tablet models including all versions of the iPad including the iPad Air. The tablet is not included.</p><p>The cover includes a document pocket, business card holders, a cleverly integrated pen sleeve and a writing pad.' +
+          'Size: 10.5" H X 9" W</p></span>' +
           // Padfolio
           '<span id= "info_passport_luggage_tag"><p><strong>Passport and luggage tag set</strong></p><p>This genuine black leather passport holder and luggage tag has 25 Years debossed on the front. It has a magnetic closure. </p></span>' +
           // Pearl Earrings
-          '<span id="info_pearl_earrings"><p><strong>Pearl Earrings</strong></p><p>These sterling silver, fresh water pearl earrings have an accent of gold. They are made in Vancouver, B.C. by <a href="http://www.howlingdogart.com/" target="_blank">Howling Dog Artisan Jewellery.</a></p><p>Note: Due to the nature of this award, engraving is not possible.</p></span>' +
+          '<span id="info_pearl_earrings"><p><strong>Pearl earrings</strong></p><p>These sterling silver, fresh water pearl earrings have an accent of gold. They are made in Vancouver, B.C. by <a href="http://www.howlingdogart.com/" target="_blank">Howling Dog Artisan Jewellery.</a></p><p>Size: 2.5 cm L x 1 cm W' +
+          '</p><p>Note: Due to the nature of this award, engraving is not possible.</p></span>' +
           // PECSF donation
           '<span id="info_provincial_employees_community_services_fund"><p><strong>Charitable donation</strong></p><p>Instead of choosing an award from the catalogue, you can opt to make a charitable donation via the <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf" target="_blank">Provincial Employees Community Services Fund</a>.  A framed certificate of service, signed by the Premier of British Columbia, will be presented to you noting your charitable contribution. </p><p>You can donate to the <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions" target="_blank">click on your region</a>.</p><br /><p><em>Before registering for your Long Service Award, you will first need to view the list of <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions" target="_blank">fund supported pool of charities in your region</a>, or you can choose one or two specific charities to receive your donation. </p><p>Note: Charitable tax receipts are not issued for Long Service Award donations</p></span>' +
           '</div>' +
