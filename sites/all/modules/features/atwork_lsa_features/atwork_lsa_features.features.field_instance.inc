@@ -3037,7 +3037,7 @@ Wheelchair/walker seating',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_office_address',
-    'label' => 'Office Street Address',
+    'label' => 'Work Street Address',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -3317,87 +3317,6 @@ Wheelchair/walker seating',
       ),
       'type' => 'text_textfield',
       'weight' => 21,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-lsa_application-field_lsa_office_work_group'.
-  $field_instances['node-lsa_application-field_lsa_office_work_group'] = array(
-    'bundle' => 'lsa_application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'inline',
-        'module' => 'editablefields',
-        'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
-          'semantic_field_format' => '',
-        ),
-        'type' => 'editable',
-        'weight' => 14,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'question' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_lsa_office_work_group',
-    'label' => 'Office',
-    'required' => 0,
-    'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'maxlength_js' => 0,
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 18,
     ),
   );
 
@@ -3753,6 +3672,19 @@ Wheelchair/walker seating',
     'label' => 'PECSF Region',
     'required' => 0,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -4479,8 +4411,8 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_supervisor_city',
-    'label' => 'Supervisor City',
-    'required' => 0,
+    'label' => 'City',
+    'required' => 1,
     'settings' => array(
       'authcache' => array(
         'clients' => array(
@@ -4495,7 +4427,6 @@ Vegan',
         'peruser' => 1,
         'status' => 0,
       ),
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -4788,7 +4719,7 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_supervisor_postal_code',
-    'label' => 'Supervisor Postal Code',
+    'label' => 'Postal Code',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -4804,7 +4735,6 @@ Vegan',
         'peruser' => 1,
         'status' => 0,
       ),
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -4826,7 +4756,11 @@ Vegan',
   // 'node-lsa_application-field_lsa_supervisor_province'.
   $field_instances['node-lsa_application-field_lsa_supervisor_province'] = array(
     'bundle' => 'lsa_application',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 'BC',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -4866,8 +4800,8 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_supervisor_province',
-    'label' => 'Supervisor Province',
-    'required' => 0,
+    'label' => 'Province',
+    'required' => 1,
     'settings' => array(
       'authcache' => array(
         'clients' => array(
@@ -4882,7 +4816,6 @@ Vegan',
         'peruser' => 1,
         'status' => 0,
       ),
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -5385,8 +5318,8 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_supervisor_address',
-    'label' => 'Supervisor Address',
-    'required' => 0,
+    'label' => 'Supervisor\'s Work Address',
+    'required' => 1,
     'settings' => array(
       'authcache' => array(
         'clients' => array(
@@ -5401,7 +5334,6 @@ Vegan',
         'peruser' => 1,
         'status' => 0,
       ),
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -7290,8 +7222,6 @@ Vegan',
   t('My guest(s) request(s)');
   t('Notes');
   t('Number Attending');
-  t('Office');
-  t('Office Street Address');
   t('PECSF ID');
   t('PECSF ID 2');
   t('PECSF Region');
@@ -7309,13 +7239,10 @@ Vegan',
   t('Service Milestone');
   t('Service pins will be sent to the employee\'s supervisor for presentation during Public Service Week - June 12-16, 2017.');
   t('Street');
-  t('Supervisor Address');
-  t('Supervisor City');
   t('Supervisor Email');
   t('Supervisor First Name');
   t('Supervisor Last Name');
-  t('Supervisor Postal Code');
-  t('Supervisor Province');
+  t('Supervisor\'s Work Address');
   t('Supervisors’ Address');
   t('Terms');
   t('This is how your name will appear on your 25 year certificate. Make any changes necessary.');
@@ -7324,6 +7251,7 @@ Vegan',
   t('Who is registering for this service pin?');
   t('Work Phone');
   t('Work Phone Extension');
+  t('Work Street Address');
   t('Years of Service');
 
   return $field_instances;

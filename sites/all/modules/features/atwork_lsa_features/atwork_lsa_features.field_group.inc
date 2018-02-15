@@ -391,13 +391,7 @@ function atwork_lsa_features_field_group_info() {
         'required_fields' => 1,
         'id' => 'lsa-pin-terms',
         'classes' => 'group-lsa-pin-terms field-group-fieldset',
-        'description' => 'If the above information is complete, and you have agreed to the terms below, click the “SUBMIT” button at the bottom of the screen. You will then receive:
-<ul>
-<li> a confirmation page displaying all of the information you’ve entered. Please check this page to ensure the information is accurate. If something is incorrect, contact  your<a href="/career/employee-appreciation/recognition-contacts"> Ministry Recognition Contact</a>. </li>
-<li>an automated email thanking you for your registration.</li>
-</ul>
-<p class="style-red"> <strong>IMPORTANT:</strong> If you do not receive a confirmation email, you will need to re-submit the request again.</p>
-',
+        'description' => '<p>If the above information is complete, and you have agreed to the terms below, click the SUBMIT button.</p>',
       ),
       'formatter' => 'open',
     ),
@@ -725,17 +719,18 @@ function atwork_lsa_features_field_group_info() {
       2 => 'field_lsa_pin_last_name',
       3 => 'field_lsa_branch_department',
       4 => 'field_lsa_email',
-      5 => 'field_lsa_branch',
-      6 => 'field_lsa_home_phone',
+      5 => 'field_lsa_home_phone',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Recipient Details',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-recipient-details field-group-fieldset ',
         'required_fields' => 1,
+        'id' => '',
+        'classes' => 'group-recipient-details field-group-fieldset ',
+        'description' => '',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_recipient_details|node|lsa_pin_application|form'] = $field_group;
