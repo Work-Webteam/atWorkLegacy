@@ -80,7 +80,7 @@
         // Certificate and certificate text box
         '<div id = "lsa_certificate_and_textbox_div">' +
           // Certificate - comes with all 25 year gifts
-          '<span id="info_25_year_certificate"><img src="/sites/default/files/bg/image/2015/0224/lsacertificategeneric-thumb.jpg" alt="25 year certificate" id="image_25_year_certificate"><p>The 25 year milestone award comes with an framed certificate of service. </p><br /></span>' +
+          '<span id="info_25_year_certificate"><img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/certificate-thumb.jpg" alt="25 year certificate" id="image_25_year_certificate"><p>The 25 year milestone award comes with an framed certificate of service. </p><br /></span>' +
           // Create a radial button to let the user select if they would, or would not like a certificate.
           //'<form name="_25_certificate_choice" required="required" id="certificate_choice">' +
           '<input type = "hidden" name="certificate" value="yes" checked="checked" id="_25_certificate_yes" display="none">' +
@@ -613,7 +613,13 @@ function gift_choice_populate_form(gifts){
 
   // If the selectedAward object exists, display it
   if(typeof selectedAward != "undefined") {
-  	$(".lsa-award-selector-img-display-panel").attr("src", selectedAward["URI"]).show();
+    $(".lsa-award-selector-img-display-panel").attr("src", selectedAward["URI"]).show();
+    // If this is 25 year, drop a picture of certificate as well
+    if($('input[name="field_lsa_years_of_service[und]"]:checked').val() == 25){
+      $(".form-item.form-type-textfield.form-item-field-lsa-award-und-0-value").append('<img class="cert-add" src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/certificate-thumb.jpg">');
+    } else {
+      $('.cert-add').remove();
+    }
   	
   	// Uncomment for descriptions to be displayed alongside award photo. Also uncommnt .remove() functions in atwork_lsa.js.
   	//$("#lsa-award-selector-description-display").remove();
@@ -761,6 +767,7 @@ function gift_choice_populate_form(gifts){
     var selected_image=($('#image_' + $("select#gift_selection_box").find('option:selected').attr("name")));
     // Hide everything and...
     $('#lsa_gift_images_div img').hide();
+    $('#')
     // If watch, show watch, print engravement to form
     if($("select#gift_selection_box").find('option:selected').attr("name") == "bulova_watch"){
       $('#lsa_gift_images_div img').hide();
@@ -1000,11 +1007,13 @@ function gift_choice_populate_form(gifts){
     });
 
     $('#edit-field-lsa-years-of-service-und').click(function () {
-        if ($('input[name="field_lsa_years_of_service[und]"]:checked').val() == 45 || $('input[name="field_lsa_years_of_service[und]"]:checked').val() == 50){
+      if ($('input[name="field_lsa_years_of_service[und]"]:checked').val() == 45 || $('input[name="field_lsa_years_of_service[und]"]:checked').val() == 50){
         gift_choices();
         $(".lsa-award-selector-img-display-panel").attr("src", "").hide();
 //        /$("#lsa-award-selector-description-display").remove();
       }
+      $('.cert-add').remove();
+
     });
   });
 
