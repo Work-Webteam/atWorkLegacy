@@ -41,7 +41,8 @@ function atwork_lsa_features_node_info() {
 		<ol>
 			<li>A confirmation page displaying all of the information you&rsquo;ve entered. If something is incorrect, please contact the <a href="mailto:longserviceawards@gov.bc.ca?Long%20Service%20Awards">Long Service Awards</a> team.</li>
 			<li>An automated confirmation email. </li>
-		</ol>'),
+		</ol>
+<p><span style="color:red;" class="red-text">* If you do not receive these two items, your registration was not received </span></p>'),
     ),
     'lsa_pin_application' => array(
       'name' => t('Service Pin Application'),

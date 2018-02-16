@@ -165,8 +165,8 @@
     // Hide PECSF unless user selects this choice
     $('#pecsf-fields').hide();
     // Change text for pecsf options (too long for text box in setup)
-    $("label[for=edit-field-lsa-donation-options-und-0]").html('Option A: Make a PECSF donation to the <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity">fund supported pool of charities in my region</a>.');
-    $("label[for=edit-field-lsa-donation-options-und-1]").html('Option B: Make a PECSF donation to one or two charities of my choice. (Find the PECSF ID number for your choice(s) by reviewing the <a href="https://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions">charity list by region</a>.)');
+    $("label[for=edit-field-lsa-donation-options-und-0]").html('Option A: Make a PECSF donation to the <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity" target="_blank">fund supported pool of charities in my region</a>.');
+    $("label[for=edit-field-lsa-donation-options-und-1]").html('Option B: Make a PECSF donation to one or two charities of my choice. (Find the PECSF ID number for your choice(s) by reviewing the <a href="https://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions" target="_blank">charity list by region</a>.)');
     $("form-item.form-type-radio.form-item-field-lsa-donation-options-und").attr("style", "display:block");
     // Hide alternate fields until they are required
     $('.collapsible.required-fields.group-lsa-first-donation.field-group-fieldset.form-wrapper.collapse-processed').hide();

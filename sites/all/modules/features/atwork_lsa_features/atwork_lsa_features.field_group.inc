@@ -315,7 +315,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'PECSF',
+    'label' => 'Charitable donation',
     'weight' => '11',
     'children' => array(
       0 => 'field_lsa_donation_options',
@@ -326,7 +326,7 @@ function atwork_lsa_features_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => 'PECSF',
+      'label' => 'Charitable donation',
       'instance_settings' => array(
         'required_fields' => 0,
         'id' => 'pecsf-fields',
@@ -811,12 +811,12 @@ function atwork_lsa_features_field_group_info() {
   // Included for use with string extractors like potx.
   t('Administration');
   t('Ceremony Details');
+  t('Charitable donation');
   t('Contact Information');
   t('Home Mailing Address');
   t('Long Service Award Survey');
   t('Name');
   t('Office Information');
-  t('PECSF');
   t('Pin Options');
   t('RSVP Information');
   t('Recipient Contact Information');

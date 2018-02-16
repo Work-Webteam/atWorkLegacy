@@ -644,8 +644,8 @@ function atwork_lsa_features_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        0 => 'Option A: Please make a donation on my behalf, to the PECSF Fund Supported Pool of regional programs in my area.',
-        1 => 'Option B:  Please make a donation on my behalf, to the following charities. Maximum of two.',
+        0 => 'Option A',
+        1 => 'Option B',
       ),
       'allowed_values_function' => '',
     ),
