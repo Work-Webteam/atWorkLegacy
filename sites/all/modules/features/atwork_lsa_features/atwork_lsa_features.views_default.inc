@@ -238,7 +238,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['relationship'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: Display Name */
+  /* Field: Field: Email */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
@@ -401,7 +401,7 @@ function atwork_lsa_features_views_default_views() {
     7 => 0,
     8 => 0,
   );
-  /* Filter criterion: Field: Display Name (field_display_name) */
+  /* Filter criterion: Field: Email (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
@@ -578,7 +578,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['relationship'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: Display Name */
+  /* Field: Field: Email */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
@@ -777,7 +777,7 @@ function atwork_lsa_features_views_default_views() {
     7 => 0,
     8 => 0,
   );
-  /* Filter criterion: Field: Display Name (field_display_name) */
+  /* Filter criterion: Field: Email (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
@@ -962,7 +962,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['relationship'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: Display Name */
+  /* Field: Field: Email */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
@@ -1066,7 +1066,7 @@ function atwork_lsa_features_views_default_views() {
     13 => 0,
   );
   $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
-  /* Filter criterion: Field: Display Name (field_display_name) */
+  /* Filter criterion: Field: Email (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
@@ -1629,10 +1629,6 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_branch_department']['id'] = 'field_lsa_branch_department';
   $handler->display->display_options['fields']['field_lsa_branch_department']['table'] = 'field_data_field_lsa_branch_department';
   $handler->display->display_options['fields']['field_lsa_branch_department']['field'] = 'field_lsa_branch_department';
-  /* Field: Broken/missing handler */
-  $handler->display->display_options['fields']['field_lsa_office_work_group']['id'] = 'field_lsa_office_work_group';
-  $handler->display->display_options['fields']['field_lsa_office_work_group']['table'] = 'field_data_field_lsa_office_work_group';
-  $handler->display->display_options['fields']['field_lsa_office_work_group']['field'] = 'field_lsa_office_work_group';
   /* Field: Content: Work Street Address */
   $handler->display->display_options['fields']['field_lsa_office_address']['id'] = 'field_lsa_office_address';
   $handler->display->display_options['fields']['field_lsa_office_address']['table'] = 'field_data_field_lsa_office_address';
@@ -2761,7 +2757,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['relationship'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: Display Name */
+  /* Field: Field: Email */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
@@ -2873,7 +2869,7 @@ function atwork_lsa_features_views_default_views() {
     7 => 0,
     8 => 0,
   );
-  /* Filter criterion: Field: Display Name (field_display_name) */
+  /* Filter criterion: Field: Email (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
@@ -3059,7 +3055,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['relationship'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: Display Name */
+  /* Field: Field: Email */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
@@ -5999,10 +5995,6 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_branch_department']['id'] = 'field_lsa_branch_department';
   $handler->display->display_options['fields']['field_lsa_branch_department']['table'] = 'field_data_field_lsa_branch_department';
   $handler->display->display_options['fields']['field_lsa_branch_department']['field'] = 'field_lsa_branch_department';
-  /* Field: Broken/missing handler */
-  $handler->display->display_options['fields']['field_lsa_office_work_group']['id'] = 'field_lsa_office_work_group';
-  $handler->display->display_options['fields']['field_lsa_office_work_group']['table'] = 'field_data_field_lsa_office_work_group';
-  $handler->display->display_options['fields']['field_lsa_office_work_group']['field'] = 'field_lsa_office_work_group';
   /* Field: Content: Work Street Address */
   $handler->display->display_options['fields']['field_lsa_office_address']['id'] = 'field_lsa_office_address';
   $handler->display->display_options['fields']['field_lsa_office_address']['table'] = 'field_data_field_lsa_office_address';
@@ -6035,14 +6027,6 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_supervisor_email']['id'] = 'field_lsa_supervisor_email';
   $handler->display->display_options['fields']['field_lsa_supervisor_email']['table'] = 'field_data_field_lsa_supervisor_email';
   $handler->display->display_options['fields']['field_lsa_supervisor_email']['field'] = 'field_lsa_supervisor_email';
-  /* Field: Broken/missing handler */
-  $handler->display->display_options['fields']['field_lsa_specialrequirements']['id'] = 'field_lsa_specialrequirements';
-  $handler->display->display_options['fields']['field_lsa_specialrequirements']['table'] = 'field_data_field_lsa_specialrequirements';
-  $handler->display->display_options['fields']['field_lsa_specialrequirements']['field'] = 'field_lsa_specialrequirements';
-  /* Field: Broken/missing handler */
-  $handler->display->display_options['fields']['field_specialrequirement_descrip']['id'] = 'field_specialrequirement_descrip';
-  $handler->display->display_options['fields']['field_specialrequirement_descrip']['table'] = 'field_data_field_specialrequirement_descrip';
-  $handler->display->display_options['fields']['field_specialrequirement_descrip']['field'] = 'field_specialrequirement_descrip';
   /* Field: Content: Notes */
   $handler->display->display_options['fields']['field_lsa_notes']['id'] = 'field_lsa_notes';
   $handler->display->display_options['fields']['field_lsa_notes']['table'] = 'field_data_field_lsa_notes';
@@ -6104,42 +6088,52 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_donation_options']['id'] = 'field_lsa_donation_options';
   $handler->display->display_options['fields']['field_lsa_donation_options']['table'] = 'field_data_field_lsa_donation_options';
   $handler->display->display_options['fields']['field_lsa_donation_options']['field'] = 'field_lsa_donation_options';
+  $handler->display->display_options['fields']['field_lsa_donation_options']['label'] = 'Donation_Option';
   /* Field: Content: PECSF Region */
   $handler->display->display_options['fields']['field_lsa_pecsf_region']['id'] = 'field_lsa_pecsf_region';
   $handler->display->display_options['fields']['field_lsa_pecsf_region']['table'] = 'field_data_field_lsa_pecsf_region';
   $handler->display->display_options['fields']['field_lsa_pecsf_region']['field'] = 'field_lsa_pecsf_region';
+  $handler->display->display_options['fields']['field_lsa_pecsf_region']['label'] = 'PECSF_Region';
   /* Field: Content: Charity Name */
   $handler->display->display_options['fields']['field_lsa_pecsf_charity_name']['id'] = 'field_lsa_pecsf_charity_name';
   $handler->display->display_options['fields']['field_lsa_pecsf_charity_name']['table'] = 'field_data_field_lsa_pecsf_charity_name';
   $handler->display->display_options['fields']['field_lsa_pecsf_charity_name']['field'] = 'field_lsa_pecsf_charity_name';
+  $handler->display->display_options['fields']['field_lsa_pecsf_charity_name']['label'] = 'PECSF_Charity_Name';
   /* Field: Content: PECSF ID */
   $handler->display->display_options['fields']['field_lsa_pecsf_id']['id'] = 'field_lsa_pecsf_id';
   $handler->display->display_options['fields']['field_lsa_pecsf_id']['table'] = 'field_data_field_lsa_pecsf_id';
   $handler->display->display_options['fields']['field_lsa_pecsf_id']['field'] = 'field_lsa_pecsf_id';
+  $handler->display->display_options['fields']['field_lsa_pecsf_id']['label'] = 'PECSF_Charity_ID';
   /* Field: Content: Donation Amount */
   $handler->display->display_options['fields']['field_lsa_donation_amount']['id'] = 'field_lsa_donation_amount';
   $handler->display->display_options['fields']['field_lsa_donation_amount']['table'] = 'field_data_field_lsa_donation_amount';
   $handler->display->display_options['fields']['field_lsa_donation_amount']['field'] = 'field_lsa_donation_amount';
+  $handler->display->display_options['fields']['field_lsa_donation_amount']['label'] = 'Donation_Amount';
   /* Field: Content: Second Charity */
   $handler->display->display_options['fields']['field_lsa_second_donation']['id'] = 'field_lsa_second_donation';
   $handler->display->display_options['fields']['field_lsa_second_donation']['table'] = 'field_data_field_lsa_second_donation';
   $handler->display->display_options['fields']['field_lsa_second_donation']['field'] = 'field_lsa_second_donation';
+  $handler->display->display_options['fields']['field_lsa_second_donation']['label'] = 'Second_Charity_Selected';
   /* Field: Content: Charity Name 2 */
   $handler->display->display_options['fields']['field_lsa_charity_name_2']['id'] = 'field_lsa_charity_name_2';
   $handler->display->display_options['fields']['field_lsa_charity_name_2']['table'] = 'field_data_field_lsa_charity_name_2';
   $handler->display->display_options['fields']['field_lsa_charity_name_2']['field'] = 'field_lsa_charity_name_2';
+  $handler->display->display_options['fields']['field_lsa_charity_name_2']['label'] = 'Second_Charity_Name';
   /* Field: Content: PECSF ID 2 */
   $handler->display->display_options['fields']['field_lsa_pecsf_id_2']['id'] = 'field_lsa_pecsf_id_2';
   $handler->display->display_options['fields']['field_lsa_pecsf_id_2']['table'] = 'field_data_field_lsa_pecsf_id_2';
   $handler->display->display_options['fields']['field_lsa_pecsf_id_2']['field'] = 'field_lsa_pecsf_id_2';
+  $handler->display->display_options['fields']['field_lsa_pecsf_id_2']['label'] = 'Second_Charity_ID';
   /* Field: Content: Donation Amount 2 */
   $handler->display->display_options['fields']['field_lsa_donation_amount_2']['id'] = 'field_lsa_donation_amount_2';
   $handler->display->display_options['fields']['field_lsa_donation_amount_2']['table'] = 'field_data_field_lsa_donation_amount_2';
   $handler->display->display_options['fields']['field_lsa_donation_amount_2']['field'] = 'field_lsa_donation_amount_2';
+  $handler->display->display_options['fields']['field_lsa_donation_amount_2']['label'] = 'Donation_Amount_Charity2';
   /* Field: Content: <em>I do <u>not</u> wish to take part in the LSA survey.</em> */
   $handler->display->display_options['fields']['field_lsa_survey']['id'] = 'field_lsa_survey';
   $handler->display->display_options['fields']['field_lsa_survey']['table'] = 'field_data_field_lsa_survey';
   $handler->display->display_options['fields']['field_lsa_survey']['field'] = 'field_lsa_survey';
+  $handler->display->display_options['fields']['field_lsa_survey']['label'] = 'LSA_Survey';
   $handler->display->display_options['fields']['field_lsa_survey']['type'] = 'list_key';
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
