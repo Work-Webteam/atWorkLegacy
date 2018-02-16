@@ -67,7 +67,27 @@
       $('#edit-field-lsa-engravement-und-0-value').hide();
       $('.form-item.form-type-textfield.form-item-field-lsa-engravement-und-0-value').hide();
     }
+    // Set dietary and accomodation boxes open/closed as appropriate
+    // Show textbox if there are accomodation requests
+      if($('#edit-field-lsa-ceremony-accommodation-und-1').is(":checked")){
+        $('#field-lsa-accommodation-notes-add-more-wrapper').show();
+      } 
+      // Otherwise hide
+      if($('#edit-field-lsa-ceremony-accommodation-und-0').is(":checked")){
+        $('#field-lsa-accommodation-notes-add-more-wrapper').hide();;
+      }
+    
+        // Show dietary options if required
+        if($('#edit-field-lsa-dietary-requirements-und-1').is(":checked")){
+          $("#edit-field-lsa-recipient-dietary").show();
+          $('#edit-field-lsa-dietary-guest').show();
+        } 
 
+        // Otherwise hide
+        if($('#edit-field-lsa-dietary-requirements-und-0').is(":checked")){
+          $("#edit-field-lsa-recipient-dietary").hide();
+          $('#edit-field-lsa-dietary-guest').hide();
+        } 
   }
 
   /**

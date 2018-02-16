@@ -22,11 +22,15 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
     $form['field_lsa_recipient_accom']['#access'] = false;
   }
 
+  // LSA form adjustments
   $form['field_lsa_received_award']['#suffix'] = '<div style="display: none" id="lsa-no-gift">The Office of Protocol will contact you soon in this regard. Or you may contact them directly at (250) 387-1616.</div>';
   $form['field_lsa_terms'][$form['field_lsa_terms']['#language']]['#title'] = '';
   $form['#validate'][] = 'atwork_lsa_application_validate';
   $form['#submit'][] = 'atwork_lsa_application_submit';
   $form['actions']['submit']['#value'] = "SUBMIT your LSA registration";
+  $form['field_lsa_accommodation_notes']['und'][0]['value']['#title'] = "";
+  $form['field_lsa_accommodation_notes']['und']['#prefix'] .= "<p>Please specify your accommodations requirements, and indicate if the accommodation is for you or your guest.</p>";
+  $form['field_lsa_award_sp_instructions']['#access'] = FALSE;
   // skip defaults for admins who are entering for others
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)  || in_array('lsa contact', $user->roles)) {
     //$form['field_lsa_terms'][$form['field_lsa_terms']['#language']]['#default_value'] = 1;
@@ -276,6 +280,19 @@ function atwork_lsa_application_validate($form, &$form_state) {
   if (in_array(substr_replace(strtolower($email), '', 0, strpos($email, '@')), $internal_addresses)) {
   } else {
     form_set_error($email, t('Email is limited to organizations within the BC Public Service. %email was not found.', array('%email' => $email)));
+  }
+  // Check to see if special requirements was selected as "yes" - if so then textbox is required.
+  if($form_state['values']['field_lsa_ceremony_accommodation']['und'][0]['value'] == "1" && $form_state['values'  ]['field_lsa_accommodation_notes']['und'][0]['value'] == ''){
+    form_set_error('field_lsa_accommodation_notes', t("You must indicate the accommodations that you require"));
+  }
+  // Check to see if user had indicated dietary requirements, but indicated none.
+  if($form_state['values']['field_lsa_dietary_requirements']['und'][0]['value'] == "1" && (empty($form_state['values'  ]['field_lsa_recipient_dietary']['und']) && empty($form_state['values'  ]['field_lsa_dietary_guest']['und']))){
+    form_set_error('field_lsa_recipient_dietary', t("You have not indicated dietary requirements for you or your guest"));
+  }
+  dpm($form_state);
+  // Check if terms are approved
+  if($form_state['values']['field_lsa_terms']['und'][0]['value'] != "1"){
+    form_set_error('field_lsa_terms', t("You must agree to Terms in order to submit the form"));
   }
 }
 
