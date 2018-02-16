@@ -49,7 +49,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Ceremony Accommodations',
+    'label' => '',
     'weight' => '20',
     'children' => array(
       0 => 'field_lsa_ceremony_accommodation',
@@ -59,13 +59,14 @@ function atwork_lsa_features_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => '',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-lsa-accom field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'group-lsa-accom field-group-fieldset',
+        'description' => '<span class="ceremony-acc-note">Do you or your guest require any accommodations to attend the Long Service Award ceremony at Government House? (e.g. sign language interpreter (ASL), service dog, accessible parking/entrance, etc.)</span>',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_lsa_accom|node|lsa_application|form'] = $field_group;
@@ -183,7 +184,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Dietary Requirements',
+    'label' => '',
     'weight' => '21',
     'children' => array(
       0 => 'field_lsa_dietary_requirements',
@@ -192,13 +193,14 @@ function atwork_lsa_features_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => '',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-lsa-dietary-acc field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'group-lsa-dietary-acc field-group-fieldset',
+        'description' => '<span id="dietary-requirements-text">Do you or your guest have any food allergies or dietary restrictions?</span>',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_lsa_dietary_acc|node|lsa_application|form'] = $field_group;
@@ -284,12 +286,11 @@ function atwork_lsa_features_field_group_info() {
       0 => 'field_lsa_org',
       1 => 'field_lsa_work_phone',
       2 => 'field_lsa_branch_department',
-      3 => 'field_lsa_office_work_group',
-      4 => 'field_lsa_work_phone_ext',
-      5 => 'field_lsa_office_address',
-      6 => 'field_lsa_office_city',
-      7 => 'field_lsa_office_postal_code',
-      8 => 'field_lsa_office_province',
+      3 => 'field_lsa_work_phone_ext',
+      4 => 'field_lsa_office_address',
+      5 => 'field_lsa_office_city',
+      6 => 'field_lsa_office_postal_code',
+      7 => 'field_lsa_office_province',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -472,10 +473,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->data = array(
     'label' => 'Special Requirements',
     'weight' => '0',
-    'children' => array(
-      0 => 'field_lsa_specialrequirements',
-      1 => 'field_specialrequirement_descrip',
-    ),
+    'children' => array(),
     'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Special Requirements',
@@ -644,10 +642,10 @@ function atwork_lsa_features_field_group_info() {
       0 => 'field_lsa_supervisor_first_name',
       1 => 'field_lsa_supervisor_last_name',
       2 => 'field_lsa_supervisor_email',
-      3 => 'field_supervisor_address',
-      4 => 'field_lsa_supervisor_city',
+      3 => 'field_lsa_supervisor_city',
+      4 => 'field_lsa_supervisor_postal_code',
       5 => 'field_lsa_supervisor_province',
-      6 => 'field_lsa_supervisor_postal_code',
+      6 => 'field_supervisor_address',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -812,10 +810,8 @@ function atwork_lsa_features_field_group_info() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Administration');
-  t('Ceremony Accommodations');
   t('Ceremony Details');
   t('Contact Information');
-  t('Dietary Requirements');
   t('Home Mailing Address');
   t('Long Service Award Survey');
   t('Name');

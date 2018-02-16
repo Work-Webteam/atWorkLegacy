@@ -80,13 +80,13 @@ function atwork_lsa_features_field_default_field_instances() {
     'bundle' => 'lsa_application',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please specify your accommodations requirements, and specify if the accommodation is for you or your guest.',
+    'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(
-          'semantic_field_format' => 0,
+          'semantic_field_format' => '',
         ),
         'type' => 'text_default',
         'weight' => 38,
@@ -134,7 +134,6 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -236,16 +235,11 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'email',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'email_default',
         'weight' => 12,
       ),
       'ecard' => array(
@@ -754,16 +748,11 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 12,
       ),
       'ecard' => array(
@@ -837,13 +826,13 @@ function atwork_lsa_features_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '<span class="ceremony-acc-note">Do you or your guest require any accommodations to attend the Long Service Award ceremony at Government House? (e.g. sign language interpreter (ASL), service dog, accessible parking/entrance, etc.)</span>',
+    'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'list',
         'settings' => array(
-          'semantic_field_format' => 0,
+          'semantic_field_format' => '',
         ),
         'type' => 'list_default',
         'weight' => 37,
@@ -891,7 +880,6 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -1266,16 +1254,11 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 8,
       ),
       'ecard' => array(
@@ -1333,16 +1316,18 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'date',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
           'semantic_field_format' => '',
+          'show_remaining_days' => FALSE,
+          'show_repeat_rule' => 'show',
         ),
-        'type' => 'editable',
+        'type' => 'date_default',
         'weight' => 7,
       ),
       'ecard' => array(
@@ -1417,19 +1402,15 @@ function atwork_lsa_features_field_default_field_instances() {
   // Exported field_instance: 'node-lsa_application-field_lsa_dietary_guest'.
   $field_instances['node-lsa_application-field_lsa_dietary_guest'] = array(
     'bundle' => 'lsa_application',
-    'default_value' => array(
-      0 => array(
-        'value' => FALSE,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(
-          'semantic_field_format' => 0,
+          'semantic_field_format' => '',
         ),
         'type' => 'text_default',
         'weight' => 43,
@@ -1461,7 +1442,7 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_dietary_guest',
-    'label' => 'My guest(s) request(s)',
+    'label' => 'My guest\'s requests',
     'required' => 0,
     'settings' => array(
       'authcache' => array(
@@ -1477,7 +1458,6 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -1514,13 +1494,13 @@ Vegan',
       ),
     ),
     'deleted' => 0,
-    'description' => 'Do you or your guest have any food allergies or dietary restrictions? ',
+    'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'list',
         'settings' => array(
-          'semantic_field_format' => 0,
+          'semantic_field_format' => '',
         ),
         'type' => 'list_default',
         'weight' => 41,
@@ -1568,7 +1548,6 @@ Vegan',
         'peruser' => 1,
         'status' => 0,
       ),
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -1812,16 +1791,11 @@ Vegan',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'email',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'email_default',
         'weight' => 11,
       ),
       'ecard' => array(
@@ -2026,16 +2000,11 @@ Vegan',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 8,
       ),
       'ecard' => array(
@@ -2246,12 +2215,9 @@ Vegan',
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'text_default',
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 40,
       ),
       'ecard' => array(
@@ -2297,7 +2263,6 @@ Vegan',
         'peruser' => 1,
         'status' => 0,
       ),
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -2307,6 +2272,7 @@ Vegan',
       'module' => 'select_or_other',
       'settings' => array(
         'available_options' => 'Sign language interpreter (ASL)
+Visual Impairment
 Service dog
 Accessible parking/entrance
 Wheelchair/walker seating',
@@ -2318,7 +2284,7 @@ Wheelchair/walker seating',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 22,
+      'weight' => 23,
     ),
   );
 
@@ -2331,16 +2297,11 @@ Wheelchair/walker seating',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'phone',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'phone',
         'weight' => 13,
       ),
       'ecard' => array(
@@ -2400,16 +2361,11 @@ Wheelchair/walker seating',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 10,
       ),
       'ecard' => array(
@@ -2486,16 +2442,11 @@ Wheelchair/walker seating',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 9,
       ),
       'ecard' => array(
@@ -2647,16 +2598,11 @@ Wheelchair/walker seating',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 10,
       ),
       'ecard' => array(
@@ -2714,16 +2660,11 @@ Wheelchair/walker seating',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 9,
       ),
       'ecard' => array(
@@ -2998,16 +2939,11 @@ Wheelchair/walker seating',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 15,
       ),
       'ecard' => array(
@@ -3079,16 +3015,11 @@ Wheelchair/walker seating',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 16,
       ),
       'ecard' => array(
@@ -3161,16 +3092,11 @@ Wheelchair/walker seating',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 18,
       ),
       'ecard' => array(
@@ -3247,16 +3173,11 @@ Wheelchair/walker seating',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 17,
       ),
       'ecard' => array(
@@ -3708,16 +3629,11 @@ Wheelchair/walker seating',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'list',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'list_default',
         'weight' => 9,
       ),
       'ecard' => array(
@@ -3771,12 +3687,9 @@ Wheelchair/walker seating',
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'text_default',
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 39,
       ),
       'ecard' => array(
@@ -3822,7 +3735,6 @@ Wheelchair/walker seating',
         'peruser' => 1,
         'status' => 0,
       ),
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -3832,6 +3744,7 @@ Wheelchair/walker seating',
       'module' => 'select_or_other',
       'settings' => array(
         'available_options' => 'Sign language interpreter (ASL)
+Visual Impairment
 Service dog
 Accessible parking/entrance
 Wheelchair/walker seating',
@@ -3843,7 +3756,7 @@ Wheelchair/walker seating',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other_buttons',
-      'weight' => 24,
+      'weight' => 22,
     ),
   );
 
@@ -3851,19 +3764,15 @@ Wheelchair/walker seating',
   // 'node-lsa_application-field_lsa_recipient_dietary'.
   $field_instances['node-lsa_application-field_lsa_recipient_dietary'] = array(
     'bundle' => 'lsa_application',
-    'default_value' => array(
-      0 => array(
-        'value' => FALSE,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(
-          'semantic_field_format' => 0,
+          'semantic_field_format' => '',
         ),
         'type' => 'text_default',
         'weight' => 42,
@@ -3895,7 +3804,7 @@ Wheelchair/walker seating',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_recipient_dietary',
-    'label' => 'My Request(s)',
+    'label' => 'My Requests',
     'required' => 0,
     'settings' => array(
       'authcache' => array(
@@ -3911,7 +3820,6 @@ Wheelchair/walker seating',
         'peruser' => 1,
         'status' => 0,
       ),
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -4026,16 +3934,11 @@ Vegan',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'list',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'list_default',
         'weight' => 6,
       ),
       'ecard' => array(
@@ -4310,16 +4213,11 @@ Vegan',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 7,
       ),
       'ecard' => array(
@@ -4453,16 +4351,11 @@ Vegan',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'email',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'email_default',
         'weight' => 10,
       ),
       'ecard' => array(
@@ -4519,16 +4412,11 @@ Vegan',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 8,
       ),
       'ecard' => array(
@@ -4602,16 +4490,11 @@ Vegan',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 9,
       ),
       'ecard' => array(
@@ -4842,7 +4725,7 @@ Vegan',
       ),
     ),
     'deleted' => 0,
-    'description' => 'I do not wish to take part in the survey.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -4877,7 +4760,7 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_survey',
-    'label' => 'Long Service Award Survey',
+    'label' => '<em>I do <u>not</u> wish to take part in the LSA survey.</em>',
     'required' => 0,
     'settings' => array(
       'authcache' => array(
@@ -4893,7 +4776,6 @@ Vegan',
         'peruser' => 1,
         'status' => 0,
       ),
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -4968,7 +4850,6 @@ Vegan',
         'peruser' => 1,
         'status' => 0,
       ),
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -5074,16 +4955,11 @@ Vegan',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'phone',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'phone',
         'weight' => 19,
       ),
       'ecard' => array(
@@ -5143,16 +5019,11 @@ Vegan',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 20,
       ),
       'ecard' => array(
@@ -7165,10 +7036,10 @@ Vegan',
   // Included for use with string extractors like potx.
   t('25 Year Certificate');
   t('<em> Service pins will be sent to the employee’s supervisor for presentation during Public Service Week - June 12-16, 2017.</em>');
+  t('<em>I do <u>not</u> wish to take part in the LSA survey.</em>');
   t('<img class="lsa-award-selector-img-display-panel"></img>');
   t('<p class="style-red">For Victoria locations, please use the P.O. Box address</p>');
   t('<p>I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2018, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events.</p>');
-  t('<span class="ceremony-acc-note">Do you or your guest require any accommodations to attend the Long Service Award ceremony at Government House? (e.g. sign language interpreter (ASL), service dog, accessible parking/entrance, etc.)</span>');
   t('Accommodation Notes');
   t('Actual_Min/Org');
   t('Alternate Email Address');
@@ -7194,7 +7065,6 @@ Vegan',
   t('Did you receive your award?');
   t('Did you register last year but were unable to attend the ceremony?');
   t('Dietary Requirements');
-  t('Do you or your guest have any food allergies or dietary restrictions? ');
   t('Do you wish to request any service pin(s) retroactively?');
   t('Does your supervisor work in a different office location than you? ');
   t('Donation Amount');
@@ -7209,17 +7079,15 @@ Vegan',
   t('Guest Attending');
   t('Home Phone');
   t('I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target ="_blank">Service Pin Recognition Eligibility Guidelines</a> (which I have reviewed) that as of December 31, 2017, I will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and am therefore eligible to receive a service pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.');
-  t('I do not wish to take part in the survey.');
   t('If retired, please enter the last organization and supervisor you worked with.');
   t('Invitation Send Date');
   t('Last Name');
-  t('Long Service Award Survey');
   t('Middle Name');
   t('Ministry ID');
   t('Ministry Representative Email');
   t('Ministry/Organization');
-  t('My Request(s)');
-  t('My guest(s) request(s)');
+  t('My Requests');
+  t('My guest\'s requests');
   t('Notes');
   t('Number Attending');
   t('PECSF ID');
@@ -7227,7 +7095,6 @@ Vegan',
   t('PECSF Region');
   t('Phone');
   t('Please select the retroactive milestone pin(s) you would like to order');
-  t('Please specify your accommodations requirements, and specify if the accommodation is for you or your guest.');
   t('Please use the format:A1A 1A1');
   t('Postal Code');
   t('Province');

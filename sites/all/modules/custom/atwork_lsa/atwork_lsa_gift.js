@@ -613,7 +613,7 @@ function gift_choice_populate_form(gifts){
 
   // If the selectedAward object exists, display it
   if(typeof selectedAward != "undefined") {
-    $(".lsa-award-selector-img-display-panel").attr("src", selectedAward["URI"]).show();
+    $(".lsa-award-selector-img-display-panel").attr("src", selectedAward.URI).show();
     // If this is 25 year, drop a picture of certificate as well
     if($('input[name="field_lsa_years_of_service[und]"]:checked').val() == 25){
       $(".form-item.form-type-textfield.form-item-field-lsa-award-und-0-value").append('<img class="cert-add" src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/certificate-thumb.jpg">');
