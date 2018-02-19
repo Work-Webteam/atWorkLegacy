@@ -601,14 +601,31 @@ function atwork_lsa_node_insert($node) {
 
     require_once(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_pin.mail.inc');
 
-    // Only to specific ministries
+  /** Only to specific ministries
+    * 6 | Ministry of Education
+    *12 | Ministry of Indigenous Relations and Reconciliation
+    *15 | Ministry of Mental Health and Addictions
+    *20 | Ministry of Transportation and Infrastructure
+    *41 | Environmental Appeal Board
+    *42 | Environmental Assessment Office
+    *52 | Intergovernmental Relations Secretariat
+    *60 | Office of the Information and Privacy Commissioner
+    *61 | Office of the Merit Commissioner
+    *62 | Office of the Ombudsperson
+    *63 | Office of the Police Complaint Commissioner
+   **/
     $check_min = array(
-      1, //ABR
-      6, // ED
-      2, // Aved
-      11, // health
-      40, // Environmental assessment office
-      64, // Pub guardian and trustee
+      6 , //Ministry of Education
+      12, //Ministry of Indigenous Relations and Reconciliation
+      15, //Ministry of Mental Health and Addictions
+      20, //Ministry of Transportation and Infrastructure
+      41, //Environmental Appeal Board
+      42, //Environmental Assessment Office
+      52, //Intergovernmental Relations Secretariat
+      60, //Office of the Information and Privacy Commissioner
+      61, //Office of the Merit Commissioner
+      62, //Office of the Ombudsperson
+      63, //Office of the Police Complaint Commissioner
       );
 
 

@@ -30,19 +30,19 @@ if($years == 1){
 
 
 $supervisor_to = $node->field_lsa_supervisor_email[$lang][0]['email'];
-$supervisor_subject = t('An employee you supervise has applied for a service pin');
+$supervisor_subject = t('An employee you supervise has applied for a Service Pin');
 $supervisor_body = <<<EOT
 <span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
 
-<p>An employee you supervise has registered for a BC Public Service Pin, in celebration of a service milestone they are currently celebrating, or have missed celebrating in the past.</p>
+<p>FYI – an employee you supervise has registered for a BC Public Service Pin, in celebration of a service milestone they are currently celebrating, or have missed celebrating in the past.</p>
 
 <p><strong> {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']}</strong> is registered for a $email_milestone year Service Pin(s)</p>
 
 <p>The pin(s) will be mailed directly to you at the beginning of June, and will include a list of all your employees who have registered. </p>
 
-<p><strong>Please present the pin(s) to {$node->field_lsa_pin_first_name[$lang][0]['value']} during Public Service Week  - June 11-15, 2018.</strong> This is a wonderful opportunity to thank your employee for their service and celebrate their commitment to the BC Public Service! </p>
+<p><strong>Please present the pin(s) to {$node->field_lsa_pin_first_name[$lang][0]['value']} during Public Service Week  - June 12-16, 2017.</strong></p>
 
-<p>If you have questions about the <a href="/career/service-pins" target="_blank">corporate service pin program</a>, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
+<p>If you have questions about the corporate pin program, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
 
 EOT;
 
@@ -54,9 +54,9 @@ $applicant_body = <<<EOT
 <span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
 <p>Thank you for registering for your {$email_milestone} year BC Public Service Pin, and congratulations on this important career milestone!</p>
 
-<p>Your pin(s) will be sent directly to your supervisor or ministry, for presentation to you during <strong>Public Service Week (June 11-15, 2018)</strong></p>
+<p>Your pin(s) will be sent directly to your supervisor, for presentation to you during <strong>Public Service Week (June 11-15)</strong></p>
 
-<p>If you have questions about the <a href="/career/service-pins" target="_blank">corporate service pin program</a>, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.
+<p>If you have questions about the corporate pin program, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.
 
 EOT;
 
@@ -71,16 +71,27 @@ $ministry_rep_body = <<<EOT
 
 <p>Thank you for registering <strong>{$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']}</strong> for a $email_milestone year Service Pin(s)</p>
 
-<p>The pin(s) will be be mailed directly to {$node->field_lsa_pin_first_name[$lang][0]['value']}'s supervisor at the beginning of June, in order to <strong>present the pin(s) to {$node->field_lsa_pin_first_name[$lang][0]['value']} during Public Service Week  - June 11-15, 2018.</strong></p>
+<p>The pin(s) will be be mailed directly to {$node->field_lsa_pin_first_name[$lang][0]['value']}'s supervisor at the beginning of June, in order to <strong>present the pin(s) to {$node->field_lsa_pin_first_name[$lang][0]['value']} during Public Service Week  - June 12-16, 2017.</strong></p>
 
-<p>If you have questions about the <a href="/career/service-pins" target="_blank">corporate service pin program</a>, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
+<p>If you have questions about the corporate pin program, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
 
 EOT;
 
 
 
 /**
- * Some ministries require specific email changes: These updates are only for the ministries of: Abor Relations, Adv Education, Education, Health, Env Assess Office, Public Guardian Trustee:
+ * Some ministries require specific email changes: These updates are only for the following:
+ * 6 | Ministry of Education
+ * 12 | Ministry of Indigenous Relations and Reconciliation
+ * 15 | Ministry of Mental Health and Addictions
+ * 20 | Ministry of Transportation and Infrastructure
+ * 41 | Environmental Appeal Board
+ * 42 | Environmental Assessment Office
+ * 52 | Intergovernmental Relations Secretariat
+ * 60 | Office of the Information and Privacy Commissioner
+ * 61 | Office of the Merit Commissioner
+ * 62 | Office of the Ombudsperson
+ * 63 | Office of the Police Complaint Commissioner 
  */
 
 
@@ -93,7 +104,7 @@ $supervisor_body_special_condition = <<<EOT
 
 <p>The pin(s) will be mailed directly to your ministry/organization, for presentation during Public Service Week  - June 12-16, 2017.</strong></p>
 
-<p>If you have questions about the <a href="/career/service-pins" target="_blank">corporate service pin program</a>, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
+<p>If you have questions about the corporate pin program, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
 
 EOT;
 
@@ -106,6 +117,6 @@ $applicant_body_special_condition = <<<EOT
 
 <p>Your pin(s) will be sent directly to your ministry/organization, for presentation to you during <strong>Public Service Week (June 12-16)</strong></p>
 
-<p>If you have questions about the <a href="/career/service-pins" target="_blank">corporate service pin program</a>, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.
+<p>If you have questions about the corporate pin program, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.
 
 EOT;

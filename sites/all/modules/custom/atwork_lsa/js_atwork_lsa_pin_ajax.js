@@ -68,7 +68,20 @@
    * @param  {array} response [Holds an array of user, supervisor fields for auto-pop, the response.choice key holds the type of submission this will be]
    */
   var feedDetails = function(response){
-    var special_cases = ["1","2","6","11","40","64", "65"]; //Abor Relations, Adv Education, Education, Health, Env Assess Office, Public Guardian Trustee:
+    // Ministries are special cases and require their own text. NOTE: If .inArray is not working, make sure keys do not have spaces in that field (i.e. 11|ministry not 11 |ministry)
+    special_cases = [
+      "6",  //Ministry of Education
+      "12", //Ministry of Indigenous Relations and Reconciliation
+      "15", //Ministry of Mental Health and Addictions
+      "20", //Ministry of Transportation and Infrastructure
+      "41", //Environmental Appeal Board
+      "42", //Environmental Assessment Office
+      "52", //Intergovernmental Relations Secretariat
+      "60", //Office of the Information and Privacy Commissioner
+      "61", //Office of the Merit Commissioner
+      "62", //Office of the Ombudsperson
+      "63", //Office of the Police Complaint Commissioner
+      ]; 
 
     checkLabels(response.choice);
     $('#sup-div.required-fields.form-wrapper').hide();
@@ -89,7 +102,6 @@
       $('#edit-field-lsa-email-und-0-email').val(response.email);
       $('#edit-field-lsa-home-phone-und-0-value').val(response.phone[0].safe_value);
       $('#edit-field-lsa-branch-und-0-value').val(response.work_group[0].safe_value);
-
       if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1 ){
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
         $('#sup-div.required-fields.form-wrapper').hide();
@@ -129,6 +141,7 @@
 
     // Ministry Rep if filling out form.
     } else if(response.choice == 3){
+
       // Show field for ministry
       $('#edit-field-lsa-pin-ministry-org').slideDown('slow');
       $('#field-lsa-ministry-rep-email-add-more-wrapper').show();
@@ -153,7 +166,6 @@
   };
 
   function setUpPage() {
-    console.log($('#edit-field-lsa-registerer-und').val());
     if($('#edit-field-lsa-registerer-und').val() == '_none'){
       // Hide top fields that user should not have access to
       $('#edit-field-lsa-pin-service-milestone').hide();
@@ -193,10 +205,10 @@
    */
 
   function setMinistryOptions(ministry){
+    console.log(ministry);
     switch(true){
-      //Only One
-      case ministry ==  8:
-      case ministry == 18:
+      //Only One retro pin allowed 
+      case ministry == 18: //Ministry of Social Development and Poverty Reduction
         // We can only allow one box to be checked if they have chosen
         $('#edit-field-lsa-other-milestone-years').slideDown('slow');
         // Make sure our labels are set correctly
@@ -209,23 +221,30 @@
           });
         }
       break;
-      //multiple: 1,2,3,5,7,8,11,12,15,16,17, 21
-      case ministry == 1:
-      case ministry == 2:
-      case ministry == 4:
-      case ministry == 6:
-      case ministry == 7:
-      case ministry == 10:
-      case ministry == 11:
-      case ministry == 14:
-      case ministry == 15:
-      case ministry == 16:
-      case ministry == 20:
-      case ministry == 29:
-      case ministry == 40:
-      case ministry == 64:
-      case ministry == 65:
-      case ministry == 19:
+      //multiple retro pins allowed
+      case ministry == 1 : //Ministry of Advanced Education, Skills and Training
+      case ministry == 2 : //Ministry of Agriculture
+      case ministry == 3 : //Ministry of Attorney General
+      case ministry == 4 : //Ministry of Children and Family Development
+      case ministry == 5 : //Ministry of Citizens' Services
+      case ministry == 8 : //Ministry of Environment and Climate Change Strategy
+      case ministry == 9 : //Ministry of Finance
+      case ministry == 10: // Ministry of Forests, Lands, Natural Resource Operations and Rural Development
+      case ministry == 11: // Ministry of Health
+      case ministry == 12: // Ministry of Indigenous Relations and Reconciliation
+      case ministry == 15: // Ministry of Mental Health and Addictions
+      case ministry == 17: // Ministry of Public Safety and Solicitor General
+      case ministry == 20: // Ministry of Transportation and Infrastructure
+      case ministry == 27: // BC Public Service Agency
+      case ministry == 41: // Environmental Appeal Board
+      case ministry == 42: // Environmental Assessment Office
+      case ministry == 52: // Intergovernmental Relations Secretariat
+      case ministry == 60: // Office of the Information and Privacy Commissioner
+      case ministry == 61: // Office of the Merit Commissioner
+      case ministry == 62: // Office of the Ombudsperson
+      case ministry == 63: // Office of the Police Complaint Commissioner
+      case ministry == 68: // Public Guardian and Trustee
+
         // If we have previous set handlers on this - lets remove them.
         if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
 
@@ -244,9 +263,9 @@
       break;
 
       //If this is one of their award years then they can choose multiple extras: 20
-      //MTICS changed their mind on this
-      /*
-      case ministry == 19:
+      
+      case ministry == 6: // Ministry of Education
+      case ministry == 7: // Ministry of Energy, Mines and Petroleum Resources
         // Check if this had other restrictions previously
         if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
           $('#edit-field-lsa-previous-service-miles-und').removeClass('atwork-activity-processed');
@@ -269,7 +288,7 @@
           $('#edit-field-lsa-previous-service-miles').slideUp('slow');
         }
         break;
-      */
+      
       // Any other number is not allowed to have retroactive
       default:
         if($('#edit-field-lsa-milestone-year-und').hasClass('atwork-activity-processed')){
@@ -291,8 +310,22 @@
     $('#edit-field-lsa-milestone-year').slideDown('slow');
 
     var applicationSubmitter = $('#edit-field-lsa-registerer-und option:selected').val();
-    var special_cases = ["1","2","6","11","40","64", "65"]; //Abor Relations, Adv Education, Education, Health, Env Assess Office, Public Guardian Trustee:
-
+    var special_cases = new Array();
+    special_cases = [
+      "6",  //Ministry of Education
+      "12", //Ministry of Indigenous Relations and Reconciliation
+      "15", //Ministry of Mental Health and Addictions
+      "20", //Ministry of Transportation and Infrastructure
+      "41", //Environmental Appeal Board
+      "42", //Environmental Assessment Office
+      "52", //Intergovernmental Relations Secretariat
+      "60", //Office of the Information and Privacy Commissioner
+      "61", //Office of the Merit Commissioner
+      "62", //Office of the Ombudsperson
+      "63", //Office of the Police Complaint Commissioner
+      ]; 
+    // Application by use
+    console.log(applicationSubmitter);
     if(applicationSubmitter == 1){
       if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
         $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>Your pin(s) will be sent directly to your ministry/organization, for presentation to you during Public Service Week (June 12-16).</em>");
@@ -307,8 +340,10 @@
         $('#edit-field-lsa-pin-ministry-org').find('.description').hide();
         $('#sup-div.required-fields.form-wrapper').show();
       }
+      // Application by sup
     } else if(applicationSubmitter == 2){
       // depending on the situation, show or change the description field
+      console.log($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases));
       if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
         $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>The pin(s) will be sent directly to your ministry/organization, for presentation to the employee during Public Service Week (June 12-16).</em>");
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
@@ -321,7 +356,11 @@
         $('#edit-field-lsa-pin-ministry-org').find('.description').hide();
         $('#sup-div.required-fields.form-wrapper').hide();
       }
+      // Application by min contact
     }  else if(applicationSubmitter == 3){
+      console.log(special_cases);
+      console.log($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases));
+      console.log($('#edit-field-lsa-pin-ministry-org-und option:selected').val());
       if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
         $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>The pin(s) will be sent directly to your ministry/organization, for presentation to the employee during Public Service Week (June 12-16).</em>");
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
