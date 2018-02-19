@@ -5359,7 +5359,7 @@ Vegan',
     'hashtag_settings' => array(
       'hashtag_field' => 0,
     ),
-    'label' => 'Department',
+    'label' => 'Branch',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -7065,7 +7065,7 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_work_phone',
-    'label' => 'Work Phone',
+    'label' => 'Supervisor Phone',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -7086,14 +7086,13 @@ Vegan',
       'phone_country_code' => 0,
       'phone_default_country_code' => 1,
       'phone_int_max_length' => 15,
+      'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 0,
       'module' => 'phone',
-      'settings' => array(
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-      ),
+      'settings' => array(),
       'type' => 'phone_textfield',
       'weight' => 29,
     ),
@@ -7129,7 +7128,6 @@ Vegan',
   t('City');
   t('Date Stamp');
   t('Date of Retirement');
-  t('Department');
   t('Did you receive your award?');
   t('Did you register last year but were unable to attend the ceremony?');
   t('Dietary Requirements');
@@ -7177,6 +7175,7 @@ Vegan',
   t('Supervisor Email');
   t('Supervisor First Name');
   t('Supervisor Last Name');
+  t('Supervisor Phone');
   t('Supervisor\'s Work Address');
   t('Supervisors’ Address');
   t('Terms');
