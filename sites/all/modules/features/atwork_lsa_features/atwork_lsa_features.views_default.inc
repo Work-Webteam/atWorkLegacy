@@ -2506,7 +2506,8 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_email']['table'] = 'field_data_field_lsa_email';
   $handler->display->display_options['fields']['field_lsa_email']['field'] = 'field_lsa_email';
   $handler->display->display_options['fields']['field_lsa_email']['label'] = 'Employee Email';
-  /* Field: Content: Are you celebrating a current service milestone in 2017? */
+
+  /* Field: Content: Are you celebrating a current service milestone in 2018? */
   $handler->display->display_options['fields']['field_lsa_milestone_year']['id'] = 'field_lsa_milestone_year';
   $handler->display->display_options['fields']['field_lsa_milestone_year']['table'] = 'field_data_field_lsa_milestone_year';
   $handler->display->display_options['fields']['field_lsa_milestone_year']['field'] = 'field_lsa_milestone_year';

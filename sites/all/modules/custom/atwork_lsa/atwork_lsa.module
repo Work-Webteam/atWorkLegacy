@@ -299,7 +299,7 @@ function atwork_lsa_pin_application_validate($form, &$form_state){
   global $user;
 
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)) {
-    return true;
+    //return true;
   }
 
   // Check if an application has already been submitted for this user
@@ -317,15 +317,47 @@ function atwork_lsa_pin_application_validate($form, &$form_state){
   }
 
   // Make sure we have selected one or the other - don't want an empty application.
-  if((isset($form_state['input']['field_lsa_other_milestone_years']['und']) && $form_state['input']['field_lsa_other_milestone_years']['und'] == 1) || (isset($form_state['input']['field_lsa_milestone_year']['und']) && $form_state['input']['field_lsa_milestone_year']['und'] == 1)){
-    return true;
-  } else {
+  if((isset($form_state['input']['field_lsa_other_milestone_years']['und']) && $form_state['input']['field_lsa_other_milestone_years']['und'] != 1) && (isset($form_state['input']['field_lsa_milestone_year']['und']) && $form_state['input']['field_lsa_milestone_year']['und'] != 1)){
     // Form is empty
     form_set_error('field_lsa_', t('You have not selected any milestone'));
+  } elseif(!isset($form_state['input']['field_lsa_other_milestone_years']['und']) && !isset($form_state['input']['field_lsa_milestone_year']['und'])){
+    // No milestone entered
+    form_set_error('field_lsa_', t('You have not selected any milestone'));
+  } 
+  if(isset($form_state['input']['field_lsa_other_milestone_years']['und']) || isset($form_state['input']['field_lsa_milestone_year']['und'])){
+    if($form_state['input']['field_lsa_other_milestone_years']['und'] == 1){
+      $chose = false;
+      foreach($form_state['input']['field_lsa_previous_service_miles']['und'] as $k){
+        if(isset($k)){
+          $chose = true;
+          break;
+        }
+        //dpm($val);
+      }
+      if($chose == false){
+        form_set_error('field_lsa_previous_service_miles', t('You have not selected any retroactive milestones'));
+      }
+    }
+    if($form_state['input']['field_lsa_milestone_year']['und'] == 1){
+      if(isset($form_state['input']['field_lsa_pin_service_milestone']['und']) && $form_state['input']['field_lsa_pin_service_milestone']['und'] == '_none'){
+        form_set_error('field_lsa_pin_service_milestone', t('You have not selected any milestone year(s)'));
+      }
+    }
   }
-
+  if(isset($form_state['input']['field_lsa_other_milestone_years']['und']) || isset($form_state['input']['field_lsa_milestone_year']['und'])){
+    if(isset($form_state['input']['field_lsa_other_milestone_years']['und']) && $form_state['input']['field_lsa_other_milestone_years']['und'] == 1){
+      if(isset($form_state['input']['field_lsa_pin_service_milestone']['und']) && $form_state['input']['field_lsa_pin_service_milestone']['und'] == '_none'){
+        form_set_error('field_lsa_pin_service_milestone', t('You have not selected any milestone year(s)'));
+      }
+    }
+  }
   // Lets make sure the Postal codes at least match standardized format - we are not looking up validity here.
-
+  // Quick regex to make sure we have relatively the right type of canadian postal
+  $postal_regex = '/^([a-zA-Z]\d[a-zA-Z])\ {0,1}(\d[a-zA-Z]\d)$/';
+  $validity = preg_match($postal_regex, $form_state['input']['field_lsa_office_postal_code']['und'][0]['value']);
+  if($validity == FALSE){
+    form_set_error('field_lsa_supefield_lsa_office_postal_code', t("Please enter a valid postal code for the supervisor in the format A1A 1A1"));
+  }
 
   return true;
 }
@@ -584,14 +616,31 @@ function atwork_lsa_node_insert($node) {
 
     require_once(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_pin.mail.inc');
 
-    // Only to specific ministries
+  /** Only to specific ministries
+    * 6 | Ministry of Education
+    *12 | Ministry of Indigenous Relations and Reconciliation
+    *15 | Ministry of Mental Health and Addictions
+    *20 | Ministry of Transportation and Infrastructure
+    *41 | Environmental Appeal Board
+    *42 | Environmental Assessment Office
+    *52 | Intergovernmental Relations Secretariat
+    *60 | Office of the Information and Privacy Commissioner
+    *61 | Office of the Merit Commissioner
+    *62 | Office of the Ombudsperson
+    *63 | Office of the Police Complaint Commissioner
+   **/
     $check_min = array(
-      1, //ABR
-      6, // ED
-      2, // Aved
-      11, // health
-      40, // Environmental assessment office
-      64, // Pub guardian and trustee
+      6 , //Ministry of Education
+      12, //Ministry of Indigenous Relations and Reconciliation
+      15, //Ministry of Mental Health and Addictions
+      20, //Ministry of Transportation and Infrastructure
+      41, //Environmental Appeal Board
+      42, //Environmental Assessment Office
+      52, //Intergovernmental Relations Secretariat
+      60, //Office of the Information and Privacy Commissioner
+      61, //Office of the Merit Commissioner
+      62, //Office of the Ombudsperson
+      63, //Office of the Police Complaint Commissioner
       );
 
 
