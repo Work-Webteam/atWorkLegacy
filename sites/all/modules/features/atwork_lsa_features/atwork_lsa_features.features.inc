@@ -37,12 +37,12 @@ function atwork_lsa_features_node_info() {
       'description' => '',
       'has_title' => '1',
       'title_label' => t('Title'),
-      'help' => t('<p>Once you have entered all the required information and hit the &ldquo;save&rdquo; button at the bottom of the screen, you will receive:</p>
-<p ><strong>**IMPORTANT TO NOTE: If you do not receive these two items, you are not registered**</strong></p>
+      'help' => t('<p>Once you have entered all the required information and hit the &ldquo;SUBMIT&rdquo; button at the bottom of the screen, you will receive:</p>
 		<ol>
-			<li>A confirmation page displaying all of the information you&rsquo;ve entered. Please check this page to ensure the information is accurate and then print a copy for your records. If something is incorrect, please contact the <a href="mailto:longserviceawards@gov.bc.ca?Long%20Service%20Awards">Long Service Awards program</a>.</li>
+			<li>A confirmation page displaying all of the information you&rsquo;ve entered. If something is incorrect, please contact the <a href="mailto:longserviceawards@gov.bc.ca?Long%20Service%20Awards">Long Service Awards</a> team.</li>
 			<li>An automated confirmation email. </li>
-		</ol>'),
+		</ol>
+<p><span style="color:red;" class="red-text">* If you do not receive these two items, your registration was not received </span></p>'),
     ),
     'lsa_pin_application' => array(
       'name' => t('Service Pin Application'),
