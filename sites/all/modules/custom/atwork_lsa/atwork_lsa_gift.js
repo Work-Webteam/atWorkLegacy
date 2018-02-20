@@ -404,7 +404,7 @@
           // Glass bowl
           '<option value="Blue Flower Bouquet glass bowl" name="glass_bowl" id="40_glass_bowl">Blue Flower Bouquet glass bowl</option>' +
           // MD Print
-          '<option value="Morning Surf framed art print" name="md_print" id="40_md_print">Morning Surf framed art print </option>' +
+          '<option value="Michaela Davidson Print - Morning Surf" name="md_print" id="40_md_print">Morning Surf framed art print </option>' +
           // PECSF donation
           '<option value= "$400.00 PECSF charitable donation" name="provincial_employees_community_services_fund" id="25_pecsf">Charitable Donation</option>' +
         '</select></label>' +
