@@ -83,8 +83,8 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
 			if(!isset($form['#prefix'])){
 				$form['#prefix'] = '';
 			}
-			$form['#prefix'] = $form['#prefix'] . t('<p>Ensure you are using the "Chrome" browser. To begin creating the newsletter, click the checkbox in the leftmost column beside the articles and blogs you would like to have in the newsletter.</p>
-      <p>There is no maximum number that can select. However, you must ensure there is at least one article. Once complete, scroll down to the next section - comments.</p><br>');
+			$form['#prefix'] = $form['#prefix'] . t('<p>Ensure you are using the "Chrome" browser. To begin creating the newsletter, click the checkboxes in the leftmost column beside the articles and blogs you would like to have in the newsletter.</p>
+      <p>There is no maximum number that you can select. However, you must ensure there is at least one article. Once complete, scroll down to the next section: Comment.</p><br>');
 		} else {
 			// protect prefix, which is tripping errors at times 
 			if(!isset($form['#prefix'])){
@@ -135,8 +135,7 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
 				'#title' => NULL,
 				'#default_value' => t(''),
 				'#format' => NULL,
-				'#prefix' => t('<br><strong>Take Note</strong><br><P>To add content into the Take Note section, copy the bullets from the newsletter entry of the editorial calendar and use the "Paste from Word" icon to paste content into the field below.
-				Then select "ok."</p>'),
+				'#prefix' => t('<br><strong>Take Note</strong><br><P>To add content into the Take Note section, copy the bullets from the newsletter entry of the editorial calendar and use the "Paste from Word" icon to paste content into the field below. If the bullets do not show up, highlight the text and click the "bullet" icon.</p>'),
 		);
 		// Spot for "Did You Know?"
 		$form['did_you_know'] = array(
@@ -144,8 +143,7 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
 				'#title' => NULL,
 				'#default_value' => t(''),
 				'#format' => NULL,
-				'#prefix' => t('<br><br><strong>Did You Know?</strong><br><p>To add content into the Did You Know? section, copy the content from the newsletter entry of the editorial calendar and use the "Paste from Word" icon to paste content into the field below.
-				Then select "ok."</p>'),
+				'#prefix' => t('<br><br><strong>Did You Know?</strong><br><p>To add content into the Did You Know? section, copy the content from the newsletter entry of the editorial calendar and use the "Paste from Word" icon to paste content into the field below.</p>'),
 				'#suffix' => t('<br><p>When you have completed the sections above, click the "Create newsletter" button below to review your information.<p>'),
 		);
 		// Add our own validation
