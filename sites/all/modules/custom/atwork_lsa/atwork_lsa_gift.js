@@ -32,7 +32,7 @@
           // Pearl Earrings
           '<option value="Sterling Silver and White Pearl Earrings" name="pearl_earrings" id="25_gift_pearl_earrings">Pearl earrings</option>' +
           // PECSF donation
-          '<option value= "PECSF Fund" name="provincial_employees_community_services_fund" id="25_pecsf">Charitable donation</option>' +
+          '<option value= "PECSF Fund" name="provincial_employees_community_services_fund" id="25_pecsf">Charitable Donation</option>' +
         '</select></label>' +
 
 
@@ -159,7 +159,7 @@
           // Sterling earrings
           '<option value="Sterling silver earrings" name="sterling_earrings" id="30_gift_sterling_earrings">Sterling silver earrings</option>' +
           // PECSF donation
-          '<option value= "$150.00 PECSF charitable Donation" name="provincial_employees_community_services_fund" id="25_pecsf">Charitable Donation</option>' +
+          '<option value= "$150.00 PECSF charitable donation" name="provincial_employees_community_services_fund" id="25_pecsf">Charitable Donation</option>' +
         '</select></label>' +
         /**
          * Image List
@@ -406,7 +406,7 @@
           // MD Print
           '<option value="Morning Surf framed art print" name="md_print" id="40_md_print">Morning Surf framed art print </option>' +
           // PECSF donation
-          '<option value= "$400.00 PECSF charitable Donation" name="provincial_employees_community_services_fund" id="25_pecsf">Charitable Donation</option>' +
+          '<option value= "$400.00 PECSF charitable donation" name="provincial_employees_community_services_fund" id="25_pecsf">Charitable Donation</option>' +
         '</select></label>' +
         /**
          * Image List
@@ -513,7 +513,7 @@ function gift_choice_populate_form(gifts){
       case "PECSF Fund":
         g_choice = "$75.00 PECSF charitable Donation";
         // No certificate, so lets send this back now
-        full_gift_name  = "25 - $75.00 PECSF charitable Donation";
+        full_gift_name  = "25 - $75.00 PECSF charitable donation";
         break;
       default :
         g_choice = "Please try again.";
@@ -521,7 +521,7 @@ function gift_choice_populate_form(gifts){
     }
     if(cert_choice){
       full_gift_name = "25 - " + cert_choice + g_choice;
-    } else if(full_gift_name == '25 - $75.00 PECSF charitable Donation'){
+    } else if(full_gift_name == '25 - $75.00 PECSF charitable donation'){
       //do nothing, already filled this in above.
     } else {
       full_gift_name = "25 - " + g_choice + " - No Certificate";
@@ -558,7 +558,7 @@ function gift_choice_populate_form(gifts){
       console.log(full_gift_name);
     }
     if(gift_name == "PECSF Fund"){
-      full_gift_name = "35 - $300.00 PECSF charitable Donation";
+      full_gift_name = "35 - $300.00 PECSF charitable donation";
     }
     // Fill in Engravement if it was an option
     if($("#engravement_pop_text").prop("value")!== ""){
@@ -892,7 +892,7 @@ function gift_choice_populate_form(gifts){
   /**
    * Helper function that resets watch form if user switches watch type
    * Fixes issue where user could get stuck with a form that would not submit if they switched between gold and silver without filling in other selections
-   * Also resets on gift choice change
+   * Also resets on gift choice change 
    */
 
   function reset_fields() {

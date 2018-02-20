@@ -954,7 +954,7 @@ function atwork_lsa_node_page_view($node) {
  */
 
 function atwork_lsa_menu() {
-  $items['atwork_lsa_pin_form/%'] = array(
+  $items['atwork_lsa_pin_form/%'] = array( 
     'type' => MENU_CALLBACK,
     'page callback' => 'atwork_lsa_pin_page_callback',
     'page arguments' => array(1),

@@ -1,7 +1,7 @@
 /**
  * JS function for LSA Gift and key array
  * Drupal.jquery
- * Written by Thayne Werdal Feb 2016
+ * Written by Thayne Werdal Feb 2016 
  */
 
   function gift_list_complete() {
@@ -16,13 +16,13 @@
 		  //8: "25 - Sterling Silver White Pearl Earrings - No Certificate",
 		  9: "25 - Framed Certificate and passport and luggage tag set",
 		  //10: "25 - Leather Passport and Luggage Tag Set - No Certificate",
-		  11: "25 - Framed Certificate and $75.00 PECSF Charitible Donation",
+		  11: "25 - Framed Certificate and $75.00 PECSF charitable donation",
 		  12: "30 - Choice TBC",
 		  13: "30 - Colonnade clock",
 		  14: "30 - Appalachian Sherpa blanket",
 		  15: "30 - Golden Shores framed art print",
 		  16: "30 - Sterling silver earrings",
-		  17: "30 - $150.00 PECSF Charitible Donation",
+		  17: "30 - $150.00 PECSF charitable donation",
 		  18: "35 - Choice TBC",
 		  19: "35 - Bushnell NatureView binoculars",
 		  20: "35 - Blue flower bouquet glass vase",
@@ -38,18 +38,18 @@
 		  30: "35 - Men's Silver Watch with Two-toned Face",
 		  31: "35 - Sterling Silver Bracelet - size A",
 		  32: "35 - Sterling Silver Bracelet - size B",
-		  33: "35 - $300.00 PECSF Charitible Donation",
+		  33: "35 - $300.00 PECSF charitable donation",
 		  34: "40 - Choice TBC",
 		  35: "40 - Napolean Beauty ergo mantle clock",
 		  36: "40 - Genuine diamond stud earrings",
 		  37: "40 - Blue Flower Bouquet glass bowl",
 		  38: "40 - Morning Surf framed art print",
 		  39: "40 - Genuine diamond pendant and chain",
-		  40: "40 - $400.00 PECSF Charitible Donation",
+		  40: "40 - $400.00 PECSF charitable donation",
 		  41: "45 - Choice TBC",
-		  42: "45 - $450.00 PECSF Charitible Donation",
+		  42: "45 - $450.00 PECSF charitable donation",
 		  43: "50 - Choice TBC",
-		  44: "50 - $500.00 PECSF Charitible Donation",
+		  44: "50 - $500.00 PECSF charitable donation",
 		  45: "Award already Sent",
     };
     return gift_list;
@@ -65,13 +65,13 @@
   	//"Leather Passport and Luggage Tag Set - No Certificate": "/sites/default/files/styles/node_image/public/bg/image/2018/0201/passport-luggage-thumb.jpg",
   	"Framed Certificate and pearl earrings": {"URI":"/sites/default/files/styles/node_image/public/bg/image/2018/0201/pearl-earrings-thumb.jpg", "description":"These sterling silver, fresh water pearl earrings have an accent of gold. They are made in Vancouver, B.C. by Howling Dog Artisan Jewellery.<br>Note: Due to the nature of this award, engraving is not possible."},
   	//"Sterling Silver White Pearl Earrings - No Certificate": "/sites/default/files/styles/node_image/public/bg/image/2018/0201/pearl-earrings-thumb.jpg",
-  	"Framed Certificate and $75.00 PECSF Charitible Donation": {"URI":"/sites/default/files/lsa_2015/25_pecsf.jpg","desciption":"Instead of choosing an award from the catalogue, you can opt to make a charitable donation via the Provincial Employees Community Services Fund. A framed certificate of service, signed by the Premier of British Columbia, will be presented to you noting your charitable contribution.<br>You can donate to the fund supported pool of charities in your region, or you can choose one or two specific charities to receive your donation.<br>Note: Charitable tax receipts are not issued for Long Service Award donations."},
+  	"Framed Certificate and $75.00 PECSF charitable donation": {"URI":"/sites/default/files/lsa_2015/25_pecsf.jpg","desciption":"Instead of choosing an award from the catalogue, you can opt to make a charitable donation via the Provincial Employees Community Services Fund. A framed certificate of service, signed by the Premier of British Columbia, will be presented to you noting your charitable contribution.<br>You can donate to the fund supported pool of charities in your region, or you can choose one or two specific charities to receive your donation.<br>Note: Charitable tax receipts are not issued for Long Service Award donations."},
   	//"Choice TBC",
   	"Colonnade clock": {"URI":"/sites/default/files/styles/node_image/public/bg/image/2018/0201/clock-thumb.jpg","description":"This bold optical crystal, carriage-style clock has In recognition of thirty years of service engraved on front plate. It features a black glass center panel and a white dial with black Roman numerals and hour markers surrounded by a polished silver-tone bezel.<br><br>Size: 6.75\" H (17 cm) x 6.25\" W (16 cm)"},
   	"Appalachian Sherpa blanket": {"URI":"/sites/default/files/styles/node_image/public/bg/image/2018/0201/blanket-thumb.jpg","description":"This high-end plush blanket has <em>30 Years</em> embroidered on the corner. It’s made of faux suede on one side and soft Sherpa fleece on the other.<br><br>Size:  50\" H x 60\" L"},
   	"Golden Shores framed art print": {"URI":"/sites/default/files/styles/node_image/public/bg/image/2018/0213/gullprint-thumb.png","description":"This calming seaside photograph by B.C. artist Marvin Pelkey is printed on fine art paper and comes matted in a silver frame. The frame has In recognition of thirty years of service engraved on a plaque."},
   	"Sterling silver earrings": {"URI":"/sites/default/files/styles/node_image/public/bg/image/2018/0208/silverearringsthumb.jpg","description":"These sterling silver drop earrings are individually handcrafted by B.C. artists Nancy Dawson and Vincent Henson of Silver Eagles Design Studio in Alert Bay. They come in a box with <em>In recognition of thirty years of service</em> engraved on the top.<br>Note: These earrings are designed to coordinate with the 35 year sterling silver bracelet."},
-  	"$150.00 PECSF Charitible Donation": {"URI":"/sites/default/files/lsa_2015/25_pecsf.jpg","desciption":"Instead of choosing an award from the catalogue, you can opt to make a charitable donation via the Provincial Employees Community Services Fund. A framed certificate of service, signed by the Premier of British Columbia, will be presented to you noting your charitable contribution.<br>You can donate to the fund supported pool of charities in your region, or you can choose one or two specific charities to receive your donation.<br>Note: Charitable tax receipts are not issued for Long Service Award donations."},
+  	"$150.00 PECSF charitable donation": {"URI":"/sites/default/files/lsa_2015/25_pecsf.jpg","desciption":"Instead of choosing an award from the catalogue, you can opt to make a charitable donation via the Provincial Employees Community Services Fund. A framed certificate of service, signed by the Premier of British Columbia, will be presented to you noting your charitable contribution.<br>You can donate to the fund supported pool of charities in your region, or you can choose one or two specific charities to receive your donation.<br>Note: Charitable tax receipts are not issued for Long Service Award donations."},
   	"Morning Surf framed art print": {"URI":"/sites/default/files/styles/node_image/public/bg/image/2018/0213/shorelineprint-thumb.png", "description": "This colourful landscape print was originally painted by artist Michaela Davidson, from Lake Cowichan, B.C. The artwork is presented in a matted green frame with In recognition of forty years of service engraved on a plaque."},
   	"Bushnell NatureView binoculars": {"URI":"/sites/default/files/styles/node_image/public/bg/image/2018/0213/binocs-thumb.png","description":"These binoculars feature outstanding optical performance in a trim, balanced roof-prism design. They have a textured center-focus knob for easy, precise adjustments; BaK-4 roof prisms for bright, clear, crisp viewing; and fully multi-coated optics for superior light transmission and brightness. The non-slip rubber armor absorbs shock and they are fully waterproof and fogproof. They come with a soft case.<br>Magnification x Objective Lens = 8 x 42mm<br>Field of View 393/131 (ft.@1000 yrds/m@1000m)<br>Weight = 23.1 oz (654 gm) <br>Note: Due to the nature of this award, engraving is not possible."},
   	"Blue flower bouquet glass vase": {"URI":"/sites/default/files/styles/node_image/public/bg/image/2018/0201/vase-thumb.jpg","description":"Each of these unique glass vases are hand-blown by B.C. artist Robert Held in Parksville. <br>Size: 11.5\" H<br>Note: Due to the nature of this award, engraving is not possible."},
@@ -87,18 +87,18 @@
   	"Men's Silver Watch with Two-toned Face": {"URI": "/sites/default/files/styles/node_image/public/bg/image/2018/0201/watches-thumb.jpg","description":"This watch features the BC Coat of Arms on the dial and your name and <em>35 Years</em> is engraved on the back of the watch face. It comes in a choice of gold, silver or two-toned watch face with a plated strap, or a black or brown leather strap. <br>Size: <br>Larger watch face (men’s) = 38 mm W<br>Strap width: approx. 20 mm<br>Smaller watch face (women’s) = 29 mm W<br>Strap width: approx. 14 mm"},
   	"Sterling Silver Bracelet - size A": {"URI": "/sites/default/files/styles/node_image/public/bg/image/2018/0201/bracelet-1-thumb.jpg","description":"This sterling silver bracelet has a 14 kt yellow gold insert. It is handcrafted by B.C. artists Nancy Dawson and Vincent Henson of Silver Eagles Design Studio in Alert Bay. It comes in a box with In recognition of thirty five years of service engraved on the top.<br>Size:<br>Cuff is ¾ inch wide and comes in two sizes: <br>Size A fits 6 ½\" - 7 ½\" wrist<br>Size B fits 7 ½\" -  8 ½\" wrist"},
   	"Sterling Silver Bracelet - size B": {"URI": "/sites/default/files/styles/node_image/public/bg/image/2018/0201/bracelet-1-thumb.jpg","description":"This sterling silver bracelet has a 14 kt yellow gold insert. It is handcrafted by B.C. artists Nancy Dawson and Vincent Henson of Silver Eagles Design Studio in Alert Bay. It comes in a box with In recognition of thirty five years of service engraved on the top.<br>Size:<br>Cuff is ¾ inch wide and comes in two sizes: <br>Size A fits 6 ½\" - 7 ½\" wrist<br>Size B fits 7 ½\" -  8 ½\" wrist"},
-  	"$300.00 PECSF Charitible Donation": {"URI": "/sites/default/files/lsa_2015/25_pecsf.jpg","desciption":"Instead of choosing an award from the catalogue, you can opt to make a charitable donation via the Provincial Employees Community Services Fund. A framed certificate of service, signed by the Premier of British Columbia, will be presented to you noting your charitable contribution.<br>You can donate to the fund supported pool of charities in your region, or you can choose one or two specific charities to receive your donation.<br>Note: Charitable tax receipts are not issued for Long Service Award donations."},
+  	"$300.00 PECSF Charitable Donation": {"URI": "/sites/default/files/lsa_2015/25_pecsf.jpg","desciption":"Instead of choosing an award from the catalogue, you can opt to make a charitable donation via the Provincial Employees Community Services Fund. A framed certificate of service, signed by the Premier of British Columbia, will be presented to you noting your charitable contribution.<br>You can donate to the fund supported pool of charities in your region, or you can choose one or two specific charities to receive your donation.<br>Note: Charitable tax receipts are not issued for Long Service Award donations."},
   	//"Choice TBC": {"URI": "","":""},
   	"Napolean Beauty ergo mantle clock": {"URI": "/sites/default/files/styles/node_image/public/bg/image/2018/0201/napoleonclock-thumb.jpg","description":"This clock features a wood frame in solids and veneers in a warm oak finish with burl accents. It has <em>In recognition of forty years of service</em> engraved on front plate. A brass finish bezel surrounds the dial. It has rich chimes which you can adjust to your preference (quarterly Westminster, quarterly Ava Maria, hourly Westminster or hourly/half hour strike).<br>Size: 20\" x 10\""},
   	"Genuine diamond pendant and chain": {"URI": "/sites/default/files/styles/node_image/public/bg/image/2018/0201/diamondnecklace-thumb.jpg","description":"This necklace features a 10 kt white gold, four claw pendant and 18 inch Box chain. The round brilliant cut diamonds are .20-carat total weight. It comes in a box <em>In recognition of forty years of service</em> engraved on the top."},
   	"Blue Flower Bouquet glass bowl": {"URI": "/sites/default/files/styles/node_image/public/bg/image/2018/0201/bowl40yearcopy-thumb.jpg","description":"Each of these unique glass bowls is hand-blown by B.C. artist Robert Held in Parksville. <br>Size: 7\" H<br>Note: Due to the nature of this award, engraving is not possible."},
   	"Genuine diamond stud earrings": {"URI": "/sites/default/files/styles/node_image/public/bg/image/2018/0201/diamondearrings-thumb.jpg","description":"This necklace features a 10 kt white gold, four claw pendant and 18 inch Box chain. The round brilliant cut diamonds are .20-carat total weight. It comes in a box <em>In recognition of forty years of service</em> engraved on the top."},
   	//"Michaela Davidson Print - Sunbreakers",{"URI": "","":""},
-  	"$400.00 PECSF Charitible Donation": {"URI": "/sites/default/files/lsa_2015/25_pecsf.jpg","desciption":"Instead of choosing an award from the catalogue, you can opt to make a charitable donation via the Provincial Employees Community Services Fund. A framed certificate of service, signed by the Premier of British Columbia, will be presented to you noting your charitable contribution.<br>You can donate to the fund supported pool of charities in your region, or you can choose one or two specific charities to receive your donation.<br>Note: Charitable tax receipts are not issued for Long Service Award donations."},
+  	"$400.00 PECSF charitable donation": {"URI": "/sites/default/files/lsa_2015/25_pecsf.jpg","desciption":"Instead of choosing an award from the catalogue, you can opt to make a charitable donation via the Provincial Employees Community Services Fund. A framed certificate of service, signed by the Premier of British Columbia, will be presented to you noting your charitable contribution.<br>You can donate to the fund supported pool of charities in your region, or you can choose one or two specific charities to receive your donation.<br>Note: Charitable tax receipts are not issued for Long Service Award donations."},
   	//"Choice TBC","":""},
-  	"$450.00 PECSF Charitible Donation": {"URI": "/sites/default/files/lsa_2015/25_pecsf.jpg","desciption":"Instead of choosing an award from the catalogue, you can opt to make a charitable donation via the Provincial Employees Community Services Fund. A framed certificate of service, signed by the Premier of British Columbia, will be presented to you noting your charitable contribution.<br>You can donate to the fund supported pool of charities in your region, or you can choose one or two specific charities to receive your donation.<br>Note: Charitable tax receipts are not issued for Long Service Award donations."},
+  	"$450.00 PECSF charitable donation": {"URI": "/sites/default/files/lsa_2015/25_pecsf.jpg","desciption":"Instead of choosing an award from the catalogue, you can opt to make a charitable donation via the Provincial Employees Community Services Fund. A framed certificate of service, signed by the Premier of British Columbia, will be presented to you noting your charitable contribution.<br>You can donate to the fund supported pool of charities in your region, or you can choose one or two specific charities to receive your donation.<br>Note: Charitable tax receipts are not issued for Long Service Award donations."},
   	//"Choice TBC": {"URI":"". "description":""},
-  	"$500.00 PECSF Charitible Donation": {"URI": "/sites/default/files/lsa_2015/25_pecsf.jpg","desciption":"Instead of choosing an award from the catalogue, you can opt to make a charitable donation via the Provincial Employees Community Services Fund. A framed certificate of service, signed by the Premier of British Columbia, will be presented to you noting your charitable contribution.<br>You can donate to the fund supported pool of charities in your region, or you can choose one or two specific charities to receive your donation.<br>Note: Charitable tax receipts are not issued for Long Service Award donations."}
+  	"$500.00 PECSF charitable donation": {"URI": "/sites/default/files/lsa_2015/25_pecsf.jpg","desciption":"Instead of choosing an award from the catalogue, you can opt to make a charitable donation via the Provincial Employees Community Services Fund. A framed certificate of service, signed by the Premier of British Columbia, will be presented to you noting your charitable contribution.<br>You can donate to the fund supported pool of charities in your region, or you can choose one or two specific charities to receive your donation.<br>Note: Charitable tax receipts are not issued for Long Service Award donations."}
   	//"Award already Sent": {"URI":"","description":""},
   };
   return giftImages;
