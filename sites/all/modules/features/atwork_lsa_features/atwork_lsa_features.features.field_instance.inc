@@ -4834,7 +4834,7 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_terms',
-    'label' => 'Terms',
+    'label' => 'Declaration',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -7135,6 +7135,7 @@ Vegan',
   t('City');
   t('Date Stamp');
   t('Date of Retirement');
+  t('Declaration');
   t('Did you receive your award?');
   t('Did you register last year but were unable to attend the ceremony?');
   t('Dietary Requirements');

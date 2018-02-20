@@ -251,13 +251,13 @@
         '</select></label>' +
         // Mens or womens watch
         '<div id="mens_womens">' +
-          '<p>Please choose:</p>' +
-          '<label><input type="radio" name="Mens_Womens" value="Women\'s" id="35_bulova_womens" > Smaller watch face (women\'s) </label>' +
-          '<label><input type="radio" name="Mens_Womens" value="Men\'s" id="35_bulova_mens"> Larger watch face (men\'s) </label>' +
+          '<p>Select a watch size:</p>' +
+          '<label><input type="radio" name="Mens_Womens" value="Women\'s" id="35_bulova_womens" >Small (women’s) = 29 mm watch face, 14 mm strap width</label>' +
+          '<label><input type="radio" name="Mens_Womens" value="Men\'s" id="35_bulova_mens">Large (men’s) = 38 mm watch face, 20 mm strap width</label>' +
         '</div>' +
         // Watch Type
         '<div id="watch_type">' +
-          '<p>Please choose the type of watch you would like</p><br />' +
+          '<p>Select a wath colour</p><br />' +
           '<label>Options: <select name="_35_year_bulova_watch_type" id="Bulova_type_selection_box"><br />' +
             '<option value="default" name="default" id="default_choice"> - Choose a watch type - </option>' +
             '<option value="Gold" name="Gold Watch" id="35_bulova_gold_watch"> Gold Watch </option>' +
@@ -266,7 +266,7 @@
         '</div>' +
         // If silver, two toned or silver
         '<div id="face_type">' +
-          '<p>Which type of strap would you like on your watch?</p>' +
+          '<p>Select a strap</p>' +
           '<label><input type="radio" name="silver_face_type" value="Silver" id="35_bulova_silver_face"> Silver' +
           '<label><input type="radio" name="silver_face_type" value="Two-toned" id="35_bulova_two_toned_face"> Two Toned</label>' +
           '<label><input type="radio" name="silver_face_type" value="Black" id="35_bulova_black_strap"> Black</label>' +
@@ -274,7 +274,7 @@
         '</div>' +
         //  If gold, gold/black or brown strap?
         '<div id="strap_type">' +
-          '<p> Select the strap you would like for your watch </p>' +
+          '<p>Select a strap</p>' +
           '<label><input type="radio" name="gold_strap_type" value="Gold" id="35_bulova_gold_strap">Gold</label>'+
           '<label><input type="radio" name="gold_strap_type" value="Brown" id="35_bulova_brown_strap">Brown</label>'+
           '<label><input type="radio" name="gold_strap_type" value="Black" id="35_bulova_black_strap">Black</label>'+
@@ -317,7 +317,7 @@
          */
         '<div id = "lsa_more_info_div">' +
           // Bulova watch
-          '<span id="info_bulova_watch"><br /><p><strong>Bulova® watch</strong></p><p>This watch features the BC Coat of Arms on the dial and your name and <em>35 Years</em> is engraved on the back of the watch face. It comes in a choice of gold, silver or two-toned watch face with a plated strap, or a black or brown leather strap. </p><br /><p>Size:</p><p>Larger watch face (men’s) = 38 mm W</p><p>Strap width: approx. 20 mm</p><br /><p>Smaller watch face (women’s) = 29 mm W</p><p>Strap width: approx. 14 mm</p><br /></span>' +
+          '<span id="info_bulova_watch"><br /><p><strong>Bulova® watch</strong></p><p>This watch features the BC Coat of Arms on the dial and your name and <em>35 Years</em> is engraved on the back of the watch face. It comes in a choice of gold, silver or two-toned watch face with a plated strap, or a black or brown leather strap. </p><br /></span>' +
           // Bushnell binoculars
           '<span id="info_bushnell_binoculars"><br /><p><strong>Bushnell® NatureView binoculars</strong></p><p>These <a href="http://bushnell.com/wildlife/binoculars/natureview/8x-42mm-roof" target="_blank">binoculars</a> feature outstanding optical performance in a trim, balanced roof-prism design. They have a textured center-focus knob for easy, precise adjustments; BaK-4 roof prisms for bright, clear, crisp viewing; and fully multi-coated optics for superior light transmission and brightness. The non-slip rubber armor absorbs shock and they are fully waterproof and fogproof. They come with a soft case.</p><br /><p>Magnification x Objective Lens = 8 x 42mm</p><p>Field of View 393/131 (ft.@1000 yrds/m@1000m)</p><p>Weight = 23.1 oz (654 gm) <p></p>Note: Due to the nature of this award, engraving is not possible.</p></span>' +
           // Blue Flower Bouquet glass vase
@@ -418,9 +418,9 @@
           // Ergo® Napoleon Beauty mantle clock
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/napoleonclock-thumb.jpg" alt="Ergo Napoleon Beauty mantle clock" id="image_mantle_clock"><br />'+
           // Diamond pendant
-          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/diamondnecklace-thumb.jpg" alt="Image of diamond pendant" id="image_diamond_pendant_and_chain"><br />' +
+          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/diamondnecklace-thumb.png" alt="Image of diamond pendant" id="image_diamond_pendant_and_chain"><br />' +
           // Diamond Earrings
-          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/diamondearrings-thumb.jpg" alt="Genuine daimond stud earrings" id="image_diamond_earrings"><br />' +
+          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/diamondearrings.jpg" alt="Genuine daimond stud earrings" id="image_diamond_earrings"><br />' +
           // Glass bowl
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/bowl40yearcopy-thumb.jpg" alt="Blue flower bouquet glass bowl" id="image_glass_bowl"><br />' +
           // MD Print
@@ -554,11 +554,9 @@ function gift_choice_populate_form(gifts){
         watch_specific_type = gifts.silver_face_type + " Strap";
       }
       full_gift_name = "35 - " + gifts.Mens_Womens + " " + gifts._35_year_bulova_watch_type + " Watch with " + watch_specific_type;
-      console.log(full_gift_name);
     }
     if(gift_name == "Blue flower bouquet glass vase"){
       full_gift_name = "35 - " + gifts._35_year_option;
-      console.log(full_gift_name);
     }
     if(gift_name == "PECSF Fund"){
       full_gift_name = "35 - $300.00 PECSF charitable donation";
@@ -574,7 +572,6 @@ function gift_choice_populate_form(gifts){
   if($('input[name="field_lsa_years_of_service[und]"]:checked').val() == 40){
     gift_name = gifts._40_year_option;
     full_gift_name = "40 - " + gifts._40_year_option;
-    console.log(full_gift_name);
   }
 
        // 45 year gift population

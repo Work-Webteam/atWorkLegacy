@@ -153,8 +153,8 @@
 
     // Setting engravement text box - will no be useable by applicant
     $('#edit-field-lsa-engravement-und-0-value').hide();
-    $('#edit-field-lsa-engravement-und-0-value').prop("readonly", true);
-    $('#edit-field-lsa-engravement-und-0-value').css('background-color' , '#DEDEDE');
+    //$('#edit-field-lsa-engravement-und-0-value').prop("readonly", true);
+    //$('#edit-field-lsa-engravement-und-0-value').css('background-color' , '#DEDEDE');
     $('.form-item.form-type-textfield.form-item-field-lsa-engravement-und-0-value').hide();
 
     // 25 year certificate box will only be used by 25 year recipients
