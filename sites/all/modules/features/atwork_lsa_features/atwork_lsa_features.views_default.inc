@@ -5088,12 +5088,12 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_employee_number']['id'] = 'field_lsa_employee_number';
   $handler->display->display_options['fields']['field_lsa_employee_number']['table'] = 'field_data_field_lsa_employee_number';
   $handler->display->display_options['fields']['field_lsa_employee_number']['field'] = 'field_lsa_employee_number';
-  /* Field: Broken/missing handler */
+  /* Field: Content: Special Requirements (editable) */
   $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['id'] = 'field_lsa_specialrequirements_editable';
   $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['table'] = 'field_data_field_lsa_specialrequirements';
   $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['field'] = 'field_lsa_specialrequirements_editable';
   $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['label'] = 'Special Requirements';
-  /* Field: Broken/missing handler */
+  /* Field: Content: Please Specify Your Requirements (editable) */
   $handler->display->display_options['fields']['field_specialrequirement_descrip_editable']['id'] = 'field_specialrequirement_descrip_editable';
   $handler->display->display_options['fields']['field_specialrequirement_descrip_editable']['table'] = 'field_data_field_specialrequirement_descrip';
   $handler->display->display_options['fields']['field_specialrequirement_descrip_editable']['field'] = 'field_specialrequirement_descrip_editable';
@@ -5180,7 +5180,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['autocomplete_raw_dropdown'] = 1;
   $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['autocomplete_dependent'] = 0;
-  /* Filter criterion: Broken/missing handler */
+  /* Filter criterion: Content: Special Requirements (field_lsa_specialrequirements) */
   $handler->display->display_options['filters']['field_lsa_specialrequirements_value']['id'] = 'field_lsa_specialrequirements_value';
   $handler->display->display_options['filters']['field_lsa_specialrequirements_value']['table'] = 'field_data_field_lsa_specialrequirements';
   $handler->display->display_options['filters']['field_lsa_specialrequirements_value']['field'] = 'field_lsa_specialrequirements_value';
