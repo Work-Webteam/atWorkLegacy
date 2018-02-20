@@ -50,7 +50,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => '',
-    'weight' => '20',
+    'weight' => '18',
     'children' => array(
       0 => 'field_lsa_ceremony_accommodation',
       1 => 'field_lsa_accommodation_notes',
@@ -82,7 +82,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Administration',
-    'weight' => '25',
+    'weight' => '22',
     'children' => array(
       0 => 'field_lsa_notes',
       1 => 'field_lsa_form_date_stamp',
@@ -185,7 +185,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => '',
-    'weight' => '21',
+    'weight' => '20',
     'children' => array(
       0 => 'field_lsa_dietary_requirements',
       1 => 'field_lsa_recipient_dietary',
@@ -246,7 +246,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Work Information',
-    'weight' => '18',
+    'weight' => '17',
     'children' => array(
       0 => 'field_lsa_org',
       1 => 'field_lsa_branch_department',
@@ -536,7 +536,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Long Service Award Survey',
-    'weight' => '23',
+    'weight' => '21',
     'children' => array(
       0 => 'field_lsa_survey',
     ),

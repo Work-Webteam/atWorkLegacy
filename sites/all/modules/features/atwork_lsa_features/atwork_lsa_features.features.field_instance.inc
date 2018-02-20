@@ -70,7 +70,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 17,
+      'weight' => 15,
     ),
   );
 
@@ -295,7 +295,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 32,
+      'weight' => 21,
     ),
   );
 
@@ -521,7 +521,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 10,
     ),
   );
 
@@ -673,7 +673,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 21,
+      'weight' => 19,
     ),
   );
 
@@ -734,7 +734,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 8,
+      'weight' => 7,
     ),
   );
 
@@ -1162,7 +1162,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 18,
+      'weight' => 16,
     ),
   );
 
@@ -1303,7 +1303,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 40,
       ),
       'type' => 'text_textfield',
-      'weight' => 27,
+      'weight' => 17,
     ),
   );
 
@@ -1395,7 +1395,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -1852,7 +1852,7 @@ Vegan',
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 31,
+      'weight' => 20,
     ),
   );
 
@@ -1914,7 +1914,7 @@ Vegan',
         'size' => 8,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -1987,7 +1987,7 @@ Vegan',
         'size' => 35,
       ),
       'type' => 'text_textfield',
-      'weight' => 19,
+      'weight' => 13,
     ),
   );
 
@@ -2348,7 +2348,7 @@ Wheelchair/walker seating',
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'phone_textfield',
-      'weight' => 33,
+      'weight' => 22,
     ),
   );
 
@@ -2425,7 +2425,7 @@ Wheelchair/walker seating',
         'size' => 7,
       ),
       'type' => 'text_textfield',
-      'weight' => 30,
+      'weight' => 19,
     ),
   );
 
@@ -2504,7 +2504,7 @@ Wheelchair/walker seating',
         'size' => 2,
       ),
       'type' => 'text_textfield',
-      'weight' => 28,
+      'weight' => 18,
     ),
   );
 
@@ -3241,87 +3241,6 @@ Wheelchair/walker seating',
     ),
   );
 
-  // Exported field_instance:
-  // 'node-lsa_application-field_lsa_office_work_group'.
-  $field_instances['node-lsa_application-field_lsa_office_work_group'] = array(
-    'bundle' => 'lsa_application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'inline',
-        'module' => 'editablefields',
-        'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
-          'semantic_field_format' => '',
-        ),
-        'type' => 'editable',
-        'weight' => 14,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'question' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_lsa_office_work_group',
-    'label' => 'Office',
-    'required' => 0,
-    'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'maxlength_js' => 0,
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 18,
-    ),
-  );
-
   // Exported field_instance: 'node-lsa_application-field_lsa_org'.
   $field_instances['node-lsa_application-field_lsa_org'] = array(
     'bundle' => 'lsa_application',
@@ -3756,7 +3675,7 @@ Wheelchair/walker seating',
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_buttons',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -3997,7 +3916,7 @@ Vegan',
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_buttons',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 
@@ -4074,7 +3993,7 @@ Vegan',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -4285,84 +4204,6 @@ Vegan',
     ),
   );
 
-  // Exported field_instance:
-  // 'node-lsa_application-field_lsa_specialrequirements'.
-  $field_instances['node-lsa_application-field_lsa_specialrequirements'] = array(
-    'bundle' => 'lsa_application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'editablefields',
-        'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
-          'semantic_field_format' => '',
-        ),
-        'type' => 'editable',
-        'weight' => 5,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'question' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_lsa_specialrequirements',
-    'label' => 'Special Requirements',
-    'required' => 1,
-    'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'quiz_result' => FALSE,
-      'semantic_field_format' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 24,
-    ),
-  );
-
   // Exported field_instance: 'node-lsa_application-field_lsa_street'.
   $field_instances['node-lsa_application-field_lsa_street'] = array(
     'bundle' => 'lsa_application',
@@ -4421,7 +4262,7 @@ Vegan',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 26,
+      'weight' => 16,
     ),
   );
 
@@ -5019,7 +4860,7 @@ Vegan',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 26,
+      'weight' => 23,
     ),
   );
 
@@ -5165,7 +5006,7 @@ Vegan',
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'phone_textfield',
-      'weight' => 34,
+      'weight' => 23,
     ),
   );
 
@@ -5242,7 +5083,7 @@ Vegan',
         'size' => 10,
       ),
       'type' => 'text_textfield',
-      'weight' => 35,
+      'weight' => 24,
     ),
   );
 
@@ -5301,90 +5142,7 @@ Vegan',
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'options_buttons',
-      'weight' => 10,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'node-lsa_application-field_specialrequirement_descrip'.
-  $field_instances['node-lsa_application-field_specialrequirement_descrip'] = array(
-    'bundle' => 'lsa_application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'editablefields',
-        'settings' => array(
-          'click_to_edit' => 0,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => 'text_default',
-          'fallback_settings' => array(),
-          'semantic_field_format' => '',
-        ),
-        'type' => 'editable',
-        'weight' => 6,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'question' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_specialrequirement_descrip',
-    'label' => 'Please Specify Your Requirements',
-    'required' => 0,
-    'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'maxlength_js' => 350,
-        'maxlength_js_enforce' => 0,
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'maxlength_js_truncate_html' => 1,
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 25,
+      'weight' => 9,
     ),
   );
 
@@ -7405,12 +7163,10 @@ Vegan',
   t('My guest\'s requests');
   t('Notes');
   t('Number Attending');
-  t('Office');
   t('PECSF ID');
   t('PECSF ID 2');
   t('PECSF Region');
   t('Phone');
-  t('Please Specify Your Requirements');
   t('Please select the retroactive milestone pin(s) you would like to order');
   t('Please use the format:A1A 1A1');
   t('Postal Code');
@@ -7421,7 +7177,6 @@ Vegan',
   t('Retro-Active');
   t('Second Charity');
   t('Service Milestone');
-  t('Special Requirements');
   t('Street');
   t('Supervisor Email');
   t('Supervisor First Name');

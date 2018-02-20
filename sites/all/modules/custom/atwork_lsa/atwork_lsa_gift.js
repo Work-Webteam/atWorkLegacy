@@ -252,7 +252,7 @@
         // Mens or womens watch
         '<div id="mens_womens">' +
           '<p>Please choose:</p>' +
-          '<label><input type="radio" name="Mens_Womens" value="Ladies\'" id="35_bulova_womens" > Smaller watch face (women\'s) </label>' +
+          '<label><input type="radio" name="Mens_Womens" value="Women\'s" id="35_bulova_womens" > Smaller watch face (women\'s) </label>' +
           '<label><input type="radio" name="Mens_Womens" value="Men\'s" id="35_bulova_mens"> Larger watch face (men\'s) </label>' +
         '</div>' +
         // Watch Type
@@ -266,9 +266,11 @@
         '</div>' +
         // If silver, two toned or silver
         '<div id="face_type">' +
-          '<p>Which type of watch face would you like on your silver watch?</p>' +
+          '<p>Which type of strap would you like on your watch?</p>' +
           '<label><input type="radio" name="silver_face_type" value="Silver" id="35_bulova_silver_face"> Silver' +
-          '<label><input type="radio" name="silver_face_type" value="Two-toned" id="35_bulova_two_toned_face">Two Toned</label>' +
+          '<label><input type="radio" name="silver_face_type" value="Two-toned" id="35_bulova_two_toned_face"> Two Toned</label>' +
+          '<label><input type="radio" name="silver_face_type" value="Black" id="35_bulova_black_strap"> Black</label>' +
+          '<label><input type="radio" name="silver_face_type" value="Brown" id="35_bulova_brown_strap"> Brown</label>' +
         '</div>' +
         //  If gold, gold/black or brown strap?
         '<div id="strap_type">' +
@@ -549,9 +551,10 @@ function gift_choice_populate_form(gifts){
       if(gifts._35_year_bulova_watch_type == "Gold"){
         watch_specific_type = gifts.gold_strap_type + " Strap";
       } else {
-        watch_specific_type = gifts.silver_face_type + " Face";
+        watch_specific_type = gifts.silver_face_type + " Strap";
       }
       full_gift_name = "35 - " + gifts.Mens_Womens + " " + gifts._35_year_bulova_watch_type + " Watch with " + watch_specific_type;
+      console.log(full_gift_name);
     }
     if(gift_name == "Blue flower bouquet glass vase"){
       full_gift_name = "35 - " + gifts._35_year_option;
