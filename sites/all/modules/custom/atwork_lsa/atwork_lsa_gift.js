@@ -633,10 +633,10 @@ function gift_choice_populate_form(gifts){
   
   // Check if this is a pecsef donation, if it is, run a function to figure out values etc.
   switch(true){
-    case gift_id_number == 11:
+    case gift_id_number == 7:
       set_pecsef(25);
       break;
-    case gift_id_number == 17:
+    case gift_id_number == 13:
       set_pecsef(30);
       break;
     case gift_id_number == 33:
@@ -1006,6 +1006,7 @@ function gift_choice_populate_form(gifts){
     //jQuery.error = console.error;
     // User clicking on the jQuery created Choose Gift button will initiate this script
     $('input#gift_select').click(function () {
+
       gift_choices();
     });
 

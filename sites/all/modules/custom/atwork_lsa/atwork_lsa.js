@@ -296,6 +296,7 @@
     });
 
     $('#edit-submit').click(function(){
+      checkPECSF();
       certificate_populate();
     });
 
@@ -345,7 +346,7 @@
       $('.collapsible.required-fields.group-lsa-second-donation.field-group-fieldset.form-wrapper.collapse-processed').slideUp('fast');
     });
 
-    // Handle choice A in PECSF form
+    // Handle choice B in PECSF form
     $('#edit-field-lsa-donation-options-und-1').on('click', function(){
       $('.collapsible.required-fields.group-lsa-first-donation.field-group-fieldset.form-wrapper.collapse-processed').slideDown('fast');
       // For IE we have to explicitly tell it to open the field under here for some stupid reason
@@ -355,8 +356,6 @@
       $('#edit-field-lsa-donation-amount').show();
       $('#edit-field-lsa-second-donation').show();
       set_pecsef($("input[name='field_lsa_years_of_service[und]']:checked").val());
-
-
     });
     $('#edit-field-lsa-donation-options-und-0').on('click', function(){
       $('.collapsible.required-fields.group-lsa-first-donation.field-group-fieldset.form-wrapper.collapse-processed').slideUp('fast');
@@ -373,8 +372,6 @@
       $('#edit-field-lsa-charity-name-2').slideUp('fast');
       $('#edit-field-lsa-donation-amount-2').slideUp('fast');
       $('#edit-field-lsa-second-donation-und-0').prop("checked", true);
-
-
     });
     $('#edit-field-lsa-donation-options-und-none').on('click', function(){
       $('.collapsible.required-fields.group-lsa-first-donation.field-group-fieldset.form-wrapper.collapse-processed').slideUp('fast');
@@ -413,6 +410,21 @@
       case year == 50:
         $('#edit-field-lsa-donation-amount-und-0-value').val('$500.00');
         break;
+    }
+  }
+
+  /**
+   * Here we need to make required fields required if specific options have been checked.
+   */
+  function checkPECSF(){
+    // If we are on Donation Option B (choose donation charities) we must have these fields filled out
+    if($('#edit-field-lsa-donation-options-und-1').is(":checked") && $('#edit-field-lsa-donation-options-und-1').is(":visible")){
+      $('#edit-field-lsa-pecsf-id-und-0-value').prop("required", true);
+      $('#edit-field-lsa-pecsf-charity-name-und-0-value').prop("required", true);
+    } else {
+      // If this is not chose, or user has chosen a different award - we no longer require these.
+      $('#edit-field-lsa-pecsf-id-und-0-value').prop("required", false);
+      $('#edit-field-lsa-pecsf-charity-name-und-0-value').prop("required", false);
     }
   }
 })(jQuery);
