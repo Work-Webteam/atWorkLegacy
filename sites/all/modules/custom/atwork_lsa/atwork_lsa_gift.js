@@ -513,9 +513,9 @@ function gift_choice_populate_form(gifts){
         g_choice = "passport and luggage tag set";
         break;
       case "PECSF Fund":
-        g_choice = "$75.00 PECSF charitable Donation";
+        g_choice = "$75.00 PECSF charitable donation";
         // No certificate, so lets send this back now
-        full_gift_name  = "25 - $75.00 PECSF charitable donation";
+        //full_gift_name  = "25 - Framed Certificate and $75.00 PECSF charitable donation";
         break;
       default :
         g_choice = "Please try again.";
@@ -528,6 +528,7 @@ function gift_choice_populate_form(gifts){
     } else {
       full_gift_name = "25 - " + g_choice + " - No Certificate";
     }
+    console.log(full_gift_name);
     // Put the certificate info into the main form
     $('#edit-field-lsa-25year-certificatename-und-0-value').val($('#_25_year_certificate_text_box').val());
   }
