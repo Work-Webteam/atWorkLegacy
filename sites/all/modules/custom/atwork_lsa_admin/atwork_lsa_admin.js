@@ -128,7 +128,7 @@
 
     // Do they get a certificate?
     if(years_of_service != "25"){
-      $("div.field.field-name-field-lsa-25year-certificatename").hide();
+      //$("div.field.field-name-field-lsa-25year-certificatename").hide();
       $(".field-name-field-lsa-certificate-ordered").hide();
     }
     if($("input[name='field_lsa_certificate_ordered[und]']").prop("checked") == true){

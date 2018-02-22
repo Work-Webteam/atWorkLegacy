@@ -257,12 +257,13 @@
         '</div>' +
         // Watch Type
         '<div id="watch_type">' +
-          '<p>Select a wath colour</p><br />' +
-          '<label>Options: <select name="_35_year_bulova_watch_type" id="Bulova_type_selection_box"><br />' +
-            '<option value="default" name="default" id="default_choice"> - Choose a watch type - </option>' +
-            '<option value="Gold" name="Gold Watch" id="35_bulova_gold_watch"> Gold Watch </option>' +
-            '<option value="Silver" name="Silver Watch" id="35_year_bulova_silver_watch"> Silver Watch </option>' +
-          '</select></label><br />' +
+          '<p>Select a watch type</p><br />' +
+          //'<label>Options: <select name="_35_year_bulova_watch_type" id="Bulova_type_selection_box"><br />' +
+          //  '<option value="Gold" name="Gold Watch" id="35_bulova_gold_watch"> Gold Watch </option>' +
+          //  '<option value="Silver" name="Silver Watch" id="35_year_bulova_silver_watch"> Silver Watch </option>' +
+          //'</select></label><br />' +
+          '<label ><input type="radio" name="watch_type" value="Gold" id="35_bulova_gold_watch" >Gold Watch</label>' +
+          '<label ><input type="radio" name="watch_type" value="Silver" id="35_year_bulova_silver_watch">Silver Watch</label>' +
         '</div>' +
         // If silver, two toned or silver
         '<div id="face_type">' +
@@ -300,7 +301,7 @@
           //'<img src="/sites/default/files/bg/image/2015/0224/35watchleathertb.jpg" alt="Bulova Gold Watch with Leather strap" id="image_bulova_watch_2"> ' +
           //'<img src="/sites/default/files/bg/image/2015/0224/35watchsilverwtb.jpg" alt="Bulova Silver Watch, Silver Face" id="image_bulova_watch_3">' +
           //'<img src="/sites/default/files/lsa_2015/35_watch_silver_gold.png" alt="Bulova Silver Watch, two-toned face" id="image_bulova_watch_4">' +
-          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/watches-thumb.jpg" alt="Bulova Watch" id="image_bulova_watch">' +
+          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/watches-group.png" alt="Bulova Watch" id="image_bulova_watch">' +
           // Bushnell Compact Binoculars
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/binocs-thumb.png" alt="bushnell binoculars" id="image_bushnell_binoculars">' +
           // Vase Picture
@@ -370,7 +371,7 @@
     });
 
     //Need to catch the case if user swaps watch type
-    $("#Bulova_type_selection_box").change(function() {
+    $(".Bulova_type_selection_box").change(function() {
       reset_fields();
     });
 
@@ -406,7 +407,7 @@
           // Glass bowl
           '<option value="Blue Flower Bouquet glass bowl" name="glass_bowl" id="40_glass_bowl">Blue Flower Bouquet glass bowl</option>' +
           // MD Print
-          '<option value="Michaela Davidson Print - Morning Surf" name="md_print" id="40_md_print">Morning Surf framed art print </option>' +
+          '<option value="Morning Surf framed art print" name="md_print" id="40_md_print">Morning Surf framed art print </option>' +
           // PECSF donation
           '<option value= "$400.00 PECSF charitable donation" name="provincial_employees_community_services_fund" id="25_pecsf">Charitable Donation</option>' +
         '</select></label>' +
@@ -496,8 +497,8 @@ function gift_choice_populate_form(gifts){
       $('#edit-field-lsa-certificate-ordered-und').prop("checked", false);
     }
     // This gift must have a certificate name for recipient
-    //$('#field-lsa-25year-certificatename-add-more-wrapper').show();
-    //$("input#edit-field-lsa-25year-certificatename-und-0-value").prop("required", "required");
+    $('#field-lsa-25year-certificatename-add-more-wrapper').show();
+    $("input#edit-field-lsa-25year-certificatename-und-0-value").prop("required", "required");
     // Get proper wording
     switch(gift_name) {
       case "Cross Starry Blue ballpoint pen":
@@ -548,12 +549,12 @@ function gift_choice_populate_form(gifts){
     }
     if(gift_name == "Bulova Watch"){
       var watch_specific_type;
-      if(gifts._35_year_bulova_watch_type == "Gold"){
+      if(gifts.watch_type == "Gold"){
         watch_specific_type = gifts.gold_strap_type + " Strap";
       } else {
         watch_specific_type = gifts.silver_face_type + " Strap";
       }
-      full_gift_name = "35 - " + gifts.Mens_Womens + " " + gifts._35_year_bulova_watch_type + " Watch with " + watch_specific_type;
+      full_gift_name = "35 - " + gifts.Mens_Womens + " " + gifts.watch_type + " Watch with " + watch_specific_type;
     }
     if(gift_name == "Blue flower bouquet glass vase"){
       full_gift_name = "35 - " + gifts._35_year_option;
@@ -663,6 +664,15 @@ function gift_choice_populate_form(gifts){
   function set_pecsef(year){
     // Show and open pecsf block
     $('#pecsf-fields').slideDown('slow');
+      // Certificates now required for PECSF as well
+    if($('#edit-field-lsa-donation-options-und-0').is(":visible")){
+      $("#edit-field-lsa-25year-certificatename-und-0-value").show();
+      $('#edit-field-lsa-25year-certificatename').show();
+      $("#edit-field-lsa-25year-certificatename-und-0-value").prop("required", true);
+    } else {
+      $("#edit-field-lsa-25year-certificatename-und-0-value").hide();
+      $("#edit-field-lsa-25year-certificatename-und-0-value").prop("required", false);
+    }
     switch(true){
       case year == 25:
         $('#edit-field-lsa-donation-amount-und-0-value').val('$75.00');
@@ -831,17 +841,17 @@ function gift_choice_populate_form(gifts){
         }
         // show type chooser and make it required
         $('#watch_type').show();
-        $('#Bulova_type_selection_box').prop("required", true);
+        $('.Bulova_type_selection_box').prop("required", true);
 
       }
       // This is a watch and we know the type, so now show/hide special choices depending on teh watch. Reset if the type is changed.
-      if($('select#Bulova_type_selection_box').find('option:selected').prop("value") == 'Gold'){
+      if($('#35_bulova_gold_watch').is(':checked')){
         $('#image_bulova_watch_3').hide();
         $('#image_bulova_watch_4').hide();
         // Show strap type choices for gold watches and make this required
         $('#strap_type').show();
         $('input[name=gold_strap_type]:radio').prop("required", true);
-      } else if ($('select#Bulova_type_selection_box').find('option:selected').prop("value") == 'Silver'){
+      } else if ($('#35_year_bulova_silver_watch').is(':checked')){
         // Show face type choices for silver watches adn make this required
         $('#image_bulova_watch_1').hide();
         $('#image_bulova_watch_2').hide();

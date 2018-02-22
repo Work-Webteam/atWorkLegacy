@@ -497,7 +497,7 @@ function get_award_id_number($form_state){
     35=>"Napolean Beauty ergo mantle clock",
     36=>"Genuine diamond stud earrings",
     37=>"Blue Flower Bouquet glass bowl",
-    38=>"Michaela Davidson Print - Morning Surf",
+    38=>"Morning Surf framed art print",
     39=>"Genuine diamond pendant and chain",
     40=>"$400.00 PECSF charitable donation",
     41=>"Choice TBC",

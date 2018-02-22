@@ -61,6 +61,7 @@
       //$('#field-lsa-25year-certificatename-add-more-wrapper').hide();
       $("input#edit-field-lsa-25year-certificatename-und-0-value").prop("required", false);
       $('#edit-field-lsa-25year-certificatename-und-0-value').val('');
+      checkPECSF();
     }
     if(gift_year_choice != 35){
       $('#edit-field-lsa-engravement-und-0-value').val('');
@@ -88,6 +89,8 @@
           $("#edit-field-lsa-recipient-dietary").hide();
           $('#edit-field-lsa-dietary-guest').hide();
         } 
+        checkPECSF();
+
   }
 
   /**
@@ -138,7 +141,7 @@
     $('#edit-field-lsa-received-award').append(lost_gift);
     $('#lost_gift_message').hide();
     // Message for recipients who have completed 45 || 50 years
-    var special_gift = $('<div id="special_gift"><span style="color:red;"><strong>*</strong> For the tremendous achievement of your years of service, an LSA team member will connect with you personally to discuss award options that will be most meaningful to you. You will be contacted in May/June by our giftware representative.</span></div>');
+    var special_gift = $('<div id="special_gift"><span style="color:red;"><strong>*</strong> Are you celebrating 45 or 50 years in the BC Public Service? If so, the Long Service Awards program would like to give you an opportunity to identify an award that would be most meaningful to you. Once you’ve registered and identified yourself as a 45+ year recipient, our awards coordinator will be notified and will contact you by mid June.</span></div>');
     $('#edit-field-lsa-years-of-service').append(special_gift);
     $('#special_gift').hide();
 
@@ -232,6 +235,8 @@
         }
       }
     }
+    // We now allow this for PECSF as well
+    checkPECSF();
   }
 
 
@@ -276,6 +281,7 @@
       lsaGift();
       change_award_year();
       certificate_populate();
+      checkPECSF();
     });
 
     $('#edit-field-lsa-years-of-service').change(function () {
@@ -287,6 +293,7 @@
       $("#edit-field-lsa-award-id-und-0-value").val("");
       lsaGift();
       certificate_populate();
+      checkPECSF();
     });
     
     $('#edit-field-lsa-received-award').change(function () {
@@ -435,6 +442,14 @@
       // If this is not chose, or user has chosen a different award - we no longer require these.
       $('#edit-field-lsa-pecsf-id-und-0-value').prop("required", false);
       $('#edit-field-lsa-pecsf-charity-name-und-0-value').prop("required", false);
+    }
+    if($('#edit-field-lsa-donation-options-und-0').is(":visible")){
+      $("#edit-field-lsa-25year-certificatename-und-0-value").show();
+      $('#edit-field-lsa-25year-certificatename').show();
+      $("#edit-field-lsa-25year-certificatename-und-0-value").prop("required", true);
+    } else {
+      $("#edit-field-lsa-25year-certificatename-und-0-value").hide();
+      $("#edit-field-lsa-25year-certificatename-und-0-value").prop("required", false);
     }
   }
 })(jQuery);
