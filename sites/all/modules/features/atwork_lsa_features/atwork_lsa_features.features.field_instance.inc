@@ -70,7 +70,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 15,
+      'weight' => 13,
     ),
   );
 
@@ -1162,7 +1162,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 16,
+      'weight' => 14,
     ),
   );
 
@@ -1471,8 +1471,9 @@ Gluten Free
 Sugar Free
 No Shellfish
 Vegetarian
-Vegan',
-        'other' => 'Other',
+Vegan
+Guest information is not known at this time.',
+        'other' => 'Other/Allergy',
         'other_size' => 60,
         'other_title' => '',
         'other_unknown_defaults' => 'other',
@@ -1987,7 +1988,7 @@ Vegan',
         'size' => 35,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 15,
     ),
   );
 
@@ -2275,7 +2276,8 @@ Vegan',
 Visual Impairment
 Service dog
 Accessible parking/entrance
-Wheelchair/walker seating',
+Wheelchair/walker seating
+Guest information is not known at this time.',
         'other' => 'Other',
         'other_size' => 60,
         'other_title' => '',
@@ -3834,7 +3836,7 @@ Sugar Free
 No Shellfish
 Vegetarian
 Vegan',
-        'other' => 'Other',
+        'other' => 'Other/Allergy',
         'other_size' => 60,
         'other_title' => '',
         'other_unknown_defaults' => 'other',

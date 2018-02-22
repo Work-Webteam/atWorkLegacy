@@ -49,17 +49,17 @@ function atwork_lsa_features_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => '',
+    'label' => 'Ceremony Accommodations',
     'weight' => '18',
     'children' => array(
-      0 => 'field_lsa_accommodation_notes',
-      1 => 'field_lsa_ceremony_accommodation',
-      2 => 'field_lsa_guest_accom',
-      3 => 'field_lsa_recipient_accom',
+      0 => 'field_lsa_ceremony_accommodation',
+      1 => 'field_lsa_accommodation_notes',
+      2 => 'field_lsa_recipient_accom',
+      3 => 'field_lsa_guest_accom',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => '',
+      'label' => 'Ceremony Accommodations',
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
@@ -184,16 +184,16 @@ function atwork_lsa_features_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => '',
+    'label' => 'Dietary Requirements',
     'weight' => '20',
     'children' => array(
-      0 => 'field_lsa_dietary_guest',
-      1 => 'field_lsa_dietary_requirements',
-      2 => 'field_lsa_recipient_dietary',
+      0 => 'field_lsa_dietary_requirements',
+      1 => 'field_lsa_recipient_dietary',
+      2 => 'field_lsa_dietary_guest',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => '',
+      'label' => 'Dietary Requirements',
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
@@ -349,7 +349,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Recipient Contact Information',
-    'weight' => '14',
+    'weight' => '16',
     'children' => array(
       0 => 'field_lsa_first_name',
       1 => 'field_lsa_middle_name',
@@ -810,9 +810,11 @@ function atwork_lsa_features_field_group_info() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Administration');
+  t('Ceremony Accommodations');
   t('Ceremony Details');
   t('Charitable donation');
   t('Contact Information');
+  t('Dietary Requirements');
   t('Home Mailing Address');
   t('Long Service Award Survey');
   t('Name');
