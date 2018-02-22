@@ -642,10 +642,11 @@ function atwork_lsa_admin_node_view($node, $view_mode, $langcode) {
   */
   if(_atwork_is_admin() || in_array('lsa admin', $user->roles) || in_array('lsa contact', $user->roles) ){
     return;
-  } else {   
-    drupal_set_message(t("The RSVP period has ended. Please contact us at <a href='mailto:longserviceawards@gov.bc.ca'>LongServiceAwards@gov.bc.ca</a> for more information."), 'warning');
-    drupal_goto('career/long-service-awards');
-    $node->content['#access'] = false;
+  } else {
+  	/* Uncommented for application period. */
+    //drupal_set_message(t("The RSVP period has ended. Please contact us at <a href='mailto:longserviceawards@gov.bc.ca'>LongServiceAwards@gov.bc.ca</a> for more information."), 'warning');
+    //drupal_goto('career/long-service-awards');
+    //$node->content['#access'] = false;
   }
 }
 
