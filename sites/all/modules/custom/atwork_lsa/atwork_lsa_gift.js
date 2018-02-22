@@ -528,7 +528,6 @@ function gift_choice_populate_form(gifts){
     } else {
       full_gift_name = "25 - " + g_choice + " - No Certificate";
     }
-    console.log(full_gift_name);
     // Put the certificate info into the main form
     $('#edit-field-lsa-25year-certificatename-und-0-value').val($('#_25_year_certificate_text_box').val());
   }

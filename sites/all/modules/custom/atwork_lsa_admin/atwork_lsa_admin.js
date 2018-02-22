@@ -2,9 +2,9 @@
 
   $(document).ready(function () {
     var awardName = $(".field-name-field-lsa-award .field-item.odd").text();
-	  var giftImages = giftListImages();
-	  // The form is adding a leading whitespace, if you were wondering why I trim the award name  
-	  var selectedAward= giftImages[awardName.trim()]; 
+	  var giftImages = giftListImages(); 
+    // The form is adding a leading whitespace, if you were wondering why I trim the award name  
+    var selectedAward= giftImages[awardName.trim()]; 
 	  $(".field-name-field-lsa-award").after('<div><img class="lsa-award-selector-img-display-panel" /></div>');
 	  //$(".lsa-award-selector-img-display-panel").attr({"src":selectedImageURI});
 	  $(".lsa-award-selector-img-display-panel").css({"border-radius":"9px","box-shadow":"2px 2px lightgrey","padding":"10px","border":"1px solid gray","margin":"5px 0 20px 50px"}).attr({"src":selectedAward["URI"]});  

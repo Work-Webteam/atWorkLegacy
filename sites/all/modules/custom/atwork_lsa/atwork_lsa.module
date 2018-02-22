@@ -430,8 +430,10 @@ function atwork_lsa_application_submit(&$form, &$form_state) {
     $form_state['values']['field_lsa_ministry_id']['und'][0]['value'] = $form_state['values']['field_lsa_org']['und'][0]['value'];
   }
   $id = get_award_id_number($form_state);
+  dpm($id);
+  dpm($form_state['values']['field_lsa_award_id']['und'][0]['value']);
   // Send to helper function that will sort out the award id number if it is not populated yet.
-  if($form_state['values']['field_lsa_award_id']['und'][0]['value'] == 0 || $form_state['values']['field_lsa_award_id']['und'][0]['value'] == NULL){
+  if($form_state['values']['field_lsa_award_id']['und'][0]['value'] == 0 || $form_state['values']['field_lsa_award_id']['und'][0]['value'] == ""){
     if(isset($id) && $id > 0){
       $form_state['values']['field_lsa_award_id']['und'][0]['value'] = $id;
     }
@@ -440,7 +442,7 @@ function atwork_lsa_application_submit(&$form, &$form_state) {
   } elseif(!isset($form_state['values']['field_lsa_award_id']['und'][0]['value'])){
     $form_state['values']['field_lsa_award_id']['und'][0]['value'] = $id;
   }
-
+  dpm($form_state['values']['field_lsa_award_id']['und'][0]['value']);
   // Check if we have a middle name. If it is a single initial, add a . (if length is == 1 )
   if(isset($form_state['values']['field_lsa_middle_name']['und'][0]['value']) && $form_state['values']['field_lsa_middle_name']['und'][0]['value']){
     $middle_name = $form_state['values']['field_lsa_middle_name']['und'][0]['value'];
@@ -460,53 +462,54 @@ function atwork_lsa_application_submit(&$form, &$form_state) {
 }
 
 function get_award_id_number($form_state){
-  $award = $form_state['values']['field_lsa_award']['und'][0]['value'];
+  $award = trim($form_state['values']['field_lsa_award']['und'][0]['value']);
+  dpm($award);
   $awards = array(
-    1 => "2017 Recipient - award received",
-    2 => "25 - Choice TBC",
-    3 => "25 - Framed Certificate and Cross pen",
-    4 => "25 - Framed Certificate and Cross tablet holder",
-    5 => "25 - Framed Certificate and pearl earrings",
-    6 => "25 - Framed Certificate and passport and luggage tag set",
-    7 => "25 - Framed Certificate and $75.00 PECSF charitable donation",
-    8 => "30 - Choice TBC",
-    9 => "30 - Colonnade clock",
-    10=> "30 - Appalachian Sherpa blanket",
-    11=> "30 - Golden Shores framed art print",
-    12=> "30 - Sterling silver earrings",
-    13=> "30 - $150.00 PECSF charitable donation",
-    14=> "35 - Choice TBC",
-    15=> "35 - Bushnell NatureView binoculars",
-    16=> "35 - Blue flower bouquet glass vase",
-    17=> "35 - Women's Gold Watch with Black Strap",
-    18=> "35 - Women's Gold Watch with Brown Strap",
-    19=> "35 - Women's Gold Watch with Gold Strap",
-    20=> "35 - Women's Silver Watch with Silver Strap",
-    21=> "35 - Women's Silver Watch with Two-toned Strap",
-    22=> "35 - Women's Silver Watch with Black Strap",
-    23=> "35 - Women's Silver Watch with Brown Strap",
-    24=> "35 - Men's Gold Watch with Black Strap",
-    25=> "35 - Men's Gold Watch with Brown Strap",
-    26=> "35 - Men's Gold Watch with Gold Strap",
-    27=> "35 - Men's Silver Watch with Silver Strap",
-    28=> "35 - Men's Silver Watch with Two-toned Strap",
-    29=> "35 - Men's Silver Watch with Black Strap",
-    30=> "35 - Men's Silver Watch with Brown Strap",
-    31=> "35 - Sterling Silver Bracelet - size A",
-    32=> "35 - Sterling Silver Bracelet - size B",
-    33=> "35 - $300.00 PECSF charitable donation",
-    34=> "40 - Choice TBC",
-    35=> "40 - Napolean Beauty ergo mantle clock",
-    36=> "40 - Genuine diamond stud earrings",
-    37=> "40 - Blue Flower Bouquet glass bowl",
-    38=> "40 - Michaela Davidson Print - Morning Surf",
-    39=> "40 - Genuine diamond pendant and chain",
-    40=> "40 - $400.00 PECSF charitable donation",
-    41=> "45 - Choice TBC",
-    42=> "45 - $450.00 PECSF charitable donation",
-    43=> "50 - Choice TBC",
-    44=> "50 - $500.00 PECSF charitable donation",
-    45=> "Award already Sent",
+    1=>"2017 Recipient - award received",
+    2=>"Choice TBC",
+    3=>"Framed Certificate and Cross pen",
+    4=>"Framed Certificate and Cross tablet holder",
+    5=>"Framed Certificate and pearl earrings",
+    6=>"Framed Certificate and passport and luggage tag set",
+    7=>"Framed Certificate and $75.00 PECSF charitable donation",
+    8=>"Choice TBC",
+    9=>"Colonnade clock",
+    10=>"Appalachian Sherpa blanket",
+    11=>"Golden Shores framed art print",
+    12=>"Sterling silver earrings",
+    13=>"$150.00 PECSF charitable donation",
+    14=>"Choice TBC",
+    15=>"Bushnell NatureView binoculars",
+    16=>"Blue flower bouquet glass vase",
+    17=>"Women's Gold Watch with Black Strap",
+    18=>"Women's Gold Watch with Brown Strap",
+    19=>"Women's Gold Watch with Gold Strap",
+    20=>"Women's Silver Watch with Silver Strap",
+    21=>"Women's Silver Watch with Two-toned Strap",
+    22=>"Women's Silver Watch with Black Strap",
+    23=>"Women's Silver Watch with Brown Strap",
+    24=>"Men's Gold Watch with Black Strap",
+    25=>"Men's Gold Watch with Brown Strap",
+    26=>"Men's Gold Watch with Gold Strap",
+    27=>"Men's Silver Watch with Silver Strap",
+    28=>"Men's Silver Watch with Two-toned Strap",
+    29=>"Men's Silver Watch with Black Strap",
+    30=>"Men's Silver Watch with Brown Strap",
+    31=>"Sterling Silver Bracelet - size A",
+    32=>"Sterling Silver Bracelet - size B",
+    33=>"$300.00 PECSF charitable donation",
+    34=>"Choice TBC",
+    35=>"Napolean Beauty ergo mantle clock",
+    36=>"Genuine diamond stud earrings",
+    37=>"Blue Flower Bouquet glass bowl",
+    38=>"Michaela Davidson Print - Morning Surf",
+    39=>"Genuine diamond pendant and chain",
+    40=>"$400.00 PECSF charitable donation",
+    41=>"Choice TBC",
+    42=>"$450.00 PECSF charitable donation",
+    43=>"Choice TBC",
+    44=>"$500.00 PECSF charitable donation",
+    45=>"Award already Sent",
     );
   $award_id = array_search($award, $awards);
   return $award_id;

@@ -9,15 +9,15 @@
   function lsaGift() {
 
     if ($("input[name='field_lsa_register_last_year[und]']:checked").val() == 1){
-      $('#edit-field-lsa-award-und-0-value').val("2016 Recipient - award received");
+      $('#edit-field-lsa-award-und-0-value').val("2017 Recipient - award received");
       $('#edit-field-lsa-award-id-und-0-value').val(1);
     }
     // Always reset textbox when this value changes, so that we don't have a mis-match between award and years of service
     if ($("input[name='field_lsa_register_last_year[und]']:checked").val() == 2 && $('input[name="field_lsa_years_of_service[und]"]:checked').val() <= 40) {
-      $("#edit-field-lsa-award-id-und-0-value").val('');
+      //$("#edit-field-lsa-award-id-und-0-value").val('');
       //$('#edit-field-lsa-award-und-0-value').val('');
-      $("#edit-field-lsa-award-und-0-value").hide();
-      $(".lsa-award-selector-img-display-panel").hide();
+      //$("#edit-field-lsa-award-und-0-value").hide();
+      //$(".lsa-award-selector-img-display-panel").hide();
       //$("#lsa-award-selector-description-display").remove();
       $(".form-item.form-type-textfield.form-item-field-lsa-award-und-0-value").hide();
 
@@ -143,8 +143,12 @@
     $('#special_gift').hide();
 
     // Setting award text box - will not be useable by applicant
-    $('#edit-field-lsa-award-und-0-value').hide();
-    $(".lsa-award-selector-img-display-panel").hide();
+    // Only hide if user has not chose a milestone
+    if(!$("#edit-field-lsa-years-of-service-und input:radio").is(":checked")){
+      $('#edit-field-lsa-award-und-0-value').hide();
+      $(".lsa-award-selector-img-display-panel").hide();
+    }
+
     //$("#lsa-award-selector-description-display").remove();
     
     $('.form-item.form-type-textfield.form-item-field-lsa-award-und-0-value').hide();
@@ -275,10 +279,16 @@
     });
 
     $('#edit-field-lsa-years-of-service').change(function () {
+      // If they change year - wipe award
+      $("#edit-field-lsa-award-und-0-value").val("");
+      // Wipe out picture
+      $(".lsa-award-selector-img-display-panel.imageeditor-inline-processed").hide();
+      // Wipe award ID
+      $("#edit-field-lsa-award-id-und-0-value").val("");
       lsaGift();
       certificate_populate();
     });
-
+    
     $('#edit-field-lsa-received-award').change(function () {
       lsaGift();
     });
