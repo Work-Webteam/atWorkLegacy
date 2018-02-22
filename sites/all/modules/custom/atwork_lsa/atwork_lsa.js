@@ -141,7 +141,7 @@
     $('#edit-field-lsa-received-award').append(lost_gift);
     $('#lost_gift_message').hide();
     // Message for recipients who have completed 45 || 50 years
-    var special_gift = $('<div id="special_gift"><span style="color:red;"><strong>*</strong> Are you celebrating 45 or 50 years in the BC Public Service? If so, the Long Service Awards program would like to give you an opportunity to identify an award that would be most meaningful to you. Once you’ve registered and identified yourself as a 45+ year recipient, our awards coordinator will be notified and will contact you by mid June.</span></div>');
+    var special_gift = $('<div id="special_gift"><span style="color:red;"><strong>*</strong> Because of your notable milestone, the Long Service Awards program would like to give you an opportunity to identify an award that would be most meaningful to you. Our awards coordinator will contact you in May or June.</span></div>');
     $('#edit-field-lsa-years-of-service').append(special_gift);
     $('#special_gift').hide();
 
