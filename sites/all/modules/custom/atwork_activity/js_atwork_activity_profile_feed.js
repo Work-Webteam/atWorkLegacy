@@ -74,7 +74,6 @@
         .bind('click', function () {
           // Remove text blocks and show that it is saving
           $('[id^="field-profile-comment-add-more-wrapper"').replaceWith('<div><p id="saving-notification-comment" class="saving-activity"> SAVING </p></div>');
-
           // close the filter options
           $("#atwork-advanced-feed-settings").hide();
           // Refresh the page after .5 seconds (to let db update)

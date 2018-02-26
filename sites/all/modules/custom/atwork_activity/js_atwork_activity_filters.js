@@ -94,7 +94,7 @@
       }
 
       function postStatusUpdate(){
-        // On click, toggle the fields. We only need to do this one way. Once they post a status, it refreshes the block anyways. 
+        // On click, toggle the fields. 
         $('#edit-status').slideToggle();
         $('.status-update-cancel').slideToggle();
         $('#atwork-activity-form div.form-item.form-type-textarea.form-item-status').slideToggle();
@@ -147,10 +147,13 @@
           postStatusUpdate();
       });
 
+
       // Set click handler for Cancel button
       $('.status-update-cancel:not(.atwork-activity-processed)', context)
         .addClass('atwork-activity-processed')
-        .bind('click', function(){
+        .bind('click', function(e){
+          e.preventDefault();
+          e.stopPropagation();
           postStatusUpdate();
       });
 
