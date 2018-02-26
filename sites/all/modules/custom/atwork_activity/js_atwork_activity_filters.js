@@ -96,6 +96,7 @@
       function postStatusUpdate(){
         // On click, toggle the fields. We only need to do this one way. Once they post a status, it refreshes the block anyways. 
         $('#edit-status').slideToggle();
+        $('.status-update-cancel').slideToggle();
         $('#atwork-activity-form div.form-item.form-type-textarea.form-item-status').slideToggle();
         $('.status-update-mock-button').slideToggle();
         $('#edit-post').slideToggle();
@@ -107,8 +108,12 @@
    */
   Drupal.behaviors.profileFilterJquery = {
     attach: function(context, settings) {
+
       // Need to initially hide this - people think it is a search bar... Seriously.. 
+      // Add in a cancel button by the post button
+      $('button.status-update-cancel').length ? $('button.status-update-cancel') : $('#edit-post').before('<button class="status-update-cancel" name="status-update-cancel">Cancel</button>');
       $('#edit-status').hide();
+      $('.status-update-cancel').hide();
       $('#atwork-activity-form div.form-item.form-type-textarea.form-item-status').hide();
       $('#edit-post').hide();
 
@@ -137,6 +142,13 @@
         
       // Set click handler for Post Status Update button
       $('.status-update-mock-button:not(.atwork-activity-processed)', context)
+        .addClass('atwork-activity-processed')
+        .bind('click', function(){
+          postStatusUpdate();
+      });
+
+      // Set click handler for Cancel button
+      $('.status-update-cancel:not(.atwork-activity-processed)', context)
         .addClass('atwork-activity-processed')
         .bind('click', function(){
           postStatusUpdate();
