@@ -498,6 +498,8 @@ function gift_choice_populate_form(gifts){
     }
     // This gift must have a certificate name for recipient
     $('#field-lsa-25year-certificatename-add-more-wrapper').show();
+    $('#edit-field-lsa-25year-certificatename-und-0-value').show();
+    //$('#edit-field-lsa-25year-certificatename').show();
     $("input#edit-field-lsa-25year-certificatename-und-0-value").prop("required", "required");
     // Get proper wording
     switch(gift_name) {
@@ -654,6 +656,7 @@ function gift_choice_populate_form(gifts){
     default:
       // Not pecsf, so make sure this is hidden and turned off.
       $('#pecsf-fields').hide();
+      set_pecsef('none');
       break;
   }
 }
@@ -663,14 +666,19 @@ function gift_choice_populate_form(gifts){
  */
   function set_pecsef(year){
     // Show and open pecsf block
-    $('#pecsf-fields').slideDown('slow');
-      // Certificates now required for PECSF as well
-    if($('#edit-field-lsa-donation-options-und-0').is(":visible")){
+    if(year=="none"){
+      $('#pecsf-fields').slideUp();
+    } else {
+      $('#pecsf-fields').slideDown('slow');
+    }
+      // Certificates now required for PECSF as well as 25 years
+    if($('#edit-field-lsa-donation-options-und-0').is(":visible") || $('input[name="field_lsa_years_of_service[und]"]:checked').val() == 25){
       $("#edit-field-lsa-25year-certificatename-und-0-value").show();
       $('#edit-field-lsa-25year-certificatename').show();
       $("#edit-field-lsa-25year-certificatename-und-0-value").prop("required", true);
     } else {
       $("#edit-field-lsa-25year-certificatename-und-0-value").hide();
+      $('#edit-field-lsa-25year-certificatename').hide();
       $("#edit-field-lsa-25year-certificatename-und-0-value").prop("required", false);
     }
     switch(true){
@@ -692,6 +700,9 @@ function gift_choice_populate_form(gifts){
       case year == 50:
         $('#edit-field-lsa-donation-amount-und-0-value').val('$500.00');
         break;
+      default:
+        $('#edit-field-lsa-donation-amount-und-0-value').val('');
+
     }
   }
 
@@ -1028,6 +1039,7 @@ function gift_choice_populate_form(gifts){
       $('.cert-add').remove();
 
     });
+
   });
 
 }(jQuery));
