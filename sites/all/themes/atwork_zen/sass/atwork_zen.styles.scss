@@ -221,6 +221,7 @@ html {
 /* YouTube videos embedded in article/background pages */
 iframe.media-youtube-player {
  width: 100%;
+ height:400px;    
 }
 /* Site wide links -------------------------------------------------------*/
 a {
@@ -2913,6 +2914,7 @@ aside.sidebars h2 {
   display:inline-block;
   width: 48.5%;
   margin-right: 15px;
+  float:left;
 }
 .page-executive-team #content .attachment-before .profile-image img {
   height: auto;

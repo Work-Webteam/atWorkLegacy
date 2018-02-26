@@ -19,6 +19,8 @@ sites/default/custom/
 files/
 sites/*/files
 sites/*/private
+sites/all/themes/atwork_zen/arrc
+sites/all/themes/atwork_zen/images
 
 # Ignore default text files
 //robots.txt
