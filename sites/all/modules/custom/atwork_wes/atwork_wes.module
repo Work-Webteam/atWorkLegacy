@@ -232,7 +232,7 @@ function atwork_wes_node_view($node, $view_mode, $langcode) {
 			<div id="wes-popup" style="margin-bottom: 20px; width: 100%; float: left;">
 			<h1>2018 <br>
 			WORK ENVIRONMENT SURVEY</h1>
-			<p>To complete your survey by February 23, click on the unique and personalized link found in your email invitation.</p>
+			<p>The survey window has now closed. If you completed the survey, you can see your personal results in <a href="https://securesurveys.gov.bc.ca/mywes2018/" target="_blank">MyWES</a>.</p>
 			<div id="wes-image">
 			$last_updated
 			<div id="wes-links-container">
@@ -333,7 +333,7 @@ function _atwork_wes_block_content(){
  */
 function _atwork_wes_block_theme($top_three_ministries){
 	$block_html = '';
-	$block_html .= '<a href ="/wes/2018/tracker"><div style="height: 190px; width: 955px; position: absolute;"></div></a><img src="/sites/default/files/images/WES/WES_tracker_Jan2_without-graphs.png" style="-ms-interpolation-mode: bicubic;"/>'; 
+	$block_html .= '<a href ="/wes/2018/tracker"><div style="height: 190px; width: 955px; position: absolute;"></div></a><img src="/sites/default/files/images/WES/tracker_closed.jpg" style="-ms-interpolation-mode: bicubic;"/>'; 
 	
 	$block_html .= "<div id='ministry-top-three'>";
 	foreach($top_three_ministries as $key => $value){
