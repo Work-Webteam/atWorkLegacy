@@ -257,7 +257,7 @@
         '</div>' +
         // Watch Type
         '<div id="watch_type">' +
-          '<p>Select a watch type</p><br />' +
+          '<p>Select a watch type:</p>' +
           //'<label>Options: <select name="_35_year_bulova_watch_type" id="Bulova_type_selection_box"><br />' +
           //  '<option value="Gold" name="Gold Watch" id="35_bulova_gold_watch"> Gold Watch </option>' +
           //  '<option value="Silver" name="Silver Watch" id="35_year_bulova_silver_watch"> Silver Watch </option>' +
@@ -267,7 +267,7 @@
         '</div>' +
         // If silver, two toned or silver
         '<div id="face_type">' +
-          '<p>Select a strap</p>' +
+          '<p>Select a strap:</p>' +
           '<label><input type="radio" name="silver_face_type" value="Silver" id="35_bulova_silver_face"> Silver' +
           '<label><input type="radio" name="silver_face_type" value="Two-toned" id="35_bulova_two_toned_face"> Two Toned</label>' +
           '<label><input type="radio" name="silver_face_type" value="Black" id="35_bulova_black_strap"> Black</label>' +
@@ -275,7 +275,7 @@
         '</div>' +
         //  If gold, gold/black or brown strap?
         '<div id="strap_type">' +
-          '<p>Select a strap</p>' +
+          '<p>Select a strap:</p>' +
           '<label><input type="radio" name="gold_strap_type" value="Gold" id="35_bulova_gold_strap">Gold</label>'+
           '<label><input type="radio" name="gold_strap_type" value="Brown" id="35_bulova_brown_strap">Brown</label>'+
           '<label><input type="radio" name="gold_strap_type" value="Black" id="35_bulova_black_strap">Black</label>'+
@@ -301,7 +301,7 @@
           //'<img src="/sites/default/files/bg/image/2015/0224/35watchleathertb.jpg" alt="Bulova Gold Watch with Leather strap" id="image_bulova_watch_2"> ' +
           //'<img src="/sites/default/files/bg/image/2015/0224/35watchsilverwtb.jpg" alt="Bulova Silver Watch, Silver Face" id="image_bulova_watch_3">' +
           //'<img src="/sites/default/files/lsa_2015/35_watch_silver_gold.png" alt="Bulova Silver Watch, two-toned face" id="image_bulova_watch_4">' +
-          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/watches-group.png" alt="Bulova Watch" id="image_bulova_watch">' +
+          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/Watches-group-thumb.png" alt="Bulova Watch" id="image_bulova_watch">' +
           // Bushnell Compact Binoculars
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/binocs-thumb.png" alt="bushnell binoculars" id="image_bushnell_binoculars">' +
           // Vase Picture

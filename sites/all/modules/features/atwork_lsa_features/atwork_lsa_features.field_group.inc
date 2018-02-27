@@ -316,7 +316,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Charitable donation',
-    'weight' => '11',
+    'weight' => '12',
     'children' => array(
       0 => 'field_lsa_donation_options',
       1 => 'field_lsa_pecsf_region',
