@@ -301,7 +301,7 @@
           //'<img src="/sites/default/files/bg/image/2015/0224/35watchleathertb.jpg" alt="Bulova Gold Watch with Leather strap" id="image_bulova_watch_2"> ' +
           //'<img src="/sites/default/files/bg/image/2015/0224/35watchsilverwtb.jpg" alt="Bulova Silver Watch, Silver Face" id="image_bulova_watch_3">' +
           //'<img src="/sites/default/files/lsa_2015/35_watch_silver_gold.png" alt="Bulova Silver Watch, two-toned face" id="image_bulova_watch_4">' +
-          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/watches-group.png" alt="Bulova Watch" id="image_bulova_watch">' +
+          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/Watches-group-thumb.png" alt="Bulova Watch" id="image_bulova_watch">' +
           // Bushnell Compact Binoculars
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/binocs-thumb.png" alt="bushnell binoculars" id="image_bushnell_binoculars">' +
           // Vase Picture
