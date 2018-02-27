@@ -206,7 +206,11 @@
     $('#field-lsa-accommodation-notes-add-more-wrapper').hide();
     $('#edit-field-lsa-recipient-dietary').hide();
     $('#edit-field-lsa-dietary-guest').hide();
-    // Move the 
+    // Move the "not known" checks after the "other"
+    var move = $('.form-item.form-type-checkbox.form-item-field-lsa-dietary-guest-und-select-Guest-information-is-not-known-at-this-time').detach();
+    $('.form-item.form-type-textfield.form-item-field-lsa-dietary-guest-und-other').after(move);
+    var accommodationMove = $('.form-item.form-type-checkbox.form-item-field-lsa-guest-accom-und-select-Guest-information-is-not-known-at-this-time');
+    $('.form-item.form-type-textfield.form-item-field-lsa-guest-accom-und-other').after(accommodationMove);
   }
 
   // Make sure phone number is formatted right
