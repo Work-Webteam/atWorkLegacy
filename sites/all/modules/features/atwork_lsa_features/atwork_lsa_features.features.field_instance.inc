@@ -1485,7 +1485,7 @@ Sugar Free
 No Shellfish
 Vegetarian
 Vegan
-Guest information is not known at this time.',
+Guest information is not known at this time',
         'other' => 'Other/Allergy',
         'other_size' => 60,
         'other_title' => '',
@@ -2290,7 +2290,7 @@ Visual Impairment
 Service dog
 Accessible parking/entrance
 Wheelchair/walker seating
-Guest information is not known at this time.',
+Guest information is not known at this time',
         'other' => 'Other',
         'other_size' => 60,
         'other_title' => '',
