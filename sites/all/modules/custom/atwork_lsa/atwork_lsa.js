@@ -153,6 +153,8 @@
     }
 
     //$("#lsa-award-selector-description-display").remove();
+    // Shrink word count wording
+    $("#edit-field-lsa-25year-certificatename-und-0-value-counter").css("font-size", "smaller");
     
     $('.form-item.form-type-textfield.form-item-field-lsa-award-und-0-value').hide();
     $('#edit-field-lsa-award-und-0-value').prop("readonly", true);
