@@ -10,6 +10,9 @@
  */
 function atwork_lsa_admin_form_alter(&$form, &$form_state, $form_id) {
   global $user;
+  
+  // Add gift list so we can display the images for chosen awards.
+  drupal_add_js(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_gift_list.js');
 
   // For LSA admin, allows to sort on whether a user has entered input into the notes field or not.
   if($form['#id'] == 'views-exposed-form-lsa-admin-page-2'){
@@ -639,10 +642,11 @@ function atwork_lsa_admin_node_view($node, $view_mode, $langcode) {
   */
   if(_atwork_is_admin() || in_array('lsa admin', $user->roles) || in_array('lsa contact', $user->roles) ){
     return;
-  } else {   
-    drupal_set_message(t("The RSVP period has ended. Please contact us at <a href='mailto:longserviceawards@gov.bc.ca'>LongServiceAwards@gov.bc.ca</a> for more information."), 'warning');
-    drupal_goto('career/long-service-awards');
-    $node->content['#access'] = false;
+  } else {
+  	/* Uncommented for application period. */
+    //drupal_set_message(t("The RSVP period has ended. Please contact us at <a href='mailto:longserviceawards@gov.bc.ca'>LongServiceAwards@gov.bc.ca</a> for more information."), 'warning');
+    //drupal_goto('career/long-service-awards');
+    //$node->content['#access'] = false;
   }
 }
 

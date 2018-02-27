@@ -349,7 +349,7 @@ function atwork_comments_comment_load($comments) {
  */
 function atwork_comments_preprocess_comment(&$variables){
   $variables['title'] = '';
-  $variables['permalink'] = '';
+  //$variables['permalink'] = '';
   $variables['picture'] = '';
   //dpm($variables);
   $comment = $variables['comment'];

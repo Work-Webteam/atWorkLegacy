@@ -1,5 +1,15 @@
 (function ($) {
 
+  $(document).ready(function () {
+    var awardName = $(".field-name-field-lsa-award .field-item.odd").text();
+	  var giftImages = giftListImages(); 
+    // The form is adding a leading whitespace, if you were wondering why I trim the award name  
+    var selectedAward= giftImages[awardName.trim()]; 
+	  $(".field-name-field-lsa-award").after('<div><img class="lsa-award-selector-img-display-panel" /></div>');
+	  //$(".lsa-award-selector-img-display-panel").attr({"src":selectedImageURI});
+	  $(".lsa-award-selector-img-display-panel").css({"border-radius":"9px","box-shadow":"2px 2px lightgrey","padding":"10px","border":"1px solid gray","margin":"5px 0 20px 50px"}).attr({"src":selectedAward["URI"]});  
+  });
+
   // Close all shown buttons save on click
 
   function close_button(){
@@ -118,7 +128,7 @@
 
     // Do they get a certificate?
     if(years_of_service != "25"){
-      $("div.field.field-name-field-lsa-25year-certificatename").hide();
+      //$("div.field.field-name-field-lsa-25year-certificatename").hide();
       $(".field-name-field-lsa-certificate-ordered").hide();
     }
     if($("input[name='field_lsa_certificate_ordered[und]']").prop("checked") == true){

@@ -49,12 +49,12 @@ EOT;
 
 
 $applicant_to = $node->field_lsa_email[$lang][0]['email'];
-$applicant_subject = t('Your Service Milestone Pin application has been received');
+$applicant_subject = t('Your service pin application has been received');
 $applicant_body = <<<EOT
 <span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
 <p>Thank you for registering for your {$email_milestone} year BC Public Service Pin, and congratulations on this important career milestone!</p>
 
-<p>Your pin(s) will be sent directly to your supervisor, for presentation to you during <strong>Public Service Week (June 12-16)</strong></p>
+<p>Your pin(s) will be sent directly to your supervisor, for presentation to you during <strong>Public Service Week (June 11-15)</strong></p>
 
 <p>If you have questions about the corporate pin program, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.
 
@@ -80,7 +80,18 @@ EOT;
 
 
 /**
- * Some ministries require specific email changes: These updates are only for the ministries of: Abor Relations, Adv Education, Education, Health, Env Assess Office, Public Guardian Trustee:
+ * Some ministries require specific email changes: These updates are only for the following:
+ * 6 | Ministry of Education
+ * 12 | Ministry of Indigenous Relations and Reconciliation
+ * 15 | Ministry of Mental Health and Addictions
+ * 20 | Ministry of Transportation and Infrastructure
+ * 41 | Environmental Appeal Board
+ * 42 | Environmental Assessment Office
+ * 52 | Intergovernmental Relations Secretariat
+ * 60 | Office of the Information and Privacy Commissioner
+ * 61 | Office of the Merit Commissioner
+ * 62 | Office of the Ombudsperson
+ * 63 | Office of the Police Complaint Commissioner 
  */
 
 
