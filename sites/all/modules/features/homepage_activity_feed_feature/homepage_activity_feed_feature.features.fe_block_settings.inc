@@ -18,10 +18,16 @@ function homepage_activity_feed_feature_default_fe_block_settings() {
  height: 1565px!important;
 }
 #social-side .entity-message p[class^="msg-"] + p + p, #social-side .entity-message span.activity-comment {
- line-height: 18px;
+ line-height: 16px;
 }
 #social-side p.message {
  line-height:initial;
+}
+// comment quote adjustment
+span.activity-comment:after {
+   display:inline-block!important;
+    position: absolute!important;
+    margin-top: 5px!important;
 }',
     'custom' => 0,
     'delta' => 'homepage',
