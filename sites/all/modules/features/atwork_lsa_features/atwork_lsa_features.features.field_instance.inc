@@ -16,7 +16,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'bundle' => 'lsa_application',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'This is how your name will appear on your 25 year certificate. Make any changes necessary.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -54,9 +54,22 @@ function atwork_lsa_features_field_default_field_instances() {
     'hashtag_settings' => array(
       'hashtag_field' => 0,
     ),
-    'label' => '25 Year Certificate',
+    'label' => 'Certificate Name',
     'required' => 0,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
       'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -70,7 +83,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 11,
     ),
   );
 
@@ -598,7 +611,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'number',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -5224,6 +5237,94 @@ Vegan',
     ),
   );
 
+  // Exported field_instance: 'node-lsa_pin_application-field_lsa_branch'.
+  $field_instances['node-lsa_pin_application-field_lsa_branch'] = array(
+    'bundle' => 'lsa_pin_application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 10,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 10,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_branch',
+    'hashtag_settings' => array(
+      'hashtag_field' => 0,
+    ),
+    'label' => 'Branch',
+    'required' => 0,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'semantic_field_format' => '',
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'maxlength_js' => 0,
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        'size' => 20,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 32,
+    ),
+  );
+
   // Exported field_instance:
   // 'node-lsa_pin_application-field_lsa_branch_department'.
   $field_instances['node-lsa_pin_application-field_lsa_branch_department'] = array(
@@ -7022,7 +7123,6 @@ Vegan',
   // Translatables
   // Included for use with string extractors like potx.
   t('  ');
-  t('25 Year Certificate');
   t('<em> Service pins will be sent to the employee’s supervisor for presentation during Public Service Week - June 11-15, 2018.</em>');
   t('<em>I do <u>not</u> wish to take part in the LSA survey.</em>');
   t('<img class="lsa-award-selector-img-display-panel"></img>');
@@ -7043,6 +7143,7 @@ Vegan',
   t('Ceremony Date');
   t('Ceremony Night');
   t('Ceremony Response');
+  t('Certificate Name');
   t('Certificate Ordered');
   t('Charity Name');
   t('Charity Name 2');
@@ -7100,7 +7201,6 @@ Vegan',
   t('Supervisor\'s Work Address');
   t('Supervisors’ Address');
   t('Terms');
-  t('This is how your name will appear on your 25 year certificate. Make any changes necessary.');
   t('Watch Engraving Sent');
   t('What ministry/organization are you with?');
   t('Who is registering for this service pin?');
