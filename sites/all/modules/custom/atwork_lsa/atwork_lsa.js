@@ -75,7 +75,7 @@
       } 
       // Otherwise hide
       if($('#edit-field-lsa-ceremony-accommodation-und-0').is(":checked")){
-        $('#field-lsa-accommodation-notes-add-more-wrapper').hide();;
+        $('#field-lsa-accommodation-notes-add-more-wrapper').hide();
       }
     
         // Show dietary options if required
@@ -166,7 +166,7 @@
     //$('#edit-field-lsa-engravement-und-0-value').css('background-color' , '#DEDEDE');
     $('.form-item.form-type-textfield.form-item-field-lsa-engravement-und-0-value').hide();
 
-    // 25 year certificate box will only be used by 25 year recipients
+    // 25 year certificate box will only be used by 25 year recipients, or PECSF recipients
     //$('#field-lsa-25year-certificatename-add-more-wrapper').hide();
 
     // There will be no instructions unless we actually are choosing an award
@@ -175,8 +175,14 @@
     var award_value = $('#edit-field-lsa-award-id-und-0-value').val();
     if($.inArray(award_value, ["7","13","33","40","42","44"]) > -1){
       $("#pecsf-fields").show();
+      $('#field-lsa-25year-certificatename-add-more-wrapper').show();
+    }else if ($('#edit-field-lsa-years-of-service-und-25').is(":checked")){
+      $('#field-lsa-25year-certificatename-add-more-wrapper').show();
+      // If we made it here, it is not pecsf
+      $('#pecsf-fields').hide();
     }else{
       $('#pecsf-fields').hide();
+      $('#field-lsa-25year-certificatename-add-more-wrapper').hide();
     }
         // Change text for pecsf options (too long for text box in setup)
     $("label[for=edit-field-lsa-donation-options-und-0]").html('Option A: Make a PECSF donation to the <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity" target="_blank">fund supported pool of charities in my region</a>.');
@@ -200,6 +206,7 @@
     $('#field-lsa-accommodation-notes-add-more-wrapper').hide();
     $('#edit-field-lsa-recipient-dietary').hide();
     $('#edit-field-lsa-dietary-guest').hide();
+    // Move the 
   }
 
   // Make sure phone number is formatted right
