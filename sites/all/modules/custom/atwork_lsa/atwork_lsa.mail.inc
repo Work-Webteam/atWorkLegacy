@@ -22,7 +22,7 @@ $supervisor_subject = t('An employee you supervise has registered for a Long Ser
 $supervisor_body = <<<EOT
 <span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
 
-<p>This email is to advise you that {$node->title}, who you supervise, has registered to receive a milestone {$node->field_lsa_years_of_service[$lang][0]['value']}year Long Service Award in 2018.</p>
+<p>This email is to advise you that {$node->title}, who you supervise, has registered to receive a milestone {$node->field_lsa_years_of_service[$lang][0]['value']} year Long Service Award in 2018.</p>
 
 <p>Eligible employees are any full-time, part-time or seasonal employees who will reach their 25th, 30th, 35th, 40th, 45th or 50th anniversary with the BC Public Service by December 31, 2018, or who have achieved one of these milestones before this year but have not previously been recognized.</p>
 

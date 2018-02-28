@@ -126,6 +126,8 @@
    *  Creates gift button linking to atwork_lsa_gift.js functions
    */
   function set_form() {
+    // For some reason, we have a term/privacy notice that looks very strange at the bottom of this page. Hide it.
+    $('#block-block-31').hide();
     // Gift button - links user to gift choices outlined in atwork_lsa_gift.js
     var gift_button = $('<br /><input type="button" value="Select Award" id="gift_select" />');
     $('#field-lsa-award-add-more-wrapper').append(gift_button);
