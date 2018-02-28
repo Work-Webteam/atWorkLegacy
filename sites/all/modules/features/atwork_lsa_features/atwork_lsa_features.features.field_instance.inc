@@ -1455,7 +1455,7 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_dietary_guest',
-    'label' => 'My guest\'s requests',
+    'label' => 'Guest requests',
     'required' => 0,
     'settings' => array(
       'authcache' => array(
@@ -3819,7 +3819,7 @@ Wheelchair/walker seating',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_recipient_dietary',
-    'label' => 'My Requests',
+    'label' => 'Recipient Requests',
     'required' => 0,
     'settings' => array(
       'authcache' => array(
@@ -4775,7 +4775,7 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_survey',
-    'label' => '<em>I do <u>not</u> wish to take part in the LSA survey.</em>',
+    'label' => '<em>I do <u>not</u> wish to take part in the Long Service Awards survey.</em>',
     'required' => 0,
     'settings' => array(
       'authcache' => array(
@@ -7036,7 +7036,7 @@ Vegan',
   // Included for use with string extractors like potx.
   t('  ');
   t('<em> Service pins will be sent to the employee’s supervisor for presentation during Public Service Week - June 11-15, 2018.</em>');
-  t('<em>I do <u>not</u> wish to take part in the LSA survey.</em>');
+  t('<em>I do <u>not</u> wish to take part in the Long Service Awards survey.</em>');
   t('<img class="lsa-award-selector-img-display-panel"></img>');
   t('<p>I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2018, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events.</p>');
   t('Accommodation Notes');
@@ -7077,6 +7077,7 @@ Vegan',
   t('First Name');
   t('Guest Accommodations');
   t('Guest Attending');
+  t('Guest requests');
   t('Home Phone');
   t('I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target ="_blank">service pin recognition eligibility guidelines</a> (which I have reviewed) that as of December 31, 2018, I will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and am therefore eligible to receive a service pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.');
   t('If retired, please enter the last organization and supervisor you worked with.');
@@ -7086,8 +7087,6 @@ Vegan',
   t('Ministry ID');
   t('Ministry Representative Email');
   t('Ministry/Organization');
-  t('My Requests');
-  t('My guest\'s requests');
   t('Notes');
   t('Number Attending');
   t('PECSF ID');
@@ -7100,6 +7099,7 @@ Vegan',
   t('Province');
   t('RSVP');
   t('Recipient Accommodations');
+  t('Recipient Requests');
   t('Retiring in 2018?');
   t('Retro-Active');
   t('Second Charity');

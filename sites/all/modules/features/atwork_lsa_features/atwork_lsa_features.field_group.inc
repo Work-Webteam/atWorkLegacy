@@ -331,7 +331,7 @@ function atwork_lsa_features_field_group_info() {
         'required_fields' => 0,
         'id' => 'pecsf-fields',
         'classes' => 'group-lsa-pecsf field-group-fieldset',
-        'description' => 'Instructions: Click here to access the list of <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions" target = "_blank">PECSF charities by Region</a>. Once you have made your decision of which charity (maximum 2), OR regional pool of charities to donate to, complete the information below. Note: Charitable tax receipts are not issued for Long Service Award donations. ',
+        'description' => '',
       ),
       'formatter' => 'collapsible',
     ),
