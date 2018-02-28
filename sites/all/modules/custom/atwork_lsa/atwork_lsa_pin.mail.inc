@@ -40,7 +40,7 @@ $supervisor_body = <<<EOT
 
 <p>The pin(s) will be mailed directly to you at the beginning of June, and will include a list of all your employees who have registered. </p>
 
-<p><strong>Please present the pin(s) to {$node->field_lsa_pin_first_name[$lang][0]['value']} during Public Service Week  - June 12-16, 2017.</strong></p>
+<p><strong>Please present the pin(s) to {$node->field_lsa_pin_first_name[$lang][0]['value']} during Public Service Week  (June 11-15, 2018.</strong> This is a wonderful opportunity to thank your employee for their service and celebrate their commitment to the BC Public Service!</p>
 
 <p>If you have questions about the corporate pin program, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
 
@@ -54,7 +54,7 @@ $applicant_body = <<<EOT
 <span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
 <p>Thank you for registering for your {$email_milestone} year BC Public Service Pin, and congratulations on this important career milestone!</p>
 
-<p>Your pin(s) will be sent directly to your supervisor, for presentation to you during <strong>Public Service Week (June 11-15)</strong></p>
+<p>Your pin(s) will be sent directly to your supervisor for presentation to you during <strong>Public Service Week (June 11-15, 2018)</strong></p>
 
 <p>If you have questions about the corporate pin program, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.
 
@@ -71,7 +71,7 @@ $ministry_rep_body = <<<EOT
 
 <p>Thank you for registering <strong>{$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']}</strong> for a $email_milestone year Service Pin(s)</p>
 
-<p>The pin(s) will be be mailed directly to {$node->field_lsa_pin_first_name[$lang][0]['value']}'s supervisor at the beginning of June, in order to <strong>present the pin(s) to {$node->field_lsa_pin_first_name[$lang][0]['value']} during Public Service Week  - June 12-16, 2017.</strong></p>
+<p>The pin(s) will be be mailed directly to {$node->field_lsa_pin_first_name[$lang][0]['value']}'s supervisor, for presentation during Public Service Week (June 11-15, 2018).</strong></p>
 
 <p>If you have questions about the corporate pin program, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
 
@@ -102,7 +102,7 @@ $supervisor_body_special_condition = <<<EOT
 
 <p>Thank you for registering <strong> {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']}</strong> for a $email_milestone year Service Pin(s)</p>
 
-<p>The pin(s) will be mailed directly to your ministry/organization, for presentation during Public Service Week  - June 12-16, 2017.</strong></p>
+<p>The pin(s) will be mailed directly to your ministry/organization, for presentation during Public Service Week  (June 11-15, 2018).</strong></p>
 
 <p>If you have questions about the corporate pin program, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
 
@@ -115,7 +115,7 @@ $applicant_body_special_condition = <<<EOT
 <span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
 <p>Thank you for registering for your {$email_milestone} year BC Public Service Pin(s), and congratulations on this important career milestone!</p>
 
-<p>Your pin(s) will be sent directly to your ministry/organization, for presentation to you during <strong>Public Service Week (June 12-16)</strong></p>
+<p>Your pin(s) will be sent directly to your ministry/organization, for presentation to you during <strong>Public Service Week (June 11-15, 2018).</strong></p>
 
 <p>If you have questions about the corporate pin program, please connect with your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.
 
