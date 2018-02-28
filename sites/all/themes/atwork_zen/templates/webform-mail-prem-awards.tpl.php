@@ -57,9 +57,7 @@ $application_type_map = array(
 );
 
 print 'Thank you for submitting the following nomination:<br /><br />';
-print 'Nomination Name - ' . $submission->data[7][0] . '<br />';
-
-
+print 'Nomination Name - ' . $submission->data[5][0] . '<br />';
 
 print 'Ministry - '. $ministry .'<br />';
 print 'Category - '. $application_type_map[$application_type] .'<br />';
