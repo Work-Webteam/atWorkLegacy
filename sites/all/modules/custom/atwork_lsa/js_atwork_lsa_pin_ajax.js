@@ -280,6 +280,13 @@
           // If so, then they can choose prev years.
           $('#edit-field-lsa-other-milestone-years').slideDown('slow');
         } else {
+          // Add note
+          if($('#edit-field-lsa-milestone-year-und').hasClass('atwork-activity-processed')){
+            // We are fine, nothing to do
+          } else {
+            $('#edit-field-lsa-milestone-year-und').addClass('atwork-activity-processed');
+            $('#edit-field-lsa-milestone-year-und').after('<div id="select-message"><p><em>In order to be eligible for a service pin, employees must be celebrating a current milestone in 2018. If you have questions about your eligibility, please contact your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</em></p></div>');
+          }
           $('#edit-field-lsa-other-milestone-years').hide();
           $('#edit-field-lsa-other-milestone-years-und-1').prop('checked', false);
           $('#edit-field-lsa-other-milestone-years').hide();
@@ -294,7 +301,7 @@
           // We are fine, nothing to do
         } else {
           $('#edit-field-lsa-milestone-year-und').addClass('atwork-activity-processed');
-          $('#edit-field-lsa-milestone-year-und').before('<div id="select-message"><p>In order to be eligible for a service pin, employees must be celebrating a current milestone in 2018. If you have questions about your eligibility, please contact your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>. </p></div>');
+          $('#edit-field-lsa-milestone-year-und').after('<div id="select-message"><p><em>In order to be eligible for a service pin, employees must be celebrating a current milestone in 2018. If you have questions about your eligibility, please contact your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</em></p></div>');
         }
         $('#edit-field-lsa-other-milestone-years').hide();
         $('#edit-field-lsa-previous-service-miles').hide();
@@ -326,12 +333,12 @@
     // Application by use
     if(applicationSubmitter == 1){
       if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
-        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>Your pin(s) will be sent directly to your ministry/organization, for presentation to you during Public Service Week (June 11-15, 2018).</em>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Your pin(s) will be sent directly to your ministry/organization, for presentation to you during Public Service Week - June 11-15, 2018.</em></p>");
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
         $('#sup-div.required-fields.form-wrapper').hide();
 
       } else if ($('#edit-field-lsa-pin-ministry-org-und option:selected').val() != '_none'){
-        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 11-15, 2018.</em>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 11-15, 2018.</em></p>");
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
         $('#sup-div.required-fields.form-wrapper').show();
       } else {
@@ -342,11 +349,11 @@
     } else if(applicationSubmitter == 2){
       // depending on the situation, show or change the description field
       if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
-        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>The pin(s) will be sent directly to your ministry/organization, for presentation to the employee during Public Service Week (June 11-15, 2018).</em>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pin(s) will be sent directly to your ministry/organization, for presentation to the employee during Public Service Week - June 11-15, 2018.</em></p>");
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
         $('#sup-div.required-fields.form-wrapper').hide();
       } else if ($('#edit-field-lsa-pin-ministry-org-und option:selected').val() != '_none'){
-        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 11-15, 2018.</em>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 11-15, 2018.</em></p>");
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
         $('#sup-div.required-fields.form-wrapper').show();
       } else {
@@ -356,11 +363,11 @@
       // Application by min contact
     }  else if(applicationSubmitter == 3){
       if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
-        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>The pin(s) will be sent directly to your ministry/organization, for presentation to the employee during Public Service Week (June 11-15, 2018).</em>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pin(s) will be sent directly to your ministry/organization, for presentation to the employee during Public Service Week - June 11-15, 2018.</em></p>");
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
         $('#sup-div.required-fields.form-wrapper').hide();
       } else if ($('#edit-field-lsa-pin-ministry-org-und option:selected').val() != '_none'){
-        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 11-15, 2018.</em>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 11-15, 2018.</em></p>");
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
         $('#sup-div.required-fields.form-wrapper').show();
       } else {
