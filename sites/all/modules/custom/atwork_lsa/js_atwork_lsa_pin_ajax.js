@@ -381,6 +381,14 @@
     $('#edit-field-lsa-pin-terms').slideDown('slow');
     $('#edit-field-lsa-pin-sup-location').slideDown('slow');
     $('#lsa-pin-terms').slideDown('slow');
+    // Updates to instructions that don't go well in Drupal itself
+    if($('#edit-field-lsa-office-address-und-0-value').hasClass('atwork-activity-processed')){
+      // We are fine, nothing to do
+    } else {
+      $('#edit-field-lsa-office-address-und-0-value').addClass('atwork-activity-processed');
+      $('#edit-field-lsa-office-address-und-0-value').after('<div id="po-message" align="center"><em>For Victoria locations, please use the P.O. Box address</em></div>');
+      $("#term-red").css("color", "red");
+    }
     return false;
   }
 

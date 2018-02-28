@@ -392,7 +392,7 @@ function atwork_lsa_features_field_group_info() {
         'required_fields' => 1,
         'id' => 'lsa-pin-terms',
         'classes' => 'group-lsa-pin-terms field-group-fieldset',
-        'description' => '<p>If the above information is complete, and you have agreed to the terms below, click the SUBMIT button.</p>',
+        'description' => '<br /><div id="term-red">If the above information is complete, and you have agreed to the terms below, click the SUBMIT button.</div>',
       ),
       'formatter' => 'open',
     ),

@@ -5237,94 +5237,6 @@ Vegan',
     ),
   );
 
-  // Exported field_instance: 'node-lsa_pin_application-field_lsa_branch'.
-  $field_instances['node-lsa_pin_application-field_lsa_branch'] = array(
-    'bundle' => 'lsa_pin_application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(
-          'semantic_field_format' => '',
-        ),
-        'type' => 'text_default',
-        'weight' => 10,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'full' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(
-          'semantic_field_format' => '',
-        ),
-        'type' => 'text_default',
-        'weight' => 10,
-      ),
-      'question' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_lsa_branch',
-    'hashtag_settings' => array(
-      'hashtag_field' => 0,
-    ),
-    'label' => 'Branch',
-    'required' => 0,
-    'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'semantic_field_format' => '',
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'maxlength_js' => 0,
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'size' => 20,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 32,
-    ),
-  );
-
   // Exported field_instance:
   // 'node-lsa_pin_application-field_lsa_branch_department'.
   $field_instances['node-lsa_pin_application-field_lsa_branch_department'] = array(
@@ -5381,7 +5293,7 @@ Vegan',
     'hashtag_settings' => array(
       'hashtag_field' => 0,
     ),
-    'label' => 'Branch',
+    'label' => 'Department/Branch',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -5466,7 +5378,7 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_email',
-    'label' => 'Email address',
+    'label' => 'Email Address',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -5758,7 +5670,7 @@ Vegan',
     'bundle' => 'lsa_pin_application',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '<p class="style-red">For Victoria locations, please use the P.O. Box address</p>',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -5808,7 +5720,7 @@ Vegan',
     'hashtag_settings' => array(
       'hashtag_field' => 0,
     ),
-    'label' => 'Supervisors’ Address',
+    'label' => 'Supervisors Address',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -7126,7 +7038,6 @@ Vegan',
   t('<em> Service pins will be sent to the employee’s supervisor for presentation during Public Service Week - June 11-15, 2018.</em>');
   t('<em>I do <u>not</u> wish to take part in the LSA survey.</em>');
   t('<img class="lsa-award-selector-img-display-panel"></img>');
-  t('<p class="style-red">For Victoria locations, please use the P.O. Box address</p>');
   t('<p>I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2018, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events.</p>');
   t('Accommodation Notes');
   t('Actual_Min/Org');
@@ -7151,6 +7062,7 @@ Vegan',
   t('Date Stamp');
   t('Date of Retirement');
   t('Declaration');
+  t('Department/Branch');
   t('Did you receive your award?');
   t('Did you register last year but were unable to attend the ceremony?');
   t('Dietary Requirements');
@@ -7160,7 +7072,6 @@ Vegan',
   t('Donation Amount 2');
   t('Donation options');
   t('Email Address');
-  t('Email address');
   t('Employee Number');
   t('Engravement');
   t('First Name');
@@ -7199,7 +7110,7 @@ Vegan',
   t('Supervisor Last Name');
   t('Supervisor Phone');
   t('Supervisor\'s Work Address');
-  t('Supervisors’ Address');
+  t('Supervisors Address');
   t('Terms');
   t('Watch Engraving Sent');
   t('What ministry/organization are you with?');
