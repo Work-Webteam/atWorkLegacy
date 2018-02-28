@@ -15,7 +15,7 @@ function homepage_activity_feed_feature_default_fe_block_settings() {
   $export['atwork_activity-homepage'] = array(
     'cache' => 1,
     'css' => '#block-atwork-activity-homepage {
- height: 1565px!important;
+ height: 1360px!important;
 }
 #social-side .entity-message p[class^="msg-"] + p + p, #social-side .entity-message span.activity-comment {
  line-height: 16px;
