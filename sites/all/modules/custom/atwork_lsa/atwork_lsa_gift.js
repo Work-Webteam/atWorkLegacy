@@ -675,6 +675,7 @@ function gift_choice_populate_form(gifts){
     if($('#edit-field-lsa-donation-options-und-0').is(":visible") || $('input[name="field_lsa_years_of_service[und]"]:checked').val() == 25){
       $("#edit-field-lsa-25year-certificatename-und-0-value").show();
       $('#edit-field-lsa-25year-certificatename').show();
+      $("#field-lsa-25year-certificatename-add-more-wrapper").show();
       $("#edit-field-lsa-25year-certificatename-und-0-value").prop("required", true);
     } else {
       $("#edit-field-lsa-25year-certificatename-und-0-value").hide();
