@@ -33,7 +33,7 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
   $form['field_lsa_award_sp_instructions']['#access'] = FALSE;
   $form['field_lsa_ceremony_accommodation']['und']['#title'] = t('');
   $form['field_lsa_dietary_requirements']['und']['#title'] = t('');
-  $form['field_lsa_25year_certificatename']['und']['#prefix'] = t("<p>This is how your name will appear on your 25 year certificate. Make any changes necessary.</p>" . $form['field_lsa_25year_certificatename']['und']['#prefix']);
+  $form['field_lsa_25year_certificatename']['und']['#prefix'] = t("<p>Enter your name as you’d like it to appear on your certificate. </p>" . $form['field_lsa_25year_certificatename']['und']['#prefix']);
   // skip defaults for admins who are entering for others
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)  || in_array('lsa contact', $user->roles)) {
     //$form['field_lsa_terms'][$form['field_lsa_terms']['#language']]['#default_value'] = 1;
