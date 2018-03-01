@@ -52,10 +52,10 @@ function atwork_lsa_features_field_group_info() {
     'label' => 'Ceremony Accommodations',
     'weight' => '18',
     'children' => array(
-      0 => 'field_lsa_accommodation_notes',
-      1 => 'field_lsa_ceremony_accommodation',
-      2 => 'field_lsa_guest_accom',
-      3 => 'field_lsa_recipient_accom',
+      0 => 'field_lsa_ceremony_accommodation',
+      1 => 'field_lsa_accommodation_notes',
+      2 => 'field_lsa_recipient_accom',
+      3 => 'field_lsa_guest_accom',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -187,9 +187,9 @@ function atwork_lsa_features_field_group_info() {
     'label' => 'Dietary Requirements',
     'weight' => '20',
     'children' => array(
-      0 => 'field_lsa_dietary_guest',
-      1 => 'field_lsa_dietary_requirements',
-      2 => 'field_lsa_recipient_dietary',
+      0 => 'field_lsa_dietary_requirements',
+      1 => 'field_lsa_recipient_dietary',
+      2 => 'field_lsa_dietary_guest',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

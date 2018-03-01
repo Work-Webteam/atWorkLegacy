@@ -194,7 +194,7 @@ function atwork_mail_mail($key, &$message, $params) {
  **/
 
 function atwork_mail_subscriptions_digest_alter(&$digest_data) {
-  dpm($digest_data);
+
 }
 
 
