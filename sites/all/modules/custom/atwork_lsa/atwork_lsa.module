@@ -231,7 +231,7 @@ function atwork_lsa_application_validate($form, &$form_state) {
 
   // Make sure all relevant PECSF fields filled out
   $award_id = $form_state['values']['field_lsa_award_id'][$lang][0]['value'];
-  $pecsf_id = array(11,17, 33, 40, 42,44);
+  $pecsf_id = array(7, 13, 33, 40, 42,44);
   // They have chosen a pecsf award
   if(in_array($award_id, $pecsf_id)){    
     if(!isset($form_state['values']['field_lsa_donation_options'][$lang][0]['value'])){
