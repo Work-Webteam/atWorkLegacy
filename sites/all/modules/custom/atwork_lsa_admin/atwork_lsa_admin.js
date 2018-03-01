@@ -125,19 +125,15 @@
     }
 
     var years_of_service = $(".field.field-name-field-lsa-years-of-service.field-type-list-integer.field-label-inline.clearfix div.field-items div.field-item").text();
+    var award_name = $(".field.field-name-field-lsa-award.field-type-text.field-label-inline.clearfix div.field-items div.field-item").text();
 
     // Do they get a certificate?
-    if(years_of_service != "25"){
-      //$("div.field.field-name-field-lsa-25year-certificatename").hide();
-      $(".field-name-field-lsa-certificate-ordered").hide();
+    if(years_of_service != "25" && award_name.indexOf("PECSF") < 0){
+    	console.log('pecsf');
+    	$(".field.field-name-field-lsa-25year-certificatename.field-type-text.field-label-inline.clearfix").hide();
+    }else {
+    	$(".field.field-name-field-lsa-25year-certificatename.field-type-text.field-label-inline.clearfix").show();
     }
-    if($("input[name='field_lsa_certificate_ordered[und]']").prop("checked") == true){
-      $(".field-name-field-lsa-25year-certificatename").show();
-    } else {
-      $(".field-name-field-lsa-25year-certificatename").hide();
-    }
-
-    var award = $(".field.field-name-field-lsa-award.field-type-text.field-label-inline.clearfix").text();
 
     // Did they choose a watch?
     if(years_of_service == "35" && award.indexOf("Watch") >= 0){
