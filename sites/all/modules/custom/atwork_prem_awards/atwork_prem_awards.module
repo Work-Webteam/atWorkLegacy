@@ -539,7 +539,6 @@ function atwork_prem_awards_form_alter(&$form, $form_state, $form_id) {
       '#value' => t('Save'),
       '#prefix' => '<p>' . t('Saving the application will not trigger any emails.') . '</p>',
     );
-    dpm($form);
     // check for existence of application type (innovation, leadership, etc)
     if (!isset($form['submitted']['application_type']['#default_value']) || !$form['submitted']['application_type']['#default_value']) {
       return;
