@@ -19,10 +19,13 @@ function atwork_lsa_features_field_default_field_instances() {
     'description' => 'This is how your name will appear on your 25 year certificate. Make any changes necessary.',
     'display' => array(
       'default' => array(
-        'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 26,
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_plain',
+        'weight' => 13,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -462,7 +465,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 12,
+        'weight' => 11,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1180,7 +1183,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 35,
+        'weight' => 16,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1871,7 +1874,7 @@ Guest information is not known at this time.',
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 10,
+        'weight' => 9,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -3243,6 +3246,87 @@ Guest information is not known at this time.',
     ),
   );
 
+  // Exported field_instance:
+  // 'node-lsa_application-field_lsa_office_work_group'.
+  $field_instances['node-lsa_application-field_lsa_office_work_group'] = array(
+    'bundle' => 'lsa_application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'editablefields',
+        'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
+          'semantic_field_format' => '',
+        ),
+        'type' => 'editable',
+        'weight' => 14,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_office_work_group',
+    'label' => 'Office',
+    'required' => 0,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'maxlength_js' => 0,
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 18,
+    ),
+  );
+
   // Exported field_instance: 'node-lsa_application-field_lsa_org'.
   $field_instances['node-lsa_application-field_lsa_org'] = array(
     'bundle' => 'lsa_application',
@@ -3332,7 +3416,7 @@ Guest information is not known at this time.',
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 31,
+        'weight' => 14,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -3563,7 +3647,7 @@ Guest information is not known at this time.',
           'semantic_field_format' => '',
         ),
         'type' => 'list_default',
-        'weight' => 29,
+        'weight' => 12,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -3636,7 +3720,7 @@ Guest information is not known at this time.',
           'semantic_field_format' => '',
         ),
         'type' => 'list_default',
-        'weight' => 9,
+        'weight' => 8,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4162,7 +4246,7 @@ Vegan',
           'semantic_field_format' => '',
         ),
         'type' => 'list_default',
-        'weight' => 33,
+        'weight' => 15,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -4203,6 +4287,84 @@ Vegan',
       'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 19,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-lsa_application-field_lsa_specialrequirements'.
+  $field_instances['node-lsa_application-field_lsa_specialrequirements'] = array(
+    'bundle' => 'lsa_application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'editablefields',
+        'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
+          'semantic_field_format' => '',
+        ),
+        'type' => 'editable',
+        'weight' => 5,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_specialrequirements',
+    'label' => 'Special Requirements',
+    'required' => 1,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 24,
     ),
   );
 
@@ -5103,7 +5265,7 @@ Vegan',
           'semantic_field_format' => '',
         ),
         'type' => 'list_default',
-        'weight' => 11,
+        'weight' => 10,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -5145,6 +5307,89 @@ Vegan',
       ),
       'type' => 'options_buttons',
       'weight' => 9,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-lsa_application-field_specialrequirement_descrip'.
+  $field_instances['node-lsa_application-field_specialrequirement_descrip'] = array(
+    'bundle' => 'lsa_application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'editablefields',
+        'settings' => array(
+          'click_to_edit' => 0,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => 'text_default',
+          'fallback_settings' => array(),
+          'semantic_field_format' => '',
+        ),
+        'type' => 'editable',
+        'weight' => 6,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_specialrequirement_descrip',
+    'label' => 'Please Specify Your Requirements',
+    'required' => 0,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'maxlength_js' => 350,
+        'maxlength_js_enforce' => 0,
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        'maxlength_js_truncate_html' => 1,
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 25,
     ),
   );
 
@@ -5221,6 +5466,94 @@ Vegan',
       ),
       'type' => 'text_textfield',
       'weight' => 40,
+    ),
+  );
+
+  // Exported field_instance: 'node-lsa_pin_application-field_lsa_branch'.
+  $field_instances['node-lsa_pin_application-field_lsa_branch'] = array(
+    'bundle' => 'lsa_pin_application',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 10,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 10,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lsa_branch',
+    'hashtag_settings' => array(
+      'hashtag_field' => 0,
+    ),
+    'label' => 'Branch',
+    'required' => 0,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'semantic_field_format' => '',
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'maxlength_js' => 0,
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        'size' => 20,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 32,
     ),
   );
 
@@ -7078,10 +7411,12 @@ Vegan',
   t('My guest\'s requests');
   t('Notes');
   t('Number Attending');
+  t('Office');
   t('PECSF ID');
   t('PECSF ID 2');
   t('PECSF Region');
   t('Phone');
+  t('Please Specify Your Requirements');
   t('Please select the retroactive milestone pin(s) you would like to order');
   t('Please use the format:A1A 1A1');
   t('Postal Code');
@@ -7092,6 +7427,7 @@ Vegan',
   t('Retro-Active');
   t('Second Charity');
   t('Service Milestone');
+  t('Special Requirements');
   t('Street');
   t('Supervisor Email');
   t('Supervisor First Name');
