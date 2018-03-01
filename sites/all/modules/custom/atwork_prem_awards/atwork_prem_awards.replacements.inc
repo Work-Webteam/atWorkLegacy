@@ -8,7 +8,7 @@ function _atwork_prem_awards_ministry_contacts() {
   		2 => 'Erin.Hansen@gov.bc.ca', //Agriculture
   		3 => 'Marlene.Dayman@gov.bc.ca;Robert.Meseyton@gov.bc.ca;Karla.Limion@gov.bc.ca', // Attorney General
   		4 => 'Gail.Crosby@gov.bc.ca', //Children & Family Development
-  		5 => 'Denise.Moreau.gov.bc.ca', // Citizens’ Services
+  		5 => 'Denise.Moreau@gov.bc.ca', // Citizens’ Services
   		6 => 'kris.Olson@gov.bc.ca;Cheryl.Specht@gov.bc.ca', //Education
   		7 => 'Janine.Crockett@gov.bc.ca', // Energy, Mines and Petroleum Resources
   		8 => 'Karla.Kennedy@gov.bc.ca', //Environment and Climate Change Strategy
