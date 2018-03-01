@@ -13,211 +13,6 @@ function atwork_lsa_features_conditional_fields_default_fields() {
   $items["node:lsa_application:0"] = array(
     'entity' => 'node',
     'bundle' => 'lsa_application',
-    'dependent' => 'field_lsa_25year_certificatename',
-    'dependee' => 'field_lsa_years_of_service',
-    'options' => array(
-      'state' => 'visible',
-      'condition' => 'value',
-      'grouping' => 'AND',
-      'effect' => 'show',
-      'effect_options' => array(),
-      'element_view' => array(
-        1 => 1,
-        2 => 2,
-        5 => 0,
-        3 => 0,
-        4 => 0,
-      ),
-      'element_view_per_role' => 0,
-      'element_view_roles' => array(
-        1 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        2 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        3 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        4 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        5 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        6 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        7 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        8 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        10 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        11 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        12 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        13 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        15 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        16 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-        17 => array(
-          1 => 1,
-          2 => 2,
-          5 => 0,
-          3 => 0,
-          4 => 0,
-        ),
-      ),
-      'element_edit' => array(
-        1 => 1,
-        3 => 0,
-      ),
-      'element_edit_per_role' => 0,
-      'element_edit_roles' => array(
-        1 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        2 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        3 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        4 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        5 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        6 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        7 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        8 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        10 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        11 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        12 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        13 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        15 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        16 => array(
-          1 => 1,
-          3 => 0,
-        ),
-        17 => array(
-          1 => 1,
-          3 => 0,
-        ),
-      ),
-      'selector' => '',
-      'values_set' => 1,
-      'value_form' => 25,
-      'value' => array(
-        0 => array(
-          'value' => 25,
-        ),
-      ),
-      'values' => array(),
-    ),
-  );
-
-  $items["node:lsa_application:1"] = array(
-    'entity' => 'node',
-    'bundle' => 'lsa_application',
     'dependent' => 'field_lsa_charity_name_2',
     'dependee' => 'field_lsa_second_donation',
     'options' => array(
@@ -420,7 +215,7 @@ function atwork_lsa_features_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:lsa_application:2"] = array(
+  $items["node:lsa_application:1"] = array(
     'entity' => 'node',
     'bundle' => 'lsa_application',
     'dependent' => 'field_lsa_donation_amount',
@@ -625,7 +420,7 @@ function atwork_lsa_features_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:lsa_application:3"] = array(
+  $items["node:lsa_application:2"] = array(
     'entity' => 'node',
     'bundle' => 'lsa_application',
     'dependent' => 'field_lsa_donation_amount_2',
@@ -830,7 +625,7 @@ function atwork_lsa_features_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:lsa_application:4"] = array(
+  $items["node:lsa_application:3"] = array(
     'entity' => 'node',
     'bundle' => 'lsa_application',
     'dependent' => 'field_lsa_pecsf_id',
@@ -1035,7 +830,7 @@ function atwork_lsa_features_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:lsa_application:5"] = array(
+  $items["node:lsa_application:4"] = array(
     'entity' => 'node',
     'bundle' => 'lsa_application',
     'dependent' => 'field_lsa_pecsf_id_2',
@@ -1240,7 +1035,7 @@ function atwork_lsa_features_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:lsa_application:6"] = array(
+  $items["node:lsa_application:5"] = array(
     'entity' => 'node',
     'bundle' => 'lsa_application',
     'dependent' => 'field_lsa_received_award',
@@ -1390,7 +1185,7 @@ function atwork_lsa_features_conditional_fields_default_fields() {
     ),
   );
 
-  $items["node:lsa_application:7"] = array(
+  $items["node:lsa_application:6"] = array(
     'entity' => 'node',
     'bundle' => 'lsa_application',
     'dependent' => 'field_lsa_second_donation',
