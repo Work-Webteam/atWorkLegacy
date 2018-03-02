@@ -346,13 +346,12 @@ function atwork_lsa_pin_application_validate($form, &$form_state){
       }
     }
   }
-  if(isset($form_state['input']['field_lsa_other_milestone_years']['und']) || isset($form_state['input']['field_lsa_milestone_year']['und'])){
-    if(isset($form_state['input']['field_lsa_other_milestone_years']['und']) && $form_state['input']['field_lsa_other_milestone_years']['und'] == 1){
-      if(isset($form_state['input']['field_lsa_pin_service_milestone']['und']) && $form_state['input']['field_lsa_pin_service_milestone']['und'] == '_none'){
-        form_set_error('field_lsa_pin_service_milestone', t('You have not selected a service milestone'));
-      }
-    }
-  }
+  // If they indicate they would like a retro pin, they have to choose one
+  //if(isset($form_state['input']['field_lsa_other_milestone_years']['und']) || isset($form_state['input']//['field_lsa_milestone_year']['und'])){
+  //  if(isset($form_state['input']['field_lsa_other_milestone_years']['und']) && $form_state['input']['field_lsa_other_milestone_years']['und'] == '_none'){
+   //   form_set_error('field_lsa_pin_service_milestone', t('You have not selected a retroactive service milestone'));
+   // }
+  //}
   // Lets make sure the Postal codes at least match standardized format - we are not looking up validity here.
   // Quick regex to make sure we have relatively the right type of canadian postal
   $postal_regex = '/^([a-zA-Z]\d[a-zA-Z])\ {0,1}(\d[a-zA-Z]\d)$/';
