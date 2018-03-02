@@ -226,6 +226,7 @@
       case ministry == 3 : //Ministry of Attorney General
       case ministry == 4 : //Ministry of Children and Family Development
       case ministry == 5 : //Ministry of Citizens' Services
+      case ministry == 7: // Ministry of Energy, Mines and Petroleum Resources
       case ministry == 8 : //Ministry of Environment and Climate Change Strategy
       case ministry == 9 : //Ministry of Finance
       case ministry == 10: // Ministry of Forests, Lands, Natural Resource Operations and Rural Development
@@ -264,7 +265,6 @@
       //If this is one of their award years then they can choose multiple extras: 20
       
       case ministry == 6: // Ministry of Education
-      case ministry == 7: // Ministry of Energy, Mines and Petroleum Resources
         // Check if this had other restrictions previously
         if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
           $('#edit-field-lsa-previous-service-miles-und').removeClass('atwork-activity-processed');
