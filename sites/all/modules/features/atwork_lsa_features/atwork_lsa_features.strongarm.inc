@@ -349,13 +349,13 @@ if (isset($node->field_lsa_middle_name[$node->language][0][\'value\']) && $node-
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '1',
+          'weight' => '0',
         ),
         'path' => array(
-          'weight' => '2',
+          'weight' => '1',
         ),
         'redirect' => array(
-          'weight' => '3',
+          'weight' => '2',
         ),
       ),
       'display' => array(),

@@ -63,7 +63,7 @@
   color: lighten(#000000,55%);
   font-family: Georgia, serif;
   position: relative;
-  top: 8px;
+  top:9px;
 }
 
 @mixin quotes-closed {
@@ -71,8 +71,9 @@
   font-size: 2em;
   color: lighten(#000000, 55%);
   font-family: Georgia, serif;
-  position: relative;
-  top: 8px;
+  position: absolute;
+  margin-top:5px;
+  margin-left: 2px;
 }
 
 // Boxed Messages. Images are borrowed from Drupal core, stored in /misc

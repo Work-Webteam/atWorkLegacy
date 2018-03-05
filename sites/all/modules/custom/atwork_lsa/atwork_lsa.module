@@ -4,7 +4,7 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
   global $user;
   $user = user_load($user->uid);
   //$form['#token'] = False;
-  drupal_set_title('Long Service Award Application');
+  drupal_set_title('Registration');
   drupal_set_breadcrumb(array());
   drupal_add_js(drupal_get_path('module', 'atwork_lsa').'/atwork_lsa.js');
   drupal_add_js(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_gift.js');
@@ -12,19 +12,28 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
   jquery_impromptu_add();
   drupal_add_library('system', 'drupal.ajax');
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)){
-    //dpm($user);
     drupal_add_css('.group-lsa-administration {dsplay:block !important;}', 'inline');
   } else {
     // Hide the administration panel from all users until after signup is over.
     drupal_add_js(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_admin_fields.js');
     drupal_add_css('.group-lsa-administration {display:none}', 'inline');
+    // Also hide some fields non-admins will not use
+    $form['field_lsa_guest_accom']['#access'] = false;
+    $form['field_lsa_recipient_accom']['#access'] = false;
   }
 
+  // LSA form adjustments
   $form['field_lsa_received_award']['#suffix'] = '<div style="display: none" id="lsa-no-gift">The Office of Protocol will contact you soon in this regard. Or you may contact them directly at (250) 387-1616.</div>';
-  $form['field_lsa_terms'][$form['field_lsa_terms']['#language']]['#title'] = '';
+  //$form['field_lsa_terms'][$form['field_lsa_terms']['#language']]['#title'] = '';
   $form['#validate'][] = 'atwork_lsa_application_validate';
   $form['#submit'][] = 'atwork_lsa_application_submit';
   $form['actions']['submit']['#value'] = "SUBMIT your LSA registration";
+  $form['field_lsa_accommodation_notes']['und'][0]['value']['#title'] = "";
+  $form['field_lsa_accommodation_notes']['und']['#prefix'] .= "<p>Please specify your accommodations requirements, and indicate if the accommodation is for you or your guest.</p>";
+  $form['field_lsa_award_sp_instructions']['#access'] = FALSE;
+  $form['field_lsa_ceremony_accommodation']['und']['#title'] = t('');
+  $form['field_lsa_dietary_requirements']['und']['#title'] = t('');
+  $form['field_lsa_25year_certificatename']['und']['#prefix'] = t("<p>Enter your name as you’d like it to appear on your certificate.</p>" . $form['field_lsa_25year_certificatename']['und']['#prefix']);
   // skip defaults for admins who are entering for others
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)  || in_array('lsa contact', $user->roles)) {
     //$form['field_lsa_terms'][$form['field_lsa_terms']['#language']]['#default_value'] = 1;
@@ -142,25 +151,87 @@ function atwork_lsa_application_validate($form, &$form_state) {
     ));
   }
 
+  $postal_regex = '/^([a-zA-Z]\d[a-zA-Z])\ {0,1}(\d[a-zA-Z]\d)$/';
   // Quick validation to make sure we have the right number of chars for the Postal Codes
   if(isset($form_state['input']['field_lsa_home_postal_code']['und'][0]['value']) && $form_state['input']['field_lsa_home_postal_code']['und'][0]['value']){
+    // Format this postal code
+    // Upper case
+    $form_state['input']['field_lsa_home_postal_code']['und'][0]['value'] = strtoupper($form_state['input']['field_lsa_home_postal_code']['und'][0]['value']);
+    // remove spaces
+    $form_state['input']['field_lsa_home_postal_code']['und'][0]['value'] = preg_replace('/\s+/', '', $form_state['input']['field_lsa_home_postal_code']['und'][0]['value']);
+    // remove special characters
+    $form_state['input']['field_lsa_home_postal_code']['und'][0]['value'] = preg_replace('/[^A-Za-z0-9\-]/', '', $form_state['input']['field_lsa_home_postal_code']['und'][0]['value']);
+    // Put expected space back at 3rd spot
+    $form_state['input']['field_lsa_home_postal_code']['und'][0]['value'] = wordwrap($form_state['input']['field_lsa_home_postal_code']['und'][0]['value'], 3, ' ', true);
+    // Make sure this is no more than 7 characters long
+    if (strlen($form_state['input']['field_lsa_home_postal_code']['und'][0]['value']) > 7){
+      $form_state['input']['field_lsa_home_postal_code']['und'][0]['value'] = substr($node->field_lsa_home_postal_code[$lang][0]['value'],0,7);
+    }
     $postal_check = str_replace(" ", "", $form_state['input']['field_lsa_home_postal_code']['und'][0]['value']);
     if(strlen($postal_check) < 6 || strlen($postal_check) > 6){
       form_set_error('field_lsa_home_postal_code', t("The recipient postal code must have 6 characters."));
     }
+    // Quick regex to make sure we have relatively the right type of canadian postal
+    $validity = preg_match($postal_regex, $form_state['input']['field_lsa_home_postal_code']['und'][0]['value']);
+    if($validity == FALSE){
+      form_set_error('field_lsa_home_postal_code', t("Please enter a valid recipient postal code in the format A1A 1A1"));
+    }
   }
 
   if(isset($form_state['input']['field_lsa_office_postal_code']['und'][0]['value']) && $form_state['input']['field_lsa_office_postal_code']['und'][0]['value']){
+    // Format this postal code
+    // Upper case
+    $form_state['input']['field_lsa_office_postal_code']['und'][0]['value'] = strtoupper($form_state['input']['field_lsa_office_postal_code']['und'][0]['value']);
+    // remove spaces
+    $form_state['input']['field_lsa_office_postal_code']['und'][0]['value'] = preg_replace('/\s+/', '', $form_state['input']['field_lsa_office_postal_code']['und'][0]['value']);
+    // remove special characters
+    $form_state['input']['field_lsa_office_postal_code']['und'][0]['value'] = preg_replace('/[^A-Za-z0-9\-]/', '', $form_state['input']['field_lsa_office_postal_code']['und'][0]['value']);
+    // Put expected space back at 3rd spot
+    $form_state['input']['field_lsa_office_postal_code']['und'][0]['value'] = wordwrap($form_state['input']['field_lsa_office_postal_code']['und'][0]['value'], 3, ' ', true);
+    // Make sure this is no more than 7 characters long
+    if (strlen($form_state['input']['field_lsa_office_postal_code']['und'][0]['value']) > 7){
+      $form_state['input']['field_lsa_office_postal_code']['und'][0]['value'] = substr($node->field_lsa_home_postal_code[$lang][0]['value'],0,7);
+    }
     $postal_check = str_replace(" ", "", $form_state['input']['field_lsa_office_postal_code']['und'][0]['value']);
     if(strlen($postal_check) < 6 || strlen($postal_check) > 6){
       form_set_error('field_lsa_office_postal_code', t("The office postal code must have 6 characters."));
     }
+    // Quick regex to make sure we have relatively the right type of canadian postal
+    $validity = preg_match($postal_regex, $form_state['input']['field_lsa_office_postal_code']['und'][0]['value']);
+    if($validity == FALSE){
+      form_set_error('field_lsa_office_postal_code', t("Please enter a valid office postal code in the format A1A 1A1"));
+    }
   }
 
+  
+  if(isset($form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']) && $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']){
+    // Format this postal code
+    // Upper case
+    $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'] = strtoupper($form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']);
+    // remove spaces
+    $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'] = preg_replace('/\s+/', '', $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']);
+    // remove special characters
+    $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'] = preg_replace('/[^A-Za-z0-9\-]/', '', $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']);
+    // Put expected space back at 3rd spot
+    $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'] = wordwrap($form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'], 3, ' ', true);
+    // Make sure this is no more than 7 characters long
+    if (strlen($form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']) > 7){
+      $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'] = substr($node->field_lsa_home_postal_code[$lang][0]['value'],0,7);
+    }
+    $postal_check = str_replace(" ", "", $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']);
+    if(strlen($postal_check) < 6 || strlen($postal_check) > 6){
+      form_set_error('field_lsa_supervisor_postal_code', t("The supervisor postal code must have 6 characters."));
+    }
+    // Quick regex to make sure we have relatively the right type of canadian postal
+    $validity = preg_match($postal_regex, $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']);
+    if($validity == FALSE){
+      form_set_error('field_lsa_supervisor_postal_code', t("Please enter a valid postal code for the supervisor in the format A1A 1A1"));
+    }
+  }
 
   // Make sure all relevant PECSF fields filled out
   $award_id = $form_state['values']['field_lsa_award_id'][$lang][0]['value'];
-  $pecsf_id = array(11,17, 33, 40, 42,44);
+  $pecsf_id = array(7, 13, 33, 40, 42,44);
   // They have chosen a pecsf award
   if(in_array($award_id, $pecsf_id)){    
     if(!isset($form_state['values']['field_lsa_donation_options'][$lang][0]['value'])){
@@ -212,16 +283,28 @@ function atwork_lsa_application_validate($form, &$form_state) {
   } else {
     form_set_error($email, t('Email is limited to organizations within the BC Public Service. %email was not found.', array('%email' => $email)));
   }
+  // Check to see if special requirements was selected as "yes" - if so then textbox is required.
+  if($form_state['values']['field_lsa_ceremony_accommodation']['und'][0]['value'] == "1" && $form_state['values'  ]['field_lsa_accommodation_notes']['und'][0]['value'] == ''){
+    form_set_error('field_lsa_accommodation_notes', t("You must indicate the accommodations that you require"));
+  }
+  // Check to see if user had indicated dietary requirements, but indicated none.
+  if($form_state['values']['field_lsa_dietary_requirements']['und'][0]['value'] == "1" && (empty($form_state['values'  ]['field_lsa_recipient_dietary']['und']) && empty($form_state['values'  ]['field_lsa_dietary_guest']['und']))){
+    form_set_error('field_lsa_recipient_dietary', t("You have not indicated dietary requirements for you or your guest"));
+  }
+  // Check if terms are approved
+  if($form_state['values']['field_lsa_terms']['und'][0]['value'] != "1"){
+    //form_set_error('field_lsa_terms', t("You must agree to Terms in order to submit the form"));
+  }
 }
 
 function atwork_lsa_pin_application_validate($form, &$form_state){
   $lang = $form_state['values']['language'];
-
   global $user;
 
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)) {
-    return true;
+    //return true;
   }
+
   // Check if an application has already been submitted for this user
   $exists = db_select('field_data_field_lsa_pin_employee_number', 'e')
       ->fields('e', array('entity_id'))
@@ -237,11 +320,44 @@ function atwork_lsa_pin_application_validate($form, &$form_state){
   }
 
   // Make sure we have selected one or the other - don't want an empty application.
-  if((isset($form_state['input']['field_lsa_other_milestone_years']['und']) && $form_state['input']['field_lsa_other_milestone_years']['und'] == 1) || (isset($form_state['input']['field_lsa_milestone_year']['und']) && $form_state['input']['field_lsa_milestone_year']['und'] == 1)){
-    return true;
-  } else {
+  if((isset($form_state['input']['field_lsa_other_milestone_years']['und']) && $form_state['input']['field_lsa_other_milestone_years']['und'] != 1) && (isset($form_state['input']['field_lsa_milestone_year']['und']) && $form_state['input']['field_lsa_milestone_year']['und'] != 1)){
     // Form is empty
     form_set_error('field_lsa_', t('You have not selected any milestone'));
+  } elseif(!isset($form_state['input']['field_lsa_other_milestone_years']['und']) && !isset($form_state['input']['field_lsa_milestone_year']['und'])){
+    // No milestone entered
+    form_set_error('field_lsa_', t('You have not selected any milestone'));
+  } 
+  if(isset($form_state['input']['field_lsa_other_milestone_years']['und']) || isset($form_state['input']['field_lsa_milestone_year']['und'])){
+    if($form_state['input']['field_lsa_other_milestone_years']['und'] == 1){
+      $chose = false;
+      foreach($form_state['input']['field_lsa_previous_service_miles']['und'] as $k){
+        if(isset($k)){
+          $chose = true;
+          break;
+        }
+      }
+      if($chose == false){
+        form_set_error('field_lsa_previous_service_miles', t('You have not selected any retroactive milestones'));
+      }
+    }
+    if($form_state['input']['field_lsa_milestone_year']['und'] == 1){
+      if(isset($form_state['input']['field_lsa_pin_service_milestone']['und']) && $form_state['input']['field_lsa_pin_service_milestone']['und'] == '_none'){
+        form_set_error('field_lsa_pin_service_milestone', t('You have not selected a service milestone'));
+      }
+    }
+  }
+  // If they indicate they would like a retro pin, they have to choose one
+  //if(isset($form_state['input']['field_lsa_other_milestone_years']['und']) || isset($form_state['input']//['field_lsa_milestone_year']['und'])){
+  //  if(isset($form_state['input']['field_lsa_other_milestone_years']['und']) && $form_state['input']['field_lsa_other_milestone_years']['und'] == '_none'){
+   //   form_set_error('field_lsa_pin_service_milestone', t('You have not selected a retroactive service milestone'));
+   // }
+  //}
+  // Lets make sure the Postal codes at least match standardized format - we are not looking up validity here.
+  // Quick regex to make sure we have relatively the right type of canadian postal
+  $postal_regex = '/^([a-zA-Z]\d[a-zA-Z])\ {0,1}(\d[a-zA-Z]\d)$/';
+  $validity = preg_match($postal_regex, $form_state['input']['field_lsa_office_postal_code']['und'][0]['value']);
+  if($validity == FALSE){
+    form_set_error('field_lsa_supefield_lsa_office_postal_code', t("Please enter a valid postal code for the supervisor in the format A1A 1A1"));
   }
 
   return true;
@@ -274,27 +390,6 @@ function atwork_lsa_node_presave($node) {
   // standardize case
   $node->field_lsa_street[$lang][0]['value'] = ucwords(strtolower($node->field_lsa_street[$lang][0]['value']));
   $node->field_lsa_city[$lang][0]['value'] = ucwords(strtolower($node->field_lsa_city[$lang][0]['value']));
-  // Postal Code setup
-  // Upper case
-  $node->field_lsa_home_postal_code[$lang][0]['value'] = strtoupper($node->field_lsa_home_postal_code[$lang][0]['value']);
-  $node->field_lsa_office_postal_code[$lang][0]['value'] = strtoupper($node->field_lsa_office_postal_code[$lang][0]['value']);
-  // remove spaces
-  $node->field_lsa_home_postal_code[$lang][0]['value'] = preg_replace('/\s+/', '', $node->field_lsa_home_postal_code[$lang][0]['value']);
-  $node->field_lsa_office_postal_code[$lang][0]['value'] = preg_replace('/\s+/', '', $node->field_lsa_office_postal_code[$lang][0]['value']);
-  // remove special characters
-  $node->field_lsa_home_postal_code[$lang][0]['value'] = preg_replace('/[^A-Za-z0-9\-]/', '', $node->field_lsa_home_postal_code[$lang][0]['value']);
-  $node->field_lsa_office_postal_code[$lang][0]['value'] = preg_replace('/[^A-Za-z0-9\-]/', '', $node->field_lsa_office_postal_code[$lang][0]['value']);
-  // Put expected space back at 3rd spot
-  $node->field_lsa_home_postal_code[$lang][0]['value'] = wordwrap($node->field_lsa_home_postal_code[$lang][0]['value'], 3, ' ', true);
-  $node->field_lsa_office_postal_code[$lang][0]['value'] = wordwrap($node->field_lsa_office_postal_code[$lang][0]['value'], 3, ' ', true);
-  // Make sure this is no more than 7 characters long
-  if (strlen($node->field_lsa_home_postal_code[$lang][0]['value']) > 7){
-    $node->field_lsa_home_postal_code[$lang][0]['value'] = substr($node->field_lsa_home_postal_code[$lang][0]['value'],0,7);
-  }
-  if(strlen($node->field_lsa_office_postal_code[$lang][0]['value']) > 7){
-    $node->field_lsa_office_postal_code[$lang][0]['value'] = substr($node->field_lsa_office_postal_code[$lang][0]['value'], 0,7);
-  }
-
 
   // trim by request - probably not needed
   $node->field_lsa_first_name[$lang][0]['value'] = trim($node->field_lsa_first_name[$lang][0]['value']);
@@ -337,7 +432,7 @@ function atwork_lsa_application_submit(&$form, &$form_state) {
   }
   $id = get_award_id_number($form_state);
   // Send to helper function that will sort out the award id number if it is not populated yet.
-  if($form_state['values']['field_lsa_award_id']['und'][0]['value'] == 0 || $form_state['values']['field_lsa_award_id']['und'][0]['value'] == NULL){
+  if($form_state['values']['field_lsa_award_id']['und'][0]['value'] == 0 || $form_state['values']['field_lsa_award_id']['und'][0]['value'] == ""){
     if(isset($id) && $id > 0){
       $form_state['values']['field_lsa_award_id']['und'][0]['value'] = $id;
     }
@@ -346,7 +441,6 @@ function atwork_lsa_application_submit(&$form, &$form_state) {
   } elseif(!isset($form_state['values']['field_lsa_award_id']['und'][0]['value'])){
     $form_state['values']['field_lsa_award_id']['und'][0]['value'] = $id;
   }
-
   // Check if we have a middle name. If it is a single initial, add a . (if length is == 1 )
   if(isset($form_state['values']['field_lsa_middle_name']['und'][0]['value']) && $form_state['values']['field_lsa_middle_name']['und'][0]['value']){
     $middle_name = $form_state['values']['field_lsa_middle_name']['und'][0]['value'];
@@ -366,53 +460,53 @@ function atwork_lsa_application_submit(&$form, &$form_state) {
 }
 
 function get_award_id_number($form_state){
-  $award = $form_state['values']['field_lsa_award']['und'][0]['value'];
+  $award = trim($form_state['values']['field_lsa_award']['und'][0]['value']);
   $awards = array(
-      1 => "2016 Recipient - award received",
-      2 => "25 - Choice TBC",
-      3 => "25 - Framed Certificate and Cross 'Starry Blue' Ballpoint Pen",
-      4 => "25 - Cross 'Starry Blue' Ballpoint Pen - No Certificate",
-      5 => "25 - Framed Certificate and Leather Tablet Holder with Notepad",
-      6 => "25 - Leather Tablet Holder with Notepad - No Certificate",
-      7 => "25 - Framed Certificate and Sterling Silver White Pearl Earrings",
-      8 => "25 - Sterling Silver White Pearl Earrings - No Certificate",
-      9 => "25 - Framed Certificate and Leather Passport and Luggage Tag Set",
-      10 => "25 - Leather Passport and Luggage Tag Set - No Certificate",
-      11 => "25 - $75.00 PECSF Charitible Donation",
-      12 => "30 - Choice TBC",
-      13 => "30 - Collande Clock",
-      14 => "30 - Appalacian Sherpa Blanket",
-      15 => "30 - Roy Vickers Print - Tofino Sunrise",
-      16 => "30 - Solid Sterling Drop Earrings",
-      17 => "30 - $150.00 PECSF Charitible Donation",
-      18 => "35 - Choice TBC",
-      19 => "35 - Bushnell Compact Binoculars",
-      20 => "35 - Hand-Blown Glass Vase by Robert Held",
-      21 => "35 - Ladies' Gold Watch with Black Strap",
-      22 => "35 - Ladies' Gold Watch with Brown Strap",
-      23 => "35 - Ladies' Gold Watch with Gold Strap",
-      24 => "35 - Ladies' Silver Watch with Silver Face",
-      25 => "35 - Ladies' Silver Watch with Two-toned Face",
-      26 => "35 - Men's Gold Watch with Black Strap",
-      27 => "35 - Men's Gold Watch with Brown Strap",
-      28 => "35 - Men's Gold Watch with Gold Strap",
-      29 => "35 - Men's Silver Watch with Silver Face",
-      30 => "35 - Men's Silver Watch with Two-toned Face",
-      31 => "35 - Sterling Silver Bracelet - size A",
-      32 => "35 - Sterling Silver Bracelet - size B",
-      33 => "35 - $300.00 PECSF Charitible Donation",
-      34 => "40 - Choice TBC",
-      35 => "40 - Napolean Beauty Ergo Mantle Clock",
-      36 => "40 - 14kt White Gold Diamond Stud Earrings",
-      37 => "40 - Hand-Blown Glass Bowl by Robert Held",
-      38 => "40 - Michaela Davidson Print - Sunbreakers",
-      39 => "40 - 10kt White Gold Diamond Pendant and Chain",
-      40 => "40 - $400.00 PECSF Charitible Donation",
-      41 => "45 - Choice TBC",
-      42 => "45 - $450.00 PECSF Charitible Donation",
-      43 => "50 - Choice TBC",
-      44 => "50 - $500.00 PECSF Charitible Donation",
-      45 => "Award already Sent",
+    1=>"2017 Recipient - award received",
+    2=>"Choice TBC",
+    3=>"Framed Certificate and Cross pen",
+    4=>"Framed Certificate and Cross tablet holder",
+    5=>"Framed Certificate and pearl earrings",
+    6=>"Framed Certificate and passport and luggage tag set",
+    7=>"Framed Certificate and $75.00 PECSF charitable donation",
+    8=>"Choice TBC",
+    9=>"Colonnade clock",
+    10=>"Appalachian Sherpa blanket",
+    11=>"Golden Shores framed art print",
+    12=>"Sterling silver earrings",
+    13=>"$150.00 PECSF charitable donation",
+    14=>"Choice TBC",
+    15=>"Bushnell NatureView binoculars",
+    16=>"Blue flower bouquet glass vase",
+    17=>"Women's Gold Watch with Black Strap",
+    18=>"Women's Gold Watch with Brown Strap",
+    19=>"Women's Gold Watch with Gold Strap",
+    20=>"Women's Silver Watch with Silver Strap",
+    21=>"Women's Silver Watch with Two-toned Strap",
+    22=>"Women's Silver Watch with Black Strap",
+    23=>"Women's Silver Watch with Brown Strap",
+    24=>"Men's Gold Watch with Black Strap",
+    25=>"Men's Gold Watch with Brown Strap",
+    26=>"Men's Gold Watch with Gold Strap",
+    27=>"Men's Silver Watch with Silver Strap",
+    28=>"Men's Silver Watch with Two-toned Strap",
+    29=>"Men's Silver Watch with Black Strap",
+    30=>"Men's Silver Watch with Brown Strap",
+    31=>"Sterling Silver Bracelet - size A",
+    32=>"Sterling Silver Bracelet - size B",
+    33=>"$300.00 PECSF charitable donation",
+    34=>"Choice TBC",
+    35=>"Napolean Beauty ergo mantle clock",
+    36=>"Genuine diamond stud earrings",
+    37=>"Blue Flower Bouquet glass bowl",
+    38=>"Morning Surf framed art print",
+    39=>"Genuine diamond pendant and chain",
+    40=>"$400.00 PECSF charitable donation",
+    41=>"Choice TBC",
+    42=>"$450.00 PECSF charitable donation",
+    43=>"Choice TBC",
+    44=>"$500.00 PECSF charitable donation",
+    45=>"Award already Sent",
     );
   $award_id = array_search($award, $awards);
   return $award_id;
@@ -422,13 +516,12 @@ function atwork_lsa_node_view($node, $view_mode, $langcode) {
     $node->content['top_message'] = array(
       '#weight' => -10,
       '#markup' => '<h2>Thank you for your registration</h2>
-      <em style="color: red; font-weight: bold;">Print and retain this confirmation for your records.</em>',
+      <em style="color: red; font-weight: bold;">If you do not receive an automated confirmation email, you will need to re-submit this application.</em>',
       );
     $node->content['bottom_message'] = array(
       '#weight' => 90,
       '#markup' => '<p class="feature_box_yellow" style="margin-top: 1em;">If you have any questions, please contact your <a href="/career/employee-appreciation/recognition-contacts">Ministry Recognition Contact</a>.' /*, or the corporate  contact at the BC Public Service Agency, <a href="mailto:Gillian.Kish@gov.bc.ca">Gillian.Kish@gov.bc.ca</a></p>' */,
       );
-
   }
 
 
@@ -444,8 +537,23 @@ function atwork_lsa_node_view($node, $view_mode, $langcode) {
     drupal_add_css('.field-name-field-lsa-25year-certificatename {display:block; }', 'inline');
   }
   // Adding in our third and final steps of instructions that isn't in the block - TODO: hide this until we are ready to allow users to alter their fields
-  $node->content['field_lsa_retiring_thisyear']['#prefix'] = '<p> Step 3: Verify your contact information below is correct. If you make changes, click the “Save Change” button. If you are unable to make changes to certain fields, please notify us by email at <a href="mailto:longserviceawards@gov.bc.ca?subject=Change%20request">longserviceawards@gov.bc.ca</a>.</p><p>&nbsp</p>'; 
-  $node->content['field_lsa_supervisor_email']['#suffix'] = '<strong style="color: red;"> <br /><p>Thank you for confirming your information.</p><p>Once all your changes are saved, please visit the <a href="https://gww.gov.bc.ca/career/long-service-awards/faq">Long Service Awards FAQs</a> for more information.</p></strong>';
+  //$node->content['field_lsa_retiring_thisyear']['#prefix'] = '<p> Step 3: Verify your contact information below is correct. If you make changes, click the “Save Change” button. If you are unable to make changes to certain fields, please notify us by email at <a href="mailto:longserviceawards@gov.bc.ca?subject=Change%20request">longserviceawards@gov.bc.ca</a>.</p><p>&nbsp</p>'; 
+  //$node->content['field_lsa_supervisor_email']['#suffix'] = '<strong style="color: red;"> <br /><p>Thank you for confirming your information.</p><p>Once all your changes are saved, please visit the <a href="https://gww.gov.bc.ca/career/long-service-awards/faq">Long Service Awards FAQs</a> for more information.</p></strong>';
+  // Change the confirmation message to make more sense.
+  if (isset($_SESSION['messages']['status']) && $_SESSION['messages']['status']){
+    $first_name = $node->field_lsa_first_name['und'][0]['safe_value'];
+    $last_name = $node->field_lsa_last_name['und'][0]['safe_value'];
+    if(isset($node->field_lsa_middle_name['und'][0]['safe_value']) && $node->field_lsa_middle_name['und'][0]['safe_value']) {
+      $full_name = $first_name . ' ' . $node->field_lsa_middle_name['und'][0]['safe_value'] . ' ' . $last_name;
+    } else {
+      $full_name = $first_name . ' ' . $last_name;
+    }
+    $message_check = 'Long Service Awards Application <em class="placeholder">' . $full_name . '</em> has been created.';
+    if (in_array($message_check, $_SESSION['messages']['status'])){
+      $i = array_search($message_check, $_SESSION['messages']['status']);
+      $_SESSION['messages']['status'][$i] = $full_name .'\'s Long Service Award registration has been received';
+    }
+  }
 }
 
 function atwork_lsa_views_pre_view(&$view, &$display_id, &$args) {
@@ -508,14 +616,31 @@ function atwork_lsa_node_insert($node) {
 
     require_once(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_pin.mail.inc');
 
-    // Only to specific ministries
+  /** Only to specific ministries
+    * 6 | Ministry of Education
+    *12 | Ministry of Indigenous Relations and Reconciliation
+    *15 | Ministry of Mental Health and Addictions
+    *20 | Ministry of Transportation and Infrastructure
+    *41 | Environmental Appeal Board
+    *42 | Environmental Assessment Office
+    *52 | Intergovernmental Relations Secretariat
+    *60 | Office of the Information and Privacy Commissioner
+    *61 | Office of the Merit Commissioner
+    *62 | Office of the Ombudsperson
+    *63 | Office of the Police Complaint Commissioner
+   **/
     $check_min = array(
-      1, //ABR
-      6, // ED
-      2, // Aved
-      11, // health
-      40, // Environmental assessment office
-      64, // Pub guardian and trustee
+      6 , //Ministry of Education
+      12, //Ministry of Indigenous Relations and Reconciliation
+      15, //Ministry of Mental Health and Addictions
+      20, //Ministry of Transportation and Infrastructure
+      41, //Environmental Appeal Board
+      42, //Environmental Assessment Office
+      52, //Intergovernmental Relations Secretariat
+      60, //Office of the Information and Privacy Commissioner
+      61, //Office of the Merit Commissioner
+      62, //Office of the Ombudsperson
+      63, //Office of the Police Complaint Commissioner
       );
 
 
@@ -579,7 +704,6 @@ function atwork_lsa_node_insert($node) {
  */
 function atwork_lsa_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-
 // For LSA admin, allows to sort on whether a user has entered input.
   if($form['#id'] == 'views-exposed-form-lsa-admin-page-2'){
     if(isset($form['field_lsa_notes_value_op']['#options'])){
@@ -600,10 +724,10 @@ function atwork_lsa_form_alter(&$form, &$form_state, $form_id) {
       // But hide the weird textbox
       drupal_add_css("#edit-field-lsa-notes-value {display:none; }", 'inline');
     }
-    //dpm($form);
   }
 
   if ($form['#id'] == 'views-exposed-form-content-lsa') {
+
     if (isset($form['#info']['filter-created']['label'])) {
       $form['#info']['filter-created']['label'] = '';
     }
@@ -636,7 +760,6 @@ function atwork_lsa_form_alter(&$form, &$form_state, $form_id) {
   }
 
   if ($form_id === 'lsa_application_node_form' ) {
-   //dpm($form);
 
   }
 
@@ -661,7 +784,7 @@ function atwork_lsa_form_lsa_pin_application_node_form_alter(&$form, $form_state
     $form['field_lsa_work_phone_ext']['und'][0]['value']['#title'] = t('Supervisor Phone Ext');
   }
   $form['#validate'][] = 'atwork_lsa_pin_application_validate';
-  $form['actions']['submit']['#value'] = t('Submit this Service Pin request');
+  $form['actions']['submit']['#value'] = t('Submit');
 
 /*
   // skip defaults for admins who are entering for others
@@ -829,7 +952,7 @@ function atwork_lsa_node_page_view($node) {
  */
 
 function atwork_lsa_menu() {
-  $items['atwork_lsa_pin_form/%'] = array(
+  $items['atwork_lsa_pin_form/%'] = array( 
     'type' => MENU_CALLBACK,
     'page callback' => 'atwork_lsa_pin_page_callback',
     'page arguments' => array(1),

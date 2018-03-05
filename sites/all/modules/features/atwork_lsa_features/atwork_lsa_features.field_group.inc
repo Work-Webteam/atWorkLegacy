@@ -42,6 +42,38 @@ function atwork_lsa_features_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_lsa_accom|node|lsa_application|form';
+  $field_group->group_name = 'group_lsa_accom';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'lsa_application';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Ceremony Accommodations',
+    'weight' => '18',
+    'children' => array(
+      0 => 'field_lsa_ceremony_accommodation',
+      1 => 'field_lsa_accommodation_notes',
+      2 => 'field_lsa_recipient_accom',
+      3 => 'field_lsa_guest_accom',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Ceremony Accommodations',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => '',
+        'classes' => 'group-lsa-accom field-group-fieldset',
+        'description' => '<span class="ceremony-acc-note">Do you or your guest require any accommodations to attend the Long Service Award ceremony at Government House? (e.g. sign language interpreter (ASL), service dog, accessible parking/entrance, etc.)</span>',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_lsa_accom|node|lsa_application|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_lsa_administration|node|lsa_application|form';
   $field_group->group_name = 'group_lsa_administration';
   $field_group->entity_type = 'node';
@@ -50,13 +82,14 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Administration',
-    'weight' => '28',
+    'weight' => '22',
     'children' => array(
       0 => 'field_lsa_notes',
       1 => 'field_lsa_form_date_stamp',
-      2 => 'field_lsa_retro_active',
-      3 => 'group_lsa_ceremony_details',
-      4 => 'group_lsa_rsvp',
+      2 => 'field_lsa_watch_engraving_sent',
+      3 => 'field_lsa_retro_active',
+      4 => 'group_lsa_ceremony_details',
+      5 => 'group_lsa_rsvp',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -83,7 +116,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = 'group_lsa_administration';
   $field_group->data = array(
     'label' => 'Ceremony Details',
-    'weight' => '39',
+    'weight' => '26',
     'children' => array(
       0 => 'field_lsa_alternate_min_org',
       1 => 'field_lsa_actual_min_org',
@@ -114,7 +147,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = 'group_lsa_personal_info';
   $field_group->data = array(
-    'label' => 'Home Contact Information',
+    'label' => 'Home Mailing Address',
     'weight' => '13',
     'children' => array(
       0 => 'field_lsa_street',
@@ -129,17 +162,48 @@ function atwork_lsa_features_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => 'Home Contact Information',
+      'label' => 'Home Mailing Address',
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
         'classes' => 'group-lsa-contact-info field-group-fieldset ',
-        'description' => 'Home Mailing Address',
+        'description' => '',
       ),
       'formatter' => 'open',
     ),
   );
   $field_groups['group_lsa_contact_info|node|lsa_application|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_lsa_dietary_acc|node|lsa_application|form';
+  $field_group->group_name = 'group_lsa_dietary_acc';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'lsa_application';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Dietary Requirements',
+    'weight' => '20',
+    'children' => array(
+      0 => 'field_lsa_dietary_requirements',
+      1 => 'field_lsa_recipient_dietary',
+      2 => 'field_lsa_dietary_guest',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Dietary Requirements',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => '',
+        'classes' => 'group-lsa-dietary-acc field-group-fieldset',
+        'description' => '<span id="dietary-requirements-text">Do you or your guest have any food allergies or dietary restrictions?</span>',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_lsa_dietary_acc|node|lsa_application|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -152,7 +216,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = 'group_lsa_pecsf';
   $field_group->data = array(
     'label' => '',
-    'weight' => '16',
+    'weight' => '17',
     'children' => array(
       0 => 'field_lsa_donation_amount',
       1 => 'field_lsa_pecsf_charity_name',
@@ -182,17 +246,16 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Work Information',
-    'weight' => '23',
+    'weight' => '17',
     'children' => array(
       0 => 'field_lsa_org',
       1 => 'field_lsa_branch_department',
       2 => 'field_lsa_ministry_id',
-      3 => 'field_lsa_office_work_group',
-      4 => 'field_lsa_office_address',
-      5 => 'field_lsa_office_city',
-      6 => 'field_lsa_office_postal_code',
-      7 => 'field_lsa_office_province',
-      8 => 'group_lsa_supervisor_info',
+      3 => 'field_lsa_office_address',
+      4 => 'field_lsa_office_city',
+      5 => 'field_lsa_office_postal_code',
+      6 => 'field_lsa_office_province',
+      7 => 'group_lsa_supervisor_info',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -223,12 +286,11 @@ function atwork_lsa_features_field_group_info() {
       0 => 'field_lsa_org',
       1 => 'field_lsa_work_phone',
       2 => 'field_lsa_branch_department',
-      3 => 'field_lsa_office_work_group',
-      4 => 'field_lsa_work_phone_ext',
-      5 => 'field_lsa_office_address',
-      6 => 'field_lsa_office_city',
-      7 => 'field_lsa_office_postal_code',
-      8 => 'field_lsa_office_province',
+      3 => 'field_lsa_work_phone_ext',
+      4 => 'field_lsa_office_address',
+      5 => 'field_lsa_office_city',
+      6 => 'field_lsa_office_postal_code',
+      7 => 'field_lsa_office_province',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -253,8 +315,8 @@ function atwork_lsa_features_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'PECSF',
-    'weight' => '13',
+    'label' => 'Charitable donation',
+    'weight' => '12',
     'children' => array(
       0 => 'field_lsa_donation_options',
       1 => 'field_lsa_pecsf_region',
@@ -264,12 +326,12 @@ function atwork_lsa_features_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => 'PECSF',
+      'label' => 'Charitable donation',
       'instance_settings' => array(
         'required_fields' => 0,
         'id' => 'pecsf-fields',
         'classes' => 'group-lsa-pecsf field-group-fieldset',
-        'description' => 'Instructions: Click here to access the list of <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions" target = "_blank">PECSF charities by Region</a>. Once you have made your decision of which charity (maximum 2), OR regional pool of charities to donate to, complete the information below. Note: Charitable tax receipts are not issued for Long Service Award donations. ',
+        'description' => '',
       ),
       'formatter' => 'collapsible',
     ),
@@ -286,8 +348,8 @@ function atwork_lsa_features_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Name',
-    'weight' => '22',
+    'label' => 'Recipient Contact Information',
+    'weight' => '16',
     'children' => array(
       0 => 'field_lsa_first_name',
       1 => 'field_lsa_middle_name',
@@ -296,7 +358,7 @@ function atwork_lsa_features_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => 'Name',
+      'label' => 'Recipient Contact Information',
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
@@ -330,13 +392,7 @@ function atwork_lsa_features_field_group_info() {
         'required_fields' => 1,
         'id' => 'lsa-pin-terms',
         'classes' => 'group-lsa-pin-terms field-group-fieldset',
-        'description' => 'If the above information is complete, and you have agreed to the terms below, click the “SUBMIT” button at the bottom of the screen. You will then receive:
-<ul>
-<li> a confirmation page displaying all of the information you’ve entered. Please check this page to ensure the information is accurate. If something is incorrect, contact  your<a href="/career/employee-appreciation/recognition-contacts"> Ministry Recognition Contact</a>. </li>
-<li>an automated email thanking you for your registration.</li>
-</ul>
-<p class="style-red"> <strong>IMPORTANT:</strong> If you do not receive a confirmation email, you will need to re-submit the request again.</p>
-',
+        'description' => '<br /><div id="term-red">If the above information is complete, and you have agreed to the terms below, click the SUBMIT button.</div>',
       ),
       'formatter' => 'open',
     ),
@@ -354,7 +410,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = 'group_lsa_administration';
   $field_group->data = array(
     'label' => 'RSVP Information',
-    'weight' => '38',
+    'weight' => '25',
     'children' => array(
       0 => 'field_lsa_rsvp',
       1 => 'field_lsa_attending_ceremony',
@@ -386,7 +442,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = 'group_lsa_pecsf';
   $field_group->data = array(
     'label' => '',
-    'weight' => '21',
+    'weight' => '18',
     'children' => array(
       0 => 'field_lsa_charity_name_2',
       1 => 'field_lsa_donation_amount_2',
@@ -417,10 +473,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->data = array(
     'label' => 'Special Requirements',
     'weight' => '0',
-    'children' => array(
-      0 => 'field_lsa_specialrequirements',
-      1 => 'field_specialrequirement_descrip',
-    ),
+    'children' => array(),
     'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Special Requirements',
@@ -454,6 +507,10 @@ function atwork_lsa_features_field_group_info() {
       0 => 'field_lsa_supervisor_first_name',
       1 => 'field_lsa_supervisor_last_name',
       2 => 'field_lsa_supervisor_email',
+      3 => 'field_lsa_supervisor_city',
+      4 => 'field_lsa_supervisor_postal_code',
+      5 => 'field_lsa_supervisor_province',
+      6 => 'field_supervisor_address',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -467,6 +524,35 @@ function atwork_lsa_features_field_group_info() {
     ),
   );
   $field_groups['group_lsa_supervisor_info|node|lsa_application|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_lsa_survey|node|lsa_application|form';
+  $field_group->group_name = 'group_lsa_survey';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'lsa_application';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Long Service Award Survey',
+    'weight' => '21',
+    'children' => array(
+      0 => 'field_lsa_survey',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Long Service Award Survey',
+      'instance_settings' => array(
+        'required_fields' => 0,
+        'id' => '',
+        'classes' => 'group-lsa-survey field-group-fieldset',
+        'description' => 'At the end of the year, a follow-up survey may be sent to collect feedback about your experience with the Long Service Awards program. Please indicate if you do not want to participate below.',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_lsa_survey|node|lsa_application|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -556,6 +642,10 @@ function atwork_lsa_features_field_group_info() {
       0 => 'field_lsa_supervisor_first_name',
       1 => 'field_lsa_supervisor_last_name',
       2 => 'field_lsa_supervisor_email',
+      3 => 'field_lsa_supervisor_city',
+      4 => 'field_lsa_supervisor_postal_code',
+      5 => 'field_lsa_supervisor_province',
+      6 => 'field_supervisor_address',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -627,17 +717,18 @@ function atwork_lsa_features_field_group_info() {
       2 => 'field_lsa_pin_last_name',
       3 => 'field_lsa_branch_department',
       4 => 'field_lsa_email',
-      5 => 'field_lsa_branch',
-      6 => 'field_lsa_home_phone',
+      5 => 'field_lsa_home_phone',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Recipient Details',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-recipient-details field-group-fieldset ',
         'required_fields' => 1,
+        'id' => '',
+        'classes' => 'group-recipient-details field-group-fieldset ',
+        'description' => '',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_recipient_details|node|lsa_pin_application|form'] = $field_group;
@@ -659,12 +750,13 @@ function atwork_lsa_features_field_group_info() {
       1 => 'field_lsa_years_of_service',
       2 => 'field_lsa_received_award',
       3 => 'field_lsa_retiring_thisyear',
-      4 => 'field_lsa_award',
-      5 => 'field_lsa_date_of_retirement',
-      6 => 'field_lsa_charity_name_2',
-      7 => 'field_lsa_pecsf_charity_name',
-      8 => 'field_lsa_pecsf_region',
-      9 => 'field_lsa_second_donation',
+      4 => 'field_lsa_25year_certificatename',
+      5 => 'field_lsa_award',
+      6 => 'field_lsa_date_of_retirement',
+      7 => 'field_lsa_charity_name_2',
+      8 => 'field_lsa_pecsf_charity_name',
+      9 => 'field_lsa_pecsf_region',
+      10 => 'field_lsa_second_donation',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -719,14 +811,18 @@ function atwork_lsa_features_field_group_info() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Administration');
+  t('Ceremony Accommodations');
   t('Ceremony Details');
+  t('Charitable donation');
   t('Contact Information');
-  t('Home Contact Information');
+  t('Dietary Requirements');
+  t('Home Mailing Address');
+  t('Long Service Award Survey');
   t('Name');
   t('Office Information');
-  t('PECSF');
   t('Pin Options');
   t('RSVP Information');
+  t('Recipient Contact Information');
   t('Recipient Details');
   t('Service Information');
   t('Special Requirements');

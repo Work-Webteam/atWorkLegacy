@@ -18,7 +18,6 @@ Drupal.settings.urlIsAjaxTrusted = Drupal.settings.urlIsAjaxTrusted || {};
 
 /**
  * Attaches the Ajax behavior to each Ajax form element.
- * 
  */
 Drupal.behaviors.AJAX = {
   attach: function (context, settings) {

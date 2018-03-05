@@ -2461,6 +2461,3 @@ function atwork_activity_user_view_alter(&$build){
     }
   }
 }
-
-
-

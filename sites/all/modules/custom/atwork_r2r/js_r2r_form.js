@@ -68,6 +68,7 @@
       opacity: 1,
       title: "Region to Region",
       draggable: true,
+      title: "Region to Region",
       show: { effect: "blind", duration: 800 },
       buttons: {
         "Continue": function(){
