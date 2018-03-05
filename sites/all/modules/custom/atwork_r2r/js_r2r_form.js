@@ -47,7 +47,8 @@
       // Edit button needs to be set / toggle renamed
       setClickHandlers();
       return;
-    } else {
+    } 
+    else {
       // Already had an application, so redirect them
       window.open(result[2], '_blank');
       // Remove spinner and make button clickable again
