@@ -22,6 +22,7 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 		
 		// Retrieve Username from UID and place in comments array
 		$user = user_load($comment->uid);
+		$comment->name = $user->field_display_name['und'][0]['safe_value'];
 		// We need to remove any image tags
 		$comment->comment_body['und'][0]['formatted'] = preg_replace("/<img[^>]+\>/i", "", $comment->comment_body['und'][0]['value'] ); 
 		// Get rid of <p>&nbsp;</p> if author has dropped in a bunch of returns
