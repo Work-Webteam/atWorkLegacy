@@ -302,7 +302,7 @@ function atwork_lsa_pin_application_validate($form, &$form_state){
   global $user;
 
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)) {
-    //return true;
+    return true;
   }
 
   // Check if an application has already been submitted for this user
