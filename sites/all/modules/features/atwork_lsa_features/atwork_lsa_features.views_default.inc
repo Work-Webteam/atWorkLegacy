@@ -238,7 +238,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['relationship'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: Display Name */
+  /* Field: Field: Email */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
@@ -401,7 +401,7 @@ function atwork_lsa_features_views_default_views() {
     7 => 0,
     8 => 0,
   );
-  /* Filter criterion: Field: Display Name (field_display_name) */
+  /* Filter criterion: Field: Email (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
@@ -578,7 +578,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['relationship'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: Display Name */
+  /* Field: Field: Email */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
@@ -777,7 +777,7 @@ function atwork_lsa_features_views_default_views() {
     7 => 0,
     8 => 0,
   );
-  /* Filter criterion: Field: Display Name (field_display_name) */
+  /* Filter criterion: Field: Email (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
@@ -962,7 +962,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['relationship'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: Display Name */
+  /* Field: Field: Email */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
@@ -1066,7 +1066,7 @@ function atwork_lsa_features_views_default_views() {
     13 => 0,
   );
   $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
-  /* Filter criterion: Field: Display Name (field_display_name) */
+  /* Filter criterion: Field: Email (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
@@ -2394,65 +2394,6 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['filters']['field_lsa_supervisor_last_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['field_lsa_supervisor_last_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
   $handler->display->display_options['filters']['field_lsa_supervisor_last_name_value']['expose']['autocomplete_dependent'] = 0;
-  /* Filter criterion: Content: Please select the retroactive milestone pin(s) you would like to order (field_lsa_previous_service_miles) */
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['id'] = 'field_lsa_previous_service_miles_value';
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['table'] = 'field_data_field_lsa_previous_service_miles';
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['field'] = 'field_lsa_previous_service_miles_value';
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['operator'] = 'not';
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['operator_id'] = 'field_lsa_previous_service_miles_value_op';
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['label'] = 'retroactive milestone pins';
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['operator'] = 'field_lsa_previous_service_miles_value_op';
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['identifier'] = 'field_lsa_previous_service_miles_value';
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_lsa_previous_service_miles_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    5 => 0,
-    6 => 0,
-    7 => 0,
-    8 => 0,
-    10 => 0,
-    11 => 0,
-    12 => 0,
-    13 => 0,
-    15 => 0,
-    16 => 0,
-    17 => 0,
-  );
-  /* Filter criterion: Content: Service Milestone (field_lsa_pin_service_milestone) */
-  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['id'] = 'field_lsa_pin_service_milestone_value_1';
-  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['table'] = 'field_data_field_lsa_pin_service_milestone';
-  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['field'] = 'field_lsa_pin_service_milestone_value';
-  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['operator'] = 'empty';
-  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['expose']['operator_id'] = 'field_lsa_pin_service_milestone_value_1_op';
-  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['expose']['label'] = 'Service Milestone Value';
-  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['expose']['operator'] = 'field_lsa_pin_service_milestone_value_1_op';
-  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['expose']['identifier'] = 'field_lsa_pin_service_milestone_value_1';
-  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_lsa_pin_service_milestone_value_1']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-    4 => 0,
-    5 => 0,
-    6 => 0,
-    7 => 0,
-    8 => 0,
-    10 => 0,
-    11 => 0,
-    12 => 0,
-    13 => 0,
-    15 => 0,
-    16 => 0,
-    17 => 0,
-  );
   $handler->display->display_options['path'] = 'administration/long-service-pin';
 
   /* Display: Data export */
@@ -2757,7 +2698,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['relationship'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: Display Name */
+  /* Field: Field: Email */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';
@@ -2869,7 +2810,7 @@ function atwork_lsa_features_views_default_views() {
     7 => 0,
     8 => 0,
   );
-  /* Filter criterion: Field: Display Name (field_display_name) */
+  /* Filter criterion: Field: Email (field_display_name) */
   $handler->display->display_options['filters']['field_display_name_value']['id'] = 'field_display_name_value';
   $handler->display->display_options['filters']['field_display_name_value']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['filters']['field_display_name_value']['field'] = 'field_display_name_value';
@@ -3055,7 +2996,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['relationship'] = 'uid';
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  /* Field: Field: Display Name */
+  /* Field: Field: Email */
   $handler->display->display_options['fields']['field_display_name']['id'] = 'field_display_name';
   $handler->display->display_options['fields']['field_display_name']['table'] = 'field_data_field_display_name';
   $handler->display->display_options['fields']['field_display_name']['field'] = 'field_display_name';

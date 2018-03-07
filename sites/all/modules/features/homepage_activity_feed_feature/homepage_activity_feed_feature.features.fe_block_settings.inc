@@ -14,10 +14,7 @@ function homepage_activity_feed_feature_default_fe_block_settings() {
 
   $export['atwork_activity-homepage'] = array(
     'cache' => 1,
-    'css' => '#block-atwork-activity-homepage {
- height: 1360px!important;
-}
-#social-side .entity-message p[class^="msg-"] + p + p, #social-side .entity-message span.activity-comment {
+    'css' => '#social-side .entity-message p[class^="msg-"] + p + p, #social-side .entity-message span.activity-comment {
  line-height: 16px;
 }
 #social-side p.message {
@@ -28,7 +25,46 @@ span.activity-comment:after {
    display:inline-block!important;
     position: absolute!important;
     margin-top: 5px!important;
-}',
+}
+
+/* Adjust the activity feed height. Might not be needed on move to Prod. */
+#block-atwork-activity-homepage {
+ height: 1360px!important;
+}
+/*  Minor styling for the update button */
+.status-update-mock-button {
+ margin-top: 14px;
+ margin-left: 3px;
+ color: #26669E;
+ background-color: #ECECEC;
+}
+.status-update-mock-button:hover {
+ background-color: #A7A7A7;
+ color: #FFFFFF;
+}
+
+/*  Change the border setting for the status update field */
+.block-atwork-activity .form-textarea {
+    border: 1px solid #B7B7B7!important;
+}
+
+/* Change the border setting for the HP search box */
+.front .custom-search-box.form-text {
+ border: solid 5px #26669E!important;
+}
+
+/* Activity counter update */
+.block-atwork-activity #message-count-number,
+.block-atwork-activity #new-message-image-icon {
+ display:none;
+}
+
+.block-atwork-activity .new-message-count {
+width: 75px;
+border-bottom: solid 4px red;
+left: 28px!important;
+}
+',
     'custom' => 0,
     'delta' => 'homepage',
     'js' => '',
