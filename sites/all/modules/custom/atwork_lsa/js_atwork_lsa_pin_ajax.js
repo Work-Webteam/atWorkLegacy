@@ -76,8 +76,8 @@
       "20", //Ministry of Transportation and Infrastructure
       "41", //Environmental Appeal Board
       "42", //Environmental Assessment Office
+      "47", // Government Communications and Public Engagement
       "52", //Intergovernmental Relations Secretariat
-      "54", // Government Communications and Public Engagement
       "60", //Office of the Information and Privacy Commissioner
       "61", //Office of the Merit Commissioner
       "62", //Office of the Ombudsperson
@@ -239,8 +239,8 @@
       case ministry == 27: // BC Public Service Agency
       case ministry == 41: // Environmental Appeal Board
       case ministry == 42: // Environmental Assessment Office
+      case ministry == 47: // Government Communications and Public Engagement
       case ministry == 52: // Intergovernmental Relations Secretariat
-      case ministry == 54: // Government Communications and Public Engagement
       case ministry == 60: // Office of the Information and Privacy Commissioner
       case ministry == 61: // Office of the Merit Commissioner
       case ministry == 62: // Office of the Ombudsperson
@@ -326,8 +326,8 @@
       "20", //Ministry of Transportation and Infrastructure
       "41", //Environmental Appeal Board
       "42", //Environmental Assessment Office
+      "47", // Government Communications and Public Engagement
       "52", //Intergovernmental Relations Secretariat
-      "54", // Government Communications and Public Engagement
       "60", //Office of the Information and Privacy Commissioner
       "61", //Office of the Merit Commissioner
       "62", //Office of the Ombudsperson
