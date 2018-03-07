@@ -616,7 +616,7 @@ function atwork_lsa_node_insert($node) {
 
     require_once(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_pin.mail.inc');
 
-  /** Only to specific ministries
+  /** Pins sent directly to ministry contact, only for specific ministries
     * 6 | Ministry of Education
     *12 | Ministry of Indigenous Relations and Reconciliation
     *15 | Ministry of Mental Health and Addictions
@@ -624,6 +624,7 @@ function atwork_lsa_node_insert($node) {
     *41 | Environmental Appeal Board
     *42 | Environmental Assessment Office
     *52 | Intergovernmental Relations Secretariat
+    *54 | Government Communications and Public Engagement
     *60 | Office of the Information and Privacy Commissioner
     *61 | Office of the Merit Commissioner
     *62 | Office of the Ombudsperson
@@ -637,6 +638,7 @@ function atwork_lsa_node_insert($node) {
       41, //Environmental Appeal Board
       42, //Environmental Assessment Office
       52, //Intergovernmental Relations Secretariat
+      54, //Government Communications and Public Engagement
       60, //Office of the Information and Privacy Commissioner
       61, //Office of the Merit Commissioner
       62, //Office of the Ombudsperson
