@@ -166,7 +166,7 @@ $atwork_base_url = $GLOBALS['base_url'];
                 <tr>
                   <td align="right">
                     <div class="content-type">
-                      <?php echo '<p style="font-family: Calibri, sans-serif; margin-right:10px; margin-bottom: 10px; padding-top: 10px; padding-right: 10px; border-top: solid 1px #000;"> <a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . $pubDate . '"> News </a> </p>'; ?>                    
+                      <?php echo '<p style="font-family: Calibri, sans-serif; margin-right:10px; margin-bottom: 10px; padding-top: 10px; padding-right: 10px; border-top: solid 1px #000;"> <a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/executive-messages' . $pubDate . '"> Executive Messages </a> </p>'; ?>                    
                     </div>
                   </td>
                 </tr>
