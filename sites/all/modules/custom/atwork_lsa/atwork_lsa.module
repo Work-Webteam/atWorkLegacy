@@ -319,33 +319,33 @@ function atwork_lsa_pin_application_validate($form, &$form_state){
 
   }
 
-  // Make sure we have selected one or the other - don't want an empty application.
-  if((isset($form_state['input']['field_lsa_other_milestone_years']['und']) && $form_state['input']['field_lsa_other_milestone_years']['und'] != 1) && (isset($form_state['input']['field_lsa_milestone_year']['und']) && $form_state['input']['field_lsa_milestone_year']['und'] != 1)){
-    // Form is empty
-    form_set_error('field_lsa_', t('You have not selected any milestone'));
-  } elseif(!isset($form_state['input']['field_lsa_other_milestone_years']['und']) && !isset($form_state['input']['field_lsa_milestone_year']['und'])){
-    // No milestone entered
-    form_set_error('field_lsa_', t('You have not selected any milestone'));
-  } 
-  if(isset($form_state['input']['field_lsa_other_milestone_years']['und']) || isset($form_state['input']['field_lsa_milestone_year']['und'])){
-    if($form_state['input']['field_lsa_other_milestone_years']['und'] == 1){
-      $chose = false;
-      foreach($form_state['input']['field_lsa_previous_service_miles']['und'] as $k){
-        if(isset($k)){
-          $chose = true;
-          break;
-        }
-      }
-      if($chose == false){
-        form_set_error('field_lsa_previous_service_miles', t('You have not selected any retroactive milestones'));
+  // If we have retro milestones, we must check which milestones we have.
+  if(isset($form_state['input']['field_lsa_other_milestone_years'][$lang]) && $form_state['input']['field_lsa_other_milestone_years'][$lang] == 1){
+    $chose = false;
+    foreach($form_state['input']['field_lsa_previous_service_miles'][$lang] as $k){
+      if(isset($k)){
+        $chose = true;
+        break;
       }
     }
-    if($form_state['input']['field_lsa_milestone_year']['und'] == 1){
-      if(isset($form_state['input']['field_lsa_pin_service_milestone']['und']) && $form_state['input']['field_lsa_pin_service_milestone']['und'] == '_none'){
-        form_set_error('field_lsa_pin_service_milestone', t('You have not selected a service milestone'));
-      }
+    if($chose == false){
+      form_set_error('field_lsa_previous_service_miles', t('You have not selected any retroactive milestones'));
+    }
+    // Otherwise we have to make sure they selected a regular milestone
+  } else {
+    if(isset($form_state['input']['field_lsa_pin_service_milestone'][$lang]) && $form_state['input']['field_lsa_pin_service_milestone'][$lang] == '_none'){
+      form_set_error('field_lsa_', t('You have not selected any milestone'));
     }
   }
+
+  // If we have marked that we are having a milestone year, we need to pick a milestone
+  if(isset($form_state['input']['field_lsa_milestone_year'][$lang]) && $form_state['input']['field_lsa_milestone_year'][$lang] == 1){
+    if(isset($form_state['input']['field_lsa_pin_service_milestone'][$lang]) && $form_state['input']['field_lsa_pin_service_milestone'][$lang] == '_none'){
+      form_set_error('field_lsa_', t('You have not selected any milestone'));
+    }
+  }
+
+  
   // If they indicate they would like a retro pin, they have to choose one
   //if(isset($form_state['input']['field_lsa_other_milestone_years']['und']) || isset($form_state['input']//['field_lsa_milestone_year']['und'])){
   //  if(isset($form_state['input']['field_lsa_other_milestone_years']['und']) && $form_state['input']['field_lsa_other_milestone_years']['und'] == '_none'){
@@ -355,7 +355,7 @@ function atwork_lsa_pin_application_validate($form, &$form_state){
   // Lets make sure the Postal codes at least match standardized format - we are not looking up validity here.
   // Quick regex to make sure we have relatively the right type of canadian postal
   $postal_regex = '/^([a-zA-Z]\d[a-zA-Z])\ {0,1}(\d[a-zA-Z]\d)$/';
-  $validity = preg_match($postal_regex, $form_state['input']['field_lsa_office_postal_code']['und'][0]['value']);
+  $validity = preg_match($postal_regex, $form_state['input']['field_lsa_office_postal_code'][$lang][0]['value']);
   if($validity == FALSE){
     form_set_error('field_lsa_supefield_lsa_office_postal_code', t("Please enter a valid postal code for the supervisor in the format A1A 1A1"));
   }
@@ -616,13 +616,14 @@ function atwork_lsa_node_insert($node) {
 
     require_once(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_pin.mail.inc');
 
-  /** Only to specific ministries
+  /** Pins sent directly to ministry contact, only for specific ministries
     * 6 | Ministry of Education
     *12 | Ministry of Indigenous Relations and Reconciliation
     *15 | Ministry of Mental Health and Addictions
     *20 | Ministry of Transportation and Infrastructure
     *41 | Environmental Appeal Board
     *42 | Environmental Assessment Office
+    *47 | Government Communications and Public Engagement
     *52 | Intergovernmental Relations Secretariat
     *60 | Office of the Information and Privacy Commissioner
     *61 | Office of the Merit Commissioner
@@ -636,6 +637,7 @@ function atwork_lsa_node_insert($node) {
       20, //Ministry of Transportation and Infrastructure
       41, //Environmental Appeal Board
       42, //Environmental Assessment Office
+      47, //Government Communications and Public Engagement
       52, //Intergovernmental Relations Secretariat
       60, //Office of the Information and Privacy Commissioner
       61, //Office of the Merit Commissioner

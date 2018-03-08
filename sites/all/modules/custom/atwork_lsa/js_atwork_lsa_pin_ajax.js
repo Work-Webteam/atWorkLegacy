@@ -76,6 +76,7 @@
       "20", //Ministry of Transportation and Infrastructure
       "41", //Environmental Appeal Board
       "42", //Environmental Assessment Office
+      "47", // Government Communications and Public Engagement
       "52", //Intergovernmental Relations Secretariat
       "60", //Office of the Information and Privacy Commissioner
       "61", //Office of the Merit Commissioner
@@ -238,6 +239,7 @@
       case ministry == 27: // BC Public Service Agency
       case ministry == 41: // Environmental Appeal Board
       case ministry == 42: // Environmental Assessment Office
+      case ministry == 47: // Government Communications and Public Engagement
       case ministry == 52: // Intergovernmental Relations Secretariat
       case ministry == 60: // Office of the Information and Privacy Commissioner
       case ministry == 61: // Office of the Merit Commissioner
@@ -324,13 +326,14 @@
       "20", //Ministry of Transportation and Infrastructure
       "41", //Environmental Appeal Board
       "42", //Environmental Assessment Office
+      "47", // Government Communications and Public Engagement
       "52", //Intergovernmental Relations Secretariat
       "60", //Office of the Information and Privacy Commissioner
       "61", //Office of the Merit Commissioner
       "62", //Office of the Ombudsperson
       "63", //Office of the Police Complaint Commissioner
       ]; 
-    // Application by use
+    // Application by user
     if(applicationSubmitter == 1){
       if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
         $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Your pin(s) will be sent directly to your ministry/organization, for presentation to you during Public Service Week - June 11-15, 2018.</em></p>");
