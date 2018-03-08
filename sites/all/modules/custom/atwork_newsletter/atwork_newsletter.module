@@ -144,7 +144,7 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
 				'#default_value' => t(''),
 				'#format' => NULL,
 				'#prefix' => t('<br><br><strong>Did You Know?</strong><br><p>To add content into the Did You Know? section, copy the content from the newsletter entry of the editorial calendar and use the "Paste from Word" icon to paste content into the field below.</p>'),
-				'#suffix' => t('<br><p>When you have completed the sections above, click the "Next" button below to review your information.<p>'),
+				'#suffix' => t('<br><p>When you have completed the sections above, click the ' . ($form['#action'] == '/admin/content/newsletter-creation' ? $button = 'Create Newsletter': $button = 'Next') . ' button below to review your information.<p>'),
 		);
 		// Add our own validation
 		if((isset($form['select']['action::scs_views_create_newsletter_action']['#validate'])) &&
