@@ -74,9 +74,10 @@
       "12", //Ministry of Indigenous Relations and Reconciliation
       "15", //Ministry of Mental Health and Addictions
       "20", //Ministry of Transportation and Infrastructure
+      "38", //Elections BC
       "41", //Environmental Appeal Board
       "42", //Environmental Assessment Office
-      "47", // Government Communications and Public Engagement
+      "47", //Government Communications and Public Engagement
       "52", //Intergovernmental Relations Secretariat
       "60", //Office of the Information and Privacy Commissioner
       "61", //Office of the Merit Commissioner
@@ -237,6 +238,7 @@
       case ministry == 17: // Ministry of Public Safety and Solicitor General
       case ministry == 20: // Ministry of Transportation and Infrastructure
       case ministry == 27: // BC Public Service Agency
+      case ministry == 38: // Elections BC
       case ministry == 41: // Environmental Appeal Board
       case ministry == 42: // Environmental Assessment Office
       case ministry == 47: // Government Communications and Public Engagement
@@ -324,6 +326,7 @@
       "12", //Ministry of Indigenous Relations and Reconciliation
       "15", //Ministry of Mental Health and Addictions
       "20", //Ministry of Transportation and Infrastructure
+      "38", //Elections BC
       "41", //Environmental Appeal Board
       "42", //Environmental Assessment Office
       "47", // Government Communications and Public Engagement
