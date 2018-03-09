@@ -80,6 +80,39 @@ function atwork_comments_preprocess_comment(&$variables){
   if(isset($variables['permalink'])){
     $variables['permalink'] = str_replace(">Permalink</a>", ">Comment URL</a>", $variables['permalink']);
   }
+  $comment = $variables['comment'];
+  if ($comment->pid) {
+    $parent_comment = comment_load($comment->pid);
+    if ($parent_comment->uid) {
+      $parent_author = user_load($parent_comment->uid);
+      $reply_to_name = _atwork_display_name($parent_author);
+    }
+    else {
+      $reply_to_name = variable_get('anonymous', t('Employee News'));
+      $parent_author = '';
+    }
+
+    if ($parent_comment->status == 1) {
+      $title = $parent_comment->comment_body[$parent_comment->language][0]['safe_value'];
+      $title = strip_tags(str_replace("\n", "\n\n", $title));
+    }
+    else {
+      $title = '';
+    }
+    $variables['author'] .= ' ' . t('in !link to !name', array(
+      '!link' => l('reply', 'node/' . $node->nid, array(
+        'query' => array(
+          'c' => $parent_comment->cid,
+        ),
+        'fragment' => 'comment-' . $parent_comment->cid,
+        'attributes' => array(
+          'title' =>  $title,
+        ),
+      )),
+      '!name' => theme('username', array('account' => $parent_author)),
+    ));
+  }
+
   //dpm($variables);
 }
 
