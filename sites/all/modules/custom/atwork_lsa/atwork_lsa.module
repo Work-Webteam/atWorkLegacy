@@ -621,6 +621,7 @@ function atwork_lsa_node_insert($node) {
     *12 | Ministry of Indigenous Relations and Reconciliation
     *15 | Ministry of Mental Health and Addictions
     *20 | Ministry of Transportation and Infrastructure
+    *38 | Elections BC
     *41 | Environmental Appeal Board
     *42 | Environmental Assessment Office
     *47 | Government Communications and Public Engagement
@@ -635,6 +636,7 @@ function atwork_lsa_node_insert($node) {
       12, //Ministry of Indigenous Relations and Reconciliation
       15, //Ministry of Mental Health and Addictions
       20, //Ministry of Transportation and Infrastructure
+      38, //Elections BC
       41, //Environmental Appeal Board
       42, //Environmental Assessment Office
       47, //Government Communications and Public Engagement
