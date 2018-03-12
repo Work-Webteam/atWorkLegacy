@@ -12,8 +12,9 @@
   <header>
     <p class="submitted">
       <?php print $picture; ?>
-      <?php print $submitted; ?>
+      <span class="submitted">Posted <?php print $created; ?> by <?php print $author; ?></span>
       <?php print $permalink; ?>
+
     </p>
 
     <?php print render($title_prefix); ?>

@@ -33,13 +33,12 @@ function atwork_comments_form_alter(&$form, &$form_state, $form_id) {
       );
     }
     // add Pension BC checkbox
-    if(user_access('administer comments')){
-      $form['post_as_pensions'] = array(
-        '#type' => 'checkbox',
-        '#title' => t('Post as Pensions BC'),
-      );
-    }
-    $form['#submit'][] = 'atwork_comment_form_submit';
+    //if(user_access('administer comments')){
+    //  $form['post_as_pensions'] = array(
+    //    '#type' => 'checkbox',
+    //    '#title' => t('Post as Pensions BC'),
+    //  );
+    //}
   }
 }
 
@@ -55,12 +54,12 @@ function atwork_comments_comment_presave($comment) {
     $comment->uid = 0;
     $comment->is_anonymous = TRUE;
   }
-  if(user_access('administer comments') && isset($comment->post_as_pensions) && $comment->post_as_pensions){
-    $comment->name = 'Pensions BC';
+  //if(user_access('administer comments') && isset($comment->post_as_pensions) && $comment->post_as_pensions){
+  //  $comment->name = 'Pensions BC';
     // TODO: THis will need to be changed to Pensions UID after it is created on @Work
-    $comment->uid = 91190;
-    $comment->is_anonymous = FALSE;
-  }
+  //  $comment->uid = 91190;
+  //  $comment->is_anonymous = FALSE;
+ // }
 }
 
 /*
@@ -70,7 +69,6 @@ function atwork_comments_comment_presave($comment) {
  *
  * Add comment links
  *
- * Remove reply links (advanced adds it hard-coded)
  *
  */
 function atwork_comments_preprocess_comment(&$variables){
@@ -80,7 +78,15 @@ function atwork_comments_preprocess_comment(&$variables){
   if(isset($variables['permalink'])){
     $variables['permalink'] = str_replace(">Permalink</a>", ">Comment URL</a>", $variables['permalink']);
   }
+
   $comment = $variables['comment'];
+  // We want to show users display name, not their idir
+  if($comment->uid){
+    $commenter = user_load($comment->uid);
+    $comment_author = _atwork_display_name($commenter);
+    $variables['author'] = l(_atwork_display_name($commenter), 'user/' . $commenter->uid);
+  }
+  // We also want to note if this is a reply to someone else's comment (i.e. does it have a parent?)
   if ($comment->pid) {
     $parent_comment = comment_load($comment->pid);
     if ($parent_comment->uid) {
@@ -109,8 +115,12 @@ function atwork_comments_preprocess_comment(&$variables){
           'title' =>  $title,
         ),
       )),
-      '!name' => theme('username', array('account' => $parent_author)),
+      '!name' => l(_atwork_display_name($parent_author), 'user/' . $parent_author->uid),
     ));
+  }
+  if (isset($variables['content']['links']['flag']['#links']['flag-abuse_comments']['title'])) {
+    $variables['content']['links']['flag']['#links']['flag-abuse_comments']['title'] =
+      str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $variables['content']['links']['flag']['#links']['flag-abuse_comments']['title']);
   }
 
   //dpm($variables);
