@@ -4074,7 +4074,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_branch_department']['id'] = 'field_lsa_branch_department';
   $handler->display->display_options['fields']['field_lsa_branch_department']['table'] = 'field_data_field_lsa_branch_department';
   $handler->display->display_options['fields']['field_lsa_branch_department']['field'] = 'field_lsa_branch_department';
-  /* Field: Content: Office */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_lsa_office_work_group']['id'] = 'field_lsa_office_work_group';
   $handler->display->display_options['fields']['field_lsa_office_work_group']['table'] = 'field_data_field_lsa_office_work_group';
   $handler->display->display_options['fields']['field_lsa_office_work_group']['field'] = 'field_lsa_office_work_group';
@@ -5026,7 +5026,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_employee_number']['id'] = 'field_lsa_employee_number';
   $handler->display->display_options['fields']['field_lsa_employee_number']['table'] = 'field_data_field_lsa_employee_number';
   $handler->display->display_options['fields']['field_lsa_employee_number']['field'] = 'field_lsa_employee_number';
-  /* Field: Content: Special Requirements (editable) */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['id'] = 'field_lsa_specialrequirements_editable';
   $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['table'] = 'field_data_field_lsa_specialrequirements';
   $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['field'] = 'field_lsa_specialrequirements_editable';
@@ -5118,7 +5118,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['autocomplete_raw_dropdown'] = 1;
   $handler->display->display_options['filters']['field_lsa_employee_number_value']['expose']['autocomplete_dependent'] = 0;
-  /* Filter criterion: Content: Special Requirements (field_lsa_specialrequirements) */
+  /* Filter criterion: Broken/missing handler */
   $handler->display->display_options['filters']['field_lsa_specialrequirements_value']['id'] = 'field_lsa_specialrequirements_value';
   $handler->display->display_options['filters']['field_lsa_specialrequirements_value']['table'] = 'field_data_field_lsa_specialrequirements';
   $handler->display->display_options['filters']['field_lsa_specialrequirements_value']['field'] = 'field_lsa_specialrequirements_value';
