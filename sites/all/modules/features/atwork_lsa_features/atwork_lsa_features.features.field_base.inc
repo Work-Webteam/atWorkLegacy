@@ -1127,27 +1127,6 @@ function atwork_lsa_features_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_lsa_office_work_group'.
-  $field_bases['field_lsa_office_work_group'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_lsa_office_work_group',
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
-    ),
-    'translatable' => 0,
-    'type' => 'text',
-  );
-
   // Exported field_base: 'field_lsa_org'.
   $field_bases['field_lsa_org'] = array(
     'active' => 1,
@@ -1874,35 +1853,6 @@ function atwork_lsa_features_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_boolean',
-  );
-
-  // Exported field_base: 'field_lsa_specialrequirements'.
-  $field_bases['field_lsa_specialrequirements'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_lsa_specialrequirements',
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        6 => 'None',
-        1 => 'Food Allergy',
-        2 => 'Deaf or Hard of Hearing',
-        3 => 'Visual Impairment',
-        4 => 'Wheelchair/Walker Accessibility',
-        5 => 'Other',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_integer',
   );
 
   // Exported field_base: 'field_lsa_street'.
