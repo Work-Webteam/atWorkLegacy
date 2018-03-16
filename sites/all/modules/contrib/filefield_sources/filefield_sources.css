@@ -15,14 +15,6 @@ div.filefield-source .hint {
   color: #999;
 }
 
-div.filefield-sources-list, div.filefield-source-remote, div.image-widget-data a, div.image-widget-data .file-size, div.image-widget-data .imageeditor-inline-processed, div.image-widget-data .insert-style-select {
-	display: none;
-}
-
-div.image-widget-data div.form-type-textfield {
-	display: none;
-}
-
 div.filefield-sources-list a.active {
   font-weight: bold;
 }
