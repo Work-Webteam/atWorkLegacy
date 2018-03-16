@@ -25,7 +25,7 @@ include_once drupal_get_path('module', 'atwork_newsletter') . "/atwork_newslette
                                                                                                                                                                                                                                                                                                                                                                                                                    
 //Build render array for dynamic content                                                                                                                                                                                                                                                                                                                                                                           
 $atwork_newsletter_render_array = atwork_newsletter_create_render_arrays($nodes, $comment, $notes, $did_you_know);                                                                                                                                                                                                                                                                                                 
-                                                                                                                                                                                                                                                                                                                                                                                                                   
+
 // Grab (probable) publishing date for webtrends                                                                                                                                                                                                                                                                                                                                                                   
 if(date('D') === 'Wed') {                                                                                                                                                                                                                                                                                                                                                                                          
 	// Publish date is current date                                                                                                                                                                                                                                                                                                                                                                                
@@ -288,7 +288,13 @@ $atwork_base_url = $GLOBALS['base_url'];
                 <!--  Output Read More & News Links -->
                 <tr>
                   <?php echo '<td style="padding: 0 0 5px 0;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" > Read more >> </a></td>'; ?>
-                  <?php echo '<td style="padding: 0 0 5px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/news' . $pubDate . '"> News </a></td>'; ?>
+                  <?php 
+                  	if(!$node_first->executive_message) {
+                  		echo '<td style="padding: 0 0 5px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/news' . $pubDate . '"> NEWS </a></td>';
+                  	} else {
+                      echo '<td style="padding: 0 0 5px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/executive-messages' . $pubDate . '"> Executive Messages </a></td>';
+                    }
+                  ?>
                 </tr>
                 
               </table>

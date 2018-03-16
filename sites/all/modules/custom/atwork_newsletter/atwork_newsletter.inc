@@ -15,6 +15,18 @@
 function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_you_know){
 	$atwork_base_url = $GLOBALS['base_url'];
 	$comment = NULL;
+
+	// Check for Exec Messages
+	foreach($nodes as $node){
+	  foreach($node->field_tags['und'] as $terms) {
+	  	$tag_object = taxonomy_term_load($terms['tid']);
+	  	if($tag_object->name == 'Executive Messages') {
+	    	$node->executive_message = TRUE;
+	    } else {
+	    	$node->executive_message = FALSE;
+	    }	
+    }
+	}
 	
 	if($comments !== '') {
 		// Load Comment Object
@@ -63,6 +75,7 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 		$parent = node_load($comment->nid);
 		$comment->parent_url = drupal_get_path_alias('node/' . $comment->nid);
 	} 
+
 	
 	//Fix formatting in bulleted lists in Take Note
 	$notes = str_replace('<ul>', '<ul style="font-family: Calibri,sans-serif; font-size:12pt; margin-top: 10px; margin-right: 10px; margin-bottom: 20px;">', $notes);
