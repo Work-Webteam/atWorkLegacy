@@ -32,13 +32,15 @@ function atwork_comments_form_alter(&$form, &$form_state, $form_id) {
         '#title' => t('Post as Employee News.'),
       );
     }
+    global $user;
+    $current_commenter = user_load($user);
     // add Pension BC checkbox
-    //if(user_access('administer comments')){
-    //  $form['post_as_pensions'] = array(
-    //    '#type' => 'checkbox',
-    //    '#title' => t('Post as Pensions BC'),
-    //  );
-    //}
+    if(user_has_role(18, $current_commenter)){
+      $form['post_as_pensions'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Post as Public Service Pension Plan'),
+      );
+    }
   }
 }
 
@@ -54,12 +56,16 @@ function atwork_comments_comment_presave($comment) {
     $comment->uid = 0;
     $comment->is_anonymous = TRUE;
   }
-  //if(user_access('administer comments') && isset($comment->post_as_pensions) && $comment->post_as_pensions){
-  //  $comment->name = 'Pensions BC';
-    // TODO: THis will need to be changed to Pensions UID after it is created on @Work
-  //  $comment->uid = 91190;
-  //  $comment->is_anonymous = FALSE;
- // }
+
+  global $user;
+  $current_commenter = user_load($user);
+  // Pension plan hack for comments
+  if(user_has_role(18, $current_commenter) && isset($comment->post_as_pensions) && $comment->post_as_pensions){
+    $comment->name = 'Public Service Pension Plan';
+    // TODO: This will need to be changed to Pensions UID after it is created on @Work
+    $comment->uid = 99633;
+    $comment->is_anonymous = FALSE;
+  }
 }
 
 /*
