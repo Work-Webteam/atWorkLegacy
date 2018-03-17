@@ -77,7 +77,8 @@ function atwork_wes_cron() {
 	
 	$total_pop = 0;
 	$total_submissions = 0;
-	
+
+	/* Commented out to stop ftp to https://securesurveys.gov.bc.ca
 	if (($handle = fopen("https://securesurveys.gov.bc.ca/responses/wes2018/responseRate.csv", "r")) !== FALSE) {
 		while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
 			$ministry = str_replace('&#34;', '', $data[0]);
@@ -122,6 +123,7 @@ function atwork_wes_cron() {
 		}
 		fclose($handle);
 	}
+	*/
 	
 	if ($result) {
 		$record = array(
