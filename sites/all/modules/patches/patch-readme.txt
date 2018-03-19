@@ -73,3 +73,8 @@ Module: Views autocomplete filters
 file: views_autocomplete_filters.inc
 source: https://www.drupal.org/project/views_autocomplete_filters/issues/2645124
 issue: Unprotected code fix, at line 49
+
+date: 2018-03-19
+Module: AuthcacheNodeHistorySetting.inc
+source: We created this fix
+issue: Watchdog/php complaining about "Notice: Trying to get property of non-object in AuthcacheNodeHistorySetting->get() (line 50 of /var/www/html/sites/all/modules/contrib/authcache/modules/authcache_node_history/includes/AuthcacheNodeHistorySetting.inc).  We fixed this by altering the foreach so that it makes sure $history['nid']->timestamp exists (in addition to just checking $history['nid']).  We also assign timestamp to a variable of its own rather than straight to the array.

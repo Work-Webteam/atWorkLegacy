@@ -1,0 +1,7 @@
+line 49
+-  if (isset($history[$nid]) {
++  if (isset($history[$nid])&& isset($history[$nid]->timestamp)) {
+-    $tsmap[$nid] = $history[$nid]->timestamp;
++    $history_time = $history[$nid]->timestamp;
++   $tsmap[$nid] = $history_time;
+  }
