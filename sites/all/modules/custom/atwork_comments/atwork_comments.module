@@ -33,7 +33,7 @@ function atwork_comments_form_alter(&$form, &$form_state, $form_id) {
       );
     }
     global $user;
-    $current_commenter = user_load($user);
+    $current_commenter = user_load($user->uid);
     // add Pension BC checkbox
     if(user_has_role(18, $current_commenter)){
       $form['post_as_pensions'] = array(
