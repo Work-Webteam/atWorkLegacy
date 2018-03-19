@@ -86,6 +86,7 @@ function atwork_comments_preprocess_comment(&$variables){
   }
 
   $comment = $variables['comment'];
+  dpm($comment);
   // We want to show users display name, not their idir
   if($comment->uid){
     $commenter = user_load($comment->uid);
@@ -111,8 +112,9 @@ function atwork_comments_preprocess_comment(&$variables){
     else {
       $title = '';
     }
+
     $variables['author'] .= ' ' . t('in !link to !name', array(
-      '!link' => l('reply', 'node/' . $node->nid, array(
+      '!link' => l('reply', 'node/' . $comment->nid, array(
         'query' => array(
           'c' => $parent_comment->cid,
         ),
