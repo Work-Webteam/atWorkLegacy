@@ -59,7 +59,7 @@ function atwork_sharepoint_page_callback($nid) {
   
   $result = sharepoint_call($client, "GetListItems", $xml);
   
-  dpm($result);
+  //dpm($result);
   
   $header = array(
     t('Filename'),
@@ -119,7 +119,7 @@ function atwork_sharepoint_page_callback($nid) {
             $str .= "['files']['" . $file_info['filename'] . "']";
             
             $result = eval("$files . $str = $file_info;");
-            dpm($result);
+            //dpm($result);
           }
           else {
             $files[$loc]['files'][$file_info['filename']] = $file_info;
@@ -166,7 +166,7 @@ function atwork_sharepoint_page_callback($nid) {
     }
   }
   
-  dpm($files);
+  //dpm($files);
   
   foreach ($files as $filename => $file) {
     if ($file['type'] == 'file') {

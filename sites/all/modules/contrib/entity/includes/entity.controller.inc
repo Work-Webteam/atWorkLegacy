@@ -216,7 +216,9 @@ class EntityAPIController extends DrupalDefaultEntityController implements Entit
     // were passed. The $ids array is reduced as items are loaded from cache,
     // and we need to know if it's empty for this reason to avoid querying the
     // database when all requested entities are loaded from cache.
-    $passed_ids = !empty($ids) ? array_flip($ids) : FALSE;
+    //$passed_ids = !empty($ids) ? array_flip($ids) : FALSE;
+    $passed_ids = is_array($ids) && !empty($ids) ? array_flip(array_filter($ids)) : FALSE;
+
 
     // Try to load entities from the static cache.
     if ($this->cache && !$revision_id) {
@@ -739,7 +741,7 @@ class EntityAPIControllerExportable extends EntityAPIController {
     else {
       $revision_id = FALSE;
     }
-    $passed_ids = !empty($ids) ? array_flip($ids) : FALSE;
+    $passed_ids = is_array($ids) && !empty($ids) ? array_flip(array_filter($ids)) : FALSE;
 
     // Care about the static cache.
     if ($this->cache && !$revision_id) {
@@ -770,7 +772,7 @@ class EntityAPIControllerExportable extends EntityAPIController {
    */
   protected function cacheGet($ids, $conditions = array()) {
     if (!empty($this->entityCache) && $ids !== array()) {
-      $entities = $ids ? array_intersect_key($this->entityCache, array_flip($ids)) : $this->entityCache;
+      $entities = $ids && is_array($ids) ? array_intersect_key($this->entityCache, array_flip(array_filter($ids))) : $this->entityCache;
       return $this->applyConditions($entities, $conditions);
     }
     return array();
@@ -784,7 +786,7 @@ class EntityAPIControllerExportable extends EntityAPIController {
       // First get the entities by ids, then apply the conditions.
       // Generally, we make use of $this->entityCache, but if we are loading by
       // name, we have to use $this->entityCacheByName.
-      $entities = array_intersect_key($this->entityCacheByName, array_flip($names));
+      $entities = array_intersect_key($this->entityCacheByName, array_flip(array_filter($names)));
       return $this->applyConditions($entities, $conditions);
     }
     return array();
@@ -866,7 +868,7 @@ class EntityAPIControllerExportable extends EntityAPIController {
   public function resetCache(array $ids = NULL) {
     $this->cacheComplete = FALSE;
     if (isset($ids)) {
-      foreach (array_intersect_key($this->entityCache, array_flip($ids)) as $id => $entity) {
+      foreach (array_intersect_key($this->entityCache, array_flip(array_filter($ids))) as $id => $entity) {
         unset($this->entityCacheByName[$this->entityCache[$id]->{$this->nameKey}]);
         unset($this->entityCache[$id]);
       }
