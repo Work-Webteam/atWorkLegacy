@@ -823,6 +823,14 @@ EOT;
   }
   // Changing submit text and setting a message for flag
   if($form_id == 'flag_confirm'){
+    $destination = $_GET['destination'];
+    if($destination == 'node/96'){
+      if(isset($form['entity_id']['#value'])){
+        $this_comment = comment_load($form['entity_id']['#value']);
+        $destination = 'node/' . $this_comment->nid;
+        $form['#action'] = str_replace('?destination=node/96', '?destination=' . $destination, $form['#action']);
+      }
+    }
     $form['actions']['submit']['#value'] = t('Submit');
     $form['#submit'][] = 'flag_form_set_message';
 }
