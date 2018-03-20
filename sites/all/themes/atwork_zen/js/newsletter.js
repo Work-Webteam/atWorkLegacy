@@ -21,4 +21,6 @@ jQuery(function () {
   
   jQuery(".node-type-simplenews #comment-body p").css({"margin-top" : "10px"});
   
+  jQuery("<br><p>&nbsp;&nbsp;Select the \"Newsletter\" tab to email the newsletter below.</p><br>").insertBefore("article.node-simplenews");
+  
 });
