@@ -180,3 +180,13 @@ function atwork_newsletter_validate(&$form, &$form_state){
 function atwork_newsletter_submit(&$form, &$form_state){
 	return;
 }
+
+/**
+ * Implements hook_form_alter to modify newsletter send tab options.
+ **/
+function atwork_newsletter_form_alter(&$form, &$form_state, $form_id){
+	if($form['#form_id'] == 'simplenews_node_tab_send_form') {
+	  $form['simplenews']['test_address']['#default_value'] = 'atwork@gov.bc.ca';
+	  $form['simplenews']['send']['#access'] = false;
+	}
+}
