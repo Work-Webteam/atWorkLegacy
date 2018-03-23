@@ -290,7 +290,7 @@ $atwork_base_url = $GLOBALS['base_url'];
                   <?php echo '<td style="padding: 0 0 5px 0;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" > Read more >> </a></td>'; ?>
                   <?php 
                   	if(!$node_first->executive_message) {
-                  		echo '<td style="padding: 0 0 5px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/news' . $pubDate . '"> NEWS </a></td>';
+                  		echo '<td style="padding: 0 0 5px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/news' . $pubDate . '"> News </a></td>';
                   	} else {
                       echo '<td style="padding: 0 0 5px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/executive-messages' . $pubDate . '"> Executive Messages </a></td>';
                     }
@@ -465,7 +465,7 @@ $atwork_base_url = $GLOBALS['base_url'];
           <tr>
             <td height="30" style="background-color:#E0ECF5;">
               <h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; margin-top: 10px; margin-left: 10px; margin-right: 15px;"> Take Note </h2>
-              <div class="outlook-didyouknow-takenote-title" style="margin-left: 15px; font-family: Calibri,sans-serif; font-size:12pt; line-height: 20px; margin-right: 27px; margin-bottom: 20px;" >
+              <div class="outlook-didyouknow-takenote-title" style="margin-left: 15px; text-decoration: none; font-family: Calibri,sans-serif; font-size:12pt; line-height: 20px; margin-right: 27px; margin-bottom: 20px;" >
                 <?php echo $atwork_newsletter_render_array['take_note']['value']; ?>
               </div>
             </td>
@@ -552,7 +552,7 @@ $atwork_base_url = $GLOBALS['base_url'];
           </td>
         </tr>
         <tr>
-          <td colspan="2" style="padding: 5px 0 0 15px; color:#004B8D">
+          <td colspan="2" style="padding: 15px 0 0 15px; color:#004B8D">
             <?php echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; /*line-height: 24px;*/ font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_blog_aliased. '" > Read more >> </a>';?>
           </td>
         </tr>
@@ -605,7 +605,7 @@ $atwork_base_url = $GLOBALS['base_url'];
             </td>
           </tr>
           <tr>
-            <td class="outlook-no-mso-border" colspan="2" style="padding: 5px 0 0 15px; color:#004B8D">
+            <td class="outlook-no-mso-border" colspan="2" style="padding: 15px 0 0 15px; color:#004B8D">
               <?php echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; /*line-height: 24px;*/ font-size: 10pt;" href="' . $atwork_base_url . '/comment/' . $atwork_newsletter_render_array['comments']->cid . '?#comment-' . $atwork_newsletter_render_array['comments']->cid . '" > Read more >> </a>';?>
             </td>
           </tr>
