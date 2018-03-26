@@ -180,3 +180,32 @@ function atwork_newsletter_validate(&$form, &$form_state){
 function atwork_newsletter_submit(&$form, &$form_state){
 	return;
 }
+
+/**
+ * Implements hook_form_alter to modify newsletter send tab options.
+ **/
+function atwork_newsletter_form_alter(&$form, &$form_state, $form_id){
+	if($form['#form_id'] == 'simplenews_node_tab_send_form') {
+	  $form['simplenews']['test_address']['#default_value'] = 'atwork@gov.bc.ca';
+	  $form['simplenews']['send']['#access'] = false;
+	}
+}
+
+/**
+ * Implements node_form_view to custom instructions to editors/admin on newsletter view page
+ **/
+function atwork_newsletter_node_view($node, $view_mode, $langcode){
+	if($node->type == 'simplenews'){
+	  $allowed_roles = array('administrator','editor', 'manager');
+	  $users_roles = user_roles();
+	  $role_ids =  array();
+	  
+	  foreach($allowed_roles as $role){
+	  	$role_ids[] = array_search($role, $users_roles);
+	  }
+	  
+	  if(in_array(true, array_map(user_has_role, $role_ids))){
+	    $node->content['#prefix'] = '<p>Select the "Newsletter" tab to email the newsletter below.</p>';
+	  }
+	}
+}

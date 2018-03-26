@@ -80,6 +80,10 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 	//Fix formatting in bulleted lists in Take Note
 	$notes = str_replace('<ul>', '<ul style="font-family: Calibri,sans-serif; font-size:12pt; margin-top: 10px; margin-right: 10px; margin-bottom: 20px;">', $notes);
 	$notes = str_replace('<li>', '<li class="outlook-list" style="margin-left: 5px;">', $notes);
+	$notes = str_replace('href', 'style="text-decoration: none;" href', $notes);
+	
+	//Add style to remove outlook links in did you know text.
+	$did_you_know = str_replace('href', 'style="text-decoration: none;" href', $did_you_know);
 	
 	// If a comment/note/did you know were NOT entered, our value should be "none" - we may want to account for this possibility here or in the template when deciding how exactly to theme in these instances
 	$atwork_newsletter_render_array = array(
