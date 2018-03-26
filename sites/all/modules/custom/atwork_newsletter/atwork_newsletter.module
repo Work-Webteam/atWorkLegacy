@@ -194,16 +194,18 @@ function atwork_newsletter_form_alter(&$form, &$form_state, $form_id){
 /**
  * Implements node_form_view to custom instructions to editors/admin on newsletter view page
  **/
-function atwork_newsletter_node_view($node, $view_mode, $langcode){	
-	$allowed_roles = array('administrator','editor', 'manager');
-	$users_roles = user_roles();
-	$role_ids =  array();
-	
-	foreach($allowed_roles as $role){
-		$role_ids[] = array_search($role, $users_roles);
-	}
-	
-	if(in_array(true, array_map(user_has_role, $role_ids))){
-	  $node->content['#prefix'] = '<p>Select the "Newsletter" tab to email the newsletter below.</p>';
+function atwork_newsletter_node_view($node, $view_mode, $langcode){
+	if($node->type == 'simplenews'){
+	  $allowed_roles = array('administrator','editor', 'manager');
+	  $users_roles = user_roles();
+	  $role_ids =  array();
+	  
+	  foreach($allowed_roles as $role){
+	  	$role_ids[] = array_search($role, $users_roles);
+	  }
+	  
+	  if(in_array(true, array_map(user_has_role, $role_ids))){
+	    $node->content['#prefix'] = '<p>Select the "Newsletter" tab to email the newsletter below.</p>';
+	  }
 	}
 }
