@@ -204,7 +204,7 @@ function atwork_newsletter_node_view($node, $view_mode, $langcode){
 	  	$role_ids[] = array_search($role, $users_roles);
 	  }
 	  
-	  if(in_array(true, array_map(user_has_role, $role_ids))){
+	  if(in_array(true, array_map("user_has_role", $role_ids))){
 	    $node->content['#prefix'] = '<p>Select the "Newsletter" tab to email the newsletter below.</p>';
 	  }
 	}
