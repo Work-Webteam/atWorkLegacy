@@ -5190,89 +5190,6 @@ Vegan',
     ),
   );
 
-  // Exported field_instance:
-  // 'node-lsa_application-field_specialrequirement_descrip'.
-  $field_instances['node-lsa_application-field_specialrequirement_descrip'] = array(
-    'bundle' => 'lsa_application',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'editablefields',
-        'settings' => array(
-          'click_to_edit' => 0,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => 'text_default',
-          'fallback_settings' => array(),
-          'semantic_field_format' => '',
-        ),
-        'type' => 'editable',
-        'weight' => 6,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'question' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_specialrequirement_descrip',
-    'label' => 'Please Specify Your Requirements',
-    'required' => 0,
-    'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'maxlength_js' => 350,
-        'maxlength_js_enforce' => 0,
-        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
-        'maxlength_js_truncate_html' => 1,
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 25,
-    ),
-  );
-
   // Exported field_instance: 'node-lsa_application-field_supervisor_address'.
   $field_instances['node-lsa_application-field_supervisor_address'] = array(
     'bundle' => 'lsa_application',
@@ -7294,7 +7211,6 @@ Vegan',
   t('PECSF ID 2');
   t('PECSF Region');
   t('Phone');
-  t('Please Specify Your Requirements');
   t('Please select the retroactive milestone pin(s) you would like to order');
   t('Please use the format:A1A 1A1');
   t('Postal Code');
