@@ -289,10 +289,10 @@ $atwork_base_url = $GLOBALS['base_url'];
                 <tr>
                   <?php echo '<td style="padding: 0 0 5px 0;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" > Read more >> </a></td>'; ?>
                   <?php 
-                  	if(!$node_first->executive_message) {
-                  		echo '<td style="padding: 0 0 5px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/news' . $pubDate . '"> News </a></td>';
-                  	} else {
+                  	if($node_first->executive_message) {
                       echo '<td style="padding: 0 0 5px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/executive-messages' . $pubDate . '"> Executive Messages </a></td>';
+                  	} else {
+                  		echo '<td style="padding: 0 0 5px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/news' . $pubDate . '"> News </a></td>';
                     }
                   ?>
                 </tr>
@@ -426,7 +426,13 @@ $atwork_base_url = $GLOBALS['base_url'];
                     <?php echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" > Read more >> </a>'; ?>
                   </td>
                   <td style="padding: 0 0 5px 0; text-align: right;">
-                    <?php echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; font-size: 10pt;" href="' . $atwork_base_url . '/news' . $pubDate . '"> News </a>'; ?>
+                  <?php 
+                  if($curr_node->executive_message) {
+                  		echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; font-size: 10pt;" href="' . $atwork_base_url . '/executive-messages'. $pubDate . '"> Executive Messages </a>';
+                  	} else {
+                  		echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; font-size: 10pt;" href="' . $atwork_base_url . '/news' . $pubDate . '"> News </a>';
+                    }
+                  ?>
                   </td>
                 </tr>
                 

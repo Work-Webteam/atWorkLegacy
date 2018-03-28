@@ -18,13 +18,12 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 
 	// Check for Exec Messages
 	foreach($nodes as $node){
+		$node->executive_message = FALSE;
 	  foreach($node->field_tags['und'] as $terms) {
 	  	$tag_object = taxonomy_term_load($terms['tid']);
 	  	if($tag_object->name == 'Executive updates') {
 	    	$node->executive_message = TRUE;
-	    } else {
-	    	$node->executive_message = FALSE;
-	    }	
+	    }
     }
 	}
 	
