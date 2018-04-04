@@ -5,13 +5,34 @@
 	  var giftImages = giftListImages(); 
     // The form is adding a leading whitespace, if you were wondering why I trim the award name  
     var selectedAward= giftImages[awardName.trim()]; 
-	  $(".field-name-field-lsa-award").after('<div><img class="lsa-award-selector-img-display-panel" /></div>');
+	  $(".field-name-field-lsa-award").after('<div><img id="lsa-award-selector-img-display-panel" /></div>');
 	  //$(".lsa-award-selector-img-display-panel").attr({"src":selectedImageURI});
-	  $(".lsa-award-selector-img-display-panel").css({"border-radius":"9px","box-shadow":"2px 2px lightgrey","padding":"10px","border":"1px solid gray","margin":"5px 0 20px 50px"}).attr({"src":selectedAward["URI"]});  
+	  $("#lsa-award-selector-img-display-panel").css({"border-radius":"9px","box-shadow":"2px 2px lightgrey","padding":"10px","border":"1px solid gray","margin":"5px 0 20px 50px"}).attr({"src":selectedAward["URI"]});  
+
+    //Move RSVP block down the page
+    $("#block-views-lsa-admin-block-lsa-rsvp").insertAfter("#lsa-award-selector-img-display-panel");
+  
+    // Hide and style recipient/guest dietary requirements dropdown
+    $(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").hide();
+    $(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").css("float", "left").hide().parent().css("overflow", "hidden");
+    
+    $(".field.field-name-field-lsa-ceremony-accommodation").hide();
   });
 
+  $("#edit-field-do-you-need-to-update-your").hide();
+  
+  //Show/hide dietary requirements input
+  $("#special-dietary-requirements").click(function () {
+  	if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '1') {
+  		$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").show();
+  		$(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").show();
+  	}else if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '0') {
+  		$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").hide();
+  	  $(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").hide();
+    }
+  });
+  
   // Close all shown buttons save on click
-
   function close_button(){
       // At this point, the modules css hides the button after we click it, so no need to do it ourselves.
       // Misses this one:
