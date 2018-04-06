@@ -36,7 +36,7 @@
     	$(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed").show();
     }
     
-    $("#editableviews-entity-form-lsa-admin #edit-actions-submit").parent().after(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed");
+    $("#editableviews-entity-form-lsa-admin #edit-actions-submit").parent().insertAfter(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed");
     
   });
 

@@ -419,6 +419,9 @@
       $('#edit-field-lsa-second-donation').hide();
       set_pecsef($("input[name='field_lsa_years_of_service[und]']:checked").val());
     });
+    
+    $("#edit-field-do-you-need-to-update-your").hide();
+    $("#edit-field-accessibility").hide();
 
   });
 
