@@ -14,24 +14,56 @@
   
     // Hide and style recipient/guest dietary requirements dropdown
     $(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").hide();
-    $(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").css("float", "left").hide().parent().css("overflow", "hidden");
-    
+    $(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").hide().parent().css("overflow", "hidden");
     $(".field.field-name-field-lsa-ceremony-accommodation").hide();
+    
+    
+    //Show/hide dietary requirements input
+    if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '1') {
+    	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").show();
+    	$(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").show();
+    }else if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '0') {
+    	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").hide();
+    	$(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").hide();
+    }
+    
+    //Show/hide contact information for updating
+    if($("input[name='field_do_you_need_to_update_your[und]']:checked").val() == 0) {
+    	$("#node-lsa-application-full-group-lsad-contact-info").hide();
+    	$(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed").hide();
+    } else if($("input[name='field_do_you_need_to_update_your[und]']:checked").val() == 1) {
+    	$("#node-lsa-application-full-group-lsad-contact-info").show();
+    	$(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed").show();
+    }
+    
+    $("#editableviews-entity-form-lsa-admin #edit-actions-submit").parent().after(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed");
+    
   });
 
-  $("#edit-field-do-you-need-to-update-your").hide();
-  
   //Show/hide dietary requirements input
   $("#special-dietary-requirements").click(function () {
-  	if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '1') {
-  		$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").show();
-  		$(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").show();
-  	}else if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '0') {
-  		$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").hide();
-  	  $(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").hide();
+    if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '1') {
+    	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").show();
+    	$(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").show();
+    }else if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '0') {
+    	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").hide();
+    	$(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").hide();
     }
   });
   
+  //Show/hide contact information 
+  $(".field.field-name-field-do-you-need-to-update-your.field-type-list-boolean.field-label-above").click(function () {
+  if($("input[name='field_do_you_need_to_update_your[und]']:checked").val() == 0) {
+  	console.log(0);
+  	$("#node-lsa-application-full-group-lsad-contact-info").hide();
+  	$(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed").hide();
+  } else if($("input[name='field_do_you_need_to_update_your[und]']:checked").val() == 1) {
+  	console.log(1);
+  	$("#node-lsa-application-full-group-lsad-contact-info").show();
+  	$(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed").show();
+  }
+  });
+
   // Close all shown buttons save on click
   function close_button(){
       // At this point, the modules css hides the button after we click it, so no need to do it ourselves.
