@@ -36,7 +36,7 @@
     $("#editableviews-entity-form-lsa-admin #edit-actions-submit").parent().insertAfter(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed");
     $("#field-lsa-accommodation-notes-add-more-wrapper .description").insertAfter(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above .field-label");
     
-    var consentText = "<strong>Notive of Collection, Consent, and Authorization</strong>" +
+    var consentText = "<strong>Notive of Collection, Consent, and Authorization</strong><br>" +
     	"Employees attending this Long Service Awards ceremony may appear on camera. " +
     	"Personal information including photo, video and/or voice, and any other information " +
     	"may be collected and used by the BC Public Service Agency to support communications " +
