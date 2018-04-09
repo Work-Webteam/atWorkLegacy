@@ -4841,46 +4841,54 @@ table.forum-table-forums td.forum-last-reply {
   padding: 10px;
 }
 /*----------------- Individual Forum Listings --------------------*/
-.page-forum .views-field-last-updated {
-  padding: 10px;
-}
-.forum-table-topics td.views-field-last-updated .username {
-  font-weight: bold;
-}
-.page-forum .forum-table-description,
-.page-forum #forum .forum-node-create-links-top {
-  background-color: #26669e;
-  float: right;
-  padding: 5px 15px;
-  margin-top: -52px;
-  width: auto;
-  margin-right: -36px;
-}
-.page-forum .forum-table-description a,
-.page-forum #forum .forum-node-create-links-top a {
-  color: #FFF;
+#forum-topic-header {
+  margin-bottom: 8px;
+  border-bottom: solid 4px #008d7b;
+  .topic-post-count {
+    margin: 0;
+  }
 }
 
-#forum-sort {
-  display: none;
+div.forum-post {
+  border: solid 1px #a7a7a7;
+  .forum-post-info {
+    background-color: #ececec;
+    padding: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-bottom: solid 1px #a7a7a7;
+  }
+  .forum-post-panel-main {
+    margin-right: 25px;
+    padding-top:10px;
+    border: solid 1px #b7b7b7;
+    margin-top: 10px;
+  }
+  .author-pane {
+    margin: 0px 10px;
+    background-color: #ececec;
+    padding: 5px;
+    border: solid 1px #b7b7b7;
+    font-size: .9em;
+  }
+  .form-item.form-type-item {
+    margin-bottom: .5em;
+  }
 }
-.forum-tools {
-  margin: 0;
-  padding: 0;
-  width: 200px;
-}
-#forum-pager-bottom {
-  float: none;
-  width: 70%;
-}
-.forum-list-icon-legend {
-  display: none;
+.node-type-forum {
+  h2.title.comment-form {
+    border-bottom: solid 4px #008d7b;
+  }
+  #comment-form {
+    margin: 0;
+    padding: 15px;
+    background-color: #d7d7d7;
+  }
+  #edit-author--2 {
+    margin:0;
+  }
 }
 /*----------------- End of Section--------------------*/
-
-
-
-
 
 
 

@@ -307,7 +307,7 @@ and (orientation : portrait) {
 }
 .not-front.logged-in.one-sidebar.sidebar-first aside.sidebars {
   width: 100%;
-  position:relative;
+  position:inherit;
   .region.region-sidebar-first {
     width:100%;
     max-width:none!important;

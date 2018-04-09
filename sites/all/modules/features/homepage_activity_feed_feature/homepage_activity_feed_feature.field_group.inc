@@ -50,7 +50,7 @@ function homepage_activity_feed_feature_field_group_info() {
   $field_group->parent_name = 'group_multi5';
   $field_group->data = array(
     'label' => 'Custom Code',
-    'weight' => '10',
+    'weight' => '12',
     'children' => array(
       0 => 'field_js_files',
       1 => 'field_js_effects',

@@ -222,6 +222,55 @@
           });
         }
       break;
+      
+      case ministry == 35 :
+      /** Community living BC. retroactive pin option should only be available if a person indicates they are currently 
+      *	  celebrating a milestone, and choose a "current year pin". They may request one retro pin in addition to that.
+      **/
+       // Check if this had other restrictions previously
+        if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
+          $('#edit-field-lsa-previous-service-miles-und').removeClass('atwork-activity-processed');
+          $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').unbind();
+        }
+        if($('#edit-field-lsa-milestone-year-und').hasClass('atwork-activity-processed')){
+          // If we have a notice we don't need, detach it, and be ready to re-apply as necessary
+          $('#select-message').detach();
+          $('#edit-field-lsa-milestone-year-und').removeClass('atwork-activity-processed');
+        }
+        // Check if they are celebrating this year
+        if($('#edit-field-lsa-milestone-year-und-1').is(':checked')){
+          // If so, then they can choose prev years.
+          $('#edit-field-lsa-other-milestone-years').slideDown('slow');
+          
+        } else {
+          // Add note
+          if($('#edit-field-lsa-milestone-year-und').hasClass('atwork-activity-processed')){
+            // We are fine, nothing to do
+          } else {
+            $('#edit-field-lsa-milestone-year-und').addClass('atwork-activity-processed');
+            $('#edit-field-lsa-milestone-year-und').after('<div id="select-message"><p><em>In order to be eligible for a service pin, employees must be celebrating a current milestone in 2018. If you have questions about your eligibility, please contact your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</em></p></div>');
+          }
+          $('#edit-field-lsa-other-milestone-years').hide();
+          $('#edit-field-lsa-other-milestone-years-und-1').prop('checked', false);
+          $('#edit-field-lsa-other-milestone-years').hide();
+          $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false);
+          $('#edit-field-lsa-previous-service-miles').slideUp('slow');
+        }
+        
+        $('#edit-field-lsa-other-milestone-years').slideDown('slow');
+        // We can only allow one box to be checked if they have chosen
+        // Make sure our labels are set correctly
+        if($('#edit-field-lsa-previous-service-miles-und').not('atwork-activity-processed')){
+          $('#edit-field-lsa-previous-service-miles-und').addClass('atwork-activity-processed');
+          $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false);
+          // Allow them to choose one pin:
+          $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').on('change', function() {
+            $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').not(this).prop('checked', false);
+          });
+        }
+
+      break;
+      
       //multiple retro pins allowed
       case ministry == 1 : //Ministry of Advanced Education, Skills and Training
       case ministry == 2 : //Ministry of Agriculture
@@ -326,6 +375,7 @@
       "12", //Ministry of Indigenous Relations and Reconciliation
       "15", //Ministry of Mental Health and Addictions
       "20", //Ministry of Transportation and Infrastructure
+      "35", //Community Liviing BC
       "38", //Elections BC
       "41", //Environmental Appeal Board
       "42", //Environmental Assessment Office

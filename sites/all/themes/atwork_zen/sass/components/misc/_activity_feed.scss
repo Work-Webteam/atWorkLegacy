@@ -475,6 +475,9 @@
       &.clearfix:after {
         display: inline-block; // fix for odd bottom space on first posting
       }
+      p {
+        margin-bottom: 10px;
+      }
       p:first-of-type { // the status message shouldn't crowd the like link
         max-width: 500px;
       }
