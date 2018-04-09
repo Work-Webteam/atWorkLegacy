@@ -258,17 +258,16 @@
         }
         
         $('#edit-field-lsa-other-milestone-years').slideDown('slow');
+        // We can only allow one box to be checked if they have chosen
         // Make sure our labels are set correctly
         if($('#edit-field-lsa-previous-service-miles-und').not('atwork-activity-processed')){
-        	$('#edit-field-lsa-previous-service-miles-und').addClass('atwork-activity-processed');
-        	$('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false);
-        	// Allow them to choose one pin:
-        	$('#edit-field-lsa-previous-service-miles-und input.form-checkbox').on('change', function() {
-        	$('#edit-field-lsa-previous-service-miles-und input.form-checkbox').not(this).prop('checked', false);
-        	});
+          $('#edit-field-lsa-previous-service-miles-und').addClass('atwork-activity-processed');
+          $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false);
+          // Allow them to choose one pin:
+          $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').on('change', function() {
+            $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').not(this).prop('checked', false);
+          });
         }
-        
-        
 
       break;
       
@@ -376,6 +375,7 @@
       "12", //Ministry of Indigenous Relations and Reconciliation
       "15", //Ministry of Mental Health and Addictions
       "20", //Ministry of Transportation and Infrastructure
+      "35", //Community Liviing BC
       "38", //Elections BC
       "41", //Environmental Appeal Board
       "42", //Environmental Assessment Office
