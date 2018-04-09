@@ -1,12 +1,10 @@
 (function ($) {
-
   $(document).ready(function () {
     var awardName = $(".field-name-field-lsa-award .field-item.odd").text();
 	  var giftImages = giftListImages(); 
-    // The form is adding a leading whitespace, if you were wondering why I trim the award name  
+  
     var selectedAward= giftImages[awardName.trim()]; 
 	  $(".field-name-field-lsa-award").after('<div><img id="lsa-award-selector-img-display-panel" /></div>');
-	  //$(".lsa-award-selector-img-display-panel").attr({"src":selectedImageURI});
 	  $("#lsa-award-selector-img-display-panel").css({"border-radius":"9px","box-shadow":"2px 2px lightgrey","padding":"10px","border":"1px solid gray","margin":"5px 0 20px 50px"}).attr({"src":selectedAward["URI"]});  
 
     //Move RSVP block down the page
@@ -35,8 +33,25 @@
     	$("#node-lsa-application-full-group-lsad-contact-info").show();
     	$(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed").show();
     }
-    
     $("#editableviews-entity-form-lsa-admin #edit-actions-submit").parent().insertAfter(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed");
+    $("#field-lsa-accommodation-notes-add-more-wrapper .description").insertAfter(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above .field-label");
+    
+    var consentText = "<strong>Notive of Collection, Consent, and Authorization</strong>" +
+    	"Employees attending this Long Service Awards ceremony may appear on camera. " +
+    	"Personal information including photo, video and/or voice, and any other information " +
+    	"may be collected and used by the BC Public Service Agency to support communications " +
+    	"and engagement within and on behalf of the BC Public Service. This information is " +
+    	"being collected under the authority of section 26(c) of the Freedom of Information " +
+    	"and Protection of Privacy Act (FOIPPA). <br>By registering for this ceremony, " +
+    	"you agree to your personal information being disclosed to BC Public Service " +
+    	"employees (e.g. @Work Corporate Intranet, @Work Newsletter, events, brochures, " +
+    	"reports) and/or used and disclosed outside of Canada to a public site " +
+    	"(e.g. YouTube, Twitter). This personal information will be accessed by BC Public " +
+    	"Service employees and may also be accessed by the public. <br> Should you have any " +
+    	"questions about the collection or disclosure of this information, please contact: " +
+    	"EmployeeNews@gov.bc.ca, 976 Meares St. Victoria, BC, V8V 3J4.";
+
+    $(consentText).insertAfter(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed");
     
   });
 
