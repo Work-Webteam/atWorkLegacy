@@ -33,10 +33,12 @@
     	$("#node-lsa-application-full-group-lsad-contact-info").show();
     	$(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed").show();
     }
+    
     $("#editableviews-entity-form-lsa-admin #edit-actions-submit").parent().insertAfter(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed");
+    $("#edit-actions-submit").attr("form", "editableviews-entity-form-lsa-admin");
     $("#field-lsa-accommodation-notes-add-more-wrapper .description").insertAfter(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above .field-label");
     
-    var consentText = "<strong>Notive of Collection, Consent, and Authorization</strong><br>" +
+    var consentText = "<strong>Notice of Collection, Consent, and Authorization</strong><br>" +
     	"Employees attending this Long Service Awards ceremony may appear on camera. " +
     	"Personal information including photo, video and/or voice, and any other information " +
     	"may be collected and used by the BC Public Service Agency to support communications " +
@@ -177,9 +179,13 @@
     var checkMessage = $('.messages--status.messages.status').text();
     if(checkMessage.indexOf("RSVP") >= 0){
       // If it is the string we are looking for, place the message lower and focus on it.
-      $('.messages--status.messages.status').insertAfter('#editableviews-entity-form-lsa-admin');
+      //$('.messages--status.messages.status').insertAfter('#editableviews-entity-form-lsa-admin');
       // replace the text with a call to move to step 2
-      $('.messages--status.messages.status').text("Your RSVP has been saved. Please move on to Step 2 below.");
+      $('.messages--status.messages.status').text("Your RSVP has been received. Thank you!");
+      
+      //var submitMessage = "If you have any questions, please connect with your <a href="">ministry/organization contact</a> or send an email to the Long Service Awards team."; 
+      $(submitMessage).insertAfter(".messages--status.messages.status");
+      //console.log(submitMessage);
     }
 
     // Change all save buttons to "save changes"
