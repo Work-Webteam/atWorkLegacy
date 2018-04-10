@@ -281,7 +281,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Office Information',
-    'weight' => '4',
+    'weight' => '11',
     'children' => array(
       0 => 'field_lsa_org',
       1 => 'field_lsa_work_phone',
@@ -565,7 +565,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Contact Information',
-    'weight' => '3',
+    'weight' => '10',
     'children' => array(
       0 => 'field_lsa_street',
       1 => 'field_lsa_city',
@@ -603,12 +603,8 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Name',
-    'weight' => '2',
-    'children' => array(
-      0 => 'field_lsa_first_name',
-      1 => 'field_lsa_middle_name',
-      2 => 'field_lsa_last_name',
-    ),
+    'weight' => '9',
+    'children' => array(),
     'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Name',
@@ -637,7 +633,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Supervisor Information',
-    'weight' => '5',
+    'weight' => '13',
     'children' => array(
       0 => 'field_lsa_supervisor_first_name',
       1 => 'field_lsa_supervisor_last_name',
@@ -647,7 +643,7 @@ function atwork_lsa_features_field_group_info() {
       5 => 'field_lsa_supervisor_province',
       6 => 'field_supervisor_address',
     ),
-    'format_type' => 'div',
+    'format_type' => 'hidden',
     'format_settings' => array(
       'label' => 'Supervisor Information',
       'instance_settings' => array(
@@ -744,19 +740,16 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Service Information',
-    'weight' => '1',
+    'weight' => '4',
     'children' => array(
-      0 => 'field_lsa_employee_number',
-      1 => 'field_lsa_years_of_service',
-      2 => 'field_lsa_received_award',
-      3 => 'field_lsa_retiring_thisyear',
-      4 => 'field_lsa_25year_certificatename',
-      5 => 'field_lsa_award',
-      6 => 'field_lsa_date_of_retirement',
-      7 => 'field_lsa_charity_name_2',
-      8 => 'field_lsa_pecsf_charity_name',
-      9 => 'field_lsa_pecsf_region',
-      10 => 'field_lsa_second_donation',
+      0 => 'field_lsa_years_of_service',
+      1 => 'field_lsa_received_award',
+      2 => 'field_lsa_award',
+      3 => 'field_lsa_date_of_retirement',
+      4 => 'field_lsa_charity_name_2',
+      5 => 'field_lsa_pecsf_charity_name',
+      6 => 'field_lsa_pecsf_region',
+      7 => 'field_lsa_second_donation',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -774,6 +767,40 @@ function atwork_lsa_features_field_group_info() {
     ),
   );
   $field_groups['group_service_information|node|lsa_application|default'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_special_requirements|node|lsa_application|default';
+  $field_group->group_name = 'group_special_requirements';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'lsa_application';
+  $field_group->mode = 'default';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Requirements',
+    'weight' => '5',
+    'children' => array(
+      0 => 'field_lsa_dietary_guest',
+      1 => 'field_lsa_dietary_requirements',
+      2 => 'field_lsa_recipient_dietary',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Requirements',
+      'instance_settings' => array(
+        'id' => 'special-dietary-requirements',
+        'classes' => 'group-special-requirements field-group-div',
+        'description' => '',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'fast',
+      ),
+      'formatter' => 'collapsible',
+    ),
+  );
+  $field_groups['group_special_requirements|node|lsa_application|default'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -824,6 +851,7 @@ function atwork_lsa_features_field_group_info() {
   t('RSVP Information');
   t('Recipient Contact Information');
   t('Recipient Details');
+  t('Requirements');
   t('Service Information');
   t('Special Requirements');
   t('Supervisor Details');
