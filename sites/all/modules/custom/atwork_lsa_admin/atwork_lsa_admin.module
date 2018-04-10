@@ -46,6 +46,7 @@ function atwork_lsa_admin_form_alter(&$form, &$form_state, $form_id) {
   if($form['#id'] == 'editableviews-entity-form-lsa-admin' && $form['#view_display_name'] == 'block_lsa_rsvp'){
     // Change submit button text
     $form['actions']['submit']['#value'] = "Submit RSVP";
+    //The button gets moved to the bottom of the page, so tell it which form to submit.
     drupal_add_css("#edit-actions-submit {font-weight:bolder; font-size:125%;}", "inline");
     // Add submit handler
     $form['#submit'][] = 'update_lsa_node_submit';
