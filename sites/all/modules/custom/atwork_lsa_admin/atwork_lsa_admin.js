@@ -71,11 +71,9 @@
   //Show/hide contact information 
   $(".field.field-name-field-do-you-need-to-update-your.field-type-list-boolean.field-label-above").click(function () {
   if($("input[name='field_do_you_need_to_update_your[und]']:checked").val() == 0) {
-  	console.log(0);
   	$("#node-lsa-application-full-group-lsad-contact-info").hide();
   	$(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed").hide();
   } else if($("input[name='field_do_you_need_to_update_your[und]']:checked").val() == 1) {
-  	console.log(1);
   	$("#node-lsa-application-full-group-lsad-contact-info").show();
   	$(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed").show();
   }
@@ -200,7 +198,6 @@
 
     // Do they get a certificate?
     if(years_of_service != "25" && award_name.indexOf("PECSF") < 0){
-    	console.log('pecsf');
     	$(".field.field-name-field-lsa-25year-certificatename.field-type-text.field-label-inline.clearfix").hide();
     }else {
     	$(".field.field-name-field-lsa-25year-certificatename.field-type-text.field-label-inline.clearfix").show();
