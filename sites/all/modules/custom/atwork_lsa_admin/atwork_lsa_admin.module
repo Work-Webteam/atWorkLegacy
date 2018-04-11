@@ -118,7 +118,8 @@ function update_lsa_node_submit(&$form, &$form_state){
       if(isset($messages['status'][0]) && $messages['status'][0]){
         $message_check = substr($messages['status'][0], 0, 5);
         if($message_check == 'Saved'){
-          $messages['status'][0] = 'Your RSVP has been submitted. Thank you!';
+          $messages['status'][0] = 'Your RSVP has been received. Thank you!<br><br>
+          		If you have any questions, please connect with your <a href="' . $base_url . '/career/long-service-awards/long_service_awards_contacts">ministry/organization contact</a> or send an email to the <a href="mailto:longserviceawards@gov.bc.ca">Long Service Awards team</a>.';
           $_SESSION['messages'] = $messages;
         }
       }
@@ -736,4 +737,3 @@ function atwork_lsa_admin_block_list_alter(&$blocks){
     }
   }
 }
-

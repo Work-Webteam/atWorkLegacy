@@ -181,11 +181,8 @@
       // If it is the string we are looking for, place the message lower and focus on it.
       //$('.messages--status.messages.status').insertAfter('#editableviews-entity-form-lsa-admin');
       // replace the text with a call to move to step 2
-      $('.messages--status.messages.status').text("Your RSVP has been received. Thank you!");
-      
-      //var submitMessage = "If you have any questions, please connect with your <a href="">ministry/organization contact</a> or send an email to the Long Service Awards team."; 
+      //$('.messages--status.messages.status').text("Your RSVP has been received. Thank you!");
       $(submitMessage).insertAfter(".messages--status.messages.status");
-      //console.log(submitMessage);
     }
 
     // Change all save buttons to "save changes"
