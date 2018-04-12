@@ -7,7 +7,7 @@
  *
  */
 function atwork_comments_form_alter(&$form, &$form_state, $form_id) {
-
+	
   if ($form['#id'] == 'comment-form' && !$form['cid']['#value']) {
     global $user;
 
@@ -34,11 +34,18 @@ function atwork_comments_form_alter(&$form, &$form_state, $form_id) {
     }
     global $user;
     $current_commenter = user_load($user->uid);
-    // add Pension BC checkbox
+    // Pension BC checkbox
     if(user_has_role(18, $current_commenter)){
       $form['post_as_pensions'] = array(
         '#type' => 'checkbox',
         '#title' => t('Post as Public Service Pension Plan'),
+      );    
+    }
+    // BCGEU checkbox
+    if(user_has_role(20, $current_commenter)){
+      $form['post_as_bcgeu'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Post as BCGEU Representative'),
       );    
     }
   }
@@ -59,11 +66,17 @@ function atwork_comments_comment_presave($comment) {
 
   global $user;
   $current_commenter = user_load($user->uid);
-  // Pension plan hack for comments
+  // Pension plan mod for comments
   if(user_has_role(18, $current_commenter) && isset($comment->post_as_pensions) && $comment->post_as_pensions){
     $comment->name = 'Public Service Pension Plan';
-    // TODO: This will need to be changed to Pensions UID after it is created on @Work
     $comment->uid = 99633;
+    $comment->is_anonymous = FALSE;
+  }
+  // BCGEU mod for comments
+  if(user_has_role(20, $current_commenter) && isset($comment->post_as_bcgeu) && $comment->post_as_bcgeu){
+    $comment->name = 'BCGEU Representative';
+    // TODO: This will need to be changed to Pensions UID after it is created on @Work
+    $comment->uid = 100406;
     $comment->is_anonymous = FALSE;
   }
 }

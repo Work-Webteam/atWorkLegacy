@@ -454,7 +454,7 @@ function atwork_lsa_application_submit(&$form, &$form_state) {
     $middle_name = '';
   }
 
-  if(isset($form_state['values']['field_lsa_certificate_ordered']['und'][0]['value']) && $form_state['values']['field_lsa_certificate_ordered']['und'][0]['value'] == 1){
+  if(isset($form_state['values']['field_lsa_certificate_ordered']['und'][0]['value']) && $form_state['values']['field_lsa_certificate_ordered']['und'][0]['value'] == ''){
     $form_state['values']['field_lsa_25year_certificatename']['und'][0]['value'] = $form_state['values']['field_lsa_first_name']['und'][0]['value'] . " " . $middle_name . $form_state['values']['field_lsa_last_name']['und'][0]['value'];
   }
 }
