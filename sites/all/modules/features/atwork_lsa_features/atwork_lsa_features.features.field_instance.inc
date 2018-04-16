@@ -260,7 +260,7 @@ function atwork_lsa_features_field_default_field_instances() {
           'empty_text' => '',
           'fallback_format' => 'text_default',
           'fallback_settings' => array(),
-          'semantic_field_format' => 0,
+          'semantic_field_format' => '',
         ),
         'type' => 'editable',
         'weight' => 7,
@@ -3508,16 +3508,11 @@ Guest information is not known at this time',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'list',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'list_default',
         'weight' => 11,
       ),
       'ecard' => array(
