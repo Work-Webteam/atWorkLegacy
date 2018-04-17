@@ -12,7 +12,7 @@
  *    @return array
  */
 
-function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_you_know){
+function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_you_know, $track_date){
 	$atwork_base_url = $GLOBALS['base_url'];
 	$comment = NULL;
 
@@ -75,11 +75,32 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 		$comment->parent_url = drupal_get_path_alias('node/' . $comment->nid);
 	} 
 
+	//Add webtrends tracker string to internal links only for 'take note'
+	$note_links = array(); 
+	preg_match_all('/<a href="http:\/\/gww.gov.bc.ca.*">/',$notes['value'],$note_links);
+	
+	$i = 0;
+	foreach($note_links[0] as $link){
+		$link = substr_replace($link,$track_date,-2,0);
+		$notes['value'] = str_replace($note_links[0][$i],$link,$notes['value']);
+	  $i++;
+	}
 	
 	//Fix formatting in bulleted lists in Take Note
 	$notes = str_replace('<ul>', '<ul style="font-family: Calibri,sans-serif; font-size:12pt; margin-top: 10px; margin-right: 10px; margin-bottom: 20px;">', $notes);
 	$notes = str_replace('<li>', '<li class="outlook-list" style="margin-left: 5px;">', $notes);
 	$notes = str_replace('href', 'style="text-decoration: none;" href', $notes);
+	
+	//Add webtrends tracker string to internal links only for 'did you know'
+	$didyouknow_links = array(); 
+	preg_match_all('/<a href="http:\/\/gww.gov.bc.ca.*">/',$did_you_know['value'],$didyouknow_links);
+	
+	$i = 0;
+	foreach($didyouknow_links[0] as $link){
+		$link = substr_replace($link,$track_date,-2,0);
+		$did_you_know['value'] = str_replace($didyouknow_links[0][$i],$link,$did_you_know['value']);
+	  $i++;
+	}
 	
 	//Add style to remove outlook links in did you know text.
 	$did_you_know = str_replace('href', 'style="text-decoration: none;" href', $did_you_know);
