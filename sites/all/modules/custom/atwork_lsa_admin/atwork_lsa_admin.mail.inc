@@ -6,38 +6,38 @@ $applicant_first_name =  $lsa_node->field_lsa_first_name['und'][0]['safe_value']
 $applicant_last_name = $lsa_node->field_lsa_last_name['und'][0]['safe_value'];
 //$applicant_last_name = ucfirst(strtolower($applicant_last_name));
 if(isset($lsa_node->field_lsa_middle_name['und'][0]['safe_value']) && $lsa_node->field_lsa_middle_name['und'][0]['safe_value']){
-  $applicant_middle_name = $lsa_node->field_lsa_middle_name['und'][0]['safe_value'] . ' ';
+	$applicant_middle_name = $lsa_node->field_lsa_middle_name['und'][0]['safe_value'] . ' ';
 } else {
-  $applicant_middle_name = '';
+	$applicant_middle_name = '';
 }
 $applicant_full_name = $applicant_first_name . ' ' . $applicant_middle_name . $applicant_last_name;
 // Need to shrink font if the name is too long
 /*
-switch(true){
-  case (strlen($applicant_full_name)<= 27):
-    $name_font_size = '21pt';
-    break;
-  case (strlen($applicant_full_name) >27 && strlen($applicant_full_name) <= 35):
-    $name_font_size = '16pt';
-    break;
-  case (strlen($applicant_full_name) > 35 && strlen($applicant_full_name) <= 40):
-    $name_font_size = '14pt';
-    break;
-  case (strlen($applicant_full_name) >40):
-    $name_font_size = '10pt';
-    break;
-  default:
-    $name_font_size = '8pt';
-}
-*/
+ switch(true){
+   case (strlen($applicant_full_name)<= 27):
+     $name_font_size = '21pt';
+     break;
+   case (strlen($applicant_full_name) >27 && strlen($applicant_full_name) <= 35):
+     $name_font_size = '16pt';
+     break;
+   case (strlen($applicant_full_name) > 35 && strlen($applicant_full_name) <= 40):
+     $name_font_size = '14pt';
+     break;
+   case (strlen($applicant_full_name) >40):
+     $name_font_size = '10pt';
+     break;
+   default:
+     $name_font_size = '8pt';
+ }
+ */
 // Get ceremony date label value
 //$all_fields = field_info_fields();
 $list_of_values = list_allowed_values(field_info_field('field_lsa_ceremonydate'));
 $ceremony_date_key = $lsa_node->field_lsa_ceremonydate['und'][0]['value'];
 foreach($list_of_values as $key=>$value){
-  if($key == $ceremony_date_key){
-    $ceremony_date = $value;
-  }
+	if($key == $ceremony_date_key){
+		$ceremony_date = $value;
+	}
 }
 
 // Grab Node id for link
@@ -47,7 +47,7 @@ $nid = $lsa_node->nid;
 //$invite = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_print.jpg';
 //$invite_button = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_RSVP.png';
 
-$invite = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_invite_Apr28_with_RSVP.jpg";
+$invite = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_RSVP_with_text_2018.jpg";
 $invite_sized = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_720x800.jpg";
 //$invite_button = 'https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_RSVP.jpg';
 
@@ -61,7 +61,7 @@ $applicant_body = <<<EOT
   .ExternalClass{
     width:100%;
   }
-
+  
   .ExternalClass,
   .ExternalClass p,
   .ExternalClass span,
@@ -71,21 +71,21 @@ $applicant_body = <<<EOT
     line-height: 100%;
     padding: 0px !important;
   }
-
+  
   #outlook a{
       padding:0;
   }
-
+  
   table{
       mso-table-lspace:0pt;
       mso-table-rspace:0pt;
   }
-
+  
    img{
         -ms-interpolation-mode:bicubic;
     }
-
-
+    
+    
     </style>
 <!--[if gte mso 11]>
   <style>
