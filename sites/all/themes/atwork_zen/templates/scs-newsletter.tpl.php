@@ -400,7 +400,7 @@ $atwork_base_url = $GLOBALS['base_url'];
               </div>
             </td>
             <td>
-              <?php echo '<img class="outlook-padding-image-size" src = "' . $atwork_base_url . '/sites/all/themes/atwork/images/whitespace_10_179.png" style="height: 100px;"/>'; ?>
+              <?php echo '<img class="outlook-padding-image-size" src = "' . $atwork_base_url . '/mem_fs/images/whitespace_10_179.png" style="height: 100px;"/>'; ?>
             </td>
             <td width=66% valign="top">
               <table width=97% border="0" cellpadding="0" cellspacing="0" style="border-bottom: 1px solid black;" >
@@ -617,7 +617,7 @@ $atwork_base_url = $GLOBALS['base_url'];
           </tr>
           <tr>
             <td class="outlook-no-mso-border" colspan="2" style="padding: 15px 0 0 15px; color:#004B8D">
-              <?php dpm($atwork_newsletter_render_array['comments']); echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; /*line-height: 24px;*/ font-size: 10pt;" href="' . $atwork_base_url . '/comment/' . $atwork_newsletter_render_array['comments']->cid . '?#comment-' . $atwork_newsletter_render_array['comments']->cid . '" > Read more >> </a>';?>
+              <?php echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; /*line-height: 24px;*/ font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . $pubDate . '" > Read more >> </a>';?>
             </td>
           </tr>
           <tr>
