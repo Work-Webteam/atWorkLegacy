@@ -89,8 +89,7 @@
       }
     }
   }
-  .required-fields.group-lsa-accom .form-required,
-  .required-fields.group-lsa-dietary-acc .form-required {
+  .required-fields.group-lsa-accom .form-required {
     float:left;
     margin-right: 5px;
   }
@@ -98,7 +97,8 @@
     float:left;
     width: 40%;
   }
-  #edit-field-lsa-recipient-dietary {
+  #edit-field-lsa-recipient-dietary,
+  .field-name-field-lsa-recipient-dietary {
     float:left;
     width: 30%;
   }
@@ -115,6 +115,67 @@
   }
   .jqi input[type="radio"] {
     margin-right:5px;
+  }
+}
+/* Visual fixes for the LSA RSVP registration form */
+.node-type-lsa-application {
+  > br:nth-child(11) {
+    padding: 12px;
+  }
+  .form-submit {
+    background-color: beige;
+    margin-top: 5px;
+    margin-left: 10px;
+  }
+  #special-dietary-requirements {
+    border: solid 1px #b7b7b7;
+    margin-bottom:12px;
+    padding:5px;
+    h3 {
+      background-color:#d7d7d7;
+      padding:5px 10px;
+    }
+    .field-name-field-lsa-dietary-requirements > .field-label:after {
+      content:"*";
+      color:red;
+    }
+    .field-name-field-lsa-recipient-dietary {
+      float:left;
+      margin-right: 10px;
+      margin-top:5px;
+      padding-bottom:10px;
+      .field-items {
+        display: inline-block;
+        border-top:solid 1px #b7b7b7;
+        border-bottom:solid 1px #b7b7b7;
+        padding:5px;
+      }
+    }
+    .field-name-field-lsa-dietary-guest {
+      display:inline-block!important;
+      margin-top:5px;
+      padding-bottom:10px;
+      .field-items {
+        border-top:solid 1px #b7b7b7;
+        border-bottom:solid 1px #b7b7b7;
+        padding:5px;
+      }
+    }
+    #edit-submit--20, #edit-submit--21 {
+      display:none;
+    }
+  }
+  fieldset.group-lsa-office-contact {
+    margin-bottom: 15px!important;
+  }
+  .form-type-select > label:nth-child(1) > span:nth-child(1) {
+    position:absolute;
+    top:20px;
+    left:0px;
+  }
+  #edit-field-lsa-org-und {
+    font-size:.95em;
+    margin-left:10px;
   }
 }
 
