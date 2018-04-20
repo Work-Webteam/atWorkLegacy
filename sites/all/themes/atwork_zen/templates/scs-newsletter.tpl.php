@@ -23,9 +23,6 @@ if(!isset($comment)){
 // A file that will take the above vars, returning an associate array with keys                                                                                                                                                                                                                                                                                                                                    
 include_once drupal_get_path('module', 'atwork_newsletter') . "/atwork_newsletter.inc";                                                                                                                                                                                                                                                                                                                            
                                                                                                                                                                                                                                                                                                                                                                                                                    
-//Build render array for dynamic content                                                                                                                                                                                                                                                                                                                                                                           
-$atwork_newsletter_render_array = atwork_newsletter_create_render_arrays($nodes, $comment, $notes, $did_you_know);                                                                                                                                                                                                                                                                                                 
-
 // Grab (probable) publishing date for webtrends                                                                                                                                                                                                                                                                                                                                                                   
 if(date('D') === 'Wed') {                                                                                                                                                                                                                                                                                                                                                                                          
 	// Publish date is current date                                                                                                                                                                                                                                                                                                                                                                                
@@ -34,6 +31,9 @@ if(date('D') === 'Wed') {
 	// Publish date is next wednesday                                                                                                                                                                                                                                                                                                                                                                              
 	$pubDate = "?nl=" . date("dmy", strtotime("next Wednesday"));                                                                                                                                                                                                                                                                                                                                                  
 }                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+//Build render array for dynamic content                                                                                                                                                                                                                                                                                                                                                                           
+$atwork_newsletter_render_array = atwork_newsletter_create_render_arrays($nodes, $comment, $notes, $did_you_know, $pubDate);                                                                                                                                                                                                                                                                                                 
                                                                                                                                                                                                                                                                                                                                                                                                                    
 // Get base URL                                                                                                                                                                                                                                                                                                                                                                                                    
 $atwork_base_url = $GLOBALS['base_url'];                                                                                                                                                                                                                                                                                                                                                                           
@@ -236,7 +236,12 @@ $atwork_base_url = $GLOBALS['base_url'];
   				),
   		));
   		$image_markup = render($image_output);
-  		
+
+  		//Add image tracker link.
+  		$image_ref;
+  		preg_match('/<a href=.*">/',$image_markup,$image_ref);
+  		$image_ref = substr_replace($image_ref,$pubDate,-2,0);
+    	$image_markup = preg_replace('/<a href=.*">/',$image_ref[0],$image_markup);
   	} ?>
   		
   <!-- Start Feature Spot Section for Newsletter -->
@@ -361,21 +366,21 @@ $atwork_base_url = $GLOBALS['base_url'];
           $height = $height[0];
           $width = $width[0];
           
-          // Calculate Aspect ratio
-          $hw_ratio = ($height / $width);
-          $wh_ratio = ($width/ $height);
-          
           $height = 'height="161"';
           $width = 'width="247"';
           
           // Set image style
-          //$image_markup = str_replace('img', 'img style="margin: auto; display: block; height: 161px; width: 247px;"', $image_markup);
           $image_markup = str_replace('img', 'img class="outlook-image-margin" style="display: block; height: 161px; width: 247px;"', $image_markup);
           
           // Insert new rationalized dimensions and display Photo.
           $image_markup = preg_replace('/width="[0-9]+"/', $width, $image_markup);
           $image_markup = preg_replace('/height="[0-9]+"/', $height, $image_markup);
-
+          
+          //Add image tracker link.
+          $image_ref;
+          preg_match('/<a href=.*">/',$image_markup,$image_ref);
+          $image_ref = substr_replace($image_ref,$pubDate,-2,0);
+          $image_markup = preg_replace('/<a href=.*">/',$image_ref[0],$image_markup);
     ?>  
     
     <!-- Output News Article -->
@@ -395,7 +400,7 @@ $atwork_base_url = $GLOBALS['base_url'];
               </div>
             </td>
             <td>
-              <?php echo '<img class="outlook-padding-image-size" src = "' . $atwork_base_url . '/sites/all/themes/atwork/images/whitespace_10_179.png" style="height: 100px;"/>'; ?>
+              <?php echo '<img class="outlook-padding-image-size" src = "' . $atwork_base_url . '/mem_fs/images/whitespace_10_179.png" style="height: 100px;"/>'; ?>
             </td>
             <td width=66% valign="top">
               <table width=97% border="0" cellpadding="0" cellspacing="0" style="border-bottom: 1px solid black;" >
@@ -566,7 +571,7 @@ $atwork_base_url = $GLOBALS['base_url'];
           <td style="padding: 0 0 5px 15px; color:#004B8D">
             <p style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">
               <?php echo "Posted by: ";?>
-              <?php echo '<a style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; font-size: 10pt;" href="' . $atwork_base_url . '/employees/' . $author_name_blog . '">' . $blog_author_name_full . '</a>'; ?>
+              <?php echo '<a style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; font-size: 10pt;" href="' . $atwork_base_url . '/employees/' . $author_name_blog . $pubDate . '">' . $blog_author_name_full . '</a>'; ?>
             </p>
           </td>
           <td style="padding: 0 0 5px 0; color:#004B8D;text-align: right;">
@@ -600,7 +605,7 @@ $atwork_base_url = $GLOBALS['base_url'];
             <td class="outlook-comment-blog-title" style="line-height: 24px; border-bottom: none !important;" valign="top" colspan="2">
               <div class="outlook-comment-blog-title" outlook-body style="line-height: 24px;" >
                 <h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px; margin-left: 15px; margin-bottom: 15px;">
-                  <?php echo '<a style="text-decoration: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/comment/' . $atwork_newsletter_render_array['comments']->cid . '?#comment-' . $atwork_newsletter_render_array['comments']->cid . '">Join the Conversation</a>'; ?>
+                  <?php echo '<a style="text-decoration: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/comment/' . $atwork_newsletter_render_array['comments']->cid . '?#comment-' . $atwork_newsletter_render_array['comments']->cid . $pubDate . '">Join the Conversation</a>'; ?>
                 </h2>
               </div>
             </td>
@@ -612,14 +617,14 @@ $atwork_base_url = $GLOBALS['base_url'];
           </tr>
           <tr>
             <td class="outlook-no-mso-border" colspan="2" style="padding: 15px 0 0 15px; color:#004B8D">
-              <?php echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; /*line-height: 24px;*/ font-size: 10pt;" href="' . $atwork_base_url . '/comment/' . $atwork_newsletter_render_array['comments']->cid . '?#comment-' . $atwork_newsletter_render_array['comments']->cid . '" > Read more >> </a>';?>
+              <?php echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; /*line-height: 24px;*/ font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . $pubDate . '" > Read more >> </a>';?>
             </td>
           </tr>
           <tr>
             <td style="padding: 0 0 5px 15px; color:#004B8D">
               <p style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">
                 <?php echo "Posted by: ";?>
-                <?php echo '<a style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; font-size: 10pt;" href="' . $atwork_base_url . '/employees/' . $atwork_newsletter_render_array['comments']->registered_name . '">' . $atwork_newsletter_render_array['comments']->name. '</a>';?>
+                <?php echo '<a style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; font-size: 10pt;" href="' . $atwork_base_url . '/employees/' . $atwork_newsletter_render_array['comments']->registered_name . $pubDate . '">' . $atwork_newsletter_render_array['comments']->name. '</a>';?>
               </p>
             </td>
             <td style="padding: 0 0 5px 0; color:#004B8D;text-align: right;">

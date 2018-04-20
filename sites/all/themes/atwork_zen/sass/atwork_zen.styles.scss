@@ -2392,8 +2392,33 @@ aside.sidebars h2 {
   padding:5px 10px;
 }
 
-
-
+/****************** Recent/All Comments page ***************************/
+ul.recent-comment-line {
+  border-bottom: solid 1px #a7a7a7;
+  list-style-type: none;
+  margin: 0 0 12px 0;
+  padding: 8px 8px 0;
+  .recent-comment-body {
+    margin: 0 0 8px;
+  }
+  .recent-comment-author {
+    display: block;
+    font-size:.9em;
+    padding-top:5px;
+  }
+}
+.view-recent-comments {
+  #edit-type {
+    position: relative;
+    top: -20px;
+    left: 40px;
+  }
+  .views-submit-button {
+    position: relative;
+    top: -18px;
+    left: 35px;
+  }
+}
 
 
 /*----------------- Article ID bars - Used to denote content creation type --------------------*/
