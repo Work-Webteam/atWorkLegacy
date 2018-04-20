@@ -26,10 +26,11 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 	    }
     }
 	}
-	
 	if($comments !== '') {
+		
 		// Load Comment Object
-		$comment = comment_load($comments);
+		$comment = comment_load($comments['cid']);
+		$comment->edited = $comments['value'];
 		
 		// Retrieve Username from UID and place in comments array
 		$user = user_load($comment->uid);
@@ -38,7 +39,7 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 		$comment->comment_body['und'][0]['formatted'] = preg_replace("/<img[^>]+\>/i", "", $comment->comment_body['und'][0]['value'] ); 
 		// Get rid of <p>&nbsp;</p> if author has dropped in a bunch of returns
 		$pattern = "/<p>*(?:[[:blank:]]|[[:space:]]|\s|\W|X|h|\t|\r|\n)*<\/p>/";
-		$comment->comment_body['und'][0]['formatted'] = preg_replace($pattern, '',$comment->comment_body['und'][0]['formatted']);
+		$comment->comment_body['und'][0]['formatted'] = preg_replace($pattern, '',$comment->edited);
 		// Trim whitespace
 		$comment->comment_body['und'][0]['formatted'] = trim($comment->comment_body['und'][0]['formatted']);
 		// We need to check if this is an HTML comment or a regular text comment. Start by prefixing an x to the front so that we

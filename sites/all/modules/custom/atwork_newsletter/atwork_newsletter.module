@@ -41,12 +41,13 @@ function atwork_newsletter_form_node_form_alter(&$form, &$form_state, $form_id) 
 			}
 		}
 		
+		$form_state['input']['comment_value']['cid'] = $form_state['input']['cid'];
+
 		// Now rebuild the array from scs, this puts the variables into the body field (using our theme)
 		$form['body']['und'][0]['#default_value'] = theme('scs_newsletter', array(
 				'nodes' => $nodes,
 				'toc' => FALSE, //empty($form_state['input']['scs_toc']) ? FALSE : TRUE,
-				//'comment' => $form_state['input']['cid'],
-				'comment' => isset($form_state['input']['cid']) ? $form_state['input']['cid'] : 'none',
+				'comment' => isset($form_state['input']['cid']) ? $form_state['input']['comment_value'] : 'none',
 				'notes' => $form_state['input']['take_note'],
 				'did_you_know' => $form_state['input']['did_you_know'],
 		));
@@ -112,9 +113,6 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
 			$comment_value = $form_state['input']['cid'];
 			$comment_preview = comment_load($comment_value);
 			$comment_body = $comment_preview->comment_body['und'][0]['value'];
-			if($_POST['cid'] !== '') {
-				$comment_suffix = '<div><table style="border: 1px solid #bebfb9;"><tr><td style="border: 1px solid #bebfb9; background-color: #e1e2dc;">COMMENT PREVIEW</td><td>'. $comment_body . '</td></tr></table></div>';
-			}
 		}
 		// We want a text field to add a comment ID
 		$form['cid'] = array(
@@ -129,6 +127,13 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
         	<p>For example, the ID is "42378" in this URL: https:// gww.gov.bc.ca/comment/reply/26948/<strong>42378</strong></p>
         	<p>You can find the comment ID by mousing over the "reply" link below the comment and typing it in the field or by pressing "reply" and copying the ID from the url.</p>'),
 		);
+		if(isset($_POST['cid']) && $_POST['cid'] !== '') {
+	  	//$comment_suffix = '<div><table style="border: 1px solid #bebfb9;"><tr><td style="border: 1px solid #bebfb9; background-color: #e1e2dc;">COMMENT PREVIEW</td><td>'. $comment_body . '</td></tr></table></div>';
+	  	$form['comment_value'] = array(
+	  		'#type' => 'text_format', // gives us ckeditor functionality
+	  		'#default_value' => t($comment_body),
+	  	);
+	  }
 		// Spot for "Take Note"
 		$form['take_note'] = array(
 				'#type' => 'text_format', // gives us ckeditor functionality
