@@ -49,9 +49,8 @@ $nid = $lsa_node->nid;
 
 $invite = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_RSVP_with_text_2018.jpg";
 $invite_sized = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_Apr19.jpg";
-//$invite_button = 'https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_RSVP.jpg';
 
-$applicant_subject = t('Your Long Service Awards invitation is enclosed – please RSVP using the clickable button');
+$applicant_subject = t('Your Long Service Awards Invitation');
 $applicant_body = <<<EOT
 <html>
 <head>
@@ -99,11 +98,12 @@ $applicant_body = <<<EOT
 </head>
 
 <body id="mimemail-body" class="atwork-mail-default" style="padding:0;">
-<p><strong>**DO NOT REPLY TO THIS EMAIL – PLEASE FOLLOW THE INSTRUCTIONS BELOW TO RSVP.**</strong></p>
-<p> Your electronic invitation with RSVP button should appear below. If you are having trouble seeing the image in this email, please ensure you click <strong>“download images”</strong>. </p>
-<p> To confirm your attendance OR to confirm you are unable to attend, <strong>please click on the <a href="$base_url/node/$nid">RSVP button</a></strong> in the invitation below.</p>
-<p style = "page-break-after:always">If you are retired, or unable to access the RSVP link below – please contact us at <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20link" target="_top">LongServiceAwards@gov.bc.ca</a>.</p>
-<p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p><br />
+<p> This is an automated email</p>
+<p> To RSVP for your Long Service Awards ceremony, click on the button in the invitation below. </p>
+<p> If you can’t view the invitation and RSVP form in the body of the email, follow the Outlook prompts to download pictures. If you have retired or you cannot access the RSVP form, please email the <a href="mailto:longserviceawards@gov.bc.ca">Long Service Awards team</a> for assistance. </p>
+
+
+
 <table width="750" border="0" cellpadding="0" cellspacing="0" style = "page-break-before:always; padding:0;" >
   <tbody>
     <tr  style="width:720px !important; height:100% !important; max-height:100% !important; background-size:100%; padding:0 !important; vertical-align:top; float: left;">
@@ -134,6 +134,7 @@ $applicant_body = <<<EOT
             </tbody>
           </table>
         </div>
+    <p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p><br />
     <!--[if gte mso 9]>
     </v:textbox>
     </v:rect>
@@ -146,4 +147,3 @@ $applicant_body = <<<EOT
 </body>
 </html>
 EOT;
-
