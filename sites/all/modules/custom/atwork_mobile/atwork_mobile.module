@@ -77,6 +77,7 @@ function _atwork_menu_block_builder(){
         <li id="atwork_menu_item_polls" class="atwork_menu_nested"><a href="/polls">Polls</a></li>
         <li id="atwork_menu_item_events" class="atwork_menu_nested"><a href="/announcements">Events</a></li>
         <li id="atwork_menu_item_classifieds" class="atwork_menu_nested"><a href="/classifieds">Classifieds</a></li>
+        <li id="atwork_menu_item_recent_comments" class="atwork_menu_nested"><a href="/recent-comments">Comments</a></li>
       </ul>
     </li>
     <li id="atwork_menu_item_engagement_recognition" class="atwork_menu_top_level"><span class="menu-title"><i class="fa fa-plus" aria-hidden="true"></i> Engagement &amp; Recognition</span>
