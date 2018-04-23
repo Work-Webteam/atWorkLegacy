@@ -50,7 +50,7 @@ function profile_feed_comments_flag_default_flags() {
     'unflag_message' => '',
     'unflag_denied_text' => 'flagged',
     'link_type' => 'confirm',
-    'weight' => -7,
+    'weight' => -8,
     'show_in_links' => array(
       'full' => 'full',
       'diff_standard' => 'diff_standard',
@@ -85,7 +85,7 @@ function profile_feed_comments_flag_default_flags() {
     'unflag_message' => '',
     'unflag_denied_text' => 'flagged',
     'link_type' => 'confirm',
-    'weight' => -8,
+    'weight' => -7,
     'show_in_links' => array(
       'full' => 'full',
       'diff_standard' => 'diff_standard',
