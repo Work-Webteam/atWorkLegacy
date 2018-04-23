@@ -172,9 +172,8 @@ class DrupalDefaultEntityController implements DrupalEntityControllerInterface {
     // were passed. The $ids array is reduced as items are loaded from cache,
     // and we need to know if it's empty for this reason to avoid querying the
     // database when all requested entities are loaded from cache.
-
-    $passed_ids = is_array($ids) && !empty($ids) ? array_flip(array_filter($ids)) : FALSE;
-    //Try to load entities from the static cache, if the entity type supports
+    $passed_ids = !empty($ids) ? array_flip($ids) : FALSE;
+    // Try to load entities from the static cache, if the entity type supports
     // static caching.
     if ($this->cache && !$revision_id) {
       $entities += $this->cacheGet($ids, $conditions);
