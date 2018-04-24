@@ -83,7 +83,7 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
   }
 
   if(isset($field_gal_work_group[0]['value']) && $field_gal_work_group[0]['value']){
-    $form['field_lsa_office_work_group'][$form['field_lsa_office_work_group']['#language']][0]['value']['#default_value'] = $field_gal_work_group[0]['value'];
+    //$form['field_lsa_office_work_group'][$form['field_lsa_office_work_group']['#language']][0]['value']['#default_value'] = $field_gal_work_group[0]['value'];
   }
 
   if(isset($field_gal_address[0]['value']) && $field_gal_address[0]['value']){
