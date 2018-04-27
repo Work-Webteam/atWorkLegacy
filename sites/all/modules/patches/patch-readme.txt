@@ -78,3 +78,9 @@ date: 2018-03-19
 Module: AuthcacheNodeHistorySetting.inc
 source: We created this fix
 issue: Watchdog/php complaining about "Notice: Trying to get property of non-object in AuthcacheNodeHistorySetting->get() (line 50 of /var/www/html/sites/all/modules/contrib/authcache/modules/authcache_node_history/includes/AuthcacheNodeHistorySetting.inc).  We fixed this by altering the foreach so that it makes sure $history['nid']->timestamp exists (in addition to just checking $history['nid']).  We also assign timestamp to a variable of its own rather than straight to the array.
+
+
+date: 2018-04-24
+Module: Views
+Source: https://www.drupal.org/project/views/issues/2481401
+Issue: Views include is looking for an exposed filter that does not exist - this patch makes sure it also checks if the variable is set prior to running code.
