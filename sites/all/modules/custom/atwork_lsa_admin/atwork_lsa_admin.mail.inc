@@ -39,6 +39,7 @@ foreach($list_of_values as $key=>$value){
 		$ceremony_date = $value;
 	}
 }
+		$ceremony_date = '';
 
 // Grab Node id for link
 $nid = $lsa_node->nid;
@@ -134,7 +135,6 @@ $applicant_body = <<<EOT
             </tbody>
           </table>
         </div>
-    <p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p><br />
     <!--[if gte mso 9]>
     </v:textbox>
     </v:rect>
@@ -145,5 +145,6 @@ $applicant_body = <<<EOT
   </tbody>
 </table>
 </body>
+<p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p><br />
 </html>
 EOT;
