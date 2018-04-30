@@ -39,7 +39,6 @@ foreach($list_of_values as $key=>$value){
 		$ceremony_date = $value;
 	}
 }
-		$ceremony_date = '';
 
 // Grab Node id for link
 $nid = $lsa_node->nid;
