@@ -11,11 +11,11 @@ $applicant_attending_body = <<<EOT
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     </head>
     <body id="mimemail-body" class="atwork-mail-default">
-        <center><img src="$image_source" height="100" width="100" align="middle"></center>
+        <center><img src="$image_source" height="120" width="120" align="middle"></center>
         <br />
         <p>This in an automated email. No response is required. </p>
         <p>Thank you for confirming your attendance for your Long Service Award ceremony. If you need to make changes to your RSVP information or cancel your attendance, please email the <a href="mailto:LongServiceAwards@gov.bc.ca?subject=RSVP%20to%20ceremony">Long Service Awards team</a>. </p>
-        <p>The ceremony will take place at <a href="http://www.ltgov.bc.ca/contact/default.html">Government House</a>, and business attire is recommended. Doors open at 5:45 p.m. Your invitation is not required for entry to the ceremony. </p>
+        <p>The ceremony will take place at <a href="http://www.ltgov.bc.ca/getting-here">Government House</a>, and business attire is recommended. Doors open at 5:45 p.m. Your invitation is not required for entry to the ceremony. </p>
         <p><strong>Itinerary:</strong>
             <ul>
                 <li>5:45 – 6:15 p.m.- Registration, Reception and Welcome</li>
@@ -29,7 +29,6 @@ $applicant_attending_body = <<<EOT
         </p>
         <p>For information about travel reimbursement and taking time off, visit <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility/policy">@Work</a> or contact your workplace <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts">Long Service Award contact</a>. If you have questions about the ceremony, email the <a href="mailto:longserviceawards@gov.bc.ca?subject=Question%20about%20LSA%20ceremony">Long Service Awards team</a>.</p>
         <p>We look forward to welcoming you to Government House this fall!</p>
-        <p>Long Service Awards Team<br />
         <p>Thank you,<br>Long Service Awards Team</p>
     </body>
 </html>

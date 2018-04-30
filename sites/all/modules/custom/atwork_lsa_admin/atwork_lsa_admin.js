@@ -9,6 +9,7 @@
 
     //Move RSVP block down the page
     $("#block-views-lsa-admin-block-lsa-rsvp").insertAfter("#lsa-award-selector-img-display-panel");
+    $(".node-type-lsa-application #edit-actions--21").css({'text-align':'center','margin-top':'15px','margin-bottom':'15px'});
   
     // Hide and style recipient/guest dietary requirements dropdown
     $(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").hide();
@@ -38,8 +39,8 @@
     $("#edit-actions-submit").attr("form", "editableviews-entity-form-lsa-admin");
     $("#field-lsa-accommodation-notes-add-more-wrapper .description").insertAfter(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above .field-label");
     
-    var consentText = "<strong>Notice of Collection, Consent, and Authorization</strong><br>" +
-    	"Employees attending this Long Service Awards ceremony may appear on camera. " +
+    var consentText = "<br><br><strong>Notice of Collection, Consent, and Authorization</strong><br>" +
+    	"<em>Employees attending this Long Service Awards ceremony may appear on camera. " +
     	"Personal information including photo, video and/or voice, and any other information " +
     	"may be collected and used by the BC Public Service Agency to support communications " +
     	"and engagement within and on behalf of the BC Public Service. This information is " +
@@ -51,7 +52,7 @@
     	"(e.g. YouTube, Twitter). This personal information will be accessed by BC Public " +
     	"Service employees and may also be accessed by the public. <br> Should you have any " +
     	"questions about the collection or disclosure of this information, please contact: " +
-    	"EmployeeNews@gov.bc.ca, 976 Meares St. Victoria, BC, V8V 3J4.";
+    	"EmployeeNews@gov.bc.ca, 976 Meares St. Victoria, BC, V8V 3J4.</em>";
 
     $(consentText).insertAfter(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed");
     
