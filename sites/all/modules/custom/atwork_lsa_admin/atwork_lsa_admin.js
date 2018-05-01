@@ -40,6 +40,8 @@
     $("#edit-actions-submit").attr("form", "editableviews-entity-form-lsa-admin");
     $("#field-lsa-accommodation-notes-add-more-wrapper .description").insertAfter(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above .field-label");
     
+    $('.field.field-name-field-do-you-need-to-update-your.field-type-list-boolean.field-label-above').css({"margin-top": "15px"});
+    
     var consentText = "<br><br><strong>Notice of Collection, Consent, and Authorization</strong><br>" +
     	"<em>Employees attending this Long Service Awards ceremony may appear on camera. " +
     	"Personal information including photo, video and/or voice, and any other information " +
