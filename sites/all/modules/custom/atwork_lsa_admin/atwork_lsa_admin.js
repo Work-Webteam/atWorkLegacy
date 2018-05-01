@@ -11,7 +11,8 @@
     $("#block-views-lsa-admin-block-lsa-rsvp").insertAfter("#lsa-award-selector-img-display-panel");
     $(".node-type-lsa-application #edit-actions--21").css({'text-align':'center','margin-top':'15px','margin-bottom':'15px'});
 
-    $('#edit-node-31835-field-lsa-ceremony-response-und option[value="_none"]').text('- Select your RSVP -');
+    console.log($('.field-type-list-text.field-name-field-lsa-ceremony-response.field-widget-options-select.form-wrapper .form-select option[value="_none"]').text());
+    $('.field-name-field-lsa-ceremony-response select option[value="_none"]').text('- Select your RSVP -');
     
     // Hide and style recipient/guest dietary requirements dropdown
     $(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").hide();
