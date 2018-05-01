@@ -572,7 +572,7 @@ function _atwork_activity_render_messages($result, $activityType) {
         // This is a zero based function adn we counted the first character above as '1' - so now need to take taht into account.
         $rebuilt_string = substr($rebuilt_array, 0, $i-1);
         // Add tagged more href on end
-        $rebuilt_string = $rebuilt_string . ' <a href="node/' . $message['#entity']->field_message_node['und'][0]['target_id'] . '">more</a>';
+        $rebuilt_string = $rebuilt_string . '...' . ' <a href="node/' . $message['#entity']->field_message_node['und'][0]['target_id'] . '">more</a>';
         // Make sure all of our <p> tags are closed
         while($k < $j){
           $rebuilt_string = $rebuilt_string . '</p>';
