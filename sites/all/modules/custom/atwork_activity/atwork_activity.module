@@ -479,10 +479,16 @@ function _atwork_activity_render_messages($result, $activityType) {
       $string_is_too_long = false;
       $message_string = $message['message__message_text__0']['#markup'];
       // We want to split out everything before the message (i.e. name etc)
-      $message_array = explode('<br />', $message_string);
-      if(isset($message_array[1])){
+      $message_array = explode('<br />', $message_string);  
+      // If we had a number of <br> tags after teh first, we need to pull out the original and implode the rest of the string
+      if(count($message_array) > 2){
+        array_shift($message_array);
+        $message_text = implode('<br>', $message_array);
+      // If we only have one <br>
+      } elseif(isset($message_array[1])){
         $message_text = $message_array[1];
       } else {
+        // Final case, so we don't error - didn't split out for some reason so we will count everything
         $message_text = $message_string;
       }
       $no_tags_message = strip_tags($message_text);
