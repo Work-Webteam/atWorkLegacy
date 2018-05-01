@@ -478,14 +478,20 @@ function _atwork_activity_render_messages($result, $activityType) {
      // If field is longer than 100 characters (without tags);
       $string_is_too_long = false;
       $message_string = $message['message__message_text__0']['#markup'];
-      $no_tags_message = strip_tags($message_string);
+      // We want to split out everything before the message (i.e. name etc)
+      $message_array = explode('<br />', $message_string);
+      if(isset($message_array[1])){
+        $message_text = $message_array[1];
+      } else {
+        $message_text = $message_string;
+      }
+      $no_tags_message = strip_tags($message_text);
       $message_string_length = strlen($no_tags_message);
        global $user;
 
       if($message_string_length > 100){
         $string_is_too_long = true;
-      }
-
+      } 
       // Make a copy, explode on closing tags
       if($string_is_too_long === true && $message['#bundle'] == 'status'){
         // We know all messages start with <p and  class> - lets remove and save this.
@@ -516,6 +522,7 @@ function _atwork_activity_render_messages($result, $activityType) {
         $j = 0;
         // Our closing tag counter
         $k = 0;
+
         // Run through string, count the # of chars at each location that is not one of our placeholders
         foreach($string_array as $key=>$character){
           // We're done here, lets split
@@ -564,8 +571,8 @@ function _atwork_activity_render_messages($result, $activityType) {
         $rebuilt_array = implode($string_array);
         // This is a zero based function adn we counted the first character above as '1' - so now need to take taht into account.
         $rebuilt_string = substr($rebuilt_array, 0, $i-1);
-        // Add ellipses and tagged more href on end
-        $rebuilt_string = $rebuilt_string . '... <a href="node/' . $message['#entity']->field_message_node['und'][0]['target_id'] . '">more</a>';
+        // Add tagged more href on end
+        $rebuilt_string = $rebuilt_string . ' <a href="node/' . $message['#entity']->field_message_node['und'][0]['target_id'] . '">more</a>';
         // Make sure all of our <p> tags are closed
         while($k < $j){
           $rebuilt_string = $rebuilt_string . '</p>';
@@ -584,7 +591,13 @@ function _atwork_activity_render_messages($result, $activityType) {
         // Now put it back in markup
         $message['message__message_text__0']['#markup'] = $rebuilt_string;
       // Comments are the other message type that prints user markup - so we need to sanitize that portion as well. 
-      } else if($string_is_too_long === true && $message['#bundle'] == 'new_comment'){
+      } else if($message['#bundle'] == 'new_comment'){
+        // Is it too long?
+        if($string_is_too_long){
+          $e = "...";
+        } else {
+          $e = '';
+        }
         // Make new array
         $finished_array = array();
         // explode out the user generated text, we will need to keep the first bit ([0])
@@ -603,12 +616,12 @@ function _atwork_activity_render_messages($result, $activityType) {
           if($last_space !== false){
             $comment_text = substr($comment_text, 0, $last_space);
           }
-        }
+        } 
         // Put it all back together
         $finished_array[] = ($message_split[0]);
         $finished_array[] = '<span class="activity-comment">';
         $finished_array[] = $comment_text;
-        $finished_array[] = '</span>';
+        $finished_array[] = $e .'</span>';
         $finished_array[] = (end($message_end_split));
         $finished_string = implode(' ', $finished_array);
         $message['message__message_text__0']['#markup'] = $finished_string;
