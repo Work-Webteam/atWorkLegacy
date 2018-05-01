@@ -11,7 +11,6 @@
     $("#block-views-lsa-admin-block-lsa-rsvp").insertAfter("#lsa-award-selector-img-display-panel");
     $(".node-type-lsa-application #edit-actions--21").css({'text-align':'center','margin-top':'15px','margin-bottom':'15px'});
 
-    console.log($('.field-type-list-text.field-name-field-lsa-ceremony-response.field-widget-options-select.form-wrapper .form-select option[value="_none"]').text());
     $('.field-name-field-lsa-ceremony-response select option[value="_none"]').text('- Select your RSVP -');
     
     // Hide and style recipient/guest dietary requirements dropdown
@@ -54,13 +53,30 @@
     	"employees (e.g. @Work Corporate Intranet, @Work Newsletter, events, brochures, " +
     	"reports) and/or used and disclosed outside of Canada to a public site " +
     	"(e.g. YouTube, Twitter). This personal information will be accessed by BC Public " +
-    	"Service employees and may also be accessed by the public. <br> Should you have any " +
+    	"Service employees and may also be accessed by the public. Should you have any " +
     	"questions about the collection or disclosure of this information, please contact: " +
     	"EmployeeNews@gov.bc.ca, 976 Meares St. Victoria, BC, V8V 3J4.</em>";
 
     $(consentText).insertAfter(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed");
-    
+
+    //Hide fields if not attending
+    if($('.field-name-field-lsa-ceremony-response select option[value="3"]').prop("selected")) {
+    	$("#special-dietary-requirements").hide();
+    	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").hide();
+    }
   });
+  
+  //Hide /show fields depending on attendance
+  $('.field-name-field-lsa-ceremony-response select').change(function() {
+    if($('.field-name-field-lsa-ceremony-response select option[value="3"]').prop("selected")) {
+  	  $("#special-dietary-requirements").hide();
+  	  $(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").hide();
+    } else {
+    	$("#special-dietary-requirements").show();
+    	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").show();
+    }
+  });
+  
 
   //Show/hide dietary requirements input
   $("#special-dietary-requirements").click(function () {
