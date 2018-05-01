@@ -29,7 +29,7 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
   $form['#submit'][] = 'atwork_lsa_application_submit';
   $form['actions']['submit']['#value'] = "SUBMIT your LSA registration";
   $form['field_lsa_accommodation_notes']['und'][0]['value']['#title'] = "";
-  $form['field_lsa_accommodation_notes']['und']['#prefix'] .= "<p>Please specify your accommodations requirements, and indicate if the accommodation is for you or your guest.</p>";
+  //$form['field_lsa_accommodation_notes']['und']['#prefix'] .= "<p>Please specify your accommodations requirements, and indicate if the accommodation is for you or your guest.</p>";
   $form['field_lsa_award_sp_instructions']['#access'] = FALSE;
   $form['field_lsa_ceremony_accommodation']['und']['#title'] = t('');
   $form['field_lsa_dietary_requirements']['und']['#title'] = t('');
