@@ -38,7 +38,7 @@
     }
 
     // Show accessibility textbox instructions
-    var accessibilityInstructions = "<p>Please confirm the accessibility accommodations that you and/or your guest" +
+    var accessibilityInstructions = "<p>Please confirm the accessibility accommodations that you and/or your guest " +
     	"require to attend the Long Service Awards ceremony (e.g., sign language interpreter (ASL), service dog," +
     	"accessible parking/entrance, etc.)</p><br>";
     
