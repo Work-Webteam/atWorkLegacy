@@ -7,11 +7,6 @@
 	  $(".field-name-field-lsa-award").after('<div><img id="lsa-award-selector-img-display-panel" /></div>');
 	  $("#lsa-award-selector-img-display-panel").css({"border-radius":"9px","box-shadow":"2px 2px lightgrey","padding":"10px","border":"1px solid gray","margin":"5px 0 20px 50px"}).attr({"src":selectedAward["URI"]});  
 
-	  //Move submit button to bottom of page for chrome
-	  //$("#editableviews-entity-form-lsa-admin #edit-actions-submit").parent().insertAfter(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed");
-	  //$("#edit-actions-submit").attr("form", "editableviews-entity-form-lsa-admin");
-
-
 	  //Move RSVP block down the page
 	  $("#block-views-lsa-admin-block-lsa-rsvp").insertAfter("#lsa-award-selector-img-display-panel");
 	  $(".node-type-lsa-application #edit-actions--21").css({'text-align':'center','margin-top':'15px','margin-bottom':'15px'});
@@ -41,11 +36,7 @@
     	$("#node-lsa-application-full-group-lsad-contact-info").show();
     	$(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed").show();
     }
-    
 
-    
-    
-    
     // Show accessibility textbox instructions
     var accessibilityInstructions = "<p>Please confirm the accessibility accommodations that you and/or your guest" +
     	"require to attend the Long Service Awards ceremony (e.g., sign language interpreter (ASL), service dog," +
@@ -215,7 +206,7 @@
       //$('.messages--status.messages.status').insertAfter('#editableviews-entity-form-lsa-admin');
       // replace the text with a call to move to step 2
       //$('.messages--status.messages.status').text("Your RSVP has been received. Thank you!");
-      $(submitMessage).insertAfter(".messages--status.messages.status");
+      //$(submitMessage).insertAfter(".messages--status.messages.status");
     }
 
     // Change all save buttons to "save changes"
