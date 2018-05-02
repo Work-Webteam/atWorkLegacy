@@ -7,9 +7,15 @@
 	  $(".field-name-field-lsa-award").after('<div><img id="lsa-award-selector-img-display-panel" /></div>');
 	  $("#lsa-award-selector-img-display-panel").css({"border-radius":"9px","box-shadow":"2px 2px lightgrey","padding":"10px","border":"1px solid gray","margin":"5px 0 20px 50px"}).attr({"src":selectedAward["URI"]});  
 
-    //Move RSVP block down the page
-    $("#block-views-lsa-admin-block-lsa-rsvp").insertAfter("#lsa-award-selector-img-display-panel");
-    $(".node-type-lsa-application #edit-actions--21").css({'text-align':'center','margin-top':'15px','margin-bottom':'15px'});
+	  //Move submit button to bottom of page for chrome
+	  //$("#editableviews-entity-form-lsa-admin #edit-actions-submit").parent().insertAfter(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed");
+	  //$("#edit-actions-submit").attr("form", "editableviews-entity-form-lsa-admin");
+
+
+	  //Move RSVP block down the page
+	  $("#block-views-lsa-admin-block-lsa-rsvp").insertAfter("#lsa-award-selector-img-display-panel");
+	  $(".node-type-lsa-application #edit-actions--21").css({'text-align':'center','margin-top':'15px','margin-bottom':'15px'});
+
 
     $('.field-name-field-lsa-ceremony-response select option[value="_none"]').text('- Select your RSVP -');
     
@@ -36,10 +42,17 @@
     	$(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed").show();
     }
     
-    $("#editableviews-entity-form-lsa-admin #edit-actions-submit").parent().insertAfter(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed");
-    $("#edit-actions-submit").attr("form", "editableviews-entity-form-lsa-admin");
-    $("#field-lsa-accommodation-notes-add-more-wrapper .description").insertAfter(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above .field-label");
+
     
+    
+    
+    // Show accessibility textbox instructions
+    var accessibilityInstructions = "<p>Please confirm the accessibility accommodations that you and/or your guest" +
+    	"require to attend the Long Service Awards ceremony (e.g., sign language interpreter (ASL), service dog," +
+    	"accessible parking/entrance, etc.)</p><br>";
+    
+    // Show accessibility instructions
+    $(accessibilityInstructions).insertAfter(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above .field-label");
     $('.field.field-name-field-do-you-need-to-update-your.field-type-list-boolean.field-label-above').css({"margin-top": "15px"});
     
     var consentText = "<br><br><strong>Notice of Collection, Consent, and Authorization</strong><br>" +
@@ -65,6 +78,7 @@
     	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").hide();
     }
   });
+  
   
   //Hide /show fields depending on attendance
   $('.field-name-field-lsa-ceremony-response select').change(function() {

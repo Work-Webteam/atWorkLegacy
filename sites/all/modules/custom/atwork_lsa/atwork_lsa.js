@@ -1,6 +1,5 @@
 (function ($) {
 
-
 /**
  * This function handles various form messages and elements, determining when they should be seen.
  * All elements and messages are created in set_form() function below
@@ -269,19 +268,31 @@
     set_form();
     lsaGift();
 
+    //Move accomodation description to above textbox
+    var accessibilityInstructions = "<div id='lsa_accomodation_notes_description'><p>Please confirm the accessibility accommodations that you and/or your guest" +
+  	"require to attend the Long Service Awards ceremony (e.g., sign language interpreter (ASL), service dog," +
+  	"accessible parking/entrance, etc.)</p></div>";
+
+    $(accessibilityInstructions).insertAfter("#edit-field-lsa-ceremony-accommodation");
+    if($('#edit-field-lsa-ceremony-accommodation-und-0').is(":checked")){
+    	$("#lsa_accomodation_notes_description").hide();
+    }
+    
     // Show textbox if there are accomodation requests
     $('#edit-field-lsa-ceremony-accommodation-und-1').click(function() {
       if($('#edit-field-lsa-ceremony-accommodation-und-1').is(":checked")){
         $('#field-lsa-accommodation-notes-add-more-wrapper').slideDown("slow");
+        $("#lsa_accomodation_notes_description").slideDown("slow");
       } 
     });
     // Otherwise hide
     $('#edit-field-lsa-ceremony-accommodation-und-0').click(function() {
       if($('#edit-field-lsa-ceremony-accommodation-und-0').is(":checked")){
         $('#field-lsa-accommodation-notes-add-more-wrapper').slideUp("slow");
+        $("#lsa_accomodation_notes_description").slideUp("slow");
       }
     });
-
+    
     // Show dietary options if required
     $('#edit-field-lsa-dietary-requirements-und-1').click(function() {
       if($('#edit-field-lsa-dietary-requirements-und-1').is(":checked")){
