@@ -47,7 +47,7 @@
     $('.field.field-name-field-do-you-need-to-update-your.field-type-list-boolean.field-label-above').css({"margin-top": "15px"});
     
     var consentText = "<br><br><strong>Notice of Collection, Consent, and Authorization</strong><br>" +
-    	"<em>Employees attending this Long Service Awards ceremony may appear on camera. " +
+    	"<em>Employees attending this event may appear on camera. " +
     	"Personal information including photo, video and/or voice, and any other information " +
     	"may be collected and used by the BC Public Service Agency to support communications " +
     	"and engagement within and on behalf of the BC Public Service. This information is " +
