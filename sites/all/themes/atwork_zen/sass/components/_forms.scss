@@ -119,6 +119,14 @@
 }
 /* Visual fixes for the LSA RSVP registration form */
 .node-type-lsa-application {
+  #editableviews-entity-form-lsa-admin {
+    #edit-actions-submit {
+      position: absolute;
+      bottom: 10px;
+      left: 550px;
+    }
+  }
+
   > br:nth-child(11) {
     padding: 12px;
   }
@@ -162,7 +170,7 @@
       }
     }
     #edit-submit--20, #edit-submit--21 {
-      display:none;
+      display:none!important;
     }
   }
   fieldset.group-lsa-office-contact {

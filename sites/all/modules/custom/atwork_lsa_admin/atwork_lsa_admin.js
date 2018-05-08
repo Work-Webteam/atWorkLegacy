@@ -78,10 +78,14 @@
   // Hide guest dietary requests if no-guest-attending is selected.
   $('.field-name-field-lsa-ceremony-response select').change(function() {
   if($('.form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und input[value="1"]').prop('checked')) {
+  	console.log(2);
     if($('.field-name-field-lsa-ceremony-response select option[value="1"]').prop("selected")) {
+    	console.log(4);
         $('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "none"});
+        $('#special-dietary-requirements .field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above').css({"display": "none"});
       } else {
       	$('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "inline-block"});
+      	$('#special-dietary-requirements .field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above').css({"display": "inline-block"});
       }
     }
   });
