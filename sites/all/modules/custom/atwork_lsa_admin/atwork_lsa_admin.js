@@ -39,7 +39,7 @@
 
     // Show accessibility textbox instructions
     var accessibilityInstructions = "<p>Please confirm the accessibility accommodations that you and/or your guest " +
-    	"require to attend the Long Service Awards ceremony (e.g., sign language interpreter (ASL), service dog," +
+    	"require to attend the Long Service Awards ceremony (e.g. sign language interpreter (ASL), service dog, " +
     	"accessible parking/entrance, etc.)</p><br>";
     
     // Show accessibility instructions
@@ -68,10 +68,25 @@
     	$("#special-dietary-requirements").hide();
     	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").hide();
     }
+    
+    if($('.field-name-field-lsa-ceremony-response select option[value="1"]').prop("selected")
+    	 && $('#edit-field-lsa-dietary-requirements-und-1').prop('checked')) {
+    	  		$('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "none"});
+    }
+  });
+
+  // Hide guest dietary requests if no-guest-attending is selected.
+  $('.field-name-field-lsa-ceremony-response select').change(function() {
+  if($('.form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und input[value="1"]').prop('checked')) {
+    if($('.field-name-field-lsa-ceremony-response select option[value="1"]').prop("selected")) {
+        $('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "none"});
+      } else {
+      	$('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "inline-block"});
+      }
+    }
   });
   
-  
-  //Hide /show fields depending on attendance
+  // Hide/show fields depending on attendance
   $('.field-name-field-lsa-ceremony-response select').change(function() {
     if($('.field-name-field-lsa-ceremony-response select option[value="3"]').prop("selected")) {
   	  $("#special-dietary-requirements").hide();
@@ -380,7 +395,7 @@
     
     close_button();
     settings();
-    setTooltip();
+    //setTooltip();
     document.body.addEventListener('click', open_button, true);
   });
 
