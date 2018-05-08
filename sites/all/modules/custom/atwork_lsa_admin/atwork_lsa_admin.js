@@ -38,7 +38,7 @@
     }
 
     // Show accessibility textbox instructions
-    var accessibilityInstructions = "<p>Please confirm the accessibility accommodations that you and/or your guest " +
+    var accessibilityInstructions = "<p> If needed, please confirm the accessibility accommodations that you and/or your guest " +
     	"require to attend the Long Service Awards ceremony (e.g. sign language interpreter (ASL), service dog, " +
     	"accessible parking/entrance, etc.)</p><br>";
     
@@ -61,7 +61,7 @@
     	"questions about the collection or disclosure of this information, please contact: " +
     	"EmployeeNews@gov.bc.ca, 976 Meares St. Victoria, BC, V8V 3J4.</em>";
 
-    $(consentText).insertAfter(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed");
+    $(consentText).insertAfter(".node-lsa-application #node-lsa-application-full-group-lsad-contact-info");
 
     //Hide fields if not attending
     if($('.field-name-field-lsa-ceremony-response select option[value="3"]').prop("selected")) {

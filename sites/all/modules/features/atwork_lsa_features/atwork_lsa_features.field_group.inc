@@ -278,10 +278,10 @@ function atwork_lsa_features_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'lsa_application';
   $field_group->mode = 'default';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_lsad_contact_info';
   $field_group->data = array(
     'label' => 'Office Information',
-    'weight' => '11',
+    'weight' => '14',
     'children' => array(
       0 => 'field_lsa_org',
       1 => 'field_lsa_work_phone',
@@ -574,6 +574,7 @@ function atwork_lsa_features_field_group_info() {
       4 => 'field_lsa_alt_email_address',
       5 => 'field_lsa_home_postal_code',
       6 => 'field_lsa_home_province',
+      7 => 'group_lsa_office_contact',
     ),
     'format_type' => 'div',
     'format_settings' => array(

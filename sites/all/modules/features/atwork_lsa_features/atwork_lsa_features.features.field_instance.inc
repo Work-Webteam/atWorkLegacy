@@ -137,7 +137,7 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_do_you_need_to_update_your',
-    'label' => 'Do you need to update your contact information or workplace details (e.g. ministry?)',
+    'label' => 'Do you need to update your contact information or workplace details (e.g. ministry)?',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -249,7 +249,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'bundle' => 'lsa_application',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Please confirm the accessibility accommodations that you and/or your guest require to attend the Long Service Awards ceremony (e.g., sign language interpreter (ASL), service dog, accessible parking/entrance, etc.)',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1642,7 +1642,7 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_dietary_guest',
-    'label' => 'Guest requests',
+    'label' => 'Guest Requests',
     'required' => 0,
     'settings' => array(
       'authcache' => array(
@@ -7488,7 +7488,7 @@ Vegan',
   t('Did you receive your award?');
   t('Did you register last year but were unable to attend the ceremony?');
   t('Dietary Requirements');
-  t('Do you need to update your contact information or workplace details (e.g. ministry?)');
+  t('Do you need to update your contact information or workplace details (e.g. ministry)?');
   t('Do you wish to request any service pin(s) for any past milestones?');
   t('Does your supervisor work in a different office location than you? ');
   t('Donation Amount');
@@ -7500,7 +7500,7 @@ Vegan',
   t('First Name');
   t('Guest Accommodations');
   t('Guest Attending');
-  t('Guest requests');
+  t('Guest Requests');
   t('Home Phone');
   t('I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target ="_blank">service pin recognition eligibility guidelines</a> (which I have reviewed) that as of December 31, 2018, I will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and am therefore eligible to receive a service pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.');
   t('If retired, please enter the last organization and supervisor you worked with.');
@@ -7517,7 +7517,6 @@ Vegan',
   t('PECSF Region');
   t('Phone');
   t('Please Specify Your Requirements');
-  t('Please confirm the accessibility accommodations that you and/or your guest require to attend the Long Service Awards ceremony (e.g., sign language interpreter (ASL), service dog, accessible parking/entrance, etc.)');
   t('Please confirm the accessibility accommodations that you and/or your guest require to attend the Long Service Awards ceremony(e.g. sign language interpreter (ASL), service dog, accessible parking/entrance, etc.)');
   t('Please select the retroactive milestone pin(s) you would like to order');
   t('Please use the format:A1A 1A1');
