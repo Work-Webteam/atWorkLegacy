@@ -148,10 +148,8 @@
    // // If no rows are checked, disable any form submit actions.
    var selectbox = $('select[name="operation"]', form);
    var checkedCheckboxes = $('.vbo-select:checked', form);
-   console.log(checkedCheckboxes);
    var buttons = $('[id^="edit-select"] input[type="submit"]', form);
    
-   console.log(checkedCheckboxes.length);
    if (selectbox.length) {
      var has_selection = checkedCheckboxes.length && selectbox.val() !== '0';
      buttons.prop('disabled', !has_selection);
