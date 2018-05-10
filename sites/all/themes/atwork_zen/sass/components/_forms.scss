@@ -1,6 +1,14 @@
 // Long Service Awards Registration Form 
 
 .page-node-add-lsa-application {
+  #editablefields-field-do-you-need-to-update-your {
+    #edit-field-do-you-need-to-update-your {
+      .form-required {
+        position: absolute;
+        right: 175px;
+      }
+    }
+  }
   fieldset {
     background-color: #f1f1f1;
     margin: 1em 0;
@@ -122,6 +130,9 @@
   > br:nth-child(11) {
     padding: 12px;
   }
+  .field.field-name-field-do-you-need-to-update-your.field-type-list-boolean.field-label-above {
+    margin-top: 5px;
+  }
   .form-submit {
     background-color: beige;
     margin-top: 5px;
@@ -152,7 +163,7 @@
       }
     }
     .field-name-field-lsa-dietary-guest {
-      display:inline-block;
+      display:inline-block!important;
       margin-top:5px;
       padding-bottom:10px;
       .field-items {
