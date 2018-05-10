@@ -828,8 +828,10 @@ EOT;
     if ($destination == 'node/96') {
       if (isset($form['entity_id']['#value']) && $form['entity_id']['#value']) {
         $this_comment = comment_load($form['entity_id']['#value']);
-        $destination = 'node/' . $this_comment->nid;
-        $form['#action'] = str_replace('?destination=node/96', '?destination=' . $destination, $form['#action']);
+        if(isset($this_comment) && $this_comment != null) {
+          $destination = 'node/' . $this_comment->nid;
+          $form['#action'] = str_replace('?destination=node/96', '?destination=' . $destination, $form['#action']);
+        }s
       }
     }
     $form['actions']['submit']['#value'] = t('Submit');
