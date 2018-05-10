@@ -321,8 +321,12 @@ function subscriptions_og_node_insert($node) {
   $subscription_body = isset($node->title) ? 'A new ' . $node->type . ' titled \'<a href="/node/' . $node->nid . '">' . $node->title . "</a>\' was created by " . $node->name . ". \n" : 'A new ' . $node->type . ' titled \'<a href="/node/' . $node->nid . '">' . ' Untitled ' . "</a>\' was created by " . $node->name . ". \n";
 
   // Send first 150 chars of the body field to give community manager a bit of an idea.
-  if(isset($node->body['und'][0]['value'])){
-    $subscription_body = $subscription_body . " \n <p><i>" . strip_tags(substr($node->body['und'][0]['value'],0,150)) . "...</i></p>";
+  if(isset($node->body['und'][0]['value']) && (strlen($node->body['und'][0]['value']) > 500)){
+    if(strlen($node->body['und'][0]['value']) > 500) {
+      $subscription_body = $subscription_body . " \n <p><i>" . strip_tags(substr($node->body['und'][0]['value'], 0, 500)) . "...</i></p>";
+    } else {
+      $subscription_body = $subscription_body . " \n <p><i>" . strip_tags($node->body['und'][0]['value']) . "...</i></p>";
+    }
   }
   // admin email
   $params = [
@@ -371,8 +375,10 @@ function subscriptions_og_node_update($node) {
   $subscription_body = isset($node->title) ? 'A new ' . $node->type . ' titled \'<a href="/node/' . $node->nid . '">' . $node->title . "</a>\' was created by " . $node->name . ". \n" : 'A new ' . $node->type . ' titled \'<a href="/node/' . $node->nid . '">' . ' Untitled ' . "</a>\' was created by " . $node->name . ". \n";
 
   // Send first 150 chars of the body field to give community manager a bit of an idea.
-  if(isset($node->body['und'][0]['value'])){
-    $subscription_body = $subscription_body . " \n <p><i>" . strip_tags(substr($node->body['und'][0]['value'],0,150)) . "...</i></p>";
+  if(strlen($node->body['und'][0]['value']) > 500) {
+    $subscription_body = $subscription_body . " \n <p><i>" . strip_tags(substr($node->body['und'][0]['value'], 0, 500)) . "...</i></p>";
+  } else {
+    $subscription_body = $subscription_body . " \n <p><i>" . strip_tags($node->body['und'][0]['value']) . "...</i></p>";
   }
   // admin email
   $params = [
