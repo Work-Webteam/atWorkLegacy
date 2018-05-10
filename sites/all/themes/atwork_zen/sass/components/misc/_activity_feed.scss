@@ -368,9 +368,6 @@
       line-height: 12px;
     }
     span.activity-comment ~ a {
-      &:before {
-        content:"...";
-      }
       display: inline;
       float: right;
       font-size: .9em;
