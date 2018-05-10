@@ -831,7 +831,7 @@ EOT;
         if(isset($this_comment) && $this_comment != null) {
           $destination = 'node/' . $this_comment->nid;
           $form['#action'] = str_replace('?destination=node/96', '?destination=' . $destination, $form['#action']);
-        }s
+        }
       }
     }
     $form['actions']['submit']['#value'] = t('Submit');
