@@ -735,7 +735,7 @@ EOT;
       if (isset($form['field_promoted'])) $form['field_promoted']['#access'] = FALSE;
       if (isset($form['options']['promote'] )) $form['options']['promote']['#access'] = FALSE;
       if (isset($form['options']['sticky'] )) $form['options']['sticky']['#access'] = FALSE;
-      
+
 
       if (in_array($node->type, array('forum', 'question')) && isset($form['field_image'])) {
         $form['field_image']['#access'] = FALSE;
@@ -822,18 +822,21 @@ EOT;
     $form['actions']['submit']['#value'] = '';
   }
   // Changing submit text and setting a message for flag
-  if($form_id == 'flag_confirm'){
+
+  if($form_id == 'flag_confirm') {
     $destination = $_GET['destination'];
-    if($destination == 'node/96'){
-      if(isset($form['entity_id']['#value'])){
+    if ($destination == 'node/96') {
+      if (isset($form['entity_id']['#value']) && $form['entity_id']['#value']) {
         $this_comment = comment_load($form['entity_id']['#value']);
-        $destination = 'node/' . $this_comment->nid;
-        $form['#action'] = str_replace('?destination=node/96', '?destination=' . $destination, $form['#action']);
+        if(isset($this_comment) && $this_comment != null) {
+          $destination = 'node/' . $this_comment->nid;
+          $form['#action'] = str_replace('?destination=node/96', '?destination=' . $destination, $form['#action']);
+        }
       }
     }
     $form['actions']['submit']['#value'] = t('Submit');
     $form['#submit'][] = 'flag_form_set_message';
-}
+  }
 }
 // Helper function to set message once flag report is submitted
 function flag_form_set_message(){
