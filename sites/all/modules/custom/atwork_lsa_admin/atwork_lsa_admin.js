@@ -22,7 +22,9 @@
     //Show/hide dietary requirements input
     if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '1') {
     	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").show();
-    	$(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").show();
+    	if(!$('.field-name-field-lsa-ceremony-response select option[value="1"]').prop("selected")) {
+    	  $(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").show();
+    	}
     }else if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '0') {
     	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").hide();
     	$(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").hide();
@@ -68,46 +70,43 @@
     	$("#special-dietary-requirements").hide();
     	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").hide();
     }
-    
-    if($('.field-name-field-lsa-ceremony-response select option[value="1"]').prop("selected")
-    	 && $('#edit-field-lsa-dietary-requirements-und-1').prop('checked')) {
-    	  		$('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "none"});
-    }
   });
-
+  
   // Hide guest dietary requests if no-guest-attending is selected.
   $('.field-name-field-lsa-ceremony-response select').change(function() {
-  if($('.form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und input[value="1"]').prop('checked')) {
-  	console.log(2);
     if($('.field-name-field-lsa-ceremony-response select option[value="1"]').prop("selected")) {
-    	console.log(4);
-        $('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "none"});
-      } else {
-      	$('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "inline-block"});
-      }
-    }
-  });
-  
-  // Hide/show fields depending on attendance
-  $('.field-name-field-lsa-ceremony-response select').change(function() {
-    if($('.field-name-field-lsa-ceremony-response select option[value="3"]').prop("selected")) {
-  	  $("#special-dietary-requirements").hide();
-  	  $(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").hide();
-    } else {
+    	//attending without guest
     	$("#special-dietary-requirements").show();
     	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").show();
+    	if($('.form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und input[value="1"]').prop('checked')) {
+    		$('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "none"});
+    	}
+    } else if($('.field-name-field-lsa-ceremony-response select option[value="2"]').prop("selected")){
+    	//attending with guest
+console.log(2);
+    	$("#special-dietary-requirements").show();
+    	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").show();
+    	if($('.form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und input[value="1"]').prop('checked')) {
+    		$('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "inline-block"});
+    	}
+    } else if ($('.field-name-field-lsa-ceremony-response select option[value="3"]').prop("selected")){
+    	$("#special-dietary-requirements").hide();
+    	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").hide();
     }
   });
   
-
   //Show/hide dietary requirements input
   $("#special-dietary-requirements").click(function () {
     if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '1') {
-    	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").show();
-    	$(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").show();
+    	console.log(1);
+    	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").css({"display": "inline-block"});
+    	if(!$('.field-name-field-lsa-ceremony-response select option[value="1"]').prop("selected")) {
+    	  $(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").css({"display": "inline-block"});
+    	}
     }else if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '0') {
-    	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").hide();
-    	$(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").hide();
+    	console.log(2);
+    	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").css({"display": "none"});
+    	$(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").css({"display": "none"});
     }
   });
   
