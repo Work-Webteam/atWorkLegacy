@@ -42,7 +42,7 @@
     // Show accessibility textbox instructions
     var accessibilityInstructions = "<p> If needed, please confirm the accessibility accommodations that you and/or your guest " +
     	"require to attend the Long Service Awards ceremony (e.g. sign language interpreter (ASL), service dog, " +
-    	"accessible parking/entrance, etc.)</p><br>";
+    	"accessible parking/entrance, etc.).</p><br>";
     
     // Show accessibility instructions
     $(accessibilityInstructions).insertAfter(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above .field-label");
