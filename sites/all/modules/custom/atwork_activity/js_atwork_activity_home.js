@@ -15,7 +15,7 @@ function refreshAllActivity(page) {
 		error: function(request, status, error) {
 			//alert(status);
 		},
-		success: function(data, status, request) {
+		success: function(data) {
 			var html = data;
 
                         hideProgress();
@@ -27,11 +27,10 @@ function refreshAllActivity(page) {
 				.add('#tabs-1 .pager-previous a')
 				.add('#tabs-1 .pager-next a')
 				.add('#tabs-1 .pager-last a')
-					.click(function(el, a, b, c) {
+					.click(function(el) {
                                                 showProgress();
-						var url = jQuery.url(el.currentTarget.getAttribute('href'));
+						let url = jQuery.url(el.currentTarget.getAttribute('href'));
 						refreshAllActivity(url.param('page'));
-
 						return (false);
 					});
 		}
@@ -49,8 +48,8 @@ function refreshGroupActivity(page) {
 		error: function(request, status, error) {
 			//alert(status);
 		},
-		success: function(data, status, request) {
-			var html = data;
+		success: function(data) {
+			let html = data;
 
                         hideProgress();
 
@@ -61,7 +60,7 @@ function refreshGroupActivity(page) {
 				.add('#tabs-2 .pager-previous a')
 				.add('#tabs-2 .pager-next a')
 				.add('#tabs-2 .pager-last a')
-					.click(function(el, a, b, c) {
+					.click(function(el) {
                                                 showProgress();
 						var url = jQuery.url(el.currentTarget.getAttribute('href'));
 						refreshGroupActivity(url.param('page'));
@@ -83,10 +82,10 @@ function refreshCommentActivity(page) {
 		error: function(request, status, error) {
 			//alert(status);
 		},
-		success: function(data, status, request) {
-			var html = data;
+		success: function(data) {
+			let html = data;
 
-                        hideProgress();
+			hideProgress();
 
 			jQuery('#tabs-4').html(html);
 
@@ -96,8 +95,8 @@ function refreshCommentActivity(page) {
 				.add('#tabs-4 .pager-next a')
 				.add('#tabs-4 .pager-last a')
 					.click(function(el, a, b, c) {
-                                                showProgress();
-						var url = jQuery.url(el.currentTarget.getAttribute('href'));
+					  showProgress();
+						let url = jQuery.url(el.currentTarget.getAttribute('href'));
 						refreshCommentActivity(url.param('page'));
 
 						return (false);
@@ -117,7 +116,7 @@ function refreshMyActivity(page) {
 		error: function(request, status, error) {
 			//alert(status);
 		},
-		success: function(data, status, request) {
+		success: function(data) {
 			var html = data;
 
                         hideProgress();
@@ -129,8 +128,8 @@ function refreshMyActivity(page) {
 				.add('#tabs-3 .pager-previous a')
 				.add('#tabs-3 .pager-next a')
 				.add('#tabs-3 .pager-last a')
-					.click(function(el, a, b, c) {
-                                                showProgress();
+					.click(function(el) {
+					  showProgress();
 						var url = jQuery.url(el.currentTarget.getAttribute('href'));
 						refreshMyActivity(url.param('page'));
 

@@ -1,11 +1,11 @@
 (function ($) {
-  var stateSave = [];
-  var refreshFeed = false;
+  let stateSave = [];
+  let refreshFeed = false;
   /**
    * Drupal attach function - click handlers etc.
    */
   Drupal.behaviors.profileFeedJquery = {
-    attach: function (context, settings) {
+    attach: function (context) {
       // On initial load, lets make sure this window is focused.
       $(".toggle-com-button").before('<span class="comment-icon"></span>');
 
@@ -37,8 +37,7 @@
       // Stop checking when window is not in focus
       $(window).blur(function () {
         stopFeedInterval();
-      })
-
+      });
       // click handler for the comment toggle function
       // Make sure we are not rebinding this improperly on profile page
       $('#block-atwork-activity-profile-page-activity-feed-block .comment-count-link:not(.atwork-activity-processed)', context)
@@ -59,7 +58,7 @@
         .addClass('atwork-activity-processed')
         .bind('click', function () {
           //  ID changes on your page vs. others page.
-          var location = $(this).parentsUntil('#activity-feed').closest("div").prop("class");
+          let location = $(this).parentsUntil('#activity-feed').closest("div").prop("class");
           // Others feed
           if (location.length < 1) {
             toggleComments($(this).parentsUntil('#block-atwork-activity-profile-page-activity-feed-block').closest("div").prop("class"));
@@ -87,8 +86,6 @@
           } else {
             setOpenOnReloadComments(location);
           }
-
-          return;
         });
 
       // Updates status
@@ -129,7 +126,7 @@
     // IE specific jQuery
     if (trident > 0 || edge > 0 || msie > 0) {
       // This is IE, so lets check what is in the textbox.
-      var checkText = $('#edit-status').attr('value');
+      let checkText = $('#edit-status').attr('value');
       if (checkText == "What are you working on?") {
         $('#edit-status').on("focus", function () {
           // Grab this again so that we don't erase user input after the handler is set.
@@ -172,14 +169,13 @@
           $(this).find(".reply").hide();
         }
         // If we don't have one yet, lets append it to this block.
-        var k = $(this).find($(".reply")).length;
+        let k = $(this).find($(".reply")).length;
 
         if ($(this).find(".comment-count-link").length === 0 && k > 0) {
           $(this).append('<div class="comment-count-link"><a class="comment-count-link-text" href="#/">Comments (' + k + ')</a></div>');
         }
       });
     }
-    return;
   }
 
   /**
@@ -188,11 +184,11 @@
    */
   function toggleComments(classDiv) {
     //Get rid of the spaces, so we can use this as a selector
-    divClass = classDiv.split(' ').join('.');
+    let divClass = classDiv.split(' ').join('.');
     // There is nothing in the array, so this needs to be opened and added to array.
     if (stateSave.length > 0) {
       // We have something in our array, so lets see if this is supposed to be closed or open.
-      var arraySpot = $.inArray(classDiv, stateSave);
+      let arraySpot = $.inArray(classDiv, stateSave);
       if (arraySpot === -1) {
         // If it is not in our array, it has been closed, and now should be opened - toggle open
         $("." + divClass).find(".replies").find(".reply").slideDown("fast");
@@ -210,7 +206,6 @@
       // And add it to our array
       stateSave.push(classDiv);
     }
-    return;
   }
 
 
@@ -219,9 +214,9 @@
    */
   function setOpenOnReloadComments(classDiv) {
     //Get rid of the spaces, so we can use this as a selector
-    divClass = classDiv.split(' ').join('.');
+    let divClass = classDiv.split(' ').join('.');
     //If this is already open, we can ignore it
-    var arraySpot = $.inArray(classDiv, stateSave);
+    let arraySpot = $.inArray(classDiv, stateSave);
     if (arraySpot === -1) {
       stateSave.push(classDiv);
     }
@@ -261,7 +256,7 @@
 
 
   function checkMessageCount() {
-    checkLink = $('#profile-comment-link').length;
+    let checkLink = $('#profile-comment-link').length;
     if (checkLink > 0) {
       $('#profile-comment-link').trigger('click');
     }
