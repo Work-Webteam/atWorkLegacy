@@ -6,7 +6,6 @@
  */
 
 (function ($) {
-
   /**
    * Helper function that hides admin fields from non-admins
    */

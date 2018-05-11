@@ -56,7 +56,7 @@
     }
 
     // Handles specific form elements that are particular to a certain years choice
-    var gift_year_choice = $('input[name="field_lsa_years_of_service[und]"]:checked').val();
+    const gift_year_choice = $('input[name="field_lsa_years_of_service[und]"]:checked').val();
     if (gift_year_choice != 25){
       //$('#field-lsa-25year-certificatename-add-more-wrapper').hide();
       $("input#edit-field-lsa-25year-certificatename-und-0-value").prop("required", false);
@@ -70,27 +70,26 @@
     }
     // Set dietary and accomodation boxes open/closed as appropriate
     // Show textbox if there are accomodation requests
-      if($('#edit-field-lsa-ceremony-accommodation-und-1').is(":checked")){
-        $('#field-lsa-accommodation-notes-add-more-wrapper').show();
-      } 
-      // Otherwise hide
-      if($('#edit-field-lsa-ceremony-accommodation-und-0').is(":checked")){
-        $('#field-lsa-accommodation-notes-add-more-wrapper').hide();
-      }
-    
-        // Show dietary options if required
-        if($('#edit-field-lsa-dietary-requirements-und-1').is(":checked")){
-          $("#edit-field-lsa-recipient-dietary").show();
-          $('#edit-field-lsa-dietary-guest').show();
-        } 
+    if($('#edit-field-lsa-ceremony-accommodation-und-1').is(":checked")){
+      $('#field-lsa-accommodation-notes-add-more-wrapper').show();
+    }
+    // Otherwise hide
+    if($('#edit-field-lsa-ceremony-accommodation-und-0').is(":checked")){
+      $('#field-lsa-accommodation-notes-add-more-wrapper').hide();
+    }
 
-        // Otherwise hide
-        if($('#edit-field-lsa-dietary-requirements-und-0').is(":checked")){
-          $("#edit-field-lsa-recipient-dietary").hide();
-          $('#edit-field-lsa-dietary-guest').hide();
-        } 
-        checkPECSF();
+    // Show dietary options if required
+    if($('#edit-field-lsa-dietary-requirements-und-1').is(":checked")){
+      $("#edit-field-lsa-recipient-dietary").show();
+      $('#edit-field-lsa-dietary-guest').show();
+    }
 
+    // Otherwise hide
+    if($('#edit-field-lsa-dietary-requirements-und-0').is(":checked")){
+      $("#edit-field-lsa-recipient-dietary").hide();
+      $('#edit-field-lsa-dietary-guest').hide();
+    }
+    checkPECSF();
   }
 
   /**
@@ -134,16 +133,16 @@
     $('#gift_select').hide();
 
     // Message for retired applicants
-    var retirement = $('<div id="retirement_message"><p><span style="color:red">Please enter your last scheduled day of work</span></div>');
+    const retirement = $('<div id="retirement_message"><p><span style="color:red">Please enter your last scheduled day of work</span></div>');
     $('#edit-field-lsa-retiring-thisyear').append(retirement);
     $('#retirement_message').hide();
     $('#field-lsa-date-of-retirement-add-more-wrapper').hide();
     // Message for users from previous year who never received their gift
-    var lost_gift = $('<div id="lost_gift_message"><span style="color:red "> *Please take time to send a quick <a href="mailto:LongServiceAwards@gov.bc.ca?subject=LSA%20award%20not%20yet%20received">email</a> to the Long Service Awards team and let us know your award is still outstanding</span></div>');
+    const lost_gift = $('<div id="lost_gift_message"><span style="color:red "> *Please take time to send a quick <a href="mailto:LongServiceAwards@gov.bc.ca?subject=LSA%20award%20not%20yet%20received">email</a> to the Long Service Awards team and let us know your award is still outstanding</span></div>');
     $('#edit-field-lsa-received-award').append(lost_gift);
     $('#lost_gift_message').hide();
     // Message for recipients who have completed 45 || 50 years
-    var special_gift = $('<div id="special_gift"><span style="color:red;"><strong>*</strong> Because of your notable milestone, the Long Service Awards program would like to give you an opportunity to identify an award that would be most meaningful to you. Our awards coordinator will contact you in May or June.</span></div>');
+    const special_gift = $('<div id="special_gift"><span style="color:red;"><strong>*</strong> Because of your notable milestone, the Long Service Awards program would like to give you an opportunity to identify an award that would be most meaningful to you. Our awards coordinator will contact you in May or June.</span></div>');
     $('#edit-field-lsa-years-of-service').append(special_gift);
     $('#special_gift').hide();
 
@@ -157,7 +156,7 @@
     //$("#lsa-award-selector-description-display").remove();
     // Shrink word count wording
     $("#edit-field-lsa-25year-certificatename-und-0-value-counter").css("font-size", "smaller");
-    
+
     $('.form-item.form-type-textfield.form-item-field-lsa-award-und-0-value').hide();
     $('#edit-field-lsa-award-und-0-value').prop("readonly", true);
     $('#edit-field-lsa-award-und-0-value').css('background-color' , '#DEDEDE');
@@ -174,7 +173,7 @@
     // There will be no instructions unless we actually are choosing an award
     $('#edit-field-lsa-award-sp-instructions').hide();
     // Hide PECSF unless user selects this choice
-    var award_value = $('#edit-field-lsa-award-id-und-0-value').val();
+    const award_value = $('#edit-field-lsa-award-id-und-0-value').val();
     if($.inArray(award_value, ["7","13","33","40","42","44"]) > -1){
       $("#pecsf-fields").show();
       $('#field-lsa-25year-certificatename-add-more-wrapper').show();
@@ -209,9 +208,9 @@
     $('#edit-field-lsa-recipient-dietary').hide();
     $('#edit-field-lsa-dietary-guest').hide();
     // Move the "not known" checks after the "other"
-    var move = $('.form-item.form-type-checkbox.form-item-field-lsa-dietary-guest-und-select-Guest-information-is-not-known-at-this-time').detach();
+    let move = $('.form-item.form-type-checkbox.form-item-field-lsa-dietary-guest-und-select-Guest-information-is-not-known-at-this-time').detach();
     $('.form-item.form-type-textfield.form-item-field-lsa-dietary-guest-und-other').after(move);
-    var accommodationMove = $('.form-item.form-type-checkbox.form-item-field-lsa-guest-accom-und-select-Guest-information-is-not-known-at-this-time');
+    let accommodationMove = $('.form-item.form-type-checkbox.form-item-field-lsa-guest-accom-und-select-Guest-information-is-not-known-at-this-time');
     $('.form-item.form-type-textfield.form-item-field-lsa-guest-accom-und-other').after(accommodationMove);
   }
 
@@ -221,8 +220,8 @@
       if(e.keyCode == 8){
         return;
       }
-      var curchr = this.value.length;
-      var curval = $(this).val();
+      let curchr = this.value.length;
+      let curval = $(this).val();
       if(curchr == 3) {
         $("#edit-field-lsa-home-phone-und-0-value").val(curval + " ");
       } else if (curchr === 7) {
@@ -233,8 +232,8 @@
       if(e.keyCode == 8){
         return;
       }
-      var curchr = this.value.length;
-      var curval = $(this).val();
+      let curchr = this.value.length;
+      let curval = $(this).val();
       if(curchr == 3) {
         $("#edit-field-lsa-work-phone-und-0-value").val(curval + " ");
       } else if (curchr === 7) {
@@ -273,7 +272,7 @@
     $('#edit-field-lsa-ceremony-accommodation-und-1').click(function() {
       if($('#edit-field-lsa-ceremony-accommodation-und-1').is(":checked")){
         $('#field-lsa-accommodation-notes-add-more-wrapper').slideDown("slow");
-      } 
+      }
     });
     // Otherwise hide
     $('#edit-field-lsa-ceremony-accommodation-und-0').click(function() {
@@ -287,14 +286,14 @@
       if($('#edit-field-lsa-dietary-requirements-und-1').is(":checked")){
         $("#edit-field-lsa-recipient-dietary").slideDown();
         $('#edit-field-lsa-dietary-guest').slideDown();
-      } 
+      }
     });
     // Otherwise hide
     $('#edit-field-lsa-dietary-requirements-und-0').click(function() {
       if($('#edit-field-lsa-dietary-requirements-und-0').is(":checked")){
         $("#edit-field-lsa-recipient-dietary").slideUp();
         $('#edit-field-lsa-dietary-guest').slideUp();
-      } 
+      }
     });
 
     $('#edit-field-lsa-register-last-year-und').change(function () {
@@ -315,7 +314,7 @@
       certificate_populate();
       checkPECSF();
     });
-    
+
     $('#edit-field-lsa-received-award').change(function () {
       lsaGift();
     });
@@ -342,7 +341,7 @@
       // User has decided to split their donation, we need to alter amounts
       if($('#edit-field-lsa-second-donation-und-1').prop("checked", true)){
         // Grab existing value
-        amount = $('#edit-field-lsa-donation-amount-und-0-value').val();
+        let amount = $('#edit-field-lsa-donation-amount-und-0-value').val();
         // Remove $ sign
         amount = amount.substring(1, amount.length);
         // Split in half
