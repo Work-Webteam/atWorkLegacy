@@ -322,7 +322,7 @@ function subscriptions_og_node_insert($node) {
 
   // Send first 150 chars of the body field to give community manager a bit of an idea.
   if(isset($node->body['und'][0]['value']) && (strlen($node->body['und'][0]['value']) > 500)){
-    $clean_text = strip_tags($node->body['und'][0]['value'], "<p> <br>" );
+    $clean_text = strip_tags($node->body['und'][0]['value'], "<p> <br> <i>" );
     if(strlen($node->body['und'][0]['value']) > 500) {
       $subscription_body = $subscription_body . " \n <p><i>" . substr($clean_text, 0, 500) . "...</i></p>";
     } else {
@@ -378,7 +378,7 @@ function subscriptions_og_node_update($node) {
   $subscription_body = isset($node->title) ? 'A new ' . $node->type . ' titled <a href="/node/' . $node->nid . '">' . '"' . $node->title . '"' . "</a> was created by " . $node->name . ". \n" : 'A new ' . $node->type . ' titled <a href="/node/' . $node->nid . '">' . ' Untitled ' . "</a> was created by " . $node->name . ". \n";
 
   // Send first 150 chars of the body field to give community manager a bit of an idea.
-  $clean_text = strip_tags($node->body['und'][0]['value'], "<p> <br>" );
+  $clean_text = strip_tags($node->body['und'][0]['value'], "<p> <br> <i>" );
 
   if(strlen($node->body['und'][0]['value']) > 500) {
     $subscription_body = $subscription_body . " \n <p><i>" . substr($clean_text, 0, 500) . "...</i></p>";
