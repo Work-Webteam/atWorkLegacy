@@ -329,6 +329,8 @@ function subscriptions_og_node_insert($node) {
       $subscription_body = $subscription_body . " \n <p><i>" . $clean_text . "...</i></p>";
     }
   }
+  // Cute little closing salutation:
+  $subscription_body = $subscription_body . " <br> <br> Love, <br> Employee News and Drupal. ";
   // admin email
   $params = [
     'subject' => 'New ' . $node->type . ' published',
@@ -351,7 +353,7 @@ function subscriptions_og_node_update($node) {
       case($type == 'page'):
       case($type == 'ecard'):
       case($type == 'image'):
-      case($type == 'lsa_apoplication'):
+      case($type == 'lsa_application'):
       case($type == 'multichoice'):
       case($type == 'simplenews'):
       case($type == 'quiz'):
@@ -385,6 +387,9 @@ function subscriptions_og_node_update($node) {
   } else {
      $subscription_body = $subscription_body . " \n <p><i>" . $clean_text . "...</i></p>";
   }
+
+  // Cute little closing salutation:
+  $subscription_body = $subscription_body . " <br> <br> Love, <br> Employee News and Drupal. ";
   // admin email
   $params = [
     'subject' => 'New ' . $node->type . ' published',
