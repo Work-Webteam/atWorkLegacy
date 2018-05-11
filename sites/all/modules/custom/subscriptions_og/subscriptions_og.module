@@ -286,11 +286,6 @@ function subscriptions_og_disable() {
  * Employee news wishes to be notified on all content creations
  */
 function subscriptions_og_node_insert($node) {
-  // Fires when user first saves the node. We only want to send a notification if they publish it here - otherwise we will send a note when they update from unpublished -> published.
-  if($node->status != 1 ){
-    return;
-  }
-
   // Don't need certain content types - if we hit one of those, then leave immediately.
   if(isset($node->type)){
     $type = $node->type;
@@ -312,8 +307,13 @@ function subscriptions_og_node_insert($node) {
         // Do nothing
         break;
     }
-  } else {
-    // No $node->type - so leave
+  }
+  // If this node is set to send notifications anyways - no point in sending another.
+  if($node->subscriptions_notify == 1){
+    return;
+  }
+  // Fires when user first saves the node. We only want to send a notification if they publish it here - otherwise we will send a note when they update from unpublished -> published.
+  if($node->status != 1 ){
     return;
   }
 
@@ -342,10 +342,6 @@ function subscriptions_og_node_insert($node) {
  * Employee news wants to be notified whenever a node is published on the site.
  */
 function subscriptions_og_node_update($node) {
-  // Fires when user first saves the node. We only want to send a notification if they publish it here from an unpublished state- otherwise we will send a note when they update from unpublished -> published.
-  if($node->status != 1 && $node->original->status != 0){
-    return;
-  }
   // Don't need certain content types - if we hit one of those, then leave immediately.
   if(isset($node->type)){
     $type = $node->type;
@@ -367,10 +363,16 @@ function subscriptions_og_node_update($node) {
         // Do nothing
         break;
     }
-  } else {
-    // No $node->type - so leave
+  }
+  // If this node is set to send notifications anyways - no point in sending another.
+  if($node->subscriptions_notify == 1){
     return;
   }
+  // Fires when user first saves the node. We only want to send a notification if they publish it here from an unpublished state- otherwise we will send a note when they update from unpublished -> published.
+  if($node->status != 1 && $node->original->status != 0){
+    return;
+  }
+
   // Just in case we have a content type that creates nodes with no titles.
   $subscription_body = isset($node->title) ? 'A new ' . $node->type . ' titled <a href="/node/' . $node->nid . '">' . '"' . $node->title . '"' . "</a> was created by " . $node->name . ". \n" : 'A new ' . $node->type . ' titled <a href="/node/' . $node->nid . '">' . ' Untitled ' . "</a> was created by " . $node->name . ". \n";
 
