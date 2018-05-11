@@ -8,11 +8,8 @@ function toggleCommentForm(nid) {
 
 
 (function ($) {
-
-
-
   Drupal.behaviors.atworkActivity = {
-    attach: function (context, settings) {
+    attach: function () {
       $('.comment-form').hide();
       $(".toggle-com-button").before('<span class="comment-icon"></span>');
     }

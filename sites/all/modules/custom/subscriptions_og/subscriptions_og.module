@@ -323,11 +323,7 @@ function subscriptions_og_node_insert($node) {
   // Send first 150 chars of the body field to give community manager a bit of an idea.
   if(isset($node->body['und'][0]['value']) && (strlen($node->body['und'][0]['value']) > 500)){
     $clean_text = strip_tags($node->body['und'][0]['value'], "<p> <br> <i>" );
-    if(strlen($node->body['und'][0]['value']) > 500) {
-      $subscription_body = $subscription_body . " \n <p><i>" . substr($clean_text, 0, 500) . "...</i></p>";
-    } else {
-      $subscription_body = $subscription_body . " \n <p><i>" . $clean_text . "...</i></p>";
-    }
+    $subscription_body = strlen($node->body['und'][0]['value']) > 500 ? $subscription_body . " \n <p><i>" . substr($clean_text, 0, 500) . "...</i></p>" : $subscription_body . " \n <p><i>" . $clean_text . "...</i></p>";
   }
   // Cute little closing salutation:
   $subscription_body = $subscription_body . " <br> <br> Love, <br> Employee News and Drupal. ";
@@ -382,11 +378,7 @@ function subscriptions_og_node_update($node) {
   // Send first 150 chars of the body field to give community manager a bit of an idea.
   $clean_text = strip_tags($node->body['und'][0]['value'], "<p> <br> <i>" );
 
-  if(strlen($node->body['und'][0]['value']) > 500) {
-    $subscription_body = $subscription_body . " \n <p><i>" . substr($clean_text, 0, 500) . "...</i></p>";
-  } else {
-     $subscription_body = $subscription_body . " \n <p><i>" . $clean_text . "...</i></p>";
-  }
+  $subscription_body = strlen($node->body['und'][0]['value']) > 500 ? $subscription_body . " \n <p><i>" . substr($clean_text, 0, 500) . "...</i></p>" : $subscription_body . " \n <p><i>" . $clean_text . "...</i></p>";
 
   // Cute little closing salutation:
   $subscription_body = $subscription_body . " <br> <br> Love, <br> Employee News and Drupal. ";
