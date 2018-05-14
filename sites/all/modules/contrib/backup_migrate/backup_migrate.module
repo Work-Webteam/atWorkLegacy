@@ -21,8 +21,8 @@ function backup_migrate_help($section, $arg) {
   $help = array(
     array(
       'body' =>
-       t('Backup and Migrate makes the task of backing up your Drupal database and migrating data from one Drupal install to another easier. It provides a function to backup the entire database to file or download, and to restore from a previous backup. You can also schedule the backup operation. Compression of backup files is also supported.  The database backup files created with this module can be imported into this or any other Drupal installation with the !restorelink, or you can use a database tool such as <a href="!phpmyadminurl">phpMyAdmin</a> or the mysql command line command.',
-         array(
+        t('Backup and Migrate makes the task of backing up your Drupal database and migrating data from one Drupal install to another easier. It provides a function to backup the entire database to file or download, and to restore from a previous backup. You can also schedule the backup operation. Compression of backup files is also supported.  The database backup files created with this module can be imported into this or any other Drupal installation with the !restorelink, or you can use a database tool such as <a href="!phpmyadminurl">phpMyAdmin</a> or the mysql command line command.',
+          array(
             '!restorelink' => user_access('restore from backup') ? l(t('restore feature'), BACKUP_MIGRATE_MENU_PATH . '/restore') : t('restore feature'),
             '!phpmyadminurl' => 'http://www.phpmyadmin.net'
           )
@@ -36,7 +36,7 @@ function backup_migrate_help($section, $arg) {
     BACKUP_MIGRATE_MENU_PATH . '/export/advanced' => array(
       'title' => t('Advanced Backup Tab'),
       'body' => t('Use this form to run manual backups of your database and files with more advanced options. If you have any !profilelink saved you can load those settings. You can save any of the changes you make to these settings as a new settings profile.',
-                  array("!profilelink" => user_access('administer backup and migrate') ? l(t('settings profiles'), BACKUP_MIGRATE_MENU_PATH . '/profile') : t('settings profiles'), '!restorelink' => user_access('restore from backup') ? l(t('restore feature'), BACKUP_MIGRATE_MENU_PATH . '/restore') : t('restore feature'), '!phpmyadminurl' => 'http://www.phpmyadmin.net')),
+        array("!profilelink" => user_access('administer backup and migrate') ? l(t('settings profiles'), BACKUP_MIGRATE_MENU_PATH . '/profile') : t('settings profiles'), '!restorelink' => user_access('restore from backup') ? l(t('restore feature'), BACKUP_MIGRATE_MENU_PATH . '/restore') : t('restore feature'), '!phpmyadminurl' => 'http://www.phpmyadmin.net')),
       'access arguments' => array('perform backup'),
     ),
     BACKUP_MIGRATE_MENU_PATH . '/restore' => array(
@@ -58,21 +58,21 @@ function backup_migrate_help($section, $arg) {
     BACKUP_MIGRATE_MENU_PATH . '/settings/profile' => array(
       'title' => t('Profiles'),
       'body' => t('Profiles are saved backup settings. Profiles store your table exclusion settings as well as your backup file name, compression and timestamp settings. You can use profiles in !schedulelink and for !manuallink.',
-                  array('!schedulelink' => user_access('administer backup and migrate') ? l(t('schedules'), BACKUP_MIGRATE_MENU_PATH . '/schedule') : t('settings profiles'), '!manuallink' => user_access('perform backups') ? l(t('manual backups'), BACKUP_MIGRATE_MENU_PATH) : t('manual backups'))),
+        array('!schedulelink' => user_access('administer backup and migrate') ? l(t('schedules'), BACKUP_MIGRATE_MENU_PATH . '/schedule') : t('settings profiles'), '!manuallink' => user_access('perform backups') ? l(t('manual backups'), BACKUP_MIGRATE_MENU_PATH) : t('manual backups'))),
       'more' => t('You can create new profiles using the add profiles tab or by checking the "Save these settings" button on the advanced backup page.'),
       'access arguments' => array('administer backup and migrate'),
     ),
     BACKUP_MIGRATE_MENU_PATH . '/schedule' => array(
       'title' => t('Scheduling'),
       'body' => t('Automatically backup up your database and files on a regular schedule using <a href="!cronurl">cron</a>.',
-                  array('!cronurl' => 'http://drupal.org/cron')),
+        array('!cronurl' => 'http://drupal.org/cron')),
       'more' => t('Each schedule will run a maximum of once per cron run, so they will not run more frequently than your cron is configured to run. If you specify a number of backups to keep for a schedule, old backups will be deleted as new ones created. <strong>If specifiy a number of files to keep other backup files in that schedule\'s destination will get deleted</strong>.'),
       'access arguments' => array('administer backup and migrate'),
     ),
     BACKUP_MIGRATE_MENU_PATH . '/settings/import' => array(
       'title' => t('Importing Settings'),
       'body' => t('Import a settings profile, backup schedule, source or destination by pasting the export code into the textarea.',
-                  array('!cronurl' => 'http://drupal.org/cron')),
+        array('!cronurl' => 'http://drupal.org/cron')),
     ),
   );
   if (module_exists('help')) {
@@ -437,18 +437,18 @@ function backup_migrate_backup_migrate_schedules() {
   // }
 
   if (variable_get('nodesquirrel_secret_key', FALSE) != FALSE) {
-      $schedule = array(
-        'machine_name' => 'nodesquirrel',
-        'name' => 'NodeSquirrel',
-        'source_id' => variable_get('nodesquirrel_schedule_source_id', 'db'),
-        'destination_id' => 'nodesquirrel',
-        'profile_id' => 'default',
-        'period' => variable_get('nodesquirrel_schedule', 60*60*24),
-        'enabled' => variable_get('nodesquirrel_schedule_enabled', TRUE) && variable_get('nodesquirrel_secret_key', FALSE) != FALSE,
-        'keep' => variable_get('nodesquirrel_schedule_keep', BACKUP_MIGRATE_SMART_DELETE)
-      );
-      $schedules['nodesquirrel'] = backup_migrate_crud_create_item('schedule', $schedule);
-    }
+    $schedule = array(
+      'machine_name' => 'nodesquirrel',
+      'name' => 'NodeSquirrel',
+      'source_id' => variable_get('nodesquirrel_schedule_source_id', 'db'),
+      'destination_id' => 'nodesquirrel',
+      'profile_id' => 'default',
+      'period' => variable_get('nodesquirrel_schedule', 60*60*24),
+      'enabled' => variable_get('nodesquirrel_schedule_enabled', TRUE) && variable_get('nodesquirrel_secret_key', FALSE) != FALSE,
+      'keep' => variable_get('nodesquirrel_schedule_keep', BACKUP_MIGRATE_SMART_DELETE)
+    );
+    $schedules['nodesquirrel'] = backup_migrate_crud_create_item('schedule', $schedule);
+  }
 
   return $schedules;
 }
@@ -908,11 +908,11 @@ function theme_backup_migrate_ui_quick_schedule_form_inline($form) {
     '!keep'       => drupal_render($form['settings']['keep']),
   );
   $form['settings'] = array('inline' => array(
-    '#type' => 'markup',
-    "#prefix" => '<div class="container-inline backup-migrate-quickschedule">',
-    "#suffix" => '</div>',
-    '#markup'  => t('Backup !frequency to !to using !profile keeping !keep', $replacements),
-  )) + $form['settings'];
+      '#type' => 'markup',
+      "#prefix" => '<div class="container-inline backup-migrate-quickschedule">',
+      "#suffix" => '</div>',
+      '#markup'  => t('Backup !frequency to !to using !profile keeping !keep', $replacements),
+    )) + $form['settings'];
 
   $replacements = array(
     '!to' => drupal_render($form['settings']['destination']['copy_destination']['copy_destination_id']),
@@ -1334,7 +1334,7 @@ function backup_migrate_ui_manual_restore_form_submit($form, &$form_state) {
   else if ($values['from'] == 'saved' && $file = $values['file']) {
     list($destination, $file_id) = explode('/', $file, 2);
     $file =
-    backup_migrate_perform_restore($destination, $file_id, $form_state['values']);
+      backup_migrate_perform_restore($destination, $file_id, $form_state['values']);
   }
 
   $form_state['redirect'] = BACKUP_MIGRATE_MENU_PATH . '/restore';
@@ -1374,7 +1374,7 @@ function backup_migrate_ui_saved_backups() {
 
   // Get the fetch link.
   if ($fetch_time < $now) {
-     $fetch = '<div class="description">'. t('This listing was fetched !time ago. !refresh', array('!time' => format_interval($now - $fetch_time, 1), '!refresh' => l(t('fetch now'), $_GET['q'], array('query' => array('refresh' =>'true'))))) .'</div>';
+    $fetch = '<div class="description">'. t('This listing was fetched !time ago. !refresh', array('!time' => format_interval($now - $fetch_time, 1), '!refresh' => l(t('fetch now'), $_GET['q'], array('query' => array('refresh' =>'true'))))) .'</div>';
   }
 
   // Render the list.
@@ -1384,10 +1384,10 @@ function backup_migrate_ui_saved_backups() {
 
   // Add a remote backups warning if there are no remote backups.
   if (!$remote && user_access('administer backup and migrate')) {
-      drupal_set_message(
-        t('You do not have any offsite backups. For the highest level of protection, <a href="!addurl">create an offsite destination</a> or <a href="!nsurl">set up NodeSquirrel</a> to save your backups to.',
-            array('!addurl' => url(BACKUP_MIGRATE_MENU_PATH . '/settings/destination/add'),
-                  '!nsurl' => url(BACKUP_MIGRATE_MENU_PATH . '/nodesquirrel')
+    drupal_set_message(
+      t('You do not have any offsite backups. For the highest level of protection, <a href="!addurl">create an offsite destination</a> or <a href="!nsurl">set up NodeSquirrel</a> to save your backups to.',
+        array('!addurl' => url(BACKUP_MIGRATE_MENU_PATH . '/settings/destination/add'),
+          '!nsurl' => url(BACKUP_MIGRATE_MENU_PATH . '/nodesquirrel')
         )), 'warning', FALSE);
   }
 
@@ -1447,7 +1447,7 @@ function backup_migrate_perform_backup(&$settings) {
 
   // If not in 'safe mode', increase the maximum execution time:
   //if (!ini_get('safe_mode') && ini_get('max_execution_time') < variable_get('backup_migrate_backup_max_time', 1200)) {
-   // drupal_set_time_limit(variable_get('backup_migrate_backup_max_time', 1200));
+  // drupal_set_time_limit(variable_get('backup_migrate_backup_max_time', 1200));
   //}
   _backup_migrate_set_timeout();
 
@@ -1526,7 +1526,7 @@ function backup_migrate_perform_restore($destination_id, $file, $settings = arra
 
   // If not in 'safe mode', increase the maximum execution time:
   //if (!ini_get('safe_mode') && ini_get('max_execution_time') < variable_get('backup_migrate_backup_max_time', 1200)) {
-   // drupal_set_time_limit(variable_get('backup_migrate_restore_max_time', 1200));
+  // drupal_set_time_limit(variable_get('backup_migrate_restore_max_time', 1200));
   //}
   _backup_migrate_set_timeout();
   // Make the settings into a default profile.
@@ -1664,35 +1664,35 @@ function backup_migrate_shutdown($settings) {
 /**
  * Action to backup the drupal site. Requires actions.module.
 function action_backup_migrate_backup($op, $edit = array()) {
-  switch ($op) {
-    case 'do':
-      _backup_migrate_backup_with_defaults();
-      watchdog('action', 'Backed up database');
-      break;
+switch ($op) {
+case 'do':
+_backup_migrate_backup_with_defaults();
+watchdog('action', 'Backed up database');
+break;
 
-    case 'metadata':
-      return array(
-      'description' => t('Backup the database with the default settings'),
-      'type' => t('Backup and Migrate'),
-      'batchable' => TRUE,
-      'configurable' => FALSE,
-    );
+case 'metadata':
+return array(
+'description' => t('Backup the database with the default settings'),
+'type' => t('Backup and Migrate'),
+'batchable' => TRUE,
+'configurable' => FALSE,
+);
 
-    // Return an HTML config form for the action.
+// Return an HTML config form for the action.
 
-    case 'form':
-      return '';
+case 'form':
+return '';
 
-    // Validate the HTML form.
+// Validate the HTML form.
 
-    case 'validate':
-      return TRUE;
+case 'validate':
+return TRUE;
 
-    // Process the HTML form to store configuration.
+// Process the HTML form to store configuration.
 
-    case 'submit':
-      return '';
-  }
+case 'submit':
+return '';
+}
 }
  */
 

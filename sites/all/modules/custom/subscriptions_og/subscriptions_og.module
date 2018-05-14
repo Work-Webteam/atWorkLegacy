@@ -294,7 +294,7 @@ function subscriptions_og_node_insert($node) {
       case($type == 'page'):
       case($type == 'ecard'):
       case($type == 'image'):
-      case($type == 'lsa_apoplication'):
+      case($type == 'lsa_application'):
       case($type == 'multichoice'):
       case($type == 'simplenews'):
       case($type == 'quiz'):
