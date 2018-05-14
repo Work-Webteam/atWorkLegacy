@@ -478,14 +478,26 @@ function _atwork_activity_render_messages($result, $activityType) {
      // If field is longer than 100 characters (without tags);
       $string_is_too_long = false;
       $message_string = $message['message__message_text__0']['#markup'];
-      $no_tags_message = strip_tags($message_string);
+      // We want to split out everything before the message (i.e. name etc)
+      $message_array = explode('<br />', $message_string);
+      // If we had a number of <br> tags after teh first, we need to pull out the original and implode the rest of the string
+      if(count($message_array) > 2){
+        array_shift($message_array);
+        $message_text = implode('<br>', $message_array);
+      // If we only have one <br>
+      } elseif(isset($message_array[1])){
+        $message_text = $message_array[1];
+      } else {
+        // Final case, so we don't error - didn't split out for some reason so we will count everything
+        $message_text = $message_string;
+      }
+      $no_tags_message = strip_tags($message_text);
       $message_string_length = strlen($no_tags_message);
        global $user;
 
       if($message_string_length > 100){
         $string_is_too_long = true;
       }
-
       // Make a copy, explode on closing tags
       if($string_is_too_long === true && $message['#bundle'] == 'status'){
         // We know all messages start with <p and  class> - lets remove and save this.
@@ -516,6 +528,7 @@ function _atwork_activity_render_messages($result, $activityType) {
         $j = 0;
         // Our closing tag counter
         $k = 0;
+
         // Run through string, count the # of chars at each location that is not one of our placeholders
         foreach($string_array as $key=>$character){
           // We're done here, lets split
@@ -564,8 +577,8 @@ function _atwork_activity_render_messages($result, $activityType) {
         $rebuilt_array = implode($string_array);
         // This is a zero based function adn we counted the first character above as '1' - so now need to take taht into account.
         $rebuilt_string = substr($rebuilt_array, 0, $i-1);
-        // Add ellipses and tagged more href on end
-        $rebuilt_string = $rebuilt_string . '... <a href="node/' . $message['#entity']->field_message_node['und'][0]['target_id'] . '">more</a>';
+        // Add tagged more href on end
+        $rebuilt_string = $rebuilt_string . ' <a href="node/' . $message['#entity']->field_message_node['und'][0]['target_id'] . '">Read More</a>';
         // Make sure all of our <p> tags are closed
         while($k < $j){
           $rebuilt_string = $rebuilt_string . '</p>';
@@ -583,8 +596,14 @@ function _atwork_activity_render_messages($result, $activityType) {
         $rebuilt_string = strip_tags($rebuilt_string, '<p><a>');
         // Now put it back in markup
         $message['message__message_text__0']['#markup'] = $rebuilt_string;
-      // Comments are the other message type that prints user markup - so we need to sanitize that portion as well. 
-      } else if($string_is_too_long === true && $message['#bundle'] == 'new_comment'){
+      // Comments are the other message type that prints user markup - so we need to sanitize that portion as well.
+      } else if($message['#bundle'] == 'new_comment'){
+        // Is it too long?
+        if($string_is_too_long){
+          $e = "...";
+        } else {
+          $e = '';
+        }
         // Make new array
         $finished_array = array();
         // explode out the user generated text, we will need to keep the first bit ([0])
@@ -608,12 +627,12 @@ function _atwork_activity_render_messages($result, $activityType) {
         $finished_array[] = ($message_split[0]);
         $finished_array[] = '<span class="activity-comment">';
         $finished_array[] = $comment_text;
-        $finished_array[] = '</span>';
+        $finished_array[] = $e .'</span>';
         $finished_array[] = (end($message_end_split));
         $finished_string = implode(' ', $finished_array);
         $message['message__message_text__0']['#markup'] = $finished_string;
       }
-      
+
 
       // Use a function to check if message is stickied
       $sticky_check = check_sticky_status($message['#entity']->mid);
@@ -694,7 +713,7 @@ function _atwork_activity_render_messages($result, $activityType) {
       // We want to add images to the activity feed.
       // We need to force Employee News - seeing as this user is "special" as both user 0 and 10
       if($author->uid == 0 || $author->uid == 10){
-        // Want to use ENews profile 
+        // Want to use ENews profile
         $e_news = user_load(10);
         $user_image = field_view_field('user', $e_news, 'field_image', array('settings' => array('label'=>'hidden', 'image_style' => 'profile_thumbs_med')));
       // Check if an image exists:
@@ -1477,7 +1496,7 @@ function atwork_activity_form_reply_form_alter(&$form, &$form_state, $form_id){
   global $user;
   // Only admin can post as employee news
   //TODO: Make this !_atwork_is_admin - that is when we want to make this change.
-  
+
 
 
   if($form['form_id']['#id'] == "edit-reply-form"){
@@ -2082,15 +2101,15 @@ function atwork_activity_block_view($delta = '') {
 
   switch ($delta) {
 
-	  case 'group':		
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity.js');		
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_group.js');		
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/jquery.url.js');		
-      drupal_add_js('initializeActivity();', 'inline');		
-      $block['subject'] = _atwork_fa('circle-blank') . t('Activity');		
-      $block['content'] = array(		
-        '#markup' => '<div id="group-activity"><div class="activity-feed-progress"><img src="/sites/all/themes/atwork_zen/images/progress.gif" title="Loading" /></div><!-- /.activity-feed-progress --><div id="group-activity-ajax"></div><!-- /#group-activity-ajax --></div><!-- /#group-activity" -->',		
-      );		
+	  case 'group':
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_group.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/jquery.url.js');
+      drupal_add_js('initializeActivity();', 'inline');
+      $block['subject'] = _atwork_fa('circle-blank') . t('Activity');
+      $block['content'] = array(
+        '#markup' => '<div id="group-activity"><div class="activity-feed-progress"><img src="/sites/all/themes/atwork_zen/images/progress.gif" title="Loading" /></div><!-- /.activity-feed-progress --><div id="group-activity-ajax"></div><!-- /#group-activity-ajax --></div><!-- /#group-activity" -->',
+      );
     break;
 
 
@@ -2106,9 +2125,9 @@ function atwork_activity_block_view($delta = '') {
       $block['subject'] .= '<div class="block-header-inner">';
       $block['subject'] .= '<button class="activity-filters-my" title="My Activity">&nbsp;</button>';
       $block['subject'] .= '<button class="activity-filters-all" title="All Activity">&nbsp;</button>';
-      
+
       $block['subject'] .= '<a href="node/21603" class="jsNewActivityWindow"><img id="ActivityWindowButton" src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="See Activity in New Window" /></a>';
-      
+
       $block['subject'] .= '</div><!-- /.block-header-inner -->';
 
       $block['content'] = '<div class="atwork-activity-block-container">';
