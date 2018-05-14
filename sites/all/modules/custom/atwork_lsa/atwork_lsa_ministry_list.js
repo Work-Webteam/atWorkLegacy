@@ -5,7 +5,7 @@
  */
 
   function ministry_list_complete() {
-    ministry_list = {
+    const ministry_list = {
       17:"Agricultural Land Commission",
       19:"BC Arts Council",
       20:"BC Farm Industry Review Board",

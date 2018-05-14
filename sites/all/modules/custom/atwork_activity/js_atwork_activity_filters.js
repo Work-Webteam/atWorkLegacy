@@ -1,7 +1,7 @@
 (function ($) {
 
   // Need to know if the advanced feed info has been opened or not
-  var advancedFilters = false;
+  let advancedFilters = false;
 
        /*********** Begin My Actions vs All Activity interaction ***********/
 
@@ -34,9 +34,6 @@
         $("#edit-feed-choices-20").attr("checked", true);
         $("#edit-feed-choices-21").attr("checked", true);
         $("#edit-feed-choices-22").attr("checked", true);
-
-
-
 
         // The above must be marked prior to submit
         submitChanges();
@@ -94,7 +91,7 @@
       }
 
       function postStatusUpdate(){
-        // On click, toggle the fields. 
+        // On click, toggle the fields.
         $('#edit-status').slideToggle();
         $('.status-update-cancel').slideToggle();
         $('#atwork-activity-form div.form-item.form-type-textarea.form-item-status').slideToggle();
@@ -107,9 +104,9 @@
    * Drupal attach function - click handlers etc.
    */
   Drupal.behaviors.profileFilterJquery = {
-    attach: function(context, settings) {
+    attach: function(context) {
 
-      // Need to initially hide this - people think it is a search bar... Seriously.. 
+      // Need to initially hide this - people think it is a search bar... Seriously..
       // Add in a cancel button by the post button
       $('button.status-update-cancel').length ? $('button.status-update-cancel') : $('#edit-post').before('<button class="status-update-cancel" name="status-update-cancel">Cancel</button>');
       $('#edit-status').hide();
@@ -139,7 +136,7 @@
           allActivityRules();
           // Also need to lock these in - so click the update button
         });
-        
+
       // Set click handler for Post Status Update button
       $('.status-update-mock-button:not(.atwork-activity-processed)', context)
         .addClass('atwork-activity-processed')
