@@ -279,3 +279,113 @@ function subscriptions_og_disable() {
   ->condition('field', 'group_audience')
   ->execute();
 }
+
+
+/**
+ * Implements hook_node_insert().
+ * Employee news wishes to be notified on all content creations
+ */
+function subscriptions_og_node_insert($node) {
+  // Don't need certain content types - if we hit one of those, then leave immediately.
+  if(isset($node->type)){
+    $type = $node->type;
+    switch(TRUE){
+      case($type == 'ad_space'):
+      case($type == 'page'):
+      case($type == 'ecard'):
+      case($type == 'image'):
+      case($type == 'lsa_apoplication'):
+      case($type == 'multichoice'):
+      case($type == 'simplenews'):
+      case($type == 'quiz'):
+      case($type == 'lsa_pin_application'):
+      case($type == 'status_update'):
+      case($type == 'webform'):
+        return;
+        break;
+      default:
+        // Do nothing
+        break;
+    }
+  }
+  // If this node is set to send notifications anyways - no point in sending another.
+  if($node->subscriptions_notify == 1){
+    return;
+  }
+  // Fires when user first saves the node. We only want to send a notification if they publish it here - otherwise we will send a note when they update from unpublished -> published.
+  if($node->status != 1 ){
+    return;
+  }
+
+  // Just in case we have a content type that creates nodes with no titles.
+  $subscription_body = isset($node->title) ? 'A new ' . $node->type . ' titled \'<a href="/node/' . $node->nid . '">' . '"' . $node->title . '"' ."</a>\' was created by " . $node->name . ". \n" : 'A new ' . $node->type . ' titled <a href="/node/' . $node->nid . '">' . ' Untitled ' . "</a> was created by " . $node->name . ". \n";
+
+  // Send first 150 chars of the body field to give community manager a bit of an idea.
+  if(isset($node->body['und'][0]['value']) && (strlen($node->body['und'][0]['value']) > 500)){
+    $clean_text = strip_tags($node->body['und'][0]['value'], "<p> <br> <i>" );
+    $subscription_body = strlen($node->body['und'][0]['value']) > 500 ? $subscription_body . " \n <p><i>" . substr($clean_text, 0, 500) . "...</i></p>" : $subscription_body . " \n <p><i>" . $clean_text . "...</i></p>";
+  }
+  // Cute little closing salutation:
+  $subscription_body = $subscription_body . " <br> <br> Love, <br> Employee News and Drupal. ";
+  // admin email
+  $params = [
+    'subject' => 'New ' . $node->type . ' published',
+    'body' => $subscription_body,
+  ];
+  drupal_mail('atwork_mail', 'atwork_mail_default', 'EmployeeNews@gov.bc.ca', language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
+}
+
+
+/**
+ * Implements hook_node_update().
+ * Employee news wants to be notified whenever a node is published on the site.
+ */
+function subscriptions_og_node_update($node) {
+  // Don't need certain content types - if we hit one of those, then leave immediately.
+  if(isset($node->type)){
+    $type = $node->type;
+    switch(TRUE){
+      case($type == 'ad_space'):
+      case($type == 'page'):
+      case($type == 'ecard'):
+      case($type == 'image'):
+      case($type == 'lsa_application'):
+      case($type == 'multichoice'):
+      case($type == 'simplenews'):
+      case($type == 'quiz'):
+      case($type == 'lsa_pin_application'):
+      case($type == 'status_update'):
+      case($type == 'webform'):
+        return;
+        break;
+      default:
+        // Do nothing
+        break;
+    }
+  }
+  // If this node is set to send notifications anyways - no point in sending another.
+  if($node->subscriptions_notify == 1){
+    return;
+  }
+  // Fires when user first saves the node. We only want to send a notification if they publish it here from an unpublished state- otherwise we will send a note when they update from unpublished -> published.
+  if($node->status != 1 && $node->original->status != 0){
+    return;
+  }
+
+  // Just in case we have a content type that creates nodes with no titles.
+  $subscription_body = isset($node->title) ? 'A new ' . $node->type . ' titled <a href="/node/' . $node->nid . '">' . '"' . $node->title . '"' . "</a> was created by " . $node->name . ". \n" : 'A new ' . $node->type . ' titled <a href="/node/' . $node->nid . '">' . ' Untitled ' . "</a> was created by " . $node->name . ". \n";
+
+  // Send first 150 chars of the body field to give community manager a bit of an idea.
+  $clean_text = strip_tags($node->body['und'][0]['value'], "<p> <br> <i>" );
+
+  $subscription_body = strlen($node->body['und'][0]['value']) > 500 ? $subscription_body . " \n <p><i>" . substr($clean_text, 0, 500) . "...</i></p>" : $subscription_body . " \n <p><i>" . $clean_text . "...</i></p>";
+
+  // Cute little closing salutation:
+  $subscription_body = $subscription_body . " <br> <br> Love, <br> Employee News and Drupal. ";
+  // admin email
+  $params = [
+    'subject' => 'New ' . $node->type . ' published',
+    'body' => $subscription_body,
+  ];
+  drupal_mail('atwork_mail', 'atwork_mail_default', 'EmployeeNews@gov.bc.ca', language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
+}

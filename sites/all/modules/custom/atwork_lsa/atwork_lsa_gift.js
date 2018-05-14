@@ -14,7 +14,7 @@
 
   function _25year() {
     // Using the impromptu library for this: http://trentrichardson.com/Impromptu/
-    var gift_chooser = {
+    const gift_chooser = {
       state0: {
         title: 'Congratulations on 25 years!',
         // All HTML in one long string - pretty much any html tags can go here, and will be replicated in the popup.
@@ -58,7 +58,7 @@
           // PECSF donation
           '<img src="/sites/default/files/lsa_2015/25_pecsf.jpg" alt="PECSF donation image" id="image_provincial_employees_community_services_fund">' +
         '</div>' +
-        
+
         /**
          * More info list
          * NOTE: related span id must match option "name" variable preceeded by info_ for the image to show.
@@ -94,10 +94,13 @@
         buttons: { 'Accept': 1 },
         /**
          * Submit function
+         * @param e
+         * @param v
+         * @param m
          * @param  {Object} f - Holds form data that user has chosen
          */
         submit:function(e,v,m,f){
-          // List of arguements that can be used in order to save gift value to our LSA form
+          // List of arguments that can be used in order to save gift value to our LSA form
           gift_choice_populate_form(f);
           e.preventDefault();
 
@@ -141,7 +144,7 @@
 
   function _30year() {
     // Using the impromptu library for this: http://trentrichardson.com/Impromptu/
-    var gift_chooser = {
+    const gift_chooser = {
       state0: {
         title: 'Congratulations on 30 years!',
         // All HTML in one long string - pretty much any html tags can go here, and will be replicated in the popup.
@@ -163,7 +166,7 @@
         '</select></label>' +
         /**
          * Image List
-         * NOTE: image id must match option "name" variable preceeded by image_ for the image to show.
+         * NOTE: image id must match option "name" variable preceded by image_ for the image to show.
          */
         '<div id="lsa_gift_images_div">' +
           // Appalachian sherpa blanket
@@ -226,7 +229,7 @@
   function _35year() {
 
     // Using the impromptu library for this: http://trentrichardson.com/Impromptu/
-    var gift_chooser = {
+    const gift_chooser = {
       state0: {
         title: 'Congratulations on 35 years!',
 
@@ -293,7 +296,7 @@
 
         /**
          * Image List
-         * NOTE: image id must match option "name" variable preceeded by image_ for the image to show.
+         * NOTE: image id must match option "name" variable preceded by image_ for the image to show.
          */
         '<div id="lsa_gift_images_div">' +
           // Bulova watch
@@ -391,7 +394,7 @@
 
   function _40year() {
     // Using the impromptu library for this: http://trentrichardson.com/Impromptu/
-    var gift_chooser = {
+    const gift_chooser = {
       state0: {
         title: 'Congratulations on 40 years!',
         // All HTML in one long string - pretty much any html tags can go here, and will be replicated in the popup.
@@ -441,9 +444,9 @@
           '<span id="info_diamond_pendant_and_chain"><p><strong>Genuine diamond pendant and chain</strong></p><p>This necklace features a 10 kt white gold, four claw pendant and 18 inch box chain. The round brilliant cut diamonds are .20-carat total weight. It comes in a box with <em>In recognition of forty years of service</em> engraved on the top.</p></span>'+
           // Genuine diamond stud earrings
           '<span id="info_diamond_earrings"><p><strong>Genuine diamond stud earrings</strong></p><p>These earrings are 14 kt white gold stud earrings featuring round brilliant cut diamonds that are .25 carat total weight. They come in a box with <em>In recognition of forty years of service</em> engraved on the top.</p></span>' +
-          // Blue Flower Bouquet glass bowl 
+          // Blue Flower Bouquet glass bowl
           '<span id="info_glass_bowl"><p><strong>Blue Flower Bouquet glass bowl</strong></p><p>Each of these unique glass bowls are hand-blown by B.C. artist <a href="http://robertheld.com/about-robert-held" target = "_blank">Robert Held</a> in Parksville.</p><p>Size: 7" H</p><p><strong>Note:</strong> Due to the nature of this award, engraving is not possible.</p></span>'+
-          // TODO: Add up to date informatino when it comes in 
+          // TODO: Add up to date informatino when it comes in
           // MD print
           '<span id="info_md_print"><p><strong>Morning Surf framed art print</strong></p><p>This colourful landscape print was originally painted by artist <a href="http://michaeladavidsonart.com/" target = "_blank">Michaela Davidson</a>, from Lake Cowichan, B.C. The artwork is presented in a matted green frame with <em>In recognition of forty years of service</em> engraved on a plaque.</p><p>Size: 15" H x 16" W </p></span>' +
           // PECSF donation
@@ -452,7 +455,7 @@
         // buttons options, if not than Next or Back then we need to put quotes around it
         buttons: { 'Accept': 1 },
         submit:function(e,v,m,f){
-          // List of arguements that can be used in order to save gift value to our LSA form
+          // List of arguments that can be used in order to save gift value to our LSA form
           gift_choice_populate_form(f);
           e.preventDefault();
 
@@ -480,15 +483,15 @@
 
 function gift_choice_populate_form(gifts){
   // List
-  var gift_name;
-  var gift_id_number;
-  var full_gift_name;
+  let gift_name;
+  let gift_id_number;
+  let full_gift_name;
   //console.log(gifts);
 
   if($('input[name="field_lsa_years_of_service[und]"]:checked').val() == 25){
     gift_name = gifts._25_year_option;
-    certificate_choice = gifts.certificate;
-    var cert_choice='';
+    let certificate_choice = gifts.certificate;
+    let cert_choice='';
     if(certificate_choice == "yes"){
       cert_choice = "Framed Certificate and ";
       $('#edit-field-lsa-certificate-ordered-und').prop("checked", true);
@@ -501,6 +504,7 @@ function gift_choice_populate_form(gifts){
     $('#edit-field-lsa-25year-certificatename-und-0-value').show();
     //$('#edit-field-lsa-25year-certificatename').show();
     $("input#edit-field-lsa-25year-certificatename-und-0-value").prop("required", "required");
+    let g_choice = '';
     // Get proper wording
     switch(gift_name) {
       case "Cross Starry Blue ballpoint pen":
@@ -550,7 +554,7 @@ function gift_choice_populate_form(gifts){
       full_gift_name = "35 - Bushnell NatureView binoculars";
     }
     if(gift_name == "Bulova Watch"){
-      var watch_specific_type;
+      let watch_specific_type;
       if(gifts.watch_type == "Gold"){
         watch_specific_type = gifts.gold_strap_type + " Strap";
       } else {
@@ -589,7 +593,7 @@ function gift_choice_populate_form(gifts){
   }
 
   // Populate the gift id box
-  gift_list_object = gift_list_complete();
+  const gift_list_object = gift_list_complete();
 
   // Match gift to list to get id
   $.each(gift_list_object, function(key, value){
@@ -610,11 +614,11 @@ function gift_choice_populate_form(gifts){
   $('#edit-field-lsa-award-id-und-0-value').val(gift_id_number);
 
   // Show the award image and description while we are at it
-  var giftImages = giftListImages();
-  var selectedAward = giftImages[gift_list_object[gift_id_number].slice(5)];
+  const giftImages = giftListImages();
+  let selectedAward = giftImages[gift_list_object[gift_id_number].slice(5)];
 
   // If the selectedAward object exists, display it
-  if(typeof selectedAward != "undefined") {
+  if(typeof selectedAward !== "undefined") {
     $(".lsa-award-selector-img-display-panel").attr("src", selectedAward.URI).show();
     // If this is 25 year, drop a picture of certificate as well
     if($('input[name="field_lsa_years_of_service[und]"]:checked').val() == 25){
@@ -625,14 +629,14 @@ function gift_choice_populate_form(gifts){
     } else {
       $('.cert-add').remove();
     }
-  	
+
   	// Uncomment for descriptions to be displayed alongside award photo. Also uncommnt .remove() functions in atwork_lsa.js.
   	//$("#lsa-award-selector-description-display").remove();
   	//$(".lsa-award-selector-img-display-panel").parent().append("<div id=\"lsa-award-selector-description-display\" style=\"margin: 30px; font-size: 10pt;\"><p>" + selectedAward["description"] + "</p></div>");
   } else {
   	$(".lsa-award-selector-img-display-panel").hide();
   }
-  
+
   // Check if this is a pecsef donation, if it is, run a function to figure out values etc.
   switch(true){
     case gift_id_number == 7:
@@ -716,7 +720,6 @@ function gift_choice_populate_form(gifts){
  function certificate_name(){
   $('#_25_year_certificate_text_box').val($('#edit-field-lsa-first-name-und-0-value').val() + ' ' + $('#edit-field-lsa-last-name-und-0-value').val());
   $('#_25_year_certificate_text_box').hide();
-  //console.log($('#_25_year_certificate_text_box').val());
  }
 
 
@@ -725,7 +728,7 @@ function gift_choice_populate_form(gifts){
  * Years 45 & 50 handled in atwork_lsa_module
  */
   function gift_choices() {
-    var gift_year_choice = $('input[name="field_lsa_years_of_service[und]"]:checked').val();
+    let gift_year_choice = $('input[name="field_lsa_years_of_service[und]"]:checked').val();
     switch (gift_year_choice) {
       case '25':
         _25year();
@@ -756,7 +759,7 @@ function gift_choice_populate_form(gifts){
   // This hides all but the applicable image - uses 'name' and 'id' from html.
   function image_choices() {
     // Get the proper image id - this requires standardized id nomiclature for any added image (#image_[name])
-    var selected_image=($('#image_' + $("select#gift_selection_box").find('option:selected').attr("name")));
+    let selected_image=($('#image_' + $("select#gift_selection_box").find('option:selected').attr("name")));
     // Hide everything and...
     $('#lsa_gift_images_div img').hide();
     // Show only the image that goes with the selection
@@ -769,7 +772,7 @@ function gift_choice_populate_form(gifts){
  */
   // This hides all but teh applicable information <p>
   function more_info_choices() {
-    var selected_info=($('#info_' + $("select#gift_selection_box").find('option:selected').attr("name")));
+    let selected_info=($('#info_' + $("select#gift_selection_box").find('option:selected').attr("name")));
     $('#lsa_more_info_div span').hide();
     selected_info.show();
   }
@@ -788,10 +791,10 @@ function gift_choice_populate_form(gifts){
     $('.form-item.form-type-textfield.form-item-field-lsa-engravement-und-0-value').hide();
 
     // Get the proper image id - this requires standardized id nomiclature for any added image (#image_[name])
-    var selected_image=($('#image_' + $("select#gift_selection_box").find('option:selected').attr("name")));
+    let selected_image=($('#image_' + $("select#gift_selection_box").find('option:selected').attr("name")));
     // Hide everything and...
     $('#lsa_gift_images_div img').hide();
-    $('#')
+
     // If watch, show watch, print engravement to form
     if($("select#gift_selection_box").find('option:selected').attr("name") == "bulova_watch"){
       $('#lsa_gift_images_div img').hide();
@@ -800,7 +803,7 @@ function gift_choice_populate_form(gifts){
       //selected_image_2 = ($('#image_' + $("select#gift_selection_box").find('option:selected').attr("name") + '_2'));
       //selected_image_3 = ($('#image_' + $("select#gift_selection_box").find('option:selected').attr("name") + '_3'));
       //selected_image_4 = ($('#image_' + $("select#gift_selection_box").find('option:selected').attr("name") + '_4'));
-      selected_image_1 = ($('#image_' + $("select#gift_selection_box").find('option:selected').attr("name")));
+      let selected_image_1 = ($('#image_' + $("select#gift_selection_box").find('option:selected').attr("name")));
 
 
       // Show them
@@ -888,8 +891,6 @@ function gift_choice_populate_form(gifts){
           $('#image_bulova_watch_3').hide();
         }
       }
-
-      return;
     } else if($("select#gift_selection_box").find('option:selected').attr("name") == "aboriginal_bracelet"){
       $('#bracelet_size').show();
       // Clear all watch fields, turn off required
@@ -903,18 +904,15 @@ function gift_choice_populate_form(gifts){
       $('#face_type').hide();
       $('#watch_engravement_text_box').hide();
     } else {
-
       // Clear all watch fields, turn off required
       reset_fields();
-
-
     }
   }
 
   /**
    * Helper function that resets watch form if user switches watch type
    * Fixes issue where user could get stuck with a form that would not submit if they switched between gold and silver without filling in other selections
-   * Also resets on gift choice change 
+   * Also resets on gift choice change
    */
 
   function reset_fields() {
@@ -964,8 +962,8 @@ function gift_choice_populate_form(gifts){
   function validate_form() {
 
     // Need to spoof a validation handler
-    var countValid = 0;
-    var totalRequiredFields = 0;
+    let countValid = 0;
+    let totalRequiredFields = 0;
 
     // go through every field on form to see if they are required
     $(':input[required]', '.jqiform').each( function() {
@@ -1009,7 +1007,7 @@ function gift_choice_populate_form(gifts){
 
   function check_form() {
     // TODO: create a validate function that checks if fields are filled in , then engrave
-    var button_status = validate_form();
+    const button_status = validate_form();
     //console.log(button_status);
     if(button_status === true){
       $("button.jqibutton.jqidefaultbutton").prop("disabled", false);
@@ -1017,7 +1015,6 @@ function gift_choice_populate_form(gifts){
       $("button.jqibutton.jqidefaultbutton").prop('disabled', true);
     }
   }
-
 
 /**
  * Document ready controller,
@@ -1027,7 +1024,6 @@ function gift_choice_populate_form(gifts){
     //jQuery.error = console.error;
     // User clicking on the jQuery created Choose Gift button will initiate this script
     $('input#gift_select').click(function () {
-
       gift_choices();
     });
 
@@ -1035,12 +1031,8 @@ function gift_choice_populate_form(gifts){
       if ($('input[name="field_lsa_years_of_service[und]"]:checked').val() == 45 || $('input[name="field_lsa_years_of_service[und]"]:checked').val() == 50){
         gift_choices();
         $(".lsa-award-selector-img-display-panel").attr("src", "").hide();
-//        /$("#lsa-award-selector-description-display").remove();
       }
       $('.cert-add').remove();
-
     });
-
   });
-
 }(jQuery));

@@ -1,9 +1,8 @@
 <?php
 
-function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
+function atwork_lsa_form_lsa_application_node_form_alter(&$form) {
   global $user;
   $user = user_load($user->uid);
-  //$form['#token'] = False;
   drupal_set_title('Registration');
   drupal_set_breadcrumb(array());
   drupal_add_js(drupal_get_path('module', 'atwork_lsa').'/atwork_lsa.js');
@@ -12,7 +11,7 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
   jquery_impromptu_add();
   drupal_add_library('system', 'drupal.ajax');
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)){
-    drupal_add_css('.group-lsa-administration {dsplay:block !important;}', 'inline');
+    drupal_add_css('.group-lsa-administration {display:block !important;}', 'inline');
   } else {
     // Hide the administration panel from all users until after signup is over.
     drupal_add_js(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_admin_fields.js');
@@ -37,7 +36,6 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
   // skip defaults for admins who are entering for others
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)  || in_array('lsa contact', $user->roles)) {
     //$form['field_lsa_terms'][$form['field_lsa_terms']['#language']]['#default_value'] = 1;
-
     return;
   }
 
@@ -113,9 +111,9 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
  *
  */
 function atwork_lsa_application_validate($form, &$form_state) {
-  global $user;
+  //global $user;
 
-  $lang = $form_state['values']['language'];
+  //$lang = $form_state['values']['language'];
 
   // if new check for duplicate employee id
 //  $exists = db_select('field_data_field_lsa_employee_number', 'f')
@@ -144,8 +142,8 @@ function atwork_lsa_application_validate($form, &$form_state) {
 //  }
 
   // We need to check if all PECSF fields have been filled out if this gift is their choice.
-  if (($form_state['values']['field_lsa_register_last_year'][$lang][0]['value'] == 2 &&
-      !$form_state['values']['field_lsa_award'][$lang][0]['value']) && $form_state['values']['field_lsa_years_of_service']['und'][0]['value'] <= '40'){
+  if (($form_state['values']['field_lsa_register_last_year']['und'][0]['value'] == 2 &&
+      !$form_state['values']['field_lsa_award']['und'][0]['value']) && $form_state['values']['field_lsa_years_of_service']['und'][0]['value'] <= '40'){
     form_set_error('field_lsa_gift_option', t(
       'Please choose an award.'
     ));
@@ -165,7 +163,7 @@ function atwork_lsa_application_validate($form, &$form_state) {
     $form_state['input']['field_lsa_home_postal_code']['und'][0]['value'] = wordwrap($form_state['input']['field_lsa_home_postal_code']['und'][0]['value'], 3, ' ', true);
     // Make sure this is no more than 7 characters long
     if (strlen($form_state['input']['field_lsa_home_postal_code']['und'][0]['value']) > 7){
-      $form_state['input']['field_lsa_home_postal_code']['und'][0]['value'] = substr($node->field_lsa_home_postal_code[$lang][0]['value'],0,7);
+      $form_state['input']['field_lsa_home_postal_code']['und'][0]['value'] = substr($form_state['input']['field_lsa_home_postal_code']['und'][0]['value'],0,7);
     }
     $postal_check = str_replace(" ", "", $form_state['input']['field_lsa_home_postal_code']['und'][0]['value']);
     if(strlen($postal_check) < 6 || strlen($postal_check) > 6){
@@ -190,7 +188,7 @@ function atwork_lsa_application_validate($form, &$form_state) {
     $form_state['input']['field_lsa_office_postal_code']['und'][0]['value'] = wordwrap($form_state['input']['field_lsa_office_postal_code']['und'][0]['value'], 3, ' ', true);
     // Make sure this is no more than 7 characters long
     if (strlen($form_state['input']['field_lsa_office_postal_code']['und'][0]['value']) > 7){
-      $form_state['input']['field_lsa_office_postal_code']['und'][0]['value'] = substr($node->field_lsa_home_postal_code[$lang][0]['value'],0,7);
+      $form_state['input']['field_lsa_office_postal_code']['und'][0]['value'] = substr($form_state['input']['field_lsa_office_postal_code']['und'][0]['value'],0,7);
     }
     $postal_check = str_replace(" ", "", $form_state['input']['field_lsa_office_postal_code']['und'][0]['value']);
     if(strlen($postal_check) < 6 || strlen($postal_check) > 6){
@@ -203,7 +201,7 @@ function atwork_lsa_application_validate($form, &$form_state) {
     }
   }
 
-  
+
   if(isset($form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']) && $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']){
     // Format this postal code
     // Upper case
@@ -216,7 +214,7 @@ function atwork_lsa_application_validate($form, &$form_state) {
     $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'] = wordwrap($form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'], 3, ' ', true);
     // Make sure this is no more than 7 characters long
     if (strlen($form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']) > 7){
-      $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'] = substr($node->field_lsa_home_postal_code[$lang][0]['value'],0,7);
+      $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'] = substr($form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'],0,7);
     }
     $postal_check = str_replace(" ", "", $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']);
     if(strlen($postal_check) < 6 || strlen($postal_check) > 6){
@@ -230,42 +228,42 @@ function atwork_lsa_application_validate($form, &$form_state) {
   }
 
   // Make sure all relevant PECSF fields filled out
-  $award_id = $form_state['values']['field_lsa_award_id'][$lang][0]['value'];
+  $award_id = $form_state['values']['field_lsa_award_id']['und'][0]['value'];
   $pecsf_id = array(7, 13, 33, 40, 42,44);
   // They have chosen a pecsf award
-  if(in_array($award_id, $pecsf_id)){    
-    if(!isset($form_state['values']['field_lsa_donation_options'][$lang][0]['value'])){
+  if(in_array($award_id, $pecsf_id)){
+    if(!isset($form_state['values']['field_lsa_donation_options']['und'][0]['value'])){
       form_set_error('field_lsa_donation_options', t("You must select a donation option."));
     }
-    if(isset($form_state['values']['field_lsa_donation_options'][$lang][0]['value'])){
+    if(isset($form_state['values']['field_lsa_donation_options']['und'][0]['value'])){
      // Option A - need to choose region
-      if($form_state['values']['field_lsa_donation_options'][$lang][0]['value'] == 0){
-        if(!$form_state['values']['field_lsa_pecsf_region'][$lang][0]['value']){
+      if($form_state['values']['field_lsa_donation_options']['und'][0]['value'] == 0){
+        if(!$form_state['values']['field_lsa_pecsf_region']['und'][0]['value']){
           form_set_error('field_lsa_pecsf_region', t('You must select a region'));
         }
       }
       // Option B
-      if($form_state['values']['field_lsa_donation_options'][$lang][0]['value'] == 1){
+      if($form_state['values']['field_lsa_donation_options']['und'][0]['value'] == 1){
         // Forgot to choose a region
-        if(!isset($form_state['values']['field_lsa_pecsf_region'][$lang][0]['value'])){
+        if(!isset($form_state['values']['field_lsa_pecsf_region']['und'][0]['value'])){
           form_set_error('field_lsa_pecsf_region', t('You must select a region'));
         }
         // Forgot to enter a valid ID or Charity name
-        if(!isset($form_state['values']['field_lsa_pecsf_id'][$lang][0]['value'])){
+        if(!isset($form_state['values']['field_lsa_pecsf_id']['und'][0]['value'])){
           form_set_error('field_lsa_pecsf_id', t('Please enter a PECSF charity ID'));
         }
 
-        if(!isset($form_state['values']['field_lsa_pecsf_charity_name'][$lang][0]['value'])){
+        if(!isset($form_state['values']['field_lsa_pecsf_charity_name']['und'][0]['value'])){
           form_set_error('field_lsa_pecsf_charity_name', t('Please enter a PECSF charity name you would like to donate to'));
         }
 
-        if($form_state['values']['field_lsa_second_donation'][$lang][0]['value'] == 1){
+        if($form_state['values']['field_lsa_second_donation']['und'][0]['value'] == 1){
           // Forgot information on second charity
-          if(!isset($form_state['values']['field_lsa_pecsf_id_2'][$lang][0]['value'])){
+          if(!isset($form_state['values']['field_lsa_pecsf_id_2']['und'][0]['value'])){
             form_set_error('field_lsa_pecsf_id_2', t('Please enter a PECSF charity ID number for your second charity'));
           }
 
-          if(!isset($form_state['values']['field_lsa_charity_name_2'][$lang][0]['value'])){
+          if(!isset($form_state['values']['field_lsa_charity_name_2']['und'][0]['value'])){
             form_set_error('field_lsa_charity_name_2', t('Please enter a PECSF charity name you would like to donate to'));
           }
         }
@@ -277,7 +275,7 @@ function atwork_lsa_application_validate($form, &$form_state) {
   // check supervisor's email
   // WE went around the better GAL centered validation because not all addresses in LSA are in the GAL
   //_atwork_validate_emails($form_state['values']['field_lsa_supervisor_email'][$lang][0]['email'] , 'field_lsa_supervisor_email', $form['form_token']['#default_value']);
-  $email = $form_state['values']['field_lsa_supervisor_email'][$lang][0]['email'];
+  $email = $form_state['values']['field_lsa_supervisor_email']['und'][0]['email'];
   $internal_addresses = variable_get('atwork_mail_internal_addresses',array());
   if (in_array(substr_replace(strtolower($email), '', 0, strpos($email, '@')), $internal_addresses)) {
   } else {
@@ -291,13 +289,14 @@ function atwork_lsa_application_validate($form, &$form_state) {
   if($form_state['values']['field_lsa_dietary_requirements']['und'][0]['value'] == "1" && (empty($form_state['values'  ]['field_lsa_recipient_dietary']['und']) && empty($form_state['values'  ]['field_lsa_dietary_guest']['und']))){
     form_set_error('field_lsa_recipient_dietary', t("You have not indicated dietary requirements for you or your guest"));
   }
-  // Check if terms are approved
-  if($form_state['values']['field_lsa_terms']['und'][0]['value'] != "1"){
-    //form_set_error('field_lsa_terms', t("You must agree to Terms in order to submit the form"));
-  }
 }
 
-function atwork_lsa_pin_application_validate($form, &$form_state){
+/**
+ * @param $form_state
+ *
+ * @return bool
+ */
+function atwork_lsa_pin_application_validate(&$form_state){
   $lang = $form_state['values']['language'];
   global $user;
 
@@ -345,7 +344,7 @@ function atwork_lsa_pin_application_validate($form, &$form_state){
     }
   }
 
-  
+
   // If they indicate they would like a retro pin, they have to choose one
   //if(isset($form_state['input']['field_lsa_other_milestone_years']['und']) || isset($form_state['input']//['field_lsa_milestone_year']['und'])){
   //  if(isset($form_state['input']['field_lsa_other_milestone_years']['und']) && $form_state['input']['field_lsa_other_milestone_years']['und'] == '_none'){
@@ -407,12 +406,6 @@ function atwork_lsa_node_presave($node) {
   if ($node->field_lsa_register_last_year[$lang][0]['value'] == 2) {
     $node->field_lsa_received_award[$lang][0]['value'] = 0;
   }
-
-  // if "registered last year" is true then no gift for you!
-  if ($node->field_lsa_register_last_year[$lang][0]['value'] == 1) {
-    //$node->field_lsa_award[$lang][0]['value'] = "";
-  }
-
 }
 
 /*
@@ -425,7 +418,7 @@ function atwork_lsa_node_presave($node) {
  * Use those contained in $form_state['values']['submitted_tree']
  *
  */
-function atwork_lsa_application_submit(&$form, &$form_state) {
+function atwork_lsa_application_submit(&$form_state) {
   // Append the ministry ID to the form
   if(isset($form_state['values']['field_lsa_org']['und'][0]['value']) && $form_state['values']['field_lsa_org']['und'][0]['value']){
     $form_state['values']['field_lsa_ministry_id']['und'][0]['value'] = $form_state['values']['field_lsa_org']['und'][0]['value'];
@@ -461,7 +454,7 @@ function atwork_lsa_application_submit(&$form, &$form_state) {
 
 function get_award_id_number($form_state){
   $award = trim($form_state['values']['field_lsa_award']['und'][0]['value']);
-  $awards = array(
+  $awards = [
     1=>"2017 Recipient - award received",
     2=>"Choice TBC",
     3=>"Framed Certificate and Cross pen",
@@ -507,11 +500,11 @@ function get_award_id_number($form_state){
     43=>"Choice TBC",
     44=>"$500.00 PECSF charitable donation",
     45=>"Award already Sent",
-    );
+  ];
   $award_id = array_search($award, $awards);
   return $award_id;
 }
-function atwork_lsa_node_view($node, $view_mode, $langcode) {
+function atwork_lsa_node_view($node) {
   if($node->type === 'lsa_pin_application'){
     $node->content['top_message'] = array(
       '#weight' => -10,
@@ -528,17 +521,12 @@ function atwork_lsa_node_view($node, $view_mode, $langcode) {
   if ($node->type != 'lsa_application') {
     return;
   }
-
-  $award_year = date("Y");
   if(isset($node->field_lsa_certificate_ordered['und'][0]['value']) && $node->field_lsa_certificate_ordered['und'][0]['value'] == 0){
     // Don't show certificate unless 25 year recipient has chosen to get one made
     drupal_add_css('.field-name-field-lsa-25year-certificatename {display:none; }', 'inline');
   } else {
     drupal_add_css('.field-name-field-lsa-25year-certificatename {display:block; }', 'inline');
   }
-  // Adding in our third and final steps of instructions that isn't in the block - TODO: hide this until we are ready to allow users to alter their fields
-  //$node->content['field_lsa_retiring_thisyear']['#prefix'] = '<p> Step 3: Verify your contact information below is correct. If you make changes, click the “Save Change” button. If you are unable to make changes to certain fields, please notify us by email at <a href="mailto:longserviceawards@gov.bc.ca?subject=Change%20request">longserviceawards@gov.bc.ca</a>.</p><p>&nbsp</p>'; 
-  //$node->content['field_lsa_supervisor_email']['#suffix'] = '<strong style="color: red;"> <br /><p>Thank you for confirming your information.</p><p>Once all your changes are saved, please visit the <a href="https://gww.gov.bc.ca/career/long-service-awards/faq">Long Service Awards FAQs</a> for more information.</p></strong>';
   // Change the confirmation message to make more sense.
   if (isset($_SESSION['messages']['status']) && $_SESSION['messages']['status']){
     $first_name = $node->field_lsa_first_name['und'][0]['safe_value'];
@@ -556,7 +544,7 @@ function atwork_lsa_node_view($node, $view_mode, $langcode) {
   }
 }
 
-function atwork_lsa_views_pre_view(&$view, &$display_id, &$args) {
+function atwork_lsa_views_pre_view(&$view, &$display_id) {
   global $user;
   if ($view->name == 'content' &&
       $display_id == 'lsa' &&
@@ -583,23 +571,18 @@ function atwork_lsa_views_pre_view(&$view, &$display_id, &$args) {
 /**
  * Implements hook_insert();
  *
- * Send emails on successfult application creation
+ * Send emails on successful application creation
+ *
+ * @param $node
  */
 function atwork_lsa_node_insert($node) {
-  //if ($node->type != 'lsa_application' || $node->type != 'lsa_pin_application') {
-    //return;
-  //}
-
   if($node->type == 'lsa_application'){
-    $lang = $node->language;
-
     require_once(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa.mail.inc');
-
     // applicant email
-      $params = array(
-        'subject' => $applicant_subject,
-        'body' => $applicant_body,
-      );
+    $params = array(
+      'subject' => $applicant_subject,
+      'body' => $applicant_body,
+    );
       drupal_mail('atwork_mail', 'atwork_mail_default', $applicant_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
 
     // supervisor
@@ -612,8 +595,6 @@ function atwork_lsa_node_insert($node) {
   }
 
   if($node->type == 'lsa_pin_application'){
-    $lang = $node->language;
-
     require_once(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_pin.mail.inc');
 
   /** Pins sent directly to ministry contact, only for specific ministries
@@ -631,7 +612,7 @@ function atwork_lsa_node_insert($node) {
     *62 | Office of the Ombudsperson
     *63 | Office of the Police Complaint Commissioner
    **/
-    $check_min = array(
+    $check_min = [
       6 , //Ministry of Education
       12, //Ministry of Indigenous Relations and Reconciliation
       15, //Ministry of Mental Health and Addictions
@@ -645,7 +626,7 @@ function atwork_lsa_node_insert($node) {
       61, //Office of the Merit Commissioner
       62, //Office of the Ombudsperson
       63, //Office of the Police Complaint Commissioner
-      );
+    ];
 
 
     // applicant email, only sent if applicant has applied for themselves
@@ -706,8 +687,7 @@ function atwork_lsa_node_insert($node) {
 /**
  * Implements hook_form_alter();
  */
-function atwork_lsa_form_alter(&$form, &$form_state, $form_id) {
-  global $user;
+function atwork_lsa_form_alter(&$form,$form_id) {
 // For LSA admin, allows to sort on whether a user has entered input.
   if($form['#id'] == 'views-exposed-form-lsa-admin-page-2'){
     if(isset($form['field_lsa_notes_value_op']['#options'])){
@@ -762,11 +742,6 @@ function atwork_lsa_form_alter(&$form, &$form_state, $form_id) {
     drupal_set_title('Service Pin Application');
     drupal_set_breadcrumb(array());
   }
-
-  if ($form_id === 'lsa_application_node_form' ) {
-
-  }
-
 }
 
 
@@ -854,9 +829,11 @@ function atwork_lsa_form_lsa_pin_application_node_form_alter(&$form, $form_state
 }
 
 /**
- * implements hook_mmenu_alter()
+ * implements hook_menu_alter()
  * this is used to redirect users after LSA alteration term has ended.
  * TODO = turn off before next season of LSA applications
+ *
+ * @param $items
  */
 function atwork_lsa_menu_alter(&$items){
   $items['node/%node']['page callback'] = 'atwork_lsa_node_page_view';
@@ -871,8 +848,7 @@ function atwork_lsa_node_page_view($node) {
   global $user;
 
   /**
-   * For some strange reason, pin form does not show retro milestones
-   * @var [type]
+   * For some strange reason, pin form does not show retro milestone
    */
 
   if($node->type == 'lsa_pin_application'){
@@ -934,14 +910,7 @@ function atwork_lsa_node_page_view($node) {
     if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)) {
       return node_page_view($node);
     }
-    // Give contact details
-   //drupal_set_message('The LSA application period has come to an end. If you have any questions or concerns, please contact the Jenny Pescod at (250-356-7916) or email the <a href="mailto:longserviceawards@gov.bc.ca"> Long Service Award inbox </a> ', 'status');
-    // Redirect to 403
-    //drupal_goto('r4032login');
-
     return node_page_view($node);
-
-
   }
   else {
     // Not an lsa_application node, continue
@@ -956,12 +925,11 @@ function atwork_lsa_node_page_view($node) {
  */
 
 function atwork_lsa_menu() {
-  $items['atwork_lsa_pin_form/%'] = array( 
+  $items['atwork_lsa_pin_form/%'] = array(
     'type' => MENU_CALLBACK,
     'page callback' => 'atwork_lsa_pin_page_callback',
     'page arguments' => array(1),
     'access arguments' => array('access content'),
-    //'delivery callback' => 'atwork_lsa_pin_delivery_callback',
   );
   return $items;
 }
@@ -974,14 +942,7 @@ function atwork_lsa_pin_page_callback($choice) {
   $return_array = array();
   global $user;
   $current_user = user_load($user->uid);
-
-  // skip defaults for admins who are entering for others
- // if (in_array('lsa admin', $current_user->roles) || in_array('recognition contact', $current_user->roles)) {
- //   die();
- // }
   if($choice == 1){
-    //If this is a user, check to see if they have already submitted an application
-
     // We need to autofill some text boxes
     $field_gal_employee_number = field_get_items('user', $current_user, 'field_gal_employee_number');
     $field_gal_first_name = field_get_items('user', $current_user, 'field_gal_first_name');
@@ -1043,9 +1004,3 @@ function atwork_lsa_pin_page_callback($choice) {
 
 }
 
-/*
-function atwork_lsa_in_delivery_callback($page_callback_result) {
-  print $page_callback_result;
-
-}
-*/

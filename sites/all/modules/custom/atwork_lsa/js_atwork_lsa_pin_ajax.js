@@ -1,13 +1,13 @@
 (function ($) {
   Drupal.behaviors.atwork_lsa_pin = {
     attach: function(context, settings) {
-      var type = "";
+      let type = "";
       setUpPage();
       // Only run if the link exists in the current page load or fragment refresh.
       $('#edit-field-lsa-registerer-und:not(.atwork-activity-processed)', context)
         .addClass('atwork-activity-processed')
         .bind('change', function(){
-          rebuiltForm = true;
+          let rebuiltForm = true;
           type = $('#edit-field-lsa-registerer-und').val();
           $.get('/atwork_lsa_pin_form/' + type, null, feedDetails);
           return false;
@@ -18,7 +18,6 @@
         .addClass('.atwork-activity-processed')
         .bind('change', function(){
           setMinistryOptions($('#edit-field-lsa-pin-ministry-org-und').val());
-          return;
         });
 
       // Should we always see this? Maybe highlight them here if they are not filled out yet.
@@ -67,9 +66,9 @@
    * Helper function that parses returned DB data depending on the users roll, and kickstarts the relevant form
    * @param  {array} response [Holds an array of user, supervisor fields for auto-pop, the response.choice key holds the type of submission this will be]
    */
-  var feedDetails = function(response){
+  let feedDetails = function(response){
     // Ministries are special cases and require their own text. NOTE: If .inArray is not working, make sure keys do not have spaces in that field (i.e. 11|ministry not 11 |ministry)
-    special_cases = [
+    const special_cases = [
       "6",  //Ministry of Education
       "12", //Ministry of Indigenous Relations and Reconciliation
       "15", //Ministry of Mental Health and Addictions
@@ -83,7 +82,7 @@
       "61", //Office of the Merit Commissioner
       "62", //Office of the Ombudsperson
       "63", //Office of the Police Complaint Commissioner
-      ]; 
+      ];
 
     checkLabels(response.choice);
     $('#sup-div.required-fields.form-wrapper').hide();
@@ -162,9 +161,8 @@
       }
 
     } else {
-      // todo - Reset to default?
+      // TODO - Reset to default?
     }
-    return;
   };
 
   function setUpPage() {
@@ -208,7 +206,7 @@
 
   function setMinistryOptions(ministry){
     switch(true){
-      //Only One retro pin allowed 
+      //Only One retro pin allowed
       case ministry == 18: //Ministry of Social Development and Poverty Reduction
         // We can only allow one box to be checked if they have chosen
         $('#edit-field-lsa-other-milestone-years').slideDown('slow');
@@ -222,9 +220,9 @@
           });
         }
       break;
-      
+
       case ministry == 35 :
-      /** Community living BC. retroactive pin option should only be available if a person indicates they are currently 
+      /** Community living BC. retroactive pin option should only be available if a person indicates they are currently
       *	  celebrating a milestone, and choose a "current year pin". They may request one retro pin in addition to that.
       **/
        // Check if this had other restrictions previously
@@ -241,7 +239,7 @@
         if($('#edit-field-lsa-milestone-year-und-1').is(':checked')){
           // If so, then they can choose prev years.
           $('#edit-field-lsa-other-milestone-years').slideDown('slow');
-          
+
         } else {
           // Add note
           if($('#edit-field-lsa-milestone-year-und').hasClass('atwork-activity-processed')){
@@ -256,7 +254,7 @@
           $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false);
           $('#edit-field-lsa-previous-service-miles').slideUp('slow');
         }
-        
+
         $('#edit-field-lsa-other-milestone-years').slideDown('slow');
         // We can only allow one box to be checked if they have chosen
         // Make sure our labels are set correctly
@@ -270,7 +268,7 @@
         }
 
       break;
-      
+
       //multiple retro pins allowed
       case ministry == 1 : //Ministry of Advanced Education, Skills and Training
       case ministry == 2 : //Ministry of Agriculture
@@ -316,7 +314,7 @@
       break;
 
       //If this is one of their award years then they can choose multiple extras: 20
-      
+
       case ministry == 6: // Ministry of Education
         // Check if this had other restrictions previously
         if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
@@ -347,7 +345,7 @@
           $('#edit-field-lsa-previous-service-miles').slideUp('slow');
         }
         break;
-      
+
       // Any other number is not allowed to have retroactive
       default:
         if($('#edit-field-lsa-milestone-year-und').hasClass('atwork-activity-processed')){
@@ -368,9 +366,8 @@
     // Show field for current year status
     $('#edit-field-lsa-milestone-year').slideDown('slow');
 
-    var applicationSubmitter = $('#edit-field-lsa-registerer-und option:selected').val();
-    var special_cases = new Array();
-    special_cases = [
+    let applicationSubmitter = $('#edit-field-lsa-registerer-und option:selected').val();
+    const special_cases = [
       "6",  //Ministry of Education
       "12", //Ministry of Indigenous Relations and Reconciliation
       "15", //Ministry of Mental Health and Addictions
@@ -385,7 +382,7 @@
       "61", //Office of the Merit Commissioner
       "62", //Office of the Ombudsperson
       "63", //Office of the Police Complaint Commissioner
-      ]; 
+      ];
     // Application by user
     if(applicationSubmitter == 1){
       if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
@@ -450,14 +447,10 @@
 
   function validateForm(){
     // May be easier to attach this as a standard php drupal form validate.
-    var valid = false;
+    let valid = false;
     // If we have a extra milestones - one must be checked:
-    if($('#edit-field-lsa-previous-service-miles').hasClass('atwork-activity-processed')){
-      if($('#edit-field-lsa-previous-service-miles input.form-checkbox:checkbox:checked').length > 0){
+    if($('#edit-field-lsa-previous-service-miles').hasClass('atwork-activity-processed') && $('#edit-field-lsa-previous-service-miles input.form-checkbox:checkbox:checked').length > 0){
         valid = true;
-      } else {
-        valid = false;
-      }
     }
   }
 
