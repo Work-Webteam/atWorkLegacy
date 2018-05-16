@@ -44,7 +44,7 @@ $applicant_not_attending_body = <<<EOT
         <br />
         <p>Thank you for notifying us that you will not be attending this year's Long Service Award ceremony. </p>
         <p>Long Service Awards are presented the year an employee registers. Your award will be mailed to your organization following the 2018 fall ceremonies, and your <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts">ministry/organization contact</a> will make arrangements to have your award presented to you.</p>
-        <p>You can defer your ceremony attendance by one year if you are not able to attend this year. NOTE: You will need to re-register in March/April 2019 on <a href="https://gww.gov.bc.ca/career/long-service-awards">@Work</a> in order to take advantage of the one-year deferral. </p>
+        <p>NOTE: You will need to re-register in March/April 2019 on <a href="https://gww.gov.bc.ca/career/long-service-awards">@Work</a> in order to take advantage of the one-year deferral. </p>
         <p>If you have any questions, please read the <a href="https://gww.gov.bc.ca/career/long-service-awards/faq">FAQs on @Work</a>, connect with your workplace <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts">Long Service Award contact</a> or email the <a href="mailto:longserviceawards@gov.bc.ca?subject=Question%20about%20LSA%20ceremony">Long Service Awards team</a>.</p>
     </body>
 </html>
