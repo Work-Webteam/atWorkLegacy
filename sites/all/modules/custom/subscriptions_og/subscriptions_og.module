@@ -294,7 +294,7 @@ function subscriptions_og_node_insert($node) {
       case($type == 'page'):
       case($type == 'ecard'):
       case($type == 'image'):
-      case($type == 'lsa_apoplication'):
+      case($type == 'lsa_application'):
       case($type == 'multichoice'):
       case($type == 'simplenews'):
       case($type == 'quiz'):
@@ -320,7 +320,7 @@ function subscriptions_og_node_insert($node) {
   // Just in case we have a content type that creates nodes with no titles.
   $subscription_body = isset($node->title) ? 'A new ' . $node->type . ' titled \'<a href="/node/' . $node->nid . '">' . '"' . $node->title . '"' ."</a>\' was created by " . $node->name . ". \n" : 'A new ' . $node->type . ' titled <a href="/node/' . $node->nid . '">' . ' Untitled ' . "</a> was created by " . $node->name . ". \n";
 
-  // Send first 150 chars of the body field to give community manager a bit of an idea.
+  // Send first 500 chars of the body field to give community manager a bit of an idea.
   if(isset($node->body['und'][0]['value']) && (strlen($node->body['und'][0]['value']) > 500)){
     $clean_text = strip_tags($node->body['und'][0]['value'], "<p> <br> <i>" );
     $subscription_body = strlen($node->body['und'][0]['value']) > 500 ? $subscription_body . " \n <p><i>" . substr($clean_text, 0, 500) . "...</i></p>" : $subscription_body . " \n <p><i>" . $clean_text . "...</i></p>";
@@ -368,24 +368,26 @@ function subscriptions_og_node_update($node) {
     return;
   }
   // Fires when user first saves the node. We only want to send a notification if they publish it here from an unpublished state- otherwise we will send a note when they update from unpublished -> published.
-  if($node->status != 1 && $node->original->status != 0){
+  if($node->status != 1){
     return;
   }
 
-  // Just in case we have a content type that creates nodes with no titles.
-  $subscription_body = isset($node->title) ? 'A new ' . $node->type . ' titled <a href="/node/' . $node->nid . '">' . '"' . $node->title . '"' . "</a> was created by " . $node->name . ". \n" : 'A new ' . $node->type . ' titled <a href="/node/' . $node->nid . '">' . ' Untitled ' . "</a> was created by " . $node->name . ". \n";
+  if($node->status == 1 && $node->original->status == 0) {
+    // Just in case we have a content type that creates nodes with no titles.
+    $subscription_body = isset($node->title) ? 'A new ' . $node->type . ' titled <a href="/node/' . $node->nid . '">' . '"' . $node->title . '"' . "</a> was created by " . $node->name . ". \n" : 'A new ' . $node->type . ' titled <a href="/node/' . $node->nid . '">' . ' Untitled ' . "</a> was created by " . $node->name . ". \n";
 
-  // Send first 150 chars of the body field to give community manager a bit of an idea.
-  $clean_text = strip_tags($node->body['und'][0]['value'], "<p> <br> <i>" );
+    // Send first 150 chars of the body field to give community manager a bit of an idea.
+    $clean_text = strip_tags($node->body['und'][0]['value'], "<p> <br> <i>");
 
-  $subscription_body = strlen($node->body['und'][0]['value']) > 500 ? $subscription_body . " \n <p><i>" . substr($clean_text, 0, 500) . "...</i></p>" : $subscription_body . " \n <p><i>" . $clean_text . "...</i></p>";
+    $subscription_body = strlen($node->body['und'][0]['value']) > 500 ? $subscription_body . " \n <p><i>" . substr($clean_text, 0, 500) . "...</i></p>" : $subscription_body . " \n <p><i>" . $clean_text . "...</i></p>";
 
-  // Cute little closing salutation:
-  $subscription_body = $subscription_body . " <br> <br> Love, <br> Employee News and Drupal. ";
-  // admin email
-  $params = [
-    'subject' => 'New ' . $node->type . ' published',
-    'body' => $subscription_body,
-  ];
-  drupal_mail('atwork_mail', 'atwork_mail_default', 'EmployeeNews@gov.bc.ca', language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
+    // Cute little closing salutation:
+    $subscription_body = $subscription_body . " <br> <br> Love, <br> Employee News and Drupal. ";
+    // admin email
+    $params = [
+      'subject' => 'New ' . $node->type . ' published',
+      'body' => $subscription_body,
+    ];
+    drupal_mail('atwork_mail', 'atwork_mail_default', 'EmployeeNews@gov.bc.ca', language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
+  }
 }
