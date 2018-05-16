@@ -350,7 +350,7 @@ function send_to_all_applicants(&$form, &$form_state){
 
   // Gather all results *NOTE - These will have to be cleared every year prior to launch
   // We need to account for other filters here as well now, so slightly different queries
-
+  
   $results = db_query("SELECT node.nid AS nid
     FROM {node} node
     LEFT JOIN {users} users_node ON node.uid = users_node.uid
@@ -358,7 +358,12 @@ function send_to_all_applicants(&$form, &$form_state){
     LEFT JOIN {field_data_field_lsa_org} org ON node.nid = org.entity_id
     LEFT JOIN {field_data_field_lsa_rsvp} rsvp ON node.nid = rsvp.entity_id
     LEFT JOIN {field_data_field_lsa_retro_active} retroactive ON node.nid = retroactive.entity_id
-    WHERE (( (node.status =  '1') AND (node.type IN ('lsa_application')) AND (ceremony_date.field_lsa_ceremonydate_value  $ceremony_compare '$ceremony_id') AND (rsvp.field_lsa_rsvp_value $rsvp_compare '$rsvp') AND (org.field_lsa_org_value $ministry_compare '$ministry_id') AND (retroactive.field_lsa_retro_active_value $retro_active_compare '$retro_active')))");
+    WHERE (( (node.status =  '1') 
+		AND (node.type IN ('lsa_application')) 
+		AND (ceremony_date.field_lsa_ceremonydate_value  $ceremony_compare '$ceremony_id') 
+		AND (rsvp.field_lsa_rsvp_value $rsvp_compare '$rsvp') 
+		AND (org.field_lsa_org_value $ministry_compare '$ministry_id') 
+		AND (retroactive.field_lsa_retro_active_value $retro_active_compare '$retro_active')))");
 
   if($results){
     foreach($results as $record){

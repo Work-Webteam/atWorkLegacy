@@ -100,7 +100,7 @@ $applicant_body = <<<EOT
 <body id="mimemail-body" class="atwork-mail-default" style="padding:0;">
 <p> To RSVP for your Long Service Awards ceremony, click on the button in the invitation below. </p>
 
-<p> If you can’t view the invitation and RSVP form below, follow the Outlook prompts to download pictures. If you have retired or you cannot access the RSVP form, please email the <a href="mailto:longserviceawards@gov.bc.ca">Long Service Awards team</a> for assistance. </p>
+<p> If you can’t view the invitation and RSVP form below, follow the prompts to download pictures. If you have retired or you cannot access the RSVP form, please email the <a href="mailto:longserviceawards@gov.bc.ca">Long Service Awards team</a> for assistance. </p>
 
 
 
