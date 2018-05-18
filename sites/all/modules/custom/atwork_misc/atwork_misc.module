@@ -849,8 +849,9 @@ EOT;
     drupal_set_message(t("You are not allowed to post content."), 'error');
     drupal_access_denied();
   }
-}
 */
+ }
+
  // Helper function to set message once flag report is submitted
 function flag_form_set_message(){
   drupal_set_message(t('Employee News has been notified.'), 'status', FALSE);
