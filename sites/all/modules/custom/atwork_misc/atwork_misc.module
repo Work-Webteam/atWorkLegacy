@@ -838,7 +838,7 @@ EOT;
     $form['#submit'][] = 'flag_form_set_message';
   }
 
-
+ /*
   if($form['#id'] == 'comment-form'){
     $form['comment_body']['#access'] = FALSE;
     $form['actions']['submit']['#access'] = FALSE;
@@ -850,7 +850,8 @@ EOT;
     drupal_access_denied();
   }
 }
-// Helper function to set message once flag report is submitted
+*/
+ // Helper function to set message once flag report is submitted
 function flag_form_set_message(){
   drupal_set_message(t('Employee News has been notified.'), 'status', FALSE);
 }
