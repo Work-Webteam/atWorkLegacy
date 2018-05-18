@@ -837,6 +837,18 @@ EOT;
     $form['actions']['submit']['#value'] = t('Submit');
     $form['#submit'][] = 'flag_form_set_message';
   }
+
+
+  if($form['#id'] == 'comment-form'){
+    $form['comment_body']['#access'] = FALSE;
+    $form['actions']['submit']['#access'] = FALSE;
+    $form['actions']['preview']['#access'] = FALSE;
+  }
+  if(isset($form['#entity_type']) && $form['#entity_type'] == 'node'){
+    //$form['#node_edit_form'] = FALSE;
+    drupal_set_message(t("You are not allowed to post content."), 'error');
+    drupal_access_denied();
+  }
 }
 // Helper function to set message once flag report is submitted
 function flag_form_set_message(){

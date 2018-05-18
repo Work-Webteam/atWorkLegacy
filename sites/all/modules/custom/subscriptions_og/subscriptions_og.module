@@ -301,7 +301,8 @@ function subscriptions_og_node_insert($node) {
       case($type == 'lsa_pin_application'):
       case($type == 'status_update'):
       case($type == 'webform'):
-        return;
+      case($type == 'classified');
+      return;
         break;
       default:
         // Do nothing
@@ -356,6 +357,7 @@ function subscriptions_og_node_update($node) {
       case($type == 'lsa_pin_application'):
       case($type == 'status_update'):
       case($type == 'webform'):
+      case($type == 'classified');
         return;
         break;
       default:
