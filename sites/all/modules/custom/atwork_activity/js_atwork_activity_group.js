@@ -15,10 +15,10 @@ function refreshActivity(page) {
 			alert(status);
 		},
 		success: function(data) {
-			var html = data;
+			let html = data;
 			hideProgress();
 			jQuery('#group-activity-ajax').html(html);
-\			jQuery('#group-activity-ajax .pager-item a')
+			jQuery('#group-activity-ajax .pager-item a')
 				.add('#group-activity-ajax .pager-first a')
 				.add('#group-activity-ajax .pager-previous a')
 				.add('#group-activity-ajax .pager-next a')
