@@ -6108,6 +6108,72 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['nid']['node_in_colorbox_width'] = '600';
   $handler->display->display_options['fields']['nid']['node_in_colorbox_height'] = '600';
   $handler->display->display_options['fields']['nid']['node_in_colorbox_rel'] = '';
+  /* Field: Content: First Name */
+  $handler->display->display_options['fields']['field_lsa_supervisor_first_name_1']['id'] = 'field_lsa_supervisor_first_name_1';
+  $handler->display->display_options['fields']['field_lsa_supervisor_first_name_1']['table'] = 'field_data_field_lsa_supervisor_first_name';
+  $handler->display->display_options['fields']['field_lsa_supervisor_first_name_1']['field'] = 'field_lsa_supervisor_first_name';
+  $handler->display->display_options['fields']['field_lsa_supervisor_first_name_1']['label'] = 'Supervisor First Name';
+  /* Field: Content: Last Name */
+  $handler->display->display_options['fields']['field_lsa_supervisor_last_name_1']['id'] = 'field_lsa_supervisor_last_name_1';
+  $handler->display->display_options['fields']['field_lsa_supervisor_last_name_1']['table'] = 'field_data_field_lsa_supervisor_last_name';
+  $handler->display->display_options['fields']['field_lsa_supervisor_last_name_1']['field'] = 'field_lsa_supervisor_last_name';
+  $handler->display->display_options['fields']['field_lsa_supervisor_last_name_1']['label'] = 'Supervisor Last Name';
+  /* Field: Content: Supervisor Email (editable) */
+  $handler->display->display_options['fields']['field_lsa_supervisor_email_editable']['id'] = 'field_lsa_supervisor_email_editable';
+  $handler->display->display_options['fields']['field_lsa_supervisor_email_editable']['table'] = 'field_data_field_lsa_supervisor_email';
+  $handler->display->display_options['fields']['field_lsa_supervisor_email_editable']['field'] = 'field_lsa_supervisor_email_editable';
+  $handler->display->display_options['fields']['field_lsa_supervisor_email_editable']['widget_type'] = '0';
+  $handler->display->display_options['fields']['field_lsa_supervisor_email_editable']['suppress_label'] = 0;
+  $handler->display->display_options['fields']['field_lsa_supervisor_email_editable']['suppress_description'] = 0;
+  /* Field: Content: Supervisor's Work Address */
+  $handler->display->display_options['fields']['field_supervisor_address']['id'] = 'field_supervisor_address';
+  $handler->display->display_options['fields']['field_supervisor_address']['table'] = 'field_data_field_supervisor_address';
+  $handler->display->display_options['fields']['field_supervisor_address']['field'] = 'field_supervisor_address';
+  /* Field: Content: Work Phone */
+  $handler->display->display_options['fields']['field_lsa_work_phone_1']['id'] = 'field_lsa_work_phone_1';
+  $handler->display->display_options['fields']['field_lsa_work_phone_1']['table'] = 'field_data_field_lsa_work_phone';
+  $handler->display->display_options['fields']['field_lsa_work_phone_1']['field'] = 'field_lsa_work_phone';
+  $handler->display->display_options['fields']['field_lsa_work_phone_1']['label'] = 'Supervisor Work Phone';
+  /* Field: Content: Ceremony Accommodations */
+  $handler->display->display_options['fields']['field_lsa_ceremony_accommodation']['id'] = 'field_lsa_ceremony_accommodation';
+  $handler->display->display_options['fields']['field_lsa_ceremony_accommodation']['table'] = 'field_data_field_lsa_ceremony_accommodation';
+  $handler->display->display_options['fields']['field_lsa_ceremony_accommodation']['field'] = 'field_lsa_ceremony_accommodation';
+  /* Field: Content: Guest Accommodations */
+  $handler->display->display_options['fields']['field_lsa_guest_accom']['id'] = 'field_lsa_guest_accom';
+  $handler->display->display_options['fields']['field_lsa_guest_accom']['table'] = 'field_data_field_lsa_guest_accom';
+  $handler->display->display_options['fields']['field_lsa_guest_accom']['field'] = 'field_lsa_guest_accom';
+  $handler->display->display_options['fields']['field_lsa_guest_accom']['label'] = 'Guest Accommodations (Ceremony)';
+  $handler->display->display_options['fields']['field_lsa_guest_accom']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_lsa_guest_accom']['alter']['text'] = '[field_lsa_guest_accom-value]';
+  $handler->display->display_options['fields']['field_lsa_guest_accom']['delta_offset'] = '0';
+  /* Field: Content: Recipient Accommodations */
+  $handler->display->display_options['fields']['field_lsa_recipient_accom']['id'] = 'field_lsa_recipient_accom';
+  $handler->display->display_options['fields']['field_lsa_recipient_accom']['table'] = 'field_data_field_lsa_recipient_accom';
+  $handler->display->display_options['fields']['field_lsa_recipient_accom']['field'] = 'field_lsa_recipient_accom';
+  $handler->display->display_options['fields']['field_lsa_recipient_accom']['label'] = 'Recipient Accommodations (Ceremony)';
+  $handler->display->display_options['fields']['field_lsa_recipient_accom']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_lsa_recipient_accom']['alter']['text'] = '[field_lsa_recipient_accom-value]';
+  $handler->display->display_options['fields']['field_lsa_recipient_accom']['delta_offset'] = '0';
+  /* Field: Content: Dietary Requirements */
+  $handler->display->display_options['fields']['field_lsa_dietary_requirements']['id'] = 'field_lsa_dietary_requirements';
+  $handler->display->display_options['fields']['field_lsa_dietary_requirements']['table'] = 'field_data_field_lsa_dietary_requirements';
+  $handler->display->display_options['fields']['field_lsa_dietary_requirements']['field'] = 'field_lsa_dietary_requirements';
+  /* Field: Content: Guest Requests */
+  $handler->display->display_options['fields']['field_lsa_dietary_guest']['id'] = 'field_lsa_dietary_guest';
+  $handler->display->display_options['fields']['field_lsa_dietary_guest']['table'] = 'field_data_field_lsa_dietary_guest';
+  $handler->display->display_options['fields']['field_lsa_dietary_guest']['field'] = 'field_lsa_dietary_guest';
+  $handler->display->display_options['fields']['field_lsa_dietary_guest']['label'] = 'Guest Dietary Requests';
+  $handler->display->display_options['fields']['field_lsa_dietary_guest']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_lsa_dietary_guest']['alter']['text'] = '[field_lsa_dietary_guest-value]';
+  $handler->display->display_options['fields']['field_lsa_dietary_guest']['delta_offset'] = '0';
+  /* Field: Content: Recipient Requests */
+  $handler->display->display_options['fields']['field_lsa_recipient_dietary']['id'] = 'field_lsa_recipient_dietary';
+  $handler->display->display_options['fields']['field_lsa_recipient_dietary']['table'] = 'field_data_field_lsa_recipient_dietary';
+  $handler->display->display_options['fields']['field_lsa_recipient_dietary']['field'] = 'field_lsa_recipient_dietary';
+  $handler->display->display_options['fields']['field_lsa_recipient_dietary']['label'] = 'Recipient Dietary Requests';
+  $handler->display->display_options['fields']['field_lsa_recipient_dietary']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_lsa_recipient_dietary']['alter']['text'] = '[field_lsa_recipient_dietary-value]';
+  $handler->display->display_options['fields']['field_lsa_recipient_dietary']['delta_offset'] = '0';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
