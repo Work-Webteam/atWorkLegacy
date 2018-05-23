@@ -2414,9 +2414,10 @@ Vegan',
       'active' => 1,
       'module' => 'options',
       'settings' => array(
+        'display_label' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
-      'type' => 'options_buttons',
+      'type' => 'options_onoff',
       'weight' => 23,
     ),
   );
