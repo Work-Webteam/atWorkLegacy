@@ -88,51 +88,47 @@ function atwork_webform_block_view($delta = '') {
 function _atwork_webform_block_content(){
   // Our current webform
   $nid = 19843;
+  
   // First lets make a table of all contestants and their vote numbers
   // We need to get all of our votes cast per contestant key
   $votes = db_select('webform_submitted_data', 's')
-    ->fields('s', array('data'))
-    ->condition('s.nid', $nid)
-    ->execute()
-    ->fetchAll();
-
-  // Count votes by key option
+  ->fields('s', array('no'))
+  ->fields('s', array('data'))
+  ->condition('s.nid', $nid)
+  ->condition('s.no', '0', '!=')
+  ->execute()
+  ->fetchAll();
+  
+  // Count votes by key option for each nominee.
   $vote_count = array();
   foreach($votes as $key=>$value){
-    if(isset($vote_count[$value->data])){
-      $vote_count[$value->data]['count'] += 1; 
-    } else {
-      $vote_count[$value->data] = array(
-        'count' => 1,
-      );
-    }
+  	(isset($vote_count[$value->no])? $vote_count[$value->no] += ceil(3/$value->data) : $vote_count[$value->no] = ceil(3/$value->data));
   }
-
+  
   //Get the form to match names to selection
   $webform = node_load($nid);
-  $choices = $webform->webform['components'][1]['extra']['items'];
+  
+  //Pull out the names of the nominees
+  $choices = array();
 
-  $formated_choices_array = array();
-  $choices_array = explode(';/p&gt;', $choices);
-  foreach($choices_array as $choice_string){
-    if(strlen($choice_string > 0 )){
-      // Split off all extra info in string past name
-      $choice_string = strstr($choice_string, '&&&', true);
-      $split_choice = explode('|', $choice_string);
-      $formated_choices_array[$split_choice[0]] = $split_choice[1];  
-    }
+  // Get names of nominees
+  $webform_question_text = $webform->webform['components'][1]['extra']['questions'];
+  if(preg_match_all('/[123]\W<strong>(\w+ \w+)\./',$webform_question_text,$nominees)){
+  	$choices_array= $nominees[1];
   }
 
   // Now make  table of emerging leaders and vote counts
   $output = '<div id="count-block">';
   $output .= '<table id="leaders-list" style="width:100%; border:1px solid black;" >';
-  $output .= '<tr style="border:1px solid black; background-color:#E0EEEE;"><td style="border:1px solid black !important;"><h2>Emerging Leader</h2></td><td style="border:1px solid black !important;"><h2>Votes</h2></td></tr>';
+  $output .= '<tr style="border:1px solid black; background-color:#E0EEEE;"><td style="border:1px solid black !important;"><h2>Emerging Leader</h2></td><td style="border:1px solid black !important;"><h2>Total Score</h2></td></tr>';
   
   // To color stripes
   $i = 1;
-  foreach($formated_choices_array as $key=>$value){   
+  foreach($choices_array as $key=>$value){   
     // Need to cast our key to an int to traverse arrays
-    $key = (int)$key;
+    $key = (int)$key + 1;
+    dpm($choices_array[$key]);
+    dpm($vote_count[$key+1]);
     // pick our background color
     if($i & 1 ){
       $background = '#FFFFFF';
@@ -140,7 +136,7 @@ function _atwork_webform_block_content(){
       $background = '#E0EEEE';
     }
     if(isset($vote_count[$key]) || array_key_exists($key, $vote_count)){
-      $output .= '<tr style="border:1px solid black; background-color:' . $background . ';"><td style="border:1px solid black !important;">' . $value . '</td><td style="border:1px solid black !important; background-color:' . $background . ';">' . $vote_count[$key]['count'] . '</td></tr>';
+      $output .= '<tr style="border:1px solid black; background-color:' . $background . ';"><td style="border:1px solid black !important;">' . $value . '</td><td style="border:1px solid black !important; background-color:' . $background . ';">' . $vote_count[$key] . '</td></tr>';
     } else {
       $output .= '<tr><td style="border:1px solid black !important; background-color:' . $background . ';">' . $value . '</td><td style="border:1px solid black !important; background-color:' . $background . ';">0</td></tr>';
     }
@@ -209,13 +205,17 @@ function atwork_webform_ajax_callback($var){
 
   // Get total # of voters 
   $total = count($voted);
+  
   // Choose a winner:
   $winning_number = mt_rand(0,$total-1);
+  
   // Winner is:
   $winner = $voted[$winning_number];
   $winning_user = user_load($winner->uid);
+  
   // Return winners info
   $winner_name = $winning_user->field_gal_first_name['und'][0]['safe_value'] . " " . $winning_user->field_gal_last_name['und'][0]['safe_value'];
+  
   if(isset($winning_user->field_image['und'][0]['uri'] )&& $winning_user->field_image['und'][0]['uri'] ){
     $picture_url = $winning_user->field_image['und'][0]['uri'];
   } else {
@@ -223,12 +223,18 @@ function atwork_webform_ajax_callback($var){
     global $base_path;
     $picture_url = $base_path . 'default_images/default_profile220x220b_0.gif';
   }
+  
   $picture_location = str_replace("public://", "", $picture_url);
+  
   $winner_picture = '/sites/default/files/' . $picture_location; 
+  
   $return_string = '<div id="winner_profile"><h1>The Winner is....</p><img src="' . $winner_picture . '" style="width:160px;height:200px;"><h2><a href="/user/' . $winning_user->uid . '">' . $winner_name .'</a></h2></div>';
-    // Return image and winner name to js
+  
+  // Return image and winner name to js
   echo json_encode($return_string);
-    // Stops themeing layer from interacting with this
+  
+  // Stops themeing layer from interacting with this
   die();
+
   return;
 }
