@@ -127,8 +127,6 @@ function _atwork_webform_block_content(){
   foreach($choices_array as $key=>$value){   
     // Need to cast our key to an int to traverse arrays
     $key = (int)$key + 1;
-    dpm($choices_array[$key]);
-    dpm($vote_count[$key+1]);
     // pick our background color
     if($i & 1 ){
       $background = '#FFFFFF';
