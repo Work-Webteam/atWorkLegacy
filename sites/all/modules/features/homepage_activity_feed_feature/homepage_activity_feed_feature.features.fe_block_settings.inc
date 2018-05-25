@@ -64,7 +64,10 @@ width: 75px;
 border-bottom: solid 4px red;
 left: 28px!important;
 }
-',
+/* Temporary removal of ellipses before Read More. Permanent fix with next CSS update */
+#social-side .entity-message span.activity-comment ~ a::before {
+    content: none;
+}',
     'custom' => 0,
     'delta' => 'homepage',
     'js' => '',
