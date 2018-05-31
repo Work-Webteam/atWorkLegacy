@@ -399,9 +399,6 @@ $atwork_base_url = $GLOBALS['base_url'];
                 <?php echo $image_markup; ?>
               </div>
             </td>
-            <td>
-              <?php echo '<img class="outlook-padding-image-size" src = "https://dagur.dmz:8888/mem_fs/images/whitespace_10_179.png" style="height: 100px;"/>'; ?>
-            </td>
             <td width=66% valign="top">
               <table width=97% border="0" cellpadding="0" cellspacing="0" style="border-bottom: 1px solid black;" >
               
