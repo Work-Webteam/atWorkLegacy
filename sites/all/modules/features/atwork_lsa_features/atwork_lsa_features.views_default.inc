@@ -5992,6 +5992,15 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_supervisor_email']['id'] = 'field_lsa_supervisor_email';
   $handler->display->display_options['fields']['field_lsa_supervisor_email']['table'] = 'field_data_field_lsa_supervisor_email';
   $handler->display->display_options['fields']['field_lsa_supervisor_email']['field'] = 'field_lsa_supervisor_email';
+  /* Field: Content: Work Phone */
+  $handler->display->display_options['fields']['field_lsa_work_phone_1']['id'] = 'field_lsa_work_phone_1';
+  $handler->display->display_options['fields']['field_lsa_work_phone_1']['table'] = 'field_data_field_lsa_work_phone';
+  $handler->display->display_options['fields']['field_lsa_work_phone_1']['field'] = 'field_lsa_work_phone';
+  $handler->display->display_options['fields']['field_lsa_work_phone_1']['label'] = 'Supervisor Work Phone';
+  /* Field: Content: Supervisor's Work Address */
+  $handler->display->display_options['fields']['field_supervisor_address']['id'] = 'field_supervisor_address';
+  $handler->display->display_options['fields']['field_supervisor_address']['table'] = 'field_data_field_supervisor_address';
+  $handler->display->display_options['fields']['field_supervisor_address']['field'] = 'field_supervisor_address';
   /* Field: Content: Notes */
   $handler->display->display_options['fields']['field_lsa_notes']['id'] = 'field_lsa_notes';
   $handler->display->display_options['fields']['field_lsa_notes']['table'] = 'field_data_field_lsa_notes';
@@ -6108,32 +6117,6 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['nid']['node_in_colorbox_width'] = '600';
   $handler->display->display_options['fields']['nid']['node_in_colorbox_height'] = '600';
   $handler->display->display_options['fields']['nid']['node_in_colorbox_rel'] = '';
-  /* Field: Content: First Name */
-  $handler->display->display_options['fields']['field_lsa_supervisor_first_name_1']['id'] = 'field_lsa_supervisor_first_name_1';
-  $handler->display->display_options['fields']['field_lsa_supervisor_first_name_1']['table'] = 'field_data_field_lsa_supervisor_first_name';
-  $handler->display->display_options['fields']['field_lsa_supervisor_first_name_1']['field'] = 'field_lsa_supervisor_first_name';
-  $handler->display->display_options['fields']['field_lsa_supervisor_first_name_1']['label'] = 'Supervisor First Name';
-  /* Field: Content: Last Name */
-  $handler->display->display_options['fields']['field_lsa_supervisor_last_name_1']['id'] = 'field_lsa_supervisor_last_name_1';
-  $handler->display->display_options['fields']['field_lsa_supervisor_last_name_1']['table'] = 'field_data_field_lsa_supervisor_last_name';
-  $handler->display->display_options['fields']['field_lsa_supervisor_last_name_1']['field'] = 'field_lsa_supervisor_last_name';
-  $handler->display->display_options['fields']['field_lsa_supervisor_last_name_1']['label'] = 'Supervisor Last Name';
-  /* Field: Content: Supervisor Email (editable) */
-  $handler->display->display_options['fields']['field_lsa_supervisor_email_editable']['id'] = 'field_lsa_supervisor_email_editable';
-  $handler->display->display_options['fields']['field_lsa_supervisor_email_editable']['table'] = 'field_data_field_lsa_supervisor_email';
-  $handler->display->display_options['fields']['field_lsa_supervisor_email_editable']['field'] = 'field_lsa_supervisor_email_editable';
-  $handler->display->display_options['fields']['field_lsa_supervisor_email_editable']['widget_type'] = '0';
-  $handler->display->display_options['fields']['field_lsa_supervisor_email_editable']['suppress_label'] = 0;
-  $handler->display->display_options['fields']['field_lsa_supervisor_email_editable']['suppress_description'] = 0;
-  /* Field: Content: Supervisor's Work Address */
-  $handler->display->display_options['fields']['field_supervisor_address']['id'] = 'field_supervisor_address';
-  $handler->display->display_options['fields']['field_supervisor_address']['table'] = 'field_data_field_supervisor_address';
-  $handler->display->display_options['fields']['field_supervisor_address']['field'] = 'field_supervisor_address';
-  /* Field: Content: Work Phone */
-  $handler->display->display_options['fields']['field_lsa_work_phone_1']['id'] = 'field_lsa_work_phone_1';
-  $handler->display->display_options['fields']['field_lsa_work_phone_1']['table'] = 'field_data_field_lsa_work_phone';
-  $handler->display->display_options['fields']['field_lsa_work_phone_1']['field'] = 'field_lsa_work_phone';
-  $handler->display->display_options['fields']['field_lsa_work_phone_1']['label'] = 'Supervisor Work Phone';
   /* Field: Content: Ceremony Accommodations */
   $handler->display->display_options['fields']['field_lsa_ceremony_accommodation']['id'] = 'field_lsa_ceremony_accommodation';
   $handler->display->display_options['fields']['field_lsa_ceremony_accommodation']['table'] = 'field_data_field_lsa_ceremony_accommodation';
