@@ -4592,7 +4592,7 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_supervisor_city',
-    'label' => 'City',
+    'label' => 'Supervisor City',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -4608,6 +4608,7 @@ Vegan',
         'peruser' => 1,
         'status' => 0,
       ),
+      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -4873,7 +4874,7 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_supervisor_postal_code',
-    'label' => 'Postal Code',
+    'label' => 'Supervisor Postal Code',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -4889,6 +4890,7 @@ Vegan',
         'peruser' => 1,
         'status' => 0,
       ),
+      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -4951,7 +4953,7 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_supervisor_province',
-    'label' => 'Province',
+    'label' => 'Supervisor Province',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -4967,6 +4969,7 @@ Vegan',
         'peruser' => 1,
         'status' => 0,
       ),
+      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -7546,10 +7549,13 @@ Vegan',
   t('Second Charity');
   t('Service Milestone');
   t('Street');
+  t('Supervisor City');
   t('Supervisor Email');
   t('Supervisor First Name');
   t('Supervisor Last Name');
   t('Supervisor Phone');
+  t('Supervisor Postal Code');
+  t('Supervisor Province');
   t('Supervisor\'s Work Address');
   t('Supervisors Address');
   t('Terms');
