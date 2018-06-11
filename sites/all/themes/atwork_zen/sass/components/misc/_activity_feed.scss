@@ -483,7 +483,7 @@
         margin-top: 1em;
         display: block;
       }
-      p:first-of-type + p + p:before { // target exactly the only 3rd p
+      p:first-of-type + p:before { // wrap comments in quote marks
         margin-left: 0.3em;
         @include quotes-open;
       }
