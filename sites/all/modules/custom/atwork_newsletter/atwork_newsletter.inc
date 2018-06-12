@@ -116,7 +116,7 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 	
 	//Directory/image locations on prod
 	$articlesDir = '/sites/default/files/';
-	$newsletterDir = '/var/www/html-8888/mem_fs/images/';
+	$newsletterDir = '/var/www/html/nl_images/images/';
 	$imgSrc = NULL;
 	$imgDest = NULL;
 	$error = NULL;

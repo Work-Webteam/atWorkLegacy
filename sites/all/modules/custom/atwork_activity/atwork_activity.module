@@ -1,7 +1,7 @@
 <?php
 
 function _atwork_activity_node_types() {
-  return array(
+  return [
     'blog',
     'event',
     'forum',
@@ -15,114 +15,105 @@ function _atwork_activity_node_types() {
     'question',
     'answer',
     'poll',
-//    'task',
-  );
+    //    'task',
+  ];
 }
 
 /**
  * Implements hook_menu();
  */
 function atwork_activity_menu() {
-// TODO: Is this needed now? Seeing as we ajax this ourselves?
+  // TODO: Is this needed now? Seeing as we ajax this ourselves?
   // this one has an access callback which was handy when it was a menu tab
-  $items['atwork-activity/group/%node'] = array(
+  $items['atwork-activity/group/%node'] = [
     'title' => 'Group Activity',
     'type' => MENU_CALLBACK,
     'page callback' => 'atwork_activity_group_callback',
-    'page arguments' => array(2),
+    'page arguments' => [2],
     'access callback' => 'atwork_activity_group_access',
-    'access arguments' => array(2),
-  );
+    'access arguments' => [2],
+  ];
 
-  $items['atwork-activity/all-activity'] = array(
+  $items['atwork-activity/all-activity'] = [
     'title' => 'All Activity',
     'type' => MENU_CALLBACK,
     'page callback' => 'atwork_activity_home_all_callback',
-    'access arguments' => array('access content'),
-    'page arguements' =>array(1),
+    'access arguments' => ['access content'],
+    'page arguements' => [1],
 
-  );
+  ];
 
-  $items['atwork-activity/my-activity'] = array(
+  $items['atwork-activity/my-activity'] = [
     'title' => 'My Activity',
     'type' => MENU_CALLBACK,
     'page callback' => 'atwork_activity_home_my_callback',
-    'access arguments' => array('access content'),
-    'page arguements' =>array(1),
-  );
+    'access arguments' => ['access content'],
+    'page arguements' => [1],
+  ];
 
-  $items['noodle/%/%/%/%'] = array(
+  $items['noodle/%/%/%/%'] = [
     'page callback' => 'atwork_activity_ajax_get_ajax', // Render HTML.
-    'page arguments' => array(1,2,3,4),
+    'page arguments' => [1, 2, 3, 4],
     'type' => MENU_CALLBACK,
-    'access arguments' => array('access content'),
+    'access arguments' => ['access content'],
     'delivery callback' => 'atwork_activity_ajax_callback',  // Magic goes here.
-  );
+  ];
 
 
-  $items['atwork-activity/%/%/%/%'] = array(
+  $items['atwork-activity/%/%/%/%'] = [
     'page callback' => 'atwork_activity_homepage_ajax_get_ajax', // Render HTML.
-    'page arguments' => array(1,2,3,4),
+    'page arguments' => [1, 2, 3, 4],
     'type' => MENU_CALLBACK,
-    'access arguments' => array('access content'),
+    'access arguments' => ['access content'],
     'delivery callback' => 'atwork_activity_ajax_callback',  // Magic goes here.
-  );
+  ];
 
   return $items;
 }
 
 
-
-function atwork_activity_homepage_ajax_get_ajax($idir, $uid, $latest_rendered_time_stamp, $query = null) {
-  if(isset($query) && $query != null && $query != 'undefined'){
-    $return_modifier = $query;
-  } else {
-    $return_modifier = 0;
-  }
+function atwork_activity_homepage_ajax_get_ajax($uid, $latest_rendered_time_stamp, $query = NULL) {
+  $return_modifier = isset($query) && $query != NULL && $query != 'undefined' ? $query : 0;
   //Check DB for last timestamps > $latest and count them
   $new_message_count = atwork_activity_home_all_callback($latest_rendered_time_stamp, $uid);
-  if(isset($return_modifier) && $return_modifier != 0 ){
+  if (isset($return_modifier) && $return_modifier != 0) {
     $new_message_count[0]->expression = ($new_message_count[0]->expression - (8 * $return_modifier));
   }
-  if($new_message_count[0]->expression > 0){
-    $return_message = '<div id="message-counter" class="new-message-count"><img src=" /sites/all/modules/custom/atwork_activity/img/message-icon.png" alt="messages" id="new-message-image-icon"><span id="message-count-number">'. $new_message_count[0]->expression . '</span></div>';
-  }else {
-     $return_message = '<div id="message-counter" class="no-new-messages"></div>';
-  }
+  $return_message = $new_message_count[0]->expression > 0 ? '<div id="message-counter" class="new-message-count"><img src=" /sites/all/modules/custom/atwork_activity/img/message-icon.png" alt="messages" id="new-message-image-icon"><span id="message-count-number">' . $new_message_count[0]->expression . '</span></div>' : '<div id="message-counter" class="no-new-messages"></div>';
   // Return to js
-  echo json_encode(array($return_message, $new_message_count[0]->expression));
+  echo json_encode([$return_message, $new_message_count[0]->expression]);
   // Stops themeing layer from interacting with this
   die();
-  return;
 }
 
 
-
-function atwork_activity_ajax_get_ajax($idir, $uid, $latest_rendered_time_stamp, $query=null) {
-  if(isset($query) && $query != null){
-    $return_modifier = $query;
-  } else {
-    $return_modifier = 0;
-  }
+/**
+ * @param $uid
+ * @param $latest_rendered_time_stamp
+ * @param null $query
+ */
+function atwork_activity_ajax_get_ajax($uid, $latest_rendered_time_stamp, $query = NULL) {
+  $return_modifier = isset($query) && $query != NULL ? $query : 0;
   //Check DB for last timestamps > $latest and count them
   $new_message_count = check_message_count($latest_rendered_time_stamp, $uid);
-  if(isset($return_modifier) && $return_modifier != 0 ){
+  if (isset($return_modifier) && $return_modifier != 0) {
     $new_message_count[0]->expression = ($new_message_count[0]->expression - (5 * $return_modifier));
   }
-  if($new_message_count[0]->expression > 0){
-    $return_message = '<div id="message-counter" class="new-message-count"><img src=" /sites/all/modules/custom/atwork_activity/img/message-icon.png" alt="messages" id="new-message-image-icon"><span id="message-count-number">'. $new_message_count[0]->expression . '</span></div>';
-  }else {
-     $return_message = '<div id="message-counter" class="no-new-messages"></div>';
-  }
+  $return_message = $new_message_count[0]->expression > 0 ? '<div id="message-counter" class="new-message-count"><img src=" /sites/all/modules/custom/atwork_activity/img/message-icon.png" alt="messages" id="new-message-image-icon"><span id="message-count-number">' . $new_message_count[0]->expression . '</span></div>' : '<div id="message-counter" class="no-new-messages"></div>';
   // Return to js
-  echo json_encode(array($return_message, $new_message_count[0]->expression));
+  echo json_encode([$return_message, $new_message_count[0]->expression]);
   // Stops themeing layer from interacting with this
   die();
-  return;
 }
 
-function check_message_count($latest_rendered_time_stamp, $account_uid){
-  $content_types = array(
+/**
+ * @param $latest_rendered_time_stamp
+ * @param $account_uid
+ *
+ * @return mixed
+ */
+function check_message_count($latest_rendered_time_stamp, $account_uid) {
+  $content_types = [
     'group_subscribe',
     'new_answer',
     'new_comment',
@@ -130,16 +121,15 @@ function check_message_count($latest_rendered_time_stamp, $account_uid){
     'new_node',
     'status',
     'updated_user',
-    'following_user'
-  );
+    'following_user',
+  ];
 
 
   $query = db_select('message', 'm')
-    ->fields('m', array('mid'))
+    ->fields('m', ['mid'])
     ->orderBy('m.timestamp', 'DESC')
-
     ->condition('m.uid', $account_uid)
-    ->condition('m.type', $content_types , "IN")
+    ->condition('m.type', $content_types, "IN")
     ->condition('m.timestamp', $latest_rendered_time_stamp, '>');
 
   $count_query = $query->countQuery($query);
@@ -150,9 +140,14 @@ function check_message_count($latest_rendered_time_stamp, $account_uid){
     ->execute()
     ->fetchAll();
 
-    return $result;
+  return $result;
 }
 
+/**
+ * @param $node
+ *
+ * @return bool
+ */
 function atwork_activity_group_access($node) {
   if ($node->type == 'section' && user_access('access content')) {
     return TRUE;
@@ -166,29 +161,32 @@ function atwork_activity_group_access($node) {
  *
  */
 function atwork_activity_form() {
-  $form = array();
-  $form['status'] = array(
+  $form = [];
+  $form['status'] = [
     '#type' => 'textarea',
     '#rows' => 2,
     '#maxlength' => 1000,
     '#maxlength_js' => TRUE,
-    '#attributes' => array(
+    '#attributes' => [
       'placeholder' => t('What are you working on?'),
-    ),
-  );
-  $form['post'] = array(
-        '#type' => 'button', // We lose ajax if we make this a true Submit - we will manually save the entity in our callback
-        '#value' => 'Post', // To differentiate it from the normal submit button
-        '#prefix' => '<div id="status-submit-button">',
-        '#suffix' => '</div><!-- /#status-submit-button -->',
-        '#ajax' => array(
-          'callback' => 'atwork_activity_form_submit',
-          'wrapper' => 'status-submit-button',
-          'event' => 'click',
-        ),
-        '#weight' => 99, // Want this at the bottom, just ahead of the footer.
-        '#redirect' => FALSE,
-      );
+    ],
+  ];
+  $form['post'] = [
+    '#type' => 'button',
+    // We lose ajax if we make this a true Submit - we will manually save the entity in our callback
+    '#value' => 'Post',
+    // To differentiate it from the normal submit button
+    '#prefix' => '<div id="status-submit-button">',
+    '#suffix' => '</div><!-- /#status-submit-button -->',
+    '#ajax' => [
+      'callback' => 'atwork_activity_form_submit',
+      'wrapper' => 'status-submit-button',
+      'event' => 'click',
+    ],
+    '#weight' => 99,
+    // Want this at the bottom, just ahead of the footer.
+    '#redirect' => FALSE,
+  ];
   return $form;
 }
 
@@ -213,8 +211,8 @@ function atwork_activity_form_submit(&$form, &$form_state) {
   $node->promote = 0;
   $node->comment = 2;
 
-  $node->body[$node->language][0]['value']   = $form_state['values']['status'];
-  $node->body[$node->language][0]['format']  = 'filtered_no_editor';
+  $node->body[$node->language][0]['value'] = $form_state['values']['status'];
+  $node->body[$node->language][0]['format'] = 'filtered_no_editor';
 
   $node = node_submit($node);
   node_save($node);
@@ -223,10 +221,11 @@ function atwork_activity_form_submit(&$form, &$form_state) {
 }
 
 /**
- * A form that interacts with the users customized messages for the homepage. Saves to the fields located in the users profile.
+ * A form that interacts with the users customized messages for the homepage.
+ * Saves to the fields located in the users profile.
  *
  */
-function atwork_activity_customize_feed_form(){
+function atwork_activity_customize_feed_form() {
   global $user;
   $current_user = user_load($user->uid);
 
@@ -236,44 +235,48 @@ function atwork_activity_customize_feed_form(){
   $options = field_get_items('user', $current_user, 'field_feed_options');
 
   // User has set options
-  if(isset($options) && !empty($options)){
-    foreach($options as $key=>$value){
+  if (isset($options) && !empty($options)) {
+    foreach ($options as $key => $value) {
       $checked_value = field_view_value('user', $current_user, 'field_feed_options', $options[$key]);
       // Create an array of settings that the user has previously set
       $default_array[$value['value']] = $checked_value['#markup'];
     }
-  } else {
+  }
+  else {
     // They have no saved preferences, so we turn everything on.
-    foreach($choices as $key=>$value){
+    foreach ($choices as $key => $value) {
       $default_array[$key] = $value;
     }
   }
   // Now build the form
-  $form = array();
-  $form['feed_choices'] = array(
+  $form = [];
+  $form['feed_choices'] = [
     '#title' => ('<a href="#" id="activity-feed-advanced-filters">Advanced Filter</a>'),
     '#description' => t(''),
     '#type' => 'checkboxes',
     '#options' => $choices,
-    '#default_value' => array(),
-    );
-  $form['update'] = array(
-        '#type' => 'button', // We lose ajax if we make this a true Submit - we will manually save the entity in our callback
-        '#value' => t('Update'), // To differentiate it from the normal submit button
-        '#prefix' => '<div id="home-status-preference-button">',
-        '#suffix' => '</div><!-- /#home-status-preference-button -->',
-        '#ajax' => array(
-          'callback' => 'atwork_activity_advanced_feed_settings_submit_callback',
-          'wrapper' => 'feed-settings-submit-button',
-          'event' => 'click',
-        ),
-        '#weight' => 99, // Want this at the bottom of this form section.
-        '#redirect' => FALSE,
-      );
+    '#default_value' => [],
+  ];
+  $form['update'] = [
+    '#type' => 'button',
+    // We lose ajax if we make this a true Submit - we will manually save the entity in our callback
+    '#value' => t('Update'),
+    // To differentiate it from the normal submit button
+    '#prefix' => '<div id="home-status-preference-button">',
+    '#suffix' => '</div><!-- /#home-status-preference-button -->',
+    '#ajax' => [
+      'callback' => 'atwork_activity_advanced_feed_settings_submit_callback',
+      'wrapper' => 'feed-settings-submit-button',
+      'event' => 'click',
+    ],
+    '#weight' => 99,
+    // Want this at the bottom of this form section.
+    '#redirect' => FALSE,
+  ];
   // Now we auto-check the users preferences here, so it reflects what they are seeing in the feed.
   // $default_array should always be set
-  if(isset($default_array) && !empty($default_array)){
-    foreach($default_array as $key=>$value){
+  if (isset($default_array) && !empty($default_array)) {
+    foreach ($default_array as $key => $value) {
       $form['feed_choices']['#default_value'][] = $key;
     }
   }
@@ -283,7 +286,7 @@ function atwork_activity_customize_feed_form(){
 /**
  * Helper function that returns default values for one user field
  */
-function get_all_default_choices($chosen_field){
+function get_all_default_choices($chosen_field) {
   global $user;
   $current_user = user_load($user->uid);
   // Need to grab all of the possible field choices
@@ -292,9 +295,9 @@ function get_all_default_choices($chosen_field){
   $instance = field_info_instance('user', $chosen_field, 'user');
   // Now we have the ability to get all default values
   $defvalue = field_get_default_value('user', $current_user, $field, $instance);
-  $choices = array();
+  $choices = [];
   // Duplicate these choices for our custom form
-  foreach($defvalue as $key=>$value){
+  foreach ($defvalue as $key => $value) {
     //Get proper name/markup, $value is the list number in the field we created for the profile/user object
     $field_name = field_view_value('user', $current_user, $chosen_field, $value);
     // Roll it all into our array
@@ -305,55 +308,57 @@ function get_all_default_choices($chosen_field){
 
 
 /**
- * submit handler for the homepage feed settings - need to update and save these for the user
+ * submit handler for the homepage feed settings - need to update and save
+ * these for the user
  */
-function atwork_activity_advanced_feed_settings_submit_callback($form, &$form_state){
+function atwork_activity_advanced_feed_settings_submit_callback($form, &$form_state) {
   // Gather the users choices
   global $user;
   $current_user = user_load($user->uid);
   // Update users fields
-  if(isset($form_state['values']['feed_choices']) && $form_state['values']['feed_choices']){
+  if (isset($form_state['values']['feed_choices']) && $form_state['values']['feed_choices']) {
     // Remove old choices, Users must have at least one choice to reach this stage
     unset($current_user->field_feed_options['und']);
     $i = 0;
     // Add in current choices from form
-    foreach($form_state['values']['feed_choices'] as $key=>$value){
-      if($value > 0){
+    foreach ($form_state['values']['feed_choices'] as $key => $value) {
+      if ($value > 0) {
         $current_user->field_feed_options['und'][$i]['value'] = $value;
         $i++;
       }
     }
-      // Save user to save the fields so we can save users preferences.
+    // Save user to save the fields so we can save users preferences.
     user_save($current_user);
   }
   return;
 }
 
 /**
- * Vaidation handler for hompage feed advanced settings
+ * Validation handler for homepage feed advanced settings
  */
-function atwork_activity_customize_feed_form_validate($form, &$form_state){
-  $form_set = false;
-  $set_array = array();
-  foreach($form_state['values']['feed_choices'] as $key=>$value){
-    if($value!='0'){
-      array_push($set_array, $value);
+function atwork_activity_customize_feed_form_validate(&$form_state) {
+  $form_set = FALSE;
+  $set_array = [];
+  if (!empty($form_state['values']['feed_choices'])) {
+    foreach ($form_state['values']['feed_choices'] as $key => $value) {
+      if ($value != '0') {
+        array_push($set_array, $value);
+      }
     }
   }
   // All or My feed have been chose
-  if(in_array('1', $set_array) || in_array('2', $set_array)){
+  if (in_array('1', $set_array) || in_array('2', $set_array)) {
     // Array to check for any non "Content" choice content
-    $non_content = array('3','4','5','7', '8', '9', '11', '12');
-    $content_filters = array('13', '14','15','16','17','18','19','20','22');
+    $non_content = ['3', '4', '5', '7', '8', '9', '11', '12'];
+    $content_filters = ['13', '14', '15', '16', '17', '18', '19', '20', '22'];
     $check_array = array_intersect($non_content, $set_array);
     $check_content_filters = array_intersect($content_filters, $set_array);
     // If content and a content type are shown, then we can submit
-    if(in_array('10', $set_array) && !empty($check_content_filters)){
-      $form_set = true;
+    if (in_array('10', $set_array) && !empty($check_content_filters)) {
+      $form_set = TRUE;
       return;
     }
-    if(!empty($check_array)){
-      $form_set = true;
+    if (!empty($check_array)) {
       return;
     }
   }
@@ -377,6 +382,13 @@ function _atwork_activity_ajax_header() {
  *
  * render a query result of messages
  */
+/**
+ * @param $result
+ * @param $activityType
+ *
+ * @return string
+ * @throws \Exception
+ */
 function _atwork_activity_render_messages($result, $activityType) {
   // Create two links that will change the choices below to give the illusion of two seperate tabs
   // Use JQuery to refresh the block with the new choices.
@@ -388,9 +400,10 @@ function _atwork_activity_render_messages($result, $activityType) {
   $adv_form = drupal_get_form('atwork_activity_customize_feed_form');
   $output .= '<a class="btn" href="#" id="profile-comment-link">Message Check</a>';
   $output .= '<div id="ajax-target"></div>';
-  if(_atwork_is_admin()){
+  if (_atwork_is_admin()) {
     $output .= '<div id="atwork-advanced-feed-settings" class="admin-advanced-feed-settings-view">';
-  } else {
+  }
+  else {
     $output .= '<div id="atwork-advanced-feed-settings" class="user-advanced-feed-settings-view">';
   }
   $output .= render($adv_form);
@@ -399,7 +412,7 @@ function _atwork_activity_render_messages($result, $activityType) {
   // Load adnode in here, not using superior sticky functionality baked into queries
   //$ad_node = node_load(20524); // dev and local
   $ad_node = node_load(17352); // test and prod
-  if(isset($ad_node->field_content['und'][0]['value']) &&  $ad_node->field_content['und'][0]['value'] && $ad_node->status == '1'){
+  if (isset($ad_node->field_content['und'][0]['value']) && $ad_node->field_content['und'][0]['value'] && $ad_node->status == '1') {
     $content = $ad_node->field_content['und'][0]['value'];
     $image = $ad_node->field_image_adspace['und'][0]['uri'];
     $ad_image = image_style_url("ad_space_250w", $image);
@@ -407,52 +420,60 @@ function _atwork_activity_render_messages($result, $activityType) {
     $current_time = time();
     $diff = $current_time - $date;
     $time_record = "";
-        switch(TRUE){
-          case($diff<=60):
-            $time_record = "Now";
-            break;
-          // Less than an hour
-          case($diff<3600):
-            if($diff < 120){
-              $time_record = floor($diff/60) . " minute ago";
-            } else {
-            $time_record = floor($diff/60) . " minutes ago";
-            }
-            break;
-          // Less than a day
-          case($diff<86400):
-            if($diff < 7200){
-              $time_record = floor($diff/3600) . " hour ago";
-            } else {
-              $time_record = floor($diff/3600) . " hours ago";
-            }
-            break;
-          // Less than a week
-          case($diff<604800):
-            // On day
-            if($diff < 172800){
-              $time_record = floor($diff/86400) . " day ago";
-            } else {
-              // More than one day
-              $time_record = floor($diff/86400) . " days ago";
-            }
-            break;
-          default:
-            $time_record = date('F j Y', $date);
-            break;
+    switch (TRUE) {
+      case($diff <= 60):
+        $time_record = "Now";
+        break;
+      // Less than an hour
+      case($diff < 3600):
+        if ($diff < 120) {
+          $time_record = floor($diff / 60) . " minute ago";
         }
+        else {
+          $time_record = floor($diff / 60) . " minutes ago";
+        }
+        break;
+      // Less than a day
+      case($diff < 86400):
+        if ($diff < 7200) {
+          $time_record = floor($diff / 3600) . " hour ago";
+        }
+        else {
+          $time_record = floor($diff / 3600) . " hours ago";
+        }
+        break;
+      // Less than a week
+      case($diff < 604800):
+        // On day
+        if ($diff < 172800) {
+          $time_record = floor($diff / 86400) . " day ago";
+        }
+        else {
+          // More than one day
+          $time_record = floor($diff / 86400) . " days ago";
+        }
+        break;
+      default:
+        $time_record = date('F j Y', $date);
+        break;
+    }
 
-    $output .= '<div class="feed-ad-space-image"><img src="'. $ad_image .'" /></div>
+    $output .= '<div class="feed-ad-space-image"><img src="' . $ad_image . '" /></div>
     <div class="feed-ad-space-outer">
       <div class="feed-ad-space-content">' . $content . '</div>
       <div class="feed-ad-space-author-date">Posted by: Employee News ' . $time_record . '</div>
     </div>';
   }
   // The Status update form
-  $user_image  = field_view_field('user', $current_user, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
+  $user_image = field_view_field('user', $current_user, 'field_image', [
+    'settings' => [
+      'label' => 'hidden',
+      'image_style' => 'profile_thumbs_med',
+    ],
+  ]);
   $form = drupal_get_form('atwork_activity_form');
   $output .= '<div id="status-update">';
-  $output .= '<a href="employees/' . $current_user->name . '">' .  render($user_image) . '</a>';
+  $output .= '<a href="employees/' . $current_user->name . '">' . render($user_image) . '</a>';
   $output .= '<div id="speech-pointer"></div>';
   $output .= render($form);
   $output .= '</div><!-- /#status-update" -->';
@@ -462,8 +483,8 @@ function _atwork_activity_render_messages($result, $activityType) {
   $time_stamp = 0;
   $i = 1;
   $msgCount = 0;
-  if($result != 'error' && !empty($result)){
-    foreach($result as $value){
+  if ($result != 'error' && !empty($result)) {
+    foreach ($result as $value) {
       $result_mid[] = $value->mid;
     }
     // Load entities and all related content
@@ -471,32 +492,47 @@ function _atwork_activity_render_messages($result, $activityType) {
     $message_render_array = entity_view('message', $messages);
     foreach ($message_render_array['message'] as $message) {
       //dpm($message['#entity']);
-      if( $message['#entity']->timestamp > $time_stamp){
+      if ($message['#entity']->timestamp > $time_stamp) {
         $time_stamp = $message['#entity']->timestamp;
       }
       // We need to make sure that this message is not too long. Current character count we want is 100
-     // If field is longer than 100 characters (without tags);
-      $string_is_too_long = false;
+      // If field is longer than 100 characters (without tags);
+      $string_is_too_long = FALSE;
       $message_string = $message['message__message_text__0']['#markup'];
-      $no_tags_message = strip_tags($message_string);
-      $message_string_length = strlen($no_tags_message);
-       global $user;
-
-      if($message_string_length > 100){
-        $string_is_too_long = true;
+      // We want to split out everything before the message (i.e. name etc)
+      $message_array = explode('<br />', $message_string);
+      // If we had a number of <br> tags after teh first, we need to pull out the original and implode the rest of the string
+      if (count($message_array) > 2) {
+        array_shift($message_array);
+        $message_text = implode('<br>', $message_array);
+        // If we only have one <br>
       }
+      elseif (isset($message_array[1])) {
+        $message_text = $message_array[1];
+      }
+      else {
+        // Final case, so we don't error - didn't split out for some reason so we will count everything
+        $message_text = $message_string;
+      }
+      $no_tags_message = strip_tags($message_text);
+      $message_string_length = strlen($no_tags_message);
+      global $user;
 
+      if ($message_string_length > 100) {
+        $string_is_too_long = TRUE;
+      }
       // Make a copy, explode on closing tags
-      if($string_is_too_long === true && $message['#bundle'] == 'status'){
+      if ($string_is_too_long === TRUE && $message['#bundle'] == 'status') {
         // We know all messages start with <p and  class> - lets remove and save this.
         preg_match('~^<p[^>]*>~', $message_string, $get_beginning_tag, PREG_OFFSET_CAPTURE);
         preg_match('/<a.*?>(.*?)<\/a>/', $message_string, $get_name_tag, PREG_OFFSET_CAPTURE);
         $beginning_tag = $get_beginning_tag[0][0];
         // If we have an href that is near the beginning of a string, we capture it here
-        if(isset($get_name_tag) && !empty($get_name_tag) && $get_name_tag[0][1] < 30){
+        if (isset($get_name_tag) && !empty($get_name_tag) && $get_name_tag[0][1] < 30) {
           $name_href = $get_name_tag[0][0];
-        } else {
-          $name_href = false;
+        }
+        else {
+          $name_href = FALSE;
         }
 
         // If user has used our markers, we need to strip them out here.
@@ -505,7 +541,7 @@ function _atwork_activity_render_messages($result, $activityType) {
         $replace_tags = preg_replace('~<p[^>]*>~', '[^]', $message_string);
         // Now a different placeholder in </p> sted
         $replace_tags = preg_replace('~</p[^>]*>~', '[~]', $replace_tags);
-        if(isset($name_href) && $name_href != false){
+        if (isset($name_href) && $name_href != FALSE) {
           // Now the first occurence of <a if it is wrapping a name.
           $replace_tags = preg_replace('/<a.*?>(.*?)<\/a>/', '[`]', $replace_tags, 1);
         }
@@ -516,58 +552,61 @@ function _atwork_activity_render_messages($result, $activityType) {
         $j = 0;
         // Our closing tag counter
         $k = 0;
+
         // Run through string, count the # of chars at each location that is not one of our placeholders
-        foreach($string_array as $key=>$character){
+        foreach ($string_array as $key => $character) {
           // We're done here, lets split
-          if($i >= 100 && $character == " "){
+          if ($i >= 100 && $character == " ") {
             break;
           }
 
           // this is an opening tag
-          if($character == "^"){
-           // Make sure this is our marker
-           if($key > 0){
-             // check if this is our marker
-             if($string_array[$key-1] == "[" && $string_array[$key+1] == "]"){
-              $j ++;
-              // Account for 3 characters in <p>
-              $i += 3;
-              // May as well replace this tag now
-              $string_array[$key] = "<p>";
-              // Remove the brackets - we don't need them
-              unset($string_array[$key-1]);
-              unset($string_array[$key+1]);
-              continue;
-             }
-           }
-          // Same treatment for end tags
-          } elseif($character == "~"){
+          if ($character == "^") {
+            // Make sure this is our marker
+            if ($key > 0) {
+              // check if this is our marker
+              if ($string_array[$key - 1] == "[" && $string_array[$key + 1] == "]") {
+                $j++;
+                // Account for 3 characters in <p>
+                $i += 3;
+                // May as well replace this tag now
+                $string_array[$key] = "<p>";
+                // Remove the brackets - we don't need them
+                unset($string_array[$key - 1]);
+                unset($string_array[$key + 1]);
+                continue;
+              }
+            }
+            // Same treatment for end tags
+          }
+          elseif ($character == "~") {
             // check if this is our marker
-            if($string_array[$key-1] == "[" && $string_array[$key+1] == "]"){
+            if ($string_array[$key - 1] == "[" && $string_array[$key + 1] == "]") {
               // Addding new endtag
-              $k ++;
+              $k++;
               // Account for 4 characters in </p>
               $i += 4;
               $string_array[$key] = "</p>";
               // Remove the brackets - we don't need them
-              unset($string_array[$key-1]);
-              unset($string_array[$key+1]);
+              unset($string_array[$key - 1]);
+              unset($string_array[$key + 1]);
               continue;
               // Else this is a legitmate character
             }
-          } else {
-                $i ++;
+          }
+          else {
+            $i++;
           }
         }
 
         // Now we can implode the array, rebuild the string
         $rebuilt_array = implode($string_array);
         // This is a zero based function adn we counted the first character above as '1' - so now need to take taht into account.
-        $rebuilt_string = substr($rebuilt_array, 0, $i-1);
-        // Add ellipses and tagged more href on end
-        $rebuilt_string = $rebuilt_string . '... <a href="node/' . $message['#entity']->field_message_node['und'][0]['target_id'] . '">more</a>';
+        $rebuilt_string = substr($rebuilt_array, 0, $i - 1);
+        // Add tagged more href on end
+        $rebuilt_string = $rebuilt_string . ' <a href="node/' . $message['#entity']->field_message_node['und'][0]['target_id'] . '">Read More</a>';
         // Make sure all of our <p> tags are closed
-        while($k < $j){
+        while ($k < $j) {
           $rebuilt_string = $rebuilt_string . '</p>';
           $k++;
         }
@@ -575,7 +614,7 @@ function _atwork_activity_render_messages($result, $activityType) {
 
         // Finally, re-ad our <p> with class to the beginning of array
         $rebuilt_string = preg_replace('~^<p[^>]*>~', $beginning_tag, $rebuilt_string);
-        if(isset($name_href) && $name_href != false){
+        if (isset($name_href) && $name_href != FALSE) {
           $rebuilt_string = preg_replace('/\[`[^\]]*\]/', $name_href, $rebuilt_string);
         }
 
@@ -583,48 +622,59 @@ function _atwork_activity_render_messages($result, $activityType) {
         $rebuilt_string = strip_tags($rebuilt_string, '<p><a>');
         // Now put it back in markup
         $message['message__message_text__0']['#markup'] = $rebuilt_string;
-      // Comments are the other message type that prints user markup - so we need to sanitize that portion as well. 
-      } else if($string_is_too_long === true && $message['#bundle'] == 'new_comment'){
-        // Make new array
-        $finished_array = array();
-        // explode out the user generated text, we will need to keep the first bit ([0])
-        $message_split = explode('<span class="activity-comment">', $message_string);
-        // cut end off of the message, we will need to keep the last item on array
-        $message_end_split = explode('</span>', $message_split[1]);
-        // Now sanitize it
-        $comment_text = strip_tags($message_end_split[0]);
-        // We only want 100 characters or less. so lets count to 100.
-        $comment_text = substr($comment_text, 0, 100);
-        // If the last character is not a space, we will count back to the previous space.
-        $last_char = substr($comment_text, -1);
-        if($last_char != " "){
-          //trim a littl more
-          $last_space = strrpos($comment_text, ' ');
-          if($last_space !== false){
-            $comment_text = substr($comment_text, 0, $last_space);
-          }
-        }
-        // Put it all back together
-        $finished_array[] = ($message_split[0]);
-        $finished_array[] = '<span class="activity-comment">';
-        $finished_array[] = $comment_text;
-        $finished_array[] = '</span>';
-        $finished_array[] = (end($message_end_split));
-        $finished_string = implode(' ', $finished_array);
-        $message['message__message_text__0']['#markup'] = $finished_string;
+        // Comments are the other message type that prints user markup - so we need to sanitize that portion as well.
       }
-      
+      else {
+        if ($message['#bundle'] == 'new_comment') {
+          // Is it too long?
+          if ($string_is_too_long) {
+            $e = "...";
+          }
+          else {
+            $e = '';
+          }
+          // Make new array
+          $finished_array = [];
+          // explode out the user generated text, we will need to keep the first bit ([0])
+          $message_split = explode('<span class="activity-comment">', $message_string);
+          // cut end off of the message, we will need to keep the last item on array
+          $message_end_split = explode('</span>', $message_split[1]);
+          // Now sanitize it
+          $comment_text = strip_tags($message_end_split[0]);
+          // We only want 100 characters or less. so lets count to 100.
+          $comment_text = substr($comment_text, 0, 100);
+          // If the last character is not a space, we will count back to the previous space.
+          $last_char = substr($comment_text, -1);
+          if ($last_char != " ") {
+            //trim a littl more
+            $last_space = strrpos($comment_text, ' ');
+            if ($last_space !== FALSE) {
+              $comment_text = substr($comment_text, 0, $last_space);
+            }
+          }
+          // Put it all back together
+          $finished_array[] = ($message_split[0]);
+          $finished_array[] = '<span class="activity-comment">';
+          $finished_array[] = $comment_text;
+          $finished_array[] = $e . '</span>';
+          $finished_array[] = (end($message_end_split));
+          $finished_string = implode(' ', $finished_array);
+          $message['message__message_text__0']['#markup'] = $finished_string;
+        }
+      }
+
 
       // Use a function to check if message is stickied
       $sticky_check = check_sticky_status($message['#entity']->mid);
 
-      if($sticky_check == true){
-        $classes = array();
+      if ($sticky_check == TRUE) {
+        $classes = [];
         $classes[] = 'message';
         $classes[] = 'message-' . $message['#entity']->mid;
         $classes[] = 'sticky';
-      } else {
-        $classes = array();
+      }
+      else {
+        $classes = [];
         $classes[] = 'message';
         $classes[] = 'message-' . $message['#entity']->mid;
 
@@ -639,16 +689,15 @@ function _atwork_activity_render_messages($result, $activityType) {
       $msgCount++;
 
       $render = 1;
-      if($message['#entity']->type == 'new_image'){
+      if ($message['#entity']->type == 'new_image') {
 
         $q = db_select('field_data_field_message_node', 'fmn')
-          ->where('fmn.entity_id = '. $message['#entity']->mid);
+          ->where('fmn.entity_id = ' . $message['#entity']->mid);
 
         $q->leftJoin('field_data_field_gallery', 'i', 'i.entity_id = fmn.field_message_node_target_id');
         $q->leftJoin('field_data_field_gallery_status', 's', 's.entity_id = i.field_gallery_target_id');
 
-        $q
-          ->fields('fmn', array('bundle'))
+        $q->fields('fmn', ['bundle'])
           ->condition('s.field_gallery_status_value', '1');
 
         $re = $q
@@ -657,16 +706,17 @@ function _atwork_activity_render_messages($result, $activityType) {
           ->execute()
           ->fetchAll();
 
-        if(!count($re))
+        if (!count($re)) {
           $render = 0;
+        }
       }
       $author = user_load($message['#entity']->uid);
       // Change the message text for status updates if user on own feed
-      if($message['#entity']->type == 'status' && $author->uid === $user->uid){
+      if ($message['#entity']->type == 'status' && $author->uid === $user->uid) {
         // The author is looking at their own page, so lets update the wording
-        $message_split = explode( " ", $message['message__message_text__0']['#markup']);
-        foreach($message_split as $key=>$word){
-          if($word == "their"){
+        $message_split = explode(" ", $message['message__message_text__0']['#markup']);
+        foreach ($message_split as $key => $word) {
+          if ($word == "their") {
             $message_split[$key] = "your";
             // Must break out of loop here, so we don't change a status by accident
             break;
@@ -678,11 +728,11 @@ function _atwork_activity_render_messages($result, $activityType) {
       }
 
       // Handle following wording case
-      if($author->uid === $user->uid && $message['#bundle'] == 'following_user'){
+      if ($author->uid === $user->uid && $message['#bundle'] == 'following_user') {
         // Remove "You is" and replace with You are
         $message_split = explode(" ", $message['message__message_text__0']['#markup']);
-        foreach($message_split as $key=>$value){
-          if($value == "is"){
+        foreach ($message_split as $key => $value) {
+          if ($value == "is") {
             $message_split[$key] = "are";
             break;
           }
@@ -693,20 +743,39 @@ function _atwork_activity_render_messages($result, $activityType) {
 
       // We want to add images to the activity feed.
       // We need to force Employee News - seeing as this user is "special" as both user 0 and 10
-      if($author->uid == 0 || $author->uid == 10){
-        // Want to use ENews profile 
+      if ($author->uid == 0 || $author->uid == 10) {
+        // Want to use ENews profile
         $e_news = user_load(10);
-        $user_image = field_view_field('user', $e_news, 'field_image', array('settings' => array('label'=>'hidden', 'image_style' => 'profile_thumbs_med')));
-      // Check if an image exists:
-      } else if(isset($author->field_image) && $author->field_image){
-        // If it does, then grab a renderable view of it
-        $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
-      } else {
-        // Default image isn't always repopulated into $author->field_image after an ajax reload - so if it is missng and they have not saved a personal image, then lets reset the default image
-        $profile_image_field = field_info_instance('user', 'field_image', 'user');
-        $default_fid = $profile_image_field['settings']['default_image'];
-        $author->field_image[] = file_load($default_fid);
-        $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
+        $user_image = field_view_field('user', $e_news, 'field_image', [
+          'settings' => [
+            'label' => 'hidden',
+            'image_style' => 'profile_thumbs_med',
+          ],
+        ]);
+        // Check if an image exists:
+      }
+      else {
+        if (isset($author->field_image) && $author->field_image) {
+          // If it does, then grab a renderable view of it
+          $user_image = field_view_field('user', $author, 'field_image', [
+            'settings' => [
+              'label' => 'hidden',
+              'image_style' => 'profile_thumbs_med',
+            ],
+          ]);
+        }
+        else {
+          // Default image isn't always repopulated into $author->field_image after an ajax reload - so if it is missng and they have not saved a personal image, then lets reset the default image
+          $profile_image_field = field_info_instance('user', 'field_image', 'user');
+          $default_fid = $profile_image_field['settings']['default_image'];
+          $author->field_image[] = file_load($default_fid);
+          $user_image = field_view_field('user', $author, 'field_image', [
+            'settings' => [
+              'label' => 'hidden',
+              'image_style' => 'profile_thumbs_med',
+            ],
+          ]);
+        }
       }
 
       // Set date for mins/ago then hours, then days, week, then date
@@ -714,72 +783,88 @@ function _atwork_activity_render_messages($result, $activityType) {
       $post_time = $message['#entity']->timestamp;
       $diff = $current_time - $post_time;
       $time_record = "";
-      switch(TRUE){
-        case($diff<=60):
+      switch (TRUE) {
+        case($diff <= 60):
           $time_record = "Now";
           break;
         // Less than an hour
-        case($diff<3600):
-          if($diff <120){
-             $time_record = floor($diff/60) . " minute ago";
-          } else {
-            $time_record = floor($diff/60) . " minutes ago";
+        case($diff < 3600):
+          if ($diff < 120) {
+            $time_record = floor($diff / 60) . " minute ago";
+          }
+          else {
+            $time_record = floor($diff / 60) . " minutes ago";
           }
           break;
         // Less than a day
-        case($diff<86400):
-          if($diff < 7200){
-            $time_record = floor($diff/3600) . " hour ago";
-          } else {
-            $time_record = floor($diff/3600) . " hours ago";
+        case($diff < 86400):
+          if ($diff < 7200) {
+            $time_record = floor($diff / 3600) . " hour ago";
+          }
+          else {
+            $time_record = floor($diff / 3600) . " hours ago";
           }
           break;
         // Less than a week
-        case($diff<604800):
+        case($diff < 604800):
           // On day
-          if($diff < 172800){
-            $time_record = floor($diff/86400) . " day ago";
-          } else {
+          if ($diff < 172800) {
+            $time_record = floor($diff / 86400) . " day ago";
+          }
+          else {
             // More than one day
-            $time_record = floor($diff/86400) . " days ago";
+            $time_record = floor($diff / 86400) . " days ago";
           }
           break;
         default:
           $time_record = date('F j Y', $message['#entity']->timestamp);
           break;
       }
-      if($render)
+      if ($render) {
         $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . $time_record . '</span> <span class="user-feed-image"><a href="employees/' . $author->name . '">' . render($user_image) . '</span></a>' . render($message) . '</div><!-- /.message -->';
+      }
 
       $i++;
     }
   }
 
-  if($msgCount == 0){
-    if($activityType == 1)
+  if ($msgCount == 0) {
+    if ($activityType == 1) {
       $output .= 'No activity to report at this time.<br><br>When you take part on @Work by doing things like contributing to <a href="groups/">groups</a> or posting comments on news articles, that activity will be listed here.';
-    else if($activityType == 2)
-      $output .= 'No activity to report at this time.<br><br>When you join @Work <a href="groups/">groups</a>, you\'ll be able to follow the activity what\'s happening in those groups here.';
-    else
-      $output .= 'No results found.';
+    }
+    else {
+      if ($activityType == 2) {
+        $output .= 'No activity to report at this time.<br><br>When you join @Work <a href="groups/">groups</a>, you\'ll be able to follow the activity what\'s happening in those groups here.';
+      }
+      else {
+        $output .= 'No results found.';
+      }
+    }
   }
 
   // Pass timestamp to js settings
-  drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $author->name, 'uid' => $author->uid)), 'setting');
+  drupal_add_js([
+    'atwork_activity' => [
+      'time' => $time_stamp,
+      'user' => $author->name,
+      'uid' => $author->uid,
+    ],
+  ], 'setting');
 
   $output .= '<span style="display:none" id="timestamp-latest">' . $time_stamp . '</span>';
   // The front page feed pager
-  $output .= '</div><!-- /#activity-feed" -->' . theme('pager', array('quantity' => 3));
+  $output .= '</div><!-- /#activity-feed" -->' . theme('pager', ['quantity' => 3]);
 
 
   return $output;
 }
 
-function check_sticky_status($mid){
+function check_sticky_status($mid) {
   // Not using for launch
-  return false;
-  if(empty($mid)){
-    return false;
+  return FALSE;
+  /*
+  if (empty($mid)) {
+    return FALSE;
   }
 
   // check if node mentioned in mid is stickied
@@ -788,8 +873,8 @@ function check_sticky_status($mid){
   $user_feed_query->leftJoin('node', 'n', 'n.nid = fmn.field_message_node_target_id');
   $user_feed_query->leftJoin('field_data_field_sticky_to_activity_feeds', 'st', 'st.entity_id = n.nid');
 
-  $user_feed_query->fields('m', array('mid'));
-  $user_feed_query->fields('n', array('nid'));
+  $user_feed_query->fields('m', ['mid']);
+  $user_feed_query->fields('n', ['nid']);
   $db_and = db_and();
   $db_and->condition('n.status', '1');
   $db_and->condition('st.field_sticky_to_activity_feeds_value', '1');
@@ -800,24 +885,26 @@ function check_sticky_status($mid){
   $user_feed_query->condition($db_and);
 
   $result_sticky = $user_feed_query
-        ->execute()
-        ->fetchAll();
+    ->execute()
+    ->fetchAll();
   // This is not a stickied node
-  if(empty($result_sticky)){
-    return false;
+  if (empty($result_sticky)) {
+    return FALSE;
   }
   // This is a stickied node
-  if(!empty($result_sticky)){
+  if (!empty($result_sticky)) {
     $current_content = node_load($result_sticky[0]->nid);
     $current_time = time();
     // Check if we are within the timeframe
-    if(($current_time > $current_content->field_sticky_start_date['und'][0]['value']) && $current_time < $current_content->field_sticky_start_date['und'][0]['value2']){
-      return true;
-    } else {
-      return false;
+    if (($current_time > $current_content->field_sticky_start_date['und'][0]['value']) && $current_time < $current_content->field_sticky_start_date['und'][0]['value2']) {
+      return TRUE;
     }
-  }
+    else {
+      return FALSE;
+    }
+  } */
 }
+
 /*
  * Menu callback for an ajax-called activity feed on a group homepage
  */
@@ -826,8 +913,9 @@ function atwork_activity_group_callback($node) {
   $og_context = og_context('node', $node);
   $activityType = 2;
 
-  if(!isset($og_context['group_type']) || $og_context['group_type'] != 'node' || !isset($og_context['gid']))
+  if (!isset($og_context['group_type']) || $og_context['group_type'] != 'node' || !isset($og_context['gid'])) {
     die();
+  }
 
   _atwork_activity_ajax_header();
 
@@ -841,7 +929,7 @@ function atwork_activity_group_callback($node) {
 
   $query = db_select('message', 'm')->distinct();
 
-  $query->fields('m', array('mid'))
+  $query->fields('m', ['mid'])
     ->leftJoin('field_data_field_message_node', 'n', 'm.mid = n.entity_id');
 
   $query->leftJoin('og_membership', 'og', "(og.etid = n.field_message_node_target_id AND og.entity_type = 'node')");
@@ -856,7 +944,14 @@ function atwork_activity_group_callback($node) {
 
   $query->orderBy('m.timestamp', 'DESC')
     ->condition($or)
-    ->condition('m.type', array('new_comment', 'new_node', 'node_updated', 'new_answer', 'new_image', 'group_subscribe'), 'IN');
+    ->condition('m.type', [
+      'new_comment',
+      'new_node',
+      'node_updated',
+      'new_answer',
+      'new_image',
+      'group_subscribe',
+    ], 'IN');
 
   $result = $query
     ->extend('PagerDefault')
@@ -880,11 +975,11 @@ function _atwork_activity_group_render_messages($result, $activityType) {
   $i = 1;
   $msgCount = 0;
 
-  if($result != 'error'){
+  if ($result != 'error') {
     foreach ($result as $record) {
       $message = message_load($record->mid);
 
-      $classes = array();
+      $classes = [];
       $classes[] = 'message';
       $classes[] = 'message-' . $message->mid;
 
@@ -899,16 +994,16 @@ function _atwork_activity_group_render_messages($result, $activityType) {
 
       $render = 1;
 
-      if($message->type == 'new_image'){
+      if ($message->type == 'new_image') {
 
         $q = db_select('field_data_field_message_node', 'fmn')
-          ->where('fmn.entity_id = '. $message->mid);
+          ->where('fmn.entity_id = ' . $message->mid);
 
         $q->leftJoin('field_data_field_gallery', 'i', 'i.entity_id = fmn.field_message_node_target_id');
         $q->leftJoin('field_data_field_gallery_status', 's', 's.entity_id = i.field_gallery_target_id');
 
         $q
-          ->fields('fmn', array('bundle'))
+          ->fields('fmn', ['bundle'])
           ->condition('s.field_gallery_status_value', '1');
 
         $re = $q
@@ -917,14 +1012,15 @@ function _atwork_activity_group_render_messages($result, $activityType) {
           ->execute()
           ->fetchAll();
 
-        if(!count($re))
+        if (!count($re)) {
           $render = 0;
+        }
       }
 
 
-      $tmpMsg = str_replace("background","webpage", $message->getText());
+      $tmpMsg = str_replace("background", "webpage", $message->getText());
 
-      if($msgCount > 0){
+      if ($msgCount > 0) {
 
         // Lets fix all badly formed html.
         /*$stripHtml = new DOMDocument();
@@ -934,23 +1030,40 @@ function _atwork_activity_group_render_messages($result, $activityType) {
          $tmpMsg = html_entity_decode($tmpMsg,ENT_QUOTES,"UTF-8");
          $tmpMsg = str_replace("Â","", $tmpMsg);
          */
-        $tmpMsg = str_replace(array("<u>","</u>","<i>","</i>","<b>","</b>","<strong>","</strong>", "<em>", "</em>"),"", $tmpMsg);
+        $tmpMsg = str_replace([
+          "<u>",
+          "</u>",
+          "<i>",
+          "</i>",
+          "<b>",
+          "</b>",
+          "<strong>",
+          "</strong>",
+          "<em>",
+          "</em>",
+        ], "", $tmpMsg);
       }
 
-      if($render)
+      if ($render) {
         $output .= '<div class="' . implode(' ', $classes) . '"><span class="date">' . date('M j', $message->timestamp) . '</span> ' . $tmpMsg . '</div><!-- /#444 -->';
+      }
 
       $i++;
     }
   }
 
-  if($msgCount == 0){
-    if($activityType == 1)
+  if ($msgCount == 0) {
+    if ($activityType == 1) {
       $output .= 'No activity to report at this time.<br><br>When you take part on @Work by doing things like contributing to <a href="groups/">groups</a> or posting comments on news articles, that activity will be listed here.';
-    else if($activityType == 2)
-      $output .= 'No activity to report at this time.<br><br>When you join @Work <a href="groups/">groups</a>, you\'ll be able to follow the activity what\'s happening in those groups here.';
-    else
-      $output .= 'No results found.';
+    }
+    else {
+      if ($activityType == 2) {
+        $output .= 'No activity to report at this time.<br><br>When you join @Work <a href="groups/">groups</a>, you\'ll be able to follow the activity what\'s happening in those groups here.';
+      }
+      else {
+        $output .= 'No results found.';
+      }
+    }
   }
 
   $output .= '</div><!-- /#555 -->' . theme('pager');
@@ -960,47 +1073,56 @@ function _atwork_activity_group_render_messages($result, $activityType) {
 
 
 /**
- * Helper function that grabs all of the users choices, puts them in an array, and returns them.
+ * Helper function that grabs all of the users choices, puts them in an array,
+ * and returns them.
  */
-function feed_message_choices(){
+function feed_message_choices() {
   global $user;
   $current_user = user_load($user->uid);
-  $user_selection = array();
+  $user_selection = [];
   // Now gather the users previously saved preferences if they have any
   $options = field_get_items('user', $current_user, 'field_feed_options');
-  if(isset($options) && !empty($options)){
-    foreach($options as $key=>$value){
+  if (isset($options) && !empty($options)) {
+    foreach ($options as $key => $value) {
       $checked_value = field_view_value('user', $current_user, 'field_feed_options', $options[$key]);
       // Create an array of settings that the user has previously set
       $user_selection[] = $checked_value['#markup'];
     }
-  } else {
+  }
+  else {
     // They have no saved preferences, so we turn everything on.
     $choices = get_all_default_choices('field_feed_options');
-    foreach($choices as $key=>$value){
+    foreach ($choices as $key => $value) {
       $user_selection[] = $value;
     }
   }
   $return_array = homepage_choices_match($user_selection);
-  return($return_array);
+  return ($return_array);
 }
 
 /**
  * Helper function that matches choices to mysql field names.
+ *
+ * @param $user_selection
+ *
+ * @return array
  */
-function homepage_choices_match($user_selection){
+function homepage_choices_match($user_selection) {
   // Change user choices into machine names for the messages
-  $key_array = array(
-    'My Actions' => 'user_feed', // This means they are on the My Activity tab
+  $key_array = [
+    'My Actions' => 'user_feed',
+    // This means they are on the My Activity tab
     'Actions by Colleagues I Follow' => 'following_actions',
-    'All Activity' => 'all_activity', // This means they are on the All Activity tab
+    'All Activity' => 'all_activity',
+    // This means they are on the All Activity tab
     'Connections Between Colleagues' => 'following_user',
     'Group Subscriptions' => 'group_subscribe',
     'Comments' => 'new_comment',
     'Content' => 'new_node',
     'Images' => 'new_image',
     'Status Updates' => 'status',
-    'Answered a Question' => 'new_answer', // This is a specific type of node, so will need to check this with JQuery when someone chooses the Content-> Answer choice.
+    'Answered a Question' => 'new_answer',
+    // This is a specific type of node, so will need to check this with JQuery when someone chooses the Content-> Answer choice.
     'Profile Updates' => 'updated_user',
     'Activity In My Groups' => 'group_activity',
     'Blogs' => 'blog',
@@ -1013,12 +1135,12 @@ function homepage_choices_match($user_selection){
     'Questions' => 'question',
     'Answers' => 'answer',
     'Polls' => 'poll',
-    );
+  ];
 
   // Put it all into an array that can be used in a MySQL PDO query
-  $query_array = array();
-  foreach($user_selection as $key=>$value){
-    if(array_key_exists($value, $key_array)){
+  $query_array = [];
+  foreach ($user_selection as $key => $value) {
+    if (array_key_exists($value, $key_array)) {
       array_push($query_array, $key_array[$value]);
     }
   }
@@ -1029,32 +1151,32 @@ function homepage_choices_match($user_selection){
 /**
  * Query building function for individuals feed
  */
-function user_feed_query($choices, $latest_rendered_time_stamp = NULL){
+function user_feed_query($choices, $latest_rendered_time_stamp = NULL) {
   global $user;
   $current_user = user_load($user->uid);
-  $uids = array();
+  $uids = [];
   // Need at least this users uid
   array_push($uids, $current_user->uid);
 
   //Check if we are collecting followers actions as well
-  if(in_array("following_actions", $choices)){
+  if (in_array("following_actions", $choices)) {
     // Add employee news
     array_push($uids, 0);
     //create a query that collects the uid of all users this user is following
     $query = db_select('user_relationships', 'u')
       ->condition('u.requester_id', $current_user->uid, '=')
-      ->fields('u', array('requestee_id'));
+      ->fields('u', ['requestee_id']);
     $result = $query->execute();
-    foreach($result as $record){
+    foreach ($result as $record) {
       array_push($uids, $record->requestee_id);
     }
   }
 
   // If we are also looking for group info - grab that here
   // TODO: This must be overhauled, so that it grabs nodes that are referenced by user og_ref, and then searches the DB for all content associated with that group. grabbing their MID's
-  if(in_array("group_activity", $choices)){
+  if (in_array("group_activity", $choices)) {
     $og_sub1 = db_select('og_membership', 'og')
-      ->fields('og', array('gid'));
+      ->fields('og', ['gid']);
     $db_and = db_and();
 
     $db_and->condition('og.etid', $current_user->uid, '=');
@@ -1062,7 +1184,7 @@ function user_feed_query($choices, $latest_rendered_time_stamp = NULL){
     $og_sub1->condition($db_and);
 
     $og_subquery = db_select('node', 'node')
-      ->fields('node', array('nid'));
+      ->fields('node', ['nid']);
     $og_subquery->leftJoin('og_membership', 'og_mem', 'og_mem.etid=node.nid');
     $db_and2 = db_and();
     $db_and2->condition('og_mem.gid', $og_sub1, 'IN');
@@ -1070,13 +1192,13 @@ function user_feed_query($choices, $latest_rendered_time_stamp = NULL){
     //$og_subquery->leftJoin('og_membership', 'og_user', "og_nodes.gid = og_user.gid AND og_user.entity_type = 'user' AND og_user.group_type = 'node' AND og_user.state = 1 AND og_user.etid = :current_user", array(':current_user' => $user->uid));
 
     //$og_subquery->where('og_user.etid = :current_user', array(':current_user' => $user->uid))
-     //->where('node.status = 1');
+    //->where('node.status = 1');
   }
   // TODO: This needs to be extended to all content types - and also tested against other message types (i.e. does comments have to go here too?)
-  $node_type = array();
-  if(in_array("new_node", $choices)){
+  $node_type = [];
+  if (in_array("new_node", $choices)) {
     // This will screen for the type of content they would like to see, if they have chosen content above.
-    $content_type_array = array(
+    $content_type_array = [
       'blog',
       'event',
       'forum',
@@ -1089,17 +1211,17 @@ function user_feed_query($choices, $latest_rendered_time_stamp = NULL){
       'status',
       'answer',
       'page',
-      );
+    ];
 
-    foreach($choices as $k => $choice){
-      if(($item = array_search($choice, $content_type_array))!==false){
+    foreach ($choices as $k => $choice) {
+      if (($item = array_search($choice, $content_type_array)) !== FALSE) {
         $content_choice = $choice;
         array_push($node_type, $content_choice);
       }
     }
 
   }
-  if(empty($choices)){
+  if (empty($choices)) {
     return;
   }
 
@@ -1123,64 +1245,67 @@ function user_feed_query($choices, $latest_rendered_time_stamp = NULL){
   $db_and5 = db_and();
 
 
-   $user_feed_query->fields('m', array('mid'))
+  $user_feed_query->fields('m', ['mid'])
     ->condition(db_and()
-      ->condition('m.type', $choices, 'IN')
+    ->condition('m.type', $choices, 'IN')
     );
 
-  if(isset($og_subquery)){
+  if (isset($og_subquery)) {
     $user_feed_query
       ->condition(
         db_and()
-        ->condition(
-          db_or()
-            ->condition('m.uid', $uids, 'IN')
-            ->condition(
-              db_and()
-                ->condition('fmn.field_message_node_target_id', $og_subquery, 'IN')
-            )
-        )
+          ->condition(
+            db_or()
+              ->condition('m.uid', $uids, 'IN')
+              ->condition(
+                db_and()
+                  ->condition('fmn.field_message_node_target_id', $og_subquery, 'IN')
+              )
+          )
       );
-  } else {
+  }
+  else {
     $user_feed_query
       ->condition(db_and()
         ->condition('m.uid', $uids, 'IN')
       );
   }
 
-  if(isset($node_type) && !empty($node_type)){
+  if (isset($node_type) && !empty($node_type)) {
     $db_and
       ->condition(db_and()
         ->condition('n.status', '1')
         ->condition('n.type', $node_type, 'IN')
-    );
+      );
 
-  } else{
+  }
+  else {
     $db_and
       ->condition(db_and()
         ->condition('n.status', '1')
-    );
+      );
   }
   // These are not really nodes, so they don't show unless we tell them too
-  $additional = array();
-  if(in_array('following_user', $choices)){
+  $additional = [];
+  if (in_array('following_user', $choices)) {
     array_push($additional, 'following_user');
   }
-  if(in_array('updated_user', $choices)){
+  if (in_array('updated_user', $choices)) {
     array_push($additional, 'updated_user');
   }
   // TODO - check for following user or profile update
-  if(isset($additional) && !empty($additional)){
+  if (isset($additional) && !empty($additional)) {
     $db_and3
       ->condition('m.type', $additional, 'IN')
-      ->condition('m.uid', $uids, 'IN' );
+      ->condition('m.uid', $uids, 'IN');
     $user_feed_query
       ->condition(db_or()
         ->condition($db_and)
         ->condition($db_and3)
       );
-  } else {
-    $user_feed_query ->condition($db_and);
+  }
+  else {
+    $user_feed_query->condition($db_and);
   }
 
   // Only want published, non-private galleries to be selected
@@ -1192,29 +1317,30 @@ function user_feed_query($choices, $latest_rendered_time_stamp = NULL){
       )
     );
 
-   if(isset($latest_rendered_time_stamp) && $latest_rendered_time_stamp != null){
+  if (isset($latest_rendered_time_stamp) && $latest_rendered_time_stamp != NULL) {
     $user_feed_query
-        ->condition(db_and()
-           ->condition('m.timestamp', $latest_rendered_time_stamp, '>')
-        );
+      ->condition(db_and()
+        ->condition('m.timestamp', $latest_rendered_time_stamp, '>')
+      );
 
-  $count_query = $user_feed_query->countQuery($user_feed_query);
+    $count_query = $user_feed_query->countQuery($user_feed_query);
 
-  $result = $count_query
-    //->extend('PagerDefault')
-    //->limit(15)
-    ->execute()
-    ->fetchAll();
+    $result = $count_query
+      //->extend('PagerDefault')
+      //->limit(15)
+      ->execute()
+      ->fetchAll();
     return $result;
-   } else {
-  $user_feed_query->orderBy('m.timestamp', 'DESC')
-  ->range(0, 100);
-  $result = $user_feed_query
-    ->extend('PagerDefault')
-    ->limit(8)
-    ->execute()
-    ->fetchAll();
-  return $result;
+  }
+  else {
+    $user_feed_query->orderBy('m.timestamp', 'DESC')
+      ->range(0, 100);
+    $result = $user_feed_query
+      ->extend('PagerDefault')
+      ->limit(8)
+      ->execute()
+      ->fetchAll();
+    return $result;
   }
   return;
 }
@@ -1222,12 +1348,10 @@ function user_feed_query($choices, $latest_rendered_time_stamp = NULL){
 /**
  * Function that builds a query for all activity on the site.
  */
-function all_activity_query($choices, $latest_rendered_time_stamp =null){
-
-
-  if(in_array("new_node", $choices)){
+function all_activity_query($choices, $latest_rendered_time_stamp = NULL) {
+  if (in_array("new_node", $choices)) {
     // This will screen for the type of content they would like to see, if they have chosen content above.
-    $content_type_array = array(
+    $content_type_array = [
       'blog',
       'event',
       'forum',
@@ -1240,12 +1364,12 @@ function all_activity_query($choices, $latest_rendered_time_stamp =null){
       'status',
       'answer',
       'page',
-    );
+    ];
 
 
-    $node_type = array();
-    foreach($choices as $k => $choice){
-      if(($item = array_search($choice, $content_type_array))!==false){
+    $node_type = [];
+    foreach ($choices as $k => $choice) {
+      if (($item = array_search($choice, $content_type_array)) !== FALSE) {
         $content_choice = $choice;
         array_push($node_type, $content_choice);
         //unset($choices[$k]);
@@ -1266,44 +1390,45 @@ function all_activity_query($choices, $latest_rendered_time_stamp =null){
   $db_and2 = db_and();
   $db_and3 = db_and();
   $user_feed_query
-    ->fields('m', array('mid'));
-    $db_and->condition('m.type', $choices, 'IN');
+    ->fields('m', ['mid']);
+  $db_and->condition('m.type', $choices, 'IN');
 
-    // Must be published, unless message is only a message and not a node
-    $db_and2->condition('n.status', '1');
-    if(isset($node_type) && !empty($node_type)){
-      $db_and2->condition('n.type', $node_type, 'IN');
-    }
-    $db_or2->condition($db_and2);
-    $db_and3
-    ->condition('m.type', array('following_user','updated_user'), 'IN');
-    $db_or2->condition($db_and3);
+  // Must be published, unless message is only a message and not a node
+  $db_and2->condition('n.status', '1');
+  if (isset($node_type) && !empty($node_type)) {
+    $db_and2->condition('n.type', $node_type, 'IN');
+  }
+  $db_or2->condition($db_and2);
+  $db_and3
+    ->condition('m.type', ['following_user', 'updated_user'], 'IN');
+  $db_or2->condition($db_and3);
 
-    // Only want published, non-private galleries to be selected
-    $db_or->condition('s.field_gallery_status_value', '1');
-    $db_or->condition('s.field_gallery_status_value', NULL);
-    //$db_or->condition('s.field_gallery_status_value', 'none', IFNULL) ;
-    $db_and->condition($db_or2);
-    $db_and->condition($db_or);
-    $user_feed_query->condition($db_and);
-  if(isset($latest_rendered_time_stamp) && $latest_rendered_time_stamp != null){
+  // Only want published, non-private galleries to be selected
+  $db_or->condition('s.field_gallery_status_value', '1');
+  $db_or->condition('s.field_gallery_status_value', NULL);
+  //$db_or->condition('s.field_gallery_status_value', 'none', IFNULL) ;
+  $db_and->condition($db_or2);
+  $db_and->condition($db_or);
+  $user_feed_query->condition($db_and);
+  if (isset($latest_rendered_time_stamp) && $latest_rendered_time_stamp != NULL) {
     // There was an issue where at times relationships would be entered twice in rapid succession. This fixes that.
     $latest_rendered_time_stamp += 20;
     $user_feed_query
       ->condition(db_and()
         ->condition('m.timestamp', $latest_rendered_time_stamp, '>')
-        );
+      );
 
     $count_query = $user_feed_query->countQuery($user_feed_query);
 
     $result = $count_query
       ->extend('PagerDefault')
       ->limit(9)
-    ->execute()
-    ->fetchAll();
+      ->execute()
+      ->fetchAll();
 
     return $result;
-  } else {
+  }
+  else {
     $user_feed_query->orderBy('m.timestamp', 'DESC')
       ->range(0, 100);
     $result = $user_feed_query
@@ -1312,42 +1437,41 @@ function all_activity_query($choices, $latest_rendered_time_stamp =null){
       ->execute()
       ->fetchAll();
 
-  return $result;
+    return $result;
+  }
 }
-}
 
 
-
-/*
+/**
  * Menu callback for an ajax-called activity feed on the homepage
- */
-function atwork_activity_home_all_callback($latest_rendered_time_stamp=null, $uid=null) {
+ **/
+function atwork_activity_home_all_callback($latest_rendered_time_stamp = NULL, $uid = NULL) {
   // TODO: Change what is called in the query depending on which boxes are checked.... Should this be done in a different function?
   $activityType = 0;
   // Get the choices that the user has selected
   $feed_message_choices = feed_message_choices();
   // Check if this is "My Feed" or "All Activity"
-  if(in_array("user_feed", $feed_message_choices)){
+  if (in_array("user_feed", $feed_message_choices)) {
     // Remove this from array - it should not be part of query
     $position = array_search("user_feed", $feed_message_choices);
     unset($feed_message_choices[$position]);
     $result = user_feed_query($feed_message_choices, $latest_rendered_time_stamp);
-    if(isset($latest_rendered_time_stamp) && $latest_rendered_time_stamp != null){
+    if (isset($latest_rendered_time_stamp) && $latest_rendered_time_stamp != NULL) {
       return $result;
     }
   }
 
-  if(in_array("all_activity", $feed_message_choices)){
+  if (in_array("all_activity", $feed_message_choices)) {
     // Remove this from array - it should not be part of query
     $position = array_search("all_activity", $feed_message_choices);
     unset($feed_message_choices[$position]);
     $result = all_activity_query($feed_message_choices, $latest_rendered_time_stamp);
-    if(isset($latest_rendered_time_stamp) && $latest_rendered_time_stamp != null){
+    if (isset($latest_rendered_time_stamp) && $latest_rendered_time_stamp != NULL) {
       return $result;
     }
   }
 
-  if(isset($latest_render_time_stamp) && $latest_rendered_time_stamp != null){
+  if (isset($latest_render_time_stamp) && $latest_rendered_time_stamp != NULL) {
     return $result;
   }
   // Check if we have any 'stickied' messages
@@ -1356,25 +1480,28 @@ function atwork_activity_home_all_callback($latest_rendered_time_stamp=null, $ui
   $output = _atwork_activity_render_messages($result, $activityType);
   drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity.js');
 
-  return($output);
+  return ($output);
 }
 
 /**
  * Helper function to check for any stickied messages
+ *
  * @param  array $result current query object
- * @return [type]         [description]
+ *
+ * @return array [type]         [description]
+ * @throws \Exception
  */
-function stickied_activity_query($result){
+function stickied_activity_query($result) {
   // Not using sticky content currently
   return $result;
-  $messages = array();
+  $messages = [];
   // Now we need to create our larger query
   $user_feed_query = db_select('message', 'm');
   $user_feed_query->leftJoin('field_data_field_message_node', 'fmn', 'fmn.entity_id = m.mid');
   $user_feed_query->leftJoin('node', 'n', 'n.nid = fmn.field_message_node_target_id');
   $user_feed_query->leftJoin('field_data_field_sticky_to_activity_feeds', 'st', 'st.entity_id = n.nid');
 
-  $user_feed_query->fields('m', array('mid'));
+  $user_feed_query->fields('m', ['mid']);
   $db_and = db_and();
   $db_and->condition('n.status', '1');
   $db_and->condition('st.field_sticky_to_activity_feeds_value', '1');
@@ -1384,8 +1511,8 @@ function stickied_activity_query($result){
   $user_feed_query->condition($db_and);
 
   $result_sticky = $user_feed_query
-        ->execute()
-        ->fetchAll();
+    ->execute()
+    ->fetchAll();
   // Now grab any marked messages
   foreach ($result_sticky as $record) {
     $message = message_load($record->mid);
@@ -1393,13 +1520,14 @@ function stickied_activity_query($result){
     $current_time = time();
     $node_start = $current_node->field_sticky_start_date['und'][0]['value'];
     $node_end = $current_node->field_sticky_start_date['und'][0]['value2'];
-    if(($current_time > $node_start)&&($current_time < $node_end)){
+    if (($current_time > $node_start) && ($current_time < $node_end)) {
       // We need to remove this from teh wider feed if it is stickied
       $key = array_search($record->mid, $result);
       unset($result[$key]);
       // This is currently within time limit - so lets put it on the front fo the array
       array_unshift($result, $record);
-    } elseif($current_time > $node_end){
+    }
+    elseif ($current_time > $node_end) {
       // This is an old case, so lets clean it up so we don't have to look it over again
       $current_node->field_sticky_to_activity_feeds['und'][0]['value'] = 0;
       node_save($current_node);
@@ -1424,22 +1552,22 @@ function atwork_activity_page_access($account) {
 }
 
 /**
-* Find existing messages that match certain parameters.
+ * Find existing messages that match certain parameters.
  *
  * Copied from Commons and used in various hooks to delete mssages
  *
-*/
+ */
 function atwork_activity_existing_messages($acting_uid, $target_ids, $target_field, $message_type) {
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'message', '=')
-   ->propertyCondition('uid', $acting_uid)
-   ->propertyCondition('type', $message_type, '=')
-   ->fieldCondition($target_field, 'target_id', $target_ids, 'IN')
-   ->execute();
+    ->propertyCondition('uid', $acting_uid)
+    ->propertyCondition('type', $message_type, '=')
+    ->fieldCondition($target_field, 'target_id', $target_ids, 'IN')
+    ->execute();
 
   if (!empty($query->ordered_results)) {
-    $mids = array();
-    foreach($query->ordered_results as $result) {
+    $mids = [];
+    foreach ($query->ordered_results as $result) {
       $mids[] = $result->entity_id;
     }
     return $mids;
@@ -1473,22 +1601,18 @@ function atwork_activity_form_og_ui_confirm_unsubscribe_alter(&$form, &$form_sta
  * Change title on edit reply from View to Edit
  *
  */
-function atwork_activity_form_reply_form_alter(&$form, &$form_state, $form_id){
-  global $user;
+function atwork_activity_form_reply_form_alter(&$form, &$form_state, $form_id) {
   // Only admin can post as employee news
   //TODO: Make this !_atwork_is_admin - that is when we want to make this change.
-  
 
-
-  if($form['form_id']['#id'] == "edit-reply-form"){
-    global $user;
+  if ($form['form_id']['#id'] == "edit-reply-form") {
     // We are on the form, but the same form is used for add and edit, need to find which we are really on
     // Get rid of query string
     $check_url = explode('?', $_SERVER['REQUEST_URI']);
     // Then parse the URI
     $check_url = explode('/', $check_url[0]);
-    foreach($check_url as $key=>$value){
-      if($value === "edit"){
+    foreach ($check_url as $key => $value) {
+      if ($value === "edit") {
         drupal_set_title('Edit');
       }
     }
@@ -1500,23 +1624,25 @@ function atwork_activity_form_reply_form_alter(&$form, &$form_state, $form_id){
 }
 
 /**
- * helper function to change message when user submits a reply in activity feed $...['status'][1]
+ * helper function to change message when user submits a reply in activity feed
+ * $...['status'][1]
  */
-function reply_custom_submit($form, &$form_state){
+function reply_custom_submit($form, &$form_state) {
   // Pull all current messages and clear var
   $messages = drupal_get_messages();
   /// Replace only the 'status' message, other messages can remain the same
-  foreach($messages as $type=>$message){
-    if($type != 'status'){
+  foreach ($messages as $type => $message) {
+    if ($type != 'status') {
       drupal_set_message($message, $type);
     }
     // get at the actual messages
-    if($type == 'status'){
-      foreach($message as $key=>$value){
-        if($value != '<em class="placeholder">Entity Comments</em> was successfully updated.' ){
+    if ($type == 'status') {
+      foreach ($message as $key => $value) {
+        if ($value != '<em class="placeholder">Entity Comments</em> was successfully updated.') {
           // Keep messages that we are not looking to change
           drupal_set_message($value, $type);
-        } else {
+        }
+        else {
           // Set our new reply message
           $value = t('Your reply has been saved');
           drupal_set_message($value, $type);
@@ -1529,11 +1655,12 @@ function reply_custom_submit($form, &$form_state){
 
 /**
  * Implements hook_form_alter
- * Need to include displayname and date in comments to make them similar to other site comment strings
+ * Need to include displayname and date in comments to make them similar to
+ * other site comment strings
  */
-function atwork_activity_form_alter(&$form, &$form_state, $form_id){
-  if(isset($form['bundle']) && $form['bundle']['#value'] == "entity_comments" && $form_state['build_info']['args'][0]->bundle == 'entity_comments' && $form['#type'] == 'form'){
-    if($form_id == 'field_ui_field_delete_form' || $form_id == "reply_delete_form" ){
+function atwork_activity_form_alter(&$form, &$form_state, $form_id) {
+  if (isset($form['bundle']) && $form['bundle']['#value'] == "entity_comments" && $form_state['build_info']['args'][0]->bundle == 'entity_comments' && $form['#type'] == 'form') {
+    if ($form_id == 'field_ui_field_delete_form' || $form_id == "reply_delete_form") {
       return;
     }
     global $user;
@@ -1541,58 +1668,61 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
     $form['field_hashtags']['#access'] = FALSE;
     $form['field_display_name']['#access'] = FALSE;
     $form['field_profile_comment_date']['#access'] = FALSE;
-    if(!_atwork_is_admin($user) && $form['#entity']->bundle == "entity_comments" ){
-    // Need to make sure this is the right form
-      $form_name_array = explode('_',$form_id);
-        if(isset($form_name_array) && $form_name_array[0] == 'reply' && $form_name_array[1] == "form"){
+    if (!_atwork_is_admin($user) && $form['#entity']->bundle == "entity_comments") {
+      // Need to make sure this is the right form
+      $form_name_array = explode('_', $form_id);
+      if (isset($form_name_array) && $form_name_array[0] == 'reply' && $form_name_array[1] == "form") {
         // No posting as employee news.
         $form['field_post_as_employee_news']['#access'] = FALSE;
       }
     }
 
     // These can be updated regardless if there are available
-    if(isset($form_state['reply']) && $form_state['reply']){
+    if (isset($form_state['reply']) && $form_state['reply']) {
       $author = user_load($form_state['reply']->uid);
     }
     // Add image render as a #prefix to name?
-    if(isset($author->field_display_name['und'][0]['safe_value']) && $author->field_display_name['und'][0]['safe_value']){
-      $form['field_display_name']['und'][0]['value']['#default_value'] =  $author->field_display_name['und'][0]['safe_value'];
+    if (isset($author->field_display_name['und'][0]['safe_value']) && $author->field_display_name['und'][0]['safe_value']) {
+      $form['field_display_name']['und'][0]['value']['#default_value'] = $author->field_display_name['und'][0]['safe_value'];
     }
     // TODO: Set prefix and suffix for display name in form (image render and <a> tags)
-    if(isset($form['field_profile_comment_date']['und']['#prefix']) && $form['field_profile_comment_date']['und']['#prefix']){
+    if (isset($form['field_profile_comment_date']['und']['#prefix']) && $form['field_profile_comment_date']['und']['#prefix']) {
       $form['field_profile_comment_date']['und']['#prefix'] = "Posted: " . $form['field_profile_comment_date']['und']['#prefix'];
     }
     // Leave out Reply/Edit and Delete versions of the form -- so far this field seems to be the only one that differentiates them
     $url_test = explode('/', $form['#action']);
-    if($url_test[1] == "reply"){
+    if ($url_test[1] == "reply") {
       $form['#submit'][] = 'atwork_activity_reply_form_submit_custom';
       return;
     }
-   // hide this submit button when we use our own.
+    // hide this submit button when we use our own.
     $form['actions']['submit']['#access'] = FALSE;
     // Create our own submit button for the profile page to send users to our handler
-    $form['button'] = array(
-      '#type' => 'button', // We lose ajax if we make this a true Submit - we will manually save the entity in our callback
-      '#value' => 'Post Comment', // To differentiate it from the normal submit button - this will be hidden by CSS.
+    $form['button'] = [
+      '#type' => 'button',
+      // We lose ajax if we make this a true Submit - we will manually save the entity in our callback
+      '#value' => 'Post Comment',
+      // To differentiate it from the normal submit button - this will be hidden by CSS.
       '#prefix' => '<div class="comment-submit-button">',
       '#suffix' => '</div><!-- /.comment-submit-button -->',
-      '#ajax' => array(
+      '#ajax' => [
         'callback' => 'atwork_activity_reply_form_submit_custom',
         'wrapper' => 'comment-submit-button',
         'event' => 'click',
-        ),
-      '#weight' => 99, // Want this at the bottom, just ahead of the footer.
-    );
-    $form['toggle_com_button'] = array(// create a  button to toggle visibility of the comment elements
+      ],
+      '#weight' => 99,
+      // Want this at the bottom, just ahead of the footer.
+    ];
+    $form['toggle_com_button'] = [// create a  button to toggle visibility of the comment elements
       '#type' => 'button',
-      '#attributes' => array(
+      '#attributes' => [
         'onclick' => 'return (false);',
 
         'name' => 'toggle button',
-        'class' => array('toggle-com-button')
-        ),
+        'class' => ['toggle-com-button'],
+      ],
       '#value' => t('Comment'),
-    );
+    ];
   }
 
 }
@@ -1603,7 +1733,7 @@ function atwork_activity_form_alter(&$form, &$form_state, $form_id){
 
 function atwork_activity_reply_form_submit_custom($form, &$form_state) {
   // Check if this is E News or not
-  if(isset($form_state['values']['field_post_as_employee_news']['und'][0]['value'])&& $form_state['values']['field_post_as_employee_news']['und'][0]['value'] == 1){
+  if (isset($form_state['values']['field_post_as_employee_news']['und'][0]['value']) && $form_state['values']['field_post_as_employee_news']['und'][0]['value'] == 1) {
     $form_state['reply']->uid = '10';
     $form_state['values']['field_display_name']['und'][0]['value'] = t('Employee News');
   }
@@ -1613,7 +1743,7 @@ function atwork_activity_reply_form_submit_custom($form, &$form_state) {
   entity_save('reply', $reply);
   $bundle = reply_bundle_load($reply->bundle);
 
-  return($form);
+  return ($form);
 }
 
 /**
@@ -1621,53 +1751,52 @@ function atwork_activity_reply_form_submit_custom($form, &$form_state) {
  * Used to add in links/images and prefix's to rendered comment entities
  */
 
-function atwork_activity_entity_view_alter(&$build, $type){
+function atwork_activity_entity_view_alter(&$build, $type) {
 
 
-  if($type == "reply"){
-    if(isset($build['#entity'])){
-      if($build['#entity']->depth == '0'){
+  if ($type == "reply") {
+    if (isset($build['#entity'])) {
+      if ($build['#entity']->depth == '0') {
         // This is the top level, so we are refering to content - grab the content info?
-        $ids = array();
+        $ids = [];
         $ids[] = $build['#entity']->entity_id;
-        $parent_message = entity_load($build['#entity']->entity_type, $ids );
+        $parent_message = entity_load($build['#entity']->entity_type, $ids);
         $message_author = user_load($parent_message[$build['#entity']->entity_id]->uid);
         // See if this is employee news - need to manually add if anonymous user.
-        if(isset($parent_message[$build['#entity']->entity_id]->uid) && ($parent_message[$build['#entity']->entity_id]->uid == 10 || $parent_message[$build['#entity']->entity_id]->uid == 0)){
+        if (isset($parent_message[$build['#entity']->entity_id]->uid) && ($parent_message[$build['#entity']->entity_id]->uid == 10 || $parent_message[$build['#entity']->entity_id]->uid == 0)) {
           $message_name = t("Employee News");
-        } else {
+        }
+        else {
           $message_name = $message_author->field_gal_first_name['und'][0]['safe_value'];
         }
-        // Need to check grammer
-        $grammer_check = substr($message_name, -1);
-        if($grammer_check == "s"){
-          $posessive = "'";
-        } else {
-          $posessive = "'s";
-        }
+        // Need to check grammar
+        $grammar_check = substr($message_name, -1);
+        $posessive = $grammar_check == "s" ? "'" : "'s";
         $author_line = " commented on $message_name" . $posessive . " status";
-      } elseif($build['#entity']->depth > 0){
+      }
+      elseif ($build['#entity']->depth > 0) {
         // We have parents, so lets grab the immediate parent's author for this reply
         $mid = $build;
         // Grab the parent of the reply
         $parent_reply = $build['#entity']->parent;
-        if(isset($parent_reply) && !empty($parent_reply)){
-          // Create a query that grabes the uid of the parent reply
+        if (isset($parent_reply) && !empty($parent_reply)) {
+          // Create a query that grabs the uid of the parent reply
           $user_feed_query = db_select('reply', 'r');
-          $user_feed_query->fields('r', array('uid'))
+          $user_feed_query->fields('r', ['uid'])
             ->condition('r.id', $parent_reply, '=');
 
           $parent_reply_author = $user_feed_query
-                ->execute()
-                ->fetchAll();
+            ->execute()
+            ->fetchAll();
           // Will only ever be one of these
           $author_uid = $parent_reply_author[0]->uid;
           $reply_author = user_load($author_uid);
-          if($author_uid == 10){
+          if ($author_uid == 10) {
             // Employee News user 10 does not have a traditional first name, so we need to take care of that here.
             $author_first_name = t("Employee News");
-          } else {
-              $author_first_name = $reply_author->field_gal_first_name['und'][0]['safe_value'];
+          }
+          else {
+            $author_first_name = $reply_author->field_gal_first_name['und'][0]['safe_value'];
           }
           $author_line = " replied to $author_first_name";
         }
@@ -1676,31 +1805,31 @@ function atwork_activity_entity_view_alter(&$build, $type){
 
     /**** HASHTAG FUNCTIONALITY ****/
 
-    if(isset($build['field_profile_comment'][0]['#markup']) && $build['field_profile_comment'][0]['#markup']){
+    if (isset($build['field_profile_comment'][0]['#markup']) && $build['field_profile_comment'][0]['#markup']) {
       $markup = $build['field_profile_comment'][0]['#markup'];
       // Strip all html tags before we check.
       $check_for_hash = strpos($markup, '#');
-      if(isset($check_for_hash) && is_numeric($check_for_hash)){
+      if (isset($check_for_hash) && is_numeric($check_for_hash)) {
         // Split this up so we can get to any hashes
         $markup_array = explode(' ', $markup);
         $vocabulary = taxonomy_vocabulary_machine_name_load('Hashtags');
-        $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
+        $terms = entity_load('taxonomy_term', FALSE, ['vid' => $vocabulary->vid]);
 
-        foreach($markup_array as $key=>$word){
+        foreach ($markup_array as $key => $word) {
 
           $clean_word = (trim($word));
-          if(!empty($clean_word) && $clean_word{0} == "#"){
+          if (!empty($clean_word) && $clean_word{0} == "#") {
             // Get the term without the hash
             $hash_term = ltrim($clean_word, '#');
             $i = FALSE;
-            foreach($terms as $term){
-              if($term->name == $hash_term){
+            foreach ($terms as $term) {
+              if ($term->name == $hash_term) {
                 $markup_array[$key] = '<a href="/taxonomy/terms/reply/' . $term->tid . '" class="hashtag">' . $word . '</a>';
                 // Rebuild markup
                 $return_markup = implode(' ', $markup_array);
                 $build['field_profile_comment'][0]['#markup'] = $return_markup;
-              // Found it - no reason to continue looking through list.
-              break;
+                // Found it - no reason to continue looking through list.
+                break;
               }
             }
             // save new term and then get path
@@ -1709,15 +1838,15 @@ function atwork_activity_entity_view_alter(&$build, $type){
 
           }
           //if($term->name == $this_tag){
-            // Explode markup on space
-            // find any with #
-            // add in the new a href tags
-            // implode array
-         // } else {
-            // need to create a new term and save it here
-            // then grab that term, and tid
-            // and then explode this line and wrap the term in html
-            // implode it and save as markup
+          // Explode markup on space
+          // find any with #
+          // add in the new a href tags
+          // implode array
+          // } else {
+          // need to create a new term and save it here
+          // then grab that term, and tid
+          // and then explode this line and wrap the term in html
+          // implode it and save as markup
           //}
         }
       }
@@ -1727,60 +1856,69 @@ function atwork_activity_entity_view_alter(&$build, $type){
     // Create a query that grabs the uid of the author
     $rid_reply = $build['field_display_name']['#object']->id;
     $user_feed_query = db_select('reply', 'r')
-      ->fields('r', array('uid'))
+      ->fields('r', ['uid'])
       ->condition('r.id', $rid_reply, '=');
 
     $author_uid = $user_feed_query
-          ->execute()
-          ->fetchAll();
+      ->execute()
+      ->fetchAll();
     // Will only ever be one of these
     $author = user_load($author_uid[0]->uid);
 
     // Add a link to their profile to encourage connections
-    if($author_uid[0]->uid == 10){
+    if ($author_uid[0]->uid == 10) {
       // We need to deal with the link from Employee News
       $build['field_display_name'][0]['#markup'] = 'Employee News ' . $author_line;
-    } else {
+    }
+    else {
       $build["field_display_name"][0]['#markup'] = ' <a href="/employees/' . $author->name . '"> ' . $build["field_display_name"][0]['#markup'] . '</a> ' . $author_line;
     }
     // Add image to the comment
-    $image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
+    $image = field_view_field('user', $author, 'field_image', [
+      'settings' => [
+        'label' => 'hidden',
+        'image_style' => 'profile_thumbs_med',
+      ],
+    ]);
     // Now lets set a more dynamic date
     $current_time = time();
     $post_time = $build['field_profile_comment_date']['#object']->field_profile_comment_date['und'][0]['value'];
     $diff = $current_time - $post_time;
     $time_record = "";
-    switch(TRUE){
-      case($diff<=60):
+    switch (TRUE) {
+      case($diff <= 60):
         $time_record = "Now";
         break;
       // Less than an hour
-      case($diff<3600):
+      case($diff < 3600):
         // One minute
-        if($diff < 120){
-          $time_record = floor($diff/60) . " minute ago";
-        } else {
+        if ($diff < 120) {
+          $time_record = floor($diff / 60) . " minute ago";
+        }
+        else {
           // Any number of minutes
-          $time_record = floor($diff/60) . " minutes ago";
+          $time_record = floor($diff / 60) . " minutes ago";
         }
         break;
       // Less than a day
-      case($diff<86400):
+      case($diff < 86400):
         // One hour
-        if($diff < 7200) {
-          $time_record = floor($diff/3600) . " hour ago";
-        } else {
-          $time_record = floor($diff/3600) . " hours ago";
+        if ($diff < 7200) {
+          $time_record = floor($diff / 3600) . " hour ago";
+        }
+        else {
+          $time_record = floor($diff / 3600) . " hours ago";
         }
         break;
       // Less than a week
-      case($diff<604800):
+      case($diff < 604800):
         // On day
-        if($diff < 172800){
-          $time_record = floor($diff/86400) . " day ago";
-        } else {
+        if ($diff < 172800) {
+          $time_record = floor($diff / 86400) . " day ago";
+        }
+        else {
           // More than one day
-          $time_record = floor($diff/86400) . " days ago";
+          $time_record = floor($diff / 86400) . " days ago";
         }
         break;
       default:
@@ -1792,23 +1930,30 @@ function atwork_activity_entity_view_alter(&$build, $type){
     $build['field_profile_comment_date'][0]['#markup'] = '<span class="date-display-single" property="dc:date" datatype="xsd:dateTime">' . $time_record . '</span>';
 
     // Append the user image here
-    $build["field_profile_comment_date"][0]['#markup'] = '<div class="feed-user-image">' . render($image) . '</div><!-- /.feed-user-image -->'. " Posted: " . $build["field_profile_comment_date"][0]['#markup'];
+    $build["field_profile_comment_date"][0]['#markup'] = '<div class="feed-user-image">' . render($image) . '</div><!-- /.feed-user-image -->' . " Posted: " . $build["field_profile_comment_date"][0]['#markup'];
 
     // Add flag icon:
-    $build['links']['flag']['#links']['flag-flag_for_message_replies']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $build['links']['flag']['#links']['flag-flag_for_message_replies']['title']);
+    $build['links']['flag']['#links']['flag-flag_for_message_replies']['title'] = str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $build['links']['flag']['#links']['flag-flag_for_message_replies']['title']);
   }
 
-  if($type == "message" && isset($build['links']['flag']['#links']['flag-activity_feed_messages_flag']['title'])){
-    $build['links']['flag']['#links']['flag-activity_feed_messages_flag']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'),$build['links']['flag']['#links']['flag-activity_feed_messages_flag']['title']);
+  if ($type == "message" && isset($build['links']['flag']['#links']['flag-activity_feed_messages_flag']['title'])) {
+    $build['links']['flag']['#links']['flag-activity_feed_messages_flag']['title'] = str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $build['links']['flag']['#links']['flag-activity_feed_messages_flag']['title']);
   }
 }
 
+/**
+ * @param $form
+ * @param $form_state
+ */
 function _atwork_activity_group_subscribe(&$form, &$form_state) {
   global $user;
 
   $node = node_load($form_state['build_info']['args'][1]);
 
-  $message = message_create('group_subscribe', array('uid' => $user->uid, 'timestamp' => time()));
+  $message = message_create('group_subscribe', [
+    'uid' => $user->uid,
+    'timestamp' => time(),
+  ]);
 
   $wrapper = entity_metadata_wrapper('message', $message);
   $wrapper->field_message_node->set($node);
@@ -1816,12 +1961,19 @@ function _atwork_activity_group_subscribe(&$form, &$form_state) {
   $wrapper->save();
 }
 
+/**
+ * @param $form
+ * @param $form_state
+ */
 function _atwork_activity_group_unsubscribe(&$form, &$form_state) {
   global $user;
 
   $node = $form_state['build_info']['args'][1];
 
-  $message = message_create('group_unsubscribe', array('uid' => $user->uid, 'timestamp' => time()));
+  $message = message_create('group_unsubscribe', [
+    'uid' => $user->uid,
+    'timestamp' => time(),
+  ]);
 
   $wrapper = entity_metadata_wrapper('message', $message);
   $wrapper->field_message_node->set($node);
@@ -1843,7 +1995,10 @@ function atwork_activity_comment_insert($comment) {
     return;
   }
 
-  $message = message_create('new_comment', array('uid' => $account->uid, 'timestamp' => $comment->created));
+  $message = message_create('new_comment', [
+    'uid' => $account->uid,
+    'timestamp' => $comment->created,
+  ]);
 
   $wrapper = entity_metadata_wrapper('message', $message);
   $wrapper->field_message_node->set($node);
@@ -1862,7 +2017,7 @@ function atwork_activity_comment_insert($comment) {
 function atwork_activity_comment_delete($comment) {
   // Delete the activity stream message created when this comment
   // was posted.
-  if ($mids = atwork_activity_existing_messages($comment->uid, array($comment->cid), 'field_message_comment', 'new_comment')) {
+  if ($mids = atwork_activity_existing_messages($comment->uid, [$comment->cid], 'field_message_comment', 'new_comment')) {
     message_delete_multiple($mids);
   }
 }
@@ -1874,8 +2029,6 @@ function atwork_activity_comment_delete($comment) {
  *
  */
 function atwork_activity_node_insert($node) {
-  global $atwork_activity_node_types;
-
   if (!in_array($node->type, _atwork_activity_node_types())) {
     return;
   }
@@ -1894,7 +2047,10 @@ function atwork_activity_node_insert($node) {
   }
 
   // Create a message when a user creates a new node.
-  $message = message_create($message_type, array('uid' => $node->uid, 'timestamp' => $node->created));
+  $message = message_create($message_type, [
+    'uid' => $node->uid,
+    'timestamp' => $node->created,
+  ]);
   $wrapper = entity_metadata_wrapper('message', $message);
   $wrapper->field_message_node->set($node);
   $wrapper->save();
@@ -1907,11 +2063,14 @@ function atwork_activity_node_insert($node) {
  *
  */
 function atwork_activity_node_update($node) {
-  if (!in_array($node->type, array('wiki' /*, 'page', 'section_page'*/))) {
+  if (!in_array($node->type, ['wiki' /*, 'page', 'section_page'*/])) {
     return;
   }
 
-  $message = message_create('node_updated', array('uid' => $node->revision_uid, 'timestamp' => $node->changed));
+  $message = message_create('node_updated', [
+    'uid' => $node->revision_uid,
+    'timestamp' => $node->changed,
+  ]);
   $wrapper = entity_metadata_wrapper('message', $message);
   $wrapper->field_message_node->set($node);
   $wrapper->save();
@@ -1928,7 +2087,10 @@ function atwork_activity_votingapi_insert($votes) {
   foreach ($votes as $vote) {
     if ($vote['entity_type'] == 'node') {
       $node = node_load($vote['entity_id']);
-      $message = message_create('user_liked_node', array('uid' => $vote['uid'], 'timestamp' => $vote['timestamp']));
+      $message = message_create('user_liked_node', [
+        'uid' => $vote['uid'],
+        'timestamp' => $vote['timestamp'],
+      ]);
       $wrapper = entity_metadata_wrapper('message', $message);
       $wrapper->field_message_node->set($node);
       $wrapper->save();
@@ -1936,7 +2098,10 @@ function atwork_activity_votingapi_insert($votes) {
     if ($vote['entity_type'] == 'comment') {
       $comment = comment_load($vote['entity_id']);
       $node = node_load($comment->nid);
-      $message = message_create('user_liked_comment', array('uid' => $vote['uid'], 'timestamp' => $vote['timestamp']));
+      $message = message_create('user_liked_comment', [
+        'uid' => $vote['uid'],
+        'timestamp' => $vote['timestamp'],
+      ]);
       $wrapper = entity_metadata_wrapper('message', $message);
       $wrapper->field_message_node->set($node);
       $wrapper->field_message_comment->set($comment);
@@ -1984,7 +2149,10 @@ function atwork_activity_user_update(&$edit, $account, $category) {
 
   // TODO, don't show subsequent edits (15 minutes delay)
   if (_atwork_user_changed($account->original, $account) && $account->uid == $user->uid) {
-    $message = message_create('updated_user', array('uid' => $account->uid, 'timestamp' => time()));
+    $message = message_create('updated_user', [
+      'uid' => $account->uid,
+      'timestamp' => time(),
+    ]);
     $wrapper = entity_metadata_wrapper('message', $message);
     $wrapper->save();
   }
@@ -1999,19 +2167,22 @@ function atwork_activity_user_update(&$edit, $account, $category) {
 function atwork_activity_user_relationships_save($relationship, $action) {
   if ($action == 'request') {
     // Cannot follow yourself
-    if($relationship->requestee_id == $relationship->requester_id){
+    if ($relationship->requestee_id == $relationship->requester_id) {
       return;
     }
 
     // Shouldn't be able to follow if you already are - don't want to doublesave follow messages (in messages anyway);
-    $check = atwork_activity_existing_messages($relationship->requester_id, array($relationship->requestee_id), 'field_message_user', 'following_user');
-  if(isset($check) && !empty($check) ){
-    return;
-  }
+    $check = atwork_activity_existing_messages($relationship->requester_id, [$relationship->requestee_id], 'field_message_user', 'following_user');
+    if (isset($check) && !empty($check)) {
+      return;
+    }
 
     $requestee = user_load($relationship->requestee_id);
-    $message = message_create('following_user', array('uid' => $relationship->requester_id, 'timestamp' => $relationship->created));
-        $wrapper = entity_metadata_wrapper('message', $message);
+    $message = message_create('following_user', [
+      'uid' => $relationship->requester_id,
+      'timestamp' => $relationship->created,
+    ]);
+    $wrapper = entity_metadata_wrapper('message', $message);
     $wrapper->field_message_user->set($requestee);
     $wrapper->save();
   }
@@ -2024,7 +2195,7 @@ function atwork_activity_user_relationships_save($relationship, $action) {
  *
  */
 function atwork_activity_user_relationships_delete($relationship, $action) {
-  if ($mids = atwork_activity_existing_messages($relationship->requester_id, array($relationship->requestee_id), 'field_message_user', 'following_user')) {
+  if ($mids = atwork_activity_existing_messages($relationship->requester_id, [$relationship->requestee_id], 'field_message_user', 'following_user')) {
     message_delete_multiple($mids);
   }
 }
@@ -2048,11 +2219,11 @@ function atwork_activity_tokens_alter(&$replacements, $context) {
  * Includes profile page activity block, and homepage activity block.
  */
 function atwork_activity_block_info() {
-   // For the profile page
-  $blocks['profile_page_activity_feed_block'] = array(
+  // For the profile page
+  $blocks['profile_page_activity_feed_block'] = [
     'info' => t("Profile page activity feed block"),
     'visibility' => BLOCK_VISIBILITY_LISTED,
-  );
+  ];
   // This example comes from node.module.
   /*
   $blocks['profile'] = array(
@@ -2060,14 +2231,14 @@ function atwork_activity_block_info() {
     'visibility' => BLOCK_VISIBILITY_LISTED,
   );
   */
-  $blocks['group'] = array(
+  $blocks['group'] = [
     'info' => t('Group: Activity'),
     'visibility' => BLOCK_VISIBILITY_LISTED,
-  );
-  $blocks['homepage'] = array(
+  ];
+  $blocks['homepage'] = [
     'info' => t('Homepage: Activity'),
     'visibility' => BLOCK_VISIBILITY_LISTED,
-  );
+  ];
   return $blocks;
 }
 
@@ -2078,20 +2249,20 @@ function atwork_activity_block_info() {
  *
  */
 function atwork_activity_block_view($delta = '') {
-  $block = array();
+  $block = [];
 
   switch ($delta) {
 
-	  case 'group':		
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity.js');		
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_group.js');		
-      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/jquery.url.js');		
-      drupal_add_js('initializeActivity();', 'inline');		
-      $block['subject'] = _atwork_fa('circle-blank') . t('Activity');		
-      $block['content'] = array(		
-        '#markup' => '<div id="group-activity"><div class="activity-feed-progress"><img src="/sites/all/themes/atwork_zen/images/progress.gif" title="Loading" /></div><!-- /.activity-feed-progress --><div id="group-activity-ajax"></div><!-- /#group-activity-ajax --></div><!-- /#group-activity" -->',		
-      );		
-    break;
+    case 'group':
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/js_atwork_activity_group.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_activity') . '/jquery.url.js');
+      drupal_add_js('initializeActivity();', 'inline');
+      $block['subject'] = _atwork_fa('circle-blank') . t('Activity');
+      $block['content'] = [
+        '#markup' => '<div id="group-activity"><div class="activity-feed-progress"><img src="/sites/all/themes/atwork_zen/images/progress.gif" title="Loading" /></div><!-- /.activity-feed-progress --><div id="group-activity-ajax"></div><!-- /#group-activity-ajax --></div><!-- /#group-activity" -->',
+      ];
+      break;
 
 
     case 'homepage':
@@ -2106,9 +2277,9 @@ function atwork_activity_block_view($delta = '') {
       $block['subject'] .= '<div class="block-header-inner">';
       $block['subject'] .= '<button class="activity-filters-my" title="My Activity">&nbsp;</button>';
       $block['subject'] .= '<button class="activity-filters-all" title="All Activity">&nbsp;</button>';
-      
+
       $block['subject'] .= '<a href="node/21603" class="jsNewActivityWindow"><img id="ActivityWindowButton" src="/sites/all/modules/custom/atwork_activity/img/pop-out-white.png" title="See Activity in New Window" /></a>';
-      
+
       $block['subject'] .= '</div><!-- /.block-header-inner -->';
 
       $block['content'] = '<div class="atwork-activity-block-container">';
@@ -2120,13 +2291,13 @@ function atwork_activity_block_view($delta = '') {
       global $user;
       $this_user = user_load($user->uid);
 
-      if(isset($this_user) && $this_user->uid == arg(1)){
-        $account = user_load($this_user->uid);
+      if (isset($this_user) && $this_user->uid == arg(1)) {
         $block['subject'] = t("My Status");
-      } else {
+      }
+      else {
         $account = user_load(arg(1));
         // Show the user's first name for the activityd title if this is not the current user's feed
-        if(isset($account->field_gal_first_name['und'][0]['safe_value']) && $account->field_gal_first_name['und'][0]['safe_value']){
+        if (isset($account->field_gal_first_name['und'][0]['safe_value']) && $account->field_gal_first_name['und'][0]['safe_value']) {
           $block['subject'] = $account->field_gal_first_name['und'][0]['safe_value'] . t("'s Activity");
         }
       }
@@ -2146,16 +2317,17 @@ function atwork_activity_block_view($delta = '') {
 /**
  * Helper function to create content for the profile page feed
  */
-function _atwork_activity_profile_page_block_content($user_id){
+function _atwork_activity_profile_page_block_content($user_id) {
 
   // Grab user and account variables
   global $user;
   $this_user = user_load($user->uid);
 
-  if(isset($user_id)){
-  $account = user_load($user_id);
-  } else {
-   $account = user_load(arg(1));
+  if (isset($user_id)) {
+    $account = user_load($user_id);
+  }
+  else {
+    $account = user_load(arg(1));
   }
 
   // Bail out if we don't have a user, or if this is employee news
@@ -2169,21 +2341,22 @@ function _atwork_activity_profile_page_block_content($user_id){
   $output .= '<div id="ajax-target"></div>';
 
   // Decide if it is users block or others and set title
-  if($account->uid === $user->uid){
+  if ($account->uid === $user->uid) {
     $block['title'] = t("My Feed");
     // The final markup - wrap it up in a div
     $form = drupal_get_form('atwork_activity_form');
     $output .= render($form);
 
     $output .= '<h2 class="block__title block-title">My Activity</h2>';
-    $output .= '<div id="activity-feed">' ;
-  } else {
+    $output .= '<div id="activity-feed">';
+  }
+  else {
     $block['title'] = $account->field_gal_first_name['und'][0]['safe_value'] . t("'s activity feed");
   }
   // Grab all messages related to user, User name, and picture of User.
-  $classes = array();
+  $classes = [];
 
-  $current_types = array(
+  $current_types = [
     'group_subscribe',
     'new_answer',
     'new_comment',
@@ -2191,14 +2364,14 @@ function _atwork_activity_profile_page_block_content($user_id){
     'new_node',
     'status',
     'updated_user',
-    'following_user'
-    );
+    'following_user',
+  ];
 
   $query = db_select('message', 'm')
-    ->fields('m', array('mid'))
+    ->fields('m', ['mid'])
     ->orderBy('m.timestamp', 'DESC')
     ->condition('m.uid', $account->uid)
-    ->condition('m.type', $current_types , "IN");
+    ->condition('m.type', $current_types, "IN");
 
   $result = $query
     //->extend('PagerDefault')
@@ -2206,10 +2379,10 @@ function _atwork_activity_profile_page_block_content($user_id){
     ->execute()
     ->fetchAll();
 
- // $result = profile_query($account->uid);
+  // $result = profile_query($account->uid);
 
-  $result_mid = array();
-  foreach($result as $value){
+  $result_mid = [];
+  foreach ($result as $value) {
     $result_mid[] = $value->mid;
   }
 
@@ -2217,15 +2390,15 @@ function _atwork_activity_profile_page_block_content($user_id){
   $messages1 = entity_load('message', $result_mid);
   // Now remove all unwanted messages
   // TODO: Instead of removing messages, we should move this into the query (as seen in front page feed query)
-  foreach($messages1 as $key=>$value){
-    switch(true){
+  foreach ($messages1 as $key => $value) {
+    switch (TRUE) {
       // Gallery case
       case($value->type == "new_image"):
-        if(isset($value->field_message_node['und'][0]['target_id']) && $value->field_message_node['und'][0]['target_id']){
+        if (isset($value->field_message_node['und'][0]['target_id']) && $value->field_message_node['und'][0]['target_id']) {
           $node = node_load($value->field_message_node['und'][0]['target_id']);
-          if(!empty($node)){
-            if(isset($node->uid) && $account->uid){
-              if(($node->uid !== $account->uid)){
+          if (!empty($node)) {
+            if (isset($node->uid) && $account->uid) {
+              if (($node->uid !== $account->uid)) {
                 unset($messages1[$key]);
               }
             }
@@ -2234,7 +2407,7 @@ function _atwork_activity_profile_page_block_content($user_id){
         break;
       // Following case
       case($value->type == "following_user"):
-        if(isset($value->uid) && $value->uid == $this_user->uid){
+        if (isset($value->uid) && $value->uid == $this_user->uid) {
           $user_on_own_feed = TRUE;
         }
         break;
@@ -2247,20 +2420,20 @@ function _atwork_activity_profile_page_block_content($user_id){
   $message_render_array = entity_view('message', $messages1);
 
   // This is for the pager - but we don't need this if we clean up our query above
-  if(isset($message_render_array) && $message_render_array){
+  if (isset($message_render_array) && $message_render_array) {
     $pager_number = pager_array_splice($message_render_array['message'], 5);
   }
 
   $time_stamp = '0';
   $j = 1;
-  if(isset($pager_number) && !empty($pager_number)){
-    foreach($pager_number as $key=>$result) {
+  if (isset($pager_number) && !empty($pager_number)) {
+    foreach ($pager_number as $key => $result) {
       // This variable will get passed to jQuery so we can check it against DB
-      if($result['#entity']->timestamp > $time_stamp){
+      if ($result['#entity']->timestamp > $time_stamp) {
         $time_stamp = $result['#entity']->timestamp;
       }
       // Set up odd/even classes
-      $classes = array();
+      $classes = [];
       $classes[] = 'message';
       $classes[] = 'message-' . $key;
 
@@ -2274,29 +2447,40 @@ function _atwork_activity_profile_page_block_content($user_id){
       // We want to add images to the activity feed.
       $author = user_load($result['#entity']->uid, TRUE);
       // Add flag icon:
-      if(isset( $result['links']['flag']['#links']['flag-message_flag']) &&  $result['links']['flag']['#links']['flag-message_flag']){
-        $result['links']['flag']['#links']['flag-message_flag']['title'] =  str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $result['links']['flag']['#links']['flag-message_flag']['title']);
+      if (isset($result['links']['flag']['#links']['flag-message_flag']) && $result['links']['flag']['#links']['flag-message_flag']) {
+        $result['links']['flag']['#links']['flag-message_flag']['title'] = str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $result['links']['flag']['#links']['flag-message_flag']['title']);
       }
 
       // Check if an image exists:
-       if(isset($author->field_image) && $author->field_image){
+      if (isset($author->field_image) && $author->field_image) {
         // If it does, then grab a renderable view of it
-        $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
-      } else {
+        $user_image = field_view_field('user', $author, 'field_image', [
+          'settings' => [
+            'label' => 'hidden',
+            'image_style' => 'profile_thumbs_med',
+          ],
+        ]);
+      }
+      else {
         // Default image isn't always repopulated into $author->field_image after an ajax reload - so if it is missng and they have not saved a personal image, then lets reset the default image
         $profile_image_field = field_info_instance('user', 'field_image', 'user');
         $default_fid = $profile_image_field['settings']['default_image'];
         $author->field_image[] = file_load($default_fid);
-        $user_image = field_view_field('user', $author, 'field_image', array('settings' => array('label' => 'hidden', 'image_style' => 'profile_thumbs_med')));
+        $user_image = field_view_field('user', $author, 'field_image', [
+          'settings' => [
+            'label' => 'hidden',
+            'image_style' => 'profile_thumbs_med',
+          ],
+        ]);
       }
 
       // Handle following wording case
-      if(isset($user_on_own_feed) && $result['#bundle'] == 'following_user'){
+      if (isset($user_on_own_feed) && $result['#bundle'] == 'following_user') {
         // Remove "You is" and replace with You are
         $message_split = explode(" ", $result['message__message_text__0']['#markup']);
-        foreach($message_split as $key=>$value){
-          if($value == "is"){
-            $message_split[$key] = "are";
+        foreach ($message_split as $key2 => $value) {
+          if ($value == "is") {
+            $message_split[$key2] = "are";
             break;
           }
         }
@@ -2305,12 +2489,12 @@ function _atwork_activity_profile_page_block_content($user_id){
       }
 
       // Status update messages display improperly.
-      if(isset($user_on_own_feed) && $result['#bundle'] == 'status'){
+      if (isset($user_on_own_feed) && $result['#bundle'] == 'status') {
         // Remove "their" and replace with Your
-        $message_split = explode(" ", $result['message__message_text__0']['#markup'] );
-        foreach($message_split as $key=>$value){
-          if($value == "their"){
-            $message_split[$key] = "your";
+        $message_split = explode(" ", $result['message__message_text__0']['#markup']);
+        foreach ($message_split as $key3 => $value) {
+          if ($value == "their") {
+            $message_split[$key3] = "your";
             break;
           }
         }
@@ -2323,26 +2507,27 @@ function _atwork_activity_profile_page_block_content($user_id){
       $post_time = $result['#entity']->timestamp;
       $diff = $current_time - $post_time;
       $time_record = "";
-      switch(TRUE){
-        case($diff<=60):
+      switch (TRUE) {
+        case($diff <= 60):
           $time_record = "Now";
           break;
         // Less than an hour
-        case($diff<3600):
-          $time_record = floor($diff/60) . " minutes ago";
+        case($diff < 3600):
+          $time_record = floor($diff / 60) . " minutes ago";
           break;
         // Less than a day
-        case($diff<86400):
-          $time_record = floor($diff/3600) . " hours ago";
+        case($diff < 86400):
+          $time_record = floor($diff / 3600) . " hours ago";
           break;
         // Less than a week
-        case($diff<604800):
+        case($diff < 604800):
           // On day
-          if($diff < 172800){
-            $time_record = floor($diff/86400) . " day ago";
-          } else {
+          if ($diff < 172800) {
+            $time_record = floor($diff / 86400) . " day ago";
+          }
+          else {
             // More than one day
-            $time_record = floor($diff/86400) . " days ago";
+            $time_record = floor($diff / 86400) . " days ago";
           }
           break;
         default:
@@ -2351,43 +2536,57 @@ function _atwork_activity_profile_page_block_content($user_id){
       }
       // strip out any tags that could cause problems later
       $result['message__message_text__0']['#markup'] = strip_tags($result['message__message_text__0']['#markup'], '<p><a><br>');
-       // Put everything together in the order we would like for this message
+      // Put everything together in the order we would like for this message
       $output .= '<div class="' . implode(' ', $classes) . '"><span class="date"> ' . $time_record . '</span> <span class="feed_image">' . render($user_image) . '</span>' . render($result) .
-    /* print rate_generate_widget($widget_id, 'message', $entity->cid) . */ '</div><!-- /.message -->' ;
-     $j++;
+        /* print rate_generate_widget($widget_id, 'message', $entity->cid) . */
+        '</div><!-- /.message -->';
+      $j++;
     }
   }
   // Pass timestamp to js settings
-  drupal_add_js(array('atwork_activity' => array('time' => $time_stamp, 'user' => $account->name, 'uid' => $account->uid)), 'setting');
+  drupal_add_js([
+    'atwork_activity' => [
+      'time' => $time_stamp,
+      'user' => $account->name,
+      'uid' => $account->uid,
+    ],
+  ], 'setting');
 
   $output .= '<span style="display:none" id="timestamp-latest">' . $time_stamp . '</span>';
   // The profile page pager
-  $output .= '</div><!-- /#activity-feed -->' . theme('pager', array('quantity' => 5));
- // $output .= theme('pager');
+  $output .= '</div><!-- /#activity-feed -->' . theme('pager', ['quantity' => 5]);
+  // $output .= theme('pager');
 
-  return array('#markup'=>$output);
+  return ['#markup' => $output];
 }
 
 /**
  * A generic array pager for Drupal
  * Found here:
  * https://www.drupal.org/docs/7/creating-custom-modules/howtos/paging-non-sql-data
- * TODO: We  may no longer need this if we fix our query in the profile page view.
+ * TODO: We  may no longer need this if we fix our query in the profile page
+ * view.
+ *
+ * @param $data
+ * @param int $limit
+ * @param int $element
+ *
+ * @return array
  */
 function pager_array_splice($data, $limit = 9, $element = 0) {
-  if(empty($data)){
-    return;
+  if (empty($data)) {
+    return [];
   }
-  global $pager_page_array, $pager_total, $pager_total_items; $page = isset($_GET['page']) ? $_GET['page'] : '';
+  global $pager_page_array, $pager_total, $pager_total_items;
+  $page = isset($_GET['page']) ? $_GET['page'] : '';
   // Convert comma-separated $page to an array, used by other functions.
   $pager_page_array = explode(',', $page);
   // We calculate the total of pages as ceil(items / limit).
   $pager_total_items[$element] = count($data);
   $pager_total[$element] = ceil($pager_total_items[$element] / $limit);
-  $pager_page_array[$element] = max(0, min((int)$pager_page_array[$element], ((int)$pager_total[$element]) - 1));
+  $pager_page_array[$element] = max(0, min((int) $pager_page_array[$element], ((int) $pager_total[$element]) - 1));
   return array_slice($data, $pager_page_array[$element] * $limit, $limit, TRUE);
 }
-
 
 
 /*
@@ -2399,13 +2598,19 @@ function atwork_activity_mail_alter(&$email_message) {
     $receiver = user_load_by_mail($ecard->mail_to);
     $node = node_load($ecard->entity_id);
     if ($receiver) {
-      $message = message_create('user_received_ecard', array('uid' => $receiver->uid, 'timestamp' => time()));
+      $message = message_create('user_received_ecard', [
+        'uid' => $receiver->uid,
+        'timestamp' => time(),
+      ]);
       $wrapper = entity_metadata_wrapper('message', $message);
       $wrapper->field_message_ecard->set($ecard);
       $wrapper->field_message_node->set($node);
       $wrapper->save();
 
-      $message = message_create('user_sent_ecard', array('uid' => $ecard->uid, 'timestamp' => $ecard->sent_time));
+      $message = message_create('user_sent_ecard', [
+        'uid' => $ecard->uid,
+        'timestamp' => $ecard->sent_time,
+      ]);
       $wrapper = entity_metadata_wrapper('message', $message);
       $wrapper->field_message_ecard->set($ecard);
       $wrapper->field_message_node->set($node);
@@ -2418,23 +2623,23 @@ function atwork_activity_mail_alter(&$email_message) {
  * Implementation of hook_block_view_alter
  * Code to show activity feed block only on user and user/* pages.
  */
-function atwork_activity_block_view_alter(&$data, $block){
-  switch ($block->delta){
+function atwork_activity_block_view_alter(&$data, $block) {
+  switch ($block->delta) {
     case("profile_page_activity_feed_block"):
       // Block is set, so lets check if we are on the right page
-      if(isset($block->visibility) && $block->visibility == 1){
+      if (isset($block->visibility) && $block->visibility == 1) {
         $url_check = $_SERVER['REQUEST_URI'];
-        $url_parts_check = explode( '/', $url_check);
+        $url_parts_check = explode('/', $url_check);
         // Don't want to make the block disappear on ajax reload
-        if($url_parts_check[1] == "block_refresh"){
+        if ($url_parts_check[1] == "block_refresh") {
           return;
         }
         // If we are down the path further than user/[idir], then hide these blocks
-        if(count($url_parts_check) > 3){
-          $data['content']['#access'] = false;
+        if (count($url_parts_check) > 3) {
+          $data['content']['#access'] = FALSE;
         }
       }
-    break;
+      break;
   }
 }
 
@@ -2443,20 +2648,20 @@ function atwork_activity_block_view_alter(&$data, $block){
  * Implements hook_user_view
  */
 
-function atwork_activity_user_view_alter(&$build){
+function atwork_activity_user_view_alter(&$build) {
   // Removing message that you receive when editing/posting a reply
   $current_msgs = drupal_get_messages('status');
 
   // Check if we have a status message, find it in array (if it is there) and remove it
-  if(isset($current_msgs) && $current_msgs){
+  if (isset($current_msgs) && $current_msgs) {
     // This is the message that we no longer want
     $remove_msgs = array_search('<em class="placeholder">Entity Comments</em> was successfully updated.', $current_msgs['status']);
     // Turns to a boolean when empty for some reason - so doesn't reg as null
-    if(isset($remove_msgs) && $remove_msgs !== FALSE){
+    if (isset($remove_msgs) && $remove_msgs !== FALSE) {
       unset($current_msgs['status'][$remove_msgs]);
     }
     // Replace message array in session with our new sanitized message
-    foreach($current_msgs['status'] as $key=>$value){
+    foreach ($current_msgs['status'] as $key => $value) {
       drupal_set_message($value, 'status');
     }
   }

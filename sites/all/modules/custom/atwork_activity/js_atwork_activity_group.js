@@ -11,25 +11,22 @@ function refreshActivity(page) {
 		url: Drupal.settings.basePath + '?q=atwork-activity/group/' + Drupal.settings.ogContext.gid,
 		data: {page: page},
 		dataType: 'text',
-		error: function(request, status, error) {
+		error: function(request, status) {
 			alert(status);
 		},
-		success: function(data, status, request) {
-			var html = data;
-
-                        hideProgress();
-
+		success: function(data) {
+			let html = data;
+			hideProgress();
 			jQuery('#group-activity-ajax').html(html);
-
 			jQuery('#group-activity-ajax .pager-item a')
 				.add('#group-activity-ajax .pager-first a')
 				.add('#group-activity-ajax .pager-previous a')
 				.add('#group-activity-ajax .pager-next a')
 				.add('#group-activity-ajax .pager-last a')
 					.click(function(el, a, b, c) {
-                                                showProgress();
+					  showProgress();
 
-						var url = jQuery.url(el.currentTarget.getAttribute('href'));
+						let url = jQuery.url(el.currentTarget.getAttribute('href'));
 						refreshActivity(url.param('page'));
 
 						return (false);

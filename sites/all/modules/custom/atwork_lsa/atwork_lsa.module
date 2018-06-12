@@ -3,7 +3,7 @@
 function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
   global $user;
   $user = user_load($user->uid);
-  //$form['#token'] = False;
+
   drupal_set_title('Registration');
   drupal_set_breadcrumb(array());
   drupal_add_js(drupal_get_path('module', 'atwork_lsa').'/atwork_lsa.js');
@@ -12,7 +12,7 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
   jquery_impromptu_add();
   drupal_add_library('system', 'drupal.ajax');
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)){
-    drupal_add_css('.group-lsa-administration {dsplay:block !important;}', 'inline');
+    drupal_add_css('.group-lsa-administration {display:block !important;}', 'inline');
   } else {
     // Hide the administration panel from all users until after signup is over.
     drupal_add_js(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_admin_fields.js');
@@ -583,7 +583,7 @@ function atwork_lsa_views_pre_view(&$view, &$display_id, &$args) {
 /**
  * Implements hook_insert();
  *
- * Send emails on successfult application creation
+ * Send emails on successful application creation
  */
 function atwork_lsa_node_insert($node) {
   //if ($node->type != 'lsa_application' || $node->type != 'lsa_pin_application') {

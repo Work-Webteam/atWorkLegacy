@@ -674,19 +674,5 @@ if (isset($node->field_lsa_middle_name[$node->language][0][\'value\']) && $node-
   $strongarm->value = 0;
   $export['webform_node_lsa_pin_application'] = $strongarm;
 
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'workbench_moderation_default_state_lsa_application';
-  $strongarm->value = 'draft';
-  $export['workbench_moderation_default_state_lsa_application'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'workbench_moderation_default_state_lsa_pin_application';
-  $strongarm->value = 'draft';
-  $export['workbench_moderation_default_state_lsa_pin_application'] = $strongarm;
-
   return $export;
 }

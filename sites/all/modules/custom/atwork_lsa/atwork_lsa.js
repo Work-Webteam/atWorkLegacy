@@ -267,29 +267,17 @@
     //jQuery.error = console.error;
     set_form();
     lsaGift();
-
-    //Move accomodation description to above textbox
-    var accessibilityInstructions = "<div id='lsa_accomodation_notes_description'><p>Please confirm the accessibility accommodations that you and/or your guest" +
-  	"require to attend the Long Service Awards ceremony (e.g., sign language interpreter (ASL), service dog," +
-  	"accessible parking/entrance, etc.)</p></div>";
-
-    $(accessibilityInstructions).insertAfter("#edit-field-lsa-ceremony-accommodation");
-    if($('#edit-field-lsa-ceremony-accommodation-und-0').is(":checked")){
-    	$("#lsa_accomodation_notes_description").hide();
-    }
     
     // Show textbox if there are accomodation requests
     $('#edit-field-lsa-ceremony-accommodation-und-1').click(function() {
       if($('#edit-field-lsa-ceremony-accommodation-und-1').is(":checked")){
         $('#field-lsa-accommodation-notes-add-more-wrapper').slideDown("slow");
-        $("#lsa_accomodation_notes_description").slideDown("slow");
       } 
     });
     // Otherwise hide
     $('#edit-field-lsa-ceremony-accommodation-und-0').click(function() {
       if($('#edit-field-lsa-ceremony-accommodation-und-0').is(":checked")){
         $('#field-lsa-accommodation-notes-add-more-wrapper').slideUp("slow");
-        $("#lsa_accomodation_notes_description").slideUp("slow");
       }
     });
     
@@ -353,7 +341,7 @@
       // User has decided to split their donation, we need to alter amounts
       if($('#edit-field-lsa-second-donation-und-1').prop("checked", true)){
         // Grab existing value
-        amount = $('#edit-field-lsa-donation-amount-und-0-value').val();
+        let amount = $('#edit-field-lsa-donation-amount-und-0-value').val();
         // Remove $ sign
         amount = amount.substring(1, amount.length);
         // Split in half
@@ -430,9 +418,6 @@
       $('#edit-field-lsa-second-donation').hide();
       set_pecsef($("input[name='field_lsa_years_of_service[und]']:checked").val());
     });
-    
-    $("#edit-field-do-you-need-to-update-your").hide();
-    $("#edit-field-accessibility").hide();
 
   });
 
