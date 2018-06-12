@@ -419,6 +419,9 @@
       set_pecsef($("input[name='field_lsa_years_of_service[und]']:checked").val());
     });
 
+    $("#edit-field-do-you-need-to-update-your").hide();
+    $("#edit-field-specialrequirement-descrip").hide();
+    $("#edit-field-accessibility").hide();
   });
 
   /** Helper function to set PECSEF options anv values
