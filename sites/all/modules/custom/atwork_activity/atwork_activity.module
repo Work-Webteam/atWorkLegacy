@@ -55,8 +55,7 @@ function atwork_activity_menu() {
     'page callback' => 'atwork_activity_ajax_get_ajax', // Render HTML.
     'page arguments' => [1, 2, 3, 4],
     'type' => MENU_CALLBACK,
-    'access arguments' => ['access content'],
-    'delivery callback' => 'atwork_activity_ajax_callback',  // Magic goes here.
+    'access arguments' => ['access content']
   ];
 
 
@@ -65,7 +64,6 @@ function atwork_activity_menu() {
     'page arguments' => [1, 2, 3, 4],
     'type' => MENU_CALLBACK,
     'access arguments' => ['access content'],
-    'delivery callback' => 'atwork_activity_ajax_callback',  // Magic goes here.
   ];
 
   return $items;
