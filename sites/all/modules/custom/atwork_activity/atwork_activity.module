@@ -72,7 +72,7 @@ function atwork_activity_menu() {
 }
 
 
-function atwork_activity_homepage_ajax_get_ajax($uid, $latest_rendered_time_stamp, $query = NULL) {
+function atwork_activity_homepage_ajax_get_ajax($name, $uid, $latest_rendered_time_stamp, $query = NULL) {
   $return_modifier = isset($query) && $query != NULL && $query != 'undefined' ? $query : 0;
   //Check DB for last timestamps > $latest and count them
   $new_message_count = atwork_activity_home_all_callback($latest_rendered_time_stamp, $uid);
@@ -92,7 +92,7 @@ function atwork_activity_homepage_ajax_get_ajax($uid, $latest_rendered_time_stam
  * @param $latest_rendered_time_stamp
  * @param null $query
  */
-function atwork_activity_ajax_get_ajax($uid, $latest_rendered_time_stamp, $query = NULL) {
+function atwork_activity_ajax_get_ajax($name, $uid, $latest_rendered_time_stamp, $query = NULL) {
   $return_modifier = isset($query) && $query != NULL ? $query : 0;
   //Check DB for last timestamps > $latest and count them
   $new_message_count = check_message_count($latest_rendered_time_stamp, $uid);
