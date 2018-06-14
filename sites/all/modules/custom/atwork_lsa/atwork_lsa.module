@@ -511,6 +511,8 @@ function get_award_id_number($form_state){
   $award_id = array_search($award, $awards);
   return $award_id;
 }
+
+
 function atwork_lsa_node_view($node, $view_mode, $langcode) {
   if($node->type === 'lsa_pin_application'){
     $node->content['top_message'] = array(
@@ -930,10 +932,25 @@ function atwork_lsa_node_page_view($node) {
 
   // Redirect any other user who tries to access an lsa application node
   if($node->type == 'lsa_application'){
-    // skip redirect for admins and lsa_admins
-    if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)) {
-      return node_page_view($node);
+    // skip redirect for admins and lsa_admins    
+  	if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles) || in_array('lsa contact', $user->roles)) {
+  		return node_page_view($node);
+  	}
+    
+    $exists = db_select('node', 'n')
+    ->fields('n')
+    ->condition('n.uid', $user->uid)
+    ->condition('n.type', 'lsa_application')
+    ->execute()
+    ->fetchAssoc();
+    
+    if ((isset($exists['nid']) && $exists['nid'] && $exists == $node->nid) || ($user->mail == $node->field_lsa_email['und'][0]['email'])) {
+    	return node_page_view($node);
+    } else {
+    	drupal_set_message(t('The requested application could not be displayed. You may be seeing this page if you used a non-government email address in your LSA application. If so, please RSVP to your LSA Contact directly.'), 'status');
+    	drupal_goto('career/long-service-awards');
     }
+    
     // Give contact details
    //drupal_set_message('The LSA application period has come to an end. If you have any questions or concerns, please contact the Jenny Pescod at (250-356-7916) or email the <a href="mailto:longserviceawards@gov.bc.ca"> Long Service Award inbox </a> ', 'status');
     // Redirect to 403
