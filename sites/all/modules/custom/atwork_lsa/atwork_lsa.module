@@ -947,7 +947,7 @@ function atwork_lsa_node_page_view($node) {
     if ((isset($exists['nid']) && $exists['nid'] && $exists == $node->nid) || ($user->mail == $node->field_lsa_email['und'][0]['email'])) {
     	return node_page_view($node);
     } else {
-    	drupal_set_message(t('The requested application could not be displayed. You may be seeing this page if you used a non-government email address in your LSA application. If so, please RSVP to your LSA Contact directly.'), 'status');
+    	drupal_set_message(t('Because your primary email is a non-government email address, you can’t access the RSVP form on @Work at this time. To RSVP for your Long Service Award ceremony, please contact the Long Service Awards team by phone (250 387-1616) or <a href="mailto:longserviceawards@gov.bc.ca">email</a>. Thank you and congratulations on this important milestone!'), 'status');
     	drupal_goto('career/long-service-awards');
     }
     
