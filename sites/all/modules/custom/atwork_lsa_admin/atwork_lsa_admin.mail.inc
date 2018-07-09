@@ -98,7 +98,7 @@ $applicant_body = <<<EOT
 </head>
 
 <body id="mimemail-body" class="atwork-mail-default" style="padding:0;">
-<p> To RSVP for your Long Service Awards ceremony, click anywhere in the invitation below to RSVP.  </p>
+<p> To RSVP for your Long Service Awards ceremony, click anywhere in the invitation below.  </p>
 
 <p> If you can’t view the invitation and RSVP form below, follow the instructions in the upper left hand corner of this email to download the invitation in a web browser. </p>
 
