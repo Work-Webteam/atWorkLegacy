@@ -122,6 +122,8 @@ function _atwork_group_add_content_links($group) {
       }
     }
   }
+
+  // We need to grab the admins for this group and add them to the menu
   return drupal_render($links);
 
 }
@@ -552,46 +554,6 @@ function atwork_group_views_pre_render(&$view) {
      //dpm($_SESSION['messages']['status']);
     }
   }
-
-
-  // FOR ATWORK CLASSIC - REDIRECT GROUP PAGE TO OUR BACKGROUND PAGE
-  //dpm($view);
-  global $user;
-  /*if ($view->name == 'groups')  {
-    global $theme;
-    if($theme == 'atwork'  && !_atwork_is_admin()){
-      switch($view->args[0]){
-        // Climate change
-        case 10096:
-          drupal_goto('/blogs/climate-action-blog');
-          break;
-        // Yearning for Learning
-        case 12388:
-          drupal_goto('/blogs/yearning-for-learning-blog');
-          break;
-        // Beyond the Soapbox
-        case 10097:
-          drupal_goto('blogs/beyond-the-soapbox-blog');
-          break;
-        // Health-bent
-        case 10095:
-          drupal_goto('/blogs/health-bent-blog');
-          break;
-        // Citizen Engagement and Social Media Corner
-        case 2186:
-          break;
-        // ARRC
-        case 2637:
-          drupal_goto('blogs/arrc-blog');
-          break;
-        // Anything else
-        // ignore for now
-        default:
-          //drupal_goto('blogs');
-          break;
-      }
-    }
-  }*/
 }
 
 
@@ -950,6 +912,36 @@ function atwork_group_block_view($delta = '') {
  * Add content links to the og_menu block
  */
 function atwork_group_block_view_alter(&$data, $block) {
+  if($block->module == "views" && $block->delta == "groups-details"){
+    $og_context = og_context();
+    if (isset($og_context['group_type']) && $og_context['group_type'] == 'node' && isset($og_context['gid'])) {
+      $group = node_load($og_context['gid']);
+      $members = array();
+      $current_members = db_select('og_users_roles', 'ogur');
+      $current_members->fields('ogur', array('uid'));
+      $current_members->condition('ogur.rid', 3);
+      $current_members->condition('ogur.gid', $og_context['gid']);
+    
+      $result = $current_members->execute();
+      while ($res = $result->fetchAssoc()) { $members[] = $res['uid'];}
+    
+      // Remove duplicate items.
+      $members = array_unique($members);
+      // Prepare our replacement string
+      $replacement_string = '<span id="group-admin-block" class="fieldset-legend"><a class="fieldset-title" href="javascript:;">Administrators:</a><ul id="admin-list-accordian">';
+      foreach($members as $key=>$value){
+        $this_user = user_load($value);
+        $replacement_string .= '<li><a href="/employees/' . $this_user->name . '">' . $this_user->field_gal_first_name['und'][0]['safe_value'] . ' ' . $this_user->field_gal_last_name['und'][0]['safe_value'] . '</a></li>' ;
+      }
+      $replacement_string .= '</ul></span>';
+      $current_string = $data['content']['#markup']; 
+      $current_string = str_replace('<span id="group-admin-block"></span>', $replacement_string, $current_string);
+      $data['content']['#markup'] = $current_string;
+      // Add in our js library
+      drupal_add_js(drupal_get_path('module', 'atwork_group') . '/atwork_group.js');
+    }
+  }
+
   if ($block->module == 'og_menu' && $block->delta == 'og_single_menu_block') {
     //$data['subject'] = '';
 

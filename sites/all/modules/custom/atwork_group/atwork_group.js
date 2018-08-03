@@ -1,7 +1,10 @@
 (function ($) {
 
   $( document ).ready(function(){
-    //$.prompt("Hello World!");
+    $("#admin-list-accordian").hide();
+    $("#group-admin-block").click(function(){
+      $("#admin-list-accordian").slideToggle();
+    });
   });
 
 }(jQuery));
