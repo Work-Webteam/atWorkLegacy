@@ -135,6 +135,25 @@
           }
           ?>
         <?php endif; ?>
+        <?php // Sometimes we need to get the gid ourselves ?>
+        <?php if(empty($og_context) && isset($node->og_group_ref['und'][0]['target_id'])): ?>
+          <?php  
+            switch($node->type) {
+              case 'article':
+              case 'blog':
+              case 'poll':
+              case 'question':
+              case 'section_page':
+              case 'event':
+                $group = node_load($node->og_group_ref['und'][0]['target_id']);
+                $title_prefix = $title;
+                $title = $group->title;
+                break;
+              default:
+                break;
+            }
+          ?>
+        <?php endif; ?>
       <?php endif ?>
       <?php // ***END GROUP SPECIFIC CHANGES*** ?>
 

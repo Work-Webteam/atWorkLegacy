@@ -250,22 +250,6 @@ function _atwork_group_link($gid) {
 }
 
 /**
- * Implements hook_init();
- */
-function atwork_group_init() {
-  // js to support ajax-based group joining/leaving
-  // not using ajax anymore so not needed
-//  $js = <<<EOT
-//function atwork_membership_ajax_load(op, gid) {
-//  jQuery(".atwork-membership-action.gid-" + gid).load("/atwork-membership/" + op + "/" + gid);
-//  return false;
-//}
-//EOT;
-//
-//    drupal_add_js($js, 'inline');
-}
-
-/**
  * Implements hook_menu();
  */
 function atwork_group_menu() {
@@ -409,10 +393,6 @@ function atwork_group_views_post_render(&$view, &$output, &$cache) {
 
   if ((($view->name == 'groups' && $view->current_display == 'details') || ($view->name == 'second_sidebar_blocks' && $view->current_display == 'og_links'))  && isset($view->args[0]) && $view->args[0]) {
    global $user;
-
-    if($user->uid == 56664) {
-    	//dpm($view);
-    }
 
     $group = node_load($view->args[0]);
 
@@ -944,9 +924,25 @@ function atwork_group_block_view_alter(&$data, $block) {
 
   if ($block->module == 'og_menu' && $block->delta == 'og_single_menu_block') {
     //$data['subject'] = '';
-
-
     $og_context = og_context();
+    // When we pull up comments, we don't get og_context by default - so lets check again
+    if(empty($og_context)){
+      if(null !== arg(0) && arg(0) == 'node'){
+        if(null !== arg(1) && is_numeric(arg(1))){
+          $this_node = node_load(arg(1));
+          if(isset($this_node->og_group_ref['und'][0]['target_id']) && og_is_group('node', $this_node->og_group_ref['und'][0]['target_id'])){
+            $group = node_load($this_node->og_group_ref['und'][0]['target_id']);
+            $group_links = _atwork_group_content_links($group);
+            $group_links = str_replace('<ul class="links">', '', $group_links);
+            $group_links = str_replace('</ul>', '', $group_links);
+      
+            $data['content']['atwork_menu']['#markup'] = $group_links;
+      
+            $data['subject'] = l($group->title, 'node/' . $group->nid);
+          }
+        }
+      }
+    }
 
     if (isset($og_context['group_type']) &&
         $og_context['group_type'] == 'node' &&
@@ -1014,17 +1010,4 @@ function atwork_group_node_view($node, $view_mode, $langcode) {
 }
 
 
-
-/**
- *
- * Implements hook_preprocess_views_view()
- *
- * We need to attach impromptu libraries to show tutorials on the groups page
- */
-
-function atwork_group_preprocess_views_view(&$vars) {
-	$view = &$vars['view'];
-	// Make sure it's the correct view
-
-}
 
