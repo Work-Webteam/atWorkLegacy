@@ -91,12 +91,12 @@ Drupal.behaviors.atwork_quicklinks = {
 		$(".view-top-tools").css("top", 225);
 	} else if ($(window).scrollTop() < 162){
 		var $navbarPos = 162 - $(window).scrollTop();
-		$(".region-navigation").css("top", $navbarPos)
+		$(".region-navigation").css("top", $navbarPos);
 	} else {
-		$(".region-navigation").css("top", -2)
+		$(".region-navigation").css("top", -2);
 	}
 /**
- * This function removes previous action to scroll to anchor, and replaces it with an animated scroll that leaves the desired content lower on the page.
+ * This function removes previous action to scroll to anchor, and replaces it with an animated scroll that leaves the desired content lower on the page, while also highlighting it.
  */
 	// to top right away
 if ( window.location.hash ) scroll(0,0);
@@ -105,7 +105,7 @@ setTimeout( function() { scroll(0,0); }, 1);
 
 $(function() {
 
-    // your current click function
+    // current click function
     $('.scroll').on('click', function(e) {
         e.preventDefault();
         $('html, body').animate({
@@ -118,7 +118,9 @@ $(function() {
         // smooth scroll to the anchor id
         $('html, body').animate({
             scrollTop: $(window.location.hash).offset().top - 200 + 'px'
-        }, 1000, 'swing');
+				}, 1000, 'swing');
+				// Mark the location of the comment for 3 seconds so user can id it easier.
+				$(window.location.hash).next().effect("highlight", {}, 3000);
     }
 });
 	// Short term code to give a title on hover to banner div
