@@ -19,7 +19,8 @@
       // New array
       $sorted_array = array();
       $last_key = "";
-      while(list($key, $value) = each($reply_copy)){
+      foreach($reply_copy as $key => $value) {
+      //while(list($key, $value) = each($reply_copy)){
         if($value['#entity']->depth == 0){
           // Put this on the end
           array_push($sorted_array, $value['#entity']->id);
