@@ -902,12 +902,13 @@ function atwork_group_block_view_alter(&$data, $block) {
       // Remove duplicate items.
       $members = array_unique($members);
       // Prepare our replacement string
-      $replacement_string = '<span id="group-admin-block" class="fieldset-legend"><a class="fieldset-title" href="javascript:;">Administrators:</a><ul id="admin-list-accordian">';
+      $replacement_string = '<fieldset id="fieldset-admin-block" style="margin-top: 8px; margin-bottom: 0; position:relative; clear:both;" class="no-outline admin-list-accordian collapsible collapsed collapse-processed">' .
+      '<legend><span id="group-admin-block-span" class="fieldset-legend"><a id="group-admin-block" class="fieldset-title" href="javascript:;">Administrators</a></span></legend><div id="admin-list-accordian"  style="display:none; position:relative;"><ul class="administrator-group-links">';
       foreach($members as $key=>$value){
         $this_user = user_load($value);
         $replacement_string .= '<li><a href="/employees/' . $this_user->name . '">' . $this_user->field_gal_first_name['und'][0]['safe_value'] . ' ' . $this_user->field_gal_last_name['und'][0]['safe_value'] . '</a></li>' ;
       }
-      $replacement_string .= '</ul></span>';
+      $replacement_string .= '</ul></div></fieldset>';
       $current_string = $data['content']['#markup']; 
       $current_string = str_replace('<span id="group-admin-block"></span>', $replacement_string, $current_string);
       $data['content']['#markup'] = $current_string;
