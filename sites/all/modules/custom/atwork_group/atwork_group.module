@@ -450,7 +450,7 @@ function atwork_group_views_post_render(&$view, &$output, &$cache) {
       $group_url = $GLOBALS['base_url'] . '/' . drupal_get_path_alias();
       $variables['links']['email'] = array(
         'title' => t('Send Group Invite Email'),
-        'href' => 'mailto:?subject=' . _atwork_full_name($user) . '%20has%20invited%20you%20to%20join%20' . $group->title . '&body=' . _atwork_full_name($user) . '%20would%20like%20to%20invite%20you%20to%20join%20"' . $group->title . '". Join by clicking on the following url:' . $group_url . ' .',
+        'href' => 'mailto:?subject=' . _atwork_full_name($user) . 'has invited you to join' . $group->title . '&body=' . _atwork_full_name($user) . ' would like to invite you to join "' . $group->title . '". Join by clicking on the following url: ' . $group_url . ' .',
       );
 
       $admin_links = theme('links', $variables);
