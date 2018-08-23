@@ -7,7 +7,7 @@
         settings.atwork_prem_awards.user = 'Employee News';
       }
       // Only run if the link exists in the current page load or fragment refresh.
-      // Note: this module requires the activiation of a block, and that you create a button or link with a specific ID in the ad space
+      // Note: this module requires the activiation of a block, and that you create a button or link with a specific ID (#prem-awards-form) in the ad space
       $('#prem-awards-form:not(.atwork-prem-awards-processed)', context)
         .addClass('atwork-prem-awards-processed')
         .bind('click', function (){

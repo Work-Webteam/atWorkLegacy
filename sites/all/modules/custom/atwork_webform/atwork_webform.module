@@ -17,7 +17,9 @@ function atwork_webform_form_alter(&$form, $form_state, $form_id) {
 
 
   if ($form_id == 'webform_client_form_33248') {
-  	
+    // Hide the second field here - we will print it out under the submit button so it doesn't show up unexpectedly.
+    $form['submitted']['post_text']['#access'] = false;
+
     // check if user voted
     global $user;
     
@@ -29,8 +31,8 @@ function atwork_webform_form_alter(&$form, $form_state, $form_id) {
       ->fetchAll();
 
     if ($voted) {
-      //$form['actions']['submit']['#access'] = FALSE;
-      //drupal_set_message('Thanks for voting!');
+      $form['actions']['submit']['#access'] = FALSE;
+      drupal_set_message('Thanks for voting!');
     }
 
     /*
@@ -47,7 +49,21 @@ function atwork_webform_form_alter(&$form, $form_state, $form_id) {
   }
 }
 
-
+/**
+ * Want to append some text to the webform
+ * implements hook_node_view
+ */
+function atwork_webform_node_view_alter(&$build){
+  if($build['body']['#object']->nid == '33248'){
+    //Need to grab text from second field in this webform and plug it in as the suffix here.
+    if(isset($build['body']['#object']->webform['components'][2]['value']) && $build['body']['#object']->webform['components'][2]['value']){
+      $suffix_text = $build['body']['#object']->webform['components'][2]['value'];
+      // Put it in the suffix, Including an html note if anyone finds this and it breaks anything
+      $build['webform']['#suffix'] = '<!-- This text is pulled from the webforms second field. If it should not be showing up then access it in atwork_webform.module --> ' . $suffix_text;
+    }
+    
+  }
+}
 
 
 
