@@ -871,7 +871,7 @@ function atwork_prem_awards_callback($user, $current_uid){
   // Grab current webcast names
   $return_info_array['webcasts'] = array(
     'vancouver_island' =>  $webform_node->webform['components'][4]['name'],
-    'lower_mainland' => $webform_node->webform['components'][6]['name'],
+    //'lower_mainland' => $webform_node->webform['components'][6]['name'],
     'interior_north' =>  $webform_node->webform['components'][14]['name'],
   );
   $return_info_array['uid'] = $current_uid;
@@ -930,7 +930,7 @@ function atwork_prem_awards_submit_callback(){
     // Check if this matches webcast for existing webform
     if($submission_array['webcast'] == $webform_node->webform['components'][4]['name'] && isset($webform->data[13][0]) && $webform->data[13][0] == 'vi_webcast'){
       //continue
-    } elseif ($submission_array['webcast'] == $webform_node->webform['components'][6]['name'] && isset($webform->data[13][0]) && $webform->data[13][0] == 'main_webcast') {
+    } elseif (isset($webform_node->webform['components'][6]['name']) && ($submission_array['webcast'] == $webform_node->webform['components'][6]['name']) && isset($webform->data[13][0]) && $webform->data[13][0] == 'main_webcast') {
       //continue
     } elseif ($submission_array['webcast'] == $webform_node->webform['components'][14]['name'] && isset($webform->data[13][0]) && $webform->data[13][0] == 'int_webcast') {
       //continue
@@ -1017,8 +1017,8 @@ function create_new_webform_entry($submission_array){
    // Get static webform for titles
   $webform_node = node_load(PA_REG_FORM_NID);
   isset( $webform_node->webform['components'][4]['name']) ? $vancouver_island =  $webform_node->webform['components'][4]['name']: $vancouver_island = null;
-  isset(  $webform_node->webform['components'][6]['name']) ? $lower_mainland =  $webform_node->webform['components'][6]['name']: $vancouver_island = null;
-  isset( $webform_node->webform['components'][14]['name']) ? $interior_north =  $webform_node->webform['components'][14]['name']: $vancouver_island = null;
+  isset(  $webform_node->webform['components'][6]['name']) ? $lower_mainland =  $webform_node->webform['components'][6]['name']: $lower_mainland = null;
+  isset( $webform_node->webform['components'][14]['name']) ? $interior_north =  $webform_node->webform['components'][14]['name']: $interior_north = null;
 
   $response = array(
     'sid' => $submission_array['id'],
