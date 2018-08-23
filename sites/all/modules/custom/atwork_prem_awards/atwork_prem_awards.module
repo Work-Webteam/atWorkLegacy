@@ -1016,7 +1016,8 @@ function create_new_webform_entry($submission_array){
   $current_user = user_load($submission_array['uid']);
    // Get static webform for titles
   $webform_node = node_load(PA_REG_FORM_NID);
-  $vancouver_island =  $webform_node->webform['components'][4]['name'];
+  isset( $webform_node->webform['components'][4]['name']) ? $vancouver_island =  $webform_node->webform['components'][4]['name']: $vancouver_island = null;
+  
   $lower_mainland = $webform_node->webform['components'][6]['name'];
   $interior_north =  $webform_node->webform['components'][14]['name'];
   $response = array(

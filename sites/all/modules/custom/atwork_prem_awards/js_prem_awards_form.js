@@ -311,11 +311,11 @@
             } else {
               formString += '<option value="' +  items.webcasts.vancouver_island + '">' +  items.webcasts.vancouver_island + '</option>';
             }
-            if(castValue == items.webcasts.lower_mainland){
-              formString += '<option value="' + castValue + '" selected>' + castValue + '</option>';
-            } else {
-              formString += '<option value="' + items.webcasts.lower_mainland + '">' +  items.webcasts.lower_mainland + '</option>';
-            }
+            //if(castValue == items.webcasts.lower_mainland){
+            //  formString += '<option value="' + castValue + '" selected>' + castValue + '</option>';
+            //} else {
+            //  formString += '<option value="' + items.webcasts.lower_mainland + '">' +  items.webcasts.lower_mainland + '</option>';
+            //}
             if(castValue == items.webcasts.interior_north){
               formString += '<option value="' + castValue + '" selected>' + castValue + '</option>';
             } else {
@@ -368,7 +368,7 @@
         // Get proper dates/times for this.
         formString += '<option value="--- Choose a Webcast ---">--- Choose a Webcast ---</option>';
         formString += '<option value="' +  items.webcasts.vancouver_island + '">' +  items.webcasts.vancouver_island + '</option>';
-        formString += '<option value="' +  items.webcasts.lower_mainland + '">' +   items.webcasts.lower_mainland + '</option>';
+        //formString += '<option value="' +  items.webcasts.lower_mainland + '">' +   items.webcasts.lower_mainland + '</option>';
         formString += '<option value="' +   items.webcasts.interior_north + '">' + items.webcasts.interior_north + '</option>';
         formString += '</select>';
       // Number attending bundle
