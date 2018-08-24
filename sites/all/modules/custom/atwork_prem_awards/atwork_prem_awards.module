@@ -36,10 +36,10 @@ EOT;
 
   // this is the event-specific details. We might want to add links, etc, key numbers corrospond with the $submission array
   $dates = array(
-    15 => "Interior/North and Emerging Leaders: October 26 <br />
+    15 => "Interior/North: October 18 <br />
   <a href=\" https://gww.gov.bc.ca/sites/default/files/ics/2017/premiers-innovation-and-excellence-awards-interiornorth/event.ics \" > Add to your Outlook Calendar </a></p><hr />
   ",
-    5 => "Vancouver Island: November 2 <br />
+    5 => "Vancouver Island/Lower Mainland: October 11 <br />
   <a href=\"  https://gww.gov.bc.ca/sites/default/files/ics/2017/premiers-innovation-and-excellence-awards-vancouver-island/event.ics \" > Add to your Outlook Calendar </a></p><hr />
   ",
     7 => "Lower Mainland: November 9 <br />
