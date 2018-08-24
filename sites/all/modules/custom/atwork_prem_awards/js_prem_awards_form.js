@@ -150,7 +150,7 @@
       $('.error-note-webcast').remove();
       $('.fieldset-prem-award-class-' + currentSid + ' select.prem-award-input').css('border-color', 'green');
     }
-    if(attend.length < 1 || attend == 0 || ($.isNumeric(attend)==false)){
+    if(attend.length < 1 || attend < 1 || ($.isNumeric(attend)==false)){
       $('.error-note-attend').remove();      
       $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-attending').css('border-color', 'red');
       $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-attending').after('<p class="error-note-attend" style="color: red;">* Attending field cannot be blank and must be numeric, please enter number of viewers.</p>');
