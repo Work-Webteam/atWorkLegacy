@@ -59,7 +59,7 @@ function atwork_webform_node_view_alter(&$build){
     if(isset($build['body']['#object']->webform['components'][2]['value']) && $build['body']['#object']->webform['components'][2]['value']){
       $suffix_text = $build['body']['#object']->webform['components'][2]['value'];
       // Put it in the suffix, Including an html note if anyone finds this and it breaks anything
-      $build['webform']['#suffix'] = '<!-- This text is pulled from the webforms second field. If it should not be showing up then access it in atwork_webform.module --> ' . $suffix_text;
+      $build['webform']['#suffix'] = '<!-- This text is pulled from the webforms second field. If it should not be showing up then access it in atwork_webform.module --> ' . $suffix_text . '<br />';
     }
     
   }

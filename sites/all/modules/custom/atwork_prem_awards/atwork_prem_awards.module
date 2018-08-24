@@ -62,7 +62,7 @@ EOT;
 <h2>You registered:</h2>
 EOT; */
 
-    $output .= "<h2>You registered:</h2>";
+    $output .= "<strong>You registered:</strong>";
     foreach ($dates as $key => $value) {
       if (isset($submission->data[$key][0]) && $submission->data[$key][0]) {
         $output .= "<p>";
