@@ -120,7 +120,7 @@ $(function() {
             scrollTop: $(window.location.hash).offset().top - 200 + 'px'
 				}, 1000, 'swing');
 				// Mark the location of the comment for 3 seconds so user can id it easier.
-				$(window.location.hash).next().effect("highlight", {}, 3000);
+				$(window.location.hash).next().effect("highlight", {color: '#E0ECF5'}, 3000);
     }
 });
 	// Short term code to give a title on hover to banner div
