@@ -54,14 +54,13 @@ function atwork_webform_form_alter(&$form, $form_state, $form_id) {
  * implements hook_node_view
  */
 function atwork_webform_node_view_alter(&$build){
-  if($build['body']['#object']->nid == '33248'){
+  if(isset($build['body']['#object']->nid) && $build['body']['#object']->nid == '33248'){
     //Need to grab text from second field in this webform and plug it in as the suffix here.
     if(isset($build['body']['#object']->webform['components'][2]['value']) && $build['body']['#object']->webform['components'][2]['value']){
       $suffix_text = $build['body']['#object']->webform['components'][2]['value'];
       // Put it in the suffix, Including an html note if anyone finds this and it breaks anything
       $build['webform']['#suffix'] = '<!-- This text is pulled from the webforms second field. If it should not be showing up then access it in atwork_webform.module --> ' . $suffix_text . '<br />';
-    }
-    
+    }  
   }
 }
 
