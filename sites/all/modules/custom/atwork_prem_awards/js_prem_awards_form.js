@@ -339,7 +339,7 @@
           // Cancel button in case they don't want to edit afterall
           formString += '<input type="button" class="cancel-show-input-field" sid="' + index + '" value="Cancel">';
           // Holder button to fire a function to post changes. This is hidden initially
-          formString += '<input type="button" class="save-form-field" sid="' + index + '" value="save">';
+          formString += '<input type="button" class="save-form-field" sid="' + index + '" value="Save">';
 
         formString += '</fieldset>';
       }
@@ -388,7 +388,7 @@
       // Cancel button in case they don't want to edit afterall
       formString += '<input type="button" class="cancel-show-input-field" sid="Null" id="'+ timeStamp + '" value="Cancel">';
       // Holder button to fire a function to post changes. This is hidden initially
-      formString += '<input type="button" class="save-form-field" sid="Null" id="'+ timeStamp + '" value="save">';
+      formString += '<input type="button" class="save-form-field" sid="Null" id="'+ timeStamp + '" value="Save">';
     formString += '</fieldset>';
     return formString;
   }
