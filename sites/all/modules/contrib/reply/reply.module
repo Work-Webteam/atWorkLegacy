@@ -785,15 +785,17 @@ function template_preprocess_replies(&$vars) {
     }
   }
   else {
-    $vars['links']['reply_post_forbidden'] = array(
-      '#markup' => theme('reply_post_forbidden', array(
-        'entity_type' => $vars['entity_type'],
-        'entity' => $vars['entity'],
-        'instance_id' => $vars['instance_id'],
-        'form' => $vars['form'],
-        'bundle' => $vars['bundle'],
-      )),
-    );
+    if ( is_array($vars['links']) ) {
+        $vars['links']['reply_post_forbidden'] = array(
+          '#markup' => theme('reply_post_forbidden', array(
+          'entity_type' => $vars['entity_type'],
+          'entity' => $vars['entity'],
+          'instance_id' => $vars['instance_id'],
+          'form' => $vars['form'],
+          'bundle' => $vars['bundle'],
+        )),
+      );
+    }  
   }
 }
 
