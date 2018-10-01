@@ -6,11 +6,10 @@
  *
  */
 function atwork_auth_init() {
-
-  if (isset($_SERVER['HTTP_SM_USER']) ? $_SERVER['HTTP_SM_USER'] == 'twerdal' : FALSE) {
+  if (isset($_SERVER['HTTP_SMUSER']) ? $_SERVER['HTTP_SMUSER'] == 'twerdal' : FALSE) {
     //$_SERVER['HTTP_SMGOV_USEREMAIL'] = 'some@email.com';
     //dpm(list_extract_allowed_values(variable_get('atwork_auth_gal_fieldmap', ''), 'list_text', FALSE));
-    //$_SERVER['HTTP_SM_USER'] = 'IDIR\TWERDAL';
+    //$_SERVER['HTTP_SMUSER'] = 'IDIR\TWERDAL';
     //$_SERVER['HTTP_SMGOV_USERGUID'] = 'abcd';
     //dpm($_SERVER);
     //$atwork_ldap = new atwork_ldap;
@@ -25,7 +24,7 @@ function atwork_auth_init() {
 
   } else {
     //dpm('false');
-    //dpm($_SERVER['HTTP_SM_USER']);
+    //dpm($_SERVER['HTTP_SMUSER']);
   }
 
 
@@ -34,7 +33,7 @@ function atwork_auth_init() {
 
   // this should only happen if site isn't accessed through reverse proxy
   // let's log it if this happens
-  if (!isset($_SERVER['HTTP_SM_USER']) || !isset($_SERVER['HTTP_SMGOV_USERGUID'])) {
+  if (!isset($_SERVER['HTTP_SMUSER']) || !isset($_SERVER['HTTP_SMGOV_USERGUID'])) {
     if (variable_get('atwork_auth_watchdog_nosm', 1)) {
       watchdog('atwork_auth', t('A user connected without going through siteminder: ' . print_r($_SERVER, TRUE)));
     }
@@ -42,7 +41,7 @@ function atwork_auth_init() {
   }
 
   // for consistency always use lowercase IDIRs in drupal
-  $sm_user = str_replace("idir\\", "", strtolower($_SERVER['HTTP_SM_USER']));
+  $sm_user = str_replace("idir\\", "", strtolower($_SERVER['HTTP_SMUSER']));
   $sm_guid = $_SERVER['HTTP_SMGOV_USERGUID'];
 
   // abort for special IDIRs
@@ -99,8 +98,8 @@ function atwork_auth_init() {
   // load it but don't replace $user (yet)
   $external_account = user_load($uid['uid']);
 
-  // if our HTTP_SM_USER doesn't match our existing drupal
-  // $user->name then the HTTP_SM_USER must have changed on us.
+  // if our HTTP_SMUSER doesn't match our existing drupal
+  // $user->name then the HTTP_SMUSER must have changed on us.
   if ($sm_user != $external_account->name) {
     // check to see if this new IDIR is being used
     $new_name = _atwork_auth_get_unique_name($sm_user);
@@ -176,7 +175,7 @@ function atwork_auth_node_view($node, $view_mode, $langcode){
 
 
   // this should only happen if site isn't accessed through reverse proxy
-  if (!isset($_SERVER['HTTP_SM_USER']) || !isset($_SERVER['HTTP_SMGOV_USERGUID'])) {
+  if (!isset($_SERVER['HTTP_SMUSER']) || !isset($_SERVER['HTTP_SMGOV_USERGUID'])) {
     // If not valid uri, and user is anonymous, and user has no set name, boot them out to home page for siteminder to catch
     if(!file_valid_uri($_SERVER['REQUEST_URI']) && !isset($user->name)){
       if (user_is_anonymous()) {
@@ -230,7 +229,7 @@ function atwork_auth_views_post_build(&$view){
 
 
   // this should only happen if site isn't accessed through reverse proxy
-  if(!isset($_SERVER['HTTP_SM_USER']) || !isset($_SERVER['HTTP_SMGOV_USERGUID'])) {
+  if(!isset($_SERVER['HTTP_SMUSER']) || !isset($_SERVER['HTTP_SMGOV_USERGUID'])) {
     // If not valid uri, and user is anonymous, and user has no set name, boot them out to home page for siteminder to catch
     if(!file_valid_uri($_SERVER['REQUEST_URI']) && !isset($user->name)){
       if (user_is_anonymous()) {
