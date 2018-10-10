@@ -257,6 +257,7 @@
       modal: true,
       opacity: 1,
       draggable: true,
+      width: "400px",
       show: { effect: "blind", duration: 800 },
       background: '#FFFFFF',
       buttons: {
@@ -280,6 +281,9 @@
         dialog.dialog("destroy").remove();
       }
     });
+
+    $("div.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix > button > span.ui-button-text").text("X");
+    $("div.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix > button > span.ui-button-text").css({"text-indent": "0px", "padding":"0em", "color":"red"});
     return;
   }
 
