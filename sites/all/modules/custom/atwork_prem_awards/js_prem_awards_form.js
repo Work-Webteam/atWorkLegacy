@@ -260,6 +260,7 @@
       width: "400px",
       show: { effect: "blind", duration: 800 },
       background: 'white',
+      color: 'white',
       buttons: {
         "Go To Webcast": redirectSubmit,
         Close: function(){
@@ -284,6 +285,7 @@
 
     $("div.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix > button > span.ui-button-text").text("X");
     $("div.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix > button > span.ui-button-text").css({"text-indent": "0px", "padding":"0em", "color":"red"});
+    $("#modal-pop").css("background-color", "white");
     return;
   }
 
