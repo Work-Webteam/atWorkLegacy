@@ -26,7 +26,6 @@ function atwork_auth_init() {
     //dpm('false');
     //dpm($_SERVER['HTTP_SMUSER']);
   }
-  dpm($_SERVER);
 
  // rss.xml bypasses siteminder so can abort now
   if($_GET['q'] == 'rss.xml') return;
@@ -43,8 +42,6 @@ function atwork_auth_init() {
   // for consistency always use lowercase IDIRs in drupal
   $sm_user = $_SERVER['HTTP_SMUSER'];
   $sm_guid = $_SERVER['HTTP_SMGOV_USERGUID'];
-  dpm($sm_user);
-  dpm($sm_guid);
 
   // abort for special IDIRs
   // these could be search crawlers who shouldn't be logged in
