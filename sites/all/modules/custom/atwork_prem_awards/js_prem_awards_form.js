@@ -255,7 +255,7 @@
     dialog = $('#modal-pop').dialog({
       autoOpen: true,
       modal: true,
-      opacity: 1,
+      opacity: 1.00,
       draggable: true,
       width: "400px",
       show: { effect: "blind", duration: 800 },
@@ -283,7 +283,7 @@
     });
 
     $("div.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix > button > span.ui-button-text").text("X");
-    $("div.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix > button > span.ui-button-text").css({"text-indent": "0px", "padding":"0em", "color":"red", "background-color": "white"});
+    $("div.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix > button > span.ui-button-text").css({"text-indent": "0px", "padding":"0em", "color":"red"});
     return;
   }
 
