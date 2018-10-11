@@ -284,8 +284,15 @@
     });
 
     $("div.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix > button > span.ui-button-text").text("X");
-    $("div.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix > button > span.ui-button-text").css({"text-indent": "0px", "padding":"0em", "color":"red"});
-    $("#modal-pop").css("background-color", "white");
+    $("div.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix > button > span.ui-button-text").css({"text-indent": "0px", "padding":"0em", "color":"red", "background-color":"beige"});
+    //$("#modal-pop").css("background-color", "white");
+    //$('.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix').css('background-color', 'white');
+    // These are the actual colors that Chris picked
+    $('.front .ui-dialog').css({'background-color': 'beige', 'border': 'solid 1px grey'});
+    $('.front .ui-widget .ui-dialog-titlebar ').css({'background-color':'#26669e', 'border-bottom': 'solid 1px grey'});
+
+
+
     return;
   }
 
