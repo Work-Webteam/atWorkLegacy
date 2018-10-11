@@ -259,7 +259,7 @@
       draggable: true,
       width: "400px",
       show: { effect: "blind", duration: 800 },
-      background: '#FFFFFF',
+      background: 'white',
       buttons: {
         "Go To Webcast": redirectSubmit,
         Close: function(){
