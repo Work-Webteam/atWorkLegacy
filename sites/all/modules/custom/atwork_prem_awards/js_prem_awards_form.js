@@ -283,7 +283,7 @@
     });
 
     $("div.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix > button > span.ui-button-text").text("X");
-    $("div.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix > button > span.ui-button-text").css({"text-indent": "0px", "padding":"0em", "color":"red", "background": "white"});
+    $("div.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix > button > span.ui-button-text").css({"text-indent": "0px", "padding":"0em", "color":"red", "background-color": "white"});
     return;
   }
 
