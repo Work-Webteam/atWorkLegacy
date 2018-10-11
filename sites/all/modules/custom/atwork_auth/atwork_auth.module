@@ -26,7 +26,7 @@ function atwork_auth_init() {
     //dpm('false');
     //dpm($_SERVER['HTTP_SMUSER']);
   }
-  kint($_SERVER);
+  dpm($_SERVER);
 
  // rss.xml bypasses siteminder so can abort now
   if($_GET['q'] == 'rss.xml') return;
