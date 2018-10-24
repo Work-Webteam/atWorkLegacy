@@ -98,30 +98,39 @@ Drupal.behaviors.atwork_quicklinks = {
 /**
  * This function removes previous action to scroll to anchor, and replaces it with an animated scroll that leaves the desired content lower on the page, while also highlighting it.
  */
-	// to top right away
-if ( window.location.hash ) scroll(0,0);
-// void some browsers issue
-setTimeout( function() { scroll(0,0); }, 1);
-
 $(function() {
 
-    // current click function
-    $('.scroll').on('click', function(e) {
+  if(window.location.hash) {
+    var identifier = window.location.hash;
+    if($(identifier).hasClass("found")){
+      return;
+    } else {
+      // to top right away
+      if ( window.location.hash ) scroll(0,0);
+      // void some browsers issue
+      setTimeout( function() { scroll(0,0); }, 3);
+
+      // current click function
+      $(".scroll").on("click", function(e) {
         e.preventDefault();
         $('html, body').animate({
-            scrollTop: $($(this).attr('href')).offset().top - 200 + 'px'
-        }, 1000, 'swing');
-    });
+          scrollTop: $($(this).attr("href")).offset().top - 200 + "px"
+        }, 1000, "swing");
+      });
 
-    // *only* if we have anchor on the url
-    if(window.location.hash) {
+
+      // *only* if we have anchor on the url
+      if(window.location.hash) {
         // smooth scroll to the anchor id
-        $('html, body').animate({
-            scrollTop: $(window.location.hash).offset().top - 200 + 'px'
-				}, 1000, 'swing');
-				// Mark the location of the comment for 3 seconds so user can id it easier.
-				$(window.location.hash).next().effect("highlight", {color: '#E0ECF5'}, 3000);
+        $("html, body").animate({
+          scrollTop: $(window.location.hash).offset().top - 200 + "px"
+        }, 1000, "swing");
+        // Mark the location of the comment for 3 seconds so user can id it easier.
+        $(window.location.hash).next().effect("highlight", {color: "#E0ECF5"}, 3000);
+      }
     }
+    $(identifier).addClass("found");
+  }
 });
 	// Short term code to give a title on hover to banner div
 	//$('#header-box').prop('title', "First day of spring - March 20");
