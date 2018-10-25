@@ -84,3 +84,8 @@ date: 2018-04-24
 Module: Views
 Source: https://www.drupal.org/project/views/issues/2481401
 Issue: Views include is looking for an exposed filter that does not exist - this patch makes sure it also checks if the variable is set prior to running code.
+
+date: 2018-10-25
+Modules: Features
+Source: https://www.drupal.org/files/issues/2018-03-12/features-support_php_72-2931464-10.patch
+Issue: Fixing deprecated function that is breaking install in php7.2
