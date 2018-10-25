@@ -9,7 +9,7 @@
 
 
 (function($) {
-Drupal.behaviors.atwork_quicklinks = {
+Drupal.behaviors.atwork_comment_scroll = {
   attach: function (context, settings) {
  /*
 	// Variable to track cookie state
@@ -102,11 +102,12 @@ $(function() {
 
   if(window.location.hash) {
     var identifier = window.location.hash;
+    // Only want to run this once
     if($(identifier).hasClass("found")){
       return;
     } else {
       // to top right away
-      if ( window.location.hash ) scroll(0,0);
+      if ( window.location.hash ) scroll(0, 0);
       // void some browsers issue
       setTimeout( function() { scroll(0,0); }, 3);
 
@@ -129,6 +130,7 @@ $(function() {
         $(window.location.hash).next().effect("highlight", {color: "#E0ECF5"}, 3000);
       }
     }
+    // Make sure we mark that we have attached this behaviour now.
     $(identifier).addClass("found");
   }
 });
