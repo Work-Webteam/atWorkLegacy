@@ -290,6 +290,8 @@ function atwork_auth_menu() {
  * @return array Any GAL fields that have data. The format is that of a text field, IE: $field_name['und'][0]['value']
  */
 function _atwork_auth_add_gal_fields($user, $query_field = 'mail', $query_value = NULL, $additional_fields = array(), $additional_filters = '') {
+  drupal_set_message("Atwork no longer updates profiles from GAL directly. If something is wrong with your profile, please contact <a href='https://77000.gov.bc.ca/'>77000</a>", "error");
+  return;
   if ($query_field == 'mail' && (!isset($user->mail) && !$query_value)) {
     return;
   }
