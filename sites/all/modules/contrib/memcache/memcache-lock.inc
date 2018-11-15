@@ -16,7 +16,7 @@ $mc = dmemcache_object('semaphore');
 // dmemcache_object always returns TRUE, we don't need these stats but it forces
 // us to try and connect to memcache. If this fails, we can't store locks in
 // memcache.
-if (!$mc->getStats()) {
+if (!$mc || !$mc->getStats()) {
   $lock_file = DRUPAL_ROOT . '/includes/lock.inc';
 }
 require_once $lock_file;
