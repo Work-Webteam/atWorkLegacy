@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Copyright (c) 2003-2016, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
@@ -33,7 +33,13 @@ CKEDITOR.stylesSet.add( 'default', [
 
 	{ name: 'Italic Title',		element: 'h2', styles: { 'font-style': 'italic' } },
 	{ name: 'Subtitle',			element: 'h3', styles: { 'color': '#aaa', 'font-style': 'italic' } },
-	{
+	{ name: 'Lists',			element: 'ul', styles: { 'margin-top': '0px' } },
+	{ name: 'Img Left',			element: 'img', styles: { 'float': 'left','margin-right':'12px'} },
+	{ name: 'Img Right',			element: 'img', styles: { 'float': 'right','margin-left':'12px'} },
+	{ name: 'Img Ctr',			element: 'p', styles: { 'text-align':'center'} },
+  { name: 'Img Style Left',			element: 'img', styles: { 'float': 'left','padding':'5px','margin-right':'12px', 'border':'solid 1px #CCCCCC'} },
+  { name: 'Img Style Right',			element: 'img', styles: { 'float': 'right','padding':'5px','margin-left':'12px', 'border':'solid 1px #CCCCCC'} },
+  {
 		name: 'Special Container',
 		element: 'div',
 		styles: {
@@ -108,4 +114,3 @@ CKEDITOR.stylesSet.add( 'default', [
 	{ name: 'Borderless Table',		element: 'table',	styles: { 'border-style': 'hidden', 'background-color': '#E6E6FA' } },
 	{ name: 'Square Bulleted List',	element: 'ul',		styles: { 'list-style-type': 'square' } }
 ] );
-
