@@ -1,4 +1,9 @@
-# Created by https://www.gitignore.io/api/ for: sass,drupal,windows,macos,gulp,sublimetext
+# Ignore configuration files that may contain sensitive information.
+sites/*/settings*.php
+
+# Ignore paths that contain user-generated content.
+sites/*/files
+sites/*/private
 
 ### Sass ###
 .sass-cache/
