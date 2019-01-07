@@ -826,7 +826,8 @@ function sort_pin_applications($pin_nids = array()){
   // Array we will use to store array of lsa pin nodes sorted by supervisor
   $sorted_pin_list = array();
   foreach($pin_nids as $key => $value){
-    dpm($value['nid']);
+    // TODO: Now gather all of the nodes one at a time and pull out the nec fields, add them to array by supervisor.
+    dpm($value->nid);
   }
   return($sorted_pin_list);
 }
