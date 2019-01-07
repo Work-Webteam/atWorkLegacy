@@ -1,5 +1,4 @@
 <?php
-
 function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
   global $user;
   $user = user_load($user->uid);
@@ -768,9 +767,69 @@ function atwork_lsa_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id === 'lsa_application_node_form' ) {
 
   }
+  /*
+   * Create a button that fires a function that will generate letters and labels
+   */
+  if($form['#id'] === 'views-exposed-form-content-page-2') {
+    global $user;
+    $current_user = user_load($user->uid);
+    if (_atwork_is_admin($user)) {
+      //dpm($form_state);
+      $form['create-pin-letter'] = [
+        '#type' => 'submit',
+        '#value' => 'Generate Letters',
+        '#submit' => ['create_lsa_pin_letters'],
+        '#access' => ['admin'],
+        /*'#ajax' => array(
+          'callback' => 'administration/long-service-pin/create_lsa_pin_letters',
+          'event' => 'click',
+          'wrapper' => 'wrapper',
+          'progress' => array(
+            'type' => 'throbber',
+          ),
+        )*/
+      ];
+    }
+  }
 
 }
 
+/**
+ * Callback function that creates files for LSA pin letters and labels
+ */
+function create_lsa_pin_letters(){
+  drupal_set_message('Generating Files', 'status');
+  $all_application_nid = array();
+  // grab array of all application NID's
+  $all_application_nid = get_all_applications();
+  // Now load those id's one at a time and add them to an array sorted by supervisor
+  $sorted_lsa_pin_applications = sort_pin_applications($all_application_nid);
+}
+
+/**
+ * Helper function tasked with gathering and returning all lsa_pin nodes
+ */
+function get_all_applications(){
+  $lsa_applications = array();
+  // Create a query to get all lsa nodes
+
+  $query = db_query("SELECT nid FROM {node} WHERE type = 'lsa_pin_application'");
+  // Now grab them all and add them to the array one - by - one
+  $lsa_applications = $query->fetchAll();
+  return $lsa_applications;
+}
+
+/**
+ *Help function that loads and sorts LSA pins
+ */
+function sort_pin_applications($pin_nids = array()){
+  // Array we will use to store array of lsa pin nodes sorted by supervisor
+  $sorted_pin_list = array();
+  foreach($pin_nids as $key => $value){
+    dpm($value['nid']);
+  }
+  return($sorted_pin_list);
+}
 
 
 
