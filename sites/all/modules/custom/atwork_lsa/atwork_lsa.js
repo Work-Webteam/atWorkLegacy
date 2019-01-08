@@ -6,7 +6,10 @@
  *
  */
   function lsaGift() {
-
+  
+    // Hide the certificate name input if they change award
+   	$('#edit-field-lsa-25year-certificatename').hide();
+  
     if ($("input[name='field_lsa_register_last_year[und]']:checked").val() == 1){
       $('#edit-field-lsa-award-und-0-value').val("2017 Recipient - award received");
       $('#edit-field-lsa-award-id-und-0-value').val(1);
