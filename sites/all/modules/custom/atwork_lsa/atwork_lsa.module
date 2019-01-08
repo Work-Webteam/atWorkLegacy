@@ -804,6 +804,8 @@ function create_lsa_pin_letters(){
   $all_application_nid = get_all_applications();
   // Now load those id's one at a time and add them to an array sorted by supervisor
   $sorted_lsa_pin_applications = sort_pin_applications($all_application_nid);
+  // Pass this list to the pdf/label creation function
+  $create_pdf_labels = create_pdf_label($sorted_lsa_pin_applications);
 }
 
 /**
@@ -816,6 +818,7 @@ function get_all_applications(){
   $query = db_query("SELECT nid FROM {node} WHERE type = 'lsa_pin_application'");
   // Now grab them all and add them to the array one - by - one
   $lsa_applications = $query->fetchAll();
+  $query = null;
   return $lsa_applications;
 }
 
@@ -851,10 +854,53 @@ function sort_pin_applications($pin_nids = array()){
     $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']]['ministry email'] = $value->field_lsa_ministry_rep_email['und'][0]['safe_value'];
     // Ministry
     $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']]['ministry'] = $value->field_lsa_pin_ministry_org['und'][0]['value'];
+    // Supervisors name
+    $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']]['supervisor_first_name'] = $value->field_lsa_supervisor_first_name['und'][0]['safe_value'];
+    $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']]['supervisor_last_name'] = $value->field_lsa_supervisor_last_name['und'][0]['safe_value'];
   }
-  //dpm($check_node);
+  dpm($check_node);
+  // Lets make sure we aren't carrying around uneccesary mem
+  $pin_nids = null;
+  $unsorted_pin_list = null;
   //dpm($sorted_pin_list);
   return($sorted_pin_list);
+}
+
+/**
+ * Function that creates pdfs and txt files for emails and labels
+ * @param array $supervisor_list An array that contains applicants sorted by supervisor email
+ */
+function create_pdf_label($supervisor_list = array()){
+  require_once(drupal_get_path('module', 'atwork_lsa') . '/atwork_pin_lsa.pdf.inc');
+  require_once(drupal_get_path('module', 'atwork_lsa') . '/atwork_pin_lsa.label.inc');
+  require_once(drupal_get_path('module', 'atwork_lsa_admin') . '/fpdf/fpdf181/fpdf.php');
+  // Iterate through our list, creating labels and pdfs, thgen saving them in the file system.
+  foreach($supervisor_list as $key => $value){
+    dpm($value);
+    // Split up our array
+    $supervisor_name = $value['supervisor_first_name'] + ' ' + $value['supervisor_last_name'];
+    // Unset the fields after we use them so we can iterate through users later.
+    unset($value['supervisor_first_name']);
+    unset($value['supervisor_last_name']);
+    //Address for label
+    $label_address = $value['address'];
+    unset($value['address']);
+    // ministry
+    $ministry_number = $value['ministry'];
+    // Create pdf letter
+
+    // Create label
+    // Check for each part of path, create them if they don't exist
+    // LSA Pin path
+    // Date dir
+    // Ministry path
+    // Supervisor name path
+    // Save letter here
+    // LSA Pin path, Date dir, labels path
+    // label file
+    // append label to file
+  }
+
 }
 
 /**
