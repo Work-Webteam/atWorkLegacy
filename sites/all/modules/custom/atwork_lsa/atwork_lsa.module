@@ -825,14 +825,37 @@ function get_all_applications(){
 function sort_pin_applications($pin_nids = array()){
   // Array we will use to store array of lsa pin nodes sorted by supervisor
   $sorted_pin_list = array();
+  $nid_array = array();
   foreach($pin_nids as $key => $value){
     // TODO: Now gather all of the nodes one at a time and pull out the nec fields, add them to array by supervisor.
-    dpm($value->nid);
+    // Get the node id's into their own array
+    $nid_array[] = $value->nid;
   }
+  // Now load all nodes
+  $unsorted_pin_list = node_load_multiple($nid_array);
+  $check_node = array_slice($unsorted_pin_list, 2100);
+  foreach($check_node as $key=>$value){
+    $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']][] = array(
+      "first name" => $value->field_lsa_pin_first_name['und'][0]['safe_value'],
+      "last name" => $value->field_lsa_pin_last_name['und'][0]['safe_value'],
+      "milestone" => isset($value->field_lsa_pin_service_milestone['und'][0]['value'])? $value->field_lsa_pin_service_milestone['und'][0]['value']:"",
+      "other milestone" => isset($value->field_lsa_previous_service_miles['und'][0]['value'])? $value->field_lsa_previous_service_miles['und'][0]['value']:""
+    );
+    // Now we put in the office for the label - overwrite if this is not the first
+    $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']]['address'] = array(
+      "street" => $value->field_lsa_office_address['und'][0]['safe_value'],
+      "city" => $value->field_lsa_office_city['und'][0]['safe_value'],
+      "postal" => $value->field_lsa_office_postal_code['und'][0]['safe_value'],
+    );
+    // Ministry contact email
+    $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']]['ministry email'] = $value->field_lsa_ministry_rep_email['und'][0]['safe_value'];
+    // Ministry
+    $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']]['ministry'] = $value->field_lsa_pin_ministry_org['und'][0]['value'];
+  }
+  //dpm($check_node);
+  //dpm($sorted_pin_list);
   return($sorted_pin_list);
 }
-
-
 
 /**
  * implements hook_form_FORM_ID_alter
