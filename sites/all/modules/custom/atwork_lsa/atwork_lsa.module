@@ -904,13 +904,26 @@ function create_pdf_label($supervisor_list = array()){
     }
 
     // Create label in another function so we have this specific info to use
-    $label = set_mail_label($supervisor_name, $label_address);
+    $label = set_mail_label($supervisor_name, $label_address, $ministry);
+    $label_csv_record = array(
+      "Label" => $label
+    );
     // Now check if label file already exists
-    
+    $folder_check = 'public://lsa_pin/' . str_replace(" ", "", $ministry);
+    $check_dir = file_prepare_directory($folder_check, FILE_CREATE_DIRECTORY);
+    if($check_dir){
+      if(file_exists($folder_check . "/labels.csv")){
+        // Get this file to append something
+        $file = fopen($folder_check ."/lables.csv", "w");
+      } else {
+        // Make this text file and save it
+        $file = fopen($folder_check ."/lables.csv", "a");
+      }
+      fputcsv($file, $label_csv_record);
+      fclose($file);
+    }
     // Check for each part of path, create them if they don't exist
-    // LSA Pin path
-    // Date dir
-    // Ministry path
+
     // Supervisor name path
     // Save letter here
     // LSA Pin path, Date dir, labels path
@@ -920,9 +933,8 @@ function create_pdf_label($supervisor_list = array()){
 
 }
 
-function set_mail_label($supervisor_name, $label_address){
+function set_mail_label($supervisor_name, $label_address, $ministry){
   require(drupal_get_path('module', 'atwork_lsa') . '/atwork_pin_lsa.label.inc');
-  dpm($letter_label);
   return $letter_label;
 }
 
@@ -1071,7 +1083,7 @@ function atwork_lsa_node_page_view($node) {
           0 => array(
             'value' => $return_string_year,
             'format' => NULL,
-            'safe_value' => $return_string_year,
+            'safe_value' => $return_string_year,c
             ),
           ),
         );

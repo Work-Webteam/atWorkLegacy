@@ -5,6 +5,7 @@ $postal = isset($label_address['postal']) ? $label_address['postal'] : "No posta
 
 $letter_label = <<< EOT
   {$supervisor_name} 
+  {$ministry}
   {$street} 
   {$city} 
   {$postal}
