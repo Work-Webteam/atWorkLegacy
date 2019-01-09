@@ -164,7 +164,7 @@ function atwork_lsa_application_validate($form, &$form_state) {
     $form_state['input']['field_lsa_home_postal_code']['und'][0]['value'] = wordwrap($form_state['input']['field_lsa_home_postal_code']['und'][0]['value'], 3, ' ', true);
     // Make sure this is no more than 7 characters long
     if (strlen($form_state['input']['field_lsa_home_postal_code']['und'][0]['value']) > 7){
-      $form_state['input']['field_lsa_home_postal_code']['und'][0]['value'] = substr($node->field_lsa_home_postal_code[$lang][0]['value'],0,7);
+      $form_state['input']['field_lsa_home_postal_code']['und'][0]['value'] = substr($form_state['input']['field_lsa_home_postal_code']['und'][0]['value'],0,7);
     }
     $postal_check = str_replace(" ", "", $form_state['input']['field_lsa_home_postal_code']['und'][0]['value']);
     if(strlen($postal_check) < 6 || strlen($postal_check) > 6){
@@ -189,7 +189,7 @@ function atwork_lsa_application_validate($form, &$form_state) {
     $form_state['input']['field_lsa_office_postal_code']['und'][0]['value'] = wordwrap($form_state['input']['field_lsa_office_postal_code']['und'][0]['value'], 3, ' ', true);
     // Make sure this is no more than 7 characters long
     if (strlen($form_state['input']['field_lsa_office_postal_code']['und'][0]['value']) > 7){
-      $form_state['input']['field_lsa_office_postal_code']['und'][0]['value'] = substr($node->field_lsa_home_postal_code[$lang][0]['value'],0,7);
+      $form_state['input']['field_lsa_office_postal_code']['und'][0]['value'] = substr($form_state['input']['field_lsa_office_postal_code']['und'][0]['value'],0,7);
     }
     $postal_check = str_replace(" ", "", $form_state['input']['field_lsa_office_postal_code']['und'][0]['value']);
     if(strlen($postal_check) < 6 || strlen($postal_check) > 6){
@@ -215,7 +215,7 @@ function atwork_lsa_application_validate($form, &$form_state) {
     $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'] = wordwrap($form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'], 3, ' ', true);
     // Make sure this is no more than 7 characters long
     if (strlen($form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']) > 7){
-      $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'] = substr($node->field_lsa_home_postal_code[$lang][0]['value'],0,7);
+      $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'] = substr($form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value'],0,7);
     }
     $postal_check = str_replace(" ", "", $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']);
     if(strlen($postal_check) < 6 || strlen($postal_check) > 6){
@@ -852,14 +852,19 @@ function sort_pin_applications($pin_nids = array()){
     );
     // Ministry contact email
     $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']]['ministry email'] = $value->field_lsa_ministry_rep_email['und'][0]['safe_value'];
-    // Ministry
-    $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']]['ministry'] = $value->field_lsa_pin_ministry_org['und'][0]['value'];
+    // Get a list so we know the name of the ministry we have chosen
+    $ministry_names = field_info_field('field_lsa_pin_ministry_org');
+    $allowed_ministry_names = list_allowed_values($ministry_names);
+    if(array_key_exists($value->field_lsa_pin_ministry_org['und'][0]['value'], $allowed_ministry_names)){
+      $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']]['ministry_name'] = $allowed_ministry_names[$value->field_lsa_pin_ministry_org['und'][0]['value']];
+    } else {
+      $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']]['ministry_name'] = "unknown";
+    }
     // Supervisors name
     $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']]['supervisor_first_name'] = $value->field_lsa_supervisor_first_name['und'][0]['safe_value'];
     $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']]['supervisor_last_name'] = $value->field_lsa_supervisor_last_name['und'][0]['safe_value'];
   }
-  dpm($check_node);
-  // Lets make sure we aren't carrying around uneccesary mem
+  // Lets make sure we aren't carrying around unnecessary mem
   $pin_nids = null;
   $unsorted_pin_list = null;
   //dpm($sorted_pin_list);
@@ -872,13 +877,13 @@ function sort_pin_applications($pin_nids = array()){
  */
 function create_pdf_label($supervisor_list = array()){
   require_once(drupal_get_path('module', 'atwork_lsa') . '/atwork_pin_lsa.pdf.inc');
-  require_once(drupal_get_path('module', 'atwork_lsa') . '/atwork_pin_lsa.label.inc');
   require_once(drupal_get_path('module', 'atwork_lsa_admin') . '/fpdf/fpdf181/fpdf.php');
+  // WE need an array for each name followed by award milestone years
+  $recipients = array();
   // Iterate through our list, creating labels and pdfs, thgen saving them in the file system.
   foreach($supervisor_list as $key => $value){
-    dpm($value);
     // Split up our array
-    $supervisor_name = $value['supervisor_first_name'] + ' ' + $value['supervisor_last_name'];
+    $supervisor_name = $value['supervisor_first_name'] . ' ' . $value['supervisor_last_name'];
     // Unset the fields after we use them so we can iterate through users later.
     unset($value['supervisor_first_name']);
     unset($value['supervisor_last_name']);
@@ -886,10 +891,22 @@ function create_pdf_label($supervisor_list = array()){
     $label_address = $value['address'];
     unset($value['address']);
     // ministry
-    $ministry_number = $value['ministry'];
-    // Create pdf letter
+    $ministry = $value['ministry_name'];
+    unset($value['ministry_name']);
+    $ministry_contact = $value['ministry email'];
+    unset($value['ministry email']);
+    // To create pdf letter we need to iterate further.
+    foreach($value as $sub_key => $sub_value){
+      $recipients[] = array(
+        "name" => (isset($sub_value['first name']) ? $sub_value['first name'] : "") . ' ' . (isset($sub_value['last name']) ? $sub_value['last name'] : ""),
+        "milestones" => (isset($sub_value['milestone']) && $sub_value['milestone'] > 0 ? $sub_value['milestone'] : '') . ' ' . (isset($sub_value['other milestone']) && !empty($sub_value['other milestone']) ? $sub_value['other milestone'] : ''),
+        );
+    }
 
-    // Create label
+    // Create label in another function so we have this specific info to use
+    $label = set_mail_label($supervisor_name, $label_address);
+    // Now check if label file already exists
+    
     // Check for each part of path, create them if they don't exist
     // LSA Pin path
     // Date dir
@@ -901,6 +918,12 @@ function create_pdf_label($supervisor_list = array()){
     // append label to file
   }
 
+}
+
+function set_mail_label($supervisor_name, $label_address){
+  require(drupal_get_path('module', 'atwork_lsa') . '/atwork_pin_lsa.label.inc');
+  dpm($letter_label);
+  return $letter_label;
 }
 
 /**
