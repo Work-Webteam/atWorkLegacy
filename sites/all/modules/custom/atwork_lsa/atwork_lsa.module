@@ -800,6 +800,8 @@ function atwork_lsa_form_alter(&$form, &$form_state, $form_id) {
 function create_lsa_pin_letters(){
   drupal_set_message('Generating Files', 'status');
   $all_application_nid = array();
+  // first lets clean out the lsa_pin folder in case we are re-running.
+
   // grab array of all application NID's
   $all_application_nid = get_all_applications();
   // Now load those id's one at a time and add them to an array sorted by supervisor
@@ -871,19 +873,22 @@ function sort_pin_applications($pin_nids = array()){
   return($sorted_pin_list);
 }
 
+function sort_lsa_appications($pin_nids, $sorted_pin_list = array()){
+  //TODO: add lsa info to the same list.
+}
+
 /**
  * Function that creates pdfs and txt files for emails and labels
  * @param array $supervisor_list An array that contains applicants sorted by supervisor email
  */
 function create_pdf_label($supervisor_list = array()){
-  require_once(drupal_get_path('module', 'atwork_lsa') . '/atwork_pin_lsa.pdf.inc');
-  require_once(drupal_get_path('module', 'atwork_lsa_admin') . '/fpdf/fpdf181/fpdf.php');
-  // WE need an array for each name followed by award milestone years
-  $recipients = array();
+
   // Iterate through our list, creating labels and pdfs, thgen saving them in the file system.
   foreach($supervisor_list as $key => $value){
     // Split up our array
     $supervisor_name = $value['supervisor_first_name'] . ' ' . $value['supervisor_last_name'];
+    $supervisor_first = $value['supervisor_first_name'];
+    $supervisor_last = $value['supervisor_last_name'];
     // Unset the fields after we use them so we can iterate through users later.
     unset($value['supervisor_first_name']);
     unset($value['supervisor_last_name']);
@@ -896,17 +901,17 @@ function create_pdf_label($supervisor_list = array()){
     $ministry_contact = $value['ministry email'];
     unset($value['ministry email']);
     // To create pdf letter we need to iterate further.
+    $recipients = array();
     foreach($value as $sub_key => $sub_value){
       $recipients[] = array(
         "name" => (isset($sub_value['first name']) ? $sub_value['first name'] : "") . ' ' . (isset($sub_value['last name']) ? $sub_value['last name'] : ""),
-        "milestones" => (isset($sub_value['milestone']) && $sub_value['milestone'] > 0 ? $sub_value['milestone'] : '') . ' ' . (isset($sub_value['other milestone']) && !empty($sub_value['other milestone']) ? $sub_value['other milestone'] : ''),
-        );
+        "milestones" =>  (isset($sub_value['other milestone']) && $sub_value['other milestone'] > 0 ? $sub_value['other milestone'] . " " : '') . (isset($sub_value['milestone']) && $sub_value['milestone'] > 0 ? $sub_value['milestone'] : ''),
+      );
     }
-
     // Create label in another function so we have this specific info to use
     $label = set_mail_label($supervisor_name, $label_address, $ministry);
     $label_csv_record = array(
-      "Label" => $label
+      "Label" => strip_tags($label)
     );
     // Now check if label file already exists
     $folder_check = 'public://lsa_pin/' . str_replace(" ", "", $ministry);
@@ -922,20 +927,55 @@ function create_pdf_label($supervisor_list = array()){
       fputcsv($file, $label_csv_record);
       fclose($file);
     }
+    // Create letter
+    $date = date("F jS, Y");
+    $image_path = drupal_get_path('module', 'atwork_lsa') . "/letter-img.jpg";
+    $picture = file_get_contents($image_path);
+    $image_64 = chunk_split(base64_encode($picture));
+    $size = getimagesize($image_path);
+    $letter = set_letter($label, $ministry_contact, $supervisor_first, $supervisor_last, $recipients, $date, $image_64, $size );
     // Check for each part of path, create them if they don't exist
-
-    // Supervisor name path
-    // Save letter here
-    // LSA Pin path, Date dir, labels path
-    // label file
-    // append label to file
+    if($check_dir){
+      if(file_exists($folder_check . "/" . $key . "-letter")){
+        $file = fopen($folder_check . "/letters.html", "w");
+      } else {
+        $file = fopen($folder_check . "/letters.html", "a");
+      }
+      fwrite($file, $letter);
+      fclose($file);
+    }
   }
-
 }
 
+/**
+ * @param string $supervisor_name
+ * @param array $label_address
+ * @param string $ministry
+ *
+ * Function that puts together a text block holding address info
+ *
+ * @return string $letter_label
+ */
 function set_mail_label($supervisor_name, $label_address, $ministry){
   require(drupal_get_path('module', 'atwork_lsa') . '/atwork_pin_lsa.label.inc');
   return $letter_label;
+}
+
+/**
+ * @param string $label
+ * @param string $ministry_contact
+ * @param string $supervisor_first
+ * @param string $supervisor_last
+ * @param array $recipients
+ * @param date $date
+ * @param string $image_64
+ * @param array $size
+ *
+ * @return string $letter_text
+ */
+function set_letter($label, $ministry_contact, $supervisor_first, $supervisor_last, $recipients, $date, $image_64, $size ){
+  require(drupal_get_path('module', 'atwork_lsa') . '/atwork_pin_lsa.pdf.inc');
+  return $letter_text;
 }
 
 /**

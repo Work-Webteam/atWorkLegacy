@@ -4,10 +4,10 @@ $city = isset($label_address['city']) ? $label_address['city'] : "No city provid
 $postal = isset($label_address['postal']) ? $label_address['postal'] : "No postal code provided.";
 
 $letter_label = <<< EOT
-  {$supervisor_name} 
-  {$ministry}
-  {$street} 
-  {$city} 
-  {$postal}
+  {$supervisor_name} <br />   
+  {$ministry}   <br /> 
+  {$street}    <br /> 
+  {$city}, B.C.    <br /> 
+  {$postal}   <br /> 
 EOT;
 
