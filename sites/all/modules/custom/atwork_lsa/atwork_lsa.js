@@ -9,7 +9,10 @@
   
     // Hide the certificate name input if they change award
    	$('#edit-field-lsa-25year-certificatename').hide();
-  
+   	
+   	// Donation amount field for Option A should be readonly
+   	$('#edit-field-donation-amount-und-0-value').attr("readonly", true);
+   	
     if ($("input[name='field_lsa_register_last_year[und]']:checked").val() == 1){
       $('#edit-field-lsa-award-und-0-value').val("2017 Recipient - award received");
       $('#edit-field-lsa-award-id-und-0-value').val(1);
@@ -128,6 +131,11 @@
    *  Creates gift button linking to atwork_lsa_gift.js functions
    */
   function set_form() {
+  
+    $('#edit-field-lsa-award-id').hide();
+    $('#lsa-declaration').css("margin-top", "20px");
+    
+  
     // For some reason, we have a term/privacy notice that looks very strange at the bottom of this page. Hide it.
     $('#block-block-31').hide();
     // Gift button - links user to gift choices outlined in atwork_lsa_gift.js
@@ -141,7 +149,7 @@
     $('#retirement_message').hide();
     $('#field-lsa-date-of-retirement-add-more-wrapper').hide();
     // Message for users from previous year who never received their gift
-    var lost_gift = $('<div id="lost_gift_message"><span style="color:red "> *Please take time to send a quick <a href="mailto:LongServiceAwards@gov.bc.ca?subject=LSA%20award%20not%20yet%20received">email</a> to the Long Service Awards team and let us know your award is still outstanding</span></div>');
+    var lost_gift = $('<div id="lost_gift_message"><span style="color:red "> *Please take time to send a quick <a href="mailto:LongServiceAwards@gov.bc.ca?subject=LSA%20award%20not%20yet%20received">email</a> to the Long Service Awards team and let us know you haven\'t received your award yet.</span></div>');
     $('#edit-field-lsa-received-award').append(lost_gift);
     $('#lost_gift_message').hide();
     // Message for recipients who have completed 45 || 50 years
@@ -298,7 +306,18 @@
         $('#edit-field-lsa-dietary-guest').slideUp();
       } 
     });
-
+    
+    // Hide ceremony/dietary accommodations if user selects award only
+    $('#edit-field-award-only-und').click(function() {
+      if($('#edit-field-award-only-und').is(":checked")){
+      	$('.required-fields.group-lsa-accom.field-group-fieldset.form-wrapper').hide();
+      	$('.required-fields.group-lsa-dietary-acc.field-group-fieldset.form-wrapper').hide();
+      }else {
+      	$('.required-fields.group-lsa-accom.field-group-fieldset.form-wrapper').show();
+      	$('.required-fields.group-lsa-dietary-acc.field-group-fieldset.form-wrapper').show();
+      }
+    });
+    
     $('#edit-field-lsa-register-last-year-und').change(function () {
       lsaGift();
       change_award_year();
@@ -311,6 +330,7 @@
       $("#edit-field-lsa-award-und-0-value").val("");
       // Wipe out picture
       $(".lsa-award-selector-img-display-panel.imageeditor-inline-processed").hide();
+      $("#edit-field-lsa-25year-certificatename").css("display", "none !important");
       // Wipe award ID
       $("#edit-field-lsa-award-id-und-0-value").val("");
       lsaGift();
@@ -320,6 +340,10 @@
     
     $('#edit-field-lsa-received-award').change(function () {
       lsaGift();
+    });
+    
+    $('#field_lsa_award_id').change(function () {
+      set_pecsef_option_A();
     });
 
     $('#edit-field-lsa-retiring-thisyear-und').change(function () {
@@ -459,6 +483,31 @@
     }
   }
 
+  function set_pecsef_option_A(){
+    switch($('#field_lsa_award_id').val()){
+      case '7':
+      	$('#edit-field-donation-amount-und-0-value').val('$75.00');
+      	break;
+      case '13':
+      	$('#edit-field-donation-amount-und-0-value').val('$150.00');
+      	break;
+      case '33':
+      	$('#edit-field-donation-amount-und-0-value').val('$300.00');
+      	break;
+      case '40':
+      	$('#edit-field-donation-amount-und-0-value').val('$400.00');
+      	break;
+      default:
+      	if ($("input[name='field_lsa_years_of_service[und]']:checked").val() == 45) {
+      		$('#edit-field-donation-amount-und-0-value').val('$450.00');
+      	}else  {
+      		$('#edit-field-donation-amount-und-0-value').val('$500.00');
+      	}
+      	break;
+    }
+  }
+  
+  
   /**
    * Here we need to make required fields required if specific options have been checked.
    */
@@ -472,13 +521,13 @@
       $('#edit-field-lsa-pecsf-id-und-0-value').prop("required", false);
       $('#edit-field-lsa-pecsf-charity-name-und-0-value').prop("required", false);
     }
-    if($('#edit-field-lsa-donation-options-und-0').is(":visible")){
-      $("#edit-field-lsa-25year-certificatename-und-0-value").show();
-      $('#edit-field-lsa-25year-certificatename').show();
-      $("#edit-field-lsa-25year-certificatename-und-0-value").prop("required", true);
-    } else {
-      $("#edit-field-lsa-25year-certificatename-und-0-value").hide();
-      $("#edit-field-lsa-25year-certificatename-und-0-value").prop("required", false);
-    }
+    //if($('#edit-field-lsa-donation-options-und-0').is(":visible")){
+    //  $("#edit-field-lsa-25year-certificatename-und-0-value").show();
+    //  $('#edit-field-lsa-25year-certificatename').show();
+    //  $("#edit-field-lsa-25year-certificatename-und-0-value").prop("required", true);
+    //} else {
+    //  $("#edit-field-lsa-25year-certificatename-und-0-value").hide();
+    //  $("#edit-field-lsa-25year-certificatename-und-0-value").prop("required", false);
+    //}
   }
 })(jQuery);
