@@ -149,7 +149,7 @@
     $('#retirement_message').hide();
     $('#field-lsa-date-of-retirement-add-more-wrapper').hide();
     // Message for users from previous year who never received their gift
-    var lost_gift = $('<div id="lost_gift_message"><span style="color:red "> *Please take time to send a quick <a href="mailto:LongServiceAwards@gov.bc.ca?subject=LSA%20award%20not%20yet%20received">email</a> to the Long Service Awards team and let us know you haven\'t received your award yet.</span></div>');
+    var lost_gift = $('<div id="lost_gift_message"><span style="color:red "> *Please take time to send a quick <a href="mailto:LongServiceAwards@gov.bc.ca?subject=LSA%20award%20not%20yet%20received">email</a> to the Long Service Awards team and let us know you haven\'t received your award yet</span></div>');
     $('#edit-field-lsa-received-award').append(lost_gift);
     $('#lost_gift_message').hide();
     // Message for recipients who have completed 45 || 50 years
@@ -183,19 +183,10 @@
 
     // There will be no instructions unless we actually are choosing an award
     $('#edit-field-lsa-award-sp-instructions').hide();
+    
     // Hide PECSF unless user selects this choice
-    var award_value = $('#edit-field-lsa-award-id-und-0-value').val();
-    if($.inArray(award_value, ["7","13","33","40","42","44"]) > -1){
-      $("#pecsf-fields").show();
-      $('#field-lsa-25year-certificatename-add-more-wrapper').show();
-    }else if ($('#edit-field-lsa-years-of-service-und-25').is(":checked")){
-      $('#field-lsa-25year-certificatename-add-more-wrapper').show();
-      // If we made it here, it is not pecsf
-      $('#pecsf-fields').hide();
-    }else{
-      $('#pecsf-fields').hide();
-      $('#field-lsa-25year-certificatename-add-more-wrapper').hide();
-    }
+    set_pecsf_fields();
+    
         // Change text for pecsf options (too long for text box in setup)
     $("label[for=edit-field-lsa-donation-options-und-0]").html('Option A: Make a PECSF donation to the <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity" target="_blank">fund supported pool of charities in my region</a>.');
     $("label[for=edit-field-lsa-donation-options-und-1]").html('Option B: Make a PECSF donation to one or two charities of my choice. (Find the PECSF ID number for your choice(s) by reviewing the <a href="https://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions" target="_blank">charity list by region</a>.)');
@@ -326,11 +317,13 @@
     });
 
     $('#edit-field-lsa-years-of-service').change(function () {
+      $('#edit-field-lsa-award-id-und-0-value').prop("checked", false);
+      $('#edit-field-lsa-donation-amount-und-0-value').val('');
+      $('#pecsf-fields').hide();
       // If they change year - wipe award
       $("#edit-field-lsa-award-und-0-value").val("");
       // Wipe out picture
       $(".lsa-award-selector-img-display-panel.imageeditor-inline-processed").hide();
-      $("#edit-field-lsa-25year-certificatename").css("display", "none !important");
       // Wipe award ID
       $("#edit-field-lsa-award-id-und-0-value").val("");
       lsaGift();
@@ -340,10 +333,6 @@
     
     $('#edit-field-lsa-received-award').change(function () {
       lsaGift();
-    });
-    
-    $('#field_lsa_award_id').change(function () {
-      set_pecsef_option_A();
     });
 
     $('#edit-field-lsa-retiring-thisyear-und').change(function () {
@@ -421,6 +410,7 @@
       set_pecsef($("input[name='field_lsa_years_of_service[und]']:checked").val());
     });
     $('#edit-field-lsa-donation-options-und-0').on('click', function(){
+      set_pecsf_option_A();
       $('.collapsible.required-fields.group-lsa-first-donation.field-group-fieldset.form-wrapper.collapse-processed').slideUp('fast');
       // For IE we have to explicitly tell it to open the field under here for some stupid reason
       $('#edit-field-lsa-pecsf-region').show();
@@ -483,8 +473,12 @@
     }
   }
 
-  function set_pecsef_option_A(){
-    switch($('#field_lsa_award_id').val()){
+  function set_pecsf_option_A(){
+  console.log($('#edit-field-lsa-award-id-und-0-value').val());
+    switch($('#edit-field-lsa-award-id-und-0-value').val()){
+      case '0':
+      	$('#edit-field-donation-amount-und-0-value').val('$75.00');
+      	break;
       case '7':
       	$('#edit-field-donation-amount-und-0-value').val('$75.00');
       	break;
@@ -521,13 +515,32 @@
       $('#edit-field-lsa-pecsf-id-und-0-value').prop("required", false);
       $('#edit-field-lsa-pecsf-charity-name-und-0-value').prop("required", false);
     }
-    //if($('#edit-field-lsa-donation-options-und-0').is(":visible")){
-    //  $("#edit-field-lsa-25year-certificatename-und-0-value").show();
-    //  $('#edit-field-lsa-25year-certificatename').show();
-    //  $("#edit-field-lsa-25year-certificatename-und-0-value").prop("required", true);
-    //} else {
-    //  $("#edit-field-lsa-25year-certificatename-und-0-value").hide();
-    //  $("#edit-field-lsa-25year-certificatename-und-0-value").prop("required", false);
-    //}
+    if($('#edit-field-lsa-donation-options-und-0').is(":visible")){
+      $("#edit-field-lsa-25year-certificatename-und-0-value").show();
+      $('#edit-field-lsa-25year-certificatename').show();
+      $("#edit-field-lsa-25year-certificatename-und-0-value").prop("required", true);
+    } else {
+      $("#edit-field-lsa-25year-certificatename-und-0-value").hide();
+      $("#edit-field-lsa-25year-certificatename-und-0-value").prop("required", false);
+    }
+  }
+  
+  function set_pecsf_fields() {
+    //Hide PECSF unless user selects this choice
+    var award_value = $('#edit-field-lsa-award-id-und-0-value').val();
+    if($('#edit-field-lsa-award-id-und-0-value').is(":checked")) {
+      $('#edit-field-lsa-award-id-und-0-value').prop("checked", false);   
+    }
+    if($.inArray(award_value, ["7","13","33","40","42","44"]) > -1){
+      $("#pecsf-fields").show();
+      $('#field-lsa-25year-certificatename-add-more-wrapper').show();
+    }else if ($('#edit-field-lsa-years-of-service-und-25').is(":checked")){
+      $('#field-lsa-25year-certificatename-add-more-wrapper').show();
+      // If we made it here, it is not pecsf
+      $('#pecsf-fields').hide();
+    }else{
+      $('#pecsf-fields').hide();
+      $('#field-lsa-25year-certificatename-add-more-wrapper').hide();
+    }
   }
 })(jQuery);
