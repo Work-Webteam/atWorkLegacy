@@ -315,7 +315,7 @@ function features_export_render($export, $module_name, $reset = FALSE) {
   $code = array_filter($code);
   foreach ($code as $filename => $contents) {
     if ($filename != '_files') {
-      $code[$filename] = "<?php\n/**\n * @file\n * {$module_name}.{$filename}.inc\n */\n\n". implode("\n\n", $contents) ."\n";
+      $code[$filename] = "<?php\n\n/**\n * @file\n * {$module_name}.{$filename}.inc\n */\n\n". implode("\n\n", $contents) ."\n";
     }
   }
 
@@ -332,8 +332,8 @@ function features_export_render($export, $module_name, $reset = FALSE) {
   $code['info'] = features_export_info($export);
 
   // Used to create or manipulate the generated .module for features.inc.
-  $modulefile_features_inc = "<?php\n/**\n * @file\n * Code for the {$export['name']} feature.\n */\n\ninclude_once '{$module_name}.features.inc';\n";
-  $modulefile_blank = "<?php\n/**\n * @file\n * Drupal needs this blank file.\n */\n";
+  $modulefile_features_inc = "<?php\n\n/**\n * @file\n * Code for the {$export['name']} feature.\n */\n\ninclude_once '{$module_name}.features.inc';\n";
+  $modulefile_blank = "<?php\n\n/**\n * @file\n * Drupal needs this blank file.\n */\n";
 
   // Prepare the module
   // If module exists, let it be and include it in the files
@@ -1115,13 +1115,12 @@ function features_remove_recursion($o) {
 }
 
 /**
-+ * Callback function for preg_replace_callback() to remove recursion.
-+ */
+ * Callback function for preg_replace_callback() to remove recursion.
+ */
 function _features_remove_recursion($m) {
-    $r = "\x00{$m[1]}ecursion_features";
-    return 's:' . strlen($r . $m[2]) . ':"' . $r . $m[2] . '";';
+  $r = "\x00{$m[1]}ecursion_features";
+  return 's:' . strlen($r . $m[2]) . ':"' . $r . $m[2] . '";';
 }
-
 
 /**
  * Helper to removes a set of keys an object/array.

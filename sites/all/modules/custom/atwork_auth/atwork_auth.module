@@ -6,8 +6,9 @@
  *
  */
 function atwork_auth_init() {
-  if (isset($_SERVER['HTTP_SMUSER']) ? $_SERVER['HTTP_SMUSER'] == 'twerdal' : FALSE) {
-	//$_SERVER['HTTP_SMGOV_USEREMAIL'] = 'some@email.com';
+
+  if (isset($_SERVER['HTTP_SM_USER']) ? $_SERVER['HTTP_SM_USER'] == 'twerdal' : FALSE) {
+    //$_SERVER['HTTP_SMGOV_USEREMAIL'] = 'some@email.com';
     //dpm(list_extract_allowed_values(variable_get('atwork_auth_gal_fieldmap', ''), 'list_text', FALSE));
     //$_SERVER['HTTP_SMUSER'] = 'IDIR\TWERDAL';
     //$_SERVER['HTTP_SMGOV_USERGUID'] = 'abcd';

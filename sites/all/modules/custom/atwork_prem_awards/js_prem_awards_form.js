@@ -255,10 +255,12 @@
     dialog = $('#modal-pop').dialog({
       autoOpen: true,
       modal: true,
-      opacity: 1,
+      opacity: 1.00,
       draggable: true,
+      width: "400px",
       show: { effect: "blind", duration: 800 },
-      background: '#FFFFFF',
+      background: 'white',
+      color: 'white',
       buttons: {
         "Go To Webcast": redirectSubmit,
         Close: function(){
@@ -280,6 +282,18 @@
         dialog.dialog("destroy").remove();
       }
     });
+
+    // No idea where teh actual css for this is - didn't carry over to the production site, so recreating it here as the dialog is built.
+    $("div.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix > button > span.ui-button-text").text("X");
+    $("div.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix > button > span.ui-button-text").css({"text-indent": "0px", "padding":"0em", "color":"red"});
+    $("div.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix > button").css({"background-color":"beige", 'border': 'solid 1px grey'});
+
+    // These are the actual colors that Chris picked
+    $('.front .ui-dialog').css({'background-color': 'beige', 'border': 'solid 1px grey'});
+    $('.front .ui-widget .ui-dialog-titlebar ').css({'background-color':'#26669e', 'border-bottom': 'solid 1px grey'});
+
+
+
     return;
   }
 
