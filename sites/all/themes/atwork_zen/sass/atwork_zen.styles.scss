@@ -221,6 +221,7 @@ html {
 /* YouTube videos embedded in article/background pages */
 iframe.media-youtube-player {
  width: 100%;
+ height:400px;    
 }
 /* Site wide links -------------------------------------------------------*/
 a {
@@ -1843,9 +1844,17 @@ nav.breadcrumb a:hover {
   margin: 0 0 20px 0;
   padding: 0;
 }
-.section-news .pre-title-snipet,
-.no-sidebars.node-type-image.section-groups .pre-title-snipet {
-  display: none;
+.section-news .pre-title-snipet {
+  display:none;
+}
+.no-sidebars.node-type-image.section-groups {
+  .pre-title-snipet {
+    display: block;
+    padding: 8px;
+  }
+  h1#page-title {
+    display:none;
+  }
 }
 /* Pager found on multiple page landing pages -------------------------------------------------------*/
 .html.not-front.logged-in ul.pager,
@@ -1904,7 +1913,9 @@ nav.breadcrumb a:hover {
 }
 .field-name-field-tags ul.field-items {
   margin: 0;
-  padding: 0 5px 0 0;
+  padding: 2px 5px 0 0;
+  text-transform: uppercase;
+  font-size: .85em;
 }
 
 .field-name-field-tags ul.field-items li {
@@ -2331,6 +2342,7 @@ aside.sidebars h2 {
   font-style: oblique;
   display: block;
   float: left;
+  font-size:.95em;
 }
 .page-galleries .view-gallery-reference .views-field-nothing,
 .sidebar-first.og-context.og-context-node .view-display-id-page_2 .views-field-nothing,
@@ -2362,7 +2374,7 @@ aside.sidebars h2 {
 .section-series #block-views-article-series-block-6 .article-series-views,
 .section-series #block-views-article-series-block-7 .article-series-views {
   float: right;
-  margin-right: 15px;
+  margin-right: 10px;
   font-style: oblique;
 }
 .gallery-status {
@@ -2390,8 +2402,33 @@ aside.sidebars h2 {
   padding:5px 10px;
 }
 
-
-
+/****************** Recent/All Comments page ***************************/
+ul.recent-comment-line {
+  border-bottom: solid 1px #a7a7a7;
+  list-style-type: none;
+  margin: 0 0 12px 0;
+  padding: 8px 8px 0;
+  .recent-comment-body {
+    margin: 0 0 8px;
+  }
+  .recent-comment-author {
+    display: block;
+    font-size:.9em;
+    padding-top:5px;
+  }
+}
+.view-recent-comments {
+  #edit-type {
+    position: relative;
+    top: -20px;
+    left: 40px;
+  }
+  .views-submit-button {
+    position: relative;
+    top: -18px;
+    left: 35px;
+  }
+}
 
 
 /*----------------- Article ID bars - Used to denote content creation type --------------------*/
@@ -2913,6 +2950,7 @@ aside.sidebars h2 {
   display:inline-block;
   width: 48.5%;
   margin-right: 15px;
+  float:left;
 }
 .page-executive-team #content .attachment-before .profile-image img {
   height: auto;
@@ -3533,6 +3571,24 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 #block-block-33 .block__title.block-title {
   display: none;
 }
+
+.page-node-add-lsa-application .lsa-award-selector-img-display-panel {
+  border-radius: 9px;
+  box-shadow: 2px 2px lightgray;
+  padding: 10px;
+  border: 1px solid gray;
+  margin: 5px 20px 20px 50px;
+  float: left;
+}
+
+.form-type-radio.form-item-field-lsa-donation-options-und:nth-child(3) {
+  display: inline-block !important;
+  label {
+    display: inline !important;
+  }
+}
+
+
 /*----------------- End of Section--------------------*/
 
 
@@ -4785,6 +4841,46 @@ article.node-question .tiled-node-links {
 /*#####################################################################################################################################################*/
 /** Discussion Forum Page Specific -------------------------------------------------------*/
 /*#####################################################################################################################################################*/
+.page-forum {
+  .forum-table-description a,
+  .forum-node-create-links a {
+      border: solid 1px #D7D7D7;
+      padding: 3px 5px;
+      background-color: beige;
+      display: inline-block;
+      margin-top: 5px;
+  }
+  .forum-node-create-links a {
+      margin-bottom: 5px;
+  }
+  div.forum-node-create-links:nth-child(5) {
+      display: none;
+  }
+  #forum-pager-top .pager {
+      display: none;
+  }
+  #forum-pager-bottom .pager {
+      float:none;
+      padding:inherit;
+  }
+  .forum-topic-legend {
+      display: inline-block;
+      margin-top: 5px;
+      div {
+      clear:right;
+      padding: 5px 0 8px 25px;
+  }
+}
+  .view-advanced-forum-topic-list {
+      #forum-sort {
+          margin-top: 10px;
+      }
+      border-bottom:solid 1px #D7D7D7;
+      padding-bottom:5px;
+  }
+}
+
+
 .comAnon {
   margin: 10px 0 0;
 }
@@ -4821,46 +4917,54 @@ table.forum-table-forums td.forum-last-reply {
   padding: 10px;
 }
 /*----------------- Individual Forum Listings --------------------*/
-.page-forum .views-field-last-updated {
-  padding: 10px;
-}
-.forum-table-topics td.views-field-last-updated .username {
-  font-weight: bold;
-}
-.page-forum .forum-table-description,
-.page-forum #forum .forum-node-create-links-top {
-  background-color: #26669e;
-  float: right;
-  padding: 5px 15px;
-  margin-top: -52px;
-  width: auto;
-  margin-right: -36px;
-}
-.page-forum .forum-table-description a,
-.page-forum #forum .forum-node-create-links-top a {
-  color: #FFF;
+#forum-topic-header {
+  margin-bottom: 8px;
+  border-bottom: solid 4px #008d7b;
+  .topic-post-count {
+    margin: 0;
+  }
 }
 
-#forum-sort {
-  display: none;
+div.forum-post {
+  border: solid 1px #a7a7a7;
+  .forum-post-info {
+    background-color: #ececec;
+    padding: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-bottom: solid 1px #a7a7a7;
+  }
+  .forum-post-panel-main {
+    margin-right: 25px;
+    padding-top:10px;
+    border: solid 1px #b7b7b7;
+    margin-top: 10px;
+  }
+  .author-pane {
+    margin: 0px 10px;
+    background-color: #ececec;
+    padding: 5px;
+    border: solid 1px #b7b7b7;
+    font-size: .9em;
+  }
+  .form-item.form-type-item {
+    margin-bottom: .5em;
+  }
 }
-.forum-tools {
-  margin: 0;
-  padding: 0;
-  width: 200px;
-}
-#forum-pager-bottom {
-  float: none;
-  width: 70%;
-}
-.forum-list-icon-legend {
-  display: none;
+.node-type-forum {
+  h2.title.comment-form {
+    border-bottom: solid 4px #008d7b;
+  }
+  #comment-form {
+    margin: 0;
+    padding: 15px;
+    background-color: #d7d7d7;
+  }
+  #edit-author--2 {
+    margin:0;
+  }
 }
 /*----------------- End of Section--------------------*/
-
-
-
-
 
 
 

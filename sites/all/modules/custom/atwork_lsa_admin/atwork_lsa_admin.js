@@ -1,7 +1,127 @@
 (function ($) {
+  $(document).ready(function () {
+    var awardName = $(".field-name-field-lsa-award .field-item.odd").text();
+	  var giftImages = giftListImages(); 
+  
+    var selectedAward= giftImages[awardName.trim()]; 
+	  $(".field-name-field-lsa-award").after('<div><img id="lsa-award-selector-img-display-panel" /></div>');
+	  $("#lsa-award-selector-img-display-panel").css({"border-radius":"9px","box-shadow":"2px 2px lightgrey","padding":"10px","border":"1px solid gray","margin":"5px 0 20px 50px"}).attr({"src":selectedAward["URI"]});  
+
+	  //Move RSVP block down the page
+	  $("#block-views-lsa-admin-block-lsa-rsvp").insertAfter("#lsa-award-selector-img-display-panel");
+	  $(".node-type-lsa-application #edit-actions--21").css({'text-align':'center','margin-top':'15px','margin-bottom':'15px'});
+
+
+    $('.field-name-field-lsa-ceremony-response select option[value="_none"]').text('- Select your RSVP -');
+    
+    // Hide and style recipient/guest dietary requirements dropdown
+    $(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").hide();
+    $(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").hide().parent().css("overflow", "hidden");
+    $(".field.field-name-field-lsa-ceremony-accommodation").hide();
+    
+    //Show/hide dietary requirements input
+    if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '1') {
+    	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").show();
+    	if(!$('.field-name-field-lsa-ceremony-response select option[value="1"]').prop("selected")) {
+    	  $(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").show();
+    	}
+    }else if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '0') {
+    	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").hide();
+    	$(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").hide();
+    }
+    
+    //Show/hide contact information for updating
+    if($("input[name='field_do_you_need_to_update_your[und]']:checked").val() == 0) {
+    	$("#node-lsa-application-full-group-lsad-contact-info").hide();
+    	$(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed").hide();
+    } else if($("input[name='field_do_you_need_to_update_your[und]']:checked").val() == 1) {
+    	$("#node-lsa-application-full-group-lsad-contact-info").show();
+    	$(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed").show();
+    }
+
+    // Show accessibility textbox instructions
+    var accessibilityInstructions = "<p> If needed, please confirm the accessibility requirements that you and/or your guest " +
+    	"require to attend the Long Service Awards ceremony (e.g. sign language interpreter (ASL), service dog, " +
+    	"accessible parking/entrance, etc.).</p><br>";
+    
+    // Show accessibility instructions
+    $(accessibilityInstructions).insertAfter(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above .field-label");
+    $('.field.field-name-field-do-you-need-to-update-your.field-type-list-boolean.field-label-above').css({"margin-top": "15px"});
+    
+    var consentText = "<br><br><strong>Notice of Collection, Consent, and Authorization</strong><br>" +
+    	"<em>Employees attending this event may appear on camera. " +
+    	"Personal information including photo, video and/or voice, and any other information " +
+    	"may be collected and used by the BC Public Service Agency to support communications " +
+    	"and engagement within and on behalf of the BC Public Service. This information is " +
+    	"being collected under the authority of section 26(c) of the Freedom of Information " +
+    	"and Protection of Privacy Act (FOIPPA). <br>By registering for this ceremony, " +
+    	"you agree to your personal information being disclosed to BC Public Service " +
+    	"employees (e.g. @Work Corporate Intranet, @Work Newsletter, events, brochures, " +
+    	"reports) and/or used and disclosed outside of Canada to a public site " +
+    	"(e.g. YouTube, Twitter). This personal information will be accessed by BC Public " +
+    	"Service employees and may also be accessed by the public. Should you have any " +
+    	"questions about the collection or disclosure of this information, please contact: " +
+    	"EmployeeNews@gov.bc.ca, 976 Meares St. Victoria, BC, V8V 3J4.</em>";
+
+    $(consentText).insertAfter(".node-lsa-application #node-lsa-application-full-group-lsad-contact-info");
+
+    //Hide fields if not attending
+    if($('.field-name-field-lsa-ceremony-response select option[value="3"]').prop("selected")) {
+    	$("#special-dietary-requirements").hide();
+    	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").hide();
+    }
+  });
+  
+  // Hide guest dietary requests if no-guest-attending is selected.
+  $('.field-name-field-lsa-ceremony-response select').change(function() {
+    if($('.field-name-field-lsa-ceremony-response select option[value="1"]').prop("selected")) {
+    	//attending without guest
+    	$("#special-dietary-requirements").show();
+    	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").show();
+    	if($('.form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und input[value="1"]').prop('checked')) {
+    		$('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "none"});
+    	}
+    } else if($('.field-name-field-lsa-ceremony-response select option[value="2"]').prop("selected")){
+    	//attending with guest
+console.log(2);
+    	$("#special-dietary-requirements").show();
+    	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").show();
+    	if($('.form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und input[value="1"]').prop('checked')) {
+    		$('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "inline-block"});
+    	}
+    } else if ($('.field-name-field-lsa-ceremony-response select option[value="3"]').prop("selected")){
+    	$("#special-dietary-requirements").hide();
+    	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").hide();
+    }
+  });
+  
+  //Show/hide dietary requirements input
+  $("#special-dietary-requirements").click(function () {
+    if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '1') {
+    	console.log(1);
+    	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").css({"display": "inline-block"});
+    	if(!$('.field-name-field-lsa-ceremony-response select option[value="1"]').prop("selected")) {
+    	  $(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").css({"display": "inline-block"});
+    	}
+    }else if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '0') {
+    	console.log(2);
+    	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").css({"display": "none"});
+    	$(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").css({"display": "none"});
+    }
+  });
+  
+  //Show/hide contact information 
+  $(".field.field-name-field-do-you-need-to-update-your.field-type-list-boolean.field-label-above").click(function () {
+  if($("input[name='field_do_you_need_to_update_your[und]']:checked").val() == 0) {
+  	$("#node-lsa-application-full-group-lsad-contact-info").hide();
+  	$(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed").hide();
+  } else if($("input[name='field_do_you_need_to_update_your[und]']:checked").val() == 1) {
+  	$("#node-lsa-application-full-group-lsad-contact-info").show();
+  	$(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed").show();
+  }
+  });
 
   // Close all shown buttons save on click
-
   function close_button(){
       // At this point, the modules css hides the button after we click it, so no need to do it ourselves.
       // Misses this one:
@@ -99,9 +219,10 @@
     var checkMessage = $('.messages--status.messages.status').text();
     if(checkMessage.indexOf("RSVP") >= 0){
       // If it is the string we are looking for, place the message lower and focus on it.
-      $('.messages--status.messages.status').insertAfter('#editableviews-entity-form-lsa-admin');
+      //$('.messages--status.messages.status').insertAfter('#editableviews-entity-form-lsa-admin');
       // replace the text with a call to move to step 2
-      $('.messages--status.messages.status').text("Your RSVP has been saved. Please move on to Step 2 below.");
+      //$('.messages--status.messages.status').text("Your RSVP has been received. Thank you!");
+      //$(submitMessage).insertAfter(".messages--status.messages.status");
     }
 
     // Change all save buttons to "save changes"
@@ -115,19 +236,14 @@
     }
 
     var years_of_service = $(".field.field-name-field-lsa-years-of-service.field-type-list-integer.field-label-inline.clearfix div.field-items div.field-item").text();
+    var award_name = $(".field.field-name-field-lsa-award.field-type-text.field-label-inline.clearfix div.field-items div.field-item").text();
 
     // Do they get a certificate?
-    if(years_of_service != "25"){
-      $("div.field.field-name-field-lsa-25year-certificatename").hide();
-      $(".field-name-field-lsa-certificate-ordered").hide();
+    if(years_of_service != "25" && award_name.indexOf("PECSF") < 0){
+    	$(".field.field-name-field-lsa-25year-certificatename.field-type-text.field-label-inline.clearfix").hide();
+    }else {
+    	$(".field.field-name-field-lsa-25year-certificatename.field-type-text.field-label-inline.clearfix").show();
     }
-    if($("input[name='field_lsa_certificate_ordered[und]']").prop("checked") == true){
-      $(".field-name-field-lsa-25year-certificatename").show();
-    } else {
-      $(".field-name-field-lsa-25year-certificatename").hide();
-    }
-
-    var award = $(".field.field-name-field-lsa-award.field-type-text.field-label-inline.clearfix").text();
 
     // Did they choose a watch?
     if(years_of_service == "35" && award.indexOf("Watch") >= 0){
@@ -280,7 +396,7 @@
     
     close_button();
     settings();
-    setTooltip();
+    //setTooltip();
     document.body.addEventListener('click', open_button, true);
   });
 

@@ -134,8 +134,6 @@ nav ol {
 img {
   /* Remove border when inside `a` element in IE 8/9. */
   border: 0;
-  /* Improve image quality when scaled in IE 7. */
-  -ms-interpolation-mode: bicubic;
 
   /* Suppress the space beneath the baseline */
   /* vertical-align: bottom; */
@@ -149,7 +147,7 @@ img {
   image-rendering:   -o-auto;         /* Opera */
   image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
   /*image-rendering: auto;*/
-  -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
+  -ms-interpolation-mode: bicubic;  /* IE (non-standard property) */
 }
 
 /* Correct overflow displayed oddly in IE 9. */

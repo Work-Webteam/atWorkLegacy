@@ -6,7 +6,6 @@
  */
 
 (function ($) {
-
   /**
    * Helper function that hides admin fields from non-admins
    */
@@ -26,7 +25,7 @@
     $('.collapsible.collapsed.required-fields.group-lsa-administration.field-group-fieldset.form-wrapper.collapse-processed').hide();
 
     // Certificate
-    $('#field-lsa-25year-certificatename-add-more-wrapper').hide();
+    //$('#field-lsa-25year-certificatename-add-more-wrapper').hide();
 
     // Award Special Instructions
     $('#field-lsa-award-sp-instructions-add-more-wrapper').hide();

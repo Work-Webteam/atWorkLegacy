@@ -19,12 +19,6 @@ jQuery(function () {
 	  jQuery(this).css({"margin-left": "0"});
   });
   
-  jQuery(".node-type-simplenews #comment-body")
-    .css({"padding-left": "0"})
-    .contents()
-      .filter(function() {
-        return this.nodeType === 3;
-      })
-      .wrap('<p style="margin: 0 0 0 15px;"></p>');
+  jQuery(".node-type-simplenews #comment-body p").css({"margin-top" : "10px"});
   
 });

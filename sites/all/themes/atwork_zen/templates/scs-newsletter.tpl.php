@@ -23,9 +23,6 @@ if(!isset($comment)){
 // A file that will take the above vars, returning an associate array with keys                                                                                                                                                                                                                                                                                                                                    
 include_once drupal_get_path('module', 'atwork_newsletter') . "/atwork_newsletter.inc";                                                                                                                                                                                                                                                                                                                            
                                                                                                                                                                                                                                                                                                                                                                                                                    
-//Build render array for dynamic content                                                                                                                                                                                                                                                                                                                                                                           
-$atwork_newsletter_render_array = atwork_newsletter_create_render_arrays($nodes, $comment, $notes, $did_you_know);                                                                                                                                                                                                                                                                                                 
-                                                                                                                                                                                                                                                                                                                                                                                                                   
 // Grab (probable) publishing date for webtrends                                                                                                                                                                                                                                                                                                                                                                   
 if(date('D') === 'Wed') {                                                                                                                                                                                                                                                                                                                                                                                          
 	// Publish date is current date                                                                                                                                                                                                                                                                                                                                                                                
@@ -34,6 +31,9 @@ if(date('D') === 'Wed') {
 	// Publish date is next wednesday                                                                                                                                                                                                                                                                                                                                                                              
 	$pubDate = "?nl=" . date("dmy", strtotime("next Wednesday"));                                                                                                                                                                                                                                                                                                                                                  
 }                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+//Build render array for dynamic content                                                                                                                                                                                                                                                                                                                                                                           
+$atwork_newsletter_render_array = atwork_newsletter_create_render_arrays($nodes, $comment, $notes, $did_you_know, $pubDate);                                                                                                                                                                                                                                                                                                 
                                                                                                                                                                                                                                                                                                                                                                                                                    
 // Get base URL                                                                                                                                                                                                                                                                                                                                                                                                    
 $atwork_base_url = $GLOBALS['base_url'];                                                                                                                                                                                                                                                                                                                                                                           
@@ -166,7 +166,7 @@ $atwork_base_url = $GLOBALS['base_url'];
                 <tr>
                   <td align="right">
                     <div class="content-type">
-                      <?php echo '<p style="font-family: Calibri, sans-serif; margin-right:10px; margin-bottom: 10px; padding-top: 10px; padding-right: 10px; border-top: solid 1px #000;"> <a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . $pubDate . '"> News </a> </p>'; ?>                    
+                      <?php echo '<p style="font-family: Calibri, sans-serif; margin-right:10px; margin-bottom: 10px; padding-top: 10px; padding-right: 10px; border-top: solid 1px #000;"> <a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/executive-messages' . $pubDate . '"> Executive Messages </a> </p>'; ?>                    
                     </div>
                   </td>
                 </tr>
@@ -209,16 +209,19 @@ $atwork_base_url = $GLOBALS['base_url'];
   		if(isset($images) && $images){
   			// Grab the features sized image
   			foreach($images as $image){
-  				// We can get image by image size - $image['height'] && $image['width']
-  				// For some reason, sizes come in at like 774 instead of 775, so we will look for a range here in case we are a pixel or two off.
-  				$height = intval($image['height']);
-  				$width = intval($image['width']);
-  				if(($height > 245 && $height < 255) && ($width > 770 && $width < 780)){
-  					// Get image that has feature image range so we can load it in the next part.
-  					$feature_image = $image;
-  					//We wil only take the first match.
-  					break;
-  				}
+          // Make sure we have images first
+          if(isset($image['height']) && isset($image['width'])){
+            // We can get image by image size - $image['height'] && $image['width']
+            // For some reason, sizes come in at like 774 instead of 775, so we will look for a range here in case we are a pixel or two off.
+            $height = intval($image['height']);
+            $width = intval($image['width']);
+            if(($height > 245 && $height < 255) && ($width > 770 && $width < 780)){
+              // Get image that has feature image range so we can load it in the next part.
+              $feature_image = $image;
+              //We wil only take the first match.
+              break;
+            }
+          }
   			}
   			// Make sure we have a feature image
   			if(!isset($feature_image)){
@@ -233,7 +236,12 @@ $atwork_base_url = $GLOBALS['base_url'];
   				),
   		));
   		$image_markup = render($image_output);
-  		
+
+  		//Add image tracker link.
+  		$image_ref;
+  		preg_match('/<a href=.*">/',$image_markup,$image_ref);
+  		$image_ref = substr_replace($image_ref,$pubDate,-2,0);
+    	$image_markup = preg_replace('/<a href=.*">/',$image_ref[0],$image_markup);
   	} ?>
   		
   <!-- Start Feature Spot Section for Newsletter -->
@@ -285,7 +293,13 @@ $atwork_base_url = $GLOBALS['base_url'];
                 <!--  Output Read More & News Links -->
                 <tr>
                   <?php echo '<td style="padding: 0 0 5px 0;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" > Read more >> </a></td>'; ?>
-                  <?php echo '<td style="padding: 0 0 5px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/news' . $pubDate . '"> News </a></td>'; ?>
+                  <?php 
+                  	if($node_first->executive_message) {
+                      echo '<td style="padding: 0 0 5px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/executive-messages' . $pubDate . '"> Executive Messages </a></td>';
+                  	} else {
+                  		echo '<td style="padding: 0 0 5px 0; text-align: right;"><a style="text-decoration: none; color:#004B8D; font-family: Calibri, sans-serif; font-size:10pt;" href="' . $atwork_base_url . '/news' . $pubDate . '"> News </a></td>';
+                    }
+                  ?>
                 </tr>
                 
               </table>
@@ -324,6 +338,9 @@ $atwork_base_url = $GLOBALS['base_url'];
           
           // Get summary for current node
           $atwork_newsletter_body = $curr_node->body['und'][0]['summary'];
+          // Sanitize summary for images
+          $atwork_newsletter_body = preg_replace("/<img[^>]+\>/i", "", $atwork_newsletter_body ); 
+
           
           // Build title for article
           $output_atwork_newsletter_title = '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px;"><a style="text-decoration: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" >' . $atwork_newsletter_title . '</a></h2>';
@@ -349,21 +366,21 @@ $atwork_base_url = $GLOBALS['base_url'];
           $height = $height[0];
           $width = $width[0];
           
-          // Calculate Aspect ratio
-          $hw_ratio = ($height / $width);
-          $wh_ratio = ($width/ $height);
-          
           $height = 'height="161"';
           $width = 'width="247"';
           
           // Set image style
-          //$image_markup = str_replace('img', 'img style="margin: auto; display: block; height: 161px; width: 247px;"', $image_markup);
           $image_markup = str_replace('img', 'img class="outlook-image-margin" style="display: block; height: 161px; width: 247px;"', $image_markup);
           
           // Insert new rationalized dimensions and display Photo.
           $image_markup = preg_replace('/width="[0-9]+"/', $width, $image_markup);
           $image_markup = preg_replace('/height="[0-9]+"/', $height, $image_markup);
-
+          
+          //Add image tracker link.
+          $image_ref;
+          preg_match('/<a href=.*">/',$image_markup,$image_ref);
+          $image_ref = substr_replace($image_ref,$pubDate,-2,0);
+          $image_markup = preg_replace('/<a href=.*">/',$image_ref[0],$image_markup);
     ?>  
     
     <!-- Output News Article -->
@@ -381,9 +398,6 @@ $atwork_base_url = $GLOBALS['base_url'];
               <div class="article-image">
                 <?php echo $image_markup; ?>
               </div>
-            </td>
-            <td>
-              <?php echo '<img class="outlook-padding-image-size" src = "' . $atwork_base_url . '/sites/all/themes/atwork/images/whitespace_10_179.png" style="height: 100px;"/>'; ?>
             </td>
             <td width=66% valign="top">
               <table width=97% border="0" cellpadding="0" cellspacing="0" style="border-bottom: 1px solid black;" >
@@ -414,7 +428,13 @@ $atwork_base_url = $GLOBALS['base_url'];
                     <?php echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_aliased . '" > Read more >> </a>'; ?>
                   </td>
                   <td style="padding: 0 0 5px 0; text-align: right;">
-                    <?php echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; font-size: 10pt;" href="' . $atwork_base_url . '/news' . $pubDate . '"> News </a>'; ?>
+                  <?php 
+                  if($curr_node->executive_message) {
+                  		echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; font-size: 10pt;" href="' . $atwork_base_url . '/executive-messages'. $pubDate . '"> Executive Messages </a>';
+                  	} else {
+                  		echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; font-size: 10pt;" href="' . $atwork_base_url . '/news' . $pubDate . '"> News </a>';
+                    }
+                  ?>
                   </td>
                 </tr>
                 
@@ -453,7 +473,7 @@ $atwork_base_url = $GLOBALS['base_url'];
           <tr>
             <td height="30" style="background-color:#E0ECF5;">
               <h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; margin-top: 10px; margin-left: 10px; margin-right: 15px;"> Take Note </h2>
-              <div class="outlook-didyouknow-takenote-title" style="margin-left: 15px; font-family: Calibri,sans-serif; font-size:12pt; line-height: 20px; margin-right: 27px; margin-bottom: 20px;" >
+              <div class="outlook-didyouknow-takenote-title" style="margin-left: 15px; text-decoration: none; font-family: Calibri,sans-serif; font-size:12pt; line-height: 20px; margin-right: 27px; margin-bottom: 20px;" >
                 <?php echo $atwork_newsletter_render_array['take_note']['value']; ?>
               </div>
             </td>
@@ -508,7 +528,10 @@ $atwork_base_url = $GLOBALS['base_url'];
       	$atwork_blog_aliased = drupal_get_path_alias('node/' . $atwork_blog_location) . $pubDate;
       	
       	// Grab teaser of news story for output
-      	$atwork_blog_body = field_get_items('node', $curr_node, 'body');
+        $atwork_blog_body = field_get_items('node', $curr_node, 'body');
+        // Sanitize teaser for images
+        $atwork_blog_body[0]['summary'] = preg_replace("/<img[^>]+\>/i", "", $atwork_blog_body[0]['summary']); 
+
       	
       	// Build title for blog
       	$output_atwork_blog_title = '<h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px; margin-left: 10px; margin-right: 10px;"><a style="text-decoration: none; color:#004B8D;" href="' . $atwork_base_url . '/' . $atwork_blog_aliased . '" >' . $atwork_blog_title . '</a></h2>';
@@ -537,7 +560,7 @@ $atwork_base_url = $GLOBALS['base_url'];
           </td>
         </tr>
         <tr>
-          <td colspan="2" style="padding: 5px 0 0 15px; color:#004B8D">
+          <td colspan="2" style="padding: 15px 0 0 15px; color:#004B8D">
             <?php echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; /*line-height: 24px;*/ font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_blog_aliased. '" > Read more >> </a>';?>
           </td>
         </tr>
@@ -545,7 +568,7 @@ $atwork_base_url = $GLOBALS['base_url'];
           <td style="padding: 0 0 5px 15px; color:#004B8D">
             <p style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">
               <?php echo "Posted by: ";?>
-              <?php echo '<a style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; font-size: 10pt;" href="' . $atwork_base_url . '/employees/' . $author_name_blog . '">' . $blog_author_name_full . '</a>'; ?>
+              <?php echo '<a style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; font-size: 10pt;" href="' . $atwork_base_url . '/employees/' . $author_name_blog . $pubDate . '">' . $blog_author_name_full . '</a>'; ?>
             </p>
           </td>
           <td style="padding: 0 0 5px 0; color:#004B8D;text-align: right;">
@@ -579,7 +602,7 @@ $atwork_base_url = $GLOBALS['base_url'];
             <td class="outlook-comment-blog-title" style="line-height: 24px; border-bottom: none !important;" valign="top" colspan="2">
               <div class="outlook-comment-blog-title" outlook-body style="line-height: 24px;" >
                 <h2 style="font-family: Georgia, Times New Roman, Times, serif; font-size:22px; line-height: 24px; color:#004B8D; margin-top: 0px; margin-left: 15px; margin-bottom: 15px;">
-                  <?php echo '<a style="text-decoration: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . '">Join the Conversation</a>'; ?>
+                  <?php echo '<a style="text-decoration: none; color:#004B8D; text-align: top;" href="' . $atwork_base_url . '/comment/' . $atwork_newsletter_render_array['comments']->cid . $pubDate . '#comment-' . $atwork_newsletter_render_array['comments']->cid . '">Join the Conversation</a>'; ?>
                 </h2>
               </div>
             </td>
@@ -590,15 +613,15 @@ $atwork_base_url = $GLOBALS['base_url'];
             </td>
           </tr>
           <tr>
-            <td class="outlook-no-mso-border" colspan="2" style="padding: 5px 0 0 15px; color:#004B8D">
-              <?php echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; /*line-height: 24px;*/ font-size: 10pt;" href="' . $atwork_base_url . '/' . $atwork_newsletter_render_array['comments']->parent_url . '" > Read more >> </a>';?>
+            <td class="outlook-no-mso-border" colspan="2" style="padding: 15px 0 0 15px; color:#004B8D">
+              <?php echo '<a style="text-decoration: none; color:#004B8D; font-family: Calibri,sans-serif; /*line-height: 24px;*/ font-size: 10pt;" href="' . $atwork_base_url . '/comment/' . $atwork_newsletter_render_array['comments']->cid .  $pubDate . '#comment-' . $atwork_newsletter_render_array['comments']->cid . '" > Read more >> </a>';?>
             </td>
           </tr>
           <tr>
             <td style="padding: 0 0 5px 15px; color:#004B8D">
               <p style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">
                 <?php echo "Posted by: ";?>
-                <?php echo '<a style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; font-size: 10pt;" href="' . $atwork_base_url . '/employees/' . $atwork_newsletter_render_array['comments']->registered_name . '">' . $atwork_newsletter_render_array['comments']->name. '</a>';?>
+                <?php echo '<a style="text-decoration: none; font-family: Calibri,sans-serif; color:#004B8D; font-size: 10pt;" href="' . $atwork_base_url . '/employees/' . $atwork_newsletter_render_array['comments']->registered_name . $pubDate . '">' . $atwork_newsletter_render_array['comments']->name. '</a>';?>
               </p>
             </td>
             <td style="padding: 0 0 5px 0; color:#004B8D;text-align: right;">

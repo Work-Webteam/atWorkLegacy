@@ -368,9 +368,6 @@
       line-height: 12px;
     }
     span.activity-comment ~ a {
-      &:before {
-        content:"...";
-      }
       display: inline;
       float: right;
       font-size: .9em;
@@ -475,6 +472,9 @@
       &.clearfix:after {
         display: inline-block; // fix for odd bottom space on first posting
       }
+      p {
+        margin-bottom: 10px;
+      }
       p:first-of-type { // the status message shouldn't crowd the like link
         max-width: 500px;
       }
@@ -483,19 +483,13 @@
         margin-top: 1em;
         display: block;
       }
-      p:first-of-type + p + p:before { // target exactly the only 3rd p
+      p:first-of-type + p:before { // wrap comments in quote marks
         margin-left: 0.3em;
-        @include quotes-open;
       }
       .activity-comment {
         margin-left: 0.3em;
         &:before {
           @include quotes-open;
-        }
-      }
-      p:nth-last-of-type(2) {
-        &:after {
-          @include quotes-closed;
         }
       }
     }

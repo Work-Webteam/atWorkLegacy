@@ -7,7 +7,7 @@
         settings.atwork_prem_awards.user = 'Employee News';
       }
       // Only run if the link exists in the current page load or fragment refresh.
-      // Note: this module requires the activiation of a block, and that you create a button or link with a specific ID in the ad space
+      // Note: this module requires the activiation of a block, and that you create a button or link with a specific ID (#prem-awards-form) in the ad space
       $('#prem-awards-form:not(.atwork-prem-awards-processed)', context)
         .addClass('atwork-prem-awards-processed')
         .bind('click', function (){
@@ -150,7 +150,7 @@
       $('.error-note-webcast').remove();
       $('.fieldset-prem-award-class-' + currentSid + ' select.prem-award-input').css('border-color', 'green');
     }
-    if(attend.length < 1 || attend == 0 || ($.isNumeric(attend)==false)){
+    if(attend.length < 1 || attend < 1 || ($.isNumeric(attend)==false)){
       $('.error-note-attend').remove();      
       $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-attending').css('border-color', 'red');
       $('.fieldset-prem-award-class-' + currentSid + ' .prem-award-attending').after('<p class="error-note-attend" style="color: red;">* Attending field cannot be blank and must be numeric, please enter number of viewers.</p>');
@@ -255,10 +255,12 @@
     dialog = $('#modal-pop').dialog({
       autoOpen: true,
       modal: true,
-      opacity: 1,
+      opacity: 1.00,
       draggable: true,
+      width: "400px",
       show: { effect: "blind", duration: 800 },
-      background: '#FFFFFF',
+      background: 'white',
+      color: 'white',
       buttons: {
         "Go To Webcast": redirectSubmit,
         Close: function(){
@@ -280,6 +282,18 @@
         dialog.dialog("destroy").remove();
       }
     });
+
+    // No idea where teh actual css for this is - didn't carry over to the production site, so recreating it here as the dialog is built.
+    $("div.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix > button > span.ui-button-text").text("X");
+    $("div.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix > button > span.ui-button-text").css({"text-indent": "0px", "padding":"0em", "color":"red"});
+    $("div.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix > button").css({"background-color":"beige", 'border': 'solid 1px grey'});
+
+    // These are the actual colors that Chris picked
+    $('.front .ui-dialog').css({'background-color': 'beige', 'border': 'solid 1px grey'});
+    $('.front .ui-widget .ui-dialog-titlebar ').css({'background-color':'#26669e', 'border-bottom': 'solid 1px grey'});
+
+
+
     return;
   }
 
@@ -311,11 +325,11 @@
             } else {
               formString += '<option value="' +  items.webcasts.vancouver_island + '">' +  items.webcasts.vancouver_island + '</option>';
             }
-            if(castValue == items.webcasts.lower_mainland){
-              formString += '<option value="' + castValue + '" selected>' + castValue + '</option>';
-            } else {
-              formString += '<option value="' + items.webcasts.lower_mainland + '">' +  items.webcasts.lower_mainland + '</option>';
-            }
+            //if(castValue == items.webcasts.lower_mainland){
+            //  formString += '<option value="' + castValue + '" selected>' + castValue + '</option>';
+            //} else {
+            //  formString += '<option value="' + items.webcasts.lower_mainland + '">' +  items.webcasts.lower_mainland + '</option>';
+            //}
             if(castValue == items.webcasts.interior_north){
               formString += '<option value="' + castValue + '" selected>' + castValue + '</option>';
             } else {
@@ -339,7 +353,7 @@
           // Cancel button in case they don't want to edit afterall
           formString += '<input type="button" class="cancel-show-input-field" sid="' + index + '" value="Cancel">';
           // Holder button to fire a function to post changes. This is hidden initially
-          formString += '<input type="button" class="save-form-field" sid="' + index + '" value="save">';
+          formString += '<input type="button" class="save-form-field" sid="' + index + '" value="Save">';
 
         formString += '</fieldset>';
       }
@@ -368,7 +382,7 @@
         // Get proper dates/times for this.
         formString += '<option value="--- Choose a Webcast ---">--- Choose a Webcast ---</option>';
         formString += '<option value="' +  items.webcasts.vancouver_island + '">' +  items.webcasts.vancouver_island + '</option>';
-        formString += '<option value="' +  items.webcasts.lower_mainland + '">' +   items.webcasts.lower_mainland + '</option>';
+        //formString += '<option value="' +  items.webcasts.lower_mainland + '">' +   items.webcasts.lower_mainland + '</option>';
         formString += '<option value="' +   items.webcasts.interior_north + '">' + items.webcasts.interior_north + '</option>';
         formString += '</select>';
       // Number attending bundle
@@ -388,7 +402,7 @@
       // Cancel button in case they don't want to edit afterall
       formString += '<input type="button" class="cancel-show-input-field" sid="Null" id="'+ timeStamp + '" value="Cancel">';
       // Holder button to fire a function to post changes. This is hidden initially
-      formString += '<input type="button" class="save-form-field" sid="Null" id="'+ timeStamp + '" value="save">';
+      formString += '<input type="button" class="save-form-field" sid="Null" id="'+ timeStamp + '" value="Save">';
     formString += '</fieldset>';
     return formString;
   }

@@ -12,7 +12,7 @@
         print render($content);
         ?>
       <?php if ($signature): ?>
-        <div class="signature"><?php print $signature ?></div>
+        <div class="signature"><?php print $signature ?></div>  
       <?php endif; ?>
     </div>
     

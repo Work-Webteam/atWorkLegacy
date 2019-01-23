@@ -12,32 +12,99 @@
  *    @return array
  */
 
-function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_you_know){
+function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_you_know, $track_date){
 	$atwork_base_url = $GLOBALS['base_url'];
 	$comment = NULL;
-	
+
+	// Check for Exec Messages
+	foreach($nodes as $node){
+		$node->executive_message = FALSE;
+	  foreach($node->field_tags['und'] as $terms) {
+	  	$tag_object = taxonomy_term_load($terms['tid']);
+	  	if($tag_object->name == 'Executive updates') {
+	    	$node->executive_message = TRUE;
+	    }
+    }
+	}
 	if($comments !== '') {
+		
 		// Load Comment Object
-		$comment = comment_load($comments);
+		$comment = comment_load($comments['cid']);
+		$comment->edited = $comments['value'];
 		
 		// Retrieve Username from UID and place in comments array
 		$user = user_load($comment->uid);
-		
-		$comment->comment_body['und'][0]['formatted'] = '<p class="outlook-comment-body" style="margin: 0 10px 0 15px; font-size: 12pt; font-family: Calibri,sans-serif; padding-bottom: 10px; line-height: 20px;">"'
-		  . substr($comment->comment_body['und'][0]['value'], 3);
-		$comment->comment_body['und'][0]['formatted'] = str_replace('<p>', '<p class="outlook-comment-body" style="margin: 0 10px 0 15px; font-size: 12pt; font-family: Calibri,sans-serif; padding-bottom: 10px; line-height: 20px;">', $comment->comment_body['und'][0]['formatted']);
-		$comment->comment_body['und'][0]['formatted'] = str_replace('</p>', '</p>', $comment->comment_body['und'][0]['formatted']);
+		$comment->name = $user->field_display_name['und'][0]['safe_value'];
+		// We need to remove any image tags
+		$comment->comment_body['und'][0]['formatted'] = preg_replace("/<img[^>]+\>/i", "", $comment->comment_body['und'][0]['value'] ); 
+		// Get rid of <p>&nbsp;</p> if author has dropped in a bunch of returns
+		$pattern = "/<p>*(?:[[:blank:]]|[[:space:]]|\s|\W|X|h|\t|\r|\n)*<\/p>/";
+		$comment->comment_body['und'][0]['formatted'] = preg_replace($pattern, '',$comment->edited);
+		// Trim whitespace
 		$comment->comment_body['und'][0]['formatted'] = trim($comment->comment_body['und'][0]['formatted']);
-		$comment->comment_body['und'][0]['formatted'] = substr($comment->comment_body['und'][0]['formatted'],0,-6) .  '"</p>';
-		
+		// We need to check if this is an HTML comment or a regular text comment. Start by prefixing an x to the front so that we
+		// Do not have to deal with the case where the match occurs at 0 (mistaken for false)
+		// HTML Case
+		if(strpos('x' . $comment->comment_body['und'][0]['formatted'], '<p>') !== false){
+			// remove first and last <p> tags
+			$comment->comment_body['und'][0]['formatted'] = substr($comment->comment_body['und'][0]['formatted'], 3);
+			$comment->comment_body['und'][0]['formatted'] = substr($comment->comment_body['und'][0]['formatted'], 0, -4);
+			// Change any double quotes to single quotes (if the author has started or ended comment with a quote or something)
+			// NOTE: The double quotes that are used onsite are not regular " so we need to use the correct ones.
+			$comment->comment_body['und'][0]['formatted'] = str_replace("“","'",$comment->comment_body['und'][0]['formatted']);
+			$comment->comment_body['und'][0]['formatted'] = str_replace("”","'",$comment->comment_body['und'][0]['formatted']);
+			$comment->comment_body['und'][0]['formatted'] = str_replace("\"","'",$comment->comment_body['und'][0]['formatted']);
+
+			// Now replace all remaining <p> tags with proper formatting
+			$comment->comment_body['und'][0]['formatted'] = str_replace('<p>', '<p class="outlook-comment-body" style="margin: 0 10px 0 15px; font-size: 12pt; font-family: Calibri,sans-serif; padding-bottom: 10px; line-height: 20px;">', $comment->comment_body['und'][0]['formatted']);
+			// Now add double quotes to front and end of comment
+			$comment->comment_body['und'][0]['formatted'] = "“" . $comment->comment_body['und'][0]['formatted'] . "”";
+			// Adding in formating for outlook
+			$comment->comment_body['und'][0]['formatted'] = '<p class="outlook-comment-body" style="margin: 0 10px 0 15px; font-size: 12pt; font-family: Calibri,sans-serif; padding-bottom: 10px; line-height: 20px;">' . $comment->comment_body['und'][0]['formatted'] . '</p>';
+		}
+		// Text case
+		else {
+			// replace all existing double-quotes with single quotes
+			$comment->comment_body['und'][0]['formatted'] = str_replace("\"","'",$comment->comment_body['und'][0]['formatted']);
+			// Add stylized quotes for newsletter
+			$comment->comment_body['und'][0]['formatted'] = "“" . $comment->comment_body['und'][0]['formatted'] . "”";
+			// Put in HTML tags so that we have the proper font
+			$comment->comment_body['und'][0]['formatted'] = '<p class="outlook-comment-body" style="margin: 0 10px 0 15px; font-size: 12pt; font-family: Calibri,sans-serif; padding-bottom: 10px; line-height: 20px;">' . $comment->comment_body['und'][0]['formatted'] . '</p>';
+		}
 		// Add in link to parent article
 		$parent = node_load($comment->nid);
 		$comment->parent_url = drupal_get_path_alias('node/' . $comment->nid);
 	} 
+
+	//Add webtrends tracker string to internal links only for 'take note'
+	$note_links = array(); 
+	preg_match_all('/<a href="http:\/\/gww.gov.bc.ca.*">/',$notes['value'],$note_links);
+	
+	$i = 0;
+	foreach($note_links[0] as $link){
+		$link = substr_replace($link,$track_date,-2,0);
+		$notes['value'] = str_replace($note_links[0][$i],$link,$notes['value']);
+	  $i++;
+	}
 	
 	//Fix formatting in bulleted lists in Take Note
 	$notes = str_replace('<ul>', '<ul style="font-family: Calibri,sans-serif; font-size:12pt; margin-top: 10px; margin-right: 10px; margin-bottom: 20px;">', $notes);
 	$notes = str_replace('<li>', '<li class="outlook-list" style="margin-left: 5px;">', $notes);
+	$notes = str_replace('href', 'style="text-decoration: none;" href', $notes);
+	
+	//Add webtrends tracker string to internal links only for 'did you know'
+	$didyouknow_links = array(); 
+	preg_match_all('/<a href="http:\/\/gww.gov.bc.ca.*">/',$did_you_know['value'],$didyouknow_links);
+	
+	$i = 0;
+	foreach($didyouknow_links[0] as $link){
+		$link = substr_replace($link,$track_date,-2,0);
+		$did_you_know['value'] = str_replace($didyouknow_links[0][$i],$link,$did_you_know['value']);
+	  $i++;
+	}
+	
+	//Add style to remove outlook links in did you know text.
+	$did_you_know = str_replace('href', 'style="text-decoration: none;" href', $did_you_know);
 	
 	// If a comment/note/did you know were NOT entered, our value should be "none" - we may want to account for this possibility here or in the template when deciding how exactly to theme in these instances
 	$atwork_newsletter_render_array = array(
@@ -49,7 +116,7 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 	
 	//Directory/image locations on prod
 	$articlesDir = '/sites/default/files/';
-	$newsletterDir = '/var/www/html-8888/mem_fs/images/';
+	$newsletterDir = '/var/www/html/nl_images/images/';
 	$imgSrc = NULL;
 	$imgDest = NULL;
 	$error = NULL;

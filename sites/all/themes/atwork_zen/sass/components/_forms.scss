@@ -1,13 +1,18 @@
 // Long Service Awards Registration Form 
 
 .page-node-add-lsa-application {
+  #editablefields-field-do-you-need-to-update-your {
+    #edit-field-do-you-need-to-update-your {
+      .form-required {
+        position: absolute;
+        right: 175px;
+      }
+    }
+  }
   fieldset {
     background-color: #f1f1f1;
     margin: 1em 0;
-    fieldset {
-      background-color: darken(#f1f1f1, 4%);
-      margin: 10px;
-    }
+    border:none;
   }
   .fieldset-legend {
     font-weight: bold;
@@ -80,6 +85,117 @@
     text-align: center;
     margin-top: 1em;
   }
+  #block-system-help {
+    p:nth-child(n+3):nth-last-child(n+1) {
+      margin-left: 30px;
+    }
+    ol {
+      margin-left: 15px;
+      li {
+        padding: 0;
+        margin:0;
+      }
+    }
+  }
+  .required-fields.group-lsa-accom .form-required {
+    float:left;
+    margin-right: 5px;
+  }
+  #edit-field-lsa-recipient-accom {
+    float:left;
+    width: 40%;
+  }
+  #edit-field-lsa-recipient-dietary,
+  .field-name-field-lsa-recipient-dietary {
+    float:left;
+    width: 30%;
+  }
+  #edit-field-lsa-guest-accom,
+  #edit-field-lsa-dietary-guest {
+    display: inline-block;
+  }
+  .form-item {
+    margin: .5em;
+  }
+  .form-item-field-lsa-terms-und .description {
+    margin-top:initial;
+    margin-left: inherit;
+  }
+  .jqi input[type="radio"] {
+    margin-right:5px;
+  }
+}
+/* Visual fixes for the LSA RSVP registration form */
+.node-type-lsa-application {
+  #editableviews-entity-form-lsa-admin {
+    #edit-actions-submit {
+      position: absolute;
+      bottom: 10px;
+      left: 550px;
+    }
+  }
+
+  > br:nth-child(11) {
+    padding: 12px;
+  }
+  .field.field-name-field-do-you-need-to-update-your.field-type-list-boolean.field-label-above {
+    margin-top: 5px;
+  }
+  .form-submit {
+    background-color: beige;
+    margin-top: 5px;
+    margin-left: 10px;
+  }
+  #special-dietary-requirements {
+    border: solid 1px #b7b7b7;
+    margin-bottom:12px;
+    padding:5px;
+    h3 {
+      background-color:#d7d7d7;
+      padding:5px 10px;
+    }
+    .field-name-field-lsa-dietary-requirements > .field-label:after {
+      content:"*";
+      color:red;
+    }
+    .field-name-field-lsa-recipient-dietary {
+      float:left;
+      margin-right: 10px;
+      margin-top:5px;
+      padding-bottom:10px;
+      .field-items {
+        display: inline-block;
+        border-top:solid 1px #b7b7b7;
+        border-bottom:solid 1px #b7b7b7;
+        padding:5px;
+      }
+    }
+    .field-name-field-lsa-dietary-guest {
+      display:inline-block;
+      margin-top:5px;
+      padding-bottom:10px;
+      .field-items {
+        border-top:solid 1px #b7b7b7;
+        border-bottom:solid 1px #b7b7b7;
+        padding:5px;
+      }
+    }
+    #edit-submit--20, #edit-submit--21 {
+      display:none!important;
+    }
+  }
+  fieldset.group-lsa-office-contact {
+    margin-bottom: 15px!important;
+  }
+  .form-type-select > label:nth-child(1) > span:nth-child(1) {
+    position:absolute;
+    top:20px;
+    left:0px;
+  }
+  #edit-field-lsa-org-und {
+    font-size:.95em;
+    margin-left:10px;
+  }
 }
 
 // Exclude the Admin vertical tabs fieldset
@@ -133,7 +249,7 @@
   font-weight: bold;
 }
 
-// Update / additions to 2017 form update. /career/long-service-awards/applications
+// Update / additions to 2018 form update. /career/long-service-awards/applications
 .node-lsa-application .form-item {
   margin: 0 5px;
 }

@@ -36,11 +36,11 @@ EOT;
 
   // this is the event-specific details. We might want to add links, etc, key numbers corrospond with the $submission array
   $dates = array(
-    15 => "Interior/North and Emerging Leaders: October 26 <br />
-  <a href=\" https://gww.gov.bc.ca/sites/default/files/ics/2017/premiers-innovation-and-excellence-awards-interiornorth/event.ics \" > Add to your Outlook Calendar </a></p><hr />
+    15 => "Interior/North: October 18 <br />
+  <a href=\" https://gww.gov.bc.ca/sites/default/files/ics/2018/premiers-innovation-and-excellence-awards-interiornorth/event.ics \" > Add to your Outlook Calendar </a></p><hr />
   ",
-    5 => "Vancouver Island: November 2 <br />
-  <a href=\"  https://gww.gov.bc.ca/sites/default/files/ics/2017/premiers-innovation-and-excellence-awards-vancouver-island/event.ics \" > Add to your Outlook Calendar </a></p><hr />
+    5 => "Vancouver Island/Lower Mainland: October 11 <br />
+  <a href=\"  https://gww.gov.bc.ca/sites/default/files/ics/2018/premiers-innovation-and-excellence-awards-lower-mainland-vanisland/event.ics \" > Add to your Outlook Calendar </a></p><hr />
   ",
     7 => "Lower Mainland: November 9 <br />
   <a href=\" https://gww.gov.bc.ca/sites/default/files/ics/2017/premiers-innovation-and-excellence-awards-lower-mainland/event.ics \" > Add to your Outlook Calendar </a></p><hr />
@@ -62,7 +62,7 @@ EOT;
 <h2>You registered:</h2>
 EOT; */
 
-    $output .= "<h2>You registered:</h2>";
+    $output .= "<strong>You registered:</strong>";
     foreach ($dates as $key => $value) {
       if (isset($submission->data[$key][0]) && $submission->data[$key][0]) {
         $output .= "<p>";
@@ -173,6 +173,7 @@ function _atwork_prem_awards_count_words($files) {
   $pdf_page = 0;
   $longest_doc = '';
   $longest_length_of_doc = 0;
+  $pages = 0;
   foreach ($files as $file) {
     if (strpos(' ' . strtolower($file), '.docx')) {
       $text = readDocx($file);
@@ -539,7 +540,6 @@ function atwork_prem_awards_form_alter(&$form, $form_state, $form_id) {
       '#value' => t('Save'),
       '#prefix' => '<p>' . t('Saving the application will not trigger any emails.') . '</p>',
     );
-
     // check for existence of application type (innovation, leadership, etc)
     if (!isset($form['submitted']['application_type']['#default_value']) || !$form['submitted']['application_type']['#default_value']) {
       return;
@@ -595,7 +595,6 @@ function atwork_prem_awards_application_submit($form, &$form_state) {
 
   require_once drupal_get_path('module', 'atwork_prem_awards') . '/atwork_prem_awards.replacements.inc';
   $ministry_contacts = _atwork_prem_awards_ministry_contacts();
-
   // clear existing messages
   drupal_get_messages();
 
@@ -610,7 +609,6 @@ function atwork_prem_awards_application_submit($form, &$form_state) {
     }
 
     $ministry = $submission->data[1][0];
-
     $node->atwork_form = $form;
 
     $email = array(
@@ -661,7 +659,6 @@ function atwork_prem_awards_application_submit($form, &$form_state) {
       // MIME Mail requires this header or it will filter all text.
       //$mail_params['headers']['Content-Type'] = 'text/html; charset=UTF-8';
     }
-
     // Mail the submission.
     $message = drupal_mail('webform', 'submission', $email['email'], $language, $mail_params, $email['from']);
 
@@ -676,7 +673,7 @@ function atwork_prem_awards_application_submit($form, &$form_state) {
   elseif ($form_state['clicked_button']['#value'] == 'Save') {
     if(isset($form_state['storage']['details']['sid']) && $form_state['storage']['details']['is_new'] == TRUE){
       $sid = $form_state['storage']['details']['sid'];
-      drupal_goto('/premiers-award-application-2017/submission/' . $sid . '/edit');
+      drupal_goto('/premiers-award-application-2018/submission/' . $sid . '/edit');
     } 
     drupal_set_message(t('Your submission has been saved. You may review and edit any of your submissions !here.', array( '!here' => l('here', 'node/' . PA_APP_NID . '/submissions'))));
   }
@@ -874,7 +871,7 @@ function atwork_prem_awards_callback($user, $current_uid){
   // Grab current webcast names
   $return_info_array['webcasts'] = array(
     'vancouver_island' =>  $webform_node->webform['components'][4]['name'],
-    'lower_mainland' => $webform_node->webform['components'][6]['name'],
+    //'lower_mainland' => $webform_node->webform['components'][6]['name'],
     'interior_north' =>  $webform_node->webform['components'][14]['name'],
   );
   $return_info_array['uid'] = $current_uid;
@@ -933,7 +930,7 @@ function atwork_prem_awards_submit_callback(){
     // Check if this matches webcast for existing webform
     if($submission_array['webcast'] == $webform_node->webform['components'][4]['name'] && isset($webform->data[13][0]) && $webform->data[13][0] == 'vi_webcast'){
       //continue
-    } elseif ($submission_array['webcast'] == $webform_node->webform['components'][6]['name'] && isset($webform->data[13][0]) && $webform->data[13][0] == 'main_webcast') {
+    } elseif (isset($webform_node->webform['components'][6]['name']) && ($submission_array['webcast'] == $webform_node->webform['components'][6]['name']) && isset($webform->data[13][0]) && $webform->data[13][0] == 'main_webcast') {
       //continue
     } elseif ($submission_array['webcast'] == $webform_node->webform['components'][14]['name'] && isset($webform->data[13][0]) && $webform->data[13][0] == 'int_webcast') {
       //continue
@@ -1019,9 +1016,10 @@ function create_new_webform_entry($submission_array){
   $current_user = user_load($submission_array['uid']);
    // Get static webform for titles
   $webform_node = node_load(PA_REG_FORM_NID);
-  $vancouver_island =  $webform_node->webform['components'][4]['name'];
-  $lower_mainland = $webform_node->webform['components'][6]['name'];
-  $interior_north =  $webform_node->webform['components'][14]['name'];
+  isset( $webform_node->webform['components'][4]['name']) ? $vancouver_island =  $webform_node->webform['components'][4]['name']: $vancouver_island = null;
+  isset(  $webform_node->webform['components'][6]['name']) ? $lower_mainland =  $webform_node->webform['components'][6]['name']: $lower_mainland = null;
+  isset( $webform_node->webform['components'][14]['name']) ? $interior_north =  $webform_node->webform['components'][14]['name']: $interior_north = null;
+
   $response = array(
     'sid' => $submission_array['id'],
     'response' => '',

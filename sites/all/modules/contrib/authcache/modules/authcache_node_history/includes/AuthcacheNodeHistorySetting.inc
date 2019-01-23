@@ -46,8 +46,9 @@ class AuthcacheNodeHistorySetting implements AuthcacheP13nSettingInterface {
           $history = $_SESSION['authcache_node_history_last_viewed'];
 
           foreach ($params['n'] as $nid) {
-            if (isset($history[$nid]) && is_object($history[$nid])) {
-              $tsmap[$nid] = $history[$nid]->timestamp;
+            if (isset($history[$nid])&& isset($history[$nid]->timestamp)) {
+              $history_time = $history[$nid]->timestamp;
+              $tsmap[$nid] = $history_time;
             }
           }
         }

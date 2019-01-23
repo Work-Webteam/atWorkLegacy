@@ -31,7 +31,6 @@ only screen and (                min-resolution: 2dppx) {
 
 #content.column {
     max-width: inherit;
-    margin: 0 auto;
 }
 .section-ecards {
   .form-type-bef-checkbox {
@@ -71,11 +70,49 @@ only screen and (                min-resolution: 2dppx) {
 and (min-device-width : 375px)
 and (max-device-width : 667px)
 and (orientation : portrait) {
+
+  #block-atwork-wes-wes-top-three {
+    margin-top: 15px;
+    margin-bottom: 40px;
+   }
+   #block-atwork-wes-wes-top-three img {
+    display:none;
+   }
+   #block-atwork-wes-wes-top-three a {
+       display: block;
+       position: relative;
+       height: 100px;
+       width: 360px;
+   }
+   #ministry-top-three {
+         width: 320px!important;
+          left: 10px!important;
+          top: -30px!important;
+          height: inherit!important;
+          border: solid 1px #D7D7D7;
+    }
+   #ministry-top-three:before {
+    content: "2018 Work Environment Survey";
+    font-weight: bold;
+    font-size: 12px;
+   }
+   .wes-bar-container {
+        width:280px!important;
+   }
+   .ministry-stats {
+    width:280px;
+   }
+   #ministry-top-three .percent {
+     left: -65px!important;
+   }
+   #ministry-top-three .percent:after {
+     content:" %";
+   }
   #block-views-home-page-blocks-zen-block-2,
   aside.sidebars .region.region-sidebar-second {
     display: none!important;
   }
- 
+
   .front .region.region-social-side {
     min-width:100%;
   }
@@ -123,7 +160,7 @@ and (orientation : portrait) {
     padding:10px!important;
     border:none!important;
   }
-  }  
+  }
 }
 #block-custom-search-blocks-1 {
     padding: 20px 5px!important;
@@ -133,7 +170,7 @@ and (orientation : portrait) {
 .front fieldset#edit-advanced-search .fieldset-legend {
   top:-10px;
   padding-right:20px;
-} 
+}
   #block-views-home-page-blocks-zen-block-1,
 	#block-views-home-page-blocks-zen-block-3,
 	#block-views-home-page-blocks-zen-block-4 {
@@ -208,7 +245,7 @@ and (orientation : portrait) {
 
   .not-front.logged-in.sidebar-first #content.column,
   .not-front.logged-in.sidebar-second #content.column {
-    margin-left:inherit!important;
+    /*margin-left:inherit!important;*/
     clear:both!important;
     min-width:100%!important;
   }
@@ -269,7 +306,7 @@ and (orientation : portrait) {
 }
 .not-front.logged-in.one-sidebar.sidebar-first aside.sidebars {
   width: 100%;
-  position:relative;
+  position:inherit;
   .region.region-sidebar-first {
     width:100%;
     max-width:none!important;
@@ -333,7 +370,7 @@ and (orientation : portrait) {
    width:360px!important;
  }
 }
-/* Admin - Edit screens */ 
+/* Admin - Edit screens */
 #section-node-form,
 #blog-node-form {
   padding: 0!important;
@@ -368,7 +405,7 @@ and (orientation : portrait) {
     margin-top:0px!important;
     margin-right:10px;
   }
-/* Gallery / Group Gallery */  
+/* Gallery / Group Gallery */
 .node-type-image.section-groups {
   .view-id-gallery_reference.view-display-id-block_thumbs .view-content {
     width:65%!important;
@@ -417,7 +454,7 @@ table#sn-newsletter-layout {
 }
 .front fieldset#edit-advanced-search .fieldset-legend {
   right:0;
-} 
+}
   #block-views-home-page-blocks-zen-block-5 {
     margin-bottom: 25px!important;
   }
@@ -429,7 +466,7 @@ table#sn-newsletter-layout {
   }
  #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 .views-slideshow-xtra-overlay-row.views-slideshow-xtra-overlay-row {
    margin: 20px!important;
- } 
+ }
 .front.logged-in.no-sidebars .skin-default .views_slideshow_cycle_main .field-content img {
   margin-left: -20%;
   }
@@ -502,7 +539,7 @@ table#sn-newsletter-layout {
   /* New Activity Window */
 .new-activity-window #social-side div#status-update .form-textarea-wrapper {
   max-width:200px;
-}  
+}
   .new-activity-window #social-side {
     #block-atwork-activity-homepage {
       background-color:#fff;
@@ -571,7 +608,7 @@ table#sn-newsletter-layout {
   width:230px;
   height: 380px!important;
   text-align: left;
-}   
+}
   .section-blogs #block-views-blogs-block-3 .image-blog-landing img,
   .section-news .view-id-news.view-display-id-page_2 .image-news-landing img,
   .section-corporate-news .view-id-news.view-display-id-page_3 .image-news-landing img,
@@ -721,7 +758,7 @@ table#sn-newsletter-layout {
   }
   .two-sidebars.section-groups {
     #content {
-    float:right;
+    /*float:right;*/
     margin-top: 10px;
     }
     aside.sidebars {
@@ -729,6 +766,13 @@ table#sn-newsletter-layout {
       width:initial;
     }
   }
+  .not-front.logged-in.sidebar-first.og-context.og-context-node #content.column {
+    margin-top: -28px;
+    /*float:left!important;*/
+    /*margin-left: inherit!important;*/
+    position:inherit;
+    left:28%!important;
+  }//Group blog landing page
 
   /* Group Article Page */
  .not-front.logged-in.sidebar-first #content.column {
@@ -736,13 +780,13 @@ table#sn-newsletter-layout {
     clear:both!important;
     max-width:72%!important;
   }
-  .og-context.og-context-node { 
+  .og-context.og-context-node {
     #page #main {
       padding-top: 30px!important;
     }
-    aside.sidebars {
+    /*aside.sidebars {
       clear:both!important;
-    }
+    }*/
    #main h1 {
     position:relative!important;
     top: 0px!important;
@@ -752,7 +796,7 @@ table#sn-newsletter-layout {
   .create-blog, .create-event, .create-poll, .ask-question {
     margin-top:0px;
     margin-right:10px;
-  }   
+  }
   }
   .one-sidebar.sidebar-first .pre-title-snipet {
     padding: 0!important;
@@ -810,7 +854,7 @@ table#sn-newsletter-layout {
 .not-front.logged-in.sidebar-first.section-node-edit,
 .not-front.logged-in.sidebar-first.og-context.og-context-node {
   #content.column {
-  float:right!important;
+  /*float:right!important;*/
   }
   aside.sidebars {
     clear:none;
@@ -838,6 +882,26 @@ table#sn-newsletter-layout {
 and (min-device-width : 375px)
 and (max-device-width : 667px)
 and (orientation : landscape) {
+  #ministry-top-three {
+    -ms-transform: scale(0.75);
+    -webkit-transform: scale(0.75);
+     transform: scale(0.75);
+     top: 10px!important;
+     left: 190px!important;
+  }
+  .ministry-stats {
+      width: 340px!important;
+  }
+  #ministry-top-three .wes-bar-container {
+      width: 340px!important;
+  }
+  #ministry-top-three .percent:after {
+    content:" %";
+  }
+  #ministry-top-three .percent {
+      font-size: initial!important;
+  }
+
 .front #page #main {
   margin-left: 5px;
   margin-right: 5px;
@@ -866,7 +930,7 @@ and (orientation : landscape) {
     position: relative;
     width: 382px!important;
     height: 242px;
-  } 
+  }
     .carousel-960 {
       display: none;
     }
@@ -898,8 +962,8 @@ and (orientation : landscape) {
       height:inherit!important;
       width:inherit!important;
       border:none!important;
-   } 
-  }  
+   }
+  }
 }
 #block-custom-search-blocks-1 {
     padding: 20px!important;
@@ -995,7 +1059,7 @@ and (orientation : landscape) {
     #content {
       top:0;
       width:66%!important;
-      float:right;
+      /*float:right;*/
       margin-top: 16px;
     }
     aside.sidebars {
@@ -1068,7 +1132,7 @@ and (orientation : landscape) {
   width:200px;
   height: 390px!important;
   text-align: left;
-} 
+}
   /* Group Landing Page*/
 .section-groups .views-exposed-widget ul,
 .page-my-groups .views-exposed-widget ul {
@@ -1117,8 +1181,9 @@ and (orientation : landscape) {
 }
 
 .not-front.logged-in.sidebar-first.og-context.og-context-node #content.column {
-  float:right!important;
+  float:left!important;
   margin-top: -28px;
+  margin-left: 33%!important;
 }
 .og-context.og-context-node {
   aside.sidebars {
@@ -1296,7 +1361,7 @@ table#sn-newsletter-layout {
     }
 .not-front #page.new-activity-window ul.pager {
   display:block!important;
-} 
+}
     .new-activity-window #social-side #activity-feed {
       display: block !important;
     }
@@ -1307,7 +1372,7 @@ table#sn-newsletter-layout {
     /* New Activity Window */
 .new-activity-window #social-side div#status-update .form-textarea-wrapper {
   max-width:280px;
-}  
+}
     #social-side .jsNewActivityWindow {
     margin-right: 15px!important;
     }
@@ -1485,7 +1550,7 @@ table#sn-newsletter-layout {
   }
 .two-sidebars.section-groups #content {
     position:relative;
-    margin-left:20.5%;
+    /*margin-left:20.5%;*/
     width:58%;
   }
   .og-context.og-context-node .region-sidebar-second.column.sidebar {
@@ -1551,7 +1616,7 @@ section.region.region-sidebar-second.column.sidebar {
   margin:0 0 10px 0!important;
 }
  .not-front.logged-in.sidebar-first #content.column {
-    margin-left:inherit!important;
+    margin-left:inherit;
     clear:both!important;
   }
   .og-context.og-context-node #page #main {
@@ -1573,7 +1638,7 @@ section.region.region-sidebar-second.column.sidebar {
     padding: 0!important;
   }
   }
- /* Ministry Internet sites */ 
+ /* Ministry Internet sites */
   .page-node-258 {
   article .field-name-body {
   ul {
@@ -1607,8 +1672,8 @@ section.region.region-sidebar-second.column.sidebar {
 }
 /* Group landing pages, blogs, posts, articles */
 .not-front.logged-in.sidebar-first #content.column {
-  float:right!important;
-} 
+  /*float:left!important;*/
+}
 }
 
 /*********************************************************************************/
@@ -1623,7 +1688,7 @@ section.region.region-sidebar-second.column.sidebar {
   }
 	#navigation,
   //#block-custom-search-blocks-1,
-  #block-block-45, // hides the top tools panel 
+  #block-block-45, // hides the top tools panel
   #theme-banner { // hides the theme banner
    		display: none !important;
     }
@@ -1676,7 +1741,7 @@ section.region.region-sidebar-second.column.sidebar {
 @media only screen and (max-width: 1240px) {
  #page {
    min-width:960px;
- } 
+ }
 .front #social-side,
    #block-block-45 { // show social sidebar only on wide screen view - 1240 or greater
       display: none !important;

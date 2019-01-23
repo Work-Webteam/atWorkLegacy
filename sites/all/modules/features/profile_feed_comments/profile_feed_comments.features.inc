@@ -50,7 +50,7 @@ function profile_feed_comments_flag_default_flags() {
     'unflag_message' => '',
     'unflag_denied_text' => 'flagged',
     'link_type' => 'confirm',
-    'weight' => 0,
+    'weight' => -8,
     'show_in_links' => array(
       'full' => 'full',
       'diff_standard' => 'diff_standard',
@@ -85,7 +85,7 @@ function profile_feed_comments_flag_default_flags() {
     'unflag_message' => '',
     'unflag_denied_text' => 'flagged',
     'link_type' => 'confirm',
-    'weight' => 0,
+    'weight' => -7,
     'show_in_links' => array(
       'full' => 'full',
       'diff_standard' => 'diff_standard',
@@ -245,7 +245,7 @@ function profile_feed_comments_default_message_type() {
     "arguments" : null,
     "message_text" : { "und" : [
         {
-          "value" : "\\u003Cp class=\\u0022msg-new-comment\\u0022\\u003E[message:field-message-comment:author:author-conditional] posted a comment in \\u003Ca href=\\u0022[message:field-message-node:url:relative]?#comment-[message:field-message-comment:cid]\\u0022 title=\\u0022[message:field-message-node:title]\\u0022\\u003E[message:field-message-node:title]\\u003C\\/a\\u003E[atwork-groups:in-groups-text].\\u003Cbr\\u003E\\r\\n\\t\\u003Cspan class=\\u0022activity-comment\\u0022\\u003E[message:field-message-comment:teaser] \\u003C\\/span\\u003E\\u0026nbsp;\\u003Ca href=\\u0022[message:field-message-node:url:relative]?#comment-[message:field-message-comment:cid]\\u0022\\u003Emore\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\r\\n",
+          "value" : "\\u003Cp class=\\u0022msg-new-comment\\u0022\\u003E[message:field-message-comment:author:author-conditional] posted a comment in \\u003Ca href=\\u0022[message:field-message-comment:url]\\u0022 title=\\u0022[message:field-message-node:title]\\u0022\\u003E[message:field-message-node:title]\\u003C\\/a\\u003E[atwork-groups:in-groups-text].\\u003Cbr\\u003E\\r\\n\\t\\u003Cspan class=\\u0022activity-comment\\u0022\\u003E[message:field-message-comment:body] \\u003C\\/span\\u003E\\u0026nbsp;\\u003Ca href=\\u0022[message:field-message-comment:url]\\u0022\\u003ERead More \\u0026gt;\\u0026gt;\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\r\\n",
           "format" : "full_html"
         }
       ]

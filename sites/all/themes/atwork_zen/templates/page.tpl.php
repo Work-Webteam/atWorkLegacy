@@ -18,7 +18,8 @@
    6895, 6536, 7916, 6535, 6532,
    6539, 6680, 9513, 6681, 6682,
    6530, 6531, 6522, 6538, 6526,
-   6896, 11065, 12331, 21212
+   6896, 11065, 12331, 21212, 6674,
+   22868        
    ];
 
    var c = document.getElementById('block-tb-megamenu-menu-main-menu-zen').getElementsByTagName('li');
@@ -34,32 +35,12 @@
   }
 }
 }
-
-	//GALLERY THUMBS
-	jQuery(document).ready(function($){
-		var newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname;
-		var pathArray = window.location.pathname.split( '/' );
-
-		if(pathArray[3] == 'gallery'){
-			var match = RegExp('[?&]' + 'page' + '=([^&]*)').exec(window.location.search);
-			var galPg = match && decodeURIComponent(match[1].replace(/\+/g, ' '));
-			if(galPg == null) galPg = 0;
-
-			$('.views-field-field-image a').each(function(){
-				var $this = $(this),
-       href = $this.attr('href');
-       $this.attr('href', href +'?page='+ galPg);
-     })
-		}
-	});
-
 </script>
 
 
 <div id="page">
 
   <header class="header" id="header" role="banner">
-
     <?php if ($logo): ?>
       <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
     <?php endif; ?>
@@ -145,13 +126,32 @@
             case 'question':
             case 'section_page':
             case 'event':
-            $group = node_load($og_context['gid']);
-            $title_prefix = $title;
-            $title = $group->title;
+              $group = node_load($og_context['gid']);
+              $title_prefix = $title;
+              $title = $group->title;
             break;
             default:
             break;
           }
+          ?>
+        <?php endif; ?>
+        <?php // Sometimes we need to get the gid ourselves ?>
+        <?php if(empty($og_context) && isset($node->og_group_ref['und'][0]['target_id'])): ?>
+          <?php  
+            switch($node->type) {
+              case 'article':
+              case 'blog':
+              case 'poll':
+              case 'question':
+              case 'section_page':
+              case 'event':
+                $group = node_load($node->og_group_ref['und'][0]['target_id']);
+                $title_prefix = $title;
+                $title = $group->title;
+                break;
+              default:
+                break;
+            }
           ?>
         <?php endif; ?>
       <?php endif ?>
@@ -191,6 +191,9 @@
         <?php print $sidebar_first; ?>
         <?php print $sidebar_second; ?>
       </aside>
+    <?php endif; ?>
+    <?php if (isset($node) && isset($node->type) && $node->type == "image"): ?>
+      <?php drupal_add_js(drupal_get_path('module', 'atwork_images') . '/' . 'js_atwork_images.js'); ?>
     <?php endif; ?>
   </div><!-- /#main -->
 

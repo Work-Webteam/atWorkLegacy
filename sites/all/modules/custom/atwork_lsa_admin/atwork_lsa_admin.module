@@ -10,6 +10,8 @@
  */
 function atwork_lsa_admin_form_alter(&$form, &$form_state, $form_id) {
   global $user;
+  // Add gift list so we can display the images for chosen awards.
+  drupal_add_js(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_gift_list.js');
 
   // For LSA admin, allows to sort on whether a user has entered input into the notes field or not.
   if($form['#id'] == 'views-exposed-form-lsa-admin-page-2'){
@@ -42,7 +44,8 @@ function atwork_lsa_admin_form_alter(&$form, &$form_state, $form_id) {
   // For the RSVP block located on content pages, need to fill in hidden fields
   if($form['#id'] == 'editableviews-entity-form-lsa-admin' && $form['#view_display_name'] == 'block_lsa_rsvp'){
     // Change submit button text
-    $form['actions']['submit']['#value'] = "Save RSVP";
+    $form['actions']['submit']['#value'] = "Submit RSVP";
+    //The button gets moved to the bottom of the page, so tell it which form to submit.
     drupal_add_css("#edit-actions-submit {font-weight:bolder; font-size:125%;}", "inline");
     // Add submit handler
     $form['#submit'][] = 'update_lsa_node_submit';
@@ -114,7 +117,8 @@ function update_lsa_node_submit(&$form, &$form_state){
       if(isset($messages['status'][0]) && $messages['status'][0]){
         $message_check = substr($messages['status'][0], 0, 5);
         if($message_check == 'Saved'){
-          $messages['status'][0] = 'Your RSVP has been submitted. Thank you!';
+          $messages['status'][0] = 'Your RSVP has been received. Thank you!<br><br>
+          		If you have any questions, please connect with your <a href="' . $base_url . '/career/long-service-awards/long_service_awards_contacts">ministry/organization contact</a> or send an email to the <a href="mailto:longserviceawards@gov.bc.ca">Long Service Awards team</a>.';
           $_SESSION['messages'] = $messages;
         }
       }
@@ -346,7 +350,7 @@ function send_to_all_applicants(&$form, &$form_state){
 
   // Gather all results *NOTE - These will have to be cleared every year prior to launch
   // We need to account for other filters here as well now, so slightly different queries
-
+  
   $results = db_query("SELECT node.nid AS nid
     FROM {node} node
     LEFT JOIN {users} users_node ON node.uid = users_node.uid
@@ -354,7 +358,12 @@ function send_to_all_applicants(&$form, &$form_state){
     LEFT JOIN {field_data_field_lsa_org} org ON node.nid = org.entity_id
     LEFT JOIN {field_data_field_lsa_rsvp} rsvp ON node.nid = rsvp.entity_id
     LEFT JOIN {field_data_field_lsa_retro_active} retroactive ON node.nid = retroactive.entity_id
-    WHERE (( (node.status =  '1') AND (node.type IN ('lsa_application')) AND (ceremony_date.field_lsa_ceremonydate_value  $ceremony_compare '$ceremony_id') AND (rsvp.field_lsa_rsvp_value $rsvp_compare '$rsvp') AND (org.field_lsa_org_value $ministry_compare '$ministry_id') AND (retroactive.field_lsa_retro_active_value $retro_active_compare '$retro_active')))");
+    WHERE (( (node.status =  '1') 
+		AND (node.type IN ('lsa_application')) 
+		AND (ceremony_date.field_lsa_ceremonydate_value  $ceremony_compare '$ceremony_id') 
+		AND (rsvp.field_lsa_rsvp_value $rsvp_compare '$rsvp') 
+		AND (org.field_lsa_org_value $ministry_compare '$ministry_id') 
+		AND (retroactive.field_lsa_retro_active_value $retro_active_compare '$retro_active')))");
 
   if($results){
     foreach($results as $record){
@@ -560,7 +569,7 @@ function create_pdf($lsa_node){
     $date = '';
   }
   // Create handle for new PDF document
-  $pdf = new FPDF('P', 'pt', 'Letter');
+  $pdf = new FPDF('P', 'pt', array(610,675));
 
   // Will save pdfs here
   $filepath = 'sites/default/files/lsa_pdfs/Printable_Keepsake_Invitation_' . $lsa_node->nid . '.pdf';
@@ -579,12 +588,12 @@ function create_pdf($lsa_node){
   $pdf->SetFont("Times", 'IB', 20);
 
   // Grab our invitation image
-  $invitation = drupal_get_path('module', 'atwork_lsa_admin') . '/Invitation/LSA_invite_Apr28_with_text.jpg';
+  $invitation = drupal_get_path('module', 'atwork_lsa_admin') . '/Invitation/LSA_RSVP.jpg';
   // Add the image
   $pdf->Image($invitation, 15,15, 580,0,'JPG');
 
   // Set our mark in the proper place for the name
-  $pdf->SetY(305);
+  $pdf->SetY(278);
 
   // Add name Text(float x, float y, string txt)
   $pdf->Cell(0,0,$username,0,1,'C');
@@ -592,7 +601,7 @@ function create_pdf($lsa_node){
 
   // Now set our marker to the date field5pudGr@vy1
   //
-  $pdf->SetY(380);
+  $pdf->SetY(345);
   // Add date
   $pdf->Cell(0,0,$date,0,1,'C');
  //$pdf->Text(60,300, $date);
@@ -639,10 +648,11 @@ function atwork_lsa_admin_node_view($node, $view_mode, $langcode) {
   */
   if(_atwork_is_admin() || in_array('lsa admin', $user->roles) || in_array('lsa contact', $user->roles) ){
     return;
-  } else {   
-    drupal_set_message(t("The RSVP period has ended. Please contact us at <a href='mailto:longserviceawards@gov.bc.ca'>LongServiceAwards@gov.bc.ca</a> for more information."), 'warning');
-    drupal_goto('career/long-service-awards');
-    $node->content['#access'] = false;
+  } else {
+  	/* Uncommented for application period. */
+    //drupal_set_message(t("The RSVP period has ended. Please contact us at <a href='mailto:longserviceawards@gov.bc.ca'>LongServiceAwards@gov.bc.ca</a> for more information."), 'warning');
+    //drupal_goto('career/long-service-awards');
+    //$node->content['#access'] = false;
   }
 }
 
@@ -731,4 +741,3 @@ function atwork_lsa_admin_block_list_alter(&$blocks){
     }
   }
 }
-

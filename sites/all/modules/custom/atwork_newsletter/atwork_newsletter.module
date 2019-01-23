@@ -41,12 +41,13 @@ function atwork_newsletter_form_node_form_alter(&$form, &$form_state, $form_id) 
 			}
 		}
 		
+		$form_state['input']['comment_value']['cid'] = $form_state['input']['cid'];
+
 		// Now rebuild the array from scs, this puts the variables into the body field (using our theme)
 		$form['body']['und'][0]['#default_value'] = theme('scs_newsletter', array(
 				'nodes' => $nodes,
 				'toc' => FALSE, //empty($form_state['input']['scs_toc']) ? FALSE : TRUE,
-				//'comment' => $form_state['input']['cid'],
-				'comment' => isset($form_state['input']['cid']) ? $form_state['input']['cid'] : 'none',
+				'comment' => isset($form_state['input']['cid']) ? $form_state['input']['comment_value'] : 'none',
 				'notes' => $form_state['input']['take_note'],
 				'did_you_know' => $form_state['input']['did_you_know'],
 		));
@@ -77,12 +78,19 @@ function atwork_newsletter_theme() {
  */
 function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state, $vbo){
 	if($form['#form_id'] == 'views_form_newsletter_creation_page'){
-		
 		//Added instructions to content selection
 		if(!array_key_exists('nodes',$form)) {
-			$form['#prefix'] = $form['#prefix'] . t('<p>Ensure you are using the "Chrome" browser. To begin creating the newsletter, click the checkbox in the leftmost column beside the articles and blogs you would like to have in the newsletter.</p>
-      <p>There is no maximum number that can select. However, you must ensure there is at least one article. Once complete, scroll down to the next section - comments.</p><br>');
+			// protect prefix, which is tripping errors at times 
+			if(!isset($form['#prefix'])){
+				$form['#prefix'] = '';
+			}
+			$form['#prefix'] = $form['#prefix'] . t('<p>Ensure you are using the "Chrome" browser. To begin creating the newsletter, click the checkboxes in the leftmost column beside the articles and blogs you would like to have in the newsletter.</p>
+      <p>There is no maximum number that you can select. However, you must ensure there is at least one article. Once complete, scroll down to the next section: Comment.</p><br>');
 		} else {
+			// protect prefix, which is tripping errors at times 
+			if(!isset($form['#prefix'])){
+				$form['#prefix'] = '';
+			}	
 			$form['#prefix'] = $form['#prefix'] . t('<p>Please review the content on this page to ensure it is how you would like the information to be displayed.</p>
 				<p>For the articles/blogs section, you can reorder the content as you\'d like it to appear in the newsletter. Use the "+" sign to drag and drop the content into the order you would like. Note, an article must be in the top spot.</p>
 				<p>Then review the Comment, Take Note and Did You Know sections to ensure the information is as you\'d like it to be displayed. You may edit content at this point directly in the fields, as needed.</p>
@@ -101,13 +109,10 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
 		$comment_value = '';
 		$comment_suffix = NULL;
 		if(array_key_exists('nodes',$form)) {
-			$comment_disabled = TRUE;
+			//$comment_disabled = TRUE;
 			$comment_value = $form_state['input']['cid'];
 			$comment_preview = comment_load($comment_value);
 			$comment_body = $comment_preview->comment_body['und'][0]['value'];
-			if($_POST['cid'] !== '') {
-				$comment_suffix = '<div><table style="border: 1px solid #bebfb9;"><tr><td style="border: 1px solid #bebfb9; background-color: #e1e2dc;">COMMENT PREVIEW</td><td>'. $comment_body . '</td></tr></table></div>';
-			}
 		}
 		// We want a text field to add a comment ID
 		$form['cid'] = array(
@@ -122,14 +127,20 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
         	<p>For example, the ID is "42378" in this URL: https:// gww.gov.bc.ca/comment/reply/26948/<strong>42378</strong></p>
         	<p>You can find the comment ID by mousing over the "reply" link below the comment and typing it in the field or by pressing "reply" and copying the ID from the url.</p>'),
 		);
+		if(isset($_POST['cid']) && $_POST['cid'] !== '') {
+	  	//$comment_suffix = '<div><table style="border: 1px solid #bebfb9;"><tr><td style="border: 1px solid #bebfb9; background-color: #e1e2dc;">COMMENT PREVIEW</td><td>'. $comment_body . '</td></tr></table></div>';
+	  	$form['comment_value'] = array(
+	  		'#type' => 'text_format', // gives us ckeditor functionality
+	  		'#default_value' => t($comment_body),
+	  	);
+	  }
 		// Spot for "Take Note"
 		$form['take_note'] = array(
 				'#type' => 'text_format', // gives us ckeditor functionality
 				'#title' => NULL,
 				'#default_value' => t(''),
 				'#format' => NULL,
-				'#prefix' => t('<br><strong>Take Note</strong><br><P>To add content into the Take Note section, copy the bullets from the newsletter entry of the editorial calendar and use the "Paste from Word" icon to paste content into the field below.
-				Then select "ok."</p>'),
+				'#prefix' => t('<br><strong>Take Note</strong><br><P>To add content into the Take Note section, copy the bullets from the newsletter entry of the editorial calendar and use the "Paste from Word" icon to paste content into the field below. If the bullets do not show up, highlight the text and click the "bullet" icon.</p>'),
 		);
 		// Spot for "Did You Know?"
 		$form['did_you_know'] = array(
@@ -137,9 +148,8 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
 				'#title' => NULL,
 				'#default_value' => t(''),
 				'#format' => NULL,
-				'#prefix' => t('<br><br><strong>Did You Know?</strong><br><p>To add content into the Did You Know? section, copy the content from the newsletter entry of the editorial calendar and use the "Paste from Word" icon to paste content into the field below.
-				Then select "ok."</p>'),
-				'#suffix' => t('<br><p>When you have completed the sections above, click the "Create newsletter" button below to review your information.<p>'),
+				'#prefix' => t('<br><br><strong>Did You Know?</strong><br><p>To add content into the Did You Know? section, copy the content from the newsletter entry of the editorial calendar and use the "Paste from Word" icon to paste content into the field below.</p>'),
+				'#suffix' => t('<br><p>When you have completed the sections above, click the ' . ($form['#action'] == '/admin/content/newsletter-creation' ? $button = 'Create Newsletter': $button = 'Next') . ' button below to review your information.<p>'),
 		);
 		// Add our own validation
 		if((isset($form['select']['action::scs_views_create_newsletter_action']['#validate'])) &&
@@ -174,4 +184,42 @@ function atwork_newsletter_validate(&$form, &$form_state){
 
 function atwork_newsletter_submit(&$form, &$form_state){
 	return;
+}
+
+/**
+ * Implements hook_form_alter to modify newsletter send tab options.
+ **/
+function atwork_newsletter_form_alter(&$form, &$form_state, $form_id){
+	if($form['#form_id'] == 'simplenews_node_tab_send_form') {
+	  $form['simplenews']['test_address']['#default_value'] = 'atwork@gov.bc.ca';
+	  $form['simplenews']['send']['#access'] = false;
+	}
+}
+
+/**
+ * Implements node_form_view to custom instructions to editors/admin on newsletter view page
+ **/
+function atwork_newsletter_node_view($node, $view_mode, $langcode){
+	if($node->type == 'simplenews'){
+	  $allowed_roles = array('administrator','editor', 'manager');
+	  $users_roles = user_roles();
+	  $role_ids =  array();
+	  
+	  foreach($allowed_roles as $role){
+	  	$role_ids[] = array_search($role, $users_roles);
+	  }
+	  
+	  if(in_array(true, array_map("user_has_role", $role_ids))){
+	    $node->content['#prefix'] = '<p>Select the "Newsletter" tab to email the newsletter below.</p>';
+	  }
+	}
+}
+
+function atwork_newsletter_wysiwyg_editor_settings_alter(&$settings, &$context) {
+	$node = node_load(arg(1));
+	if($node->type == 'simplenews') {
+		if ($context['profile']->editor == 'ckeditor') {
+			$settings['removePlugins'] = 'image';
+		}
+	}
 }

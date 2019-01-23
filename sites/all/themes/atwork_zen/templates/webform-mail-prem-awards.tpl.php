@@ -53,18 +53,23 @@ $application_type_map = array(
   5 => 'Partnership',
   6 => 'Legacy',
   7 => 'Emerging Leader',
+	8 => 'Evidence-Based Design'
 );
 
 print 'Thank you for submitting the following nomination:<br /><br />';
-print 'Nomination Name - ' . $submission->data[7][0] . '<br />';
-
-
+if($application_type_map[$application_type] == "Leadership" || $application_type_map[$application_type] == "Emerging Leader"){
+	// Emerging Leader or Leadership (Individual)
+	print 'Nomination Name - ' . $submission->data[7][0] . '<br />';
+}else {
+	//Group type application
+	print 'Nomination Name - ' . $submission->data[5][0] . '<br />';
+}
 
 print 'Ministry - '. $ministry .'<br />';
 print 'Category - '. $application_type_map[$application_type] .'<br />';
 print 'Region - '. $region .'<br /><br />';
 
-print 'Please ensure the correct name for the nomination and ministry are listed above, as well as the correct category. If applicable, please ensure the correct region is listed above. If any of the information is incorrect please contact Alysia Johnson at: <a href="mailto:Alysia.Johnson@gov.bc.ca">Alysia.Johnson@gov.bc.ca</a><br /><br />Please share this information with the nominators, nomination contacts and the nominees.<br /><br />Your participation in the 2016 Premier\'s Innovation and Excellence Awards is greatly appreciated.  We particularly want to thank the nominators. Without their considerable efforts the program could not operate. <em>Thank you!</em>';
+print 'Please ensure the correct name for the nomination and ministry are listed above, as well as the correct category. If applicable, please ensure the correct region is listed above. If any of the information is incorrect please contact Alysia Johnson at: <a href="mailto:Alysia.Johnson@gov.bc.ca">Alysia.Johnson@gov.bc.ca</a><br /><br />Please share this information with the nominators, nomination contacts and the nominees.<br /><br />Your participation in the 2018 Premier\'s Innovation and Excellence Awards is greatly appreciated.  We particularly want to thank the nominators. Without their considerable efforts the program could not operate. <em>Thank you!</em>';
 
 print '<br /><br /><h2>' . $application_title . '</h2>';
 

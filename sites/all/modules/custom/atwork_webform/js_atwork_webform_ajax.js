@@ -29,9 +29,4 @@
     return false;
   };
 
-  function openClose(){
-  }
-
-
-
 })(jQuery);

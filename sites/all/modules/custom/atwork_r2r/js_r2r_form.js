@@ -47,7 +47,8 @@
       // Edit button needs to be set / toggle renamed
       setClickHandlers();
       return;
-    } else {
+    } 
+    else {
       // Already had an application, so redirect them
       window.open(result[2], '_blank');
       // Remove spinner and make button clickable again
@@ -66,7 +67,9 @@
       appendTo: "#block-atwork-activity-homepage",
       modal: true,
       opacity: 1,
+      title: "Region to Region",
       draggable: true,
+      title: "Region to Region",
       show: { effect: "blind", duration: 800 },
       buttons: {
         "Continue": function(){
@@ -107,8 +110,11 @@
     data.name = $(".webcast-r2r-name").val();
     data.ministry = $('.webcast-r2r-ministry').val();
     data.email = $('.webcast-r2r-email').val();
-    // This is static right now - so we can just pull the text out. In  the future this may be an input.
-    data.webcast = $('#webcast-id-name-text').text();
+    // TODO - These require values
+    data.attendance = window.r2rSettings.castId;
+    data.session = window.r2rSettings.session;
+    // This is static right now, passed from PHP 
+    data.webcast =  window.r2rSettings.castName;
     $.ajax({
       type: "POST",
       url: "/r2r/registration",
@@ -159,8 +165,9 @@
     var ministry = r2rSettings.ministry;
     var email = r2rSettings.email;
     // reminder, this is an array, while all others are strings.
-    var casts = r2rSettings.casts;
-    var domPieces = setDomPieces(name, ministry, email, casts);
+    var cast = r2rSettings.castName;
+    var session = r2rSettings.session;
+    var domPieces = setDomPieces(name, ministry, email, cast, session);
     return domPieces;
   }
 
@@ -169,16 +176,18 @@
    * @param {string} name 
    * @param {string} ministry 
    * @param {string} email 
-   * @param {array} casts 
+   * @param {string} castName
+   * @param {string} session
    */
-  function setDomPieces(name, ministry, email, casts){
+  function setDomPieces(name, ministry, email, castName, session){
     // create a string that we can pass to the dom
     // TODO: future version will need to pull out the webcasts seperatly if there are more than one.
     var form = '<div id="r2r-form-div" class="r2r-form-div">' +
       '<p> Hello ' + name + ', please review that the information in the registration form below is correct. Make changes as necessary and then click the "Continue" button at the bottom of the form. </p>' +
       '<form>' + 
         '<fieldset class="fieldset-r2r">' +
-          '<label for="webcast-r2r-webcast" id="webcast-id-name-text"> Live Stream: ' + casts['01'] + '</label>' +
+          // TODO - This casts should be dynamic - or perhaps pass up only current cast as designated by constant in PHP?
+          '<label for="webcast-r2r-webcast" id="webcast-id-name-text"> Live Stream: ' + castName + '</label>' +
           // For now this cannot be changed
           //'<input type="text" name="webcast-r2r-webcast" value="' + casts['01'] + '" class="r2r-input webcast-r2r-webcast" readonly>' +
           '<label for="webcast-r2r-name"> Name: ' + name + '</label>' +

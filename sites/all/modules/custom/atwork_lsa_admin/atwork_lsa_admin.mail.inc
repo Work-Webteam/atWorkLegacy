@@ -6,38 +6,38 @@ $applicant_first_name =  $lsa_node->field_lsa_first_name['und'][0]['safe_value']
 $applicant_last_name = $lsa_node->field_lsa_last_name['und'][0]['safe_value'];
 //$applicant_last_name = ucfirst(strtolower($applicant_last_name));
 if(isset($lsa_node->field_lsa_middle_name['und'][0]['safe_value']) && $lsa_node->field_lsa_middle_name['und'][0]['safe_value']){
-  $applicant_middle_name = $lsa_node->field_lsa_middle_name['und'][0]['safe_value'] . ' ';
+	$applicant_middle_name = $lsa_node->field_lsa_middle_name['und'][0]['safe_value'] . ' ';
 } else {
-  $applicant_middle_name = '';
+	$applicant_middle_name = '';
 }
 $applicant_full_name = $applicant_first_name . ' ' . $applicant_middle_name . $applicant_last_name;
 // Need to shrink font if the name is too long
 /*
-switch(true){
-  case (strlen($applicant_full_name)<= 27):
-    $name_font_size = '21pt';
-    break;
-  case (strlen($applicant_full_name) >27 && strlen($applicant_full_name) <= 35):
-    $name_font_size = '16pt';
-    break;
-  case (strlen($applicant_full_name) > 35 && strlen($applicant_full_name) <= 40):
-    $name_font_size = '14pt';
-    break;
-  case (strlen($applicant_full_name) >40):
-    $name_font_size = '10pt';
-    break;
-  default:
-    $name_font_size = '8pt';
-}
-*/
+ switch(true){
+   case (strlen($applicant_full_name)<= 27):
+     $name_font_size = '21pt';
+     break;
+   case (strlen($applicant_full_name) >27 && strlen($applicant_full_name) <= 35):
+     $name_font_size = '16pt';
+     break;
+   case (strlen($applicant_full_name) > 35 && strlen($applicant_full_name) <= 40):
+     $name_font_size = '14pt';
+     break;
+   case (strlen($applicant_full_name) >40):
+     $name_font_size = '10pt';
+     break;
+   default:
+     $name_font_size = '8pt';
+ }
+ */
 // Get ceremony date label value
 //$all_fields = field_info_fields();
 $list_of_values = list_allowed_values(field_info_field('field_lsa_ceremonydate'));
 $ceremony_date_key = $lsa_node->field_lsa_ceremonydate['und'][0]['value'];
 foreach($list_of_values as $key=>$value){
-  if($key == $ceremony_date_key){
-    $ceremony_date = $value;
-  }
+	if($key == $ceremony_date_key){
+		$ceremony_date = $value;
+	}
 }
 
 // Grab Node id for link
@@ -47,11 +47,10 @@ $nid = $lsa_node->nid;
 //$invite = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_print.jpg';
 //$invite_button = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_RSVP.png';
 
-$invite = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_invite_Apr28_with_RSVP.jpg";
-$invite_sized = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_720x800.jpg";
-//$invite_button = 'https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_RSVP.jpg';
+$invite = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_RSVP_with_text_2018.jpg";
+$invite_sized = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_Apr19.jpg";
 
-$applicant_subject = t('Your Long Service Awards invitation is enclosed – please RSVP using the clickable button');
+$applicant_subject = t('Your Long Service Awards Invitation');
 $applicant_body = <<<EOT
 <html>
 <head>
@@ -61,7 +60,7 @@ $applicant_body = <<<EOT
   .ExternalClass{
     width:100%;
   }
-
+  
   .ExternalClass,
   .ExternalClass p,
   .ExternalClass span,
@@ -71,21 +70,21 @@ $applicant_body = <<<EOT
     line-height: 100%;
     padding: 0px !important;
   }
-
+  
   #outlook a{
       padding:0;
   }
-
+  
   table{
       mso-table-lspace:0pt;
       mso-table-rspace:0pt;
   }
-
+  
    img{
         -ms-interpolation-mode:bicubic;
     }
-
-
+    
+    
     </style>
 <!--[if gte mso 11]>
   <style>
@@ -99,11 +98,14 @@ $applicant_body = <<<EOT
 </head>
 
 <body id="mimemail-body" class="atwork-mail-default" style="padding:0;">
-<p><strong>**DO NOT REPLY TO THIS EMAIL – PLEASE FOLLOW THE INSTRUCTIONS BELOW TO RSVP.**</strong></p>
-<p> Your electronic invitation with RSVP button should appear below. If you are having trouble seeing the image in this email, please ensure you click <strong>“download images”</strong>. </p>
-<p> To confirm your attendance OR to confirm you are unable to attend, <strong>please click on the <a href="$base_url/node/$nid">RSVP button</a></strong> in the invitation below.</p>
-<p style = "page-break-after:always">If you are retired, or unable to access the RSVP link below – please contact us at <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20link" target="_top">LongServiceAwards@gov.bc.ca</a>.</p>
-<p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p><br />
+<p> To RSVP for your Long Service Awards ceremony, click anywhere in the invitation below.  </p>
+
+<p> If you can’t view the invitation and RSVP form below, follow the instructions in the upper left hand corner of this email to download the invitation in a web browser. </p>
+
+<p> If you have retired or you cannot access the RSVP form, please email the <a href="mailto:longserviceawards@gov.bc.ca">Long Service Awards team</a> for assistance. </p>
+
+
+
 <table width="750" border="0" cellpadding="0" cellspacing="0" style = "page-break-before:always; padding:0;" >
   <tbody>
     <tr  style="width:720px !important; height:100% !important; max-height:100% !important; background-size:100%; padding:0 !important; vertical-align:top; float: left;">
@@ -144,6 +146,6 @@ $applicant_body = <<<EOT
   </tbody>
 </table>
 </body>
+<p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p><br />
 </html>
 EOT;
-

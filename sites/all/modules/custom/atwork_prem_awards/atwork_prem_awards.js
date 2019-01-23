@@ -67,6 +67,8 @@ $(document).ready(function(){
     $('#edit-submitted-submission-word-count').val(text.split(' ').length);
   });
   
+  $("#edit-submitted-application-type").prop("disabled", true);
+  
 });
 
 })(jQuery);

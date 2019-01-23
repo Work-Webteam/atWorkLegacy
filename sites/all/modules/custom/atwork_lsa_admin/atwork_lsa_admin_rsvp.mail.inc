@@ -4,54 +4,36 @@
 //
 $image_source = "https://gww.gov.bc.ca/mem_fs/images/lsa/LongServiceAwards_2017_Feb21.jpg";
 
-$applicant_attending_subject = t('Long Service Awards 2017 – RSVP Confirmation');
+$applicant_attending_subject = t('Long Service Awards 2018 – RSVP Confirmation');
 $applicant_attending_body = <<<EOT
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     </head>
     <body id="mimemail-body" class="atwork-mail-default">
-        <center><img src="$image_source" height="100" width="100" align="middle"></center>
+        <center><img src="$image_source" height="120" width="120" align="middle"></center>
         <br />
-        <p>Thank you for confirming your attendance for your Long Service Award (LSA) ceremony.  We have now received your RSVP information. </p>
-        <hr></hr>
-        <table frame="hsides" bgcolor="#ffffcc" width="100%">
-            <tbody>
-                <tr>
-                    <td>
-                        <p><strong> Need to Make Changes or Cancel Attendance? </strong></p>      
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <p>Please notify us (<a href="mailto:longserviceawards@gov.bc.ca?Subject=Changes%20to%20Application" target="_top">longserviceawards@gov.bc.ca</a>) prior to your ceremony date if you need to cancel your attendance or make any changes to your information.</p>
-                    </td>
-                <tr>
-            </tbody>
-        </table>
-        <hr></hr>
-        <br />
-        <p>If you have any questions relating to travel arrangements, pre-receptions, or reimbursement, please visit our <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility/policy">website</a> or connnect with your workplace <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts">LSA contact</a>.  If your questions are related to the LSA ceremonies at Government House, please contact <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20question" target="_top">longserviceawards@gov.bc.ca</a>.</p>
-        <p><strong>Please Note:</strong></p>
-        <p>The LSA ceremonies take place at <a href="http://www.ltgov.bc.ca/contact/default.html" target="_blank">Government House</a>, the home of the Lieutenant Governor of British Columbia. It is recommended that you “dress your best” for these formal, evening occasions and, in consideration of others, <strong>please refrain from wearing heavily scented products.</strong></p>
-        <p><strong>Itinerary:</strong>
+        <p>Thank you for confirming your attendance for your Long Service Award ceremony. If you need to make changes to your RSVP information or cancel your attendance, please email the <a href="mailto:LongServiceAwards@gov.bc.ca?subject=RSVP%20to%20ceremony">Long Service Awards team</a> as soon as possible. </p>
+        <p>The ceremony will take place at <a href="http://www.ltgov.bc.ca/getting-here">Government House</a>, and business attire is recommended. Doors open at 5:45 p.m. Your invitation is not required for entry to the ceremony. </p>
+        <p><strong>Program:</strong>
             <ul>
-                <li>5:45 – 6:15 p.m.- Registration, Reception and Welcome</li>
-                <li>6:15 – 7:15 p.m.- Dinner Buffet</li>
-                <li>7:30 – 7:50 p.m.- Speeches</li>
-                <li>7:50 – 8:30 p.m.- Awards Presentation</li>
-                <li>8:15 p.m.- Dessert Buffet</li>
-                <li>9:00 – 10:00 p.m.- Dancing</li>
+                <li>5:45 p.m. - Registration, Reception and Welcome</li>
+                <li>6:15 p.m. - Dinner Buffet</li>
+                <li>7:20 p.m. - Speeches</li>
+                <li>7:40 p.m. - Awards Presentation</li>
+                <li>8:15 p.m. - Dessert Buffet</li>
+                <li>9:00 p.m. - Dancing</li>
                 <li>10:00 p.m. - Evening Concludes</li>
             </ul>
         </p>
-        <p>We look forward to welcoming you to your LSA ceremony this fall. Congratulations on reaching this important milestone in your career! </p>
-        <p>Long Service Awards Team</p>
+        <p>For information about travel reimbursement and taking time off, visit <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility/policy">@Work</a> or contact your workplace <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts">Long Service Award contact</a>. If you have questions about the ceremony, email the <a href="mailto:longserviceawards@gov.bc.ca?subject=Question%20about%20LSA%20ceremony">Long Service Awards team</a>.</p>
+        <p>We look forward to welcoming you to Government House this fall!</p>
+        <p>Thank you,<br>Long Service Awards Team</p>
     </body>
 </html>
 EOT;
 
-$applicant_not_attending_subject = t('Regrets – Long Service Awards ceremony 2017');
+$applicant_not_attending_subject = t('Long Service Awards ceremony 2018 – Regrets');
 $applicant_not_attending_body = <<<EOT
 <html>
     <head>
@@ -60,11 +42,10 @@ $applicant_not_attending_body = <<<EOT
     <body id="mimemail-body" class="atwork-mail-default">
         <center><img height="100" width="100" src="$image_source" align="middle"></center>
         <br />
-        <p>Thank you for notifying us that you will <u>not</u> be attending this year’s Long Service Award (LSA) ceremony. </p>
-        <p>Long Service Awards are presented the year the employee registers. <strong>Your award will be sent to your organization following the fall ceremonies, and your <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts" target="_blank">ministry/organization contact</a> will make the arrangements to have your award presented to you internally</strong>.</p>
-        <p><strong>Reminder:</strong> If this is the first year you have registered, you have the option of a one-year deferral to attend next year. You are responsible for <a href="https://gww.gov.bc.ca/career/long-service-awards" target="_blank"> re-registering next year</a>. The registration period is from the beginning of March to the end of April each year.</p>
-        <p>If you have any questions, please visit our website <a href="https://gww.gov.bc.ca/career/long-service-awards/faq" target="_blank">FAQs</a>, connect with your <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts" target="_blank">ministry LSA contact</a> or send an email to <a href="mailto:longserviceawards@gov.bc.ca?Subject=RSVP%20question" target="_top">longserviceawards@gov.bc.ca</a>.</p>
-        <p>Long Service Awards Team</p>
+        <p>Thank you for notifying us that you will not be attending this year's Long Service Award ceremony. </p>
+        <p>Long Service Awards are presented the year an employee registers. Your award will be mailed to your organization following the 2018 fall ceremonies, and your <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts">ministry/organization contact</a> will make arrangements to have your award presented to you.</p>
+        <p>NOTE: You will need to re-register in March/April 2019 on <a href="https://gww.gov.bc.ca/career/long-service-awards">@Work</a> in order to take advantage of the one-year deferral. </p>
+        <p>If you have any questions, please read the <a href="https://gww.gov.bc.ca/career/long-service-awards/faq">FAQs on @Work</a>, connect with your workplace <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts">Long Service Award contact</a> or email the <a href="mailto:longserviceawards@gov.bc.ca?subject=Question%20about%20LSA%20ceremony">Long Service Awards team</a>.</p>
     </body>
 </html>
 EOT;

@@ -43,7 +43,7 @@ issue:  Server not able to curl the file, so we need to access it directly inste
 
 
 date:   2017-06-12
-module: autchace
+module: authchace
 files:  AuthcacheNodeHistorySetting.inc
 source: None - we did this ourselves.
 issue:  Fix for an error we were seeing in watchdog. Assignment seemed incorrect and code was not protected from failure.
@@ -67,3 +67,20 @@ module: Quiz (multichoice)
 file: quiz_question.module, line 460
 source: None - we did this ourselves
 issue: search hook query had incorrect condition, which would break views search_term functionality elsewhere. If it was changed off of n.type, the sites search functionality would not work. This condition was added to every query on the site - which is far from optimal. This was fixed via rejection method - focusing to only add the condition to if the node type was multichoice or question.
+
+date: 2018-01-22
+Module: Views autocomplete filters
+file: views_autocomplete_filters.inc
+source: https://www.drupal.org/project/views_autocomplete_filters/issues/2645124
+issue: Unprotected code fix, at line 49
+
+date: 2018-03-19
+Module: AuthcacheNodeHistorySetting.inc
+source: We created this fix
+issue: Watchdog/php complaining about "Notice: Trying to get property of non-object in AuthcacheNodeHistorySetting->get() (line 50 of /var/www/html/sites/all/modules/contrib/authcache/modules/authcache_node_history/includes/AuthcacheNodeHistorySetting.inc).  We fixed this by altering the foreach so that it makes sure $history['nid']->timestamp exists (in addition to just checking $history['nid']).  We also assign timestamp to a variable of its own rather than straight to the array.
+
+
+date: 2018-04-24
+Module: Views
+Source: https://www.drupal.org/project/views/issues/2481401
+Issue: Views include is looking for an exposed filter that does not exist - this patch makes sure it also checks if the variable is set prior to running code.

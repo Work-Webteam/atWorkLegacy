@@ -735,7 +735,7 @@ EOT;
       if (isset($form['field_promoted'])) $form['field_promoted']['#access'] = FALSE;
       if (isset($form['options']['promote'] )) $form['options']['promote']['#access'] = FALSE;
       if (isset($form['options']['sticky'] )) $form['options']['sticky']['#access'] = FALSE;
-      
+
 
       if (in_array($node->type, array('forum', 'question')) && isset($form['field_image'])) {
         $form['field_image']['#access'] = FALSE;
@@ -822,12 +822,37 @@ EOT;
     $form['actions']['submit']['#value'] = '';
   }
   // Changing submit text and setting a message for flag
-  if($form_id == 'flag_confirm'){
+
+  if($form_id == 'flag_confirm') {
+    $destination = $_GET['destination'];
+    if ($destination == 'node/96') {
+      if (isset($form['entity_id']['#value']) && $form['entity_id']['#value']) {
+        $this_comment = comment_load($form['entity_id']['#value']);
+        if(isset($this_comment) && $this_comment != null) {
+          $destination = 'node/' . $this_comment->nid;
+          $form['#action'] = str_replace('?destination=node/96', '?destination=' . $destination, $form['#action']);
+        }
+      }
+    }
     $form['actions']['submit']['#value'] = t('Submit');
     $form['#submit'][] = 'flag_form_set_message';
-}
-}
-// Helper function to set message once flag report is submitted
+  }
+
+ /*
+  if($form['#id'] == 'comment-form'){
+    $form['comment_body']['#access'] = FALSE;
+    $form['actions']['submit']['#access'] = FALSE;
+    $form['actions']['preview']['#access'] = FALSE;
+  }
+  if(isset($form['#entity_type']) && $form['#entity_type'] == 'node'){
+    //$form['#node_edit_form'] = FALSE;
+    drupal_set_message(t("You are not allowed to post content."), 'error');
+    drupal_access_denied();
+  }
+*/
+ }
+
+ // Helper function to set message once flag report is submitted
 function flag_form_set_message(){
   drupal_set_message(t('Employee News has been notified.'), 'status', FALSE);
 }
@@ -1097,35 +1122,6 @@ EOD;
 
   // for now lets add this all the time
   drupal_add_library('system', 'drupal.collapse');
-
-//  drupal_add_http_header(
-//    'Cache-Control',
-//    'cache',
-//    FALSE
-//  );
-
-
-  //drupal_add_css('.chzn-choices input {width: 100%} .chzn-choices .search-field {width: 100%}', $option['type'] = 'inline');
-  //node_delete(7172);
-  //node_access_rebuild();
-  //cache_clear_all();
-//  $atwork_ldap = new atwork_ldap;
-//
-//  $result = $atwork_ldap->query('person', 'mail', 'Trace.Muldoon@gov.bc.ca');
-//
-//  $image = base64_decode($result['thumbnailphoto'][0]);
-//
-//  dpm($image);
-//
-//  $image = '<img src="data:image/jpeg;base64,'. $image .'">';
-//
-//  echo $image;
-
-  //dpm($result);
-
-
-
-
 }
 
 /*
@@ -1608,4 +1604,47 @@ function atwork_misc_field_access($op, $field, $entity_type, $entity, $account){
     return false;
   }
 
+}
+
+/**
+ * Implements hook_authcache_request_exclude
+ * Certain content types really don't work when cached.
+ *
+ * @return void
+ */
+function atwork_misc_authcache_request_exclude() {
+  // Quiz and multichoice
+  $node = menu_get_object();
+  // Do not cache Long Service Awards
+  if(!empty($node) && !empty($node->type) && $node->type == 'lsa_application'){
+    return t('Avoid caching lsa application');
+  }
+  // Do not cache Service pin applications
+  if(!empty($node) && !empty($node->type) && $node->type == 'lsa_pin_application'){
+    return t('Avoid caching service pin applications');
+  }
+  // Do not cache Webforms
+  if(!empty($node) && !empty($node->type) && $node->type == 'webform'){
+    return t('Avoid caching webforms');
+  }
+  // Do not cache Quizzes
+  if(!empty($node) && !empty($node->type) && $node->type == 'quiz'){
+    return t('We don\'t want to cache quizzes or multichoice questions ever.');
+  }
+  // Do not cache eCards
+  if(!empty($node) && !empty($node->type) && $node->type == 'ecard'){
+    return t('We don\'t want to cache eCards.');
+  }
+  // Do not cache premiers awards forms
+  if(!empty($node) && !empty($node->nid) && $node->nid == '5991'){
+    return t('Don\'t cache premiers awards forms');
+  }
+  // Do not cache multichoice questions in quizzes
+  if(NULL !== arg(2) && arg(2) == 'take' ){
+    return t('We don\'t want to cache quizzes or multichoice questions ever.');
+  }
+  // Do not cache profile pages
+  if(NULL !== arg(0) && arg(0) == 'user' ){
+    return t('We don\'t want to cache profiles');
+  }
 }
