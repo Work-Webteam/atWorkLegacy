@@ -313,13 +313,13 @@ function _atwork_prem_awards_questions() {
 		<li>The use of foundational policy analysis tools to support recommendations (i.e. data and/or cost analysis, cross-jurisdictional and/or international reviews, peer reviewed research, stakeholder engagement etc.);</li>
 		<li>The use of new technology or tools (i.e. Data Science, Service Design, etc. to support policy recommendations);</li>
 		<li>Inclusive citizen engagement practices that reflects a diverse population within British Columbia.</li></ul>";
+  $translations[8][4] = "";
   $translations[8][5] = "<strong>Impact</strong><br />Capture the impact of, and use metrics to support (if applicable), the innovative approach to programs and services as demonstrated by, but not limited to:
 		<ul><li>Improved performance by doing things that may be unique, leading-edge, or new to the public service;</li>
 		<li>Describe the long-term benefits to internal or external stakeholders;</li>
 		<li>Effect that the innovative approach to the programs or services has had on its intended internal or external stakeholders;</li>
 		<li>Effect that the innovative approach to the programs or services has had on the internal operations of the individuals, teams, or organizations delivering the programs or services;</li>
 		<li>Quantitative or measurable improvement to the programs or services.</li></ul>";
-  $translations[8][5] = "";
   $translations[8][6] = "";
   $translations[8][7] = "";
   $translations[8][8] = "";
