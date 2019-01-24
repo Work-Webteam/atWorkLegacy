@@ -191,7 +191,7 @@ function _atwork_prem_awards_questions() {
 		<li>Removing barriers to overcome constraints;</li>
 		<li>Change resilience – demonstration of strategies that support success even while going through change and transformation;</li>
 		<li>Attention to cross-government processes critical for meeting stakeholder needs.</li></ul>";
-  $translations[4][5] = "<strong>Impact:</strong><br />
+  $translations[4][5] = "<strong>Impact:</strong><br />Describe, and use metrics to support, the outcomes that the program, service, or initiative has had on the organization, public service or citizens of British Columbia including, not limited to:
 		<ul><li>Process improvements in business practices;</li>
 		<li>Extent to which the outcomes and objectives have significantly improved government-to-business or government-to-citizen program or service delivery;</li>
 		<li>Extent to which the outcomes and o bjectives significantly improved government-to-business or government-to-citizen service delivery;</li>
@@ -301,18 +301,18 @@ function _atwork_prem_awards_questions() {
   $translations[8][0] = "In this section, provide a brief statement that summarizes or restates the main points of the nomination (goal and achievement). The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br><br>
 		<em>(Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.)</em>";
   $translations[8][1] = "In this section, please establish a background that will provide perspective to the work achieved including highlighting what the problem was or why the new innovative approach was undertaken.";
-  $translations[8][2] = "<strong>Approach</strong><br />Describe how the new policy or program used an evidence-based or evidence-informed approach for the development from inception to delivery including, but not limited to:
-		<ul><li>The evidence-based or evidence-informed process in which the policy framework was designed;</li>
-		<li>Demonstration of the policy cycle including clear problem identification, current state, best practices or leading edge and gap analysis, development and balanced analysis of options,  evidence-based or evidence-informed  decision making, implementation, evaluation;</li>
-		<li>The use of foundational policy analysis tools to support recommendations (i.e. data and/or cost analysis, cross-jurisdictional and/or international reviews, peer reviewed research, stakeholder engagement etc.);</li>
-		<li>The use of new technology or tools (i.e. Data Science, Service Design, etc. to support policy recommendations);</li>
-		<li>Inclusive citizen engagement practices that reflects a diverse population within British Columbia.</li></ul>";
-  $translations[8][3] = "<strong>Complexity</strong><br />Describe the scope and scale of the evidence-based or evidence-informed approach to developing the policy or program including but not limited to:
+  $translations[8][2] = "<strong>Complexity</strong><br />Describe the scope and scale of the evidence-based or evidence-informed approach to developing the policy or program including but not limited to:
 		<ul><li>What necessitated the development of the policy or program? Describe the reason and evidence for the change or initiative;</li>
 		<li>Risks encountered and overcome; </li>
 		<li>Identify constraints which may include time frames, financial, existing policy, etc.;</li>
 		<li>Identifies challenges around aligning stakeholder or partner group interests;</li>
 		<li>Technical or organizational difficulties identified and addressed.</li></ul>";
+  $translations[8][3] = "<strong>Approach</strong><br />Describe how the new policy or program used an evidence-based or evidence-informed approach for the development from inception to delivery including, but not limited to:
+		<ul><li>The evidence-based or evidence-informed process in which the policy framework was designed;</li>
+		<li>Demonstration of the policy cycle including clear problem identification, current state, best practices or leading edge and gap analysis, development and balanced analysis of options,  evidence-based or evidence-informed  decision making, implementation, evaluation;</li>
+		<li>The use of foundational policy analysis tools to support recommendations (i.e. data and/or cost analysis, cross-jurisdictional and/or international reviews, peer reviewed research, stakeholder engagement etc.);</li>
+		<li>The use of new technology or tools (i.e. Data Science, Service Design, etc. to support policy recommendations);</li>
+		<li>Inclusive citizen engagement practices that reflects a diverse population within British Columbia.</li></ul>";
   $translations[8][5] = "<strong>Impact</strong><br />Capture the impact of, and use metrics to support (if applicable), the innovative approach to programs and services as demonstrated by, but not limited to:
 		<ul><li>Improved performance by doing things that may be unique, leading-edge, or new to the public service;</li>
 		<li>Describe the long-term benefits to internal or external stakeholders;</li>
