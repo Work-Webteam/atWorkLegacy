@@ -36,6 +36,8 @@ function _atwork_validate_emails($emails, $key, $atwork_LDAP_checked) {
     $atwork_ldap = new atwork_ldap;
 
     foreach ($recipient_addresses as $recipient_address) {
+      // We no longer have access to ldap on our new servers
+      /*
       if (!_atwork_valid_email($recipient_address)) {
         form_set_error($key, t('Email is limited to organizations within the BC Public Service. %email was not found.', array('%email' => $recipient_address)));
       }
@@ -62,8 +64,9 @@ function _atwork_validate_emails($emails, $key, $atwork_LDAP_checked) {
           'id' => $atwork_LDAP_checked,
           'emails' => $emails,
         );
+
         $atwork_LDAP_checked = &drupal_static('atwork_LDAP_checked', $atwork_LDAP_checked);
-      }
+      } */
     }
   }
 }

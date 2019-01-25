@@ -55,7 +55,8 @@ function atwork_ecards_form_alter(&$form, &$form_state, $form_id) {
  *
  */
 function atwork_ecards_form_validate($form, &$form_state) {
-  _atwork_validate_emails($form_state['values']['mail_to'], 'mail_to', $form['form_token']['#default_value']);
+  // We no longer have access to ldap
+  //_atwork_validate_emails($form_state['values']['mail_to'], 'mail_to', $form['form_token']['#default_value']);
 }
 
 /*
