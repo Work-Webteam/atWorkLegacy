@@ -33,7 +33,7 @@ function _atwork_get_addresses($string) {
 function _atwork_validate_emails($emails, $key, $atwork_LDAP_checked) {
   if ($emails) {
     $recipient_addresses = _atwork_get_addresses($emails);
-    $atwork_ldap = new atwork_ldap;
+    //$atwork_ldap = new atwork_ldap;
 
     foreach ($recipient_addresses as $recipient_address) {
       // We no longer have access to ldap on our new servers
