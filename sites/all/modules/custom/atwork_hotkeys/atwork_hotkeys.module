@@ -1,8 +1,0 @@
-<?php
-
-// TODO: convince Courtney to drop hotkeys and delete this module
-function atwork_hotkeys_preprocess_page(&$vars) {
-  if ($vars['is_front']) {
-    drupal_add_js(drupal_get_path('module', 'atwork_hotkeys') . '/atwork_hotkeys.js');
-  }
-}

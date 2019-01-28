@@ -1,6 +1,0 @@
-; $Id$ 
-name = Presence
-description = Microsoft Presence (jellybean)
-package = Atwork
-dependencies[] = atwork_profiles
-core = 7.x
