@@ -241,7 +241,7 @@
    */
   function setFeedInterval() {
     if (refreshFeed === false) {
-      refreshFeed = setInterval(checkMessageCount, 60000);
+      //refreshFeed = setInterval(checkMessageCount, 60000);
     }
   }
 
