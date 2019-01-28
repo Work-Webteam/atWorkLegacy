@@ -272,6 +272,7 @@ function atwork_activity_customize_feed_form() {
     '#weight' => 99,
     // Want this at the bottom of this form section.
     '#redirect' => FALSE,
+    '#access' => FALSE,
   ];
   // Now we auto-check the users preferences here, so it reflects what they are seeing in the feed.
   // $default_array should always be set
@@ -401,7 +402,7 @@ function _atwork_activity_render_messages($result, $activityType) {
   $output .= '<a class="btn" href="#" id="profile-comment-link">Message Check</a>';
   $output .= '<div id="ajax-target"></div>';
   if (_atwork_is_admin()) {
-    $output .= '<div id="atwork-advanced-feed-settings" class="admin-advanced-feed-settings-view">';
+    $output .= '<div id="atwork-advanced-feed-settings" class="admin-advanced-feed-settings-view" style="display:none;">';
   }
   else {
     $output .= '<div id="atwork-advanced-feed-settings" class="user-advanced-feed-settings-view">';
