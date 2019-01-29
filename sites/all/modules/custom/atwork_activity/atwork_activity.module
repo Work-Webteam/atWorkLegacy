@@ -405,7 +405,7 @@ function _atwork_activity_render_messages($result, $activityType) {
     $output .= '<div id="atwork-advanced-feed-settings" class="admin-advanced-feed-settings-view" style="display:none;">';
   }
   else {
-    $output .= '<div id="atwork-advanced-feed-settings" class="user-advanced-feed-settings-view">';
+    $output .= '<div id="atwork-advanced-feed-settings" class="user-advanced-feed-settings-view" style="display:none;"> ';
   }
   $output .= render($adv_form);
   $output .= '</div><!-- /#atwork-advanced-feed-settings -->';
