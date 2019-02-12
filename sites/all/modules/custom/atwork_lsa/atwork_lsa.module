@@ -9,7 +9,7 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
   drupal_add_js(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_gift.js');
   drupal_add_js(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_gift_list.js');
   jquery_impromptu_add();
-  drupal_add_library('system', 'drupal.ajax');
+  //drupal_add_library('system', 'drupal.ajax');
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)){
     drupal_add_css('.group-lsa-administration {display:block !important;}', 'inline');
   } else {
@@ -799,9 +799,21 @@ function atwork_lsa_form_alter(&$form, &$form_state, $form_id) {
  */
 function create_lsa_pin_letters(){
   drupal_set_message('Generating Files', 'status');
-  $all_application_nid = array();
   // first lets clean out the lsa_pin folder in case we are re-running.
-
+  $folder_check = 'public://lsa_pin/';
+  $check_dir = file_prepare_directory($folder_check, FILE_CREATE_DIRECTORY);
+  if($check_dir){
+    $files = new \FilesystemIterator($folder_check);
+    //Folder exists, now lets see if it is empty
+    if($files->valid()){
+      // We already have stuff in this directory - so lets remove it so we don't append to old data
+      $dir = new RecursiveDirectoryIterator($folder_check, FilesystemIterator::SKIP_DOTS);
+      $removable = new RecursiveIteratorIterator($dir, RecursiveIteratorIterator::CHILD_FIRST);
+      foreach( $removable as $files ) {
+        $files->isDir() ? rmdir($files) : unlink($files);
+      }
+    }
+  }
   // grab array of all application NID's
   $all_application_nid = get_all_pin_applications();
   // Now load those id's one at a time and add them to an array sorted by supervisor
@@ -809,7 +821,8 @@ function create_lsa_pin_letters(){
   // Now add lsa applications as necessary
   $all_lsa_application_nid = get_all_lsa_applications();
   // Fold in any additional required pins
-  $sorted_lsa_pin_applications = sort_lsa_applications($all_lsa_application_nid,$sorted_lsa_pin_applications);
+  $sorted_lsa_pin_applications = sort_lsa_applications($all_lsa_application_nid, $sorted_lsa_pin_applications);
+  //dpm($sorted_lsa_pin_applications);
   // Pass this list to the pdf/label creation function
   $create_pdf_labels = create_pdf_label($sorted_lsa_pin_applications);
   // Check whether we have finalised creation or not and return value
@@ -854,33 +867,44 @@ function sort_pin_applications($pin_nids = array()){
   }
   // Now load all nodes
   $unsorted_pin_list = node_load_multiple($nid_array);
-  foreach($unsorted_pin_list as $key=>$value){
-    $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']][] = array(
+  // Currently there are 2050
+  $test_array = array_slice($unsorted_pin_list, 2050);
+
+
+  foreach($test_array as $key=>$value){
+    $other_milestones = null;
+    //This is an array - we are treating it like a string here - we need o convert all values into a string.
+    if(isset($value->field_lsa_previous_service_miles) && $value->field_lsa_previous_service_miles){
+      foreach($value->field_lsa_previous_service_miles['und'] as $milestone_key=>$milestone_value){
+        $other_milestones .= $milestone_value['value'] . " ";
+      }
+    }
+    $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])][] = array(
       "first name" => $value->field_lsa_pin_first_name['und'][0]['safe_value'],
       "last name" => $value->field_lsa_pin_last_name['und'][0]['safe_value'],
       "milestone" => isset($value->field_lsa_pin_service_milestone['und'][0]['value'])? $value->field_lsa_pin_service_milestone['und'][0]['value']:"",
-      "other milestone" => isset($value->field_lsa_previous_service_miles['und'][0]['value'])? $value->field_lsa_previous_service_miles['und'][0]['value']:"",
-      "email" => isset($value->field_lsa_email['und'][0]['email'])? $value->field_lsa_email['und'][0]['email'] : ''
+      "other milestone" => isset($other_milestones) ? $other_milestones : "",
+      "email" => isset($value->field_lsa_email['und'][0]['email'])? strtolower($value->field_lsa_email['und'][0]['email']) : ''
     );
     // Now we put in the office for the label - overwrite if this is not the first
-    $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']]['address'] = array(
+    $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['address'] = array(
       "street" => $value->field_lsa_office_address['und'][0]['safe_value'],
       "city" => $value->field_lsa_office_city['und'][0]['safe_value'],
       "postal" => $value->field_lsa_office_postal_code['und'][0]['safe_value'],
     );
     // Ministry contact email
-    isset($value->field_lsa_ministry_rep_email['und'][0]['safe_value']) ? $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']]['ministry email'] = $value->field_lsa_ministry_rep_email['und'][0]['safe_value'] : $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']]['ministry email'] = "";
+    isset($value->field_lsa_ministry_rep_email['und'][0]['safe_value']) ? $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry_email'] = strtolower($value->field_lsa_ministry_rep_email['und'][0]['safe_value']) : $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry email'] = "";
     // Get a list so we know the name of the ministry we have chosen
     $ministry_names = field_info_field('field_lsa_pin_ministry_org');
     $allowed_ministry_names = list_allowed_values($ministry_names);
     if(array_key_exists($value->field_lsa_pin_ministry_org['und'][0]['value'], $allowed_ministry_names)){
-      $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']]['ministry_name'] = $allowed_ministry_names[$value->field_lsa_pin_ministry_org['und'][0]['value']];
+      $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry_name'] = $allowed_ministry_names[$value->field_lsa_pin_ministry_org['und'][0]['value']];
     } else {
-      $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']]['ministry_name'] = "unknown";
+      $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry_name'] = "unknown";
     }
     // Supervisors name
-    $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']]['supervisor_first_name'] = $value->field_lsa_supervisor_first_name['und'][0]['safe_value'];
-    $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']]['supervisor_last_name'] = $value->field_lsa_supervisor_last_name['und'][0]['safe_value'];
+    $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['supervisor_first_name'] = $value->field_lsa_supervisor_first_name['und'][0]['safe_value'];
+    $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['supervisor_last_name'] = $value->field_lsa_supervisor_last_name['und'][0]['safe_value'];
   }
   // Lets make sure we aren't carrying around unnecessary mem
   $pin_nids = null;
@@ -889,41 +913,48 @@ function sort_pin_applications($pin_nids = array()){
   return($sorted_pin_list);
 }
 
-function sort_lsa_applications($pin_nids = array(), $sorted_pin_list = array()){
-  //TODO: add lsa info to the same list.
+function sort_lsa_applications($lsa_nids = array(), $sorted_pin_list = array()){
+  //add lsa info to the same list.
   $nid_array = array();
-  $sub_values = array();
-  foreach($pin_nids as $key => $value){
+  foreach($lsa_nids as $key => $value){
     // Get the node id's into their own array
     $nid_array[] = $value->nid;
   }
+  // Free up the mem
+  $lsa_nids = null;
   $unsorted_pin_list = node_load_multiple($nid_array);
   // Currently there are 1440
   $test_array = array_slice($unsorted_pin_list, 1430);
   //dpm($test_array);
-  foreach($unsorted_pin_list as $key=>$value) {
+  foreach($test_array as $key=>$value) {
+    // If we have no milestone for some reason, jump to next record - nothing more to do here
+    if(!isset($value->field_lsa_years_of_service['und'][0]['value']) || $value->field_lsa_years_of_service['und'][0]['value'] == ''){
+      continue;
+    }
     // Check if the record already exists - if it does, check if the milestone is already in the array
-    if (array_key_exists($value->field_lsa_supervisor_email['und'][0]['email'], $sorted_pin_list)) {
-      $this_super = $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']];
+    if (array_key_exists(strtolower($value->field_lsa_supervisor_email['und'][0]['email']), $sorted_pin_list)) {
+      $this_super = $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])];
       // Now check each user to see if they have been included under their supervisor
       foreach ($this_super as $sub_key => $sub_value) {
-        if (isset($sub_value['email']) && $sub_value['email'] == $value->field_lsa_email['und'][0]['email']) {
+        if (isset($sub_value['email']) && $sub_value['email'] == strtolower($value->field_lsa_email['und'][0]['email'])) {
           // Check if years of service are in array
           if ($sub_value['milestone'] == $value->field_lsa_years_of_service['und'][0]['value']) {
             // We already have the record and the milestone - nothing more to do here.
             continue;
-          }
-          else {
+          } else {
             // Case - someone has ordered milestones retroactively, but not included their lsa time
-            if ((is_numeric(strpos($sub_value['other milestone'], $value->field_lsa_years_of_service['und'][0]['value']))) || $sub_value['other milestone'] == $value->field_lsa_years_of_service['und'][0]['value']) {
+            if (strpos($sub_value['other milestone'], $value->field_lsa_years_of_service['und'][0]['value']) || $sub_value['other milestone'] == $value->field_lsa_years_of_service['und'][0]['value']) {
               // Correct pin date had been found in "Other milestones"
               continue;
             }
             else {
-              // We need to add this in
-              $sub_value['milestone'] = $sub_value['milestone'] . " " . $value->field_lsa_years_of_service['und'][0]['value'];
+              // We need to add this in to milestone if it is not currently set - or into other milestone if it is
+              if(isset($sub_value['milestone'])){
+                $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])][$sub_key][$sub_value['other milestone']] .= ' ' . $value->field_lsa_years_of_service['und'][0]['value'];
+              } else {
+                $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])][$sub_key][$sub_value['milestone']] = $value->field_lsa_years_of_service['und'][0]['value'];
+              }
             }
-
           }
         }
         else {
@@ -939,12 +970,12 @@ function sort_lsa_applications($pin_nids = array(), $sorted_pin_list = array()){
           }
           // TODO: We need to set up a ministry rep list that we can use to populate the pin form, and also can double to fill that info in here.
           //$ministry_contact =
-          $sorted_pin_list[$value->field_lsa_supervisor_email['und'][0]['email']][] = array(
+          $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])][] = array(
             "first name" => $value->field_lsa_first_name['und'][0]['safe_value'],
             "last name" => $value->field_lsa_last_name['und'][0]['safe_value'],
             "milestone" => isset($value->field_lsa_years_of_service['und'][0]['value'])? $value->field_lsa_years_of_service['und'][0]['value']:"",
             "other milestone" => "",
-            "email" => isset($value->field_lsa_email['und'][0]['email'])? $value->field_lsa_email['und'][0]['email'] : '',
+            "email" => isset($value->field_lsa_email['und'][0]['email'])? strtolower($value->field_lsa_email['und'][0]['email']) : '',
             "address" => array(
               "street" => $value->field_lsa_office_address['und'][0]['safe_value'],
               "city" => $value->field_lsa_office_city['und'][0]['safe_value'],
@@ -958,11 +989,14 @@ function sort_lsa_applications($pin_nids = array(), $sorted_pin_list = array()){
 
         }
       }
+      // Supervisor has not been added to the list yet
+    } else {
+      // TODO: Add new supervisor and info as necessary
     }
   }
 
   // Lets make sure we aren't carrying around unnecessary mem
-  $pin_nids = null;
+  $lsa_nids = null;
   $unsorted_pin_list = null;
   // Now we need to add anything not already in this array, into the array
   return $sorted_pin_list;
@@ -973,7 +1007,7 @@ function sort_lsa_applications($pin_nids = array(), $sorted_pin_list = array()){
  * @param array $supervisor_list An array that contains applicants sorted by supervisor email
  */
 function create_pdf_label($supervisor_list = array()){
-
+  $i = 0;
   // Iterate through our list, creating labels and pdfs, thgen saving them in the file system.
   foreach($supervisor_list as $key => $value){
     // Split up our array
@@ -989,15 +1023,23 @@ function create_pdf_label($supervisor_list = array()){
     // ministry
     $ministry = $value['ministry_name'];
     unset($value['ministry_name']);
-    $ministry_contact = $value['ministry email'];
-    unset($value['ministry email']);
+    //$ministry_contact = $value['ministry email'];
+    //unset($value['ministry email']);
     // To create pdf letter we need to iterate further.
     $recipients = array();
     foreach($value as $sub_key => $sub_value){
+      // Supervisor values exist under key here - don't want to try and parse them.
+      if(!is_array($sub_value)){
+        continue;
+      }
+      dpm($sub_value);
+      dpm($supervisor_name);
+
       $recipients[] = array(
         "name" => (isset($sub_value['first name']) ? $sub_value['first name'] : "") . ' ' . (isset($sub_value['last name']) ? $sub_value['last name'] : ""),
-        "milestones" =>  (isset($sub_value['other milestone']) && $sub_value['other milestone'] > 0 ? $sub_value['other milestone'] . " " : '') . (isset($sub_value['milestone']) && $sub_value['milestone'] > 0 ? $sub_value['milestone'] : ''),
+        "milestones" =>  (isset($sub_value['other milestone']) && !empty($sub_value['other milestone'])  ? $sub_value['other milestone'] . " " : '') . (isset($sub_value['milestone']) && !empty($sub_value['milestone']) ? $sub_value['milestone'] : ''),
       );
+      dpm($recipients);
     }
     // Create label in another function so we have this specific info to use
     $label = set_mail_label($supervisor_name, $label_address, $ministry);
@@ -1024,7 +1066,7 @@ function create_pdf_label($supervisor_list = array()){
     $picture = file_get_contents($image_path);
     $image_64 = chunk_split(base64_encode($picture));
     $size = getimagesize($image_path);
-    $letter = set_letter($label, $ministry_contact, $supervisor_first, $supervisor_last, $recipients, $date, $image_64, $size );
+    $letter = set_letter($label,$supervisor_first, $supervisor_last, $recipients, $date, $image_64, $size );
     // Check for each part of path, create them if they don't exist
     if($check_dir){
       if(file_exists($folder_check . "/" . $key . "-letter")){
@@ -1036,6 +1078,7 @@ function create_pdf_label($supervisor_list = array()){
       fclose($file);
     }
   }
+  return TRUE;
 }
 
 /**
@@ -1064,7 +1107,7 @@ function set_mail_label($supervisor_name, $label_address, $ministry){
  *
  * @return string $letter_text
  */
-function set_letter($label, $ministry_contact, $supervisor_first, $supervisor_last, $recipients, $date, $image_64, $size ){
+function set_letter($label, $supervisor_first, $supervisor_last, $recipients, $date, $image_64, $size ){
   require(drupal_get_path('module', 'atwork_lsa') . '/atwork_pin_lsa.pdf.inc');
   return $letter_text;
 }
