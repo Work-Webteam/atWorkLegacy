@@ -774,7 +774,6 @@ function atwork_lsa_form_alter(&$form, &$form_state, $form_id) {
     global $user;
     $current_user = user_load($user->uid);
     if (_atwork_is_admin($user)) {
-      //dpm($form_state);
       $form['create-pin-letter'] = [
         '#type' => 'submit',
         '#value' => 'Generate Letters',
@@ -822,9 +821,10 @@ function create_lsa_pin_letters(){
   $all_lsa_application_nid = get_all_lsa_applications();
   // Fold in any additional required pins
   $sorted_lsa_pin_applications = sort_lsa_applications($all_lsa_application_nid, $sorted_lsa_pin_applications);
-  //dpm($sorted_lsa_pin_applications);
   // Pass this list to the pdf/label creation function
   $create_pdf_labels = create_pdf_label($sorted_lsa_pin_applications);
+  // Finally, we will write all of our records to a .csv for protocol
+  create_csv($sorted_lsa_pin_applications);
   // Check whether we have finalised creation or not and return value
   if($create_pdf_labels == "true"){
     drupal_set_message("All letters and labels created successfully", 'message');
@@ -860,7 +860,7 @@ function get_all_lsa_applications(){
 function sort_pin_applications($pin_nids = array()){
   // Array we will use to store array of lsa pin nodes sorted by supervisor
   $sorted_pin_list = array();
-  $nid_array = array();
+  $nid_array = [];
   foreach($pin_nids as $key => $value){
     // Get the node id's into their own array
     $nid_array[] = $value->nid;
@@ -868,22 +868,21 @@ function sort_pin_applications($pin_nids = array()){
   // Now load all nodes
   $unsorted_pin_list = node_load_multiple($nid_array);
   // Currently there are 2050
-  $test_array = array_slice($unsorted_pin_list, 2050);
+  //$test_array = array_slice($unsorted_pin_list, -10, count($unsorted_pin_list));
 
-
-  foreach($test_array as $key=>$value){
+  foreach($unsorted_pin_list as $key=>$value){
     $other_milestones = null;
-    //This is an array - we are treating it like a string here - we need o convert all values into a string.
+    //This is an array - we are treating it like a string here - we need to convert all values into a string.
     if(isset($value->field_lsa_previous_service_miles) && $value->field_lsa_previous_service_miles){
       foreach($value->field_lsa_previous_service_miles['und'] as $milestone_key=>$milestone_value){
-        $other_milestones .= $milestone_value['value'] . " ";
+        $other_milestones .= trim($milestone_value['value']) . " ";
       }
     }
     $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])][] = array(
       "first name" => $value->field_lsa_pin_first_name['und'][0]['safe_value'],
       "last name" => $value->field_lsa_pin_last_name['und'][0]['safe_value'],
-      "milestone" => isset($value->field_lsa_pin_service_milestone['und'][0]['value'])? $value->field_lsa_pin_service_milestone['und'][0]['value']:"",
-      "other milestone" => isset($other_milestones) ? $other_milestones : "",
+      "milestone" => isset($value->field_lsa_pin_service_milestone['und'][0]['value'])? trim($value->field_lsa_pin_service_milestone['und'][0]['value']):"",
+      "other milestone" => isset($other_milestones) ? trim($other_milestones) : "",
       "email" => isset($value->field_lsa_email['und'][0]['email'])? strtolower($value->field_lsa_email['und'][0]['email']) : ''
     );
     // Now we put in the office for the label - overwrite if this is not the first
@@ -909,97 +908,98 @@ function sort_pin_applications($pin_nids = array()){
   // Lets make sure we aren't carrying around unnecessary mem
   $pin_nids = null;
   $unsorted_pin_list = null;
-  //dpm($sorted_pin_list);
   return($sorted_pin_list);
 }
+
 
 function sort_lsa_applications($lsa_nids = array(), $sorted_pin_list = array()){
   //add lsa info to the same list.
   $nid_array = array();
-  foreach($lsa_nids as $key => $value){
+  foreach($lsa_nids as $nidkey => $nidvalue){
     // Get the node id's into their own array
-    $nid_array[] = $value->nid;
+    $nid_array[] = $nidvalue->nid;
   }
   // Free up the mem
   $lsa_nids = null;
   $unsorted_pin_list = node_load_multiple($nid_array);
-  // Currently there are 1440
-  $test_array = array_slice($unsorted_pin_list, 1430);
-  //dpm($test_array);
-  foreach($test_array as $key=>$value) {
-    // If we have no milestone for some reason, jump to next record - nothing more to do here
-    if(!isset($value->field_lsa_years_of_service['und'][0]['value']) || $value->field_lsa_years_of_service['und'][0]['value'] == ''){
-      continue;
-    }
-    // Check if the record already exists - if it does, check if the milestone is already in the array
-    if (array_key_exists(strtolower($value->field_lsa_supervisor_email['und'][0]['email']), $sorted_pin_list)) {
-      $this_super = $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])];
-      // Now check each user to see if they have been included under their supervisor
-      foreach ($this_super as $sub_key => $sub_value) {
-        if (isset($sub_value['email']) && $sub_value['email'] == strtolower($value->field_lsa_email['und'][0]['email'])) {
-          // Check if years of service are in array
-          if ($sub_value['milestone'] == $value->field_lsa_years_of_service['und'][0]['value']) {
-            // We already have the record and the milestone - nothing more to do here.
-            continue;
-          } else {
-            // Case - someone has ordered milestones retroactively, but not included their lsa time
-            if (strpos($sub_value['other milestone'], $value->field_lsa_years_of_service['und'][0]['value']) || $sub_value['other milestone'] == $value->field_lsa_years_of_service['und'][0]['value']) {
-              // Correct pin date had been found in "Other milestones"
-              continue;
-            }
-            else {
-              // We need to add this in to milestone if it is not currently set - or into other milestone if it is
-              if(isset($sub_value['milestone'])){
-                $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])][$sub_key][$sub_value['other milestone']] .= ' ' . $value->field_lsa_years_of_service['und'][0]['value'];
-              } else {
-                $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])][$sub_key][$sub_value['milestone']] = $value->field_lsa_years_of_service['und'][0]['value'];
-              }
-            }
-          }
-        }
-        else {
-          // User not under this supervisor, and should be added
-          // First lets get a ministry name
-          // Get a list so we know the name of the ministry we have chosen
-          $ministry_names = field_info_field('field_lsa_org');
-          $allowed_ministry_names = list_allowed_values($ministry_names);
-          if(array_key_exists($value->field_lsa_org['und'][0]['value'], $allowed_ministry_names)){
-            $ministry = $allowed_ministry_names[$value->field_lsa__org['und'][0]['value']];
-          } else {
-            $ministry = "unknown";
-          }
-          // TODO: We need to set up a ministry rep list that we can use to populate the pin form, and also can double to fill that info in here.
-          //$ministry_contact =
-          $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])][] = array(
-            "first name" => $value->field_lsa_first_name['und'][0]['safe_value'],
-            "last name" => $value->field_lsa_last_name['und'][0]['safe_value'],
-            "milestone" => isset($value->field_lsa_years_of_service['und'][0]['value'])? $value->field_lsa_years_of_service['und'][0]['value']:"",
-            "other milestone" => "",
-            "email" => isset($value->field_lsa_email['und'][0]['email'])? strtolower($value->field_lsa_email['und'][0]['email']) : '',
-            "address" => array(
-              "street" => $value->field_lsa_office_address['und'][0]['safe_value'],
-              "city" => $value->field_lsa_office_city['und'][0]['safe_value'],
-              "postal" => $value->field_lsa_office_postal_code['und'][0]['safe_value']
-            ),
-            "ministry_name" => $ministry,
-            'supervisor_first_name' => $value->field_lsa_supervisor_first_name['und'][0]['safe_value'],
-            'supervisor_last_name' => $value->field_lsa_supervisor_last_name['und'][0]['safe_value']
+  //$test_array = array_slice($unsorted_pin_list, -10, count($unsorted_pin_list));
 
-          );
+  foreach($unsorted_pin_list as $key=>$value){
+    $record_exists = check_array($value, $sorted_pin_list);
 
-        }
-      }
-      // Supervisor has not been added to the list yet
-    } else {
-      // TODO: Add new supervisor and info as necessary
+    if($record_exists == FALSE){
+      // Grab our ministry name list
+      $ministry_names = field_info_field('field_lsa_org');
+      $allowed_ministry_names = list_allowed_values($ministry_names);
+
+      // Add this supervisor record to the array in full
+      $sorted_pin_list[strtolower($value->field_lsa_email['und'][0]['email'])] = [
+        'supervisor_first_name' => $value->field_lsa_supervisor_first_name['und'][0]['safe_value'],
+        'supervisor_last_name' => $value->field_lsa_supervisor_last_name['und'][0]['safe_value'],
+        'ministry_name' => array_key_exists($value->field_lsa_org['und'][0]['value'], $allowed_ministry_names) ? $allowed_ministry_names[$value->field_lsa_org['und'][0]['value']] :'unknown',
+        'address' => [
+          'street' => $value->field_lsa_street['und'][0]['safe_value'],
+          'city' => $value->field_lsa_city['und'][0]['safe_value'],
+          'postal' => $value->field_lsa_home_postal_code['und'][0]['safe_value'],
+        ],
+      ];
+      // Now add the recipient
+      $sorted_pin_list[strtolower($value->field_lsa_email['und'][0]['email'])][] = [
+        "first name" => $value->field_lsa_first_name['und'][0]['safe_value'],
+        "last name" => $value->field_lsa_last_name['und'][0]['safe_value'],
+        "milestone" => isset($value->field_lsa_years_of_service['und'][0]['value'])? trim($value->field_lsa_years_of_service['und'][0]['value']):"",
+        "other milestone" => "",
+        "email" => isset($value->field_lsa_email['und'][0]['email'])? strtolower($value->field_lsa_email['und'][0]['email']) : ''
+      ];
     }
   }
 
-  // Lets make sure we aren't carrying around unnecessary mem
-  $lsa_nids = null;
   $unsorted_pin_list = null;
-  // Now we need to add anything not already in this array, into the array
   return $sorted_pin_list;
+}
+
+
+function check_array($application, &$sorted_pin_list ){
+  $i = FALSE;
+  // Check if the record already exists - if it does, check if the milestone is already in the array
+  if (array_key_exists(strtolower($application->field_lsa_supervisor_email['und'][0]['email']), $sorted_pin_list)) {
+    // Supervisor already has an entry in the array - so we need to check if this application has already been added.
+    foreach($sorted_pin_list[strtolower($application->field_lsa_supervisor_email['und'][0]['email'])] as $subkey=>$subvalue){
+      // Get rid of any non-numerical arrays - we only want user arrays
+      if(!is_numeric(filter_var($subkey, FILTER_VALIDATE_INT))){
+        continue;
+      }
+      // If user record exists, we need to check milestone #'s
+      if(strtolower($application->field_lsa_email['und'][0]['email']) == $subvalue['email']){
+        // Need to notify that we are done with this record.
+        $i = TRUE;
+        // Check if this milestone already exists in 'milestone' variable
+        if(trim($subvalue['milestone']) == trim($application->field_lsa_years_of_service['und'][0]['value'])) {
+          return $i;
+        }
+        // Check if this milestone exists in 'other milestone' variable
+        if(trim($application->field_lsa_years_of_service['und'][0]['value']) == trim($subvalue['other milestone']) || strpos(trim($subvalue['other milestone']), trim($application->field_lsa_years_of_service['und'][0]['value']))){
+          return $i;
+        }
+
+        // This was not yet added - so lets add it here
+        $subvalue['other milestone'] = trim($subvalue['other milestone']) . ' ' . trim($application->field_lsa_years_of_service['und'][0]['value']);
+        return $i;
+      }
+    }
+    // Now we know that the supervisor exists, but the applicant doesn't, so lets just add the applicant info
+    $sorted_pin_list[strtolower($application->field_lsa_supervisor_email['und'][0]['email'])][] = [
+      "first name" => $application->field_lsa_first_name['und'][0]['safe_value'],
+      "last name" => $application->field_lsa_last_name['und'][0]['safe_value'],
+      "milestone" => trim($application->field_lsa_years_of_service['und'][0]['value']),
+      'other milestone' => '',
+      'email' => isset($application->field_lsa_email['und'][0]['email']) ? $application->field_lsa_email['und'][0]['email'] : ''
+    ];
+    $i = TRUE;
+    return $i;
+  }
+  // We need to add this to our final array
+  return $i;
 }
 
 /**
@@ -1011,35 +1011,33 @@ function create_pdf_label($supervisor_list = array()){
   // Iterate through our list, creating labels and pdfs, thgen saving them in the file system.
   foreach($supervisor_list as $key => $value){
     // Split up our array
-    $supervisor_name = $value['supervisor_first_name'] . ' ' . $value['supervisor_last_name'];
-    $supervisor_first = $value['supervisor_first_name'];
-    $supervisor_last = $value['supervisor_last_name'];
-    // Unset the fields after we use them so we can iterate through users later.
-    unset($value['supervisor_first_name']);
-    unset($value['supervisor_last_name']);
+    $supervisor_name = ucfirst($value['supervisor_first_name']) . ' ' . ucfirst($value['supervisor_last_name']);
+    $supervisor_first = ucfirst($value['supervisor_first_name']);
+    $supervisor_last = ucfirst($value['supervisor_last_name']);
     //Address for label
     $label_address = $value['address'];
-    unset($value['address']);
     // ministry
     $ministry = $value['ministry_name'];
-    unset($value['ministry_name']);
     //$ministry_contact = $value['ministry email'];
     //unset($value['ministry email']);
     // To create pdf letter we need to iterate further.
     $recipients = array();
     foreach($value as $sub_key => $sub_value){
       // Supervisor values exist under key here - don't want to try and parse them.
-      if(!is_array($sub_value)){
+      if(!is_numeric(filter_var($sub_key, FILTER_VALIDATE_INT))){
         continue;
       }
-      dpm($sub_value);
-      dpm($supervisor_name);
 
       $recipients[] = array(
-        "name" => (isset($sub_value['first name']) ? $sub_value['first name'] : "") . ' ' . (isset($sub_value['last name']) ? $sub_value['last name'] : ""),
-        "milestones" =>  (isset($sub_value['other milestone']) && !empty($sub_value['other milestone'])  ? $sub_value['other milestone'] . " " : '') . (isset($sub_value['milestone']) && !empty($sub_value['milestone']) ? $sub_value['milestone'] : ''),
+        "name" => (isset($sub_value['first name']) ? ucfirst($sub_value['first name']) : "") . ' ' . (isset($sub_value['last name']) ? ucfirst($sub_value['last name']) : ""),
+        "milestones" =>  (isset($sub_value['other milestone']) && !empty($sub_value['other milestone'])  ? trim($sub_value['other milestone']) . " " : '') . (isset($sub_value['milestone']) && !empty($sub_value['milestone']) ? trim($sub_value['milestone']) : ''),
       );
-      dpm($recipients);
+      // make sure we have not set the same milestone twice
+      foreach($recipients as $key=>$value){
+        $check_milestones = explode(" ", $value['milestones']);
+        $no_dupes = array_unique($check_milestones);
+        $recipients[$key]["milestonse"] = implode(" ", $no_dupes);
+      }
     }
     // Create label in another function so we have this specific info to use
     $label = set_mail_label($supervisor_name, $label_address, $ministry);
@@ -1079,6 +1077,34 @@ function create_pdf_label($supervisor_list = array()){
     }
   }
   return TRUE;
+}
+
+
+
+function create_csv($sorted_list) {
+  //dpm($sorted_list);
+  if (file_exists("public://lsa_pin", "recipients.csv")) {
+    // Get this file to append something
+    $file = fopen("public://lsa_pin/recipients.csv", "w");
+  }else {
+    // Make this text file and save it
+    $file = fopen("public://lsa_pin/recipients.csv", "a");
+  }
+  fputcsv($file, array('supervisor email', 'supervisor first name', 'supervisor last name', 'ministry', 'address', 'city', 'postal', 'applicant first name', 'applicant last name', 'applicant email', 'milestone', 'other milestone'));
+  foreach($sorted_list as $record => $value){
+    // We only want to parse the next line if we are working with an applicant
+    foreach($value as $subkey => $subvalue){
+      if(!is_numeric(filter_var($subkey, FILTER_VALIDATE_INT))){
+        continue;
+      }
+      $line = [$record, $value['supervisor_first_name'], $value['supervisor_last_name'], $value['ministry_name']];
+      array_push($line, $value['address']['street'], $value['address']['city'], $value['address']['postal']);
+      array_push($line, $subvalue['first name'], $subvalue['last name'], $subvalue['email'], $subvalue['milestone'], $subvalue['other milestone']);
+      fputcsv($file, $line);
+    }
+  }
+  fclose($file);
+  $sorted_list = null;
 }
 
 /**

@@ -7,13 +7,13 @@ $year_milestones = "";
 //dpm($supervisor_first);
 foreach($recipients as $key => $value){
   // Let's add some comma's to our milestones if necessary
-  if(isset($value['milestones']) && !is_numeric($value['milestones'])){
+  if(isset($value['milestones']) && !is_numeric(trim($value['milestones']))){
+    // Make sure we don't have any double spaces that will mess up the explode implode
+    $value['milestones'] = str_replace("  ", " ", $value['milestones']);
     $year_milestones = explode(" ", trim($value['milestones']));
-    //dpm($year_milestones);
-      //dpm($value['milestones']);
-      //dpm($value);
-      //dpm($key);
-      $year_append_milestones = implode(", ", $year_milestones) . " years";
+    // Last dup check
+    $year_milestones = array_unique($year_milestones);
+    $year_append_milestones = implode(", ", $year_milestones) . " years";
   } else {
       $year_append_milestones = $value['milestones'] . " years";
   }
@@ -54,7 +54,7 @@ $letter_text = <<< EOT
 
 <p>Registration for the corporate pin program takes place annually in March. You can order additional pins and pin plaques through Distribution Centre Victoria at any point throughout the year, but note there is a cost associated with this option.</p>
 
-<p>If you have questions about the corporate pin program, please connect with your organization’s <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">Recognition contact</a> Recognition contact, or email me directly.</p>
+<p>If you have questions about the corporate pin program, please connect with your organization’s <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">Recognition contact</a>, or email me directly.</p>
 
 <p>Thank you,</p>
 
