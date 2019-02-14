@@ -868,9 +868,9 @@ function sort_pin_applications($pin_nids = array()){
   // Now load all nodes
   $unsorted_pin_list = node_load_multiple($nid_array);
   // Currently there are 2050
-  //$test_array = array_slice($unsorted_pin_list, -10, count($unsorted_pin_list));
+  $test_array = array_slice($unsorted_pin_list, -10, count($unsorted_pin_list));
 
-  foreach($unsorted_pin_list as $key=>$value){
+  foreach($test_array as $key=>$value){
     $other_milestones = null;
     //This is an array - we are treating it like a string here - we need to convert all values into a string.
     if(isset($value->field_lsa_previous_service_miles) && $value->field_lsa_previous_service_miles){
@@ -922,9 +922,9 @@ function sort_lsa_applications($lsa_nids = array(), $sorted_pin_list = array()){
   // Free up the mem
   $lsa_nids = null;
   $unsorted_pin_list = node_load_multiple($nid_array);
-  //$test_array = array_slice($unsorted_pin_list, -10, count($unsorted_pin_list));
+  $test_array = array_slice($unsorted_pin_list, -10, count($unsorted_pin_list));
 
-  foreach($unsorted_pin_list as $key=>$value){
+  foreach($test_array as $key=>$value){
     $record_exists = check_array($value, $sorted_pin_list);
 
     if($record_exists == FALSE){
@@ -1042,7 +1042,7 @@ function create_pdf_label($supervisor_list = array()){
     // Create label in another function so we have this specific info to use
     $label = set_mail_label($supervisor_name, $label_address, $ministry);
     $label_csv_record = array(
-      "Label" => strip_tags($label)
+      "Label" => trim($label)
     );
     // Now check if label file already exists
     $folder_check = 'public://lsa_pin/' . str_replace(" ", "", $ministry);
@@ -1083,7 +1083,7 @@ function create_pdf_label($supervisor_list = array()){
 
 function create_csv($sorted_list) {
   //dpm($sorted_list);
-  if (file_exists("public://lsa_pin", "recipients.csv")) {
+  if (file_exists("public://lsa_pin/recipients.csv")) {
     // Get this file to append something
     $file = fopen("public://lsa_pin/recipients.csv", "w");
   }else {
