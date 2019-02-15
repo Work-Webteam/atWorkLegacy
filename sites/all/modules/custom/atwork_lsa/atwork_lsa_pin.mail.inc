@@ -40,7 +40,7 @@ $supervisor_body = <<<EOT
 
 <p>The pin(s) will be mailed directly to you at the beginning of June, and will include a list of all your employees who have registered. </p>
 
-<p>Please present the pin(s) to {$node->field_lsa_pin_first_name[$lang][0]['value']} during <strong>Public Service Week (June 11-15, 2018)</strong>. This is an ideal opportunity to thank your employees for their service and celebrate their commitment to the BC Public Service!</p>
+<p>Please present the pin(s) to {$node->field_lsa_pin_first_name[$lang][0]['value']} during <strong>Public Service Week (June 10-14, 2019)</strong>. This is an ideal opportunity to thank your employees for their service and celebrate their commitment to the BC Public Service!</p>
 
 <p>For more information about service pins, visit <a href="https://gww.gov.bc.ca/career/service-pins">@Work</a>. If you have additional questions, connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
 
@@ -54,7 +54,7 @@ $applicant_body = <<<EOT
 <span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
 <p>Thank you for registering for your {$email_milestone}-year corporate service pin, and congratulations on this important career milestone!</p>
 
-<p>Your pin(s) will be sent directly to your supervisor for presentation to you during <strong>Public Service Week (June 11-15, 2018)</strong>.</p>
+<p>Your pin(s) will be sent directly to your supervisor for presentation to you during <strong>Public Service Week (June 10-14, 2019)</strong>.</p>
 
 <p>For more information about service pins, visit <a href="https://gww.gov.bc.ca/career/service-pins" target="_blank">@Work</a>. If you have additional questions, connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
 
@@ -71,7 +71,7 @@ $ministry_rep_body = <<<EOT
 
 <p>Thank you for registering {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} for a {$email_milestone}-year service pin(s)</p>
 
-<p>The pin(s) will be mailed directly to {$node->field_lsa_pin_first_name[$lang][0]['value']}'s supervisor, for presentation during <strong>Public Service Week (June 11-15, 2018).</strong></p>
+<p>The pin(s) will be mailed directly to {$node->field_lsa_pin_first_name[$lang][0]['value']}'s supervisor, for presentation during <strong>Public Service Week (June 10-14, 2019).</strong></p>
 
 <p>For more information about service pins, visit <a href="https://gww.gov.bc.ca/career/service-pins" target="_blank">@Work</a>. If you have additional questions, connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
 
@@ -81,17 +81,20 @@ EOT;
 
 /**
  * Some ministries require specific email changes: These updates are only for the following:
- * 6 | Ministry of Education
- * 12 | Ministry of Indigenous Relations and Reconciliation
- * 15 | Ministry of Mental Health and Addictions
- * 20 | Ministry of Transportation and Infrastructure
- * 41 | Environmental Appeal Board
- * 42 | Environmental Assessment Office
- * 52 | Intergovernmental Relations Secretariat
- * 60 | Office of the Information and Privacy Commissioner
- * 61 | Office of the Merit Commissioner
- * 62 | Office of the Ombudsperson
- * 63 | Office of the Police Complaint Commissioner 
+ * 21|Community Living BC
+ * 24|Education
+ * 25|Elections BC
+ * 29|Energy, Mines & Petroleum Resources
+ * 32|Environmental Assessment Office
+ * 40|Government Communications & Public Engagement
+ * 46|Indigenous Relations & Reconciliation
+ * 48|Intergovernmental Relations Secretariat
+ * 55|Mental Health & Addictions
+ * 60|Office of the Information and Privacy Commissioner
+ * 62|Office of the Ombudsperson
+ * 63|Office of the Police Complaints Commissioner
+ * 68|Property Assessment Appeal Board
+ * 81|Transportation & Infrastructure
  */
 
 
@@ -102,7 +105,7 @@ $supervisor_body_special_condition = <<<EOT
 
 <p>Thank you for registering {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} for a {$email_milestone}-year service pin(s)</p>
 
-<p>The pin(s) will be mailed directly to your ministry/organization, for presentation during <strong>Public Service Week (June 11-15, 2018).</strong></p>
+<p>The pin(s) will be mailed directly to your ministry/organization, for presentation during <strong>Public Service Week (June 10-14, 2019).</strong></p>
 
 <p>If you have questions about the corporate pin program, please connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
 
@@ -115,7 +118,7 @@ $applicant_body_special_condition = <<<EOT
 <span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
 <p>Thank you for registering for your {$email_milestone}-year corporate service pin(s), and congratulations on this important career milestone!</p>
 
-<p>Your pin(s) will be sent directly to your ministry/organization, for presentation to you during <strong>Public Service Week (June 11-15, 2018)</strong>.</p>
+<p>Your pin(s) will be sent directly to your ministry/organization, for presentation to you during <strong>Public Service Week (June 10-14, 2019)</strong>.</p>
 
 <p>If you have questions about the corporate pin program, please connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.
 

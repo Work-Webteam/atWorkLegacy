@@ -207,7 +207,7 @@
   function setMinistryOptions(ministry){
     switch(true){
       //Only One retro pin allowed
-      case ministry == 18: //Ministry of Social Development and Poverty Reduction
+      case ministry == 68: //Property Assessment Appeal Board
         // We can only allow one box to be checked if they have chosen
         $('#edit-field-lsa-other-milestone-years').slideDown('slow');
         // Make sure our labels are set correctly
@@ -221,8 +221,8 @@
         }
       break;
 
-      case ministry == 35 :
-      /** Community living BC. retroactive pin option should only be available if a person indicates they are currently
+      case ministry == 76 : //Social Development & Poverty Reduction
+      /** Social Development & Poverty Reduction retroactive pin option should only be available if a person indicates they are currently
       *	  celebrating a milestone, and choose a "current year pin". They may request one retro pin in addition to that.
       **/
        // Check if this had other restrictions previously
@@ -246,7 +246,7 @@
             // We are fine, nothing to do
           } else {
             $('#edit-field-lsa-milestone-year-und').addClass('atwork-activity-processed');
-            $('#edit-field-lsa-milestone-year-und').after('<div id="select-message"><p><em>In order to be eligible for a service pin, employees must be celebrating a current milestone in 2018. If you have questions about your eligibility, please contact your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</em></p></div>');
+            $('#edit-field-lsa-milestone-year-und').after('<div id="select-message"><p><em>In order to be eligible for a service pin, employees must be celebrating a current milestone in 2019. If you have questions about your eligibility, please contact your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</em></p></div>');
           }
           $('#edit-field-lsa-other-milestone-years').hide();
           $('#edit-field-lsa-other-milestone-years-und-1').prop('checked', false);
@@ -270,31 +270,31 @@
       break;
 
       //multiple retro pins allowed
-      case ministry == 1 : //Ministry of Advanced Education, Skills and Training
-      case ministry == 2 : //Ministry of Agriculture
-      case ministry == 3 : //Ministry of Attorney General
-      case ministry == 4 : //Ministry of Children and Family Development
-      case ministry == 5 : //Ministry of Citizens' Services
-      case ministry == 7: // Ministry of Energy, Mines and Petroleum Resources
-      case ministry == 8 : //Ministry of Environment and Climate Change Strategy
-      case ministry == 9 : //Ministry of Finance
-      case ministry == 10: // Ministry of Forests, Lands, Natural Resource Operations and Rural Development
-      case ministry == 11: // Ministry of Health
-      case ministry == 12: // Ministry of Indigenous Relations and Reconciliation
-      case ministry == 15: // Ministry of Mental Health and Addictions
-      case ministry == 17: // Ministry of Public Safety and Solicitor General
-      case ministry == 20: // Ministry of Transportation and Infrastructure
-      case ministry == 27: // BC Public Service Agency
-      case ministry == 38: // Elections BC
-      case ministry == 41: // Environmental Appeal Board
-      case ministry == 42: // Environmental Assessment Office
-      case ministry == 47: // Government Communications and Public Engagement
-      case ministry == 52: // Intergovernmental Relations Secretariat
-      case ministry == 60: // Office of the Information and Privacy Commissioner
-      case ministry == 61: // Office of the Merit Commissioner
-      case ministry == 62: // Office of the Ombudsperson
-      case ministry == 63: // Office of the Police Complaint Commissioner
-      case ministry == 68: // Public Guardian and Trustee
+      case ministry == 2 :  // Advanced Education, Skills & Training
+      case ministry == 3 :  // Agricultural Land Commission
+      case ministry == 4 :  // Agriculture
+      case ministry == 5 :  // Attorney General
+      case ministry == 9 :  // BC Farm Industry Review Board
+      case ministry == 12 :  // |BC Public Service Agency
+      case ministry == 17 :  // |Children & Family Development
+      case ministry == 18 :  // |Citizens' Services
+      case ministry == 24 :  // |Education
+      case ministry == 25 :  // |Elections BC
+      case ministry == 29 :  // |Energy, Mines & Petroleum Resources
+      case ministry == 30 :  // |Environment & Climate Change Strategy
+      case ministry == 32 :  // |Environmental Assessment Office
+      case ministry == 34 :  // |Finance
+      case ministry == 39 :  // |Forests, Lands, Natural Resource Operations & Rural Development
+      case ministry == 40 :  // |Government Communications & Public Engagement
+      case ministry == 42 :  // |Health
+      case ministry == 46 :  // |Indigenous Relations & Reconciliation
+      case ministry == 48 :  // |Intergovernmental Relations Secretariat
+      case ministry == 55 :  // |Mental Health & Addictions
+      case ministry == 60 :  // |Office of the Information and Privacy Commissioner
+      case ministry == 62 :  // |Office of the Ombudsperson
+      case ministry == 63 :  // |Office of the Police Complaints Commissioner
+      case ministry == 71 :  // |Public Safety & Solicitor General
+      case ministry == 81 :  // |Transportation & Infrastructure
 
         // If we have previous set handlers on this - lets remove them.
         if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
@@ -315,7 +315,7 @@
 
       //If this is one of their award years then they can choose multiple extras: 20
 
-      case ministry == 6: // Ministry of Education
+      case ministry == 21: //Community Living BC
         // Check if this had other restrictions previously
         if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
           $('#edit-field-lsa-previous-service-miles-und').removeClass('atwork-activity-processed');
@@ -336,7 +336,7 @@
             // We are fine, nothing to do
           } else {
             $('#edit-field-lsa-milestone-year-und').addClass('atwork-activity-processed');
-            $('#edit-field-lsa-milestone-year-und').after('<div id="select-message"><p><em>In order to be eligible for a service pin, employees must be celebrating a current milestone in 2018. If you have questions about your eligibility, please contact your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</em></p></div>');
+            $('#edit-field-lsa-milestone-year-und').after('<div id="select-message"><p><em>In order to be eligible for a service pin, employees must be celebrating a current milestone in 2019. If you have questions about your eligibility, please contact your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</em></p></div>');
           }
           $('#edit-field-lsa-other-milestone-years').hide();
           $('#edit-field-lsa-other-milestone-years-und-1').prop('checked', false);
@@ -352,7 +352,7 @@
           // We are fine, nothing to do
         } else {
           $('#edit-field-lsa-milestone-year-und').addClass('atwork-activity-processed');
-          $('#edit-field-lsa-milestone-year-und').after('<div id="select-message"><p><em>In order to be eligible for a service pin, employees must be celebrating a current milestone in 2018. If you have questions about your eligibility, please contact your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</em></p></div>');
+          $('#edit-field-lsa-milestone-year-und').after('<div id="select-message"><p><em>In order to be eligible for a service pin, employees must be celebrating a current milestone in 2019. If you have questions about your eligibility, please contact your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</em></p></div>');
         }
         $('#edit-field-lsa-other-milestone-years').hide();
         $('#edit-field-lsa-previous-service-miles').hide();
@@ -368,30 +368,30 @@
 
     let applicationSubmitter = $('#edit-field-lsa-registerer-und option:selected').val();
     const special_cases = [
-      "6",  //Ministry of Education
-      "12", //Ministry of Indigenous Relations and Reconciliation
-      "15", //Ministry of Mental Health and Addictions
-      "20", //Ministry of Transportation and Infrastructure
-      "35", //Community Liviing BC
-      "38", //Elections BC
-      "41", //Environmental Appeal Board
-      "42", //Environmental Assessment Office
-      "47", // Government Communications and Public Engagement
-      "52", //Intergovernmental Relations Secretariat
+      "21", //Community Living BC
+      "24", //Education
+      "25", //Elections BC
+      "29", //Energy, Mines & Petroleum Resources
+      "32", //Environmental Assessment Office
+      "40", //Government Communications & Public Engagement
+      "46", //Indigenous Relations & Reconciliation
+      "48", //Intergovernmental Relations Secretariat
+      "55", //Mental Health & Addictions
       "60", //Office of the Information and Privacy Commissioner
-      "61", //Office of the Merit Commissioner
       "62", //Office of the Ombudsperson
-      "63", //Office of the Police Complaint Commissioner
+      "63", //Office of the Police Complaints Commissioner
+      "68", //Property Assessment Appeal Board
+      "81", //Transportation & Infrastructure
       ];
     // Application by user
     if(applicationSubmitter == 1){
       if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
-        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Your pin(s) will be sent directly to your ministry/organization, for presentation to you during Public Service Week - June 11-15, 2018.</em></p>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Your pin(s) will be sent directly to your ministry/organization, for presentation to you during Public Service Week - June 10-14, 2019.</em></p>");
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
         $('#sup-div.required-fields.form-wrapper').hide();
 
       } else if ($('#edit-field-lsa-pin-ministry-org-und option:selected').val() != '_none'){
-        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 11-15, 2018.</em></p>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 10-14, 2019.</em></p>");
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
         $('#sup-div.required-fields.form-wrapper').show();
       } else {
@@ -402,11 +402,11 @@
     } else if(applicationSubmitter == 2){
       // depending on the situation, show or change the description field
       if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
-        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pin(s) will be sent directly to your ministry/organization, for presentation to the employee during Public Service Week - June 11-15, 2018.</em></p>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pin(s) will be sent directly to your ministry/organization, for presentation to the employee during Public Service Week - June 10-14, 2019.</em></p>");
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
         $('#sup-div.required-fields.form-wrapper').hide();
       } else if ($('#edit-field-lsa-pin-ministry-org-und option:selected').val() != '_none'){
-        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 11-15, 2018.</em></p>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 10-14, 2019.</em></p>");
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
         $('#sup-div.required-fields.form-wrapper').show();
       } else {
@@ -416,11 +416,11 @@
       // Application by min contact
     }  else if(applicationSubmitter == 3){
       if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
-        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pin(s) will be sent directly to your ministry/organization, for presentation to the employee during Public Service Week - June 11-15, 2018.</em></p>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pin(s) will be sent directly to your ministry/organization, for presentation to the employee during Public Service Week - June 10-14, 2019.</em></p>");
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
         $('#sup-div.required-fields.form-wrapper').hide();
       } else if ($('#edit-field-lsa-pin-ministry-org-und option:selected').val() != '_none'){
-        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 11-15, 2018.</em></p>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 10-14, 2019.</em></p>");
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
         $('#sup-div.required-fields.form-wrapper').show();
       } else {
@@ -458,20 +458,20 @@
 
     if(choice == 1){
       // This is a user, so check if we need to change anything back. If not leave it.
-      $('.form-item-field-lsa-milestone-year-und label:first-child').html('Are you celebrating a current service milestone in 2018? <span class="form-required" title="This field is required.">*</span>');
+      $('.form-item-field-lsa-milestone-year-und label:first-child').html('Are you celebrating a current service milestone in 2019? <span class="form-required" title="This field is required.">*</span>');
       $('.form-item.form-type-select.form-item-field-lsa-pin-ministry-org-und label:first-child').html('What ministry/organization are you with? <span class="form-required" title="This field is required.">*</span>');
       $('.form-item.form-type-select.form-item-field-lsa-pin-sup-location-und label:first-child').html('Does your supervisor work in a different office location than you? <span class="form-required" title="This field is required.">*</span>');
       $('.form-item-field-lsa-other-milestone-years-und label:first-child').html('Do you wish to request any service pin(s) retroactively? <span class="form-required" title="This field is required.">*</span>');
       $('.form-item.form-type-checkboxes.form-item-field-lsa-previous-service-miles-und label:first-child').html('Please select the retroactive milestone pin(s) you would like to order <span class="form-required" title="This field is required.">*</span>');
-      $('.form-item-field-lsa-pin-terms-und').find($('.description')).html('I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target="_blank">service pin recognition eligibility guidelines</a> (which I have reviewed) that as of December 31, 2018, I will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and am therefore eligible to receive a service pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.');
+      $('.form-item-field-lsa-pin-terms-und').find($('.description')).html('I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target="_blank">service pin recognition eligibility guidelines</a> (which I have reviewed) that as of December 31, 2019, I will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and am therefore eligible to receive a service pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.');
     } else {
       // Change this if user is applying on behalf of an employee
-      $('.form-item-field-lsa-milestone-year-und label:first-child').html('Is the employee celebrating a current service milestone in 2018? <span class="form-required" title="This field is required.">*</span>');
+      $('.form-item-field-lsa-milestone-year-und label:first-child').html('Is the employee celebrating a current service milestone in 2019? <span class="form-required" title="This field is required.">*</span>');
       $('.form-item.form-type-select.form-item-field-lsa-pin-ministry-org-und label:first-child').html('What ministry/organization is the employee with? <span class="form-required" title="This field is required.">*</span>');
       $('.form-item.form-type-select.form-item-field-lsa-pin-sup-location-und label:first-child').html('Does the employee’s supervisor work in a different office location than the employee? <span class="form-required" title="This field is required.">*</span>');
       $('.form-item-field-lsa-other-milestone-years-und label:first-child').html('Do you wish to request any service pin(s) for the employee retroactively? <span class="form-required" title="This field is required.">*</span>');
       $('.form-item.form-type-checkboxes.form-item-field-lsa-previous-service-miles-und label:first-child').html('Please select the retroactive milestone pin(s) you would like to order for the employee <span class="form-required" title="This field is required.">*</span>');
-      $('.form-item.form-type-checkbox.form-item-field-lsa-pin-terms-und').find($('.description')).html('I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target="_blank">service pin recognition eligibility guidelines</a> (which I have reviewed) that as of December 31, 2018, the above noted employee will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and is therefore eligible to receive a service pin. By providing the employee\'s contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.');
+      $('.form-item.form-type-checkbox.form-item-field-lsa-pin-terms-und').find($('.description')).html('I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target="_blank">service pin recognition eligibility guidelines</a> (which I have reviewed) that as of December 31, 2019, the above noted employee will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and is therefore eligible to receive a service pin. By providing the employee\'s contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.');
 
     }
   }
