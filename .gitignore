@@ -4,6 +4,9 @@ sites/*/settings*.php
 # Ignore paths that contain user-generated content.
 sites/*/files
 sites/*/private
+sites/all/themes/atwork_zen/images/*
+
+# Created by https://www.gitignore.io/api/ for: sass,drupal,windows,macos,gulp,sublimetext
 
 ### Sass ###
 .sass-cache/
@@ -161,3 +164,4 @@ GitHub.sublime-settings
 !.vscode/launch.json
 !.vscode/extensions.json
 .htaccess
+

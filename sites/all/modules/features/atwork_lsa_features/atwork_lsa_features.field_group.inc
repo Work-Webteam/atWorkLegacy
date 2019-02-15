@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * atwork_lsa_features.field_group.inc
@@ -49,8 +50,8 @@ function atwork_lsa_features_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Ceremony Accommodations',
-    'weight' => '18',
+    'label' => 'Ceremony Requirements',
+    'weight' => '20',
     'children' => array(
       0 => 'field_lsa_accommodation_notes',
       1 => 'field_lsa_ceremony_accommodation',
@@ -59,7 +60,7 @@ function atwork_lsa_features_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => 'Ceremony Accommodations',
+      'label' => 'Ceremony Requirements',
       'instance_settings' => array(
         'required_fields' => 1,
         'id' => '',
@@ -82,7 +83,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Administration',
-    'weight' => '22',
+    'weight' => '24',
     'children' => array(
       0 => 'field_lsa_notes',
       1 => 'field_lsa_form_date_stamp',
@@ -185,7 +186,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Dietary Requirements',
-    'weight' => '20',
+    'weight' => '22',
     'children' => array(
       0 => 'field_lsa_dietary_guest',
       1 => 'field_lsa_dietary_requirements',
@@ -246,7 +247,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Work Information',
-    'weight' => '17',
+    'weight' => '18',
     'children' => array(
       0 => 'field_lsa_org',
       1 => 'field_lsa_branch_department',
@@ -316,7 +317,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Charitable donation',
-    'weight' => '12',
+    'weight' => '13',
     'children' => array(
       0 => 'field_lsa_donation_options',
       1 => 'field_lsa_pecsf_region',
@@ -349,7 +350,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Recipient Contact Information',
-    'weight' => '16',
+    'weight' => '17',
     'children' => array(
       0 => 'field_lsa_first_name',
       1 => 'field_lsa_middle_name',
@@ -536,7 +537,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Long Service Award Survey',
-    'weight' => '21',
+    'weight' => '23',
     'children' => array(
       0 => 'field_lsa_survey',
     ),
@@ -839,8 +840,8 @@ function atwork_lsa_features_field_group_info() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Administration');
-  t('Ceremony Accommodations');
   t('Ceremony Details');
+  t('Ceremony Requirements');
   t('Charitable donation');
   t('Contact Information');
   t('Dietary Requirements');
