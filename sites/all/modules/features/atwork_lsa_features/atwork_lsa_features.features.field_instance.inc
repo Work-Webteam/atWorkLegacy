@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * atwork_lsa_features.features.field_instance.inc
@@ -80,7 +81,85 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 45,
+      'weight' => 28,
+    ),
+  );
+
+  // Exported field_instance: 'node-lsa_application-field_award_only'.
+  $field_instances['node-lsa_application-field_award_only'] = array(
+    'bundle' => 'lsa_application',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'Selecting Award Only indicates you do not wish to attend the awards ceremony. <strong>No invitation will be issued.</strong> Your award will be sent to your organization for presentation to you later this fall. ',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(
+          'semantic_field_format' => 0,
+        ),
+        'type' => 'list_default',
+        'weight' => 48,
+      ),
+      'ecard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'question' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'scs' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_award_only',
+    'label' => 'Award Only',
+    'required' => 0,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
+      'semantic_field_format' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 10,
     ),
   );
 
@@ -162,7 +241,7 @@ function atwork_lsa_features_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 44,
+      'weight' => 27,
     ),
   );
 
@@ -239,7 +318,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 12,
     ),
   );
 
@@ -701,7 +780,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 
@@ -778,7 +857,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
       ),
       'type' => 'number',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
@@ -853,7 +932,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 19,
+      'weight' => 21,
     ),
   );
 
@@ -904,6 +983,20 @@ function atwork_lsa_features_field_default_field_instances() {
     'label' => 'Award Year',
     'required' => 0,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -1049,7 +1142,7 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_ceremony_accommodation',
-    'label' => 'Ceremony Accommodations',
+    'label' => 'Ceremony Requirements',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -1065,6 +1158,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
+      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -1347,7 +1441,7 @@ function atwork_lsa_features_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -2037,7 +2131,7 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_email',
-    'label' => 'Email Address',
+    'label' => 'Government Email Address',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -2196,7 +2290,7 @@ Vegan',
         'size' => 35,
       ),
       'type' => 'text_textfield',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
@@ -2462,7 +2556,7 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_guest_accom',
-    'label' => 'Guest Accommodations',
+    'label' => 'Guest Requirements',
     'required' => 0,
     'settings' => array(
       'authcache' => array(
@@ -2478,6 +2572,7 @@ Vegan',
         'peruser' => 1,
         'status' => 0,
       ),
+      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -3993,7 +4088,7 @@ Guest information is not known at this time',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_recipient_accom',
-    'label' => 'Recipient Accommodations',
+    'label' => 'Recipient Requirements',
     'required' => 0,
     'settings' => array(
       'authcache' => array(
@@ -4009,6 +4104,7 @@ Guest information is not known at this time',
         'peruser' => 1,
         'status' => 0,
       ),
+      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -4249,7 +4345,7 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_retiring_thisyear',
-    'label' => 'Retiring in 2018?',
+    'label' => 'Retiring in 2019?',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -5070,7 +5166,7 @@ Vegan',
       ),
     ),
     'deleted' => 0,
-    'description' => '<p style="margin-top: 20px;">I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2018, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events.</p>',
+    'description' => '<p id="lsa-declaration">I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2019, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events.</p>',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -5132,7 +5228,7 @@ Vegan',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 23,
+      'weight' => 25,
     ),
   );
 
@@ -5512,7 +5608,7 @@ Vegan',
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 25,
+      'weight' => 26,
     ),
   );
 
@@ -7479,7 +7575,7 @@ Vegan',
   t('<em> Service pins will be sent to the employee’s supervisor for presentation during Public Service Week - June 11-15, 2018.</em>');
   t('<em>I do <u>not</u> wish to take part in the Long Service Awards survey.</em>');
   t('<img class="lsa-award-selector-img-display-panel"></img>');
-  t('<p style="margin-top: 20px;">I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2018, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events.</p>');
+  t('<p id="lsa-declaration">I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2019, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events.</p>');
   t('Accessibility');
   t('Actual_Min/Org');
   t('Alternate Email Address');
@@ -7488,12 +7584,13 @@ Vegan',
   t('Attending with alternate Min/Org');
   t('Award');
   t('Award ID');
+  t('Award Only');
   t('Award Special Instructions');
   t('Award Year');
   t('Branch');
-  t('Ceremony Accommodations');
   t('Ceremony Date');
   t('Ceremony Night');
+  t('Ceremony Requirements');
   t('Ceremony Response');
   t('Certificate Name');
   t('Certificate Ordered');
@@ -7517,9 +7614,10 @@ Vegan',
   t('Employee Number');
   t('Engravement');
   t('First Name');
-  t('Guest Accommodations');
+  t('Government Email Address');
   t('Guest Attending');
   t('Guest Requests');
+  t('Guest Requirements');
   t('Home Phone');
   t('I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target ="_blank">service pin recognition eligibility guidelines</a> (which I have reviewed) that as of December 31, 2018, I will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and am therefore eligible to receive a service pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.');
   t('If retired, please enter the last organization and supervisor you worked with.');
@@ -7542,11 +7640,12 @@ Vegan',
   t('Postal Code');
   t('Province');
   t('RSVP');
-  t('Recipient Accommodations');
   t('Recipient Requests');
-  t('Retiring in 2018?');
+  t('Recipient Requirements');
+  t('Retiring in 2019?');
   t('Retro-Active');
   t('Second Charity');
+  t('Selecting Award Only indicates you do not wish to attend the awards ceremony. <strong>No invitation will be issued.</strong> Your award will be sent to your organization for presentation to you later this fall. ');
   t('Service Milestone');
   t('Street');
   t('Supervisor City');
