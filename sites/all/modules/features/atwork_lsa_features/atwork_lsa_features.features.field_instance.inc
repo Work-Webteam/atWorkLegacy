@@ -6087,7 +6087,7 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_milestone_year',
-    'label' => 'Are you celebrating a current service milestone in 2018?',
+    'label' => 'Are you celebrating a current service milestone in 2019?',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -6502,7 +6502,7 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_other_milestone_years',
-    'label' => 'Do you wish to request any service pin(s) for any past milestones?',
+    'label' => 'Do you wish to request service pin(s) for any past milestones?',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -7030,7 +7030,7 @@ Vegan',
       ),
     ),
     'deleted' => 0,
-    'description' => 'I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target ="_blank">service pin recognition eligibility guidelines</a> (which I have reviewed) that as of December 31, 2018, I will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and am therefore eligible to receive a service pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.',
+    'description' => 'I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target ="_blank">service pin recognition eligibility guidelines</a> (which I have reviewed) that as of December 31, 2019, I will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and am therefore eligible to receive a service pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -7579,7 +7579,7 @@ Vegan',
   t('Accessibility');
   t('Actual_Min/Org');
   t('Alternate Email Address');
-  t('Are you celebrating a current service milestone in 2018?');
+  t('Are you celebrating a current service milestone in 2019?');
   t('Attending Ceremony');
   t('Attending with alternate Min/Org');
   t('Award');
@@ -7605,7 +7605,7 @@ Vegan',
   t('Did you register last year but were unable to attend the ceremony?');
   t('Dietary Requirements');
   t('Do you need to update your contact information or workplace details (e.g. ministry)?');
-  t('Do you wish to request any service pin(s) for any past milestones?');
+  t('Do you wish to request service pin(s) for any past milestones?');
   t('Does your supervisor work in a different office location than you? ');
   t('Donation Amount');
   t('Donation Amount 2');
@@ -7619,7 +7619,7 @@ Vegan',
   t('Guest Requests');
   t('Guest Requirements');
   t('Home Phone');
-  t('I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target ="_blank">service pin recognition eligibility guidelines</a> (which I have reviewed) that as of December 31, 2018, I will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and am therefore eligible to receive a service pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.');
+  t('I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target ="_blank">service pin recognition eligibility guidelines</a> (which I have reviewed) that as of December 31, 2019, I will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and am therefore eligible to receive a service pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.');
   t('If retired, please enter the last organization and supervisor you worked with.');
   t('Invitation Send Date');
   t('Last Name');
