@@ -157,8 +157,8 @@
         '<option value="Appalachian Sherpa blanket" name="sherpa_blanket" id="30_gift_sherpa_blanket">Appalachian Sherpa blanket</option>' +
           // Colonnade Clock
           '<option value="Colonnade clock" name="colonnade_clock" id="30_gift_colonnade_clock">Colonnade Clock</option>' +
-          // RHV Orca Sunset painting
-          '<option value="Golden Shores framed art print" name="rhv_print_sunrise" id="30_gift_rhv_print_sunrise">Golden Shores framed art print</option>' +
+          // Epiphany painting
+          '<option value="Epiphany III framed Art Print" name="print_epiphany" id="30_gift_print_epiphany">Epiphany III framed art print</option>' +
           // Sterling earrings
           '<option value="Sterling silver earrings" name="sterling_earrings" id="30_gift_sterling_earrings">Sterling silver earrings</option>' +
           // PECSF donation
@@ -173,8 +173,8 @@
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/blanket.jpg" alt="Image of appalachian sherpa blanket" id="image_sherpa_blanket">' +
         // Colonnade Clock
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/clock.jpg" alt="Colonnade Clock" id="image_colonnade_clock">'+
-          // RHV Orca Sunset painting
-          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/gullprint-thumb.png" alt="Golden Shores framed art print" id="image_rhv_print_sunrise">' +
+          // Epiphany III painting
+          '<img src="/sites/default/files/styles/node_image/public/bg/image/2019/0213/30yearprint-epiphany-sm.jpg" alt="Epiphany III framed Art Print" id="image_print_epiphany">' +
           // Sterling Earrings
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0208/silverearringsthumb.jpg" alt="Solid sterling earrings" id="image_sterling_earrings">' +
           // PECSF donation
@@ -190,7 +190,7 @@
         // Colonnade clock
         '<span id="info_colonnade_clock"><p><strong>Howard Miller® Colonnade clock</strong></p><p>This bold optical crystal, carriage-style clock has <em>In recognition of thirty years of service</em> engraved on front plate. It features a black glass center panel and a white dial with black Roman numerals and hour markers surrounded by a polished silver-tone bezel.</p><br /><p>Size: 6.75" H (17 cm) x 6.25" W (16 cm)</p></span>' +
         // RHV Orca Sunset painting
-        '<span id="info_rhv_print_sunrise"><p><strong>Golden Shores framed art print</strong></p><p>This calming seaside photograph by B.C. artist Marvin Pelkey is printed on fine art paper and comes matted in a silver frame. The frame has <em>In recognition of thirty years of service</em> engraved on a plaque.</p><p>Size: 15 ½” H x 26 ½” W</p></span>' +
+        '<span id="info_print_epiphany"><p><strong>Epiphany III framed art print</strong></p><p>This stunning photograph by B.C. artist Marvin Pelkey is printed on fine art paper and comes matted in a black frame. The frame has In recognition of thirty years of service engraved on a plaque. The frame has <em>In recognition of thirty years of service</em> engraved on a plaque.</p><p>Size: 16” H x 16” W</p></span>' +
         // Sterling Earrings
         '<span id="info_sterling_earrings"><p><strong>Sterling silver earrings</strong></p><p>These sterling silver drop earrings are individually handcrafted by B.C. artists Nancy Dawson and Vincent Henson of Silver Eagles Design Studio in Alert Bay. They come in a box with <em>In recognition of thirty years of service</em> engraved on the top.</p><p>Size: 2.75 cm L x 2 cm W</p><p>Note: These earrings are designed to coordinate with the 35 year sterling silver bracelet.</p></span>' +
         // PECSF donation
@@ -410,7 +410,7 @@
           // Glass bowl
           '<option value="Blue Flower Bouquet glass bowl" name="glass_bowl" id="40_glass_bowl">Blue Flower Bouquet glass bowl</option>' +
           // MD Print
-          '<option value="Morning Surf framed art print" name="md_print" id="40_md_print">Morning Surf framed art print </option>' +
+          '<option value="Forest Cove framed art print" name="fc_print" id="40_fc_print"> Forest Cove framed art print </option>' +
           // PECSF donation
           '<option value= "$400.00 PECSF charitable donation" name="provincial_employees_community_services_fund" id="25_pecsf">Charitable Donation</option>' +
         '</select></label>' +
@@ -428,7 +428,7 @@
           // Glass bowl
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/bowl40yearcopy-thumb.jpg" alt="Blue flower bouquet glass bowl" id="image_glass_bowl"><br />' +
           // MD Print
-          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/shorelineprint-thumb.png" alt="Morning Surf Framed Art print" id="image_md_print"><br />' +
+          '<img src="/sites/default/files/styles/node_image/public/bg/image/2019/0213/40yearprint-forestcove-sm.jpg" alt="Forest Cove framed art print" id="image_fc_print"><br />' +
           // PECSF donation
           '<img src="/sites/default/files/lsa_2015/25_pecsf.jpg" alt="PECSF donation image" id="image_provincial_employees_community_services_fund"><br />' +
 
@@ -447,8 +447,8 @@
           // Blue Flower Bouquet glass bowl
           '<span id="info_glass_bowl"><p><strong>Blue Flower Bouquet glass bowl</strong></p><p>Each of these unique glass bowls are hand-blown by B.C. artist <a href="http://robertheld.com/about-robert-held" target = "_blank">Robert Held</a> in Parksville.</p><p>Size: 7" H</p><p><strong>Note:</strong> Due to the nature of this award, engraving is not possible.</p></span>'+
           // TODO: Add up to date informatino when it comes in
-          // MD print
-          '<span id="info_md_print"><p><strong>Morning Surf framed art print</strong></p><p>This colourful landscape print was originally painted by artist <a href="http://michaeladavidsonart.com/" target = "_blank">Michaela Davidson</a>, from Lake Cowichan, B.C. The artwork is presented in a matted green frame with <em>In recognition of forty years of service</em> engraved on a plaque.</p><p>Size: 15" H x 16" W </p></span>' +
+          // FC print
+          '<span id="info_fc_print"><p><strong>Forest Cove framed art print</strong></p><p>This colourful landscape print was originally painted by artist <a href="http://michaeladavidsonart.com/" target = "_blank">Michaela Davidson</a>, from Lake Cowichan, B.C. The artwork is presented in a matted green frame with <em>In recognition of forty years of service</em> engraved on a plaque.</p><p>Size: 16" H x 14" W </p></span>' +
           // PECSF donation
           '<span id="info_provincial_employees_community_services_fund"><p><strong>Charitable donation</strong></p><p>Instead of choosing an award from the catalogue, you can opt to make a charitable donation via the Provincial Employees Community Services Fund. A framed certificate of service, signed by the Premier of British Columbia, will be presented to you noting your charitable contribution. </p><p>You can donate to the <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions" target="_blank">fund supported pool of charities in your region</a>, or you can choose one or two specific charities to receive your donation. </p><p>Note: Charitable tax receipts are not issued for Long Service Award donations.</p></span>' +
         '</div>',

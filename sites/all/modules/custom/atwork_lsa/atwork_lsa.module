@@ -10,6 +10,32 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
   drupal_add_js(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_gift_list.js');
   jquery_impromptu_add();
   //drupal_add_library('system', 'drupal.ajax');
+
+  // Hide Ceremony Requirements for now. We must also make these fields not required or we get a form error (even though they have a default)
+
+  $form['#fieldgroups']['group_lsa_accom']->format_type = "hidden";
+  $form['field_lsa_ceremony_accommodation']['#required'] = FALSE;
+  $form['field_lsa_ceremony_accommodation']['#access'] = FALSE;
+
+  $form['field_lsa_guest_accom']['#required'] = FALSE;
+  $form['field_lsa_guest_accom']['#access'] = FALSE;
+
+  $form['field_lsa_recipient_accom']['#required'] = FALSE;
+  $form['field_lsa_recipient_accom']['#access'] = FALSE;
+
+  $form['field_lsa_award_sp_instructions']['#required'] = FALSE;
+  $form['field_lsa_award_sp_instructions']['#access'] = FALSE;
+  // Hide Dietary Requirements for now.
+  $form['#fieldgroups']['group_lsa_dietary_acc']->format_type = "hidden";
+  $form['field_lsa_dietary_requirements']['#required'] = FALSE;
+  $form['field_lsa_dietary_requirements']['#access'] = FALSE;
+
+  $form['field_lsa_recipient_dietary']['#required'] = FALSE;
+  $form['field_lsa_recipient_dietary']['#access'] = FALSE;
+
+  $form['field_lsa_dietary_guest']['#required'] = FALSE;
+  $form['field_lsa_dietary_guest']['#access'] = FALSE;
+
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)){
     drupal_add_css('.group-lsa-administration {display:block !important;}', 'inline');
   } else {
@@ -19,6 +45,7 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
     // Also hide some fields non-admins will not use
     $form['field_lsa_guest_accom']['#access'] = false;
     $form['field_lsa_recipient_accom']['#access'] = false;
+    $form['field_award_only']['#access'] = false;
   }
 
   // LSA form adjustments
@@ -32,7 +59,16 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
   $form['field_lsa_award_sp_instructions']['#access'] = FALSE;
   $form['field_lsa_ceremony_accommodation']['und']['#title'] = t('');
   $form['field_lsa_dietary_requirements']['und']['#title'] = t('');
-  $form['field_lsa_25year_certificatename']['und']['#prefix'] = t("<p>Enter your name as you’d like it to appear on your certificate.</p>" . $form['field_lsa_25year_certificatename']['und']['#prefix']);
+  $form['field_lsa_25year_certificatename']['und']['#prefix'] = t("<p>Enter your name as you’d like it to appear on your certificate.</p>" .  $form['field_lsa_25year_certificatename']['und']['#prefix']);
+  $form['field_lsa_terms']['und']['#suffix'] = '<div class="instruction-suffix-info"><p>Once you have entered all the required information and hit the &ldquo;SUBMIT&rdquo; button you will receive:</p>
+		<ol>
+			<li>A confirmation page displaying all of the information you&rsquo;ve entered. If something is incorrect, please contact the <a href="mailto:longserviceawards@gov.bc.ca?Long%20Service%20Awards">Long Service Awards</a> team.</li>
+			<li>An automated confirmation email. </li>
+		</ol>
+  <p><span style="color:red;" class="red-text"> If you do not receive these two items, your registration was not received. </span></p></div>';
+
+  $form['field_lsa_terms']['und']['#prefix'] = '<p id="lsa-declaration" class="form-item-field-lsa-terms-und">I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2019, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events.</p>';
+
   // skip defaults for admins who are entering for others
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)  || in_array('lsa contact', $user->roles)) {
     //$form['field_lsa_terms'][$form['field_lsa_terms']['#language']]['#default_value'] = 1;
@@ -471,7 +507,7 @@ function get_award_id_number($form_state){
     8=>"Choice TBC",
     9=>"Colonnade clock",
     10=>"Appalachian Sherpa blanket",
-    11=>"Golden Shores framed art print",
+    11=>"30 - Epiphany III framed Art Print",
     12=>"Sterling silver earrings",
     13=>"$150.00 PECSF charitable donation",
     14=>"Choice TBC",
@@ -498,7 +534,7 @@ function get_award_id_number($form_state){
     35=>"Napolean Beauty ergo mantle clock",
     36=>"Genuine diamond stud earrings",
     37=>"Blue Flower Bouquet glass bowl",
-    38=>"Morning Surf framed art print",
+    38=>"Forrest Cove framed art print",
     39=>"Genuine diamond pendant and chain",
     40=>"$400.00 PECSF charitable donation",
     41=>"Choice TBC",

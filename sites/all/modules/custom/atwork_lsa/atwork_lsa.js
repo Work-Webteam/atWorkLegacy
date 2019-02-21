@@ -149,11 +149,11 @@
     $('#retirement_message').hide();
     $('#field-lsa-date-of-retirement-add-more-wrapper').hide();
     // Message for users from previous year who never received their gift
-    var lost_gift = $('<div id="lost_gift_message"><span style="color:red "> *Please take time to send a quick <a href="mailto:LongServiceAwards@gov.bc.ca?subject=LSA%20award%20not%20yet%20received">email</a> to the Long Service Awards team and let us know you haven\'t received your award yet</span></div>');
+    const lost_gift = $('<div id="lost_gift_message"><span style="color:red "> *Please send a quick <a href="mailto:LongServiceAwards@gov.bc.ca?subject=LSA%20award%20not%20yet%20received">email</a> to the Long Service Awards team to advise us that your award is still outstanding. Your award will be presented to you by your ministry, prior to the ceremony this fall.</span></div>');
     $('#edit-field-lsa-received-award').append(lost_gift);
     $('#lost_gift_message').hide();
     // Message for recipients who have completed 45 || 50 years
-    var special_gift = $('<div id="special_gift"><span style="color:red;"><strong>*</strong> Because of your notable milestone, the Long Service Awards program would like to give you an opportunity to identify an award that would be most meaningful to you. Our awards coordinator will contact you in May or June.</span></div>');
+    var special_gift = $('<div id="special_gift"><span style="color:red;"><strong>*</strong> A catalogue of awards specially curated for your Long Service milestone will be sent to you by email. You will be asked to confirm your choice of award before the end of June.</span></div>');
     $('#edit-field-lsa-years-of-service').append(special_gift);
     $('#special_gift').hide();
 
