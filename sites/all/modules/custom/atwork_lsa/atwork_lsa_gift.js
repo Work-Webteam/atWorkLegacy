@@ -26,7 +26,7 @@
           // Blue ballpoint pen
           '<option value="Cross Starry Blue ballpoint pen" name="blue_xp_ball_point_pen" id="25_gift_blue_pen">Cross pen</option>' +
           // Silver lapel pin
-          '<option value="Cross Tablet holder" name="cross_tablet_holder" id="25_cross_tablet_holder">Cross Tablet holder</option>' +
+          '<option value="Bugatti® writing case and tablet holder" name="cross_tablet_holder" id="25_cross_tablet_holder">Bugatti® writing case and tablet holder</option>' +
           // Padfolio/ipad holder
           '<option value="Passport and Luggage tag set" name="passport_luggage_tag" id="25_gift_passport_luggage_tag">Passport and Luggage tag set</option>' +
           // Pearl Earrings
@@ -50,7 +50,7 @@
           // Blue ball point pen
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/cross-pen-2-thumb.jpg" alt="Blue ballpoint pen" id="image_blue_xp_ball_point_pen">'+
           //silver lapel pin
-          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/padfolio-1-thumb.jpg" alt="Cross Tablet holder" id="image_cross_tablet_holder">' +
+          '<img src="/sites/default/files/styles/node_image/public/bg/image/2019/0213/m000747150sc7.jpg" alt="Bugatti Tablet holder" id="image_cross_tablet_holder">' +
           //Padfolio
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/passport-luggage-thumb.jpg" alt="Passport and Luggage tag picture" id="image_passport_luggage_tag">' +
           // Pearl Earrings
@@ -67,8 +67,8 @@
           // Blue ball point pen
           '<span id="info_blue_xp_ball_point_pen"><p><strong>Cross® pen</strong></p><p>This Cross® Calais chrome and blue lacquer rollerball pen is lightweight with a bold profile. It comes in a box with <em>25 Years</em> engraved on the lid of the pen.</p></span>' +
           // Tablet Holder
-          '<span id= "info_cross_tablet_holder"><p><strong>Cross® tablet holder</strong></p><p>This genuine leather table holder has <em>25 Years</em> debossed on the front. The zippered closure keeps your tablet secure during transport, and adjustable brackets hold most tablet models including all versions of the iPad including the iPad Air. The tablet is not included.</p><p>The cover includes a document pocket, business card holders, a cleverly integrated pen sleeve and a writing pad.</p>' +
-          '<p>Size: 10.5" H X 9" W</p></span>' +
+          '<span id= "info_cross_tablet_holder"><p><strong>Bugatti® writing case and tablet holder</strong></p><p>This recycled and synthetic leather case has <em>25 Years</em> debossed on the front. The zippered closure keeps your tablet secure during transport, and adjustable brackets hold most tablet models, including three sizes of iPad (tablet is not included). The cover includes a pocket for a smartphone, USB and pen holders, card slots, an ID window and writing pad.</p>' +
+          '<p>Size: 10 3/4" H X 9" W</p></span>' +
           // Padfolio
           '<span id= "info_passport_luggage_tag"><p><strong>Passport and luggage tag set</strong></p><p>This genuine black leather passport holder and luggage tag has <em>25 Years</em> debossed on the front. It has a magnetic closure. </p></span>' +
           // Pearl Earrings
@@ -244,7 +244,7 @@
           // Watch
           '<option value="Bulova Watch" name="bulova_watch" id="35_bulova_watch">Bulova watch</option>' +
         // Binoculars
-          '<option value="Bushnell Compact Binoculars" name="bushnell_binoculars" id="35_bushnell_binoculars"> Bushnell NatureView binoculars</option>' +
+          '<option value="Bushnell Prime Binoculars" name="bushnell_binoculars" id="35_bushnell_binoculars">Bushnell® Prime binoculars</option>' +
           // Glass Vase
           '<option value="Blue flower bouquet glass vase" name="glass_vase" id="35_glass_vase">Blue Flower Bouquet glass vase</option>' +
           // Bracelet
@@ -306,7 +306,7 @@
           //'<img src="/sites/default/files/lsa_2015/35_watch_silver_gold.png" alt="Bulova Silver Watch, two-toned face" id="image_bulova_watch_4">' +
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/Watches-group-thumb.png" alt="Bulova Watch" id="image_bulova_watch">' +
           // Bushnell Compact Binoculars
-          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/binocs-thumb.png" alt="bushnell binoculars" id="image_bushnell_binoculars">' +
+          '<img src="/sites/default/files/styles/node_image/public/bg/image/2019/0213/35yearbinoculars-sm.png" alt="bushnell binoculars" id="image_bushnell_binoculars">' +
           // Vase Picture
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/vase-thumb.jpg" alt=="Glass Vase" id="image_glass_vase">' +
           // Bracelet Picture
@@ -323,7 +323,7 @@
           // Bulova watch
           '<span id="info_bulova_watch"><br /><p><strong>Bulova® watch</strong></p><p>This watch features the BC Coat of Arms on the dial and your name and <em>35 Years</em> is engraved on the back of the watch face. It comes in a choice of gold, silver or two-toned watch face with a plated strap, or a black or brown leather strap. </p><br /></span>' +
           // Bushnell binoculars
-          '<span id="info_bushnell_binoculars"><br /><p><strong>Bushnell® NatureView binoculars</strong></p><p>These <a href="http://bushnell.com/wildlife/binoculars/natureview/8x-42mm-roof" target="_blank">binoculars</a> feature outstanding optical performance in a trim, balanced roof-prism design. They have a textured center-focus knob for easy, precise adjustments; BaK-4 roof prisms for bright, clear, crisp viewing; and fully multi-coated optics for superior light transmission and brightness. The non-slip rubber armor absorbs shock and they are fully waterproof and fogproof. They come with a soft case.</p><br /><p>Magnification x Objective Lens = 8 x 42mm</p><p>Field of View 393/131 (ft.@1000 yrds/m@1000m)</p><p>Weight = 23.1 oz (654 gm) <p></p>Note: Due to the nature of this award, engraving is not possible.</p></span>' +
+          '<span id="info_bushnell_binoculars"><br /><p><strong>Bushnell® Prime binoculars</strong></p><p>The Bushnell® Prime 8x42 binocular is the perfect blend of magnification and field of view, allowing easy viewing of moving animals and birds.  The EXO barrier and fully multi coated optics deliver bright images in any weather conditions. The Prime binoculars feature Bushnell’s newest and best protective lens coating that molecularly bonds to the glass, repelling water, oil, dust, debris and preventing scratches. With IPX7 waterproof construction, O-ring sealed optics stay dry inside, when immersed in three feet of water for up to 30 minutes. They come with a soft case. Note: Due to the nature of this award, engraving is not possible.</p><br /><p>Configuration = 8 x 42mm</p><p>Field of View 350/117 (ft.@1000 yrds/m@1000m)</p><p>Close Focus = 10F/3M</p></p><p>Weight = 23.3 oz (660 gm)</p></span>' +
           // Blue Flower Bouquet glass vase
           '<span id="info_glass_vase"><br /><p><strong>Blue Flower Bouquet glass vase</strong></p><p>Each of these unique glass vases are hand-blown by B.C. artist <a href="http://robertheld.com/about-robert-held" target = "_blank">Robert Held </a>in Parksville.</p><br /><p>Size:11.5" H</p><p>Note: Due to the nature of this gift, engraving is not possible.</p></span>' +
           // Aboriginal Bracelet
@@ -510,8 +510,8 @@ function gift_choice_populate_form(gifts){
       case "Cross Starry Blue ballpoint pen":
         g_choice = "Cross pen";
         break;
-      case "Cross Tablet holder":
-        g_choice = "Cross tablet holder";
+      case "Bugatti® writing case and tablet holder":
+        g_choice = "Bugatti® writing case and tablet holder";
         break;
       case "Sterling Silver and White Pearl Earrings":
         g_choice = "pearl earrings";
@@ -550,8 +550,8 @@ function gift_choice_populate_form(gifts){
     if(gift_name == 'Solid Sterling Silver Aboriginal Bracelet'){
       full_gift_name = "35 - Sterling Silver Bracelet - " + gifts.size_bracelet;
     }
-    if(gift_name == 'Bushnell Compact Binoculars'){
-      full_gift_name = "35 - Bushnell NatureView binoculars";
+    if(gift_name == 'Bushnell Prime Binoculars'){
+      full_gift_name = "35 - Bushnell Prime binoculars";
     }
     if(gift_name == "Bulova Watch"){
       let watch_specific_type;
