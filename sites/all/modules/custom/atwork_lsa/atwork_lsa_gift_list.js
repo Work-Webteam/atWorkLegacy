@@ -55,6 +55,7 @@
 		  43: "50 - Choice TBC",
 		  44: "50 - $500.00 PECSF charitable donation",
 		  45: "Award already Sent",
+      46: "Retroactive Award",
     };
     return gift_list;
   }
