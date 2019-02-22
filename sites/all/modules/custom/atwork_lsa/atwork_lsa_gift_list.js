@@ -6,7 +6,7 @@
 
   function gift_list_complete() {
     const gift_list = {
-	    1: "2017 Recipient - award received",
+	    1: "2018 Recipient - award received",
 	    2: "25 - Choice TBC",
 	    3: "25 - Framed Certificate and Cross pen",
 	    //4: "25 - Cross 'Starry Blue' Ballpoint Pen - No Certificate",
