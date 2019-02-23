@@ -98,11 +98,8 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
-        'settings' => array(
-          'semantic_field_format' => 0,
-        ),
-        'type' => 'list_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 48,
       ),
       'ecard' => array(
@@ -177,16 +174,8 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'editablefields',
-        'settings' => array(
-          'click_to_edit' => 0,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => 'list_key',
-          'fallback_settings' => array(),
-          'semantic_field_format' => '',
-        ),
-        'type' => 'editable',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 8,
       ),
       'ecard' => array(
@@ -332,16 +321,8 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'editablefields',
-        'settings' => array(
-          'click_to_edit' => 0,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => 'text_default',
-          'fallback_settings' => array(),
-          'semantic_field_format' => '',
-        ),
-        'type' => 'editable',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 7,
       ),
       'ecard' => array(
@@ -489,16 +470,11 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'email',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'email_default',
         'weight' => 12,
       ),
       'ecard' => array(
@@ -1021,16 +997,11 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 12,
       ),
       'ecard' => array(
@@ -1108,11 +1079,8 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'list',
-        'settings' => array(
-          'semantic_field_format' => '',
-        ),
-        'type' => 'list_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 6,
       ),
       'ecard' => array(
@@ -1532,16 +1500,11 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 8,
       ),
       'ecard' => array(
@@ -1691,21 +1654,8 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'editablefields',
-        'settings' => array(
-          'click_to_edit' => 0,
-          'click_to_edit_style' => 'hover',
-          'empty_text' => 'Dairy Free
-Gluten Free
-Sugar Free
-No Shellfish
-Vegetarian
-Vegan',
-          'fallback_format' => 'text_default',
-          'fallback_settings' => array(),
-          'semantic_field_format' => '',
-        ),
-        'type' => 'editable',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 7,
       ),
       'ecard' => array(
@@ -1791,17 +1741,9 @@ Vegan',
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
-        'module' => 'editablefields',
-        'settings' => array(
-          'click_to_edit' => 0,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => 'list_default',
-          'fallback_settings' => array(),
-          'semantic_field_format' => '',
-        ),
-        'type' => 'editable',
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 5,
       ),
       'ecard' => array(
@@ -2090,16 +2032,11 @@ Vegan',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'email',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'email_default',
         'weight' => 11,
       ),
       'ecard' => array(
@@ -2300,16 +2237,11 @@ Vegan',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 1,
       ),
       'ecard' => array(
@@ -2605,16 +2537,11 @@ Guest information is not known at this time',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'phone',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'phone',
         'weight' => 13,
       ),
       'ecard' => array(
@@ -2687,16 +2614,11 @@ Guest information is not known at this time',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 10,
       ),
       'ecard' => array(
@@ -2773,16 +2695,11 @@ Guest information is not known at this time',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 9,
       ),
       'ecard' => array(
@@ -2934,16 +2851,11 @@ Guest information is not known at this time',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 3,
       ),
       'ecard' => array(
@@ -3001,16 +2913,11 @@ Guest information is not known at this time',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 2,
       ),
       'ecard' => array(
@@ -3285,16 +3192,11 @@ Guest information is not known at this time',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 14,
       ),
       'ecard' => array(
@@ -3366,16 +3268,11 @@ Guest information is not known at this time',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 15,
       ),
       'ecard' => array(
@@ -3448,16 +3345,11 @@ Guest information is not known at this time',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 17,
       ),
       'ecard' => array(
@@ -3534,16 +3426,11 @@ Guest information is not known at this time',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 16,
       ),
       'ecard' => array(
@@ -4136,21 +4023,8 @@ Wheelchair/walker seating',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'editablefields',
-        'settings' => array(
-          'click_to_edit' => 0,
-          'click_to_edit_style' => 'button',
-          'empty_text' => 'Dairy Free
-Gluten Free
-Sugar Free
-No Shellfish
-Vegetarian
-Vegan',
-          'fallback_format' => 'text_default',
-          'fallback_settings' => array(),
-          'semantic_field_format' => '',
-        ),
-        'type' => 'editable',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 6,
       ),
       'ecard' => array(
@@ -4586,16 +4460,11 @@ Vegan',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => 0,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => 'text_default',
-          'fallback_settings' => array(),
-          'semantic_field_format' => 0,
+          'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 7,
       ),
       'ecard' => array(
@@ -5319,16 +5188,11 @@ Vegan',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'phone',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'phone',
         'weight' => 18,
       ),
       'ecard' => array(
@@ -5401,16 +5265,11 @@ Vegan',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'editablefields',
+        'module' => 'text',
         'settings' => array(
-          'click_to_edit' => FALSE,
-          'click_to_edit_style' => 'button',
-          'empty_text' => '',
-          'fallback_format' => NULL,
-          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'editable',
+        'type' => 'text_default',
         'weight' => 19,
       ),
       'ecard' => array(
