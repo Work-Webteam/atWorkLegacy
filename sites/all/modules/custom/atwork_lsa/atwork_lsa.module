@@ -67,8 +67,6 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
 		</ol>
   <p><span style="color:red;" class="red-text"> If you do not receive these two items, your registration was not received. </span></p></div>';
 
-  $form['field_lsa_terms']['und']['#prefix'] = '<p id="lsa-declaration" class="form-item-field-lsa-terms-und">I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2019, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events.</p>';
-
   // skip defaults for admins who are entering for others
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)  || in_array('lsa contact', $user->roles)) {
     //$form['field_lsa_terms'][$form['field_lsa_terms']['#language']]['#default_value'] = 1;
@@ -952,6 +950,7 @@ function sort_pin_applications($pin_nids = array()){
 
 
 function sort_lsa_applications($lsa_nids = array(), $sorted_pin_list = array()){
+  //add lsa info to the same list.
   //add lsa info to the same list.
   $nid_array = array();
   foreach($lsa_nids as $nidkey => $nidvalue){
