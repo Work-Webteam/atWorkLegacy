@@ -350,7 +350,6 @@ function atwork_lsa_pin_application_validate($form, &$form_state){
     }
   }
 
-
   $chose = false;
   // If we have retro milestones, we must check which milestones we have.
   if(isset($form_state['input']['field_lsa_other_milestone_years'][$lang]) && $form_state['input']['field_lsa_other_milestone_years'][$lang] == 1){
