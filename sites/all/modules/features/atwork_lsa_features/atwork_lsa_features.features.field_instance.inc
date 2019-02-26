@@ -94,7 +94,7 @@ function atwork_lsa_features_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => 'Selecting Award Only indicates you do not wish to attend the awards ceremony. <strong>No invitation will be issued.</strong> Your award will be sent to your organization for presentation to you later this fall. ',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -145,7 +145,6 @@ function atwork_lsa_features_field_default_field_instances() {
         'peruser' => 1,
         'status' => 0,
       ),
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -5031,7 +5030,7 @@ Vegan',
       ),
     ),
     'deleted' => 0,
-    'description' => '<p id="lsa-declaration">I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2019, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events.</p>',
+    'description' => '<p id="lsa-declaration">I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="career/long-service-awards/eligibility" target="_blank">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2019, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events. This personal information is required to process your application for the Long Service Awards and is collected in accordance with section 26(c) of the Freedom of Information and Protection of Privacy Act (FOIPPA). Questions about the collection or use of this information can be directed to <a href="mailto:EmployeeNews@gov.bc.ca" target="_top">EmployeeNews@gov.bc.ca</a>, 1st floor- 563 Superior Street, Victoria BC, V8V 0C5</p><br />',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -5082,7 +5081,6 @@ Vegan',
         'peruser' => 1,
         'status' => 0,
       ),
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -7341,7 +7339,7 @@ Vegan',
   t('  ');
   t('<em> Service pins will be sent to the employee’s supervisor for presentation during Public Service Week - June 11-15, 2018.</em>');
   t('<img class="lsa-award-selector-img-display-panel"></img>');
-  t('<p id="lsa-declaration">I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2019, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events.</p>');
+  t('<p id="lsa-declaration">I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="career/long-service-awards/eligibility" target="_blank">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2019, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events. This personal information is required to process your application for the Long Service Awards and is collected in accordance with section 26(c) of the Freedom of Information and Protection of Privacy Act (FOIPPA). Questions about the collection or use of this information can be directed to <a href="mailto:EmployeeNews@gov.bc.ca" target="_top">EmployeeNews@gov.bc.ca</a>, 1st floor- 563 Superior Street, Victoria BC, V8V 0C5</p><br />');
   t('Accessibility');
   t('Actual_Min/Org');
   t('Alternate Email Address');
@@ -7413,7 +7411,6 @@ Vegan',
   t('Retiring in 2019?');
   t('Retro-Active');
   t('Second Charity');
-  t('Selecting Award Only indicates you do not wish to attend the awards ceremony. <strong>No invitation will be issued.</strong> Your award will be sent to your organization for presentation to you later this fall. ');
   t('Service Milestone');
   t('Street');
   t('Supervisor City');
