@@ -169,8 +169,11 @@ function authcache_backend_init($module, $vary_header, $initial_key) {
     return FALSE;
   }
 
-  // Finally set vary header and cache backend.
-  drupal_add_http_header('Vary', $vary_header);
+  // Finally set vary header, if not empty, and cache backend.
+  if ($vary_header) {
+    drupal_add_http_header('Vary', $vary_header);
+  }
+
   authcache_backend($module);
   authcache_backend_initial_key($initial_key);
   $initial_session_id = isset($_COOKIE[session_name()]) ? $_COOKIE[session_name()] : FALSE;

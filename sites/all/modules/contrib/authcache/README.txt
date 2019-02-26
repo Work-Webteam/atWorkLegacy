@@ -13,7 +13,7 @@ Please visit:
 
 For information, updates, configuration help, and support.
 
-Please note that authcache requires at least Drupal 7.24.
+Please note that authcache requires at least Drupal 7.58.
 
 ============
 Installation
