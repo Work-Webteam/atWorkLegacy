@@ -5,10 +5,8 @@ $postal = isset($label_address['postal']) ? trim($label_address['postal']) : "No
 $ministry = trim($ministry);
 
 $letter_label = <<< EOT
-{$supervisor_name}   
-{$ministry}  
-{$street}    
-{$city}, B.C.
-Canada
-{$postal} 
+{$supervisor_name} <br />   
+{$ministry}  <br />
+{$street} <br />  
+{$city}, B.C., {$postal} 
 EOT;

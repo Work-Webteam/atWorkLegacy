@@ -17,7 +17,7 @@ foreach($recipients as $key => $value){
   } else {
       $year_append_milestones = $value['milestones'] . " years";
   }
-  $recipient_list .= "<tr><td>" . $value['name'] . "&emsp;</td><td>" . $year_append_milestones . "</td></td>";
+  $recipient_list .= "<tr><td>" . $value['name'] . ": &emsp;</td><td>" . $year_append_milestones . "</td></td>";
 }
 
 // User our Base64 image to imbed it in the doc. Shrink the image to half size.
@@ -31,9 +31,9 @@ $letter_text = <<< EOT
         
 <p>{$label}</p>
 
-<p style="text-align: right">{$date}</p>
+<p ><br /></p>
 
-<p>Dear {$supervisor_first},</p>
+<p>Dear {$supervisor_first}, <span style="display:block;float:right;">{$date}</span> </p>
     
 <p>Please find enclosed one or more service pins and cards with which to recognize your employee(s) for their career milestone(s). Details of your registered employee(s) and their service milestone(s) are shown below.</p>
 
