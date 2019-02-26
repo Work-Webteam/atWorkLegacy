@@ -35,26 +35,25 @@ $letter_text = <<< EOT
 
 <p>Dear {$supervisor_first}, <span style="display:block;float:right;">{$date}</span> </p>
     
-<p>Please find enclosed one or more service pins and cards with which to recognize your employee(s) for their career milestone(s). Details of your registered employee(s) and their service milestone(s) are shown below.</p>
+<p>Enclosed are the service pins to present to your employees celebrating a career milestone. See below for details on which pins go to which employees. </p>
 
-<p><strong>We encourage you to present the pin(s) directly to your employee(s) during Public Service Week, June 11-15</strong>. This is a wonderful opportunity to thank your employees for their service and celebrate their commitment to the BC Public Service! </p>
+<p><em>Please present the pins during Public Service Week, June 10-14</em>. It’s a wonderful opportunity to thank your employees for their service and celebrate their commitment to the BC Public Service.  </p>
 
-<p>When planning how to present the pin(s), consider individual employee preferences – you may choose to make a splash at a work unit or ministry event, or you may decide to do something low-key.  For employees that work in a different location to you, this can still be a special presentation. In addition to mailing the pins, consider hosting a virtual presentation commemorating their years of service.</p>   
+<p>Consider the employees’ individual preferences when planning how and when to present these pins. If your employee works in a different location, please mail the pins and consider hosting a virtual presentation commemorating their years of service.</p>   
 
-<p>Pins will come affixed to a card that can be signed by you or an executive member.</p>
+<p>Don’t forget to personalize and sign (or ask an executive to sign) the pin card for the employee!</p>
 
 <p>The pins included in this package are to be presented to:</p>
 
-<br />
 <table>
 <p>{$recipient_list}</p>
 </table>
 
 <br />
 
-<p>Registration for the corporate pin program takes place annually in March. You can order additional pins and pin plaques through Distribution Centre Victoria at any point throughout the year, but note there is a cost associated with this option.</p>
+<p>Note that only employees who registered themselves or were registered by you or a ministry representative, are included in this package. If you have an employee who is eligible and did not register, please connect with your ministry recognition contact (email below) to enquire about additional pins. Pins can be ordered at your organization’s cost at any time from the Distribution Centre Victoria. Pin cards are also available for purchase. Find links to these products on the Service Pin section of @Work (https://gww.gov.bc.ca/career/service-pins).</p>
 
-<p>If you have questions about the corporate pin program, please connect with your organization’s <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">Recognition contact</a>, or email me directly.</p>
+<p>Registration for the corporate pin program takes place annually in March. If you have questions about the corporate pin program, please connect with your organization’s recognition contact (list can be found on @Work <https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts>), or email me directly.</p>
 
 <p>Thank you,</p>
 
