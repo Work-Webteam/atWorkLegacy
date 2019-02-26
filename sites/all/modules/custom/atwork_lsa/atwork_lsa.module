@@ -60,12 +60,12 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
   $form['field_lsa_ceremony_accommodation']['und']['#title'] = t('');
   $form['field_lsa_dietary_requirements']['und']['#title'] = t('');
   $form['field_lsa_25year_certificatename']['und']['#prefix'] = t("<p>Enter your name as you’d like it to appear on your certificate.</p>" .  $form['field_lsa_25year_certificatename']['und']['#prefix']);
-  $form['field_lsa_terms']['und']['#suffix'] = '<div class="instruction-suffix-info"><p>Once you have entered all the required information and hit the &ldquo;SUBMIT&rdquo; button you will receive:</p>
-		<ol>
+  $form['field_lsa_terms']['und']['#suffix'] = '<div class="instruction-suffix-info"><br /><p><span style="color:red;" class="red-text"><strong>IMPORTANT NOTE:</strong> Once you have entered all the required information and hit the &ldquo;SUBMIT&rdquo; button you will receive:</span></p>
+		<ol style="padding-bottom:0; margin-bottom:0;">
 			<li>A confirmation page displaying all of the information you&rsquo;ve entered. If something is incorrect, please contact the <a href="mailto:longserviceawards@gov.bc.ca?Long%20Service%20Awards">Long Service Awards</a> team.</li>
 			<li>An automated confirmation email. </li>
 		</ol>
-  <p><span style="color:red;" class="red-text"> If you do not receive these two items, your registration was not received. </span></p></div>';
+  <p style="padding-top:0; margin-top:0;"><span style="color:red; padding-top:0; margin-top:0;" class="red-text"> If you do not receive these two items, your registration was not received. </span></p></div>';
 
   // skip defaults for admins who are entering for others
   if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)  || in_array('lsa contact', $user->roles)) {
@@ -310,12 +310,14 @@ function atwork_lsa_application_validate($form, &$form_state) {
   // check supervisor's email
   // WE went around the better GAL centered validation because not all addresses in LSA are in the GAL
   //_atwork_validate_emails($form_state['values']['field_lsa_supervisor_email'][$lang][0]['email'] , 'field_lsa_supervisor_email', $form['form_token']['#default_value']);
+  /*
   $email = $form_state['values']['field_lsa_supervisor_email'][$lang][0]['email'];
   $internal_addresses = variable_get('atwork_mail_internal_addresses',array());
   if (in_array(substr_replace(strtolower($email), '', 0, strpos($email, '@')), $internal_addresses)) {
   } else {
     form_set_error($email, t('Email is limited to organizations within the BC Public Service. %email was not found.', array('%email' => $email)));
   }
+  */
   // Check to see if special requirements was selected as "yes" - if so then textbox is required.
   if($form_state['values']['field_lsa_ceremony_accommodation']['und'][0]['value'] == "1" && $form_state['values'  ]['field_lsa_accommodation_notes']['und'][0]['value'] == ''){
     form_set_error('field_lsa_accommodation_notes', t("You must indicate the accommodations that you require"));
