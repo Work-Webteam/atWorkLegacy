@@ -4,30 +4,32 @@ function _atwork_prem_awards_ministry_contacts() {
   return array(
     // All ministry contacts must be included in the exact same order as the ministry dropdown (i.e. aboriginal contact in array [1], advanced ed in array [2])
   		// All ministry contacts must be included in the exact same order as the ministry dropdown (i.e. aboriginal contact in array [1], advanced ed in array [2])
-  		1 => 'Ross.Palin@gov.bc.ca', //Ministry of Advanced Education, skills and Training
-  		2 => 'Erin.Hansen@gov.bc.ca', //Agriculture
-  		3 => 'Marlene.Dayman@gov.bc.ca', // Attorney General
-  		4 => 'Gail.Crosby@gov.bc.ca', //Children & Family Development
-  		5 => 'Denise.Moreau@gov.bc.ca', // Citizens’ Services
+  		1 => 'Kristin.Barnes@gov.bc.ca', //Ministry of Advanced Education, skills and Training
+  		2 => 'erin.hansen@gov.bc.ca', //Agriculture
+  		3 => 'Robert.Meseyton@gov.bc.ca', // Attorney General
+  		4 => 'Kate.Mitchell@gov.bc.ca', //Children & Family Development
+  		5 => 'Melody.Olsen@gov.bc.ca', // Citizens’ Services
   		6 => 'kris.Olson@gov.bc.ca', //Education
-  		7 => 'Janine.Crockett@gov.bc.ca', // Energy, Mines and Petroleum Resources
+  		7 => 'Shyla.Warner@gov.bc.ca', // Energy, Mines and Petroleum Resources
   		8 => 'Karla.Kennedy@gov.bc.ca', //Environment and Climate Change Strategy
   		9 => 'Sabrina.Loiacono@gov.bc.ca', //Environment Assessment Office
   		10 => 'Jennifer.Michell@gov.bc.ca', //Finance
   		11 => 'Dana.Eckardt@gov.bc.ca', //Forests, Lands, Natural Resource Operations and Rural Development
   		12 => 'Andrea.Kerrigan@gov.bc.ca', //Government Communications and Public Engagement
-  		13 => 'Nicole.Benbow@gov.bc.ca', //Health
-  		14 => 'Tonja.Joyce@gov.bc.ca', //Aboriginal Relations & Reconciliation
-  		15 => 'Alicia.Matthews@gov.bc.ca', //Jobs, Trade and Technology
-  		16 => 'Alicia.Matthews@gov.bc.ca', //Labour
+  		13 => 'Aleta.Mullane@gov.bc.ca', //Health
+  		14 => 'Karen.Williams@gov.bc.ca', //Aboriginal Relations & Reconciliation
+  		15 => 'Monica.Jang@gov.bc.ca', //Jobs, Trade and Technology
+  		16 => 'Sveah.Hourston@gov.bc.ca', //Labour
   		17 => 'Kimberley.Guidoriagao@gov.bc.ca', // Mental Health and Addictions
-  		18 => 'Alicia.Matthews@gov.bc.ca', // Municipal Affairs and Housing
-  		19 => 'Christy.Gao@gov.bc.ca', //Public Safety & Solicitor General
-  		20 => 'Kimberlee.Johns@gov.bc.ca', // Social Development and Poverty Reduction
-  		21 => 'Alicia.Matthews@gov.bc.ca',  // Tourism, Arts and Culture
-  		22 => 'Kim.Pilkington@gov.bc.ca',  // Transportation and Infrastructure
-  		23 => 'Linsey.Tupper@gov.bc.ca', //BC Public Service Agency
-  		24 => 'alysia.johnson@gov.bc.ca', //Office of the Premier
+  		18 => 'Susan.Paton@gov.bc.ca', // Municipal Affairs and Housing
+  		19 => 'Robert.Meseyton@gov.bc.ca', //Public Safety & Solicitor General
+  		20 => 'Priya.Kullar@gov.bc.ca ', // Social Development and Poverty Reduction
+  		21 => 'Cindy.Shang@gov.bc.ca',  // Tourism, Arts and Culture
+  		22 => 'Jennifer.Lewthwaite@gov.bc.ca',  // Transportation and Infrastructure
+  		23 => 'Shirley.Nelson@gov.bc.ca ', //BC Public Service Agency
+  		24 => 'Andrea.Kerrigan@gov.bc.ca', // Government Communications and Public Engagement
+  		25 => 'Simmi.Purewal@bcldb.com', // Liquor Distribution Branch
+  		26 => 'smaloney@Trustee.bc.ca', // Public Guardian and Trustee
   );
 }
 
