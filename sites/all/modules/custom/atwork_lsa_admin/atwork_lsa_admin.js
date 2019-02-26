@@ -5,7 +5,7 @@
   
     var selectedAward= giftImages[awardName.trim()];
 	  $(".field-name-field-lsa-award").after('<div><img id="lsa-award-selector-img-display-panel" /></div>');
-	  if(typeof selectedAward !== 'undefined' ) {
+	  if(typeof selectedAward !== 'undefined') {
       $("#lsa-award-selector-img-display-panel").css({
         "border-radius": "9px",
         "box-shadow": "2px 2px lightgrey",
