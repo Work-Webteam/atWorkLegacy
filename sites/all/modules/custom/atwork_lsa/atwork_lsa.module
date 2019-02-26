@@ -334,27 +334,26 @@ function atwork_lsa_pin_application_validate($form, &$form_state){
   $lang = $form_state['values']['language'];
   global $user;
 
-  if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles)) {
-    return true;
-  }
-
-  // Check if an application has already been submitted for this user
-  $exists = db_select('field_data_field_lsa_pin_employee_number', 'e')
+  if (!in_array('lsa admin', $user->roles) && in_array('administrator', $user->roles)) {
+    // Check if an application has already been submitted for this user
+    $exists = db_select('field_data_field_lsa_pin_employee_number', 'e')
       ->fields('e', array('entity_id'))
       ->condition('e.field_lsa_pin_employee_number_value', $form_state['input']['field_lsa_pin_employee_number'][$lang][0]['value'])
       //->condition('e.bundle', 'lsa_pin_application')
       ->execute()
       ->fetchAll();
-  if(isset($exists) && !empty($exists)){
-    // They already have an application, so we set an error.
-    //form_set_error('field_lsa_pin_employee_number', t('This employee has already been registered for a service pin. Contact Gillian Kish (<a href="mailto:gillian.kish@gov.bc.ca?subject=Question%20about%20existing%20pin%20application">Gillian.kish@gov.bc.ca</a>) if additional pins are required.'));
-    form_set_error('field_lsa_pin_employee_number', t('This employee has already been registered for a service pin. Contact your <a href="/career/employee-appreciation/recognition-contacts" target="blank">Ministry Recognition Contact</a> if additional pins are required.'));
+    if(isset($exists) && !empty($exists)){
+      // They already have an application, so we set an error.
+      //form_set_error('field_lsa_pin_employee_number', t('This employee has already been registered for a service pin. Contact Gillian Kish (<a href="mailto:gillian.kish@gov.bc.ca?subject=Question%20about%20existing%20pin%20application">Gillian.kish@gov.bc.ca</a>) if additional pins are required.'));
+      form_set_error('field_lsa_pin_employee_number', t('This employee has already been registered for a service pin. Contact your <a href="/career/employee-appreciation/recognition-contacts" target="blank">Ministry Recognition Contact</a> if additional pins are required.'));
 
+    }
   }
 
+
+  $chose = false;
   // If we have retro milestones, we must check which milestones we have.
   if(isset($form_state['input']['field_lsa_other_milestone_years'][$lang]) && $form_state['input']['field_lsa_other_milestone_years'][$lang] == 1){
-    $chose = false;
     foreach($form_state['input']['field_lsa_previous_service_miles'][$lang] as $k){
       if(isset($k)){
         $chose = true;

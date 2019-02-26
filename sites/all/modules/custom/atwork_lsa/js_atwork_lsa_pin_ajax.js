@@ -168,6 +168,8 @@
   };
 
   function setUpPage() {
+    // We want to turn off submit button initially, until we are sure we have some type of milestone.
+    //$('#edit-submit').prop("disabled", "disabled");
     if($('#edit-field-lsa-registerer-und').val() == '_none'){
       // Hide top fields that user should not have access to
       $('#edit-field-lsa-pin-service-milestone').hide();
