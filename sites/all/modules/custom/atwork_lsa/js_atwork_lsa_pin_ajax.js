@@ -67,21 +67,23 @@
    * @param  {array} response [Holds an array of user, supervisor fields for auto-pop, the response.choice key holds the type of submission this will be]
    */
   let feedDetails = function(response){
-    // Ministries are special cases and require their own text. NOTE: If .inArray is not working, make sure keys do not have spaces in that field (i.e. 11|ministry not 11 |ministry)
+    // Ministries are special cases that will send all pins to ministry contact rather than supervisor, and require their own text. NOTE: If .inArray is not working, make sure keys do not have spaces in that field (i.e. 11|ministry not 11 |ministry)
     const special_cases = [
-      "6",  //Ministry of Education
-      "12", //Ministry of Indigenous Relations and Reconciliation
-      "15", //Ministry of Mental Health and Addictions
-      "20", //Ministry of Transportation and Infrastructure
-      "38", //Elections BC
-      "41", //Environmental Appeal Board
-      "42", //Environmental Assessment Office
-      "47", //Government Communications and Public Engagement
-      "52", //Intergovernmental Relations Secretariat
+      "21", //Community Living BC
+      "24", //Education
+      "25", //Elections BC
+      "29", //Energy, Mines & Petroleum Resources
+      "32", //Environmental Assessment Office
+      "40", //Government Communications & Public Engagement
+      "46", //Indigenous Relations & Reconciliation
+      "48", //Intergovernmental Relations Secretariat
+      "55", //Mental Health & Addictions
       "60", //Office of the Information and Privacy Commissioner
-      "61", //Office of the Merit Commissioner
       "62", //Office of the Ombudsperson
-      "63", //Office of the Police Complaint Commissioner
+      "63", //Office of the Police Complaints Commissioner
+      "68", //Property Assessment Appeal Board
+      "70", // Public Guardian and Trustee
+      "81", //Transportation & Infrastructure
       ];
 
     checkLabels(response.choice);
@@ -255,7 +257,7 @@
           $('#edit-field-lsa-previous-service-miles').slideUp('slow');
         }
 
-        $('#edit-field-lsa-other-milestone-years').slideDown('slow');
+        //$('#edit-field-lsa-other-milestone-years').slideDown('slow');
         // We can only allow one box to be checked if they have chosen
         // Make sure our labels are set correctly
         if($('#edit-field-lsa-previous-service-miles-und').not('atwork-activity-processed')){
@@ -293,6 +295,7 @@
       case ministry == 60 :  // |Office of the Information and Privacy Commissioner
       case ministry == 62 :  // |Office of the Ombudsperson
       case ministry == 63 :  // |Office of the Police Complaints Commissioner
+      case ministry == 70 :  // Public Guardian and Trustee
       case ministry == 71 :  // |Public Safety & Solicitor General
       case ministry == 81 :  // |Transportation & Infrastructure
 
@@ -381,6 +384,7 @@
       "62", //Office of the Ombudsperson
       "63", //Office of the Police Complaints Commissioner
       "68", //Property Assessment Appeal Board
+      "70", // Public Guardian and Trustee
       "81", //Transportation & Infrastructure
       ];
     // Application by user

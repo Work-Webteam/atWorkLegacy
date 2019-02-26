@@ -666,6 +666,7 @@ function atwork_lsa_node_insert($node) {
   * 62|Office of the Ombudsperson
   * 63|Office of the Police Complaints Commissioner
   * 68|Property Assessment Appeal Board
+  * 70|Public Guardian and Trustee
   * 81|Transportation & Infrastructure
    **/
     $check_min = array(
@@ -682,6 +683,7 @@ function atwork_lsa_node_insert($node) {
       62, //Office of the Ombudsperson
       63, //Office of the Police Complaints Commissioner
       68, //Property Assessment Appeal Board
+      70, // Public Guardian and Trustee
       81, //Transportation & Infrastructure
     );
 
