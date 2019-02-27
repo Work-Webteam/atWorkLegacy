@@ -134,6 +134,9 @@ sites/all/themes/*/node_modules
 *.tmPreferences.cache
 *.stTheme.cache
 
+#jetbrains files
+.idea
+
 # workspace files are user-specific
 *.sublime-workspace
 
