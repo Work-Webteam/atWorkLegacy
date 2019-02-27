@@ -167,7 +167,7 @@ function _atwork_prem_awards_questions() {
 		<li>Demonstrated improvement to the quality of the workplace for employees by contributing to the enhancement of </li>
 		<li>Measurable benefits to either their organization(s) and/or the citizens of British Columbia through process improvements to transform business practices, and/or support sustainable revenue generation or savings;</li>
 		<li>Significantly improved organizational performance as indicated by Work Environment Survey scores.</li></ul>";
-  $translations[3][6] = "<strong>Commitment to the Organization:</strong><br />Describe, and use metrics to support (where applicable), the effect that the leader has had on employees, clients, the public service, and/or citizens of British Columbia. Considerations may include, but are not limited to:
+  $translations[3][6] = "<strong>Commitment to the Organization:</strong><br />
 		<ul><li>Anticipates future trends and works with others to develop strategies to meet future challenges;</li>
 		<li>Exhibits ability to make decisions with considerations of the long-term impacts and context, anticipating not just the current need but also emerging priorities;</li>
 		<li>Displays ability to demonstrate an experimental or innovative mindset whereby being open to change, taking calculated risks and challenging the status quo to try something new resulting in a measurable outcome;</li>
