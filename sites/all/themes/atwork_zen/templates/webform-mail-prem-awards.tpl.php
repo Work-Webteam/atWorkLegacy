@@ -59,7 +59,7 @@ $application_type_map = array(
 print 'Thank you for submitting the following nomination:<br /><br />';
 if($application_type_map[$application_type] == "Leadership" || $application_type_map[$application_type] == "Emerging Leader"){
 	// Emerging Leader or Leadership (Individual)
-	print 'Nomination Name - ' . $submission->data[7][0] . '<br />';
+	print 'Nomination Name - ' . $submission->data[54][0] . '<br />';
 }else {
 	//Group type application
 	print 'Nomination Name - ' . $submission->data[5][0] . '<br />';
