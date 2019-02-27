@@ -6,7 +6,7 @@ $applicant_body = <<<EOT
 
 <p>You have successfully registered for a {$node->field_lsa_years_of_service[$lang][0]['value']} year Long Service Award.</p> 
 
-<p>The 2019 ceremonies will be held at Government House in Victoria this October and November. Your invitation will be emailed to you in June.</p>
+<p>The 2019 ceremonies will be held at Government House in Victoria this October. Your invitation will be emailed to you in June.</p>
 
 <p>The date for your ceremony will be specified on your invitation. Because the ceremonies are tailored to host specific ministries and organizations it is not possible to change your ceremony date.</p>
 
@@ -34,7 +34,7 @@ $supervisor_body = <<<EOT
 
 <p>Eligible employees are any full-time, part-time or seasonal employees who will reach their 25th, 30th, 35th, 40th, 45th or 50th anniversary with the BC Public Service by December 31, 2019, or who have achieved one of these milestones prior to this year but have not been recognized for it.</p>
 
-<p>The 2019 Long Service Awards ceremonies will be held at Government House in Victoria in October and November. Invitations will be emailed to recipients in June, and the dates of the ceremonies will be posted on <a href="https://gww.gov.bc.ca/career/long-service-awards/ceremonies">@Work</a> at that time.</p>
+<p>The 2019 Long Service Awards ceremonies will be held at Government House in Victoria in October. Invitations will be emailed to recipients in June, and the dates of the ceremonies will be posted on <a href="https://gww.gov.bc.ca/career/long-service-awards/ceremonies">@Work</a> at that time.</p>
 
 <p><strong><u>Travel and Time Off:</u></strong></p>
 

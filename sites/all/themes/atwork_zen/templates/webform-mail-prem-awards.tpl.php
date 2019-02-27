@@ -74,4 +74,3 @@ print 'Please ensure the correct name for the nomination and ministry are listed
 print '<br /><br /><h2>' . $application_title . '</h2>';
 
 print drupal_render($renderable_fields);
-?>

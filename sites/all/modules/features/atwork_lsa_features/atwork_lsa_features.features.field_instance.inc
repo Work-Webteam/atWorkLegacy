@@ -2571,7 +2571,7 @@ Guest information is not known at this time',
     'entity_type' => 'node',
     'field_name' => 'field_lsa_home_phone',
     'label' => 'Home Phone',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'authcache' => array(
         'clients' => array(
@@ -2591,7 +2591,6 @@ Guest information is not known at this time',
       'phone_country_code' => 0,
       'phone_default_country_code' => 1,
       'phone_int_max_length' => 15,
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -5065,7 +5064,7 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_terms',
-    'label' => 'Declaration',
+    'label' => 'Declaration and Notice of Collection, Consent, and Authorization',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -5182,7 +5181,7 @@ Vegan',
     'bundle' => 'lsa_application',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'If you are retired, please enter your home phone in both fields.',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -5221,7 +5220,7 @@ Vegan',
     'entity_type' => 'node',
     'field_name' => 'field_lsa_work_phone',
     'label' => 'Work Phone',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'authcache' => array(
         'clients' => array(
@@ -5241,7 +5240,6 @@ Vegan',
       'phone_country_code' => 0,
       'phone_default_country_code' => 1,
       'phone_int_max_length' => 15,
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -6715,7 +6713,7 @@ Vegan',
       ),
     ),
     'deleted' => 0,
-    'description' => '<em> Service pins will be sent to the employee’s supervisor for presentation during Public Service Week - June 11-15, 2018.</em>',
+    'description' => '<em> Service pins will be sent to the employee’s supervisor for presentation during Public Service Week - June 10-14, 2019.</em>',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -7337,7 +7335,7 @@ Vegan',
   // Translatables
   // Included for use with string extractors like potx.
   t('  ');
-  t('<em> Service pins will be sent to the employee’s supervisor for presentation during Public Service Week - June 11-15, 2018.</em>');
+  t('<em> Service pins will be sent to the employee’s supervisor for presentation during Public Service Week - June 10-14, 2019.</em>');
   t('<img class="lsa-award-selector-img-display-panel"></img>');
   t('<p id="lsa-declaration">I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="career/long-service-awards/eligibility" target="_blank">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2019, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events. This personal information is required to process your application for the Long Service Awards and is collected in accordance with section 26(c) of the Freedom of Information and Protection of Privacy Act (FOIPPA). Questions about the collection or use of this information can be directed to <a href="mailto:EmployeeNews@gov.bc.ca" target="_top">EmployeeNews@gov.bc.ca</a>, 1st floor- 563 Superior Street, Victoria BC, V8V 0C5</p><br />');
   t('Accessibility');
@@ -7363,7 +7361,7 @@ Vegan',
   t('City');
   t('Date Stamp');
   t('Date of Retirement');
-  t('Declaration');
+  t('Declaration and Notice of Collection, Consent, and Authorization');
   t('Department/Branch');
   t('Did you receive your award?');
   t('Did you register last year but were unable to attend the ceremony?');
@@ -7386,6 +7384,7 @@ Vegan',
   t('I am opting out of the survey.');
   t('I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target ="_blank">service pin recognition eligibility guidelines</a> (which I have reviewed) that as of December 31, 2019, I will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and am therefore eligible to receive a service pin. By providing my contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.');
   t('If retired, please enter the last organization and supervisor you worked with.');
+  t('If you are retired, please enter your home phone in both fields.');
   t('If you are retired, please enter your personal email address in both fields.');
   t('Invitation Send Date');
   t('Last Name');
