@@ -424,7 +424,7 @@
           // Diamond pendant
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/diamondnecklace-thumb.png" alt="Image of diamond pendant" id="image_diamond_pendant_and_chain"><br />' +
           // Diamond Earrings
-          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/diamondearrings.jpg" alt="Genuine daimond stud earrings" id="image_diamond_earrings"><br />' +
+          '<img src="/sites/default/files/bg/image/2019/0228/diamondearringssmall.jpg " alt="Genuine daimond stud earrings" id="image_diamond_earrings"><br />' +
           // Glass bowl
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/bowl40yearcopy-thumb.jpg" alt="Blue flower bouquet glass bowl" id="image_glass_bowl"><br />' +
           // MD Print
