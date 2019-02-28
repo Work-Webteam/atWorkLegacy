@@ -6703,87 +6703,6 @@ Vegan',
     ),
   );
 
-  // Exported field_instance:
-  // 'node-lsa_pin_application-field_lsa_pin_sup_location'.
-  $field_instances['node-lsa_pin_application-field_lsa_pin_sup_location'] = array(
-    'bundle' => 'lsa_pin_application',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '<em> Service pins will be sent to the employee’s supervisor for presentation during Public Service Week - June 10-14, 2019.</em>',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 19,
-      ),
-      'ecard' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'full' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 19,
-      ),
-      'question' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'scs' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_lsa_pin_sup_location',
-    'label' => 'Does your supervisor work in a different office location than you? ',
-    'required' => 0,
-    'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'semantic_field_format' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(
-        'apply_chosen' => '',
-      ),
-      'type' => 'options_select',
-      'weight' => 19,
-    ),
-  );
-
   // Exported field_instance: 'node-lsa_pin_application-field_lsa_pin_terms'.
   $field_instances['node-lsa_pin_application-field_lsa_pin_terms'] = array(
     'bundle' => 'lsa_pin_application',
@@ -7335,7 +7254,6 @@ Vegan',
   // Translatables
   // Included for use with string extractors like potx.
   t('  ');
-  t('<em> Service pins will be sent to the employee’s supervisor for presentation during Public Service Week - June 10-14, 2019.</em>');
   t('<img class="lsa-award-selector-img-display-panel"></img>');
   t('<p id="lsa-declaration">I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="career/long-service-awards/eligibility" target="_blank">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2019, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events. This personal information is required to process your application for the Long Service Awards and is collected in accordance with section 26(c) of the Freedom of Information and Protection of Privacy Act (FOIPPA). Questions about the collection or use of this information can be directed to <a href="mailto:EmployeeNews@gov.bc.ca" target="_top">EmployeeNews@gov.bc.ca</a>, 1st floor- 563 Superior Street, Victoria BC, V8V 0C5</p><br />');
   t('Accessibility');
@@ -7368,7 +7286,6 @@ Vegan',
   t('Dietary Requirements');
   t('Do you need to update your contact information or workplace details (e.g. ministry)?');
   t('Do you wish to request service pin(s) for any past milestones?');
-  t('Does your supervisor work in a different office location than you? ');
   t('Donation Amount');
   t('Donation Amount 2');
   t('Donation options');
