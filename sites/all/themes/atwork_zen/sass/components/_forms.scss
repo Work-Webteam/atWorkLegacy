@@ -47,7 +47,7 @@
         float: left;
         text-align: right !important;
         margin-right: 15px;
-        width: 124px;
+        width: 130px;
       }
     }
     label:first-child {
@@ -253,6 +253,25 @@
 .node-lsa-application .form-item {
   margin: 0 5px;
 }
+#lsa-application-node-form {
+  #field-lsa-work-phone-add-more-wrapper,
+  #field-lsa-home-postal-code-add-more-wrapper,
+  #field-lsa-office-postal-code-add-more-wrapper,
+  #edit-field-lsa-org  {
+    .description {
+      margin-left:145px!important;
+    }
+  }
+  #edit-field-lsa-org {
+    .form-item-field-lsa-org-und {
+      display:inline-block;
+      margin-right:5px;
+      > label {
+        float:left;
+      }
+    }
+  }
+}
 table.views-table.cols-2 {
   margin-bottom: 10px;
   td.views-field.views-field-field-lsa-ceremonydate {
@@ -317,7 +336,7 @@ table.views-table.cols-2 {
   padding: 5px;
   margin: 10px 0;
   .field-label {
-    width: 160px;
+    width: 190px;
     text-align:right;
   }
   .field-items {

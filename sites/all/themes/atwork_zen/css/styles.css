@@ -21,8 +21,3 @@
 
 /* Import SASS compiled atwork_zen style */
 @import "atwork_zen.styles.css";
-
-
-.views-slideshow-xtra-overlay-row-4 .slideshow-num-comments{
-  display: none !important;
-}
