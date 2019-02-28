@@ -6020,7 +6020,7 @@ Vegan',
     'hashtag_settings' => array(
       'hashtag_field' => 0,
     ),
-    'label' => 'Supervisors Address',
+    'label' => 'Supervisors Mailing Address',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -7337,7 +7337,7 @@ Vegan',
   t('Supervisor Postal Code');
   t('Supervisor Province');
   t('Supervisor\'s Work Address');
-  t('Supervisors Address');
+  t('Supervisors Mailing Address');
   t('Terms');
   t('Watch Engraving Sent');
   t('What ministry/organization are you with?');
