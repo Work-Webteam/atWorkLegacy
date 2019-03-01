@@ -358,30 +358,34 @@ function atwork_lsa_pin_application_validate($form, &$form_state){
   $chose = false;
   // If we have retro milestones, we must check which milestones we have.
   if(isset($form_state['input']['field_lsa_other_milestone_years'][$lang]) && $form_state['input']['field_lsa_other_milestone_years'][$lang] == 1){
+
     foreach($form_state['input']['field_lsa_previous_service_miles'][$lang] as $k){
       if(isset($k)){
         $chose = true;
         break;
       }
     }
-    if($chose == false){
+    if($chose == false) {
       form_set_error('field_lsa_previous_service_miles', t('You have not selected any retroactive milestones'));
+      //drupal_add_js("(jQuery)(document).ready(function () {
+      //    jQuery('.form-item-field-lsa-previous-service-miles-und label').append('<p><span style=\"color:red;border:1px red;\">You have not selected any retroactive milestones</span></p>');
+       // });", 'inline');
+
+
     }
-    // Otherwise we have to make sure they selected a regular milestone
+  // Otherwise we have to make sure they selected a regular milestone
   } else {
     if(isset($form_state['input']['field_lsa_pin_service_milestone'][$lang]) && $form_state['input']['field_lsa_pin_service_milestone'][$lang] == '_none'){
-      form_set_error('field_lsa_', t('You have not selected any milestone'));
+      form_set_error('field_lsa_pin_service_milestone', t('You have not selected any milestone'));
     }
   }
 
   // If we have marked that we are having a milestone year, we need to pick a milestone
   if(isset($form_state['input']['field_lsa_milestone_year'][$lang]) && $form_state['input']['field_lsa_milestone_year'][$lang] == 1){
     if(isset($form_state['input']['field_lsa_pin_service_milestone'][$lang]) && $form_state['input']['field_lsa_pin_service_milestone'][$lang] == '_none'){
-      form_set_error('field_lsa_', t('You have not selected any milestone'));
+      form_set_error('field_lsa_pin_service_milestone', t('You have not selected any milestone'));
     }
   }
-
-  
   // If they indicate they would like a retro pin, they have to choose one
   //if(isset($form_state['input']['field_lsa_other_milestone_years']['und']) || isset($form_state['input']//['field_lsa_milestone_year']['und'])){
   //  if(isset($form_state['input']['field_lsa_other_milestone_years']['und']) && $form_state['input']['field_lsa_other_milestone_years']['und'] == '_none'){
