@@ -466,6 +466,16 @@ function lsa_email_send($lsa_node){
     return($send_status);
   }
 
+  // Dont send email invitation if recipient has selected award only
+  if($lsa_node->field_award_only['und'][0]['value'] == 1) {
+    $send_status['notice']['node'] = $lsa_node->nid;
+    $send_status['notice']['employee_id'] = $lsa_node->field_lsa_employee_number[$lang][0]['safe_value'];
+    $send_status['notice']['name'] = $lsa_node->title;
+    $send_status['notice']['reason'] = 'User has selected Award Only';
+    // Don't bother building email
+    return($send_status);
+  }
+  
   // Lets create a pdf of the invitation for the user
   create_pdf($lsa_node);
 

@@ -56,10 +56,13 @@ $application_type_map = array(
 	8 => 'Evidence-Based Design'
 );
 
+file_put_contents('submission.txt', print_r($submission->data, true));
+file_put_contents('renderable_fields.txt', print_r($renderable_fields, true));
+
 print 'Thank you for submitting the following nomination:<br /><br />';
 if($application_type_map[$application_type] == "Leadership" || $application_type_map[$application_type] == "Emerging Leader"){
 	// Emerging Leader or Leadership (Individual)
-	print 'Nomination Name - ' . $submission->data[7][0] . '<br />';
+	print 'Nomination Name - ' . $submission->data[54][0] . '<br />';
 }else {
 	//Group type application
 	print 'Nomination Name - ' . $submission->data[5][0] . '<br />';
@@ -69,9 +72,8 @@ print 'Ministry - '. $ministry .'<br />';
 print 'Category - '. $application_type_map[$application_type] .'<br />';
 print 'Region - '. $region .'<br /><br />';
 
-print 'Please ensure the correct name for the nomination and ministry are listed above, as well as the correct category. If applicable, please ensure the correct region is listed above. If any of the information is incorrect please contact Alysia Johnson at: <a href="mailto:Alysia.Johnson@gov.bc.ca">Alysia.Johnson@gov.bc.ca</a><br /><br />Please share this information with the nominators, nomination contacts and the nominees.<br /><br />Your participation in the 2018 Premier\'s Innovation and Excellence Awards is greatly appreciated.  We particularly want to thank the nominators. Without their considerable efforts the program could not operate. <em>Thank you!</em>';
+print 'Please ensure the above-listed information is accurate for this nomination. If any information is incorrect, please contact Shanna Tom at: <a href="mailto:Shanna.Tom@gov.bc.ca">Shanna.Tom@gov.bc.ca</a><br /><br />A formal announcement will be made on @Work, and communication will be shared with Ministry Contacts when finalists are determined. In the meantime, please share the nomination information with the nominator(s), nomination contacts and nominees.<br /><br />Your participation in this year’s Premier\'s Innovation and Excellence Awards is greatly appreciated. The significant efforts of all involved in the nomination process is integral to the program’s success. Thank you!';
 
 print '<br /><br /><h2>' . $application_title . '</h2>';
 
 print drupal_render($renderable_fields);
-?>

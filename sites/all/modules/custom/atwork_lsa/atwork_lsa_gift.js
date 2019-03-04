@@ -26,7 +26,7 @@
           // Blue ballpoint pen
           '<option value="Cross Starry Blue ballpoint pen" name="blue_xp_ball_point_pen" id="25_gift_blue_pen">Cross pen</option>' +
           // Silver lapel pin
-          '<option value="Cross Tablet holder" name="cross_tablet_holder" id="25_cross_tablet_holder">Cross Tablet holder</option>' +
+          '<option value="Bugatti® writing case and tablet holder" name="cross_tablet_holder" id="25_cross_tablet_holder">Bugatti® writing case and tablet holder</option>' +
           // Padfolio/ipad holder
           '<option value="Passport and Luggage tag set" name="passport_luggage_tag" id="25_gift_passport_luggage_tag">Passport and Luggage tag set</option>' +
           // Pearl Earrings
@@ -50,7 +50,7 @@
           // Blue ball point pen
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/cross-pen-2-thumb.jpg" alt="Blue ballpoint pen" id="image_blue_xp_ball_point_pen">'+
           //silver lapel pin
-          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/padfolio-1-thumb.jpg" alt="Cross Tablet holder" id="image_cross_tablet_holder">' +
+          '<img src="/sites/default/files/styles/node_image/public/bg/image/2019/0213/m000747150sc7.jpg" alt="Bugatti Tablet holder" id="image_cross_tablet_holder">' +
           //Padfolio
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/passport-luggage-thumb.jpg" alt="Passport and Luggage tag picture" id="image_passport_luggage_tag">' +
           // Pearl Earrings
@@ -67,8 +67,8 @@
           // Blue ball point pen
           '<span id="info_blue_xp_ball_point_pen"><p><strong>Cross® pen</strong></p><p>This Cross® Calais chrome and blue lacquer rollerball pen is lightweight with a bold profile. It comes in a box with <em>25 Years</em> engraved on the lid of the pen.</p></span>' +
           // Tablet Holder
-          '<span id= "info_cross_tablet_holder"><p><strong>Cross® tablet holder</strong></p><p>This genuine leather table holder has <em>25 Years</em> debossed on the front. The zippered closure keeps your tablet secure during transport, and adjustable brackets hold most tablet models including all versions of the iPad including the iPad Air. The tablet is not included.</p><p>The cover includes a document pocket, business card holders, a cleverly integrated pen sleeve and a writing pad.</p>' +
-          '<p>Size: 10.5" H X 9" W</p></span>' +
+          '<span id= "info_cross_tablet_holder"><p><strong>Bugatti® writing case and tablet holder</strong></p><p>This recycled and synthetic leather case has <em>25 Years</em> debossed on the front. The zippered closure keeps your tablet secure during transport, and adjustable brackets hold most tablet models, including three sizes of iPad (tablet is not included). The cover includes a pocket for a smartphone, USB and pen holders, card slots, an ID window and writing pad.</p>' +
+          '<p>Size: 10 3/4" H X 9" W</p></span>' +
           // Padfolio
           '<span id= "info_passport_luggage_tag"><p><strong>Passport and luggage tag set</strong></p><p>This genuine black leather passport holder and luggage tag has <em>25 Years</em> debossed on the front. It has a magnetic closure. </p></span>' +
           // Pearl Earrings
@@ -157,8 +157,8 @@
         '<option value="Appalachian Sherpa blanket" name="sherpa_blanket" id="30_gift_sherpa_blanket">Appalachian Sherpa blanket</option>' +
           // Colonnade Clock
           '<option value="Colonnade clock" name="colonnade_clock" id="30_gift_colonnade_clock">Colonnade Clock</option>' +
-          // RHV Orca Sunset painting
-          '<option value="Golden Shores framed art print" name="rhv_print_sunrise" id="30_gift_rhv_print_sunrise">Golden Shores framed art print</option>' +
+          // Epiphany painting
+          '<option value="Epiphany III framed Art Print" name="print_epiphany" id="30_gift_print_epiphany">Epiphany III framed art print</option>' +
           // Sterling earrings
           '<option value="Sterling silver earrings" name="sterling_earrings" id="30_gift_sterling_earrings">Sterling silver earrings</option>' +
           // PECSF donation
@@ -173,8 +173,8 @@
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/blanket.jpg" alt="Image of appalachian sherpa blanket" id="image_sherpa_blanket">' +
         // Colonnade Clock
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/clock.jpg" alt="Colonnade Clock" id="image_colonnade_clock">'+
-          // RHV Orca Sunset painting
-          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/gullprint-thumb.png" alt="Golden Shores framed art print" id="image_rhv_print_sunrise">' +
+          // Epiphany III painting
+          '<img src="/sites/default/files/styles/node_image/public/bg/image/2019/0213/30yearprint-epiphany-sm.jpg" alt="Epiphany III framed Art Print" id="image_print_epiphany">' +
           // Sterling Earrings
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0208/silverearringsthumb.jpg" alt="Solid sterling earrings" id="image_sterling_earrings">' +
           // PECSF donation
@@ -190,7 +190,7 @@
         // Colonnade clock
         '<span id="info_colonnade_clock"><p><strong>Howard Miller® Colonnade clock</strong></p><p>This bold optical crystal, carriage-style clock has <em>In recognition of thirty years of service</em> engraved on front plate. It features a black glass center panel and a white dial with black Roman numerals and hour markers surrounded by a polished silver-tone bezel.</p><br /><p>Size: 6.75" H (17 cm) x 6.25" W (16 cm)</p></span>' +
         // RHV Orca Sunset painting
-        '<span id="info_rhv_print_sunrise"><p><strong>Golden Shores framed art print</strong></p><p>This calming seaside photograph by B.C. artist Marvin Pelkey is printed on fine art paper and comes matted in a silver frame. The frame has <em>In recognition of thirty years of service</em> engraved on a plaque.</p><p>Size: 15 ½” H x 26 ½” W</p></span>' +
+        '<span id="info_print_epiphany"><p><strong>Epiphany III framed art print</strong></p><p>This stunning photograph by B.C. artist Marvin Pelkey is printed on fine art paper and comes matted in a black frame. The frame has <em>In recognition of thirty years of service</em> engraved on a plaque.</p><p>Size: 16” H x 16” W</p></span>' +
         // Sterling Earrings
         '<span id="info_sterling_earrings"><p><strong>Sterling silver earrings</strong></p><p>These sterling silver drop earrings are individually handcrafted by B.C. artists Nancy Dawson and Vincent Henson of Silver Eagles Design Studio in Alert Bay. They come in a box with <em>In recognition of thirty years of service</em> engraved on the top.</p><p>Size: 2.75 cm L x 2 cm W</p><p>Note: These earrings are designed to coordinate with the 35 year sterling silver bracelet.</p></span>' +
         // PECSF donation
@@ -244,7 +244,7 @@
           // Watch
           '<option value="Bulova Watch" name="bulova_watch" id="35_bulova_watch">Bulova watch</option>' +
         // Binoculars
-          '<option value="Bushnell Compact Binoculars" name="bushnell_binoculars" id="35_bushnell_binoculars"> Bushnell NatureView binoculars</option>' +
+          '<option value="Bushnell Prime Binoculars" name="bushnell_binoculars" id="35_bushnell_binoculars">Bushnell® Prime binoculars</option>' +
           // Glass Vase
           '<option value="Blue flower bouquet glass vase" name="glass_vase" id="35_glass_vase">Blue Flower Bouquet glass vase</option>' +
           // Bracelet
@@ -306,7 +306,7 @@
           //'<img src="/sites/default/files/lsa_2015/35_watch_silver_gold.png" alt="Bulova Silver Watch, two-toned face" id="image_bulova_watch_4">' +
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/Watches-group-thumb.png" alt="Bulova Watch" id="image_bulova_watch">' +
           // Bushnell Compact Binoculars
-          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/binocs-thumb.png" alt="bushnell binoculars" id="image_bushnell_binoculars">' +
+          '<img src="/sites/default/files/styles/node_image/public/bg/image/2019/0213/35yearbinoculars-sm.png" alt="bushnell binoculars" id="image_bushnell_binoculars">' +
           // Vase Picture
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/vase-thumb.jpg" alt=="Glass Vase" id="image_glass_vase">' +
           // Bracelet Picture
@@ -323,11 +323,11 @@
           // Bulova watch
           '<span id="info_bulova_watch"><br /><p><strong>Bulova® watch</strong></p><p>This watch features the BC Coat of Arms on the dial and your name and <em>35 Years</em> is engraved on the back of the watch face. It comes in a choice of gold, silver or two-toned watch face with a plated strap, or a black or brown leather strap. </p><br /></span>' +
           // Bushnell binoculars
-          '<span id="info_bushnell_binoculars"><br /><p><strong>Bushnell® NatureView binoculars</strong></p><p>These <a href="http://bushnell.com/wildlife/binoculars/natureview/8x-42mm-roof" target="_blank">binoculars</a> feature outstanding optical performance in a trim, balanced roof-prism design. They have a textured center-focus knob for easy, precise adjustments; BaK-4 roof prisms for bright, clear, crisp viewing; and fully multi-coated optics for superior light transmission and brightness. The non-slip rubber armor absorbs shock and they are fully waterproof and fogproof. They come with a soft case.</p><br /><p>Magnification x Objective Lens = 8 x 42mm</p><p>Field of View 393/131 (ft.@1000 yrds/m@1000m)</p><p>Weight = 23.1 oz (654 gm) <p></p>Note: Due to the nature of this award, engraving is not possible.</p></span>' +
+          '<span id="info_bushnell_binoculars"><br /><p><strong>Bushnell® Prime binoculars</strong></p><p>The Bushnell® Prime 8x42 binocular is the perfect blend of magnification and field of view, allowing easy viewing of moving animals and birds.  The EXO barrier and fully multi coated optics deliver bright images in any weather conditions. The Prime binoculars feature Bushnell’s newest and best protective lens coating that molecularly bonds to the glass, repelling water, oil, dust, debris and preventing scratches. With IPX7 waterproof construction, O-ring sealed optics stay dry inside, when immersed in three feet of water for up to 30 minutes. They come with a soft case.</p><p> Note: Due to the nature of this award, engraving is not possible.</p><br /><p>Configuration = 8 x 42mm</p><p>Field of View 350/117 (ft.@1000 yrds/m@1000m)</p><p>Close Focus = 10F/3M</p></p><p>Weight = 23.3 oz (660 gm)</p></span>' +
           // Blue Flower Bouquet glass vase
           '<span id="info_glass_vase"><br /><p><strong>Blue Flower Bouquet glass vase</strong></p><p>Each of these unique glass vases are hand-blown by B.C. artist <a href="http://robertheld.com/about-robert-held" target = "_blank">Robert Held </a>in Parksville.</p><br /><p>Size:11.5" H</p><p>Note: Due to the nature of this gift, engraving is not possible.</p></span>' +
           // Aboriginal Bracelet
-          '<span id="info_aboriginal_bracelet"><br /><p><strong>Sterling silver bracelet</strong></p><p>This sterling silver bracelet has a 14 kt yellow gold insert. It is handcrafted by B.C. artists Nancy Dawson and Vincent Henson of Silver Eagles Design Studio in Alert Bay. It comes in a box with <em>In recognition of thirty five years of service</em></p> engraved on the top.</p><br /></span>' +
+          '<span id="info_aboriginal_bracelet"><br /><p><strong>Sterling silver bracelet</strong></p><p>This sterling silver bracelet has a 14 kt yellow gold insert. It is handcrafted by B.C. artists Nancy Dawson and Vincent Henson of Silver Eagles Design Studio in Alert Bay. It comes in a box with <em>In recognition of thirty five years of service</em>engraved on the top.</p><br /></span>' +
         // PECSF donation
         '<span id="info_provincial_employees_community_services_fund"><p><strong>Charitable donation</strong></p><p>Instead of choosing an award from the catalogue, you can opt to make a charitable donation via the Provincial Employees Community Services Fund. A framed certificate of service, signed by the Premier of British Columbia, will be presented to you noting your charitable contribution. </p><p>You can donate to the <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions" target="_blank">fund supported pool of charities in your region</a>, or you can choose one or two specific charities to receive your donation. </p><p>Note: Charitable tax receipts are not issued for Long Service Award donations.</p></span>' +
         '</div>',
@@ -410,7 +410,7 @@
           // Glass bowl
           '<option value="Blue Flower Bouquet glass bowl" name="glass_bowl" id="40_glass_bowl">Blue Flower Bouquet glass bowl</option>' +
           // MD Print
-          '<option value="Morning Surf framed art print" name="md_print" id="40_md_print">Morning Surf framed art print </option>' +
+          '<option value="Forest Cove framed art print" name="fc_print" id="40_fc_print"> Forest Cove framed art print </option>' +
           // PECSF donation
           '<option value= "$400.00 PECSF charitable donation" name="provincial_employees_community_services_fund" id="25_pecsf">Charitable Donation</option>' +
         '</select></label>' +
@@ -424,11 +424,11 @@
           // Diamond pendant
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/diamondnecklace-thumb.png" alt="Image of diamond pendant" id="image_diamond_pendant_and_chain"><br />' +
           // Diamond Earrings
-          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/diamondearrings.jpg" alt="Genuine daimond stud earrings" id="image_diamond_earrings"><br />' +
+          '<img src="/sites/default/files/styles/node_image/public/bg/image/2019/0228/diamondearrings2.jpg " alt="Genuine daimond stud earrings" id="image_diamond_earrings"><br />' +
           // Glass bowl
           '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0201/bowl40yearcopy-thumb.jpg" alt="Blue flower bouquet glass bowl" id="image_glass_bowl"><br />' +
           // MD Print
-          '<img src="/sites/default/files/styles/node_image/public/bg/image/2018/0213/shorelineprint-thumb.png" alt="Morning Surf Framed Art print" id="image_md_print"><br />' +
+          '<img src="/sites/default/files/styles/node_image/public/bg/image/2019/0213/40yearprint-forestcove-sm.jpg" alt="Forest Cove framed art print" id="image_fc_print"><br />' +
           // PECSF donation
           '<img src="/sites/default/files/lsa_2015/25_pecsf.jpg" alt="PECSF donation image" id="image_provincial_employees_community_services_fund"><br />' +
 
@@ -443,12 +443,12 @@
           // Genuine diamond pendant and chain
           '<span id="info_diamond_pendant_and_chain"><p><strong>Genuine diamond pendant and chain</strong></p><p>This necklace features a 10 kt white gold, four claw pendant and 18 inch box chain. The round brilliant cut diamonds are .20-carat total weight. It comes in a box with <em>In recognition of forty years of service</em> engraved on the top.</p></span>'+
           // Genuine diamond stud earrings
-          '<span id="info_diamond_earrings"><p><strong>Genuine diamond stud earrings</strong></p><p>These earrings are 14 kt white gold stud earrings featuring round brilliant cut diamonds that are .25 carat total weight. They come in a box with <em>In recognition of forty years of service</em> engraved on the top.</p></span>' +
+          '<span id="info_diamond_earrings" style="margin-top:0; padding-top:0;"><p><strong>Genuine diamond stud earrings</strong></p><p>These earrings are 14 kt white gold stud earrings featuring round brilliant cut diamonds that are .25 carat total weight. They come in a box with <em>In recognition of forty years of service</em> engraved on the top.</p></span>' +
           // Blue Flower Bouquet glass bowl
-          '<span id="info_glass_bowl"><p><strong>Blue Flower Bouquet glass bowl</strong></p><p>Each of these unique glass bowls are hand-blown by B.C. artist <a href="http://robertheld.com/about-robert-held" target = "_blank">Robert Held</a> in Parksville.</p><p>Size: 7" H</p><p><strong>Note:</strong> Due to the nature of this award, engraving is not possible.</p></span>'+
-          // TODO: Add up to date informatino when it comes in
-          // MD print
-          '<span id="info_md_print"><p><strong>Morning Surf framed art print</strong></p><p>This colourful landscape print was originally painted by artist <a href="http://michaeladavidsonart.com/" target = "_blank">Michaela Davidson</a>, from Lake Cowichan, B.C. The artwork is presented in a matted green frame with <em>In recognition of forty years of service</em> engraved on a plaque.</p><p>Size: 15" H x 16" W </p></span>' +
+          '<span id="info_glass_bowl"><p><strong>Blue Flower Bouquet glass bowl</strong></p><p>Each of these unique glass bowls are hand-blown by B.C. artist <a href="http://robertheld.com/about-robert-held" target = "_blank">Robert Held</a> in Parksville.</p><p>Size: 7" H</p><p>Note: Due to the nature of this award, engraving is not possible.</p></span>'+
+          // TODO: Add up to date information when it comes in
+          // FC print
+          '<span id="info_fc_print"><p><strong>Forest Cove framed art print</strong></p><p>This colourful landscape print was originally painted by artist <a href="http://michaeladavidsonart.com/" target = "_blank">Michaela Davidson</a>, from Lake Cowichan, B.C. The artwork is presented in a matted green frame with <em>In recognition of forty years of service</em> engraved on a plaque.</p><p>Size: 16" H x 14" W </p></span>' +
           // PECSF donation
           '<span id="info_provincial_employees_community_services_fund"><p><strong>Charitable donation</strong></p><p>Instead of choosing an award from the catalogue, you can opt to make a charitable donation via the Provincial Employees Community Services Fund. A framed certificate of service, signed by the Premier of British Columbia, will be presented to you noting your charitable contribution. </p><p>You can donate to the <a href="http://www2.gov.bc.ca/gov/content/careers-myhr/about-the-bc-public-service/corporate-social-responsibility/pecsf/donate/choose-your-charity#charity-regions" target="_blank">fund supported pool of charities in your region</a>, or you can choose one or two specific charities to receive your donation. </p><p>Note: Charitable tax receipts are not issued for Long Service Award donations.</p></span>' +
         '</div>',
@@ -510,8 +510,8 @@ function gift_choice_populate_form(gifts){
       case "Cross Starry Blue ballpoint pen":
         g_choice = "Cross pen";
         break;
-      case "Cross Tablet holder":
-        g_choice = "Cross tablet holder";
+      case "Bugatti® writing case and tablet holder":
+        g_choice = "Bugatti® writing case and tablet holder";
         break;
       case "Sterling Silver and White Pearl Earrings":
         g_choice = "pearl earrings";
@@ -550,8 +550,8 @@ function gift_choice_populate_form(gifts){
     if(gift_name == 'Solid Sterling Silver Aboriginal Bracelet'){
       full_gift_name = "35 - Sterling Silver Bracelet - " + gifts.size_bracelet;
     }
-    if(gift_name == 'Bushnell Compact Binoculars'){
-      full_gift_name = "35 - Bushnell NatureView binoculars";
+    if(gift_name == 'Bushnell Prime Binoculars'){
+      full_gift_name = "35 - Bushnell Prime binoculars";
     }
     if(gift_name == "Bulova Watch"){
       let watch_specific_type;

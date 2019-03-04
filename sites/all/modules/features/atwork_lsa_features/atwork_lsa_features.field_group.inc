@@ -475,19 +475,10 @@ function atwork_lsa_features_field_group_info() {
     'label' => 'Special Requirements',
     'weight' => '0',
     'children' => array(),
-    'format_type' => 'div',
+    'format_type' => 'hidden',
     'format_settings' => array(
-      'label' => 'Special Requirements',
-      'instance_settings' => array(
-        'id' => 'node_lsa_application_full_group_lsad_special_requirements',
-        'classes' => '',
-        'description' => '',
-        'show_label' => '1',
-        'label_element' => 'h2',
-        'effect' => 'none',
-        'speed' => 'fast',
-      ),
-      'formatter' => 'open',
+      'formatter' => '',
+      'instance_settings' => array(),
     ),
   );
   $field_groups['group_lsa_special_requirements|node|lsa_application|default'] = $field_group;
@@ -607,19 +598,10 @@ function atwork_lsa_features_field_group_info() {
     'label' => 'Name',
     'weight' => '9',
     'children' => array(),
-    'format_type' => 'div',
+    'format_type' => 'hidden',
     'format_settings' => array(
-      'label' => 'Name',
-      'instance_settings' => array(
-        'id' => 'node_lsa_application_full_group_lsad_personal_info',
-        'classes' => '',
-        'description' => '',
-        'show_label' => '1',
-        'label_element' => 'h2',
-        'effect' => 'none',
-        'speed' => 'fast',
-      ),
-      'formatter' => 'open',
+      'formatter' => '',
+      'instance_settings' => array(),
     ),
   );
   $field_groups['group_lsad_personal_info|node|lsa_application|default'] = $field_group;
@@ -784,10 +766,8 @@ function atwork_lsa_features_field_group_info() {
     'weight' => '5',
     'children' => array(
       0 => 'field_lsa_dietary_guest',
-      1 => 'field_lsa_dietary_requirements',
-      2 => 'field_lsa_recipient_dietary',
     ),
-    'format_type' => 'div',
+    'format_type' => 'hidden',
     'format_settings' => array(
       'label' => 'Requirements',
       'instance_settings' => array(
