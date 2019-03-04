@@ -1,4 +1,4 @@
-// Long Service Awards Registration Form 
+// Long Service Awards Registration Form
 
 .page-node-add-lsa-application {
   #editablefields-field-do-you-need-to-update-your {
@@ -47,7 +47,7 @@
         float: left;
         text-align: right !important;
         margin-right: 15px;
-        width: 124px;
+        width: 130px;
       }
     }
     label:first-child {
@@ -65,7 +65,7 @@
     border-color: #dcdcdc;
     .description {
       margin-left: 4em;
-      margin-top: -2em;
+      margin-top: inherit;
       font-weight: normal;
       font-size: 0.9em;
       padding: 3px;
@@ -118,7 +118,7 @@
     margin: .5em;
   }
   .form-item-field-lsa-terms-und .description {
-    margin-top:initial;
+    margin-top: inherit;
     margin-left: inherit;
   }
   .jqi input[type="radio"] {
@@ -253,6 +253,25 @@
 .node-lsa-application .form-item {
   margin: 0 5px;
 }
+#lsa-application-node-form {
+  #field-lsa-work-phone-add-more-wrapper,
+  #field-lsa-home-postal-code-add-more-wrapper,
+  #field-lsa-office-postal-code-add-more-wrapper,
+  #edit-field-lsa-org  {
+    .description {
+      margin-left:145px!important;
+    }
+  }
+  #edit-field-lsa-org {
+    .form-item-field-lsa-org-und {
+      display:inline-block;
+      margin-right:5px;
+      > label {
+        float:left;
+      }
+    }
+  }
+}
 table.views-table.cols-2 {
   margin-bottom: 10px;
   td.views-field.views-field-field-lsa-ceremonydate {
@@ -317,7 +336,7 @@ table.views-table.cols-2 {
   padding: 5px;
   margin: 10px 0;
   .field-label {
-    width: 160px;
+    width: 190px;
     text-align:right;
   }
   .field-items {
@@ -327,7 +346,7 @@ table.views-table.cols-2 {
   #edit-field-lsa-alt-email-address-und-0-email,
   #edit-field-lsa-office-work-group-und-0-value,
   #edit-field-lsa-work-phone-ext-und-0-value {
-    margin-left: 10px; 
+    margin-left: 10px;
   }
   h2:nth-child(1) {
     margin: 0 0 10px 0!important;

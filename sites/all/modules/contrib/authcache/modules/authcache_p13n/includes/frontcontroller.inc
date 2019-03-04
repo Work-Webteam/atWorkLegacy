@@ -20,6 +20,9 @@
  */
 function authcache_p13n_frontcontroller_prepare_request(&$get = NULL) {
   if (!isset($get)) {
+    // Sanitize unsafe keys from the request.
+    require_once DRUPAL_ROOT . '/includes/request-sanitizer.inc';
+    DrupalRequestSanitizer::sanitize();
     $get = &$_GET;
   }
 

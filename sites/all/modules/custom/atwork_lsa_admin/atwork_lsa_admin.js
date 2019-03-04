@@ -3,9 +3,17 @@
     var awardName = $(".field-name-field-lsa-award .field-item.odd").text();
 	  var giftImages = giftListImages(); 
   
-    var selectedAward= giftImages[awardName.trim()]; 
+    var selectedAward= giftImages[awardName.trim()];
 	  $(".field-name-field-lsa-award").after('<div><img id="lsa-award-selector-img-display-panel" /></div>');
-	  $("#lsa-award-selector-img-display-panel").css({"border-radius":"9px","box-shadow":"2px 2px lightgrey","padding":"10px","border":"1px solid gray","margin":"5px 0 20px 50px"}).attr({"src":selectedAward["URI"]});  
+	  if(typeof selectedAward !== 'undefined') {
+      $("#lsa-award-selector-img-display-panel").css({
+        "border-radius": "9px",
+        "box-shadow": "2px 2px lightgrey",
+        "padding": "10px",
+        "border": "1px solid gray",
+        "margin": "5px 0 20px 50px"
+      }).attr({"src": selectedAward["URI"]});
+    }
 
 	  //Move RSVP block down the page
 	  $("#block-views-lsa-admin-block-lsa-rsvp").insertAfter("#lsa-award-selector-img-display-panel");

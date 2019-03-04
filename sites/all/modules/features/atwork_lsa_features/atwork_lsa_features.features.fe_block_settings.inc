@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * atwork_lsa_features.features.fe_block_settings.inc
@@ -25,11 +26,14 @@ function atwork_lsa_features_default_fe_block_settings() {
     'noscript' => '',
     'pages' => '*/edit
 node/add/*',
-    'roles' => array(),
+    'roles' => array(
+      'lsa admin' => 11,
+      'premiers awards admin' => 7,
+    ),
     'themes' => array(
       'atwork_zen' => array(
-        'region' => 'pre_content',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'atwork_zen',
         'weight' => 10,
       ),

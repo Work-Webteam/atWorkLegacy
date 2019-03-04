@@ -48,7 +48,7 @@ function authcache_admin_config($form, &$form_state) {
     '#empty_option' => $session_period_option,
     '#empty_value' => 'session',
     '#zero_duration' => t('Temporary'),
-    '#description' => t('Select <em>Temporary</em> if keys shold last for one browser session (when using Cookies) or keys should be removed during cron runs.'),
+    '#description' => t('Select <em>Temporary</em> if keys should last for one browser session (when using Cookies) or keys should be removed during cron runs.'),
   );
 
   $form['adv'] = array(

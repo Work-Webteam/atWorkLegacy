@@ -529,7 +529,7 @@ function atwork_prem_awards_form_alter(&$form, $form_state, $form_id) {
     if (strpos(' '.$form['#action'], '/submission/') && !user_access('edit webform submissions')) {
       if (arg(4) == 'edit') {
         $form['submitted']['name_of_ministry_or_eligible_organization_sponsoring_this_application']['#disabled'] = 'true';
-        $form['submitted']['region']['#disabled'] = 'true';
+        //$form['submitted']['region']['#disabled'] = 'true';
       }
     }
 

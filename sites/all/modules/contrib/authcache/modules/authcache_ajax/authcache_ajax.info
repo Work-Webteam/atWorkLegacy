@@ -5,9 +5,8 @@ core = 7.x
 dependencies[] = authcache_p13n
 files[] = tests/authcache_ajax.test
 
-; Information added by Drupal.org packaging script on 2017-11-15
-version = "7.x-2.2"
+; Information added by Drupal.org packaging script on 2019-02-20
+version = "7.x-2.3"
 core = "7.x"
 project = "authcache"
-datestamp = "1510757296"
-
+datestamp = "1550676797"

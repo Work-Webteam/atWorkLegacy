@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * atwork_lsa_features.features.inc
@@ -38,13 +39,7 @@ function atwork_lsa_features_node_info() {
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => t('<p>&nbsp;</p>
-<p>Review the <a href="/career/long-service-awards/award-catalogue" target="_blank">Award Catalogue</a> prior to filling out the registration form.</p>
-<p>Once you have entered all the required information and hit the &ldquo;SUBMIT&rdquo; button at the bottom of the screen, you will receive:</p>
-		<ol>
-			<li>A confirmation page displaying all of the information you&rsquo;ve entered. If something is incorrect, please contact the <a href="mailto:longserviceawards@gov.bc.ca?Long%20Service%20Awards">Long Service Awards</a> team.</li>
-			<li>An automated confirmation email. </li>
-		</ol>
-<p><span style="color:red;" class="red-text"> If you do not receive these two items, your registration was not received. </span></p>'),
+<p style=“color:red!important;”><span style=“color:red!important;” class="red-text">Review the <a href="/career/long-service-awards/award-catalogue" target="_blank">Award Catalogue</a> prior to filling out the registration form.</span></p>'),
     ),
     'lsa_pin_application' => array(
       'name' => t('Service Pin Application'),
