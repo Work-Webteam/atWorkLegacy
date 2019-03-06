@@ -1342,7 +1342,7 @@ function atwork_lsa_node_page_view($node) {
           0 => array(
             'value' => $return_string_year,
             'format' => NULL,
-            'safe_value' => $return_string_year,c
+            'safe_value' => $return_string_year,
             ),
           ),
         );
