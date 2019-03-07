@@ -604,7 +604,7 @@ function gift_choice_populate_form(gifts){
 
       // Last years recipients will always have the same award and award id number
   if ($("input[name='field_lsa_register_last_year[und]']:checked").val() == 1){
-    full_gift_name = "2016 Recipient - award received";
+    full_gift_name = "2018 Recipient - award received";
     gift_id_number = 1;
   }
 
