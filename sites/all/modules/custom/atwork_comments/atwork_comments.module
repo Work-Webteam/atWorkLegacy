@@ -30,7 +30,6 @@ function atwork_comments_form_alter(&$form, &$form_state, $form_id) {
         '#title' => t('Post as Employee News.'),
       );
     }
-    global $user;
     $current_commenter = user_load($user->uid);
     // Pension BC checkbox
     if(user_has_role(18, $current_commenter)){
