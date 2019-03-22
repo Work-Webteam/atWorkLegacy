@@ -228,6 +228,8 @@ function atwork_activity_form_submit(&$form, &$form_state) {
 function atwork_activity_customize_feed_form() {
   global $user;
   $current_user = user_load($user->uid);
+  $update_array = [];
+  $require_update = FALSE;
 
   $choices = get_all_default_choices('field_feed_options');
   // TODO: Require group activity here
@@ -243,10 +245,16 @@ function atwork_activity_customize_feed_form() {
     }
   }
   else {
-    // They have no saved preferences, so we turn everything on.
+    // They have no saved preferences, so we turn everything on for initial load, and set them up for "All Activity" feed on next load.
     foreach ($choices as $key => $value) {
       $default_array[$key] = $value;
+      if($key == 1 || $key == 3 || $key ==6 ) {
+        continue;
+      }
+      $update_array['field_feed_options']['und'][]['value'] = $key;
     }
+    $require_update = TRUE;
+
   }
   // Now build the form
   $form = [];
@@ -274,12 +282,27 @@ function atwork_activity_customize_feed_form() {
     '#redirect' => FALSE,
   ];
   // Now we auto-check the users preferences here, so it reflects what they are seeing in the feed.
+  //If the user has both My Actions and All Activity checked, it creates an error - so lets change the saved fields.
+  if(in_array("My Actions", $choices) && in_array("All Activity", $choices)){
+    $require_update = TRUE;
+    foreach ($choices as $key => $value) {
+      if($key == 1 || $key == 3 || $key ==6 ) {
+        continue;
+      }
+      $update_array['field_feed_options']['und'][]['value'] = $key;
+    }
+  }
   // $default_array should always be set
   if (isset($default_array) && !empty($default_array)) {
     foreach ($default_array as $key => $value) {
       $form['feed_choices']['#default_value'][] = $key;
     }
   }
+  // Save this user if they don't currently have fields set
+  if($require_update === TRUE){
+    user_save($current_user, $update_array);
+  }
+
   return $form;
 }
 
