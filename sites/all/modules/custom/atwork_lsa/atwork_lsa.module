@@ -980,18 +980,18 @@ function sort_lsa_applications($lsa_nids = array(), $sorted_pin_list = array()){
       $allowed_ministry_names = list_allowed_values($ministry_names);
 
       // Add this supervisor record to the array in full
-      $sorted_pin_list[strtolower($value->field_lsa_email['und'][0]['email'])] = [
+      $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])] = [
         'supervisor_first_name' => $value->field_lsa_supervisor_first_name['und'][0]['safe_value'],
         'supervisor_last_name' => $value->field_lsa_supervisor_last_name['und'][0]['safe_value'],
         'ministry_name' => array_key_exists($value->field_lsa_org['und'][0]['value'], $allowed_ministry_names) ? $allowed_ministry_names[$value->field_lsa_org['und'][0]['value']] :'unknown',
         'address' => [
-          'street' => $value->field_lsa_street['und'][0]['safe_value'],
-          'city' => $value->field_lsa_city['und'][0]['safe_value'],
-          'postal' => $value->field_lsa_home_postal_code['und'][0]['safe_value'],
+          'street' => $value->field_supervisor_address['und'][0]['safe_value'],
+          'city' => $value->field_lsa_supervisor_city['und'][0]['safe_value'],
+          'postal' => $value->field_lsa_supervisor_postal_code['und'][0]['safe_value'],
         ],
       ];
       // Now add the recipient
-      $sorted_pin_list[strtolower($value->field_lsa_email['und'][0]['email'])][] = [
+      $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])][] = [
         "first name" => $value->field_lsa_first_name['und'][0]['safe_value'],
         "last name" => $value->field_lsa_last_name['und'][0]['safe_value'],
         "milestone" => isset($value->field_lsa_years_of_service['und'][0]['value'])? trim($value->field_lsa_years_of_service['und'][0]['value']):"",
