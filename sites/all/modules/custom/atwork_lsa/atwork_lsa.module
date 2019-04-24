@@ -996,7 +996,7 @@ function sort_lsa_applications($lsa_nids = array(), $sorted_pin_list = array()){
         "last name" => $value->field_lsa_last_name['und'][0]['safe_value'],
         "milestone" => isset($value->field_lsa_years_of_service['und'][0]['value'])? trim($value->field_lsa_years_of_service['und'][0]['value']):"",
         "other milestone" => "",
-        "email" => isset($value->field_lsa_email['und'][0]['email'])? strtolower($value->field_lsa_email['und'][0]['email']) : ''
+        "email" => isset($value->field_lsa_email['und'][0]['email'])? strtolower($value->field_lsa_email['und'][0]['email']) : '',
       ];
     }
   }
