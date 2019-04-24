@@ -27,15 +27,16 @@ function atwork_lsa_features_default_fe_block_settings() {
     'pages' => '*/edit
 node/add/*',
     'roles' => array(
+      'administrator' => 3,
       'lsa admin' => 11,
       'premiers awards admin' => 7,
     ),
     'themes' => array(
       'atwork_zen' => array(
-        'region' => '',
-        'status' => 0,
+        'region' => 'pre_content',
+        'status' => 1,
         'theme' => 'atwork_zen',
-        'weight' => 10,
+        'weight' => -10,
       ),
       'seven' => array(
         'region' => '',
