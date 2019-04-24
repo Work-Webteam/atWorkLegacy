@@ -16,7 +16,7 @@
     }
 
 	  //Move RSVP block down the page
-	  //$("#block-views-lsa-admin-block-lsa-rsvp").insertAfter("#lsa-award-selector-img-display-panel");
+	  $("#block-views-lsa-admin-block-lsa-rsvp").insertAfter("#lsa-award-selector-img-display-panel");
 	  $(".node-type-lsa-application #edit-actions--21").css({'text-align':'center','margin-top':'15px','margin-bottom':'15px'});
 
 
@@ -91,7 +91,6 @@
     	}
     } else if($('.field-name-field-lsa-ceremony-response select option[value="2"]').prop("selected")){
     	//attending with guest
-console.log(2);
     	$("#special-dietary-requirements").show();
     	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").show();
     	if($('.form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und input[value="1"]').prop('checked')) {
@@ -106,13 +105,11 @@ console.log(2);
   //Show/hide dietary requirements input
   $("#special-dietary-requirements").click(function () {
     if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '1') {
-    	console.log(1);
     	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").css({"display": "inline-block"});
     	if(!$('.field-name-field-lsa-ceremony-response select option[value="1"]').prop("selected")) {
     	  $(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").css({"display": "inline-block"});
     	}
     }else if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '0') {
-    	console.log(2);
     	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").css({"display": "none"});
     	$(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").css({"display": "none"});
     }
