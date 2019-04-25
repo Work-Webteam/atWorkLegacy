@@ -1,4 +1,5 @@
 (function ($) {
+  /**
   $(document).ready(function () {
     var awardName = $(".field-name-field-lsa-award .field-item.odd").text();
 	  var giftImages = giftListImages(); 
@@ -29,9 +30,9 @@
     
     //Show/hide dietary requirements input
     if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '1') {
-    	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").show();
+    	$(".field-name-field-lsa-recipient-dietary").show();
     	if(!$('.field-name-field-lsa-ceremony-response select option[value="1"]').prop("selected")) {
-    	  $(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").show();
+    	  $(".field-name-field-lsa-dietary-guest").show();
     	}
     }else if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '0') {
     	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").hide();
@@ -78,11 +79,28 @@
     	$("#special-dietary-requirements").hide();
     	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").hide();
     }
-  });
-  
+
+    // Set our change handlers, but only on initial load - don't want them going crazy. We can add a class to the title element in order to check.
+    if(!$("#page-title").hasClass("page-processed-with-js")) {
+      $("#page-title").addClass("page-processed-with-js");
+      // We need to show both the dietary and special request choices, along with the option to update info if the user is either attending, or attending with a guest.
+      // We can check on a change action
+      $(".field-name-field-lsa-ceremony-response select").change(function () {
+        // If no-on is attending, we don't need to show anything
+        if($('.field-name-field-lsa-ceremony-response select option[value="3"]').prop("selected")) {
+          // We already have a function for - the original setup to hide everything.
+          // This will fire if anyone chooses an attending action, then changes their mind (hide previous choices).
+          hideAttendingFields();
+        }
+      });
+    }
+  }); **/
   // Hide guest dietary requests if no-guest-attending is selected.
-  $('.field-name-field-lsa-ceremony-response select').change(function() {
+  $(".field-name-field-lsa-ceremony-response select").change(function() {
+    console.log("Select has been changed");
+    alert("Changed");
     if($('.field-name-field-lsa-ceremony-response select option[value="1"]').prop("selected")) {
+      console.log("Attending without guest");
     	//attending without guest
     	$("#special-dietary-requirements").show();
     	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").show();
@@ -90,6 +108,7 @@
     		$('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "none"});
     	}
     } else if($('.field-name-field-lsa-ceremony-response select option[value="2"]').prop("selected")){
+      console.log("Attending with a guest");
     	//attending with guest
     	$("#special-dietary-requirements").show();
     	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").show();
@@ -97,6 +116,7 @@
     		$('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "inline-block"});
     	}
     } else if ($('.field-name-field-lsa-ceremony-response select option[value="3"]').prop("selected")){
+      console.log("Not attending");
     	$("#special-dietary-requirements").hide();
     	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").hide();
     }
@@ -216,6 +236,8 @@
     // If anything has changed, we should re-run settings()
     settings();
   }
+
+
 
   function settings(){
     // Deciding which fields should be visible to user on initial load
@@ -393,16 +415,103 @@
     });
   }
 
-/**
+  function addGiftImage() {
+    let awardName = $(".field-name-field-lsa-award .field-item.odd").text();
+    let giftImages = giftListImages();
+
+    let selectedAward= giftImages[awardName.trim()];
+    $(".field-name-field-lsa-award").after('<div><img id="lsa-award-selector-img-display-panel" /></div>');
+    if(typeof selectedAward !== 'undefined') {
+      $("#lsa-award-selector-img-display-panel").css({
+        "border-radius": "9px",
+        "box-shadow": "2px 2px lightgrey",
+        "padding": "10px",
+        "border": "1px solid gray",
+        "margin": "5px 0 20px 50px"
+      }).attr({"src": selectedAward["URI"]});
+    }
+
+    //Move RSVP block down the page
+    $("#block-views-lsa-admin-block-lsa-rsvp").insertAfter("#lsa-award-selector-img-display-panel");
+    $(".node-type-lsa-application #edit-actions--21").css({'text-align':'center','margin-top':'15px','margin-bottom':'15px'});
+  }
+
+  /**
+   * Only show any of these if the user is actually attending the show
+   * We are using pseudo selectors set up with form elements here
+   */
+  function hideAttendingFields(){
+    // Dietary info.
+    $specialRequirements = hideField($("#special-dietary-requirements"));
+
+    // Accommodation info.
+    $ceremonyAccommodations = hideField($("#special-ceremony-accomodations"));
+
+    // User info
+    $contactInfo = hideField($("#node-lsa-application-full-group-lsad-contact-info"));
+
+    // Update contact info boolean
+    $update = hideField($(".field-name-field-do-you-need-to-update-your"));
+  }
+
+  function hideField($field){
+    if(!$field.hasClass("hidden")){
+      if($field.hasClass("show")){
+        $field.removeClass("show");
+      }
+      $field.addClass("hidden");
+      $field.hide();
+    }
+    return $field;
+  }
+
+  function showField($field){
+    if(!$field.hasClass("show")){
+      if($field.hasClass("hidden")){
+        $field.removeClass("hidden");
+      }
+      $field.addClass("show");
+      $field.show();
+    }
+    return $field;
+  }
+
+  /**
+   * Helper function that returns if a user is bringing a guest or not
+   * @return boolean
+   */
+  function checkAttendees(){
+    // has guest, return true, only one case where this applies.
+    return $('.field-name-field-lsa-ceremony-response select option[value="2"]').prop("selected");
+  }
+
+  // We want to cache each form element independently so that we can manipulate it easily and quickly - we will do this at global scope for this page.
+  let $specialRequirements = $("#special-dietary-requirements");
+  let $ceremonyAccommodations = $("#special-ceremony-accomodations");
+  let $contactInfo = $("#node-lsa-application-full-group-lsad-contact-info");
+  let $update = $(".field-name-field-do-you-need-to-update-your");
+  let $rsvp = $(".field-name-field-lsa-ceremony-response");
+
+  /**
  * Main function, various click handlers/event listener.
  *
  */
   $(document).ready(function(){
-    
+    // Some things should be hidden
+    hideAttendingFields();
+    // Pull in an image of the gift
+    addGiftImage();
+    // change the first option in the RSVP block:
+    $('.field-name-field-lsa-ceremony-response select option[value="_none"]').text('- Select your RSVP -');
+
     close_button();
     settings();
+    // Fieldset titles are super annoying, and can't be turned off.
+    $('.fieldset-legend').hide();
+    $('.fieldset-title').hide();
     //setTooltip();
     document.body.addEventListener('click', open_button, true);
+
   });
 
   $(document).ajaxComplete(function() {

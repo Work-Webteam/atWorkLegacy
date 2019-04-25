@@ -473,12 +473,19 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Special Requirements',
-    'weight' => '0',
-    'children' => array(),
-    'format_type' => 'hidden',
+    'weight' => '5',
+    'children' => array(
+      0 => 'field_lsa_ceremony_accommodation',
+      1 => 'field_specialrequirement_descrip',
+    ),
+    'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => '',
-      'instance_settings' => array(),
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => '',
+        'id' => '',
+      ),
     ),
   );
   $field_groups['group_lsa_special_requirements|node|lsa_application|default'] = $field_group;
@@ -557,7 +564,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Contact Information',
-    'weight' => '10',
+    'weight' => '7',
     'children' => array(
       0 => 'field_lsa_street',
       1 => 'field_lsa_city',
@@ -596,7 +603,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Name',
-    'weight' => '9',
+    'weight' => '13',
     'children' => array(),
     'format_type' => 'hidden',
     'format_settings' => array(
@@ -617,7 +624,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Supervisor Information',
-    'weight' => '13',
+    'weight' => '14',
     'children' => array(
       0 => 'field_lsa_supervisor_first_name',
       1 => 'field_lsa_supervisor_last_name',
@@ -724,16 +731,15 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Service Information',
-    'weight' => '4',
+    'weight' => '3',
     'children' => array(
       0 => 'field_lsa_years_of_service',
-      1 => 'field_lsa_received_award',
+      1 => 'field_lsa_ceremonydate',
       2 => 'field_lsa_award',
-      3 => 'field_lsa_date_of_retirement',
-      4 => 'field_lsa_charity_name_2',
-      5 => 'field_lsa_pecsf_charity_name',
-      6 => 'field_lsa_pecsf_region',
-      7 => 'field_lsa_second_donation',
+      3 => 'field_lsa_charity_name_2',
+      4 => 'field_lsa_pecsf_charity_name',
+      5 => 'field_lsa_pecsf_region',
+      6 => 'field_lsa_second_donation',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -763,11 +769,13 @@ function atwork_lsa_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Requirements',
-    'weight' => '5',
+    'weight' => '4',
     'children' => array(
       0 => 'field_lsa_dietary_guest',
+      1 => 'field_lsa_dietary_requirements',
+      2 => 'field_lsa_recipient_dietary',
     ),
-    'format_type' => 'hidden',
+    'format_type' => 'fieldset',
     'format_settings' => array(
       'label' => 'Requirements',
       'instance_settings' => array(

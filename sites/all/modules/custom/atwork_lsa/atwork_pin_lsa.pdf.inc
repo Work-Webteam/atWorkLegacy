@@ -54,15 +54,15 @@ $letter_text = <<< EOT
 
 <p>Important: only employees who registered themselves, or were registered by you or a ministry representative, are included in this package. If you have an employee who is eligible and did not register, please connect with your ministry recognition contact (see below) to enquire about additional pins. Pins and pin cards can be ordered at your organization&apos;s cost at any time from the Distribution Centre Victoria. Find links to these products on the Service Pin section of @Work (https://gww.gov.bc.ca/career/service-pins).</p>
 
-<p>Registration for the corporate pin program takes place annually in March. If you have questions about the  program, you&apos;ll find further information at gww.gov.bc.ca/career/service-pins, or you can connect with your organization&apos;s recognition contact (see list on @Work)</p>
+<p>Registration for the corporate pin program takes place annually in March. If you have questions about the  program, you&apos;ll find further information at <strong>gww.gov.bc.ca/career/service-pins</strong>, or you can connect with your organization&apos;s recognition contact (see list on @Work)</p>
 
 <p>Thank you,</p>
 
 <p>Gillian</p>
 
-<p style="color: blue"><small>Gillian Kish, Corporate Recognition and Long Service Awards Manager<br />
+<p><smaller>Gillian Kish, Corporate Recognition and Long Service Awards Manager<br />
 Public service Engagement and Corporate Initiatives | BC Public Service Agency<br />
-Contact: Gillian.Kish@gov.bc.ca</small></p> <br />
+Email: Gillian.Kish@gov.bc.ca</smaller></p> <br />
 
 <!-- This should double as a page break as .md takes html -->
 <div style="page-break-after: always;"></div>
