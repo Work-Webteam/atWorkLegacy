@@ -172,7 +172,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'editablefields',
         'settings' => array(
           'click_to_edit' => FALSE,

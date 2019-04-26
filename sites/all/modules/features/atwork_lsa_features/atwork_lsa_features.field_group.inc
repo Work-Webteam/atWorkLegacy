@@ -472,7 +472,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->mode = 'default';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Special Requirements',
+    'label' => 'Ceremony Accommodations',
     'weight' => '5',
     'children' => array(
       0 => 'field_lsa_ceremony_accommodation',
@@ -480,12 +480,13 @@ function atwork_lsa_features_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Ceremony Accommodations',
       'instance_settings' => array(
-        'description' => '',
+        'id' => 'special-ceremony-accomodations',
         'classes' => '',
-        'id' => '',
+        'description' => '',
       ),
+      'formatter' => 'collapsed',
     ),
   );
   $field_groups['group_lsa_special_requirements|node|lsa_application|default'] = $field_group;
@@ -768,7 +769,7 @@ function atwork_lsa_features_field_group_info() {
   $field_group->mode = 'default';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Requirements',
+    'label' => 'Dietary Accommodations',
     'weight' => '4',
     'children' => array(
       0 => 'field_lsa_dietary_guest',
@@ -777,17 +778,13 @@ function atwork_lsa_features_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => 'Requirements',
+      'label' => 'Dietary Accommodations',
       'instance_settings' => array(
         'id' => 'special-dietary-requirements',
         'classes' => 'group-special-requirements field-group-div',
         'description' => '',
-        'show_label' => '0',
-        'label_element' => 'h3',
-        'effect' => 'none',
-        'speed' => 'fast',
       ),
-      'formatter' => 'collapsible',
+      'formatter' => 'collapsed',
     ),
   );
   $field_groups['group_special_requirements|node|lsa_application|default'] = $field_group;
@@ -828,10 +825,12 @@ function atwork_lsa_features_field_group_info() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Administration');
+  t('Ceremony Accommodations');
   t('Ceremony Details');
   t('Ceremony Requirements');
   t('Charitable donation');
   t('Contact Information');
+  t('Dietary Accommodations');
   t('Dietary Requirements');
   t('Home Mailing Address');
   t('Long Service Award Survey');
@@ -841,9 +840,7 @@ function atwork_lsa_features_field_group_info() {
   t('RSVP Information');
   t('Recipient Contact Information');
   t('Recipient Details');
-  t('Requirements');
   t('Service Information');
-  t('Special Requirements');
   t('Supervisor Details');
   t('Supervisor Information');
   t('Work Information');
