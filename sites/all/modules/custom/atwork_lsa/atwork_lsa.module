@@ -933,9 +933,9 @@ function sort_pin_applications($pin_nids = array()){
     );
     // Now we put in the office for the label - overwrite if this is not the first
     $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['address'] = array(
-      "street" => $value->field_lsa_office_address['und'][0]['safe_value'],
-      "city" => $value->field_lsa_office_city['und'][0]['safe_value'],
-      "postal" => $value->field_lsa_office_postal_code['und'][0]['safe_value'],
+      "street" => mb_convert_encoding($value->field_lsa_office_address['und'][0]['value'], "HTML-ENTITIES", "UTF-8"),
+      "city" => mb_convert_encoding($value->field_lsa_office_city['und'][0]['value'], "HTML-ENTITIES", "UTF-8"),
+      "postal" => mb_convert_encoding($value->field_lsa_office_postal_code['und'][0]['value'], "HTML-ENTITIES", "UTF-8"),
     );
     // Ministry contact email
     isset($value->field_lsa_ministry_rep_email['und'][0]['safe_value']) ? $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry_email'] = strtolower($value->field_lsa_ministry_rep_email['und'][0]['safe_value']) : $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry email'] = "";
@@ -985,9 +985,9 @@ function sort_lsa_applications($lsa_nids = array(), $sorted_pin_list = array()){
         'supervisor_last_name' => $value->field_lsa_supervisor_last_name['und'][0]['safe_value'],
         'ministry_name' => array_key_exists($value->field_lsa_org['und'][0]['value'], $allowed_ministry_names) ? $allowed_ministry_names[$value->field_lsa_org['und'][0]['value']] :'unknown',
         'address' => [
-          'street' => $value->field_supervisor_address['und'][0]['safe_value'],
-          'city' => $value->field_lsa_supervisor_city['und'][0]['safe_value'],
-          'postal' => $value->field_lsa_supervisor_postal_code['und'][0]['safe_value'],
+          'street' => mb_convert_encoding($value->field_supervisor_address['und'][0]['value'], "HTML-ENTITIES", "UTF-8"),
+          'city' => mb_convert_encoding($value->field_lsa_supervisor_city['und'][0]['value'], "HTML-ENTITIES", "UTF-8"),
+          'postal' => mb_convert_encoding($value->field_lsa_supervisor_postal_code['und'][0]['value'], "HTML-ENTITIES", "UTF-8"),
         ],
       ];
       // Now add the recipient
@@ -1096,22 +1096,22 @@ function create_pdf_label($supervisor_list = array()){
       'supervisor Postal Code' => 'Postal Code',
     ];
     $label_csv_record = [
-      'supervisor' => trim($supervisor_name),
-      'ministry' => trim($ministry),
-      'super address' => trim($label_address['street']),
-      'super city' => trim($label_address['city']),
-      'supervisor Postal Code' => trim($label_address['postal']),
+      'supervisor' => mb_convert_encoding(trim($supervisor_name), "HTML-ENTITIES", "UTF-8"),
+      'ministry' => mb_convert_encoding(trim($ministry), "HTML-ENTITIES", "UTF-8"),
+      'super address' =>  mb_convert_encoding(trim($label_address['street']), "HTML-ENTITIES", "UTF-8"),
+      'super city' =>  mb_convert_encoding(trim($label_address['city']), "HTML-ENTITIES", "UTF-8"),
+      'supervisor Postal Code' =>  mb_convert_encoding(trim($label_address['postal']), "HTML-ENTITIES", "UTF-8"),
     ];
     // Now check if label file already exists
     $folder_check = 'public://lsa_pin/' . str_replace(" ", "", $ministry);
     $check_dir = file_prepare_directory($folder_check, FILE_CREATE_DIRECTORY);
     if($check_dir){
-      if(file_exists($folder_check . "/labels.csv")){
+      if(file_exists($folder_check . "/" . str_replace("", " ", $ministry) . "-labels.csv")){
         // Get this file to append something
-        $file = fopen($folder_check ."/labels.csv", "a");
+        $file = fopen($folder_check ."/" . str_replace("", " ", $ministry) . "-labels.csv", "a");
       } else {
         // Make this text file and save it
-        $file = fopen($folder_check ."/labels.csv", "a");
+        $file = fopen($folder_check ."/" . str_replace("", " ", $ministry) . "-labels.csv", "a");
         fputcsv($file, $label_csv_labels);
       }
       fputcsv($file, $label_csv_record);
@@ -1194,7 +1194,7 @@ function set_mail_label($supervisor_name, $label_address, $ministry){
  */
 function set_letter($label, $supervisor_first, $supervisor_last, $recipients, $date, $image_64, $size ){
   require(drupal_get_path('module', 'atwork_lsa') . '/atwork_pin_lsa.pdf.inc');
-  return $letter_text;
+  return mb_convert_encoding($letter_text, "HTML-ENTITIES", "UTF-8");
 }
 
 /**
@@ -1407,7 +1407,7 @@ function atwork_lsa_menu() {
 }
 
 /**
- * Callback to determing who is filling out the pin form, and sending an array back to use to hide/show/auto-pop specific fields.
+ * Callback to determine who is filling out the pin form, and sending an array back to use to hide/show/auto-pop specific fields.
  * @param  string $choice   passes the choice that the user selects, which alters the way the form appears/populates.
  */
 function atwork_lsa_pin_page_callback($choice) {
