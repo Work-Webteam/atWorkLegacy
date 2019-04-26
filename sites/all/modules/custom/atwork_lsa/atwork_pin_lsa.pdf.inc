@@ -50,7 +50,7 @@ $letter_text = <<< EOT
 <p>{$recipient_list}</p>
 </table>
 
-<p>Important: only employees who registered themselves, or were registered by you or a ministry representative, are included in this package. If you have an employee who is eligible and did not register, please connect with your ministry recognition contact (see below) to enquire about additional pins. Pins and pin cards can be ordered at your organization&apos;s cost at any time from the Distribution Centre Victoria. Find links to these products on the Service Pin section of @Work (https://gww.gov.bc.ca/career/service-pins).</p>
+<p>Important: only employees who registered themselves, or were registered by you or a ministry representative, are included in this package. If you have an employee who is eligible and did not register, please connect with your ministry recognition contact (see below) to enquire about additional pins. Pins and pin cards can be ordered at your organization&apos;s cost at any time from the Distribution Centre Victoria. Find links to these products on the Service Pin section of @Work (gww.gov.bc.ca/career/service-pins).</p>
 
 <p>Registration for the corporate pin program takes place annually in March. If you have questions about the  program, you&apos;ll find further information at <strong>gww.gov.bc.ca/career/service-pins</strong>, or you can connect with your organization&apos;s recognition contact (see list on @Work)</p>
 
