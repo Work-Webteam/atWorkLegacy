@@ -442,16 +442,19 @@
    */
   function hideAttendingFields(){
     // Dietary info.
-    $specialRequirements = hideField($("#special-dietary-requirements"));
+    hideField($("#special-dietary-requirements"));
+    hideField($(".field-name-field-lsa-recipient-dietary"));
+    hideField($(".field-name-field-lsa-dietary-guest"));
+
 
     // Accommodation info.
-    $ceremonyAccommodations = hideField($("#special-ceremony-accomodations"));
+    hideField($("#special-ceremony-accomodations"));
 
     // User info
-    $contactInfo = hideField($("#node-lsa-application-full-group-lsad-contact-info"));
+    hideField($("#node-lsa-application-full-group-lsad-contact-info"));
 
     // Update contact info boolean
-    $update = hideField($(".field-name-field-do-you-need-to-update-your"));
+    hideField($(".field-name-field-do-you-need-to-update-your"));
   }
 
   function hideField($field){
@@ -473,7 +476,6 @@
       $field.addClass("show");
       $field.show();
     }
-    return $field;
   }
 
   /**
@@ -485,12 +487,84 @@
     return $('.field-name-field-lsa-ceremony-response select option[value="2"]').prop("selected");
   }
 
-  // We want to cache each form element independently so that we can manipulate it easily and quickly - we will do this at global scope for this page.
-  let $specialRequirements = $("#special-dietary-requirements");
-  let $ceremonyAccommodations = $("#special-ceremony-accomodations");
-  let $contactInfo = $("#node-lsa-application-full-group-lsad-contact-info");
-  let $update = $(".field-name-field-do-you-need-to-update-your");
-  let $rsvp = $(".field-name-field-lsa-ceremony-response");
+  /**
+   *
+   * @type {*|jQuery|HTMLElement}
+   */
+  function rsvpUpdateFields(){
+    let $guest = checkAttendees();
+    // if we have a guest, then we show everything, else we show only specific fields
+    if($guest){
+      setGuestOptions();
+    } else {
+      setOptions();
+    }
+  }
+
+  function setGuestOptions() {
+    console.log("function called");
+    //attending with guest
+    showField($("#special-dietary-requirements"));
+    // Set click options if not already set
+      // TODO: This only clicks once - not sure why, maybe check the class is not getting messed up. Or maybe explicitly put the click handler in document load, then the logic in a funcion.
+      $(".form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und").on("click", function(){
+          console.log("click recorded");
+          console.log($('.form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und input[value="1"]').prop('checked'));
+          // If user has said they have dietary requirements, then
+          if($('.form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und input[value="1"]').prop('checked')) {
+            // Show them their own options
+            showField($(".field-name-field-lsa-recipient-dietary"));
+            // show them guest options
+            showField($(".field-name-field-lsa-dietary-guest"));
+            // Add some CSS for viewing pleasure
+            $('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "inline-block"});
+          } else {
+            // remove all checks and hide these again.
+            hideField($(".field-name-field-lsa-recipient-dietary"));
+            hideField($(".field-name-field-lsa-dietary-guest"));
+            let $checkboxes = $("#edit-field-lsa-recipient-dietary-und-select input:checkbox");
+            $($checkboxes).prop('checked', false);
+          }
+      });
+  }
+
+  function setOptions() {
+    //attending without guest
+    console.log("setting options with no guest")
+    showField($("#special-dietary-requirements"));
+    if($('.form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und input[value="1"]').prop('checked')) {
+      $('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "none"});
+    }
+  }
+
+
+  function setInstructions(){
+    // Show accessibility textbox instructions
+    const accessibilityInstructions = "<p> If needed, please confirm the accessibility requirements that you and/or your guest " +
+      "require to attend the Long Service Awards ceremony (e.g. sign language interpreter (ASL), service dog, " +
+      "accessible parking/entrance, etc.).</p><br>";
+
+    // Show accessibility instructions
+    $(accessibilityInstructions).insertAfter(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above .field-label");
+    $('.field.field-name-field-do-you-need-to-update-your.field-type-list-boolean.field-label-above').css({"margin-top": "15px"});
+
+    const consentText = "<br><br><strong>Notice of Collection, Consent, and Authorization</strong><br>" +
+      "<em>Employees attending this event may appear on camera. " +
+      "Personal information including photo, video and/or voice, and any other information " +
+      "may be collected and used by the BC Public Service Agency to support communications " +
+      "and engagement within and on behalf of the BC Public Service. This information is " +
+      "being collected under the authority of section 26(c) of the Freedom of Information " +
+      "and Protection of Privacy Act (FOIPPA). <br>By registering for this ceremony, " +
+      "you agree to your personal information being disclosed to BC Public Service " +
+      "employees (e.g. @Work Corporate Intranet, @Work Newsletter, events, brochures, " +
+      "reports) and/or used and disclosed outside of Canada to a public site " +
+      "(e.g. YouTube, Twitter). This personal information will be accessed by BC Public " +
+      "Service employees and may also be accessed by the public. Should you have any " +
+      "questions about the collection or disclosure of this information, please contact: " +
+      "EmployeeNews@gov.bc.ca, 976 Meares St. Victoria, BC, V8V 3J4.</em>";
+
+    $(consentText).insertAfter(".node-lsa-application #node-lsa-application-full-group-lsad-contact-info");
+  }
 
   /**
  * Main function, various click handlers/event listener.
@@ -501,21 +575,29 @@
     hideAttendingFields();
     // Pull in an image of the gift
     addGiftImage();
+    // Set instructions
+    setInstructions();
     // change the first option in the RSVP block:
     $('.field-name-field-lsa-ceremony-response select option[value="_none"]').text('- Select your RSVP -');
+    // Whgen a user changes their attendence status, we need to act accordingl
+    $(".field-name-field-lsa-ceremony-response select").change(function() {
+      console.log("changed");
+      rsvpUpdateFields();
+    });
 
-    close_button();
-    settings();
+     // close_button();
+    //settings();
     // Fieldset titles are super annoying, and can't be turned off.
     $('.fieldset-legend').hide();
     $('.fieldset-title').hide();
     //setTooltip();
-    document.body.addEventListener('click', open_button, true);
+    //document.body.addEventListener('click', open_button, true);
+
 
   });
 
   $(document).ajaxComplete(function() {
-    close_button();
-    settings();
+    //close_button();
+    //settings();
   });
 })(jQuery);
