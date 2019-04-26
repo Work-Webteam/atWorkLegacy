@@ -17,7 +17,7 @@ foreach($recipients as $key => $value){
   } else {
       $year_append_milestones = $value['milestones'] . " years";
   }
-  $recipient_list .= "<tr><td><strong>" . $value['name'] . ": &emsp;</strong></td><td><strong>" . $year_append_milestones . "</strong></td></td>";
+  $recipient_list .= "<tr><td><strong><font size='-1'>" . $value['name'] . ": &emsp;</font></strong></td><td><strong><font size='-1'>" . $year_append_milestones . "</font></strong></td></td>";
 }
 
 // User our Base64 image to imbed it in the doc. Shrink the image to half size.
@@ -28,10 +28,9 @@ $letter_text = <<< EOT
 <br clear=all style='page-break-before:always'>
 
 {$image_string}
-        
+<font size="-1">      
 <p>{$label}</p>
 <p><br /></p>
-<font size="-1">
 <p> <span style="display:block;float:right;">{$date}</span></p>
 <p><br /></p>
 <p>Dear {$supervisor_first}, </p>
@@ -59,9 +58,9 @@ $letter_text = <<< EOT
 
 <p>Gillian</p>
 
-<p><smaller>Gillian Kish, Corporate Recognition and Long Service Awards Manager<br />
+<p><font size="-2">Gillian Kish, Corporate Recognition and Long Service Awards Manager<br />
 Public service Engagement and Corporate Initiatives | BC Public Service Agency<br />
-Email: Gillian.Kish@gov.bc.ca</smaller></p> <br />
+Email: Gillian.Kish@gov.bc.ca</font></p> <br />
 </font>
 <!-- This should double as a page break as .md takes html -->
 <div style="page-break-after: always;"></div>
