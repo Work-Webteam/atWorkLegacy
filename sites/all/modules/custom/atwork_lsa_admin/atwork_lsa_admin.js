@@ -96,6 +96,7 @@
     }
   }); **/
   // Hide guest dietary requests if no-guest-attending is selected.
+  /*
   $(".field-name-field-lsa-ceremony-response select").change(function() {
     console.log("Select has been changed");
     alert("Changed");
@@ -121,8 +122,9 @@
     	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").hide();
     }
   });
-  
+  */
   //Show/hide dietary requirements input
+  /*
   $("#special-dietary-requirements").click(function () {
     if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '1') {
     	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").css({"display": "inline-block"});
@@ -145,7 +147,7 @@
   	$(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed").show();
   }
   });
-
+*/
   // Close all shown buttons save on click
   function close_button(){
       // At this point, the modules css hides the button after we click it, so no need to do it ourselves.
@@ -234,7 +236,7 @@
     }
 
     // If anything has changed, we should re-run settings()
-    settings();
+    //settings();
   }
 
 
@@ -366,6 +368,7 @@
 
     });
   }
+  /*
   function setTooltip(){
     // First add an icon behind the block we wish to mark
     // For the "Attending" dropdown
@@ -414,21 +417,23 @@
       }
     });
   }
+  */
+
 
   function addGiftImage() {
-    let awardName = $(".field-name-field-lsa-award .field-item.odd").text();
-    let giftImages = giftListImages();
+    let $awardName = $(".field-name-field-lsa-award .field-item.odd").text();
+    let $giftImages = giftListImages();
 
-    let selectedAward= giftImages[awardName.trim()];
+    let $selectedAward = $giftImages[$awardName.trim()];
     $(".field-name-field-lsa-award").after('<div><img id="lsa-award-selector-img-display-panel" /></div>');
-    if(typeof selectedAward !== 'undefined') {
+    if(typeof $selectedAward !== 'undefined') {
       $("#lsa-award-selector-img-display-panel").css({
         "border-radius": "9px",
         "box-shadow": "2px 2px lightgrey",
         "padding": "10px",
         "border": "1px solid gray",
         "margin": "5px 0 20px 50px"
-      }).attr({"src": selectedAward["URI"]});
+      }).attr({"src": $selectedAward["URI"]});
     }
 
     //Move RSVP block down the page
@@ -449,6 +454,7 @@
 
     // Accommodation info.
     hideField($("#special-ceremony-accomodations"));
+    hideField($(".field-name-field-specialrequirement-descrip"));
 
     // User info
     hideField($("#node-lsa-application-full-group-lsad-contact-info"));
@@ -492,6 +498,31 @@
    * @type {*|jQuery|HTMLElement}
    */
   function rsvpUpdateFields(){
+    // if this is set to Not attending, or to Select your RSVP we should just run the hiding RSVP fields and eject from other functionality.
+    let $rsvpValue = $('.field-name-field-lsa-ceremony-response select');
+    if($rsvpValue.val() === "_none" || $rsvpValue.val() ==="3") {
+      hideAttendingFields();
+      return;
+    }
+    // We can set our ceremony and contact info clicks here, as we should only need to do so once.
+    if(!$("#special-ceremony-accomodations").hasClass("set-ceremony-office")){
+      $("#special-ceremony-accomodations").addClass("set-ceremony-office");
+      $(document).bind("click.ceremony", ".form-item.form-type-radio.form-item-field-lsa-ceremony-accommodation-und", function(){
+        if($('.form-item.form-type-radio.form-item-field-lsa-ceremony-accommodation-und input[value="1"]').prop("checked")){
+          showField($(".field-name-field-specialrequirement-descrip"));
+        } else {
+          hideField($(".field-name-field-specialrequirement-descrip"));
+        }
+      });
+      $(document).bind("click.contact", ".form-item.form-type-radio..form-item-field-do-you-need-to-update-your-und", function(){
+        if($('.form-item.form-type-radio.form-item-field-do-you-need-to-update-your-und input[value="1"]').prop("checked")) {
+          showField($("#node-lsa-application-full-group-lsad-contact-info"));
+        } else {
+          hideField($("#node-lsa-application-full-group-lsad-contact-info"));
+        }
+      });
+    }
+
     let $guest = checkAttendees();
     // if we have a guest, then we show everything, else we show only specific fields
     if($guest){
@@ -502,38 +533,89 @@
   }
 
   function setGuestOptions() {
-    console.log("function called");
+    console.log("Guest options");
     //attending with guest
     showField($("#special-dietary-requirements"));
+    showField($("#special-ceremony-accomodations"));
+    showField($(".field-name-field-do-you-need-to-update-your"));
+
     // Set click options if not already set
-      // TODO: This only clicks once - not sure why, maybe check the class is not getting messed up. Or maybe explicitly put the click handler in document load, then the logic in a funcion.
-      $(".form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und").on("click", function(){
-          console.log("click recorded");
-          console.log($('.form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und input[value="1"]').prop('checked'));
-          // If user has said they have dietary requirements, then
-          if($('.form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und input[value="1"]').prop('checked')) {
-            // Show them their own options
-            showField($(".field-name-field-lsa-recipient-dietary"));
-            // show them guest options
-            showField($(".field-name-field-lsa-dietary-guest"));
-            // Add some CSS for viewing pleasure
-            $('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "inline-block"});
-          } else {
-            // remove all checks and hide these again.
-            hideField($(".field-name-field-lsa-recipient-dietary"));
-            hideField($(".field-name-field-lsa-dietary-guest"));
-            let $checkboxes = $("#edit-field-lsa-recipient-dietary-und-select input:checkbox");
-            $($checkboxes).prop('checked', false);
-          }
+    // No need to look up the dom twice to check classes
+    let $dietaryRequirements = $(".form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und");
+    if(!$dietaryRequirements.hasClass("guest-options-set")) {
+      // If we have a class set for no guest, remove it and unbind the click handler so we don't duplicate it
+      if($dietaryRequirements.hasClass("no-guest-options-set")) {
+        // Make sure we don't already have a click bound here that could cause issues/double bindings.
+        $(document).unbind("click.dietary");
+        // remove class now that the click is gone
+        $(".form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und").removeClass("no-guest-options-set");
+      }
+      // Add our new click handler
+      $(document).bind("click.dietary", ".form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und", function(){
+        // Set the class, so we know we have a click here
+        $(".form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und").addClass("guest-options-set");
+        // If user has said they have dietary requirements, then
+        if($('.form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und input[value="1"]').prop('checked')) {
+          // Show them their own options
+          showField($(".field-name-field-lsa-recipient-dietary"));
+          // show them guest options
+          showField($(".field-name-field-lsa-dietary-guest"));
+          // Add some CSS for viewing pleasure
+          $('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "inline-block"});
+        } else {
+          // remove all checks and hide these again.
+          hideField($(".field-name-field-lsa-recipient-dietary"));
+          hideField($(".field-name-field-lsa-dietary-guest"));
+          let $checkboxes = $("#edit-field-lsa-recipient-dietary input:checkbox");
+          $($checkboxes).prop('checked', false);
+          let $guestCheckboxes = $("#edit-field-lsa-dietary-guest input:checkbox");
+          $($guestCheckboxes).prop('checked', false);
+        }
       });
+    }
   }
 
   function setOptions() {
     //attending without guest
-    console.log("setting options with no guest")
+    console.log("setting options with no guest");
     showField($("#special-dietary-requirements"));
-    if($('.form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und input[value="1"]').prop('checked')) {
-      $('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "none"});
+    showField($("#special-ceremony-accomodations"));
+    showField($(".field-name-field-do-you-need-to-update-your"));
+
+    // Set click options if not already set
+    // No need to look up the dom twice to check classes
+    // We know if we have this class set for the dietary, options are set for all other fields as well
+    let $dietaryRequirements = $(".form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und");
+    if (!$dietaryRequirements.hasClass("no-guest-options-set")) {
+      if ($dietaryRequirements.hasClass("guest-options-set")) {
+        // Make sure we don't already have a click bound here that could cause issues/double bindings.
+        $(document).unbind("click.dietary");
+        // remove class now that the click is gone
+        $(".form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und").removeClass("guest-options-set");
+      }
+      // Add our new click handler for dietary
+      $(document).bind("click.dietary", ".form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und", function () {
+        // Set our class so we know we have a click handler
+        $(".form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und").addClass("no-guest-options-set");
+        // Manipulate the fields, we don't need to show guest options, user had indicted that they don't have guests.
+        if ($('.form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und input[value="1"]').prop('checked')) {
+          // Show them their own options
+          showField($(".field-name-field-lsa-recipient-dietary"));
+          hideField($(".field-name-field-lsa-dietary-guest"));
+        } else {
+          // remove all checks and hide these again.
+          hideField($(".field-name-field-lsa-recipient-dietary"));
+          hideField($(".field-name-field-lsa-dietary-guest"));
+          // We want to wipe out checkboxes if this is closed - so we don't have odd data.
+          let $checkboxes = $("#edit-field-lsa-recipient-dietary input:checkbox");
+          $($checkboxes).prop('checked', false);
+          let $guestCheckboxes = $("#edit-field-lsa-dietary-guest input:checkbox");
+          $($guestCheckboxes).prop('checked', false);
+        }
+      });
+      // Add our click handler for ceremony accomodations
+
+      // Add our click handler for Contact information
     }
   }
 
@@ -577,11 +659,13 @@
     addGiftImage();
     // Set instructions
     setInstructions();
+    // show fields if they are filled out
+    rsvpUpdateFields();
+
     // change the first option in the RSVP block:
     $('.field-name-field-lsa-ceremony-response select option[value="_none"]').text('- Select your RSVP -');
     // Whgen a user changes their attendence status, we need to act accordingl
     $(".field-name-field-lsa-ceremony-response select").change(function() {
-      console.log("changed");
       rsvpUpdateFields();
     });
 
