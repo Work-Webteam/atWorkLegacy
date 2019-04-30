@@ -59,7 +59,7 @@ $letter_text = <<< EOT
 <p>Gillian</p>
 
 <p><font size="-2">Gillian Kish, Corporate Recognition and Long Service Awards Manager<br />
-Public service Engagement and Corporate Initiatives | BC Public Service Agency<br />
+Public Service Engagement and Corporate Initiatives | BC Public Service Agency<br />
 Email: Gillian.Kish@gov.bc.ca</font></p> <br />
 </font>
 <!-- This should double as a page break as .md takes html -->
