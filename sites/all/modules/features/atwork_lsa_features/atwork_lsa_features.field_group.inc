@@ -486,7 +486,7 @@ function atwork_lsa_features_field_group_info() {
         'classes' => '',
         'description' => '',
       ),
-      'formatter' => 'collapsed',
+      'formatter' => 'collapsible',
     ),
   );
   $field_groups['group_lsa_special_requirements|node|lsa_application|default'] = $field_group;
@@ -784,7 +784,7 @@ function atwork_lsa_features_field_group_info() {
         'classes' => 'group-special-requirements field-group-div',
         'description' => '',
       ),
-      'formatter' => 'collapsed',
+      'formatter' => 'collapsible',
     ),
   );
   $field_groups['group_special_requirements|node|lsa_application|default'] = $field_group;
