@@ -6,7 +6,6 @@
  *
  */
 function atwork_auth_init() {
-
   if (isset($_SERVER['HTTP_SM_USER']) ? $_SERVER['HTTP_SM_USER'] == 'twerdal' : FALSE) {
     //$_SERVER['HTTP_SMGOV_USEREMAIL'] = 'some@email.com';
     //dpm(list_extract_allowed_values(variable_get('atwork_auth_gal_fieldmap', ''), 'list_text', FALSE));
@@ -33,15 +32,15 @@ function atwork_auth_init() {
 
   // this should only happen if site isn't accessed through reverse proxy
   // let's log it if this happens
-  if (!isset($_SERVER['HTTP_SMUSER']) || !isset($_SERVER['HTTP_SMGOV_USERGUID'])) {
-    if (variable_get('atwork_auth_watchdog_nosm', 1)) {
+  if ($_SERVER['USER'] != 'apache' && (!isset($_SERVER['HTTP_SM_USER']) || !isset($_SERVER['HTTP_SMGOV_USERGUID']))) {
+	if (variable_get('atwork_auth_watchdog_nosm', 1)) {
       watchdog('atwork_auth', t('A user connected without going through siteminder: ' . print_r($_SERVER, TRUE)));
     }
     return;
   }
 
   // for consistency always use lowercase IDIRs in drupal
-  $sm_user = $_SERVER['HTTP_SMUSER'];
+  $sm_user = strtolower($_SERVER['HTTP_SM_USER']);
   $sm_guid = $_SERVER['HTTP_SMGOV_USERGUID'];
 
   // abort for special IDIRs
@@ -103,6 +102,7 @@ function atwork_auth_init() {
   if ($sm_user != $external_account->name) {
     // check to see if this new IDIR is being used
     $new_name = _atwork_auth_get_unique_name($sm_user);
+
     if ($new_name != $sm_user) {
       // if this IDIR is being used we will need to first rename the older account using our re-used IDIR
       //_atwork_auth_rename_user($sm_user, $new_name);

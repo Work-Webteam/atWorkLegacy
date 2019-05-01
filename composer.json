@@ -1,4 +1,7 @@
 {
 
 
+    "require": {
+        "drush/drush": "^8"
+    }
 }
