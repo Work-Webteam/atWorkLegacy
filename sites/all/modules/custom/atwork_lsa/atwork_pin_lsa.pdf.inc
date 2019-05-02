@@ -60,9 +60,9 @@ Public Service Engagement and Corporate Initiatives | BC Public Service Agency<b
 Email: Gillian.Kish@gov.bc.ca</font></p> <br />
 </font>
 <!-- This should double as a page break as .md takes html -->
-<div style="page-break-after: always;"></div>
-<!---- <div clear=all style='page-break-before:always'></div> 
-<p clear=all style='page-break-before:always'></p> ---->
+<!-- <div style="page-break-after: always;"></div> -->
+<div clear=all style='page-break-before:always'></div> 
+<!-- <p clear=all style='page-break-before:always'></p> ---->
 
 
 EOT;
