@@ -1648,3 +1648,19 @@ function atwork_misc_authcache_request_exclude() {
     return t('We don\'t want to cache profiles');
   }
 }
+
+
+/**
+ * Implements hook_element_info_alter().
+ * Booleans come with an NA element, which is not needed.
+ */
+function atwork_misc_element_info_alter(&$type)
+{
+  $type['radios']['#process'][] = '_atwork_misc_remove_radio_na';
+}
+
+function _atwork_misc_remove_radio_na($element) {
+  unset($element['#options']['_none']);
+  unset($element['_none']);
+  return $element;
+}

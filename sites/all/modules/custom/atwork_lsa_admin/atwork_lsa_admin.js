@@ -1,4 +1,5 @@
 (function ($) {
+  /**
   $(document).ready(function () {
     var awardName = $(".field-name-field-lsa-award .field-item.odd").text();
 	  var giftImages = giftListImages(); 
@@ -29,9 +30,9 @@
     
     //Show/hide dietary requirements input
     if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '1') {
-    	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").show();
+    	$(".field-name-field-lsa-recipient-dietary").show();
     	if(!$('.field-name-field-lsa-ceremony-response select option[value="1"]').prop("selected")) {
-    	  $(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").show();
+    	  $(".field-name-field-lsa-dietary-guest").show();
     	}
     }else if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '0') {
     	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").hide();
@@ -78,11 +79,29 @@
     	$("#special-dietary-requirements").hide();
     	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").hide();
     }
-  });
-  
+
+    // Set our change handlers, but only on initial load - don't want them going crazy. We can add a class to the title element in order to check.
+    if(!$("#page-title").hasClass("page-processed-with-js")) {
+      $("#page-title").addClass("page-processed-with-js");
+      // We need to show both the dietary and special request choices, along with the option to update info if the user is either attending, or attending with a guest.
+      // We can check on a change action
+      $(".field-name-field-lsa-ceremony-response select").change(function () {
+        // If no-on is attending, we don't need to show anything
+        if($('.field-name-field-lsa-ceremony-response select option[value="3"]').prop("selected")) {
+          // We already have a function for - the original setup to hide everything.
+          // This will fire if anyone chooses an attending action, then changes their mind (hide previous choices).
+          hideAttendingFields();
+        }
+      });
+    }
+  }); **/
   // Hide guest dietary requests if no-guest-attending is selected.
-  $('.field-name-field-lsa-ceremony-response select').change(function() {
+  /*
+  $(".field-name-field-lsa-ceremony-response select").change(function() {
+    console.log("Select has been changed");
+    alert("Changed");
     if($('.field-name-field-lsa-ceremony-response select option[value="1"]').prop("selected")) {
+      console.log("Attending without guest");
     	//attending without guest
     	$("#special-dietary-requirements").show();
     	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").show();
@@ -90,29 +109,29 @@
     		$('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "none"});
     	}
     } else if($('.field-name-field-lsa-ceremony-response select option[value="2"]').prop("selected")){
+      console.log("Attending with a guest");
     	//attending with guest
-console.log(2);
     	$("#special-dietary-requirements").show();
     	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").show();
     	if($('.form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und input[value="1"]').prop('checked')) {
     		$('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "inline-block"});
     	}
     } else if ($('.field-name-field-lsa-ceremony-response select option[value="3"]').prop("selected")){
+      console.log("Not attending");
     	$("#special-dietary-requirements").hide();
     	$(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above").hide();
     }
   });
-  
+  */
   //Show/hide dietary requirements input
+  /*
   $("#special-dietary-requirements").click(function () {
     if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '1') {
-    	console.log(1);
     	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").css({"display": "inline-block"});
     	if(!$('.field-name-field-lsa-ceremony-response select option[value="1"]').prop("selected")) {
     	  $(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").css({"display": "inline-block"});
     	}
     }else if($("input[name='field_lsa_dietary_requirements[und]']:checked").val() == '0') {
-    	console.log(2);
     	$(".field.field-name-field-lsa-recipient-dietary.field-type-text.field-label-above").css({"display": "none"});
     	$(".field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above").css({"display": "none"});
     }
@@ -128,7 +147,7 @@ console.log(2);
   	$(".collapsible.group-lsa-office-contact.field-group-fieldset.form-wrapper.collapse-processed").show();
   }
   });
-
+*/
   // Close all shown buttons save on click
   function close_button(){
       // At this point, the modules css hides the button after we click it, so no need to do it ourselves.
@@ -217,8 +236,10 @@ console.log(2);
     }
 
     // If anything has changed, we should re-run settings()
-    settings();
+    //settings();
   }
+
+
 
   function settings(){
     // Deciding which fields should be visible to user on initial load
@@ -347,6 +368,7 @@ console.log(2);
 
     });
   }
+  /*
   function setTooltip(){
     // First add an icon behind the block we wish to mark
     // For the "Attending" dropdown
@@ -395,21 +417,254 @@ console.log(2);
       }
     });
   }
+  */
 
-/**
+
+  function addGiftImage() {
+    let $awardName = $(".field-name-field-lsa-award .field-item.odd").text();
+    let $giftImages = giftListImages();
+
+    let $selectedAward = $giftImages[$awardName.trim()];
+    $(".field-name-field-lsa-award").after('<div><img id="lsa-award-selector-img-display-panel" /></div>');
+    if(typeof $selectedAward !== 'undefined') {
+      $("#lsa-award-selector-img-display-panel").css({
+        "border-radius": "9px",
+        "box-shadow": "2px 2px lightgrey",
+        "padding": "10px",
+        "border": "1px solid gray",
+        "margin": "5px 0 20px 50px"
+      }).attr({"src": $selectedAward["URI"]});
+    }
+
+    //Move RSVP block down the page
+    $("#block-views-lsa-admin-block-lsa-rsvp").insertAfter("#lsa-award-selector-img-display-panel");
+    $(".node-type-lsa-application #edit-actions--21").css({'text-align':'center','margin-top':'15px','margin-bottom':'15px'});
+  }
+
+  /**
+   * Only show any of these if the user is actually attending the show
+   * We are using pseudo selectors set up with form elements here
+   */
+  function hideAttendingFields(){
+    // Hide everything if user has not chosen, or is not attending
+    if($('.field-name-field-lsa-ceremony-response select').val() === "_none" || $('.field-name-field-lsa-ceremony-response select').val() === "3") {
+      hideField($("#special-dietary-requirements"));
+      hideField($(".field-name-field-lsa-recipient-dietary"));
+      hideField($(".field-name-field-lsa-dietary-guest"));
+      // Accommodation info.
+      hideField($("#special-ceremony-accomodations"));
+      hideField($(".field-name-field-specialrequirement-descrip"));
+      // User info
+      hideField($("#node-lsa-application-full-group-lsad-contact-info"));
+      // Update contact info boolean
+      hideField($(".field-name-field-do-you-need-to-update-your"));
+    }
+  }
+
+  function hideField($field){
+    if(!$field.hasClass("hidden")){
+      if($field.hasClass("show")){
+        $field.removeClass("show");
+      }
+      $field.addClass("hidden");
+      $field.hide();
+    }
+    return $field;
+  }
+
+  function showField($field){
+    if(!$field.hasClass("show")){
+      if($field.hasClass("hidden")){
+        $field.removeClass("hidden");
+      }
+      $field.addClass("show");
+      $field.show();
+    }
+  }
+
+  /**
+   * Helper function that returns if a user is bringing a guest or not
+   * @return boolean
+   */
+  function checkAttendees(){
+    // has guest, return true, only one case where this applies.
+    return $('.field-name-field-lsa-ceremony-response select option[value="2"]').prop("selected");
+  }
+
+  /**
+   *
+   * @type {*|jQuery|HTMLElement}
+   */
+  function rsvpUpdateFields(){
+    // if this is set to Not attending, or to Select your RSVP we should just run the hiding RSVP fields and eject from other functionality.
+    let $rsvpValue = $('.field-name-field-lsa-ceremony-response select');
+    if($rsvpValue.val() === "_none" || $rsvpValue.val() ==="3") {
+      hideAttendingFields();
+      return;
+    } else {
+      setOptions();
+      fieldView();
+    }
+  }
+
+
+  function setClickHandlers(){
+    // We can set our ceremony and contact info clicks here, as we should only need to do so once.
+    if(!$("#special-ceremony-accomodations").hasClass("set-ceremony")){
+      $("#special-ceremony-accomodations").addClass("set-ceremony");
+      $('.form-item.form-type-radio.form-item-field-lsa-ceremony-accommodation-und input[name="field_lsa_ceremony_accommodation[und]"]').on("click", function($event){
+        fieldView();
+        $event.stopPropagation();
+      });
+    }
+    if(!$('.form-item-field-do-you-need-to-update-your-und').hasClass("set-contact")) {
+      $('.form-item-field-do-you-need-to-update-your-und').addClass("set-contact");
+      $('.form-item.form-type-radio.form-item-field-do-you-need-to-update-your-und input[name="field_do_you_need_to_update_your[und]"]').on("click", function ($event) {
+        fieldView();
+        $event.stopPropagation();
+      });
+    }
+    // Set click options if not already set
+    if (!$(".form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und").hasClass("options-set")) {
+      if ($(".form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und").addClass("options-set")) {
+        // Add our new click handler for dietary
+        $('.form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und input[name="field_lsa_dietary_requirements[und]"]').on("click", function ($event) {
+          fieldView();
+          $event.stopPropagation();
+        });
+      }
+    }
+  }
+
+
+  /**
+   *
+   */
+  function fieldView(){
+    let $guest = checkAttendees();
+
+    // If user has said they have dietary requirements, then
+    if($('.form-item.form-type-radio.form-item-field-lsa-dietary-requirements-und input[value="1"]').prop('checked')) {
+      // Show them their own options
+      showField($(".field-name-field-lsa-recipient-dietary"));
+      if($guest){      // show them guest options
+        showField($(".field-name-field-lsa-dietary-guest"));
+        // Add some CSS for viewing pleasure
+        $('#special-dietary-requirements .field.field-name-field-lsa-dietary-guest.field-type-text.field-label-above').css({"display": "inline-block"});
+      } else {
+        hideField($(".field-name-field-lsa-dietary-guest"));
+      }
+    } else {
+      // remove all checks and hide these again.
+      hideField($(".field-name-field-lsa-recipient-dietary"));
+      hideField($(".field-name-field-lsa-dietary-guest"));
+      let $checkboxes = $("#edit-field-lsa-recipient-dietary input:checkbox");
+      $($checkboxes).prop('checked', false);
+      let $guestCheckboxes = $("#edit-field-lsa-dietary-guest input:checkbox");
+      $($guestCheckboxes).prop('checked', false);
+    }
+
+    if($('.form-item.form-type-radio.form-item-field-lsa-ceremony-accommodation-und input[value="1"]').prop("checked")) {
+      showField($(".field-name-field-specialrequirement-descrip"));
+    } else {
+      hideField($(".field-name-field-specialrequirement-descrip"));
+    }
+
+    if($('.form-item.form-type-radio.form-item-field-do-you-need-to-update-your-und input[value="1"]').prop("checked")) {
+      showField($("#node-lsa-application-full-group-lsad-contact-info"));
+    } else {
+      hideField($("#node-lsa-application-full-group-lsad-contact-info"));
+    }
+  }
+
+  /**
+   * Shows the main fields we previously hid.
+   */
+  function setOptions() {
+    // We already show this - so skip
+    if($('#special-dietary-requirements').hasClass('show')){
+      return;
+    }
+    let $rsvpValue = $('.field-name-field-lsa-ceremony-response select');
+    if ($rsvpValue.val() === "2" || $rsvpValue.val() === "1") {
+      showField($("#special-dietary-requirements"));
+      showField($("#special-ceremony-accomodations"));
+      showField($(".field-name-field-do-you-need-to-update-your"));
+    }
+  }
+
+
+  function setInstructions(){
+    // Show accessibility textbox instructions
+    const accessibilityInstructions = "<p> If needed, please confirm the accessibility requirements that you and/or your guest " +
+      "require to attend the Long Service Awards ceremony (e.g. sign language interpreter (ASL), service dog, " +
+      "accessible parking/entrance, etc.).</p><br>";
+
+    // Show accessibility instructions
+    $(accessibilityInstructions).insertAfter(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above .field-label");
+    $('.field.field-name-field-do-you-need-to-update-your.field-type-list-boolean.field-label-above').css({"margin-top": "15px"});
+
+    const consentText = "<br><br><strong>Notice of Collection, Consent, and Authorization</strong><br>" +
+      "<em>Employees attending this event may appear on camera. " +
+      "Personal information including photo, video and/or voice, and any other information " +
+      "may be collected and used by the BC Public Service Agency to support communications " +
+      "and engagement within and on behalf of the BC Public Service. This information is " +
+      "being collected under the authority of section 26(c) of the Freedom of Information " +
+      "and Protection of Privacy Act (FOIPPA). <br>By registering for this ceremony, " +
+      "you agree to your personal information being disclosed to BC Public Service " +
+      "employees (e.g. @Work Corporate Intranet, @Work Newsletter, events, brochures, " +
+      "reports) and/or used and disclosed outside of Canada to a public site " +
+      "(e.g. YouTube, Twitter). This personal information will be accessed by BC Public " +
+      "Service employees and may also be accessed by the public. Should you have any " +
+      "questions about the collection or disclosure of this information, please contact: " +
+      "EmployeeNews@gov.bc.ca, 976 Meares St. Victoria, BC, V8V 3J4.</em>";
+
+    $(consentText).insertAfter(".node-lsa-application #node-lsa-application-full-group-lsad-contact-info");
+  }
+
+  /**
  * Main function, various click handlers/event listener.
  *
  */
   $(document).ready(function(){
-    
-    close_button();
-    settings();
-    //setTooltip();
-    document.body.addEventListener('click', open_button, true);
+    // There is ajax here, so we don't want to do these things over and over - lets set a class on title
+    // After that we should be able to leave it up to the handlers we set
+    if(!$('#page-title').hasClass('document-lsa-set')) {
+      $('#page-title').addClass('document-lsa-set');
+      // Some things should be hidden
+      hideAttendingFields();
+      // Pull in an image of the gift
+      addGiftImage();
+      // Set instructions
+      setInstructions();
+      // Set our click handlers
+      setClickHandlers();
+      // change the first option in the RSVP block:
+      $('.field-name-field-lsa-ceremony-response select option[value="_none"]').text('- Select your RSVP -');
+      // Whgen a user changes their attendence status, we need to act accordingl
+      $(".field-name-field-lsa-ceremony-response select").change(function () {
+        rsvpUpdateFields();
+      });
+      // Check if this has already been selected.
+      let $rsvpValue = $('.field-name-field-lsa-ceremony-response select');
+
+      if ($rsvpValue.val() === "2" || $rsvpValue.val() === "1") {
+        setOptions();
+        fieldView();
+      }
+      // close_button();
+      //settings();
+      // Fieldset titles are super annoying, and can't be turned off.
+      $('.fieldset-legend').hide();
+      $('.fieldset-title').hide();
+      //setTooltip();
+      //document.body.addEventListener('click', open_button, true);
+    }
   });
 
   $(document).ajaxComplete(function() {
-    close_button();
-    settings();
+    //close_button();
+    //settings();
+    setClickHandlers();
   });
 })(jQuery);
