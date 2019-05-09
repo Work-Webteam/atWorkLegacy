@@ -153,7 +153,7 @@
     $('#edit-field-lsa-received-award').append(lost_gift);
     $('#lost_gift_message').hide();
     // Message for recipients who have completed 45 || 50 years
-    var special_gift = $('<div id="special_gift"><span style="color:red;"><strong>*</strong> A catalogue of awards specially curated for your Long Service milestone will be sent to you by email. You will be asked to confirm your choice of award before the end of June.</span></div>');
+    var special_gift = $('<div id="special_gift"><span style="color:red;"><strong>*</strong> A catalogue of awards specially curated for your Long Service milestone will be sent to you by email. You will be asked to confirm your choice of award before the end of May.</span></div>');
     $('#edit-field-lsa-years-of-service').append(special_gift);
     $('#special_gift').hide();
 
