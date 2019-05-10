@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * profile_feed_comments.strongarm.inc
@@ -34,7 +35,7 @@ function profile_feed_comments_strongarm() {
       'element' => 'block-atwork-activity-homepage',
       'auto' => 0,
       'manual' => 1,
-      'init' => 0,
+      'init' => 1,
       'arguments' => 1,
       'panels' => 0,
       'timer' => '120',

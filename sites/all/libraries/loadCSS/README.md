@@ -1,5 +1,7 @@
 # loadCSS
 
+[![NPM version](http://img.shields.io/npm/v/fg-loadcss.svg)](https://www.npmjs.org/package/fg-loadcss) [![dependencies Status](https://david-dm.org/filamentgroup/loadCSS/status.svg)](https://david-dm.org/filamentgroup/loadCSS) [![devDependencies Status](https://david-dm.org/filamentgroup/loadCSS/dev-status.svg)](https://david-dm.org/filamentgroup/loadCSS?type=dev)
+
 A function for loading CSS asynchronously
 [c]2017 @scottjehl, @zachleat [Filament Group, Inc.](https://www.filamentgroup.com/)
 Licensed MIT
@@ -62,7 +64,7 @@ By including this script (_which became standalone and no longer dependent on lo
 
 In browsers that do not support `rel=preload`, the script will apply a workaround (by temporarily manipulating the media attribute) to ensure that the file loads and applies asynchronously. It will also continue at a short interval to look for link elements in the DOM that need to be polyfilled. This means that the script will work from any location in the DOM (before or after the preload link(s)), but we do recommend placing the script **immediately after** all preload links for best performance.
 
-Note: regardless of whether the browser supports `rel=preload` or not, the original link element in the source will be used to fetch and apply the stylesheet. Keep this in mind, as you may want to place the `link` in a particular location in your `head` element so that the CSS loads with an expected cascade order. As you'd expect, any `media` attribute present on the original link element will be retained when the polyfill is in play. When the polyfill has a
+Note: regardless of whether the browser supports `rel=preload` or not, the original link element in the source will be used to fetch and apply the stylesheet. Keep this in mind, as you may want to place the `link` in a particular location in your `head` element so that the CSS loads with an expected cascade order. As you'd expect, any `media` attribute present on the original link element will be retained when the polyfill is in play. When the polyfill has asynchronously loaded, it will be enabled immediately.
 
 You can view a demo of this `rel=preload` pattern here: https://master-origin-loadcss.fgview.com/test/preload.html
 
@@ -79,7 +81,7 @@ The code above will insert a new CSS stylesheet `link` *after* the last styleshe
 
 ## Function API
 
-If you're including and calling the loadCSS function (without the `rel=preload` pattern, the function has 3 optional arguments.
+If you're including and calling the loadCSS function (without the `rel=preload` pattern), the function has 3 optional arguments.
 
 - `before`: By default, loadCSS attempts to inject the stylesheet link *after* all CSS and JS in the page. However, if you desire a more specific location in your document, such as before a particular stylesheet link, you can use the `before` argument to specify a particular element to use as an insertion point. Your stylesheet will be inserted *before* the element you specify. For example, here's how that can be done by simply applying an `id` attribute to your `script`.
 ```html
@@ -94,6 +96,18 @@ If you're including and calling the loadCSS function (without the `rel=preload` 
 ```
 
 - `media`: You can optionally pass a string to the media argument to set the `media=""` of the stylesheet - the default value is `all`.
+- `attributes`: You can also optionally pass an Object of attribute name/attribute value pairs to set on the stylesheet. This can be used to specify Subresource Integrity attributes:
+```javascript
+loadCSS( 
+  "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css",
+  null,
+  null,
+  {
+    "crossorigin": "anonymous",
+    "integrity": "sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+  }
+);
+```
 
 #### Using with `onload`
 

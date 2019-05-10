@@ -116,6 +116,13 @@ function atwork_ecards_form_submit($form, &$form_state) {
     $ecard->ecard_copy_url = url($ecard->entity_path, array('query' => array('ecard' => $ecard->hash), 'absolute' => TRUE));
     $ecard->site_name = variable_get('site_name', 'Default site name');
 
+    // Add to our query string so we can differentiate between our sender and recipient
+    $ecard->ecard_url = $ecard->ecard_url . '&recipient';
+    $ecard->ecard_copy_url = $ecard->ecard_copy_url . '&sender';
+
+    // . '&sender'
+    dpm($ecard);
+
     // this is changed from ecard_mail_send() because that will trigger multiple copies to sender
     ecard_mail_send_ecard($ecard);
 

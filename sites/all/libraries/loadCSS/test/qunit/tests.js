@@ -1,4 +1,3 @@
-/*global window:true*/
 (function(window) {
 	/*
 		======== A Handy Little QUnit Reference ========
@@ -44,6 +43,21 @@
 		var ss = loadCSS("../../test/qunit/files/test.css");
 		onloadCSS( ss, function(){
 			ok("stylesheet loaded successfully");
+			start();
+		});
+	});
+
+	asyncTest( 'loadCSS loads a CSS file with specific attributes', function(){
+		expect(3);
+		var attributes = {
+			title: "Default Style",
+			type: "text/css"
+		};
+		var ss = loadCSS("files/test.css", null, null, attributes);
+		onloadCSS( ss, function(){
+			ok("stylesheet loaded successfully");
+			equal(ss.title, attributes.title, "'title' attribute should be '" + attributes.title + "'");
+			equal(ss.type, attributes.type, "'type' attribute should be '" + attributes.type + "'");
 			start();
 		});
 	});
@@ -98,9 +112,5 @@
 		ok( typeof window.loadCSS.relpreload.poly === "function", "relpreload.poly should be a function" );
 		ok( typeof window.loadCSS.relpreload.support() === "boolean", "relpreload.support should be a bool" );
 	});
-
-
-
-
 
 }(window));

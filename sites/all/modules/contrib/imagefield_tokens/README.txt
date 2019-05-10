@@ -23,4 +23,3 @@ A. Only User tokens are supported in the ImageField module.
 
    Node tokens allow you to use the Node ID, Node Title, Node creation date and
    much more in your ALT/Title text where User tokens are very limited.
-
