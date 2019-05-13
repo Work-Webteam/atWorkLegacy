@@ -5673,3 +5673,8 @@ li.TabbedPanelsTab {
 .webform-analysis-component.webform-analysis-component-select.webform-analysis-component--finalists {
   width: inherit;
 }
+
+// Hides the User Profile contact information. Contains GAL update not needed unless specified.
+#user-profile-form .group-contact-info {
+  display:none;
+}
