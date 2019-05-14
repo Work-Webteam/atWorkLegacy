@@ -514,8 +514,8 @@
 
   function setClickHandlers(){
     // We can set our ceremony and contact info clicks here, as we should only need to do so once.
-    if(!$("#special-ceremony-accomodations").hasClass("set-ceremony")){
-      $("#special-ceremony-accomodations").addClass("set-ceremony");
+    if(!$(".form-item.form-type-radio.form-item-field-lsa-ceremony-accommodation-und").hasClass("set-ceremony")){
+      $(".form-item.form-type-radio.form-item-field-lsa-ceremony-accommodation-und").addClass("set-ceremony");
       $('.form-item.form-type-radio.form-item-field-lsa-ceremony-accommodation-und input[name="field_lsa_ceremony_accommodation[und]"]').on("click", function($event){
         fieldView();
         $event.stopPropagation();
@@ -621,7 +621,7 @@
       "(e.g. YouTube, Twitter). This personal information will be accessed by BC Public " +
       "Service employees and may also be accessed by the public. Should you have any " +
       "questions about the collection or disclosure of this information, please contact: " +
-      "EmployeeNews@gov.bc.ca, 976 Meares St. Victoria, BC, V8V 3J4.</em>";
+      "EmployeeNews@gov.bc.ca, 563 Superior Street, Victoria BC, V8V 1T7.</em>";
 
     $(consentText).insertAfter(".node-lsa-application #node-lsa-application-full-group-lsad-contact-info");
   }
@@ -656,6 +656,7 @@
         setOptions();
         fieldView();
       }
+      $('#edit-field-specialrequirement-descrip').prepend("Do you, or your guest, have any accessibility requirements needed to attend the Long Service Award ceremony? (e.g. sign language interpreter (ASL), service dog, accessible parking/entrance, etc.)");
       // close_button();
       //settings();
       // Fieldset titles are super annoying, and can't be turned off.
