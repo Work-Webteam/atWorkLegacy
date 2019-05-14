@@ -29,7 +29,9 @@ $applicant_attending_body = <<<EOT
         </p>
         <p>For information about travel reimbursement and taking time off, visit <a href="https://gww.gov.bc.ca/career/long-service-awards/eligibility/policy">@Work</a> or contact your workplace <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts">Long Service Awards contact</a>. If you have questions about the ceremony, email the <a href="mailto:longserviceawards@gov.bc.ca?subject=Question%20about%20LSA%20ceremony">Long Service Awards team</a>.</p>
         <p>We look forward to welcoming you to Government House this fall!</p>
-        <p>Thank you,<br />Long Service Awards Team</p>
+        <p>Thank you,</p>
+        <br />
+        <p>Long Service Awards Team</p>
     </body>
 </html>
 EOT;
