@@ -661,6 +661,8 @@
       // Fieldset titles are super annoying, and can't be turned off.
       $('.fieldset-legend').hide();
       $('.fieldset-title').hide();
+      // Hiding the field description here - we already know this was the old ministry if soemone retires so lets not confuse them.
+      $('#node-lsa-application-full-group-lsad-contact-info > fieldset > div > div.fieldset-description > p').hide();
       //setTooltip();
       //document.body.addEventListener('click', open_button, true);
     }

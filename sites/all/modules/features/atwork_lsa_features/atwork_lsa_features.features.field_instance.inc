@@ -477,11 +477,16 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'email',
+        'module' => 'editablefields',
         'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'email_default',
+        'type' => 'editable',
         'weight' => 12,
       ),
       'ecard' => array(
@@ -1504,11 +1509,16 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'text',
+        'module' => 'editablefields',
         'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'text_default',
+        'type' => 'editable',
         'weight' => 8,
       ),
       'ecard' => array(
@@ -2042,11 +2052,16 @@ Vegan',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'email',
+        'module' => 'editablefields',
         'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'email_default',
+        'type' => 'editable',
         'weight' => 11,
       ),
       'ecard' => array(
@@ -2552,11 +2567,16 @@ Guest information is not known at this time',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'phone',
+        'module' => 'editablefields',
         'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'phone',
+        'type' => 'editable',
         'weight' => 13,
       ),
       'ecard' => array(
@@ -2628,11 +2648,16 @@ Guest information is not known at this time',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'text',
+        'module' => 'editablefields',
         'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'text_default',
+        'type' => 'editable',
         'weight' => 10,
       ),
       'ecard' => array(
@@ -2709,11 +2734,16 @@ Guest information is not known at this time',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'text',
+        'module' => 'editablefields',
         'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'text_default',
+        'type' => 'editable',
         'weight' => 9,
       ),
       'ecard' => array(
@@ -4489,11 +4519,16 @@ Vegan',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'text',
+        'module' => 'editablefields',
         'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'text_default',
+        'type' => 'editable',
         'weight' => 7,
       ),
       'ecard' => array(
@@ -5471,19 +5506,7 @@ Vegan',
     'label' => 'Please Specify Your Requirements',
     'required' => 0,
     'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -5491,7 +5514,7 @@ Vegan',
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'maxlength_js' => 350,
+        'maxlength_js' => 200,
         'maxlength_js_enforce' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
         'maxlength_js_truncate_html' => 1,
