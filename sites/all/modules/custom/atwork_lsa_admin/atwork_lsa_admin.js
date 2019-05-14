@@ -423,7 +423,6 @@
   function addGiftImage() {
     let $awardName = $(".field-name-field-lsa-award .field-item.odd").text();
     let $giftImages = giftListImages();
-
     let $selectedAward = $giftImages[$awardName.trim()];
     $(".field-name-field-lsa-award").after('<div><img id="lsa-award-selector-img-display-panel" /></div>');
     if(typeof $selectedAward !== 'undefined') {
@@ -436,6 +435,11 @@
       }).attr({"src": $selectedAward["URI"]});
     }
 
+    // We want this to read differently on the view page
+    if($awardName.trim() == "Choice TBC"){
+      // drop in our new
+      $(".field-name-field-lsa-award .field-item.odd").text("Your personally selected award");
+    }
     //Move RSVP block down the page
     $("#block-views-lsa-admin-block-lsa-rsvp").insertAfter("#lsa-award-selector-img-display-panel");
     $(".node-type-lsa-application #edit-actions--21").css({'text-align':'center','margin-top':'15px','margin-bottom':'15px'});
