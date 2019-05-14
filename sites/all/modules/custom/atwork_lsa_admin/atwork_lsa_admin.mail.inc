@@ -48,7 +48,7 @@ $nid = $lsa_node->nid;
 //$invite_button = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_RSVP.png';
 
 $invite = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_RSVP_with_text_2018.jpg";
-$invite_sized = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_Apr19.jpg";
+$invite_sized = "https://gww.gov.bc.ca/mem_fs/images/lsa/2019-LSA_May14.jpg";
 
 $applicant_subject = t('Your Long Service Awards Invitation');
 $applicant_body = <<<EOT
@@ -98,11 +98,9 @@ $applicant_body = <<<EOT
 </head>
 
 <body id="mimemail-body" class="atwork-mail-default" style="padding:0;">
-<p> To RSVP for your Long Service Awards ceremony, <strong>click on the button</strong> in the invitation below.  </p>
+<p> To RSVP for your Long Service Awards ceremony, <strong>click on the invitation below.  </strong></p>
 
-<p> If you can’t view the invitation and RSVP form in the body of the email, follow the Outlook prompts to download pictures. </p>
-
-<p> If you have retired or you cannot access the RSVP form, please email the <a href="mailto:longserviceawards@gov.bc.ca">Long Service Awards team</a> for assistance. </p>
+<p> Note: If you are unable to view the invitation below, follow the Outlook prompts to download pictures. If you still cannot access the invitation and RSVP form, please email the <a href="mailto:longserviceawards@gov.bc.ca">Long Service Awards team</a> for assistance.  </p>
 
 <p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p>
 
