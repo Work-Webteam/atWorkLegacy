@@ -72,6 +72,7 @@ $applicant_body = <<<EOT
   }
   
   #outlook a{
+      display: block;
       padding:0;
   }
   
