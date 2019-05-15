@@ -48,7 +48,7 @@ $nid = $lsa_node->nid;
 //$invite_button = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_RSVP.png';
 
 $invite = "https://gww.gov.bc.ca/mem_fs/images/lsa/2019-LSA_May14.jpg";
-$invite_sized = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_Apr19.jpg";
+$invite_sized = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_May15_Summer.jpg";
 
 $applicant_subject = t('Your Long Service Awards Invitation');
 $applicant_body = <<<EOT
