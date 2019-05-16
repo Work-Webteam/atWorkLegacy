@@ -92,8 +92,8 @@ $applicant_body = <<<EOT
     /* For outlook only - OWA spaces just a tiny bit differently. */
     .outlook-box {
       /* Text above the image changed, so we need to move the placement of names etc as well. */
-      /* height: 345 !important; */
-      height: 275 !important;
+      height: 345 !important;
+      /* height: 275 !important; */
     }
   </style>
 <![endif]-->
