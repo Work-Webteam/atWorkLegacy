@@ -47,14 +47,8 @@ $nid = $lsa_node->nid;
 //$invite = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_print.jpg';
 //$invite_button = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_RSVP.png';
 
-//$invite = "https://gww.gov.bc.ca/mem_fs/images/lsa/2019-LSA_May14.jpg";
-//$invite_sized = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_May15_Summer.jpg";
-
-// Create an image for the email
-$imagick = new Imagick('sites/default/files/lsa_pdfs/Printable_Keepsake_Invitation_' . $lsa_node->nid . '.pdf');
-$imagick->setImageFormat('jpg');
-file_put_contents('sites/default/files/lsa_pdfs/Printable_Keepsake_Invitation_' . $lsa_node->nid . '.jpg', $imagick);
-$invite = 'sites/default/files/lsa_pdfs/Printable_Keepsake_Invitation_' . $lsa_node->nid . '.jpg';
+$invite = "https://gww.gov.bc.ca/mem_fs/images/lsa/2019-LSA_May14.jpg";
+$invite_sized = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_May15_Summer.jpg";
 
 $applicant_subject = t('Your Long Service Awards Invitation');
 $applicant_body = <<<EOT
