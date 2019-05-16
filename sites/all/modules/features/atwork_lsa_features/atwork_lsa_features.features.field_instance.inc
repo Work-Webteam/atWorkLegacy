@@ -324,7 +324,7 @@ function atwork_lsa_features_field_default_field_instances() {
     'bundle' => 'lsa_application',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Do you, or your guest, have any accessibility requirements needed to attend the Long Service Award ceremony? (e.g. sign language interpreter (ASL), service dog, accessible parking/entrance, etc.)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -362,20 +362,6 @@ function atwork_lsa_features_field_default_field_instances() {
     'label' => 'Accessibility',
     'required' => 0,
     'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -477,11 +463,16 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'email',
+        'module' => 'editablefields',
         'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'email_default',
+        'type' => 'editable',
         'weight' => 12,
       ),
       'ecard' => array(
@@ -1125,22 +1116,9 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_ceremony_accommodation',
-    'label' => 'Ceremony Requirements',
+    'label' => 'Accessibility Requirements',
     'required' => 0,
     'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -1504,11 +1482,16 @@ function atwork_lsa_features_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'text',
+        'module' => 'editablefields',
         'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'text_default',
+        'type' => 'editable',
         'weight' => 8,
       ),
       'ecard' => array(
@@ -2042,11 +2025,16 @@ Vegan',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'email',
+        'module' => 'editablefields',
         'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'email_default',
+        'type' => 'editable',
         'weight' => 11,
       ),
       'ecard' => array(
@@ -2552,11 +2540,16 @@ Guest information is not known at this time',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'phone',
+        'module' => 'editablefields',
         'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'phone',
+        'type' => 'editable',
         'weight' => 13,
       ),
       'ecard' => array(
@@ -2628,11 +2621,16 @@ Guest information is not known at this time',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'text',
+        'module' => 'editablefields',
         'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'text_default',
+        'type' => 'editable',
         'weight' => 10,
       ),
       'ecard' => array(
@@ -2709,11 +2707,16 @@ Guest information is not known at this time',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'text',
+        'module' => 'editablefields',
         'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'text_default',
+        'type' => 'editable',
         'weight' => 9,
       ),
       'ecard' => array(
@@ -4489,11 +4492,16 @@ Vegan',
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'text',
+        'module' => 'editablefields',
         'settings' => array(
+          'click_to_edit' => FALSE,
+          'click_to_edit_style' => 'button',
+          'empty_text' => '',
+          'fallback_format' => NULL,
+          'fallback_settings' => array(),
           'semantic_field_format' => '',
         ),
-        'type' => 'text_default',
+        'type' => 'editable',
         'weight' => 7,
       ),
       'ecard' => array(
@@ -5428,7 +5436,7 @@ Vegan',
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'editablefields',
         'settings' => array(
           'click_to_edit' => FALSE,
@@ -5468,22 +5476,10 @@ Vegan',
     ),
     'entity_type' => 'node',
     'field_name' => 'field_specialrequirement_descrip',
-    'label' => 'Please Specify Your Requirements',
+    'label' => 'Please describe your accessibility requirements.',
     'required' => 0,
     'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
+      'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -5491,7 +5487,7 @@ Vegan',
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'maxlength_js' => 350,
+        'maxlength_js' => 200,
         'maxlength_js_enforce' => 0,
         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
         'maxlength_js_truncate_html' => 1,
@@ -7296,6 +7292,7 @@ Vegan',
   t('<img class="lsa-award-selector-img-display-panel"></img>');
   t('<p id="lsa-declaration">I declare, to the best of my knowledge and consistent with the Long Service Awards <a href="career/long-service-awards/eligibility" target="_blank">eligibility guidelines</a> (which I have reviewed) that as of December 31, 2019, I will have worked for the BC Public Service for 25, 30, 35, 40, 45 or 50 years and I am therefore eligible for a Long Service Award. By providing my personal information, I am allowing the BC Public Service Agency to use and disclose this information for the planning and delivery of the Long Service Award recognition events. This personal information is required to process your application for the Long Service Awards and is collected in accordance with section 26(c) of the Freedom of Information and Protection of Privacy Act (FOIPPA). Questions about the collection or use of this information can be directed to <a href="mailto:EmployeeNews@gov.bc.ca" target="_top">EmployeeNews@gov.bc.ca</a>, 1st floor- 563 Superior Street, Victoria BC, V8V 0C5</p><br />');
   t('Accessibility');
+  t('Accessibility Requirements');
   t('Actual_Min/Org');
   t('Alternate Email Address');
   t('Are you celebrating a current service milestone in 2019?');
@@ -7309,7 +7306,6 @@ Vegan',
   t('Branch');
   t('Ceremony Date');
   t('Ceremony Night');
-  t('Ceremony Requirements');
   t('Ceremony Response');
   t('Certificate Name');
   t('Certificate Ordered');
@@ -7325,6 +7321,7 @@ Vegan',
   t('Dietary Requirements');
   t('Do you need to update your contact information or workplace details (e.g. ministry)?');
   t('Do you wish to request service pin(s) for any past milestones?');
+  t('Do you, or your guest, have any accessibility requirements needed to attend the Long Service Award ceremony? (e.g. sign language interpreter (ASL), service dog, accessible parking/entrance, etc.)');
   t('Donation Amount');
   t('Donation Amount 2');
   t('Donation options');
@@ -7354,8 +7351,8 @@ Vegan',
   t('PECSF ID 2');
   t('PECSF Region');
   t('Phone');
-  t('Please Specify Your Requirements');
   t('Please confirm the accessibility accommodations that you and/or your guest require to attend the Long Service Awards ceremony(e.g. sign language interpreter (ASL), service dog, accessible parking/entrance, etc.)');
+  t('Please describe your accessibility requirements.');
   t('Please select the retroactive milestone pin(s) you would like to order');
   t('Please use the format:A1A 1A1');
   t('Postal Code');
