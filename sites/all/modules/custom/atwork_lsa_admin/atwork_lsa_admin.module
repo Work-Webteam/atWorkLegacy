@@ -436,7 +436,6 @@ function send_to_selected_applicants($form, $form_state){
  * @return [array] $send_status [Collect the status of the send, note if there are errors and pinpoint the reason this record has errors, bundle in array and send back]
  */
 function lsa_email_send($lsa_node){
-  require(drupal_get_path('module', 'atwork_lsa_admin') . '/atwork_lsa_admin.mail.inc');
   $lang = $lsa_node->language;
   $email = "no email address specified";
 
@@ -478,6 +477,8 @@ function lsa_email_send($lsa_node){
   
   // Lets create a pdf of the invitation for the user
   create_pdf($lsa_node);
+  // Now that we have an invitation, we can convert it into an image
+  require(drupal_get_path('module', 'atwork_lsa_admin') . '/atwork_lsa_admin.mail.inc');
 
   // get pdf url
   $filepath = 'sites/default/files/lsa_pdfs/Printable_Keepsake_Invitation_' . $lsa_node->nid . '.pdf';
