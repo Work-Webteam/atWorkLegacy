@@ -620,8 +620,6 @@
       "disclosure of this information, please contact: <a href='mailto:LongServiceAwards@gov.bc.ca'>LongServiceAwards@gov.bc.ca</a>, 563 " +
       "Superior Street, Victoria BC, V8V 1T7.</em>";
 
-
-
     $(consentText).insertAfter(".node-lsa-application #node-lsa-application-full-group-lsad-contact-info");
   }
 

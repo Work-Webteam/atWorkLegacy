@@ -212,23 +212,9 @@ function atwork_lsa_features_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_do_you_need_to_update_your',
-    'label' => 'Do you need to update your contact information or workplace details (e.g. ministry)?',
+    'label' => 'Do you need to update your contact information?',
     'required' => 1,
     'settings' => array(
-      'authcache' => array(
-        'clients' => array(
-          'authcache_ajax' => array(
-            'status' => 1,
-            'weight' => 0,
-          ),
-        ),
-        'fallback' => 'cancel',
-        'lifespan' => 3600,
-        'perpage' => 0,
-        'peruser' => 1,
-        'status' => 0,
-      ),
-      'quiz_result' => FALSE,
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -7319,7 +7305,7 @@ Vegan',
   t('Did you receive your award?');
   t('Did you register last year but were unable to attend the ceremony?');
   t('Dietary Requirements');
-  t('Do you need to update your contact information or workplace details (e.g. ministry)?');
+  t('Do you need to update your contact information?');
   t('Do you wish to request service pin(s) for any past milestones?');
   t('Do you, or your guest, have any accessibility requirements needed to attend the Long Service Award ceremony? (e.g. sign language interpreter (ASL), service dog, accessible parking/entrance, etc.)');
   t('Donation Amount');
