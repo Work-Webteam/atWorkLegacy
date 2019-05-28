@@ -253,9 +253,9 @@
     if($('input[name="field_lsa_years_of_service[und]"]:checked').val() == 25  && ($('input[name="field_lsa_register_last_year[und]"]:checked').val() == 2 )) {
       if($('#edit-field-lsa-25year-certificatename-und-0-value').val().length < 1){
         if($('#edit-field-lsa-middle-name-und-0-value').val().length > 0){
-          $('#edit-field-lsa-25year-certificatename-und-0-value').val($('#edit-field-lsa-first-name-und-0-value').val() + ' ' + $('#edit-field-lsa-middle-name-und-0-value').val() + ' ' + $('#edit-field-lsa-last-name-und-0-value').val());
+          //$('#edit-field-lsa-25year-certificatename-und-0-value').val($('#edit-field-lsa-first-name-und-0-value').val() + ' ' + $('#edit-field-lsa-middle-name-und-0-value').val() + ' ' + $('#edit-field-lsa-last-name-und-0-value').val());
         } else {
-          $('#edit-field-lsa-25year-certificatename-und-0-value').val($('#edit-field-lsa-first-name-und-0-value').val() + ' ' + $('#edit-field-lsa-last-name-und-0-value').val());
+          //$('#edit-field-lsa-25year-certificatename-und-0-value').val($('#edit-field-lsa-first-name-und-0-value').val() + ' ' + $('#edit-field-lsa-last-name-und-0-value').val());
         }
       }
     }
