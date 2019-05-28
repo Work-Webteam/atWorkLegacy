@@ -65,7 +65,10 @@
     if (gift_year_choice != 25){
       //$('#field-lsa-25year-certificatename-add-more-wrapper').hide();
       $("input#edit-field-lsa-25year-certificatename-und-0-value").prop("required", false);
-      $('#edit-field-lsa-25year-certificatename-und-0-value').val('');
+      if(!$('#edit-field-lsa-donation-options-und-0').is(":visible")) {
+        // Only remove this if it is not 25 years and PECSF field is not visible.
+        $('#edit-field-lsa-25year-certificatename-und-0-value').val('');
+      }
       checkPECSF();
     }
     if(gift_year_choice != 35){

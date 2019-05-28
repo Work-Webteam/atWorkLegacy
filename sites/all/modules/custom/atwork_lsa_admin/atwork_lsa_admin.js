@@ -571,6 +571,7 @@
     if($('.form-item.form-type-radio.form-item-field-lsa-ceremony-accommodation-und input[value="1"]').prop("checked")) {
       showField($(".field-name-field-specialrequirement-descrip"));
     } else {
+      $( '[id^="edit-field-specialrequirement-descrip-und-0-value"]').val('');
       hideField($(".field-name-field-specialrequirement-descrip"));
     }
 
@@ -608,20 +609,18 @@
     $(accessibilityInstructions).insertAfter(".field.field-name-field-lsa-accommodation-notes.field-type-text-long.field-label-above .field-label");
     $('.field.field-name-field-do-you-need-to-update-your.field-type-list-boolean.field-label-above').css({"margin-top": "15px"});
 
-    const consentText = "<br><br><strong>Notice of Collection, Consent, and Authorization</strong><br>" +
-      "<em>Employees attending this event may appear on camera. " +
-      "Personal information including photo, video and/or voice, and any other information " +
-      "may be collected and used by the BC Public Service Agency to support communications " +
-      "and engagement within and on behalf of the BC Public Service. This information is " +
-      "being collected under the authority of section 26(c) of the Freedom of Information " +
-      "and Protection of Privacy Act (FOIPPA). <br>By registering for this ceremony, " +
-      "you agree to your personal information being disclosed to BC Public Service " +
-      "employees (e.g. @Work Corporate Intranet, @Work Newsletter, events, brochures, " +
-      "reports) and/or used and disclosed outside of Canada to a public site " +
-      "(e.g. YouTube, Twitter). This personal information will be accessed by BC Public " +
-      "Service employees and may also be accessed by the public. Should you have any " +
-      "questions about the collection or disclosure of this information, please contact: " +
-      "EmployeeNews@gov.bc.ca, 563 Superior Street, Victoria BC, V8V 1T7.</em>";
+    const consentText = "<br><br><strong>Notice of Collection, Consent, and Authorization</strong><br />" +
+      "<em>By registering for a Long Service Award, you consent to your personal information (name, years of service, ministry, city, etc.) " +
+      "being disclosed to BC Public Service employees (e.g. @Work Corporate Intranet, @Work Newsletter, reports, etc.). " +
+      "This personal information will be accessed by BC Public Service employees and may also be accessed by the public. " +
+      "<strong>Employees attending the Long Service Award ceremony may appear on camera</strong>. Personal information including photos, videos " +
+      "and/or voice, and any other information may be collected and used by the BC Public Service Agency to support communications " +
+      "and engagement within and on behalf of the BC Public Service. This information is being collected under the authority of section " +
+      "26(c) of the Freedom of Information and Protection of Privacy Act (FOIPPA). Should you have any questions about the collection or " +
+      "disclosure of this information, please contact: <a href='mailto:LongServiceAwards@gov.bc.ca'>LongServiceAwards@gov.bc.ca</a>, 563 " +
+      "Superior Street, Victoria BC, V8V 1T7.</em>";
+
+
 
     $(consentText).insertAfter(".node-lsa-application #node-lsa-application-full-group-lsad-contact-info");
   }
