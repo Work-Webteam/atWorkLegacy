@@ -959,6 +959,8 @@ function sort_pin_applications($pin_nids = array()){
     $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry_name'] = str_replace('&', "and", $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry_name']);
     $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry_name'] = str_replace('(FICOM)', "", $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry_name']);
 
+    // TODO: We need to add in the lsa pin branch here.
+    $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['branch'] = $value->field_lsa_branch_department['und'][0]['value'];
     // Supervisors name
     $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['supervisor_first_name'] = $value->field_lsa_supervisor_first_name['und'][0]['safe_value'];
     $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['supervisor_last_name'] = $value->field_lsa_supervisor_last_name['und'][0]['safe_value'];
@@ -996,6 +998,7 @@ function sort_lsa_applications($lsa_nids = array(), $sorted_pin_list = array()){
         'supervisor_first_name' => $value->field_lsa_supervisor_first_name['und'][0]['safe_value'],
         'supervisor_last_name' => $value->field_lsa_supervisor_last_name['und'][0]['safe_value'],
         'ministry_name' => array_key_exists($value->field_lsa_org['und'][0]['value'], $allowed_ministry_names) ? $allowed_ministry_names[$value->field_lsa_org['und'][0]['value']] :'unknown',
+        'branch' => isset($value->field_lsa_branch_department['und'][0]['value']) ? $value->field_lsa_branch_department['und'][0]['value'] : "none entered (see form)",
         'address' => [
           'street' => mb_convert_encoding($value->field_supervisor_address['und'][0]['value'], "HTML-ENTITIES", "UTF-8"),
           'city' => mb_convert_encoding($value->field_lsa_supervisor_city['und'][0]['value'], "HTML-ENTITIES", "UTF-8"),
@@ -1161,14 +1164,14 @@ function create_csv($sorted_list) {
     // Make this text file and save it
     $file = fopen("public://lsa_pin/recipients.csv", "a");
   }
-  fputcsv($file, array('supervisor email', 'supervisor first name', 'supervisor last name', 'ministry', 'address', 'city', 'postal', 'applicant first name', 'applicant last name', 'applicant email', 'milestone', 'other milestone'));
+  fputcsv($file, array('supervisor email', 'supervisor first name', 'supervisor last name', 'ministry', 'branch', 'address', 'city', 'postal', 'applicant first name', 'applicant last name', 'applicant email', 'milestone', 'other milestone'));
   foreach($sorted_list as $record => $value){
     // We only want to parse the next line if we are working with an applicant
     foreach($value as $subkey => $subvalue){
       if(!is_numeric(filter_var($subkey, FILTER_VALIDATE_INT))){
         continue;
       }
-      $line = [$record, $value['supervisor_first_name'], $value['supervisor_last_name'], $value['ministry_name']];
+      $line = [$record, $value['supervisor_first_name'], $value['supervisor_last_name'], $value['ministry_name'], $value['branch']];
       array_push($line, $value['address']['street'], $value['address']['city'], $value['address']['postal']);
       array_push($line, $subvalue['first name'], $subvalue['last name'], $subvalue['email'], $subvalue['milestone'], $subvalue['other milestone']);
       fputcsv($file, $line);
