@@ -466,6 +466,8 @@ function atwork_lsa_node_presave($node) {
  *
  */
 function atwork_lsa_application_submit(&$form, &$form_state) {
+  global $user;
+  $current_user = user_load($user->uid);
   // Append the ministry ID to the form
   if(isset($form_state['values']['field_lsa_org']['und'][0]['value']) && $form_state['values']['field_lsa_org']['und'][0]['value']){
     $form_state['values']['field_lsa_ministry_id']['und'][0]['value'] = $form_state['values']['field_lsa_org']['und'][0]['value'];
@@ -481,6 +483,7 @@ function atwork_lsa_application_submit(&$form, &$form_state) {
   } elseif(!isset($form_state['values']['field_lsa_award_id']['und'][0]['value'])){
     $form_state['values']['field_lsa_award_id']['und'][0]['value'] = $id;
   }
+  /*
   // Check if we have a middle name. If it is a single initial, add a . (if length is == 1 )
   if(isset($form_state['values']['field_lsa_middle_name']['und'][0]['value']) && $form_state['values']['field_lsa_middle_name']['und'][0]['value']){
     $middle_name = $form_state['values']['field_lsa_middle_name']['und'][0]['value'];
@@ -494,9 +497,14 @@ function atwork_lsa_application_submit(&$form, &$form_state) {
     $middle_name = '';
   }
 
-  if(isset($form_state['values']['field_lsa_certificate_ordered']['und'][0]['value']) && $form_state['values']['field_lsa_certificate_ordered']['und'][0]['value'] == ''){
-    $form_state['values']['field_lsa_25year_certificatename']['und'][0]['value'] = $form_state['values']['field_lsa_first_name']['und'][0]['value'] . " " . $middle_name . $form_state['values']['field_lsa_last_name']['und'][0]['value'];
+  // Only set cert automatically if this is not an admin user
+
+  if( !in_array('lsa_admin', $current_user->roles)){
+    if (isset($form_state['values']['field_lsa_certificate_ordered']['und'][0]['value']) && $form_state['values']['field_lsa_certificate_ordered']['und'][0]['value'] == '') {
+      $form_state['values']['field_lsa_25year_certificatename']['und'][0]['value'] = $form_state['values']['field_lsa_first_name']['und'][0]['value'] . " " . $middle_name . $form_state['values']['field_lsa_last_name']['und'][0]['value'];
+    }
   }
+  */
 }
 
 function get_award_id_number($form_state){
