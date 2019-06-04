@@ -6512,6 +6512,9 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_ceremonydate']['id'] = 'field_lsa_ceremonydate';
   $handler->display->display_options['fields']['field_lsa_ceremonydate']['table'] = 'field_data_field_lsa_ceremonydate';
   $handler->display->display_options['fields']['field_lsa_ceremonydate']['field'] = 'field_lsa_ceremonydate';
+  $handler->display->display_options['fields']['field_lsa_ceremonydate']['label'] = '';
+  $handler->display->display_options['fields']['field_lsa_ceremonydate']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_lsa_ceremonydate']['element_label_colon'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
