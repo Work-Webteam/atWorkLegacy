@@ -46,10 +46,10 @@ $applicant_not_attending_body = <<<EOT
         <center><img height="100" width="100" src="$image_source" align="middle"></center>
         <br />
         <p>This is an automated email. No response is required.</p>
-        <p>Thank you for confirming that you will not be attending your Long Service Award ceremony.</p>
-        <p>Long Service Awards are presented the year an you register. <strong>Your award will be mailed to your organization following the 2019 fall ceremonies, and your <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts">ministry/organization contact</a> will make arrangements to have your award presented to you.</strong></p>
+        <p>Thank you for confirming that you will not be attending your Long Service Awards ceremony.</p>
+        <p>Long Service Awards are presented the year you register. <strong>Your award will be mailed to your organization following the 2019 fall ceremonies, and your <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts">ministry/organization contact</a> will make arrangements to have your award presented to you.</strong></p>
         <p>Note: You can defer your attendance at the ceremony for one year. You will need to re-register in March/April 2020 to take advantage of the one-year deferral.</p>
-        <p>If you have any questions, please read the <a href="https://gww.gov.bc.ca/career/long-service-awards/faq">FAQs on @Work</a>, connect with your workplace <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts">Long Service Award contact</a> or email the <a href="mailto:longserviceawards@gov.bc.ca?subject=Question%20about%20LSA%20ceremony">Long Service Awards team</a>.</p>
+        <p>If you have any questions, please read the <a href="https://gww.gov.bc.ca/career/long-service-awards/faq">FAQs on @Work</a>, connect with your workplace <a href="https://gww.gov.bc.ca/career/long-service-awards/long_service_awards_contacts">Long Service Awards contact</a> or email the <a href="mailto:longserviceawards@gov.bc.ca?subject=Question%20about%20LSA%20ceremony">Long Service Awards team</a>.</p>
     </body>
 </html>
 EOT;

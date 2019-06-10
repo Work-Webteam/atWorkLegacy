@@ -538,6 +538,22 @@
         });
       }
     }
+
+    /*
+    $(".field-name-field-lsa-recipient-dietary").off("click");
+    $(".field-name-field-lsa-recipient-dietary").on("click", function () {
+      console.log("reset");
+     // $("#editablefields-field-lsa-recipient-dietary").find($("input[id^='edit-submit']")).click();
+      $(".field-name-field-lsa-recipient-dietary").find($("input[id^='edit-submit']")).click();
+      console.log($("input[id^='editablefields-field-lsa-recipient-dietary']").find($("input[id^='edit-submit']")));
+      //function () {
+      //  if($(this).is(":visible")) {
+      //    $(this).click();
+      //  }
+      //});
+    });
+
+     */
   }
 
 
@@ -669,6 +685,10 @@
   $(document).ajaxComplete(function() {
     //close_button();
     //settings();
+    setClickHandlers();
+  });
+
+  $(document).on("change", function() {
     setClickHandlers();
   });
 })(jQuery);
