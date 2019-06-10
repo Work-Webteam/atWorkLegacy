@@ -475,7 +475,6 @@ function atwork_lsa_features_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        1 => 'Tuesday, October 1, 2019',
         2 => 'Wednesday, October 2, 2019',
         3 => 'Thursday, October 3, 2019',
         4 => 'Tuesday October 8, 2019',
@@ -486,7 +485,7 @@ function atwork_lsa_features_field_default_field_bases() {
         9 => 'Tuesday, October 22, 2019',
         10 => 'Wednesday, October 23, 2019',
         11 => 'Thursday, October 24, 2019',
-        12 => 'Tuesday, October 29, 2019',
+        12 => 'Friday, October 18, 2019',
       ),
       'allowed_values_function' => '',
     ),
