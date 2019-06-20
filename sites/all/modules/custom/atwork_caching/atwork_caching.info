@@ -1,0 +1,4 @@
+name = Atwork Caching
+description = Cache things to help performance
+package = Atwork
+core = 7.x
