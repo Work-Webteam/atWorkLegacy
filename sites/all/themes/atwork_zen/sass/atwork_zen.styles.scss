@@ -221,7 +221,7 @@ html {
 /* YouTube videos embedded in article/background pages */
 iframe.media-youtube-player {
  width: 100%;
- height:400px;    
+ height:400px;
 }
 /* Site wide links -------------------------------------------------------*/
 a {
@@ -1578,7 +1578,7 @@ h3.front-promoted-title {
 /*----------------- End of Section--------------------*/
 
 #block-atwork-wes-wes-top-three {
-  padding-top: 5px; 
+  padding-top: 5px;
 }
 
 #block-atwork-wes-wes-top-three map {
@@ -1601,7 +1601,7 @@ h3.front-promoted-title {
   width: 370px;
   height: 17px;
   background-color: #EEE;
-  border: none; 
+  border: none;
 }
 
 #ministry-top-three .wes-bar {
@@ -1616,13 +1616,13 @@ h3.front-promoted-title {
   top: -18px;
   left: 25px;
   font-weight: bold;
-  font-size: inherit; 
+  font-size: inherit;
 }
 
 .ministry-stats {
   width: 380px;
   color: #26669E;
-  padding-bottom: 5px; 
+  padding-bottom: 5px;
 }
 
 /*#####################################################################################################################################################*/
@@ -1970,7 +1970,7 @@ aside.sidebars h2 {
 
 /* Newsletter Archive Page -------------------------------------------------------*/
 .view-newsletter-archive .view-content {
-  width: 325px;
+  max-width:65%;
   margin: 20px auto 0;
 }
 .view-newsletter-archive .view-content .views-row-odd {
@@ -5554,7 +5554,7 @@ a.word {
 .forum-post-panel-main #node-tools .rate-widget {
     display: inline;
     position: relative;
-    top: 0px;  
+    top: 0px;
 }
 .forum-post-content {
   .rate-thumbs-up-btn-up {
@@ -5672,4 +5672,9 @@ li.TabbedPanelsTab {
 
 .webform-analysis-component.webform-analysis-component-select.webform-analysis-component--finalists {
   width: inherit;
+}
+
+// Hides the User Profile contact information. Contains GAL update not needed unless specified.
+#user-profile-form .group-contact-info {
+  display:none;
 }

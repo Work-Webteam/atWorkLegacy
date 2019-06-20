@@ -584,8 +584,9 @@ function atwork_misc_admin_paths_alter(&$paths) {
 function atwork_misc_form_alter(&$form, &$form_state, $form_id) {
   global $user;
   // We decided that we always want Send subscriptions notifications to default to unchecked. There is no setting for this behaviour in the front end. We will do it here.
+  // The only exception is Questions - we want users to be notified if a question is asked.
   if(isset($form['options']['subscriptions_notify']['subscriptions_notify']['#default_value']) && $form['options']['subscriptions_notify']['subscriptions_notify']['#default_value'] == TRUE){
-    $form['options']['subscriptions_notify']['subscriptions_notify']['#default_value'] = FALSE;
+    isset($form['type']['#value']) && $form['type']['#value'] == 'question' ?  /*do nothing*/ : $form['options']['subscriptions_notify']['subscriptions_notify']['#default_value'] = FALSE;
   }
 
   // add date popups on comment admin
@@ -1647,4 +1648,20 @@ function atwork_misc_authcache_request_exclude() {
   if(NULL !== arg(0) && arg(0) == 'user' ){
     return t('We don\'t want to cache profiles');
   }
+}
+
+
+/**
+ * Implements hook_element_info_alter().
+ * Booleans come with an NA element, which is not needed.
+ */
+function atwork_misc_element_info_alter(&$type)
+{
+  $type['radios']['#process'][] = '_atwork_misc_remove_radio_na';
+}
+
+function _atwork_misc_remove_radio_na($element) {
+  unset($element['#options']['_none']);
+  unset($element['_none']);
+  return $element;
 }

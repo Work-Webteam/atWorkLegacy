@@ -536,7 +536,7 @@ function gift_choice_populate_form(gifts){
       full_gift_name = "25 - " + g_choice + " - No Certificate";
     }
     // Put the certificate info into the main form
-    $('#edit-field-lsa-25year-certificatename-und-0-value').val($('#_25_year_certificate_text_box').val());
+    //$('#edit-field-lsa-25year-certificatename-und-0-value').val($('#_25_year_certificate_text_box').val());
   }
   // 30 year gift population
   if($('input[name="field_lsa_years_of_service[und]"]:checked').val() == 30){
@@ -604,7 +604,7 @@ function gift_choice_populate_form(gifts){
 
       // Last years recipients will always have the same award and award id number
   if ($("input[name='field_lsa_register_last_year[und]']:checked").val() == 1){
-    full_gift_name = "2016 Recipient - award received";
+    full_gift_name = "2018 Recipient - award received";
     gift_id_number = 1;
   }
 

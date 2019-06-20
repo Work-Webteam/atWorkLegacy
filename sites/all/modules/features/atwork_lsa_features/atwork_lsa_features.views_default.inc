@@ -5062,7 +5062,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['table'] = 'field_data_field_lsa_specialrequirements';
   $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['field'] = 'field_lsa_specialrequirements_editable';
   $handler->display->display_options['fields']['field_lsa_specialrequirements_editable']['label'] = 'Special Requirements';
-  /* Field: Content: Please Specify Your Requirements (editable) */
+  /* Field: Content: Please describe your accessibility requirements. (editable) */
   $handler->display->display_options['fields']['field_specialrequirement_descrip_editable']['id'] = 'field_specialrequirement_descrip_editable';
   $handler->display->display_options['fields']['field_specialrequirement_descrip_editable']['table'] = 'field_data_field_specialrequirement_descrip';
   $handler->display->display_options['fields']['field_specialrequirement_descrip_editable']['field'] = 'field_specialrequirement_descrip_editable';
@@ -6127,7 +6127,7 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['nid']['node_in_colorbox_width'] = '600';
   $handler->display->display_options['fields']['nid']['node_in_colorbox_height'] = '600';
   $handler->display->display_options['fields']['nid']['node_in_colorbox_rel'] = '';
-  /* Field: Content: Ceremony Requirements */
+  /* Field: Content: Accessibility Requirements */
   $handler->display->display_options['fields']['field_lsa_ceremony_accommodation']['id'] = 'field_lsa_ceremony_accommodation';
   $handler->display->display_options['fields']['field_lsa_ceremony_accommodation']['table'] = 'field_data_field_lsa_ceremony_accommodation';
   $handler->display->display_options['fields']['field_lsa_ceremony_accommodation']['field'] = 'field_lsa_ceremony_accommodation';
@@ -6512,6 +6512,9 @@ function atwork_lsa_features_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_ceremonydate']['id'] = 'field_lsa_ceremonydate';
   $handler->display->display_options['fields']['field_lsa_ceremonydate']['table'] = 'field_data_field_lsa_ceremonydate';
   $handler->display->display_options['fields']['field_lsa_ceremonydate']['field'] = 'field_lsa_ceremonydate';
+  $handler->display->display_options['fields']['field_lsa_ceremonydate']['label'] = '';
+  $handler->display->display_options['fields']['field_lsa_ceremonydate']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_lsa_ceremonydate']['element_label_colon'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';

@@ -47,8 +47,8 @@ $nid = $lsa_node->nid;
 //$invite = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_print.jpg';
 //$invite_button = $base_url . '/sites/all/modules/custom/atwork_lsa_admin/Invitation/LSA_RSVP.png';
 
-$invite = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_RSVP_with_text_2018.jpg";
-$invite_sized = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_Apr19.jpg";
+$invite = "https://gww.gov.bc.ca/mem_fs/images/lsa/2019-LSA_May14.jpg";
+$invite_sized = "https://gww.gov.bc.ca/mem_fs/images/lsa/LSA_May15_Summer.jpg";
 
 $applicant_subject = t('Your Long Service Awards Invitation');
 $applicant_body = <<<EOT
@@ -72,6 +72,7 @@ $applicant_body = <<<EOT
   }
   
   #outlook a{
+      display: block;
       padding:0;
   }
   
@@ -90,7 +91,9 @@ $applicant_body = <<<EOT
   <style>
     /* For outlook only - OWA spaces just a tiny bit differently. */
     .outlook-box {
+      /* Text above the image changed, so we need to move the placement of names etc as well. */
       height: 345 !important;
+      /* height: 275 !important; */
     }
   </style>
 <![endif]-->
@@ -98,13 +101,11 @@ $applicant_body = <<<EOT
 </head>
 
 <body id="mimemail-body" class="atwork-mail-default" style="padding:0;">
-<p> To RSVP for your Long Service Awards ceremony, click anywhere in the invitation below.  </p>
+<p> To RSVP for your Long Service Awards ceremony, <strong>click on the invitation below.  </strong></p>
 
-<p> If you can’t view the invitation and RSVP form below, follow the instructions in the upper left hand corner of this email to download the invitation in a web browser. </p>
+<p> Note: If you are unable to view the invitation below, follow the Outlook prompts to download pictures. If you still cannot access the invitation and RSVP form, or if you are retired from the public service, please email the <a href="mailto:longserviceawards@gov.bc.ca">Long Service Awards team</a> for assistance.  </p>
 
-<p> If you have retired or you cannot access the RSVP form, please email the <a href="mailto:longserviceawards@gov.bc.ca">Long Service Awards team</a> for assistance. </p>
-
-
+<p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p>
 
 <table width="750" border="0" cellpadding="0" cellspacing="0" style = "page-break-before:always; padding:0;" >
   <tbody>
@@ -124,8 +125,8 @@ $applicant_body = <<<EOT
               <tr style="max-height:60px; padding:0 !important; vertical-align:top;float:left;">
                 <td class="initial-height-box" width="750" height="60"style="max-height:60px !important;font-size: 19pt; color: #333333; text-align: center; font-family: Times, 'Times New Roman', 'serif'; font-weight: 900; padding:0 !important; vertical-align:top;float:left;"><span style="padding:0 !important"><i><b>$applicant_full_name</b></i></span></td>
               </tr>
-              <tr style="max-height:30px; padding:0 !important; vertical-align:top;float:left;">
-                <td width="750" height="30" style="max-height:30px; padding:0 !important; vertical-align:top;float:left;"><span style="padding:0 !important">&nbsp;</span></td>
+              <tr style="max-height:60px; padding:0 !important; vertical-align:top;float:left;">
+                <td width="750" height="40" style="max-height:30px; padding:0 !important; vertical-align:top;float:left;"><span style="padding:0 !important">&nbsp;</span></td>
               </tr>
               <tr style="max-height:60px !important; font-size: 19pt; color: #333333; text-align: center; font-family: Times; font-weight: 900; padding:0 !important; vertical-align:top;float:left;">
                 <td width="750" height="60" style="max-height:60px !important; font-size: 19pt; color: #333333; text-align: center; font-family: Times, 'Times New Roman', 'serif'; font-weight: 900; padding:0 !important; vertical-align:top;float:left;"><i><b>$ceremony_date</b></i></span></td>
@@ -146,6 +147,6 @@ $applicant_body = <<<EOT
   </tbody>
 </table>
 </body>
-<p> If you would like to print your invitation as a keepsake, the attached PDF version has been provided. </p><br />
+<br />
 </html>
 EOT;

@@ -65,7 +65,10 @@
     if (gift_year_choice != 25){
       //$('#field-lsa-25year-certificatename-add-more-wrapper').hide();
       $("input#edit-field-lsa-25year-certificatename-und-0-value").prop("required", false);
-      $('#edit-field-lsa-25year-certificatename-und-0-value').val('');
+      if(!$('#edit-field-lsa-donation-options-und-0').is(":visible")) {
+        // Only remove this if it is not 25 years and PECSF field is not visible.
+        $('#edit-field-lsa-25year-certificatename-und-0-value').val('');
+      }
       checkPECSF();
     }
     if(gift_year_choice != 35){
@@ -153,7 +156,7 @@
     $('#edit-field-lsa-received-award').append(lost_gift);
     $('#lost_gift_message').hide();
     // Message for recipients who have completed 45 || 50 years
-    var special_gift = $('<div id="special_gift"><span style="color:red;"><strong>*</strong> A catalogue of awards specially curated for your Long Service milestone will be sent to you by email. You will be asked to confirm your choice of award before the end of June.</span></div>');
+    var special_gift = $('<div id="special_gift"><span style="color:red;"><strong>*</strong> A catalogue of awards specially curated for your Long Service milestone will be sent to you by email. You will be asked to confirm your choice of award before the end of May.</span></div>');
     $('#edit-field-lsa-years-of-service').append(special_gift);
     $('#special_gift').hide();
 
@@ -250,9 +253,9 @@
     if($('input[name="field_lsa_years_of_service[und]"]:checked').val() == 25  && ($('input[name="field_lsa_register_last_year[und]"]:checked').val() == 2 )) {
       if($('#edit-field-lsa-25year-certificatename-und-0-value').val().length < 1){
         if($('#edit-field-lsa-middle-name-und-0-value').val().length > 0){
-          $('#edit-field-lsa-25year-certificatename-und-0-value').val($('#edit-field-lsa-first-name-und-0-value').val() + ' ' + $('#edit-field-lsa-middle-name-und-0-value').val() + ' ' + $('#edit-field-lsa-last-name-und-0-value').val());
+          //$('#edit-field-lsa-25year-certificatename-und-0-value').val($('#edit-field-lsa-first-name-und-0-value').val() + ' ' + $('#edit-field-lsa-middle-name-und-0-value').val() + ' ' + $('#edit-field-lsa-last-name-und-0-value').val());
         } else {
-          $('#edit-field-lsa-25year-certificatename-und-0-value').val($('#edit-field-lsa-first-name-und-0-value').val() + ' ' + $('#edit-field-lsa-last-name-und-0-value').val());
+          //$('#edit-field-lsa-25year-certificatename-und-0-value').val($('#edit-field-lsa-first-name-und-0-value').val() + ' ' + $('#edit-field-lsa-last-name-und-0-value').val());
         }
       }
     }

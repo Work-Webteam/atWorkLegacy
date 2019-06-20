@@ -58,6 +58,7 @@ function atwork_ecards_form_alter(&$form, &$form_state, $form_id) {
 function atwork_ecards_form_validate($form, &$form_state) {
   // We no longer have access to ldap
   //_atwork_validate_emails($form_state['values']['mail_to'], 'mail_to', $form['form_token']['#default_value']);
+
 }
 
 /*
@@ -117,6 +118,10 @@ function atwork_ecards_form_submit($form, &$form_state) {
     $ecard->ecard_url = url($ecard->entity_path, array('query' => array('ecard' => $ecard->hash), 'absolute' => TRUE));
     $ecard->ecard_copy_url = url($ecard->entity_path, array('query' => array('ecard' => $ecard->hash), 'absolute' => TRUE));
     $ecard->site_name = variable_get('site_name', 'Default site name');
+
+    // Add to our query string so we can differentiate between our sender and recipient
+    $ecard->ecard_url = $ecard->ecard_url . '&recipient';
+    $ecard->ecard_copy_url = $ecard->ecard_copy_url . '&sender';
 
     // this is changed from ecard_mail_send() because that will trigger multiple copies to sender
     ecard_mail_send_ecard($ecard);

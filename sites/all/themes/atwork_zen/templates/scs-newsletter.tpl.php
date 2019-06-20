@@ -660,7 +660,7 @@ $atwork_base_url = $GLOBALS['base_url'];
             <table width="100%" border="0" cellspacing="0" cellpadding="0" >
               <tr>
                 <td>
-                  <p style="font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; margin-top: 10px; margin-right: 25px; margin-bottom: 10px; margin-left: 25px;">You're one of 27,000+ employees receiving this newsletter. Visit <?php echo '<a color="#FFF" href="' . $atwork_base_url . '/' . $pubDate . '"'; ?> style="color:#FFF;">@Work</a> to stay informed and connect with your colleagues across the BC Public Service.</a> </p>
+                  <p style="font-family: Calibri, sans-serif; font-size:11pt; color:#FFF; margin-top: 10px; margin-right: 25px; margin-bottom: 10px; margin-left: 25px;">You're one of 31,000+ employees receiving this newsletter. Visit <?php echo '<a color="#FFF" href="' . $atwork_base_url . '/' . $pubDate . '"'; ?> style="color:#FFF;">@Work</a> to stay informed and connect with your colleagues across the BC Public Service.</a> </p>
                 </td>
               </tr>
             </table>
