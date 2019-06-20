@@ -12,11 +12,6 @@
  */
 function atwork_ecards_form_alter(&$form, &$form_state, $form_id) {
 
-  if (isset($form['#token'])) {
-	unset($form['#token']);
-    //$form_state['input']['form_token'] = drupal_get_token($form['#token']);
-  } 
-
   //dpm($form_id);
   if ($form_id == 'ecard_form_create_ecard') {
     global $user;
