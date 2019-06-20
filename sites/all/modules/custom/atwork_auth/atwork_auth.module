@@ -40,7 +40,7 @@ function atwork_auth_init() {
   }
 
   // for consistency always use lowercase IDIRs in drupal
-  $sm_user = strtolower($_SERVER['HTTP_SM_USER']);
+  $sm_user = str_replace("idir\\", "", strtolower($_SERVER['HTTP_SM_USER']));
   $sm_guid = $_SERVER['HTTP_SMGOV_USERGUID'];
 
   // abort for special IDIRs

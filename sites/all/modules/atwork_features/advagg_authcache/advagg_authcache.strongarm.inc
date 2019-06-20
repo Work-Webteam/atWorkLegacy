@@ -1043,26 +1043,5 @@ news/2017/0929/healthy-workplace-month/quiz/quiz-results/*/view',
   );
   $export['authcache_roles'] = $strongarm;
 
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'cache_flush_cache_authcache_debug';
-  $strongarm->value = 1560976825;
-  $export['cache_flush_cache_authcache_debug'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'cache_flush_cache_authcache_key';
-  $strongarm->value = 1560976825;
-  $export['cache_flush_cache_authcache_key'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'cache_flush_cache_authcache_p13n';
-  $strongarm->value = 1560976825;
-  $export['cache_flush_cache_authcache_p13n'] = $strongarm;
-
   return $export;
 }
