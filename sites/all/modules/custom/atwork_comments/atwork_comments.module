@@ -136,21 +136,21 @@ function atwork_comments_preprocess_comment(&$variables){
     } else {
       $title = '';
     }
-    $name_link = isset($parent_author) && !empty($parent_author='')? l(_atwork_display_name($parent_author), 'user/' . $parent_author->uid) : l('Employee News', 'at-work');
-    if (isset($parent_author) && $parent_author != '') {
-      $variables['author'] .= ' ' . t('in !link to !name', array(
-          '!link' => l('reply', 'node/' . $comment->nid, array(
-            'query' => array(
-              'c' => $parent_comment->cid,
-            ),
-            'fragment' => 'comment-' . $parent_comment->cid,
-            'attributes' => array(
-              'title' => $title,
-            ),
-          )),
-          '!name' => $name_link,
-        ));
-    }
+    // We need to grab the name and link we want to use. If this is EN we need to add a link or we get an error and broken link.
+    $name_link = isset($parent_author) && !empty($parent_author)? l(_atwork_display_name($parent_author), 'user/' . $parent_author->uid) : l('Employee News', 'at-work');
+    $variables['author'] .= ' ' . t('in !link to !name', array(
+      '!link' => l('reply', 'node/' . $comment->nid, array(
+        'query' => array(
+          'c' => $parent_comment->cid,
+        ),
+        'fragment' => 'comment-' . $parent_comment->cid,
+        'attributes' => array(
+          'title' => $title,
+        ),
+      )),
+      '!name' => $name_link,
+    ));
+
   }
   if (isset($variables['content']['links']['flag']['#links']['flag-abuse_comments']['title'])) {
     $variables['content']['links']['flag']['#links']['flag-abuse_comments']['title'] =
