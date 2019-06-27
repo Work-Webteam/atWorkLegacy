@@ -217,7 +217,7 @@ function atwork_newsletter_node_view($node, $view_mode, $langcode){
 
 function atwork_newsletter_wysiwyg_editor_settings_alter(&$settings, &$context) {
 	$node = node_load(arg(1));
-	if($node->type == 'simplenews') {
+	if(isset($node) && !empty($node) && $node->type == 'simplenews') {
 		if ($context['profile']->editor == 'ckeditor') {
 			$settings['removePlugins'] = 'image';
 		}
