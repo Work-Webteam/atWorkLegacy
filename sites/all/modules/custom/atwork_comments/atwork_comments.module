@@ -136,7 +136,7 @@ function atwork_comments_preprocess_comment(&$variables){
     } else {
       $title = '';
     }
-
+    $name_link = isset($parent_author) && !empty($parent_author='')? l(_atwork_display_name($parent_author), 'user/' . $parent_author->uid) : l('Employee News', 'at-work');
     if (isset($parent_author) && $parent_author != '') {
       $variables['author'] .= ' ' . t('in !link to !name', array(
           '!link' => l('reply', 'node/' . $comment->nid, array(
@@ -148,7 +148,7 @@ function atwork_comments_preprocess_comment(&$variables){
               'title' => $title,
             ),
           )),
-          '!name' => l(_atwork_display_name($parent_author), 'user/' . $parent_author->uid),
+          '!name' => $name_link,
         ));
     }
   }
