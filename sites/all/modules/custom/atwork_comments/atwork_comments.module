@@ -125,8 +125,7 @@ function atwork_comments_preprocess_comment(&$variables){
     if ($parent_comment->uid) {
       $parent_author = user_load($parent_comment->uid);
       $reply_to_name = _atwork_display_name($parent_author);
-    }
-    else {
+    } else {
       $reply_to_name = variable_get('anonymous', t('Employee News'));
       $parent_author = '';
     }
@@ -134,23 +133,24 @@ function atwork_comments_preprocess_comment(&$variables){
     if ($parent_comment->status == 1) {
       $title = $parent_comment->comment_body[$parent_comment->language][0]['safe_value'];
       $title = strip_tags(str_replace("\n", "\n\n", $title));
-    }
-    else {
+    } else {
       $title = '';
     }
 
-    $variables['author'] .= ' ' . t('in !link to !name', array(
-      '!link' => l('reply', 'node/' . $comment->nid, array(
-        'query' => array(
-          'c' => $parent_comment->cid,
-        ),
-        'fragment' => 'comment-' . $parent_comment->cid,
-        'attributes' => array(
-          'title' =>  $title,
-        ),
-      )),
-      '!name' => l(_atwork_display_name($parent_author), 'user/' . $parent_author->uid),
-    ));
+    if (isset($parent_author) && $parent_author != '') {
+      $variables['author'] .= ' ' . t('in !link to !name', array(
+          '!link' => l('reply', 'node/' . $comment->nid, array(
+            'query' => array(
+              'c' => $parent_comment->cid,
+            ),
+            'fragment' => 'comment-' . $parent_comment->cid,
+            'attributes' => array(
+              'title' => $title,
+            ),
+          )),
+          '!name' => l(_atwork_display_name($parent_author), 'user/' . $parent_author->uid),
+        ));
+    }
   }
   if (isset($variables['content']['links']['flag']['#links']['flag-abuse_comments']['title'])) {
     $variables['content']['links']['flag']['#links']['flag-abuse_comments']['title'] =
