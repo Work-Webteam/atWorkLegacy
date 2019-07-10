@@ -1024,12 +1024,14 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
         '#bundle' => 'user',
         '#items' => array(
           0 => array(
-            'value' => t(' Test '),
+            'value' => t(''),
             'format' => 'comment',
-            'safe_value' => t(' Test '),
+            'safe_value' => t(''),
           ),
         ),
-        0 => '',
+        0 => array(
+          '#markup' => '',
+        ),
       );
 
       $account->content['field_summary'][0]['#markup'] = t('<h2 class="profile-section-unfilled">' . $account->content['field_summary']['#title'] );
@@ -1079,7 +1081,9 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
           ),
         ),
        '#formatter' => 'text_default',
-        0 => '',
+        0 => array(
+          '#markup' => '',
+        ),
       );
 
       $account->content['field_extended_biography'][0]['#markup'] = t('<h2 class="profile-section-unfilled">' . $account->content['field_extended_biography']['#title'] . '</h2>' );
