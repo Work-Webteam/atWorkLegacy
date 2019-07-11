@@ -450,9 +450,9 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
     }
 
     //$form['atwork_required_questions']['#prefix'] = $profile_questions_instructions['value'];
-    $form['#group_children']['atwork_required_questions'] = 'group_profile';
-    $form['field_summary']['#weight'] = 2;
-    array_unshift($form['#groups']['group_profile']->children, 'atwork_required_questions');
+    //$form['#group_children']['atwork_required_questions'] = 'group_profile';
+    //$form['field_summary']['#weight'] = 2;
+    //array_unshift($form['#groups']['group_profile']->children, 'atwork_required_questions');
   }
   else {
     $form['field_career']['#prefix'] = $profile_questions_instructions['value'];
@@ -507,7 +507,10 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
   $form['field_public_profile'][$form['field_public_profile']['#language']]['#options'][1] = "Share your profile";
 
   $form['#group_children']['notes'] = 'group_profile';
-  array_unshift($form['#groups']['group_profile']->children, 'notes');
+
+  if (isset($form['#groups']['group_profile']) && is_array($form['#groups']['group_profile']->children)) {
+    array_unshift($form['#groups']['group_profile']->children, 'notes');
+  }
 
     // remove summary title
   $form['field_summary'][$form['field_summary']['#language']][0]['#title'] = '';
@@ -807,7 +810,7 @@ function atwork_profiles_form_submit($form, &$form_state) {
   // check for exec special checkbox
   global $user;
   $account = $form_state['build_info']['args'][0];
-  $lang = $form['field_career']['#language'];
+  $lang = 'und';
 
   if (isset($form_state['input']['notify']) && $form_state['input']['notify'] &&
       isset($form_state['input']['field_public_profile'][$lang]) && $form_state['input']['field_public_profile'][$lang][1] == NULL) {
@@ -969,6 +972,7 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
     $field_collections = _atwork_profiles_field_collections();
     $required_questions = _atwork_profiles_required_questions(TRUE);
     //dpm($field_collections);
+    /*
     foreach ($field_collections as $field_collection) {
       if (!$account->$field_collection) {
         $account->content[$field_collection]['#access'] = FALSE;
@@ -987,7 +991,7 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
         }
       }
     }
-
+     */
      // About me field is filled in (#access = FALSE at this point if UID for user and account do not match), and has been published
     if (isset($account->content['field_summary']) && ($account->content['field_summary']) && ($account->field_public_profile))  {
       $account->content['field_summary']['#label_display'] = 'visible';
