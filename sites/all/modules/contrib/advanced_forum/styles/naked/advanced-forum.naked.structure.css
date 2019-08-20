@@ -361,7 +361,9 @@ div.forum-post {
 /* These heights keep the AP items from jumping out of the bottom. Depending
    on how many items you display, there, this number may need to be adjusted
    to avoid having unnecessary white space in your posts. */
+  min-height: 230px;
   height: auto !important;
+  height: 230px;
 }
 
 .forum-post-panel-main .forum-post-content {

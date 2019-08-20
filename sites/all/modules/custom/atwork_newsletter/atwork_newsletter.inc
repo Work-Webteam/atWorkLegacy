@@ -27,16 +27,16 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
     }
 	}
 	if($comments !== '') {
-		
+
 		// Load Comment Object
 		$comment = comment_load($comments['cid']);
 		$comment->edited = $comments['value'];
-		
+
 		// Retrieve Username from UID and place in comments array
 		$user = user_load($comment->uid);
 		$comment->name = $user->field_display_name['und'][0]['safe_value'];
 		// We need to remove any image tags
-		$comment->comment_body['und'][0]['formatted'] = preg_replace("/<img[^>]+\>/i", "", $comment->comment_body['und'][0]['value'] ); 
+		$comment->comment_body['und'][0]['formatted'] = preg_replace("/<img[^>]+\>/i", "", $comment->comment_body['und'][0]['value'] );
 		// Get rid of <p>&nbsp;</p> if author has dropped in a bunch of returns
 		$pattern = "/<p>*(?:[[:blank:]]|[[:space:]]|\s|\W|X|h|\t|\r|\n)*<\/p>/";
 		$comment->comment_body['und'][0]['formatted'] = preg_replace($pattern, '',$comment->edited);
@@ -74,38 +74,38 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 		// Add in link to parent article
 		$parent = node_load($comment->nid);
 		$comment->parent_url = drupal_get_path_alias('node/' . $comment->nid);
-	} 
+	}
 
 	//Add webtrends tracker string to internal links only for 'take note'
-	$note_links = array(); 
+	$note_links = array();
 	preg_match_all('/<a href="http:\/\/gww.gov.bc.ca.*">/',$notes['value'],$note_links);
-	
+
 	$i = 0;
 	foreach($note_links[0] as $link){
 		$link = substr_replace($link,$track_date,-2,0);
 		$notes['value'] = str_replace($note_links[0][$i],$link,$notes['value']);
 	  $i++;
 	}
-	
+
 	//Fix formatting in bulleted lists in Take Note
 	$notes = str_replace('<ul>', '<ul style="font-family: Calibri,sans-serif; font-size:12pt; margin-top: 10px; margin-right: 10px; margin-bottom: 20px;">', $notes);
 	$notes = str_replace('<li>', '<li class="outlook-list" style="margin-left: 5px;">', $notes);
 	$notes = str_replace('href', 'style="text-decoration: none;" href', $notes);
-	
+
 	//Add webtrends tracker string to internal links only for 'did you know'
-	$didyouknow_links = array(); 
+	$didyouknow_links = array();
 	preg_match_all('/<a href="http:\/\/gww.gov.bc.ca.*">/',$did_you_know['value'],$didyouknow_links);
-	
+
 	$i = 0;
 	foreach($didyouknow_links[0] as $link){
 		$link = substr_replace($link,$track_date,-2,0);
 		$did_you_know['value'] = str_replace($didyouknow_links[0][$i],$link,$did_you_know['value']);
 	  $i++;
 	}
-	
+
 	//Add style to remove outlook links in did you know text.
 	$did_you_know = str_replace('href', 'style="text-decoration: none;" href', $did_you_know);
-	
+
 	// If a comment/note/did you know were NOT entered, our value should be "none" - we may want to account for this possibility here or in the template when deciding how exactly to theme in these instances
 	$atwork_newsletter_render_array = array(
 			"comments" => $comment,
@@ -113,7 +113,7 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 			"did_you_know" => $did_you_know,
 			"nodes" => array(),
 	);
-	
+
 	//Directory/image locations on prod
 	$articlesDir = '/sites/default/files/';
 	$newsletterDir = '/var/www/html/nl_images/images/';
@@ -162,7 +162,7 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 				    	}
 				    } else {
 				    	//Regular News article
-				    	if(($newsletterImg['width'] <= '600' && $newsletterImg['width'] >= '200' ) 
+				    	if(($newsletterImg['width'] <= '600' && $newsletterImg['width'] >= '200' )
 				    		&& ($newsletterImg['height'] <= '600' && $newsletterImg['height'] >= '200' )) {
 				    		if(!file_exists($imgDest)) {
 				    			if(copy(DRUPAL_ROOT . $imgSrc, $imgDest)) {
@@ -176,7 +176,7 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 				    		  $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
 						   	  $imgFound = TRUE;
 						    }
-				    		
+
 				    	} else if(strpos($newsletterImg['filename'],'382') && (($newsletterImg['width'] > '200')&&($newsletterImg['height'] > '200'))) {
 				    		if(!file_exists($imgDest)) {
 				    			if(copy(DRUPAL_ROOT . $imgSrc, $imgDest)) {
@@ -195,18 +195,18 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 				}
 			}
 	        if(!$imgFound) {
-	        	$node->field_image['und'][0]['uri'] = 'default_images/no_image_found_nl.jpg';
-	        	$node->field_image['und'][1]['uri'] = 'default_images/no_image_found_nl.jpg';
+	        	//$node->field_image['und'][0]['uri'] = 'default_images/no_image_found_nl.jpg';
+	        	//$node->field_image['und'][1]['uri'] = 'default_images/no_image_found_nl.jpg';
 	        }
 		}
 		// Image couldn't be transferred to/found in newsletter image folder. Inform user.
 		if(!$imgFound && $node->type != 'blog') {
 			$error .= "The image corresponding to <strong>" . $node->title . "</strong> could not be found.<br>";
 		}
-		
+
 		//Update img path & then add node to render array.
 		$atwork_newsletter_render_array['nodes'][$node->nid] = $node;
-	} 
+	}
 	if($error) {
 	  drupal_set_message($error . "<br>Please check the images in the article to make sure they are uploaded in this order:<br>"
 			. "&emsp;Small 382 X 250 px<br>"
