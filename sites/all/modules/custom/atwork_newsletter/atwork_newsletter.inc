@@ -126,78 +126,33 @@ function atwork_newsletter_create_render_arrays($nodes, $comments, $notes, $did_
 		//Check to see if Article/Blog has a valid picture.
 		if(isset($node->field_image['und']) && $node->field_image['und']){
 			foreach($node->field_image['und'] as $newsletterImg) {
-				$imgSrc = $articlesDir . substr($newsletterImg['uri'], 9);
-				$imgDest = $newsletterDir . $newsletterImg['filename'];
-				if(file_exists(DRUPAL_ROOT . $imgSrc)) {
-				  	//Check image size first
-				    if(array_search($node->nid,array_keys($nodes)) == 0) {
-				    	//Feature spot image
-				    	if(($newsletterImg['width'] <= '800' && $newsletterImg['width'] >= '700' )
-				    		&& ($newsletterImg['height'] <= '300' && $newsletterImg['height'] >= '200' )) {
-				    		if(!file_exists($imgDest)) {
-				    			if(copy(DRUPAL_ROOT . $imgSrc, $imgDest)) {
-				    			    $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
-				    				$imgFound = TRUE;
-				    			}
-				    			chmod($imgDest,0670);
-				    		}
-						    if(file_exists($imgDest)) {
-						   	  //Verify file is now in memfs directory
-				    		  $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
-						   	  $imgFound = TRUE;
-						    }
-				    	} else if(strpos($newsletterImg['filename'],'775') && (($newsletterImg['width'] > '700')&&($newsletterImg['height'] > '200'))) {
-				    		if(!file_exists($imgDest)) {
-				    			if(copy(DRUPAL_ROOT . $imgSrc, $imgDest)) {
-				    				$node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
-				    				$imgFound = TRUE;
-				    			}
-				    			chmod($imgDest,0670);
-				    		}
-				    		if(file_exists($imgDest)) {
-				    			//Verify file is now in memfs directory
-				    		    $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
-				    			$imgFound = TRUE;
-				    		}
-				    	}
-				    } else {
-				    	//Regular News article
-				    	if(($newsletterImg['width'] <= '600' && $newsletterImg['width'] >= '200' )
-				    		&& ($newsletterImg['height'] <= '600' && $newsletterImg['height'] >= '200' )) {
-				    		if(!file_exists($imgDest)) {
-				    			if(copy(DRUPAL_ROOT . $imgSrc, $imgDest)) {
-				    				$node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
-				    				$imgFound = TRUE;
-				    			}
-				    			chmod($imgDest,0670);
-				    		}
-						    if(file_exists($imgDest)) {
-						   	  //Verify file is now in memfs directory
-				    		  $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
-						   	  $imgFound = TRUE;
-						    }
-
-				    	} else if(strpos($newsletterImg['filename'],'382') && (($newsletterImg['width'] > '200')&&($newsletterImg['height'] > '200'))) {
-				    		if(!file_exists($imgDest)) {
-				    			if(copy(DRUPAL_ROOT . $imgSrc, $imgDest)) {
-				    				$node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
-				    				$imgFound = TRUE;
-				    			}
-				    			chmod($imgDest,0670);
-				    		}
-						    if(file_exists($imgDest)) {
-						   	  //Verify file is now in memfs directory
-				    		  $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
-						   	  $imgFound = TRUE;
-						    }
-				    	}
-				    }
-				}
+        //Check image size first
+        if(array_search($node->nid,array_keys($nodes)) == 0) {
+          //Feature spot image
+          if(($newsletterImg['width'] <= '800' && $newsletterImg['width'] >= '700' )
+            && ($newsletterImg['height'] <= '300' && $newsletterImg['height'] >= '200' )) {
+              //Verify file is now in memfs directory
+              $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
+              $imgFound = TRUE;
+          } else if(strpos($newsletterImg['filename'],'775') && (($newsletterImg['width'] > '700')&&($newsletterImg['height'] > '200'))) {
+            //Verify file is now in memfs directory
+            $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
+            $imgFound = TRUE;
+          }
+        } else {
+          //Regular News article
+          if(($newsletterImg['width'] <= '600' && $newsletterImg['width'] >= '200' )
+            && ($newsletterImg['height'] <= '600' && $newsletterImg['height'] >= '200' )) {
+              //Verify file is now in memfs directory
+              $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
+              $imgFound = TRUE;
+          } else if(strpos($newsletterImg['filename'],'382') && (($newsletterImg['width'] > '200')&&($newsletterImg['height'] > '200'))) {
+              //Verify file is now in memfs directory
+              $node->newsletter_image[] = array_search($newsletterImg, $node->field_image['und']);
+              $imgFound = TRUE;
+          }
+        }
 			}
-	        if(!$imgFound) {
-	        	//$node->field_image['und'][0]['uri'] = 'default_images/no_image_found_nl.jpg';
-	        	//$node->field_image['und'][1]['uri'] = 'default_images/no_image_found_nl.jpg';
-	        }
 		}
 		// Image couldn't be transferred to/found in newsletter image folder. Inform user.
 		if(!$imgFound && $node->type != 'blog') {
