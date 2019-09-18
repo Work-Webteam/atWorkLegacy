@@ -6,7 +6,7 @@ issue:    the function dd() prevents the proper use of drush when combined with 
 
 
 date:    2017-01-26
-module:  rules 
+module:  rules
 file:    rules-2406863-stampede-protection-89.patch
 issue:   QF-15-semaphore-table-loop
 
@@ -60,7 +60,7 @@ date: 2017-11-27
 module: views_bulk_operations
 file: viws_bulk_operations.js
 source: None - we did this ourselves
-issue: Script breaking input select behaviour in VBO forms. The select anywhere on row was not toggling the create butoon enable/disable correctly. Removed line 68 entirely (this.checked = !checked;). 
+issue: Script breaking input select behaviour in VBO forms. The select anywhere on row was not toggling the create butoon enable/disable correctly. Removed line 68 entirely (this.checked = !checked;).
 
 date: 2018-01-09
 module: Quiz (multichoice)
@@ -89,3 +89,9 @@ date: 2018-10-25
 Modules: Features
 Source: https://www.drupal.org/files/issues/2018-03-12/features-support_php_72-2931464-10.patch
 Issue: Fixing deprecated function that is breaking install in php7.2
+
+
+date: 2019-09-18
+Module: Advanced Forums
+Source: https://www.drupal.org/project/advanced_forum/issues/3064321
+Issue: Fixing error introduced by last module security patch.
