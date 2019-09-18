@@ -1,8 +1,0 @@
-<?php
-
-/**
- * @file
- * Code for the Advagg-Authcache feature.
- */
-
-include_once 'advagg_authcache.features.inc';

@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the atwork seckit feature.
- */
-
-include_once 'atwork_seckit.features.inc';
