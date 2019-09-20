@@ -630,10 +630,12 @@ function atwork_group_node_access($node, $op, $account) {
  *
  *
  */
+
 function atwork_group_form_alter(&$form, &$form_state, $form_id) {
   global $user;
 
   //Group Page manipulations - TODO - should probably be in its own module - difficult to find here
+
   if($form_id == 'section_page_node_form') {
     // Want users to be able to unpub background pages if they wish
     if(isset($form['options']) && $form['options']) {
@@ -647,15 +649,17 @@ function atwork_group_form_alter(&$form, &$form_state, $form_id) {
       //Hide other fields from non-priv'd users
       $form['options']['promote']['#access'] = FALSE;
       $form['options']['sticky']['#access'] = FALSE;
-      $form['og_group_ref']['#access'] = FALSE;
+      // This was blocking us from seeing menu parent items - so we needed to unhide it.
+      //$form['og_group_ref']['#access'] = FALSE;
       $form['actions']['delete']['#access'] = FALSE;
-      drupal_add_css('.form-item.form-type-select.form-item-menu-parent {display:none;}', $option['type'] = 'inline' );
+      //drupal_add_css('.form-item.form-type-select.form-item-menu-parent {display:none;}', $option['type'] = 'inline' );
     }
 
 
   }
 
-  //TODO: put this in atwork_group_wizrd.module
+
+
   if ($form_id == 'section_node_form') {
 
     $group_terms = variable_get('atwork_group_terms','');
@@ -668,6 +672,7 @@ function atwork_group_form_alter(&$form, &$form_state, $form_id) {
     $form['#validate'][] = 'atwork_groups_form_validate';
 
   }
+
 
   // checkbox indicating whether or not to subscribe to group on join
   if ($form_id == 'og_ui_confirm_subscribe') {
@@ -708,6 +713,7 @@ function atwork_group_form_alter(&$form, &$form_state, $form_id) {
   /*
    * Add a list of letters to our exposed filters on the group listing page
    */
+
   if (in_array($form['#id'], array('views-exposed-form-groups-page-2', 'views-exposed-form-groups-page-3'))) {
     if (isset($form['title'])) {
       hide($form['title']);
@@ -895,10 +901,10 @@ function atwork_group_block_view_alter(&$data, $block) {
       $current_members->fields('ogur', array('uid'));
       $current_members->condition('ogur.rid', 3);
       $current_members->condition('ogur.gid', $og_context['gid']);
-    
+
       $result = $current_members->execute();
       while ($res = $result->fetchAssoc()) { $members[] = $res['uid'];}
-    
+
       // Remove duplicate items.
       $members = array_unique($members);
       // Prepare our replacement string
@@ -909,7 +915,7 @@ function atwork_group_block_view_alter(&$data, $block) {
         $replacement_string .= '<li><a href="/employees/' . $this_user->name . '">' . $this_user->field_gal_first_name['und'][0]['safe_value'] . ' ' . $this_user->field_gal_last_name['und'][0]['safe_value'] . '</a></li>' ;
       }
       $replacement_string .= '</ul></div></fieldset>';
-      $current_string = $data['content']['#markup']; 
+      $current_string = $data['content']['#markup'];
       $current_string = str_replace('<span id="group-admin-block"></span>', $replacement_string, $current_string);
       $data['content']['#markup'] = $current_string;
       // Add in our js library
