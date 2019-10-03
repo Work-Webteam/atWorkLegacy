@@ -25,15 +25,16 @@ function atwork_ecards_form_alter(&$form, &$form_state, $form_id) {
     }
 
     $form['text']['#required'] = TRUE;
-    $form['text']['#description'] = t('Whatever you type here will be displayed with the ecard.');
+    $form['text']['#title'] .= t('<br />Displays with the ecard. Plain text only – no links, emojis or HTML.');
+    $form['text']['#description'] = '';
 
     $form['submit']['#value'] = t('Send ecard');
 
     unset($form['name_to']);
 
-    $form['mail_to']['#title'] = t('Email(s) of recipient(s) (Limited to organizations within the BC Public Service.)');
+    $form['mail_to']['#prefix'] = t('<br />Email(s) of recipient(s) (Limited to organizations within the BC Public Service.)');
     $form['mail_to']['#type'] = 'textarea';
-    $form['mail_to']['#suffix'] = t('Enter your recipient\'s email address. Separate multiple email addresses with commas.');
+    $form['mail_to']['#title'] = t('Enter the recipient\'s email address. Separate multiple email addresses with commas.' . "<br />" . ' ex. Recipient.One@gov.bc.ca, Recipient.Two@gov.bc.ca, Recipient.Three@gov.bc.ca');
 
     $form['#validate'] = array('atwork_ecards_form_validate');
     $form['#submit'] = array('atwork_ecards_form_submit');
@@ -63,7 +64,7 @@ function atwork_ecards_form_validate($form, &$form_state) {
     // Check if mail syntax is valid.
     $recipient_address = _atwork_valid_email($recipient_address);
     if ($recipient_address === FALSE) {
-      form_set_error('mail_to', t('Email address %email could not be validated, please make sure it is formatted properly.', array('%email' => $recipient_address)));
+      form_set_error('mail_to', t("The email address you've entered ( %email ) isn't valid, Use the format Recipient.One@gov.bc.ca.", array('%email' => $recipient_address)));
     }
     // So lets see if we have a record of this email address.
     $query = db_query("SELECT u.uid FROM {users u} WHERE u.mail=:mail", array(
@@ -72,7 +73,7 @@ function atwork_ecards_form_validate($form, &$form_state) {
     $result = $query->fetchAssoc();
     if ($result == NULL) {
       // we have no record of this email address.
-      form_set_error('mail_to', t('Email address %email was not found.', array('%email' => $recipient_address)));
+      form_set_error('mail_to', t('It looks like you’re trying to send an ecard to someone outside the BC Public Service (%email). Please enter a valid BC Public Service email address using the format Recipient.One@gov.bc.ca ', array('%email' => $recipient_address)));
     }
     // We no longer have access to ldap
     //_atwork_validate_emails($form_state['values']['mail_to'], 'mail_to', $form['form_token']['#default_value']);
