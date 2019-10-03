@@ -12,7 +12,6 @@
  */
 function atwork_ecards_form_alter(&$form, &$form_state, $form_id) {
 
-  //dpm($form_id);
   if ($form_id == 'ecard_form_create_ecard') {
     global $user;
     $full_user = user_load($user->uid);
@@ -44,7 +43,6 @@ function atwork_ecards_form_alter(&$form, &$form_state, $form_id) {
     if (isset($form['#info']['filter-field_ecard_category_tid']['label'])) {
       $form['#info']['filter-field_ecard_category_tid']['label'] = '';
     }
-    //dpm($form);
   }
 
 }
@@ -56,8 +54,29 @@ function atwork_ecards_form_alter(&$form, &$form_state, $form_id) {
  *
  */
 function atwork_ecards_form_validate($form, &$form_state) {
-  // We no longer have access to ldap
-  //_atwork_validate_emails($form_state['values']['mail_to'], 'mail_to', $form['form_token']['#default_value']);
+
+  $recipient_addresses = _atwork_get_addresses($form_state['values']['mail_to']);
+  // the ecard module only accepts one email per submission
+  // we will "submit" the form once per email address
+  foreach ($recipient_addresses as $recipient_address) {
+    // We no longer have access to ldap on our new servers
+    // Check if mail syntax is valid.
+    $recipient_address = _atwork_valid_email($recipient_address);
+    if ($recipient_address === FALSE) {
+      form_set_error('mail_to', t('Email address %email could not be validated, please make sure it is formatted properly.', array('%email' => $recipient_address)));
+    }
+    // So lets see if we have a record of this email address.
+    $query = db_query("SELECT u.uid FROM {users u} WHERE u.mail=:mail", array(
+      ':mail' => $recipient_address,
+    ));
+    $result = $query->fetchAssoc();
+    if ($result == NULL) {
+      // we have no record of this email address.
+      form_set_error('mail_to', t('Email address %email was not found.', array('%email' => $recipient_address)));
+    }
+    // We no longer have access to ldap
+    //_atwork_validate_emails($form_state['values']['mail_to'], 'mail_to', $form['form_token']['#default_value']);
+  }
 
 }
 
@@ -74,10 +93,10 @@ function atwork_ecards_form_validate($form, &$form_state) {
 function atwork_ecards_form_submit($form, &$form_state) {
 
   $recipient_addresses = _atwork_get_addresses($form_state['values']['mail_to']);
-
   // the ecard module only accepts one email per submission
   // we will "submit" the form once per email address
   foreach ($recipient_addresses as $recipient_address) {
+    // We no longer have access to ldap on our new servers
     $form['mail_to']['#value'] = $recipient_address;
 
     // lookup a name, if not found use the email address
@@ -231,9 +250,6 @@ function atwork_ecards_views_pre_render(&$view) {
 
     array_unshift($view->result, $row);
   }
-  if ($view->name == 'e_cards' && $view->current_display == 'page') {
-    //dpm($view);
-  }
 }
 
 /*
@@ -302,7 +318,6 @@ function atwork_ecards_views_post_render(&$view, &$output, &$cache) {
 
 // THis function was messing up the path to the theme template - removing it helped. March 2016
 //function atwork_ecards_theme_registry_alter(&$theme_registry) {
-  //dpm($theme_registry);
  // if (isset($theme_registry['ecard_formatter_view'])) {
   //  $theme_registry['ecard_formatter_view']['template'] = drupal_get_path('theme', 'atwork') .'/templates/ecard_field';
  //   $theme_registry['ecard_formatter_view']['type'] = 'theme';

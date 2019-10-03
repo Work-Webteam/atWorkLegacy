@@ -1,16 +1,16 @@
 <?php
 
 /*
- * Helper function that checks an email domain
- * against a list of internal domains
+ * Helper function that checks for an email domain and proper syntax
  */
 function _atwork_valid_email($email) {
-  $internal_addresses = variable_get('atwork_mail_internal_addresses',array());
-
-  if (in_array(substr_replace(strtolower($email), '', 0, strpos($email, '@')), $internal_addresses)) {
-    return TRUE;
+  // Make it all lower case.
+  $email = strtolower($email);
+  // Check that it has an @symbol in it
+  $email_check = substr_count($email, '@');
+  if ( $email_check !== FALSE && $email_check < 2) {
+    return $email;
   }
-
   return FALSE;
 }
 
@@ -22,6 +22,7 @@ function _atwork_valid_email($email) {
 function _atwork_get_addresses($string) {
   $string = str_replace(array("\r\n", "\n", "\r"), ',', trim($string));
   $string = str_replace(' ', '', $string);
+  $string = str_replace(';', ',', $string);
 
   $addresses = explode(',', $string);
   return array_filter($addresses);
@@ -31,12 +32,13 @@ function _atwork_get_addresses($string) {
  * Helper function that validates a set of emails
  */
 function _atwork_validate_emails($emails, $key, $atwork_LDAP_checked) {
+  // TODO: This requires an update - we want to validate, but we no longer have access to LDAP
   if ($emails) {
     $recipient_addresses = _atwork_get_addresses($emails);
     //$atwork_ldap = new atwork_ldap;
 
     foreach ($recipient_addresses as $recipient_address) {
-      // We no longer have access to ldap on our new servers
+
       /*
       if (!_atwork_valid_email($recipient_address)) {
         form_set_error($key, t('Email is limited to organizations within the BC Public Service. %email was not found.', array('%email' => $recipient_address)));
@@ -98,8 +100,8 @@ function atwork_mail_exit($destination = NULL) {
  * Modify some email headers the way we like them for outlook/exchange
  */
 function atwork_mail_mail_alter(&$message) {
-  // We don't want to send emails to users who have been deactivated. 
-  $email_address = $message['to']; 
+  // We don't want to send emails to users who have been deactivated.
+  $email_address = $message['to'];
   $email_extension = explode('@', $email_address);
   if(isset($email_extension[1]) && $email_extension[1] == 'gov.old.ca'){
     $message['send'] = FALSE;
@@ -166,7 +168,7 @@ function atwork_mail_mail($key, &$message, $params) {
           unset($message['params']['headers'][$header]);
           unset($params['headers'][$header]);
         }
-      } elseif(!empty($header_keys['cc']) && variable_get(REROUTE_EMAIL_ENABLE) == 0) {      
+      } elseif(!empty($header_keys['cc']) && variable_get(REROUTE_EMAIL_ENABLE) == 0) {
         $message['headers'] += $params['headers'];
       }
 
@@ -179,7 +181,7 @@ function atwork_mail_mail($key, &$message, $params) {
           unset($message['params']['headers'][$header]);
           unset($params['headers'][$header]);
 
-        } 
+        }
       } elseif(!empty($header_keys['bcc']) && variable_get(REROUTE_EMAIL_ENABLE) == 0) {
           $message['headers'] += $params['headers'];
       }
@@ -191,7 +193,7 @@ function atwork_mail_mail($key, &$message, $params) {
 }
 
 /**
- * Implements hook_subscriptions_digest_alter() 
+ * Implements hook_subscriptions_digest_alter()
  * From subscriptions module
  * Need a way to avoid sending emails to users who have been deactivated.
  **/
