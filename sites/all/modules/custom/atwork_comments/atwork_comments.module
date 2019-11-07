@@ -7,7 +7,7 @@
  *
  */
 function atwork_comments_form_alter(&$form, &$form_state, $form_id) {
-	
+
   if ($form['#id'] == 'comment-form' && !$form['cid']['#value']) {
     global $user;
     //$comment_terms = variable_get('atwork_comment_terms','');
@@ -36,14 +36,14 @@ function atwork_comments_form_alter(&$form, &$form_state, $form_id) {
       $form['post_as_pensions'] = array(
         '#type' => 'checkbox',
         '#title' => t('Post as Public Service Pension Plan'),
-      );    
+      );
     }
     // BCGEU checkbox
     if(user_has_role(20, $current_commenter)){
       $form['post_as_bcgeu'] = array(
         '#type' => 'checkbox',
         '#title' => t('Post as BCGEU Representative'),
-      );    
+      );
     }
     // Acknowledge terms checkbox
     $form['agree_to_terms'] = [

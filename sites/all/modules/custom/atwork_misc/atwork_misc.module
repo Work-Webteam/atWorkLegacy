@@ -233,8 +233,8 @@ function _atwork_display_name($user) {
 
   $display_name = field_get_items('user', $user, 'field_display_name');
 
-  if (isset($display_name[0]['safe_value'])) {
-    return $display_name[0]['safe_value'];
+  if (isset($display_name[0]['value'])) {
+    return $display_name[0]['value'];
   }
 
   return $user->name;
