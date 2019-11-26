@@ -27,6 +27,14 @@ function atwork_news_form_article_node_form_alter(&$form, &$form_state, $form_id
       // Hide exec tags, from helper function in atwork_misc.module
       _atwork_hide_exec_tags($form);
     }
+  } else {
+    if (_atwork_is_admin()) {
+      //If this is new and not an edit page.
+      if ($form['nid']['#value'] === NULL) {
+        // If the user is an editor and this is not in a group, default comments off.
+        $form['#node']->comment = 0;
+      }
+    }
   }
 }
 
