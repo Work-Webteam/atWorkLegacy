@@ -7,7 +7,7 @@ function _atwork_activity_node_types() {
     'forum',
     'wiki',
     'article',
-    'status',
+    //'status',
     'section',
     'section_page',
     'gallery',
@@ -114,14 +114,14 @@ function atwork_activity_ajax_get_ajax($name, $uid, $latest_rendered_time_stamp,
  */
 function check_message_count($latest_rendered_time_stamp, $account_uid) {
   $content_types = [
-    'group_subscribe',
+    //'group_subscribe',
     'new_answer',
     'new_comment',
     'new_image',
     'new_node',
-    'status',
-    'updated_user',
-    'following_user',
+    //'status',
+    //'updated_user',
+    //'following_user',
   ];
 
 
@@ -373,7 +373,7 @@ function atwork_activity_customize_feed_form_validate(&$form_state) {
   // All or My feed have been chose
   if (in_array('1', $set_array) || in_array('2', $set_array)) {
     // Array to check for any non "Content" choice content
-    $non_content = ['3', '4', '5', '7', '8', '9', '11', '12'];
+    $non_content = ['3', '7', '8', '9'];
     $content_filters = ['13', '14', '15', '16', '17', '18', '19', '20', '22'];
     $check_array = array_intersect($non_content, $set_array);
     $check_content_filters = array_intersect($content_filters, $set_array);
@@ -1120,6 +1120,10 @@ function feed_message_choices() {
       $user_selection[] = $value;
     }
   }
+  // Remove certain types of messages from being shown.
+  $removal_array = array('Actions by Colleagues I Follow', 'Connections Between Colleagues', 'Group Subscriptions',  'Status Updates', 'Profile Updates' );
+  $user_selection = array_diff( $user_selection, $removal_array);
+
   $return_array = homepage_choices_match($user_selection);
   return ($return_array);
 }
@@ -1312,10 +1316,10 @@ function user_feed_query($choices, $latest_rendered_time_stamp = NULL) {
   // These are not really nodes, so they don't show unless we tell them too
   $additional = [];
   if (in_array('following_user', $choices)) {
-    array_push($additional, 'following_user');
+    //array_push($additional, 'following_user');
   }
   if (in_array('updated_user', $choices)) {
-    array_push($additional, 'updated_user');
+    //array_push($additional, 'updated_user');
   }
   // TODO - check for following user or profile update
   if (isset($additional) && !empty($additional)) {
@@ -2381,14 +2385,14 @@ function _atwork_activity_profile_page_block_content($user_id) {
   $classes = [];
 
   $current_types = [
-    'group_subscribe',
+    //'group_subscribe',
     'new_answer',
     'new_comment',
     'new_image',
     'new_node',
-    'status',
-    'updated_user',
-    'following_user',
+    //'status',
+    //'updated_user',
+    //'following_user',
   ];
 
   $query = db_select('message', 'm')
