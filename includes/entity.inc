@@ -295,9 +295,9 @@ class DrupalDefaultEntityController implements DrupalEntityControllerInterface {
     }
 
     // Add fields from the {entity} table.
-	$entity_fields = !empty($this->entityInfo['schema_fields_sql']['base table']) ? $this->entityInfo['schema_fields_sql']['base table'] : array();
-    
-	if ($this->revisionKey) {
+    $entity_fields = $this->entityInfo['schema_fields_sql']['base table'];
+
+    if ($this->revisionKey) {
       // Add all fields from the {entity_revision} table.
       $entity_revision_fields = drupal_map_assoc($this->entityInfo['schema_fields_sql']['revision table']);
       // The id field is provided by entity, so remove it.
