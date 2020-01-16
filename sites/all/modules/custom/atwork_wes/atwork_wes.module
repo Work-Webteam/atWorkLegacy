@@ -334,7 +334,7 @@ function _atwork_wes_block_content(){
  */
 function _atwork_wes_block_theme($top_three_ministries){
 	$block_html = '';
-	$block_html .= '<a href ="/wes/2020/tracker"><div style="height: 190px; width: 955px; position: absolute;"></div></a><img src="/sites/default/files/wes/2020_Tracker.jpg" style="-ms-interpolation-mode: bicubic;"/>';
+	$block_html .= '<a href ="/wes/2020/tracker"><div style="height: 190px; width: 955px; position: absolute;"></div></a><img src="/sites/default/files/wes/2020_tracker_b.jpg" style="-ms-interpolation-mode: bicubic;"/>';
 
 	$block_html .= "<div id='ministry-top-three'>";
 	foreach($top_three_ministries as $key => $value){
