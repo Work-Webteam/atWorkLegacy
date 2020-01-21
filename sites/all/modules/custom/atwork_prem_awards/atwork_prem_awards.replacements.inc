@@ -5,47 +5,46 @@ function _atwork_prem_awards_ministry_contacts() {
     // All ministry contacts must be included in the exact same order as the ministry dropdown (i.e. aboriginal contact in array [1], advanced ed in array [2])
   		// All ministry contacts must be included in the exact same order as the ministry dropdown (i.e. aboriginal contact in array [1], advanced ed in array [2])
   		1 => 'Kristin.Barnes@gov.bc.ca', //Ministry of Advanced Education, skills and Training
-  		2 => 'erin.hansen@gov.bc.ca', //Agriculture
-  		3 => 'Robert.Meseyton@gov.bc.ca', // Attorney General
+  		2 => 'Shawna.Lyttle@gov.bc.ca', //Agriculture
+  		3 => 'Catherine.Dooner@gov.bc.ca', // Attorney General
   		4 => 'Kate.Mitchell@gov.bc.ca', //Children & Family Development
-  		5 => 'Melody.Olsen@gov.bc.ca', // Citizens’ Services
-  		6 => 'kris.Olson@gov.bc.ca', //Education
+  		5 => 'Jeannette.Cook@gov.bc.ca', // Citizens’ Services
+  		6 => 'Courtney.Ashcroft@gov.bc.ca', //Education
   		7 => 'Shyla.Warner@gov.bc.ca', // Energy, Mines and Petroleum Resources
   		8 => 'Karla.Kennedy@gov.bc.ca', //Environment and Climate Change Strategy
-  		9 => 'Sabrina.Loiacono@gov.bc.ca', //Environment Assessment Office
+  		9 => 'Jennifer.Meadows@gov.bc.ca', //Environment Assessment Office
   		10 => 'Jennifer.Michell@gov.bc.ca', //Finance
-  		11 => 'Dana.Eckardt@gov.bc.ca', //Forests, Lands, Natural Resource Operations and Rural Development
-  		12 => 'Andrea.Kerrigan@gov.bc.ca', //Government Communications and Public Engagement
-  		13 => 'Aleta.Mullane@gov.bc.ca', //Health
-  		14 => 'Karen.Williams@gov.bc.ca', //Aboriginal Relations & Reconciliation
-  		15 => 'Monica.Jang@gov.bc.ca', //Jobs, Trade and Technology
+  		11 => 'Andrea.Wood@gov.bc.ca', //Forests, Lands, Natural Resource Operations and Rural Development
+  		12 => 'Rita.Chand@gov.bc.ca', //Government Communications and Public Engagement
+  		13 => 'Nicole.Benbow@gov.bc.ca', //Health
+  		14 => 'Karen.Williams@gov.bc.ca', //Indigenous Relations & Reconciliation
+  		15 => 'Lorna.Hay@gov.bc.ca', //Jobs, Trade and Technology
   		16 => 'Sveah.Hourston@gov.bc.ca', //Labour
   		17 => 'Kimberley.Guidoriagao@gov.bc.ca', // Mental Health and Addictions
   		18 => 'Susan.Paton@gov.bc.ca', // Municipal Affairs and Housing
-  		19 => 'Robert.Meseyton@gov.bc.ca', //Public Safety & Solicitor General
-  		20 => 'Priya.Kullar@gov.bc.ca ', // Social Development and Poverty Reduction
-  		21 => 'Cindy.Shang@gov.bc.ca',  // Tourism, Arts and Culture
-  		22 => 'Jennifer.Lewthwaite@gov.bc.ca',  // Transportation and Infrastructure
-  		23 => 'Shirley.Nelson@gov.bc.ca ', //BC Public Service Agency
-  		24 => 'Andrea.Kerrigan@gov.bc.ca', // Government Communications and Public Engagement
-  		25 => 'Simmi.Purewal@bcldb.com', // Liquor Distribution Branch
-  		26 => 'smaloney@Trustee.bc.ca', // Public Guardian and Trustee
+  		19 => 'Catherine.Dooner@gov.bc.ca', //Public Safety & Solicitor General
+  		20 => 'Carolyn.Babakaiff@gov.bc.ca', // Social Development and Poverty Reduction
+  		21 => 'Andrea.Berkes@gov.bc.ca',  // Tourism, Arts and Culture
+  		22 => 'Lea.Plamondon@gov.bc.ca',  // Transportation and Infrastructure
+  		23 => 'Kelly.Brubacher@gov.bc.ca', //BC Public Service Agency
+  		24 => 'Rita.Chand@gov.bc.ca', // Government Communications and Public Engagement
+  		25 => 'andrew.james@bcldb.com', // Liquor Distribution Branch
+  		26 => 'smaloney@Trustee.bc.ca ', // Public Guardian and Trustee
   );
 }
 
 function _atwork_prem_awards_headers() {
   return array(
     1 => '<h3>CROSS GOVERNMENT INTEGRATION</h3>This award, which is presented <em>regionally and provincially</em>, recognizes two or more BC Public Service organizations that have collaboratively delivered a program or service that has resulted in substantial benefits to clients, the public service, or citizens.',
-    2 => '<h3>INNOVATION</h3>The Innovation award recognizes groups, teams, or organizations within the BC Public Service that have developed and transformed new ideas into tangible initiatives, programs, or projects. By applying a user-centric or citizen-centric approach, innovations may streamline business processes, leverage technology, or pursue creative solutions to fulfill organizational mandates. This award is recognized both regionally and provincially. Approaches to innovation in the workplace may include:
+    2 => '<h3>INNOVATION</h3>The Innovation award recognizes groups, teams, or organizations within the BC Public Service that have developed and transformed new ideas into tangible initiatives, programs, or projects. By applying a user-centric or citizen-centric approach, innovations may streamline business processes, leverage technology, or pursue creative solutions to fulfill organizational mandates. Approaches to innovation in the workplace may include:
 	    <ul><li> Generating breakthrough ideas, fresh perspectives and new opportunities;</li>
         <li>The use of new technology or tools to enhance program and service delivery or improve upon existing processes and procedures (i.e. Behavioural Insights, Data Science, Service Design,  Agile Methodology, etc.);</li>
         <li>Improving performance by doing things that may be unique, leading-edge, or new to the public sector;</li>
         <li>Changes to the organizational culture or the traditional approach to management or problem solving; </li>
         <li>Ability to demonstrate an experimental or innovative mindset whereby being open to change, taking calculated risks and challenge the status quo to try something new, resulted in a measurable outcome;</li>
         <li>Adapting and refining the approach or initiative when things have not worked well and learning from the setbacks/mistakes.</li></ul>',
-  		
-    3 => '<h3>LEADERSHIP</h3>The Leadership award recognizes a BC Public Service employee who demonstrates the highest levels of integrity and exemplary leadership attributes and abilities. This award is recognized both regionally and provincially. Considerations include, but are not limited to:
 
+    3 => '<h3>LEADERSHIP</h3>The Leadership award recognizes a BC Public Service employee who demonstrates the highest levels of integrity and exemplary leadership attributes and abilities either leading a team or organization or as leader of a substantial project, process, or initiative. Considerations include, but are not limited to:
        <ul><li>Ability to create, communicate, and implement a clear and compelling vision;</li>
 	       <li>Ability to establish trust, motivate, empower and receive high satisfaction ratings from their employees; </li>
 	       <li>Ethical leadership practices;</li>
@@ -54,9 +53,10 @@ function _atwork_prem_awards_headers() {
 	       <li>Commitment to service delivery in exceeding the needs/expectations of internal or external clients;</li>
 	       <li>Ability to demonstrate an experimental or innovative mindset whereby being open to change, taking calculated risks and challenging the status quo to try something new resulted in a measurable outcome;</li>
 	       <li>Demonstrated commitment to diversity and inclusiveness in both the work environment and in the development of programs, policies and services.</li>
+	       <li>Proven advocacy of meaningful engagement and learning with Indigenous peoples to support and facilitate reconciliation.</li>
        </ul>',
 
-    4 => '<h3>ORGANIZATIONAL EXCELLENCE</h3>The Organizational Excellence award recognizes one or more BC Public Service organizations that have delivered a program, service, or initiative resulting in substantial benefits to their organization(s), the public service, or citizens of British Columbia. This award is recognized both regionally and provincially. Considerations for outstanding organizational excellence may include, but are not limited to:
+    4 => '<h3>ORGANIZATIONAL EXCELLENCE</h3>The Organizational Excellence award recognizes one or more BC Public Service organizations that have delivered a program, service, or initiative resulting in substantial benefits to their organization(s), the public service, or citizens of British Columbia. Considerations for outstanding organizational excellence may include, but are not limited to:
        <ul><li>The use of a citizen-centric or customer-centric approach at the heart of the design and/or implementation of a policy/project;</li>
 	       <li>Significantly improved the quality, cost-effectiveness, or productivity of services to internal stakeholders;</li>
 	       <li>Significantly improved government-to-business or government-to-citizen service delivery;</li>
@@ -64,26 +64,27 @@ function _atwork_prem_awards_headers() {
 	       <li>Demonstrates inclusive employee or citizen engagement practices with diverse stakeholder groups.</li>
 	     </ul>',
 
-    5 => '<h3>PARTNERSHIP</h3>The Partnership award recognizes joint-ventures or multi-party initiatives between BC Public Service organizations and organizations in the broader public sector, other levels of government, First Nations communities, or in the private or not-for-profit sectors. This award is recognized both regionally and provincially. Considerations include but are not limited to partnerships that have:
+    5 => '<h3>PARTNERSHIP</h3>The Partnership award recognizes joint-ventures or multi-party initiatives between BC Public Service organizations and organizations in the broader public sector, other levels of government, First Nations communities, or in the private or not-for-profit sectors. Considerations include but are not limited to partnerships that have:
 			<ul><li>Developed, managed and sustained strategic partnerships with other government, private sector, volunteer or non-profit organizations that integrate policy and/or service delivery, with a view to better serving British Columbians;</li>
 				<li>Measurable benefits to either their organization(s) and/or the citizens of British Columbia through process improvements to transform business practices, and/or support sustainable revenue generation or savings;</li>
 				<li>Significantly improved the quality, cost-effectiveness, or productivity of services to internal stakeholders;</li>
 				<li>Significantly improved government-to-business or government-to-citizen program or service delivery;</li>
 				<li>Demonstrated inclusive employee or citizen engagement practices with diverse stakeholder groups.</li>
 			</ul>',
-  		
-    6 => '<h3>LEGACY</h3>The Legacy award recognizes individuals who have made exceptional and lasting contributions to the BC Public Service and/or the province of British Columbia during a public service career of at least 15 years. The contributions may cover a nominee’s entire career or portions of it, provided that the contribution has a lasting and ongoing positive impact. This award is presented at the provincial level only. Considerations include but are not limited to:
-			<ul><li>	Impact the nominees’  career has had on peers, the internal operations and/or external organizations;</li>
-				<li>	Contributions the nominee has made to the development or application of best practices in their field of expertise.; </li>
-				<li>	Ability to demonstrate an experimental or innovative mindset whereby being open to change, taking calculated risks and challenging the status quo to try something new resulted in a measurable outcome;</li>
-				<li>	Leading others in ways that embody the ideal vision of leadership within the BC Public Service; </li>
-				<li>	Ability to demonstrate superior leadership through complex situations including: large-scale initiatives; managing and mitigating risks; creatively solving problems and implementing solutions; </li>
-				<li>	Achieving outcomes despite constraints (e.g. technical, organizational, and financial);</li>
-				<li>	Commitment to succession management though knowledge transfer, support for continuous learning and mentorship;</li>
+
+    6 => '<h3>LEGACY</h3>The Legacy award recognizes individuals who have made exceptional and lasting contributions to the BC Public Service and/or the province of British Columbia during a public service career of at least 15 years. The contributions may cover a nominee’s entire career or portions of it, provided that the contribution has a lasting and ongoing positive impact. Considerations include but are not limited to:
+			<ul><li>Impact the nominees’  career has had on peers, the internal operations and/or external organizations;</li>
+				<li>Contributions the nominee has made to the development or application of best practices in their field of expertise.; </li>
+				<li>Ability to demonstrate an experimental or innovative mindset whereby being open to change, taking calculated risks and challenging the status quo to try something new resulted in a measurable outcome;</li>
+				<li>Leading others in ways that embody the ideal vision of leadership within the BC Public Service; </li>
+				<li>Ability to demonstrate superior leadership through complex situations including: large-scale initiatives; managing and mitigating risks; creatively solving problems and implementing solutions; </li>
+				<li>Achieving outcomes despite constraints (e.g. technical, organizational, and financial);</li>
+				<li>Commitment to succession management though knowledge transfer, support for continuous learning and mentorship;</li>
 				<li>Demonstrates a commitment to diversity and inclusiveness in both the work environment and in the development of programs, policies and services.</li>
+				<li>Proven advocacy of meaningful engagement and learning with Indigenous peoples to support and facilitate reconciliation.</li>
 			</ul>',
 
-    7 => '<h3>EMERGING LEADER</h3>This award recognizes an employee, under the age of forty (40) and at or below the level of Director, who has made a significant impact on their ministry, division, workgroup, or the greater BC Public Service early on in their career.  This award is presented at the provincial level only.  Considerations for an Emerging leader nominee should include but are not limited to:
+    7 => '<h3>EMERGING LEADER</h3>This award recognizes an employee, forty (40) years and under, and at or below the level of Director, who has made a significant impact on their ministry, division, workgroup, or the greater BC Public Service early on in their career.  Considerations for an Emerging leader nominee should include but are not limited to:
         <ul><li>Ability to demonstrate superior informal leadership with colleagues and co-workers across all levels of the organization;</li>
         <li>Ability to demonstrate superior informal leadership through innovative problem solving, team building, collaboration, and a strong client service orientation;</li>
         <li>Proven thought-leader who can articulate a strong case for change, self-motivate and motivate others through change, and demonstrate success through measurable project/program outcomes;</li>
@@ -92,13 +93,24 @@ function _atwork_prem_awards_headers() {
         <li>Demonstrates a commitment to diversity and inclusiveness in both the work environment and in the development of programs, policies and services.</li>
   		</ul>',
 
-    8 => '<h3>Evidence-Based Design</h3>The Evidence-Based Design award recognizes groups, teams or organizations within the BC Public Service whose work is outstanding in the area of evidence-based or evidence-informed policy or program development and the process by which the policy or program was designed. This category showcases excellence in policy or program development for both internal BC Public Service and external regional or provincial policies or programs. This award is recognized both regionally and provincially. Considerations may include, but are not limited to:
+    8 => '<h3>Evidence-Based Design</h3>The Evidence-Based Design award recognizes groups, teams or organizations within the BC Public Service whose work is outstanding in the area of evidence-based or evidence-informed policy or program development and the process by which the policy or program was designed. This category showcases excellence in policy or program development for both internal BC Public Service and external regional or provincial policies or programs. Considerations may include, but are not limited to:
   		<ul><li>The evidence-based or evidence-informed process in which the policy framework was designed;</li>
         <li>Demonstration of the policy cycle including clear problem identification, analysis, evidence-based or evidence-informed  decision making, implementation, evaluation;</li>
         <li>The use of foundational policy analysis tools to support recommendations (i.e. data and/or cost analysis, cross-jurisdictional and/or international reviews, peer reviewed research, etc.);</li>
         <li>The use of new technology or tools (i.e. Data Science, Service Design, etc. to support policy recommendations);</li>
         <li>Inclusive citizen engagement practices that reflects a diverse population within British Columbia.</li>
   		</ul>',
+
+    9 => '<h3>Regional Impact</h3>The Regional Impact award recognizes groups, teams or organizations within the BC Public Service who have developed and delivered programs, projects and initiatives resulting in significant impact primarily benefiting local citizens in a specific location – town, city, municipality or region within B.C. Considerations for outstanding Regional Impact may include, but are not limited to:
+  		<ul><li>Recognize projects, initiatives that impact and directly benefit citizens in the specific location – town, city, municipality, or region;</li>
+        <li>Recognize merit regardless of the project/initiative’s size or pedigree, and those with less visibility which are more grassroots in nature;</li>
+        <li>Generate innovative ideas, fresh perspectives and new opportunities;</li>
+        <li>Demonstrate citizen engagement practices with diverse stakeholder groups;</li>
+        <li>The use of a citizen-centric or customer-centric approach at the heart of the design and/or implementation of a policy/project;</li>
+        <li>Demonstrate an experimental or innovative mindset whereby being open to change, taking calculated risks and challenging the status quo result in a measurable outcome;</li>
+        <li>Develop, manage and sustain strategic partnerships with local government, First Nations, private sector, volunteer or non-profit organizations that integrate policy and/or service delivery, with a view to better serving British Columbians in a specific location.</li>
+  		</ul>',
+
   );
 }
 
@@ -117,10 +129,10 @@ function _atwork_prem_awards_questions() {
   /* Innovation */
   $translations[2][0] = 'In this section, provide a brief statement that summarizes or restates the main points of the nomination (goal and achievement). The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br><br>
 		<em>(Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.)</em>';
-  $translations[2][1] = "In this section, please establish a background that will provide perspective to the work achieved including highlighting what the problem was or why the new innovative approach was undertaken.";
+  $translations[2][1] = "To establish a background that will provide perspective to the work achieved, briefly describe why the new innovative approach was undertaken.";
   $translations[2][2] = "<strong>Complexity:</strong><br />Describe the scope and scale of the new initiative, streamlined business processes, technology, or creative solution developed including, but not limited to:
 		<ul><li>Size of the project, process, technology solution;</li>
-		<li>Risks encountered and overcome;</li>
+		<li>Risks encountered;</li>
 		<li>Challenges around introducing a new approach to solve a challenging problem;</li>
 		<li>Technical or organizational difficulties addressed;</li>
 		<li>Financial constraints managed.</li></ul>";
@@ -145,7 +157,7 @@ function _atwork_prem_awards_questions() {
   $translations[2][9] = '';
 
   /* Leadership */
-  $translations[3][0] = 'In this section, provide a brief statement that summarizes or restates the main points of the nomination, submission or personal contribution.  The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br><br> 
+  $translations[3][0] = 'In this section, provide a brief statement that summarizes or restates the main points of the nomination, submission or personal contribution.  The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br><br>
 		<em>(Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.)</em>';
   $translations[3][1] = "To establish a background that will provide perspective to the work achieved, briefly describe the conditions under which the employee demonstrated exemplary leadership.";
   $translations[3][2] = "<strong>Complexity:</strong><br />Describe the nominee’s ability to demonstrate exemplary leadership acumen including, but not limited to:
@@ -214,11 +226,8 @@ function _atwork_prem_awards_questions() {
 		<li>Risks encountered;</li>
 		<li>Constraints encountered and overcome (i.e. time frame, technical, financial, organizational, policy, etc.);</li>
 		<li>Identify challenges around aligning stakeholder or partner group interests;</li>
-		<li>Technical or organizational difficulties addressed;</li>
-		<li>Describe the any testing and process improvements along the way;</li>
-		<li>Explain how the team managed and overcame risks encountered to adapt and refine the process; or</li>
-		<li>Creativity in the design or redesign the programs or services.</li></ul>";
-  
+		<li>Technical or organizational difficulties addressed;</li>";
+
   $translations[5][3] = "<strong>Approach:</strong><br />Identify key aspects of the approach taken in key aspects of the partnership including, but not limited to:
 		<ul><li>Developing and managing sustained strategic partnerships with other government, private sector, volunteer or non-profit organizations that integrate policy and/or service delivery, with a view to better serving British Columbians;</li>
 		<li>Building relationships with internal or external stakeholder(s) to achieve mutually beneficial goals or mandates;</li>
@@ -227,7 +236,7 @@ function _atwork_prem_awards_questions() {
 		<li>Risk and/or change management strategy;</li>
 		<li>Application and/or development of best practices to remove barriers that may have prevented the successful outcome of the project;</li>
 		<li>Demonstration of inclusive employee or citizen engagement practices with diverse stakeholder groups. </li></ul>";
-  
+
   $translations[5][5] = "<strong>Impact:</strong><br />Describe, and use metrics to support (where applicable), the effect that the partnership has had on the organization, public service or citizens of British Columbia including, not limited to:
 		<ul><li>Measurable benefits  to the organization(s) and/or the citizens of British Columbia through process improvements that transform business practices, and/or support sustainable revenue generation or savings;</li>
 		<li>Effect on the community, internal or external stakeholders including any social, economic, and environmental benefits achieved as the result of the partnership;</li>
@@ -239,8 +248,8 @@ function _atwork_prem_awards_questions() {
   $translations[5][7] = '';
   $translations[5][8] = '';
 
-	/* Legacy */  
-  $translations[6][0] = "In this section, provide a brief statement that summarizes or restates the main points of the nomination (goal and achievement). The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br><br>
+	/* Legacy */
+  $translations[6][0] = "In this section, provide a brief statement that that summarizes or restates the main points of the nomination, personal contribution or lasting legacy within the BC Public Service and/or the province of British Columbia.  The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br><br>
 		<em>(Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.</em>)";
   $translations[6][1] = "To establish a background that will provide perspective to the work achieved, briefly describe the conditions under which the employee demonstrated their contribution to the BC Public Service including career highlights.";
   $translations[6][2] = "<strong>Complexity:</strong><br />Explain how the employee has demonstrated exemplary leadership throughout their career including, but not limited to:
@@ -274,11 +283,11 @@ function _atwork_prem_awards_questions() {
 		<li>Demonstration of public service values throughout their career while continually developing their subject matter expertise;</li>
 		<li>Demonstration of their commitment to diversity and inclusiveness in both the work environment and in the development of programs, policies and services.</li></ul>";
   $translations[6][8] = '';
-  
-	/* Emerging Leader */  
-  $translations[7][0] = "In this section, provide a brief statement that summarizes or restates the main points of the nomination (goal and achievement). The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br><br>
+
+	/* Emerging Leader */
+  $translations[7][0] = "In this section, provide a brief statement that that summarizes or restates the main points of the nomination, submission or personal contribution.  The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br><br>
 		<em>(Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.)</em>";
-  $translations[7][1] = "In this section, please establish a background that will provide perspective to the work achieved including highlighting what the problem was or why the new innovative approach was undertaken.";
+  $translations[7][1] = "To establish a background that will provide perspective to the work achieved, briefly describe the conditions under which the employee has demonstrated exemplary formal or informal leadership.";
   $translations[7][4] = "<strong>Valuing People:</strong><br />Identify and describe how the employee has demonstrated their leadership in supporting the workplace including, but not limited to:
 		<ul><li>Ability to demonstrate leadership through innovative problem solving, team building and collaboration with colleagues at all levels of the organization;</li>
 		<li>Actively enhancing the quality of the workplace through demonstrating a commitment to diversity and inclusiveness in both the work environment and in the development of programs, policies and services; </li>
@@ -300,9 +309,9 @@ function _atwork_prem_awards_questions() {
   $translations[7][9] = "";
 
   /* Evidence-Based Design */
-  $translations[8][0] = "In this section, provide a brief statement that summarizes or restates the main points of the nomination (goal and achievement). The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br><br>
+  $translations[8][0] = "In this section, provide a brief statement that that summarizes or restates the main points of the nomination, project or partnership.  The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br><br>
 		<em>(Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.)</em>";
-  $translations[8][1] = "In this section, please establish a background that will provide perspective to the work achieved including highlighting what the problem was or why the new innovative approach was undertaken.";
+  $translations[8][1] = "To establish a background that will provide perspective to the work achieved, briefly describe why the policy or program was developed.";
   $translations[8][2] = "<strong>Complexity</strong><br />Describe the scope and scale of the evidence-based or evidence-informed approach to developing the policy or program including but not limited to:
 		<ul><li>What necessitated the development of the policy or program? Describe the reason and evidence for the change or initiative;</li>
 		<li>Risks encountered and overcome; </li>
@@ -311,21 +320,35 @@ function _atwork_prem_awards_questions() {
 		<li>Technical or organizational difficulties identified and addressed.</li></ul>";
   $translations[8][3] = "<strong>Approach</strong><br />Describe how the new policy or program used an evidence-based or evidence-informed approach for the development from inception to delivery including, but not limited to:
 		<ul><li>The evidence-based or evidence-informed process in which the policy framework was designed;</li>
-		<li>Demonstration of the policy cycle including clear problem identification, current state, best practices or leading edge and gap analysis, development and balanced analysis of options,  evidence-based or evidence-informed  decision making, implementation, evaluation;</li>
+		<li>Demonstration of the policy cycle including clear problem identification, current state, best practices or leading edge and gap analysis, development and balanced analysis of options, evidence-based or evidence-informed decision making, implementation, evaluation;</li>
 		<li>The use of foundational policy analysis tools to support recommendations (i.e. data and/or cost analysis, cross-jurisdictional and/or international reviews, peer reviewed research, stakeholder engagement etc.);</li>
 		<li>The use of new technology or tools (i.e. Data Science, Service Design, etc. to support policy recommendations);</li>
 		<li>Inclusive citizen engagement practices that reflects a diverse population within British Columbia.</li></ul>";
   $translations[8][4] = "";
-  $translations[8][5] = "<strong>Impact</strong><br />Capture the impact of, and use metrics to support (if applicable), the innovative approach to programs and services as demonstrated by, but not limited to:
-		<ul><li>Improved performance by doing things that may be unique, leading-edge, or new to the public service;</li>
-		<li>Describe the long-term benefits to internal or external stakeholders;</li>
-		<li>Effect that the innovative approach to the programs or services has had on its intended internal or external stakeholders;</li>
-		<li>Effect that the innovative approach to the programs or services has had on the internal operations of the individuals, teams, or organizations delivering the programs or services;</li>
-		<li>Quantitative or measurable improvement to the programs or services.</li></ul>";
+  $translations[8][5] = "<strong>Impact</strong><br />Capture the impact of, and use metrics to support (if applicable), the evidence-based approach that resulted in the new policy or program as demonstrated by, but not limited to:
+		<ul><li>Effect on the community, internal or external stakeholders including any social, economic, and environmental benefits achieved as the result of the policy or program;</li>
+		<li>Extent to which the outcomes and objectives of the policy or program were achieved;</li>
+		<li>Effect that the policy or program had on operational efficiencies as demonstrated by financial or other key performance indicators;</li>
+		<li>Quantitative or measurable improvement to the programs or services;</li>
+		<li>Application and/or development of best practices to remove barriers that may have prevented the successful outcome of the policy or program.</li></ul>";
   $translations[8][6] = "";
   $translations[8][7] = "";
   $translations[8][8] = "";
   $translations[8][9] = "";
+
+
+  /* Evidence-Based Design */
+  $translations[9][0] = "In this section, provide a brief statement that summarizes or restates the main points of the nomination, submission or project, including a brief description of the town, city, or region. The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br><br>
+		<em> (Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.)</em>";
+  $translations[9][1] = "";
+  $translations[9][2] = "";
+  $translations[9][3] = "";
+  $translations[9][4] = "";
+  $translations[9][5] = "";
+  $translations[9][6] = "";
+  $translations[9][7] = "";
+  $translations[9][8] = "";
+  $translations[9][9] = "";
 
   return $translations;
 }

@@ -243,7 +243,7 @@ function _atwork_prem_awards_count_words($files) {
   if ($pages >= 6) {
     drupal_set_message(t('Over 5 pages of text has been detected across all of your attachments. Please review them to ensure you aren\'t over the 5 page limit. *NOTE: Pages are assumed to be 300 words max, your longest document looks to be ' . $longest_doc), 'warning');
   }
-  
+
 
   return 0;
 }
@@ -481,7 +481,9 @@ function atwork_prem_awards_node_view($node, $view_mode, $langcode) {
 }
 
 function atwork_prem_awards_form_alter(&$form, $form_state, $form_id) {
+
   if ($form_id == 'webform_client_form_' . PA_APP_NID) {
+
     global $user;
     require_once drupal_get_path('module', 'atwork_prem_awards') . '/atwork_prem_awards.replacements.inc';
     drupal_add_js(drupal_get_path('module', 'atwork_prem_awards') . '/atwork_prem_awards.js');
@@ -553,8 +555,8 @@ function atwork_prem_awards_form_alter(&$form, $form_state, $form_id) {
 
     $translations = _atwork_prem_awards_questions();
 
-    $form['submitted']['summary_statement']['#title'] = '<h2>Evaluation Considerations - The combined sections below must not exceed 1500 words</h2><strong>Summary (not to exceed 150 words):</strong><br />' . $translations[$form_type][0];
-    $form['submitted']['prem_award_q1']['#title'] = '<h2>Content (not to exceed 1500 words):</h2><strong>Context (not to exceed 250 words):</strong><br />' . $translations[$form_type][1];
+    $form['submitted']['summary_statement']['#title'] = '<h2>Evaluation Considerations</h2><strong>Summary (not to exceed 150 words):</strong><br />' . $translations[$form_type][0];
+    $form['submitted']['prem_award_q1']['#title'] = '<h2>The combined sections below must not exceed 1500 words</h2><strong>Context (not to exceed 250 words):</strong><br />' . $translations[$form_type][1];
     for ($i=2;$i<10;$i++) {
       if (isset($translations[$form_type][$i]) && $translations[$form_type][$i]) {
         $form['submitted']['prem_award_q'. $i]['#title'] = str_replace('[prem-award-q'. $i .']', $translations[$form_type][$i], $form['submitted']['prem_award_q'. $i]['#title']);
@@ -674,7 +676,7 @@ function atwork_prem_awards_application_submit($form, &$form_state) {
     if(isset($form_state['storage']['details']['sid']) && $form_state['storage']['details']['is_new'] == TRUE){
       $sid = $form_state['storage']['details']['sid'];
       drupal_goto('/premiers-award-application-2018/submission/' . $sid . '/edit');
-    } 
+    }
     drupal_set_message(t('Your submission has been saved. You may review and edit any of your submissions !here.', array( '!here' => l('here', 'node/' . PA_APP_NID . '/submissions'))));
   }
 
@@ -809,7 +811,7 @@ EOT;
 /**
 * Implements hook_menu();
 * Create menu path for accessing values via Ajax.
-*/ 
+*/
 function atwork_prem_awards_menu(){
   $items['p-awards/registration/%/%'] = array(
     'page callback' => 'atwork_prem_awards_callback', // Render HTML.
@@ -883,7 +885,7 @@ function atwork_prem_awards_callback($user, $current_uid){
           'numberAttending' =>$value->data[5][0],
           'ministry' => $value->data[10][0],
           'name' => $value->data[9][0],
-          'city' => $value->data[11][0], 
+          'city' => $value->data[11][0],
         );
       }
       // Signed up for Int/North
@@ -893,9 +895,9 @@ function atwork_prem_awards_callback($user, $current_uid){
           'numberAttending' => $value->data[15][0],
           'ministry' => $value->data[10][0],
           'name' => $value->data[9][0],
-          'city' => $value->data[11][0], 
+          'city' => $value->data[11][0],
         );
-      }      
+      }
       // Signed up for Lower Mainland
       if(isset($value->data[7][0]) && $value->data[7][0] > 0){
         $return_info_array[$key] = array(
@@ -903,11 +905,11 @@ function atwork_prem_awards_callback($user, $current_uid){
           'numberAttending' => $value->data[7][0],
           'ministry' => $value->data[10][0],
           'name' => $value->data[9][0],
-          'city' => $value->data[11][0],     
+          'city' => $value->data[11][0],
         );
-      }      
+      }
     }
-  } 
+  }
   // Return to js
   echo json_encode($return_info_array);
   // Stops themeing layer from interacting with this
@@ -921,12 +923,12 @@ function atwork_prem_awards_submit_callback(){
   // This is a new webform
   if($submission_array['sid'] == null){
     // create a new webform (insert function)
-    $status = create_new_webform_entry($submission_array);    
+    $status = create_new_webform_entry($submission_array);
   } else {
      // Get existing webform
     $webform = webform_get_submission(PA_REG_FORM_NID, $submission_array['sid']);
     $webform_node = node_load(PA_REG_FORM_NID);
-    
+
     // Check if this matches webcast for existing webform
     if($submission_array['webcast'] == $webform_node->webform['components'][4]['name'] && isset($webform->data[13][0]) && $webform->data[13][0] == 'vi_webcast'){
       //continue
@@ -953,27 +955,27 @@ function atwork_prem_awards_submit_callback(){
       $webform->data[10][0] = $submission_array['ministry'];
       $changes ++;
     }
-    // check number attending 
+    // check number attending
     if(isset($webform->data[5][0]) && $webform->data[5][0] > 1 && $webform->data[5][0] != $submission_array['attending']){
       $webform->data[5][0] = $submission_array['attending'];
       $changes ++;
-      
+
     }
     if(isset($webform->data[7][0]) &&  $webform->data[7][0] > 1 && $webform->data[7][0] != $submission_array['attending']){
       $webform->data[7][0] = $submission_array['attending'];
       $changes ++;
-      
+
     }
     if(isset($webform->data[15][0]) &&  $webform->data[15][0] > 1 && $webform->data[15][0] != $submission_array['attending']){
       $webform->data[15][0] = $submission_array['attending'];
       $changes ++;
-      
+
     }
     // check city
     if($webform->data[11][0] != $submission_array['city']){
       $webform->data[11][0] = $submission_array['city'];
       $changes ++;
-      
+
     }
     // update webform if any changes
     if($changes > 0){
@@ -1000,7 +1002,7 @@ function atwork_prem_awards_submit_callback(){
     }
 
   }
-  
+
   // Return either a 200 or 500 to js, so we can mark if it is successful or not.
   echo json_encode($status);
   die();
@@ -1062,7 +1064,7 @@ function create_new_webform_entry($submission_array){
       "0" => $submission_array['attending']
     );
   } else {
-    $response['response'] = 500;    
+    $response['response'] = 500;
     return $response;
   }
   $webform_node = node_load(PA_REG_FORM_NID);
@@ -1113,7 +1115,7 @@ function atwork_prem_awards_block_info() {
 /**
 * Implements hook_block_view
 * Specialized block to check/receive/update viewer numbers for the premiers awards.
-*/ 
+*/
 function atwork_prem_awards_block_view($delta = ''){
   $block = array();
   switch ($delta) {
@@ -1141,9 +1143,9 @@ function premiers_awards_registration_information(){
   $current_user = user_load($user->uid);
   // The output string we will return, we don't really want anything to show in the block, so we pass nothing back.
   $output = '';
-  
+
   // Add form update js and library
-  drupal_add_library('system', 'ui.dialog');  
+  drupal_add_library('system', 'ui.dialog');
   drupal_add_js(drupal_get_path('module', 'atwork_prem_awards') . '/' . 'js_prem_awards_form.js');
   drupal_add_js(array('atwork_prem_awards' => array('user' => $current_user->name, 'uid' => $current_user->uid)), 'setting');
   return $output;
