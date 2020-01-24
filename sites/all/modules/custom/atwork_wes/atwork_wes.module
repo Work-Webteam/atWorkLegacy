@@ -204,7 +204,7 @@ function atwork_wes_node_view($node, $view_mode, $langcode) {
 					$ministry_html = _atwork_wes_theme($id, $ministry['ministry'], $ministry['percent']);
 				}
 
-				if (($i > 1 && $i % 2 == 0) || count($data) == $i) {
+				if (($i > 0 && $i % 2 !== 0) || count($data) == $i) {
 					$ministry_html = $last_ministry_html . $ministry_html;
 					$branches_html = $last_branches_html . $branches_html;
 
