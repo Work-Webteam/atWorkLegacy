@@ -70,10 +70,41 @@ if($application_type_map[$application_type] == "Leadership" || $application_type
 
 print 'Ministry - '. $ministry .'<br />';
 print 'Category - '. $application_type_map[$application_type] .'<br />';
-print 'Region - '. $region .'<br /><br />';
 
-print 'Please ensure the above-listed information is accurate for this nomination. If any information is incorrect, please contact Shanna Tom at: <a href="mailto:Shanna.Tom@gov.bc.ca">Shanna.Tom@gov.bc.ca</a><br /><br />A formal announcement will be made on @Work, and communication will be shared with Ministry Contacts when finalists are determined. In the meantime, please share the nomination information with the nominator(s), nomination contacts and nominees.<br /><br />Your participation in this year’s Premier\'s Innovation and Excellence Awards is greatly appreciated. The significant efforts of all involved in the nomination process is integral to the program’s success. Thank you!';
+print '<br />Please ensure the above-listed information is accurate for this nomination. If any information is incorrect, please contact <a href="mailto:PremiersAwards@gov.bc.ca">PremiersAwards@gov.bc.ca</a>';
+print '<br /><br />An official announcement will be made on @Work, and communication will be shared with Ministry Contacts when finalists are determined. In the meantime, please share the nomination information with the nominator(s), nomination contacts and nominees.';
+print '<br /><br />Your participation in this year’s Premier\'s Innovation and Excellence Awards is greatly appreciated. The significant efforts of all involved in the nomination process is integral to the program’s success. Thank you!';
 
 print '<br /><br /><h2>' . $application_title . '</h2>';
 
-print drupal_render($renderable_fields);
+
+// quick and dirty search & replace hacks to clean up the email text
+$text = drupal_render($renderable_fields);
+
+$text = str_replace('<h3>[prem-award-q1]</h3>', '', $text);
+$text = str_replace('<strong><strong>', '<br /><strong>', $text);
+$text = str_replace('</ul></strong><p>', '</ul><p>', $text);
+$text = str_replace('Title of Nomination:', '<strong>Title of Nomination:</strong>', $text);
+$text = str_replace('<fieldset class="webform-component-fieldset webform-component--nominator form-wrapper">', '<br /><br /><fieldset class="webform-component-fieldset webform-component--nominator form-wrapper">', $text);
+$text = str_replace('<strong>Nominee and Partner Information</strong>:', '<br /><br /><strong>Nominee and Partner Information</strong>:', $text);
+$text = str_replace('Nominee Informed:', '<br /><br />Nominee Informed:', $text);
+$text = str_replace('Summary word count:', '<br />Summary word count:', $text);
+$text = str_replace('<strong>Context (not to exceed 250 words):', '<br /><br /><strong>Context</strong> (not to exceed 250 words):', $text);
+$text = str_replace('<h2>Evaluation Considerations</h2>' ,'', $text);
+$text = str_replace ('<h3>Evaluation Considerations</h3><strong>', '<br /><br /><h3>Evaluation Considerations</h3>', $text);
+$text = str_replace('</em>)</strong><p>', '</em>)<p>', $text);
+$text = str_replace('Content word count:', '<br />Content word count:', $text);
+$text = str_replace('<fieldset class="webform-component-fieldset webform-component--attachments form-wrapper">', '<br /><br /><fieldset class="webform-component-fieldset webform-component--attachments form-wrapper">', $text);
+
+$text = str_replace('</div>Name:', '</div><br />Name:', $text);
+$text = str_replace('Nominator Title:', '<br />Nominator Title:', $text);
+$text = str_replace('Email:', '<br />Email:', $text);
+$text = str_replace('Phone Number: ', '<br />Phone Number:', $text);
+$text = str_replace('Filming Locations: Location 1 &nbsp;&nbsp;', '<br />Filming Locations:<br />Location 1: ', $text);
+$text = str_replace('Location 2:', '<br />Location 2:', $text);
+$text = str_replace('Location 3:', '<br />Location 3:', $text);
+
+$text .= '<br /><br />';
+
+print $text;
+//print drupal_render($renderable_fields);

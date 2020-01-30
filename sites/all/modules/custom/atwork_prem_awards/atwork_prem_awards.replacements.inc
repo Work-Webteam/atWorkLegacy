@@ -151,7 +151,7 @@ function _atwork_prem_awards_questions() {
 		<li>Effect that the innovative approach to the programs orz services has had on the internal operations of the individuals, teams, or organizations delivering the programs or services;</li>
 		<li>Quantitative or measurable improvement to the programs or services;</li>
 		<li>Demonstrates why and how this was innovative.</li></ul>";
-  $translations[2][6] = "";
+  $translations[2][6] = '';
   $translations[2][7] = '';
   $translations[2][8] = '';
   $translations[2][9] = '';
@@ -337,14 +337,38 @@ function _atwork_prem_awards_questions() {
   $translations[8][9] = "";
 
 
-  /* Evidence-Based Design */
+  /* Regional Impact */
   $translations[9][0] = "In this section, provide a brief statement that summarizes or restates the main points of the nomination, submission or project, including a brief description of the town, city, or region. The purpose of the summary is to give the adjudicators and judges a condensed and objective account of the main idea(s) and accomplishment(s) of the nomination.<br><br>
 		<em> (Note that this section will be used by the Premier’s Awards team for communications purposes if this nomination is selected as a finalist.)</em>";
-  $translations[9][1] = "";
-  $translations[9][2] = "";
-  $translations[9][3] = "";
+  $translations[9][1] = "To establish a background that will provide perspective to the work achieved, briefly describe why the policy or program was developed.";
+  $translations[9][2] = "<strong>Complexity</strong><br />Describe the scope and scale of the program, project or initiative that resulted in significant impact that directly benefited local citizens, including but not limited to:
+		<ul>
+		<li>Size of the program, service, or initiative;</li>
+		<li>Risks encountered;</li>
+		<li>Challenges around introducing a new approach to solve a problem;</li>
+		<li>Constraints encountered and overcome, which may include timeframes, financial, policy, technical, etc.;</li>
+		<li>Challenges around aligning stakeholder or partner group interests.</li>
+		</ul>";
+  $translations[9][3] = "<strong>Approach</strong><br />Describe key aspects of the approach taken throughout the development of the new program, project or initiative including, but not limited to:
+		<ul>
+		<li>The process used to generate innovative ideas, fresh perspectives, new opportunities, and creativity in the design;</li>
+		<li>Application of a user-centric or citizen-centric approach in the development of the initiative/program;</li>
+		<li>Adapting and refining the approach when things did not work well and learning from the setbacks/mistakes;</li>
+		<li>Application and/or development of best practices to remove barriers that may have prevented the successful outcome of the project;</li>
+		<li>Risk and/or change management strategy;</li>
+		<li>Building relationships with external stakeholder(s) to achieve mutually beneficial goals or mandates;</li>
+		<li>Demonstration of inclusive citizen engagement practices with diverse stakeholder groups.</li>
+		</ul>";
   $translations[9][4] = "";
-  $translations[9][5] = "";
+  $translations[9][5] = "<strong>Impact</strong><br />Describe, and use metrics to support (if applicable), the outcomes and impact that the program, project or initiative has had on the BC Public Service and local citizens including, but not limited to:
+		<ul>
+		<li>Demonstrate how an experimental or innovative mindset that was open to change, taking calculate risks, and challenging the status quo resulted in a measurable outcome;</li>
+		<li>Extent to which the outcomes and objectives of the project, program or initiative were achieved;</li>
+		<li>Quantitative or measurable improvement to the program, project or initiative;</li>
+		<li>Efficiencies, improvements as demonstrated by financial or other key performance indicators;</li>
+		<li>Effect on the community, internal or external stakeholders including any social, economic, and environmental benefits achieved;</li>
+		<li>Effect that the impact has had on external stakeholders such as increased client satisfaction to high quality service delivery.</li>
+		</ul>";
   $translations[9][6] = "";
   $translations[9][7] = "";
   $translations[9][8] = "";
