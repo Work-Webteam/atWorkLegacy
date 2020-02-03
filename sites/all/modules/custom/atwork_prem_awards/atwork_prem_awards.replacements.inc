@@ -16,7 +16,7 @@ function _atwork_prem_awards_ministry_contacts() {
   		10 => 'Jennifer.Michell@gov.bc.ca', //Finance
   		11 => 'Andrea.Wood@gov.bc.ca', //Forests, Lands, Natural Resource Operations and Rural Development
   		12 => 'Rita.Chand@gov.bc.ca', //Government Communications and Public Engagement
-  		13 => 'Nicole.Benbow@gov.bc.ca', //Health
+  		13 => 'Brieana.Murray@gov.bc.ca', //Health
   		14 => 'Karen.Williams@gov.bc.ca', //Indigenous Relations & Reconciliation
   		15 => 'Lorna.Hay@gov.bc.ca', //Jobs, Trade and Technology
   		16 => 'Sveah.Hourston@gov.bc.ca', //Labour
