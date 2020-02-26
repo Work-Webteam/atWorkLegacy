@@ -10,7 +10,7 @@ function _atwork_prem_awards_ministry_contacts() {
   		4 => 'Kate.Mitchell@gov.bc.ca', //Children & Family Development
   		5 => 'Jeannette.Cook@gov.bc.ca', // Citizens’ Services
   		6 => 'Courtney.Ashcroft@gov.bc.ca', //Education
-  		7 => 'Shyla.Warner@gov.bc.ca', // Energy, Mines and Petroleum Resources
+  		7 => 'Katie.Hulbert@gov.bc.ca', // Energy, Mines and Petroleum Resources
   		8 => 'Karla.Kennedy@gov.bc.ca', //Environment and Climate Change Strategy
   		9 => 'Jennifer.Meadows@gov.bc.ca', //Environment Assessment Office
   		10 => 'Jennifer.Michell@gov.bc.ca', //Finance
