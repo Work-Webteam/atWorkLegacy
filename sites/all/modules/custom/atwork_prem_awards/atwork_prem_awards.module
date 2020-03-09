@@ -628,6 +628,9 @@ function atwork_prem_awards_application_submit($form, &$form_state) {
 
     $renderable_fields = webform_submission_render($node, $submission, $email, 'full_html');
 
+    $contact_email = $renderable_fields['nomination_contact']['nomination_contact_email']['#value'];
+
+
     $email['message'] = theme(array('webform_mail_prem_awards', 'webform_mail', 'webform_mail_message'), array('node' => $node, 'submission' => $submission, 'email' => $email, 'renderable_fields' => $renderable_fields));
 
     // Replace tokens in the message.
@@ -668,6 +671,11 @@ function atwork_prem_awards_application_submit($form, &$form_state) {
     if ($ministry_contacts[$ministry]) {
       $mail_params['email'] = $ministry_contacts[$ministry];
       $message = drupal_mail('webform', 'submission', $ministry_contacts[$ministry], $language, $mail_params, $email['from']);
+    }
+
+    if (!empty($contact_email)) {
+      $mail_params['email'] = $contact_email;
+      $message = drupal_mail('webform', 'submission', $contact_email, $language, $mail_params, $email['from']);
     }
 
     drupal_set_message('Thank you for your submission. An email has been sent to '. l($email['email'], 'mailto:'. $email['email']) . ' (Nomination Contact) and ' . l($ministry_contacts[$ministry], 'mailto:'. $ministry_contacts[$ministry]) . ' (Ministry Contact).');
