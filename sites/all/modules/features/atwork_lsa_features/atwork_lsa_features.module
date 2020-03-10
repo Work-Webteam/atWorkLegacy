@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Atwork LSA Feature feature.
- */
-
-include_once 'atwork_lsa_features.features.inc';
