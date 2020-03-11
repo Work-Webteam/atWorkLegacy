@@ -6,7 +6,6 @@ $_SERVER['REQUEST_METHOD'] = NULL;
 
 // Bootstrap drupal
 define('DRUPAL_ROOT', '/var/www/html');
-//define('DRUPAL_ROOT', '/Users/RKUYVENH/Sites/atwork');
 
 //define('DRUPAL_ROOT', '/var/www/public/atworkdev');
 require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
