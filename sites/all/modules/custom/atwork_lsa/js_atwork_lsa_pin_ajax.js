@@ -82,7 +82,7 @@
       "81", //Transportation & Infrastructure
       "87", //BC Financial Services Authority
       "11", //BC Pension Corporation
-      //Registrar of Lobbyists TODO: This is not on the regular list.
+      "88",//Registrar of Lobbyists
     ];
 
     checkLabels(response.choice);
@@ -210,7 +210,6 @@
   function setMinistryOptions(ministry){
     switch(true){
       //Only One retro pin allowed
-      //TODO: Should this still be here? case ministry == 68: //Property Assessment Appeal Board - EDIT: No longer has any special info
       case ministry == 61: // Office of the Merit Commissioner
         // We can only allow one box to be checked if they have chosen
         $('#edit-field-lsa-other-milestone-years').slideDown('slow');
@@ -302,7 +301,7 @@
       case ministry == 81 :  // |Transportation & Infrastructure
       case ministry == 87 :  // |BC Financial Services Authority
       case ministry == 11 :  // |BC Pension Corporation
-      // TODO: Is this supposed to be in the list of accepted orgs? case ministry ==   // |Registrar of Lobbyists
+      case ministry == 88 : // |Registrar of Lobbyists
 
         // If we have previous set handlers on this - lets remove them.
         if($('#edit-field-lsa-previous-service-miles-und').hasClass('atwork-activity-processed')){
@@ -390,7 +389,7 @@
       "81", //Transportation & Infrastructure
       "87", //BC Financial Services Authority
       "11", //BC Pension Corporation
-      //Registrar of Lobbyists TODO: This is not on the regular list.
+      "88", //Registrar of Lobbyists
       ];
     // Application by user
     if(applicationSubmitter == 1){

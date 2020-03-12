@@ -683,7 +683,7 @@ function atwork_lsa_node_insert($node) {
       81, //Transportation & Infrastructure
       87, //BC Financial Services Authority
       11, //BC Pension Corporation
-      //Registrar of Lobbyists TODO: This is not on the regular list.
+      88, //Registrar of Lobbyists
     );
 
 
@@ -940,7 +940,7 @@ function sort_pin_applications($pin_nids = array()){
     $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry_name'] = str_replace('&', "and", $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry_name']);
     $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry_name'] = str_replace('(FICOM)', "", $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry_name']);
 
-    // TODO: We need to add in the lsa pin branch here.
+    // TODO: We need to add in the lsa vagrapin branch here.
     $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['branch'] = $value->field_lsa_branch_department['und'][0]['value'];
     // Supervisors name
     $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['supervisor_first_name'] = $value->field_lsa_supervisor_first_name['und'][0]['safe_value'];

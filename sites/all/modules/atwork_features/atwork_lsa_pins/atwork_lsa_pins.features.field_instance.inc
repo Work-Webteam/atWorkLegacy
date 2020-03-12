@@ -26,7 +26,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 9,
+        'weight' => 8,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -114,7 +114,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'email_default',
-        'weight' => 6,
+        'weight' => 5,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -196,7 +196,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'phone',
-        'weight' => 7,
+        'weight' => 6,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -325,7 +325,7 @@ function atwork_lsa_pins_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_milestone_year',
-    'label' => 'Are you celebrating a current service milestone in 2019?',
+    'label' => 'Are you celebrating a current service milestone in 2020?',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -365,7 +365,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 17,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -454,7 +454,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 15,
+        'weight' => 13,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -542,7 +542,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 16,
+        'weight' => 14,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -628,7 +628,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 17,
+        'weight' => 15,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -705,7 +705,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 20,
+        'weight' => 18,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -868,7 +868,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -954,7 +954,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 5,
+        'weight' => 4,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1040,7 +1040,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'list_default',
-        'weight' => 8,
+        'weight' => 7,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1193,7 +1193,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 22,
+        'weight' => 20,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1270,7 +1270,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 16,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1334,7 +1334,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 21,
+        'weight' => 19,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1401,7 +1401,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'email_default',
-        'weight' => 13,
+        'weight' => 11,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1484,7 +1484,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 11,
+        'weight' => 9,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1570,7 +1570,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 12,
+        'weight' => 10,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1655,7 +1655,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'phone',
-        'weight' => 14,
+        'weight' => 12,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1729,7 +1729,7 @@ function atwork_lsa_pins_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('  ');
-  t('Are you celebrating a current service milestone in 2019?');
+  t('Are you celebrating a current service milestone in 2020?');
   t('City');
   t('Department/Branch');
   t('Do you wish to request service pin(s) for any past milestones?');
