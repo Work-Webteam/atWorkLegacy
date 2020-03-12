@@ -201,6 +201,17 @@
     if($('#edit-field-lsa-registerer-und').val() != 3){
       $('#edit-field-lsa-ministry-rep-email-und-0-value').hide();
     }
+    // We always want the province field to be none editable
+    if(!$('#edit-field-province-und-0-value').hasClass('no-edit-prov')){
+      $('#edit-field-province-und-0-value').attr('readonly', true)
+        .addClass('no-edit-prov')
+        .css('background-color' , '#DEDEDE');
+    }
+    // We want to move nudge supervisor field and also make the instructions for Victoria red
+    if(!($('.group-service-pin-sup').hasClass('updated-for-page'))){
+      $('.group-service-pin-sup').addClass('updated-for-page').css({"border":"1px solid black", "margin":"15px 10px 10px 0px", "padding":"5px"});
+      $('.red-font').css({"color":"red", "position":"relative", "left":"5px"});
+    }
   }
 
   /**

@@ -96,7 +96,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 31,
+      'weight' => 7,
     ),
   );
 
@@ -178,7 +178,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 29,
+      'weight' => 15,
     ),
   );
 
@@ -190,7 +190,7 @@ function atwork_lsa_pins_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'phone',
         'settings' => array(
           'semantic_field_format' => '',
@@ -264,7 +264,7 @@ function atwork_lsa_pins_field_default_field_instances() {
       'module' => 'phone',
       'settings' => array(),
       'type' => 'phone_textfield',
-      'weight' => 30,
+      'weight' => 16,
     ),
   );
 
@@ -349,7 +349,7 @@ function atwork_lsa_pins_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 16,
+      'weight' => 8,
     ),
   );
 
@@ -365,7 +365,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 17,
+        'weight' => 18,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -435,7 +435,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 14,
+      'weight' => 5,
     ),
   );
 
@@ -445,7 +445,7 @@ function atwork_lsa_pins_field_default_field_instances() {
     'bundle' => 'lsa_pin_application',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => '<span class="red-font">If your supervisor is located in Victoria, please use the PO Box address. If you do not know your PO Box address, please use the BC Mail <a href="https://govposearch.pss.gov.bc.ca/"> lookup tool</a>.<span class="red-font">',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -454,7 +454,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 13,
+        'weight' => 16,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -495,7 +495,7 @@ function atwork_lsa_pins_field_default_field_instances() {
     'hashtag_settings' => array(
       'hashtag_field' => 0,
     ),
-    'label' => 'Supervisors Mailing Address',
+    'label' => 'Supervisor Mailing Address',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -524,7 +524,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 30,
+      'weight' => 21,
     ),
   );
 
@@ -542,7 +542,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 14,
+        'weight' => 9,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -580,7 +580,7 @@ function atwork_lsa_pins_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_office_city',
-    'label' => 'City',
+    'label' => 'Supervisor City',
     'required' => 1,
     'settings' => array(
       'authcache' => array(
@@ -609,7 +609,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 31,
+      'weight' => 22,
     ),
   );
 
@@ -628,7 +628,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 15,
+        'weight' => 10,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -669,9 +669,22 @@ function atwork_lsa_pins_field_default_field_instances() {
     'hashtag_settings' => array(
       'hashtag_field' => 0,
     ),
-    'label' => 'Postal Code',
+    'label' => 'Supervisor Postal Code',
     'required' => 1,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
       'semantic_field_format' => '',
       'text_processing' => 0,
       'user_register_form' => FALSE,
@@ -685,7 +698,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'size' => 7,
       ),
       'type' => 'text_textfield',
-      'weight' => 32,
+      'weight' => 24,
     ),
   );
 
@@ -705,7 +718,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 19,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -764,7 +777,7 @@ function atwork_lsa_pins_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 18,
+      'weight' => 10,
     ),
   );
 
@@ -849,7 +862,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'size' => 8,
       ),
       'type' => 'text_textfield',
-      'weight' => 26,
+      'weight' => 12,
     ),
   );
 
@@ -935,7 +948,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 27,
+      'weight' => 13,
     ),
   );
 
@@ -1021,7 +1034,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 28,
+      'weight' => 14,
     ),
   );
 
@@ -1034,7 +1047,7 @@ function atwork_lsa_pins_field_default_field_instances() {
     'description' => '  ',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'list',
         'settings' => array(
           'semantic_field_format' => '',
@@ -1104,7 +1117,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 15,
+      'weight' => 6,
     ),
   );
 
@@ -1174,7 +1187,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 17,
+      'weight' => 9,
     ),
   );
 
@@ -1193,7 +1206,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 20,
+        'weight' => 21,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1254,7 +1267,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 7,
+      'weight' => 3,
     ),
   );
 
@@ -1270,7 +1283,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 17,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1319,7 +1332,7 @@ function atwork_lsa_pins_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 19,
+      'weight' => 11,
     ),
   );
 
@@ -1334,7 +1347,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 20,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1382,7 +1395,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 13,
+      'weight' => 4,
     ),
   );
 
@@ -1401,7 +1414,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'email_default',
-        'weight' => 11,
+        'weight' => 14,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1465,7 +1478,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 28,
+      'weight' => 19,
     ),
   );
 
@@ -1484,7 +1497,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 9,
+        'weight' => 12,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1551,7 +1564,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 26,
+      'weight' => 17,
     ),
   );
 
@@ -1570,7 +1583,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 10,
+        'weight' => 13,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1637,7 +1650,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 27,
+      'weight' => 18,
     ),
   );
 
@@ -1655,7 +1668,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'phone',
-        'weight' => 12,
+        'weight' => 15,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1722,15 +1735,71 @@ function atwork_lsa_pins_field_default_field_instances() {
       'module' => 'phone',
       'settings' => array(),
       'type' => 'phone_textfield',
-      'weight' => 29,
+      'weight' => 20,
+    ),
+  );
+
+  // Exported field_instance: 'node-lsa_pin_application-field_province'.
+  $field_instances['node-lsa_pin_application-field_province'] = array(
+    'bundle' => 'lsa_pin_application',
+    'default_value' => array(
+      0 => array(
+        'value' => 'BC',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(
+          'semantic_field_format' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 11,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_province',
+    'label' => 'Supervisor Province',
+    'required' => 0,
+    'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
+      'semantic_field_format' => '',
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'maxlength_js' => 0,
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        'size' => 2,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 23,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
   t('  ');
+  t('<span class="red-font">If your supervisor is located in Victoria, please use the PO Box address. If you do not know your PO Box address, please use the BC Mail <a href="https://govposearch.pss.gov.bc.ca/"> lookup tool</a>.<span class="red-font">');
   t('Are you celebrating a current service milestone in 2020?');
-  t('City');
   t('Department/Branch');
   t('Do you wish to request service pin(s) for any past milestones?');
   t('Email Address');
@@ -1741,13 +1810,15 @@ function atwork_lsa_pins_field_default_field_instances() {
   t('Ministry Representative Email');
   t('Phone');
   t('Please select the retroactive milestone pin(s) you would like to order');
-  t('Postal Code');
   t('Service Milestone');
+  t('Supervisor City');
   t('Supervisor Email');
   t('Supervisor First Name');
   t('Supervisor Last Name');
+  t('Supervisor Mailing Address');
   t('Supervisor Phone');
-  t('Supervisors Mailing Address');
+  t('Supervisor Postal Code');
+  t('Supervisor Province');
   t('Terms');
   t('What ministry/organization are you with?');
   t('Who is registering for this service pin?');
