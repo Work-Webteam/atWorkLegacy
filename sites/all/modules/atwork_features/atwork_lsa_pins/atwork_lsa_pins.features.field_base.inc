@@ -310,7 +310,6 @@ function atwork_lsa_pins_field_default_field_bases() {
         48 => 'Intergovernmental Relations Secretariat',
         49 => 'Islands Trust',
         54 => 'Legislative Assembly of BC',
-        85 => 'Liquor Distribution Branch',
         56 => 'Mental Health Review Board',
         2 => 'Ministry of Advanced Education, Skills and Training',
         4 => 'Ministry of Agriculture',

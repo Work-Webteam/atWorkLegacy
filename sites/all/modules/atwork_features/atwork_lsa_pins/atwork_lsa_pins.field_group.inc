@@ -22,7 +22,7 @@ function atwork_lsa_pins_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Supervisor Contact Info',
-    'weight' => '23',
+    'weight' => '16',
     'children' => array(
       0 => 'field_lsa_supervisor_first_name',
       1 => 'field_lsa_supervisor_last_name',

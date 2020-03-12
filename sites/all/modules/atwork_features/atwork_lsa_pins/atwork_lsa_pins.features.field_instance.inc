@@ -96,7 +96,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 
@@ -178,7 +178,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 15,
+      'weight' => 14,
     ),
   );
 
@@ -264,7 +264,7 @@ function atwork_lsa_pins_field_default_field_instances() {
       'module' => 'phone',
       'settings' => array(),
       'type' => 'phone_textfield',
-      'weight' => 16,
+      'weight' => 15,
     ),
   );
 
@@ -349,7 +349,7 @@ function atwork_lsa_pins_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 8,
+      'weight' => 7,
     ),
   );
 
@@ -435,7 +435,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -445,7 +445,7 @@ function atwork_lsa_pins_field_default_field_instances() {
     'bundle' => 'lsa_pin_application',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '<span class="red-font">If your supervisor is located in Victoria, please use the PO Box address. If you do not know your PO Box address, please use the BC Mail <a href="https://govposearch.pss.gov.bc.ca/"> lookup tool</a>.<span class="red-font">',
+    'description' => '<span class="red-font">If the supervisor is located in Victoria, please enter their PO Box address. Use the BC Mail <a href="https://govposearch.pss.gov.bc.ca/" target="_blank"> lookup tool</a> to verify.<span class="red-font">',
     'display' => array(
       'default' => array(
         'label' => 'inline',
@@ -454,7 +454,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 16,
+        'weight' => 13,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -542,7 +542,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 9,
+        'weight' => 14,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -628,7 +628,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 10,
+        'weight' => 16,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -777,7 +777,7 @@ function atwork_lsa_pins_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 10,
+      'weight' => 9,
     ),
   );
 
@@ -862,7 +862,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'size' => 8,
       ),
       'type' => 'text_textfield',
-      'weight' => 12,
+      'weight' => 11,
     ),
   );
 
@@ -948,7 +948,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 12,
     ),
   );
 
@@ -1034,7 +1034,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 14,
+      'weight' => 13,
     ),
   );
 
@@ -1117,7 +1117,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -1174,9 +1174,22 @@ function atwork_lsa_pins_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_lsa_pin_service_milestone',
-    'label' => 'Service Milestone',
+    'label' => 'Current Service Milestone',
     'required' => 0,
     'settings' => array(
+      'authcache' => array(
+        'clients' => array(
+          'authcache_ajax' => array(
+            'status' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'fallback' => 'cancel',
+        'lifespan' => 3600,
+        'perpage' => 0,
+        'peruser' => 1,
+        'status' => 0,
+      ),
       'semantic_field_format' => '',
       'user_register_form' => FALSE,
     ),
@@ -1187,7 +1200,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -1267,7 +1280,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 3,
+      'weight' => 17,
     ),
   );
 
@@ -1332,7 +1345,7 @@ function atwork_lsa_pins_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 11,
+      'weight' => 10,
     ),
   );
 
@@ -1395,7 +1408,7 @@ function atwork_lsa_pins_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -1414,7 +1427,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'email_default',
-        'weight' => 14,
+        'weight' => 11,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1497,7 +1510,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 12,
+        'weight' => 9,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1583,7 +1596,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 13,
+        'weight' => 10,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1668,7 +1681,7 @@ function atwork_lsa_pins_field_default_field_instances() {
           'semantic_field_format' => '',
         ),
         'type' => 'phone',
-        'weight' => 15,
+        'weight' => 12,
       ),
       'ecard' => array(
         'label' => 'above',
@@ -1751,13 +1764,13 @@ function atwork_lsa_pins_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(
           'semantic_field_format' => '',
         ),
         'type' => 'text_default',
-        'weight' => 11,
+        'weight' => 15,
       ),
     ),
     'entity_type' => 'node',
@@ -1798,8 +1811,9 @@ function atwork_lsa_pins_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('  ');
-  t('<span class="red-font">If your supervisor is located in Victoria, please use the PO Box address. If you do not know your PO Box address, please use the BC Mail <a href="https://govposearch.pss.gov.bc.ca/"> lookup tool</a>.<span class="red-font">');
+  t('<span class="red-font">If the supervisor is located in Victoria, please enter their PO Box address. Use the BC Mail <a href="https://govposearch.pss.gov.bc.ca/" target="_blank"> lookup tool</a> to verify.<span class="red-font">');
   t('Are you celebrating a current service milestone in 2020?');
+  t('Current Service Milestone');
   t('Department/Branch');
   t('Do you wish to request service pin(s) for any past milestones?');
   t('Email Address');
@@ -1810,7 +1824,6 @@ function atwork_lsa_pins_field_default_field_instances() {
   t('Ministry Representative Email');
   t('Phone');
   t('Please select the retroactive milestone pin(s) you would like to order');
-  t('Service Milestone');
   t('Supervisor City');
   t('Supervisor Email');
   t('Supervisor First Name');
