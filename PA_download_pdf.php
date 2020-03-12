@@ -106,10 +106,18 @@ $ministries = array(
 
 $fields = array_keys($labels);
 
+$dn = DRUPAL_ROOT . '/PA_' . date("Y") . '/';
+
+if (file_exists($dn)) {
+  deleteDir($dn);
+}
+mkdir($dn, 0700, TRUE);
+
+
+
 foreach($submissions as $submission) {
 
   $dn = DRUPAL_ROOT . '/PA_' . date("Y") . '/';
-  mkdir($dn, 0700, TRUE);
 
   $pdf = new FPDF();
   $pdf->AddPage();
@@ -1449,9 +1457,34 @@ foreach($submissions as $submission) {
       $pdf->SetFont('Arial', '', 12);
       $pdf->Cell(40, 10, $filename);
       $pdf->Ln();
-      copy(DRUPAL_ROOT . '/sites/default/files/webform/' . $filename, DRUPAL_ROOT . '/PA/' . $submission->serial . '/' . $filename);
+
+      $source = DRUPAL_ROOT . '/sites/default/files/webform/' . $filename;
+      $dest = $dn . $submission->serial . '/' . $filename;
+
+      copy(DRUPAL_ROOT . '/sites/default/files/webform/' . $filename, $dn . $submission->serial . '/' . $filename);
     }
   }
 
   $pdf->Output('F', $dn . $submission->serial . '/submission_data.pdf');
+}
+
+
+
+
+function deleteDir($dirPath) {
+    if (! is_dir($dirPath)) {
+        throw new InvalidArgumentException("$dirPath must be a directory");
+    }
+    if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
+        $dirPath .= '/';
+    }
+    $files = glob($dirPath . '*', GLOB_MARK);
+    foreach ($files as $file) {
+        if (is_dir($file)) {
+            deleteDir($file);
+        } else {
+            unlink($file);
+        }
+    }
+    rmdir($dirPath);
 }
