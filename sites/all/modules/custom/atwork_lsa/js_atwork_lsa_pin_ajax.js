@@ -147,9 +147,9 @@
       $('#edit-field-lsa-other-milestone-years-und-0:not(.atwork-activity-processed)', context)
         .addClass('atwork-activity-processed')
         .bind('click', function(){
-            //$('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false);
-            $('#edit-field-lsa-previous-service-miles').slideUp('slow');
-          });
+          $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false);
+          $('#edit-field-lsa-previous-service-miles').slideUp('slow');
+        });
 
     }
   };
@@ -363,7 +363,7 @@
           $('#edit-field-lsa-other-milestone-years').hide();
           $('#edit-field-lsa-other-milestone-years-und-1').prop('checked', false);
           $('#edit-field-lsa-other-milestone-years').hide();
-          $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false);
+          $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false); //checked
           $('#edit-field-lsa-previous-service-miles').slideUp('slow');
         }
 
@@ -372,7 +372,7 @@
         // Make sure our labels are set correctly
         if($('#edit-field-lsa-previous-service-miles-und').not('atwork-activity-processed')){
           $('#edit-field-lsa-previous-service-miles-und').addClass('atwork-activity-processed');
-          $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false);
+          //$('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false);
           // Allow them to choose one pin:
           $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').on('change', function() {
             $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').not(this).prop('checked', false);
@@ -473,7 +473,7 @@
         $('#edit-field-lsa-other-milestone-years').hide();
         $('#edit-field-lsa-previous-service-miles').hide();
         // Don't want to pass old values
-        $('#edit-field-lsa-previous-service-miles input.form-checkbox').prop('checked', false);
+        $('#edit-field-lsa-previous-service-miles input.form-checkbox').prop('checked', false); //checked
       break;
     }
 
