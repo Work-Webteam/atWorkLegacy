@@ -670,7 +670,6 @@ function atwork_lsa_node_insert($node) {
   /** Pins sent directly to ministry contact, only for specific ministries (ie bulk send)**/
     $check_min = array(
       21, //Community Living BC
-      21, //Community Living BC
       24, //Education
       29, //Energy, Mines & Petroleum Resources
       32, //Environmental Assessment Office
@@ -702,7 +701,12 @@ function atwork_lsa_node_insert($node) {
       );
 
       drupal_mail('atwork_mail', 'atwork_mail_default', $applicant_to_special_condition, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
-
+      // We also need to send a supervisor email in this case
+      $params2 = array(
+        'subject' => $supervisor_min_send_subject,
+        'body' => $supervisor_min_send_body,
+      );
+      drupal_mail('atwork_mail', 'atwork_mail_default', $supervisor_min_send_to, language_default(), $params2, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
     }
 
 
@@ -714,7 +718,6 @@ function atwork_lsa_node_insert($node) {
       );
       drupal_mail('atwork_mail', 'atwork_mail_default', $supervisor_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
     }
-
     if(isset($node->field_lsa_registerer['und'][0]['value']) && $node->field_lsa_registerer['und'][0]['value'] == 2 && in_array($node->field_lsa_pin_ministry_org['und'][0]['value'], $check_min)){
       $params = array(
         'subject' => $supervisor_subject_special_condition,
