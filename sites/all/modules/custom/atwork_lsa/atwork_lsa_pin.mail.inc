@@ -174,7 +174,7 @@ $applicant_body_special_condition = <<<EOT
 <span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
 <p>Thank you for registering for your {$email_milestone} corporate service pin(s), and congratulations on this important career milestone!</p>
 
-<p><strong>Your pin(s) will be sent directly to your ministry/organization, for presentation to you during Public Service Week (June 15-19, 2020).</strong>.</p>
+<p><strong>Your pin(s) will be sent directly to your ministry/organization, for presentation to you during Public Service Week (June 15-19, 2020).</strong></p>
 
 <p>For more information about service pins, visit <a href="https://gww.gov.bc.ca/career/service-pins">@Work</a>. If you have additional questions, connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">organization's recognition contact</a>.</p>
 

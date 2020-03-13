@@ -43,6 +43,97 @@
           }
         });
 
+        // Try to stop doubling years
+      $('#edit-field-lsa-pin-service-milestone-und:not(.atwork-activity-processed)', context)
+        .addClass('atwork-activity-processed')
+        .bind('change', function(){
+          // Check ministry, only continue if they area allowed multiple pins
+          let $ministry_multiple = checkMinistry($("#edit-field-lsa-pin-ministry-org-und option:selected").val());
+          // Check which value we have assigned here
+          if($ministry_multiple === true) {
+            // TODO: Refactor this to run in a loop incrementing numbers by 5.
+            if($("#edit-field-lsa-pin-service-milestone-und option:selected").text() == "5 Years") {
+              $('#edit-field-lsa-previous-service-miles-und-5').attr('checked', false);
+              $('#edit-field-lsa-previous-service-miles-und-5').on("click", false);
+              $('.form-item-field-lsa-previous-service-miles-und-5').hide();
+            } else {
+              // Just in case we hid this previously
+              $('.form-item-field-lsa-previous-service-miles-und-5').show();
+            }
+            if($("#edit-field-lsa-pin-service-milestone-und option:selected").text() == "10 Years") {
+              $('#edit-field-lsa-previous-service-miles-und-10').attr('checked', false);
+              $('#edit-field-lsa-previous-service-miles-und-10').on("click", false);
+              $('.form-item-field-lsa-previous-service-miles-und-10').hide();
+            } else {
+              // Just in case we hid this previously
+              $('.form-item-field-lsa-previous-service-miles-und-10').show();
+            }
+            if($("#edit-field-lsa-pin-service-milestone-und option:selected").text() == "15 Years") {
+              $('#edit-field-lsa-previous-service-miles-und-15').attr('checked', false);
+              $('#edit-field-lsa-previous-service-miles-und-15').on("click", false);
+              $('.form-item-field-lsa-previous-service-miles-und-15').hide();
+            } else {
+              // Just in case we hid this previously
+              $('.form-item-field-lsa-previous-service-miles-und-15').show();
+            }
+            if($("#edit-field-lsa-pin-service-milestone-und option:selected").text() == "20 Years") {
+              $('#edit-field-lsa-previous-service-miles-und-20').attr('checked', false);
+              $('#edit-field-lsa-previous-service-miles-und-20').on("click", false);
+              $('.form-item-field-lsa-previous-service-miles-und-20').hide();
+            } else {
+              // Just in case we hid this previously
+              $('.form-item-field-lsa-previous-service-miles-und-20').show();
+            }
+            if($("#edit-field-lsa-pin-service-milestone-und option:selected").text() == "25 Years") {
+              $('#edit-field-lsa-previous-service-miles-und-25').attr('checked', false);
+              $('#edit-field-lsa-previous-service-miles-und-25').on("click", false);
+              $('.form-item-field-lsa-previous-service-miles-und-25').hide();
+            } else {
+              // Just in case we hid this previously
+              $('.form-item-field-lsa-previous-service-miles-und-25').show();
+            }
+            if($("#edit-field-lsa-pin-service-milestone-und option:selected").text() == "30 Years") {
+              $('#edit-field-lsa-previous-service-miles-und-30').attr('checked', false);
+              $('#edit-field-lsa-previous-service-miles-und-30').on("click", false);
+              $('.form-item-field-lsa-previous-service-miles-und-30').hide();
+            } else {
+              // Just in case we hid this previously
+              $('.form-item-field-lsa-previous-service-miles-und-30').show();
+            }
+            if($("#edit-field-lsa-pin-service-milestone-und option:selected").text() == "35 Years") {
+              $('#edit-field-lsa-previous-service-miles-und-35').attr('checked', false);
+              $('#edit-field-lsa-previous-service-miles-und-35').on("click", false);
+              $('.form-item-field-lsa-previous-service-miles-und-35').hide();
+            } else {
+              // Just in case we hid this previously
+              $('.form-item-field-lsa-previous-service-miles-und-35').show();
+            }
+            if($("#edit-field-lsa-pin-service-milestone-und option:selected").text() == "40 Years") {
+              $('#edit-field-lsa-previous-service-miles-und-40').attr('checked', false);
+              $('#edit-field-lsa-previous-service-miles-und-40').on("click", false);
+              $('.form-item-field-lsa-previous-service-miles-und-40').hide();
+            } else {
+              // Just in case we hid this previously
+              $('.form-item-field-lsa-previous-service-miles-und-40').show();
+            }
+            if($("#edit-field-lsa-pin-service-milestone-und option:selected").text() == "45 Years") {
+              $('#edit-field-lsa-previous-service-miles-und-45').attr('checked', false);
+              $('#edit-field-lsa-previous-service-miles-und-45').on("click", false);
+              $('.form-item-field-lsa-previous-service-miles-und-45').hide();
+            } else {
+              // Just in case we hid this previously
+              $('.form-item-field-lsa-previous-service-miles-und-45').show();
+            }
+            if($("#edit-field-lsa-pin-service-milestone-und option:selected").text() == "50 Years") {
+              $('#edit-field-lsa-previous-service-miles-und-50').attr('checked', false);
+              $('#edit-field-lsa-previous-service-miles-und-50').on("click", false);
+              $('.form-item-field-lsa-previous-service-miles-und-50').hide();
+            } else {
+              // Just in case we hid this previously
+              $('.form-item-field-lsa-previous-service-miles-und-50').show();
+            }
+          }
+        });
 
       $('#edit-field-lsa-other-milestone-years-und-1:not(.atwork-activity-processed)', context)
         .addClass('atwork-activity-processed')
@@ -165,6 +256,12 @@
       // TODO - Reset to default?
     }
   };
+
+  /**
+   * Function to manage pin year checkboxes for all ministries that can choose retros
+   */
+
+
 
   function setUpPage() {
     // We want to turn off submit button initially, until we are sure we have some type of milestone.
@@ -493,5 +590,43 @@
       $('.form-item.form-type-checkbox.form-item-field-lsa-pin-terms-und').find($('.description')).html('I declare, to the best of my knowledge and consistent with the <a href="https://gww.gov.bc.ca/career/service-pins-eligibility" target="_blank">service pin recognition eligibility guidelines</a> (which I have reviewed) that as of December 31, 2020, the above noted employee will have reached and/or surpassed a milestone year (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 years) and is therefore eligible to receive a service pin. By providing the employee\'s contact information, I am allowing the BC Public Service Agency to use this information for the planning and delivery of the corporate pin program.');
 
     }
+  }
+
+  /* Function that checks if ministry can have more than one pin   */
+  function checkMinistry(ministry){
+    let $ministryMultiple = false;
+
+    switch(true){
+      case ministry == 2 :  // Advanced Education, Skills & Training
+      case ministry == 3 :  // Agricultural Land Commission
+      case ministry == 4 :  // Agriculture
+      case ministry == 5 :  // Attorney General
+      case ministry == 12 :  // |BC Public Service Agency
+      case ministry == 17 :  // |Children & Family Development
+      case ministry == 18 :  // |Citizens' Services
+      case ministry == 24 :  // |Education
+      case ministry == 29 :  // |Energy, Mines & Petroleum Resources
+      case ministry == 30 :  // |Environment & Climate Change Strategy
+      case ministry == 32 :  // |Environmental Assessment Office
+      case ministry == 34 :  // |Finance
+      case ministry == 39 :  // |Forests, Lands, Natural Resource Operations & Rural Development
+      case ministry == 40 :  // |Government Communications & Public Engagement
+      case ministry == 42 :  // |Health
+      case ministry == 46 :  // |Indigenous Relations & Reconciliation
+      case ministry == 48 :  // |Intergovernmental Relations Secretariat
+      case ministry == 55 :  // |Mental Health & Addictions
+      case ministry == 60 :  // |Office of the Information and Privacy Commissioner
+      case ministry == 62 :  // |Office of the Ombudsperson
+      case ministry == 63 :  // |Office of the Police Complaints Commissioner
+      case ministry == 70 :  // |Public Guardian and Trustee
+      case ministry == 71 :  // |Public Safety & Solicitor General
+      case ministry == 81 :  // |Transportation & Infrastructure
+      case ministry == 87 :  // |BC Financial Services Authority
+      case ministry == 11 :  // |BC Pension Corporation
+      case ministry == 88 : // |Registrar of Lobbyists
+        $ministryMultiple = true;
+        break;
+    }
+    return $ministryMultiple;
   }
 })(jQuery);
