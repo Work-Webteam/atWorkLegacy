@@ -5,9 +5,10 @@ $_SERVER['REMOTE_ADDR'] = '127.0.01';
 $_SERVER['REQUEST_METHOD'] = NULL;
 
 // Bootstrap drupal
-define('DRUPAL_ROOT', '/var/www/html');
+//define('DRUPAL_ROOT', '/var/www/html');
 
-//define('DRUPAL_ROOT', '/var/www/public/atworkdev');
+define('DRUPAL_ROOT', getcwd());
+
 require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
 require_once DRUPAL_ROOT . '/modules/user/user.admin.inc';
 
