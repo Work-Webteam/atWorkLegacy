@@ -147,7 +147,7 @@
       $('#edit-field-lsa-other-milestone-years-und-0:not(.atwork-activity-processed)', context)
         .addClass('atwork-activity-processed')
         .bind('click', function(){
-            $('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false);
+            //$('#edit-field-lsa-previous-service-miles-und input.form-checkbox').prop('checked', false);
             $('#edit-field-lsa-previous-service-miles').slideUp('slow');
           });
 
@@ -502,12 +502,12 @@
     // Application by user
     if(applicationSubmitter == 1){
       if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
-        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service Pin(s) will be sent directly to your ministry/organization, for presentation during Public Service Week - June 15-19, 2020.</em></p>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service Pin(s) will be sent directly to your ministry/organization, for presentation during Public Service Week - June 14-20, 2020.</em></p>");
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
         $('#sup-div.required-fields.form-wrapper').hide();
 
       } else if ($('#edit-field-lsa-pin-ministry-org-und option:selected').val() != '_none'){
-        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 15-19, 2020.</em></p>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 14-20, 2020.</em></p>");
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
         $('#sup-div.required-fields.form-wrapper').show();
       } else {
@@ -518,11 +518,11 @@
     } else if(applicationSubmitter == 2){
       // depending on the situation, show or change the description field
       if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
-        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pin(s) will be sent directly to your ministry/organization, for presentation to the employee during Public Service Week - June 15-19, 2020.</em></p>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pin(s) will be sent directly to your ministry/organization, for presentation to the employee during Public Service Week - June 14-20, 2020.</em></p>");
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
         $('#sup-div.required-fields.form-wrapper').hide();
       } else if ($('#edit-field-lsa-pin-ministry-org-und option:selected').val() != '_none'){
-        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 15-19, 2020.</em></p>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 14-20, 2020.</em></p>");
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
         $('#sup-div.required-fields.form-wrapper').show();
       } else {
@@ -532,11 +532,11 @@
       // Application by min contact
     }  else if(applicationSubmitter == 3){
       if($.inArray($('#edit-field-lsa-pin-ministry-org-und option:selected').val(), special_cases) > -1){
-        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pin(s) will be sent directly to your ministry/organization, for presentation to the employee during Public Service Week - June 15-19, 2020.</em></p>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pin(s) will be sent directly to your ministry/organization, for presentation to the employee during Public Service Week - June 14-20, 2020.</em></p>");
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
         $('#sup-div.required-fields.form-wrapper').hide();
       } else if ($('#edit-field-lsa-pin-ministry-org-und option:selected').val() != '_none'){
-        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 15-19, 2020.</em></p>");
+        $('#edit-field-lsa-pin-ministry-org').find('.description').html("<p style='color:red;'><em>Service pins will be sent to the employee's supervisor for presentation during Public Service Week - June 14-20, 2020.</em></p>");
         $('#edit-field-lsa-pin-ministry-org').find('.description').show();
         $('#sup-div.required-fields.form-wrapper').show();
       } else {
