@@ -239,7 +239,7 @@ function atwork_lsa_application_validate($form, &$form_state) {
     }
   }
 
-  
+
   if(isset($form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']) && $form_state['input']['field_lsa_supervisor_postal_code']['und'][0]['value']){
     // Format this postal code
     // Upper case
@@ -269,7 +269,7 @@ function atwork_lsa_application_validate($form, &$form_state) {
   $award_id = $form_state['values']['field_lsa_award_id'][$lang][0]['value'];
   $pecsf_id = array(7, 13, 33, 40, 42,44);
   // They have chosen a pecsf award
-  if(in_array($award_id, $pecsf_id)){    
+  if(in_array($award_id, $pecsf_id)){
     if(!isset($form_state['values']['field_lsa_donation_options'][$lang][0]['value'])){
       form_set_error('field_lsa_donation_options', t("You must select a donation option."));
     }
@@ -588,7 +588,7 @@ function atwork_lsa_node_view($node, $view_mode, $langcode) {
     drupal_add_css('.field-name-field-lsa-25year-certificatename {display:block; }', 'inline');
   }
   // Adding in our third and final steps of instructions that isn't in the block - TODO: hide this until we are ready to allow users to alter their fields
-  //$node->content['field_lsa_retiring_thisyear']['#prefix'] = '<p> Step 3: Verify your contact information below is correct. If you make changes, click the “Save Change” button. If you are unable to make changes to certain fields, please notify us by email at <a href="mailto:longserviceawards@gov.bc.ca?subject=Change%20request">longserviceawards@gov.bc.ca</a>.</p><p>&nbsp</p>'; 
+  //$node->content['field_lsa_retiring_thisyear']['#prefix'] = '<p> Step 3: Verify your contact information below is correct. If you make changes, click the “Save Change” button. If you are unable to make changes to certain fields, please notify us by email at <a href="mailto:longserviceawards@gov.bc.ca?subject=Change%20request">longserviceawards@gov.bc.ca</a>.</p><p>&nbsp</p>';
   //$node->content['field_lsa_supervisor_email']['#suffix'] = '<strong style="color: red;"> <br /><p>Thank you for confirming your information.</p><p>Once all your changes are saved, please visit the <a href="https://gww.gov.bc.ca/career/long-service-awards/faq">Long Service Awards FAQs</a> for more information.</p></strong>';
   // Change the confirmation message to make more sense.
   if (isset($_SESSION['messages']['status']) && $_SESSION['messages']['status']){
@@ -667,39 +667,22 @@ function atwork_lsa_node_insert($node) {
 
     require_once(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_pin.mail.inc');
 
-  /** Pins sent directly to ministry contact, only for specific ministries (ie bulk send)
-  * 21|Community Living BC
-  * 24|Education
-  * 25|Elections BC
-  * 29|Energy, Mines & Petroleum Resources
-  * 32|Environmental Assessment Office
-  * 40|Government Communications & Public Engagement
-  * 46|Indigenous Relations & Reconciliation
-  * 48|Intergovernmental Relations Secretariat
-  * 55|Mental Health & Addictions
-  * 60|Office of the Information and Privacy Commissioner
-  * 62|Office of the Ombudsperson
-  * 63|Office of the Police Complaints Commissioner
-  * 68|Property Assessment Appeal Board
-  * 70|Public Guardian and Trustee
-  * 81|Transportation & Infrastructure
-   **/
+  /** Pins sent directly to ministry contact, only for specific ministries (ie bulk send)**/
     $check_min = array(
       21, //Community Living BC
       24, //Education
-      25, //Elections BC
       29, //Energy, Mines & Petroleum Resources
       32, //Environmental Assessment Office
-      40, //Government Communications & Public Engagement
       46, //Indigenous Relations & Reconciliation
       48, //Intergovernmental Relations Secretariat
       55, //Mental Health & Addictions
       60, //Office of the Information and Privacy Commissioner
       62, //Office of the Ombudsperson
-      63, //Office of the Police Complaints Commissioner
-      68, //Property Assessment Appeal Board
-      70, // Public Guardian and Trustee
+      70, //Public Guardian and Trustee
       81, //Transportation & Infrastructure
+      87, //BC Financial Services Authority
+      11, //BC Pension Corporation
+      88, //Registrar of Lobbyists
     );
 
 
@@ -718,7 +701,12 @@ function atwork_lsa_node_insert($node) {
       );
 
       drupal_mail('atwork_mail', 'atwork_mail_default', $applicant_to_special_condition, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
-
+      // We also need to send a supervisor email in this case
+      $params2 = array(
+        'subject' => $supervisor_min_send_subject,
+        'body' => $supervisor_min_send_body,
+      );
+      drupal_mail('atwork_mail', 'atwork_mail_default', $supervisor_min_send_to, language_default(), $params2, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
     }
 
 
@@ -730,7 +718,6 @@ function atwork_lsa_node_insert($node) {
       );
       drupal_mail('atwork_mail', 'atwork_mail_default', $supervisor_to, language_default(), $params, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
     }
-
     if(isset($node->field_lsa_registerer['und'][0]['value']) && $node->field_lsa_registerer['und'][0]['value'] == 2 && in_array($node->field_lsa_pin_ministry_org['und'][0]['value'], $check_min)){
       $params = array(
         'subject' => $supervisor_subject_special_condition,
@@ -818,9 +805,6 @@ function atwork_lsa_form_alter(&$form, &$form_state, $form_id) {
     drupal_set_breadcrumb(array());
   }
 
-  if ($form_id === 'lsa_application_node_form' ) {
-
-  }
   /*
    * Create a button that fires a function that will generate letters and labels
    */
@@ -959,7 +943,7 @@ function sort_pin_applications($pin_nids = array()){
     $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry_name'] = str_replace('&', "and", $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry_name']);
     $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry_name'] = str_replace('(FICOM)', "", $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry_name']);
 
-    // TODO: We need to add in the lsa pin branch here.
+    // TODO: We need to add in the lsa vagrapin branch here.
     $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['branch'] = $value->field_lsa_branch_department['und'][0]['value'];
     // Supervisors name
     $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['supervisor_first_name'] = $value->field_lsa_supervisor_first_name['und'][0]['safe_value'];
@@ -1370,25 +1354,25 @@ function atwork_lsa_node_page_view($node) {
 
   // Redirect any other user who tries to access an lsa application node
   if($node->type == 'lsa_application'){
-    // skip redirect for admins and lsa_admins    
+    // skip redirect for admins and lsa_admins
   	if (in_array('lsa admin', $user->roles) || in_array('administrator', $user->roles) || in_array('lsa contact', $user->roles)) {
   		return node_page_view($node);
   	}
-    
+
     $exists = db_select('node', 'n')
     ->fields('n')
     ->condition('n.uid', $user->uid)
     ->condition('n.type', 'lsa_application')
     ->execute()
     ->fetchAssoc();
-    
+
     if ((isset($exists['nid']) && $exists['nid'] && $exists == $node->nid) || ($user->mail == $node->field_lsa_email['und'][0]['email'])) {
     	return node_page_view($node);
     } else {
     	drupal_set_message(t('Because your primary email is a non-government email address, you can’t access the RSVP form on @Work at this time. To RSVP for your Long Service Award ceremony, please contact the Long Service Awards team by phone (250 387-1616) or <a href="mailto:longserviceawards@gov.bc.ca">email</a>. Thank you and congratulations on this important milestone!'), 'status');
     	drupal_goto('career/long-service-awards');
     }
-    
+
     // Give contact details
    //drupal_set_message('The LSA application period has come to an end. If you have any questions or concerns, please contact the Jenny Pescod at (250-356-7916) or email the <a href="mailto:longserviceawards@gov.bc.ca"> Long Service Award inbox </a> ', 'status');
     // Redirect to 403
@@ -1411,7 +1395,7 @@ function atwork_lsa_node_page_view($node) {
  */
 
 function atwork_lsa_menu() {
-  $items['atwork_lsa_pin_form/%'] = array( 
+  $items['atwork_lsa_pin_form/%'] = array(
     'type' => MENU_CALLBACK,
     'page callback' => 'atwork_lsa_pin_page_callback',
     'page arguments' => array(1),

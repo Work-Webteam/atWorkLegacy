@@ -28,13 +28,13 @@ $letter_text = <<< EOT
 <br clear=all style='page-break-before:always'>
 
 {$image_string}
-<font size="-1">      
+<font size="-1">
 <p>{$label}</p>
 <p><br /></p>
-<p> <span style="display:block;float:right;">May 23, 2019</span></p>
+<p> <span style="display:block;float:right;">May 23, 2020</span></p>
 <p><br /></p>
 <p>Dear {$supervisor_first}, </p>
-    
+
 <p>Enclosed are the service pins to present to your employees celebrating a career milestone. See below for details on which pins go to which employees. </p>
 
 <p><strong>Please present the pins during Public Service Week, June 10-14</strong>. It&apos;s a wonderful opportunity to thank your employees for their service and celebrate their commitment to the BC Public Service.  </p>
@@ -61,7 +61,7 @@ Email: Gillian.Kish@gov.bc.ca</font></p> <br />
 </font>
 <!-- This should double as a page break as .md takes html -->
 <!-- <div style="page-break-after: always;"></div> -->
-<div clear=all style='page-break-before:always'></div> 
+<div clear=all style='page-break-before:always'></div>
 <!-- <p clear=all style='page-break-before:always'></p> ---->
 
 
