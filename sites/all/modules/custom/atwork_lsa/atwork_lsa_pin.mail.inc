@@ -48,13 +48,13 @@ $supervisor_subject = t('An employee you supervise has applied for a service pin
 $supervisor_body = <<<EOT
 <span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
 
-<p>An employee you supervise has registered for a corporate service pin(s) in celebration of a service milestone they are currently celebrating or have missed celebrating in the past.</p>
+<p>An employee you supervise has been registered for a corporate service pin(s) in celebration of a service milestone they are currently celebrating or have missed celebrating in the past.</p>
 
-<p>{$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} is registered for a {$email_milestone} year service pin(s)</p>
+<p><strong>{$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} is registered for a {$email_milestone} service pin(s).</strong> The pin(s) will be mailed directly to you at the beginning of June.</p>
 
-<p>The pin(s) will be mailed directly to you at the beginning of June. Please present the pin(s) to {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} during Public Service Week, June 15-19, 2020. This is an ideal opportunity to thank your employee for their contribution and commitment to the BC Public Service! </p>
+<p><strong>Please present the pin(s) to {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} during Public Service Week (June 15-19, 2020). This is an ideal opportunity to thank your employee for their contribution and commitment to the BC Public Service!</p>
 
-<p>For more information about the service pin program, visit <a href="https://gww.gov.bc.ca/career/service-pins">@Work</a>. If you have additional questions, connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
+<p>For more information about the service pin program, visit <a href="https://gww.gov.bc.ca/career/service-pins">@Work</a>. If you have additional questions, connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">organization’s recognition contact</a>.</p>
 
 EOT;
 
@@ -64,11 +64,11 @@ $applicant_to = $node->field_lsa_email[$lang][0]['email'];
 $applicant_subject = t('Your service pin application has been received');
 $applicant_body = <<<EOT
 <span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
-<p>Thank you for registering for your {$email_milestone} year corporate service pin(s), and congratulations on this important career milestone!</p>
+<p>Thank you for registering for your {$email_milestone} corporate service pin(s), and congratulations on this important career milestone!</p>
 
-<p>Your pin(s) will be sent directly to your supervisor for presentation to you during <strong>Public Service Week (June 15-19, 2020)</strong>.</p>
+<p><strong>Your pin(s) will be sent directly to your supervisor for presentation to you during Public Service Week (June 15-19, 2020).</strong>.</p>
 
-<p>For more information about service pins, visit <a href="https://gww.gov.bc.ca/career/service-pins" target="_blank">@Work</a>. If you have additional questions, connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
+<p>For more information about service pins, visit <a href="https://gww.gov.bc.ca/career/service-pins" target="_blank">@Work</a>. If you have additional questions, connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">organization's recognition contact</a>.</p>
 
 EOT;
 
@@ -84,11 +84,11 @@ $supervisor_sign_sup_send_subject = t('An employee you supervise has applied for
 $supervisor_min_send_body = <<<EOT
 <span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
 
-<p>Thank you for registering {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} for a {$email_milestone} year service pin(s)</p>
+<p>Thank you for registering {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} for a {$email_milestone} service pin(s). The pin(s) will be mailed directly to you at the beginning of June.
 
-<p>The pin(s) will be mailed directly to you at the beginning of June. Please present the pin(s) to {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} during Public Service Week, June 15-19, 2020. This is an ideal opportunity to thank your employee for their contribution and commitment to the BC Public Service!</p>
+<p><strong>Please present the pin(s) to {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} during Public Service Week (June 15-19, 2020).</strong> This is an ideal opportunity to thank your employee for their contribution and commitment to the BC Public Service!</p>
 
-<p>For more information about service pins, visit <a href="https://gww.gov.bc.ca/career/service-pins">@Work</a>. If you have additional questions, connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
+<p>For more information about the service pin program, visit <a href="https://gww.gov.bc.ca/career/service-pins">@Work</a>. If you have additional questions, connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">organization’s recognition contact</a>.</p>
 
 EOT;
 
@@ -107,11 +107,11 @@ $ministry_rep_subject = t('You have registered someone for a Service Pin.');
 $ministry_rep_body = <<<EOT
 <span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
 
-<p>Thank you for registering {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} for a {$email_milestone} year service pin(s)</p>
+<p>Thank you for registering {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} for a {$email_milestone} service pin(s).</p>
 
-<p>The pin(s) will be mailed directly to {$node->field_lsa_pin_first_name[$lang][0]['value']}'s supervisor at the beginning of June, and they will be asked to present the pin(s) to {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} during <strong>Public Service Week (June 15-19, 2020)</strong>.</p>
+<p><strong>The pin(s) will be mailed directly to {$node->field_lsa_pin_first_name[$lang][0]['value']}'s supervisor at the beginning of June, and they will be asked to present the pin(s) to {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} during Public Service Week (June 15-19, 2020)</strong>.</p>
 
-<p>For more information about the service pin program, visit <a href="https://gww.gov.bc.ca/career/service-pins" target="_blank">@Work</a>. If you have additional questions, connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
+<p>For more information about the service pin program, visit <a href="https://gww.gov.bc.ca/career/service-pins" target="_blank">@Work</a>. If you have additional questions, connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">organization’s recognition contact</a>.</p>
 
 EOT;
 
@@ -159,11 +159,11 @@ $supervisor_min_send_body = <<<EOT
 
 <p>An employee you supervise has registered for a corporate service pin(s) in celebration of a service milestone they are currently celebrating or have missed celebrating in the past.</p>
 
-<p>{$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} is registered for a {$email_milestone} year service pin(s)</p>
+<p><strong>{$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} is registered for a {$email_milestone} service pin(s)</strong></p>
 
-<p>The pin(s) will be mailed directly to your ministry/organization at the beginning of June, and they will coordinate the distribution of these pins internally. If you have questions, connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
+<p><strong>The pin(s) will be mailed directly to your ministry/organization at the beginning of June</strong>, and they will coordinate the distribution of these pins internally. If you have questions, connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">organization’s recognition contact</a>.</p>
 
-<p>For more information about service pins, visit <a href="https://gww.gov.bc.ca/career/service-pins">@Work</a>.</p>
+<p>For more information about the service pin program, visit <a href="https://gww.gov.bc.ca/career/service-pins">@Work</a>.</p>
 
 EOT;
 
@@ -172,11 +172,11 @@ $applicant_to_special_condition = $node->field_lsa_email[$lang][0]['email'];
 $applicant_subject_special_condition = t('Your service pin application has been received');
 $applicant_body_special_condition = <<<EOT
 <span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
-<p>Thank you for registering for your {$email_milestone} year corporate service pin(s), and congratulations on this important career milestone!</p>
+<p>Thank you for registering for your {$email_milestone} corporate service pin(s), and congratulations on this important career milestone!</p>
 
-<p>Your pin(s) will be sent directly to your ministry/organization, for presentation to you during <strong>Public Service Week (June 15-19, 2020)</strong>.</p>
+<p><strong>Your pin(s) will be sent directly to your ministry/organization, for presentation to you during Public Service Week (June 15-19, 2020).</strong>.</p>
 
-<p>For more information about service pins, visit <a href="https://gww.gov.bc.ca/career/service-pins">@Work</a>. If you have additional questions, connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
+<p>For more information about service pins, visit <a href="https://gww.gov.bc.ca/career/service-pins">@Work</a>. If you have additional questions, connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">organization's recognition contact</a>.</p>
 
 EOT;
 
@@ -191,9 +191,9 @@ $supervisor_subject_special_condition = t('You have registered someone for a ser
 $supervisor_body_special_condition = <<<EOT
 <span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
 
-<p>Thank you for registering {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} for a {$email_milestone} year service pin(s).</p>
+<p>Thank you for registering {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} for a {$email_milestone} service pin(s).</p>
 
-<p>The pin(s) will be mailed directly to your ministry/organization at the beginning of June, and they will coordinate the distribution of the pins internally. If you have questions, connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</p>
+<p><strong>The pin(s) will be mailed directly to your ministry/organization at the beginning of June</strong>, and they will coordinate the distribution of these pins internally. If you have questions, connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">organization’s recognition contact</a>.</p>
 
 <p>For more information about the service pin program, visit <a href="https://gww.gov.bc.ca/career/service-pins">@Work</a>.</p>
 
@@ -216,9 +216,9 @@ $ministry_sign_min_send_subject = t('You have registered someone for a Service P
 $ministry_sign_min_send_body = <<<EOT
 <span style="background:yellow">THIS IS AN AUTOMATED EMAIL. NO RESPONSE IS REQUIRED.</span>
 
-<p>Thank you for registering {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} for a {$email_milestone} year service pin(s)</p>
+<p>Thank you for registering {$node->field_lsa_pin_first_name[$lang][0]['value']} {$node->field_lsa_pin_last_name[$lang][0]['value']} for a {$email_milestone} service pin(s)</p>
 
-<p>The pin(s) will be mailed directly to your ministry/organization at the beginning of June, and they will coordinate the distribution of the pins internally. If you have questions, connect with your ministry recognition contact.</p>
+<p><strong>The pin(s) will be mailed directly to your ministry/organization at the beginning of June</strong>, and they will coordinate the distribution of the pins internally. If you have questions, connect with your <a href="https://gww.gov.bc.ca/career/employee-appreciation/recognition-contacts" target="_blank">organization’s recognition contact</a>.</p>
 
 <p>For more information about the service pin program, visit <a href="https://gww.gov.bc.ca/career/service-pins" target="_blank">@Work</a>.</p>
 
