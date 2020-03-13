@@ -358,7 +358,7 @@
             // We are fine, nothing to do
           } else {
             $('#edit-field-lsa-milestone-year-und').addClass('atwork-activity-processed');
-            $('#edit-field-lsa-milestone-year-und').after('<div id="select-message"><p><em>In order to be eligible for a service pin, employees must be celebrating a current milestone in 2020. If you have questions about your eligibility, please contact your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</em></p></div>');
+            $('#edit-field-lsa-milestone-year-und').after('<div id="select-message"><p><em>In order to be eligible for a service pin, employees must be celebrating a current milestone in 2020. If you have questions about your eligibility, please contact your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">recognition contact</a>.</em></p></div>');
           }
           $('#edit-field-lsa-other-milestone-years').hide();
           $('#edit-field-lsa-other-milestone-years-und-1').prop('checked', false);
@@ -452,7 +452,7 @@
             // We are fine, nothing to do
           } else {
             $('#edit-field-lsa-milestone-year-und').addClass('atwork-activity-processed');
-            $('#edit-field-lsa-milestone-year-und').after('<div id="select-message"><p><em>In order to be eligible for a service pin, employees must be celebrating a current milestone in 2020. If you have questions about your eligibility, please contact your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</em></p></div>');
+            $('#edit-field-lsa-milestone-year-und').after('<div id="select-message"><p><em>In order to be eligible for a service pin, employees must be celebrating a current milestone in 2020. If you have questions about your eligibility, please contact your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">recognition contact</a>.</em></p></div>');
           }
           $('#edit-field-lsa-other-milestone-years').hide();
           $('#edit-field-lsa-other-milestone-years-und-1').prop('checked', false);
@@ -468,7 +468,7 @@
           // We are fine, nothing to do
         } else {
           $('#edit-field-lsa-milestone-year-und').addClass('atwork-activity-processed');
-          $('#edit-field-lsa-milestone-year-und').after('<div id="select-message"><p><em>In order to be eligible for a service pin, employees must be celebrating a current milestone in 2020. If you have questions about your eligibility, please contact your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">ministry recognition contact</a>.</em></p></div>');
+          $('#edit-field-lsa-milestone-year-und').after('<div id="select-message"><p><em>In order to be eligible for a service pin, employees must be celebrating a current milestone in 2020. If you have questions about your eligibility, please contact your <a href="/career/employee-appreciation/recognition-contacts" target="_blank">recognition contact</a>.</em></p></div>');
         }
         $('#edit-field-lsa-other-milestone-years').hide();
         $('#edit-field-lsa-previous-service-miles').hide();
