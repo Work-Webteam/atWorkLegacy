@@ -683,6 +683,7 @@ function atwork_lsa_node_insert($node) {
       87, //BC Financial Services Authority
       11, //BC Pension Corporation
       88, //Registrar of Lobbyists
+      25, //Elections BC
     );
 
 
@@ -709,8 +710,7 @@ function atwork_lsa_node_insert($node) {
       drupal_mail('atwork_mail', 'atwork_mail_default', $supervisor_min_send_to, language_default(), $params2, variable_get('site_mail', 'EmployeeNews@gov.bc.ca'));
     }
 
-
-    // supervisor
+    // Supervisor
     if(isset($node->field_lsa_pin_ministry_org['und'][0]['value']) && $node->field_lsa_pin_ministry_org['und'][0]['value'] && !in_array($node->field_lsa_pin_ministry_org['und'][0]['value'], $check_min)){
       $params = array(
         'subject' => $supervisor_subject,

@@ -174,6 +174,8 @@
       "87", //BC Financial Services Authority
       "11", //BC Pension Corporation
       "88",//Registrar of Lobbyists
+      "25", //Elections BC
+
     ];
 
     checkLabels(response.choice);
@@ -391,6 +393,7 @@
       case ministry == 17 :  // |Children & Family Development
       case ministry == 18 :  // |Citizens' Services
       case ministry == 24 :  // |Education
+      case ministry == 25 :  // |Elections BC
       case ministry == 29 :  // |Energy, Mines & Petroleum Resources
       case ministry == 30 :  // |Environment & Climate Change Strategy
       case ministry == 32 :  // |Environmental Assessment Office
@@ -498,6 +501,7 @@
       "87", //BC Financial Services Authority
       "11", //BC Pension Corporation
       "88", //Registrar of Lobbyists
+      "25", // Elections BC
       ];
     // Application by user
     if(applicationSubmitter == 1){
@@ -605,6 +609,7 @@
       case ministry == 17 :  // |Children & Family Development
       case ministry == 18 :  // |Citizens' Services
       case ministry == 24 :  // |Education
+      case ministry == 25 : // Elections BC
       case ministry == 29 :  // |Energy, Mines & Petroleum Resources
       case ministry == 30 :  // |Environment & Climate Change Strategy
       case ministry == 32 :  // |Environmental Assessment Office
