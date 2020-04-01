@@ -339,7 +339,8 @@ function atwork_lsa_pin_application_validate($form, &$form_state){
   $lang = $form_state['values']['language'];
   global $user;
 
-  if (!in_array('lsa admin', $user->roles) && in_array('administrator', $user->roles)) {
+  // Don't enforce this for admins, lsa admins or recognition contacts.
+  if (!in_array('lsa admin', $user->roles) && !in_array('administrator', $user->roles) && !in_array('recognition contact', $user->roles)) {
     // Check if an application has already been submitted for this user
     $exists = db_select('field_data_field_lsa_pin_employee_number', 'e')
       ->fields('e', array('entity_id'))
