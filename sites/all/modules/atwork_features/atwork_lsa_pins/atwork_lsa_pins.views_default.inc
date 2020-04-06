@@ -2520,7 +2520,6 @@ function atwork_lsa_pins_views_default_views() {
   $handler->display->display_options['fields']['field_lsa_registerer']['table'] = 'field_data_field_lsa_registerer';
   $handler->display->display_options['fields']['field_lsa_registerer']['field'] = 'field_lsa_registerer';
   $handler->display->display_options['fields']['field_lsa_registerer']['label'] = 'Who is registering';
-  $handler->display->display_options['fields']['field_lsa_registerer']['type'] = 'list_key';
   /* Field: Content: Ministry Representative Email */
   $handler->display->display_options['fields']['field_lsa_ministry_rep_email']['id'] = 'field_lsa_ministry_rep_email';
   $handler->display->display_options['fields']['field_lsa_ministry_rep_email']['table'] = 'field_data_field_lsa_ministry_rep_email';
