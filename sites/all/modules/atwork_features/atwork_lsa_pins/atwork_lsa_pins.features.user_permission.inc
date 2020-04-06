@@ -16,6 +16,7 @@ function atwork_lsa_pins_user_default_permissions() {
     'name' => 'create lsa_pin_application content',
     'roles' => array(
       'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
       'editor' => 'editor',
       'lsa admin' => 'lsa admin',
       'lsa contact' => 'lsa contact',
@@ -64,6 +65,7 @@ function atwork_lsa_pins_user_default_permissions() {
       'editor' => 'editor',
       'lsa admin' => 'lsa admin',
       'lsa contact' => 'lsa contact',
+      'recognition contact' => 'recognition contact',
     ),
     'module' => 'node',
   );
