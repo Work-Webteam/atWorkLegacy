@@ -18,6 +18,13 @@ function atwork_lsa_pins_ctools_plugin_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_views_api().
+ */
+function atwork_lsa_pins_views_api($module = NULL, $api = NULL) {
+  return array("api" => "3.0");
+}
+
+/**
  * Implements hook_node_info().
  */
 function atwork_lsa_pins_node_info() {
