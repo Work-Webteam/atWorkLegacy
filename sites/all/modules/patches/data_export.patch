@@ -1,0 +1,51 @@
+diff --git a/plugins/views_data_export_plugin_display_export.inc b/plugins/views_data_export_plugin_display_export.inc
+index 54209d2..411547e 100644
+--- a/plugins/views_data_export_plugin_display_export.inc
++++ b/plugins/views_data_export_plugin_display_export.inc
+@@ -1000,9 +1000,45 @@ class views_data_export_plugin_query_default_batched extends views_plugin_query_
+         // TODO: this could probably be replaced with a query extender and new query type.
+         $query->preExecute();
+         $args = $query->getArguments();
+-        $insert_query = 'CREATE TABLE {' . $display_handler->index_tablename() . '} SELECT @row := @row + 1 AS ' . $display_handler->batched_execution_state->sandbox['weight_field_alias'] . ', ' . implode(', ', $select_aliases) . ' FROM (' . (string)$query . ') AS cl, (SELECT @row := 0) AS r';
+-        db_query($insert_query, $args);
+
++        db_create_table($display_handler->index_tablename(), array(
++          'fields' => array(
++            $display_handler->batched_execution_state->sandbox['weight_field_alias'] => array(
++              'type' => 'int',
++              'length' => 10,
++              'not null' => TRUE,
++            ),
++          ),
++          'primary key' => array($display_handler->batched_execution_state->sandbox['weight_field_alias']),
++        ));
++
++        $q = 'SELECT @row := @row + 1 AS ' . $display_handler->batched_execution_state->sandbox['weight_field_alias'] . ', ' . implode(', ', $select_aliases) . ' FROM (' . (string)$query . ') AS cl, (SELECT @row := 0) AS r';
++        $result = db_query($q, $args);
++
++        $rows = $result->fetchAllAssoc($display_handler->batched_execution_state->sandbox['weight_field_alias'], PDO::FETCH_ASSOC);
++
++        if (count($rows) > 0) {
++          $keys = array_keys(reset($rows));
++
++          foreach($keys as $key) {
++            if($key != $display_handler->batched_execution_state->sandbox['weight_field_alias']) {
++              db_add_field($display_handler->index_tablename(), $key, array(
++                'type' => 'text',
++                'size' => 'big',
++                'not null' => FALSE,
++              ));
++            }
++          }
++
++          foreach ($rows as $r) {
++            $options = array();
++            foreach($keys as $key) {
++              $options[$key] = $r[$key];
++            }
++
++            db_insert($display_handler->index_tablename())->fields($options)->execute();
++          }
++        }
+
+         $view->result = array();

@@ -95,3 +95,8 @@ date: 2019-09-18
 Module: Advanced Forums
 Source: https://www.drupal.org/project/advanced_forum/issues/3064321
 Issue: Fixing error introduced by last module security patch.
+
+date: 2020-04-06
+Module: Views Data Export
+Source: https://www.drupal.org/project/views_data_export/issues/2209853
+Issue: Fixing error when exporting data on cluster.
