@@ -17,6 +17,7 @@
 
 @import "layouts/grid.scss";
 @import "layouts/atworklayout.scss";
+@import "layouts/mainnav.scss";
 
 @import "components/buttons.scss";
 @import "components/menus/navigation.scss";
@@ -528,9 +529,9 @@ div.header-user {
   padding: 10px 0px 10px 5px;
   margin: 0;
 }
-#navigation .region-navigation {
+/*#navigation .region-navigation {
   font-family: open-sans, sans-serif !important;
-}
+}*/
 #navigation .region-navigation a.dropdown-toggle {
   cursor: default;
 }
@@ -559,9 +560,9 @@ div.header-user {
   max-width: 100% !important;
   overflow-x: visible;
 }
-.tb-megamenu .row-fluid [class*="span"] {
-  margin-left: .5%\0/ !important; /* For IE only */
-}
+//.tb-megamenu .row-fluid [class*="span"] {
+//  margin-left: .5%\0/ !important; /* For IE only */
+// }
 
 #navigation .region-navigation {
   display: block;
@@ -703,9 +704,9 @@ div.header-user {
 .front #block-views-top-tools-block {
 	display: inline-block;
 	background-color: #D7D7D7;
-	height: 390px;
+	height: auto;
 	margin-left: 5px;
-	padding-bottom: 15px;
+	//padding-bottom: 15px;
 }
 .front #block-views-top-tools-block h2 {
 	font-size: initial;
@@ -713,7 +714,7 @@ div.header-user {
 .front #top-tools-links {
 	background-color: #FFF;
 	margin: 20px;
-	padding: 15px;
+	padding: 10px;
 }
 .front #top-tools-links a {
 	display: block;
@@ -1377,13 +1378,13 @@ h3.front-promoted-title {
 	float: left;
 	background-color: #D7D7D7;
   min-width:615px;
-	height: 390px;
+	height: 450px;
 	padding-bottom: 15px;
 }
 .front #block-views-home-page-blocks-zen-block-2 .view-content {
 	background-color: #fff;
 	display: block;
-	height: 300px;
+	height: 370px;
 	padding: 10px;
 	margin: 20px 25px 0;
 }
