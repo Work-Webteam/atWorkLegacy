@@ -70,11 +70,7 @@
   <?php print $page_top; ?>
   <?php print $page; ?>
   <?php print $page_bottom; ?>
-  <?php
-    if (_atwork_production_environment()) {
-      include '/var/www/html/sites/all/themes/atwork_zen/webtrends/sdc_include.html';
-    }
-  ?>
+
   <!-- Snowplow starts plowing - Standalone vA.2.10.2 -->
   <script type="text/javascript">
   ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
