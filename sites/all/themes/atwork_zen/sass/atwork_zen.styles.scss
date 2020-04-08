@@ -566,14 +566,14 @@ div.header-user {
 
 #navigation .region-navigation {
   display: block;
-  margin: 0 auto 0;
+  margin: 0 auto;
   padding: 0px;
   top: 0px;
   position: fixed;
   clear: both;
   line-height: 1.5em;
   z-index: 100;
-  width: 100vw;
+  width: 1240px;
   left: calc(-50vw + 50%);
   background-color: rgb(236,236,236);
 }
