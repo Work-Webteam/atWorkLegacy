@@ -32,11 +32,13 @@ function atwork_auth_init() {
 
   // this should only happen if site isn't accessed through reverse proxy
   // let's log it if this happens
-  if ($_SERVER['USER'] != 'apache' && (!isset($_SERVER['HTTP_SM_USER']) || !isset($_SERVER['HTTP_SMGOV_USERGUID']))) {
-	if (variable_get('atwork_auth_watchdog_nosm', 1)) {
-      watchdog('atwork_auth', t('A user connected without going through siteminder: ' . print_r($_SERVER, TRUE)));
+  if(isset($_SERVER['USER'])) {
+    if ($_SERVER['USER'] != 'apache' && (!isset($_SERVER['HTTP_SM_USER']) || !isset($_SERVER['HTTP_SMGOV_USERGUID']))) {
+      if (variable_get('atwork_auth_watchdog_nosm', 1)) {
+        watchdog('atwork_auth', t('A user connected without going through siteminder: ' . print_r($_SERVER, TRUE)));
+      }
+      return;
     }
-    return;
   }
 
   // for consistency always use lowercase IDIRs in drupal
