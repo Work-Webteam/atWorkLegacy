@@ -185,3 +185,60 @@ function atwork_comments_comment_insert($comment) {
   }
 }
 
+/*
+ * Implementation of hook_cron()
+ *
+ * We want to close comments on content types that have not been updated in over 2 weeks.
+ */
+function atwork_comments_cron() {
+  // Run this once per hour to make sure we don't build up too many nodes.
+  // Default to an hourly interval. Of course, cron has to be running at least
+  // hourly for this to work.
+  //$interval = variable_get('atwork_comment_cron_interval', 60 * 60);
+  $interval = variable_get('atwork_comment_cron_interval', 1);
+  // Iterator for our Watchdog message
+  $i = 0;
+  // We usually don't want to act every time cron runs (which could be every
+  // minute) so keep a time for the next run in a variable.
+  if (time() >= variable_get('atwork_comment_cron_next_execution', 0)) {
+    // Get all nodes with open comments that are older than 2 weeks (sec*minutes*hours*days*weeks is 60*60*24*7*2).
+    $two_weeks = 1209600;
+    $current = time() - $two_weeks;
+    $content_types = [
+      'blog',
+      'forum',
+      'article',
+    ];
+    // TODO: Remove this testing override
+    $current = time();
+    // Set up the query
+    $db_query  = db_query(
+      "SELECT * FROM {node n} WHERE n.comment=2 and n.changed < ($current) and n.type IN('blog', 'forum', 'article', 'gallery')"
+    );
+    // Fetch assoc nodes
+    $result = $db_query->fetchAll();
+    // Process this list if there is one
+    if($result != NULL){
+      foreach($result as $n) {
+        // Close the comments on node
+        $current_node = node_load($n->nid);
+        if($current_node->comment == 2){
+          $current_node->comment = 1;
+          // Turn off subscriptions so we don't send a bunch out
+          $current_node->subscriptions_notify = FALSE;
+          // Save node
+          node_save($current_node);
+          // Increment our iterator
+          $i ++;
+        }
+      }
+    }
+
+    // Document the work
+    watchdog('atwork_comment_cron', 'Comment archive cron has run');
+    if (!empty($i)) {
+      watchdog('atwork_comment_cron', "atwork_comment_cron executed at date_iso8601(time() with $i nodes updated");
+    }
+    variable_set('atwork_comment_cron_next_execution', time() + $interval);
+  }
+}
