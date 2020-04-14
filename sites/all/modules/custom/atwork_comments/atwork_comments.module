@@ -208,13 +208,14 @@ function atwork_comments_cron() {
       'blog',
       'forum',
       'article',
-      'gallery'
+      'gallery',
+      'image',
     ];
     // TODO: Remove this testing override
     $current = time();
     // Set up the query
     $db_query  = db_query(
-      "SELECT * FROM {node n} WHERE n.comment=2 and n.changed < ($current) and n.type IN('blog', 'forum', 'article', 'gallery')"
+      "SELECT * FROM {node n} WHERE n.comment=2 and n.changed < ($current) and n.type IN('blog', 'forum', 'article', 'gallery', 'image')"
     );
     // Fetch assoc nodes
     $result = $db_query->fetchAll();
