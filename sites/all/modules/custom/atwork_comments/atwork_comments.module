@@ -208,6 +208,7 @@ function atwork_comments_cron() {
       'blog',
       'forum',
       'article',
+      'gallery'
     ];
     // TODO: Remove this testing override
     $current = time();
@@ -237,7 +238,9 @@ function atwork_comments_cron() {
     // Document the work
     watchdog('atwork_comment_cron', 'Comment archive cron has run');
     if (!empty($i)) {
-      watchdog('atwork_comment_cron', "atwork_comment_cron executed at date_iso8601(time() with $i nodes updated");
+      watchdog('atwork_comment_cron', "atwork_comment_cron executed at " . date_iso8601(time()) . " with $i nodes updated.");
+    } else {
+      watchdog('atwork_comment_cron', "atwork_comment_cron executed at " . date_iso8601(time()) . ", nothing to update.");
     }
     variable_set('atwork_comment_cron_next_execution', time() + $interval);
   }
