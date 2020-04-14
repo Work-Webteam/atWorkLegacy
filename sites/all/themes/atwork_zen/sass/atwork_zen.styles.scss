@@ -2,8 +2,8 @@
 
 // Load variables first, then mixins, then everything else
 @import "variables/colors.scss";
-@import "variables/typography.scss";
 @import "abstractions/mixins.scss";
+@import "variables/typography.scss";
 
 @import "abstractions/extends.scss";
 @import "abstractions/functions.scss";
@@ -101,7 +101,7 @@ a.avpw_cursor {
 
 .sidebars ul li,
 #content article ul li {
-  list-style-image: url(/sites/all/themes/atwork_zen/images/arrow_blue_right.png);
+  list-style-image: url(../images/arrow_blue_right.png);
 }
 
 /*----------------- End of Section--------------------*/
@@ -116,10 +116,10 @@ html, body {
   height: 100%;
 }
 html {
-  background: url(/sites/all/themes/atwork_zen/images/top-bar.png) repeat-x scroll center -30px;
+  background: url(../images/top-bar.png) repeat-x scroll center -30px;
 }
 #footer {
-  background: url(/sites/all/themes/atwork_zen/images/mountain-footer.png) repeat-x scroll center bottom;
+  background: url(../images/mountain-footer.png) repeat-x scroll center bottom;
 }
 .front #page {
   position: relative;
@@ -185,7 +185,7 @@ html {
   margin-top: -30px;
 }
 #header {
-  background: url(/sites/all/themes/atwork_zen/images/atwork-logo.png) no-repeat scroll center 10px;
+  background: url(../images/atwork-logo.png) no-repeat scroll center 10px;
   /* Below, for a new atwork-logo-theme image, update the date parameter to reflect the edit date.
   This prevents browser caching */
   /*background: url(/sites/all/themes/atwork_zen/images/atwork-logo-theme.png?d=20160919) no-repeat scroll center 18px;*/
@@ -265,7 +265,7 @@ img {
 .views-field-field-additional-info ul li,
 .one-sidebar #content article ul li {
   margin-top: 0px;
-  list-style-image: url("/sites/all/themes/atwork_zen/images/arrow_blue_right.png");
+  list-style-image: url("../images/arrow_blue_right.png");
 }
 #content article .taxonomy-terms-list li {
   list-style-image: none !important;
@@ -455,7 +455,7 @@ div.header-user {
   padding-right: 17px;
 }
 #header-user-dropdown {
-  background: url(/sites/all/themes/atwork_zen/images/menu-up-pointer.png) no-repeat 115px 0px;
+  background: url(../images/menu-up-pointer.png) no-repeat 115px 0px;
   clear:both;
   width: 165px;
   padding-top: 1px;
@@ -482,7 +482,7 @@ div.header-user {
   position: relative;
   z-index: 9999;
   display: block;
-  background: url(/sites/all/themes/atwork_zen/images/user-drop-bknd.png) repeat fixed center top;
+  background: url(../images/user-drop-bknd.png) repeat fixed center top;
   margin: 12px 0 0 0;
   padding: 10px 0;
   list-style: none;
@@ -502,179 +502,6 @@ div.header-user {
   background-color: #004B8D;
 }
 /*----------------- End of Section--------------------*/
-
-
-
-
-
-
-
-
-
-
-/*#####################################################################################################################################################*/
-/* Rules for main Navigation - Mega Menu positioning. Additional styles controlled in the TB Mega Menu default.css */
-/*#####################################################################################################################################################*/
-
-/* Editing purposes only - Displays the submenu - Change the submenu name to display */
-/* .mm-news-sub / .mm-social-sub / .mm-bcps-sub / .mm-recog-sub */
-/* .mm-forms-sub / .mm-tools-sub / .mm-resources-sub */
-
-/*#navigation .mm-social-sub {
-  display: block !important;
-  opacity: initial;
-}*/
-
-.tb-megamenu .mega-inner {
-  padding: 10px 0px 10px 5px;
-  margin: 0;
-}
-/*#navigation .region-navigation {
-  font-family: open-sans, sans-serif !important;
-}*/
-#navigation .region-navigation a.dropdown-toggle {
-  cursor: default;
-}
-#block-boxes-mm-news-hilite {
-  font-weight: normal;
-  color: #999;
-}
-#block-boxes-mm-news-hilite .boxes-box-controls {
-  display: none;
-}
-.mm-news-sub,
-.mm-social-sub,
-.mm-bcps-sub,
-.mm-recog-sub,
-.mm-forms-sub,
-.mm-tools-sub,
-.mm-resources-sub {
-  text-align: left;
-  width: 100% !important;
-}
-#block-tb-megamenu-menu-main-menu-zen {
-  width: 960px;
-  margin: auto;
-}
-#block-tb-megamenu-menu-main-menu-zen .tb-megamenu-row.row-fluid {
-  max-width: 100% !important;
-  overflow-x: visible;
-}
-//.tb-megamenu .row-fluid [class*="span"] {
-//  margin-left: .5%\0/ !important; /* For IE only */
-// }
-
-#navigation .region-navigation {
-  display: block;
-  margin: 0 auto;
-  padding: 0px;
-  top: 0px;
-  position: fixed;
-  clear: both;
-  line-height: 1.5em;
-  z-index: 100;
-  width: 1240px;
-  left: calc(-50vw + 50%);
-  background-color: rgb(236,236,236);
-}
-#navigation .ext {
-  display: none;
-}
-
-#navigation ul li a {
-  display: block;
-  text-decoration: none;
-  padding: 4px 10px 5px;
-  /*border-bottom: solid 1px #c7c7c7;*/
-}
-
-#navigation a.block-title-link,
-#navigation .mega-group-title,
-#navigation #block-boxes-mm-news-hilite h2.block__title.block-title {
-  color: #FFF;
-  font-weight: bold;
-  background-color: #26669E;
-  font-size: .95em\0/ !important;/* For IE only */
-  cursor: default;
-}
-#navigation #block-boxes-mm-news-hilite .mega-group-title {
-  padding: 5px 10px;
-}
-
-#navigation #tb-megamenu-column-9 .mega-group-title:hover {
-  background-color: #26669E;
-  color:#FFF;
-}
-
-
-#navigation .mm-home, #navigation .mm-news, #navigation .mm-social, #navigation .mm-bcps, #navigation .mm-recog, #navigation .mm-tools {
-  line-height: 1.4em;
-  text-align: center;
-  /*background-color: rgba(237,237,237,.5) !important;*/
-  /*background-color: #EEE\0/ !important; /* For IE only */
-}
-#navigation .mm-home {
-  width: 9%;
-  border-right: 1px solid #CCC;
-}
-#navigation .mm-news {
-  width: 10%;
-  border-right: 1px solid #CCC;
-}
-#navigation .mm-bcps {
-  width: 23%;
-  border-right: 1px solid #CCC;
-}
-#navigation .mm-social {
-  width: 16%;
-  border-right: 1px solid #CCC;
-}
-#navigation .mm-recog{
-  width: 21%;
-  border-right: 1px solid #CCC;
-}
-#navigation .mm-tools{
-  width: 20%;
-}
-#navigation .mm-bcps-sub .item-list li {
-  border-top: 1px solid #C7C7C7;
-}
-#navigation .mm-bcps-sub .item-list li:first-child {
-  border: 0;
-}
-#navigation .item-list .views-field-title a {
-  display: block;
-  padding: 5px 0px 5px 5px;
-  margin: 0px;
-  font-weight: bold;
-  color: #004B8D;
-}
-#navigation .item-list .views-field-title a:hover {
-  background-color: #003462;
-  color: #FFF;
-}
-#navigation .item-list .views-field-title a:first-child {
-}
-#navigation .views-field-field-date {
-  padding-left: 5px;
-  margin-bottom: 8px;
-  color: #818283;
-}
-#navigation .mm-corp-daily .view-footer {
-  display: none;
-}
-
-
-/*----------------- End of Section--------------------*/
-
-
-
-
-
-
-
-
-
 
 /*#####################################################################################################################################################*/
 /* Front Page Only -------------------------------------------------------*/
@@ -2820,7 +2647,7 @@ ul.recent-comment-line {
 
 .profile {
     #article-fade {
-      background-image: url("/sites/all/themes/atwork_zen/images/article-fade.png");
+      background-image: url("../images/article-fade.png");
       width: 639px;
       height: 130px;
       position: absolute;
@@ -3519,7 +3346,7 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 .node-type-page #block-block-34 ul li a,
 .node-type-page #block-boxes-staff-appreciation-navigation ul li a,
 .node-type-page #block-block-36 ul li a {
-  background-image: url(/sites/all/themes/atwork_zen/images/right-chevrons.png);
+  background-image: url(../images/right-chevrons.png);
   background-repeat: no-repeat;
   background-position: 1em .8em;
   color: #666;
@@ -3553,7 +3380,7 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 .node-type-page #block-block-36 ul li a:hover {
   background-color: #004B8D;
   color: #FFF;
-  background-image: url(/sites/all/themes/atwork_zen/images/right-chevrons-white.png);
+  background-image: url(../images/right-chevrons-white.png);
   text-decoration: none;
 }
 
@@ -4538,7 +4365,7 @@ article.node-question .tiled-node-links {
 }
 #block-views-events-block-1 .calendar-todays-events li,
 #block-views-events-block .calendar-upcoming-events li {
-  background-image: url(/sites/all/themes/atwork_zen/images/right-chevrons.png);
+  background-image: url(../images/right-chevrons.png);
   background-repeat: no-repeat;
   background-position: 1em 1.1em;
   color: #666;
@@ -5147,7 +4974,7 @@ span.flag-throbber {
   width: 17%;
   vertical-align: top;
   border: solid 1px #ECECEC;
-  background-image: url(/sites/all/themes/atwork_zen/images/default_images/default_photogallery310x232.gif);
+  background-image: url(../images/default_images/default_photogallery310x232.gif);
   background-position: center;
 }
 .page-node-258 .field-item li a {
