@@ -185,9 +185,12 @@
   // Superfish Main menu changes
   ul#superfish-1 {
     > li > ul {
-      margin-top:-4px;
+      margin-top:-3px;
       background: #ECECEC;
-      border-top:solid 2px #CCC;
+      border-top:solid 1px #CCC;
+      border-bottom:solid 3px #818283;
+      border-left: solid 1px #CAC7C7;
+      border-right: solid 1px #CAC7C7;
       padding-bottom:3px;
     }
     .sf-depth-1 {
@@ -238,6 +241,16 @@
     background: url('../images/arrows.png') no-repeat;
     top:15px;
     right:5px;
+  }
+}
+.not-front #navigation {
+  .region.region-navigation {
+    max-width:960px;
+  }
+  ul#superfish-1 {
+    > li > ul {
+      max-width:960px;
+    }
   }
 }
 .sf-depth-1.next-menu-item.menuparent.sf-breadcrumb.sfHover, .active-trail.sf-depth-2.next-menu-item.sf-no-children > a, .active-trail.sf-depth-2.next-menu-item.menuparent > a {

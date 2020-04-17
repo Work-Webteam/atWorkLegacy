@@ -196,10 +196,7 @@ html {
   image-rendering: auto;
   -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
 }
-/* Header search box no on front page */
-.front #header.header #block-block-7 {
-  display:none;
-}
+
 #header-box {
   position: absolute;
   height: 110px;
@@ -658,152 +655,20 @@ div #block-views-home-page-blocks-zen-block-6 {
 
 
 /* Standard top menu search -------------------------------------------------------*/
-.not-front.logged-in #block-block-7 #search-block-form {
-  display: block;
-  float: right;
+#navigation {
   position: relative;
-  width: 195px;
-  top: -18px;
-  top: 50px\0/ !important; /* For IE only */
-  margin-right: 0px;
-  /*left: 820px\0/ !important; /* For IE only */
-  z-index: 10;
-}
-.not-front.logged-in #search-block-form i.fa-search {
-  color: #999;
-  padding: 0;
-  margin: 0;
-}
-.not-front.logged-in .form-item.form-type-textfield.form-item-search-block-form {
-  width: 175px;
-  margin: 0;
-  padding: 0;
-}
-
-.front.logged-in {
-  #edit-advanced-search + .form-actions {// only the one adjacent
-    display: none;
+  #block-block-7 {
+    position: absolute;
+    right:0;
+    z-index: 1000;
+    a {
+      display: none;
+    }
   }
 }
 
-.not-front.logged-in #edit-submit--3 {
-  display: none;
-}
-.not-front.logged-in #edit-search-block-form--2 {
-  width: 100% !important;
-}
-.not-front.logged-in #block-block-7 label,
-.not-front.logged-in #block-block-7 #edit-submit,
-.not-front.logged-in #block-block-7 #edit-submit--2 {
-  display: none;
-}
-.not-front.logged-in .form-item.form-type-textfield label {
-  /*! text-align: left; */
-  /* margin-left: 10px; */
-  display: inline-block;
-  text-align:left;
-}
-/* Front page search bar / advanced search box -------------------------------------------------------*/
 
-.front #edit-actions #edit-submit.form-submit,
-.not-front #edit-actions--2 #edit-submit--4.form-submit{
-  display: none;
-}
-#block-custom-search-blocks-1 {
-  padding: 0;
-  margin: 0 auto;
-  width: 90%;
-}
-#block-custom-search-blocks-1 #custom-search-blocks-form-1, #edit-advanced-search.collapsible.collapsed.form-wrapper.collapse-processed {
-  margin-bottom: 0px;
-}
-.front #custom-search-blocks-form-1 #edit-actions--2 {
-  display: none;
-}
-#block-custom-search-blocks-1 .form-item.form-type-textfield.form-item-custom-search-blocks-form-1 {
-  width: 74%;
-  display: inline-block;
-  padding: 0 0 0 4.5%;
-  margin: 0;
-}
-#block-custom-search-blocks-1 #edit-custom-search-blocks-form-1--2 {
-  width: 100%;
-}
-i.fa.fa-search {
-  display: inline-block;
-  right: 80px;
-}
-.front i.fa.fa-search {
-  background-color: #26669E;
-  color: #FFF;
-  padding: 6px 15px 5px;
-}
-.front i.fa.fa-search:hover {
-  color: #26669E;
-  background-color: #C7C7C7;
-}
-.not-front i.fa.fa-search {
-  left: -20px;
-  padding-top: 5px!important;
-}
-fieldset#edit-advanced-search {
-  clear: both;
-  padding: 0 0 0 15px;
-  margin: 10px 0;
-}
-fieldset#edit-advanced-search.collapsible.form-wrapper.collapse-processed.collapsed {
-  display: block;
-  background-color: #FFF;
-}
-fieldset#edit-advanced-search.collapsible.form-wrapper.collapse-processed.collapsed {
-}
-fieldset#edit-advanced-search .fieldset-legend {
-  background: none;
-  display: block;
-  /*height: 45px;*/
-  position: absolute;
-  right: 35px;
-  top: -31px;
-  padding: 0;
-  margin: 0;
-}
-.collapsible.form-wrapper.collapse-processed {
-  background-color: #ECECEC;
-  border: none;
-  /*width: 100%; Turned off due to width impact on user profile edit page */
-  padding: 0;
-  margin: 0;
-}
-div[class^="form-item-custom-search-types-"], div[class*=" form-item-custom-search-types-"] {
-  width: 95px;
-}
-fieldset#edit-advanced-search .form-item .form-type-checkbox {
-  display: inline-block;
-  padding: 0;
-  margin: 0 5px 0 0;
-}
-.form-item label.option {
-  display: inline-block;
-  margin-left: 1px;
-}
-.form-item.form-type-textfield {
-  display: inline-block;
-  margin: 0;
-}
-.form-item.form-type-textfield.form-item-custom-search-criteria-or {
-  margin-left: 30px;
-}
-.form-item.form-type-textfield.form-item-custom-search-criteria-or,
-.form-item.form-type-textfield.form-item-custom-search-criteria-phrase,
-.form-item.form-type-textfield.form-item-custom-search-criteria-negative {
-  width: 30%;
-  margin-bottom: 10px;
-}
-.form-item.form-type-textfield.form-item-custom-search-criteria-or input,
-.form-item.form-type-textfield.form-item-custom-search-criteria-phrase input,
-.form-item.form-type-textfield.form-item-custom-search-criteria-negative input {
-  width: 100%;
-}
+
 /* Search results page - Filtering options */
 .custom-search-filter {
   width: 85%;
