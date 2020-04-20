@@ -9,12 +9,20 @@
  *
  * @TODO move to atwork_prem_awards module
  */
-function atwork_webform_form_alter(&$form, $form_state, $form_id) {
+function atwork_webform_form_alter(&$form, $form_state, $form_id)
+{
   if ($form_id == 'webform_component_edit_form') {
     $form['name']['#type'] = 'textarea';
     unset($form['name']['#maxlength']);
   }
 
+  // Contact form js
+  if ($form_id == 'webform_client_form_43388') {
+    dpm("ping");
+    drupal_add_js(drupal_get_path('module', 'atwork_webform').'/atwork_contact_form.js');
+    drupal_add_js(drupal_get_path('module', 'atwork_webform').'/js_atwork_webform_ajax.js');
+
+  }
 
   if ($form_id == 'webform_client_form_33248') {
     // Hide the second field here - we will print it out under the submit button so it doesn't show up unexpectedly.
@@ -22,7 +30,7 @@ function atwork_webform_form_alter(&$form, $form_state, $form_id) {
 
     // check if user voted
     global $user;
-    
+
     $voted = db_select('webform_submissions', 'd')
       ->fields('d', array('uid'))
       ->condition('d.nid', 33248)
@@ -40,7 +48,7 @@ function atwork_webform_form_alter(&$form, $form_state, $form_id) {
      */
     //$form['actions']['submit']['#access'] = FALSE;
 
-    
+
     //// This is used for the current years emergent leaders - code above is for last years.
     //foreach ($form['submitted']['finalists']['#options'] as $key => $data) {
     //  list($name, $video_id, $thumb_path, $caption) = explode('&&&', $data);
@@ -60,7 +68,7 @@ function atwork_webform_node_view_alter(&$build){
       $suffix_text = $build['body']['#object']->webform['components'][2]['value'];
       // Put it in the suffix, Including an html note if anyone finds this and it breaks anything
       $build['webform']['#suffix'] = '<!-- This text is pulled from the webforms second field. If it should not be showing up then access it in atwork_webform.module --> ' . $suffix_text . '<br />';
-    }  
+    }
   }
 }
 
@@ -71,7 +79,7 @@ function atwork_webform_node_view_alter(&$build){
  */
  /**
  * Implements hook_block_info().
- * 
+ *
  */
 function atwork_webform_block_info(){
   $blocks = array();
@@ -95,7 +103,7 @@ function atwork_webform_block_view($delta = '') {
       $block['content'] = _atwork_webform_block_content();
       break;
   }
-  
+
   return $block;
 }
 
@@ -116,7 +124,7 @@ function _atwork_webform_block_content(){
   $choices_array = array_combine(range(1, count($choices_array)), array_values($choices_array));
   // Now set up all fields for each participant
   foreach($choices_array as $key=>$value){
-    
+
     $choices_array[$key] = array(
       'name'=> $value,
       'total_score' => 0,
@@ -178,7 +186,7 @@ function _atwork_webform_block_content(){
   $output .= '<tr style="border:1px solid black; background-color:#E0EEEE;"><td style="border:1px solid black !important;"><h2>Emerging Leader</h2></td><td style="border:1px solid black !important;"><h2>Total Score</h2></td><td style="border:1px solid black !important;"><h2>First Place Votes</h2></td><td style="border:1px solid black !important;"><h2>Second Place Votes</h2></td><td style="border:1px solid black !important;"><h2>Third Place Votes</h2></td><td style="border:1px solid black !important;"><h2>Total Votes</h2></td></tr>';
   // To color stripes
   $i = 1;
-  foreach($choices_array as $key=>$value){   
+  foreach($choices_array as $key=>$value){
     // pick our background color
     if($i & 1 ){
       $background = '#FFFFFF';
@@ -204,7 +212,7 @@ function _atwork_webform_block_content(){
   $output .= '<input type="button" value="Show Voters List" id="contestant-button" />';
   $output .= '<table id="voter_list" >';
   $output .= '<tr style="border:1px solid black !important; background-color:#E0EEEE;"><th><h2>Voters:  </h2></th></tr>';
-  
+
   // To color stripes
   $i = 1;
   // Create voters table
@@ -221,14 +229,14 @@ function _atwork_webform_block_content(){
   }
   $output .= '</table>';
   return $output;
-} 
+}
 
 /**
  * Implements hook_menu();
  */
 function atwork_webform_menu() {
     // this one has an access callback which was handy when it was a menu tab
-    
+
     $items['random'] = array(
       'page callback' => 'atwork_webform_ajax_callback', // Render HTML.
       'page arguments' => array(1),
@@ -236,10 +244,10 @@ function atwork_webform_menu() {
       'access arguments' => array('access content'),
       'delivery callback' => 'atwork_webform_ajax',  // Magic goes here.
     );
-  
+
     return $items;
   }
-  
+
 function atwork_webform_ajax_callback($var){
   // Find all users who voted:
   $voted = db_select('webform_submissions', 'd')
@@ -248,36 +256,36 @@ function atwork_webform_ajax_callback($var){
     ->execute()
     ->fetchAll();
 
-  // Get total # of voters 
+  // Get total # of voters
   $total = count($voted);
-  
+
   // Choose a winner:
   $winning_number = mt_rand(0,$total-1);
-  
+
   // Winner is:
   $winner = $voted[$winning_number];
   $winning_user = user_load($winner->uid);
-  
+
   // Return winners info
   $winner_name = $winning_user->field_gal_first_name['und'][0]['safe_value'] . " " . $winning_user->field_gal_last_name['und'][0]['safe_value'];
-  
+
   if(isset($winning_user->field_image['und'][0]['uri'] )&& $winning_user->field_image['und'][0]['uri'] ){
     $picture_url = $winning_user->field_image['und'][0]['uri'];
   } else {
-    global $base_url;    
+    global $base_url;
     global $base_path;
     $picture_url = $base_path . 'default_images/default_profile220x220b_0.gif';
   }
-  
+
   $picture_location = str_replace("public://", "", $picture_url);
-  
-  $winner_picture = '/sites/default/files/' . $picture_location; 
-  
+
+  $winner_picture = '/sites/default/files/' . $picture_location;
+
   $return_string = '<div id="winner_profile"><h1>The Winner is....</p><img src="' . $winner_picture . '" style="width:160px;height:200px;"><h2><a href="/user/' . $winning_user->uid . '">' . $winner_name .'</a></h2></div>';
-  
+
   // Return image and winner name to js
   echo json_encode($return_string);
-  
+
   // Stops themeing layer from interacting with this
   die();
 
