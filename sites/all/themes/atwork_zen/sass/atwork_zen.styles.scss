@@ -715,7 +715,7 @@ body.front {
     float:left;
     width:25%;
   }
-  #block-boxes-fp-comm-news-banner h2 {
+  .fp-comm-news-title h2 {
     background-color: #818283;
     color: #FFFFFF;
     text-align: center;
@@ -760,36 +760,35 @@ body.front {
 }
 
 /* Key Initiatives -------------------------------------------------------*/
-#block-block-5 .jcarousel-wrapper {
+.front #block-block-5 {
   background-color: #D7D7D7;
-  padding-left: 20px;
   padding-bottom: 10px;
+  #initiatives {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    .covid-box {
+      display: block;
+      width:190px;
+      .init-img {
+        border: solid 1px #FFF;
+        margin-top: 12px;
+        margin-bottom:5px;
+        height:100px;
+        width:180px;
+        img {
+          display: block;
+          width:100%;
+          height:100%;
+        }
+      }
+      .init-link {
+        text-align: center;
+      }
+    }
+  }
 }
-#block-block-5 ul.jcarousel-list-horizontal {
-  display: block;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
-#block-block-5 .jcarousel span.ki-title {
-  line-height: normal;
-  display: inline-block;
-  vertical-align: top;
-}
-#block-block-5 .jcarousel-wrapper .jcarousel li {
-  width: 160px;
-  padding: 13px 10px 0px;
-  text-align: center;
-}
-#block-block-5 .homepage-key {
-  padding: 0;
-  margin: 0;
-  display: block;
-}
-#block-block-5 .jcarousel-prev.jcarousel-prev-horizontal,
-#block-block-5 .jcarousel-next.jcarousel-next-horizontal {
-  display: none !important;
-}
+
 /* Front Page Logos above the Footer -------------------------------------------------------*/
 #boxes-box-homepage_logos {
   width: 100%;
