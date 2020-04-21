@@ -17,10 +17,8 @@ function atwork_webform_form_alter(&$form, $form_state, $form_id)
   }
 
   // Contact form js
-  if ($form_id == 'webform_client_form_43388') {
-    dpm("ping");
+  if ($form_id == 'webform_client_form_43400') {
     drupal_add_js(drupal_get_path('module', 'atwork_webform').'/atwork_contact_form.js');
-    drupal_add_js(drupal_get_path('module', 'atwork_webform').'/js_atwork_webform_ajax.js');
 
   }
 
