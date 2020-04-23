@@ -116,7 +116,7 @@ html, body {
   height: 100%;
 }
 html {
-  background: url(../images/top-bar.png) repeat-x scroll center -30px;
+  background: url(../images/Bar-ECECEC.png) repeat-x scroll center -10px;
 }
 #footer {
   background: url(../images/mountain-footer.png) repeat-x scroll center bottom;
@@ -185,7 +185,8 @@ html {
   margin-top: -30px;
 }
 #header {
-  background: url(../images/atwork-logo.png) no-repeat scroll center 10px;
+  background: url(../images/Work_BCSans_rev.png) no-repeat scroll center 10px;
+  background-color:#26669E;
   /* Below, for a new atwork-logo-theme image, update the date parameter to reflect the edit date.
   This prevents browser caching */
   /*background: url(/sites/all/themes/atwork_zen/images/atwork-logo-theme.png?d=20160919) no-repeat scroll center 18px;*/
@@ -604,7 +605,7 @@ body.front .top-story {
   .day {
     display: block;
     padding:5px 10px;
-    text-align: center;
+    text-align:center;
   }
 }
 /* Front four stories - text based - under the lead story */
