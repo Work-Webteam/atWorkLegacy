@@ -203,6 +203,13 @@
         color: #FFFFFF;
       }
     }
+    .sf-item-2 {
+      ul {
+        li a {
+        padding: 10px .7em;
+        }
+      }
+    }
     .sf-depth-2, .sf-depth-3 {
       a.sf-depth-2, a.sf-depth-3 {
         &:hover {
