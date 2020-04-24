@@ -564,22 +564,25 @@ body.front .top-story {
   border:solid 1px #CAC7C7;
   #top-image {
     display: block;
-    float:left;
+    //float:left;
+    float:right;
   }
   #lead-spot {
     display: block;
-    width:250px;
+    //width:250px;
+    max-width:440px;
     position: absolute;
-    right: 0;
+    //right: 0;
     height: 230px;
     padding: 10px;
-    background-color: rgba(255,255,255,0.85);
+    //background-color: rgba(255,255,255,0.85);
+    background-color: #FFFFFF;
     .lead-title h3 {
       margin:15px 0 5px;
       padding:0;
     }
     .lead-teaser {
-      margin: 10px 0 25px;
+      margin: 10px 25px 25px 50px;
     }
     .lead-more, .more-content {
       display: inline-block;
@@ -668,8 +671,12 @@ div #block-views-home-page-blocks-zen-block-6 {
     position: absolute;
     right:0;
     z-index: 1000;
+    color: #FFFFFF;
     a {
       display: none;
+    }
+    label {
+      margin-right:5px;
     }
   }
 }

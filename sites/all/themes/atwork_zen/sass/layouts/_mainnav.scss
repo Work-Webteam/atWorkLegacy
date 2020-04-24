@@ -57,7 +57,7 @@
     z-index: 100;
     width: 100vw;
     //left: calc(-50vw + 50%);
-    background-color: #ECECEC;
+    //background-color: #ECECEC;
   }
   padding-left:0;
   padding-right:0;
@@ -83,7 +83,8 @@
   }
   ul.sf-menu.sf-style-none a, ul.sf-menu.sf-style-none a:visited, ul.sf-menu.sf-style-none span.nolink {
     padding: 0.50em 1.5em;
-    background-color:#ececec;
+    color: #FFFFFF;
+    //background-color:#ececec;
   }
   ul.sf-menu.sf-style-none.rtl a.sf-with-ul, ul.sf-menu.sf-style-none.rtl span.nolink.sf-with-ul {
     padding-left: 2.25em;
