@@ -674,14 +674,18 @@ div #block-views-home-page-blocks-zen-block-6 {
   position: relative;
   #block-block-7 {
     position: absolute;
-    right:0;
+    right:10px;
     z-index: 1000;
-    color: #000000;
+    color: #FFFFFF;
+    padding-top:3px;
     a {
       display: none;
     }
     label {
       margin-right:5px;
+    }
+    .fa.fa-search {
+      font-size: 24px;
     }
   }
 }
@@ -733,6 +737,7 @@ body.front {
     display: flex;
     float:left;
     width:25%;
+    position: relative;
   }
   .fp-comm-news-title h2 {
     background-color: #26669E;
@@ -776,7 +781,8 @@ body.front {
         float:right;
       }
       .more-content {
-        margin-top: 10px;
+        position: absolute;
+        bottom: 20px;
       }
     }
   }

@@ -57,13 +57,13 @@
     z-index: 100;
     width: 100vw;
     //left: calc(-50vw + 50%);
-    //background-color: #ECECEC;
+    background-color: #1f5792;
   }
   padding-left:0;
   padding-right:0;
   padding:0;
   .next-menu-link {
-    color: inherit;
+    color: #FFFFFF;
   }
   .links li,
   .menu li {
@@ -82,8 +82,8 @@
     padding: 0;
   }
   ul.sf-menu.sf-style-none a, ul.sf-menu.sf-style-none a:visited, ul.sf-menu.sf-style-none span.nolink {
-    padding: 0.50em 1.5em;
-    color: #000000;
+    padding: 10px 1.5em;
+    color: #FFFFFF;
     //background-color:#ececec;
   }
   ul.sf-menu.sf-style-none.rtl a.sf-with-ul, ul.sf-menu.sf-style-none.rtl span.nolink.sf-with-ul {
@@ -110,7 +110,7 @@
     background: $white;
   }
   ul.sf-menu.sf-style-none li:hover, ul.sf-menu.sf-style-none li.sfHover, ul.sf-menu.sf-style-none a:focus, ul.sf-menu.sf-style-none a:hover, ul.sf-menu.sf-style-none span.nolink:hover {
-    background: #e6f2f9;
+    //background: #e6f2f9;
     outline: 0;
     text-decoration: none;
     color:#406b93;
@@ -186,8 +186,10 @@
   // Superfish Main menu changes
   ul#superfish-1 {
     font-size: 1.15em;
+    padding:3px 0;
+    border: solid 1px #FFFFFF;
     > li > ul {
-      margin-top:-6px;
+      //margin-top:-6px;
       background: #ECECEC;
       border-top:solid 1px #CCC;
       border-bottom:solid 3px #818283;
@@ -225,8 +227,7 @@
         display: block;
         border: solid 1px #CCCCCC;
         margin-bottom: 3px;
-        padding-top: 4px;
-        padding-bottom: 6px;
+        padding: 10px;
         &:hover {
           color: $white;
           background-color: $banner-blue;
