@@ -235,6 +235,7 @@
         border: solid 1px #CCCCCC;
         margin-bottom: 3px;
         padding: 10px;
+        line-height: 18px;
         &:hover {
           color: $white;
           background-color: $banner-blue;
@@ -264,7 +265,7 @@
   }
 }
 .sf-depth-1.next-menu-item.menuparent.sf-breadcrumb.sfHover, .active-trail.sf-depth-2.next-menu-item.sf-no-children > a, .active-trail.sf-depth-2.next-menu-item.menuparent > a {
-  background-color: $black;
+  background-color: $white;
   color: $exec-greyborder;
 }
 

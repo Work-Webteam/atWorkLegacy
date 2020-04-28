@@ -522,7 +522,7 @@ div.header-user {
     padding: 5px;
     box-shadow: 0px 0px 20px #9d9d9d;
     .alert-banner {
-      background-color: #818283;
+      background-color: #2ef544;
       height:49px;
       img {
         float:left;
@@ -531,7 +531,7 @@ div.header-user {
         display:inline-block;
         padding:6px 0;
         margin:0 0 0 15px;
-        color:#FFFFFF;
+        color: #000000;
       }
     }
     .alert-content {
@@ -774,8 +774,8 @@ body.front {
       }
       .front-promoted-teaser {
         display:block;
-        margin-bottom:10px;
-        min-height:60px;
+        margin-bottom:0px;
+        min-height:85px;
       }
       .front-promoted-likes {
         float:right;
@@ -1322,7 +1322,7 @@ p.submitted a.active {
   z-index: 10;
 }*/
 nav.breadcrumb {
-  margin-top: 20px;
+  margin-top: 50px;
 }
 nav.breadcrumb a {
   text-decoration: none;
