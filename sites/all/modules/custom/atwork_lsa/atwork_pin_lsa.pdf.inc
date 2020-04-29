@@ -31,15 +31,17 @@ $letter_text = <<< EOT
 <font size="-1">
 <p>{$label}</p>
 <p><br /></p>
-<p> <span style="display:block;float:right;">May 23, 2020</span></p>
 <p><br /></p>
 <p>Dear {$supervisor_first}, </p>
 
-<p>Enclosed are the service pins to present to your employees celebrating a career milestone. See below for details on which pins go to which employees. </p>
+<p>Enclosed are the service pins for those employees celebrating a career milestone. Below is a list of which pin(s) goes to each employee.</p>
 
-<p><strong>Please present the pins during Public Service Week, June 10-14</strong>. It&apos;s a wonderful opportunity to thank your employees for their service and celebrate their commitment to the BC Public Service.  </p>
+<p><strong>Public Service Week is taking place June 14-20th</strong> and is a wonderful opportunity to thank your employees for their contributions and celebrate their commitment to the BC Public Service. With physical distancing measures currently in place, in-person presentations may not be possible. If you are unable to present the pins during Public Service Week, you are encouraged to save the presentation for a future date. </p>
 
-<p>Consider the employee&apos;s individual preference when planning how and when to present these pins. If your employee works in a different location, please consider hosting a virtual presentation during a team meeting, or connect with the employee directly to offer your congratulations. Don&apos;t forget to personalize and sign (or ask an executive to sign) the pin card for the employee!</p>
+<p>However, please still make an effort to recognize your employees’ service milestones in some way during Public Service Week. Remember to consider the employee’s individual preference when planning the type of recognition. If your employee works in a different location, you could host a virtual presentation during a team meeting or connect with the employee directly to offer your congratulations. A Public Service Week e-card is available on @Work.<br />
+<a href="https://gww.gov.bc.ca/ecards/public-service-week/stronger-together">gww.gov.bc.ca/ecards/public-service-week/stronger-together</a>
+</p>
+<p>The attached pin card can be signed by you and/or a member of your executive, with a personalized message for the employee.</p>
 
 <p>The pin(s) included in this package are to be presented to:</p>
 
@@ -47,22 +49,18 @@ $letter_text = <<< EOT
 <p>{$recipient_list}</p>
 </table>
 
-<p>Important: only employees who registered themselves, or were registered by you or a ministry representative, are included in this package. If you have an employee who is eligible and did not register, please connect with your ministry recognition contact to enquire about additional pins. Pins and pin cards can be ordered at your organization&apos;s cost at any time from the Distribution Centre Victoria. Find links to these products on the Service Pin section of @Work (gww.gov.bc.ca/career/service-pins).</p>
+<p><strong>Important</strong>: only employees who registered themselves, or were registered by you or a ministry representative, are included in this package. If you have an employee who is eligible and did not register, you can order additional service pins (at your organization’s cost) at any time from the Distribution Centre Victoria: <a href="https://gww.gov.bc.ca/career/service-pins">gww.gov.bc.ca/career/service-pins</a></p>
 
-<p>Registration for the corporate pin program takes place annually in March. If you have questions about the  program, you&apos;ll find further information on @Work or you can connect with your organization&apos;s recognition contact.</p>
+<p>If you have questions about service pins, please connect with your organization’s recognition contact. </p>
 
-<p>Thank you,</p>
+<p>Thank you for taking the time to recognize your employees and colleagues!</p>
 
-<p>Gillian</p>
-
-<p><font size="-2">Gillian Kish, Corporate Recognition and Long Service Awards Manager<br />
-Public Service Engagement and Corporate Initiatives | BC Public Service Agency<br />
-Email: Gillian.Kish@gov.bc.ca</font></p> <br />
-</font>
+<p>Public Service Engagement and Corporate Initiatives | BC Public Service Agency<br />
+<a href="mailto:corporate.engagement@gov.bc.ca">Corporate.Engagement@gov.bc.ca</a>
+</p>
 <!-- This should double as a page break as .md takes html -->
 <!-- <div style="page-break-after: always;"></div> -->
 <div clear=all style='page-break-before:always'></div>
 <!-- <p clear=all style='page-break-before:always'></p> ---->
-
 
 EOT;
