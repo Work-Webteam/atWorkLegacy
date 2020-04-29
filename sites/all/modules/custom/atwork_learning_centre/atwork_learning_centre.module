@@ -28,7 +28,7 @@ function atwork_learning_centre_cron() {
     _atw_lc_process_feed();
   }
 
-  _atw_lc_delete_old_courses();
+  _atw_lc_unpublish_old_courses();
 }
 
 /**
@@ -38,7 +38,7 @@ function atwork_learning_centre_cron_queue_info() {
   $queues = array();
   $queues['lcCourseFeed'] = array(
     'worker callback' => '_atw_lc_processCourse', //function to call for each item
-    'time' => 15, //seconds to spend working on the queue
+    'time' => 60, //seconds to spend working on the queue
   );
   return $queues;
 }
@@ -50,14 +50,14 @@ function _atw_lc_process() {
 	if (variable_get("atwork_learning_centre_feed_update") < strtotime("-" . variable_get('atwork_learning_centre_courses_wait', "24") . " minutes")) {
 		_atw_lc_process_feed();
   }
-	_atw_lc_delete_old_courses();
+  _atw_lc_unpublish_old_courses();
 	return $content;
 }
 
 
-function _atw_lc_delete_old_courses() {
+function _atw_lc_unpublish_old_courses() {
 
-  // any course that hasn't been updated in 2 days is assumed to be inactive and is therefore unpublished.
+  // any course that hasn't been updated in 2 days since last update is assumed to be inactive and is unpublished.
 	$date = strtotime("-2 days", variable_get("atwork_learning_centre_feed_update", 0));
 
 	if ($date > 0) {
