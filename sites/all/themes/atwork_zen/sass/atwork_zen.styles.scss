@@ -749,7 +749,7 @@ body.front {
   .promoted-1, .promoted-2, .promoted-3, .promoted-4 {
     display:block;
     border: solid 1px #CAC7C7;
-    min-height:440px;
+    min-height:450px;
     float:left;
     margin:0 5px 10px;
   }
@@ -757,8 +757,9 @@ body.front {
     margin-right:0;
   }
   #top-four {
+    padding:10px;
     #top-content {
-      padding:10px;
+      padding-top:10px;
       h3.front-promoted-title {
         padding:0;
         margin:0;
