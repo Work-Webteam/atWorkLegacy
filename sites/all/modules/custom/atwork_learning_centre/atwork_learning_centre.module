@@ -27,7 +27,20 @@ function atwork_learning_centre_cron() {
   if (variable_get("atwork_learning_centre_feed_update") < strtotime("-" . variable_get('atwork_learning_centre_courses_wait', "24") . " hours")) {
     _atw_lc_process_feed();
   }
+
   _atw_lc_delete_old_courses();
+}
+
+/**
+ * Implements hook_cron_queue_info().
+ */
+function atwork_learning_centre_cron_queue_info() {
+  $queues = array();
+  $queues['lcCourseFeed'] = array(
+    'worker callback' => '_atw_lc_processCourse', //function to call for each item
+    'time' => 15, //seconds to spend working on the queue
+  );
+  return $queues;
 }
 
 
@@ -44,15 +57,15 @@ function _atw_lc_process() {
 
 function _atw_lc_delete_old_courses() {
 
-  // Use a 5 minute old time stamp to ensure only stale course get deleted.  I was encountering an issue where sometimes the updated date for some courses was a second earlier than the
-  // atwork_learning_centre_feed_update date. Possibly an issue with the way Entity Wrapper sets the updated date.
-	$date = strtotime("-5 minute", variable_get("atwork_learning_centre_feed_update", 0));
+  // any course that hasn't been updated in 2 days is assumed to be inactive and is therefore unpublished.
+	$date = strtotime("-2 days", variable_get("atwork_learning_centre_feed_update", 0));
 
 	if ($date > 0) {
  		$query = new EntityFieldQuery();
 		$query->entityCondition('entity_type', 'node')
 			->entityCondition('bundle', 'course')
   		->propertyCondition('changed', $date, '<')
+  		->propertyCondition('status', 1, '=')
   		->range(0, 20);
 		$result = $query->execute();
 
@@ -79,11 +92,17 @@ function _atw_lc_process_feed() {
 
  	$items = $feed_json->items;
 
- 	$add = 0;
- 	$update =  0;
+  $queue = DrupalQueue::get('lcCourseFeed');
+
  	foreach ($items as $item) {
  		if (isset($item->id)) {
+ 		    $queue->createItem($item);
+  	}
+ 	}
+ 	return;
+}
 
+function _atw_lc_processCourse($item) {
 			// load node if it exists
  			$query = new EntityFieldQuery();
 			$query->entityCondition('entity_type', 'node')
@@ -97,7 +116,6 @@ function _atw_lc_process_feed() {
   			$courses = entity_load('node', $course_nids);
   			$course = array_shift($courses);
   			$node_wrapper = entity_metadata_wrapper('node', $course);
-  			$update++;
 			}
 			else {
   			//Create an instance of the node and wrap it
@@ -105,7 +123,6 @@ function _atw_lc_process_feed() {
   			$node_wrapper = entity_metadata_wrapper('node', $node);
 
   			$node_wrapper->author = 1; // Admin as the author
-        $add++;
   		}
   		$node_wrapper->field_course_id->set($item->id); //ID
   		$node_wrapper->title->set($item->title);  //Title
@@ -131,17 +148,11 @@ function _atw_lc_process_feed() {
   		// set to publish, incase we've updated a previously unpublished course.
   		$node_wrapper->status->set(1);
   		$node_wrapper->save();
-  	}
-
- 	}
-
-  watchdog('atwork_learning_centre', '%add courses added, %update courses updated', array('%add' => $add, '%update' => $update), WATCHDOG_INFO, $link = NULL);
-	return;
 }
 
 
-// create term if it doesn't exist.
 
+// create term if it doesn't exist.
 function _atw_lc_get_term($term_name) {
 	$vocabulary_name = "course_tags";
   if ($vocabulary = taxonomy_vocabulary_machine_name_load($vocabulary_name)) {
