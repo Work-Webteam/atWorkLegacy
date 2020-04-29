@@ -38,9 +38,7 @@ $letter_text = <<< EOT
 
 <p><strong>Public Service Week is taking place June 14-20th</strong> and is a wonderful opportunity to thank your employees for their contributions and celebrate their commitment to the BC Public Service. With physical distancing measures currently in place, in-person presentations may not be possible. If you are unable to present the pins during Public Service Week, you are encouraged to save the presentation for a future date. </p>
 
-<p>However, please still make an effort to recognize your employees’ service milestones in some way during Public Service Week. Remember to consider the employee’s individual preference when planning the type of recognition. If your employee works in a different location, you could host a virtual presentation during a team meeting or connect with the employee directly to offer your congratulations. A Public Service Week e-card is available on @Work.<br />
-<a href="https://gww.gov.bc.ca/ecards/public-service-week/stronger-together">gww.gov.bc.ca/ecards/public-service-week/stronger-together</a>
-</p>
+<p>However, please still make an effort to recognize your employees’ service milestones in some way during Public Service Week. Remember to consider the employee’s individual preference when planning the type of recognition. If your employee works in a different location, you could host a virtual presentation during a team meeting or connect with the employee directly to offer your congratulations. A Public Service Week e-card is available on @Work. <a href="https://gww.gov.bc.ca/ecards/public-service-week/stronger-together">gww.gov.bc.ca/ecards/public-service-week/stronger-together</a></p>
 <p>The attached pin card can be signed by you and/or a member of your executive, with a personalized message for the employee.</p>
 
 <p>The pin(s) included in this package are to be presented to:</p>
@@ -54,7 +52,7 @@ $letter_text = <<< EOT
 <p>If you have questions about service pins, please connect with your organization’s recognition contact. </p>
 
 <p>Thank you for taking the time to recognize your employees and colleagues!</p>
-
+<br />
 <p>Public Service Engagement and Corporate Initiatives | BC Public Service Agency<br />
 <a href="mailto:corporate.engagement@gov.bc.ca">Corporate.Engagement@gov.bc.ca</a>
 </p>
