@@ -2,6 +2,7 @@
 
 
     "require": {
-        "drush/drush": "^8"
+        "drush/drush": "^8",
+        "pear/console_table": "^1.3"
     }
 }
