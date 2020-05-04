@@ -617,19 +617,24 @@ div #block-views-home-page-blocks-zen-block-6 {
   padding:0;
   margin: 0 0 20px;
   .front-four {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-evenly;
+    /*display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;*/
     .view-content {
-      display: inline-flex;
+      //display: flex;
+      //flex-wrap: wrap;
+      padding-left:10px;
       .views-row {
-        width:25%;
-        margin-right:10px;
+        display: inline-flex;
+        //width:25%;
+        width:24%;
+        margin-right:6px;
+        //float:left;
         #follow-story {
           position: relative;
           border: solid 1px #CAC7C7;
           padding: 10px;
-          min-height: 440px;
+          min-height: 475px;
           margin-bottom: 12px;
           .follow-image {
             margin-bottom:12px;
@@ -730,14 +735,50 @@ ol.search-results h3.title {
 
 /* Front Page 4 Box Grid -------------------------------------------------------*/
 body.front {
+  #block-views-home-page-blocks-zen-block-9 {
+    clear:both;
+  }
+  #block-views-home-page-blocks-zen-block-1 {
+    margin-left:10px;
+  }
   #block-views-home-page-blocks-zen-block-1,
   #block-views-home-page-blocks-zen-block-3,
   #block-views-home-page-blocks-zen-block-4,
   #block-views-home-page-blocks-zen-block-8 {
-    display: flex;
-    float:left;
-    width:25%;
+    display: inline-flex;
+    width:24%;
     position: relative;
+    //margin-right:6px;
+    /*.comm-box {
+      display: flex;
+      justify-content: space-between;
+    }*/
+    #follow-story {
+      position: relative;
+      border: solid 1px #CAC7C7;
+      padding: 10px;
+      min-height: 440px;
+      margin-bottom: 12px;
+      .follow-image {
+        margin-bottom:12px;
+        display: block;
+      }
+      .lead-date {
+        float:left;
+        margin-right:10px;
+      }
+      h3, h5 {
+        padding:0;
+        margin:0;
+      }
+      h3 {
+        min-height:39px;
+      }
+      .more-content {
+        position:absolute;
+        bottom:10px;
+      }
+    }
   }
   .fp-comm-news-title h2 {
     background-color: #26669E;
@@ -746,46 +787,8 @@ body.front {
     padding:2px 0 5px;
     margin:0 0 20px;
   }
-  .promoted-1, .promoted-2, .promoted-3, .promoted-4 {
-    display:block;
-    border: solid 1px #CAC7C7;
-    min-height:450px;
-    float:left;
-    margin:0 5px 10px;
-  }
-  .promoted-4 {
+  .promoted:last-of-type {
     margin-right:0;
-  }
-  #top-four {
-    padding:10px;
-    #top-content {
-      padding-top:10px;
-      h3.front-promoted-title {
-        padding:0;
-        margin:0;
-        min-height:45px;
-      }
-      .front-promoted-posted {
-        display: block;
-        min-height:39px;
-        h5 {
-          padding:0;
-          margin:0;
-        }
-      }
-      .front-promoted-teaser {
-        display:block;
-        margin-bottom:0px;
-        min-height:85px;
-      }
-      .front-promoted-likes {
-        float:right;
-      }
-      .more-content {
-        position: absolute;
-        bottom: 20px;
-      }
-    }
   }
 }
 
@@ -795,7 +798,7 @@ body.front {
   padding-bottom: 10px;
   #initiatives {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
     justify-content: space-evenly;
     .covid-box {
       display: block;
