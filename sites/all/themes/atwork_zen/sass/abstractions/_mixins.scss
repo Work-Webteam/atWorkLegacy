@@ -90,3 +90,74 @@
   font-weight: bold;
   color: #777;
 }
+
+
+// Mixins from @Next
+
+// Font and pixel sizes and line-heights. Example: size1216 is 12px font / 16px line-height
+@mixin size1216 {
+  font-size: .75rem;
+  line-height: 16px;
+}
+@mixin size1416 {
+  font-size:.875rem;
+  line-height: 16px;
+}
+@mixin size1424 {
+  font-size:.875rem;
+  line-height: 24px;
+}
+@mixin size1436 {
+  font-size: .875rem;
+  line-height: 36px;
+}
+@mixin size1624 {
+  font-size: 1rem;
+  line-height: 24px;
+}
+// Group Name Title Heading Size
+@mixin size1824 {
+  font-size: 1.125em;
+  line-height: 24px;
+}
+@mixin size2136 {
+  font-size: 1.312rem;
+  line-height: 36px;
+}
+
+// Heading 4 - previously size1824
+@mixin size2160 { // Updated to match BC Digital
+  font-size: 1.2em;
+  line-height: 24px;
+}
+// Heading 3 - previously size2024
+@mixin size2592 { // Updated to match BC Digital
+  font-size: 1.44em;
+  line-height: 24px;
+}
+// Heading 2 - previously size2224
+@mixin size3110 { // Updated to match BC Digital
+  font-size:1.728em;
+  line-height: 24px;
+}
+// Heading 1 - previously size3236
+@mixin size3732 { // Updated to match BC Digital
+  font-size: 2.074em;
+  line-height: 36px;
+}
+
+@mixin author-post { // Author name and date below image on articles
+  font-weight:600;
+  text-transform: uppercase;
+}
+@mixin inset-top-bottom { // top and bottom borders on inset boxes
+  border-top:solid 6px $banner-blue;
+  border-bottom:solid 6px $banner-blue;
+}
+@mixin inset-bottom { // bottom border only on inset boxes
+  border-bottom:solid 6px $banner-blue;
+}
+@mixin caption-text { // font size and color for image/video/inset box
+  @include size1416;
+  color: $icon-grey;
+}
