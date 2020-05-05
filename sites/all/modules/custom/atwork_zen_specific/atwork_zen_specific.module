@@ -22,21 +22,13 @@ function atwork_zen_specific_init() {
  * Implements hook_form_alter();
  */
 function atwork_zen_specific_form_alter(&$form, &$form_state, $form_id) {
-  global $user;
-  if(isset($user->theme)) {
-    if ($form_id == 'search_block_form' && $user->theme == 'atwork_zen') {
-      $form['actions']['submit']['#type'] = 'submit';
-      $form['actions']['submit']['#value'] = t('Search');
-      $form['search_block_form']['#title'] = '';
-      $form['search_block_form']['#attributes']['placeholder'] = t('Search @Work');
+  if ($form_id == 'search_block_form' ) {
+    $form['actions']['submit']['#type'] = 'submit';
+    $form['actions']['submit']['#value'] = t('Search');
+    $form['search_block_form']['#title'] = '';
+    $form['search_block_form']['#attributes']['placeholder'] = t('Search @Work');
 
-      hide($form['actions']['submit']);
-
-      if (drupal_is_front_page()) {
-        $form['search_block_form']['#size'] = 40;
-        $form['search_block_form']['#suffix'] .= l(t('Advanced search'), 'search/node', array('query' => array('advanced' => 1)));
-      }
-    }
+    hide($form['actions']['submit']);
   }
 }
 
@@ -45,10 +37,6 @@ function atwork_zen_specific_form_alter(&$form, &$form_state, $form_id) {
  */
 function atwork_zen_specific_views_pre_view(&$view, &$display_id, &$args) {
   global $user;
-
-  if($user->uid == 56664){
-    //dpm($view);
-  }
 
   if($view->name == 'term_landing_page' && $view->current_display == 'page') {
     if ($user->theme && $user->theme == 'atwork'){
