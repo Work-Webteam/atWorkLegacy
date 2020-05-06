@@ -187,7 +187,6 @@ html {
 }
 #header {
   background: url(../images/atwork-logo-960_Rev.png) no-repeat scroll center 10px;
-  background-color:#26669E;
   /* Below, for a new atwork-logo-theme image, update the date parameter to reflect the edit date.
   This prevents browser caching */
   /*background: url(/sites/all/themes/atwork_zen/images/atwork-logo-theme.png?d=20160919) no-repeat scroll center 18px;*/
@@ -618,17 +617,10 @@ div #block-views-home-page-blocks-zen-block-6 {
   padding:0;
   margin: 0 0 20px;
   .front-four {
-    /*display: flex;
-    flex-flow: row wrap;
-    justify-content: space-evenly;*/
     .view-content {
-      //display: flex;
-      //flex-wrap: wrap;
-      padding-left:10px;
       .views-row {
         display: inline-flex;
-        width:24.5%;
-        //float:left;
+        width:24.7%;
         #follow-story {
           position: relative;
           border: solid 1px #CAC7C7;
@@ -734,24 +726,22 @@ ol.search-results h3.title {
 
 /* Front Page 4 Box Grid -------------------------------------------------------*/
 body.front {
+  .region .region-pre-content {
+    display:flex;
+    flex-direction: column;
+  }
   #block-views-home-page-blocks-zen-block-9 {
     clear:both;
   }
-  /*#block-views-home-page-blocks-zen-block-1 {
-    margin-left:10px;
-  }*/
   #block-views-home-page-blocks-zen-block-1,
   #block-views-home-page-blocks-zen-block-3,
   #block-views-home-page-blocks-zen-block-4,
   #block-views-home-page-blocks-zen-block-8 {
     display: inline-flex;
-    width:24.5%;
+    width:24.7%;
+    flex-flow: row nowrap;
     position: relative;
-    //margin-right:6px;
-    /*.comm-box {
-      display: flex;
-      justify-content: space-between;
-    }*/
+    justify-content: space-evenly;
     #follow-story {
       position: relative;
       border: solid 1px #CAC7C7;
