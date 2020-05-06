@@ -177,7 +177,7 @@ html {
   display:none;
 }
 #block-boxes-copyright-terms-user {
-  max-width: 970px;
+  max-width: 100%;
   margin: 0 auto;
   padding-top: 70px;
 }
@@ -186,7 +186,7 @@ html {
 }
 #header {
   background: url(../images/atwork-logo-960_Rev.png) no-repeat scroll center 10px;
-  background-color:#26669E;
+  //background-color:#26669E;
   /* Below, for a new atwork-logo-theme image, update the date parameter to reflect the edit date.
   This prevents browser caching */
   /*background: url(/sites/all/themes/atwork_zen/images/atwork-logo-theme.png?d=20160919) no-repeat scroll center 18px;*/
@@ -292,6 +292,7 @@ footer#footer {
     text-align: center;
     #footer-left, #footer-middle, #footer-right {
       display: inline-block;
+      vertical-align: middle;
     }
     #footer-left, #footer-right {
       width:20%;
@@ -736,15 +737,15 @@ body.front {
   #block-views-home-page-blocks-zen-block-9 {
     clear:both;
   }
-  /*#block-views-home-page-blocks-zen-block-1 {
+  #block-views-home-page-blocks-zen-block-1 {
     margin-left:10px;
-  }*/
+  }
   #block-views-home-page-blocks-zen-block-1,
   #block-views-home-page-blocks-zen-block-3,
   #block-views-home-page-blocks-zen-block-4,
   #block-views-home-page-blocks-zen-block-8 {
     display: inline-flex;
-    width:24.5%;
+    width:24%;
     position: relative;
     //margin-right:6px;
     /*.comm-box {
