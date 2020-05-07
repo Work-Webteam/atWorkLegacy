@@ -9,8 +9,8 @@
 ?>
 <!DOCTYPE html>
 <head>
-  <meta http-equiv="X-UA-Compatible" content="IE=11; IE=9; IE=8; IE=7; IE=EDGE" />
-  <?php header('X-UA-Compatible: IE=edge,IE=11'); ?>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <?php header('X-UA-Compatible: IE=edge,chrome=1'); ?>
   <title><?php print $head_title; ?></title>
   <!--[if !IE 7]><style type="text/css">#wrap {display:table;height:100%}</style><![endif]-->
   <!--[if IEMobile 7]><html class="iem7" <?php print $html_attributes; ?>><![endif]-->
