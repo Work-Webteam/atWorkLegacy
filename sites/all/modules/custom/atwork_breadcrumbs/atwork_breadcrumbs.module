@@ -496,8 +496,8 @@ function atwork_breadcrumbs_views_post_render(&$view, &$output, &$cache){
     $breadcrumb[] = l('News', 'news');
     drupal_set_breadcrumb($breadcrumb);
   }
-  dpm($view->name);
-  dpm($view->current_display);
+  //dpm($view->name);
+  //dpm($view->current_display);
 
   // Group Calendar view
   if($view->name == 'group_calendar' && $view->current_display == 'page_1'){
