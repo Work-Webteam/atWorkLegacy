@@ -9,8 +9,8 @@
 ?><!DOCTYPE html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=11; IE=EDGE" />
-  <?php print $head; ?>
   <title><?php print $head_title; ?></title>
+  <?php print $head; ?>
 
   <?php if ($default_mobile_metatags): ?>
     <meta name="MobileOptimized" content="width">
