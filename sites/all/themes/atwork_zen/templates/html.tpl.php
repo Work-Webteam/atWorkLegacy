@@ -7,8 +7,8 @@
  * @see https://drupal.org/node/1728208
  */
 ?><!DOCTYPE html>
+<meta http-equiv="X-UA-Compatible" content="IE=11; IE=EDGE" />
 <head>
-  <meta http-equiv="X-UA-Compatible" content="IE=11; IE=EDGE" />
   <!-- Matomo -->
   <!--
   <script type="text/javascript">
