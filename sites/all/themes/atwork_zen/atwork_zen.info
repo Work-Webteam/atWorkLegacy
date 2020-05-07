@@ -94,6 +94,7 @@ regions[help]           = Help
 regions[pre_tabs]       = Pre-Tabs
 regions[social_side]    = Social sidebar
 regions[pre_content]    = Pre-Content
+regions[comm_news]      = Comm-News
 regions[content]        = Content
 regions[post_content]   = Post-Content
 regions[sidebar_first]  = First sidebar

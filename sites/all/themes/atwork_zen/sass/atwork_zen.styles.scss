@@ -618,8 +618,10 @@ div #block-views-home-page-blocks-zen-block-6 {
   margin: 0 0 20px;
   .front-four {
     .view-content {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-around;
       .views-row {
-        display: inline-flex;
         width:24.7%;
         #follow-story {
           position: relative;
@@ -733,15 +735,17 @@ body.front {
   #block-views-home-page-blocks-zen-block-9 {
     clear:both;
   }
+  .region-comm-news {
+    display: flex;
+    flex-flow:row nowrap;
+    justify-content: space-around;
+  }
   #block-views-home-page-blocks-zen-block-1,
   #block-views-home-page-blocks-zen-block-3,
   #block-views-home-page-blocks-zen-block-4,
   #block-views-home-page-blocks-zen-block-8 {
-    display: inline-flex;
     width:24.7%;
-    flex-flow: row nowrap;
     position: relative;
-    justify-content: space-evenly;
     #follow-story {
       position: relative;
       border: solid 1px #CAC7C7;
@@ -788,7 +792,7 @@ body.front {
   #initiatives {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-evenly;
+    justify-content: space-around;
     .covid-box {
       display: block;
       width:190px;
