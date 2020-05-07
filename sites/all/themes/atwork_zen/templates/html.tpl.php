@@ -8,7 +8,7 @@
  */
 ?><!DOCTYPE html>
 <head>
-  <meta http-equiv="X-UA-Compatible" content="IE=11; IE=EDGE" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
   <title><?php print $head_title; ?></title>
   <?php print $head; ?>
 
