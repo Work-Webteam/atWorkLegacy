@@ -17,6 +17,8 @@
 
 
 <head>
+  <meta http-equiv="X-UA-Compatible" content="IE=11; IE=EDGE" />
+
   <!-- Matomo -->
   <!--
   <script type="text/javascript">
