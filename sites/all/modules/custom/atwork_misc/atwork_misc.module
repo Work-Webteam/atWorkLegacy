@@ -1096,7 +1096,13 @@ function atwork_misc_wysiwyg_editor_settings_alter(&$settings, $context) {
 
 
 function atwork_misc_init() {
-  //
+  // It is assumed that
+  if (drupal_is_front_page()) {
+    $browser_check = $_SERVER['HTTP_USER_AGENT'];
+    If ( strstr($browser_check, "MSIE 7.0")) {
+      drupal_goto("/IE-Browser-Clean/ie.html");
+    }
+  }
 
   // ugly hack for scrolling news
   if (drupal_is_front_page()) {
@@ -1276,7 +1282,7 @@ function atwork_misc_views_post_render(&$view, &$output, &$cache) {
  * Restrict field_image to one image when viewing teaser
  */
 function atwork_misc_preprocess_node(&$variables) {
-  // custom node links
+    // custom node links
   if (isset($variables['content']['links']) && $variables['content']['links']) {
     $variables['classes_array'][] = 'node-tools';
 
