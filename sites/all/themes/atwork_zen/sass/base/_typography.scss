@@ -94,20 +94,20 @@ h2, h3, h4 {
   font-family: 'BCSans';
   font-weight:600;
   color: $text;
-  padding-bottom:20px;
+  //padding-bottom:20px;
   margin:0;
 }
 h2 {
   font-size: 1.3em;
   line-height: 2em; /* 3rem / 1.5em = 2em */
   margin-top: 1em; /* 1.5rem / 1.5em = 1em */
-  margin-bottom: 1em;
+  //margin-bottom: 1em;
 }
 h3 {
   font-size: 1.15em;
   line-height: 1.28205em; /* 1.5rem / 1.17em = 1.28205em */
-  margin-top: 1.28205em;
-  margin-bottom: 1.8205em;
+  //margin-top: 1.28205em;
+  //margin-bottom: 1.8205em;
 }
 h4 {
   font-size: 1em;
@@ -141,7 +141,9 @@ a { // initial link state
       text-decoration: underline;
     }
 }
-
+dl, menu, ol, ul {
+  margin: 0 0 1.5em;
+}
 
 /* Address styling not present in IE 8/9, Safari 5, and Chrome. */
 abbr[title] {
