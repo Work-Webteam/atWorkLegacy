@@ -1,109 +1,31 @@
-/*#####################################################################################################################################################*/
-/* Site Wide Font Styles and Sizes */
-/*#####################################################################################################################################################*/
-
-/*@font-face {
-  font-family: atwork-font;
-  src: url(../fonts/aleo-regular-webfont.eot); /* IE9 Compat Modes */
-/*  src: url(../fonts/aleo-regular-webfont.eot?#iefix) format('embedded-opentype'), /* IE6-IE8 */
-/*       url(../fonts/Archer-Medium-Pro.otf)  format('opentype'); /* Safari, Android, iOS */
-/*  font-weight: bold;
-} */
-
-/*@font-face {
-  font-family: open-sans;
-  src: url(../fonts/OpenSans-Regular.ttf),
-       url(../fonts/opensans-regular-webfont.woff),
-       url(../fonts/opensans-regular-webfont.eot);
-  font-weight: normal;
-} */
-
-/**
- * Base
- *
- * Instead of relying on the fonts that are available on a user's computer, you
- * can use web fonts which, like images, are resources downloaded to the user's
- * browser. Because of the bandwidth and rendering resources required, web fonts
- * should be used with care.
- *
- * Numerous resources for web fonts can be found on Google. Here are a few
- * websites where you can find Open Source fonts to download:
- * - http://www.fontsquirrel.com/fontface
- * - http://www.theleagueofmoveabletype.com
- *
-*/
-
-/**
- * 1. Set default font family to sans-serif.
- * 2. Prevent iOS text size adjust after orientation change, without disabling
- *    user zoom.
- * 3. Correct text resizing oddly in IE 6/7 when body `font-size` is set using
- *    `em` units.
- */
-@font-face {
-  font-family: atwork-font;
-  src: url(../fonts/Archer-Medium.woff); /* IE9 Compat Modes */
-  src: url(../fonts/Archer-Medium.eot?#iefix) format('embedded-opentype'), /* IE6-IE8 */
-       url(../fonts/Archer-Medium-Pro.otf)  format('opentype'), /* Safari, Android, iOS */
-       url(../fonts/Archer-Medium.ttf) format('truetype'); /* Safari, Android, iOS */
-	font-weight: bold;
-}
+/* Site wide font settings */
+/* Updated October 2018 */
+// BC Sans Fonts
 
 
 @font-face {
-    font-family: open-sans;
-    src: url(../fonts/opensans-regular-webfont.woff); /* IE9 compat modes, Modern Browsers */
-    src: url(../fonts/opensans-regular-webfont.eot?#iefix) format('embedded-opentype'), /* IE6-IE8 */
-         url(../fonts/OpenSans-Regular.ttf) format('truetype'), /* Safari, Android, iOS */
-         url(../fonts/opensans-regular-webfont.svg#aleoregular) format('svg'); /* Legacy iOS */
-    font-weight: normal;
+    src: url('../fonts/BCSans-Regular.woff') format('woff');
+    font-weight: 400;
     font-style: normal;
+    font-family: 'BCSans';
 }
-html {
-  font-family: open-sans, sans-serif;
-  /* Delete all but one of the following font-size declarations: */
-  /* Use a 12px base font size. 16px x 75% = 12px */
-  /* font-size: 75%; /* 3 */
-  /* Use a 14px base font size. 16px x .875 = 14px */
-  /* font-size: 87.5%; /* 3 */
-  font-size: .8em; /* 3 */
-  /* Use a 16px base font size. */
-  /* font-size: 100%; /* 3 */
-  -ms-text-size-adjust: 100%;     /* 2 */
-  -webkit-text-size-adjust: 100%; /* 2 */
-
-  /* Establish a vertical rhythm. */
-  line-height: 1.5em;
+@font-face {
+    src: url('../fonts/BCSans-BoldItalic.woff') format('woff');
+    font-weight: 700;
+    font-style: italic;
+    font-family: 'BCSans';
 }
-
-/* Address `font-family` inconsistency between `textarea` and other form elements. */
-button,
-input,
-select,
-textarea {
-  font-family: open-sans, sans-serif;
+@font-face {
+    src: url('../fonts/BCSans-Italic.woff') format('woff');
+    font-weight: 400;
+    font-style: italic;
+    font-family: 'BCSans';
 }
-
-/* Remove default margin. */
-body {
-  margin: 0;
-  padding: 0;
-}
-
-/**
- * Links
- *
- * The order of link states are based on Eric Meyer's article:
- * http://meyerweb.com/eric/thoughts/2007/06/11/who-ordered-the-link-states
- */
-a:link {
-}
-a:visited {
-}
-a:hover,
-a:focus {
-}
-a:active {
+@font-face {
+    src: url('../fonts/BCSans-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-family: 'BCSans';
 }
 
 /* Address `outline` inconsistency between Chrome and other browsers. */
@@ -128,39 +50,64 @@ a:hover {
  */
 
 /* Set 1 unit of vertical rhythm on the top and bottom margin. */
-p,
-pre {
-  margin: 1.5em 0 0;
-}
 blockquote {
   /* Also indent the quote on both sides. */
   margin: 1.5em 30px;
 }
 
-/**
- * Address variable `h1` font-size and margin within `section` and `article`
- * contexts in Firefox 4+, Safari 5, and Chrome.
- */
+html, body  {
+    font-family: 'BCSans';
+    font-size: .9rem;
+    line-height: 1.5;
+    -ms-text-size-adjust: 100%;     /* 2 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+    p {
+        color: $text;
+        padding:0;
+    }
+}
 
+input,
+button,
+select,
+optgroup,
+textarea {
+  margin: 0;
+  font-family: 'BCSans'!important;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+// Heading Tags / Sizes
 h1 {
-  /* Set the font-size and line-height while keeping a proper vertical rhythm. */
-  font-size: 1.8em;
-  line-height: 1.5em; /* 3rem / 2em = 1.5em */
-  /* Set 1 unit of vertical rhythm on the top and bottom margins. */
-  margin-top: 0.75em; /* 1.5rem / 2em = .75em */
-  margin-bottom: 0.75em;
+    font-family: 'BCSans';
+    //@include size2136;
+    color: $text;
+      /* Set the font-size and line-height while keeping a proper vertical rhythm. */
+    font-size: 1.8em;
+    line-height: 1.5em; /* 3rem / 2em = 1.5em */
+    /* Set 1 unit of vertical rhythm on the top and bottom margins. */
+    margin-top: 0.75em; /* 1.5rem / 2em = .75em */
+    margin-bottom: 0.75em;
+}
+h2, h3, h4 {
+  font-family: 'BCSans';
+  font-weight:600;
+  color: $text;
+  //padding-bottom:20px;
+  margin:0;
 }
 h2 {
   font-size: 1.3em;
   line-height: 2em; /* 3rem / 1.5em = 2em */
   margin-top: 1em; /* 1.5rem / 1.5em = 1em */
-  margin-bottom: 1em;
+  //margin-bottom: 1em;
 }
 h3 {
   font-size: 1.15em;
   line-height: 1.28205em; /* 1.5rem / 1.17em = 1.28205em */
-  margin-top: 1.28205em;
-  margin-bottom: 1.8205em;
+  //margin-top: 1.28205em;
+  //margin-bottom: 1.8205em;
 }
 h4 {
   font-size: 1em;
@@ -169,16 +116,33 @@ h4 {
   margin-bottom: 1.5em;
 }
 h5 {
+  font-family: 'BCSans';
   font-size: 0.83em;
   line-height: 1.80723em; /* 1.5rem / 0.83em = 1.80723em */
   margin-top: 1.80723em;
   margin-bottom: 1.80723em;
 }
+
+// H6 tags are mainly used in Comment titles and headings. See _atwork-mixins.scss for H6 style
 h6 {
+  font-family: 'BCSans';
+  font-weight: bold;
   font-size: 0.67em;
   line-height: 2.23881em; /* 1.5rem / 0.67em = 2.23881em */
   margin-top: 2.23881em;
   margin-bottom: 2.23881em;
+  text-transform: uppercase;
+}
+// Global text links
+a { // initial link state
+    color: $link-blue;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+}
+dl, menu, ol, ul {
+  margin: 0 0 1.5em;
 }
 
 /* Address styling not present in IE 8/9, Safari 5, and Chrome. */
@@ -221,37 +185,10 @@ pre,
 samp,
 tt,
 var {
-  font-family: open-sans, sans-serif;
-  /*font-family: Arial, Verdana, "DejaVu Sans", sans-serif;*/
-  /*font-family: "Courier New", "DejaVu Sans Mono", monospace, sans-serif;
-  _font-family: 'courier new', monospace;*/
+  font-family: 'BCSans';
   font-size: 1em;
   line-height: 1.5em;
 }
-
-
-
-
-/***********************************************/
-
-h1, h2, h3, h4, h5,.pre-title-snipet {
-  font-family: atwork-font;
-  padding: 0;
-  margin: 0;
-  letter-spacing: .05em;
-}
-
-h1, h2, h3, h4, h5 {
-  font-family: atwork-font;
-  font-weight: normal;
-  padding: 0;
-  margin: 0;
-  letter-spacing: .05em;
-}
-h2, h3 {
-  font-size: 1.4em;
-}
-
 
 /* Labels / Form titles & headers -------------------------------------------------------*/
 label {

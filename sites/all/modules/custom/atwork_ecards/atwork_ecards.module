@@ -65,6 +65,7 @@ function atwork_ecards_form_validate($form, &$form_state) {
     if ($recipient_address === FALSE) {
       form_set_error('mail_to', t("The email address you've entered ( %email ) isn't valid, Use the format Recipient.One@gov.bc.ca.", array('%email' => $recipient_address)));
     }
+    /** For now lets turn this off until later.
     // So lets see if we have a record of this email address.
     $query = db_query("SELECT u.uid FROM {users u} WHERE u.mail=:mail", array(
       ':mail' => $recipient_address,
@@ -75,6 +76,7 @@ function atwork_ecards_form_validate($form, &$form_state) {
       form_set_error('mail_to', t('It looks like you’re trying to send an ecard to someone outside the BC Public Service (%email). Please enter a valid BC Public Service email address using the format Recipient.One@gov.bc.ca ', array('%email' => $recipient_address)));
     }
     // We no longer have access to ldap
+     */
     //_atwork_validate_emails($form_state['values']['mail_to'], 'mail_to', $form['form_token']['#default_value']);
   }
 

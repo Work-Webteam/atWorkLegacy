@@ -175,6 +175,7 @@
           <?php print render($page['social_side']); ?>
        </div>
       <?php print render($page['pre_content']); ?>
+      <?php print render($page['comm_news']); ?>
       <?php print render($page['content']); ?>
       <?php print render($page['post_content']); ?>
       <?php print $feed_icons; ?>
