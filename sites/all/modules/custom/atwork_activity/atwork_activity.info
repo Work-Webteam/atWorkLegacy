@@ -1,4 +1,0 @@
-name = Atwork Activity
-description = Handles activity streams
-package = Atwork
-core = 7.x
