@@ -107,7 +107,7 @@
 
   </div><!-- /#navigation -->
 
-  <?php print $breadcrumb; ?>
+  <?php //print $breadcrumb; ?>
   <div id="main">
 
     <div id="content" class="column" role="main">
