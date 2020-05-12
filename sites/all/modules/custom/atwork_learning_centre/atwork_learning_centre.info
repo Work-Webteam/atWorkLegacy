@@ -1,0 +1,4 @@
+name = Atwork Learning Centre
+description = Code to import and process Learning Centre Course JSON Feed
+package = Atwork
+core = 7.x
