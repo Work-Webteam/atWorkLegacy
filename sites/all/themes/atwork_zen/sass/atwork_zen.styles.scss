@@ -2949,6 +2949,7 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 #block-og-menu-og-single-menu-block,
 .node-type-page #block-boxes-gov-20-main,
 .node-type-page #block-boxes-premiers-awards-navigation,
+.node-type-page #block-boxes-learning-center-navigation,
 #block-boxes-long-service-awards-navigation,
 .page-node-add-lsa-pin-application #block-block-36,
 .node-type-page #block-block-30,
@@ -2963,6 +2964,8 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 }
 #block-og-menu-og-single-menu-block h2.block__title.block-title,
 .node-type-page #block-boxes-premiers-awards-navigation h2.block__title.block-title,
+.node-type-page #block-boxes-learning-center-navigation h2.block__title.block-title,
+
 #block-boxes-long-service-awards-navigation h2.block__title.block-title,
 .page-node-add-lsa-pin-application #block-block-36 h2.block__title.block-title,
 .node-type-page #block-boxes-gov-20-main h2.block__title.block-title,
@@ -2994,6 +2997,7 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
   background-color: #FFF;
 }
 .node-type-page #block-boxes-premiers-awards-navigation ul,
+.node-type-page #block-boxes-learning-center-navigation ul,
 #block-boxes-long-service-awards-navigation ul,
 .page-node-add-lsa-pin-application #block-block-36 ul,
 .node-type-page #block-boxes-gov-20-main ul,
@@ -3008,6 +3012,7 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 #block-og-menu-og-single-menu-block li,
 #block-views-groups-details ul li,
 .node-type-page #block-boxes-premiers-awards-navigation ul li,
+.node-type-page #block-boxes-learning-center-navigation ul li,
 #block-boxes-long-service-awards-navigation ul li,
 .page-node-add-lsa-pin-application #block-block-36 ul li,
 .node-type-page #block-boxes-gov-20-main ul li,
@@ -3031,6 +3036,7 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 #block-og-menu-og-single-menu-block li a,
 #block-views-groups-details ul li a,
 .node-type-page #block-boxes-premiers-awards-navigation ul li a,
+.node-type-page #block-boxes-learning-center-navigation ul li a,
 #block-boxes-long-service-awards-navigation ul li a,
 .page-node-add-lsa-pin-application #block-block-36 ul li a,
 .node-type-page #block-boxes-gov-20-main ul li a,
@@ -3049,6 +3055,7 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
   font-weight: normal;
 }
 .node-type-page #block-boxes-premiers-awards-navigation ul li ul li ,
+.node-type-page #block-boxes-learning-center-navigation ul li ul li ,
 #block-boxes-long-service-awards-navigation ul li ul li,
 .node-type-page #block-boxes-gov-20-main ul li ul li,
 .node-type-page #block-block-30 ul li ul li,
@@ -3063,6 +3070,7 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 #block-og-menu-og-single-menu-block li a:hover,
 #block-views-groups-details ul li a:hover,
 .node-type-page #block-boxes-premiers-awards-navigation ul li a:hover,
+.node-type-page #block-boxes-learning-center-navigation ul li a:hover,
 #block-boxes-long-service-awards-navigation ul li a:hover,
 .page-node-add-lsa-pin-application #block-block-36 ul li a:hover,
 .node-type-page #block-boxes-gov-20-main ul li a:hover,
@@ -3087,6 +3095,7 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 
 /* Hides the PA title in the left nav bar */
 #block-boxes-premiers-awards-navigation h2,
+#block-boxes-learning-center-navigation h2,
 .node-type-page #block-block-30 h2,
 #block-boxes-long-service-awards-navigation h2,
 #block-block-36 .block__title.block-title,
