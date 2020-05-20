@@ -200,7 +200,7 @@ html {
 
 #header-box {
   position: absolute;
-  height: 110px;
+  height: 105px;
   top: 50px;
   width: 100%;
   max-width: 960px;
@@ -675,7 +675,7 @@ div #block-views-home-page-blocks-zen-block-6 {
     right:10px;
     z-index: 1000;
     color: #FFFFFF;
-    padding-top:3px;
+    padding-top:8px;
     a {
       display: none;
     }
@@ -683,7 +683,13 @@ div #block-views-home-page-blocks-zen-block-6 {
       margin-right:5px;
     }
     .fa.fa-search {
-      font-size: 24px;
+      font-size: 1.5em;
+    }
+    .search-form {
+      margin-bottom:0;
+      input {
+        width:162px;
+      }
     }
   }
 }
