@@ -1269,11 +1269,13 @@ p.submitted a.active {
 }
 /* Table formatting for tables located in maina content articles */
 .not-front.node-type-article #main #content article table,
-.not-front.node-type-page #main #content article table {
+.not-front.node-type-page #main #content article table,
+.not-front.node-type-blog #main #content article table {
   border: solid 1px #D7D7D7;
 }
 .not-front.node-type-article #main #content article table th,
-.not-front.node-type-page #main #content article table th {
+.not-front.node-type-page #main #content article table th,
+.not-front.node-type-blog #main #content article table {
   background-color: #D7D7D7;
   padding-bottom: 8px;
 }
@@ -1283,7 +1285,8 @@ p.submitted a.active {
   margin: 0;
 }
 .not-front.node-type-article #main #content article table td,
-.not-front.node-type-page #main #content article table td {
+.not-front.node-type-page #main #content article table td,
+.not-front.node-type-blog #main #content article table td {
   vertical-align: top;
   padding: 10px;
 }
