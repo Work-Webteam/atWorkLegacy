@@ -168,7 +168,7 @@ html {
   margin-top: 0;
   padding-top: 15px;
   /*width: 100%\0/ !important;/* For IE only */
-  height: 300px;
+  //height: 300px;
   clear: both;
 }
 .not-front.page-user.section-employees #footer {
@@ -1916,6 +1916,15 @@ aside.sidebars h2 {
 #subscribe.form-wrapper {
   clear: both;
   padding-top: 15px;
+  thead tr th {
+    padding-top:10px;
+  }
+  tbody > tr > td {
+    width: 75%;
+    input {
+      margin-right:10px;
+    }
+  }
 }
 
 .grey-box {
