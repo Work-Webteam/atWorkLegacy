@@ -1,4 +1,0 @@
-name = Atwork Development
-description = Code to help development and distinguish between different installs
-package = Atwork
-core = 7.x
