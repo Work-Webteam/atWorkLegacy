@@ -168,7 +168,7 @@ html {
   margin-top: 0;
   padding-top: 15px;
   /*width: 100%\0/ !important;/* For IE only */
-  height: 300px;
+  //height: 300px;
   clear: both;
 }
 .not-front.page-user.section-employees #footer {
@@ -200,7 +200,7 @@ html {
 
 #header-box {
   position: absolute;
-  height: 110px;
+  height: 105px;
   top: 50px;
   width: 100%;
   max-width: 960px;
@@ -675,7 +675,7 @@ div #block-views-home-page-blocks-zen-block-6 {
     right:10px;
     z-index: 1000;
     color: #FFFFFF;
-    padding-top:3px;
+    padding-top:8px;
     a {
       display: none;
     }
@@ -683,7 +683,13 @@ div #block-views-home-page-blocks-zen-block-6 {
       margin-right:5px;
     }
     .fa.fa-search {
-      font-size: 24px;
+      font-size: 1.5em;
+    }
+    .search-form {
+      margin-bottom:0;
+      input {
+        width:162px;
+      }
     }
   }
 }
@@ -1269,11 +1275,13 @@ p.submitted a.active {
 }
 /* Table formatting for tables located in maina content articles */
 .not-front.node-type-article #main #content article table,
-.not-front.node-type-page #main #content article table {
+.not-front.node-type-page #main #content article table,
+.not-front.node-type-blog #main #content article table {
   border: solid 1px #D7D7D7;
 }
 .not-front.node-type-article #main #content article table th,
-.not-front.node-type-page #main #content article table th {
+.not-front.node-type-page #main #content article table th,
+.not-front.node-type-blog #main #content article table {
   background-color: #D7D7D7;
   padding-bottom: 8px;
 }
@@ -1283,7 +1291,8 @@ p.submitted a.active {
   margin: 0;
 }
 .not-front.node-type-article #main #content article table td,
-.not-front.node-type-page #main #content article table td {
+.not-front.node-type-page #main #content article table td,
+.not-front.node-type-blog #main #content article table td {
   vertical-align: top;
   padding: 10px;
 }
@@ -1916,6 +1925,18 @@ aside.sidebars h2 {
 #subscribe.form-wrapper {
   clear: both;
   padding-top: 15px;
+  thead tr th {
+    padding-top:10px;
+  }
+  tbody > tr > td {
+    width: 75%;
+    input {
+      margin-right:10px;
+    }
+    :hover {
+      color:blue;
+    }
+  }
 }
 
 .grey-box {
@@ -2949,7 +2970,6 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 #block-og-menu-og-single-menu-block,
 .node-type-page #block-boxes-gov-20-main,
 .node-type-page #block-boxes-premiers-awards-navigation,
-.node-type-page #block-boxes-learning-center-navigation,
 #block-boxes-long-service-awards-navigation,
 .page-node-add-lsa-pin-application #block-block-36,
 .node-type-page #block-block-30,
@@ -2964,8 +2984,6 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 }
 #block-og-menu-og-single-menu-block h2.block__title.block-title,
 .node-type-page #block-boxes-premiers-awards-navigation h2.block__title.block-title,
-.node-type-page #block-boxes-learning-center-navigation h2.block__title.block-title,
-
 #block-boxes-long-service-awards-navigation h2.block__title.block-title,
 .page-node-add-lsa-pin-application #block-block-36 h2.block__title.block-title,
 .node-type-page #block-boxes-gov-20-main h2.block__title.block-title,
@@ -2997,7 +3015,6 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
   background-color: #FFF;
 }
 .node-type-page #block-boxes-premiers-awards-navigation ul,
-.node-type-page #block-boxes-learning-center-navigation ul,
 #block-boxes-long-service-awards-navigation ul,
 .page-node-add-lsa-pin-application #block-block-36 ul,
 .node-type-page #block-boxes-gov-20-main ul,
@@ -3012,7 +3029,6 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 #block-og-menu-og-single-menu-block li,
 #block-views-groups-details ul li,
 .node-type-page #block-boxes-premiers-awards-navigation ul li,
-.node-type-page #block-boxes-learning-center-navigation ul li,
 #block-boxes-long-service-awards-navigation ul li,
 .page-node-add-lsa-pin-application #block-block-36 ul li,
 .node-type-page #block-boxes-gov-20-main ul li,
@@ -3036,7 +3052,6 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 #block-og-menu-og-single-menu-block li a,
 #block-views-groups-details ul li a,
 .node-type-page #block-boxes-premiers-awards-navigation ul li a,
-.node-type-page #block-boxes-learning-center-navigation ul li a,
 #block-boxes-long-service-awards-navigation ul li a,
 .page-node-add-lsa-pin-application #block-block-36 ul li a,
 .node-type-page #block-boxes-gov-20-main ul li a,
@@ -3055,7 +3070,6 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
   font-weight: normal;
 }
 .node-type-page #block-boxes-premiers-awards-navigation ul li ul li ,
-.node-type-page #block-boxes-learning-center-navigation ul li ul li ,
 #block-boxes-long-service-awards-navigation ul li ul li,
 .node-type-page #block-boxes-gov-20-main ul li ul li,
 .node-type-page #block-block-30 ul li ul li,
@@ -3070,7 +3084,6 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 #block-og-menu-og-single-menu-block li a:hover,
 #block-views-groups-details ul li a:hover,
 .node-type-page #block-boxes-premiers-awards-navigation ul li a:hover,
-.node-type-page #block-boxes-learning-center-navigation ul li a:hover,
 #block-boxes-long-service-awards-navigation ul li a:hover,
 .page-node-add-lsa-pin-application #block-block-36 ul li a:hover,
 .node-type-page #block-boxes-gov-20-main ul li a:hover,
@@ -3095,7 +3108,6 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
 
 /* Hides the PA title in the left nav bar */
 #block-boxes-premiers-awards-navigation h2,
-#block-boxes-learning-center-navigation h2,
 .node-type-page #block-block-30 h2,
 #block-boxes-long-service-awards-navigation h2,
 #block-block-36 .block__title.block-title,
