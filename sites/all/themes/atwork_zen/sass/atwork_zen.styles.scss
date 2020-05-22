@@ -3,7 +3,7 @@
 // Load variables first, then mixins, then everything else
 @import "variables/colors.scss";
 @import "abstractions/mixins.scss";
-@import "variables/typography.scss";
+//@import "variables/typography.scss";
 
 @import "abstractions/extends.scss";
 @import "abstractions/functions.scss";
