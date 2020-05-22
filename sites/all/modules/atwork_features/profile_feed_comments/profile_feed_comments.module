@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Profile_feed_comments feature.
- */
-
-include_once 'profile_feed_comments.features.inc';

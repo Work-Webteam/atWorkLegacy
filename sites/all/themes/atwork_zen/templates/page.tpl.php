@@ -8,36 +8,6 @@
  */
 ?>
 
-<script type="text/javascript">
-
-	//MAIN MENU TARGETING
-	window.onload = function(){
-		var a = [
-   9181, 6897, 6524, 6534,
-   6537, 6540, 6533, 9514, 6525,
-   6895, 6536, 7916, 6535, 6532,
-   6539, 6680, 9513, 6681, 6682,
-   6530, 6531, 6522, 6538, 6526,
-   6896, 11065, 12331, 21212, 6674,
-   22868, 19493, 37208
-   ];
-
-   var c = document.getElementById('block-tb-megamenu-menu-main-menu-zen').getElementsByTagName('li');
-
-   for(var i = 0; i < a.length; i++){
-     for(var j = 0; j < c.length; j++){
-      if(c[j].getAttribute("data-id") == a[i]){
-       c[j].onclick = function(){
-        var d = this.getElementsByTagName('a');
-        return !window.open(d[0], '_blank');
-      }
-    }
-  }
-}
-}
-</script>
-
-
 <div id="page">
 
   <header class="header" id="header" role="banner">
@@ -107,7 +77,8 @@
 
   </div><!-- /#navigation -->
 
-  <?php print $breadcrumb; ?>
+  <?php //print $breadcrumb; ?>
+  <div><p>&nbsp</p></div>
   <div id="main">
 
     <div id="content" class="column" role="main">

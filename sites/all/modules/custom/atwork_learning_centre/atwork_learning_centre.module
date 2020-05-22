@@ -1,0 +1,177 @@
+<?php
+
+function atwork_learning_centre_menu() {
+	$items = array();
+
+	$items['admin/config/atwork/lc_courses'] = array(
+	  'title' => 'Learning Centre Course Feed Configuration',
+    'description' => 'Configure settings for Learning Centre Course Feed processing',
+    'page arguments' => array('atwork_learning_centre_admin'),
+    'page callback' => 'drupal_get_form',
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'atwork_learning_centre.admin.inc',
+  );
+
+  $items['admin/atwork/test'] = array(
+    'page callback' => '_atw_lc_process',
+    'access arguments' => array('administrator'),
+    'type' => MENU_CALLBACK,
+  );
+
+	return $items;
+}
+
+
+function atwork_learning_centre_cron() {
+  if (variable_get("atwork_learning_centre_feed_update") < strtotime("-" . variable_get('atwork_learning_centre_courses_wait', "24") . " hours")) {
+    _atw_lc_process_feed();
+  }
+
+  _atw_lc_unpublish_old_courses();
+}
+
+/**
+ * Implements hook_cron_queue_info().
+ */
+function atwork_learning_centre_cron_queue_info() {
+  $queues = array();
+  $queues['lcCourseFeed'] = array(
+    'worker callback' => '_atw_lc_processCourse', //function to call for each item
+    'time' => 60, //seconds to spend working on the queue
+  );
+  return $queues;
+}
+
+
+function _atw_lc_process() {
+	$content = "atWork Learning Centre Course Feed</br></br>";
+
+	if (variable_get("atwork_learning_centre_feed_update") < strtotime("-" . variable_get('atwork_learning_centre_courses_wait', "24") . " minutes")) {
+		_atw_lc_process_feed();
+  }
+  _atw_lc_unpublish_old_courses();
+	return $content;
+}
+
+
+function _atw_lc_unpublish_old_courses() {
+
+  // any course that hasn't been updated in 2 days since last update is assumed to be inactive and is unpublished.
+	$date = strtotime("-2 days", variable_get("atwork_learning_centre_feed_update", 0));
+
+	if ($date > 0) {
+ 		$query = new EntityFieldQuery();
+		$query->entityCondition('entity_type', 'node')
+			->entityCondition('bundle', 'course')
+  		->propertyCondition('changed', $date, '<')
+  		->propertyCondition('status', 1, '=')
+  		->range(0, 20);
+		$result = $query->execute();
+
+		if (isset($result['node'])) {
+  		$course_nids = array_keys($result['node']);
+  		$courses = entity_load('node', $course_nids);
+  		foreach ($courses as $course) {
+  			$node_wrapper = entity_metadata_wrapper('node', $course);
+	  		$node_wrapper->status->set(0);
+  			$node_wrapper->save();
+  		}
+		}
+	}
+}
+
+
+function _atw_lc_process_feed() {
+
+  watchdog('atwork_learning_centre', 'processing Learning Centre Course Feed', array(), WATCHDOG_INFO, $link = NULL);
+	variable_set("atwork_learning_centre_feed_update", time());
+
+	$feed = file_get_contents(variable_get('atwork_learning_centre_courses_url'));
+ 	$feed_json = json_decode($feed);
+
+ 	$items = $feed_json->items;
+
+  $queue = DrupalQueue::get('lcCourseFeed');
+
+ 	foreach ($items as $item) {
+ 		if (isset($item->id)) {
+ 		    $queue->createItem($item);
+  	}
+ 	}
+ 	return;
+}
+
+function _atw_lc_processCourse($item) {
+			// load node if it exists
+ 			$query = new EntityFieldQuery();
+			$query->entityCondition('entity_type', 'node')
+	  		->entityCondition('bundle', 'course')
+  			->fieldCondition('field_course_id', 'value', $item->id, '=')
+  			->range(0, 1);
+			$result = $query->execute();
+
+			if (isset($result['node'])) {
+  			$course_nids = array_keys($result['node']);
+  			$courses = entity_load('node', $course_nids);
+  			$course = array_shift($courses);
+  			$node_wrapper = entity_metadata_wrapper('node', $course);
+			}
+			else {
+  			//Create an instance of the node and wrap it
+  			$node = entity_create('node', array('type' => 'course'));
+  			$node_wrapper = entity_metadata_wrapper('node', $node);
+
+  			$node_wrapper->author = 1; // Admin as the author
+  		}
+  		$node_wrapper->field_course_id->set($item->id); //ID
+  		$node_wrapper->title->set($item->title);  //Title
+  		$node_wrapper->field_course_summary->set($item->summary);
+  		$node_wrapper->field_course_content->set($item->content_text);
+  		$node_wrapper->field_course_content_html->set(array('value' => $item->content_html, 'format' => 'full_html'));
+  		$node_wrapper->field_course_url->url = $item->url;
+  		$node_wrapper->field_course_url->title = $item->title;
+  		$node_wrapper->field_course_author->set($item->author);
+  		$node_wrapper->field_course_published->set(strtotime($item->date_published));
+  		$node_wrapper->field_course_modified->set(strtotime($item->date_modified));
+  		$list = explode(',', $item->tags);
+  		$tags = array();
+  		foreach ($list as $tag) {
+  			$tag = trim($tag);
+  			if (!empty($tag)) {
+  				$tid = _atw_lc_get_term($tag);
+  				$tags[]= $tid;
+  			}
+  		}
+  		$node_wrapper->field_course_tags->set($tags);
+
+  		// set to publish, incase we've updated a previously unpublished course.
+  		$node_wrapper->status->set(1);
+  		$node_wrapper->save();
+}
+
+
+
+// create term if it doesn't exist.
+function _atw_lc_get_term($term_name) {
+	$vocabulary_name = "course_tags";
+  if ($vocabulary = taxonomy_vocabulary_machine_name_load($vocabulary_name)) {
+    $tree = taxonomy_get_tree($vocabulary->vid);
+    foreach ($tree as $term) {
+      if ($term->name == $term_name) {
+        return $term->tid;
+      }
+    }
+
+    // term doesn't exist so create
+		$newterm = new stdClass();
+		$newterm->name = $term_name;
+ 		$newterm->vid = $vocabulary->vid;
+		if (taxonomy_term_save($newterm)) {
+			return $newterm->tid;
+		}
+  }
+
+  return FALSE;
+}
+
