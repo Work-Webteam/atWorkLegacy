@@ -46,8 +46,8 @@ sites/all/themes/atwork_zen/images/*
 .sass-cache/
 
 # Ignore compiled css files
-/sites/all/themes/atwork_zen/css/atwork_zen.styles.css
-*.map
+# /sites/all/themes/atwork_zen/css/atwork_zen.styles.css
+# *.map
 
 
 ### Drupal ###
