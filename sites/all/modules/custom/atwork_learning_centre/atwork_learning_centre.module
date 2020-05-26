@@ -15,13 +15,13 @@ function atwork_learning_centre_menu() {
 
   $items['admin/atwork/learning-centre/test/feed'] = array(
     'page callback' => '_atw_lc_process',
-    'access arguments' => array('administrator'),
+    'access arguments' => array('administer site configuration'),
     'type' => MENU_CALLBACK,
   );
 
   $items['admin/atwork/learning-centre/test/queue'] = array(
     'page callback' => '_atw_lc_process_item',
-    'access arguments' => array('administrator'),
+    'access arguments' => array('administer site configuration'),
     'type' => MENU_CALLBACK,
   );
 
