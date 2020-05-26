@@ -197,7 +197,7 @@ function atwork_zen_views_pre_render(&$view) {
     }
   }
     // Additional changes for the titles/links on teh home page blocks (3 top spots)
-  if($view->name == 'home_page_blocks_zen' && ($view->current_display == 'block_1' || $view->current_display == 'block_4' || $view->current_display == 'block_3' )){
+  if($view->name == 'home_page_blocks_zen' && ($view->current_display == 'block_1' || $view->current_display == 'block_4' || $view->current_display == 'block_3' || $view->current_display == 'block_8')){
     if (isset($view->result[0]->node_type)){
       switch($view->result[0]->node_type) {
         case 'article':
