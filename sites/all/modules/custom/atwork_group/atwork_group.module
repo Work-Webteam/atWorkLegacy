@@ -433,6 +433,12 @@ function atwork_group_views_post_render(&$view, &$output, &$cache) {
         'href' => 'mailto:?subject=' . _atwork_full_name($user) . 'has invited you to join' . $group->title . '&body=' . _atwork_full_name($user) . ' would like to invite you to join "' . $group->title . '". Join by clicking on the following url: ' . $group_url . ' .',
       );
 
+      $variables['links']['help'] = array(
+        'title' => t('Group Help Centre'),
+        'href' => 'groups/work-groups-help-centre' ,
+      );
+
+
       $admin_links = theme('links', $variables);
 
       // collapse or not these admin links?
