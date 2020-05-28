@@ -132,9 +132,12 @@ html {
   min-height: 100%;
   margin-bottom: 0px;
 }
+.front #main {
+  margin-top:2em;
+}
 .not-front #main {
   padding-bottom: 50px;
-  margin-top: 0px !important;
+  margin-top: 4em!important;
   padding-top: 12px\0/ !important;
 }
 .not-front #page h2 {
@@ -1928,6 +1931,9 @@ form#subscriptions-ui-node-form {
 #subscribe.form-wrapper {
   clear: both;
   padding-top: 15px;
+  table {
+    border: solid 1px #D7D7D7;
+  }
   thead tr th {
     padding-top:10px;
   }
