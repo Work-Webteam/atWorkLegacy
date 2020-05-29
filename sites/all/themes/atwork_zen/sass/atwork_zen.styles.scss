@@ -127,6 +127,10 @@ html {
   min-height: 100%;
   /*! padding-bottom: 300px; */
 }
+.front #main {
+  margin-top:2em;
+ }
+ 
 .not-front #page {
   padding-bottom: 0px;
   min-height: 100%;
@@ -134,7 +138,7 @@ html {
 }
 .not-front #main {
   padding-bottom: 50px;
-  margin-top: 0px !important;
+  margin-top: 4em !important;
   padding-top: 12px\0/ !important;
 }
 .not-front #page h2 {
