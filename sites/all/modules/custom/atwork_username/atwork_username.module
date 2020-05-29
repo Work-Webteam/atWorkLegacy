@@ -1,0 +1,85 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ */
+
+/*
+ * Implementation of hook_theme_registry_alter()
+ *
+ * Register our atwork_replace_username() theme function
+ */
+function atwork_username_theme_registry_alter(&$theme_registry) {
+  $theme_registry['username']['theme path'] = drupal_get_path('module', 'atwork_username');
+  $theme_registry['username']['function'] = 'atwork_replace_username';
+}
+
+/*
+ * Implementation of theme_username()
+ *
+ * We want to use displaynames and not idirs/login names for content created on the site.
+ * This used to be used in the presence module which no longer is part of the repo.
+ */
+function atwork_replace_username($variables) {
+  // Relevant variables to see if user is an exec and if they have published their profile.
+  $profile_enabled = FALSE;
+  $executive = FALSE;
+
+  // drupal core truncates name
+  if (isset($variables['name_raw']) && $variables['name_raw']) {
+    $variables['name'] = check_plain($variables['name_raw']);
+  }
+
+  if (isset($variables['new_window']) && $variables['new_window']) {
+    $variables['link_options']['attributes']['onclick'] = 'window.open(this.href); return false;';
+  }
+
+  if ($variables['uid']) {
+    $user = user_load($variables['uid']);
+    if (!$user) {
+      return $variables['name'];
+    }
+
+
+    if (isset($user->roles[10])) {
+      $executive = TRUE;
+    }
+
+    $items = field_get_items('user', $user, 'field_display_name', $user->language);
+    $public_profile = field_get_items('user', $user, 'field_public_profile', $user->language);
+
+    if (isset($public_profile[0]['value']) && $public_profile[0]['value']) {
+      $profile_enabled = TRUE;
+    }
+
+    if (isset($items[0]['value'])) {
+      $variables['name'] = $items[0]['value'];
+    }
+
+    if (isset($variables['link_path']) && (( $profile_enabled) || user_access('administer users'))) {
+      if (isset($variables['email_link']) && $variables['email_link']) {
+        $variables['link_path'] = 'mailto:' . $user->mail;
+        $variables['link_options']['absolute'] = TRUE;
+      }
+      // We have a link path, so we should generate a link using l().
+      // Additional classes may be added as array elements like
+      // $variables['link_options']['attributes']['class'][] = 'myclass';
+      $output = l($variables['name'] . $variables['extra'], $variables['link_path'], $variables['link_options']);
+    }
+    elseif ((($executive && $profile_enabled) || user_access('administer users'))) {
+      $output = l($variables['name'] . $variables['extra'], 'user/' . $variables['uid'], $variables['link_options']);
+    }
+    else {
+      // Modules may have added important attributes so they must be included
+      // in the output. Additional classes may be added as array elements like
+      // $variables['attributes_array']['class'][] = 'myclass';
+      $output = '<span' . drupal_attributes($variables['attributes_array']) . '>' . $variables['name'] . $variables['extra'] . '</span>';
+    }
+  }
+  else {
+    return $variables['name'];
+  }
+
+  return $output;
+}
