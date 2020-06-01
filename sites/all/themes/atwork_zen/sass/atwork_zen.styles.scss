@@ -1285,7 +1285,8 @@ p.submitted a.active {
 }
 .not-front.node-type-article #main #content article table th,
 .not-front.node-type-page #main #content article table th,
-.not-front.node-type-blog #main #content article table {
+.not-front.node-type-blog #main #content article table th,
+.not-front.node-type-section #main #content article table th {
   background-color: #D7D7D7;
   padding-bottom: 8px;
 }
@@ -1296,7 +1297,8 @@ p.submitted a.active {
 }
 .not-front.node-type-article #main #content article table td,
 .not-front.node-type-page #main #content article table td,
-.not-front.node-type-blog #main #content article table td {
+.not-front.node-type-blog #main #content article table td,
+.not-front.node-type-section #main #content article table td {
   vertical-align: top;
   padding: 10px;
 }
@@ -1925,6 +1927,9 @@ aside.sidebars h2 {
 .sidebar-first.og-context.og-context-node .view-display-id-page_2 .views-field-nothing i {
   color: #26669E;
   margin-right: 5px;
+}
+form#subscriptions-ui-node-form.hideSubmitButton-processed {
+  clear:both;
 }
 #subscribe.form-wrapper {
   clear: both;
