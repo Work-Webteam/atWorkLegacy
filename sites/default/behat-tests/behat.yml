@@ -1,0 +1,18 @@
+default:
+  suites:
+    default:
+      contexts:
+        - FeatureContext
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\DrushContext
+  extensions:
+    Drupal\MinkExtension:
+      goutte: ~
+      selenium2: ~
+      #base_url: http://default
+    Drupal\DrupalExtension:
+      blackbox: ~
+      region_map:
+        footer: "#footer"
