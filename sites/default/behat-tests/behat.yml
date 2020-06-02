@@ -15,4 +15,16 @@ default:
     Drupal\DrupalExtension:
       blackbox: ~
       region_map:
+        header: "#header"
+        navigation: ".region-navigation"
+        highlighted: "#highlighted"
+        pre_tabs: ".region-pre-tabs"
+        social_side: "#social-side"
+        pre_content: ".region-pre-content"
+        comm_news: ".region-comm-news"
+        content: "#content"
+        post_content: ".region-post-content"
+        sidebar_first: ".region-sidebar-first"
+        sidebar_second: ".region-sidebar-second"
         footer: "#footer"
+        bottom: ".region-bottom"
