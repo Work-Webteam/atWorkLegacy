@@ -5230,3 +5230,46 @@ li.TabbedPanelsTab {
 #user-profile-form .group-contact-info {
   display:none;
 }
+
+/* Learning Centre Course page */
+.view-learning-centre-course-feed {
+  .views-field-title {
+    font-size: 1.25em;
+  }
+  br {
+    display:none;
+  }
+}
+.views-field-field-course-summary {
+  margin-bottom:10px;
+ }
+.views-field-field-course-delivery-method {
+  display:inline;
+  border:solid 1px #d7d7d7;
+  margin-right:10px;
+  padding:5px;
+}
+.views-field-field-course-duration {
+  display:inline;
+  border:solid 1px #d7d7d7;
+  padding:5px;
+}
+.views-label-field-course-delivery-method,
+ .views-label-field-course-duration {
+  border-right:solid 1px #d7d7d7;
+}
+.views-field-field-course-delivery-method .views-label,
+.views-field-field-course-duration .views-label {
+  margin-right:10px;
+  padding:2px;
+}
+.views-field-field-course-delivery-method .field-content,
+.views-field-field-course-duration .field-content {
+  font-style:oblique;
+  font-size: 1.1em;
+}
+.views-field-field-course-tags {
+   display:block;
+   clear:both;
+   margin-top: 10px;
+}
