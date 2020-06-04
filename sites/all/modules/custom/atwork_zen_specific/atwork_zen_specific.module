@@ -35,6 +35,7 @@ function atwork_zen_specific_form_alter(&$form, &$form_state, $form_id) {
 /*
  * Implements hook_views_pre_view();
  */
+/*
 function atwork_zen_specific_views_pre_view(&$view, &$display_id, &$args) {
   global $user;
 
@@ -78,11 +79,12 @@ function atwork_zen_specific_views_pre_view(&$view, &$display_id, &$args) {
     }
   }
 }
-
+*/
 /**
  * Implements hook_block_view_alter();
  * This is for classic site - hide other group options from regular users.
  */
+/*
 function atwork_zen_specific_block_view_alter(&$data, $block) {
   global $user;
   global $theme;
@@ -131,54 +133,8 @@ EOT;
 
 }
 
+*/
 
-
-
-/*
- * Implementation of hook_block_info()
- *
- * Providing a theme-switching block
- *
- */
-function atwork_zen_specific_block_info() {
-  $blocks['switch_theme'] = array(
-    'info' => t('Switch Theme'),
-    'visibility' => BLOCK_VISIBILITY_LISTED,
-  );
-
-  return $blocks;
-}
-
-/*
- * Implementation of hook_block_view()
- *
- * Providing a theme-switching block
- *
- */
-function atwork_zen_specific_block_view($delta = '') {
-  // This example is adapted from node.module.
-  $block = array();
-  global $user;
-  switch ($delta) {
-    case 'switch_theme':
-      global $user;
-
-
-      if ($user->theme == 'atwork_zen') {
-        $link = l(t('Atwork Classic'), current_path(), array('query' => array('display' => 'atwork')));
-      }
-      else {
-        $link = l(t('Atwork Beta'), current_path(), array('query' => array('display' => 'atwork_zen')));
-      }
-
-      $block['subject'] = '';
-      $block['content'] = array(
-        '#markup' => t('Switch theme to !link', array('!link' => $link)),
-      );
-      break;
-  }
-  return $block;
-}
 
 /**
  * Implements hook_views_pre_render()
