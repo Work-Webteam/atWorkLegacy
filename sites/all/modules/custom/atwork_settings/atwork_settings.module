@@ -32,15 +32,6 @@ function atwork_settings_menu() {
     'weight' => -90,
   );
 
-  $links['admin/config/atwork/mail'] =  array(
-    'title' => t('Mail') ,
-    'description' => t('Atwork Mail Settings') ,
-    'page arguments' => array('atwork_settings_mail_form'),
-    'access arguments' => array('access administration pages'),
-    'type' => MENU_LOCAL_TASK,
-    'weight' => -90,
-  );
-
   $links['admin/config/atwork/profiles'] =  array(
     'title' => t('Profiles') ,
     'description' => t('Atwork Profile Settings') ,
