@@ -47,6 +47,20 @@ function atwork_search_query_alter(&$query) {
  * Remove label from search block
  */
 function atwork_search_form_alter(&$form, &$form_state, $form_id) {
+
+  /**
+   * Moved form atwork_zen_specific_form_alter
+   * Used in homepage search block.
+   */
+  if ($form_id == 'search_block_form' ) {
+    $form['actions']['submit']['#type'] = 'submit';
+    $form['actions']['submit']['#value'] = t('Search');
+    $form['search_block_form']['#title'] = '';
+    $form['search_block_form']['#attributes']['placeholder'] = t('Search @Work');
+
+    hide($form['actions']['submit']);
+  }
+
   if ($form_id == 'search_form') {
     if (isset($form['advanced'])) {
       unset($form['advanced']['type']['#options']['page']);
@@ -81,7 +95,7 @@ function atwork_search_form_alter(&$form, &$form_state, $form_id) {
   }
 
   if ($form_id == 'custom_search_blocks_form_1') {
- 
+
     drupal_add_js(drupal_get_path('module', 'atwork_search') . '/js/atwork_search.js');
 
     //$form['actions']['submit']['#type'] = 'image_button';
