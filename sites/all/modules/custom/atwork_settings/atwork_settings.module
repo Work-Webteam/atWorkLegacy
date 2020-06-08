@@ -5,58 +5,50 @@
 */
 function atwork_settings_menu() {
   $links['admin/config/atwork'] =  array(
-    'title' => t('Atwork') , 
+    'title' => t('Atwork') ,
     'description' => t('Atwork Settings') ,
     'page callback' => 'drupal_get_form',
     'page arguments' => array('atwork_settings_general_form'),
-    'access arguments' => array('access administration pages'), 
+    'access arguments' => array('access administration pages'),
     'file' => 'atwork_settings.admin.inc',
     'file path' => drupal_get_path('module', 'atwork_settings'),
   );
-  
+
   $links['admin/config/atwork/general'] =  array(
-    'title' => t('General') , 
+    'title' => t('General') ,
     'description' => t('General Atwork Settings') ,
-    'access arguments' => array('access administration pages'), 
+    'access arguments' => array('access administration pages'),
     'type' => MENU_DEFAULT_LOCAL_TASK,
     'weight' => -99,
   );
-  
-  $links['admin/config/atwork/classifieds'] =  array(
-    'title' => t('Classifieds') , 
-    'description' => t('Atwork Classifieds Settings') ,
-    'page arguments' => array('atwork_settings_classifieds_form'),
-    'access arguments' => array('access administration pages'), 
-    'type' => MENU_LOCAL_TASK,
-    'weight' => -90,
-  );
-  
+
+
   $links['admin/config/atwork/copy'] =  array(
-    'title' => t('Labels, Instructions, Messages, etc.') , 
+    'title' => t('Labels, Instructions, Messages, etc.') ,
     'description' => t('Labels, Instructions, Messages, etc.') ,
     'page arguments' => array('atwork_settings_copy_form'),
-    'access arguments' => array('access administration pages'), 
+    'access arguments' => array('access administration pages'),
     'type' => MENU_LOCAL_TASK,
     'weight' => -90,
   );
-  
+
   $links['admin/config/atwork/mail'] =  array(
-    'title' => t('Mail') , 
+    'title' => t('Mail') ,
     'description' => t('Atwork Mail Settings') ,
     'page arguments' => array('atwork_settings_mail_form'),
-    'access arguments' => array('access administration pages'), 
+    'access arguments' => array('access administration pages'),
     'type' => MENU_LOCAL_TASK,
     'weight' => -90,
   );
-  
+
   $links['admin/config/atwork/profiles'] =  array(
-    'title' => t('Profiles') , 
+    'title' => t('Profiles') ,
     'description' => t('Atwork Profile Settings') ,
     'page arguments' => array('atwork_settings_profile_form'),
-    'access arguments' => array('administer users'), 
+    'access arguments' => array('administer users'),
     'type' => MENU_LOCAL_TASK,
     'weight' => -90,
   );
-  
+
   return $links;
 }
