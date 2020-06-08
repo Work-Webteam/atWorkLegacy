@@ -17,11 +17,8 @@ function atwork_news_form_article_node_form_alter(&$form, &$form_state, $form_id
       $form['field_snipet'][$form['language']['#value']][0]['value']['#default_value'] = 'Article';
       $form['field_snipet']['#access'] = FALSE;
       $form['og_group_ref']['#access'] = FALSE;
-      //$form['revision_information']['#access'] = FALSE;
       $form['options']['status']['#default_value'] = 1;
       $form['options']['#access'] = TRUE;
-     // $form['options']['promote']['#access'] = FALSE;
-     // $form['options']['sticky']['#access'] = FALSE;
       $form['actions']['delete']['#access'] = FALSE;
       drupal_add_css('#edit-body-und-0-format {display:none;}', $option['type'] = 'inline');
       // Hide exec tags, from helper function in atwork_misc.module
@@ -48,7 +45,6 @@ function atwork_news_form_article_node_form_alter(&$form, &$form_state, $form_id
  *
  */
 function atwork_news_views_pre_render(&$view) {
-  //dpm($view);
 
   if ($view->name == 'news' && $view->current_display == 'page_1') {
     global $user;
