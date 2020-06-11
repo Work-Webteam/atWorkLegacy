@@ -132,9 +132,12 @@ html {
   min-height: 100%;
   margin-bottom: 0px;
 }
+.front #main {
+  margin-top:2em;
+}
 .not-front #main {
   padding-bottom: 50px;
-  margin-top: 0px !important;
+  margin-top: 4em!important;
   padding-top: 12px\0/ !important;
 }
 .not-front #page h2 {
@@ -1470,7 +1473,7 @@ article p.submitted {
 }
 article p {
   padding: 0;
-  margin: 10px 0 0 0;
+  margin: 10px 0;
 }
 article p,
 article ul,
@@ -1922,9 +1925,15 @@ aside.sidebars h2 {
   color: #26669E;
   margin-right: 5px;
 }
+form#subscriptions-ui-node-form {
+  clear:both;
+}
 #subscribe.form-wrapper {
   clear: both;
   padding-top: 15px;
+  table {
+    border: solid 1px #D7D7D7;
+  }
   thead tr th {
     padding-top:10px;
   }
@@ -5220,4 +5229,47 @@ li.TabbedPanelsTab {
 // Hides the User Profile contact information. Contains GAL update not needed unless specified.
 #user-profile-form .group-contact-info {
   display:none;
+}
+
+/* Learning Centre Course page */
+.view-learning-centre-course-feed {
+  .views-field-title {
+    font-size: 1.25em;
+  }
+  br {
+    display:none;
+  }
+}
+.views-field-field-course-summary {
+  margin-bottom:10px;
+ }
+.views-field-field-course-delivery-method {
+  display:inline;
+  border:solid 1px #d7d7d7;
+  margin-right:10px;
+  padding:5px;
+}
+.views-field-field-course-duration {
+  display:inline;
+  border:solid 1px #d7d7d7;
+  padding:5px;
+}
+.views-label-field-course-delivery-method,
+ .views-label-field-course-duration {
+  border-right:solid 1px #d7d7d7;
+}
+.views-field-field-course-delivery-method .views-label,
+.views-field-field-course-duration .views-label {
+  margin-right:10px;
+  padding:2px;
+}
+.views-field-field-course-delivery-method .field-content,
+.views-field-field-course-duration .field-content {
+  font-style:oblique;
+  font-size: 1.1em;
+}
+.views-field-field-course-tags {
+   display:block;
+   clear:both;
+   margin-top: 10px;
 }

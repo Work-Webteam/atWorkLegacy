@@ -13,9 +13,15 @@ function atwork_learning_centre_menu() {
     'file' => 'atwork_learning_centre.admin.inc',
   );
 
-  $items['admin/atwork/test'] = array(
+  $items['admin/atwork/learning-centre/test/feed'] = array(
     'page callback' => '_atw_lc_process',
-    'access arguments' => array('administrator'),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['admin/atwork/learning-centre/test/queue'] = array(
+    'page callback' => '_atw_lc_process_item',
+    'access arguments' => array('administer site configuration'),
     'type' => MENU_CALLBACK,
   );
 
@@ -45,15 +51,29 @@ function atwork_learning_centre_cron_queue_info() {
 
 
 function _atw_lc_process() {
-	$content = "atWork Learning Centre Course Feed</br></br>";
+	$content = "TEST - atWork Learning Centre - Process Course Feed</br></br>";
 
-	if (variable_get("atwork_learning_centre_feed_update") < strtotime("-" . variable_get('atwork_learning_centre_courses_wait', "24") . " minutes")) {
+//	if (variable_get("atwork_learning_centre_feed_update") < strtotime("-" . variable_get('atwork_learning_centre_courses_wait', "24") . " minutes")) {
 		_atw_lc_process_feed();
-  }
+//  }
   _atw_lc_unpublish_old_courses();
 	return $content;
 }
 
+function _atw_lc_process_item() {
+  $content = "TEST - atWork Learning Centre - Course Queue Item</br></br>";
+
+  $queue = DrupalQueue::get('lcCourseFeed');
+  $item = $queue->claimItem();
+  if ($item) {
+    dpm($item);
+    _atw_lc_processCourse($item->data);
+  }
+  else {
+    dpm("no items in queue");
+  }
+  return $content;
+}
 
 function _atw_lc_unpublish_old_courses() {
 
@@ -89,8 +109,7 @@ function _atw_lc_process_feed() {
 
 	$feed = file_get_contents(variable_get('atwork_learning_centre_courses_url'));
  	$feed_json = json_decode($feed);
-
- 	$items = $feed_json->items;
+  $items = $feed_json->items;
 
   $queue = DrupalQueue::get('lcCourseFeed');
 
@@ -134,6 +153,8 @@ function _atw_lc_processCourse($item) {
   		$node_wrapper->field_course_author->set($item->author);
   		$node_wrapper->field_course_published->set(strtotime($item->date_published));
   		$node_wrapper->field_course_modified->set(strtotime($item->date_modified));
+  		$node_wrapper->field_course_delivery_method->set($item->delivery_method);
+  		$node_wrapper->field_course_duration->set($item->duration);
   		$list = explode(',', $item->tags);
   		$tags = array();
   		foreach ($list as $tag) {
