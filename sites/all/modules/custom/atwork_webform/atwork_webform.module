@@ -7,10 +7,28 @@
  *
  * Control Emerging Leader voting form
  *
- * @TODO move to atwork_prem_awards module
+ * @TODO move appropriate code to atwork_prem_awards module
  */
-function atwork_webform_form_alter(&$form, $form_state, $form_id)
-{
+function atwork_webform_form_alter(&$form, $form_state, $form_id) {
+  // We want to make sure "required" fields are actually required in webforms
+  // Seems to work for all but html textarea fields, which is a plugin
+  // these fields do not seem to respect directives.
+  if($form['#node']->type == "webform") {
+    //Check for html_text area fields, pass by reference.
+    foreach( $form['submitted'] as &$field ) {
+      if($field['#webform_component']['type'] == 'html_textarea' ) {
+        // Make sure that we have a proper fields.
+        if (isset($field['#webform_component']['required']) && isset($field['#required'])) {
+          // Sync the fields
+          $field['#required'] = $field['#webform_component']['required'];
+        }
+      }
+    }
+  }
+
+
+
+
   if ($form_id == 'webform_component_edit_form') {
     $form['name']['#type'] = 'textarea';
     unset($form['name']['#maxlength']);
@@ -54,6 +72,16 @@ function atwork_webform_form_alter(&$form, $form_state, $form_id)
     //}
   }
 }
+
+function public_service_covid_html_textarea_validate($form, $form_state){
+  foreach( $form['submitted'] as $field ) {
+    if(is_array($field) && isset($field['#webform_component']['required']) && $field['#webform_component']['required'] == '1'){
+      $field['#required'] = 1;
+    }
+  }
+
+}
+
 
 /**
  * Want to append some text to the webform
