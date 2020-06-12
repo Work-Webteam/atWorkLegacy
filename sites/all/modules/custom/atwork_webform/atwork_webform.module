@@ -14,6 +14,7 @@ function atwork_webform_form_alter(&$form, $form_state, $form_id) {
   // Seems to work for all but html textarea fields, which is a plugin
   // these fields do not seem to respect directives.
   if($form['#node']->type == "webform") {
+
     //Check for html_text area fields, pass by reference.
     foreach( $form['submitted'] as &$field ) {
       if($field['#webform_component']['type'] == 'html_textarea' ) {
@@ -21,6 +22,12 @@ function atwork_webform_form_alter(&$form, $form_state, $form_id) {
         if (isset($field['#webform_component']['required']) && isset($field['#required'])) {
           // Sync the fields
           $field['#required'] = $field['#webform_component']['required'];
+        }
+        // We also want to move the description above the textarea box if it is requested.
+        if ($field['#webform_component']['extra']['description_above'] == 1 ) {
+          $description = $field['#webform_component']['extra']['description'];
+          $field['#field_prefix'] = $description;
+          $field['#description']= '';
         }
       }
     }
@@ -71,15 +78,6 @@ function atwork_webform_form_alter(&$form, $form_state, $form_id) {
     //  $form['submitted']['finalists']['#options'][$key] = '<div class="video-finalist video-'. $key .'"><h3>'. $name .'</h3><a href="//www.youtube.com/embed/'. $video_id .'?wmode=transparent&amp;fs=1&amp;width=640&amp;height=385&amp;hl=en_US1&amp;iframe=true&amp;rel=0&amp;showinfo=0" class="colorbox-load" title="' . $caption . '" rel="Click to see ' . $name . '\'s video"><img src="/sites/default/files/webform/premieres_awards/2017/'. $thumb_path .'" alt = "Click me" /></a></div>';
     //}
   }
-}
-
-function public_service_covid_html_textarea_validate($form, $form_state){
-  foreach( $form['submitted'] as $field ) {
-    if(is_array($field) && isset($field['#webform_component']['required']) && $field['#webform_component']['required'] == '1'){
-      $field['#required'] = 1;
-    }
-  }
-
 }
 
 
