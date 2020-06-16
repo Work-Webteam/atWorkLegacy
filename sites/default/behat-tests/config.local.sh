@@ -1,0 +1,1 @@
+export BEHAT_PARAMS='{"extensions":{"Behat\\MinkExtension":{"base_url":""},"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"/var/www/public/work"},"drush":{"alias":"self"},"subcontexts":{"paths":["/var/www/public/work/sites/all/modules"]}}}}'
