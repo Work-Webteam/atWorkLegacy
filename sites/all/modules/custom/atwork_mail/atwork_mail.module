@@ -24,6 +24,7 @@ function _atwork_valid_email($email) {
  * Return an array of email addresses from a textarea
  */
 function _atwork_get_addresses($string) {
+  $string = strtolower($string);
   $string = str_replace(';', ',', $string);
   $string = str_replace(array("\r\n", "\n", "\r"), ',', trim($string));
   $string = str_replace(' ', '', $string);
