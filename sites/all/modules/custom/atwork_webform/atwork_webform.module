@@ -10,7 +10,6 @@
  * @TODO move appropriate code to atwork_prem_awards module
  */
 function atwork_webform_form_alter(&$form, $form_state, $form_id) {
-  dpm($form_id);
   // We want to make sure "required" fields are actually required in webforms
   // Seems to work for all but html textarea fields, which is a plugin
   // these fields do not seem to respect directives.
