@@ -675,13 +675,12 @@ div #block-views-home-page-blocks-zen-block-6 {
   position: relative;
   #block-search-form {
     position: absolute;
-    right:6px;
+    right:15px;
     top:9px;
     z-index: 1000;
     .form-item-search-block-form input {
       height:25px;
       background-color: #FFFFFF;
-      padding-left:35px;
     }
     #search-block-form {
       .icon {
@@ -698,6 +697,10 @@ div #block-views-home-page-blocks-zen-block-6 {
         font-size: 1.5em;
         margin-top: 3px;
         margin-left: 8px;
+        color:#FFFFFF;
+        &:hover {
+          color:lightseagreen;
+        }
       }
     }
   }
