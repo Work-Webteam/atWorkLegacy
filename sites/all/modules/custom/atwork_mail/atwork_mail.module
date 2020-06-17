@@ -2,15 +2,19 @@
 
 /*
  * Helper function that checks for an email domain and proper syntax
+ * If the email address is deemed correct, returns email address.
+ * Else returns false.
  */
 function _atwork_valid_email($email) {
   // Make it all lower case.
   $email = strtolower($email);
-  // Check that it has an @symbol in it
-  $email_check = substr_count($email, '@');
-  if ( $email_check !== FALSE && $email_check < 2) {
+  // Check against a popular regex.
+  $pattern = "/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/";
+  //If we match, return the $email.
+  if(preg_match($pattern, $email, $matches)) {
     return $email;
   }
+  // Else return false.
   return FALSE;
 }
 
@@ -20,6 +24,7 @@ function _atwork_valid_email($email) {
  * Return an array of email addresses from a textarea
  */
 function _atwork_get_addresses($string) {
+  $string = strtolower($string);
   $string = str_replace(';', ',', $string);
   $string = str_replace(array("\r\n", "\n", "\r"), ',', trim($string));
   $string = str_replace(' ', '', $string);
