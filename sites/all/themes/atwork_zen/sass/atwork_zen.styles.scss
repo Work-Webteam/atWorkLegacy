@@ -673,25 +673,31 @@ div #block-views-home-page-blocks-zen-block-6 {
 /* Standard top menu search -------------------------------------------------------*/
 #navigation {
   position: relative;
-  #block-block-7 {
+  #block-search-form {
     position: absolute;
-    right:10px;
+    right:6px;
+    top:9px;
     z-index: 1000;
-    color: #FFFFFF;
-    padding-top:8px;
-    a {
-      display: none;
+    .form-item-search-block-form input {
+      height:25px;
+      background-color: #FFFFFF;
+      padding-left:35px;
     }
-    label {
-      margin-right:5px;
-    }
-    .fa.fa-search {
-      font-size: 1.5em;
-    }
-    .search-form {
-      margin-bottom:0;
-      input {
-        width:162px;
+    #search-block-form {
+      .icon {
+        display:none;
+        top:0;
+        margin-left:8px;
+        margin-top:6px;
+        i.better_search {
+          width:2em;
+          height:2em;
+        }
+      }
+      .fa.fa-search {
+        font-size: 1.5em;
+        margin-top: 3px;
+        margin-left: 8px;
       }
     }
   }
