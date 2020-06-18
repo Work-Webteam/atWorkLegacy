@@ -41,27 +41,26 @@
 
 
 #navigation {
-  max-width:960px;
   margin:0 auto;
   display: inline-block;
+  padding:0;
+  height:55px;
+  clear:both;
   .region-navigation {
-    width:100%;
     max-width:1240px;
     display: block;
     margin: 0 auto 0;
-    padding: 0px;
     top: 0px;
     position: fixed;
     clear: both;
     line-height: 1.5em;
     z-index: 100;
-    width: 100vw;
-    //left: calc(-50vw + 50%);
+    width: 97vw;
+    left: calc(-50vw + 50%);
+    right: calc(-50vw + 50%);
     background-color: #1f5792;
+    border:solid 1px #FFFFFF;
   }
-  padding-left:0;
-  padding-right:0;
-  padding:0;
   .next-menu-link {
     color: #FFFFFF;
   }
@@ -75,7 +74,7 @@
     padding: 0;
   }
   ul.sf-menu.sf-style-none.sf-navbar {
-    width: 100%;
+    width: inherit;
   }
   ul.sf-menu.sf-style-none ul {
     margin: 0;
@@ -187,7 +186,7 @@
   ul#superfish-1 {
     font-size: 1.15em;
     padding:3px 0;
-    border: solid 1px #FFFFFF;
+    //border: solid 1px #FFFFFF;
     > li > ul {
       //margin-top:-6px;
       background: #ECECEC;
@@ -196,6 +195,7 @@
       border-left: solid 1px #CAC7C7;
       border-right: solid 1px #CAC7C7;
       padding-bottom:3px;
+      width:96.9vw;
     }
     .sf-depth-1 {
       a:hover {

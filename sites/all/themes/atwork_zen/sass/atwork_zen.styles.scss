@@ -133,7 +133,7 @@ html {
   margin-bottom: 0px;
 }
 .front #main {
-  margin-top:2em;
+  padding-top:0;
 }
 .not-front #main {
   padding-bottom: 50px;
@@ -614,61 +614,6 @@ body.front .top-story {
     text-align:center;
   }
 }
-/* Front four stories - text based - under the lead story */
-div #block-views-home-page-blocks-zen-block-6 {
-  width: 100%;
-  padding:0;
-  margin: 0 0 20px;
-  .front-four {
-    .view-content {
-      display: flex;
-      flex-flow: row nowrap;
-      justify-content: space-around;
-      .views-row {
-        width:24.7%;
-        #follow-story {
-          position: relative;
-          border: solid 1px #CAC7C7;
-          padding: 10px;
-          min-height: 475px;
-          margin-bottom: 12px;
-          .follow-image {
-            margin-bottom:12px;
-            display: block;
-          }
-          .lead-date {
-            float:left;
-            margin-right:10px;
-          }
-          h3 {
-            //min-height:45px;
-          }
-          .more-content {
-            position:absolute;
-            bottom:10px;
-          }
-        }
-        &.views-row-last {margin-right:0px;}
-        h3, h5, p {
-          padding:0;
-          margin:0;
-        }
-        h3 {
-          //margin-bottom:5px;
-          //min-height:40px;
-        }
-        h3 a {
-          color: #135ab0;
-        }
-        p {
-          clear:both;
-          margin-top: 35px;
-        }
-      }
-    }
-  }
-}
-
 
 /* Standard top menu search -------------------------------------------------------*/
 #navigation {
@@ -746,22 +691,25 @@ ol.search-results h3.title {
 
 /* Front Page 4 Box Grid -------------------------------------------------------*/
 body.front {
-  .region .region-pre-content {
-    display:flex;
-    flex-direction: column;
-  }
   #block-views-home-page-blocks-zen-block-9 {
     clear:both;
   }
+  .front-four .view-content,
   .region-comm-news {
     display: flex;
-    flex-flow:row nowrap;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .view-home-page-blocks-zen {
+      width:100%;
+    }
   }
   #block-views-home-page-blocks-zen-block-1,
   #block-views-home-page-blocks-zen-block-3,
   #block-views-home-page-blocks-zen-block-4,
-  #block-views-home-page-blocks-zen-block-8 {
+  #block-views-home-page-blocks-zen-block-8,
+  #block-views-home-page-blocks-zen-block-6 .views-row-odd,
+  #block-views-home-page-blocks-zen-block-6 .views-row-even {
     width:24.7%;
     position: relative;
     #follow-story {

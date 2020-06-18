@@ -72,11 +72,14 @@ and (max-device-width : 667px)
 and (orientation : portrait) {
   #navigation {
     .region-navigation {
-      height:40px;
-      padding:10px;
+      height:60px;
       #block-superfish-1 {
         padding-top:8px;
         text-align: center;
+      }
+      #block-search-form {
+        top:45px;
+        right: calc(-25vw + 50%);
       }
     }
   }
@@ -459,6 +462,7 @@ table#sn-newsletter-layout {
   .front #page #main {
     margin-left: 5px;
     margin-right: 5px;
+    padding-top:30px;
   }
   .not-front #page {
     margin-left: 10px;
@@ -542,6 +546,7 @@ body.front .top-story {
   }
   #lead-spot {
     width:90%;
+    height:initial!important;
   }
 }
 .front .front-four .view-content {
@@ -615,6 +620,9 @@ body.front .top-story {
 }
 .front #block-views-home-page-blocks-zen-block-2.block.block-views {
   min-width:100%!important;
+}
+.front #block-views-top-tools-block {
+  display: block!important;
 }
 /* Article / Blog pages with sidebars */
 .not-front.logged-in.one-sidebar.sidebar-first aside.sidebars {
@@ -977,6 +985,8 @@ and (orientation : landscape) {
 .front #page #main {
   margin-left: 5px;
   margin-right: 5px;
+  margin-top:0;
+  padding-top:0;
 }
 .not-front #page {
     margin-left: 5px;
@@ -1726,12 +1736,12 @@ section.region.region-sidebar-second.column.sidebar {
     }
 	#header.header,
   .not-front .new-activity-window #header.header { //make new space for mobile menu in nav space
-    height: 60px!important;
+    height: 0px!important;
     margin: 0;
   	}
  	#navigation .region-navigation { // move .region-nav to very top
     top: 0 !important;
-    width: 100%;
+    padding:10px;
   	}
 	.front #block-views-home-page-blocks-zen-block-2 {
 		min-width: 63%!important;
