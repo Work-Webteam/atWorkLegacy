@@ -11,9 +11,8 @@
  */
 function atwork_newsletter_theme_registry_alter(&$theme_registry){
   // We are overwriting the theme registry, redirecting functions to our own template.
-  if (!$user) {
-    global $user;
-  }
+  global $user;
+
   // Make sure we set this and don't append it. Only need to explicitly set this if user is manager or administrator
   // As per issue here: https://www.drupal.org/project/simplenews/issues/374222
   if (in_array('administrator', $user->roles) || in_array('manager', $user->roles)) {
