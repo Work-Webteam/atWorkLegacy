@@ -4,34 +4,3 @@ sites/*/settings*.php
 # Ignore paths that contain user-generated content.
 sites/*/files
 sites/*/private
-
-# Ignore this file - may be different for diffrent environments.
-# .gitignore
-
-# Ignore vendor file
-vendor
-
-# Ignore phpMyAdmin implementation
-sites/phpMyAdmin
-
-# Ignore theme images
-sites/all/themes/atwork_zen/images
-
-# Ignore htaccess files
-#.htaccess
-
-# Ignore sass files
-sites/all/themes/atwork_zen/sass
-
-# Ignore arrc files
-sites/all/themes/atwork_zen/arrc
-
-# Ignore php storm related files
-.idea
-
-# Ignore mac related files
-.DS_Store
-._.DS_Store
-**/.DS_Store
-**/._.DS_Store
-
