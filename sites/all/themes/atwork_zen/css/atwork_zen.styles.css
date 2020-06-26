@@ -5232,9 +5232,10 @@ a.avpw_cursor {
 /* line 115, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
 html, body {
   height: 100%;
+  margin: 0;
 }
 
-/* line 118, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
+/* line 119, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
 html {
   background: url(../images/Bar-26669E.png) repeat-x scroll center -10px;
 }
