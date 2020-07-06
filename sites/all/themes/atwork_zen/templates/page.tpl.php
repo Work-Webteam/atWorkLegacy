@@ -171,20 +171,5 @@
 
 </div><!-- /#page -->
 
-<?php if ($is_front):
-
-    $interval   = REQUEST_TIME - variable_get('user_block_seconds_online', 900);
-    $count_auth = admin_menu_session_count($interval, FALSE);
-    if ($count_auth == 1) {
-      $users_online = '<div id="users_online"><p> <strong><strong>' . $count_auth . ' </strong></strong> person is currently on @Work. </p></div>';
-    }
-    else{
-      $users_online = '<div id="users_online"><p> <strong><strong>' . $count_auth . ' </strong></strong> people are currently on @Work.</p></div>';
-    }
-    if(isset($page['footer']['boxes_copyright_terms_user']['#markup']) && $page['footer']['boxes_copyright_terms_user']['#markup']){
-      $page['footer']['boxes_copyright_terms_user']['#markup'] .= $users_online;
-    }
-endif; ?>
-
 <?php print render($page['bottom']); ?>
 <?php print render($page['footer']); ?>
