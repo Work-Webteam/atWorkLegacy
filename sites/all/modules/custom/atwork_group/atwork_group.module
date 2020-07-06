@@ -717,7 +717,6 @@ function atwork_group_form_alter(&$form, &$form_state, $form_id) {
   }
 
   if($form_id == 'og_menu_overview_form'){
-    dpm($form);
     //edit tab could get user in trouble, lets hide it.
     if(!_atwork_is_admin()){
       drupal_add_css(".tabs-primary.tabs.primary li:last-child {display:none;}", 'inline');
@@ -735,34 +734,15 @@ function atwork_group_form_alter(&$form, &$form_state, $form_id) {
         if(isset($key_name[0]) && $key_name[0] == "mlid") {
           // Now that we know that we are in the right place, lets replace the href if it starts with an /
           if(isset($form[$key]['#item']['href']) && $form[$key]['#item']['href'][0] == "/") {
-            $save_menu = TRUE;
-            // trim off the '/' if it appears before anything else.
-            // We need to nuke this before we can look up the node number.
-            // Now that this is not allowed, eventually this function will never get hit - it can then be removed.
-            $form[$key]['#item']['href'] = ltrim($form[$key]['#item']['href'], '/');
-            // Now get the original node name/id to save as the new href.
-            $form[$key]['#item']['href'] = drupal_lookup_path('source', $form[$key]['#item']['href']);
-
-            // Now we need to rebuild and save this menu item
-            dpm($form[$key]['#item']['href']);
-            // TODO: menu_link_load(mlid); <-- load this, then save below in this case.
-            $this_link = menu_link_load($key_name[1]);
-            $this_link['link_path'] = $form[$key]['#item']['href'];
-            $this_link['href'] = $this_link['link_path'];
-            dpm($this_link);
-            $save_link = menu_link_save($this_link);
-            dpm($save_link);
-            //$test = menu_link_save($form[$key]['#item']);
-            //dpm($test);
+            // If at least once link is not correct, we need to update it.
             $save_menu = TRUE;
           }
         }
       }
     }
-    array_unshift($form['#submit'], 'update_links_submit');
-    dpm($form);
     if($save_menu == TRUE) {
       // Add our own submit handler
+      $form['#submit'][] = 'update_links_submit';
     }
   }
 
@@ -781,21 +761,21 @@ function atwork_group_form_alter(&$form, &$form_state, $form_id) {
       if($form['description']['#default_value'] == 'OG Menu for ' . $form['title']['#default_value']) {
         $form['description']['#default_value'] = $form['title']['#default_value'];
       }
-      //dpm($form);
     }
   }
-  //dpm($form_id);
 }
 
 
 /**
+ * Submit function to help fix links that had been mangled with a previous sql update.
+ *
  * @param $form
  * @param $form_state
  */
 function update_links_submit($form, $form_state) {
   // here we want to clean, save links if this form is being saved.
   // Again, lets pull and save all of these links - making sure they are clean.
-  // We are pre-empting the regular handler in this situation -so we also need to save weights
+  // We are preempting the regular handler in this situation -so we also need to save weights
   // which is the only other thing that is actually saved in this menu.
   if(isset($form_state['values'])) {
     foreach($form_state['values'] as $value ) {
@@ -806,29 +786,52 @@ function update_links_submit($form, $form_state) {
         if (isset($this_menu['link_path']) && $this_menu['link_path'][0] == "/") {
           // And exists
           $new_link = ltrim($this_menu['link_path'], '/');
+
+          // First look for regular path
           $path_check = drupal_lookup_path('source', $new_link);
+          // If there is still nothing, maybe it is a link to an asset.
+          if( $path_check == FALSE ) {
+            // If this returns anything beyond false, we know the file (and this URL) is correct.
+            $file_exists = file_valid_uri(file_build_uri($new_link));
+            if($file_exists != FALSE){
+              $path_check = file_create_url($new_link);
+            }
+          }
+          // If there is nothing, look for a path alias
+          if($path_check == FALSE) {
+            $path_check = drupal_get_path_alias($new_link);
+          }
+
+          // If we found any type of match, we can save the new link.
           if (!empty($path_check)) {
-            $this_menu['href'] = $new_link;
-            $this_menu['link_path'] = $new_link;
+            $this_menu['href'] = $path_check;
+            $this_menu['link_path'] = $path_check;
             $altered = TRUE;
+          } else {
+            // Give user a note that the link could not be found and must be rebuilt.
+            drupal_set_message("The link " . $new_link . " could not be resolved, it is possible that this link moved or was deactivated.
+            Link has been removed from your menu. You can replace it by clicking the + Add link option above the menu link table.", 'warning');
           }
         }
         // Now also check that our Weight has not changed.
         if(isset($value['weight']) && isset($this_menu['link_weight']) && $value['weight'] != $this_menu['link_weight']) {
-          $this_menu['weight'] == $value['weight'];
+          $this_menu['weight'] = $value['weight'];
           $altered = TRUE;
-
         }
+        // Save the link, and also update form and form_state
         if($altered == TRUE ) {
           $saved = menu_link_save($this_menu);
-          dpm($saved);
+          // Finally, we need to update the form_state and form
+          if(isset($form["mlid:" . $value['mlid']])) {
+            $form["mlid:" . $value['mlid']]['#item']['link_path'] = $this_menu['link_path'];
+            $form["mlid:" . $value['mlid']]['#item']['href'] = $this_menu['link_path'];
+          }
         }
       }
     }
   }
-  //dpm($form);
-  //dpm($form_state);
 }
+
 
 /*
  * delete group subscription when a user leaves a group
