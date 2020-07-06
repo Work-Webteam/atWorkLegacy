@@ -773,10 +773,9 @@ function atwork_group_form_alter(&$form, &$form_state, $form_id) {
  * @param $form_state
  */
 function update_links_submit($form, $form_state) {
-  // here we want to clean, save links if this form is being saved.
-  // Again, lets pull and save all of these links - making sure they are clean.
+  // Here we want to clean, save links if this form is being saved.
   // We are preempting the regular handler in this situation -so we also need to save weights
-  // which is the only other thing that is actually saved in this menu.
+  // Which is the only other thing that is actually saved in this menu.
   if(isset($form_state['values'])) {
     foreach($form_state['values'] as $value ) {
       if (is_array($value) && isset($value['mlid'])) {
