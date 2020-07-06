@@ -5226,3 +5226,37 @@ li.TabbedPanelsTab {
    clear:both;
    margin-top: 10px;
 }
+
+/* Parallax effect test */
+body.page-node-46227, body.page-node-46228 {
+  #first, #second, #third {
+    width:100%;
+    height:450px;
+  }
+  #first {
+    background: url(http://192.168.33.10/d7-atwork/sites/default/files/bg/image/2020/0706/beach.jpg) 25% 0 no-repeat fixed;
+  }
+  #second {
+    background: url(http://192.168.33.10/d7-atwork/sites/default/files/bg/image/2020/0706/snow-trees.jpg) center bottom no-repeat fixed;
+  }
+  #third {
+    background: url(http://192.168.33.10/d7-atwork/sites/default/files/bg/image/2020/0706/willows.jpg) 25% 0 no-repeat fixed;
+  }
+}
+body.page-node-46227 {
+  div.story {
+    background-color: rgba(255,255,255,.75);
+    p {
+      padding:25px;
+    }
+  }
+}
+body.page-node-46228 {
+  div.story {
+    background-color: #FFFFFF;
+    p {
+      padding:25px;
+    }
+  }
+
+}

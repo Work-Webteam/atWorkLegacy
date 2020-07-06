@@ -11605,4 +11605,46 @@ li.TabbedPanelsTab {
   margin-top: 10px;
 }
 
+/* Parallax effect test */
+/* line 5232, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
+body.page-node-46227 #first, body.page-node-46227 #second, body.page-node-46227 #third, body.page-node-46228 #first, body.page-node-46228 #second, body.page-node-46228 #third {
+  width: 100%;
+  height: 450px;
+}
+
+/* line 5236, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
+body.page-node-46227 #first, body.page-node-46228 #first {
+  background: url(http://192.168.33.10/d7-atwork/sites/default/files/bg/image/2020/0706/beach.jpg) 25% 0 no-repeat fixed;
+}
+
+/* line 5239, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
+body.page-node-46227 #second, body.page-node-46228 #second {
+  background: url(http://192.168.33.10/d7-atwork/sites/default/files/bg/image/2020/0706/snow-trees.jpg) center bottom no-repeat fixed;
+}
+
+/* line 5242, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
+body.page-node-46227 #third, body.page-node-46228 #third {
+  background: url(http://192.168.33.10/d7-atwork/sites/default/files/bg/image/2020/0706/willows.jpg) 25% 0 no-repeat fixed;
+}
+
+/* line 5247, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
+body.page-node-46227 div.story {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+/* line 5249, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
+body.page-node-46227 div.story p {
+  padding: 25px;
+}
+
+/* line 5255, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
+body.page-node-46228 div.story {
+  background-color: #FFFFFF;
+}
+
+/* line 5257, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
+body.page-node-46228 div.story p {
+  padding: 25px;
+}
+
 /*# sourceMappingURL=atwork_zen.styles.css.map */
