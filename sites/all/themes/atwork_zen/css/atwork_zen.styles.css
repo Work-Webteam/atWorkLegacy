@@ -11607,9 +11607,9 @@ li.TabbedPanelsTab {
 
 /* Parallax effect test */
 /* line 5232, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
-body.page-node-46227 #first, body.page-node-46227 #second, body.page-node-46227 #third, body.page-node-46228 #first, body.page-node-46228 #second, body.page-node-46228 #third {
-  width: 100%;
-  height: 450px;
+body.page-node-46227 p, body.page-node-46228 p {
+  padding: 0;
+  margin: 0;
 }
 
 /* line 5236, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
@@ -11628,21 +11628,46 @@ body.page-node-46227 #third, body.page-node-46228 #third {
 }
 
 /* line 5247, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
+body.page-node-46227 #first, body.page-node-46227 #third {
+  width: 100%;
+  height: 450px;
+}
+
+/* line 5251, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
+body.page-node-46227 #second {
+  width: 100%;
+  height: 1200px;
+}
+
+/* line 5254, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
+body.page-node-46227 #second .story {
+  width: 25%;
+  float: right;
+  margin: 25px 25px 0 0;
+}
+
+/* line 5260, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
 body.page-node-46227 div.story {
   background-color: rgba(255, 255, 255, 0.75);
 }
 
-/* line 5249, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
+/* line 5262, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
 body.page-node-46227 div.story p {
   padding: 25px;
 }
 
-/* line 5255, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
+/* line 5268, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
+body.page-node-46228 #first, body.page-node-46228 #second, body.page-node-46228 #third {
+  width: 100%;
+  height: 450px;
+}
+
+/* line 5272, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
 body.page-node-46228 div.story {
   background-color: #FFFFFF;
 }
 
-/* line 5257, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
+/* line 5274, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
 body.page-node-46228 div.story p {
   padding: 25px;
 }

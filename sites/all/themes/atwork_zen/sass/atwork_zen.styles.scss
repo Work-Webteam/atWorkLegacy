@@ -5229,10 +5229,10 @@ li.TabbedPanelsTab {
 
 /* Parallax effect test */
 body.page-node-46227, body.page-node-46228 {
-  #first, #second, #third {
-    width:100%;
-    height:450px;
-  }
+   p {
+     padding:0;
+     margin:0;
+   }
   #first {
     background: url(http://192.168.33.10/d7-atwork/sites/default/files/bg/image/2020/0706/beach.jpg) 25% 0 no-repeat fixed;
   }
@@ -5244,6 +5244,19 @@ body.page-node-46227, body.page-node-46228 {
   }
 }
 body.page-node-46227 {
+  #first, #third {
+    width:100%;
+    height:450px;
+  }
+  #second {
+    width: 100%;
+    height: 1200px;
+    .story {
+      width: 25%;
+      float:right;
+      margin: 25px 25px 0 0;
+    }
+  }
   div.story {
     background-color: rgba(255,255,255,.75);
     p {
@@ -5252,6 +5265,10 @@ body.page-node-46227 {
   }
 }
 body.page-node-46228 {
+  #first, #second, #third {
+    width:100%;
+    height:450px;
+  }
   div.story {
     background-color: #FFFFFF;
     p {
