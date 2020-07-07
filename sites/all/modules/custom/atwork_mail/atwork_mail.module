@@ -111,6 +111,7 @@ function atwork_mail_mail_alter(&$message) {
   $email_extension = explode('@', $email_address);
   if(isset($email_extension[1]) && $email_extension[1] == 'gov.old.ca'){
     $message['send'] = FALSE;
+    watchdog('atwork_mail', 'Email to ' . $message['to'] . " was cancelled from sending. This email will not send, but will still give an error from subscriptions which can be ignored.");
   }
 
   if ($message['id'] == 'forward_forward_page') {
