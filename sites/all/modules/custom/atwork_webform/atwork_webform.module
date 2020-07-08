@@ -1,13 +1,16 @@
 <?php
 
-/*
- * Implementation of hook_form_alter()
+/**
+ * Implements hook_form_alter().
  *
- * Allow the component name to be larger
+ * @param $form
+ * @param $form_state
+ * @param $form_id
  *
- * Control Emerging Leader voting form
- *
- * @TODO move appropriate code to atwork_prem_awards module
+ * Updating a few things for our general webforms here.
+ * HTML textarea fields are an added contrib module, but do not respect
+ * required status. That is fixed.
+ * In addition, we add js to the comms contact form.
  */
 function atwork_webform_form_alter(&$form, $form_state, $form_id) {
   // We want to make sure "required" fields are actually required in webforms
@@ -35,6 +38,6 @@ function atwork_webform_form_alter(&$form, $form_state, $form_id) {
 
   // Contact form js
   if ($form_id == 'webform_client_form_45322') {
-    drupal_add_js(drupal_get_path('module', 'atwork_webform').'/atwork_contact_form.js');
+    drupal_add_js(drupal_get_path('module', 'atwork_webform').'/js/atwork_contact_form.js');
   }
 }

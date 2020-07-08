@@ -1163,6 +1163,9 @@ function atwork_prem_awards_block_info() {
       'info' => t("Premiere's Awards Navigation"),
       'cache' => DRUPAL_NO_CACHE,
   );
+  $blocks['randomizer_block'] = array(
+    'info' => t("Emerging Leaders Randomizer"),
+  );
  return $blocks;
 }
 
@@ -1187,6 +1190,13 @@ function atwork_prem_awards_block_view($delta = ''){
         '#markup' => _atwork_prem_awards_nav_block(),
       );
       break;
+      // For the emerging leaders block.
+    case ('randomizer_block'):
+      drupal_add_js(drupal_get_path('module', 'atwork_prem_awards').'/js/js_atwork_webform_ajax.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_prem_awards').'/js/atwork_webform.js');
+      $block['subject'] = '';
+      $block['content'] = atwork_prem_awards_block_content();
+      break;
   }
   return $block;
 }
@@ -1207,40 +1217,8 @@ function premiers_awards_registration_information(){
   return $output;
 }
 
-/**
- * Create a a block for the Comms team that they can use to randomize a winner for the emerging leaders quiz
- */
-/**
- * Implements hook_block_info().
- *
- */
-function atwork_webform_block_info(){
-  $blocks = array();
-  $blocks['randomizer_block'] = array(
-    'info' => t("Emerging Leaders Randomizer"),
-  );
-  return $blocks;
-}
 
-/**
- * Implements hook_block_view().
- */
-function atwork_webform_block_view($delta = '') {
-  $block = array();
-
-  switch($delta) {
-    case ('randomizer_block'):
-      drupal_add_js(drupal_get_path('module', 'atwork_webform').'/js_atwork_webform_ajax.js');
-      drupal_add_js(drupal_get_path('module', 'atwork_webform').'/atwork_webform.js');
-      $block['subject'] = '';
-      $block['content'] = _atwork_webform_block_content();
-      break;
-  }
-
-  return $block;
-}
-
-function _atwork_webform_block_content(){
+function atwork_prem_awards_block_content(){
   // Our current webform
   $nid = 33248;
   //Pull out the names of the nominees
