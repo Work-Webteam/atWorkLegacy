@@ -38,15 +38,15 @@ function atwork_zen_preprocess_page(&$variables, $hook) {
       $variables['title_prefix'] = $snipet[0]['value'];
     }
   }
-  
+
   if (isset($variables['node']->type) && !empty($variables['node']->type) && ($variables['node']->type == 'simplenews')){
   	drupal_add_js('sites/all/themes/atwork_zen/js/newsletter.js');
   }
-  
+
   if (isset($variables['node']->type) && !empty($variables['node']->type) && ($variables['node']->type == 'article')){
   	drupal_add_js('sites/all/themes/atwork_zen/js/article_sidebar_image.js');
   }
-  	
+
 }
 
 
@@ -365,3 +365,58 @@ function atwork_zen_pager($variables) { // used to change 'previous' to just 'pr
   }
 }
 
+/**
+ * Implements hook_views_pre_render()
+ *
+ * Change title to author on employee submitted photo's on the front page
+ *
+ */
+function atwork_zen_views_pre_render(&$view) {
+  global $user;
+  if ($view->name == 'gallery_reference' && $view->current_display == 'block_2'){
+
+    foreach($view->result as $result){
+      $author = user_load($result->users_node_uid);
+      $name = _atwork_full_name($author);
+      $result->field_field_image[0]['rendered']['#item']['title'] = 'Photo by ' . $name;
+    }
+  }
+  // Additional changes for the titles/links on teh home page blocks (3 top spots)
+  if($view->name == 'home_page_blocks_zen' && ($view->current_display == 'block_1' || $view->current_display == 'block_4' || $view->current_display == 'block_3' || $view->current_display == 'block_8')){
+    if (isset($view->result[0]->node_type)){
+      switch($view->result[0]->node_type) {
+        case 'article':
+          if(isset($view->result[0]->_field_data['nid']['entity']->field_poll) && $view->result[0] ->_field_data['nid']['entity']->field_poll){
+            $view->result[0]->node_type = "polls";
+          } elseif (isset($view->result[0]->_field_data['nid']['entity']->field_video) && $view->result[0]->_field_data['nid']['entity']->field_video) {
+            $view->result[0]->node_type = "videos";
+          } elseif(isset($view->result[0]->_field_data['nid']['entity']->field_tags) && $view->result[0]->_field_data['nid']['entity']->field_tags){
+            $view->result[0]->node_type = "articles";
+            foreach($view->result[0]->_field_data['nid']['entity']->field_tags['und'] as $k){
+              if($k['tid'] == 523){
+                $view->result[0]->node_type = "executive updates";
+              }
+            }
+          } else {
+            $view->result[0]->node_type = "articles";
+          }
+          break;
+        case 'section':
+          $view->result[0]->node_type = "groups";
+          break;
+        case 'blog':
+          $view->result[0]->node_type = "blogs";
+          break;
+        case 'event':
+          $view->result[0]->node_type = "events";
+          break;
+        case 'gallery':
+          $view->result[0]->node_type = "galleries";
+          break;
+        default:
+          //dpm($view->result[0]->node_type);
+          return;
+      }
+    }
+  }
+}
