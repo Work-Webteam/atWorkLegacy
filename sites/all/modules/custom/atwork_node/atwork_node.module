@@ -1,0 +1,392 @@
+<?php
+
+/**
+ * Node form related settings.
+ */
+function atwork_node_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+  // We decided that we always want Send subscriptions notifications to default to unchecked. There is no setting for this behaviour in the front end. We will do it here.
+  // The only exception is Questions - we want users to be notified if a question is asked.
+  if(isset($form['options']['subscriptions_notify']['subscriptions_notify']['#default_value']) && $form['options']['subscriptions_notify']['subscriptions_notify']['#default_value'] == TRUE){
+    isset($form['type']['#value']) && $form['type']['#value'] == 'question' ?  /*do nothing*/ : $form['options']['subscriptions_notify']['subscriptions_notify']['#default_value'] = FALSE;
+  }
+
+  // add description to tags wherever they are
+  if (isset($form['field_tags'])) {
+    $atwork_tag_instructions = variable_get('atwork_tag_instructions','');
+    $form['field_tags'][$form['field_tags']['#language']]['#description'] = $atwork_tag_instructions['value'];
+  }
+
+  if (isset($form['#node_edit_form'])) {
+    $node = $form['#node'];
+    // clear subscriptions checkbox if node is published so that we don't accidentally send for every update.
+    if (isset($form['options']['subscriptions_notify']['subscriptions_notify']['#default_value']) && ($form['nid']['#value'] && $form['#node']->status)) {
+      $form['options']['subscriptions_notify']['subscriptions_notify']['#default_value'] = FALSE;
+    }
+
+    // field permissions - some fields should only be for editors/admins.
+    if (!_atwork_is_admin()) {
+      if (isset($form['field_exclude_from_search'])) $form['field_exclude_from_search']['#access'] = FALSE;
+      if (isset($form['field_show_menu'])) $form['field_show_menu']['#access'] = FALSE;
+      if (isset($form['field_show_menu'])) $form['field_show_menu_siblings']['#access'] = FALSE;
+      if (isset($form['field_news'])) $form['field_news']['#access'] = FALSE;
+      if (isset($form['field_register'])) $form['field_register']['#access'] = FALSE;
+      if (isset($form['field_group_special'])) $form['field_group_special']['#access'] = FALSE;
+      if (isset($form['field_promoted'])) $form['field_promoted']['#access'] = FALSE;
+      if (isset($form['options']['promote'])) $form['options']['promote']['#access'] = FALSE;
+      if (isset($form['options']['sticky'])) $form['options']['sticky']['#access'] = FALSE;
+
+
+      if (in_array($node->type, array('forum', 'question')) && isset($form['field_image'])) {
+        $form['field_image']['#access'] = FALSE;
+      }
+
+      // let users have unpublished blog posts
+      if ($node->type == 'blog') {
+        $form['options']['#access'] = TRUE;
+        $form['options']['sticky']['#access'] = FALSE;
+        $form['options']['promote']['#access'] = FALSE;
+      }
+    }
+  }
+
+  // enforce revisions
+  if(isset($form['revision_information']['revision'])) {
+    $form['revision_information']['revision']['#default_value'] = TRUE;
+    $form['revision_information']['revision']['#disabled'] = TRUE;
+  }
+  // if node is new hide log message
+  if (!$form['nid']['#value']) {
+    $form['revision_information']['#access'] = FALSE;
+  }
+  elseif(variable_get('atwork_settings_enforce_revision_message', 0)) {
+    $form['revision_information']['log']['#required'] = TRUE;
+  }
+  // We want specific wording if user needs to add tags.
+  if (isset($form['field_tags'])) {
+    $form['#validate'][] = 'atwork_node_form_validate';
+  }
+
+  // rename summary
+  if (isset($form['#node_edit_form']) && isset($form['body']) && isset($form['body'][$form['body']['#language']][0]['summary'])) {
+    $form['body'][$form['body']['#language']][0]['summary']['#title'] = t('Teaser');
+    $form['body'][$form['body']['#language']][0]['summary']['#description'] = t('Leave blank to use trimmed value of full text as the teaser');
+  }
+  // Changing submit text and setting a message for flag
+  if($form_id == 'flag_confirm') {
+    $destination = $_GET['destination'];
+    if ($destination == 'node/96') {
+      if (isset($form['entity_id']['#value']) && $form['entity_id']['#value']) {
+        $this_comment = comment_load($form['entity_id']['#value']);
+        if(isset($this_comment) && $this_comment != null) {
+          $destination = 'node/' . $this_comment->nid;
+          $form['#action'] = str_replace('?destination=node/96', '?destination=' . $destination, $form['#action']);
+        }
+      }
+    }
+    $form['actions']['submit']['#value'] = t('Submit');
+    $form['#submit'][] = 'flag_form_set_message';
+  }
+}
+
+/**
+ * @param $form
+ * @param $form_state
+ * Validator function for node submissions.
+ * Ensures our error message makes sense if tags are not included in submit.
+ */
+function atwork_node_form_validate($form, &$form_state) {
+  if (isset($form['field_tags'])) {
+    $all_messages = drupal_get_messages();
+    foreach ($all_messages as $type =>  $messages) {
+      foreach ($messages as $message) {
+        if ($message == 'Tags field is required.') {
+          $message = 'Please add tag(s) to help promote your content in related topics.';
+        }
+        drupal_set_message($message, $type);
+      }
+    }
+  }
+}
+
+/**
+ * Helper function to set message once flag report is submitted.
+ */
+function flag_form_set_message(){
+  drupal_set_message(t('Employee News has been notified.'), 'status', FALSE);
+}
+
+
+
+
+/**
+ * Implements hook_wysiwyg_editor_settings_alter()
+ *
+ * Set the Moono skin cause it's awesome
+ */
+function atwork_node_wysiwyg_editor_settings_alter(&$settings, $context) {
+  global $user;
+
+  if ($context['profile']->editor == 'ckeditor') {
+    $settings['disableNativeSpellChecker'] = FALSE;
+    $settings['startupFocus'] = FALSE;
+    $settings['skin'] = 'moono';
+    $settings['allowedContent'] = TRUE;
+    $settings['entities'] = FALSE;
+    $settings['basicEntities'] = FALSE;
+
+    if ($context['profile']->format == 'comment') {
+      $settings['height'] = 220;
+    }
+  }
+}
+
+/**
+ * Implements hook_view_pre_render()
+ *
+ * If a view uses field_display_name but it isn't set, provide the user->name instead
+ */
+function atwork_node_views_pre_render(&$view) {
+  if (isset($view->field['field_display_name']) && isset($view->field['uid'])) {
+    foreach ($view->result as &$row) {
+      if (isset($row->field_field_display_name) && (isset($row->_field_data['users_node_uid']['entity']->uid) || isset($row->_field_data['users_comment_uid']['entity']->uid))) {
+        if (isset($row->_field_data['users_node_uid']['entity']->uid)) {
+          $account = $row->_field_data['users_node_uid']['entity'];
+        }
+        elseif ($row->_field_data['users_comment_uid']['entity']->uid) {
+          $account = $row->_field_data['users_comment_uid']['entity'];
+        }
+        if (!$row->field_field_display_name) {
+          $row->field_field_display_name = array(
+            0 => array(
+              'rendered' => array(
+                '#markup' => $account->name,
+                '#access' => TRUE,
+              ),
+              'raw' => array(
+                'value' => $account->name,
+                'format' => NULL,
+                'safe_value' => $account->name,
+              ),
+            ),
+          );
+        }
+
+        if ((!isset($row->_field_data['users_node_uid']['entity']->uid) || !$row->_field_data['users_node_uid']['entity']->uid) &&
+          (!isset($row->_field_data['users_comment_uid']['entity']->uid) || !$row->_field_data['users_comment_uid']['entity']->uid)) {
+          $view->atwork_strip_anon_links = TRUE;
+          $row->field_field_display_name = array(
+            0 => array(
+              'rendered' => array(
+                '#markup' => variable_get('anonymous', 'Guest'),
+                '#access' => TRUE,
+              ),
+              'raw' => array(
+                'value' => variable_get('anonymous', 'Guest'),
+                'format' => NULL,
+                'safe_value' => variable_get('anonymous', 'Guest'),
+              ),
+            ),
+          );
+        }
+      }
+    }
+  }
+}
+
+/*
+ * Implementation of hook_views_post_render()
+ *
+ * For some reason we can get user links to the anon page so just strip them
+ */
+function atwork_node_views_post_render(&$view, &$output, &$cache) {
+  if (isset($view->atwork_strip_anon_links)) {
+    if (!$view->atwork_strip_anon_links) {
+      return;
+    }
+
+    $dom = filter_dom_load($output);
+    $xpath = new DOMXPath($dom);
+
+    foreach ($xpath->query("//a[contains(@href,'user/0')]") as $link) {
+      $newelement = $dom->createTextNode($link->nodeValue);
+      $link->parentNode->replaceChild($newelement, $link);
+      //dpm($link->nodeValue);
+    }
+
+    $output = filter_dom_serialize($dom);
+  }
+}
+
+/**
+ * Implements atwork_misc_preprocess_node().
+ * @param $variables
+ *
+ * Adding and re-ordering of regular node links.
+ * Making sure that when viewing a Teaser, we only see the first image.
+ */
+
+function atwork_node_preprocess_node(&$variables) {
+  // custom node links
+  if (isset($variables['content']['links']) && $variables['content']['links']) {
+    $variables['classes_array'][] = 'node-tools';
+
+    // re-arrange the links
+    $variables['content']['footer'] = array(
+      '#weight' => 100,
+      '#prefix' => '<div id="node-tools">',
+      '#suffix' => '</div>',
+      'links' => $variables['content']['links'],
+    );
+
+    $variables['content']['footer']['links'] = $variables['content']['links'];
+    $variables['content']['footer']['links']['#weight'] = 80;
+    unset($variables['content']['links']);
+
+    if ($variables['type'] == 'wiki' && isset($variables['content']['footer']['links']['comment']['#links']['comment-add']['href'])) {
+      $variables['content']['footer']['links']['comment']['#links']['comment-add']['href'] .= '/discussion';
+    }
+
+    if (isset($variables['content']['rate_thumbup_nodes']) && $variables['content']['rate_thumbup_nodes']) {
+      $variables['content']['footer']['rate_thumbup_nodes'] = $variables['content']['rate_thumbup_nodes'];
+      $variables['content']['footer']['rate_thumbup_nodes']['#weight'] = 60;
+      // Remove odd label display that came with update
+      // https://www.drupal.org/node/2196731
+      $variables['content']['footer']['rate_thumbup_nodes']['#title'] = '';
+      unset($variables['content']['rate_thumbup_nodes']);
+    }
+    if (isset($variables['content']['ical_link']) && $variables['content']['ical_link']) {
+      $variables['content']['footer']['ical_link'] = $variables['content']['ical_link'];
+      $variables['content']['footer']['ical_link']['#weight'] = 60;
+      unset($variables['content']['ical_link']);
+    }
+    if ((isset($variables['content']['subscriptions_ui']['wrapper']['subscriptions']) && $variables['content']['subscriptions_ui']['wrapper']['subscriptions'])
+      || (isset($variables['content']['subscriptions_ui']['subscriptions_ui_form']['wrapper']['subscriptions']) && $variables['content']['subscriptions_ui']['subscriptions_ui_form']['wrapper']['subscriptions'])) {
+      $variables['content']['footer']['subscriptions_ui'] = $variables['content']['subscriptions_ui'];
+      $variables['content']['footer']['subscriptions_ui']['#weight'] = 999;
+      $variables['content']['footer']['subscriptions_ui_toggle'] = array(
+        '#markup' => '<div class="node-links first"><a href="#" title="Subscribe" class="subscription-flyout-toggle">' . _atwork_fa('bullhorn') . 'Subscribe</a></div>',
+        '#weight' => 0,
+      );
+      unset($variables['content']['subscriptions_ui']);
+    }
+
+    // add font-awesome icons
+    _atwork_add_link_icons($variables);
+
+    // if flag link exists, move it to the end
+
+    $links = drupal_render($variables['content']['footer']['links']);
+    // sooooooooooooo hacky :(
+    $links = str_replace('<ul class="links inline">', '', $links);
+    $links = str_replace('</ul>', '', $links);
+    $links = str_replace('<li', '<div class="node-links"><span', $links);
+    $links = str_replace('</li>', '</span></div>', $links);
+
+    $links = str_replace('<div class="node-links"><span class="node-readmore', '<div class="node-links last"><span class="node-readmore', $links);
+    $links = str_replace('<div class="node-links"><span class="flag-abuse_nodes last">', '<div class="node-links last"><span class="flag-abuse_nodes last">', $links);
+    //dpm($links);
+//    $first_div = substr($links, 0, 24);
+//
+//    if ($first_div == '<div class="node-links">') {
+//      $links = substr_replace($links, '<div class="node-links first">', 0, 24);
+//    }
+
+    if ($links) {
+      $variables['content']['footer']['links'] = array(
+        '#markup' => $links,
+        '#weight' => 10,
+      );
+    }
+  }
+  // when viewing teasers only show the first image
+  if ($variables['view_mode'] == 'teaser') {
+    if (isset($variables['content']['field_image']['#items'])) {
+      $num_images = count($variables['content']['field_image']['#items']);
+      for ($i=1; $i<$num_images; $i++) {
+        unset($variables['content']['field_image'][$i]);
+        unset($variables['content']['field_image']['#items'][$i]);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ * @param $variables
+ *  Array of variables passed to templating layer.
+ *
+ * Add an icon to our tags wherever they appear.
+ */
+function atwork_node_preprocess_field(&$variables) {
+  if( isset($variables['element']['$field_name'])) {
+    $field_name = $variables['element']['#field_name'];
+    if ($field_name == 'field_tags') {
+      $variables['label'] = _atwork_fa('tag') . $variables['label'];
+    }
+  }
+}
+
+/**
+ * Implements hook_authcache_request_exclude
+ *
+ * Certain content types really don't work when cached.
+ *
+ * @return void
+ */
+function atwork_node_authcache_request_exclude() {
+  // Quiz and multichoice
+  $node = menu_get_object();
+  // Do not cache Long Service Awards
+  if(!empty($node) && !empty($node->type) && $node->type == 'lsa_application'){
+    return t('Avoid caching lsa application');
+  }
+  // Do not cache Service pin applications
+  if(!empty($node) && !empty($node->type) && $node->type == 'lsa_pin_application'){
+    return t('Avoid caching service pin applications');
+  }
+  // Do not cache Webforms
+  if(!empty($node) && !empty($node->type) && $node->type == 'webform'){
+    return t('Avoid caching webforms');
+  }
+  // Do not cache Quizzes
+  if(!empty($node) && !empty($node->type) && $node->type == 'quiz'){
+    return t('We don\'t want to cache quizzes or multichoice questions ever.');
+  }
+  // Do not cache eCards
+  if(!empty($node) && !empty($node->type) && $node->type == 'ecard'){
+    return t('We don\'t want to cache eCards.');
+  }
+  // Do not cache premiers awards forms
+  if(!empty($node) && !empty($node->nid) && $node->nid == '5991'){
+    return t('Don\'t cache premiers awards forms');
+  }
+  // Do not cache multichoice questions in quizzes
+  if(NULL !== arg(2) && arg(2) == 'take' ){
+    return t('We don\'t want to cache quizzes or multichoice questions ever.');
+  }
+  // Do not cache profile pages
+  if(NULL !== arg(0) && arg(0) == 'user' ){
+    return t('We don\'t want to cache profiles');
+  }
+}
+
+/**
+ * Implements hook_element_info_alter().
+ * Booleans come with an NA element, which is not needed.
+ */
+function atwork_node_element_info_alter(&$type) {
+  $type['radios']['#process'][] = 'atwork_node_remove_radio_na';
+}
+
+/**
+ * Helper function that removes the NA option from Radio form elements.
+ *
+ * @param $element
+ * @return mixed
+ */
+function atwork_node_remove_radio_na($element) {
+  unset($element['#options']['_none']);
+  unset($element['_none']);
+  return $element;
+}

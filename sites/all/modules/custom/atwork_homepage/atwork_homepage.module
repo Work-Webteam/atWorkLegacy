@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @param $view
+ * @param $output
+ * @param $cache
+ *
+ * Implements hook_views_post_render()
+ *
+ * We want to add our fa icons on homepage blocks.
+ *
+ */
+function atwork_homepage_views_post_render(&$view, &$output, &$cache) {
+  if ($view->name == 'home_page_blocks_zen' && in_array($view->current_display, array('block_1', 'block_3', 'block_4'))) {
+    $output = str_replace('[icon-article]',       _atwork_fa('newspaper-o', 'title="News Article"'), $output);
+    $output = str_replace('[icon-poll]',          _atwork_fa('check-square-o', 'title="Poll"'), $output);
+    $output = str_replace('[icon-blog]',          _atwork_fa('pencil-square-o', 'title="Blog Entry"'), $output);
+    $output = str_replace('[icon-event]',         _atwork_fa('calendar', 'title="Event"'), $output);
+    $output = str_replace('[icon-forum]',         _atwork_fa('comments-o', 'title="Forum Topic"'), $output);
+    $output = str_replace('[icon-gallery]',       _atwork_fa('camera', 'title="Gallery"'), $output);
+    $output = str_replace('[icon-section]',       _atwork_fa('newspaper-o', 'title="Group"'), $output);
+    $output = str_replace('[icon-section_page]',  _atwork_fa('info', 'title="Group Page"'), $output);
+    $output = str_replace('[icon-page]',          _atwork_fa('info', 'title="Background Page"'), $output);
+    $output = str_replace('[icon-image]',         _atwork_fa('camera', 'title="Image"'), $output);
+    $output = str_replace('[icon-question]',      _atwork_fa('question-circle', 'title="Question"'), $output);
+    $output = str_replace('[icon-answer]',        _atwork_fa('question-circle', 'title="Answer"'), $output);
+  }
+}
+
+/**
+ * Implements hook_preprocess_node()
+ *
+ * @param $variables
+ *
+ * We want to remove links from homepage.
+ */
+function atwork_homepage_preprocess_node(&$variables) {
+  if (drupal_is_front_page()) {
+    $variables['title'] = '';
+    unset($variables['content']['links']);
+    unset($variables['content']['subscriptions_ui']);
+    unset($variables['content']['footer']);
+  }
+}

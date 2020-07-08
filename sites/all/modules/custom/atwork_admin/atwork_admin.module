@@ -1,0 +1,139 @@
+<?php
+
+/**
+ * implements hook_form_alter()
+ * Admin forms related changes.
+ */
+function atwork_admin_form_alter(&$form, &$form_state, $form_id) {
+  // add date popups on comment admin
+  if ($form['#id'] == 'views-exposed-form-comments-admin-page') {
+    if (isset($form['#info']['filter-created']['label'])) {
+      $form['#info']['filter-created']['label'] = '';
+    }
+
+    $form['created']['min']['#title'] = t('Start Date');
+    $form['created']['max']['#title'] = t('End Date');
+    $form['created']['min']['#type'] = 'date_popup';
+    $form['created']['max']['#type'] = 'date_popup';
+    $form['created']['min']['#date_format'] = 'Y-m-d';
+    $form['created']['max']['#date_format'] = 'Y-m-d';
+  }
+
+  // Reroute email settings field updates.
+  if ($form_id == 'reroute_email_settings') {
+    $form['reroute_email_address']['#type'] = 'textarea';
+  }
+
+  // Not too sure what this is for - moved from atwork_misc during refactor.
+  // May have something to do with promoting.
+  if ($form['#id'] == 'views-exposed-form-content-page') {
+    if (isset($form['field_migration_flag_value'])) {
+      $form['field_migration_flag_value']['#options'] = array(
+        'All' => 'All',
+        1 => 'Flagged',
+      );
+    }
+  }
+  // More migration flag stuff - still not sure what this does exactly.
+  if (isset($form['field_migration_flag']) && !user_access('administer nodes')) {
+    $form['field_migration_flag']['#access'] = FALSE;
+  }
+
+  // only allow access to js fields to admins
+  if (!isset($user->roles[3])) {
+    if (isset($form['field_js_files'])) $form['field_js_files']['#access'] = FALSE;
+    if (isset($form['field_js_effects'])) $form['field_js_effects']['#access'] = FALSE;
+  }
+  if ($form_id == 'contact_site_form') {
+    $form['name']['#default_value'] = _atwork_display_name($GLOBALS['user']);
+    $form['name']['#disabled'] = TRUE;
+    $form['mail']['#disabled'] = TRUE;
+  }
+}
+
+/*
+ * Implementation of hook_admin_paths_alter()
+ *
+ * Use our theme to edit the user page
+ */
+function atwork_admin_admin_paths_alter(&$paths) {
+  // Treat all user pages as not administrative.
+  $paths['user/*'] = FALSE;
+}
+
+/**
+ * Helper function to hide exec related tags from non-users
+ */
+function _atwork_hide_exec_tags(&$form) {
+  if(isset($form['field_tags'][$form['language']['#value']]['#options']) && $form['field_tags']['und']['#options']){
+    //Some tags are reserved for editors and admins only
+    foreach($form['field_tags'][$form['language']['#value']]['#options'] as $key => $value){
+      if($value == '-Executive updates' || $value == 'Executive Corner' || $value == '-Executive blog' || $value == '-Executive profiles' || $value == '-Messages from the Head of the BC Public Service'){
+        unset($form['field_tags'][$form['language']['#value']]['#options'][$key]);
+      }
+    }
+  }
+  return;
+}
+
+/**
+ * Implementation of hook_flag_flag()
+ *
+ * @param $flag
+ *  The flag object.
+ * @param $entity_id
+ *  The id of the entity the flag is on.
+ * @param $account
+ *  The user account performing the action.
+ * @param $flagging_id
+ *  The flagging entity.
+ *
+ * Sending an email to Employee News when an item is flagged.
+ *
+ */
+function atwork_admin_flag_flag($flag, $entity_id, $account, $flagging) {
+
+  $message = t('The following user reported an inapproriate item for your review.') . '<br /><br />';
+  $message .= '<strong>' . t('User') . ':</strong> ' . l(_atwork_display_name($account), 'user/' . $account->uid) . '<br />';
+
+  $reason = field_get_items('flagging', $flagging, 'field_reason');
+
+  if ($flag->entity_type == 'comment') {
+    $comment = comment_load($entity_id);
+    $node = node_load($comment->nid);
+    $ct_name = node_type_get_name($node);
+    $subject = t('A comment has been flagged on the !ct-name: !title', array('!ct-name' => $ct_name, '!title' => $node->title));
+    $link = l($node->title, 'node/' . $node->nid, array(
+      'query' => array(
+        'c' => $comment->cid,
+      ),
+      'fragment' => 'comment-' . $comment->cid,
+    ));
+  }
+  elseif ($flag->entity_type == 'node') {
+    $node = node_load($entity_id);
+    $ct_name = node_type_get_name($node);
+    if (in_array(substr($ct_name, 0, 1), array('A', 'E', 'I', 'O', 'U'))) {
+      $subject_header = ucfirst(t('an')) . ' ' . $ct_name;
+    }
+    else {
+      $subject_header = ucfirst(t('a')) . ' ' . $ct_name;
+    }
+    $subject = t('!node-type has been flagged', array('!node-type' => $subject_header));
+    $link = l($node->title, 'node/' . $node->nid);
+  }
+
+  $message .= '<strong>' . t('Item') . ':</strong> ' . $link . '<br />';
+  $message .= '<strong>' . t('Reason') . ':</strong> ' . $reason[0]['value'] . '<br /><br />';
+
+  $message .= t('<br />---<br />Manage the reported items list at') . ':<br />';
+  $message .= l('https://gww.gov.bc.ca/admin/content/flag_content', 'admin/content/flag_content');
+
+
+  $params = array(
+    'subject' => $subject,
+    'body' => $message,
+  );
+
+  drupal_mail('atwork_mail', 'atwork_mail_default', variable_get('site_mail', 'EmployeeNews@gov.bc.ca'), language_default(), $params, $account->mail);
+}
