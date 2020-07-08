@@ -349,3 +349,15 @@ function atwork_ecards_node_view($node, $view_mode, $langcode){
     $node->content['field_e_card'][0]['#markup'] = $markup_fix[0] . 'class="footer">' . $markup_fix[1];
   }
 }
+
+  /**
+   * Implements hook_process_html().
+   * @param $variables
+   *
+   * Setting head title when we have all ecards showing.
+   */
+function atwork_ecards_process_html(&$variables) {
+  if (arg(0) == 'ecards' && arg(1) == 'all') {
+    $variables['head_title'] = 'Ecards - All | @Work';
+  }
+}

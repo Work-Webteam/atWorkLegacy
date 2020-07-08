@@ -198,14 +198,39 @@ function atwork_mail_mail($key, &$message, $params) {
   }
 }
 
-/**
- * Implements hook_subscriptions_digest_alter()
- * From subscriptions module
- * Need a way to avoid sending emails to users who have been deactivated.
- **/
+/*
+ * Validation Callback for forward_form
+ *
+ * Validate the recipient email addresses
+ *
+ * Add quotes around the from name to fix email encoding
+ */
+function atwork_forward_form_validate($form, &$form_state) {
+  _atwork_validate_emails($form_state['values']['recipients'], 'recipients', $form['form_token']['#default_value']);
+  if (form_get_errors()) return;
 
-function atwork_mail_subscriptions_digest_alter(&$digest_data) {
-
+  // add quotes around the name because forward module doesn't
+  // we will later remove them from the subject and body in atwork_mail and
+  $form_state['values']['name'] = '"' . $form_state['values']['name'] . '"';
 }
 
-
+/**
+ *
+ * Forward form fields alter prior to mailing.
+ *
+ */
+/**
+ * Implements hook_form_alter().
+ */
+function atwork_mail_form_alter(&$form, &$form_state, $form_id) {
+  // forward form alterations.
+  // Update a few fields, add new validation handler.
+  if ($form_id == 'forward_form') {
+    $form['message']['email']['#type'] = 'hidden';
+    $form['message']['name']['#title'] = t('FROM');
+    $form['message']['name']['#default_value'] = _atwork_display_name($GLOBALS['user']);
+    $form['message']['name']['#disabled'] = TRUE;
+    $form['message']['recipients']['#title'] = 'TO (Limited to organizations within the BC Public Service.)';
+    $form['#validate'][] = 'atwork_forward_form_validate';
+  }
+}

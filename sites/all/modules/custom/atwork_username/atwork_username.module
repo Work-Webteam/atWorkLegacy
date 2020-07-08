@@ -83,3 +83,88 @@ function atwork_replace_username($variables) {
 
   return $output;
 }
+
+/*
+ * Helper function to see if a user is an admin
+ */
+function _atwork_is_admin($user = 0) {
+  if (!$user) {
+    global $user;
+  }
+
+  if (in_array('administrator', $user->roles)) return TRUE;
+  if (in_array('manager', $user->roles)) return TRUE;
+  if (in_array('editor', $user->roles)) return TRUE;
+
+  return FALSE;
+
+}
+
+/*
+ * Helper function that provides the field_display_name if it exists
+ */
+function _atwork_display_name($user) {
+  if (!isset($user) || !$user || !isset($user->uid) || !$user->uid) {
+    return variable_get('anonymous', t('Employee News'));
+  }
+
+  if (!isset($user->field_display_name) && $user->uid) {
+    $user = user_load($user->uid);
+  }
+
+  $display_name = field_get_items('user', $user, 'field_display_name');
+
+  if (isset($display_name[0]['value'])) {
+    return $display_name[0]['value'];
+  }
+
+  return $user->name;
+}
+
+/*
+ * Helper function that provides the field_display_name if it exists
+ */
+function _atwork_full_name($user) {
+  if (!isset($user->field_gal_first_name) && !isset($user->field_gal_last_name) && $user->uid) {
+    $user = user_load($user->uid);
+  }
+
+  if (!$user) {
+    return;
+  }
+
+  $first_name = field_get_items('user', $user, 'field_gal_first_name');
+  $last_name = field_get_items('user', $user, 'field_gal_last_name');
+
+  if (isset($first_name[0]['safe_value']) && isset($last_name[0]['safe_value'])) {
+    return $first_name[0]['safe_value'] . ' ' . $last_name[0]['safe_value'];
+  }
+
+  return $user->name;
+}
+
+/*
+ * Helper function that provides the first if it exists
+ */
+function _atwork_first_name($user) {
+  if (!isset($user->field_gal_first_name) && $user->uid) {
+    $user = user_load($user->uid);
+  }
+
+  if (!$user) {
+    return;
+  }
+
+  $first_name = field_get_items('user', $user, 'field_gal_first_name');
+
+  if (isset($first_name[0]['safe_value'])) {
+    return $first_name[0]['safe_value'];
+  }
+
+  if (!isset($user->name)){
+    return;
+  }
+
+  return $user->name;
+}
+

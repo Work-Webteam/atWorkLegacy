@@ -647,4 +647,24 @@ function atwork_images_preprocess_page(&$variables){
   }
 }
 
-
+/*
+ * Implementation of hook_field_widget_alter()
+ *
+ * Change the wording on image field from Add a new file to add a new image
+ *
+ * Override the js file provided by node module in order to change
+ * the "summary" into the "teaser"
+ */
+function atwork_images_field_widget_form_alter(&$element, &$form_state, $context) {
+  if (isset($element['#field_name'])) {
+    // override the text.js file so we can use "Teaser" instead of "Summary"
+    if ($element['#field_name'] == 'body' && isset($element['summary'])) {
+      $element['summary']['#attached']['js'] = array(
+        0 => drupal_get_path('module', 'atwork_images') . '/js/text.js'
+      );
+    }
+    if ($element['#field_name'] == 'field_image') {
+      $element['#file_upload_title'] = t('Add a new image');
+    }
+  }
+}

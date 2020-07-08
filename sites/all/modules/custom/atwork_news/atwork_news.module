@@ -76,17 +76,10 @@ function atwork_news_views_pre_render(&$view) {
 
 
 
-/*
+
 function atwork_news_form_alter(&$form, &$form_state, $form_id){
-  if ($form_id == 'article_node_form'){
-    $form["#validate"][] = 'atwork_news_form_validate';
+  if ($form_id == 'article_node_form') {
+    $form['options']['sticky']['#title'] = t('Top news story (sticky)');
+    $form['options']['promote']['#title'] = t('Scrolling news (promoted)');
   }
-
 }
-
-function atwork_news_form_validate($form, &$form_state){
-  dpm($form_state);
-  dpm($form);
-}
-
-*/
