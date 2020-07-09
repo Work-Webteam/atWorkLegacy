@@ -61,9 +61,6 @@ function atwork_search_form_alter(&$form, &$form_state, $form_id) {
       unset($form['advanced']['type']['#options']['lsa_pin_application']);
       //unset($form['advanced']['type']['#options']['gallery']);
 
-      if(isset($form['advanced']['type']['#options']['classified'])){
-        $form['advanced']['type']['#options']['classified'] = 'Classified ad';
-      }
       if(isset($form['advanced']['type']['#options']['forum'])){
         $form['advanced']['type']['#options']['forum'] = 'Forum topic';
       }
@@ -107,8 +104,7 @@ function atwork_search_form_alter(&$form, &$form_state, $form_id) {
       $form['advanced_search']['custom_search_types'] = $form['custom_search_types'];
       unset($form['custom_search_types']);
     }
-    if (isset($form['advanced_search']['custom_search_types']['#options']['c-classified'])){
-      $form['advanced_search']['custom_search_types']['#options']['c-classified'] = 'Classified ad';
+    if (isset($form['advanced_search']['custom_search_types']['#options']['c-forum'])){
       $form['advanced_search']['custom_search_types']['#options']['c-forum'] = 'Forum topic';
       $form['advanced_search']['custom_search_types']['#options']['c-section_page'] = 'Page';
       $form['advanced_search']['custom_search_types']['#options']['c-question'] = 'Q & A';
