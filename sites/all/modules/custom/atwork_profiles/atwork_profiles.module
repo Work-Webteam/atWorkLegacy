@@ -68,17 +68,6 @@ function atwork_profiles_menu() {
     'access arguments' => array(1),
   );
 
-  $items['tutorials/ajax/profile/%'] = array(
-    'delivery callback' => 'ajax_deliver',
-    'title' => 'Tutorial Callback For profiles',
-    'description' => 'To check if user has seen the profile tutorial',
-    'page callback' => 'atwork_profile_tutorial_check',
-    'page arguments' => array(3),
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-  //dpm($items);
-
   return $items;
 }
 
@@ -93,27 +82,6 @@ function _atwork_profiles_user_content_access($account) {
   }
 
   return TRUE;
-}
-
-/**
- * Access callback. To check off the tutorial
- */
-function atwork_profile_tutorial_check($argument) {
-  global $user;
-
-  if(isset($argument) && $argument == 'tutorial=true') {
-    $account = user_load($user->uid);
-    $edit = array(
-      'field_profile_page_tour' => array(
-        'und' => array(
-          0 => array(
-            'value' => 0
-          ),
-        ),
-      ),
-    );
-    user_save($account, $edit);
-  }
 }
 
 
@@ -294,7 +262,6 @@ function atwork_profiles_field_collection_is_empty_alter(&$is_empty, $item) {
     $field_language = field_language('field_collection_item', $item, 'field_answer');
     if (!$item->field_answer[$field_language] || !isset($item->field_answer[$field_language][0]['value']) || !$item->field_answer[$field_language][0]['value']) {
       $is_empty = TRUE;
-      //dpm('empty');
     }
   }
 }
@@ -305,7 +272,6 @@ function atwork_profiles_field_collection_is_empty_alter(&$is_empty, $item) {
  * Alter the "- Select a value -" text on select boxes
  */
 function atwork_profiles_after_build($element, &$form_state) {
-  //dpm($element);
   if (!isset($element['#type'])) {
     return $element;
   }
@@ -337,7 +303,6 @@ function atwork_profiles_after_build($element, &$form_state) {
  */
 function atwork_profiles_element_info_alter(&$types) {
   $types['select']['#after_build'][] = 'atwork_profiles_after_build';
-  //dpm($types);
 }
 
 /*
@@ -373,7 +338,6 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
 
   // Group permissions are being weird on profiles, deal with it here
   // From suggestion at https://www.drupal.org/node/2179367
-  //dpm($form);
   $field = field_info_instance('node', 'og_group_ref', 'node');
   //If it is required, don't unset the validator
   if($field['required']) {
@@ -388,15 +352,9 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
 
   // hide from non-editors
   // disabling this field eventually
-  /*
-  if (!isset($user->roles[3]) && !isset($user->roles[4])) {
-    if (isset($form['field_public_profile'])) $form['field_public_profile']['#access'] = FALSE;
-  }
-  */
   if ($user->uid != $account->uid && !user_access('administer users')) {
     $form['field_trusted_assistants']['#access'] = FALSE;
   }
-
 
   // allow users to refresh their GAL info
   $form['refresh_gal'] = array(
@@ -411,15 +369,6 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
   $form['#group_children']['refresh_gal'] = 'group_contact_info';
   array_unshift($form['#groups']['group_contact_info']->children, 'refresh_gal');
   //dpm($form);
-
-
-  /*
-  // display contact information fieldset?
-  if (!user_access('administer users')) {
-    //$form['field_trusted_assistants']['#access'] = FALSE;
-    field_group_hide_field_groups($form, array('group_contact_info'));
-  }
-  */
 
 //  For profile release we won't have the option to enable profile
   $profile_enabled = field_get_items('user', $account, 'field_public_profile');
@@ -448,11 +397,6 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
     else {
       $form['atwork_required_questions'] = $required_questions;
     }
-
-    //$form['atwork_required_questions']['#prefix'] = $profile_questions_instructions['value'];
-    //$form['#group_children']['atwork_required_questions'] = 'group_profile';
-    //$form['field_summary']['#weight'] = 2;
-    //array_unshift($form['#groups']['group_profile']->children, 'atwork_required_questions');
   }
   else {
     $form['field_career']['#prefix'] = $profile_questions_instructions['value'];
@@ -460,7 +404,6 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
 
 
   $profile_instructions = variable_get('atwork_profile_instructions','');
-  //dpm($profile_instructions);
   $form['notes']['#markup'] = $profile_instructions['value'];
   $form['notes']['#weight'] = 1;
   $form['notes']['#tree'] = TRUE;
@@ -469,8 +412,6 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
   $profile_byline_instructions = variable_get('atwork_profile_byline_instructions', '');
   $form['field_blog_profile']['#prefix'] = $profile_byline_instructions['value'];
   $form['field_blog_profile'][$form['field_blog_profile']['#language']][0]['#title'] = '';
-
-  //dpm($form['field_skills']['und']);
 
   $profile_employee_skills_instructions = variable_get('atwork_profile_employee_skills_instructions', '');
   $form['field_skills']['#prefix'] = $profile_employee_skills_instructions['value'];
@@ -481,7 +422,6 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
   $form['field_employee_interests']['#prefix'] = $profile_employee_interests_instructions['value'];
   $form['field_employee_interests'][$form['field_employee_interests']['#language']][0]['#title'] = '';
   $form['field_employee_interests']['und']['#title'] = '';
-
 
   $profile_extended_biography = variable_get('atwork_profile_extended_biography_instructions');
   $form['field_extended_biography']['#prefix'] = $profile_extended_biography['value'];
@@ -498,8 +438,6 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
   $profile_field_image_instructions = variable_get('atwork_profile_field_image_instructions');
   $form['field_image']['#prefix'] = $profile_field_image_instructions['value'];
   $form['field_image'][$form['field_image']['#language']][0]['#title'] = '';
-  //dpm($form['field_image']['und'][0]);
-
 
   $profile_terms_and_conditions_instructions = variable_get('atwork_profile_terms_and_conditions');
   $form['field_public_profile']['#suffix'] = $profile_terms_and_conditions_instructions['value'];
@@ -512,7 +450,7 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
     array_unshift($form['#groups']['group_profile']->children, 'notes');
   }
 
-    // remove summary title
+  // remove summary title
   $form['field_summary'][$form['field_summary']['#language']][0]['#title'] = '';
 
   $field_collections = _atwork_profiles_field_collections();
@@ -525,7 +463,6 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
       $form[$field_collection][$form[$field_collection]['#language']]['#prefix'] .= '<h2 class="profile-section">' . _atwork_profiles_icon($field_collection) . $form[$field_collection][$form[$field_collection]['#language']]['#title'] . '</h2>';
       $form[$field_collection][$form[$field_collection]['#language']]['#title'] = '';
     }
-
 
     // get title
     foreach ($required_questions as $delta => $required_question) {
@@ -577,7 +514,6 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
       }
     }
 
-
     if ($add_js) {
       $js = <<<EOT
 jQuery(document).ready(function($) {
@@ -588,17 +524,12 @@ EOT;
     }
   }
 
-
   // hide the label for enable public profile
   $form['field_public_profile'][$form['field_public_profile']['#language']]['#title'] = '';
 
   // expand the public profile fieldset if the public profile field is checked
   // disabling checkbox eventually so always expand
-  //if (isset($form['field_public_profile']['#language']) && isset($form['field_public_profile'][$form['field_public_profile']['#language']]['#default_value']) || in_array('executive', $account->roles)) {
-    //if ($form['field_public_profile'][$form['field_public_profile']['#language']]['#default_value'] || in_array('executive', $account->roles)) {
-      $form['#groups']['group_profile']->format_settings['formatter'] = 'collapsible';
-    //}
-  //}
+  $form['#groups']['group_profile']->format_settings['formatter'] = 'collapsible';
 
   // if profile not enabled add checkbox to notify employee news
   if (!isset($form['field_public_profile'][$form['field_public_profile']['#language']]['#default_value'][0])) {
@@ -612,32 +543,10 @@ EOT;
 
   // set title to display name
   if (arg(0) == 'user' && arg(2) == 'edit') {
-    //drupal_set_title(t('Editing !name', array('!name' => _atwork_full_name($form['#user']))));
     drupal_set_title(t('Create your profile'));
   }
 
   array_unshift($form['#submit'], 'atwork_profiles_form_submit');
-
-  $js = <<<EOT
-(function ($) {
-  $( document ).ready(function() {
-    function profile_enabled() {
-      if ($('.field-name-field-public-profile input').attr('checked') == "checked") {
-        $("#user_user_form_group_profile").show();
-      } else {
-        $("#user_user_form_group_profile").hide();
-      }
-    }
-    profile_enabled();
-    $('.field-name-field-public-profile input').change(function() {
-      profile_enabled();
-    });
-  });
-}(jQuery));
-EOT;
-
-  // enable to hide profile fieldset if not enabled
-  //drupal_add_js($js, 'inline');
 
   if (isset($form['field_image']['#weight'])) {
     // no images added
@@ -646,8 +555,6 @@ EOT;
     }
 
     $form['field_image']['#after_build'][] = '_atwork_profiles_photo_afterbuild';
-
-  //  $form['field_image']['#weight'] = 3;
   }
 
   // don't need cancel button
@@ -670,13 +577,7 @@ EOT;
     }
     $form['field_trusted_assistants'][$form['field_trusted_assistants']['#language']]['#default_value'] = implode(', ', $idirs);
   }
-
   $form['revision_information']['#access'] = FALSE;
-
-//  $form['field_blog_profile']['#weight'] = 3;
-
-  //dpm($form);
-
 }
 
 /*
@@ -689,7 +590,6 @@ function _atwork_profiles_photo_afterbuild($form, &$form_state) {
   // no images added
   if (!$form[$form['#language']][0]['#default_value']['fid']) {
     $form[$form['#language']]['#file_upload_title'] = t('');
-    //$form[$form['#language']]['#file_upload_description'] = t('Add a professional quality photo. This will be the photo displayed across the site.');
   }
   else {
     $form[$form['#language']][0]['#prefix'] = '<div class="profile-photo-title">' . t('Professional quality photo') . '</div>';
