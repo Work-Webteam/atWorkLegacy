@@ -10,8 +10,8 @@
  *
  * Register our atwork_replace_username() theme function
  */
-function atwork_username_theme_registry_alter(&$theme_registry) {
-  $theme_registry['username']['theme path'] = drupal_get_path('module', 'atwork_username');
+function atwork_user_theme_registry_alter(&$theme_registry) {
+  $theme_registry['username']['theme path'] = drupal_get_path('module', 'atwork_user');
   $theme_registry['username']['function'] = 'atwork_replace_username';
 }
 

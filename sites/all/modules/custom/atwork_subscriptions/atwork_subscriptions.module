@@ -9,7 +9,14 @@
  * Implements hook_form_alter().
  */
 function atwork_subscriptions_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'subscriptions_ui_node_form') {
+
+  // We decided that we always want Send subscriptions notifications to default to unchecked. There is no setting for this behaviour in the front end. We will do it here.
+  // The only exception is Questions - we want users to be notified if a question is asked.
+  if(isset($form['options']['subscriptions_notify']['subscriptions_notify']['#default_value']) && $form['options']['subscriptions_notify']['subscriptions_notify']['#default_value'] == TRUE){
+    isset($form['type']['#value']) && $form['type']['#value'] == 'question' ?  /*do nothing*/ : $form['options']['subscriptions_notify']['subscriptions_notify']['#default_value'] = FALSE;
+  }
+  //
+  if ($form_id == 'subscriptions_ui_node_forms') {
     // remove subscribe to tag by author
     $remove_options = array();
     if (isset($form['params']['#value'])) {

@@ -1,0 +1,5 @@
+; $Id$
+name = Atwork User
+description = User related hooks and alterations.
+package = Atwork
+core = 7.x

@@ -5,11 +5,6 @@
  */
 function atwork_node_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-  // We decided that we always want Send subscriptions notifications to default to unchecked. There is no setting for this behaviour in the front end. We will do it here.
-  // The only exception is Questions - we want users to be notified if a question is asked.
-  if(isset($form['options']['subscriptions_notify']['subscriptions_notify']['#default_value']) && $form['options']['subscriptions_notify']['subscriptions_notify']['#default_value'] == TRUE){
-    isset($form['type']['#value']) && $form['type']['#value'] == 'question' ?  /*do nothing*/ : $form['options']['subscriptions_notify']['subscriptions_notify']['#default_value'] = FALSE;
-  }
 
   // add description to tags wherever they are
   if (isset($form['field_tags'])) {
@@ -199,8 +194,13 @@ function atwork_node_views_pre_render(&$view) {
 /*
  * Implementation of hook_views_post_render()
  *
- * For some reason we can get user links to the anon page so just strip them
+ * For some reason we can get user links to the anon page so just strip them.
+ *
+ * No idea if this is still needed - or if we should even have this anymore.
+ * Was part of atwork misc.
+ * For now, commenting out.
  */
+/*
 function atwork_node_views_post_render(&$view, &$output, &$cache) {
   if (isset($view->atwork_strip_anon_links)) {
     if (!$view->atwork_strip_anon_links) {
@@ -219,6 +219,7 @@ function atwork_node_views_post_render(&$view, &$output, &$cache) {
     $output = filter_dom_serialize($dom);
   }
 }
+*/
 
 /**
  * Implements atwork_misc_preprocess_node().
