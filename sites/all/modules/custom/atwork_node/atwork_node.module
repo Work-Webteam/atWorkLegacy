@@ -56,12 +56,14 @@ function atwork_node_form_alter(&$form, &$form_state, $form_id) {
     $form['revision_information']['revision']['#disabled'] = TRUE;
   }
   // if node is new hide log message
-  if (!$form['nid']['#value']) {
-    $form['revision_information']['#access'] = FALSE;
+  if(isset($form['nid'])) {
+    if (!$form['nid']['#value']) {
+      $form['revision_information']['#access'] = FALSE;
+    }  elseif(variable_get('atwork_settings_enforce_revision_message', 0)) {
+      $form['revision_information']['log']['#required'] = TRUE;
+    }
   }
-  elseif(variable_get('atwork_settings_enforce_revision_message', 0)) {
-    $form['revision_information']['log']['#required'] = TRUE;
-  }
+
   // We want specific wording if user needs to add tags.
   if (isset($form['field_tags'])) {
     $form['#validate'][] = 'atwork_node_form_validate';

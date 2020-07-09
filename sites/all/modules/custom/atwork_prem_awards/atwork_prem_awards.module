@@ -1212,7 +1212,7 @@ function premiers_awards_registration_information(){
 
   // Add form update js and library
   drupal_add_library('system', 'ui.dialog');
-  drupal_add_js(drupal_get_path('module', 'atwork_prem_awards') . '/' . 'js_prem_awards_form.js');
+  drupal_add_js(drupal_get_path('module', 'atwork_prem_awards') . '/js/' . 'js_prem_awards_form.js');
   drupal_add_js(array('atwork_prem_awards' => array('user' => $current_user->name, 'uid' => $current_user->uid)), 'setting');
   return $output;
 }
