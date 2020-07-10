@@ -1,34 +1,6 @@
 <?php
 
 /*
- * Helper function identifying field collections used on the profile
- */
-function _atwork_profiles_field_collections() {
-  return array(
-    'field_career',
-    'field_personal',
-    'field_philosophy_influences',
-    'field_favourites',
-  );
-}
-
-/*
- * Helper function returning a field collection from a specific delta
- */
-function _atwork_profiles_field_collection_from_question($question) {
-  if ($question > 300) {
-    return 'field_favourites';
-  }
-  if ($question > 200) {
-    return 'field_personal';
-  }
-  if ($question > 100) {
-    return 'field_philosophy_influences';
-  }
-  return 'field_career';
-}
-
-/*
  * Helper function returning our font-awesome icons
  */
 function _atwork_profiles_icon($type) {
@@ -94,29 +66,6 @@ function _atwork_profiles_user_content_callback($account) {
   $arg = $user->uid;
 
   return views_embed_view('content', 'block_user', $arg);
-}
-
-/*
- * Helper function returning a loaded field_collection_item
- */
-function _atwork_profiles_required_question_load($delta, $uid) {
-  $field_name = _atwork_profiles_field_collection_from_question($delta);
-
-  $query = db_select('field_data_' . $field_name, 'fc');
-
-  $query->join('field_data_field_question', 'f', 'f.entity_id = fc.' . $field_name . '_value');
-
-  $fc_id = $query
-    ->condition('fc.entity_id', $uid)
-    ->condition('f.field_question_value', $delta)
-    ->fields('f', array('entity_id'))
-    ->range(0, 1)
-    ->execute()
-    ->fetchAssoc();
-
-  if (isset($fc_id['entity_id'])) {
-    return field_collection_item_load($fc_id['entity_id']);
-  }
 }
 
 /*
@@ -252,21 +201,6 @@ function atwork_profiles_user_view_access($account) {
 }
 
 /*
- * Implementation of hook_field_collection_is_empty_alter()
- *
- * If no field_answer is provided discount the entire field collection
- */
-function atwork_profiles_field_collection_is_empty_alter(&$is_empty, $item) {
-  $fcs = _atwork_profiles_field_collections();
-  if (in_array($item->field_name, $fcs)) {
-    $field_language = field_language('field_collection_item', $item, 'field_answer');
-    if (!$item->field_answer[$field_language] || !isset($item->field_answer[$field_language][0]['value']) || !$item->field_answer[$field_language][0]['value']) {
-      $is_empty = TRUE;
-    }
-  }
-}
-
-/*
  * after_build Callback
  *
  * Alter the "- Select a value -" text on select boxes
@@ -368,9 +302,8 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
   // add to tree
   $form['#group_children']['refresh_gal'] = 'group_contact_info';
   array_unshift($form['#groups']['group_contact_info']->children, 'refresh_gal');
-  //dpm($form);
 
-//  For profile release we won't have the option to enable profile
+  //For profile release we won't have the option to enable profile
   $profile_enabled = field_get_items('user', $account, 'field_public_profile');
   if ($profile_enabled && isset($profile_enabled[0]['value']) && $profile_enabled[0]['value']) {
     $profile_enabled = TRUE;
@@ -453,77 +386,6 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
   // remove summary title
   $form['field_summary'][$form['field_summary']['#language']][0]['#title'] = '';
 
-  $field_collections = _atwork_profiles_field_collections();
-  foreach ($field_collections as $field_collection) {
-
-    $add_js = FALSE;
-
-    if (isset($form[$field_collection]['#language'])) {
-      $form[$field_collection][$form[$field_collection]['#language']]['add_more']['#suffix'] = '<span class="add-profile-section-desc"> ' . t('To the !section section.', array('!section' => $form[$field_collection][$form[$field_collection]['#language']]['#title'])) . '</span>';
-      $form[$field_collection][$form[$field_collection]['#language']]['#prefix'] .= '<h2 class="profile-section">' . _atwork_profiles_icon($field_collection) . $form[$field_collection][$form[$field_collection]['#language']]['#title'] . '</h2>';
-      $form[$field_collection][$form[$field_collection]['#language']]['#title'] = '';
-    }
-
-    // get title
-    foreach ($required_questions as $delta => $required_question) {
-      if (isset($form[$field_collection]['#language']) && isset($form[$field_collection][$form[$field_collection]['#language']][0]['field_question']['#language'])) {
-        $language = $form[$field_collection][$form[$field_collection]['#language']][0]['field_question']['#language'];
-        if (isset($form[$field_collection][$form[$field_collection]['#language']][0]['field_question'][$language]['#options'][$delta])) {
-          $form['atwork_required_questions'][$delta]['#title'] = $form[$field_collection][$form[$field_collection]['#language']][0]['field_question'][$language]['#options'][$delta];
-        }
-      }
-    }
-
-    // get default value / hide existing answers
-    if (isset($form[$field_collection]['#language']) &&
-         isset($form[$field_collection][$form[$field_collection]['#language']]['#max_delta'])) {
-
-      $fc_lang = $form[$field_collection]['#language'];
-      $blank_entry_exists = FALSE;
-
-      for ($i=0; $i<=$form[$field_collection][$fc_lang]['#max_delta']; $i++) {
-        if (isset($form[$field_collection][$fc_lang][$i]['field_question']['#language']) &&
-             isset($form[$field_collection][$fc_lang][$i]['field_answer']['#language'])) {
-          $fa_lang = $form[$field_collection][$fc_lang][$i]['field_answer']['#language'];
-          $fq_lang = $form[$field_collection][$fc_lang][$i]['field_question']['#language'];
-
-          // change favourites to textfields to keep them short
-          if ($field_collection == 'field_favourites' && isset($form[$field_collection][$fc_lang][$i]['field_answer'][$fa_lang]['#max_delta'])) {
-            for ($j=0; $j<=$form[$field_collection][$fc_lang][$i]['field_answer'][$fa_lang]['#max_delta']; $j++) {
-              $form[$field_collection][$fc_lang][$i]['field_answer'][$fa_lang][$j]['value']['#type'] = 'textfield';
-            }
-          }
-
-          // remove required questions
-          if (isset($form[$field_collection][$fc_lang][$i]['field_question'][$fq_lang]['#default_value']) &&
-               isset($required_questions[$form[$field_collection][$fc_lang][$i]['field_question'][$fq_lang]['#default_value']]) &&
-               isset($form[$field_collection][$fc_lang][$i]['field_answer'][$fa_lang][0]['#default_value'])) {
-
-            $form['atwork_required_questions'][$form[$field_collection][$fc_lang][$i]['field_question'][$fq_lang]['#default_value']]['#default_value'] = $form[$field_collection][$fc_lang][$i]['field_answer'][$fa_lang][0]['#default_value'];
-            $form[$field_collection][$fc_lang][$i]['#access'] = FALSE;
-          }
-          else {
-            $blank_entry_exists = TRUE;
-          }
-        }
-      }
-
-      if (!$blank_entry_exists) {
-        $form[$field_collection]['#attributes']['class'][] = 'needs-click';
-        $add_js = TRUE;
-      }
-    }
-
-    if ($add_js) {
-      $js = <<<EOT
-jQuery(document).ready(function($) {
-  $('#user-profile-form .needs-click .field-add-more-submit').mousedown();
-});
-EOT;
-      drupal_add_js($js, 'inline');
-    }
-  }
-
   // hide the label for enable public profile
   $form['field_public_profile'][$form['field_public_profile']['#language']]['#title'] = '';
 
@@ -553,7 +415,6 @@ EOT;
     if (isset($form['field_image'][$form['field_image']['#language']][2])) {
       $form['field_image'][$form['field_image']['#language']][2]['#access'] = FALSE;
     }
-
     $form['field_image']['#after_build'][] = '_atwork_profiles_photo_afterbuild';
   }
 
@@ -617,74 +478,6 @@ function _atwork_profiles_photo_afterbuild($form, &$form_state) {
  */
 function _atwork_profiles_required_validate($form, &$form_state) {
   if (form_get_errors()) return;
-
-  // first update the field collection form state values for any updates
-  $field_collections = _atwork_profiles_field_collections();
-  if (isset($form_state['values']['atwork_required_questions'])) {
-    foreach ($form_state['values']['atwork_required_questions'] as $question => $answer) {
-      foreach ($field_collections as $field_collection) {
-        $fc_lang = $form[$field_collection]['#language'];
-        if (isset($form_state['values'][$field_collection][$fc_lang][0])) {
-          foreach ($form_state['values'][$field_collection][$fc_lang] as $fc_delta => $fc) {
-            if (is_numeric($fc_delta)) {
-              if (isset($fc['entity']) && isset($fc['field_question'][$fc_lang][0]) &&
-                   isset($fc['field_question'][$fc_lang][0]['value']) &&
-                   $fc['field_question'][$fc_lang][0]['value'] == $question) {
-                // first set the form state value
-                $form_state['values'][$field_collection][$fc_lang][$fc_delta]['field_answer'][$fc_lang][0] = array(
-                  'value' => $answer,
-                  'format' => 'filtered_no_editor',
-                );
-                // then the entiry
-                $form_state['values'][$field_collection][$fc_lang][$fc_delta]['entity']->field_answer[$fc_lang][0] = array(
-                  'value' => $answer,
-                  'format' => 'filtered_no_editor',
-                );
-                unset($form_state['values']['atwork_required_questions'][$question]);
-              }
-            }
-          }
-        }
-      }
-    }
-    // any left over required fields must be new
-    if ($form_state['values']['atwork_required_questions']) {
-      $lang = $form['field_career']['#language'];
-      foreach ($form_state['values']['atwork_required_questions'] as $question => $answer) {
-        $field_collection_item = entity_create('field_collection_item', array('field_name' => _atwork_profiles_field_collection_from_question($question)));
-        $field_collection_item->default_revision = TRUE;
-        $field_collection_item->archived = FALSE;
-        $field_collection_item->is_new = TRUE;
-        $field_collection_item->field_answer[$lang][0]['value'] = $answer;
-        $field_collection_item->field_answer[$lang][0]['format'] = 'filtered_no_editor';
-        $field_collection_item->field_question[$lang][0]['value'] = $question;
-
-        // so tedius
-        $new_index = count($form_state['values'][_atwork_profiles_field_collection_from_question($question)][$lang]);
-        $form_state['values'][_atwork_profiles_field_collection_from_question($question)][$lang][$new_index] = array(
-          'field_answer' => array(
-            $lang => array(
-              0 => array(
-                'value' => $answer,
-                'format' => 'filtered_no_editor',
-              )
-            )
-          ),
-          'field_question' => array(
-            $lang => array(
-              0 => array(
-                'value' => $question,
-              )
-            )
-          ),
-          'remove_button' => 'Remove',
-          '_weight' => $new_index,
-          'entity' => $field_collection_item,
-        );
-      }
-    }
-  }
-
 
   // update GAL fields if requested
   if (isset($form_state['values']['refresh_gal']) && $form_state['values']['refresh_gal']) {
@@ -839,8 +632,6 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
    $title = ' ';
     drupal_set_title(htmlspecialchars_decode($title, ENT_QUOTES));
 
-    $field_collections = _atwork_profiles_field_collections();
-    $required_questions = _atwork_profiles_required_questions(TRUE);
 
      // About me field is filled in (#access = FALSE at this point if UID for user and account do not match), and has been published
     if (isset($account->content['field_summary']) && ($account->content['field_summary']) && ($account->field_public_profile))  {
@@ -1246,46 +1037,6 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
   }
 }
 
-
-
-
-
-/**
- * Act on a field collection item that is being assembled before rendering.
- *
- * @param $field_collection_item
- *   The field collection item entity.
- * @param $view_mode
- *   The view mode the field collection item is rendered in.
- * @param $langcode
- *   The language code used for rendering.
- *
- * The module may add elements to $field_collection_item->content prior to
- * rendering. The structure of $field_collection_item->content is a renderable
- * array as expected by drupal_render().
- *
- * @see hook_entity_prepare_view()
- * @see hook_entity_view()
- */
-function atwork_profiles_field_collection_item_view($field_collection_item, $view_mode, $langcode) {
-  $field_language = field_language('field_collection_item', $field_collection_item, 'field_answer');
-
-  if (isset($field_collection_item->field_answer[$field_language][0]['value']) && isset($field_collection_item->content['field_answer'][0]['#markup'])) {
-    $field_collection_item->content['field_answer'][0]['#markup'] = check_markup($field_collection_item->field_answer[$field_language][0]['value'], 'filtered_no_editor');
-  }
-  else {
-    //dpm($field_collection_item);
-  }
-
-  // remove required questions to place elsewhere
-  $required_questions = _atwork_profiles_required_questions();
-
-  if (isset($field_collection_item->field_question[$field_language][0]['value']) &&
-       in_array($field_collection_item->field_question[$field_language][0]['value'], $required_questions)) {
-    $field_collection_item->content['#access'] = FALSE;
-  }
-}
-
 /*
  * Implements hook_views_post_render();
  */
@@ -1293,60 +1044,10 @@ function atwork_profiles_views_post_render(&$view, &$output, &$cache) {
   global $user;
   if ($view->name == 'profiles') {
     if (isset($view->args[0]) && $view->args[0] && is_numeric($view->args[0])) {
-      $account = user_load($view->args[0]);
-
-      // add required questions
-      $required_questions = _atwork_profiles_required_questions();
-
-      foreach ($required_questions as $required_question) {
-        $field_name = _atwork_profiles_field_collection_from_question($required_question);
-        $fc = field_view_field('user', $account, $field_name);
-        if ($fc && isset($fc['#items']) && is_array($fc['#items']) && count($fc['#items'])) {
-          for ($i=0; $i<count($fc['#items']); $i++) {
-            if (isset($fc[$i]['entity']['field_collection_item']) && is_array($fc[$i]['entity']['field_collection_item']) && count($fc[$i]['entity']['field_collection_item'])) {
-              foreach ($fc[$i]['entity']['field_collection_item'] as $fc_id => $fc_field_item) {
-                $fc_item = field_collection_item_load($fc_id);
-                if (isset($fc_item->field_question['und'][0]['value']) && $fc_item->field_question['und'][0]['value'] == $required_question) {
-                  $content = strip_tags($fc_field_item['field_answer'][0]['#markup']);
-                  $question = trim($fc_field_item['field_question'][0]['#markup']);
-                  $output .= <<<EOT
-<div class="views-field">
-<span class="views-label views-label-field-gal-title">$question: </span>
-<div class="field-content">$content</div>
-</div>
-EOT;
-                }
-              }
-            }
-          }
-        }
-      }
-
-      // add favourites.
-      $fc = field_view_field('user', $account, 'field_favourites');
-      if ($fc && isset($fc['#items']) && is_array($fc['#items']) && count($fc['#items'])) {
-        for ($i=0; $i<count($fc['#items']); $i++) {
-          if (isset($fc[$i]['entity']['field_collection_item']) && is_array($fc[$i]['entity']['field_collection_item']) && count($fc[$i]['entity']['field_collection_item'])) {
-            foreach ($fc[$i]['entity']['field_collection_item'] as $fc_item) {
-              if (isset($fc_item['field_question']['#items'][0]['value'])) {
-                $content = strip_tags($fc_item['field_answer'][0]['#markup']);
-                $question = trim($fc_item['field_question'][0]['#markup']);
-                $output .= <<<EOT
-<div class="views-field">
-<span class="views-label views-label-field-gal-title">$question: </span>
-<div class="field-content">$content</div>
-</div>
-EOT;
-              }
-            }
-          }
-        }
-      }
-
+      // Set executive link.
       if (in_array('executive', $account->roles)) {
         $output = '<h2 class="block-title">' . l(t('Executive Profiles'), 'node/36') . '</h2>' . $output;
       }
-
       // some extra security
       if (empty($account->field_public_profile) && $account->uid != $user->uid && !user_access('administer users') && !in_array('executive', $user->roles)) {
         $output = '';
