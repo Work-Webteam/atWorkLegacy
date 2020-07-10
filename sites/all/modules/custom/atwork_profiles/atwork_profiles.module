@@ -246,7 +246,6 @@ function atwork_profiles_element_info_alter(&$types) {
  */
 function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-  drupal_add_js(drupal_get_path('module', 'atwork_profiles') . '/atwork_profiles.js');
 
   $form['#validate'][] = '_atwork_profiles_required_validate';
 
@@ -1158,7 +1157,7 @@ function atwork_profiles_block_view($delta = '') {
       $block['subject'] = t('');
       $block['content'] = '<button id="bio-toggle-button">Show More</button>';
       // load jquery as early as possible. Before page render would be ideal however.
-      drupal_add_js(drupal_get_path('module', 'atwork_profiles') . '/atwork_profiles_2.js',
+      drupal_add_js(drupal_get_path('module', 'atwork_profiles') . '/js/atwork_profiles_2.js',
         array(
           'group' => JS_LIBRARY,
           'weight' => -19,

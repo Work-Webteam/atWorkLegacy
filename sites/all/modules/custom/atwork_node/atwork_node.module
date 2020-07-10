@@ -263,16 +263,6 @@ function atwork_node_preprocess_node(&$variables) {
       $variables['content']['footer']['ical_link']['#weight'] = 60;
       unset($variables['content']['ical_link']);
     }
-    if ((isset($variables['content']['subscriptions_ui']['wrapper']['subscriptions']) && $variables['content']['subscriptions_ui']['wrapper']['subscriptions'])
-      || (isset($variables['content']['subscriptions_ui']['subscriptions_ui_form']['wrapper']['subscriptions']) && $variables['content']['subscriptions_ui']['subscriptions_ui_form']['wrapper']['subscriptions'])) {
-      $variables['content']['footer']['subscriptions_ui'] = $variables['content']['subscriptions_ui'];
-      $variables['content']['footer']['subscriptions_ui']['#weight'] = 999;
-      $variables['content']['footer']['subscriptions_ui_toggle'] = array(
-        '#markup' => '<div class="node-links first"><a href="#" title="Subscribe" class="subscription-flyout-toggle">' . _atwork_fa('bullhorn') . 'Subscribe</a></div>',
-        '#weight' => 0,
-      );
-      unset($variables['content']['subscriptions_ui']);
-    }
 
     // add font-awesome icons
     _atwork_add_link_icons($variables);
@@ -311,6 +301,100 @@ function atwork_node_preprocess_node(&$variables) {
         unset($variables['content']['field_image']['#items'][$i]);
       }
     }
+  }
+}
+
+/*
+ * Helper function to display font-awesome icons
+ */
+function _atwork_fa($icon, $extra = '') {
+
+  global $user;
+
+  if ($extra) $extra .= ' ';
+
+  // name changes to support both themes at same time
+  switch ($icon) {
+    case 'circle-blank':
+      $icon = 'circle-o';
+      break;
+    case 'envelope-alt':
+      $icon = 'envelope-o';
+      break;
+    case 'comments-alt':
+      $icon = 'comments-o';
+      break;
+    case 'facetime-video':
+      $icon = 'video-camera';
+      break;
+    case 'star-empty':
+      $icon = 'star-o';
+      break;
+  }
+  return '<i ' . $extra . 'class="fa fa-' . $icon . '"></i> ';
+}
+
+/**
+ * Helper function used to add in the font-awesome icons.
+ *
+ * @param $variables
+ */
+function _atwork_add_link_icons(&$variables) {
+
+  // forward
+  if (isset($variables['content']['footer']['links']['forward']['#links']['forward_link']['query'])) {
+    $variables['content']['footer']['links']['forward']['#links']['forward_link']['title'] = _atwork_fa('envelope-alt') . t('Email this page');
+    // While here, change the title text
+    $variables['content']['footer']['links']['forward']['#links']['forward_link']['attributes']['title'] = t('Email this page');
+  }
+
+  // stats
+  if (isset($variables['content']['footer']['links']['statistics']['#links']['statistics_counter']['title'])) {
+    $variables['content']['footer']['links']['statistics']['#links']['statistics_counter']['title'] = _atwork_fa('star') . $variables['content']['footer']['links']['statistics']['#links']['statistics_counter']['title'];
+    $variables['content']['footer']['links']['statistics']['#links']['statistics_counter']['html'] = TRUE;
+  }
+
+  // add comment
+  if (isset($variables['content']['footer']['links']['comment']['#links']['comment-add']['title'])) {
+    $variables['content']['footer']['links']['comment']['#links']['comment-add']['title'] = _atwork_fa('comment') . $variables['content']['footer']['links']['comment']['#links']['comment-add']['title'];
+    $variables['content']['footer']['links']['comment']['#links']['comment-add']['html'] = TRUE;
+  }
+
+  // comments
+  if (isset($variables['content']['footer']['links']['comment']['#links']['comment-comments']['title'])) {
+    $variables['content']['footer']['links']['comment']['#links']['comment-comments']['title'] = _atwork_fa('comments') . $variables['content']['footer']['links']['comment']['#links']['comment-comments']['title'];
+    $variables['content']['footer']['links']['comment']['#links']['comment-comments']['html'] = TRUE;
+  }
+
+  // new comments
+  if (isset($variables['content']['footer']['links']['comment']['#links']['comment-new-comments']['title'])) {
+    $variables['content']['footer']['links']['comment']['#links']['comment-new-comments']['title'] = _atwork_fa('comments-alt') . $variables['content']['footer']['links']['comment']['#links']['comment-new-comments']['title'];
+    $variables['content']['footer']['links']['comment']['#links']['comment-new-comments']['html'] = TRUE;
+  }
+
+  // ical link
+  if (isset($variables['content']['footer']['links']['ical']['#links']['ical_link']['title'])) {
+    $variables['content']['footer']['links']['ical']['#links']['ical_link']['title'] = _atwork_fa('calendar') . $variables['content']['footer']['links']['ical']['#links']['ical_link']['title'];
+    $variables['content']['footer']['links']['ical']['#links']['ical_link']['html'] = TRUE;
+  }
+
+  // add an image link
+  if (isset($variables['content']['footer']['links']['atwork_add_image']['#links']['add_image']['title'])) {
+    $variables['content']['footer']['links']['atwork_add_image']['#links']['add_image']['title'] = _atwork_fa('picture') . $variables['content']['footer']['links']['atwork_add_image']['#links']['add_image']['title'];
+    $variables['content']['footer']['links']['atwork_add_image']['#links']['add_image']['html'] = TRUE;
+  }
+
+  // flag
+  if (isset($variables['content']['footer']['links']['flag']['#links']['flag-abuse_nodes']['title'])) {
+    $variables['content']['footer']['links']['flag']['#links']['flag-abuse_nodes']['title'] =
+      str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $variables['content']['footer']['links']['flag']['#links']['flag-abuse_nodes']['title']);
+    $variables['content']['footer']['links']['flag']['#links']['flag-abuse_nodes']['html'] = TRUE;
+  }
+
+  // teaser read more
+  if (isset($variables['content']['footer']['links']['node']['#links']['node-readmore']['title'])) {
+    $variables['content']['footer']['links']['node']['#links']['node-readmore']['title'] = _atwork_fa('angle-right') . $variables['content']['footer']['links']['node']['#links']['node-readmore']['title'];
+    $variables['content']['footer']['links']['node']['#links']['node-readmore']['html'] = TRUE;
   }
 }
 
@@ -392,4 +476,47 @@ function atwork_node_remove_radio_na($element) {
   unset($element['#options']['_none']);
   unset($element['_none']);
   return $element;
+}
+
+/*
+ * Implementation of hook_menu_alter()
+ *
+ * Need to edit the add user callback as it was interferring with our VBO view
+ *
+ * Provide some different link titles for nodes
+ */
+function atwork_node_menu_alter(&$items) {
+  $items['admin/people/create'] = array(
+    'title' => 'Add user',
+    'description' => 'Manage user accounts, roles, and permissions.',
+    'page callback' => 'user_admin',
+    'page arguments' => array('create'),
+    'access arguments' => array('administer users'),
+    'position' => 'left',
+    'weight' => -4,
+    'file' => 'modules/user/user.admin.inc',
+  );
+
+
+  if (isset($items['node/%node/edit']['title callback'])) {
+    unset($items['node/%node/edit']['title callback']);
+  }
+  if (isset($items['node/%node/edit']['title arguments'])) {
+    unset($items['node/%node/edit']['title arguments']);
+  }
+  if (isset($items['node/%node/view']['title callback'])) {
+    unset($items['node/%node/view']['title callback']);
+  }
+  if (isset($items['node/%node/view']['title arguments'])) {
+    unset($items['node/%node/view']['title arguments']);
+  }
+  if (isset($items['node/%node/moderation'])) {
+    $items['node/%node/moderation']['title'] = t('Revisions');
+  }
+  $items['node/%node/edit']['title'] = t('Edit');
+  $items['node/%node/view']['title'] = t('View');
+
+  unset($items['search/user/%menu_tail']);
+  unset($items['search/user']);
+
 }

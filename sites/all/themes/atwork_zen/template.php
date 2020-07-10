@@ -365,157 +365,7 @@ function atwork_zen_pager($variables) { // used to change 'previous' to just 'pr
   }
 }
 
-/**
- * Implements hook_views_pre_render()
- *
- * Change title to author on employee submitted photo's on the front page
- *
- */
-function atwork_zen_views_pre_render(&$view) {
-  global $user;
-  if ($view->name == 'gallery_reference' && $view->current_display == 'block_2'){
 
-    foreach($view->result as $result){
-      $author = user_load($result->users_node_uid);
-      $name = _atwork_full_name($author);
-      $result->field_field_image[0]['rendered']['#item']['title'] = 'Photo by ' . $name;
-    }
-  }
-  // Additional changes for the titles/links on teh home page blocks (3 top spots)
-  if($view->name == 'home_page_blocks_zen' && ($view->current_display == 'block_1' || $view->current_display == 'block_4' || $view->current_display == 'block_3' || $view->current_display == 'block_8')){
-    if (isset($view->result[0]->node_type)){
-      switch($view->result[0]->node_type) {
-        case 'article':
-          if(isset($view->result[0]->_field_data['nid']['entity']->field_poll) && $view->result[0] ->_field_data['nid']['entity']->field_poll){
-            $view->result[0]->node_type = "polls";
-          } elseif (isset($view->result[0]->_field_data['nid']['entity']->field_video) && $view->result[0]->_field_data['nid']['entity']->field_video) {
-            $view->result[0]->node_type = "videos";
-          } elseif(isset($view->result[0]->_field_data['nid']['entity']->field_tags) && $view->result[0]->_field_data['nid']['entity']->field_tags){
-            $view->result[0]->node_type = "articles";
-            foreach($view->result[0]->_field_data['nid']['entity']->field_tags['und'] as $k){
-              if($k['tid'] == 523){
-                $view->result[0]->node_type = "executive updates";
-              }
-            }
-          } else {
-            $view->result[0]->node_type = "articles";
-          }
-          break;
-        case 'section':
-          $view->result[0]->node_type = "groups";
-          break;
-        case 'blog':
-          $view->result[0]->node_type = "blogs";
-          break;
-        case 'event':
-          $view->result[0]->node_type = "events";
-          break;
-        case 'gallery':
-          $view->result[0]->node_type = "galleries";
-          break;
-        default:
-          //dpm($view->result[0]->node_type);
-          return;
-      }
-    }
-  }
-}
-
-/*
- * Helper function to display font-awesome icons
- */
-function _atwork_fa($icon, $extra = '') {
-
-  global $user;
-
-  if ($extra) $extra .= ' ';
-  if (isset($user->theme)) {
-    if ($user->theme == 'atwork') {
-      return '<i ' . $extra . 'class="icon-' . $icon . ' font-awesome"></i> ';
-    }
-    else {
-      // name changes to support both themes at same time
-      switch ($icon) {
-        case 'circle-blank':
-          $icon = 'circle-o';
-          break;
-        case 'envelope-alt':
-          $icon = 'envelope-o';
-          break;
-        case 'comments-alt':
-          $icon = 'comments-o';
-          break;
-        case 'facetime-video':
-          $icon = 'video-camera';
-          break;
-        case 'star-empty':
-          $icon = 'star-o';
-          break;
-      }
-
-      return '<i ' . $extra . 'class="fa fa-' . $icon . '"></i> ';
-    }
-  }
-}
-
-function _atwork_add_link_icons(&$variables) {
-
-  // forward
-  if (isset($variables['content']['footer']['links']['forward']['#links']['forward_link']['query'])) {
-    $variables['content']['footer']['links']['forward']['#links']['forward_link']['title'] = _atwork_fa('envelope-alt') . t('Email this page');
-    // While here, change the title text
-    $variables['content']['footer']['links']['forward']['#links']['forward_link']['attributes']['title'] = t('Email this page');
-  }
-
-  // stats
-  if (isset($variables['content']['footer']['links']['statistics']['#links']['statistics_counter']['title'])) {
-    $variables['content']['footer']['links']['statistics']['#links']['statistics_counter']['title'] = _atwork_fa('star') . $variables['content']['footer']['links']['statistics']['#links']['statistics_counter']['title'];
-    $variables['content']['footer']['links']['statistics']['#links']['statistics_counter']['html'] = TRUE;
-  }
-
-  // add comment
-  if (isset($variables['content']['footer']['links']['comment']['#links']['comment-add']['title'])) {
-    $variables['content']['footer']['links']['comment']['#links']['comment-add']['title'] = _atwork_fa('comment') . $variables['content']['footer']['links']['comment']['#links']['comment-add']['title'];
-    $variables['content']['footer']['links']['comment']['#links']['comment-add']['html'] = TRUE;
-  }
-
-  // comments
-  if (isset($variables['content']['footer']['links']['comment']['#links']['comment-comments']['title'])) {
-    $variables['content']['footer']['links']['comment']['#links']['comment-comments']['title'] = _atwork_fa('comments') . $variables['content']['footer']['links']['comment']['#links']['comment-comments']['title'];
-    $variables['content']['footer']['links']['comment']['#links']['comment-comments']['html'] = TRUE;
-  }
-
-  // new comments
-  if (isset($variables['content']['footer']['links']['comment']['#links']['comment-new-comments']['title'])) {
-    $variables['content']['footer']['links']['comment']['#links']['comment-new-comments']['title'] = _atwork_fa('comments-alt') . $variables['content']['footer']['links']['comment']['#links']['comment-new-comments']['title'];
-    $variables['content']['footer']['links']['comment']['#links']['comment-new-comments']['html'] = TRUE;
-  }
-
-  // ical link
-  if (isset($variables['content']['footer']['links']['ical']['#links']['ical_link']['title'])) {
-    $variables['content']['footer']['links']['ical']['#links']['ical_link']['title'] = _atwork_fa('calendar') . $variables['content']['footer']['links']['ical']['#links']['ical_link']['title'];
-    $variables['content']['footer']['links']['ical']['#links']['ical_link']['html'] = TRUE;
-  }
-
-  // add an image link
-  if (isset($variables['content']['footer']['links']['atwork_add_image']['#links']['add_image']['title'])) {
-    $variables['content']['footer']['links']['atwork_add_image']['#links']['add_image']['title'] = _atwork_fa('picture') . $variables['content']['footer']['links']['atwork_add_image']['#links']['add_image']['title'];
-    $variables['content']['footer']['links']['atwork_add_image']['#links']['add_image']['html'] = TRUE;
-  }
-
-  // flag
-  if (isset($variables['content']['footer']['links']['flag']['#links']['flag-abuse_nodes']['title'])) {
-    $variables['content']['footer']['links']['flag']['#links']['flag-abuse_nodes']['title'] =
-      str_replace('rel="nofollow">', 'rel="nofollow">' . _atwork_fa('flag'), $variables['content']['footer']['links']['flag']['#links']['flag-abuse_nodes']['title']);
-    $variables['content']['footer']['links']['flag']['#links']['flag-abuse_nodes']['html'] = TRUE;
-  }
-
-  // teaser read more
-  if (isset($variables['content']['footer']['links']['node']['#links']['node-readmore']['title'])) {
-    $variables['content']['footer']['links']['node']['#links']['node-readmore']['title'] = _atwork_fa('angle-right') . $variables['content']['footer']['links']['node']['#links']['node-readmore']['title'];
-    $variables['content']['footer']['links']['node']['#links']['node-readmore']['html'] = TRUE;
-  }
-}
 
 /*
  * Implementation of hook_node_view()
@@ -525,7 +375,6 @@ function _atwork_add_link_icons(&$variables) {
 function atwork_zen_node_view($node, $view_mode, $langcode) {
   if ($view_mode == 'teaser' && isset($node->content['body'][0]['#markup'])) {
     $node->content['body'][0]['#markup'] = strip_tags($node->content['body'][0]['#markup'], '<p><br>');
-    //dpm($node);
   }
 }
 
@@ -546,48 +395,7 @@ function atwork_zen_node_view_alter(&$build) {
   }
 }
 
-/*
- * Implementation of hook_menu_alter()
- *
- * Need to edit the add user callback as it was interferring with our VBO view
- *
- * Provide some different link titles for nodes
- */
-function atwork_misc_menu_alter(&$items) {
-  $items['admin/people/create'] = array(
-    'title' => 'Add user',
-    'description' => 'Manage user accounts, roles, and permissions.',
-    'page callback' => 'user_admin',
-    'page arguments' => array('create'),
-    'access arguments' => array('administer users'),
-    'position' => 'left',
-    'weight' => -4,
-    'file' => 'modules/user/user.admin.inc',
-  );
 
-
-  if (isset($items['node/%node/edit']['title callback'])) {
-    unset($items['node/%node/edit']['title callback']);
-  }
-  if (isset($items['node/%node/edit']['title arguments'])) {
-    unset($items['node/%node/edit']['title arguments']);
-  }
-  if (isset($items['node/%node/view']['title callback'])) {
-    unset($items['node/%node/view']['title callback']);
-  }
-  if (isset($items['node/%node/view']['title arguments'])) {
-    unset($items['node/%node/view']['title arguments']);
-  }
-  if (isset($items['node/%node/moderation'])) {
-    $items['node/%node/moderation']['title'] = t('Revisions');
-  }
-  $items['node/%node/edit']['title'] = t('Edit');
-  $items['node/%node/view']['title'] = t('View');
-
-  unset($items['search/user/%menu_tail']);
-  unset($items['search/user']);
-
-}
 
 function _atwork_misc_ct_plural($name) {
   switch ($name) {
