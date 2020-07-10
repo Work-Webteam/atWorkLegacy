@@ -33,51 +33,7 @@ function _atwork_get_addresses($string) {
   return array_filter($addresses);
 }
 
-/*
- * Helper function that validates a set of emails
- */
-function _atwork_validate_emails($emails, $key, $atwork_LDAP_checked) {
-  //  We want to validate, but we no longer have access to LDAP - so we can only check against
-  // our own DB now.
-  if ($emails) {
-    $recipient_addresses = _atwork_get_addresses($emails);
-    //$atwork_ldap = new atwork_ldap;
 
-    foreach ($recipient_addresses as $recipient_address) {
-
-      /*
-      if (!_atwork_valid_email($recipient_address)) {
-        form_set_error($key, t('Email is limited to organizations within the BC Public Service. %email was not found.', array('%email' => $recipient_address)));
-      }
-
-      // check if we already checked GAL and that we checked the same
-      // list of emails. If emails changed check again
-      if (isset($_SESSION['atwork_LDAP_checked'])) {
-
-        if ($_SESSION['atwork_LDAP_checked']['emails'] == $emails) {
-          // emails matched, check is done
-          unset($_SESSION['atwork_LDAP_checked']);
-          return;
-        }
-      }
-
-      // ok now check if email exists in GAL
-      $result = $atwork_ldap->query('person', 'mail', $recipient_address, array('employeeid'));
-
-      if (!$result['count']) {
-        $message = t('%mail was not found in the government address list. You may want to double check the name/email of the person you’re sending to. Submit this form again if you are sure this is the correct address.', array('%mail' => $recipient_address));
-        drupal_set_message($message, 'warning');
-        form_set_error($key);
-        $_SESSION['atwork_LDAP_checked'] = array(
-          'id' => $atwork_LDAP_checked,
-          'emails' => $emails,
-        );
-
-        $atwork_LDAP_checked = &drupal_static('atwork_LDAP_checked', $atwork_LDAP_checked);
-      } */
-    }
-  }
-}
 
 /*
  * Implementation of hook_exit()
@@ -96,7 +52,6 @@ function atwork_mail_exit($destination = NULL) {
       // we are still on the same page doing the checking, don't unset anything
       return;
     }
-    //unset($_SESSION['atwork_LDAP_checked']);
   }
 }
 
@@ -206,7 +161,6 @@ function atwork_mail_mail($key, &$message, $params) {
  * Add quotes around the from name to fix email encoding
  */
 function atwork_forward_form_validate($form, &$form_state) {
-  _atwork_validate_emails($form_state['values']['recipients'], 'recipients', $form['form_token']['#default_value']);
   if (form_get_errors()) return;
 
   // add quotes around the name because forward module doesn't
