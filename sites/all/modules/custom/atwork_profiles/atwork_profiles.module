@@ -593,7 +593,6 @@ function _atwork_profiles_photo_afterbuild($form, &$form_state) {
   }
   else {
     $form[$form['#language']][0]['#prefix'] = '<div class="profile-photo-title">' . t('Professional quality photo') . '</div>';
-    //$form[$form['#language']][0]['title']['#description'] = t('This will be the photo displayed across the site.');
     $form[$form['#language']][0]['title']['#title'] = t('Description');
   }
   if (isset($form[$form['#language']][1]) && !$form[$form['#language']][1]['#default_value']['fid']) {
@@ -610,7 +609,6 @@ function _atwork_profiles_photo_afterbuild($form, &$form_state) {
     $form[$form['#language']][1]['title']['#title'] = t('Description');
   }
 
-  //dpm($form);
   return $form;
 }
 
@@ -619,7 +617,6 @@ function _atwork_profiles_photo_afterbuild($form, &$form_state) {
  */
 function _atwork_profiles_required_validate($form, &$form_state) {
   if (form_get_errors()) return;
-  // convert required fields into field collections
 
   // first update the field collection form state values for any updates
   $field_collections = _atwork_profiles_field_collections();
@@ -740,21 +737,9 @@ function atwork_profiles_form_submit($form, &$form_state) {
  * When an admin makes an account expand the collapsed fieldset
  */
 function atwork_profiles_form_alter(&$form, &$form_state, $form_id) {
-//  if (isset($form['field_career']['#language'])) {
-//    $form['field_career'][$form['field_career']['#language']]['#after_build'][] = 'atwork_profiles_after_build';
-//  }
-//
 
   if ($form_id == 'user_register_form') {
     $form['#groups']['group_account_settings']->format_settings['formatter'] = 'open';
-  }
-
-  // We don't need to have a _none value in this boolean, so remove it.
-  if($form_id == 'user_profile_form') {
-    unset($form['field_group_page_tutorial']['und']['#options']['_none'] );
-    unset($form['field_home_page_tutorial']['und']['#options']['_none']);
-    unset($form['field_group_admin_tour']['und']['#options']['_none']);
-    unset($form['field_profile_page_tour']['und']['#options']['_none']);
   }
 }
 
@@ -786,8 +771,6 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
           if (isset($account->field_public_profile) && $account->field_public_profile) {
             drupal_set_message('This profile is published on @Work.');
           }
-          else {
-          }
         }
       }
     }
@@ -800,7 +783,6 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
         }
         else {
           // Non-exec filled out but not published
-
           if (isset($account->field_public_profile) && !$account->field_public_profile && !(in_array('executive', $user->roles))) {
             switch(true) {
               case (isset($account->content['field_summary']) && ($account->content['field_summary'])):
@@ -841,7 +823,6 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
           //drupal_set_message('This public profile is enabled');
         }
         else {
-          //drupal_set_message('This profile has not been published and is only viewable by ' . _atwork_full_name($account) . ' and admins.');
           // In this case, we hide all custom info
           $account->content['field_summary']['#access'] = FALSE;
           $account->content['field_extended_biography']['#access'] = FALSE;
@@ -854,44 +835,13 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
       }
     }
 
-    // set title
-    /*$title = _atwork_full_name($account);
-    $job_title = field_get_items('user', $account, 'field_gal_title');
-    if (isset($job_title[0]['safe_value'])) {
-      $title .= ' ' . $job_title[0]['safe_value'];
-    }
-    $field_ministry = field_get_items('user', $account, 'field_gal_ministry_name');
-    if (isset($field_ministry[0]['safe_value'])) {
-      $title .= ', ' . $field_ministry[0]['safe_value'];
-    }
-    */
    // remove title from this page
    $title = ' ';
     drupal_set_title(htmlspecialchars_decode($title, ENT_QUOTES));
 
     $field_collections = _atwork_profiles_field_collections();
     $required_questions = _atwork_profiles_required_questions(TRUE);
-    //dpm($field_collections);
-    /*
-    foreach ($field_collections as $field_collection) {
-      if (!$account->$field_collection) {
-        $account->content[$field_collection]['#access'] = FALSE;
-      }
-      elseif (isset($account->content[$field_collection])) {
-        $show_label = FALSE;
-        foreach ($account->content[$field_collection]['#items'] as $key => $value) {
-          $fc = $account->content[$field_collection][$key]['entity']['field_collection_item'][$value['value']];
-          if (!isset($required_questions[$fc['field_question']['#items'][0]['value']])) {
-            $show_label = TRUE;
-          }
-        }
-        if ($show_label) {
-          $account->content[$field_collection]['#prefix'] .= '<h2 class="profile-section">' . _atwork_profiles_icon($field_collection) . $account->content[$field_collection]['#title'] . '</h2>';
-          $account->content[$field_collection]['#title'] = '';
-        }
-      }
-    }
-     */
+
      // About me field is filled in (#access = FALSE at this point if UID for user and account do not match), and has been published
     if (isset($account->content['field_summary']) && ($account->content['field_summary']) && ($account->field_public_profile))  {
       $account->content['field_summary']['#label_display'] = 'visible';
@@ -1002,7 +952,6 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
     } else {
       $account->content['field_linkedin'] = array(
         '#theme' => 'field',
-  //      '#weight' => 8,
         '#title' => 'My online resume',
         '#access' => TRUE,
         '#label_display' => 'inline',
@@ -1081,10 +1030,6 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
     //Combine full first and last name, hide original GAL field
     if (isset($account->content['field_gal_first_name'])) {
       $account->content['field_gal_first_name'][0]['#markup'] = t(_atwork_full_name($account));
-      //$account->content['full_name'] = $account->content['field_gal_first_name'];
-      //$account->content['full_name'][0]['#markup'] = t(_atwork_full_name($account));
-      //$account->content['full_name']['#title'] = t('Full Name');
-      //hide($account->content['field_gal_first_name']);
     } else {
       $account->content['field_gal_first_name'] = array(
         '#theme' => 'field',
@@ -1114,7 +1059,6 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
     } else {
       $account->content['field_gal_title'] = array(
         '#theme' => 'field',
-        //'#weight' => 2,
         '#title' => 'Title',
         '#access' => TRUE,
         '#label_display' => 'hidden',
@@ -1141,15 +1085,6 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
 
      // Create mailto link for email
     if (isset($account->content['field_display_name']) && $account->content['field_display_name']) {
-      //$account->content['idir'] = $account->content['field_gal_title'];
-      //$account->content['idir']['#title'] = t('IDIR');
-      //$account->content['idir'][0]['#markup'] = $account->name;
-      //Commented out to prevent extra info showing on the user profile page
-
-      //$account->content['mail'] = $account->content['field_display_name'];
-      //$account->content['mail']['#title'] = t('Email');
-      //$account->content['mail'][0]['#markup'] = l($account->mail, 'mailto:' . $account->mail);
-      //$account->content['field_display_name']['#access'] = FALSE;
       $account->content['field_display_name'][0]['#markup'] = l($account->mail, 'mailto:' . $account->mail);
     }
 
@@ -1308,18 +1243,6 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
         unset($account->content['field_image'][1]);
       }
     }
-
-    //if( $user->uid == '56664') {
-    //  dpm($account);
-    //}
-    //Set profile tutorial
-    if (!isset($account->field_profile_page_tour['und'][0]['value']) || (isset($account->field_profile_page_tour['und'][0]['value']) && $account->field_profile_page_tour['und'][0]['value'] == 1)){
-      if($account->uid == $user->uid){
-        jquery_impromptu_add();
-        drupal_add_js(drupal_get_path('module', 'atwork_profiles') . '/atwork_profile_tutorial.js');
-      }
-    }
-
   }
 }
 
@@ -1369,23 +1292,8 @@ function atwork_profiles_field_collection_item_view($field_collection_item, $vie
 function atwork_profiles_views_post_render(&$view, &$output, &$cache) {
   global $user;
   if ($view->name == 'profiles') {
-    // add a jellybean
-    if (isset($view->result[0]->users_mail) && $view->result[0]->users_mail) {
-      //dpm(_presence_jellybean($view->result[0]->users_mail));
-      $output = str_replace('<span class="views-label views-label-mail">E-mail: </span>    <span class="field-content">',
-        '<span class="views-label views-label-mail">E-mail: </span>    <span class="field-content">' . _presence_jellybean($view->result[0]->users_mail), $output);
-    }
-
     if (isset($view->args[0]) && $view->args[0] && is_numeric($view->args[0])) {
       $account = user_load($view->args[0]);
-
-      if (strpos($output, ':relationship_link') && module_exists('atwork_relationship') && $account->uid != $user->uid) {
-        $relationship_link = atwork_relationship_get_link($account);
-        $output = str_replace(':relationship_link', $relationship_link, $output);
-      }
-      elseif (strpos($output, ':relationship_link')) {
-        $output = str_replace(':relationship_link', '', $output);
-      }
 
       // add required questions
       $required_questions = _atwork_profiles_required_questions();
@@ -1461,21 +1369,8 @@ function atwork_profiles_field_widget_form_alter(&$element, &$form_state, $conte
  */
 function atwork_profiles_views_query_alter(&$view, &$query) {
   // if a name exists order by name instead of random
-  //dpm($view);
-  if ($view->name == 'people_admin' && $view->current_display == 'employee_page') {
-    $searched = FALSE;
-    //dpm($view);
-    if(isset($view->exposed_raw_input['name']) && $view->exposed_raw_input['name']) {
-      //foreach ($view->exposed_raw_input['name'] as &$filter) {
-      //  if (isset($filter)) {
-          $searched = TRUE;
-       // }
-     // }
-    }
-
-    if ($searched) {
-      unset($query->orderby[0]);
-    }
+  if ($view->name == 'people_admin' && $view->current_display == 'employee_page' && isset($view->exposed_raw_input['name']) && $view->exposed_raw_input['name']) {
+    unset($query->orderby[0]);
   }
 }
 
@@ -1483,13 +1378,6 @@ function atwork_profiles_views_query_alter(&$view, &$query) {
  * Implementation of hook_form_FORMID_alter()
  */
 function atwork_profiles_form_views_exposed_form_alter(&$form, &$form_state, $form_id){
-  /*
-  if (isset($form['skills'])) {
-    $form['skills']['#chosen'] = TRUE;
-    $form['skills']['#attributes']['class'][] = 'chosen-widget';
-  }
-  */
-
   if (isset($form_state['view']) &&
       isset($form_state['view']->name) && $form_state['view']->name == 'people_admin' &&
       isset($form_state['view']->current_display) && $form_state['view']->current_display == 'employee_page') {
@@ -1497,13 +1385,10 @@ function atwork_profiles_form_views_exposed_form_alter(&$form, &$form_state, $fo
     $form['advanced_search'] = array(
       '#type' => 'fieldset',
       '#title' => t('Advanced Search'),
-  //    '#weight' => 3,
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
-      //'#tree' => TRUE,
     );
 
-    //dpm($form_state);
     foreach ($form_state['input'] as $key => $filter) {
       if ($filter) {
         if (in_array($key, array('following', 'followers')) && $filter == "All") {
@@ -1516,10 +1401,6 @@ function atwork_profiles_form_views_exposed_form_alter(&$form, &$form_state, $fo
       }
     }
 
-    //$form['advanced_search']['following'] = $form['following'];
-    //$form['advanced_search']['following']['#title'] = t('People I\'m following');
-    //$form['advanced_search']['followers'] = $form['followers'];
-    //$form['advanced_search']['followers']['#title'] = t('People following me');
     $form['advanced_search']['title'] = $form['title'];
     $form['advanced_search']['title']['#title'] = t('Title');
     $form['advanced_search']['branch'] = $form['branch'];
@@ -1532,13 +1413,8 @@ function atwork_profiles_form_views_exposed_form_alter(&$form, &$form_state, $fo
     $form['advanced_search']['interests']['#title'] = t('Interests');
     $form['advanced_search']['city'] = $form['city'];
     $form['advanced_search']['city']['#title'] = t('City');
-	//$form['advanced_search']['work_group'] = $form['work_group'];
-    //$form['advanced_search']['work_group']['#title'] = t('Work Group');
-
     $form['name']['#title'] = t('Name');
-
-    //unset($form['#info']);
-    ($form['#info'] = array(NULL));
+    $form['#info'] = array(NULL);
 
     unset($form['title']);
     unset($form['skills']);
@@ -1547,11 +1423,7 @@ function atwork_profiles_form_views_exposed_form_alter(&$form, &$form_state, $fo
     unset($form['branch']);
     unset($form['ministry']);
     unset($form['city']);
-    //unset($form['followers']);
-    //unset($form['following']);
-
   }
-
 }
 
 
