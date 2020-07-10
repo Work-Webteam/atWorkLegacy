@@ -9,14 +9,13 @@
  * Implements hook_form_alter().
  */
 function atwork_subscriptions_form_alter(&$form, &$form_state, $form_id) {
-
   // We decided that we always want Send subscriptions notifications to default to unchecked. There is no setting for this behaviour in the front end. We will do it here.
   // The only exception is Questions - we want users to be notified if a question is asked.
   if(isset($form['options']['subscriptions_notify']['subscriptions_notify']['#default_value']) && $form['options']['subscriptions_notify']['subscriptions_notify']['#default_value'] == TRUE){
     isset($form['type']['#value']) && $form['type']['#value'] == 'question' ?  /*do nothing*/ : $form['options']['subscriptions_notify']['subscriptions_notify']['#default_value'] = FALSE;
   }
-  //
-  if ($form_id == 'subscriptions_ui_node_form') {
+
+  if ($form_id === 'subscriptions_ui_node_form') {
     // remove subscribe to tag by author
     $remove_options = array();
     if (isset($form['params']['#value'])) {
@@ -34,9 +33,10 @@ function atwork_subscriptions_form_alter(&$form, &$form_state, $form_id) {
       if (isset($form['wrapper']['comments']['#options'][$remove_option])) unset($form['wrapper']['comments']['#options'][$remove_option]);
     }
 
-    array_unshift($form['#submit'], '_atwork_misc_subscriptions_submit');
+    array_unshift($form['#submit'], '_atwork_subscriptions_submit');
     $form['wrapper']['#type'] = 'container';
     $form['wrapper']['footer']['#description'] = '';
+    //dpm($form);
 
     $js = <<<EOT
 jQuery(document).ready(function($) {
@@ -92,7 +92,7 @@ EOT;
  *
  * Add the drupal messages subscriptions module should
  */
-function _atwork_misc_subscriptions_submit(&$form, &$form_state) {
+function _atwork_subscriptions_submit(&$form, &$form_state) {
   if (isset($form_state['values']['subscriptions'][1]) && isset($form_state['values']['updates'][1]) && isset($form_state['values']['params'][1])) {
     global $user;
     $params = array(
@@ -234,7 +234,7 @@ function atwork_subscriptions_views_pre_view(&$view, &$display_id, &$args) {
  *
  * Stop subscriptions is reverting a node.
  */
-function atwork_misc_node_presave($node) {
+function atwork_subscriptions_node_presave($node) {
   // problem: reverting a node automatically sets $node->subscriptions_notify
   // so we need to detect if this is a revision
   if (isset($node->log) && strpos($node->log, 'opy of the revision from <em class="placeholder">')) {
@@ -242,18 +242,5 @@ function atwork_misc_node_presave($node) {
   }
 }
 
-/**
- * Implements hook_preprocess_HOOK().
- */
-function atwork_subscriptions_preprocess_node(&$variables) {
-  if ((isset($variables['content']['subscriptions_ui']['wrapper']['subscriptions']) && $variables['content']['subscriptions_ui']['wrapper']['subscriptions'])
-    || (isset($variables['content']['subscriptions_ui']['subscriptions_ui_form']['wrapper']['subscriptions']) && $variables['content']['subscriptions_ui']['subscriptions_ui_form']['wrapper']['subscriptions'])) {
-    $variables['content']['footer']['subscriptions_ui'] = $variables['content']['subscriptions_ui'];
-    $variables['content']['footer']['subscriptions_ui']['#weight'] = 999;
-    $variables['content']['footer']['subscriptions_ui_toggle'] = array(
-      '#markup' => '<div class="node-links first"><a href="#" title="Subscribe" class="subscription-flyout-toggle">' . _atwork_fa('bullhorn') . 'Subscribe</a></div>',
-      '#weight' => 0,
-    );
-    unset($variables['content']['subscriptions_ui']);
-  }
-}
+
+

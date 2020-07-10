@@ -263,7 +263,16 @@ function atwork_node_preprocess_node(&$variables) {
       $variables['content']['footer']['ical_link']['#weight'] = 60;
       unset($variables['content']['ical_link']);
     }
-
+    if ((isset($variables['content']['subscriptions_ui']['wrapper']['subscriptions']) && $variables['content']['subscriptions_ui']['wrapper']['subscriptions'])
+      || (isset($variables['content']['subscriptions_ui']['subscriptions_ui_form']['wrapper']['subscriptions']) && $variables['content']['subscriptions_ui']['subscriptions_ui_form']['wrapper']['subscriptions'])) {
+      $variables['content']['footer']['subscriptions_ui'] = $variables['content']['subscriptions_ui'];
+      $variables['content']['footer']['subscriptions_ui']['#weight'] = 999;
+      $variables['content']['footer']['subscriptions_ui_toggle'] = array(
+        '#markup' => '<div class="node-links first"><a href="#" title="Subscribe" class="subscription-flyout-toggle">' . _atwork_fa('bullhorn') . 'Subscribe</a></div>',
+        '#weight' => 0,
+      );
+      unset($variables['content']['subscriptions_ui']);
+    }
     // add font-awesome icons
     _atwork_add_link_icons($variables);
 

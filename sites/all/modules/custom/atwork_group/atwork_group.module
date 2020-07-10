@@ -18,7 +18,7 @@ function _atwork_group_get_members($gid) {
 }
 
 /*
- * Helper function that helps contruct the group menu
+ * Helper function that helps construct the group menu.
  */
 function _atwork_group_content_type() {
   return array(
@@ -50,7 +50,7 @@ function _atwork_group_content_type() {
 }
 
 /*
- * Helper function that contructs links added to group menu
+ * Helper function that contructs links added to group menu.
  */
 function _atwork_group_content_links($group) {
   // If we are not in a group - jettison.
@@ -327,7 +327,6 @@ function atwork_group_views_post_render(&$view, &$output, &$cache) {
 
   if ((($view->name == 'groups' && $view->current_display == 'details') || ($view->name == 'second_sidebar_blocks' && $view->current_display == 'og_links'))  && isset($view->args[0]) && $view->args[0]) {
    global $user;
-
     $group = node_load($view->args[0]);
 
     if ($group) {
@@ -393,7 +392,7 @@ function atwork_group_views_post_render(&$view, &$output, &$cache) {
 
       $output .= <<<EOT
 <fieldset style="margin-top: 8px; margin-bottom: 0;" class="no-outline collapsible $collapsed">
-  <legend><span class="fieldset-legend">Settings</span></legend>
+  <legend><span class="fieldset-legend"><a class="fieldset-title" href="#"><span class="fieldset-legend-prefix element-invisible">Show</span>Settings</a><span class="summary"></span></span></legend>
   <div class="fieldset-wrapper" style="padding-left: 10px;">
     $admin_links
   </div>
@@ -542,10 +541,10 @@ function atwork_group_node_access($node, $op, $account) {
 function atwork_group_form_alter(&$form, &$form_state, $form_id) {
   global $user;
 
-  //Group Page manipulations - TODO - should probably be in its own module - difficult to find here
+  //Group Page manipulations.
 
   if($form_id == 'section_page_node_form') {
-    // Want users to be able to unpub background pages if they wish
+    // Want users to be able to unpub background pages if they wish.
     if(isset($form['options']) && $form['options']) {
       $form['options']['#access'] = TRUE;
     }
