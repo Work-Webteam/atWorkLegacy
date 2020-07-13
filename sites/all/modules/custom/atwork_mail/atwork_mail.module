@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Helper function that checks for an email domain and proper syntax
+ * Helper function that checks for an email domain and proper syntax.
  * If the email address is deemed correct, returns email address.
  * Else returns false.
  */
