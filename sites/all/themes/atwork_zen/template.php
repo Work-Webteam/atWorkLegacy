@@ -396,7 +396,11 @@ function atwork_zen_node_view_alter(&$build) {
 }
 
 
-
+/**
+ * Helper function to take care of pluralizing content types if required.
+ * @param $name
+ * @return array|mixed|string|null
+ */
 function _atwork_misc_ct_plural($name) {
   switch ($name) {
     case 'blog':
@@ -412,3 +416,4 @@ function _atwork_misc_ct_plural($name) {
   }
   return $name;
 }
+

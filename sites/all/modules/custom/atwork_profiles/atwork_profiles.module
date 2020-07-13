@@ -1,29 +1,5 @@
 <?php
 
-/*
- * Helper function returning our font-awesome icons
- */
-function _atwork_profiles_icon($type) {
-  switch ($type) {
-    case 'field_summary':
-      return _atwork_fa('file');
-    case 'field_career':
-      return _atwork_fa('road');
-    case 'field_philosophy_influences':
-      return _atwork_fa('cogs');
-    case 'field_personal':
-      return _atwork_fa('coffee');
-    case 'field_favourites':
-      return _atwork_fa('star-empty');
-    case 'field_book':
-      return _atwork_fa('book');
-    case 'field_certificate':
-      return _atwork_fa('certificate');
-    case 'field_check_circle-o':
-      return _atwork_fa('check-circle-o');
-  }
-}
-
 /**
  * Implements hook_menu();
  */
@@ -215,15 +191,6 @@ function atwork_profiles_after_build($element, &$form_state) {
     if (isset($element['#options']['_none']) && $element['#options']['_none'] == '- Select a value -') {
       $element['#options']['_none'] = t('- Please choose your question/topic  -');
     }
-    // remove required questions
-    $required_questions = _atwork_profiles_required_questions();
-    if ($required_questions) {
-      foreach ($element['#options'] as $question => $title) {
-        if (in_array($question, $required_questions)) {
-          unset($element['#options'][$question]);
-        }
-      }
-    }
   }
 
   //dpm($form_state);
@@ -302,38 +269,14 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
   $form['#group_children']['refresh_gal'] = 'group_contact_info';
   array_unshift($form['#groups']['group_contact_info']->children, 'refresh_gal');
 
-  //For profile release we won't have the option to enable profile
-  $profile_enabled = field_get_items('user', $account, 'field_public_profile');
-  if ($profile_enabled && isset($profile_enabled[0]['value']) && $profile_enabled[0]['value']) {
-    $profile_enabled = TRUE;
-  }
-  else {
-    $profile_enabled = FALSE;
-  }
-
+  /**
+   * These instructions are added in atwork_settings module. I worked to move them here and the
+   * database got really upset - so thought I would just leave a note so they could be found.
+   * These notes appear around fields on teh profile edit form.
+   */
   $profile_questions_instructions = variable_get('atwork_profile_questions_instructions','');
 
-  // only required for executives
-  if (in_array('executive', $account->roles)) {
-    $req = TRUE;
-  }
-  else {
-    $req = FALSE;
-  }
-
-  $required_questions = _atwork_profiles_required_questions(TRUE, TRUE);
-  if ($required_questions) {
-    if (isset($form['atwork_required_questions'])) {
-      $form['atwork_required_questions'] = array_merge($required_questions, $form['atwork_required_questions']);
-    }
-    else {
-      $form['atwork_required_questions'] = $required_questions;
-    }
-  }
-  else {
-    $form['field_career']['#prefix'] = $profile_questions_instructions['value'];
-  }
-
+  $form['field_career']['#prefix'] = $profile_questions_instructions['value'];
 
   $profile_instructions = variable_get('atwork_profile_instructions','');
   $form['notes']['#markup'] = $profile_instructions['value'];
@@ -422,7 +365,7 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
     unset($form['actions']['cancel']);
   }
 
-  // convert idirs to emails in field_trusted_assistants
+  // convert idirs to emails in field_trusted_assistants.
   if (isset($form['field_trusted_assistants'][$form['field_trusted_assistants']['#language']]['#default_value']) &&
       $form['field_trusted_assistants'][$form['field_trusted_assistants']['#language']]['#default_value']) {
     $idirs = explode(',', $form['field_trusted_assistants'][$form['field_trusted_assistants']['#language']]['#default_value']);
@@ -440,14 +383,14 @@ function atwork_profiles_form_user_profile_form_alter(&$form, &$form_state, $for
   $form['revision_information']['#access'] = FALSE;
 }
 
-/*
- * Afterbuild callback
+/**
+ * Afterbuild callback.
  *
- * Provide some prompts top image uploading
- */
+ * Provide some prompts top of image uploading field.
+ **/
 function _atwork_profiles_photo_afterbuild($form, &$form_state) {
 
-  // no images added
+  // No images added.
   if (!$form[$form['#language']][0]['#default_value']['fid']) {
     $form[$form['#language']]['#file_upload_title'] = t('');
   }
@@ -523,25 +466,24 @@ function atwork_profiles_form_submit($form, &$form_state) {
   }
 }
 
-/*
+/**
  * Implementation of hook_form_alter()
  *
  * When an admin makes an account expand the collapsed fieldset
- */
+ **/
 function atwork_profiles_form_alter(&$form, &$form_state, $form_id) {
-
   if ($form_id == 'user_register_form') {
     $form['#groups']['group_account_settings']->format_settings['formatter'] = 'open';
   }
 }
 
-/*
+/**
  * Implementation of hook_user_view()
  *
  * Show or hide various profile fields
  *
  * Add email and IDIR fields for convienence
- */
+ **/
 function atwork_profiles_user_view($account, $view_mode, $langcode) {
 
   if ($view_mode == 'full') {
@@ -566,55 +508,27 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
         }
       }
     }
-    // Handling messages to executive and non executive members under various circumstances
+    // Handling messages to executive and non executive members under various circumstances.
     if (!$is_assistant) {
       if ($user->uid == $account->uid) {
         // Any user with a profile that is published
         if (isset($account->field_public_profile) && $account->field_public_profile) {
           drupal_set_message('Your profile is published on @Work and is visible to your colleagues.');
-        }
-        else {
-          // Non-exec filled out but not published
+        } else {
+          // Non-exec filled out but not published.
           if (isset($account->field_public_profile) && !$account->field_public_profile && !(in_array('executive', $user->roles))) {
-            switch(true) {
-              case (isset($account->content['field_summary']) && ($account->content['field_summary'])):
-              case (isset($account->content['field_extended_biography']) && $account->content['field_extended_biography']):
-              case(isset($account->content['field_skills']) && $account->content['field_skills']):
-              case(isset($account->content['field_employee_interests']) && $account->content['field_employee_interests']):
-              case(isset($account->content['field_linkedin']) && $account->content['field_linkedin']):
-                drupal_set_message(t('Your profile is not published (visible to your colleagues on @Work). To publish your profile, select the "Edit" tab and click the "Share your profile" box at the bottom of the form. This action will allow colleagues to follow you. You can unpublish your profile at anytime by unchecking the "Share your profile" box in your profile. <p><span style="font-size:smaller"><strong >Note:</strong><em> Global Address List (GAL) information is always displayed in your profile.</em></span></p>'));
-                break;
-              default:
-                drupal_set_message(t('Your profile is not published (visible to your colleagues on @Work). To publish your profile, select the "Edit" tab and click the "Share your profile" box at the bottom of the form. This action will allow colleagues to follow you. You can unpublish your profile at anytime by unchecking the "Share your profile" box in your profile. <p><span style="font-size:smaller"><strong >Note:</strong><em> Global Address List (GAL) information is always displayed in your profile.</em></span></p>'));
-            }
-          }
-          elseif (isset($account->field_public_profile) && !$account->field_public_profile && (in_array('executive', $user->roles))){
-            // Exec profile filled out but not published
-            switch(true) {
-              case (isset($account->content['field_summary']) && ($account->content['field_summary'])):
-              case (isset($account->content['field_extended_biography']) && $account->content['field_extended_biography']):
-              case (isset($account->content['field_joined_public_service']) && $account->content['field_joined_pubic_service']):
-              case(isset($account->content['field_skills']) && $account->content['field_skills']):
-              case(isset($account->content['field_employee_interests']) && $account->content['field_employee_interests']):
-              case(isset($account->content['field_linkedin']) && $account->content['field_linkedin']):
-                drupal_set_message(t('Your profile is not published. Click the Edit tab to fill out your draft profile and, when you’re ready, make it visible to your colleagues. <strong>Note:</strong> GAL information is always displayed in your profile.'));
-                break;
-              default:
-                drupal_set_message(t('Your profile is not published. Click the Edit tab to fill out your draft profile and, when you’re ready, make it visible to your colleagues. <strong>Note:</strong> GAL information is always displayed in your profile.'));
-            }
+            drupal_set_message(t('Your profile is not published (visible to your colleagues on @Work). To publish your profile, select the "Edit" tab and click the "Share your profile" box at the bottom of the form. This action will allow colleagues to follow you. You can unpublish your profile at anytime by unchecking the "Share your profile" box in your profile. <p><span style="font-size:smaller"><strong >Note:</strong><em> Global Address List (GAL) information is always displayed in your profile.</em></span></p>'));
           }
           // Any profile with no info filled out, unpublished.
           else {
             drupal_set_message(t('Your profile is not published. Click the Edit tab to fill out your draft profile and, when you’re ready, make it visible to your colleagues. <strong>Note:</strong> GAL information is always displayed in your profile.'));
           }
         }
-      }
-      else {
+      } else {
         // Other users profiles, published.
         if (isset($account->field_public_profile) && $account->field_public_profile) {
           //drupal_set_message('This public profile is enabled');
-        }
-        else {
+        } else {
           // In this case, we hide all custom info
           $account->content['field_summary']['#access'] = FALSE;
           $account->content['field_extended_biography']['#access'] = FALSE;
@@ -627,16 +541,12 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
       }
     }
 
-   // remove title from this page
-   $title = ' ';
-    drupal_set_title(htmlspecialchars_decode($title, ENT_QUOTES));
+   // Remove title from this page.
+    drupal_set_title(htmlspecialchars_decode('', ENT_QUOTES));
 
-
-     // About me field is filled in (#access = FALSE at this point if UID for user and account do not match), and has been published
+    // About Me field is filled in (#access = FALSE at this point if UID for user and account do not match), and has been published.
     if (isset($account->content['field_summary']) && ($account->content['field_summary']) && ($account->field_public_profile))  {
       $account->content['field_summary']['#label_display'] = 'visible';
-      if (isset($account->content['field_summary']['#title'])) {
-      }
     // About me field is filled in but not published
     } elseif (isset($account->field_summary) && ($account->field_summary) && (empty($account->field_public_profile ))) {
       // Profile owner so show it
@@ -645,8 +555,8 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
         if (isset($account->content['field_summary']['#title'])) {
           $account->content['field_summary'][0]['#markup'] = '<h2 class="profile-section">' . $account->content['field_summary']['#title'] . '</h2>' . $account->content['field_summary'][0]['#markup'];
         }
-      // Not profile owner so hide field, change class for CSS
       } else {
+        // Not profile owner so hide field, change class for CSS
         $account->content['field_summary']['#access'] = TRUE;
         if (isset($account->content['field_summary']['#title'])) {
           $account->content['field_summary'][0]['#markup'] = t('<h2 class="profile-section-unfilled">' . $account->content['field_summary']['#title'] . '</h2>');
@@ -681,7 +591,7 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
       $account->content['field_summary'][0]['#markup'] = t('<h2 class="profile-section-unfilled">' . $account->content['field_summary']['#title'] );
     }
 
-// set up the rest of the custom labels, hide old labels
+    // set up the rest of the custom labels, hide old labels
     if (isset($account->content['field_extended_biography']) && $account->content['field_extended_biography'] && $account->field_public_profile) {
       if (isset($account->content['field_extended_biography']['#title'])) {
         $account->content['field_extended_biography'][0]['#markup'] = '<h2 class="profile-section">' . $account->content['field_extended_biography']['#title'] . '</h2>' . $account->content['field_extended_biography'][0]['#markup'];
@@ -873,7 +783,7 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
       );
      }
 
-     // Create mailto link for email
+     // Create mailto link for email.
     if (isset($account->content['field_display_name']) && $account->content['field_display_name']) {
       $account->content['field_display_name'][0]['#markup'] = l($account->mail, 'mailto:' . $account->mail);
     }
@@ -889,7 +799,6 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
     if (!isset($account->content['field_gal_address'])) {
       $account->content['field_gal_address'] = array(
         '#theme' => 'field',
-   //     '#weight' => 5,
         '#title' => 'Location',
         '#access' => TRUE,
         '#label_display' => 'above',
@@ -927,7 +836,6 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
     } else {
       $account->content['field_joined_public_service'] = array(
         '#theme' => 'field',
-    //    '#weight' => 9,
         '#title' => 'Joined the BC Public Service in',
         '#access' => TRUE,
         '#label_display' => 'inline',
@@ -957,7 +865,6 @@ function atwork_profiles_user_view($account, $view_mode, $langcode) {
     if(!isset($account->content['field_gal_phone_number'])) {
       $account->content['field_gal_phone_number'] = array(
         '#theme' => 'field',
-   //     '#weight' => 3,
         '#title' => 'Phone',
         '#access' => TRUE,
         '#label_display' => 'inline',
@@ -1133,10 +1040,6 @@ function atwork_profiles_form_views_exposed_form_alter(&$form, &$form_state, $fo
  */
 function atwork_profiles_block_info() {
   // This example comes from node.module.
-  $blocks['header'] = array(
-    'info' => t('Header Block'),
-    'cache' => DRUPAL_NO_CACHE,
-  );
   $blocks['bio-toggle'] = array(
     'info' =>t("Profile page bio toggle block"),
     'visibility' => BLOCK_VISIBILITY_LISTED,
@@ -1166,71 +1069,6 @@ function atwork_profiles_block_view($delta = '') {
           'scope' => 'header',
         )
       );
-    break;
-
-    case 'header':
-
-      global $user;
-      $hello = t('Hello') . ', ' . _atwork_first_name($user) . ' ' . _atwork_fa('caret-down');
-      $hello = '<span id="header-user-name">' . $hello . '</span>';
-      $user_links = array(
-        l(_atwork_fa('user') . '<span class="user-link-title">' . t('My Profile') . '</span><span class="user-link-desc">' . t('View and manage your profile') . '</span>',
-          'user/' . $user->uid,
-          array(
-            'html' => TRUE,
-          )
-        ),
-        l(_atwork_fa('users') . '<span class="user-link-title">' . t('My Groups') . '</span><span class="user-link-desc">' . t('View and manage your groups') . '</span>',
-          'my-groups',
-          array(
-            'html' => TRUE,
-          )
-        ),
-        l(_atwork_fa('envelope') . '<span class="user-link-title">' . t('My Subscriptions') . '</span><span class="user-link-desc">' . t('View and manage your subscriptions') . '</span>',
-          'user/' . $user->uid . '/subscriptions',
-          array(
-            'html' => TRUE,
-          )
-        ),
-      );
-
-      $variables = array(
-        'items' => $user_links,
-        'type' => 'ul',
-      );
-
-      $hidden_div = '<div id="header-user-dropdown">' . theme('item_list', $variables) . '</div>';
-
-      $content = <<<EOT
-<div class="header-links">
-  <a href="http://www2.gov.bc.ca/gov/content/careers-myhr" target="_blank">MYHR</a>
-  <a href="https://gww.gov.bc.ca/tools/it-support" target="_blank">IT SUPPORT</a>
-  <a href="/tools/intranets" target="_blank">MINISTRY INTRANETS</a>
-  <a href="http://www2.gov.bc.ca/" class="gov_link" target="_blank">GOV.BC.CA</a>
-</div>
-<div class="header-user">
-  $hello
-  $hidden_div
-</div>
-EOT;
-      $js = <<<EOT
-
-
-(function($) { $(document).ready(function() {
-  //$('#header-user-dropdown').hide();
-  $("#header-user-name").mousedown(function(){
-    $("#header-user-dropdown").slideDown();
-  });
-  $("#header-user-dropdown").mouseleave(function(){
-    $("#header-user-dropdown").hide();
-  });
-});})(jQuery);
-EOT;
-
-      drupal_add_js($js, 'inline');
-
-      $block['subject'] = '';
-      $block['content'] = $content;
       break;
   }
   return $block;
