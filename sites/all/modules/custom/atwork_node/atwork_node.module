@@ -527,5 +527,4 @@ function atwork_node_menu_alter(&$items) {
 
   unset($items['search/user/%menu_tail']);
   unset($items['search/user']);
-
 }
