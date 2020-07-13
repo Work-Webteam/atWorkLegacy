@@ -47,19 +47,17 @@ function atwork_search_query_alter(&$query) {
  * Remove label from search block
  */
 function atwork_search_form_alter(&$form, &$form_state, $form_id) {
+
   if ($form_id == 'search_form') {
     if (isset($form['advanced'])) {
       unset($form['advanced']['type']['#options']['page']);
       unset($form['advanced']['type']['#options']['multichoice']);
       unset($form['advanced']['type']['#options']['poll']);
-      //unset($form['advanced']['type']['#options']['section']);
-      //unset($form['advanced']['type']['#options']['section_page']);
       unset($form['advanced']['type']['#options']['truefalse']);
       unset($form['advanced']['type']['#options']['webform']);
       unset($form['advanced']['type']['#options']['lsa_application']);
       unset($form['advanced']['type']['#options']['image']);
       unset($form['advanced']['type']['#options']['lsa_pin_application']);
-      //unset($form['advanced']['type']['#options']['gallery']);
 
       if(isset($form['advanced']['type']['#options']['forum'])){
         $form['advanced']['type']['#options']['forum'] = 'Forum topic';
@@ -70,44 +68,6 @@ function atwork_search_form_alter(&$form, &$form_state, $form_id) {
       if(isset($form['advanced']['type']['#options']['question'])){
         $form['advanced']['type']['#options']['question'] = 'Q & A';
       }
-    }
-  }
-  if ($form_id == 'search_block_form') {
-    $form['actions']['submit']['#type'] = 'image_button';
-    $form['search_block_form']['#suffix'] = _atwork_fa('search', 'style="cursor: pointer;" onclick="document.getElementById(\'search-block-form\').submit()"');
-    $form['actions']['submit']['#value'] = '';
-  }
-
-
-  if ($form_id == 'custom_search_blocks_form_1') {
-
-    $form['advanced_search'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Advanced search'),
-      '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
-    );
-
-    if (isset($form['custom_search_criteria_or'])) {
-      $form['advanced_search']['custom_search_criteria_or'] = $form['custom_search_criteria_or'];
-      unset($form['custom_search_criteria_or']);
-    }
-    if (isset($form['custom_search_criteria_phrase'])) {
-      $form['advanced_search']['custom_search_criteria_phrase'] = $form['custom_search_criteria_phrase'];
-      unset($form['custom_search_criteria_phrase']);
-    }
-    if (isset($form['custom_search_criteria_negative'])) {
-      $form['advanced_search']['custom_search_criteria_negative'] = $form['custom_search_criteria_negative'];
-      unset($form['custom_search_criteria_negative']);
-    }
-    if (isset($form['custom_search_types'])) {
-      $form['advanced_search']['custom_search_types'] = $form['custom_search_types'];
-      unset($form['custom_search_types']);
-    }
-    if (isset($form['advanced_search']['custom_search_types']['#options']['c-forum'])){
-      $form['advanced_search']['custom_search_types']['#options']['c-forum'] = 'Forum topic';
-      $form['advanced_search']['custom_search_types']['#options']['c-section_page'] = 'Page';
-      $form['advanced_search']['custom_search_types']['#options']['c-question'] = 'Q & A';
     }
   }
 }
