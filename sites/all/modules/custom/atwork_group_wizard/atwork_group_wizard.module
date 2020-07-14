@@ -1,5 +1,43 @@
 <?php
 
+/*
+ * Helper function that accepts variable name and adds necessary js for qtip
+ */
+function _atwork_instructions($var_name) {
+  $atwork_instructions = variable_get($var_name,'');
+  $atwork_instructions = $atwork_instructions['value'];
+
+  $js = <<<EOT
+(function($) {
+  $(document).ready(function() {
+    $('.atwork-instuction').each(function() {
+      $(this).qtip({
+        content: {
+            attr: 'data-tooltip'
+        },
+        position: {
+          target: $(this).find('i')
+        },
+        hide: {
+          fixed: true,
+          event: 'click mouseleave',
+          target: $(this).find('i')
+        },
+        show: {
+          target: $(this).find('i')
+        }
+      });
+    });
+  });
+})(jQuery);
+EOT;
+
+  drupal_add_js($js, 'inline');
+
+  return $atwork_instructions;
+}
+
+
 /**
  * Implements hook_form_FORM_ID_alter();
  */
@@ -40,28 +78,6 @@ function atwork_group_wizard_form_section_node_form_alter(&$form, &$form_state, 
   $form['field_grp_opt_gallery_sidebar']['#attributes']['class'][] = 'field-indent-1';
 
   $form['og_menu']['#title'] = t('Enable Group Menu');
-
-  $form['field_grp_opt_block_order']['#attributes']['style'][] = 'display: none;';
-
-  // get existing data
-  $blocks = explode('|', $form['field_grp_opt_block_order'][$form['field_grp_opt_block_order']['#language']][0]['#default_value']);
-
-  $items = array();
-
-  foreach ($blocks as $block) {
-    $items[] = $block;
-  }
-
-  $variables = array(
-    'title' => t('Sidebar Block Order'),
-    'items' => $items,
-    'type' => 'ul',
-    'attributes' => array(
-      'class' => array('sortable'),
-    ),
-  );
-
-  $form['field_grp_opt_block_order']['#prefix'] = theme('item_list', $variables);
 
   //hiding block stuff for non-admins
   if (!_atwork_is_admin()) {
@@ -188,9 +204,7 @@ function atwork_group_wizard_validate(&$form, &$form_state) {
     }
     if(isset($accept_terms_error)){
       $_SESSION['messages']['error'][$j] = $accept_terms_error;
-      $j++;
     }
-    //dpm($_SESSION['messages']['error']);
   }
 
 
@@ -200,7 +214,6 @@ function atwork_group_wizard_validate(&$form, &$form_state) {
       $query = new EntityFieldQuery();
       $query->entityCondition('entity_type', 'node')
         ->entityCondition('bundle', 'section')
-        //->propertyCondition('nid', $form_state['node']->nid, '!=')
         ->propertyCondition('title', $form_state['values']['title']);
 
       $result = $query->execute();
@@ -214,7 +227,6 @@ function atwork_group_wizard_validate(&$form, &$form_state) {
         ->propertyCondition('title', $form_state['values']['title']);
 
       $result = $query->execute();
-      //dpm($result);
     }
     if (isset($result['node'])) {
       form_set_error('title', t('A group with this name already exists, please choose a different group title and click the <strong>save</strong> button'));
