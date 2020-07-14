@@ -5,41 +5,41 @@
  */
 Drupal.behaviors.fileFieldSources = {};
 Drupal.behaviors.fileFieldSources.attach = function(context, settings) {
-  $('div.filefield-sources-list:not(.filefield-sources-processed)', context).each(function() {
-    $(this).addClass('filefield-sources-processed');
-    var $fileFieldElement = $(this).parents('div.form-managed-file:first');
-    $(this).find('a').click(function() {
+  $("div.filefield-sources-list:not(.filefield-sources-processed)", context).each(function() {
+    $(this).addClass("filefield-sources-processed");
+    let $fileFieldElement = $(this).parents("div.form-managed-file:first");
+    $(this).find("a").click(function() {
       // Remove the active class.
-      $(this).parents('div.filefield-sources-list').find('a.active').removeClass('active');
+      $(this).parents("div.filefield-sources-list").find("a.active").removeClass("active");
 
       // Find the unique FileField Source class name.
-      var fileFieldSourceClass = this.className.match(/filefield-source-[0-9a-z]+/i)[0];
+      const fileFieldSourceClass = this.className.match(/filefield-source-[0-9a-z]+/i)[0];
 
       // The default upload element is a special case.
-      if ($(this).is('.filefield-source-upload')) {
-        $fileFieldElement.find('div.filefield-sources-list').siblings('.form-file, .form-submit').css('display', '');
-        $fileFieldElement.find('div.filefield-source').css('display', 'none');
+      if ($(this).is(".filefield-source-upload")) {
+        $fileFieldElement.find("div.filefield-sources-list").siblings(".form-file, .form-submit").css("display", "");
+        $fileFieldElement.find("div.filefield-source").css("display", "none");
       }
       else {
-        $fileFieldElement.find('div.filefield-sources-list').siblings('.form-file, .form-submit').css('display', 'none');
-        $fileFieldElement.find('div.filefield-source').not('div.' + fileFieldSourceClass).css('display', 'none');
-        $fileFieldElement.find('div.' + fileFieldSourceClass).css('display', '');
+        $fileFieldElement.find("div.filefield-sources-list").siblings(".form-file, .form-submit").css("display", "none");
+        $fileFieldElement.find("div.filefield-source").not("div." + fileFieldSourceClass).css("display", "none");
+        $fileFieldElement.find("div." + fileFieldSourceClass).css("display", "");
       }
 
       // Add the active class.
-      $(this).addClass('active');
+      $(this).addClass("active");
       Drupal.fileFieldSources.updateHintText($fileFieldElement.get(0));
-    }).first().triggerHandler('click');
+    }).first().triggerHandler("click");
 
     // Clipboard support.
-    $fileFieldElement.find('.filefield-source-clipboard-capture')
-      .bind('paste', Drupal.fileFieldSources.pasteEvent)
-      .bind('focus', Drupal.fileFieldSources.pasteFocus)
-      .bind('blur', Drupal.fileFieldSources.pasteBlur);
+    $fileFieldElement.find(".filefield-source-clipboard-capture")
+      .bind("paste", Drupal.fileFieldSources.pasteEvent)
+      .bind("focus", Drupal.fileFieldSources.pasteFocus)
+      .bind("blur", Drupal.fileFieldSources.pasteBlur);
   });
 
   if (context === document) {
-    $('form').submit(function() {
+    $("form").submit(function() {
       Drupal.fileFieldSources.removeHintText();
     });
   }
@@ -55,11 +55,10 @@ Drupal.fileFieldSources = {
   updateHintText: function(fileFieldElement) {
     // Add default value hint text to text fields.
     $(fileFieldElement).find('div.filefield-source').each(function() {
-      var matches = this.className.match(/filefield-source-([a-z]+)/);
-      var sourceType = matches[1];
-      var defaultText = '';
-      var textfield = $(this).find('input.form-text:first').get(0);
-      var defaultText = (Drupal.settings.fileFieldSources && Drupal.settings.fileFieldSources[sourceType]) ? Drupal.settings.fileFieldSources[sourceType].hintText : '';
+      const matches = this.className.match(/filefield-source-([a-z]+)/);
+      const sourceType = matches[1];
+      const textfield = $(this).find('input.form-text:first').get(0);
+      const defaultText = (Drupal.settings.fileFieldSources && Drupal.settings.fileFieldSources[sourceType]) ? Drupal.settings.fileFieldSources[sourceType].hintText : '';
 
       // If the field doesn't exist, just return.
       if (!textfield) {
@@ -131,8 +130,8 @@ Drupal.fileFieldSources = {
   },
 
   pasteEvent: function(e) {
-    var clipboardData = null;
-    var targetElement = this;
+    let clipboardData = null;
+    let targetElement = this;
 
     // Chrome.
     if (window.event && window.event.clipboardData && window.event.clipboardData.items) {
@@ -152,21 +151,24 @@ Drupal.fileFieldSources = {
       return false;
     }
 
-    var items = clipboardData.items;
-    var types = clipboardData.types;
-    var filename = targetElement.firstChild ? targetElement.firstChild.textContent : '';
+    const items = clipboardData.items;
+    const types = clipboardData.types;
+    const filename = targetElement.firstChild ? targetElement.firstChild.textContent : '';
 
     // Handle files and image content directly in the clipboard.
-    var fileFound = false;
-    for (var n = 0; n < items.length; n++) {
+    let fileFound = false;
+    let fileBlob;
+    let fileReader;
+    let n;
+    for (n = 0; n < items.length; n += 1) {
       if (items[n] && items[n].kind === 'file') {
-        var fileBlob = items[n].getAsFile();
-        var fileReader = new FileReader();
+        fileBlob = items[n].getAsFile();
+        fileReader = new FileReader();
         // Define events to fire after the file is read into memory.
-        fileReader.onload = function() {
+        fileReader.onload = function () {
           Drupal.fileFieldSources.pasteSubmit(targetElement, filename, this.result);
         };
-        fileReader.onerror = function() {
+        fileReader.onerror = function () {
           Drupal.fileFieldSources.pasteError(targetElement, Drupal.t('Error reading file from clipboard.'));
         };
         // Read in the file to fire the above events.
@@ -174,10 +176,6 @@ Drupal.fileFieldSources = {
         fileFound = true;
         break;
       }
-      // Handle files that a copy/pasted as a file reference.
-      //if (types[n] && types[n] === 'Files') {
-      //  TODO: Figure out how to capture copy/paste of entire files from desktop.
-      //}
     }
     if (!fileFound) {
       Drupal.fileFieldSources.pasteError(targetElement, Drupal.t('No file in clipboard.'));
@@ -190,8 +188,8 @@ Drupal.fileFieldSources = {
    */
   waitForPaste: function(targetElement) {
     if (targetElement.children && targetElement.children.length > 0) {
-      var filename = targetElement.firstChild ? targetElement.firstChild.textContent : '';
-      var tagFound = false;
+      const filename = targetElement.firstChild ? targetElement.firstChild.textContent : '';
+      let tagFound = false;
       $(targetElement).find('img[src^="data:image"]').each(function(n, element) {
         Drupal.fileFieldSources.pasteSubmit(targetElement, filename, element.src);
         tagFound = true;
@@ -212,12 +210,12 @@ Drupal.fileFieldSources = {
    * Set an error on the paste field temporarily then clear it.
    */
   pasteError: function(domElement, errorMessage) {
-    var $description = $(domElement).parents('.filefield-source-clipboard:first').find('.description');
+    const $description = $(domElement).parents('.filefield-source-clipboard:first').find('.description');
     if (!$description.data('originalDescription')) {
       $description.data('originalDescription', $description.html())
     }
     $description.html(errorMessage);
-    var errorTimeout = setTimeout(function() {
+    const errorTimeout = setTimeout(function() {
       $description.html($description.data('originalDescription'));
       $(this).unbind('click.pasteError');
     }, 3000);
@@ -232,7 +230,7 @@ Drupal.fileFieldSources = {
    * After retreiving a clipboard, post the results to the server.
    */
   pasteSubmit: function(targetElement, filename, contents) {
-    var $wrapper = $(targetElement).parents('.filefield-source-clipboard');
+    const $wrapper = $(targetElement).parents('.filefield-source-clipboard');
     $wrapper.find('.filefield-source-clipboard-filename').val(filename);
     $wrapper.find('.filefield-source-clipboard-contents').val(contents);
     $wrapper.find('input.form-submit').trigger('mousedown');
