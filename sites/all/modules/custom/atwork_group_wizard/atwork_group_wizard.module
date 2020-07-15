@@ -110,8 +110,6 @@ function atwork_group_wizard_form_section_node_form_alter(&$form, &$form_state, 
   } else {
     $form['field_grp_opt_qa']['#attributes']['data-tooltip'] = array(_atwork_instructions('atwork_instructions_qa'));
   }
-  $form['field_grp_opt_qa']['#attributes']['class'][] = 'atwork-instuction';
-  $form['field_grp_opt_qa'][$form['field_grp_opt_qa']['#language']]['#title'] .= ' ' . _atwork_fa('info-circle');
 
   // Task Management is no longer part of groups, lets hide it
   $form['field_grp_opt_issue']['#access'] = FALSE;
@@ -134,14 +132,6 @@ function atwork_group_wizard_form_section_node_form_alter(&$form, &$form_state, 
 
   // File Management is no longer part of groups, lets hide it.
   $form['field_grp_opt_file']['#access'] = FALSE;
-
-  if(isset($form['field_grp_opt_poll']['#attributes']['data-tooltip'])) {
-      $form['field_grp_opt_poll']['#attributes']['data-tooltip'][] .= _atwork_instructions('atwork_instructions_poll');
-  } else {
-    $form['field_grp_opt_poll']['#attributes']['data-tooltip'] = array(_atwork_instructions('atwork_instructions_poll'));
-  }
-  $form['field_grp_opt_poll']['#attributes']['class'][] = 'atwork-instuction';
-  $form['field_grp_opt_poll'][$form['field_grp_opt_poll']['#language']]['#title'] .= ' ' . _atwork_fa('info-circle');
 
   if(isset($form['field_grp_opt_news']['#attributes']['data-tooltip'])) {
       $form['field_grp_opt_news']['#attributes']['data-tooltip'][] .= _atwork_instructions('atwork_instructions_article');
