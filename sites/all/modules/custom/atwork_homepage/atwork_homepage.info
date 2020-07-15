@@ -1,0 +1,4 @@
+name = Atwork Homepage
+description = Code related to homepage blocks etc.
+package = Atwork
+core = 7.x

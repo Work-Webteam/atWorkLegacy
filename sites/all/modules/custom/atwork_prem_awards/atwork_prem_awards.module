@@ -569,6 +569,54 @@ function atwork_prem_awards_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'webform_client_form_' . PA_REG_FORM_NID && (arg(0)==='node' && is_numeric(arg(1)) && arg(1)== PA_REG_FORM_NID)) {
     $form['#submit'][] = 'atwork_prem_awards_registration_submit';
   }
+
+
+  if ($form_id == 'webform_client_form_33248') {
+    // Hide the second field here - we will print it out under the submit button so it doesn't show up unexpectedly.
+    $form['submitted']['post_text']['#access'] = false;
+
+    // check if user voted
+    global $user;
+
+    $voted = db_select('webform_submissions', 'd')
+      ->fields('d', array('uid'))
+      ->condition('d.nid', 33248)
+      ->condition('d.uid', $user->uid)
+      ->execute()
+      ->fetchAll();
+
+    if ($voted) {
+      $form['actions']['submit']['#access'] = FALSE;
+      drupal_set_message('Thanks for voting!');
+    }
+
+    /*
+     * Uncomment this when voting closes
+     */
+    //$form['actions']['submit']['#access'] = FALSE;
+
+
+    //// This is used for the current years emergent leaders - code above is for last years.
+    //foreach ($form['submitted']['finalists']['#options'] as $key => $data) {
+    //  list($name, $video_id, $thumb_path, $caption) = explode('&&&', $data);
+    //  $form['submitted']['finalists']['#options'][$key] = '<div class="video-finalist video-'. $key .'"><h3>'. $name .'</h3><a href="//www.youtube.com/embed/'. $video_id .'?wmode=transparent&amp;fs=1&amp;width=640&amp;height=385&amp;hl=en_US1&amp;iframe=true&amp;rel=0&amp;showinfo=0" class="colorbox-load" title="' . $caption . '" rel="Click to see ' . $name . '\'s video"><img src="/sites/default/files/webform/premieres_awards/2017/'. $thumb_path .'" alt = "Click me" /></a></div>';
+    //}
+  }
+}
+
+/**
+ * Want to append some text to the webform
+ * implements hook_node_view
+ */
+function atwork_webform_node_view_alter(&$build){
+  if(isset($build['body']['#object']->nid) && $build['body']['#object']->nid == '33248'){
+    //Need to grab text from second field in this webform and plug it in as the suffix here.
+    if(isset($build['body']['#object']->webform['components'][2]['value']) && $build['body']['#object']->webform['components'][2]['value']){
+      $suffix_text = $build['body']['#object']->webform['components'][2]['value'];
+      // Put it in the suffix, Including an html note if anyone finds this and it breaks anything
+      $build['webform']['#suffix'] = '<!-- This text is pulled from the webforms second field. If it should not be showing up then access it in atwork_prem_awards.module --> ' . $suffix_text . '<br />';
+    }
+  }
 }
 
 function atwork_prem_awards_application_validate($form, &$form_state) {
@@ -1115,6 +1163,9 @@ function atwork_prem_awards_block_info() {
       'info' => t("Premiere's Awards Navigation"),
       'cache' => DRUPAL_NO_CACHE,
   );
+  $blocks['randomizer_block'] = array(
+    'info' => t("Emerging Leaders Randomizer"),
+  );
  return $blocks;
 }
 
@@ -1139,6 +1190,13 @@ function atwork_prem_awards_block_view($delta = ''){
         '#markup' => _atwork_prem_awards_nav_block(),
       );
       break;
+      // For the emerging leaders block.
+    case ('randomizer_block'):
+      drupal_add_js(drupal_get_path('module', 'atwork_prem_awards').'/js/js_atwork_webform_ajax.js');
+      drupal_add_js(drupal_get_path('module', 'atwork_prem_awards').'/js/atwork_webform.js');
+      $block['subject'] = '';
+      $block['content'] = atwork_prem_awards_block_content();
+      break;
   }
   return $block;
 }
@@ -1154,7 +1212,193 @@ function premiers_awards_registration_information(){
 
   // Add form update js and library
   drupal_add_library('system', 'ui.dialog');
-  drupal_add_js(drupal_get_path('module', 'atwork_prem_awards') . '/' . 'js_prem_awards_form.js');
+  drupal_add_js(drupal_get_path('module', 'atwork_prem_awards') . '/js/' . 'js_prem_awards_form.js');
   drupal_add_js(array('atwork_prem_awards' => array('user' => $current_user->name, 'uid' => $current_user->uid)), 'setting');
   return $output;
+}
+
+
+function atwork_prem_awards_block_content(){
+  // Our current webform
+  $nid = 33248;
+  //Pull out the names of the nominees
+  $choices_array = array();
+  //Get the form to match names to selection
+  $webform = node_load($nid);
+
+  // Get names of nominees
+  $webform_question_text = $webform->webform['components'][1]['extra']['options'];
+  if(preg_match_all('/\|(.*?)</s',$webform_question_text,$nominees)){
+    $choices_array = $nominees[1];
+  }
+  // Sync the choices array to the key values in vote_count (by default choices array is 0 based)
+  $choices_array = array_combine(range(1, count($choices_array)), array_values($choices_array));
+  // Now set up all fields for each participant
+  foreach($choices_array as $key=>$value){
+
+    $choices_array[$key] = array(
+      'name'=> $value,
+      'total_score' => 0,
+      'first_place' => 0,
+      'second_place' => 0,
+      'third_place' => 0,
+      'total_votes' => 0,
+      'id' => $key
+    );
+  }
+  // Now lets make a table of all contestants and their vote numbers
+  // We need to get all of our votes cast per contestant key
+  $votes = db_select('webform_submitted_data', 's')
+    ->fields('s', array('no'))
+    ->fields('s', array('data'))
+    ->condition('s.nid', $nid)
+    ->condition('s.no', '0', '!=')
+    ->execute()
+    ->fetchAll();
+  // Count votes by key option for each nominee.
+  foreach($votes as $key=>$value){
+    // TODO: Sort data here into "Total score, First, Second, Third, Total votes"
+    if(isset($value->data) && isset($choices_array[$value->data])){
+      if(isset($value->no)){
+        switch(true)
+        {
+
+          case $value->no == 1 : {
+            $choices_array[$value->data]['total_score'] += 3;
+            $choices_array[$value->data]['first_place'] += 1;
+            $choices_array[$value->data]['total_votes'] += 1;
+            break;
+          }
+          case $value->no == 2 : {
+            $choices_array[$value->data]['total_score'] += 2;
+            $choices_array[$value->data]['second_place'] += 1;
+            $choices_array[$value->data]['total_votes'] += 1;
+            break;
+          }
+          case $value->no == 3 : {
+            $choices_array[$value->data]['total_score'] += 1;
+            $choices_array[$value->data]['third_place'] += 1;
+            $choices_array[$value->data]['total_votes'] += 1;
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  // Sort this by the vote numbers
+  usort($choices_array, function($a, $b) {
+    return $b['total_score'] - $a['total_score'];
+  });
+
+  // Now make  table of emerging leaders and vote counts
+  $output = '<div id="count-block">';
+  $output .= '<table id="leaders-list" style="width:100%; border:1px solid black;" >';
+  $output .= '<tr style="border:1px solid black; background-color:#E0EEEE;"><td style="border:1px solid black !important;"><h2>Emerging Leader</h2></td><td style="border:1px solid black !important;"><h2>Total Score</h2></td><td style="border:1px solid black !important;"><h2>First Place Votes</h2></td><td style="border:1px solid black !important;"><h2>Second Place Votes</h2></td><td style="border:1px solid black !important;"><h2>Third Place Votes</h2></td><td style="border:1px solid black !important;"><h2>Total Votes</h2></td></tr>';
+  // To color stripes
+  $i = 1;
+  foreach($choices_array as $key=>$value){
+    // pick our background color
+    if($i & 1 ){
+      $background = '#FFFFFF';
+    } else {
+      $background = '#E0EEEE';
+    }
+    $output .= '<tr style="border:1px solid black; background-color:' . $background . ';"><td style="border:1px solid black !important;">' . $value['name'] . '</td><td style="border:1px solid black !important; background-color:' . $background . ';">' . $choices_array[$key]['total_score'] . '</td><td style="border:1px solid black !important; background-color:' . $background . ';">' . $value['first_place'] . '</td><td style="border:1px solid black !important; background-color:' . $background . ';">' . $value['second_place'] . '</td><td style="border:1px solid black !important; background-color:' . $background . ';">' . $value['third_place'] . '</td><td style="border:1px solid black !important; background-color:' . $background . ';">' . $value['total_votes'] . '</td></tr>';
+
+    $i++;
+  }
+  $output .= '</table>';
+  // Find all users who voted:
+  $voted = db_select('webform_submissions', 'd')
+    ->fields('d', array('uid'))
+    ->condition('d.nid', $nid)
+    ->execute()
+    ->fetchAll();
+
+  // Add the table
+  $output .= '<div id="randomizer_block">';
+  // This button will be used to fire an Ajax function to choose a winner.
+  $output .= '<button type="submit" id="randomize">Choose Winner</button></div>';
+  $output .= '<input type="button" value="Show Voters List" id="contestant-button" />';
+  $output .= '<table id="voter_list" >';
+  $output .= '<tr style="border:1px solid black !important; background-color:#E0EEEE;"><th><h2>Voters:  </h2></th></tr>';
+
+  // To color stripes
+  $i = 1;
+  // Create voters table
+  foreach($voted as $key => $value){
+    // pick our background color
+    if($i & 1 ){
+      $background = '#FFFFFF';
+    } else {
+      $background = '#E0EEEE';
+    }
+    $voter = user_load($value->uid);
+    $output .= '<tr style="border:1px solid black !important; background-color:' . $background . ';"><td><a href="/user/' . $voter->uid . '">' .  $voter->field_gal_first_name['und'][0]['safe_value'] . ' ' . $voter->field_gal_last_name['und'][0]['safe_value'] . '</a></td></tr>';
+    $i++;
+  }
+  $output .= '</table>';
+  return $output;
+}
+
+/**
+ * Implements hook_menu();
+ */
+function atwork_webform_menu() {
+  // this one has an access callback which was handy when it was a menu tab
+
+  $items['random'] = array(
+    'page callback' => 'atwork_webform_ajax_callback', // Render HTML.
+    'page arguments' => array(1),
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+    'delivery callback' => 'atwork_webform_ajax',  // Magic goes here.
+  );
+
+  return $items;
+}
+
+function atwork_webform_ajax_callback($var){
+  // Find all users who voted:
+  $voted = db_select('webform_submissions', 'd')
+    ->fields('d', array('uid'))
+    ->condition('d.nid', 33248)
+    ->execute()
+    ->fetchAll();
+
+  // Get total # of voters
+  $total = count($voted);
+
+  // Choose a winner:
+  $winning_number = mt_rand(0,$total-1);
+
+  // Winner is:
+  $winner = $voted[$winning_number];
+  $winning_user = user_load($winner->uid);
+
+  // Return winners info
+  $winner_name = $winning_user->field_gal_first_name['und'][0]['safe_value'] . " " . $winning_user->field_gal_last_name['und'][0]['safe_value'];
+
+  if(isset($winning_user->field_image['und'][0]['uri'] )&& $winning_user->field_image['und'][0]['uri'] ){
+    $picture_url = $winning_user->field_image['und'][0]['uri'];
+  } else {
+    global $base_url;
+    global $base_path;
+    $picture_url = $base_path . 'default_images/default_profile220x220b_0.gif';
+  }
+
+  $picture_location = str_replace("public://", "", $picture_url);
+
+  $winner_picture = '/sites/default/files/' . $picture_location;
+
+  $return_string = '<div id="winner_profile"><h1>The Winner is....</p><img src="' . $winner_picture . '" style="width:160px;height:200px;"><h2><a href="/user/' . $winning_user->uid . '">' . $winner_name .'</a></h2></div>';
+
+  // Return image and winner name to js
+  echo json_encode($return_string);
+
+  // Stops themeing layer from interacting with this
+  die();
+
+  return;
 }

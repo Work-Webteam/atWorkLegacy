@@ -1,0 +1,210 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ */
+
+/*
+ * Implementation of hook_theme_registry_alter()
+ *
+ * Register our atwork_replace_username() theme function
+ */
+function atwork_user_theme_registry_alter(&$theme_registry) {
+  $theme_registry['username']['theme path'] = drupal_get_path('module', 'atwork_user');
+  $theme_registry['username']['function'] = 'atwork_replace_username';
+}
+
+/*
+ * Implementation of theme_username()
+ *
+ * We want to use displaynames and not idirs/login names for content created on the site.
+ * This used to be used in the presence module which no longer is part of the repo.
+ */
+function atwork_replace_username($variables) {
+  // Relevant variables to see if user is an exec and if they have published their profile.
+  $profile_enabled = FALSE;
+  $executive = FALSE;
+
+  // drupal core truncates name
+  if (isset($variables['name_raw']) && $variables['name_raw']) {
+    $variables['name'] = check_plain($variables['name_raw']);
+  }
+
+  if (isset($variables['new_window']) && $variables['new_window']) {
+    $variables['link_options']['attributes']['onclick'] = 'window.open(this.href); return false;';
+  }
+
+  if ($variables['uid']) {
+    $user = user_load($variables['uid']);
+    if (!$user) {
+      return $variables['name'];
+    }
+
+
+    if (isset($user->roles[10])) {
+      $executive = TRUE;
+    }
+
+    $items = field_get_items('user', $user, 'field_display_name', $user->language);
+    $public_profile = field_get_items('user', $user, 'field_public_profile', $user->language);
+
+    if (isset($public_profile[0]['value']) && $public_profile[0]['value']) {
+      $profile_enabled = TRUE;
+    }
+
+    if (isset($items[0]['value'])) {
+      $variables['name'] = $items[0]['value'];
+    }
+
+    if (isset($variables['link_path']) && (( $profile_enabled) || user_access('administer users'))) {
+      if (isset($variables['email_link']) && $variables['email_link']) {
+        $variables['link_path'] = 'mailto:' . $user->mail;
+        $variables['link_options']['absolute'] = TRUE;
+      }
+      // We have a link path, so we should generate a link using l().
+      // Additional classes may be added as array elements like
+      // $variables['link_options']['attributes']['class'][] = 'myclass';
+      $output = l($variables['name'] . $variables['extra'], $variables['link_path'], $variables['link_options']);
+    }
+    elseif ((($executive && $profile_enabled) || user_access('administer users'))) {
+      $output = l($variables['name'] . $variables['extra'], 'user/' . $variables['uid'], $variables['link_options']);
+    }
+    else {
+      // Modules may have added important attributes so they must be included
+      // in the output. Additional classes may be added as array elements like
+      // $variables['attributes_array']['class'][] = 'myclass';
+      $output = '<span' . drupal_attributes($variables['attributes_array']) . '>' . $variables['name'] . $variables['extra'] . '</span>';
+    }
+  }
+  else {
+    return $variables['name'];
+  }
+
+  return $output;
+}
+
+/*
+ * Helper function to see if a user is an admin
+ */
+function _atwork_is_admin($user = 0) {
+  if (!$user) {
+    global $user;
+  }
+
+  if (in_array('administrator', $user->roles)) return TRUE;
+  if (in_array('manager', $user->roles)) return TRUE;
+  if (in_array('editor', $user->roles)) return TRUE;
+
+  return FALSE;
+
+}
+
+/*
+ * Helper function that provides the field_display_name if it exists
+ */
+function _atwork_display_name($user) {
+  if (!isset($user) || !$user || !isset($user->uid) || !$user->uid) {
+    return variable_get('anonymous', t('Employee News'));
+  }
+
+  if (!isset($user->field_display_name) && $user->uid) {
+    $user = user_load($user->uid);
+  }
+
+  $display_name = field_get_items('user', $user, 'field_display_name');
+
+  if (isset($display_name[0]['value'])) {
+    return $display_name[0]['value'];
+  }
+
+  return $user->name;
+}
+
+/*
+ * Helper function that provides the field_display_name if it exists
+ */
+function _atwork_full_name($user) {
+  if (!isset($user->field_gal_first_name) && !isset($user->field_gal_last_name) && $user->uid) {
+    $user = user_load($user->uid);
+  }
+
+  if (!$user) {
+    return;
+  }
+
+  $first_name = field_get_items('user', $user, 'field_gal_first_name');
+  $last_name = field_get_items('user', $user, 'field_gal_last_name');
+
+  if (isset($first_name[0]['safe_value']) && isset($last_name[0]['safe_value'])) {
+    return $first_name[0]['safe_value'] . ' ' . $last_name[0]['safe_value'];
+  }
+
+  return $user->name;
+}
+
+/*
+ * Helper function that provides the first if it exists
+ */
+function _atwork_first_name($user) {
+  if (!isset($user->field_gal_first_name) && $user->uid) {
+    $user = user_load($user->uid);
+  }
+
+  if (!$user) {
+    return;
+  }
+
+  $first_name = field_get_items('user', $user, 'field_gal_first_name');
+
+  if (isset($first_name[0]['safe_value'])) {
+    return $first_name[0]['safe_value'];
+  }
+
+  if (!isset($user->name)){
+    return;
+  }
+
+  return $user->name;
+}
+
+function atwork_user_form_user_profile_form_alter(&$form, &$form_state, $form_id){
+  if (variable_get('atwork_auth_disable_gal_fields', 1) && variable_get('atwork_auth_sync_enabled', 0) && !user_access('administer users')) {
+    // disable fields
+    // although not specified anywhere we definitely want to remove password fields.
+    $form['account']['pass']['#access'] = FALSE;
+    $form['account']['name']['#access'] = FALSE;
+    $form['account']['current_pass_required_values']['#access'] = FALSE;
+    $form['account']['current_pass']['#access'] = FALSE;
+    $form['account']['mail']['#disabled'] = TRUE;
+    $form['account']['mail']['#description'] = FALSE;
+
+    // go through our fields and disable and add message
+    if ($gal_fields = list_extract_allowed_values(variable_get('atwork_auth_gal_fieldmap', ''), 'list_text', FALSE)) {
+      foreach ($gal_fields as $f => $g) {
+        $form[$f]['#disabled'] = TRUE;
+
+        if (variable_get('atwork_auth_disable_gal_fields_message', '')) {
+          if (variable_get('atwork_auth_disable_gal_fields_fieldgroup', '')) {
+            if (isset($form['#group_children'][$f]) ? $form['#group_children'][$f] == variable_get('atwork_auth_disable_gal_fields_fieldgroup', '') : FALSE) {
+              continue;
+            }
+          }
+
+          $form[$f]['#description'] = variable_get('atwork_auth_disable_gal_fields_message', '');
+        }
+      }
+    }
+
+    if (variable_get('atwork_auth_min_code_field', '')) {
+      $form[variable_get('atwork_auth_min_code_field', '')]['#disabled'] = TRUE;
+    }
+
+    // now apply message to group
+    if (variable_get('atwork_auth_disable_gal_fields_message', '') && variable_get('atwork_auth_disable_gal_fields_fieldgroup', '')) {
+      $form['#groups'][variable_get('atwork_auth_disable_gal_fields_fieldgroup', '')]
+        ->format_settings['instance_settings']['description'] =
+        variable_get('atwork_auth_disable_gal_fields_message', '');
+    }
+  }
+}

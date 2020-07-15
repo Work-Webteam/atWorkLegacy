@@ -1,8 +1,0 @@
-<?php
-
-/**
- * @file
- * Code for the atwork_lsa_pins feature.
- */
-
-include_once 'atwork_lsa_pins.features.inc';

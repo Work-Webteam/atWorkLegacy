@@ -9,8 +9,8 @@
  * Implements hook_views_query_substitutions().
  */
 function argfilters_views_query_substitutions() {
-  // TODO: Chache this thing, so we don't have reload the view if it is already
-  // loaded. Alternatively, make sure that Views does this alreday (which is
+  // TODO: Cache this thing, so we don't have reload the view if it is already
+  // loaded. Alternatively, make sure that Views does this already (which is
   // likely).
   $view = views_get_current_view();
 

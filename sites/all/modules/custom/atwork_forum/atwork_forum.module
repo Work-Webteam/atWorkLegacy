@@ -5,7 +5,6 @@
  *
  */
 function atwork_forum_preprocess_node(&$variables){
-  //dpm($variables);
   if (isset($variables['post_edited'])) {
     $variables['post_edited'] = '';
   }
@@ -61,7 +60,6 @@ EOT;
   }
 }
 
-
 /*
  * Implementation of hook_preprocess_forums()
  *
@@ -85,7 +83,6 @@ function atwork_forum_preprocess_forum_list(&$variables) {
   }
 }
 
-
 /*
  * Implementation of hook_form_alter()
  *
@@ -99,12 +96,3 @@ function atwork_forum_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
-/*
- * Implementation of hook_node_view()
- *
- * Add OBO/Firm to price
- * Add expiry date
- *
- */
-function atwork_forum_node_view($node, $view_mode, $langcode) {
-}

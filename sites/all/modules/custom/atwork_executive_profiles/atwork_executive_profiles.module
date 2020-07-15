@@ -10,18 +10,9 @@ function atwork_executive_profiles_form_user_profile_form_alter(&$form, &$form_s
     // if not an exec hide public profile field
     $account = $form['#user'];
     global $user;
-
     if (!in_array('executive', $account->roles) && !user_access('administer users')) {
-      //dpm($form);
-      //field_group_hide_field_groups($form, array('group_profile'));
-      //dpm($aThingToCheck);
-      //$form['field_public_profile']['#access'] = FALSE;
-      //$form['atwork_required_questions']['#access'] = FALSE;
-      //$form['notes']['#access'] = FALSE;
-      //$form['field_summary']['#access'] = FALSE;
       $form['notify']['#access'] = FALSE;
     }
-
     if (!in_array('executive', $account->roles) && (!in_array('administrator', $user->roles) && !in_array('editor', $user->roles))) {
       $form['field_trusted_assistants']['#access'] = FALSE;
     }
@@ -44,18 +35,13 @@ function atwork_executive_profiles_atwork_profiles_user_edit_access_alter(&$retu
  *
  * Prevent the viewing of all user pages except executives - Despite permissions!
  */
-
-
 function atwork_executive_profiles_atwork_profiles_user_view_access_alter(&$return, $account) {
   global $user;
 
   if (is_object($account)) {
     if ($user->uid != $account->uid && !in_array('executive', $account->roles) && !user_access('administer users')) {
-
-
       // Going to return the profile either way - just need to hide the custom fields
       $return = TRUE;
-
     }
     if (in_array('executive', $account->roles) && in_array('executive', $user->roles)) {
       $return = TRUE;
