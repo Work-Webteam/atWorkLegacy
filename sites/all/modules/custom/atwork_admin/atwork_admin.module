@@ -73,7 +73,6 @@ function _atwork_hide_exec_tags(&$form) {
       }
     }
   }
-  return;
 }
 
 /**
