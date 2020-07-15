@@ -34,6 +34,7 @@ function atwork_subscriptions_form_alter(&$form, &$form_state, $form_id) {
     }
 
     array_unshift($form['#submit'], '_atwork_subscriptions_submit');
+    // This allows one click to get to the subscriber board - but also breaks group menu.
     //$form['wrapper']['#type'] = 'container';
     $form['wrapper']['footer']['#description'] = '';
 
