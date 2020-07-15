@@ -322,7 +322,6 @@ function atwork_group_views_post_render(&$view, &$output, &$cache) {
       );
 
       $admin_links = theme('links', $variables);
-
       // collapse or not these admin links?
       if (strpos($admin_links, 'class="active"')) {
         $collapsed = '';
@@ -332,15 +331,14 @@ function atwork_group_views_post_render(&$view, &$output, &$cache) {
       }
 
       $add_content_links = _atwork_group_add_content_links($group);
-
       $output .= '<ul style="margin: 0;">';
 
       // add admin links if user is this group's admin
       if (in_array(3, $og_roles) || _atwork_is_admin()) {
 
       $output .= <<<EOT
-<fieldset style="margin-top: 8px; margin-bottom: 0;" class="no-outline collapsible $collapsed">
-  <legend><span class="fieldset-legend"><a class="fieldset-title" href="#"><span class="fieldset-legend-prefix element-invisible">Show</span>Settings</a><span class="summary"></span></span></legend>
+<fieldset style="margin-top: 8px; margin-bottom: 0;" class="no-outline collapsible $collapsed ">
+  <legend><span class="fieldset-legend">Settings</a></span></legend>
   <div class="fieldset-wrapper" style="padding-left: 10px;">
     $admin_links
   </div>

@@ -34,9 +34,8 @@ function atwork_subscriptions_form_alter(&$form, &$form_state, $form_id) {
     }
 
     array_unshift($form['#submit'], '_atwork_subscriptions_submit');
-    $form['wrapper']['#type'] = 'container';
+    //$form['wrapper']['#type'] = 'container';
     $form['wrapper']['footer']['#description'] = '';
-    //dpm($form);
 
     $js = <<<EOT
 jQuery(document).ready(function($) {
