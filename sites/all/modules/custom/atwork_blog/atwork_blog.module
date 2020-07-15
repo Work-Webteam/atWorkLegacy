@@ -12,9 +12,6 @@ function atwork_blog_views_pre_view(&$view, &$display_id, &$args) {
       if ($view->args[0] == 'health-bent') {
         $view->args[0] = 'Health-bent';
       }
-      elseif ($view->args[0] == 'Health-bent') {
-        //$view->args[0] = 'Health-bent';
-      }
       else {
         $view->args[0] = str_replace('-', ' ', $view->args);
       }
@@ -28,109 +25,14 @@ function atwork_blog_views_pre_view(&$view, &$display_id, &$args) {
       }
     }
   }
-  if ($view->name == 'blogs' && $view->current_display == 'block_1') {
-
-  }
-
-  if ($view->name == 'blogs' && $view->current_display == 'group_blogs') {
-    //dpm($args);
-  }
-}
-/*
- * Implementation of hook_views_pre_render
- *
- * Want to hide group content creation button for users who do not have proper permissions
- *
- */
-function atwork_blog_views_pre_render(&$view) {
-  if ($view->name == 'blogs' && $view->current_display == 'group_blogs') {
-    global $user;
-
-    global $user;
-    // This is the associated group id
-    $gid = $view -> args[0];
-    // Load the node and find user's roles
-    $group = node_load($gid);
-    $roles = og_get_user_roles('node', $gid, $user->uid);
-
-    // Hide the button link from anyone who does not have the requisite role to create this type of content
-    switch (TRUE) {
-      case (in_array("Blogger", $roles)):
-      case (in_array("administrator", $roles)):
-      case (user_access('administer users')):
-        break;
-      default:
-        drupal_add_css('.create-blog {visibility: hidden;}', $option['type'] = 'inline');
-        break;
-    }
-
-    // FOR ATWORK CLASSIC - REDIRECT BLOG PAGE TO OUR BACKGROUND PAGE
-      //dpm($view);
-    /*
-    global $theme;
-    if($theme == 'atwork'  && !_atwork_is_admin()){
-      //dpm($theme);
-      $path = current_path();
-      $path_array = explode('/', $path);
-      //dpm($path_array);
-      if(isset($path_array[1]) && is_numeric($path_array[1])){
-        switch($path_array[1]){
-          // Climate change
-          case 10096:
-            drupal_goto('/blogs/climate-action-blog');
-            break;
-          // Yearning for Learning
-          case 12388:
-            drupal_goto('/blogs/yearning-for-learning-blog');
-            break;
-          // Beyond the Soapbox
-          case 10097:
-            drupal_goto('blogs/beyond-the-soapbox-blog');
-            break;
-          // Health-bent
-          case 10095:
-            drupal_goto('/blogs/health-bent-blog');
-            break;
-          // Citizen Engagement and Social Media Corner
-          case 2186:
-            break;
-          // ARRC
-          case 2637:
-            drupal_goto('blogs/arrc-blog');
-            break;
-          // Anything else ignore for now
-          default:
-            //drupal_goto('blogs');
-            break;
-        }
-      }
-    }*/
-  }
-}
-
-/*
- * Implementation of hook_form_FORMID_form_alter()
- *
- * User's shouldn't see the blog profile field unless they've been given
- * the blogger role
- *
- */
-function atwork_blog_form_user_profile_form_alter(&$form, &$form_state, $form_id) {
-  // hide blogger profile from non-bloggers
-  $user = $form['#user'];
-  if (!in_array('blogger', $user->roles)) {
-    //field_group_hide_field_groups($form, array('group_blog_profile'));
-  }
 }
 
 /**
  * Implements hook_form_alter();
  */
 function atwork_blog_form_blog_node_form_alter(&$form, &$form_state) {
-  global $user;
-  //dpm($form);
 
-
+  // Handle fields that should not be accessible to regular users.
   if(!_atwork_is_admin()){
     $form['menu']['#access'] = FALSE;
     $form['og_group_ref']['#access'] = FALSE;
@@ -153,7 +55,6 @@ function atwork_blog_form_blog_node_form_alter(&$form, &$form_state) {
  *
  */
 function atwork_blog_node_view($node, $view_mode, $langcode) {
-  global $user;
 
   if ($node->type != 'blog' || $view_mode != 'full') {
     return;
@@ -233,4 +134,3 @@ function atwork_blog_node_view($node, $view_mode, $langcode) {
     );
   }
 }
-

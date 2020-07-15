@@ -385,6 +385,26 @@ function atwork_group_views_pre_render(&$view) {
      $_SESSION['messages']['status'][$i] = "The member was removed";
     }
   }
+
+  // Want to hide group content creation button for users who do not have proper permissions.
+  if ($view->name == 'blogs' && $view->current_display == 'group_blogs') {
+    global $user;
+    // This is the associated group id
+    $gid = $view -> args[0];
+    // Find user's roles.
+    $roles = og_get_user_roles('node', $gid, $user->uid);
+
+    // Hide the button link from anyone who does not have the requisite role to create this type of content
+    switch (TRUE) {
+      case (in_array("Blogger", $roles)):
+      case (in_array("administrator", $roles)):
+      case (user_access('administer users')):
+        break;
+      default:
+        drupal_add_css('.create-blog {visibility: hidden;}', $option['type'] = 'inline');
+        break;
+    }
+  }
 }
 
 /**
