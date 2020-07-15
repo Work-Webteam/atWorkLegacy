@@ -11605,4 +11605,36 @@ li.TabbedPanelsTab {
   margin-top: 10px;
 }
 
+/* line 5233, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
+#map-article {
+  position: relative;
+}
+
+/* line 5235, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
+#map-article #map-side {
+  width: 100%;
+  height: 2140px;
+  z-index: 1;
+  background-color: #ECECEC;
+}
+
+/* line 5241, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
+#map-article #text-side {
+  position: relative;
+  right: 0;
+  width: 350px;
+  padding: 10px;
+  z-index: 10;
+  background-color: #CAC7C7;
+}
+
+/* line 5249, ../../../../../Users/cdeakin/Sites/Atwork-Local/public/d7-atwork/sites/all/themes/atwork_zen/sass/atwork_zen.styles.scss */
+#map-article #item-1, #map-article #item-2, #map-article #item-3, #map-article #item-4, #map-article #item-5, #map-article #item-6, #map-article #item-7, #map-article #item-8 {
+  display: block;
+  width: 100%;
+  height: 250px;
+  margin-bottom: 10px;
+  border: solid 1px white;
+}
+
 /*# sourceMappingURL=atwork_zen.styles.css.map */

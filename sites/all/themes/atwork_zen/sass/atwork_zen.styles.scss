@@ -5227,3 +5227,30 @@ li.TabbedPanelsTab {
    margin-top: 10px;
 }
 
+
+//PECSF Campaign Process
+
+#map-article {
+  position: relative;
+  #map-side {
+    width:100%;
+    height:2140px;
+    z-index: 1;
+    background-color: #ECECEC;
+  }
+  #text-side {
+    position: relative;
+    right:0;
+    width: 350px;
+    padding:10px;
+    z-index: 10;
+    background-color: #CAC7C7;
+  }
+  #item-1, #item-2,#item-3, #item-4, #item-5, #item-6, #item-7, #item-8 {
+    display:block;
+    width: 100%;
+    height: 250px;
+    margin-bottom:10px;
+    border: solid 1px white;
+  }
+}
