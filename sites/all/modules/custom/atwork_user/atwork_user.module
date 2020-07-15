@@ -168,3 +168,43 @@ function _atwork_first_name($user) {
   return $user->name;
 }
 
+function atwork_user_form_user_profile_form_alter(&$form, &$form_state, $form_id){
+  if (variable_get('atwork_auth_disable_gal_fields', 1) && variable_get('atwork_auth_sync_enabled', 0) && !user_access('administer users')) {
+    // disable fields
+    // although not specified anywhere we definitely want to remove password fields.
+    $form['account']['pass']['#access'] = FALSE;
+    $form['account']['name']['#access'] = FALSE;
+    $form['account']['current_pass_required_values']['#access'] = FALSE;
+    $form['account']['current_pass']['#access'] = FALSE;
+    $form['account']['mail']['#disabled'] = TRUE;
+    $form['account']['mail']['#description'] = FALSE;
+
+    // go through our fields and disable and add message
+    if ($gal_fields = list_extract_allowed_values(variable_get('atwork_auth_gal_fieldmap', ''), 'list_text', FALSE)) {
+      foreach ($gal_fields as $f => $g) {
+        $form[$f]['#disabled'] = TRUE;
+
+        if (variable_get('atwork_auth_disable_gal_fields_message', '')) {
+          if (variable_get('atwork_auth_disable_gal_fields_fieldgroup', '')) {
+            if (isset($form['#group_children'][$f]) ? $form['#group_children'][$f] == variable_get('atwork_auth_disable_gal_fields_fieldgroup', '') : FALSE) {
+              continue;
+            }
+          }
+
+          $form[$f]['#description'] = variable_get('atwork_auth_disable_gal_fields_message', '');
+        }
+      }
+    }
+
+    if (variable_get('atwork_auth_min_code_field', '')) {
+      $form[variable_get('atwork_auth_min_code_field', '')]['#disabled'] = TRUE;
+    }
+
+    // now apply message to group
+    if (variable_get('atwork_auth_disable_gal_fields_message', '') && variable_get('atwork_auth_disable_gal_fields_fieldgroup', '')) {
+      $form['#groups'][variable_get('atwork_auth_disable_gal_fields_fieldgroup', '')]
+        ->format_settings['instance_settings']['description'] =
+        variable_get('atwork_auth_disable_gal_fields_message', '');
+    }
+  }
+}
