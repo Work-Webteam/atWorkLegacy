@@ -6,14 +6,9 @@
  */
 
 function atwork_breadcrumbs_node_view($node, $view_mode, $langcode) {
-  //global $user;
-  //if ($user->uid == 56664){
-  //  dpm($node);
-  //}
 
   if ($node->type == 'blog' && $view_mode == 'full') {
 
-    global $theme;
     $breadcrumb = array();
     $breadcrumb[] = l(t('Home'), '<front>');
       if(isset($node->og_group_ref) && $node->og_group_ref){
@@ -30,7 +25,6 @@ function atwork_breadcrumbs_node_view($node, $view_mode, $langcode) {
         $path_alias = drupal_get_path_alias('node/' . $node->nid);
         $breadcrumb[] = l($node->title, $path_alias);
       }
-    //dpm($breadcrumb );
     drupal_set_breadcrumb($breadcrumb);
 
   }
@@ -214,7 +208,6 @@ function atwork_breadcrumbs_node_view($node, $view_mode, $langcode) {
     drupal_set_breadcrumb($breadcrumb);
   }
 
-
   if($node->nid == '244') {
     $breadcrumb = array();
     $breadcrumb[] = l(t('Home'), '<front>');
@@ -290,7 +283,6 @@ function atwork_breadcrumbs_node_view($node, $view_mode, $langcode) {
     drupal_set_breadcrumb($breadcrumb);
   }
 
-
   if($node->nid == '14044') {
     $breadcrumb = array();
     $breadcrumb[] = l(t('Home'), '<front>');
@@ -307,7 +299,6 @@ function atwork_breadcrumbs_node_view($node, $view_mode, $langcode) {
     $breadcrumb[] = l(t('LSA Contacts'), 'career/long-service-awards/long_service_awards_contacts');
     drupal_set_breadcrumb($breadcrumb);
   }
-
 
   if($node->nid == '13978') {
     $breadcrumb = array();
@@ -367,7 +358,6 @@ function atwork_breadcrumbs_node_view($node, $view_mode, $langcode) {
     drupal_set_breadcrumb($breadcrumb);
   }
 
-
   if($node->nid == '13956'){
     $breadcrumb = array();
     $breadcrumb[] = l(t('Home'), '<front>');
@@ -416,12 +406,6 @@ function atwork_breadcrumbs_node_view($node, $view_mode, $langcode) {
     $breadcrumb[] = l(t('Staff Appreciation'), 'staff-appreciation');
     drupal_set_breadcrumb($breadcrumb);
   }
-  //global $user;
-  //if($user->uid == 56664) {
-  //  dpm($node);
-  //  dpm($view_mode);
-  //}
-
 }
 
 
@@ -496,7 +480,6 @@ function atwork_breadcrumbs_views_post_render(&$view, &$output, &$cache){
     $breadcrumb[] = l('News', 'news');
     drupal_set_breadcrumb($breadcrumb);
   }
-
 
   // Group Calendar view
   if($view->name == 'group_calendar' && $view->current_display == 'page_1'){
@@ -633,12 +616,6 @@ function atwork_breadcrumbs_views_post_render(&$view, &$output, &$cache){
     }
     drupal_set_breadcrumb($breadcrumb);
   }
-
-
-  //global $user;
-  //if ($user->uid == 56664){
-  //  dpm($view);
-  //}
 }
 
 
@@ -686,7 +663,7 @@ function atwork_group_form_og_menu_edit_item_form_alter(&$form, &$form_state, $f
     $breadcrumb[] = l($group_object->title, 'node/' . $gid);
     $breadcrumb[] = l(t('Menu'), 'group/node/' . $gid . '/admin/menus');
     // Set the breadcrumb.
-    drupal_set_breadcrumb($breadcrumb);//$group_type, $gid); // hide overall admin page, array(l(t('Group'), "$group_type/$gid/group")));
+    drupal_set_breadcrumb($breadcrumb);
   }
 }
 
@@ -748,8 +725,6 @@ function atwork_breadcrumbs_form_question_node_form_alter(&$form, &$form_state, 
     drupal_set_title($group->title);
   }
 }
-
-
 
 /**
  * Implements hook_form_alter();
@@ -905,14 +880,7 @@ function atwork_breadcrumbs_form_alter(&$form, &$form_state, $form_id) {
     // A quick note about required fields
     $form['title']['#prefix'] = '<div style="text-align:right;" id="instruction_for_required">(A <strong><span style="color:#c00">*</span></strong> denotes a required field.)</div><br />';
   }
-
- //if($user->uid == 56664){
- //   dpm($form);
- //   dpm($form_id);
- // }
 }
-
-
 
 /**
  * Implements hook_form_FORM_ID_alter();
@@ -928,7 +896,6 @@ function atwork_breadcrumbs_form_blog_node_form_alter(&$form, &$form_state) {
     }
     $group_object = node_load($gid);
     $group_title = $group_object->title;
-    //dpm($group_title);
     drupal_set_title(t($group_title));
     $breadcrumb = array();
     $breadcrumb[] = l(t('Home'), '<front>');
@@ -941,59 +908,6 @@ function atwork_breadcrumbs_form_blog_node_form_alter(&$form, &$form_state) {
     }
     drupal_set_breadcrumb($breadcrumb);
     $form['title']['#prefix'] = '<div style="text-align:right;" id="instruction_for_required">(A <strong><span style="color:#c00">*</span></strong> denotes a required field.)</div><br />';
-    //dpm($form);
-  }
-}
-
-/******************* BLOCK LEVEL **********************************************/
-
-
-/**
- * Implements hook_block_view_alter();
- */
-function atwork_breadcrumbs_block_view_alter(&$data, $block) {
-  global $user;
-  global $theme;
-
-  if (!isset($user->theme)) {
-    return;
-  }
-
-  //if($user->uid == 56664){
-  //  dpm($block);
-  //}
-
-  if ($theme == 'atwork'){
-    // THIS IS FOR THE PREVIOUS VERSION OF @WORK - ATWORK CLASSIC
-    switch ($block->delta){
-      case 'blogs-block_2':
-        //dpm($block);
-        drupal_set_title('');
-        $breadcrumb = array();
-        $breadcrumb[] = l('Home', '<front>');
-        $breadcrumb[] = l('Blogs', 'blogs');
-        drupal_set_breadcrumb($breadcrumb);
-        $block->title = '';
-        return $block;
-        break;
-      case 'videos-block_3':
-        drupal_set_title('');
-        $breadcrumb=array();
-        $breadcrumb[] = l('Home', '<front>');
-        $breadcrumb[] = l ('Videos', 'videos');
-        drupal_set_breadcrumb($breadcrumb);
-        $block->title = '';
-        return $block;
-        break;
-      case 'polls-block_3':
-        drupal_set_title('');
-        $breadcrumb[] = l('Home', '<front');
-        $breadcrumb[] = l('Polls', 'polls');
-        drupal_set_breadcrumb($breadcrumb);
-        $block->title = '';
-        return $block;
-        break;
-    }
   }
 }
 
