@@ -49,8 +49,10 @@ EOD;
 
     if (variable_get('atwork_auth_sync_enabled', 0)) {
       $latest_wdogs = _atwork_auth_get_recent_cron_runs();
+      //dpm($latest_wdogs);
 
       if ($latest_wdogs) {
+        $status = TRUE;
 
         $watchdogs = array(
           '#type' => 'fieldset',

@@ -1,13 +1,13 @@
 <?php
 
 /**
-* Implementation of hook_install()
-*/
+ * Implementation of hook_install()
+ */
 function atwork_auth_install() {
   // Make sure this module gets processed second (eg. when hooks are invoked) to make we
   // populate the user object before other modules get processed.
   db_query("UPDATE {system} SET weight = -98 WHERE name = 'atwork_auth'");
-  
+
   // Set up our variables
   variable_set('atwork_auth_watchdog_new', 1);
   variable_set('atwork_auth_watchdog_rename', 1);
@@ -27,8 +27,8 @@ function atwork_auth_install() {
 }
 
 /**
-* Implementation of hook_uninstall()
-*/
+ * Implementation of hook_uninstall()
+ */
 function atwork_auth_uninstall() {
   // delete our variables
   variable_del('atwork_auth_watchdog_new');
@@ -50,7 +50,7 @@ function atwork_auth_uninstall() {
 
 /*
  * Implements hook_schema()
- * 
+ *
  * Make our table that maps users (uid) to their GUID
  */
 function atwork_auth_schema() {
@@ -89,6 +89,6 @@ function atwork_auth_schema() {
       ),
     ),
   );
-  
+
   return $schema;
 }
