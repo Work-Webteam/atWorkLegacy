@@ -77,7 +77,6 @@ function atwork_auth_init() {
   $form_state['uid'] = $uid['uid'];
   user_login_submit(array(), $form_state);
   drupal_goto('<front>');
-  dpm($form_state);
 }
 
 
