@@ -6,7 +6,6 @@
  *
  */
 function atwork_auth_init() {
-  global $user;
 
  // rss.xml bypasses siteminder so can abort now
   if($_GET['q'] == 'rss.xml') return;
@@ -31,15 +30,14 @@ function atwork_auth_init() {
     $sm_user = strtolower($_SERVER['HTTP_SM_USER']);
   }
   $sm_guid = $_SERVER['HTTP_SMGOV_USERGUID'];
-  // user is already logged in, no use loading them
-  if ($user->name && $user->name == $sm_user ) {
-    return;
-  }
+
   // abort for special IDIRs.
   // these could be search crawlers who shouldn't be logged in.
   if (_atwork_auth_excluded_idirs($sm_user)) {
     return;
   }
+
+  global $user;
 
   // support masquerading, don't proceed if a user is currently masquerading.
   if (isset($user->name) && isset($user->sid)) {
@@ -73,12 +71,15 @@ function atwork_auth_init() {
     return;
   }
 
+  // user is already logged in, no use loading them
+  if (isset($user->name) ? $user->name == $sm_user : FALSE) {
+    return;
+  }
+
   // Log user in.
   $form_state['uid'] = $uid['uid'];
   user_login_submit(array(), $form_state);
-  drupal_goto('<front>');
 }
-
 
 /**
  * Implementation of hook_menu
