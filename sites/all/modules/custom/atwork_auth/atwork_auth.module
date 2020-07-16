@@ -6,28 +6,14 @@
  *
  */
 function atwork_auth_init() {
-  if (isset($_SERVER['HTTP_SM_USER']) ? $_SERVER['HTTP_SM_USER'] == 'twerdal' : FALSE) {
-    //$_SERVER['HTTP_SMGOV_USEREMAIL'] = 'some@email.com';
-    //dpm(list_extract_allowed_values(variable_get('atwork_auth_gal_fieldmap', ''), 'list_text', FALSE));
-    //$_SERVER['HTTP_SMUSER'] = 'IDIR\TWERDAL';
-    //$_SERVER['HTTP_SMGOV_USERGUID'] = 'abcd';
-    //dpm($_SERVER);
-    //$atwork_ldap = new atwork_ldap;
-    // $result = $atwork_ldap->query('person', 'mail', 'Thayne.Werdal@gov.bc.ca', array(), '(whenchanged>=20130611070000.0Z)');
-    //dpm($result);
+  global $user;
 
-    //if ($gal_fields = list_extract_allowed_values(variable_get('atwork_auth_gal_fieldmap', ''), 'list_text', FALSE)) {
-    //  foreach ($gal_fields as $f => $g) {
-    //     dpm($f);
-    //  }
-    //  }
-
-  } else {
-    //dpm('false');
-    //dpm($_SERVER['HTTP_SMUSER']);
+  // user is already logged in, no use loading them
+  if (isset($user->uid)) {
+    return;
   }
 
-  // rss.xml bypasses siteminder so can abort now
+ // rss.xml bypasses siteminder so can abort now
   if($_GET['q'] == 'rss.xml') return;
 
   // this should only happen if site isn't accessed through reverse proxy
@@ -51,15 +37,13 @@ function atwork_auth_init() {
   }
   $sm_guid = $_SERVER['HTTP_SMGOV_USERGUID'];
 
-  // abort for special IDIRs
-  // these could be search crawlers who shouldn't be logged in
+  // abort for special IDIRs.
+  // these could be search crawlers who shouldn't be logged in.
   if (_atwork_auth_excluded_idirs($sm_user)) {
     return;
   }
 
-  global $user;
-
-  // support masquerading, don't proceed if a user is currently masquerading
+  // support masquerading, don't proceed if a user is currently masquerading.
   if (isset($user->name) && isset($user->sid)) {
     if (module_exists('masquerade') && $sm_user != $user->name) {
       $true_uid = db_select('masquerade', 'm')
@@ -83,64 +67,18 @@ function atwork_auth_init() {
     ->execute()
     ->fetchAssoc();
 
-  // if no guid was found there is no account yet
+  // if no guid was found there is no account yet.
   if (empty($uid)) {
     // this is now all handled by idir script - we should never update/remove or add a user here.
     drupal_set_message(t("Something has gone wrong, please try again or contact the @Work team"), 'error');
     drupal_exit();
     return;
-    // check if $sm_user is available as $user->name
-    $name = _atwork_auth_get_unique_name($sm_user);
-
-    // if a different name is returned we will need to rename the
-    // account using $sm_user so it will be freed up
-    if ($sm_user != $name) {
-      //_atwork_auth_rename_user($sm_user, $name);
-    }
-    //$uid = _atwork_auth_create_new_user($sm_user);
-    return;
-  }
-
-  // at this point we have a valid uid
-  // load it but don't replace $user (yet)
-  $external_account = user_load($uid['uid']);
-
-  // if our HTTP_SMUSER doesn't match our existing drupal
-  // $user->name then the HTTP_SMUSER must have changed on us.
-  if ($sm_user != $external_account->name) {
-    // check to see if this new IDIR is being used
-    $new_name = _atwork_auth_get_unique_name($sm_user);
-
-    if ($new_name != $sm_user) {
-      // if this IDIR is being used we will need to first rename the older account using our re-used IDIR
-      //_atwork_auth_rename_user($sm_user, $new_name);
-    }
-
-    // now rename the newer account
-    //_atwork_auth_rename_user($external_account->name, $sm_user);
-  }
-
-  // almost done, now lets check for field changes
-  if (variable_get('atwork_auth_rename_fields', 1)) {
-    // for performance sake only save user if a field is changed
-    $save = FALSE;
-    // use an alter hook so other modules can update fields as well
-    drupal_alter('atwork_auth_update_fields_on_access', $external_account, $save);
-
-    // We no longer want to save here - this is all handled by an external script. Save should always be "FALSE"
-    $save = FALSE;
-    if ($save) {
-      //user_save($external_account);
-    }
-  }
-
-  // user is already logged in, no use loading them
-  if (isset($user->name) ? $user->name == $sm_user : FALSE) {
-    return;
   }
 
   // Log user in.
   $form_state['uid'] = $uid['uid'];
+  drupal_goto('<front>');
+  dpm('logged in');
   user_login_submit(array(), $form_state);
 }
 
@@ -150,126 +88,12 @@ function atwork_auth_init() {
  *
  */
 
-function atwork_auth_node_view($node, $view_mode, $langcode){
-  // rss.xml bypasses siteminder so can abort now
-  if($_GET['q'] == 'rss.xml') return;
-
-  // If this uri appears valid
-  if (preg_match( '/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/', $_SERVER['REQUEST_URI'])) {
-    return;
-  }
-
-  global $user;
-
-  // if user is authenticated
-  if (user_is_logged_in()) {
-    return;
-  }
-
-  //If user has a name
-  if(isset($user->name)) {
-    return;
-  }
-
-  // If this is drush
-  if(drupal_is_cli()) {
-    return;
-  }
-
-  // Bail if this is a script kickstarting the cron (should be caught under regex above).
-  if ($_SERVER['REQUEST_URI'] == '/cron.php?cron_key=Qmx36j_9vhpusKB9e41a6_ICDpy0erjiqnlkRjxbpXk') {
-    return;
-  }
-
-
-  // this should only happen if site isn't accessed through reverse proxy
-  if (!isset($_SERVER['HTTP_SMUSER']) || !isset($_SERVER['HTTP_SMGOV_USERGUID'])) {
-    // If not valid uri, and user is anonymous, and user has no set name, boot them out to home page for siteminder to catch
-    if(!file_valid_uri($_SERVER['REQUEST_URI']) && !isset($user->name)){
-      if (user_is_anonymous()) {
-        if (preg_match('/\&\.jpg|\&.png|\&.class|\&.gif|\&\.jpeg|\&.fcc|\&.scc|\&.sfcc|\&.ccc|\&.ntc/', $_SERVER['REQUEST_URI'])) {
-          drupal_access_denied();
-          drupal_exit();
-          return;
-        }
-      }
-    }
-  }
-  return;
-}
-
-/**
- * Implementation of hook_views_post_build
- * Used to restrict access through malformed uri's
- *
- */
-
-function atwork_auth_views_post_build(&$view){
-  // rss.xml bypasses siteminder so can abort now
-  if($_GET['q'] == 'rss.xml') return;
-
-  // If this uri appears valid
-  if (preg_match( '/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/', $_SERVER['REQUEST_URI'])) {
-    return;
-  }
-
-  global $user;
-
-  // if user is authenticated
-  if (user_is_logged_in()) {
-    return;
-  }
-
-  //If user has a name
-  if(isset($user->name)) {
-    return;
-  }
-
-  // If this is drush
-  if(drupal_is_cli()) {
-    return;
-  }
-
-  // Bail if this is a script kickstarting the cron (should be caught under regex above).
-  if ($_SERVER['REQUEST_URI'] == '/cron.php?cron_key=Qmx36j_9vhpusKB9e41a6_ICDpy0erjiqnlkRjxbpXk') {
-    return;
-  }
-
-
-  // this should only happen if site isn't accessed through reverse proxy
-  if(!isset($_SERVER['HTTP_SMUSER']) || !isset($_SERVER['HTTP_SMGOV_USERGUID'])) {
-    // If not valid uri, and user is anonymous, and user has no set name, boot them out to home page for siteminder to catch
-    if(!file_valid_uri($_SERVER['REQUEST_URI']) && !isset($user->name)){
-      if (user_is_anonymous()) {
-        if (preg_match('/\&\.jpg|\&.png|\&.class|\&.gif|\&\.jpeg|\&.fcc|\&.scc|\&.sfcc|\&.ccc|\&.ntc/', $_SERVER['REQUEST_URI'])) {
-          drupal_access_denied();
-          drupal_exit();
-          return;
-        }
-      }
-    }
-  }
-  return;
-}
-
 
 /**
  * Implementation of hook_menu
  *
  */
 function atwork_auth_menu() {
-  if (module_exists('atwork_ldap')) {
-    $links['get-missing-guids'] =  array(
-      'title' => t('Get Missing GUIDs') ,
-      'description' => t('Probably only needed when setting up the site') ,
-      'page callback' => 'atwork_auth_get_missing_guids',
-      'access arguments' => array('access administration pages'),
-      'file' => 'atwork_auth.pages.inc',
-      'file path' => drupal_get_path('module', 'atwork_auth'),
-      'type' => MENU_CALLBACK,
-    );
-  }
-
   $links['admin/config/atwork/auth'] =  array(
     'title' => t('Authorization') ,
     'description' => t('Manage Authorization Settings') ,
@@ -284,118 +108,6 @@ function atwork_auth_menu() {
   return $links;
 }
 
-/**
- * Helper function for retreiving GAL fields
- *
- * @param object $user
- *    A user object which should contain $user->mail unless $query_field and $query_value is provided
- * @param string $query_field
- *    An optional field to use as an LDAP query in place of $user->mail
- * @param string $query_value
- *    An optional value to go with $query_field
- * @param array $additional_fields
- *    Any additional fields to retreive. will be returned in $return['additional_fields']
- *
- * @return array Any GAL fields that have data. The format is that of a text field, IE: $field_name['und'][0]['value']
- */
-function _atwork_auth_add_gal_fields($user, $query_field = 'mail', $query_value = NULL, $additional_fields = array(), $additional_filters = '') {
-  drupal_set_message("Atwork no longer updates profiles from GAL directly. If something is wrong with your profile, please contact <a href='https://77000.gov.bc.ca/'>77000</a>", "error");
-  return;
-  if ($query_field == 'mail' && (!isset($user->mail) && !$query_value)) {
-    return;
-  }
-  if ($query_field == 'mail' && (!$user->mail && !$query_value)) {
-    return;
-  }
-
-  if (!$query_value) {
-    $query_value = $user->mail;
-  }
-
-  $edit = array();
-
-  $gal_fields = list_extract_allowed_values(variable_get('atwork_auth_gal_fieldmap', ''), 'list_text', FALSE);
-
-  $query_fields = array_values($gal_fields);
-  foreach($additional_fields as $additional_field) {
-    $query_fields[] = $additional_field;
-  }
-
-  // ldap query
-  $atwork_ldap = new atwork_ldap;
-
-  $result = $atwork_ldap->query('person', $query_field, $query_value, $query_fields, $additional_filters);
-
-  foreach ($gal_fields as $field_name => $gal_field) {
-    if (isset($result[0][$gal_field][0])) {
-      $field_language = field_language('user', $user, $field_name);
-      $edit[$field_name] = array(
-        $field_language => array(
-          0 => array(
-            'value' => $result[0][$gal_field][0],
-            'format' => NULL,
-            'safe_value' => $result[0][$gal_field][0],
-          )
-        )
-      );
-    }
-  }
-
-  // also add additional fields if they were asked for
-  foreach ($additional_fields as $additional_field) {
-    if (isset($result[0][$additional_field][0])) {
-      $edit['additional_fields'][$additional_field] = $result[0][$additional_field][0];
-    }
-  }
-
-  return $edit;
-}
-
-/*
- * Helper function that does the creating of a new account
- */
-function _atwork_auth_create_new_user($name) {
-  global $user;
-  return;
-  // this is the proper function for external authentication
-  // but for some reason doesn't require - or even take into account the
-  // user mail. We therefore need to add the mail after and re-save the user
-  user_external_login_register($name, 'atwork_auth');
-  $user->mail = $_SERVER['HTTP_SMGOV_USEREMAIL'];
-
-  // a good time to let other modules interect with the user before
-  // this all-important first save!
-  // or even just as a notice that it occurred.
-  drupal_alter('atwork_auth_new_user', $user);
-  user_save($user);
-
-  // Now save the GUID - the unique to every person government ID
-  // the update shouldn't affect a row but it was good to have during devel
-  // and good to have for potential future changes
-  $num_updated = db_update('atwork_auth')
-    ->fields(array(
-      'guid' => $_SERVER['HTTP_SMGOV_USERGUID'],
-    ))
-    ->condition('uid', $user->uid)
-    ->execute();
-
-  // if nothing was updated the uid did not exist in our table so add it new
-  if (!$num_updated) {
-    db_insert('atwork_auth')
-      ->fields(array(
-        'uid' => $user->uid,
-        'guid' => $_SERVER['HTTP_SMGOV_USERGUID'],
-        'timestamp' => REQUEST_TIME,
-      ))
-      ->execute();
-  }
-
-  return array(
-    'uid' => $user->uid,
-    'guid' => $_SERVER['HTTP_SMGOV_USERGUID'],
-  );
-}
-
 /*
  * Check if idir is on a list of exclusions
  * These could be robots/crawlers
@@ -403,313 +115,30 @@ function _atwork_auth_create_new_user($name) {
  *
  */
 function _atwork_auth_excluded_idirs($idir) {
-  if (!$idir) return TRUE;
+  if (!$idir) {
+    return TRUE;
+  }
 
   if (variable_get('atwork_auth_excluded_idirs', '')) {
     $string = str_replace(array("\r\n", "\n", "\r"), ',', trim(variable_get('atwork_auth_excluded_idirs', '')));
     $string = str_replace(' ', '', $string);
 
     $excluded_idirs = explode(',', $string);
-    if (in_array(strtolower($idir), $excluded_idirs)) return TRUE;
-  }
-}
-
-/*
- * Gets a list of watchdog messages entered by atwork_auth during
- * the syncing of GAL and $user fields
- */
-function _atwork_auth_get_recent_cron_runs() {
-  if (variable_get('atwork_auth_cron_watchdog_num', 10)) {
-    $limit = variable_get('atwork_auth_cron_watchdog_num', 10);
-  }
-  else {
-    $limit = 20;
-  }
-
-  $output = array();
-  $wdogs = db_select('watchdog', 'w')
-    ->condition('type', 'atwork_auth_sync_summary')
-    ->fields('w', array('wid', 'message', 'variables', 'timestamp'))
-    ->range(0,$limit)
-    ->orderBy('timestamp', 'DESC')
-    ->execute();
-
-  while($record = $wdogs->fetchAssoc()) {
-    $output[] = $record;
-  }
-
-  return $output;
-}
-
-/*
- * Helper function that returns an available Drupal username
- *
- * @param string $base_name
- *    The name we will check if it exists
- *
- * @return string A unique username appended with var "atwork_auth_prefix" and an integer
- */
-function _atwork_auth_get_unique_name($base_name) {
-  $i = 1;
-  $free_name = FALSE;
-
-  // procedure to find a $user->name that isn't being used
-  while (!$free_name) {
-    $name = $base_name . '_' . variable_get('atwork_auth_prefix', 'old') . $i;
-    $exists = db_select('users', 'u')
-      ->condition('name', $name)
-      ->fields('u', array('uid'))
-      ->execute()
-      ->fetchAssoc();
-
-    if (!$exists) {
-      return $name;
+    if (in_array(strtolower($idir), $excluded_idirs)) {
+      return TRUE;
     }
-
-    $i++;
   }
-
-
-  return $base_name;
+  return FALSE;
 }
 
 /**
- * Helper function for renaming an existing account
- * All this function does is invoke hook_atwork_auth_rename_user($user, $new_name)
- *
- * @param string $name
- *    The name of the existing account to be re-named
- * @param string $new_name
- *    The replacement to $name
- */
-function _atwork_auth_rename_user($name, $new_name) {
-  if ($user = user_load_by_name($name)) {
-    //module_invoke_all('atwork_auth_rename_user', $user, $new_name);
-  }
-}
-
-
-/*
- * Helper function that updates the timestamp field in the atwork_auth table
- *
- * @param integer $uid
- *    The uid of the user to show as updated
- * @param integer $timestamp
- *    Optionally add a timestamp or use REQUEST_TIME
- */
-function _atwork_auth_user_updated($uid, $timestamp = '') {
-  if (!$timestamp) {
-    $timestamp = REQUEST_TIME;
-  }
-  db_update('atwork_auth')
-    ->fields(array(
-      'timestamp' => $timestamp,
-    ))
-    ->condition('uid', $uid)
-    ->execute();
-}
-
-/*
- * Implementation of hook_atwork_auth_new_user_alter()
- */
-function atwork_auth_atwork_auth_new_user_alter(&$user) {
-  return;
-  if (variable_get('atwork_auth_gal_fieldmap', '') && variable_get('atwork_auth_sync_enabled', 0) && variable_get('atwork_auth_gal_on_creation', 0)) {
-    if ($gal_fields = _atwork_auth_add_gal_fields($user)) {
-      foreach ($gal_fields as $field_name => $field_value) {
-        $user->$field_name = $field_value;
-      }
-    }
-  }
-}
-
-/*
- * Implementation of hook_atwork_auth_rename_user()
- */
-function atwork_auth_atwork_auth_rename_user($user, $new_name) {
-  return;
-  // once we got a replacement save the user
-  $random = str_replace(array(' ', '.'), array('', ''), microtime());
-
-  $original_name = $user->name;
-  $user->name = $new_name;
-  $user->mail = $random . '@old-user.com';
-  user_save($user);
-
-  // update authmap with the change
-  db_update('authmap')
-    ->fields(array(
-      'authname' => $new_name,
-    ))
-    ->condition('uid', $user->uid)
-    ->execute();
-
-  if (variable_get('atwork_auth_watchdog_rename', 1)) {
-    $message = t('User !name (UID: !uid) was renamed to !new_name with email !email',
-      array(
-        '!name' =>  $original_name,
-        '!uid' => $user->uid,
-        '!new_name' => $new_name,
-        '!email' => $user->mail,
-      )
-    );
-
-    watchdog('atwork_auth', $message);
-  }
-}
-
-
-/*
- * Implementation of hook_atwork_auth_update_fields_on_access_alter()
- *
- * When a user accesses the site and any specified fields have changed we will
- * update and save the user.
- *
- */
-function atwork_auth_atwork_auth_update_fields_on_access_alter(&$user, &$save) {
-  // our user has the right GUID, now lets see if they have the right
-  // email, display name and ministry code. Save the user of not.
-  return;
-  // mail
-  if ($user->mail != $_SERVER['HTTP_SMGOV_USEREMAIL']) {
-    $user->mail = $_SERVER['HTTP_SMGOV_USEREMAIL'];
-    $save = TRUE;
-  }
-
-  // display name
-  if ($display_name_field = variable_get('atwork_auth_display_name_field', '')) {
-    $field_language = field_language('user', $user, $display_name_field);
-    if (!isset($user->{$display_name_field}[$field_language][0]['value']) || $user->{$display_name_field}[$field_language][0]['value'] != $_SERVER['HTTP_SMGOV_USERDISPLAYNAME']) {
-      $user->{$display_name_field}[$field_language][0]['value'] = $_SERVER['HTTP_SMGOV_USERDISPLAYNAME'];
-      $save = TRUE;
-    }
-  }
-
-  // ministry code
-  if ($min_code_field = variable_get('atwork_auth_min_code_field', '')) {
-    $field_language = field_language('user', $user, $min_code_field);
-    if(preg_match("/ ([A-Z]+):EX/", $_SERVER['HTTP_SMGOV_USERDISPLAYNAME'], $matches)) {
-      $min_code = $matches[1];
-    }
-    else {
-      $min_code = '';
-    }
-    if (isset($user->{$min_code_field}[$field_language][0]['value']) && $user->{$min_code_field}[$field_language][0]['value'] != $min_code) {
-      $user->{$min_code_field}[$field_language][0]['value'] = $min_code;
-      $save = TRUE;
-    }
-  }
-}
-
-/*
- * Implements hook_cron()
- */
-function atwork_auth_cron() {
-  if (!_atwork_production_environment()) {
-    return;
-  }
-  return;
-  if (variable_get('atwork_auth_sync_enabled', 0)) {
-    $max_execution = ini_get('max_execution_time');
-    require_once(drupal_get_path('module', 'atwork_auth') . '/atwork_auth.cron.inc');
-    // do the actual sync
-    if (variable_get('atwork_auth_gal_fieldmap', '')) {
-      _atwork_auth_sync();
-    }
-    // if the sync is recording detailed info in watchdog we might want to trim it once in awhile
-    if (variable_get('atwork_auth_cron_watchdog', 0) && variable_get('atwork_auth_cron_watchdog_num', 10)) {
-      _atwork_auth_trim_watchdog();
-    }
-    // like we were never here...
-    ini_set('max_execution_time', $max_execution);
-    //set_time_limit(60);
-  }
-}
-
-/*
- * Implements hook_form_alter()
- *
- * Hide or disable all the GAL fields
- */
-function atwork_auth_form_user_profile_form_alter(&$form, &$form_state, $form_id) {
-  // whether or not we disable fields we should update them with the latest
-  // GAL info or this could be really annoying to users
-  //
-  // We don't bother with name or email as these should(could) be changed on user access
-  //
-  // send our LDAP query using GUID as filter as we aren't too worried about performance here
-  if (variable_get('atwork_auth_sync_on_user_edit', 0)) {
-    $user = $form['#user'];
-    if (isset($user->guid) && $gal_result = _atwork_auth_add_gal_fields($user, 'bcgovguid', $user->guid)) {
-      foreach ($gal_result as $field_name => $field_value) {
-        $field_language = field_language('user', $user, $field_name);
-        $form[$field_name][$field_language][0]['value']['#default_value'] =
-          $field_value[$field_language][0]['value'];
-      }
-    }
-  }
-
-  if (variable_get('atwork_auth_disable_gal_fields', 1) && variable_get('atwork_auth_sync_enabled', 0) && !user_access('administer users')) {
-    // disable fields
-    //dpm($form);
-    // although not precified anywhere we definitely want to remove password fields
-    $form['account']['pass']['#access'] = FALSE;
-    $form['account']['name']['#access'] = FALSE;
-    $form['account']['current_pass_required_values']['#access'] = FALSE;
-    $form['account']['current_pass']['#access'] = FALSE;
-    $form['account']['mail']['#disabled'] = TRUE;
-    $form['account']['mail']['#description'] = FALSE;
-
-    // go through our fields and disable and add message
-    if ($gal_fields = list_extract_allowed_values(variable_get('atwork_auth_gal_fieldmap', ''), 'list_text', FALSE)) {
-      foreach ($gal_fields as $f => $g) {
-        $form[$f]['#disabled'] = TRUE;
-
-        if (variable_get('atwork_auth_disable_gal_fields_message', '')) {
-          if (variable_get('atwork_auth_disable_gal_fields_fieldgroup', '')) {
-            if (isset($form['#group_children'][$f]) ? $form['#group_children'][$f] == variable_get('atwork_auth_disable_gal_fields_fieldgroup', '') : FALSE) {
-              continue;
-            }
-          }
-
-          $form[$f]['#description'] = variable_get('atwork_auth_disable_gal_fields_message', '');
-        }
-      }
-    }
-
-    if (variable_get('atwork_auth_min_code_field', '')) {
-      $form[variable_get('atwork_auth_min_code_field', '')]['#disabled'] = TRUE;
-    }
-
-    // now apply message to group
-    if (variable_get('atwork_auth_disable_gal_fields_message', '') && variable_get('atwork_auth_disable_gal_fields_fieldgroup', '')) {
-      $form['#groups'][variable_get('atwork_auth_disable_gal_fields_fieldgroup', '')]
-        ->format_settings['instance_settings']['description'] =
-        variable_get('atwork_auth_disable_gal_fields_message', '');
-    }
-  }
-}
-
-/*
- * Implements hook_user_load()
- *
- * Add our GUID to users when they are loaded
- */
+  * Implements hook_user_load()
+  *
+  * Add our GUID to users when they are loaded
+  **/
 function atwork_auth_user_load($users) {
   $result = db_query('SELECT uid, guid FROM {atwork_auth} WHERE uid IN (:uids)', array(':uids' => array_keys($users)));
   foreach ($result as $record) {
     $users[$record->uid]->guid = $record->guid;
   }
-}
-
-/*
- * Implementation of hook_user_delete()
- *
- * Remove deleted users from our atwork_auth table
- */
-function atwork_auth_user_delete($account) {
-  return;
-  db_delete('atwork_auth')
-    ->condition('uid', $account->uid)
-    ->execute();
 }
