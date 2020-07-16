@@ -8,11 +8,6 @@
 function atwork_auth_init() {
   global $user;
 
-  // user is already logged in, no use loading them
-  if (isset($user->uid)) {
-    return;
-  }
-
  // rss.xml bypasses siteminder so can abort now
   if($_GET['q'] == 'rss.xml') return;
 
@@ -36,7 +31,10 @@ function atwork_auth_init() {
     $sm_user = strtolower($_SERVER['HTTP_SM_USER']);
   }
   $sm_guid = $_SERVER['HTTP_SMGOV_USERGUID'];
-
+  // user is already logged in, no use loading them
+  if (isset($user->name) ? $user->name == $sm_user : FALSE) {
+    return;
+  }
   // abort for special IDIRs.
   // these could be search crawlers who shouldn't be logged in.
   if (_atwork_auth_excluded_idirs($sm_user)) {
@@ -77,9 +75,9 @@ function atwork_auth_init() {
 
   // Log user in.
   $form_state['uid'] = $uid['uid'];
-  drupal_goto('<front>');
-  dpm('logged in');
   user_login_submit(array(), $form_state);
+  drupal_goto('<front>');
+  dpm($form_state);
 }
 
 /**
@@ -87,6 +85,106 @@ function atwork_auth_init() {
  * Used to restrict access through malformed uri's
  *
  */
+
+function atwork_auth_node_view($node, $view_mode, $langcode){
+   // rss.xml bypasses siteminder so can abort now
+  if($_GET['q'] == 'rss.xml') return;
+
+  // If this uri appears valid
+  if (preg_match( '/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/', $_SERVER['REQUEST_URI'])) {
+    return;
+  }
+
+  global $user;
+
+  // if user is authenticated
+  if (user_is_logged_in()) {
+    return;
+  }
+
+  //If user has a name
+  if(isset($user->name)) {
+    return;
+  }
+
+  // If this is drush
+  if(drupal_is_cli()) {
+    return;
+  }
+
+  // Bail if this is a script kickstarting the cron (should be caught under regex above).
+  if ($_SERVER['REQUEST_URI'] == '/cron.php?cron_key=Qmx36j_9vhpusKB9e41a6_ICDpy0erjiqnlkRjxbpXk') {
+    return;
+  }
+
+
+  // this should only happen if site isn't accessed through reverse proxy
+  if (!isset($_SERVER['HTTP_SMUSER']) || !isset($_SERVER['HTTP_SMGOV_USERGUID'])) {
+    // If not valid uri, and user is anonymous, and user has no set name, boot them out to home page for siteminder to catch
+    if(!file_valid_uri($_SERVER['REQUEST_URI']) && !isset($user->name)){
+      if (user_is_anonymous()) {
+        if (preg_match('/\&\.jpg|\&.png|\&.class|\&.gif|\&\.jpeg|\&.fcc|\&.scc|\&.sfcc|\&.ccc|\&.ntc/', $_SERVER['REQUEST_URI'])) {
+          drupal_access_denied();
+          drupal_exit();
+          return;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implementation of hook_views_post_build
+ * Used to restrict access through malformed uri's
+ *
+ */
+
+function atwork_auth_views_post_build(&$view){
+  // rss.xml bypasses siteminder so can abort now
+  if($_GET['q'] == 'rss.xml') return;
+
+  // If this uri appears valid
+  if (preg_match( '/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/', $_SERVER['REQUEST_URI'])) {
+    return;
+  }
+
+  global $user;
+
+  // if user is authenticated
+  if (user_is_logged_in()) {
+    return;
+  }
+
+  //If user has a name
+  if(isset($user->name)) {
+    return;
+  }
+
+  // If this is drush
+  if(drupal_is_cli()) {
+    return;
+  }
+
+  // Bail if this is a script kickstarting the cron (should be caught under regex above).
+  if ($_SERVER['REQUEST_URI'] == '/cron.php?cron_key=Qmx36j_9vhpusKB9e41a6_ICDpy0erjiqnlkRjxbpXk') {
+    return;
+  }
+
+
+  // this should only happen if site isn't accessed through reverse proxy
+  if(!isset($_SERVER['HTTP_SMUSER']) || !isset($_SERVER['HTTP_SMGOV_USERGUID'])) {
+    // If not valid uri, and user is anonymous, and user has no set name, boot them out to home page for siteminder to catch
+    if(!file_valid_uri($_SERVER['REQUEST_URI']) && !isset($user->name)){
+      if (user_is_anonymous()) {
+        if (preg_match('/\&\.jpg|\&.png|\&.class|\&.gif|\&\.jpeg|\&.fcc|\&.scc|\&.sfcc|\&.ccc|\&.ntc/', $_SERVER['REQUEST_URI'])) {
+          drupal_access_denied();
+          drupal_exit();
+          return;
+        }
+      }
+    }
+  }
+}
 
 
 /**
