@@ -32,7 +32,7 @@ function atwork_auth_init() {
   }
   $sm_guid = $_SERVER['HTTP_SMGOV_USERGUID'];
   // user is already logged in, no use loading them
-  if (isset($user->name) ? $user->name == $sm_user : FALSE) {
+  if ($user->name && $user->name == $sm_user ) {
     return;
   }
   // abort for special IDIRs.
