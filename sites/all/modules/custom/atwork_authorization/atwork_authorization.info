@@ -1,0 +1,4 @@
+name = Atwork Authorization
+description = Logging users in with siteminder
+package = Atwork
+core = 7.x

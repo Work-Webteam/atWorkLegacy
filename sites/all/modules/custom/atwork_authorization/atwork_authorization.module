@@ -1,0 +1,54 @@
+<?php
+
+
+/*
+ * Implementation if hook_init()
+ *
+ * We want to do this early. Logs user in if we find a proper header.
+ *
+ */
+function atwork_authorization_init() {
+
+  // If we are already logged in, then we don't need to do this again.
+  if ( user_is_logged_in() ) {
+    return;
+  }
+
+  // If this is drush, eject.
+  if(drupal_is_cli()) {
+    return;
+  }
+
+  // rss.xml bypasses siteminder so can abort now.
+  if ($_GET['q'] == 'rss.xml') {
+    return;
+  }
+
+  // Don't do this for Apache
+  if (isset($_SERVER['USER'])) {
+    if ($_SERVER['USER'] != 'apache' && !isset($_SERVER['HTTP_SM_USER'])) {
+      // Nothing to do here - it is apache.
+      return;
+    }
+  }
+
+  // Try to log the user in.
+  if( isset($_SERVER['HTTP_SM_USER'])) {
+    // We need to see if we can log the user in, and if not then deny entry.
+    // for consistency always use lowercase IDIRs in drupal
+    if (strpos($_SERVER['HTTP_SM_USER'], 'IDIR') !== false) {
+      $sm_user = str_replace("idir\\", "", strtolower($_SERVER['HTTP_SM_USER']));
+    } else {
+      $sm_user = strtolower($_SERVER['HTTP_SM_USER']);
+    }
+    $current_user = user_load_by_name($sm_user);
+    if(isset($current_user->uid)) {
+      $form_state['uid'] = $current_user->uid;
+      // We have everything we need, now lets login.
+      user_login_submit(array(), $form_state);
+      return;
+    }
+  }
+  // If the user meets none of the criteria, they should not be on the site.
+  drupal_access_denied();
+}
