@@ -193,13 +193,6 @@ function atwork_comments_cron() {
     // Get all nodes with open comments that are older than 2 weeks (sec*minutes*hours*days*weeks is 60*60*24*7*2).
     $two_weeks = 1209600;
     $current = time() - $two_weeks;
-    $content_types = [
-      'blog',
-      'forum',
-      'article',
-      'gallery',
-      'image',
-    ];
 
     // Set up the query
     $db_query  = db_query(
@@ -212,6 +205,10 @@ function atwork_comments_cron() {
       foreach($result as $n) {
         // Close the comments on node
         $current_node = node_load($n->nid);
+        // We have a checkbox that allows us to keep comments open.
+        if($current_node ->field_keep_comments_open['und'][0]['value'] == "1" ) {
+          continue;
+        }
         if($current_node->comment == 2){
           $current_node->comment = 1;
           // Turn off subscriptions so we don't send a bunch out

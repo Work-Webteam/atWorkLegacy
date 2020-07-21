@@ -31,7 +31,6 @@ function atwork_blog_views_pre_view(&$view, &$display_id, &$args) {
  * Implements hook_form_alter();
  */
 function atwork_blog_form_blog_node_form_alter(&$form, &$form_state) {
-  dpm($form);
   // Handle fields that should not be accessible to regular users.
   if(!_atwork_is_admin()){
     $form['menu']['#access'] = FALSE;
