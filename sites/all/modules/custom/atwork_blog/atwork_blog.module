@@ -31,12 +31,14 @@ function atwork_blog_views_pre_view(&$view, &$display_id, &$args) {
  * Implements hook_form_alter();
  */
 function atwork_blog_form_blog_node_form_alter(&$form, &$form_state) {
-
+  dpm($form);
   // Handle fields that should not be accessible to regular users.
   if(!_atwork_is_admin()){
     $form['menu']['#access'] = FALSE;
     $form['og_group_ref']['#access'] = FALSE;
     $form['actions']['delete']['#access'] = FALSE;
+    $form['field_keep_comments_open']['#access'] = FALSE;
+
     //Some tags are reserved for editors and admins only
     //References helper function in atwork_misc.module
     _atwork_hide_exec_tags($form);
