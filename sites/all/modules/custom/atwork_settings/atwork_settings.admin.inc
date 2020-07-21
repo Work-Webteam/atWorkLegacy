@@ -11,33 +11,6 @@ function atwork_settings_general_form() {
 
   return system_settings_form($form);
 }
-
-function atwork_settings_classifieds_form() {
-  $form = array();
-
-  $form['atwork_classifieds_expiry'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Days until classified ads expire'),
-    '#default_value' => variable_get('atwork_classifieds_expiry', 30),
-    '#size' => 3,
-    '#maxlength' => 3,
-    '#description' => t("Enter 0 to disable expiry."),
-    '#required' => TRUE,
-  );
-
-  $form['atwork_classifieds_deletion'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Days until expired classified ads are deleted'),
-    '#default_value' => variable_get('atwork_classifieds_deletion', 15),
-    '#size' => 3,
-    '#maxlength' => 3,
-    '#description' => t("Enter 0 to disable deletion."),
-    '#required' => TRUE,
-  );
-
-  return system_settings_form($form);
-}
-
 function atwork_settings_copy_form() {
   $form = array();
 
@@ -241,21 +214,6 @@ function atwork_settings_copy_form() {
   return system_settings_form($form);
 }
 
-function atwork_settings_mail_form() {
-  $form = array();
-
-  $form['atwork_mail_internal_addresses'] = array(
-    '#type' => 'textarea',
-    '#title' => t('Internal email addresses'),
-    '#default_value' => implode("\n", variable_get('atwork_mail_internal_addresses',array())),
-    '#format' => 'full_html',
-    '#weight' => 0,
-    '#rows' => 20,
-  );
-
-  return system_settings_form($form);
-}
-
 function atwork_settings_profile_form() {
   $form = array();
 
@@ -360,26 +318,4 @@ function atwork_settings_profile_form() {
   );
   //dpm($form);
   return system_settings_form($form);
-}
-
-function atwork_settings_mail_form_validate($form, &$form_state) {
-  if (isset($form_state['values']['atwork_mail_internal_addresses'])) {
-    $form_state['values']['atwork_mail_internal_addresses'] = str_replace("\r\n", "\n", $form_state['values']['atwork_mail_internal_addresses']);
-    $form_state['values']['atwork_mail_internal_addresses'] = str_replace("\r", "\n", $form_state['values']['atwork_mail_internal_addresses']);
-
-    $addresses = explode("\n", $form_state['values']['atwork_mail_internal_addresses']);
-
-    foreach ($addresses as $key => &$address) {
-      if (!trim($address)) {
-        unset($addresses[$key]);
-      }
-      else {
-        $address = strtolower($address);
-      }
-    }
-
-    sort($addresses);
-
-    $form_state['values']['atwork_mail_internal_addresses'] = $addresses;
-  }
 }

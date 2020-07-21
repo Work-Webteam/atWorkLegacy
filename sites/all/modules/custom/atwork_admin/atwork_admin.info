@@ -1,0 +1,4 @@
+name = Atwork Admin
+description = Admin and admin menu related code
+package = Atwork
+core = 7.x

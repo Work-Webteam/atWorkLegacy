@@ -7,7 +7,7 @@
  */
 function atwork_events_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'event_node_form') {
-    // TODO: why is this here?
+    // Seems to remove codemirror js and cs.
     if (isset($form['cpn'])) {
       unset($form['cpn']);
     }
@@ -15,7 +15,6 @@ function atwork_events_form_alter(&$form, &$form_state, $form_id) {
      * remove these fields simply to make the add event page less cluttered.
      */
     if (!user_access('edit any event')) {
-      //unset($form['field_image']);
       unset($form['field_related_links']);
       $form['field_event_type'][$form['field_event_type']['#language']]['#type'] = 'hidden';
     }
@@ -28,7 +27,7 @@ function atwork_events_form_alter(&$form, &$form_state, $form_id) {
      $form['menu']['#access'] = FALSE;
     }
 
-    //Some tags are reserved for editors and admins only
+    // Some tags are reserved for editors and admins only.
     if(!_atwork_is_admin()) {
       //References helper function in atwork_misc.module
       _atwork_hide_exec_tags($form);
@@ -37,10 +36,8 @@ function atwork_events_form_alter(&$form, &$form_state, $form_id) {
     $form['field_date']['und'][0]['show_repeat_settings']['#suffix'] = '<p><em>Check the "repeat" box to display your event info on the calendar at set intervals for your event.</em></p></div>';
 
     $form['actions']['submit']['#submit'][] = 'atwork_events_custom_submit';
-
-   //dpm($form);
   }
-    // Edit the redirect after delete - TODO: a module where all delete behavior is kept?
+    // Edit the redirect after delete.
   if($form_id == 'node_delete_confirm' && isset($form['#node']->og_group_ref) && $form['#node']->og_group_ref['und'][0]['target_id'] && $form['#node']->type == 'event'){
     $form['#submit'][] = 'atwork_events_redirect_event_delete';
   }
@@ -53,7 +50,6 @@ function atwork_events_form_alter(&$form, &$form_state, $form_id) {
  */
 
 function atwork_events_custom_submit(&$form, &$form_state){
-  $messages = drupal_get_messages('status');
   if(isset($form_state['build_info']['args'][0]->og_group_ref) && $form_state['build_info']['args'][0]->og_group_ref){
     if(isset($form['title']['#default_value'])){
       drupal_set_message(t('Your event <em class="placeholder">' . $form['title']['#default_value'] . '</em> has been updated and appears on your <a href = "/node/' . $form_state['build_info']['args'][0]->og_group_ref['und'][0]['target_id'] . '/calendar">group calendar</a>. To make edits, click on your event in the calendar and select Edit. '));
@@ -67,7 +63,6 @@ function atwork_events_custom_submit(&$form, &$form_state){
       drupal_set_message(t('Your event <em class="placeholder">' . $form_state['build_info']['args'][0]->title . '</em> has been created and appears on the <a href = "/announcements">corporate events calendar</a>. To make edits, click on your event in the calendar and select Edit. '));
     }
   }
-  return;
 }
 
 
@@ -79,7 +74,6 @@ function atwork_events_custom_submit(&$form, &$form_state){
  */
 function atwork_events_redirect_event_delete($form, &$form_state) {
   $form_state['redirect'] = 'node/' . $form['#node']->og_group_ref['und'][0]['target_id'] . '/calendar';
-  return;
 }
 
 
@@ -118,15 +112,15 @@ function atwork_events_node_view($node, $view_mode, $langcode) {
       $node->content['links']['#weight'] = 8;
     }
   }
-  if ($view_mode == 'teaser') {
-  }
 }
 
 
 /**
  * Implements hook_views_pre_render
  * @param  &$view
- * To clear group events out of calendar
+ *
+ * To clear group events out of calendar.
+ * We don't want to see group related events in the corporate calendar.
  */
 function atwork_events_views_pre_render(&$view){
   if($view->name == 'calendar'){
@@ -140,28 +134,5 @@ function atwork_events_views_pre_render(&$view){
       }
     }
     $view->result = $result_no_group;
-  }
-  // Below two cases are for the same one event - a test to manipulating calendar for events to keep the behavioral side of this in check.
-  if($view->name == 'home_page_blocks_zen' && $view->current_display == 'block_2'){
-    $result_no_pecsf = array();
-    foreach($view->result as $key){
-      if($key->nid == '27024'){
-        continue;
-      } else {
-        $result_no_pecsf[] = $key;
-      }
-    }
-    $view->result = $result_no_pecsf;  
-  }
-  if($view->name == 'events' && ($view->current_display=="block" || $view->current_display=="block_1")){
-    $result_no_pecsf = array();
-    foreach($view->result as $key){
-      if($key->nid == '27024'){
-        continue;
-      } else {
-        $result_no_pecsf[] = $key;
-      }
-    }
-    $view->result = $result_no_pecsf;   
   }
 }

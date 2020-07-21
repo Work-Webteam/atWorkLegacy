@@ -12,10 +12,10 @@
  *
  * @param $user
  *   The renamed $user object.
- * 
+ *
  * @param $original_name
  *   The original (former) name (IDIR)
- * 
+ *
  */
 function hook_atwork_auth_rename_user($user, $original_name) {
   $message = t('AN IDIR-GUID change was detected. User !name (!uid) was renamed to !new_name',
@@ -25,7 +25,7 @@ function hook_atwork_auth_rename_user($user, $original_name) {
       '!new_name' => $name,
     )
   );
-  
+
   db_insert('mymodule')
     ->fields(array(
       'log_message' => $message,
@@ -38,7 +38,7 @@ function hook_atwork_auth_rename_user($user, $original_name) {
  *
  * @param object $user
  *   The user passed by reference
- * 
+ *
  */
 function hook_atwork_auth_new_user_alter(&$user) {
   $field_language = field_language('user', $user, 'field_myfield');
@@ -47,12 +47,12 @@ function hook_atwork_auth_new_user_alter(&$user) {
 
 /*
  * Alter a $user when they access the site
- * 
+ *
  * @param object $user
  *    The user passed by reference
  * @param bool $save
- *    Whether or not to save the $user 
- * 
+ *    Whether or not to save the $user
+ *
  */
 function hook_atwork_auth_update_fields_on_access_alter(&$user, &$save) {
   if (!isset($user->myfield)) {

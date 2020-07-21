@@ -1,0 +1,4 @@
+name = Atwork Node
+description = Form functionality that affects all node creation
+package = Atwork
+core = 7.x

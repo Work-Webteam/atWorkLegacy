@@ -16,11 +16,7 @@ Drupal.behaviors.atwork_fix_pdf_icons = {
           if ($(this).has('img.pdf'))
             $(this).children('img.pdf').remove();
 
-          //$(this).after('<img src="' + basePath + fixPdfIconsPath + '/icons/pdf.gif" alt="pdf icon" class="pdf js-inserted atwork-fix-icons" align="absbottom" />' + ' ');
-          
           $(this).addClass('pdf');
-          
-          
       });
 
       // word doc icons
@@ -28,12 +24,10 @@ Drupal.behaviors.atwork_fix_pdf_icons = {
 
         if ($(this).next().is('img'))
           $(this).next('img').remove();
-
-        //$(this).after('<img src="' + basePath + fixPdfIconsPath + '/icons/word.gif" alt="pdf icon" class="pdf word js-inserted atwork-fix-icons" align="absbottom" />' + ' '); // we keep class 'pdf' here as sadly, it was used on word icons in content in the past too...
         // this helps with legacy css TODO: fix this.
-        
+
         $(this).addClass('word');
-        
+
       });
 
     })(jQuery);

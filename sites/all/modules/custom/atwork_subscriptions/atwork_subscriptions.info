@@ -1,0 +1,4 @@
+name = Atwork Subscriptions
+description = Subscription related customizations
+package = Atwork
+core = 7.x

@@ -24,12 +24,9 @@ function atwork_images_menu() {
  * Access Callback for node/%node/manage-gallery
  */
 function _atwork_images_gallery_manage_access($node) {
-  if (user_access('manage image gallery') && $node->type == 'gallery') {
-    return TRUE;
-  }
-
-  return FALSE;
+  return user_access('manage image gallery') && $node->type == 'gallery';
 }
+
 
 
 /*
@@ -39,7 +36,7 @@ function _atwork_images_gallery_manage_access($node) {
  */
 function atwork_images_gallery_form($form, $form_state, $node) {
 
-  // Now get images adn display
+  // Now get images and display.
   $query = new EntityFieldQuery();
 
   $query->entityCondition('entity_type', 'node')
@@ -92,7 +89,6 @@ function atwork_images_gallery_form($form, $form_state, $node) {
       '#default_value' => $image->title,
     );
 
-
     $form['images'][$nid]['gallery'] = $tmp_form['field_gallery'];
     $form['images'][$nid]['gallery'][$form['images'][$nid]['gallery']['#language']]['#default_value'] = $gallery_field[0]['target_id'];
     if (isset($form['images'][$nid]['gallery'][$form['images'][$nid]['gallery']['#language']]['#options']['_none'])) {
@@ -111,9 +107,6 @@ function atwork_images_gallery_form($form, $form_state, $node) {
         ),
       )) . ' ' .
       l(t('edit'), 'node/' . $nid . '/edit', array(
-        'attributes' => array(
-          //'onclick' => 'window.open(this.href); return false;',
-        ),
         'query' => array(
           'destination' => 'node/' . $node->nid . '/manage-gallery',
         ),
@@ -124,7 +117,6 @@ function atwork_images_gallery_form($form, $form_state, $node) {
         ),
       )),
     );
-
 
     $form['images'][$nid]['weight'] = array(
       '#type' => 'textfield',
@@ -263,7 +255,7 @@ function atwork_images_form_alter(&$form, &$form_state, $form_id) {
 
     $form['#validate'][] = 'atwork_images_form_validate';
 
-    // Gallery related code
+    // Gallery related code.
     if(isset($form['field_gallery'][$form['field_gallery']['#language']]['#default_value'][0])){
       $gallery = node_load($form['field_gallery'][$form['field_gallery']['#language']]['#default_value'][0]);
       $group_nid = field_get_items('node', $gallery, 'og_group_ref');
@@ -273,7 +265,7 @@ function atwork_images_form_alter(&$form, &$form_state, $form_id) {
         og_context('node', $group);
       }
 
-      // Lets not let them fill in all the info if this is a closed group
+      // Lets not let them fill in all the info if this is a closed group.
       if(!_atwork_is_admin()){
         if(isset($gallery->field_gallery_status[$gallery->language][0]['value']) && $gallery->field_gallery_status[$gallery->language][0]['value'] == 2 && $user->uid != $gallery->uid){
           if(isset($form['title']) && $form['title']){
@@ -305,7 +297,7 @@ function atwork_images_form_alter(&$form, &$form_state, $form_id) {
       }
     }
 
-    //hide fields users should not use
+    //hide fields users should not use.
     if(!_atwork_is_admin()){
       drupal_add_css('#edit-field-image-description-und-0-format {display:none;}', $option['type'] = 'inline');
       $form['field_gallery']['#access'] = FALSE;
@@ -315,20 +307,17 @@ function atwork_images_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'gallery_node_form') {
     $form['field_image']['#access'] = FALSE;
     $form['actions']['delete']['#access'] = FALSE;
-    // A quick note about required fields
+    // A quick note about required fields.
     $form['title']['#prefix'] = '<div style="text-align:right;" id="instruction_for_required">(A <strong><span style="color:#c00">*</span></strong> denotes a required field.)</div><br />';
     if(!_atwork_is_admin()){
       $form['og_group_ref']['#access'] = FALSE;
       drupal_add_css('#edit-body-und-0-format {display:none;}', $option['type'] = 'inline');
      _atwork_hide_exec_tags($form);
     }
-    if(!isset($form["menu"])){
-      $form['actions']['submit']['#submit'][] = 'unpublished_group_submit';
-    }
   }
 
   if ($form_id == 'atwork_images_gallery_form'){
-    // Hiding fields regular users should not see
+    // Hiding fields regular users should not see.
     if(!_atwork_is_admin()) {
       drupal_add_css('#form_id thead tr th:nth-child(2) {display:none;}', 'inline');
       drupal_add_css('#form_id thead tr th:nth-child(3) {display:none;}', 'inline');
@@ -339,23 +328,6 @@ function atwork_images_form_alter(&$form, &$form_state, $form_id) {
         }
       }
     }
-  }
-}
-
-
-/**
- * Helper function to attache gallery to groups if they are unpublished
- */
-function unpublished_group_submit($form,$form_state){
-  //$gid = (int)$_GET['og_group_ref'];
-  $gid = (int)og_context_determine_context('node');
-  if($form_state['nid']){
-    $values = array(
-      'entity_type' => 'node',
-      'entity' => $form_state['nid'],
-      'state' => OG_STATE_ACTIVE
-      );
-    $result = og_group('node', $gid, $values);
   }
 }
 
@@ -496,6 +468,10 @@ function atwork_images_views_post_render(&$view, &$output, &$cache) {
  * Adds an "Add an image" link to galleries
  */
 function atwork_images_node_view($node, $view_mode) {
+  if($view_mode == 'full' && $node->type == "image") {
+    // Add our page saver js
+    drupal_add_js(drupal_get_path('module', 'atwork_images') . '/js/js_atwork_images.js');
+  }
   if ($view_mode == 'colorbox' && $node->type == 'image') {
     $GLOBALS['in_colorbox'] = TRUE;
     unset($node->content['links']['comment']);
@@ -515,7 +491,6 @@ function atwork_images_node_view($node, $view_mode) {
         '#markup' => rate_generate_widget($widget_id, 'node', $node->nid, $display_mode),
       );
 
-      //$widget_code['#markup'] = str_replace('<a class="', '<a onclick="window.open(this.href); return false;" class="', $widget_code['#markup']);
       if ($widget->node_display == RATE_DISPLAY_DISABLE) {
         $node->$widget_name = $widget_code;
       }
@@ -544,7 +519,6 @@ function atwork_images_node_view($node, $view_mode) {
         ->execute()
         ->fetchAssoc();
 
-      // !user_access('manage image gallery')
       if (isset($heaviest_nid['entity_id'])) {
         drupal_goto('node/' . $heaviest_nid['entity_id']);
       }
@@ -561,8 +535,6 @@ function atwork_images_node_view($node, $view_mode) {
     if (isset($gallery_nid[0]['target_id'])) {
 
       $gallery = node_load($gallery_nid[0]['target_id']);
-
-      $group_nid = field_get_items('node', $gallery, 'og_group_ref');
 
       // add add image to gallery link
       $status = field_get_items('node', $gallery, 'field_gallery_status');
@@ -647,4 +619,24 @@ function atwork_images_preprocess_page(&$variables){
   }
 }
 
-
+/*
+ * Implementation of hook_field_widget_alter()
+ *
+ * Change the wording on image field from Add a new file to add a new image
+ *
+ * Override the js file provided by node module in order to change
+ * the "summary" into the "teaser"
+ */
+function atwork_images_field_widget_form_alter(&$element, &$form_state, $context) {
+  if (isset($element['#field_name'])) {
+    // override the text.js file so we can use "Teaser" instead of "Summary".
+    if ($element['#field_name'] == 'body' && isset($element['summary'])) {
+      $element['summary']['#attached']['js'] = array(
+        0 => drupal_get_path('module', 'atwork_images') . '/js/text.js'
+      );
+    }
+    if ($element['#field_name'] == 'field_image') {
+      $element['#file_upload_title'] = t('Add a new image');
+    }
+  }
+}
