@@ -531,8 +531,8 @@ function atwork_group_form_alter(&$form, &$form_state, $form_id) {
       $form['field_terms'][$form['field_terms']['#language']]['#prefix'] = $group_terms['value'];
       $form['field_terms'][$form['field_terms']['#language']]['#access'] = FALSE;
     }
-
-    $form['#validate'][] = 'atwork_groups_form_validate';
+    // Removing call to non-existant function
+    //$form['#validate'][] = 'atwork_groups_form_validate';
 
   }
 
