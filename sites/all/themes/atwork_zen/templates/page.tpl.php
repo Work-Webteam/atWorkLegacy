@@ -78,7 +78,7 @@
   </div><!-- /#navigation -->
 
   <?php //print $breadcrumb; ?>
-  
+
   <div id="main">
 
     <div id="content" class="column" role="main">
@@ -165,7 +165,7 @@
       </aside>
     <?php endif; ?>
     <?php if (isset($node) && isset($node->type) && $node->type == "image"): ?>
-      <?php drupal_add_js(drupal_get_path('module', 'atwork_images') . '/' . 'js_atwork_images.js'); ?>
+      <?php drupal_add_js(drupal_get_path('module', 'atwork_images') . '/js/' . 'js_atwork_images.js'); ?>
     <?php endif; ?>
   </div><!-- /#main -->
 
