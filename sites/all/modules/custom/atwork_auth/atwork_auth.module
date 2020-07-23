@@ -13,21 +13,21 @@ function atwork_auth_init() {
     //$_SERVER['HTTP_SMGOV_USERGUID'] = 'abcd';
     //dpm($_SERVER);
     //$atwork_ldap = new atwork_ldap;
-   // $result = $atwork_ldap->query('person', 'mail', 'Thayne.Werdal@gov.bc.ca', array(), '(whenchanged>=20130611070000.0Z)');
+    // $result = $atwork_ldap->query('person', 'mail', 'Thayne.Werdal@gov.bc.ca', array(), '(whenchanged>=20130611070000.0Z)');
     //dpm($result);
 
     //if ($gal_fields = list_extract_allowed_values(variable_get('atwork_auth_gal_fieldmap', ''), 'list_text', FALSE)) {
     //  foreach ($gal_fields as $f => $g) {
-   //     dpm($f);
-  //  }
- //  }
+    //     dpm($f);
+    //  }
+    //  }
 
   } else {
     //dpm('false');
     //dpm($_SERVER['HTTP_SMUSER']);
   }
 
- // rss.xml bypasses siteminder so can abort now
+  // rss.xml bypasses siteminder so can abort now
   if($_GET['q'] == 'rss.xml') return;
 
   // this should only happen if site isn't accessed through reverse proxy
@@ -151,7 +151,7 @@ function atwork_auth_init() {
  */
 
 function atwork_auth_node_view($node, $view_mode, $langcode){
-   // rss.xml bypasses siteminder so can abort now
+  // rss.xml bypasses siteminder so can abort now
   if($_GET['q'] == 'rss.xml') return;
 
   // If this uri appears valid
@@ -527,35 +527,35 @@ function atwork_auth_atwork_auth_new_user_alter(&$user) {
  * Implementation of hook_atwork_auth_rename_user()
  */
 function atwork_auth_atwork_auth_rename_user($user, $new_name) {
-    return;
-    // once we got a replacement save the user
-    $random = str_replace(array(' ', '.'), array('', ''), microtime());
+  return;
+  // once we got a replacement save the user
+  $random = str_replace(array(' ', '.'), array('', ''), microtime());
 
-    $original_name = $user->name;
-    $user->name = $new_name;
-    $user->mail = $random . '@old-user.com';
-    user_save($user);
+  $original_name = $user->name;
+  $user->name = $new_name;
+  $user->mail = $random . '@old-user.com';
+  user_save($user);
 
-    // update authmap with the change
-    db_update('authmap')
+  // update authmap with the change
+  db_update('authmap')
     ->fields(array(
       'authname' => $new_name,
     ))
     ->condition('uid', $user->uid)
     ->execute();
 
-    if (variable_get('atwork_auth_watchdog_rename', 1)) {
-      $message = t('User !name (UID: !uid) was renamed to !new_name with email !email',
-        array(
-          '!name' =>  $original_name,
-          '!uid' => $user->uid,
-          '!new_name' => $new_name,
-          '!email' => $user->mail,
-        )
-      );
+  if (variable_get('atwork_auth_watchdog_rename', 1)) {
+    $message = t('User !name (UID: !uid) was renamed to !new_name with email !email',
+      array(
+        '!name' =>  $original_name,
+        '!uid' => $user->uid,
+        '!new_name' => $new_name,
+        '!email' => $user->mail,
+      )
+    );
 
-      watchdog('atwork_auth', $message);
-    }
+    watchdog('atwork_auth', $message);
+  }
 }
 
 
@@ -684,8 +684,8 @@ function atwork_auth_form_user_profile_form_alter(&$form, &$form_state, $form_id
     // now apply message to group
     if (variable_get('atwork_auth_disable_gal_fields_message', '') && variable_get('atwork_auth_disable_gal_fields_fieldgroup', '')) {
       $form['#groups'][variable_get('atwork_auth_disable_gal_fields_fieldgroup', '')]
-           ->format_settings['instance_settings']['description'] =
-           variable_get('atwork_auth_disable_gal_fields_message', '');
+        ->format_settings['instance_settings']['description'] =
+        variable_get('atwork_auth_disable_gal_fields_message', '');
     }
   }
 }

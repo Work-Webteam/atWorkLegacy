@@ -87,7 +87,6 @@
       });
 
       $("input[name='field_group_type[und]']").click(function() {
-        //alert($(this).val());
 
         if ($(this).val() > 0) {
           $('fieldset.group-advanced input').prop('checked', false).change();
@@ -110,7 +109,6 @@
         // reference group
         if ($(this).val() == 2) {
           $('#edit-field-grp-opt-page-und').prop('checked', true).change();
-          //$('#edit-og-menu').prop('checked', true).change();
           $('#edit-field-group-content-home-und').prop('checked', false).change();
 
           $('#edit-field-group-type-und-2').prop('checked', true);
@@ -134,11 +132,6 @@
         }
 
       });
-
-      // change name of stupid next/previous buttons
-      //$('.multipage-link-next').val('Custom Options \u00bb');
-      //$('.multipage-link-previous').val('\u00ab Basic Options');
-
 
       $( ".sortable" ).sortable({
         stop: function( event, ui ) {

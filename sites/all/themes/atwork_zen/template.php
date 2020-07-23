@@ -38,15 +38,15 @@ function atwork_zen_preprocess_page(&$variables, $hook) {
       $variables['title_prefix'] = $snipet[0]['value'];
     }
   }
-  
+
   if (isset($variables['node']->type) && !empty($variables['node']->type) && ($variables['node']->type == 'simplenews')){
   	drupal_add_js('sites/all/themes/atwork_zen/js/newsletter.js');
   }
-  
+
   if (isset($variables['node']->type) && !empty($variables['node']->type) && ($variables['node']->type == 'article')){
   	drupal_add_js('sites/all/themes/atwork_zen/js/article_sidebar_image.js');
   }
-  	
+
 }
 
 
@@ -363,5 +363,57 @@ function atwork_zen_pager($variables) { // used to change 'previous' to just 'pr
       'attributes' => array('class' => array('pager')),
     ));
   }
+}
+
+
+
+/*
+ * Implementation of hook_node_view()
+ *
+ * On node teasers strip all HTML except <p> and <br>
+ */
+function atwork_zen_node_view($node, $view_mode, $langcode) {
+  if ($view_mode == 'teaser' && isset($node->content['body'][0]['#markup'])) {
+    $node->content['body'][0]['#markup'] = strip_tags($node->content['body'][0]['#markup'], '<p><br>');
+  }
+}
+
+/*
+ * Implementation of hook_node_view_alter()
+ *
+ * Move node links (really only the read more link) to the end of all links
+ *
+ * This pushes the read more link to the end
+ */
+function atwork_zen_node_view_alter(&$build) {
+  if ($build['#view_mode'] == 'teaser') {
+    if (isset($build['links']['node'])) {
+      $node_links = $build['links']['node'];
+      unset($build['links']['node']);
+      $build['links']['node'] = $node_links;
+    }
+  }
+}
+
+
+/**
+ * Helper function to take care of pluralizing content types if required.
+ * @param $name
+ * @return array|mixed|string|null
+ */
+function _atwork_misc_ct_plural($name) {
+  switch ($name) {
+    case 'blog':
+      return t('Blog entries');
+    case 'article':
+      return t('News');
+    case 'announcement':
+      return t('Announcements');
+    case 'event':
+      return t('Events');
+    case 'wiki':
+      return t('Wiki entries');
+  }
+  return $name;
 }
 

@@ -1,0 +1,246 @@
+<?php
+
+/**
+ * Implementation of hook_form_alter()
+ * Subscription related alterations to various forms
+ */
+
+/**
+ * Implements hook_form_alter().
+ */
+function atwork_subscriptions_form_alter(&$form, &$form_state, $form_id) {
+  // We decided that we always want Send subscriptions notifications to default to unchecked. There is no setting for this behaviour in the front end. We will do it here.
+  // The only exception is Questions - we want users to be notified if a question is asked.
+  if(isset($form['options']['subscriptions_notify']['subscriptions_notify']['#default_value']) && $form['options']['subscriptions_notify']['subscriptions_notify']['#default_value'] == TRUE){
+    isset($form['type']['#value']) && $form['type']['#value'] == 'question' ?  /*do nothing*/ : $form['options']['subscriptions_notify']['subscriptions_notify']['#default_value'] = FALSE;
+  }
+
+  if ($form_id === 'subscriptions_ui_node_form') {
+    // remove subscribe to tag by author
+    $remove_options = array();
+    if (isset($form['params']['#value'])) {
+      foreach ($form['params']['#value'] as $key => $option) {
+        if ($option['field'] == 'tid' && $option['author_uid'] > -1) {
+          $remove_options[] = $key;
+        }
+      }
+    }
+
+    foreach ($remove_options as $remove_option) {
+      if (isset($form['params']['#value'][$remove_option])) unset($form['params']['#value'][$remove_option]);
+      if (isset($form['wrapper']['subscriptions']['#options'][$remove_option])) unset($form['wrapper']['subscriptions']['#options'][$remove_option]);
+      if (isset($form['wrapper']['updates']['#options'][$remove_option])) unset($form['wrapper']['updates']['#options'][$remove_option]);
+      if (isset($form['wrapper']['comments']['#options'][$remove_option])) unset($form['wrapper']['comments']['#options'][$remove_option]);
+    }
+
+    array_unshift($form['#submit'], '_atwork_subscriptions_submit');
+    // This allows one click to get to the subscriber board - but also breaks group menu.
+    //$form['wrapper']['#type'] = 'container';
+    $form['wrapper']['footer']['#description'] = '';
+
+    $js = <<<EOT
+jQuery(document).ready(function($) {
+  $('#subscriptions-ui-node-form').hide();
+  $('#node-tools .subscription-flyout-toggle').click(function() {
+    $('#subscriptions-ui-node-form').slideToggle();
+    return false;
+  });
+});
+
+EOT;
+    drupal_add_js($js, array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
+  }
+
+  // the subscription form doesn't tell you what you are subscribing to
+  // do that here
+  if ($form_id == 'subscriptions_add_form') {
+    // node type
+    if (isset($form['stype']['#value']) && $form['stype']['#value'] == 'node' &&
+      isset($form['sid']['#value']) && is_numeric($form['sid']['#value'])) {
+      if ($node = node_load($form['sid']['#value'])) {
+        $form['header'] = array(
+          '#markup' => t('Subscribe to') . ' ' . strtolower(node_type_get_name($node)) . ': <em>' . $node->title . '</em>',
+          '#weight' => -10,
+        );
+      }
+    }
+    // taxa type
+    if (isset($form['stype']['#value']) && $form['stype']['#value'] == 'taxa' &&
+      isset($form['sid']['#value']) && is_numeric($form['sid']['#value'])) {
+      if ($term = taxonomy_term_load($form['sid']['#value'])) {
+        $form['header'] = array(
+          '#markup' => t('Subscribe to tag:') . ' <em>' . $term->name . '</em>',
+          '#weight' => -10,
+        );
+      }
+    }
+    // content type
+    if (isset($form['stype']['#value']) && $form['stype']['#value'] == 'type' &&
+      isset($form['sid']['#value']) && $types = node_type_get_types()) {
+      if (isset($types[$form['sid']['#value']]->name)) {
+        $form['header'] = array(
+          '#markup' => t('Subscribe to all content of type:') . ' <em>' . $types[$form['sid']['#value']]->name . '</em>',
+          '#weight' => -10,
+        );
+      }
+    }
+  }
+}
+
+/*
+ * submit callback
+ *
+ * Add the drupal messages subscriptions module should
+ */
+function _atwork_subscriptions_submit(&$form, &$form_state) {
+  if (isset($form_state['values']['subscriptions'][1]) && isset($form_state['values']['updates'][1]) && isset($form_state['values']['params'][1])) {
+    global $user;
+    $params = array(
+      'recipient_uid' => $user->uid,
+    );
+
+    $subscriptions = subscriptions_get($params);
+
+    if (isset($form_state['values']['params'])) {
+      foreach ($form_state['values']['params'] as $key => $sub) {
+        switch ($sub['field']) {
+          case 'nid':
+            // this subscription is subscribed to
+            if ($form_state['values']['subscriptions'][$key]) {
+              // is this subscription new?
+              if (!isset($subscriptions[$user->uid]['node']['nid'][$sub['value']])) {
+                drupal_set_message(t('You have subscribed to this page.'));
+              }
+            }
+            // this subscription is NOT subscribed to
+            else {
+              // did it exist previously?
+              if (isset($subscriptions[$user->uid]['node']['nid'][$sub['value']])) {
+                drupal_set_message(t('You have unsubscribed from this page.'));
+              }
+            }
+            break;
+          case 'type':
+            // this subscription is subscribed to
+            if ($form_state['values']['subscriptions'][$key]) {
+              // is this subscription new?
+              // and without an author
+              if ($form_state['values']['params'][$key]['author_uid'] == -1 && !isset($subscriptions[$user->uid]['node']['type'][$sub['value']])) {
+                drupal_set_message(t('You have subscribed to all <em>!content_type</em>.', array('!content_type' => _atwork_misc_ct_plural($form_state['values']['params'][$key]['value']))));
+              }
+              // with an author
+              elseif ($form_state['values']['params'][$key]['author_uid'] && !isset($subscriptions[$user->uid]['node']['type'][$sub['value']][$form_state['values']['params'][$key]['author_uid']]) && $author = user_load($form_state['values']['params'][$key]['author_uid'])) {
+                drupal_set_message(t('You have subscribed to all !content_type by <em>!name</em>.', array('!content_type' => _atwork_misc_ct_plural($form_state['values']['params'][$key]['value']), '!name' => theme('username', array('account' => $author, 'new_window' => TRUE)))));
+              }
+            }
+            // this subscription is NOT subscribed to
+            else {
+              // did it exist previously?
+              if (isset($subscriptions[$user->uid]['node']['type'][$sub['value']])) {
+                if ($form_state['values']['params'][$key]['author_uid'] == -1) {
+                  drupal_set_message(t('You have unsubscribed from all <em>!content_type</em>.', array('!content_type' => _atwork_misc_ct_plural($form_state['values']['params'][$key]['value']))));
+                }
+                elseif ($form_state['values']['params'][$key]['author_uid'] && isset($subscriptions[$user->uid]['node']['type'][$sub['value']][$form_state['values']['params'][$key]['author_uid']])) {
+                  $author = user_load($form_state['values']['params'][$key]['author_uid']);
+                  if ($author) {
+                    drupal_set_message(t('You have unsubscribed from all <em>!content_type</em> by <em>!name</em>.', array('!content_type' => _atwork_misc_ct_plural($form_state['values']['params'][$key]['value']), '!name' => theme('username', array('account' => $author, 'new_window' => TRUE)))));
+                  }
+                }
+              }
+            }
+            break;
+          case 'tid':
+            if (isset($form_state['values']['params'][$key]['value']) && $form_state['values']['params'][$key]['value'] && $term = taxonomy_term_load($form_state['values']['params'][$key]['value'])) {
+              // this subscription is subscribed to
+              if ($form_state['values']['subscriptions'][$key]) {
+                // is this subscription new?
+                // and without an author
+                if ($form_state['values']['params'][$key]['author_uid'] == -1 && !isset($subscriptions[$user->uid]['node']['tid'][$sub['value']])) {
+                  drupal_set_message(t('You have subscribed to all content with the <em>!tag</em> tag.', array('!tag' => l($term->name, 'taxonomy/term/' . $term->tid, array('attributes' => array('onclick' => 'window.open(this.href); return false;'))))));
+                }
+                // with an author
+                elseif ($form_state['values']['params'][$key]['author_uid'] && !isset($subscriptions[$user->uid]['node']['tid'][$sub['value']][$form_state['values']['params'][$key]['author_uid']]) && $author = user_load($form_state['values']['params'][$key]['author_uid'])) {
+                  drupal_set_message(t('You have subscribed to all content by <em>!name</em> with the <em>!tag</em> tag.', array('!name' => theme('username', array('account' => $author, 'new_window' => TRUE)), '!tag' => l($term->name, 'taxonomy/term/' . $term->tid, array('attributes' => array('onclick' => 'window.open(this.href); return false;'))))));
+                }
+              }
+              // this subscription is NOT subscribed to
+              else {
+                // did it exist previously?
+                if (isset($subscriptions[$user->uid]['node']['tid'][$sub['value']])) {
+                  if ($form_state['values']['params'][$key]['author_uid'] == -1) {
+                    drupal_set_message(t('You have unsubscribed from all content with the <em>!tag</em> tag.', array('!tag' => l($term->name, 'taxonomy/term/' . $term->tid, array('attributes' => array('onclick' => 'window.open(this.href); return false;'))))));
+                  }
+                  elseif ($form_state['values']['params'][$key]['author_uid'] && isset($subscriptions[$user->uid]['node']['tid'][$sub['value']][$form_state['values']['params'][$key]['author_uid']])) {
+                    $author = user_load($form_state['values']['params'][$key]['author_uid']);
+                    if ($author) {
+                      drupal_set_message(t('You have unsubscribed from all content by <em>!name</em> with the <em>!tag</em> tag.', array('!name' => theme('username', array('account' => $author, 'new_window' => TRUE)), '!tag' => l($term->name, 'taxonomy/term/' . $term->tid, array('attributes' => array('onclick' => 'window.open(this.href); return false;'))))));
+                    }
+                  }
+                }
+              }
+            }
+            break;
+        }
+      }
+    }
+  }
+}
+
+/*
+ * Implementation of hook_views_pre_view()
+ *
+ * Add a link to subscribe to taxonomy terms on their respective landing page
+ */
+function atwork_subscriptions_views_pre_view(&$view, &$display_id, &$args) {
+  if ($view->name == 'term_landing_page' && $display_id == 'page' && $view->args[0] && user_access('subscribe to taxonomy terms')) {
+    global $user;
+
+    $term = taxonomy_term_load($view->args[0]);
+
+    require_once(drupal_get_path('module', 'subscriptions') . '/subscriptions.module');
+
+    $sid = subscriptions_get_subscription($user->uid, 'node', 'tid', $view->args[0]);
+
+    $attributes = array(
+      'query' => array(
+        'destination' => current_path(),
+      ),
+    );
+
+    if (!$sid) {
+      $header = l(t('Get notified about content tagged with "!term"', array('!term' => $term->name)), 'subscriptions/add/taxa/' . $view->args[0], $attributes);
+    }
+    else {
+      $header = l(t('Stop getting notified about content tagged with "!term"', array('!term' => $term->name)), 'subscriptions/del/taxa/' . $view->args[0], $attributes);
+    }
+
+
+    $options = array(
+      'id' => 'area',
+      'table' => 'views',
+      'field' => 'area',
+      'empty' => FALSE,
+      'content' => $header,
+      'format' => 'full_html',
+      'tokenize' => 0,
+    );
+    $view->display_handler->set_option('header', array('text' => $options));
+
+  }
+}
+
+/**
+ * Implements hook_node_presave();
+ *
+ * Stop subscriptions is reverting a node.
+ */
+function atwork_subscriptions_node_presave($node) {
+  // problem: reverting a node automatically sets $node->subscriptions_notify
+  // so we need to detect if this is a revision
+  if (isset($node->log) && strpos($node->log, 'opy of the revision from <em class="placeholder">')) {
+    $node->subscriptions_notify = FALSE;
+  }
+}
+
+
+

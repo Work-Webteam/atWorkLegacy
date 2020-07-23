@@ -1,6 +1,0 @@
-; $Id$
-name = Presence
-description = This module is used to swap out idir's with user display names. It takes the necessary code from teh old presence module, removes the unneeded code and wraps it in a module that is more aptly named for what it does.
-package = Atwork
-dependencies[] = atwork_profiles
-core = 7.x
