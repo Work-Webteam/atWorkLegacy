@@ -1498,6 +1498,11 @@ function _filter_url($text, $filter) {
 
   // Match e-mail addresses.
   $url_pattern = "[A-Za-z0-9._+-]{1,254}@(?:$domain)";
+  // Mail domain pattern differs from the general domain pattern by requiring
+  // a TLD match. This allows patterns like foo@bar in text without
+  // being converted to a mailto link.
+  $email_domain = '(?:[A-Za-z0-9._+-]+\.)+[A-Za-z]{2,64}\b';
+  $url_pattern = "[A-Za-z0-9._+-]{1,254}@(?:$email_domain)";
   $pattern = "`($url_pattern)`";
   $tasks['_filter_url_parse_email_links'] = $pattern;
 
