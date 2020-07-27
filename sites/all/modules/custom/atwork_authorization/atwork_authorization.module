@@ -9,9 +9,26 @@
  */
 function atwork_authorization_init() {
 
+  $_SERVER['HTTP_SM_USER'] = "twerdal";
+  // Check if we have an idir as expected.
+  if (isset($_SERVER['HTTP_SM_USER'])) {
+    // Get idir from $server - this can come in a few forms depending on Test or Prod.
+    // We want this lowercase - as per standard.
+    if (strpos($_SERVER['HTTP_SM_USER'], 'IDIR') !== false) {
+      $sm_user = str_replace("idir\\", "", strtolower($_SERVER['HTTP_SM_USER']));
+    } else {
+      $sm_user = strtolower($_SERVER['HTTP_SM_USER']);
+    }
+  }
+
   // If we are already logged in, then we don't need to do this again.
-  if ( user_is_logged_in() ) {
-    return;
+  // Do need to check that our current user matches what we expect.
+  if ( user_is_logged_in() && isset( $sm_user )) {
+    global $user;
+    if($user->init == $sm_user ) {
+      // User is properly signed in. End function.
+      return;
+    }
   }
 
   // If this is drush, eject.
@@ -33,22 +50,14 @@ function atwork_authorization_init() {
   }
 
   // Try to log the user in.
-  if( isset($_SERVER['HTTP_SM_USER'])) {
-    // We need to see if we can log the user in, and if not then deny entry.
-    // for consistency always use lowercase IDIRs in drupal.
-    if (strpos($_SERVER['HTTP_SM_USER'], 'IDIR') !== false) {
-      $sm_user = str_replace("idir\\", "", strtolower($_SERVER['HTTP_SM_USER']));
-    } else {
-      $sm_user = strtolower($_SERVER['HTTP_SM_USER']);
-    }
-    $current_user = user_load_by_name($sm_user);
-    if(isset($current_user->uid)) {
-      $form_state['uid'] = $current_user->uid;
-      // We have everything we need, now lets login.
-      user_login_submit(array(), $form_state);
-      return;
-    }
+  $current_user = user_load_by_name($sm_user);
+  if(isset($current_user->uid)) {
+    $form_state['uid'] = $current_user->uid;
+    // We have everything we need, now lets login.
+    user_login_submit(array(), $form_state);
+    return;
   }
+
   // If the user meets none of the criteria, they should not be on the site.
   drupal_access_denied();
 }
