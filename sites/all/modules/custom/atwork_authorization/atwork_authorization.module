@@ -28,7 +28,9 @@ function atwork_authorization_init() {
   // If we are already logged in, then we don't need to do this again.
   // Do need to check that our current user matches what we expect.
   if ( user_is_logged_in() && isset( $sm_user )) {
+    // Get currently logged in user.
     global $user;
+    // Check for a match.
     if($user->init == $sm_user ) {
       // User is properly signed in. End function.
       return;
