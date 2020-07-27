@@ -2,14 +2,18 @@
 
 
 /*
- * Implementation if hook_init()
+ * Implements hook_init()
  *
- * We want to do this early. Logs user in if we find a proper header.
+ * This is used to authenticate users after they have gone through Siteminder.
+ * Uses $_SERVER['HTTP_SM_USER'] which is passed in from Siteminder after authentification.
+ * We also check for Drush/RSS etc before we deny access - so they don't get caught
+ * up in this.
+ *
+ * If the user does not check out at all - we completely deny access across the board.
  *
  */
 function atwork_authorization_init() {
 
-  $_SERVER['HTTP_SM_USER'] = "twerdal";
   // Check if we have an idir as expected.
   if (isset($_SERVER['HTTP_SM_USER'])) {
     // Get idir from $server - this can come in a few forms depending on Test or Prod.
