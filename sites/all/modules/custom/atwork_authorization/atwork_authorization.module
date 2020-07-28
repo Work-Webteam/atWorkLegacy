@@ -33,6 +33,9 @@ function atwork_authorization_init() {
 
     dpm($user);
     dpm($sm_user);
+    if(!isset($sm_user)) {
+      dpm($user);
+    }
     if($user->init == $sm_user ) {
       // User is properly signed in. End function.
       dpm('exit');
