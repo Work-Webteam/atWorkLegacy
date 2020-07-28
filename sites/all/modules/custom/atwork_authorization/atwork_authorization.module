@@ -33,6 +33,22 @@ function atwork_authorization_init() {
       // User is properly signed in. End function.
       return;
     }
+    // Support masquerading, don't proceed if a user is currently masquerading.
+    if (isset($user->name) && isset($user->sid)) {
+      if (module_exists('masquerade') && $sm_user != $user->name) {
+        $true_uid = db_select('masquerade', 'm')
+          ->condition('sid', $user->sid)
+          ->condition('uid_as', $user->uid)
+          ->fields('m', array('uid_from'))
+          ->execute()
+          ->fetchAssoc();
+
+        if ($true_uid) {
+          // user is masquerading, abort now
+          return;
+        }
+      }
+    }
   }
 
   // If this is drush, eject.
