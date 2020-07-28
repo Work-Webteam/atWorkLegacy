@@ -13,6 +13,10 @@
  *
  */
 function atwork_authorization_init() {
+  // If this is a call from the stite itself, ignore.
+  if(isset($_SERVER['HTTP_SM_AUTHTYPE']) && $_SERVER['HTTP_SM_AUTHTYPE'] == 'Auto'){
+    return;
+  }
   //$_SERVER['HTTP_SM_USER'] = 'twerdal';
   // Check if we have an idir as expected.
   if (isset($_SERVER['HTTP_SM_USER'])) {
