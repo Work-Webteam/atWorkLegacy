@@ -30,7 +30,7 @@ function atwork_authorization_init() {
 
   dpm($sm_user);
   dpm($_SERVER);
-  if(!isset($sm_user)) {
+  if(!empty($sm_user)) {
     dpm($user);
     dpm($_SERVER);
   }
