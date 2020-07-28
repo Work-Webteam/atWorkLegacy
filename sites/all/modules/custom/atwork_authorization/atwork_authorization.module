@@ -82,11 +82,12 @@ function atwork_authorization_init() {
     }
   }
   if($user->uid) {
+    dpm($_SERVER);
     // We have someone who is logged in - but we were passed a non-existant idir in $_SERVER.
     // Want to make sure past user is logged out.
     module_load_include('pages.inc', 'user');
-    user_logout_current_user();
-    drupal_goto(current_path());
+    //user_logout_current_user();
+    //drupal_goto(current_path());
   }
   // Nobody is logged in, we didn't get a $SERVER name that is recognized.
   // Drupal permissions handle this case.
