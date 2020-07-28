@@ -13,7 +13,6 @@
  *
  */
 function atwork_authorization_init() {
-  $_SERVER['HTTP_SM_USER'] = 'twerdal';
   // Check if we have an idir as expected.
   if (isset($_SERVER['HTTP_SM_USER'])) {
     // Get idir from $server - this can come in a few forms depending on Test or Prod.
