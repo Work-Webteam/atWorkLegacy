@@ -13,6 +13,7 @@
  *
  */
 function atwork_authorization_init() {
+  //$_SERVER['HTTP_SM_USER'] = 'twerdal';
   // Check if we have an idir as expected.
   if (isset($_SERVER['HTTP_SM_USER'])) {
     // Get idir from $server - this can come in a few forms depending on Test or Prod.
@@ -29,8 +30,12 @@ function atwork_authorization_init() {
     // Get currently logged in user.
     global $user;
     // Check for a match.
+
+    dpm($user);
+    dpm($sm_user);
     if($user->init == $sm_user ) {
       // User is properly signed in. End function.
+      dpm('exit');
       return;
     }
     // Support masquerading, don't proceed if a user is currently masquerading.
@@ -44,6 +49,7 @@ function atwork_authorization_init() {
           ->fetchAssoc();
 
         if ($true_uid) {
+          dpm($true_uid);
           // user is masquerading, abort now
           return;
         }
