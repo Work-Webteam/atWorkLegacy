@@ -13,7 +13,7 @@
  *
  */
 function atwork_authorization_init() {
-
+  $_SERVER['HTTP_SM_USER'] = 'twerdal';
   // Check if we have an idir as expected.
   if (isset($_SERVER['HTTP_SM_USER'])) {
     // Get idir from $server - this can come in a few forms depending on Test or Prod.
@@ -24,7 +24,6 @@ function atwork_authorization_init() {
       $sm_user = strtolower($_SERVER['HTTP_SM_USER']);
     }
   }
-
   // If we are already logged in, then we don't need to do this again.
   // Do need to check that our current user matches what we expect.
   if ( user_is_logged_in() && isset( $sm_user )) {
@@ -47,23 +46,42 @@ function atwork_authorization_init() {
     return;
   }
 
-  // Don't do this for Apache - this is only for Telus servers.
-  if (isset($_SERVER['USER'])) {
-    if ($_SERVER['USER'] != 'apache' && !isset($_SERVER['HTTP_SM_USER'])) {
-      // Nothing to do here.
-      return;
-    }
-  }
-
   // Try to log the user in.
   $current_user = user_load_by_name($sm_user);
   if(isset($current_user->uid)) {
     $form_state['uid'] = $current_user->uid;
     // We have everything we need, now lets login.
     user_login_submit(array(), $form_state);
+    drupal_session_regenerate();
+    // For some reason, the access check occurs before the user
+    // is loaded, so we are going to have to redirect them here.
+    drupal_goto(current_path());
+    return;
+  } elseif($user->uid) {
+    // We have someone who is logged in - but we were passed a non-existant idir in $_SERVER.
+    // Want to make sure past user is logged out.
+    module_load_include('pages.inc', 'user');
+    user_logout_current_user();
+    drupal_goto(current_path());
+  }
+  // Nobody is logged in, we didn't get a $SERVER name that is recognized.
+  // Drupal permissions handle this case.
+}
+
+
+/**
+ * Implements hook_module_implements_alter().
+ *
+ * Want to make sure we authorize very first thing.
+ */
+function atwork_authorization_module_implements_alter(&$implementations, $hook) {
+  // Working with hook_init.
+  if ($hook != 'init') {
     return;
   }
-
-  // If the user meets none of the criteria, they should not be on the site.
-  drupal_access_denied();
+  // Move our module hook up to the top of the list.
+  $module = 'atwork_authorization';
+  $group = array($module => $implementations[$module]);
+  unset($implementations[$module]);
+  $implementations = $group + $implementations;
 }
