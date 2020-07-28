@@ -47,9 +47,9 @@ function atwork_authorization_init() {
           ->fields('m', array('uid_from'))
           ->execute()
           ->fetchAssoc();
+        dpm($true_uid);
 
         if ($true_uid) {
-          dpm($true_uid);
           // user is masquerading, abort now
           return;
         }
@@ -68,17 +68,20 @@ function atwork_authorization_init() {
   }
 
   // Try to log the user in.
-  $current_user = user_load_by_name($sm_user);
-  if(isset($current_user->uid)) {
-    $form_state['uid'] = $current_user->uid;
-    // We have everything we need, now lets login.
-    user_login_submit(array(), $form_state);
-    drupal_session_regenerate();
-    // For some reason, the access check occurs before the user
-    // is loaded, so we are going to have to redirect them here.
-    drupal_goto(current_path());
-    return;
-  } elseif($user->uid) {
+  if(isset($sm_user)) {
+    $current_user = user_load_by_name($sm_user);
+    if (isset($current_user->uid)) {
+      $form_state['uid'] = $current_user->uid;
+      // We have everything we need, now lets login.
+      user_login_submit(array(), $form_state);
+      drupal_session_regenerate();
+      // For some reason, the access check occurs before the user
+      // is loaded, so we are going to have to redirect them here.
+      drupal_goto(current_path());
+      return;
+    }
+  }
+  if($user->uid) {
     // We have someone who is logged in - but we were passed a non-existant idir in $_SERVER.
     // Want to make sure past user is logged out.
     module_load_include('pages.inc', 'user');
