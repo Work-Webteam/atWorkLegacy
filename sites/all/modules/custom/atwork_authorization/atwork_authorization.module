@@ -28,6 +28,8 @@ function atwork_authorization_init() {
 
   global $user;
 
+  dpm($sm_user);
+  dpm($_SERVER);
   if(!isset($sm_user)) {
     dpm($user);
     dpm($_SERVER);
