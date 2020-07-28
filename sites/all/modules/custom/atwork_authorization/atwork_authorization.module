@@ -40,8 +40,6 @@ function atwork_authorization_init() {
   if ( user_is_logged_in() && isset( $sm_user )) {
     // Get currently logged in user.
     //global $user;
-    dpm($user);
-    dpm($sm_user);
     // Check for a match.
     if($user->init == $sm_user ) {
       // User is properly signed in. End function.
@@ -92,7 +90,8 @@ function atwork_authorization_init() {
     }
   }
   if($user->uid) {
-    dpm($_SERVER);
+    dpm($user);
+    dpm($sm_user);
     // We have someone who is logged in - but we were passed a non-existant idir in $_SERVER.
     // Want to make sure past user is logged out.
     module_load_include('pages.inc', 'user');
