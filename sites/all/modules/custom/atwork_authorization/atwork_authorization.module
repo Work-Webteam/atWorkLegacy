@@ -13,7 +13,7 @@
  *
  */
 function atwork_authorization_init() {
-  dpm($_SESSION);
+  dpm($_SERVER);
   // If this is a call from the site itself, ignore.
   if(isset($_SERVER['HTTP_SM_AUTHTYPE']) && $_SERVER['HTTP_SM_AUTHTYPE'] == 'Auto' && !isset($_SERVER['HTTP_SM_USER'])){
     return;
