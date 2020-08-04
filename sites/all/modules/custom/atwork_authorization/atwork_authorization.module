@@ -98,7 +98,7 @@ function atwork_authorization_init() {
 
   // Some users are not getting logged in - we want to try and figure out why that is. Adding in watchdog message here.
   if(!isset($_SERVER['HTTP_SM_USER'])){
-    watchdog("User tried to log in, but was denied", '<pre>' . print_r($_SERVER, true) . '</pre>');
+    watchdog("User tried to log in with missing variable, but was denied.", '<pre>' . print_r($_SERVER, true) . '</pre>');
     return;
   }
   // Nobody is logged in, we didn't get a $SERVER name that is recognized.
