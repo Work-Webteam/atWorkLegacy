@@ -13,12 +13,23 @@
  *
  */
 function atwork_authorization_init() {
-  dpm($_SERVER);
+
   // If this is a call from the site itself, ignore.
   if(isset($_SERVER['HTTP_SM_AUTHTYPE']) && $_SERVER['HTTP_SM_AUTHTYPE'] == 'Auto' && !isset($_SERVER['HTTP_SM_USER'])){
     return;
   }
-  $_SERVER['HTTP_SM_USER'] = 'twerdal';
+
+  // If this is drush, eject.
+  if(drupal_is_cli()) {
+    return;
+  }
+
+  // rss.xml bypasses siteminder so can abort now.
+  if ($_GET['q'] == 'rss.xml') {
+    return;
+
+  }
+
   // Check if we have an idir as expected.
   if (isset($_SERVER['HTTP_SM_USER'])) {
     // Get idir from $server - this can come in a few forms depending on Test or Prod.
@@ -32,7 +43,7 @@ function atwork_authorization_init() {
 
   // If we are already logged in, then we don't need to do this again.
   // Do need to check that our current user matches what we expect.
-  if ( user_is_logged_in() && isset( $sm_user )) {
+  if ( isset( $sm_user ) && user_is_logged_in() ) {
     // Get currently logged in user.
     global $user;
     // Check for a match.
@@ -42,14 +53,14 @@ function atwork_authorization_init() {
     }
     // Support masquerading, don't proceed if a user is currently masquerading.
     if (isset($user->name) && isset($user->sid)) {
-      if (module_exists('masquerade') && $sm_user != $user->name) {
+      if ($sm_user != $user->name && module_exists('masquerade')) {
         $true_uid = db_select('masquerade', 'm')
           ->condition('sid', $user->sid)
           ->condition('uid_as', $user->uid)
           ->fields('m', array('uid_from'))
           ->execute()
           ->fetchAssoc();
-        // Should return masquraders UID if a user is masquerading.
+        // Should return masqueraders UID if a user is masquerading.
         if ($true_uid) {
           // User is masquerading, abort now.
           return;
@@ -58,15 +69,6 @@ function atwork_authorization_init() {
     }
   }
 
-  // If this is drush, eject.
-  if(drupal_is_cli()) {
-    return;
-  }
-
-  // rss.xml bypasses siteminder so can abort now.
-  if ($_GET['q'] == 'rss.xml') {
-    return;
-  }
 
   // Try to log the user in.
   if(isset($sm_user)) {
@@ -82,7 +84,12 @@ function atwork_authorization_init() {
       return;
     }
   }
-  if($user->uid && !isset($sm_user)) {
+  // Some users are not getting logged in - we want to try and figure out why that is. Adding in watchdog message here.
+  if(!isset($_SERVER['HTTP_SM_USER'])){
+    watchdog("User tried to log in, but was denied", '<pre>' . print_r($_SERVER, true) . '</pre>');
+  }
+
+  if(!isset($sm_user) && user_is_logged_in()) {
     // We have someone who is logged in - but we were passed a non-existant idir in $_SERVER.
     // Want to make sure past user is logged out.
     module_load_include('pages.inc', 'user');
