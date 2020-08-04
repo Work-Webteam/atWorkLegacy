@@ -14,6 +14,8 @@
  */
 function atwork_authorization_init() {
 
+  $_SERVER['HTTP_SM_USER'] = 'twerdal';
+
   // If this is a call from the site itself, ignore.
   if(isset($_SERVER['HTTP_SM_AUTHTYPE']) && $_SERVER['HTTP_SM_AUTHTYPE'] == 'Auto' && !isset($_SERVER['HTTP_SM_USER'])){
     return;
@@ -84,10 +86,6 @@ function atwork_authorization_init() {
       return;
     }
   }
-  // Some users are not getting logged in - we want to try and figure out why that is. Adding in watchdog message here.
-  if(!isset($_SERVER['HTTP_SM_USER'])){
-    watchdog("User tried to log in, but was denied", '<pre>' . print_r($_SERVER, true) . '</pre>');
-  }
 
   if(!isset($sm_user) && user_is_logged_in()) {
     // We have someone who is logged in - but we were passed a non-existant idir in $_SERVER.
@@ -95,9 +93,17 @@ function atwork_authorization_init() {
     module_load_include('pages.inc', 'user');
     user_logout_current_user();
     drupal_goto(current_path());
+    return;
+  }
+
+  // Some users are not getting logged in - we want to try and figure out why that is. Adding in watchdog message here.
+  if(!isset($_SERVER['HTTP_SM_USER'])){
+    watchdog("User tried to log in, but was denied", '<pre>' . print_r($_SERVER, true) . '</pre>');
+    return;
   }
   // Nobody is logged in, we didn't get a $SERVER name that is recognized.
   // Drupal permissions handle this case.
+  watchdog("No case accurately captured user", '<pre>' . print_r($_SERVER, true) . '</pre>');
 }
 
 
