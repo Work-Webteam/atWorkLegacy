@@ -13,7 +13,6 @@
  *
  */
 function atwork_authorization_init() {
-
   // If this is a call from the site itself, ignore.
   if(isset($_SERVER['HTTP_SM_AUTHTYPE']) && $_SERVER['HTTP_SM_AUTHTYPE'] == 'Auto' && empty($_SERVER['HTTP_SM_USER'])){
     watchdog("Internal call, no auth", '<pre>' . print_r($_SERVER, true) . '</pre>');
@@ -45,10 +44,10 @@ function atwork_authorization_init() {
   if (isset($_SERVER['HTTP_SM_USER'])) {
     // Get idir from $server - this can come in a few forms depending on Test or Prod.
     // We want this lowercase - as per standard.
-    if (strpos($_SERVER['HTTP_SM_USER'], 'IDIR') !== false) {
-      $sm_user = str_replace("idir\\", "", strtolower($_SERVER['HTTP_SM_USER']));
+    if (strpos($_SERVER['HTTP_SM_USER'], 'IDIR') != false) {
+      $sm_user = trim(str_replace("idir\\", "", strtolower($_SERVER['HTTP_SM_USER'])));
     } else {
-      $sm_user = strtolower($_SERVER['HTTP_SM_USER']);
+      $sm_user = trim(strtolower($_SERVER['HTTP_SM_USER']));
     }
   }
 
