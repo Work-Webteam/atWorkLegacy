@@ -85,11 +85,12 @@ function atwork_authorization_init() {
       $form_state['uid'] = $current_user->uid;
       // We have everything we need, now lets login.
       user_login_submit(array(), $form_state);
+      watchdog("User logged in normally", '<pre>' . print_r($_SERVER, true) . '</pre>');
+
       drupal_session_regenerate();
       // For some reason, the access check occurs before the user
       // is loaded, so we are going to have to redirect them here.
       drupal_goto(current_path());
-      watchdog("User logged in", '<pre>' . print_r($_SERVER, true) . '</pre>');
 
       return;
     }
