@@ -45,10 +45,13 @@ function atwork_authorization_init() {
   if (isset($_SERVER['HTTP_SM_USER'])) {
     // Get idir from $server - this can come in a few forms depending on Test or Prod.
     // We want this lowercase - as per standard.
-    if (strpos($_SERVER['HTTP_SM_USER'], 'IDIR') !== false) {
-      $sm_user = str_replace("idir\\", "", strtolower($_SERVER['HTTP_SM_USER']));
+    // NOTE: !== is required here to return proper result, since 0 is a valid offset and 0 is "falsey".
+    if (strpos($_SERVER['HTTP_SM_USER'], 'IDIR\\') !== false) {
+      $sm_user = str_replace("idir\\", "", trim(strtolower($_SERVER['HTTP_SM_USER'])));
+
     } else {
-      $sm_user = strtolower($_SERVER['HTTP_SM_USER']);
+      $sm_user = strtolower(trim($_SERVER['HTTP_SM_USER']));
+
     }
   }
 
