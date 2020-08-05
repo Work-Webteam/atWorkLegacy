@@ -21,6 +21,11 @@ function atwork_authorization_init() {
     return;
   }
 
+  // Authcache has it's own authentication checks - so we can ignore this.
+  if(isset($_SERVER['SCRIPT_NAME'] && $_SERVER['SCRIPT_NAME'] == '/authcache.php')) {
+    watchdog("Authcache call, user is logged in", '<pre>' . print_r($_SERVER, true) . '</pre>');
+    return;
+  }
   // If this is drush, eject.
   if(drupal_is_cli()) {
     watchdog("Drush run, no auth", '<pre>' . print_r($_SERVER, true) . '</pre>');
