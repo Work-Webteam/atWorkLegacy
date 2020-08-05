@@ -16,16 +16,22 @@ function atwork_authorization_init() {
 
   // If this is a call from the site itself, ignore.
   if(isset($_SERVER['HTTP_SM_AUTHTYPE']) && $_SERVER['HTTP_SM_AUTHTYPE'] == 'Auto' && !isset($_SERVER['HTTP_SM_USER'])){
+    watchdog("Internal call, no auth", '<pre>' . print_r($_SERVER, true) . '</pre>');
+
     return;
   }
 
   // If this is drush, eject.
   if(drupal_is_cli()) {
+    watchdog("Drush run, no auth", '<pre>' . print_r($_SERVER, true) . '</pre>');
+
     return;
   }
 
   // rss.xml bypasses siteminder so can abort now.
   if ($_GET['q'] == 'rss.xml') {
+    watchdog("RSS, no auth", '<pre>' . print_r($_SERVER, true) . '</pre>');
+
     return;
 
   }
@@ -49,6 +55,8 @@ function atwork_authorization_init() {
     // Check for a match.
     if($user->init == $sm_user ) {
       // User is properly signed in. End function.
+      watchdog("user already logged in, no auth", '<pre>' . print_r($_SERVER, true) . '</pre>');
+
       return;
     }
     // Support masquerading, don't proceed if a user is currently masquerading.
@@ -81,6 +89,8 @@ function atwork_authorization_init() {
       // For some reason, the access check occurs before the user
       // is loaded, so we are going to have to redirect them here.
       drupal_goto(current_path());
+      watchdog("User logged in", '<pre>' . print_r($_SERVER, true) . '</pre>');
+
       return;
     }
   }
@@ -91,6 +101,8 @@ function atwork_authorization_init() {
     module_load_include('pages.inc', 'user');
     user_logout_current_user();
     drupal_goto(current_path());
+    watchdog("No idir, user logged out", '<pre>' . print_r($_SERVER, true) . '</pre>');
+
     return;
   }
 
