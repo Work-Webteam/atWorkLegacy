@@ -15,7 +15,7 @@
 function atwork_authorization_init() {
 
   // If this is a call from the site itself, ignore.
-  if(isset($_SERVER['HTTP_SM_AUTHTYPE']) && $_SERVER['HTTP_SM_AUTHTYPE'] == 'Auto' && !isset($_SERVER['HTTP_SM_USER'])){
+  if(isset($_SERVER['HTTP_SM_AUTHTYPE']) && $_SERVER['HTTP_SM_AUTHTYPE'] == 'Auto' && empty($_SERVER['HTTP_SM_USER'])){
     watchdog("Internal call, no auth", '<pre>' . print_r($_SERVER, true) . '</pre>');
 
     return;
