@@ -16,27 +16,20 @@ function atwork_authorization_init() {
 
   // If this is a call from the site itself, ignore.
   if(isset($_SERVER['HTTP_SM_AUTHTYPE']) && $_SERVER['HTTP_SM_AUTHTYPE'] == 'Auto' && empty($_SERVER['HTTP_SM_USER'])){
-    watchdog("Internal call, no auth", '<pre>' . print_r($_SERVER, true) . '</pre>');
-
     return;
   }
 
   // Authcache has it's own authentication checks - so we can ignore this.
   if(isset($_SERVER['SCRIPT_NAME']) && $_SERVER['SCRIPT_NAME'] == '/authcache.php') {
-    watchdog("Authcache call, user is logged in", '<pre>' . print_r($_SERVER, true) . '</pre>');
     return;
   }
   // If this is drush, eject.
   if(drupal_is_cli()) {
-    watchdog("Drush run, no auth", '<pre>' . print_r($_SERVER, true) . '</pre>');
-
     return;
   }
 
   // rss.xml bypasses siteminder so can abort now.
   if ($_GET['q'] == 'rss.xml') {
-    watchdog("RSS, no auth", '<pre>' . print_r($_SERVER, true) . '</pre>');
-
     return;
 
   }
@@ -54,6 +47,10 @@ function atwork_authorization_init() {
 
     }
   }
+  // If we don't have a user at this point, maybe try the GUID, as Idirs do not always match
+  if(!isset($sm_user) && isset($_SERVER['HTTP_SMGOV_USERGUID'])){
+    $sm_user = get_user_by_guid();
+  }
 
   // If we are already logged in, then we don't need to do this again.
   // Do need to check that our current user matches what we expect.
@@ -62,9 +59,6 @@ function atwork_authorization_init() {
     global $user;
     // Check for a match.
     if($user->init == $sm_user ) {
-      // User is properly signed in. End function.
-      watchdog("user already logged in, no auth", '<pre>' . print_r($_SERVER, true) . '</pre>');
-
       return;
     }
     // Support masquerading, don't proceed if a user is currently masquerading.
@@ -93,13 +87,10 @@ function atwork_authorization_init() {
       $form_state['uid'] = $current_user->uid;
       // We have everything we need, now lets login.
       user_login_submit(array(), $form_state);
-      watchdog("User logged in normally", '<pre>' . print_r($_SERVER, true) . '</pre>');
-
       drupal_session_regenerate();
       // For some reason, the access check occurs before the user
       // is loaded, so we are going to have to redirect them here.
       drupal_goto(current_path());
-
       return;
     }
   }
@@ -110,8 +101,6 @@ function atwork_authorization_init() {
     module_load_include('pages.inc', 'user');
     user_logout_current_user();
     drupal_goto(current_path());
-    watchdog("No idir, user logged out", '<pre>' . print_r($_SERVER, true) . '</pre>');
-
     return;
   }
 
@@ -141,4 +130,25 @@ function atwork_authorization_module_implements_alter(&$implementations, $hook) 
   $group = array($module => $implementations[$module]);
   unset($implementations[$module]);
   $implementations = $group + $implementations;
+}
+
+
+/**
+ * Helper function to return an SM_USER by GUID, or false.
+ */
+function get_user_by_guid() {
+  $guid = $_SERVER['HTTP_SMGOV_USERGUID'];
+  // now lets load the expected uid and guid
+  $uid = db_select('atwork_auth', 'a')
+    ->fields('a', array('uid'))
+    ->condition('a.guid', $guid)
+    ->execute()
+    ->fetchAssoc();
+
+  if($uid) {
+    $current_user = user_load($uid['uid']);
+    $user_name = $current_user->name;
+    return $user_name;
+  }
+  return false;
 }
