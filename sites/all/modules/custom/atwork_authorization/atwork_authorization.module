@@ -13,9 +13,10 @@
  *
  */
 function atwork_authorization_init() {
+  $current_user = false;
 
   // If this is a call from the site itself, ignore.
-  if(isset($_SERVER['HTTP_SM_AUTHTYPE']) && $_SERVER['HTTP_SM_AUTHTYPE'] == 'Auto' && empty($_SERVER['HTTP_SM_USER'])){
+  if(isset($_SERVER['HTTP_SM_AUTHTYPE']) && $_SERVER['HTTP_SM_AUTHTYPE'] == 'Auto' ){
     return;
   }
 
@@ -37,33 +38,38 @@ function atwork_authorization_init() {
   // Check if we have an idir as expected.
   if (isset($_SERVER['HTTP_SM_USER'])) {
     // Get idir from $server - this can come in a few forms depending on Test or Prod.
+    // Even in a production environment, we see some users come as IDIR\USERNAME and some simply as USERNAME.
     // We want this lowercase - as per standard.
     // NOTE: !== is required here to return proper result, since 0 is a valid offset and 0 is "falsey".
     if (strpos($_SERVER['HTTP_SM_USER'], 'IDIR\\') !== false) {
       $sm_user = str_replace("idir\\", "", trim(strtolower($_SERVER['HTTP_SM_USER'])));
-
     } else {
       $sm_user = strtolower(trim($_SERVER['HTTP_SM_USER']));
-
     }
-  }
-  // If we don't have a user at this point, maybe try the GUID, as Idirs do not always match
-  if(!isset($sm_user) && isset($_SERVER['HTTP_SMGOV_USERGUID'])){
-    $sm_user = get_user_by_guid();
+    $current_user = user_load_by_name($sm_user);
+    if(($current_user === false || $current_user->uid == 0) && isset($_SERVER['HTTP_SMGOV_USERGUID']) && !empty($_SERVER['HTTP_SMGOV_USERGUID'])) {
+      // One last try to get a username, if we have a guid present.
+      $current_user = get_user_by_guid();
+      if($current_user === false) {
+        watchdog('No user could be logged in', '<pre>' . print_r($_SERVER, true) . '</pre>');
+      } else {
+        watchdog("user logged in by guid",'<pre>' . print_r($_SERVER, true) . '</pre>');
+      }
+    }
   }
 
   // If we are already logged in, then we don't need to do this again.
   // Do need to check that our current user matches what we expect.
-  if ( isset( $sm_user ) && user_is_logged_in() ) {
+  if ( $current_user !== false && $current_user->uid != 0 && user_is_logged_in() ) {
     // Get currently logged in user.
     global $user;
     // Check for a match.
-    if($user->init == $sm_user ) {
+    if($user->init == $current_user->init ) {
       return;
     }
     // Support masquerading, don't proceed if a user is currently masquerading.
     if (isset($user->name) && isset($user->sid)) {
-      if ($sm_user != $user->name && module_exists('masquerade')) {
+      if ($current_user->name != $user->name && module_exists('masquerade')) {
         $true_uid = db_select('masquerade', 'm')
           ->condition('sid', $user->sid)
           ->condition('uid_as', $user->uid)
@@ -81,35 +87,31 @@ function atwork_authorization_init() {
 
 
   // Try to log the user in.
-  if(isset($sm_user)) {
-    $current_user = user_load_by_name($sm_user);
-    if (isset($current_user->uid)) {
-      $form_state['uid'] = $current_user->uid;
-      // We have everything we need, now lets login.
-      user_login_submit(array(), $form_state);
-      drupal_session_regenerate();
-      // For some reason, the access check occurs before the user
-      // is loaded, so we are going to have to redirect them here.
-      drupal_goto(current_path());
-      return;
-    } else {
-      watchdog("User could not be loaded", '<pre>' . print_r($_SERVER, true) . '</pre>');
-    }
+  if ($current_user !== false && $current_user->uid != 0) {
+    $form_state['uid'] = $current_user->uid;
+    // We have everything we need, now lets login.
+    user_login_submit(array(), $form_state);
+    drupal_session_regenerate();
+    // For some reason, the access check occurs before the user
+    // is loaded, so we are going to have to redirect them here.
+    drupal_goto(current_path());
+    return;
+  } else {
+    watchdog("User could not be loaded", '<pre>' . print_r($_SERVER, true) . '</pre>');
   }
 
-  if(!isset($sm_user) && user_is_logged_in()) {
+  if(($current_user === false  || $current_user->uid == 0) && user_is_logged_in()) {
     // We have someone who is logged in - but we were passed a non-existant idir in $_SERVER.
     // Want to make sure past user is logged out.
     module_load_include('pages.inc', 'user');
     user_logout_current_user();
+    watchdog("No user name, logging out existing user" . $current_user->name, '<pre>' . print_r($_SERVER, true) . '</pre>');
     drupal_goto(current_path());
-    watchdog("No user name, loggin out existing user.", '<pre>' . print_r($_SERVER, true) . '</pre>');
-
   }
 
   // Some users are not getting logged in - we want to try and figure out why that is. Adding in watchdog message here.
-  if(!isset($_SERVER['HTTP_SM_USER'])){
-    watchdog("User tried to log in with missing variable, but was denied.", '<pre>' . print_r($_SERVER, true) . '</pre>');
+  if(!isset($_SERVER['HTTP_SM_USER']) || empty($_SERVER['HTTP_SM_USER'])){
+    watchdog("User tried to log in with missing sm_username but was denied.", '<pre>' . print_r($_SERVER, true) . '</pre>');
     return;
   }
   // Nobody is logged in, we didn't get a $SERVER name that is recognized.
@@ -148,9 +150,12 @@ function get_user_by_guid() {
     ->execute()
     ->fetchAssoc();
 
-  if($uid) {
+  if(isset($uid['uid'])) {
     $current_user = user_load($uid['uid']);
-    return $current_user->name;
+    watchdog('Found user via GUID', '<pre>' . print_r($_SERVER, true) . '</pre>');
+
+    return $current_user;
   }
+  watchdog('No user found via GUID', '<pre>' . print_r($_SERVER, true) . '</pre>');
   return false;
 }
