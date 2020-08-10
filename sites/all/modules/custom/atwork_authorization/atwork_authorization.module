@@ -92,6 +92,8 @@ function atwork_authorization_init() {
       // is loaded, so we are going to have to redirect them here.
       drupal_goto(current_path());
       return;
+    } else {
+      watchdog("User could not be loaded", '<pre>' . print_r($_SERVER, true) . '</pre>');
     }
   }
 
@@ -101,7 +103,8 @@ function atwork_authorization_init() {
     module_load_include('pages.inc', 'user');
     user_logout_current_user();
     drupal_goto(current_path());
-    return;
+    watchdog("No user name, loggin out existing user.", '<pre>' . print_r($_SERVER, true) . '</pre>');
+
   }
 
   // Some users are not getting logged in - we want to try and figure out why that is. Adding in watchdog message here.
@@ -147,8 +150,7 @@ function get_user_by_guid() {
 
   if($uid) {
     $current_user = user_load($uid['uid']);
-    $user_name = $current_user->name;
-    return $user_name;
+    return $current_user->name;
   }
   return false;
 }
