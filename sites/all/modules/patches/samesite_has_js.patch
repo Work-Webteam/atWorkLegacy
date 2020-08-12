@@ -1,0 +1,195 @@
+diff --git a/includes/authorize.inc b/includes/authorize.inc
+index 8360e132ce..1db3267832 100644
+--- a/includes/authorize.inc
++++ b/includes/authorize.inc
+@@ -104,11 +104,6 @@ function authorize_filetransfer_form($form, &$form_state) {
+     // Start non-JS code.
+     if (isset($form_state['values']['connection_settings']['authorize_filetransfer_default']) && $form_state['values']['connection_settings']['authorize_filetransfer_default'] == $name) {
+
+-      // If the user switches from JS to non-JS, Drupal (and Batch API) will
+-      // barf. This is a known bug: http://drupal.org/node/229825.
+-      setcookie('has_js', '', time() - 3600, '/');
+-      unset($_COOKIE['has_js']);
+-
+       // Change the submit button to the submit_process one.
+       $form['submit_process']['#attributes'] = array();
+       unset($form['submit_connection']);
+diff --git a/includes/batch.inc b/includes/batch.inc
+index e89ab8dec9..e59b0c8917 100644
+--- a/includes/batch.inc
++++ b/includes/batch.inc
+@@ -72,7 +72,9 @@ function _batch_page() {
+   $output = NULL;
+   switch ($op) {
+     case 'start':
+-      $output = _batch_start();
++      // Display the full progress page on startup and on each additional
++      // non-JavaScript iteration.
++      $output = _batch_progress_page();
+       break;
+
+     case 'do':
+@@ -82,7 +84,7 @@ function _batch_page() {
+
+     case 'do_nojs':
+       // Non-JavaScript-based progress page.
+-      $output = _batch_progress_page_nojs();
++      $output = _batch_progress_page();
+       break;
+
+     case 'finished':
+@@ -93,69 +95,12 @@ function _batch_page() {
+   return $output;
+ }
+
+-/**
+- * Initializes the batch processing.
+- *
+- * JavaScript-enabled clients are identified by the 'has_js' cookie set in
+- * drupal.js. If no JavaScript-enabled page has been visited during the current
+- * user's browser session, the non-JavaScript version is returned.
+- */
+-function _batch_start() {
+-  if (isset($_COOKIE['has_js']) && $_COOKIE['has_js']) {
+-    return _batch_progress_page_js();
+-  }
+-  else {
+-    return _batch_progress_page_nojs();
+-  }
+-}
+-
+-/**
+- * Outputs a batch processing page with JavaScript support.
+- *
+- * This initializes the batch and error messages. Note that in JavaScript-based
+- * processing, the batch processing page is displayed only once and updated via
+- * AHAH requests, so only the first batch set gets to define the page title.
+- * Titles specified by subsequent batch sets are not displayed.
+- *
+- * @see batch_set()
+- * @see _batch_do()
+- */
+-function _batch_progress_page_js() {
+-  $batch = batch_get();
+-
+-  $current_set = _batch_current_set();
+-  drupal_set_title($current_set['title'], PASS_THROUGH);
+-
+-  // Merge required query parameters for batch processing into those provided by
+-  // batch_set() or hook_batch_alter().
+-  $batch['url_options']['query']['id'] = $batch['id'];
+-
+-  $js_setting = array(
+-    'batch' => array(
+-      'errorMessage' => $current_set['error_message'] . '<br />' . $batch['error_message'],
+-      'initMessage' => $current_set['init_message'],
+-      'uri' => url($batch['url'], $batch['url_options']),
+-    ),
+-  );
+-  drupal_add_js($js_setting, 'setting');
+-  drupal_add_library('system', 'drupal.batch');
+-
+-  return '<div id="progress"></div>';
+-}
+-
+ /**
+  * Does one execution pass with JavaScript and returns progress to the browser.
+  *
+- * @see _batch_progress_page_js()
+  * @see _batch_process()
+  */
+ function _batch_do() {
+-  // HTTP POST required.
+-  if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+-    drupal_set_message(t('HTTP POST is required.'), 'error');
+-    drupal_set_title(t('Error'));
+-    return '';
+-  }
+
+   // Perform actual processing.
+   list($percentage, $message) = _batch_process();
+@@ -164,11 +109,11 @@ function _batch_do() {
+ }
+
+ /**
+- * Outputs a batch processing page without JavaScript support.
++ * Outputs a batch processing page.
+  *
+  * @see _batch_process()
+  */
+-function _batch_progress_page_nojs() {
++function _batch_progress_page() {
+   $batch = &batch_get();
+
+   $current_set = _batch_current_set();
+@@ -216,6 +161,9 @@ function _batch_progress_page_nojs() {
+
+   $url = url($batch['url'], $batch['url_options']);
+   $element = array(
++    // Redirect through a 'Refresh' meta tag if JavaScript is disabled.
++    '#prefix' => '<noscript>',
++    '#suffix' => '</noscript>',
+     '#tag' => 'meta',
+     '#attributes' => array(
+       'http-equiv' => 'Refresh',
+@@ -224,6 +172,17 @@ function _batch_progress_page_nojs() {
+   );
+   drupal_add_html_head($element, 'batch_progress_meta_refresh');
+
++  // Adds JavaScript code and settings for clients where JavaScript is enabled.
++  $js_setting = array(
++    'batch' => array(
++      'errorMessage' => $current_set['error_message'] . '<br />' . $batch['error_message'],
++      'initMessage' => $current_set['init_message'],
++      'uri' => $url,
++    ),
++  );
++  drupal_add_js($js_setting, 'setting');
++  drupal_add_library('system', 'drupal.batch');
++
+   return theme('progress_bar', array('percent' => $percentage, 'message' => $message));
+ }
+
+diff --git a/misc/batch.js b/misc/batch.js
+index fee71a52fd..998879e4a5 100644
+--- a/misc/batch.js
++++ b/misc/batch.js
+@@ -7,6 +7,9 @@ Drupal.behaviors.batch = {
+   attach: function (context, settings) {
+     $('#progress', context).once('batch', function () {
+       var holder = $(this);
++      // Remove HTML from no-js progress bar. The JS progress bar is created
++      // later on.
++      holder.empty();
+
+       // Success: redirect to the summary.
+       var updateCallback = function (progress, status, pb) {
+diff --git a/misc/drupal.js b/misc/drupal.js
+index 19fbc712fd..0d546ef1ec 100644
+--- a/misc/drupal.js
++++ b/misc/drupal.js
+@@ -571,9 +571,6 @@ Drupal.ajaxError = function (xmlhttp, uri, customMessage) {
+ // Class indicating that JS is enabled; used for styling purpose.
+ $('html').addClass('js');
+
+-// 'js enabled' cookie.
+-document.cookie = 'has_js=1; path=/';
+-
+ /**
+  * Additions to jQuery.support.
+  */
+diff --git a/update.php b/update.php
+index d79270305a..b05d47e228 100644
+--- a/update.php
++++ b/update.php
+@@ -134,10 +134,6 @@ function update_script_selection_form($form, &$form_state) {
+     else {
+       $form['start']['#title'] = format_plural($count, '1 pending update', '@count pending updates');
+     }
+-    $form['has_js'] = array(
+-      '#type' => 'hidden',
+-      '#default_value' => FALSE,
+-    );
+     $form['actions'] = array('#type' => 'actions');
+     $form['actions']['submit'] = array(
+       '#type' => 'submit',
