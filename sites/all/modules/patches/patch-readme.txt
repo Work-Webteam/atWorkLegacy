@@ -74,3 +74,8 @@ date: 2020-07-23
 Module: Core/Filter module
 Source: https://www.drupal.org/project/drupal/issues/2016739
 Issue: Fixes issue where any text@text is automatically converted to email address.
+
+date: 2020-08-12
+Module: Core/includes/authorize.inc, includes/batch.inc, misc/batch.js, update.php
+Source: https://www.drupal.org/project/drupal/issues/229825
+Issue: Fixes has_js samesite issue that Chrome enforces Sept 1 2020.
