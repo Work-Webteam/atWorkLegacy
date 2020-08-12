@@ -17,24 +17,6 @@
 
 
 <head>
-  <!-- Matomo -->
-  <!--
-  <script type="text/javascript">
-    var _paq = window._paq || [];
-    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-    _paq.push(['trackPageView']);
-    _paq.push(['enableLinkTracking']);
-    (function() {
-      var u="//cliff.gww.gov.bc.ca/";
-      _paq.push(['setTrackerUrl', u+'matomo.php']);
-      _paq.push(['setSiteId', '1']);
-      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-    })();
-  </script>
-  -->
-  <!-- End Matomo Code -->
-
   <?php print $head; ?>
   <title><?php print $head_title; ?></title>
 
@@ -71,29 +53,29 @@
   <?php print $page; ?>
   <?php print $page_bottom; ?>
 
-  <!-- Snowplow starts plowing - Standalone vA.2.10.2 -->
+  <!-- Snowplow starts plowing - Standalone vE.2.14.0 -->
   <script type="text/javascript">
-  ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
-   p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
-   };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
-   n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","https://sp-js.apps.gov.bc.ca/MDWay3UqFnIiGVLIo7aoMi4xMC4y.js","snowplow"));
-  var collector = 'spt.apps.gov.bc.ca';
-   window.snowplow('newTracker','rt',collector, {
-    appId: "Snowplow_standalone",
-    platform: 'web',
-    post: true,
-    forceSecureTracker: true,
-    contexts: {
-     webPage: true,
-     performanceTiming: true
-    }
-   });
-   window.snowplow('enableActivityTracking', 30, 30); // Ping every 30 seconds after 30 seconds
-   window.snowplow('enableLinkClickTracking');
-   window.snowplow('trackPageView');
+    ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
+      p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
+      };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
+      n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","https://www2.gov.bc.ca/StaticWebResources/static/sp/sp-2-14-0.js","snowplow"));
+    var collector = 'spt.apps.gov.bc.ca';
+    window.snowplow('newTracker','rt',collector, {
+      appId: "Snowplow_standalone",
+      cookieLifetime: 86400 * 548,
+      platform: 'web',
+      post: true,
+      forceSecureTracker: true,
+      contexts: {
+        webPage: true,
+        performanceTiming: true
+      }
+    });
+    window.snowplow('enableActivityTracking', 30, 30); // Ping every 30 seconds after 30 seconds
+    window.snowplow('enableLinkClickTracking');
+    window.snowplow('trackPageView');
    </script>
   <!-- Snowplow stop plowing -->
-
 
 </body>
 </html>
