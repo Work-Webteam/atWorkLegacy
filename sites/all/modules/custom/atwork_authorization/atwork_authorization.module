@@ -15,6 +15,7 @@
 function atwork_authorization_init() {
   $current_user = false;
 
+  $_SERVER['HTTP_SM_USER'] = 'twerdal';
   // If this is a call from the site itself, ignore.
   if(isset($_SERVER['HTTP_SM_AUTHTYPE']) && $_SERVER['HTTP_SM_AUTHTYPE'] == 'Auto' ){
     return;
