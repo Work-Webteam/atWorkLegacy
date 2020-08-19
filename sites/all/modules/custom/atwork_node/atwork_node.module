@@ -589,7 +589,7 @@ function atwork_node_block_view($delta = '') {
       $content = <<<EOT
 <div class="header-links">
   <a href="http://www2.gov.bc.ca/gov/content/careers-myhr" target="_blank">MYHR</a>
-  <a href="https://gww.gov.bc.ca/tools/it-support">IT SUPPORT</a>
+  <a href="/tools/it-support">IT SUPPORT</a>
   <a href="/tools/intranets">MINISTRY INTRANETS</a>
   <a href="http://www2.gov.bc.ca/" class="gov_link" target="_blank">GOV.BC.CA</a>
 </div>
