@@ -69,6 +69,10 @@ function atwork_search_form_alter(&$form, &$form_state, $form_id) {
       }
     }
   }
+
+  if($form_id == 'search_block_form' && drupal_is_front_page()) {
+    drupal_add_js(drupal_get_path('module', 'atwork_search') . '/js/atwork_search.js');
+  }
 }
 
 /*
