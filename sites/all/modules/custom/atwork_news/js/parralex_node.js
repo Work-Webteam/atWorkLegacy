@@ -4,6 +4,7 @@
   Drupal.behaviors.atwork_profiles = {
     attach: function (context, settings) {
 
+      // Check position of the element we are passing in.
       function testInView($el){
         var wTop = $(window).scrollTop();
         var wBot = wTop + $(window).height();
@@ -12,17 +13,18 @@
         var eBot = eTop + $el.height();
         return ((eTop <= wMid) && (eBot >= wMid));
       }
+      // Set our class to the most central div.
       function setInView(){
         $(".story").each(function(){
           var $zis = $(this);
           $zis.removeClass("inview");
           if(testInView($zis)){
             $zis.addClass("inview");
-
           }
         });
         setOutView();
       }
+      // Show only most central div, and obfuscate others.
       function setOutView(){
         $(".story").each(function(){
           var $zat = $(this);
@@ -38,13 +40,16 @@
         });
       }
 
-      $(document).scroll($.debounce(500, function(){
+      // Check as we scroll - must debounce this or it computes way too many times,
+      // slowing down the response.
+      $(document).scroll($.debounce(250, function(){
         setInView();
       }));
+      // If a user resizes a page, recheck locations.
       $(document).resize(function(){
         setInView();
-
       });
+      // Initial load - set most central div as showing.
       $(document).ready(function(){
         setInView();
       });
