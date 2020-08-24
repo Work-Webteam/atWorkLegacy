@@ -546,7 +546,7 @@ function atwork_node_block_info(){
  * Implements hook_block_view().
  *
  * Takes care of building and returning the profile drop down
- * as well as the main site headder links.
+ * as well as the main site header links.
  *
  */
 function atwork_node_block_view($delta = '') {
