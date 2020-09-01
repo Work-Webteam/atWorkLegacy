@@ -1226,7 +1226,9 @@ p.submitted a.active {
   display: inline-block;
   padding: 0;
 }
-/* Table formatting for tables located in maina content articles */
+/* Table formatting for tables located in main content articles */
+
+
 .not-front.node-type-article #main #content article table,
 .not-front.node-type-page #main #content article table,
 .not-front.node-type-blog #main #content article table {
@@ -1253,7 +1255,12 @@ p.submitted a.active {
 .not-front.node-type-page #main #content article table tr:nth-child(odd) {
   background-color: #E7E7E7;
 }
-
+.not-front.node-type-article #main #content article table tr:first-of-type {
+  background-color: #1f5792!important;
+  p {
+    color:#FFFFFF;
+  }
+}
 
 
 #lsa-catalog h2 {
