@@ -1251,13 +1251,14 @@ p.submitted a.active {
   vertical-align: top;
   padding: 10px;
 }
-.not-front.node-type-article #main #content article table tr:nth-child(odd),
-.not-front.node-type-page #main #content article table tr:nth-child(odd) {
+.not-front.node-type-article #main #content article table tr:nth-child(even),
+.not-front.node-type-page #main #content article table tr:nth-child(even) {
   background-color: #E7E7E7;
 }
-.not-front.node-type-article #main #content article table tr:first-of-type {
+.not-front.node-type-article #main #content article table th {
   background-color: #1f5792!important;
   color:#FFFFFF;
+  padding:5px;
   p {
     color:#FFFFFF;
   }
