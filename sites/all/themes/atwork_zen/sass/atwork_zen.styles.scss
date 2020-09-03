@@ -1226,7 +1226,9 @@ p.submitted a.active {
   display: inline-block;
   padding: 0;
 }
-/* Table formatting for tables located in maina content articles */
+/* Table formatting for tables located in main content articles */
+
+
 .not-front.node-type-article #main #content article table,
 .not-front.node-type-page #main #content article table,
 .not-front.node-type-blog #main #content article table {
@@ -1249,11 +1251,18 @@ p.submitted a.active {
   vertical-align: top;
   padding: 10px;
 }
-.not-front.node-type-article #main #content article table tr:nth-child(odd),
-.not-front.node-type-page #main #content article table tr:nth-child(odd) {
+.not-front.node-type-article #main #content article table tr:nth-child(even),
+.not-front.node-type-page #main #content article table tr:nth-child(even) {
   background-color: #E7E7E7;
 }
-
+.not-front.node-type-article #main #content article table th {
+  background-color: #1f5792!important;
+  color:#FFFFFF;
+  padding:5px;
+  p {
+    color:#FFFFFF;
+  }
+}
 
 
 #lsa-catalog h2 {
