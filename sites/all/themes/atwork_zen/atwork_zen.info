@@ -70,6 +70,7 @@ scripts[] = js/nav_toggle_v2.js
 scripts[] = js/qtip/jquery.qtip.min.js
 scripts[] = js/SpryAssets/SpryCollapsiblePanel.js
 scripts[] = js/SpryAssets/SpryTabbedPanels.js
+scripts[] = js/throttle-debounce.min.js
 stylesheets[all][] = js/qtip/jquery.qtip.min.css
 
 ; This section lists the regions defined in Zen's default page.tpl.php and
