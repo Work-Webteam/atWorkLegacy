@@ -80,7 +80,7 @@ function atwork_news_form_alter(&$form, &$form_state, $form_id){
  * Implements hook_entity_view_alter().
  */
 function atwork_news_entity_view_alter(&$build, $type) {
-  if( $type == 'node' && ($build['#node']->nid == 46431 || $build["#node"]->nid == 46250 || $build["#node"]->nid == 46414 )) {
+  if( $type == 'node' && ($build['#node']->nid == 46431 || $build["#node"]->nid == 46250 || $build["#node"]->nid == 46414 || $build["#node"]->nid == 46522 || $build['#node']->nid == 46523 ||  $build["#node"]->nid == 46266 )) {
     drupal_add_js(drupal_get_path('module', 'atwork_news') . '/js/parralex_node.js');
   }
 }
