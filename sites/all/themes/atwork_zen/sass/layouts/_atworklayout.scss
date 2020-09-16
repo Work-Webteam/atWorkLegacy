@@ -25,6 +25,18 @@ only screen and (     -o-min-device-pixel-ratio: 2/1),
 only screen and (        min-device-pixel-ratio: 2),
 only screen and (                min-resolution: 192dpi),
 only screen and (                min-resolution: 2dppx) {
+#header-box {
+   display:none!important;
+}  
+li.sf-clone-parent {
+  display:none;
+}
+.sf-depth-1.next-menu-item.menuparent.sf-breadcrumb.sfHover,
+.active-trail.sf-depth-2.next-menu-item.sf-no-children > a,
+.active-trail.sf-depth-2.next-menu-item.menuparent > a {
+    background-color: #1F5792;
+    color: $exec-greyborder;
+ }  
 .resizable-textarea .grippie, #social-side #atwork-advanced-feed-settings {
   display:none;
 }
@@ -73,19 +85,7 @@ and (orientation : portrait) {
   #header-box #home-link a {
     display: none!important;
   }
-  #navigation {
-    .region-navigation {
-      height:60px;
-      #block-superfish-1 {
-        padding-top:8px;
-        text-align: center;
-      }
-      #block-search-form {
-        top:45px;
-        right: calc(-25vw + 50%);
-      }
-    }
-  }
+
   #block-atwork-wes-wes-top-three {
     margin-top: 15px;
     margin-bottom: 40px;
@@ -143,44 +143,6 @@ and (orientation : portrait) {
     width:197px;
   }
 }
-// Front page carousel - iPhone only
-
-.front.logged-in.no-sidebars .skin-default {
-    height: 490px;
-    .carousel-960 {
-      display: none;
-    }
-    .mobile-carousel-382 {
-      display: block!important;
-      background-color: #FFF;
-    }
-    .views_slideshow_cycle_main {
-      height:480px;
-    }
-    .views-slideshow-xtra-overlay {
-	  top: 250px;
-    background-color: #FFF!important;
-  }
-  #views-slideshow-xtra-overlay--home-page-blocks-zen--attachment-4 {
-    .slideshow-teaser-body {
-      height:80px;
-    }
-    .slideshow-read-more {
-      margin-right: 0px;
-    }
-  .views-slideshow-xtra-overlay-row.views-slideshow-xtra-overlay-row {
-    width:inherit!important;
-    height:inherit!important;
-    margin:0px!important;
-    padding:10px!important;
-    border:none!important;
-  }
-  }
-}
-#block-custom-search-blocks-1 {
-    padding: 20px 5px!important;
-}
-// End Front page carousel
 
 .front fieldset#edit-advanced-search .fieldset-legend {
   top:-10px;
@@ -465,10 +427,13 @@ table#sn-newsletter-layout {
       min-width:348px!important;
       max-width:768px!important;
   }
+  #navigation .region-navigation {
+    margin-right:5px!important;
+  }
   .front #page #main {
     margin-left: 5px;
     margin-right: 5px;
-    padding-top:30px;
+    padding-top:15px;
   }
   .not-front #page {
     margin-left: 10px;
@@ -976,13 +941,14 @@ and (orientation : landscape) {
 .front #page #main {
   margin-left: 5px;
   margin-right: 5px;
-  margin-top:0;
+  margin-top:15px;
   padding-top:0;
 }
 .not-front #page {
     margin-left: 5px;
     margin-right: 5px;
 }
+
   #block-views-home-page-blocks-zen-block-2,
   #block-boxes-homepage-logos,
   .atwork-activity-block-container .item-list ul.pager {
@@ -1205,7 +1171,7 @@ and (orientation : landscape) {
 }
 /* Article / Blog pages with sidebars */
 .not-front.logged-in.one-sidebar.sidebar-first aside.sidebars {
-  width:inherit;
+  //width:100%;
   .region.region-sidebar-first {
     width:100%;
     max-width:210px;
@@ -1359,6 +1325,7 @@ table#sn-newsletter-layout {
     #page {
         min-width:352px!important;
         max-width:980px!important;
+        margin-top:0!important;
     }
     #block-views-home-page-blocks-zen-block-5 {
       margin-bottom: 25px!important;
@@ -1649,7 +1616,6 @@ section.region.region-sidebar-second.column.sidebar {
   margin:0 0 10px 0!important;
 }
  .not-front.logged-in.sidebar-first #content.column {
-    margin-left:inherit;
     clear:both!important;
   }
   .og-context.og-context-node #page #main {
@@ -1695,17 +1661,10 @@ section.region.region-sidebar-second.column.sidebar {
  }
 /* Admin - Edit screens */
 .not-front.logged-in.sidebar-first.section-node-edit{
-  /*#content.column {
-  float:right!important;
-}*/
   .region-sidebar-first.column.sidebar {
     width:initial;
     padding-right:30px;
   }
-}
-/* Group landing pages, blogs, posts, articles */
-.not-front.logged-in.sidebar-first #content.column {
-  /*float:left!important;*/
 }
 }
 
@@ -1775,8 +1734,4 @@ section.region.region-sidebar-second.column.sidebar {
  #page {
    min-width:960px;
  }
-.front #social-side,
-   #block-block-45 { // show social sidebar only on wide screen view - 1240 or greater
-      display: none !important;
-  }
 }

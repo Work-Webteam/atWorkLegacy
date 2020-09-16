@@ -2803,12 +2803,7 @@ tr.draggable:nth-child(2) > td:nth-child(1) > div:nth-child(3) > div:nth-child(1
   min-height: 400px;
   /*width: 80%;*/
 }
-.not-front.logged-in.sidebar-first #content.column,
-.not-front.logged-in.sidebar-second #content.column {
-  width: 72%;
-  float: left;
-  //float: left !important;
-}
+
 .not-front.logged-in.sidebar-first #content.column {
   margin-left: 26%;
 }
