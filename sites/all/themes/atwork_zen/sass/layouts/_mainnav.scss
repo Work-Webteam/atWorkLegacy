@@ -3,9 +3,7 @@
 #navigation .ext {
   display: none;
 }
-#navigation ul li a[href="/"] {
-  display:none;
-}
+
 #navigation ul li a {
   display: block;
   text-decoration: none;
@@ -81,7 +79,7 @@
   ul.sf-menu.sf-style-none a,
   ul.sf-menu.sf-style-none a:visited,
   ul.sf-menu.sf-style-none span.nolink {
-    padding: 10px 1.9em;
+    padding: 10px 1.25em;
     color: #FFFFFF;
     //background-color:#ececec;
   }
@@ -206,6 +204,9 @@
         background-color: #10233c;
         color: #FFFFFF;
       }
+    }
+    .sf-item-2 ul li a {
+      padding: 10px .7em;
     }
     .sf-depth-2, .sf-depth-3 {
       a.sf-depth-2, a.sf-depth-3 {
