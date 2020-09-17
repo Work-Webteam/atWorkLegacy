@@ -78,8 +78,10 @@
     margin: 0;
     padding: 0;
   }
-  ul.sf-menu.sf-style-none a, ul.sf-menu.sf-style-none a:visited, ul.sf-menu.sf-style-none span.nolink {
-    padding: 10px 1.5em;
+  ul.sf-menu.sf-style-none a,
+  ul.sf-menu.sf-style-none a:visited,
+  ul.sf-menu.sf-style-none span.nolink {
+    padding: 10px 1.9em;
     color: #FFFFFF;
     //background-color:#ececec;
   }
@@ -203,13 +205,6 @@
       a:hover {
         background-color: #10233c;
         color: #FFFFFF;
-      }
-    }
-    .sf-item-2 {
-      ul {
-        li a {
-        padding: 10px .7em;
-        }
       }
     }
     .sf-depth-2, .sf-depth-3 {
