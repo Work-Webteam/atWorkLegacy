@@ -3,7 +3,9 @@
 #navigation .ext {
   display: none;
 }
-
+#navigation ul li a[href="/"] {
+  display:none;
+}
 #navigation ul li a {
   display: block;
   text-decoration: none;
