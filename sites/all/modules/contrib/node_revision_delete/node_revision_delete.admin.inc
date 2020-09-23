@@ -133,7 +133,6 @@ function node_revision_delete_admin_settings_form(array $form, array &$form_stat
         ),
       );
 
-      $links['attributes']['class'][] = 'inline';
       $dropbutton = '<div class="admin-operations">' . theme('item_list', $links) . '</div>';
     }
     // Setting the row values.
