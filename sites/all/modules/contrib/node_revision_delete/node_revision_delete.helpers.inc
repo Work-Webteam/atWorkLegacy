@@ -295,17 +295,21 @@ function _node_revision_delete_do_delete($nid, $minimum_revisions_to_keep, $dry_
   // Get the minimum age for the nid.
   $minimum_age_time = _node_revision_delete_determine_time('minimum_age_to_delete', NULL, $nid);
 
-  $node = new stdClass();
-  $node->nid = $nid;
+  $node = node_load($nid);
+
+  // Retrieve all revisions.
   $revisions = node_revision_list($node);
 
-  // Remove current revision.
-  $node = node_load($nid);
-  foreach ($revisions as $key => $revision_node) {
-    if ($node->vid == $key) {
-      unset ($revisions[$key]);
-      break;
+  if (module_exists('workbench_moderation')) {
+    // Remove current revision.
+    if (!workbench_moderation_node_is_current($node)) {
+      unset($revisions[$node->workbench_moderation['current']->vid]);
     }
+  }
+
+  // Remove published revision.
+  if (array_key_exists($node->vid, $revisions)) {
+    unset($revisions[$node->vid]);
   }
 
   // POPO to keep track of deleted revisions and whether there are more

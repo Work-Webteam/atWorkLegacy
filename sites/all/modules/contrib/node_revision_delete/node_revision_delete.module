@@ -288,24 +288,6 @@ function node_revision_delete_cron() {
 }
 
 /**
- * Implements hook_workbench_moderation_transition().
- *
- * Delete old revisions directly during moderation transition.
- */
-function node_revision_delete_workbench_moderation_transition($node, $previous_state, $new_state) {
-  // Getting the config variable.
-  $node_revision_delete_track = variable_get('node_revision_delete_track', array());
-
-  if (isset($node_revision_delete_track[$node->type])) {
-    $deleted_revisions = _node_revision_delete_do_delete($node->nid, $node_revision_delete_track[$node->type]['minimum_revisions_to_keep']);
-
-    if (!empty($deleted_revisions->count)) {
-      drupal_set_message(t('Deleted @total revisions.', array('@total' => $deleted_revisions->count)));
-    }
-  }
-}
-
-/**
  * Implements hook_form_FORM_ID_alter().
  */
 function node_revision_delete_form_node_revision_delete_confirm_alter(&$form, &$form_state, $form_id) {

@@ -4,22 +4,3 @@ sites/*/settings*.php
 # Ignore paths that contain user-generated content.
 sites/*/files
 sites/*/private
-sites/all/themes/atwork_zen/images
-
-# git ls-files --others --exclude-from=.git/info/exclude
-# Lines that start with '#' are comments.
-# For a project mostly in C, the following would be a good set of
-# exclude patterns (uncomment them if you want to use them):
-# *.[oa]
-# *~
-/.csslintrc
-/.editorconfig
-/.eslintignore
-/.eslintrc.json
-/.gitattributes
-/.ht.router.php
-/.htaccess
-/.idea
-/vendor
-/sites/all/themes/atwork_zen/images/key_initiatives/
-*.DS_Store
