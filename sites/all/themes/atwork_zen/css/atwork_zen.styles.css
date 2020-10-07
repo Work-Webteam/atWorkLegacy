@@ -288,10 +288,9 @@ h1, h2, h3, h4, h5, h6 {
 /** Desktop - 980px to max 1260px **/
 /** Social sidebar cuts out at 1240px and reappears at mobile resolutions lower than 980px **/
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
-  /* line 28, ../../../../../Users/cdeakin/Sites/Atwork-Dev/public/d7-atwork/sites/all/themes/atwork_zen/sass/layouts/_atworklayout.scss */
-  #header-box {
-    display: none !important;
-  }
+  /*#header-box {
+     display:none!important;
+  }*/
   /* line 31, ../../../../../Users/cdeakin/Sites/Atwork-Dev/public/d7-atwork/sites/all/themes/atwork_zen/sass/layouts/_atworklayout.scss */
   li.sf-clone-parent {
     display: none;
