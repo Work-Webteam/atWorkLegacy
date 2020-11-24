@@ -547,7 +547,7 @@ table.calendar-legend tr.even .stripe {
 .calendar-calendar .month-view .full tr td.today,
 .calendar-calendar .month-view .full tr.odd td.today,
 .calendar-calendar .month-view .full tr.even td.today {
-  /*background: none;*/
+  background: none;
   border-left: 2px solid #7C7F12;
   border-right: 2px solid #7C7F12;
 }
@@ -747,7 +747,6 @@ table.calendar-legend tr.even .stripe {
 }
 
 .view .date-nav-wrapper  {
-  display: inline-block;
   position: relative;
   margin-top: 5px;
   width: 100%;
@@ -781,7 +780,7 @@ table.calendar-legend tr.even .stripe {
   float: none;
   padding: 5px 0;
   position: absolute;
-  right: 60px;
+  right: 80px;
   left: auto;
   text-align: right;
   top: 0px;
@@ -801,7 +800,7 @@ table.calendar-legend tr.even .stripe {
 }
 
 .view .date-nav-wrapper .date-heading {
-  display: inline-block;
+  position: relative;
   width: 100%;
   top: 0px;
   text-align: center;
