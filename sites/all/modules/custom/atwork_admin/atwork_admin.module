@@ -5,6 +5,7 @@
  * Admin forms related changes.
  */
 function atwork_admin_form_alter(&$form, &$form_state, $form_id) {
+
   // add date popups on comment admin
   if ($form['#id'] == 'views-exposed-form-comments-admin-page') {
     if (isset($form['#info']['filter-created']['label'])) {

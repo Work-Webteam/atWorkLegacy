@@ -94,7 +94,9 @@ function atwork_authorization_init() {
     drupal_session_regenerate();
     // For some reason, the access check occurs before the user
     // is loaded, so we are going to have to redirect them here.
-    drupal_goto(current_path());
+    global $base_url;
+    drupal_goto($base_url . request_uri());
+    // drupal_goto(current_path());
     return;
   } else {
     watchdog("User could not be loaded", '<pre>' . print_r($_SERVER, true) . '</pre>');
@@ -106,7 +108,9 @@ function atwork_authorization_init() {
     module_load_include('pages.inc', 'user');
     user_logout_current_user();
     watchdog("No user name, logging out existing user" . $current_user->name, '<pre>' . print_r($_SERVER, true) . '</pre>');
-    drupal_goto(current_path());
+    global $base_url;
+    drupal_goto($base_url . request_uri());
+    //drupal_goto(current_path());
   }
 
   // Some users are not getting logged in - we want to try and figure out why that is. Adding in watchdog message here.
