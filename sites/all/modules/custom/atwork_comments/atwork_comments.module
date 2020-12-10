@@ -196,7 +196,7 @@ function atwork_comments_cron() {
 
     // Set up the query
     $db_query  = db_query(
-      "SELECT * FROM {node n} WHERE n.comment=2 and n.changed < ($current) and n.type IN('blog', 'forum', 'article', 'gallery', 'image')"
+      "SELECT * FROM {node} n WHERE n.comment=2 and n.changed < ($current) and n.type IN('blog', 'forum', 'article', 'gallery', 'image')"
     );
     // Fetch assoc nodes
     $result = $db_query->fetchAll();
