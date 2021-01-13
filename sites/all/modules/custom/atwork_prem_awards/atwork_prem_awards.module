@@ -16,7 +16,14 @@ define("PA_REG_CONF_NID", 13362); // Confirmation page, created as a background 
  */
 function _atwork_prem_awards_registration_confirmation($sid = 0) {
   module_load_include('inc', 'webform', 'includes/webform.submissions');
-
+  // FOR 2021 - we wanted a shorter confirmation message. We pass an SID for email, but not for conf page - so we can check that here:
+  if($sid === 0) {
+    $output = <<<EOT
+<h2>Registration received</h2>
+<p>Thank you.</p>
+EOT;
+    return $output;
+  }
   // this is the start of the page, displayed no matter what dates are selected
   $output = <<<EOT
 <h2>Thank you for registering!</h2>
@@ -403,8 +410,6 @@ function atwork_prem_awards_roles_form($form, $node) {
 
   // get existing contacts
   $contacts = _atwork_prem_awards_get_contacts();
-
-  $form = array();
 
   $form['users'] = array(
     '#type' => 'textarea',
