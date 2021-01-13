@@ -6,8 +6,8 @@ define("PA_LP_NID", 5991);
 // Premier's awards webcast registration pages
 //define("PA_REG_FORM_NID", 10241); // 2014 Webcast Reg
 //define("PA_REG_CONF_NID", 10242); // 2014 Confirmation page
-define("PA_REG_FORM_NID", 13361); // 2015 Webcast Reg, the webform we create
-define("PA_REG_CONF_NID", 13362); // 2015 Confirmation page, created as a background page dynamically updated with info below
+define("PA_REG_FORM_NID", 13361); // Webcast Reg, the webform we create
+define("PA_REG_CONF_NID", 13362); // Confirmation page, created as a background page dynamically updated with info below
 
 
 
@@ -20,21 +20,25 @@ function _atwork_prem_awards_registration_confirmation($sid = 0) {
   // this is the start of the page, displayed no matter what dates are selected
   $output = <<<EOT
 <h2>Thank you for registering!</h2>
-<p>Go to the <strong><a href="http://video.web.gov.bc.ca/psa/pa/vod/" target="_blank" >Premier's Awards webcast stage,</a></strong> to test out the setup and watch the webcast on show day. The stage highlights the next scheduled webcast.</p>
-<p style="margin-bottom:0;">Test out: </p>
-<ul style="margin-top:0;">
-  <li> Is the video playing? Allow 30 seconds for buffering. </li>
-  <li> Can you hear the video's audio? Are your speakers on? (Audio for the webcast will be directly through your computer speakers. Audio is not available through the phone) </li>
-</ul>
-<p><strong>Technical Troubles?</strong></p>
-<p>Please refresh your browser (IE 11, Chrome, Firefox). <br />
-If neither of these options work, please call 250-387-7000 – option#1 or toll free at 1-800-387-7000</p>
+<p>
+The 2020 Premier’s Awards webcast will take place on January 28th, 2021 at 3pm. In the next few days you can expect a calendar invite from the Premier’s Awards team that will include your web link.
+</p>
+<p>
+"See" you there!
+</p>
+<p>
+The Premier's Awards Team
+</p>
+<p>
+For other event information contact <a href="mailto:premiersawards@gov.bc.ca">PremiersAwards@gov.bc.ca</a>
+</p>
 
 <hr />
 
 EOT;
 
   // this is the event-specific details. We might want to add links, etc, key numbers corrospond with the $submission array
+  /*
   $dates = array(
     15 => "Interior/North: October 18 <br />
   <a href=\" https://gww.gov.bc.ca/sites/default/files/ics/2018/premiers-innovation-and-excellence-awards-interiornorth/event.ics \" > Add to your Outlook Calendar </a></p><hr />
@@ -46,6 +50,7 @@ EOT;
   <a href=\" https://gww.gov.bc.ca/sites/default/files/ics/2017/premiers-innovation-and-excellence-awards-lower-mainland/event.ics \" > Add to your Outlook Calendar </a></p><hr />
   " ,
   );
+  */
 //Check array numbers to match; 15 Interior North, 7 Lower Mainland, 5 is Vancouver Island
 
   // get the sid from GET if possible
@@ -61,7 +66,7 @@ EOT;
 <div class="field-label-above"><div class="field-label">Ministry:&nbsp;</div><div class="field-items"><div class="field-item odd">{$submission->data[14][0]}</div></div></div>
 <h2>You registered:</h2>
 EOT; */
-
+    /*
     $output .= "<strong>You registered:</strong>";
     foreach ($dates as $key => $value) {
       if (isset($submission->data[$key][0]) && $submission->data[$key][0]) {
@@ -71,7 +76,8 @@ EOT; */
         $output .= $value;
       }
     }
-
+  */
+    /*
   $output .= <<<EOT
     <div class="field-label-above">
       <div class="field-label">
@@ -83,12 +89,14 @@ EOT; */
       <li> Subscribe to the tag for <a href="https://gww.gov.bc.ca/tags/premiers-awards"> Premier's Awards </a> and get email alerts of new related content and discussion. </li>
       <li> Contact Alysia Johnson (<a href="mailto:Alysia.Johnson@gov.bc.ca?Subject=Premier's%20awards%202015" >Alysia.Johnson@gov.bc.ca</a>) for other event information. </li>
     </ul>
+
 EOT;
+    */
 
   }
   else {
     // what if a user comes to this page directly. Send them back to the form?
-    drupal_goto('node/' . PA_REG_FORM_NID);
+    //drupal_goto('node/' . PA_REG_FORM_NID);
   }
 
 
