@@ -117,14 +117,14 @@ class MediaInternetYouTubeHandler extends MediaInternetBaseHandler {
       $data = drupal_json_decode($response->data);
       if (!empty($data)) {
         return TRUE;
-       }
+      }
       else {
         $error_data = t('Unspecific');
         if (is_string($response->data)) {
           $error_data = $response->data;
         }
-       throw new MediaInternetValidationException("The YouTube video ID is invalid, video was deleted or is disabled for embedding. Error: {$error_data}");
-       return;
+        throw new MediaInternetValidationException("The YouTube video ID is invalid, video was deleted or is disabled for embedding. Error: {$error_data}");
+        return;
       }
     }
     else {
