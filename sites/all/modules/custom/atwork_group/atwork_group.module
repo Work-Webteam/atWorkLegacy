@@ -799,7 +799,7 @@ function atwork_group_block_view($delta = '') {
       $create_group_link = l(t('Create a Group'), 'node/add/section');
 
       $block['content'] = array(
-        '#markup' => '<span class="all-groups">' . $all_groups_link . '</span><span class="my-groups">' . $my_groups_link . '</span><span class="create-group">' . $create_group_link . '</span>',
+        '#markup' => '<span class="all-groups">' . $all_groups_link . '</span><span class="my-groups">' . $my_groups_link . '</span>'/*<span class="create-group">' . $create_group_link . '</span>'*/,
       );
 
       break;
