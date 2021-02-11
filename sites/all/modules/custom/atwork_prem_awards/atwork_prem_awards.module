@@ -568,8 +568,8 @@ function atwork_prem_awards_form_alter(&$form, $form_state, $form_id) {
 
     $translations = _atwork_prem_awards_questions();
 
-    $form['submitted']['summary_statement']['#title'] = '<h2>Evaluation Considerations</h2><strong>Summary (not to exceed 150 words):</strong><br />' . $translations[$form_type][0];
-    $form['submitted']['prem_award_q1']['#title'] = '<h2>The combined sections below must not exceed 1500 words</h2><strong>Context (not to exceed 250 words):</strong><br />' . $translations[$form_type][1];
+    $form['submitted']['summary_statement']['#title'] = '<h2>Evaluation Considerations</h2><h2>The combined sections below must not exceed 1650 words</h2><strong>Summary (not to exceed 150 words):</strong><br />' . $translations[$form_type][0];
+    $form['submitted']['prem_award_q1']['#title'] = '<strong>Context (not to exceed 250 words):</strong><br />' . $translations[$form_type][1];
     for ($i=2;$i<10;$i++) {
       if (isset($translations[$form_type][$i]) && $translations[$form_type][$i]) {
         $form['submitted']['prem_award_q'. $i]['#title'] = str_replace('[prem-award-q'. $i .']', $translations[$form_type][$i], $form['submitted']['prem_award_q'. $i]['#title']);
