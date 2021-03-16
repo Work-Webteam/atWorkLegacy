@@ -112,7 +112,9 @@ $dn = DRUPAL_ROOT . '/PA_' . date("Y") . '/';
 if (file_exists($dn)) {
   deleteDir($dn);
 }
-mkdir($dn, 0700, TRUE);
+if (!mkdir($dn, 0700, TRUE) && !is_dir($dn)) {
+  throw new \RuntimeException(sprintf('Directory "%s" was not created', $dn));
+}
 
 
 
@@ -135,7 +137,9 @@ foreach($submissions as $submission) {
 
 
   if (!is_dir($dn . $submission->serial)) {
-    mkdir($dn . $submission->serial, 0700, TRUE);
+    if (!mkdir($concurrentDirectory = $dn . $submission->serial, 0700, TRUE) && !is_dir($concurrentDirectory)) {
+      throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
+    }
   }
 
       	$type = $app_type[$submission->data['41'][0]];
@@ -901,7 +905,7 @@ foreach($submissions as $submission) {
       					$pdf->Line(21.5,$pdf->GetY() + 11,188,$pdf->GetY() + 11);
       					$pdf->Ln();
       					$pdf->SetFont('Arial', 'B', 11);
-      					$pdf->MultiCell(166.5, 5, iconv('UTF-8', 'Identify and describe how the employee has demonstrated their leadership in supporting the workplace either by leading a team or organization or as leader of a substantial project, process, or initiative. Considerations may include, but are not limited to:'));
+      					$pdf->MultiCell(166.5, 5, iconv('UTF-8', 'ASCII//TRANSLIT', 'Identify and describe how the employee has demonstrated their leadership in supporting the workplace either by leading a team or organization or as leader of a substantial project, process, or initiative. Considerations may include, but are not limited to:'));
       					$pdf->SetLeftMargin(25);
                 $pdf->MultiCell(161.5, 5, iconv('UTF-8', 'ASCII//TRANSLIT', chr(127) . ' Ability to create, communicate, and implement a clear and compelling vision for their team and which aligns with the Corporate Plan for the BC Public Service;'),0,"L");
                 $pdf->MultiCell(161.5, 5, iconv('UTF-8', 'ASCII//TRANSLIT', chr(127) . ' Anticipates future trends and works with others to develop strategies to meet future challenges;'),0,"L");

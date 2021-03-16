@@ -37,23 +37,19 @@ if (isset($form['submitted']['name_of_ministry_or_eligible_organization_sponsori
   $ministry = $form['submitted']['name_of_ministry_or_eligible_organization_sponsoring_this_application']['#options']['Agencies'][$submission->data[1][0]];
 }
 
-$region = $form['submitted']['region']['#options'][$submission->data[4][0]];
-
 // remove non-standard fields
 unset($renderable_fields['name_of_ministry_or_eligible_organization_sponsoring_this_application']);
 unset($renderable_fields['application_type']);
-unset($renderable_fields['region']);
-unset($renderable_fields['nominees']);
 
 $application_type_map = array(
-  1 => 'Cross-Government Integration',
   2 => 'Innovation',
   3 => 'Leadership',
   4 => 'Organizational Excellence',
   5 => 'Partnership',
   6 => 'Legacy',
   7 => 'Emerging Leader',
-	8 => 'Evidence-Based Design'
+	8 => 'Evidence-Based Design',
+  9 => 'Regional Impact'
 );
 
 file_put_contents('submission.txt', print_r($submission->data, true));

@@ -16,30 +16,30 @@ function atwork_webform_form_alter(&$form, $form_state, $form_id) {
   // We want to make sure "required" fields are actually required in webforms
   // Seems to work for all but html textarea fields, which is a plugin
   // these fields do not seem to respect directives.
-  if(isset($form['#node']) && $form['#node']->type == "webform") {
 
-    //Check for html_text area fields, pass by reference.
-    if(isset($form['submitted'])) {
-      foreach ($form['submitted'] as &$field) {
-        if ($field['#webform_component']['type'] == 'html_textarea') {
-          // Make sure that we have a proper fields.
-          if (isset($field['#webform_component']['required']) && isset($field['#required'])) {
-            // Sync the fields
-            $field['#required'] = $field['#webform_component']['required'];
-          }
-          // We also want to move the description above the textarea box if it is requested.
-          if ($field['#webform_component']['extra']['description_above'] == 1) {
-            $description = $field['#webform_component']['extra']['description'];
-            $field['#field_prefix'] = $description;
-            $field['#description'] = '';
+  // Contact form js
+  if ($form_id == 'webform_client_form_45322') {
+    if(isset($form['#node']) && $form['#node']->type == "webform" ) {
+
+      //Check for html_text area fields, pass by reference.
+      if(isset($form['submitted'])) {
+        foreach ($form['submitted'] as &$field) {
+          if ($field['#webform_component']['type'] == 'html_textarea') {
+            // Make sure that we have a proper fields.
+            if (isset($field['#webform_component']['required']) && isset($field['#required'])) {
+              // Sync the fields
+              $field['#required'] = $field['#webform_component']['required'];
+            }
+            // We also want to move the description above the textarea box if it is requested.
+            if ($field['#webform_component']['extra']['description_above'] == 1) {
+              $description = $field['#webform_component']['extra']['description'];
+              $field['#field_prefix'] = $description;
+              $field['#description'] = '';
+            }
           }
         }
       }
     }
-  }
-
-  // Contact form js
-  if ($form_id == 'webform_client_form_45322') {
     drupal_add_js(drupal_get_path('module', 'atwork_webform').'/js/atwork_contact_form.js');
   }
 }
