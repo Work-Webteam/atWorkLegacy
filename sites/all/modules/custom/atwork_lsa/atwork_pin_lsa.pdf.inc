@@ -34,7 +34,7 @@ $letter_text = <<< EOT
 
 <p>Enclosed are the service pins for those employees celebrating a career milestone. Below is a list of which pin(s) goes to each employee.</p>
 
-<p><strong>Public Service Week is taking place June 14-20th</strong> and is a wonderful opportunity to thank your employees for their contributions and celebrate their commitment to the BC Public Service. With physical distancing measures currently in place, in-person presentations may not be possible. If you are unable to present the pins during Public Service Week, you are encouraged to save the presentation for a future date. </p>
+<p><strong>Public Service Week is taking place June 15-19</strong> and is a wonderful opportunity to thank your employees for their contributions and celebrate their commitment to the BC Public Service. With physical distancing measures currently in place, in-person presentations may not be possible. If you are unable to present the pins during Public Service Week, you are encouraged to save the presentation for a future date. </p>
 
 <p>However, please still make an effort to recognize your employees’ service milestones in some way during Public Service Week. Remember to consider the employee’s individual preference when planning the type of recognition. If your employee works in a different location, you could host a virtual presentation during a team meeting or connect with the employee directly to offer your congratulations. A Public Service Week e-card is available on @Work. <a href="https://gww.gov.bc.ca/ecards/public-service-week/stronger-together">gww.gov.bc.ca/ecards/public-service-week/stronger-together</a></p>
 <p>The attached pin card can be signed by you and/or a member of your executive, with a personalized message for the employee.</p>
