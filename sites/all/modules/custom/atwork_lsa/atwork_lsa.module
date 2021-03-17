@@ -671,20 +671,18 @@ function atwork_lsa_node_insert($node) {
   /** Pins sent directly to ministry contact, only for specific ministries (ie bulk send)**/
     $check_min = array(
       21, //Community Living BC
-      24, //Education
-      29, //Energy, Mines & Petroleum Resources
+      29, //Ministry of Energy, Mines & Petroleum Resources
       32, //Environmental Assessment Office
-      46, //Indigenous Relations & Reconciliation
-      48, //Intergovernmental Relations Secretariat
-      55, //Mental Health & Addictions
+      46, //Ministry of Indigenous Relations & Reconciliation
+      55, //Ministry of Mental Health & Addictions
       60, //Office of the Information and Privacy Commissioner
       62, //Office of the Ombudsperson
       70, //Public Guardian and Trustee
-      81, //Transportation & Infrastructure
-      87, //BC Financial Services Authority
+      81, //Ministry of Transportation & Infrastructure
       11, //BC Pension Corporation
-      88, //Registrar of Lobbyists
       25, //Elections BC
+      61, //Office of the Merit Commissioner
+      63, // Office of Police Complaint Commissioner
     );
 
 
@@ -1080,10 +1078,10 @@ function create_pdf_label($supervisor_list = array()){
         "milestones" =>  (isset($sub_value['other milestone']) && !empty($sub_value['other milestone'])  ? trim($sub_value['other milestone']) . " " : '') . (isset($sub_value['milestone']) && !empty($sub_value['milestone']) ? trim($sub_value['milestone']) : ''),
       );
       // make sure we have not set the same milestone twice
-      foreach($recipients as $key=>$value){
-        $check_milestones = explode(" ", $value['milestones']);
+      foreach($recipients as $key2=>$value2){
+        $check_milestones = explode(" ", $value2['milestones']);
         $no_dupes = array_unique($check_milestones);
-        $recipients[$key]["milestonse"] = implode(" ", $no_dupes);
+        $recipients[$key2]["milestones"] = implode(" ", $no_dupes);
       }
     }
     // Create label in another function so we have this specific info to use
