@@ -855,9 +855,9 @@ function create_lsa_pin_letters(){
   // Now load those id's one at a time and add them to an array sorted by supervisor
   $sorted_lsa_pin_applications = sort_pin_applications($all_application_nid);
   // Now add lsa applications as necessary
-  $all_lsa_application_nid = get_all_lsa_applications();
+  //$all_lsa_application_nid = get_all_lsa_applications();
   // Fold in any additional required pins
-  $sorted_lsa_pin_applications = sort_lsa_applications($all_lsa_application_nid, $sorted_lsa_pin_applications);
+  //$sorted_lsa_pin_applications = sort_lsa_applications($all_lsa_application_nid, $sorted_lsa_pin_applications);
   // Pass this list to the pdf/label creation function
   $create_pdf_labels = create_pdf_label($sorted_lsa_pin_applications);
   // Finally, we will write all of our records to a .csv for protocol
@@ -942,7 +942,6 @@ function sort_pin_applications($pin_nids = array()){
     $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry_name'] = str_replace('&', "and", $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry_name']);
     $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry_name'] = str_replace('(FICOM)', "", $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['ministry_name']);
 
-    // TODO: We need to add in the lsa vagrapin branch here.
     $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['branch'] = $value->field_lsa_branch_department['und'][0]['value'];
     // Supervisors name
     $sorted_pin_list[strtolower($value->field_lsa_supervisor_email['und'][0]['email'])]['supervisor_first_name'] = $value->field_lsa_supervisor_first_name['und'][0]['safe_value'];
