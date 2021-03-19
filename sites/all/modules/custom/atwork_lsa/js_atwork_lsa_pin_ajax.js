@@ -20,9 +20,7 @@
         }
       break;
 
-      case ministry === '50' : //Ministry of Jobs, Economic Recovery and Innovation
-      case ministry === '57' : //Ministry of Municipal Affairs
-      case ministry === '79' : //Ministry of Tourism, Arts, Culture, and Sport
+      case ministry === '111' : //Nobody is this case for now. Turning off.
       /**  Pin option should only be available if a person indicates they are currently
       *	  celebrating a milestone, and choose a "current year pin". They may request one retro pin in addition to that.
       **/
@@ -75,6 +73,7 @@
       case ministry === '12' :  // BC Public Service Agency
       case ministry === '17' :  // Ministry of Children & Family Development
       case ministry === '18' :  // Ministry of Citizens' Services
+      case ministry === '23' :  // Destination BC Corp
       case ministry === '24' :  // Ministry of Education
       case ministry === '25' :  // Elections BC
       case ministry === '29' :  // Ministry of Energy and Mines and Low Carbon Innovations
@@ -85,6 +84,7 @@
       case ministry === '40' :  // Government Communications & Public Engagement
       case ministry === '42' :  // Ministry of Health
       case ministry === '46' :  // Ministry of Indigenous Relations & Reconciliation
+      case ministry === '48' :  // Intergovernmental Relations Secretariat
       case ministry === '55' :  // Ministry of Mental Health & Addictions
       case ministry === '60' :  // Office of the Information and Privacy Commissioner
       case ministry === '62' :  // Office of the Ombudsperson
@@ -115,7 +115,6 @@
       break;
 
       //If this is one of their award years then they can choose multiple extras: 20
-      // TODO: Should this be removed now? Community living now seems to mirror SDPR and has been moved above.
       // Turn off for now
       case ministry === '99': //Community Living BC EDIT: We are using 99 here so that we don't  use this.
         // Check if this had other restrictions previously
@@ -183,6 +182,8 @@
       '25', //Elections BC
       '61', //Office of the Merit Commissioner
       '63', // Office of Police Complaint Commissioner
+      '23', // Destination BC Corp
+      '48', // Intergovernmental Relations Secretariat
       ];
     // Application by user
     if(applicationSubmitter === '1'){
@@ -340,6 +341,7 @@
       case ministry === '12' :  // BC Public Service Agency
       case ministry === '17' :  // Ministry of Children & Family Development
       case ministry === '18' :  // Ministry of Citizens' Services
+      case ministry === '23' :  // Destination BC Corp
       case ministry === '24' :  // Ministry of Education
       case ministry === '25' :  // Elections BC
       case ministry === '29' :  // Ministry of Energy and Mines and Low Carbon Innovations
@@ -350,6 +352,7 @@
       case ministry === '40' :  // Government Communications & Public Engagement
       case ministry === '42' :  // Ministry of Health
       case ministry === '46' :  // Ministry of Indigenous Relations & Reconciliation
+      case ministry === '48' :  // Intergovernmental Relations Secretariat
       case ministry === '55' :  // Ministry of Mental Health & Addictions
       case ministry === '60' :  // Office of the Information and Privacy Commissioner
       case ministry === '62' :  // Office of the Ombudsperson
@@ -394,6 +397,8 @@
       '25', //Elections BC
       '61', //Office of the Merit Commissioner
       '63', // Office of Police Complaint Commisioner
+      '23', // Destination BC Corps
+      '48', // Intergovernmental Relations Secretariat
     ];
 
     checkLabels(response.choice);

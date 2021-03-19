@@ -683,6 +683,8 @@ function atwork_lsa_node_insert($node) {
       25, //Elections BC
       61, //Office of the Merit Commissioner
       63, // Office of Police Complaint Commissioner
+      23, // Destination BC Corp
+      48, // Intergovernmental Relations Secretariat
     );
 
 
