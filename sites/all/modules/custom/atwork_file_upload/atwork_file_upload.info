@@ -1,0 +1,4 @@
+name = Atwork File Upload
+description = Code to help manage file upload issues
+package = Atwork
+core = 7.x

@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * Implements hook_file_presave().
+ *
+ * Quick function to ensure we do not accept a filename that can break
+ *   our database (varchra 255). We decided to restrict these to 100.
+ *
+ * @return void
+ */
+function atwork_file_upload_file_presave($file) {
+  $parts = pathinfo($file->filename);
+  // Check for long filenames.
+  if(strlen($parts['basename']) > 90 ) {
+    // If it is too long, truncate the name to within our limits, and then re-add the extension.
+    $filename = substr($parts['basename'], 0, 90) . '.' . $parts['extension'];
+    $file->filename = $filename;
+  }
+}
+
