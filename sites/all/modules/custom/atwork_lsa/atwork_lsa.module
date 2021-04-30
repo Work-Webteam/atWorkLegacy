@@ -8,7 +8,7 @@ function atwork_lsa_form_lsa_application_node_form_alter(&$form, $form_state) {
   drupal_add_js(drupal_get_path('module', 'atwork_lsa').'/atwork_lsa.js');
   drupal_add_js(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_gift.js');
   drupal_add_js(drupal_get_path('module', 'atwork_lsa') . '/atwork_lsa_gift_list.js');
-  jquery_impromptu_add();
+  // jquery_impromptu_add();
   //drupal_add_library('system', 'drupal.ajax');
 
   // Hide Ceremony Requirements for now. We must also make these fields not required or we get a form error (even though they have a default)

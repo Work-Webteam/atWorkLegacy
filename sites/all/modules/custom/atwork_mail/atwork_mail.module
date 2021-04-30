@@ -48,7 +48,7 @@ function atwork_mail_exit($destination = NULL) {
     // unset if they aren't on the page anymore
     $atwork_LDAP_checked = &drupal_static('atwork_LDAP_checked');
 
-    if (isset($atwork_LDAP_checked) ? $_SESSION['atwork_LDAP_checked']['id'] == $atwork_LDAP_checked ? TRUE : FALSE : FALSE) {
+    if (isset($atwork_LDAP_checked) ? ($_SESSION['atwork_LDAP_checked']['id'] == $atwork_LDAP_checked ? TRUE : FALSE) : FALSE) {
       // we are still on the same page doing the checking, don't unset anything
       return;
     }
