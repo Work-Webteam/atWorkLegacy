@@ -161,17 +161,17 @@ function atwork_newsletter_views_bulk_operations_form_alter(&$form, &$form_state
 		if((isset($form['select']['action::scs_views_create_newsletter_action']['#validate'])) &&
 				(is_array($form['select']['action::scs_views_create_newsletter_action']['#validate']))) {
 					array_unshift($form['select']['action::scs_views_create_newsletter_action']['#validate'], 'atwork_newsletter_validate');
-				} else {
-					$form['select']['action::scs_views_create_newsletter_action']['#validate'] = 'atwork_newsletter_validate';
-				}
+		} else {
+			$form['select']['action::scs_views_create_newsletter_action']['#validate'] = 'atwork_newsletter_validate';
+		}
 
-				// Add our own submit handler
-				if((isset($form['select']['action::scs_views_create_newsletter_action']['#submit'])) &&
-						(is_array($form['select']['action::scs_views_create_newsletter_action']['#submit']))) {
-							array_unshift($form['select']['action::scs_views_create_newsletter_action']['#submit'], 'atwork_newsletter_submit');
-						} else {
-							$form['select']['action::scs_views_create_newsletter_action']['#submit'] = 'atwork_newsletter_submit';
-						}
+		// Add our own submit handler
+		if((isset($form['select']['action::scs_views_create_newsletter_action']['#submit'])) &&
+			(is_array($form['select']['action::scs_views_create_newsletter_action']['#submit']))) {
+			array_unshift($form['select']['action::scs_views_create_newsletter_action']['#submit'], 'atwork_newsletter_submit');
+		} else {
+			$form['select']['action::scs_views_create_newsletter_action']['#submit'] = 'atwork_newsletter_submit';
+		}
 	}
 }
 
